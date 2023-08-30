@@ -35,3 +35,11 @@ jobs:
         uses: kentaro-m/auto-assign-action@3e986bf9c274729de0d85191da42484917883328 # v1.2.5
         with:
           configuration-path: '.github/auto_assign.yaml'
+
+  check_pr_title:
+    name: Check PR title
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check PR is linked to Jira activity
+        uses: ./.github/actions/link-pr-to-jira-activity
