@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "clean": "turbo run clean",
+    "compile": "turbo run compile",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.13",
+    "husky": "^8.0.0"
+  }
+}
