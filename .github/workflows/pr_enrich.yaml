@@ -1,1 +1,15 @@
 name: Enrich Pull Request
+
+on: pull_request
+
+jobs:
+
+  add_assignee:
+    name: Add assignee
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Assign PR
+        uses: kentaro-m/auto-assign-action@3e986bf9c274729de0d85191da42484917883328 # v1.2.5
+        with:
+          configuration-path: '.github/auto_assign.yaml'
