@@ -18,3 +18,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           min_size: 200
           max_size: 600
+
+      - name: Add labels
+        uses: actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594 # v4.3.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labels.yaml
+          sync-labels: true
