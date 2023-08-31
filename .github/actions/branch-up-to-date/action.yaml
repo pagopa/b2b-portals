@@ -8,7 +8,7 @@ runs:
     - name: Check with base branch
       shell: bash
       env:
-        TARGET_BRANCH: ${{ github.base_ref }}
+        TARGET_BRANCH: origin/${{ github.base_ref }}
         COMMIT_SHA: ${{ github.sha }}
       run: |
         if git merge-base --is-ancestor ${{ env.TARGET_BRANCH }} ${{ env.COMMIT_SHA }}
