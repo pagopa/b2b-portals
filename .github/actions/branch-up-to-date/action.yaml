@@ -9,8 +9,9 @@ runs:
       shell: bash
       env:
         TARGET_BRANCH: ${{ github.base_ref }}
+        COMMIT_SHA: ${{ github.sha }}
       run: |
-        if git merge-base --is-ancestor ${{ env.TARGET_BRANCH }} @
+        if git merge-base --is-ancestor ${{ env.TARGET_BRANCH }} ${{ env.COMMIT_SHA }}
         then
           echo "Your branch is up to date."
           BRANCH_UP_TO_DATE='true'
@@ -18,7 +19,7 @@ runs:
           echo "You need to merge / rebase."
           BRANCH_UP_TO_DATE='false'
         fi
-        echo "BRANCH_UP_TO_DATE=BRANCH_UP_TO_DATE" >> $GITHUB_ENV
+        echo "BRANCH_UP_TO_DATE=$BRANCH_UP_TO_DATE" >> $GITHUB_ENV
 
     - name: Print message to update branch (if necessary)
       if: ${{ env.BRANCH_UP_TO_DATE == 'false' }}
