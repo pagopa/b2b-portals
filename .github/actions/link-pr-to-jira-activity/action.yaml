@@ -13,7 +13,7 @@ runs:
     - uses: Slashgear/action-check-pr-title@860e8dc639f8e60335a6f5e8936ba67ed2536890 # v4.3.0
       id: lint
       with:
-        regexp: "\\[(#?[A-Z]*-[0-9]*( |, )?){1,}\\]" # Regex the title should match.
+        regexp: "\\[([A-Z0-9]*-[0-9]*( |, )?){1,}\\]" # Regex the title should match.
       continue-on-error: true
 
     - name: Extract Jira Issue to Link
