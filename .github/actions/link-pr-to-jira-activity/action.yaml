@@ -57,6 +57,7 @@ runs:
           ## Jira Pull request Link ##
           @${{ github.actor}} it seems this Pull Request has no issues that refers to Jira!
           Please check it out.
+          PR's title should be something like: `[B2B-1] Title` where `B2B-1` is the activity's id on Jira.
 
     - name: Failure message
       if: steps.lint.outcome != 'success'
