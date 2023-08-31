@@ -25,6 +25,7 @@ runs:
       if: ${{ env.BRANCH_UP_TO_DATE == 'false' }}
       uses: marocchino/sticky-pull-request-comment@efaaab3fd41a9c3de579aba759d2552635e590fd # v2.8.0
       with:
+        header: branch-update
         recreate: true
         message: |
           ## Branch is not up to date with base branch ##

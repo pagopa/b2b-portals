@@ -43,6 +43,7 @@ runs:
       if: steps.lint.outcome == 'success'
       uses: marocchino/sticky-pull-request-comment@efaaab3fd41a9c3de579aba759d2552635e590fd # v2.8.0
       with:
+        header: pr-title
         recreate: true
         message: |
           ## Jira Pull Request Link ##
@@ -52,6 +53,7 @@ runs:
       if: steps.lint.outcome != 'success'
       uses: marocchino/sticky-pull-request-comment@efaaab3fd41a9c3de579aba759d2552635e590fd # v2.8.0
       with:
+        header: pr-title
         recreate: true
         message: |
           ## Jira Pull request Link ##
