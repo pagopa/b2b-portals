@@ -16,6 +16,7 @@ jobs:
         uses: pagopa/github-actions-template/check-pr-size@241d9bfcaa2a623cb78a2d993716d761af158c0c # v1.6.6
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          ignored_files: 'package-lock.json, docs/'
           min_size: 200
           max_size: 600
 
