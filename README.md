@@ -52,8 +52,8 @@ Add to the root the dependency `<dependency>`.
 npm i <dependency>
 ```
 
-Add to the package `<package>` the dependency `<dependency>` as `devDependencies`.
+Add to the workspace `<workspace>` the dependency `<dependency>` as `devDependencies`.
 
 ``` bash
-npm i <dependency> -D -w <package>
+npm i <dependency> -D -w <workspace>
 ```
