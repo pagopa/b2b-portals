@@ -57,3 +57,9 @@ Add to the workspace `<workspace>` the dependency `<dependency>` as `devDependen
 ``` bash
 npm i <dependency> -D -w <workspace>
 ```
+
+## Changelog
+
+To generate the changelog, the project uses [changesets](https://github.com/changesets/changesets). To add information into the changelog run `npx changeset` or `npm run changeset` and follow the wizard. Changeset will asks what kind of changes is made (major, minor, patch) and also a summary; the entered summary is what will be visible into the CHANGELOG file.
+
+The `.github/workflows/changelog.yaml` workflow is an action that uses the [changeset's action](https://github.com/changesets/action) it is used to convert the changes tracked with `npm run changeset` into a `CHANGELOG.md` file. It will, then, create a PR with the proposed changes (it will bump the version, update the `CHANGELOG.md` file, ...). If many changes happen when that PR is open, changeset's bot automatically updates it according to the changes (it looks to the `.changeset` folder).
