@@ -9,9 +9,9 @@ runs:
       shell: bash
       env:
         TARGET_BRANCH: origin/${{ github.base_ref }}
-        COMMIT_SHA: ${{ github.sha }}
+        HEAD_BRANCH: origin/${{ github.head_ref }}
       run: |
-        if git merge-base --is-ancestor ${{ env.TARGET_BRANCH }} ${{ env.COMMIT_SHA }}
+        if git merge-base --is-ancestor ${{ env.TARGET_BRANCH }} ${{ env.HEAD_BRANCH }}
         then
           echo "Your branch is up to date."
           BRANCH_UP_TO_DATE='true'
