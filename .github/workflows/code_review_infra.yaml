@@ -31,9 +31,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --audit=false --fund=false
 
-      #- name: Compile Cloudfront Functions
-      #  run: npm run compile -w cloudfront-functions
-
       - name: Configure AWS Credentials
         uses: ./.github/actions/configure-aws-credentials
         with:

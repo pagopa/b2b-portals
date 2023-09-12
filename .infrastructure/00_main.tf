@@ -18,15 +18,6 @@ provider "aws" {
   }
 }
 
-provider "aws" {
-  alias  = "us-east-1"
-  region = "us-east-1"
-
-  default_tags {
-    tags = var.tags
-  }
-}
-
 # Init IaC resources ##########################################################
 module "identity" {
   source            = "./identity"

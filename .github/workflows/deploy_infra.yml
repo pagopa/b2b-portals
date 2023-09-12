@@ -48,9 +48,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --audit=false --fund=false
 
-      #- name: Compile Cloudfront Functions
-      #  run: npm run compile -w cloudfront-functions
-
       - name: Configure AWS Credentials
         uses: ./.github/actions/configure-aws-credentials
         with:
@@ -63,8 +60,6 @@ jobs:
           environment: ${{ inputs.environment }}
 
       - name: Terraform Apply
-        env:
-          # publish the cloudfront functions
-          TF_VAR_publish_cloudfront_functions: true
+
         run: |
           ./terraform.sh apply ${{ inputs.environment }} -auto-approve
