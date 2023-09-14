@@ -17,9 +17,8 @@ on:
         description: 'The environment used as target'
         type: choice
         required: true
-        default: dev
+        default: prod
         options:
-        - dev
         - prod
 
 defaults:
