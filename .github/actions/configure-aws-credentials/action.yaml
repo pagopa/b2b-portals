@@ -1,0 +1,25 @@
+name: Configure AWS Credentials
+description: Configure AWS Credentials
+
+inputs:
+  aws_region:
+    description: 'The AWS region'
+    default: 'eu-south-1'
+    required: true
+  role_to_assume:
+    description: 'The IAM role to assume'
+    required: true
+  role_duration_seconds:
+    description: 'The duration, in seconds, of the credentials'
+    required: false
+    default: 1800 # 30 minutes
+
+runs:
+  using: "composite"
+  steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@50ac8dd1e1b10d09dac7b8727528b91bed831ac0 # 3.0.2
+      with:
+        role-to-assume: ${{ inputs.role_to_assume }}
+        aws-region: ${{ inputs.aws_region }}
+        role-duration-seconds: ${{ inputs.role_duration_seconds }}
