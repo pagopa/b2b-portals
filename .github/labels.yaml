@@ -1,1 +1,4 @@
 workflows: .github/workflows/**/*
+docs: docs/**/*
+changeset: .changeset/**/*
+website: apps/nextjs-website/**/*
