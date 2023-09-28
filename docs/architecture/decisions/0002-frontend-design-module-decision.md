@@ -142,7 +142,7 @@ p {
 }
 
 
-### Option 3: Bootstrap
+### Option 3: Bootstrap (SUGGESTED)
 
 Description:
 
