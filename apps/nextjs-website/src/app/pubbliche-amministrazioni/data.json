@@ -1,0 +1,30 @@
+[
+  {
+    "description": "Con l’uso di API Key o manualmente, l’ente crea la richiesta di notifica e carica gli allegati.",
+    "stepIcon": {
+      "icon": "./circle-icon.svg"
+    },
+    "title": "L’ente crea la richiesta di notifica"
+  },
+  {
+    "description": "SEND verifica la completezza e correttezza delle informazioni. Ad ogni cambio di stato, viene sempre generata la relativa attestazione opponibile a terzi.",
+    "stepIcon": {
+      "icon": "./square-icon.svg"
+    },
+    "title": "La piattaforma la prende in carico"
+  },
+  {
+    "description": "SEND comunica al destinatario la presenza di una notifica tramite diversi possibili canali: PEC, App IO, email, SMS. In alternativa, ricerca un indirizzo fisico e invia una raccomandata cartacea.",
+    "stepIcon": {
+      "icon": "./circle-icon.svg"
+    },
+    "title": "La notifica viene inviata"
+  },
+  {
+    "description": "Il destinatario accede alla piattaforma. Lì, può scaricare i documenti notificati e pagare contestualmente quanto dovuto, grazie all’integrazione con pagoPA. Se la riceve tramite IO, può fare tutto direttamente in app.",
+    "stepIcon": {
+      "icon": "./square-icon.svg"
+    },
+    "title": "Il destinatario la riceve"
+  }
+]

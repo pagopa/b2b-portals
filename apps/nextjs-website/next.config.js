@@ -13,4 +13,9 @@ module.exports = {
       },
     ];
   },
+  
+  // This comment to indicate that the line below should be removed before pushing to production
+  images: {
+    domains: ['notifichedigitali.pagopa.it'],
+  },
 };

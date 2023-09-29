@@ -3,7 +3,6 @@ import React from 'react';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { Header, PreHeader, Footer } from '@pagopa/pagopa-editorial-components';
-import { type CtaProps } from '@pagopa/pagopa-editorial-components/dist/components/Ctas';
 import HelpIcon from './help-icon.svg';
 import './styles.css';
 
@@ -11,34 +10,6 @@ import './styles.css';
 export const metadata: Metadata = {
   title: 'Page',
   description: 'New Page Created',
-};
-
-// Define your PreHeader and Header configurations
-const left: CtaProps = {
-  theme: 'light',
-  ctaButtons: [
-    {
-      text: 'PagoPA S.p.A.',
-      variant: 'text',
-      color: 'inherit',
-      href: 'https://www.pagopa.it/it/',
-    },
-  ],
-};
-
-const right: CtaProps = {
-  theme: 'light',
-  ctaButtons: [
-    {
-      text: 'Assistenza',
-      variant: 'text',
-      color: 'inherit',
-      onClick: () => {
-        alert('Assistenza');
-      },
-      startIcon: <Image src={HelpIcon} alt="Help Icon" />,
-    },
-  ],
 };
 
 // Define your RootLayout component
@@ -54,7 +25,31 @@ export default function RootLayout({
       
       <body>
 
-        <PreHeader leftCtas={left} rightCtas={right} />
+        <PreHeader
+          leftCtas={{
+            ctaButtons: [
+              {
+                color: 'inherit',
+                href: 'https://www.pagopa.it/it/',
+                text: 'PagoPA S.p.A.',
+                variant: 'naked'
+              }
+            ],
+            theme: 'light'
+          }}
+          rightCtas={{
+            ctaButtons: [
+              {
+                color: 'inherit',
+                onClick: () => {alert('Assistenza');},
+                startIcon: <Image src={HelpIcon} alt="Help Icon" />,
+                text: 'Assistenza',
+                variant: 'naked'
+              }
+            ],
+            theme: 'light'
+          }}
+        />
 
         <Header
           menu={[
