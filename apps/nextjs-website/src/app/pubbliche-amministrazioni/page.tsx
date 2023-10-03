@@ -1,18 +1,17 @@
 'use client'
 import React from 'react';
 import { Hero, Editorial, Feature, HowTo } from '@pagopa/pagopa-editorial-components';
-import Image from 'next/image';
 import pageData from './datastructure.json';
 
 type ComponentData = {
   type: string;
-  theme?: string;
+  theme?: 'light' | 'dark';
   image?: string;
-  size?: string;
+  size?: 'small' | 'big';
   title?: string;
   subtitle?: string;
   body?: string;
-  width?: string;
+  width?: 'wide' | 'center' | 'standard';
   reversed?: boolean;
   items?: {
     stackIcon: {
@@ -35,7 +34,7 @@ function renderComponent(componentData: ComponentData, index: number) {
     case 'hero':
       return (
         <Hero
-          theme={componentData.theme}          
+          theme={componentData.theme || 'light'}    
           image={
             <img
               src={componentData.image}
@@ -45,13 +44,12 @@ function renderComponent(componentData: ComponentData, index: number) {
                 height: 'auto',
                 margin: 'auto',
                 display: 'block',
-                justifyContent: 'center',
                 justifyItems: 'center',
               }}
             />
           }
-          size={componentData.size}
-          title={componentData.title}
+          size={componentData.size === 'small' || componentData.size === undefined ? 'small' : 'big'}
+          title={componentData.title || 'Titolo'}
           subtitle={componentData.subtitle}
           key={index}
         />
@@ -60,7 +58,7 @@ function renderComponent(componentData: ComponentData, index: number) {
     case 'editorial':
       return (
         <Editorial
-          theme={componentData.theme}
+          theme={componentData.theme || 'light'}
           image={
             <img
               src={componentData.image}
@@ -75,45 +73,52 @@ function renderComponent(componentData: ComponentData, index: number) {
               }}
             />
           }
-          title={componentData.title}
-          body={componentData.body}
-          width={componentData.width}
+          title={componentData.title || 'Titolo'}
+          body={componentData.body || 'Descrizione'}
+          width={componentData.width === 'wide' || componentData.width === 'center' ? componentData.width : 'standard'}
           reversed={componentData.reversed}
           key={index}
         />
       );
 
     case 'feature':
+      // Transform your JSON data into the expected format
+      const items = (componentData.items ?? []).map((item, itemIndex) => ({
+        stackIcon: {
+          icon: item.stackIcon.icon,
+        },
+        title: item.title,
+        subtitle: item.subtitle,
+      }));
+    
       return (
         <Feature
-          items={componentData.items.map((item, itemIndex) => (
-            <div key={itemIndex}>
-              <Image src={item.stackIcon.icon} alt="Feature Icon" style={{ width: '30%', height: 'auto', margin: 'auto', display: 'block', justifyContent: 'center', alignItems: 'center' }} />
-              <h3>{item.title}</h3>
-              <p>{item.subtitle}</p>
-            </div>
-          ))}
-          title={componentData.title}
-          theme={componentData.theme}
+          items={items}
+          title={componentData.title || 'Titolo'}
+          theme={componentData.theme || 'light'}
           key={index}
         />
       );
+      
 
     case 'howTo':
-      return (
-        <HowTo
-          steps={componentData.steps.map((step, stepIndex) => (
-            <div key={stepIndex}>
-              <Image src={step.stepIcon.icon} alt="Circle Icon" style={{ width: '80%', height: 'auto', margin: 'auto', display: 'block', justifyContent: 'center', alignItems: 'center' }} />
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-            </div>
-          ))}
-          title={componentData.title}
-          theme={componentData.theme}
-          key={index}
-        />
-      );
+    // Transform your JSON data into the expected format
+    const steps = (componentData.steps ?? []).map((step, itemIndex) => ({
+      stepIcon: {
+        icon: step.stepIcon.icon,
+      },
+      title: step.title,
+      description: step.description,
+    }));
+
+    return (
+      <HowTo
+        steps={steps}
+        title={componentData.title || 'Titolo'}
+        theme={componentData.theme || 'light'}
+        key={index}
+      />
+    );
 
     default:
       return null;
@@ -123,8 +128,7 @@ function renderComponent(componentData: ComponentData, index: number) {
 function PubblicheAmministrazioni() {
   return (
     <div>
-      {/* Render each component based on the new JSON data from datastructure.json */}
-      {pageData.map((componentData, index) => renderComponent(componentData, index))}
+      {pageData.map((componentData, index) => renderComponent(componentData as ComponentData, index))}
     </div>
   );
 }
