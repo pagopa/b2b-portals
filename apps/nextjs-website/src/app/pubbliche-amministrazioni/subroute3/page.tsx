@@ -3,7 +3,7 @@ import React from 'react';
 import { ComponentData, renderComponent } from '@/declared-components/declared-components';
 import pageData from '../../temporanydatas/datastructure.json';
 
-function Cittadini() {
+function Subroute3() {
   return (
     <div>
       {pageData.map((componentData, index) => renderComponent(componentData as ComponentData, index))}
@@ -11,4 +11,4 @@ function Cittadini() {
   );
 }
 
-export default Cittadini;
+export default Subroute3;

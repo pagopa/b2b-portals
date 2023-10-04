@@ -1,0 +1,18 @@
+[
+  { "route": "faq" },
+  { "route": "cittadini" },
+  {
+    "route": "pubbliche-amministrazioni",
+    "subroutes": [
+      {
+        "route": "subroute1",
+        "subroutes": [
+          { "route": "subsubroute1" },
+          { "route": "subsubroute2" }
+        ]
+      },
+      { "route": "subroute2" },
+      { "route": "subroute3" }
+    ]
+  }
+]

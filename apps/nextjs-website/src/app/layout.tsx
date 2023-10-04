@@ -32,7 +32,7 @@ export default function RootLayout({
                 color: 'inherit',
                 href: 'https://www.pagopa.it/it/',
                 text: 'PagoPA S.p.A.',
-                variant: 'naked'
+                variant: 'text'
               }
             ],
             theme: 'light'
@@ -44,7 +44,7 @@ export default function RootLayout({
                 onClick: () => {alert('Assistenza');},
                 startIcon: <Image src={HelpIcon} alt="Help Icon" />,
                 text: 'Assistenza',
-                variant: 'naked'
+                variant: 'text'
               }
             ],
             theme: 'light'
@@ -130,7 +130,7 @@ export default function RootLayout({
                   linkType: 'internal'
                 }
               ],
-              title: undefined
+              title: ""
             },
             followUs: {
               links: [
