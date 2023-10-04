@@ -1,12 +1,13 @@
 'use client'
 import React from 'react';
 import { ComponentData, renderComponent } from '@/declared-components/declared-components';
-import pageData from '../../temporanydatas/datastructure.json';
+import dataStructure from '../../temporanydatas/datastructure.json';
 
 function Subroute3() {
+  const pageContent = dataStructure['subroute3'] || [];
   return (
     <div>
-      {pageData.map((componentData, index) => renderComponent(componentData as ComponentData, index))}
+      {pageContent.map((componentData, index) => renderComponent(componentData as ComponentData, index))}
     </div>
   );
 }
