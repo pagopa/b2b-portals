@@ -1,4 +1,134 @@
 {
+  "pubbliche-amministrazioni": [
+
+    {
+      "type": "video",
+      "autoplay": true,
+      "src": "https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4",
+      "subtitle": "Lorem ipsum dolor sit amet",
+      "theme": "light",
+      "title":"Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "listing",
+      "date":[{
+          "date": "2023-10-06T09:17:14.705Z",
+          "locale": "it-IT",
+          "options":{
+            "day": "06",
+            "month": "10",
+            "year": "2023"
+          },
+          "preDate": "Ultimo aggiornamento"
+      }],
+      "items":[
+        {
+          "href": "https://google.it",
+          "htmlTitle": "vai al sito",
+          "text": "Lorem ipsum dolor sit amet, consectetuer asipscing elit"
+        },
+        {
+          "text": "Lorem ipsum dolor sit amet, consectetuer asipscing elit"
+        },
+        {
+          "text": "Lorem ipsum dolor sit amet, consectetuer asipscing elit"
+        }
+      ],
+      "name":"Lorem ipsum dolor sit amet",
+      "theme":"light",
+      "title":"Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "download",
+      "items":[{
+          "fileName": "sample_1.pdf",
+          "href": "static/media/sample.ac0398d4.pdf",
+          "label": "Download 1 Lorem Ipsum"
+      }],
+      "subtitle":"Lorem ipsum dolor sit amet",
+      "theme":"light",
+      "title":"Download Area Lorem Ipsum"
+    },
+    {
+      "type": "accordion",
+      "theme": "light",
+      "title": "mio accordion",
+      "accordionValues": [{
+        "content": "bellaaaaaa",
+        "header": "ciao"
+        }]
+    },
+    {
+      "type": "stats",
+      "theme": "light",
+      "title": "Carica l'atto. Poi, dimenticatene",
+      "body": "SEND si integra con il protocollo degli enti...",
+      "kpiCaption": "kpicaption text",
+      "kpiValues": [
+        {
+          "caption": "strawberry fields",
+          "id": 1,
+          "kpiIcon": {
+            "icon": "AllInclusive"
+          },
+          "value": 30000
+        },        
+        {
+          "caption": "strawberry",
+          "id": 2,
+          "kpiIcon": {
+            "icon": "AllInclusive"
+          },
+          "value": 3000
+        },        
+        {
+          "caption": "fields",
+          "id": 3,
+          "kpiIcon": {
+            "icon": "AllInclusive"
+          },
+          "value": 300
+        }
+      ]
+    },    
+    {
+      "type": "editorial",
+      "theme": "light",
+      "image": "https://notifichedigitali.pagopa.it/static/images/pa-infoblock-2.png",
+      "title": "Carica l'atto. Poi, dimenticatene",
+      "body": "SEND si integra con il protocollo degli enti e offre sia API per l'invio automatico delle notifiche, sia la possibilità di fare invii manuali. Una volta effettuato il caricamento degli atti e dei moduli di pagamento, la piattaforma genera lo IUN, un codice univoco identificativo della notifica. Successivamente, cerca nei suoi archivi e nei registri pubblici una PEC riconducibile al destinatario e invia la notifica. Poi, invia un avviso di cortesia agli altri recapiti digitali (app IO, email e SMS) del destinatario. Se il destinatario non ha indicato alcun recapito digitale e non ha accesso alla piattaforma, questa procede con la ricerca di un indirizzo fisico, e quindi con l'invio tramite raccomandata cartacea.",
+      "width": "wide",
+      "reversed": true
+    },
+    {
+      "type": "howTo",
+      "steps": [
+        {
+          "description": "Con l’uso di API Key o manualmente, l’ente crea la richiesta di notifica e carica gli allegati.",
+          "stepIcon": {
+            "icon": "./circle-icon.svg"
+          },
+          "title": "L’ente crea la richiesta di notifica"
+        },
+        {
+          "description": "SEND verifica la completezza e correttezza delle informazioni. Ad ogni cambio di stato, viene sempre generata la relativa attestazione opponibile a terzi.",
+          "stepIcon": {
+            "icon": "./square-icon.svg"
+          },
+          "title": "La piattaforma la prende in carico"
+        },
+        {
+          "description": "SEND comunica al destinatario la presenza di una notifica tramite diversi possibili canali: PEC, App IO, email, SMS. In alternativa, ricerca un indirizzo fisico e invia una raccomandata cartacea.",
+          "stepIcon": {
+            "icon": "./circle-icon.svg"
+          },
+          "title": "La notifica viene inviata"
+        }
+      ],
+      "title": "Come funziona?",
+      "theme": "light"
+    }
+  ],
   "faq": [
     {
       "type": "hero",
@@ -67,45 +197,6 @@
         }
       ],
       "title": "Un solo modo per risparmiare in tanti modi",
-      "theme": "light"
-    }
-  ],
-  "pubbliche-amministrazioni": [
-    {
-      "type": "editorial",
-      "theme": "light",
-      "image": "https://notifichedigitali.pagopa.it/static/images/pa-infoblock-2.png",
-      "title": "Carica l'atto. Poi, dimenticatene",
-      "body": "SEND si integra con il protocollo degli enti e offre sia API per l'invio automatico delle notifiche, sia la possibilità di fare invii manuali. Una volta effettuato il caricamento degli atti e dei moduli di pagamento, la piattaforma genera lo IUN, un codice univoco identificativo della notifica. Successivamente, cerca nei suoi archivi e nei registri pubblici una PEC riconducibile al destinatario e invia la notifica. Poi, invia un avviso di cortesia agli altri recapiti digitali (app IO, email e SMS) del destinatario. Se il destinatario non ha indicato alcun recapito digitale e non ha accesso alla piattaforma, questa procede con la ricerca di un indirizzo fisico, e quindi con l'invio tramite raccomandata cartacea.",
-      "width": "wide",
-      "reversed": true
-    },
-    {
-      "type": "howTo",
-      "steps": [
-        {
-          "description": "Con l’uso di API Key o manualmente, l’ente crea la richiesta di notifica e carica gli allegati.",
-          "stepIcon": {
-            "icon": "./circle-icon.svg"
-          },
-          "title": "L’ente crea la richiesta di notifica"
-        },
-        {
-          "description": "SEND verifica la completezza e correttezza delle informazioni. Ad ogni cambio di stato, viene sempre generata la relativa attestazione opponibile a terzi.",
-          "stepIcon": {
-            "icon": "./square-icon.svg"
-          },
-          "title": "La piattaforma la prende in carico"
-        },
-        {
-          "description": "SEND comunica al destinatario la presenza di una notifica tramite diversi possibili canali: PEC, App IO, email, SMS. In alternativa, ricerca un indirizzo fisico e invia una raccomandata cartacea.",
-          "stepIcon": {
-            "icon": "./circle-icon.svg"
-          },
-          "title": "La notifica viene inviata"
-        }
-      ],
-      "title": "Come funziona?",
       "theme": "light"
     }
   ]
