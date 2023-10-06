@@ -417,11 +417,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
         />
       );
 
-
-
-
-
-
     default:
       return null;
   }

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
 var path = require('path');
 // Read your JSON data
-var jsonData = require('./routeexample.json');
+var jsonData = require('../temporanydatas/routeexample.json');
 // Get the directory where routebuilder.ts is located
 var currentDir = __dirname;
 // Specify the base directory where you want to create the route files
