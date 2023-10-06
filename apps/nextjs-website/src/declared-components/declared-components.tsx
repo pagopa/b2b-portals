@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hero, Editorial, Feature, HowTo } from '@pagopa/pagopa-editorial-components';
+import { Hero, Editorial, Feature, HowTo, Stats } from '@pagopa/pagopa-editorial-components';
 
 export type ComponentData = {
   type: string;
@@ -24,6 +24,16 @@ export type ComponentData = {
       icon: string;
     };
     title: string;
+  }[];
+  eyelet?: string;
+  kpiCaption?: string;
+  kpiValues?: {
+    caption: string;
+    id: string | number;
+    kpiIcon: {
+      icon: string;
+    };
+    value: number;
   }[];
 };
 
@@ -115,6 +125,28 @@ export function renderComponent(componentData: ComponentData, index: number) {
         key={index}
       />
     );
+
+    case 'stats':
+      const kpiValuesData = (componentData.kpiValues || []).map((kpi, kpiIndex) => ({
+        caption: kpi.caption || 'Default Caption',
+        id: kpi.id || 'Default ID',
+        kpiIcon: {
+          icon: kpi.kpiIcon?.icon || 'Default Icon',
+        },
+        value: kpi.value || 0,
+      }));
+
+      return (
+        <Stats
+          body={componentData.body || 'body'}
+          eyelet={componentData.eyelet || 'eyelet'}
+          kpiCaption={componentData.kpiCaption || 'kpiCaption'}
+          kpiValues={kpiValuesData}
+          theme={componentData.theme || 'light'}
+          title={componentData.title || 'Titolo'}
+          key={index}
+        />
+      );
 
     default:
       return null;
