@@ -17,13 +17,22 @@
       ],
       "subtitle":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
       "theme":"light",
-      "title":"Download Area Lorem Ipsum"
+      "title":"Download Area Lorem Ipsum",
+      "itemsAlignment": "center"
     },
     {
       "type": "bannerLink",
       "body":"Leggi le domande frequenti sull’adesione a pagoPA da parte degli Enti Creditori oppure scrivi a: account@pagopa.it",
       "theme":"light",
-      "title":"Vuoi diventare un Partner tecnologico qualificato?"
+      "title":"Vuoi diventare un Partner tecnologico qualificato?",
+      "reverse":"false",
+      "ctaButtons":[
+        {
+          "variant": "outlined",
+          "text": "LEGGI LE FAQ",
+          "color": "primary"
+        }
+      ]
     },
     {
       "type": "abstract",
@@ -38,6 +47,14 @@
       "theme": "light",
       "title": "mio accordion",
       "accordionValues": [{
+        "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
+        "header": "Header"
+      },
+      {
+        "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
+        "header": "Header"
+      },
+      {
         "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
         "header": "Header"
       }],

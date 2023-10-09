@@ -1,5 +1,7 @@
 import React from 'react';
 import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video, Abstract, BannerLink } from '@pagopa/pagopa-editorial-components';
+import { ImgProps } from 'next/dist/shared/lib/get-img-props';
+import { AccordionItemProps } from '@pagopa/pagopa-editorial-components/dist/components/Accordion/AccordionItem';
 
 export type ComponentData = {
   type: string | 'button' | 'link';
@@ -19,9 +21,13 @@ export type ComponentData = {
   text: string;
   autoplay: boolean;
   src: string;
-  description: string;
+  description: string | Element ;
   layout: 'center' | 'left' | 'right';
   overline: string;
+  reverse: boolean;
+  decoration: Element | ImgProps;
+  accordionItems: AccordionItemProps[];
+  itemsAlignment: 'center' | 'left' | 'right';
 
   items?: {
     stackIcon: {
@@ -108,6 +114,13 @@ export type ComponentData = {
       icon: string;
     }
   }[];
+  bannerLinkValues?: {
+    ctaButtons:{
+      text: string;
+      color: string;
+      variant: string;
+    }
+  }[];
 };
 
 
@@ -124,7 +137,7 @@ export function renderComponent(componentData: ComponentData, index: number) {
           description={componentData.description || 'Testo descrizione'}
           layout={componentData.layout || 'center'}
           overline={componentData.overline || 'Testo overline'}
-          background={componentData.background || 'Testo o immagine background'}
+          background={componentData.background || 'Immagine background'}
           theme={componentData.theme || 'light'}
           title={componentData.title || 'Titolo'}
           key={index}
@@ -152,16 +165,22 @@ export function renderComponent(componentData: ComponentData, index: number) {
 
 
 
-    case 'bannerLink':
-      return (
-        <BannerLink
-          body={componentData.body || 'Testo body'}
-          theme={componentData.theme || 'light'}
-          title={componentData.title || 'Titolo'}
-          key={index}
-        />
-      );
-
+    // case 'bannerLink':
+    //   const bannerLinkValuesData = (componentData.bannerLinkValues || []).map((bannerLinkValues, bannerLinkValuesIndex) => ({
+    //       variant: bannerLinkValues.ctaButtons.variant,
+    //       text: bannerLinkValues.ctaButtons.text,
+    //       color: bannerLinkValues.ctaButtons.color
+    //   }));
+    //   return (
+    //     <BannerLink
+    //       ctaButtons={bannerLinkValuesData}
+    //       body={componentData.body || 'Testo body'}
+    //       theme={componentData.theme || 'light'}
+    //       title={componentData.title || 'Titolo'}
+    //       reverse={componentData.reverse || false}
+    //       key={index}
+    //     />
+    //   );
     // BannerLink va in errore 
 
 
@@ -196,15 +215,14 @@ export function renderComponent(componentData: ComponentData, index: number) {
 
     case 'download':
       const downloadValuesData = (componentData.items || []).map((item, itemIndex) => ({
-        items: {
           fileName: item.fileName,
           href: item.href,
           label: item.label
-        }
       }));
       return (
         <Download
           items={downloadValuesData}
+          itemsAlignment={componentData.itemsAlignment || 'center'}
           subtitle={componentData.subtitle || 'Sottotitolo'}
           theme={componentData.theme || 'light'}
           title={componentData.title || 'Titolo'}
