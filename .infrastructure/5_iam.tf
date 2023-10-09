@@ -57,26 +57,26 @@ data "aws_iam_policy_document" "ecs-task-execution" {
       aws_ssm_parameter.admin_jwt_secret.arn,
     ]
   }
-  
-    statement {
-      effect = "Allow"
-      actions = [
-        "s3:GetObject"
-      ]
-      resources = [
-        "${aws_s3_bucket.website-asset-bucket.arn}/.env"
-      ]
-    }
 
-    statement {
-      effect = "Allow"
-      actions = [
-        "s3:GetBucketLocation"
-      ]
-      resources = [
-        "${aws_s3_bucket.website-asset-bucket.arn}"
-      ]
-    }
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:GetObject"
+    ]
+    resources = [
+      "${aws_s3_bucket.website-asset-bucket.arn}/.env"
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:GetBucketLocation"
+    ]
+    resources = [
+      "${aws_s3_bucket.website-asset-bucket.arn}"
+    ]
+  }
 }
 
 resource "aws_iam_policy" "ecs-task-execution" {

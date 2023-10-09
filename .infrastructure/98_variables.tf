@@ -23,22 +23,22 @@ variable "tags" {
 
 # FARGATE ECS CONTAINER ##########################################################
 variable "app_port" {
-  default = 1337    ##### VALORE PORT eventualmente da adeguare
+  default = 1337 ##### VALORE PORT eventualmente da adeguare
 }
 
-variable "health_check_path" { 
+variable "health_check_path" {
   description = "Health check Path monitoring by Load Balancer"
-  default = "/"
+  default     = "/"
 }
 
 variable "fargate_cpu" {
   description = "Fargate instance CPU units to provision (1 vCPU = 1024 CPU units)"
-  default     = "4096"           ##### 4 vCPU
+  default     = "4096" ##### 4 vCPU
 }
 
 variable "fargate_memory" {
   description = "Fargate instance memory to provision (in MiB)"
-  default     = "16384"           ##### 16 GB RAM
+  default     = "16384" ##### 16 GB RAM
 }
 
 variable "ecr_repository" {
@@ -81,7 +81,7 @@ variable "rds_cluster_password" {
   description = "RDS cluster password"
   sensitive   = true
   type        = string
-  default     = "adminpassword"  ##### VALORE DI TEST da decidere come mascherare
+  default     = "adminpassword" ##### VALORE DI TEST da decidere come mascherare
 }
 
 variable "db_cluster_identifier" {
@@ -91,12 +91,12 @@ variable "db_cluster_identifier" {
 
 variable "db_name" {
   description = "Database Name"
-  default     = "strapidb"           ##### VALORE eventualmente da adeguare
+  default     = "strapidb" ##### VALORE eventualmente da adeguare
 }
 
 variable "db_master_username" {
   description = "Database Master Username"
-  default     = "postgres"           ##### VALORE eventualmente da adeguare
+  default     = "postgres" ##### VALORE eventualmente da adeguare
 }
 
 # APP STRAPI ##########################################################
