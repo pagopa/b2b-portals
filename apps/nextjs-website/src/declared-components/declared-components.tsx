@@ -1,8 +1,8 @@
 import React from 'react';
-import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video } from '@pagopa/pagopa-editorial-components';
+import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video, Abstract, BannerLink } from '@pagopa/pagopa-editorial-components';
 
 export type ComponentData = {
-  type: string;
+  type: string | 'button' | 'link';
   theme?: 'light' | 'dark';
   image?: string;
   size?: 'small' | 'big';
@@ -11,6 +11,18 @@ export type ComponentData = {
   body?: string;
   width?: 'wide' | 'center' | 'standard';
   reversed?: boolean;
+  eyelet?: string;
+  kpiCaption?: string;
+  name?: string;
+  background: string;
+  buttonText: string;
+  text: string;
+  autoplay: boolean;
+  src: string;
+  description: string;
+  layout: 'center' | 'left' | 'right';
+  overline: string;
+
   items?: {
     stackIcon: {
       icon: string;
@@ -41,8 +53,6 @@ export type ComponentData = {
     };
     title: string;
   }[];
-  eyelet?: string;
-  kpiCaption?: string;
   kpiValues?: {
     caption: string;
     id: string | number;
@@ -67,7 +77,6 @@ export type ComponentData = {
       preDate: string;
     }
   }[];
-  name?: string;
   listingValuesItem?: {
     href: string;
     htmlTitle: string;
@@ -93,44 +102,120 @@ export type ComponentData = {
       text: string;
     }
   }[];
-  background: string;
   stripelinkValues?: {
     icon: {
       color: string;
       icon: string;
     }
   }[];
-  buttonText: string;
-  text: string;
-  autoplay: boolean;
-  src: string;
 };
+
+
 
 export function renderComponent(componentData: ComponentData, index: number) {
   switch (componentData.type) {
-    case 'hero':
+
+
+    // Presenti nel documento su confluence
+
+    case 'abstract':
       return (
-        <Hero
+        <Abstract
+          description={componentData.description || 'Testo descrizione'}
+          layout={componentData.layout || 'center'}
+          overline={componentData.overline || 'Testo overline'}
+          background={componentData.background || 'Testo o immagine background'}
           theme={componentData.theme || 'light'}
-          image={
-            <img
-              src={componentData.image}
-              alt="hero image"
-              style={{
-                width: '100%',
-                height: 'auto',
-                margin: 'auto',
-                display: 'block',
-                justifyItems: 'center',
-              }}
-            />
-          }
-          size={componentData.size === 'small' || componentData.size === undefined ? 'small' : 'big'}
           title={componentData.title || 'Titolo'}
-          subtitle={componentData.subtitle}
           key={index}
         />
       );
+
+
+
+    case 'accordion':
+      const accordionValuesData = (componentData.accordionValues || []).map((accordionValues, accordionValuesIndex) => ({
+        content: accordionValues.content,
+        header: accordionValues.header
+      }));
+      return (
+        <Accordion
+          accordionItems={accordionValuesData}
+          theme={componentData.theme || 'light'}
+          title={componentData.title || 'Titolo'}
+          subtitle={componentData.subtitle || 'Sottotitolo'}
+          description={componentData.description || 'Testo descrizione'}
+          layout={componentData.layout || 'center'}
+          key={index}
+        />
+      );
+
+
+
+    case 'bannerLink':
+      return (
+        <BannerLink
+          body={componentData.body || 'Testo body'}
+          theme={componentData.theme || 'light'}
+          title={componentData.title || 'Titolo'}
+          key={index}
+        />
+      );
+
+    // BannerLink va in errore 
+
+
+
+    // case 'cards':
+    //   const cardsValuesData = (componentData.items || []).map((item, itemIndex) => ({
+    //     items: {
+    //       cardIcon: {
+    //         icon: item.cardIcon.icon,
+    //       },
+    //       link: {
+    //         href: item.link.href,
+    //         text: item.text,
+    //         title: item.title,
+    //       },
+    //       text: {
+    //         title: item.text.title,
+    //       } 
+    //     }
+    //   }));
+    //   // text title forse va messo in un'altra costante 
+    //   return (
+    //     <Cards
+    //       items={cardsValuesData}
+    //       theme={componentData.theme || 'light'}
+    //       key={index}
+    //     />
+    //   );
+    // impossibile trovare cards tra gli import   
+    
+    
+
+    case 'download':
+      const downloadValuesData = (componentData.items || []).map((item, itemIndex) => ({
+        items: {
+          fileName: item.fileName,
+          href: item.href,
+          label: item.label
+        }
+      }));
+      return (
+        <Download
+          items={downloadValuesData}
+          subtitle={componentData.subtitle || 'Sottotitolo'}
+          theme={componentData.theme || 'light'}
+          title={componentData.title || 'Titolo'}
+          type={ 'button' || 'link'}
+          key={index}
+        />
+      );
+    // rivedere download
+    // in download trovare il modo di impostare un type, va in contrasto con il type del json 
+
+
 
     case 'editorial':
       return (
@@ -158,24 +243,52 @@ export function renderComponent(componentData: ComponentData, index: number) {
         />
       );
 
-    case 'feature':
-      const items = (componentData.items ?? []).map((item, itemIndex) => ({
-        stackIcon: {
-          icon: item.stackIcon.icon,
-        },
-        title: item.title,
-        subtitle: item.subtitle,
-      }));
 
+
+    case 'feature':
+    const items = (componentData.items ?? []).map((item, itemIndex) => ({
+      stackIcon: {
+        icon: item.stackIcon.icon,
+      },
+      title: item.title,
+      subtitle: item.subtitle,
+    }));
+    return (
+      <Feature
+        items={items}
+        title={componentData.title || 'Titolo'}
+        theme={componentData.theme || 'light'}
+        key={index}
+      />
+    );
+
+
+
+    case 'hero':
       return (
-        <Feature
-          items={items}
-          title={componentData.title || 'Titolo'}
+        <Hero
           theme={componentData.theme || 'light'}
+          image={
+            <img
+              src={componentData.image}
+              alt="hero image"
+              style={{
+                width: '100%',
+                height: 'auto',
+                margin: 'auto',
+                display: 'block',
+                justifyItems: 'center',
+              }}
+            />
+          }
+          size={componentData.size === 'small' || componentData.size === undefined ? 'small' : 'big'}
+          title={componentData.title || 'Titolo'}
+          subtitle={componentData.subtitle}
           key={index}
         />
       );
 
+    
 
     case 'howTo':
       const steps = (componentData.steps ?? []).map((step, itemIndex) => ({
@@ -185,7 +298,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
         title: step.title,
         description: step.description,
       }));
-
       return (
         <HowTo
           steps={steps}
@@ -194,6 +306,8 @@ export function renderComponent(componentData: ComponentData, index: number) {
           key={index}
         />
       );
+
+
 
     case 'stats':
       const kpiValuesData = (componentData.kpiValues || []).map((kpi, kpiIndex) => ({
@@ -204,7 +318,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
         },
         value: kpi.value || 0,
       }));
-
       return (
         <Stats
           body={componentData.body || 'body'}
@@ -217,75 +330,66 @@ export function renderComponent(componentData: ComponentData, index: number) {
         />
       );
 
-    case 'accordion':
-      const accordionValuesData = (componentData.accordionValues || []).map((accordionValues, accordionValuesIndex) => ({
-        accordionItems: {
-          content: accordionValues.content,
-          header: accordionValues.header
-        }
 
-      }));
 
-      return (
-        <Accordion
-          accordionItems={accordionValuesData}
-          theme={componentData.theme || 'light'}
-          title={componentData.title || 'Titolo'}
-          key={index}
-        />
-      );
-
-    // rivedere accordion 
-
-    // case 'cards':
-    //   const cardsValuesData = (componentData.items || []).map((item, itemIndex) => ({
-    //     items: {
-    //       cardIcon: {
-    //         icon: item.cardIcon.icon,
-    //       },
-    //       link: {
-    //         href: item.link.href,
-    //         text: item.text,
-    //         title: item.title,
-    //       },
-    //       text: {
-    //         title: item.text.title,
-    //       } 
+    // case 'quote':
+    //   const quotesValuesData = (componentData.quotesValues || []).map((quotesValues, itemIndex) => ({
+    //     quotes: {
+    //       text: quotesValues.quotes.text
     //     }
     //   }));
-    //   // text title forse va messo in un'altra costante 
-
     //   return (
-    //     <Cards
-    //       items={cardsValuesData}
-    //       theme={componentData.theme || 'light'}
+    //     <Quote
+    //       background={componentData.background || "background"}
+    //       quotes={quotesValuesData}
+    //       theme={componentData.theme || "light"}
     //       key={index}
     //     />
     //   );
+    // impossibile trovare quote tra gli import
 
-    // impossibile trovare cards tra gli import 
 
-    case 'download':
-      const downloadValuesData = (componentData.items || []).map((item, itemIndex) => ({
-        items: {
-          fileName: item.fileName,
-          href: item.href,
-          label: item.label
-        }
-      }));
 
+    // case 'stripelink':
+    //   const stripelinkValuesData = (componentData.stripelinkValues || []).map((stripelinkValues, itemIndex) => ({
+    //     icon: {
+    //       color: stripelinkValues.icon.color,
+    //       icon: stripelinkValues.icon.icon
+    //     }
+    //   }));
+    //   return (
+    //     <StripeLink
+    //       buttonText={componentData.buttonText || "buttonText"}
+    //       icon={stripelinkValuesData}
+    //       subtitle={componentData.subtitle || "subtitle"}
+    //       theme="light"
+    //       key={index}
+    //     />
+    //   );
+    //   // impossibile trovare stripelink tra gli import
+
+
+
+    case 'video':
       return (
-        <Download
-          items={downloadValuesData}
-          subtitle={componentData.subtitle || 'Sottotitolo'}
-          theme={componentData.theme || 'light'}
-          title={componentData.title || 'Titolo'}
+        <Video
+          autoplay={false || true}
+          src={componentData.src || "true"}
+          subtitle={componentData.subtitle || "true"}
+          theme="light"
+          title={componentData.title || "true"}
           key={index}
         />
       );
 
-    // rivedere download 
 
+
+
+
+
+
+
+    // Non presenti nel documento su confluence
 
     case 'listing':
       const listingValuesData = (componentData.listingValues || []).map((listingValues, itemIndex) => ({
@@ -302,7 +406,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
           }
         }
       }));
-
       const listingValuesDataItems = (componentData.listingValuesItem || []).map((listingValuesItem, itemIndex) => ({
         listingValuesItem: {
           href: listingValuesItem.href,
@@ -310,7 +413,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
           text: listingValuesItem.text
         }
       }));
-
       return (
         <Listing
           date={listingValuesData}
@@ -320,8 +422,8 @@ export function renderComponent(componentData: ComponentData, index: number) {
           key={index}
         />
       );
-
     // rivedere listing 
+
 
 
     case 'newsroom':
@@ -342,55 +444,14 @@ export function renderComponent(componentData: ComponentData, index: number) {
         title: newsroomValues.title
         // }
       }));
-
       return (
         <Newsroom
           items={newsroomValuesData}
           key={index}
         />
       );
-
     // rivedere newsroom
 
-
-    // case 'quote':
-    //   const quotesValuesData = (componentData.quotesValues || []).map((quotesValues, itemIndex) => ({
-    //     quotes: {
-    //       text: quotesValues.quotes.text
-    //     }
-    //   }));
-
-    //   return (
-    //     <Quote
-    //       background={componentData.background || "background"}
-    //       quotes={quotesValuesData}
-    //       theme={componentData.theme || "light"}
-    //       key={index}
-    //     />
-    //   );
-
-    // impossibile trovare quote tra gli import 
-
-
-    // case 'stripelink':
-    //   const stripelinkValuesData = (componentData.stripelinkValues || []).map((stripelinkValues, itemIndex) => ({
-    //     icon: {
-    //       color: stripelinkValues.icon.color,
-    //       icon: stripelinkValues.icon.icon
-    //     }
-    //   }));
-
-    //   return (
-    //     <StripeLink
-    //       buttonText={componentData.buttonText || "buttonText"}
-    //       icon={stripelinkValuesData}
-    //       subtitle={componentData.subtitle || "subtitle"}
-    //       theme="light"
-    //       key={index}
-    //     />
-    //   );
-
-    //   // impossibile trovare stripelink tra gli import
 
 
     // case 'text':
@@ -405,17 +466,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
     //   );
 
 
-    case 'video':
-      return (
-        <Video
-          autoplay={false || true}
-          src={componentData.src || "true"}
-          subtitle={componentData.subtitle || "true"}
-          theme="light"
-          title={componentData.title || "true"}
-          key={index}
-        />
-      );
 
     default:
       return null;

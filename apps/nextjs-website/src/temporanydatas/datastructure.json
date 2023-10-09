@@ -2,6 +2,49 @@
   "pubbliche-amministrazioni": [
 
     {
+      "type": "download",
+      "items":[
+        {
+          "fileName": "sample_1.pdf",
+          "href": "static/media/sample.ac0398d4.pdf",
+          "label": "Download 1 Lorem Ipsum"
+        },
+        {
+          "fileName": "sample_2.pdf",
+          "href": "static/media/sample.ac0398d4.pdf",
+          "label": "Download 2 Lorem Ipsum"
+        }
+      ],
+      "subtitle":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+      "theme":"light",
+      "title":"Download Area Lorem Ipsum"
+    },
+    {
+      "type": "bannerLink",
+      "body":"Leggi le domande frequenti sull’adesione a pagoPA da parte degli Enti Creditori oppure scrivi a: account@pagopa.it",
+      "theme":"light",
+      "title":"Vuoi diventare un Partner tecnologico qualificato?"
+    },
+    {
+      "type": "abstract",
+      "description": "Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "layout": "center",
+      "overline": "Per i cittadini",
+      "theme": "light",
+      "title": "Lorem ipsum dolor sit amet, consectetur"
+    },
+    {
+      "type": "accordion",
+      "theme": "light",
+      "title": "mio accordion",
+      "accordionValues": [{
+        "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
+        "header": "Header"
+      }],
+      "subtitle": "sottotitolo mio accordion",
+      "description": "descrizione mio accordion"
+    },
+    {
       "type": "video",
       "autoplay": true,
       "src": "https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4",
@@ -49,15 +92,7 @@
       "theme":"light",
       "title":"Download Area Lorem Ipsum"
     },
-    {
-      "type": "accordion",
-      "theme": "light",
-      "title": "mio accordion",
-      "accordionValues": [{
-        "content": "bellaaaaaa",
-        "header": "ciao"
-        }]
-    },
+    
     {
       "type": "stats",
       "theme": "light",
