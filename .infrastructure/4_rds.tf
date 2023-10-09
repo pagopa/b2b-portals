@@ -15,12 +15,13 @@ resource "aws_db_subnet_group" "website-cms" {
 }
 
 resource "aws_rds_cluster" "website-cms-database-cluster" {
-  cluster_identifier     = var.db_cluster_identifier
-  engine                 = "aurora-postgresql"
-  engine_mode            = "provisioned"
-  engine_version         = "14.6"
-  database_name          = var.db_name
-  master_username        = var.db_master_username
+  cluster_identifier = var.db_cluster_identifier
+  engine             = "aurora-postgresql"
+  engine_mode        = "provisioned"
+  engine_version     = "14.6"
+  database_name      = var.db_name
+  master_username    = var.db_master_username
+  ##master_password        = aws_ssm_parameter.db_password.value
   master_password        = aws_ssm_parameter.db_password.value
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.website-cms-database.id]

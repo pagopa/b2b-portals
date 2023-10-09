@@ -19,8 +19,16 @@
         "value": "production"
       },
       {
+        "name": "DATABASE_CLIENT",
+        "value": "${db_client}"
+      },
+      {
         "name": "DATABASE_HOST",
         "value": "${db_host}"
+      },
+      {
+        "name": "DATABASE_NAME",
+        "value": "${db_name}"
       },
       {
         "name": "BUCKET_NAME",
@@ -29,6 +37,14 @@
       {
         "name": "DATABASE_USERNAME",
         "value": "${db_user}"
+      },
+      {
+        "name": "DATABASE_SSL",
+        "value": "false"
+      },
+      {
+        "name": "DATABASE_PORT",
+        "value": "5432"
       }
     ],
     "secrets" : [

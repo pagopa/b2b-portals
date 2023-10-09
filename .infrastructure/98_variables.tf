@@ -77,12 +77,12 @@ variable "container_name" {
 }
 
 # DATABASE RDS ##########################################################
-variable "rds_cluster_password" {
-  description = "RDS cluster password"
-  sensitive   = true
-  type        = string
-  default     = "adminpassword" ##### VALORE DI TEST da decidere come mascherare
-}
+##variable "rds_cluster_password" {
+##  description = "RDS cluster password"
+##  sensitive   = true
+##  type        = string
+##  default     = "adminpassword" ##### VALORE DI TEST da decidere come mascherare
+##}
 
 variable "db_cluster_identifier" {
   description = "Database Cluster identifier"
@@ -94,25 +94,30 @@ variable "db_name" {
   default     = "strapidb" ##### VALORE eventualmente da adeguare
 }
 
+variable "db_client" {
+  description = "Database client"
+  default     = "postgres"
+}
+
 variable "db_master_username" {
   description = "Database Master Username"
   default     = "postgres" ##### VALORE eventualmente da adeguare
 }
 
 # APP STRAPI ##########################################################
-variable "strapi_admin_jwt_secret" {
-  description = "Strapi Admin JWT Secret"
-  sensitive   = true
-  type        = string
-  default     = "admin" #####VALORE DI TEST da decidere come mascherare
-}
+##variable "strapi_admin_jwt_secret" {
+##  description = "Strapi Admin JWT Secret"
+##  sensitive   = true
+##  type        = string
+##  default     = "admin" #####VALORE DI TEST da decidere come mascherare
+##}
 
-variable "github_token" {
-  description = "github_token"
-  sensitive   = true
-  type        = string
-  default     = "github" ##### VALORE DI TEST da decidere come mascherare
-}
+##variable "github_token" {
+##  description = "github_token"
+##  sensitive   = true
+##  type        = string
+##  default     = "github" ##### VALORE DI TEST da decidere come mascherare
+##}
 
 variable "product_name" {
   description = "Product"
