@@ -99,3 +99,13 @@ And finally execute the following command that upload state to S3. Reply yes to 
 ### Step 4: Add the IAM role as GitHub environment secret
 
 In order to allow github to manage the aws resources you have to add the `IAM_ROLE` environment secret filled with the `arn` of `GitHubActionIACRole` role. Find the `arn` of the role via management console. 
+
+### Step 5: Run manually the workflow "Deploy Infrastructure" and Check on AWS
+
+After verifying that the "Code Review Infra" workflow ran correctly without errors, from the Actions section of GitHub, manually run the "Deploy Infrastructure" workflow. Monitor its execution and make sure it finishes successfully. 
+Finally, connect to the AWS console and verify that all the resources of Strapi's interest have been deployed, such as:
+- Bucket S3 for Strapi Media Library
+- Cluster ECS Fargate
+- Repository ECR
+- Database RDS Aurora PostgreSQL
+- VPC and Application Load Balancer
