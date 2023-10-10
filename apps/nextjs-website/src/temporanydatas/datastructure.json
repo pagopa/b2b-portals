@@ -1,6 +1,178 @@
 {
   "pubbliche-amministrazioni": [
-
+      {
+      "type": "newsroom",
+      "items":[
+        {
+          "date": {
+            "date": "new Date('2023-10-10T12:35:52.705Z'),"
+          },
+          "href": {
+            "label": "leggi",
+            "link": "https://google.it",
+            "title": "vai al sito"
+          },
+          "img": {
+            "alt": "A picture showing some books",
+            "src": "static/media/newsroom-cover.59549252.png"
+          },
+          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
+        },
+        {
+          "date": {
+            "date": "new Date('2023-10-10T12:35:52.705Z')"
+          },
+          "href": {
+            "label": "leggi",
+            "link": "https://google.it",
+            "title": "vai al sito"
+          },
+          "img": {
+            "alt": "A picture showing some books",
+            "src": "static/media/newsroom-cover.59549252.png"
+          },
+          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
+        },
+        {
+          "date": {
+            "date": "new Date('2023-10-10T12:35:52.705Z')"
+          },
+          "href": {
+            "label": "leggi",
+            "link": "https://google.it",
+            "title": "vai al sito"
+          },
+          "img": {
+            "alt": "A picture showing some books",
+            "src": "static/media/newsroom-cover.59549252.png"
+          },
+          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
+        },
+        {
+          "date": {
+            "date": "new Date('2023-10-10T12:35:52.705Z')"
+          },
+          "href": {
+            "label": "leggi",
+            "link": "https://google.it",
+            "title": "vai al sito"
+          },
+          "img": {
+            "alt": "A picture showing some books",
+            "src": "static/media/newsroom-cover.59549252.png"
+          },
+          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
+        },
+        {
+          "date": {
+            "date": "new Date('2023-10-10T12:35:52.705Z')"
+          },
+          "href": {
+            "label": "leggi",
+            "link": "https://google.it",
+            "title": "vai al sito"
+          },
+          "img": "<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>",
+          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "items": [
+        {
+          "stackIcon": {
+            "icon": "./feature-icon-01.svg"
+          },
+          "subtitle": "Le notifiche sono inviate, gestite e monitorate tramite un solo canale, accessibile da più referenti dello stesso ente",
+          "title": "Unico"
+        },
+        {
+          "stackIcon": {
+            "icon": "./feature-icon-01.svg"
+          },
+          "subtitle": "Si possono caricare notifiche tramite API o manualmente: depositati i documenti, la piattaforma si occupa dell’invio e tiene traccia dei cambi di stato",
+          "title": "Semplice"
+        },
+        {
+          "stackIcon": {
+            "icon": "./feature-icon-01.svg"
+          },
+          "subtitle": "Se il destinatario ha un recapito digitale, i tempi di invio diminuiscono notevolmente",
+          "title": "Immediato"
+        },
+        {
+          "stackIcon": {
+            "icon": "./feature-icon-01.svg"
+          },
+          "subtitle": "Il processo di notificazione è normato e c’è maggiore certezza di consegna al destinatario",
+          "title": "Certo"
+        }
+      ],
+      "title": "Un solo modo per risparmiare in tanti modi",
+      "theme": "light"
+    },
+    {
+      "type": "header",
+      "theme": "dark",
+      "menu":[
+        {
+          "items": [
+            {
+              "href": "#",
+              "key": 1,
+              "label": "Voce menu secondo livello"
+            },
+            {
+              "href": "#",
+              "key": 2,
+              "label": "Voce menu secondo livello"
+            },
+            {
+              "href": "#",
+              "key": 3,
+              "label": "Voce menu secondo livello"
+            }
+          ],
+          "label": "Voce Menu 1",
+          "theme": "light"
+        },
+        {
+          "active": true,
+          "items": [
+            {
+              "href": "#",
+              "key": 1,
+              "label": "Secondo livello"
+            },
+            {
+              "href": "#",
+              "key": 2,
+              "label": "Secondo livello"
+            }
+          ],
+          "label": "Voce Menu 2",
+          "theme": "light"
+        },
+        {
+          "href": "/#",
+          "label": "Voce Menu 3",
+          "theme": "light"
+        }
+      ],
+      "product":{
+        "href": "/",
+        "name": "Nome del prodotto"
+      }
+    },
+    {
+      "type": "hero",
+      "theme": "dark",
+      "image": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
+      "size": "small",
+      "title": "Inviare notifiche? Facile a dirsi.",
+      "subtitle": "E da oggi anche a farsi. SEND, Servizio Notifiche Digitali (anche nota come Piattaforma Notifiche Digitali di cui all'art. 26 del decreto-legge 76/2020 s.m.i.) digitalizza la gestione delle comunicazioni a valore legale, semplificando il processo per tutti: chi le invia, e chi le riceve."
+    },
     {
       "type": "download",
       "items":[

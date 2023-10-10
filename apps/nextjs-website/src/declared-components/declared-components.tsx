@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video, Abstract, BannerLink } from '@pagopa/pagopa-editorial-components';
+import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video, Abstract, BannerLink, Header, PreHeader } from '@pagopa/pagopa-editorial-components';
 import { ImgProps } from 'next/dist/shared/lib/get-img-props';
 import { AccordionItemProps } from '@pagopa/pagopa-editorial-components/dist/components/Accordion/AccordionItem';
 
@@ -21,7 +21,7 @@ export type ComponentData = {
   text: string;
   autoplay: boolean;
   src: string;
-  description: string | Element ;
+  description: string | Element;
   layout: 'center' | 'left' | 'right';
   overline: string;
   reverse: boolean;
@@ -125,6 +125,46 @@ export type ComponentData = {
     alt: string;
     src: string;
   };
+  headerValue?: {
+    menu: {
+      active: boolean;
+      items: {
+        href: string;
+        key: string;
+        label: string;
+      };
+      label: string;
+      theme: 'light' | 'dark';
+    };
+  }[];
+  product: {
+    href?: string;
+    name: string;
+  };
+  // ctaButtonsLeftValue?: {
+  //   leftCtas: {
+  //     theme: 'light' | 'dark';
+  //     ctaButtons: {
+  //       color: string;
+  //       href: string;
+  //       text: string;
+  //       variant: string;
+  //       theme: 'light' | 'dark';
+  //     };
+  //   }
+  // }[];
+  // ctaButtonsRightValue?: {
+  //   rightCtas: {
+  //     theme: 'light' | 'dark';
+  //     ctaButtons: {
+  //       color: string;
+  //       onClick: () => void;
+  //       startIcon: string;
+  //       text: string;
+  //       variant: string;
+  //     };
+  //   }
+  // }[];
 };
 
 export function renderComponent(componentData: ComponentData, index: number) {
@@ -163,27 +203,27 @@ export function renderComponent(componentData: ComponentData, index: number) {
         />
       );
 
-      case 'bannerLink':
-        const ctaButtonsData = (componentData.ctaButtons || []).map((ctaButton, ctaButtonIndex) => ({
-          onClick: () => {
-            const path = ctaButton.path || '/';
-            window.location.href = path;
-          },
-          text: ctaButton.text || 'Default Button Text',
-          variant: ctaButton.variant || 'outlined',
-          color: ctaButton.color || 'primary',
-        }));
-      
-        return (
-          <BannerLink
-            body={componentData.body || 'Default Body Text'}
-            ctaButtons={ctaButtonsData}
-            decoration={componentData.decoration}
-            theme={componentData.theme || 'light'}
-            title={componentData.title || 'Default Title'}
-          />
-        );
-    
+    case 'bannerLink':
+      const ctaButtonsData = (componentData.ctaButtons || []).map((ctaButton, ctaButtonIndex) => ({
+        onClick: () => {
+          const path = ctaButton.path || '/';
+          window.location.href = path;
+        },
+        text: ctaButton.text || 'Default Button Text',
+        variant: ctaButton.variant || 'outlined',
+        color: ctaButton.color || 'primary',
+      }));
+
+      return (
+        <BannerLink
+          body={componentData.body || 'Default Body Text'}
+          ctaButtons={ctaButtonsData}
+          decoration={componentData.decoration}
+          theme={componentData.theme || 'light'}
+          title={componentData.title || 'Default Title'}
+        />
+      );
+
 
     // case 'cards':
     //   const cardsValuesData = (componentData.items || []).map((item, itemIndex) => ({
@@ -210,14 +250,14 @@ export function renderComponent(componentData: ComponentData, index: number) {
     //     />
     //   );
     // impossibile trovare cards tra gli import   
-    
-    
+
+
 
     case 'download':
       const downloadValuesData = (componentData.items || []).map((item, itemIndex) => ({
-          fileName: item.fileName,
-          href: item.href,
-          label: item.label
+        fileName: item.fileName,
+        href: item.href,
+        label: item.label
       }));
       return (
         <Download
@@ -226,7 +266,7 @@ export function renderComponent(componentData: ComponentData, index: number) {
           subtitle={componentData.subtitle || 'Sottotitolo'}
           theme={componentData.theme || 'light'}
           title={componentData.title || 'Titolo'}
-          type={ 'button' || 'link'}
+          type={'button' || 'link'}
           key={index}
         />
       );
@@ -264,21 +304,48 @@ export function renderComponent(componentData: ComponentData, index: number) {
 
 
     case 'feature':
-    const items = (componentData.items ?? []).map((item, itemIndex) => ({
-      stackIcon: {
-        icon: item.stackIcon.icon,
-      },
-      title: item.title,
-      subtitle: item.subtitle,
-    }));
-    return (
-      <Feature
-        items={items}
-        title={componentData.title || 'Titolo'}
-        theme={componentData.theme || 'light'}
-        key={index}
-      />
-    );
+      const items = (componentData.items ?? []).map((item, itemIndex) => ({
+        stackIcon: {
+          icon: item.stackIcon.icon,
+        },
+        title: item.title,
+        subtitle: item.subtitle,
+      }));
+      return (
+        <Feature
+          items={items}
+          title={componentData.title || 'Titolo'}
+          theme={componentData.theme || 'light'}
+          key={index}
+        />
+      );
+
+
+
+    case 'header':
+      const headerValueData = (componentData.headerValue ?? []).map((headerValue, itemIndex) => ({
+        active: headerValue.menu.active,
+        items: {
+          href: headerValue.menu.items.href,
+          key: headerValue.menu.items.key,
+          label: headerValue.menu.items.label,
+        },
+        label: headerValue.menu.label,
+        theme: headerValue.menu.theme,
+        // product: {
+        //   href: headerValue.product.href,
+        //   name: headerValue.product.name,
+        // }
+      }));
+      return (
+        <Header
+          menu={headerValueData}
+          theme={componentData.theme || 'light'}
+          product={componentData.product}
+          key={index}
+        />
+      );
+    // rivedere header, le voci di menu non vengono visualizzate 
 
 
 
@@ -306,7 +373,7 @@ export function renderComponent(componentData: ComponentData, index: number) {
         />
       );
 
-    
+
 
     case 'howTo':
       const steps = (componentData.steps ?? []).map((step, itemIndex) => ({
@@ -324,6 +391,42 @@ export function renderComponent(componentData: ComponentData, index: number) {
           key={index}
         />
       );
+
+
+
+    // case 'preheader':
+    //   const ctaButtonsLeftValueData = (componentData.ctaButtonsLeftValue || []).map((ctaButtonsLeftValue, ctaButtonLeftIndex) => ({
+            
+    //     text: ctaButtonsLeftValue.leftCtas.ctaButtons.text || 'Default Button Text',
+    //     variant: ctaButtonsLeftValue.leftCtas.ctaButtons.variant || 'outlined',
+    //     color: ctaButtonsLeftValue.leftCtas.ctaButtons.color || 'primary',
+    //     theme: ctaButtonsLeftValue.leftCtas.theme || 'light',
+        
+        
+    //   }));
+    //   const ctaButtonsRightValueData = (componentData.ctaButtonsRightValue || []).map((ctaButtonsRightValue, ctaButtonRightIndex) => ({
+    //     // onClick: () => {
+    //     //   const path = ctaButtonsRightValue.rightCtas.ctaButtons.href || '/';
+    //     //   window.location.href = path;
+    //     // },
+    //     text: ctaButtonsRightValue.rightCtas.ctaButtons.text || 'Default Button Text',
+    //     variant: ctaButtonsRightValue.rightCtas.ctaButtons.variant || 'outlined',
+    //     color: ctaButtonsRightValue.rightCtas.ctaButtons.color || 'primary',
+    //   }));
+    //   return (
+    //     <PreHeader
+    //       leftCtas={ctaButtonsLeftValueData}
+    //       rightCtas={ctaButtonsRightValueData}
+    //       title={componentData.title || 'Titolo'}
+    //       // theme={componentData.theme || 'light'}
+    //       key={index}
+    //     />
+    //   );
+
+
+
+
+
 
 
 
