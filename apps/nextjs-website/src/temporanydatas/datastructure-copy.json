@@ -1,0 +1,261 @@
+{
+
+  "data": [
+
+      {
+
+          "id": 1,
+
+          "attributes": {
+
+              "title": "Navigazione",
+
+              "slug": "navigazione",
+
+              "createdAt": "2023-10-10T10:28:01.308Z",
+
+              "updatedAt": "2023-10-10T13:34:36.453Z",
+
+              "items": {
+
+                  "data": [
+
+                      {
+
+                          "id": 1,
+
+                          "attributes": {
+
+                              "order": 0,
+
+                              "title": "Home",
+
+                              "url": "/",
+
+                              "target": "_self",
+
+                              "visibile": false,
+
+                              "createdAt": "2023-10-10T10:29:09.920Z",
+
+                              "updatedAt": "2023-10-10T13:34:36.419Z",
+
+                              "children": {
+
+                                  "data": []
+
+                              }
+
+                          }
+
+                      },
+
+                      {
+
+                          "id": 2,
+
+                          "attributes": {
+
+                              "order": 1,
+
+                              "title": "Pricing",
+
+                              "url": "/pricing",
+
+                              "target": null,
+
+                              "visibile": true,
+
+                              "createdAt": "2023-10-10T10:29:42.385Z",
+
+                              "updatedAt": "2023-10-10T13:34:36.421Z",
+
+                              "children": {
+
+                                  "data": [
+
+                                      {
+
+                                          "id": 4,
+
+                                          "attributes": {
+
+                                              "order": 0,
+
+                                              "title": "Acquisto",
+
+                                              "url": "/acquisto",
+
+                                              "target": null,
+
+                                              "visibile": true,
+
+                                              "createdAt": "2023-10-10T10:30:18.336Z",
+
+                                              "updatedAt": "2023-10-10T13:34:36.433Z",
+
+                                              "children": {
+
+                                                  "data": [
+
+                                                      {
+
+                                                          "id": 7,
+
+                                                          "attributes": {
+
+                                                              "order": 0,
+
+                                                              "title": "Conferma Acquisto",
+
+                                                              "url": "/conferma",
+
+                                                              "target": null,
+
+                                                              "visibile": null,
+
+                                                              "createdAt": "2023-10-10T10:31:33.212Z",
+
+                                                              "updatedAt": "2023-10-10T13:34:36.436Z",
+
+                                                              "children": {
+
+                                                                  "data": []
+
+                                                              }
+
+                                                          }
+
+                                                      }
+
+                                                  ]
+
+                                              }
+
+                                          }
+
+                                      },
+
+                                      {
+
+                                          "id": 5,
+
+                                          "attributes": {
+
+                                              "order": 1,
+
+                                              "title": "Enterprise",
+
+                                              "url": "/enterprise",
+
+                                              "target": null,
+
+                                              "visibile": false,
+
+                                              "createdAt": "2023-10-10T10:30:30.963Z",
+
+                                              "updatedAt": "2023-10-10T13:34:36.435Z",
+
+                                              "children": {
+
+                                                  "data": []
+
+                                              }
+
+                                          }
+
+                                      }
+
+                                  ]
+
+                              }
+
+                          }
+
+                      },
+
+                      {
+
+                          "id": 3,
+
+                          "attributes": {
+
+                              "order": 2,
+
+                              "title": "Contattaci",
+
+                              "url": "/contattaci",
+
+                              "target": null,
+
+                              "visibile": true,
+
+                              "createdAt": "2023-10-10T10:29:42.387Z",
+
+                              "updatedAt": "2023-10-10T13:34:36.422Z",
+
+                              "children": {
+
+                                  "data": [
+
+                                      {
+
+                                          "id": 6,
+
+                                          "attributes": {
+
+                                              "order": 0,
+
+                                              "title": "Recapiti",
+
+                                              "url": "/recapiti",
+
+                                              "target": null,
+
+                                              "visibile": true,
+
+                                              "createdAt": "2023-10-10T10:30:46.472Z",
+
+                                              "updatedAt": "2023-10-10T13:34:36.435Z",
+
+                                              "children": {
+
+                                                  "data": []
+
+                                              }
+
+                                          }
+
+                                      }
+
+                                  ]
+
+                              }
+
+                          }
+
+                      }
+
+                  ]
+
+              }
+
+          }
+
+      }
+
+  ],
+
+  "meta": {
+
+      "page": 1,
+
+      "pageSize": 25,
+
+      "pageCount": 1,
+
+      "total": 1
+
+  }
+
+}
