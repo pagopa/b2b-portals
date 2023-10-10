@@ -23,7 +23,7 @@ variable "tags" {
 
 # FARGATE ECS CONTAINER ##########################################################
 variable "app_port" {
-  default = 1337 ##### VALORE PORT eventualmente da adeguare
+  default = 1337
 }
 
 variable "health_check_path" {
@@ -76,14 +76,6 @@ variable "container_name" {
   default     = "cds-website-cms"
 }
 
-# DATABASE RDS ##########################################################
-##variable "rds_cluster_password" {
-##  description = "RDS cluster password"
-##  sensitive   = true
-##  type        = string
-##  default     = "adminpassword" ##### VALORE DI TEST da decidere come mascherare
-##}
-
 variable "db_cluster_identifier" {
   description = "Database Cluster identifier"
   default     = "website-cms-database-cluster"
@@ -91,7 +83,7 @@ variable "db_cluster_identifier" {
 
 variable "db_name" {
   description = "Database Name"
-  default     = "strapidb" ##### VALORE eventualmente da adeguare
+  default     = "strapidb"
 }
 
 variable "db_client" {
@@ -101,23 +93,8 @@ variable "db_client" {
 
 variable "db_master_username" {
   description = "Database Master Username"
-  default     = "postgres" ##### VALORE eventualmente da adeguare
+  default     = "postgres"
 }
-
-# APP STRAPI ##########################################################
-##variable "strapi_admin_jwt_secret" {
-##  description = "Strapi Admin JWT Secret"
-##  sensitive   = true
-##  type        = string
-##  default     = "admin" #####VALORE DI TEST da decidere come mascherare
-##}
-
-##variable "github_token" {
-##  description = "github_token"
-##  sensitive   = true
-##  type        = string
-##  default     = "github" ##### VALORE DI TEST da decidere come mascherare
-##}
 
 variable "product_name" {
   description = "Product"
