@@ -25,7 +25,7 @@ export type ComponentData = {
   layout: 'center' | 'left' | 'right';
   overline: string;
   reverse: boolean;
-  decoration: Element | ImgProps;
+  // decoration: Element | ImgProps;
   accordionItems: AccordionItemProps[];
   itemsAlignment: 'center' | 'left' | 'right';
 
@@ -114,16 +114,18 @@ export type ComponentData = {
       icon: string;
     }
   }[];
-  bannerLinkValues?: {
-    ctaButtons:{
-      text: string;
-      color: string;
-      variant: string;
-    }
+  ctaButtons?: {
+    onClick: () => void;
+    text: string;
+    variant?: 'outlined' | 'text' | 'contained';
+    color?: 'primary' | 'inherit' | 'secondary' | 'success' | 'error' | 'info';
+    path?: string;
   }[];
+  decoration?: {
+    alt: string;
+    src: string;
+  };
 };
-
-
 
 export function renderComponent(componentData: ComponentData, index: number) {
   switch (componentData.type) {
@@ -144,8 +146,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
         />
       );
 
-
-
     case 'accordion':
       const accordionValuesData = (componentData.accordionValues || []).map((accordionValues, accordionValuesIndex) => ({
         content: accordionValues.content,
@@ -163,27 +163,27 @@ export function renderComponent(componentData: ComponentData, index: number) {
         />
       );
 
-
-
-    // case 'bannerLink':
-    //   const bannerLinkValuesData = (componentData.bannerLinkValues || []).map((bannerLinkValues, bannerLinkValuesIndex) => ({
-    //       variant: bannerLinkValues.ctaButtons.variant,
-    //       text: bannerLinkValues.ctaButtons.text,
-    //       color: bannerLinkValues.ctaButtons.color
-    //   }));
-    //   return (
-    //     <BannerLink
-    //       ctaButtons={bannerLinkValuesData}
-    //       body={componentData.body || 'Testo body'}
-    //       theme={componentData.theme || 'light'}
-    //       title={componentData.title || 'Titolo'}
-    //       reverse={componentData.reverse || false}
-    //       key={index}
-    //     />
-    //   );
-    // BannerLink va in errore 
-
-
+      case 'bannerLink':
+        const ctaButtonsData = (componentData.ctaButtons || []).map((ctaButton, ctaButtonIndex) => ({
+          onClick: () => {
+            const path = ctaButton.path || '/';
+            window.location.href = path;
+          },
+          text: ctaButton.text || 'Default Button Text',
+          variant: ctaButton.variant || 'outlined',
+          color: ctaButton.color || 'primary',
+        }));
+      
+        return (
+          <BannerLink
+            body={componentData.body || 'Default Body Text'}
+            ctaButtons={ctaButtonsData}
+            decoration={componentData.decoration}
+            theme={componentData.theme || 'light'}
+            title={componentData.title || 'Default Title'}
+          />
+        );
+    
 
     // case 'cards':
     //   const cardsValuesData = (componentData.items || []).map((item, itemIndex) => ({

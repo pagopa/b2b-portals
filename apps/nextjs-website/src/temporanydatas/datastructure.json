@@ -30,7 +30,14 @@
         {
           "variant": "outlined",
           "text": "LEGGI LE FAQ",
-          "color": "primary"
+          "color": "primary",
+          "path": "/faq"
+        },
+        {
+          "variant": "outlined",
+          "text": "LEGGI LE PUBBLICHE AMMINISTRAZIONI",
+          "color": "primary",
+          "path": "/pubbliche-amministrazioni"
         }
       ]
     },
