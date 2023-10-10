@@ -19,3 +19,9 @@ resource "aws_iam_group_policy_attachment" "read_only" {
   # The AWS ReadOnly Access Policy
   policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
+
+resource "aws_iam_group_policy_attachment" "reset_password" {
+  group = aws_iam_group.developers_read_only.name
+  # The AWS Policy to allow users changing their password
+  policy_arn = "arn:aws:iam::aws:policy/IAMUserChangePassword"
+}
