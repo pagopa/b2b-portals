@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_componenti_feature_items",
+  "info": {
+    "displayName": "FeatureItem",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Icona": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Titolo": {
+      "type": "string",
+      "required": true
+    },
+    "Paragrafo": {
+      "type": "text",
+      "required": true
+    },
+    "Link_Testo": {
+      "type": "string",
+      "required": false
+    },
+    "Link_URL": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

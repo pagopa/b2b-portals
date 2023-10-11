@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_componenti_bottones",
+  "info": {
+    "displayName": "Bottone"
+  },
+  "options": {},
+  "attributes": {
+    "Testo": {
+      "type": "string",
+      "required": true
+    },
+    "Link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

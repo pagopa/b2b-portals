@@ -1,0 +1,67 @@
+{
+  "collectionName": "components_sezioni_editorials",
+  "info": {
+    "displayName": "Editorial",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Titolo": {
+      "type": "string",
+      "required": true
+    },
+    "Label": {
+      "type": "string"
+    },
+    "Paragrafo": {
+      "type": "richtext",
+      "required": true
+    },
+    "Bottone_Primario": {
+      "type": "component",
+      "repeatable": false,
+      "component": "componenti.bottone"
+    },
+    "Bottone_Secondario": {
+      "type": "component",
+      "repeatable": false,
+      "component": "componenti.bottone"
+    },
+    "Immagine": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Tema": {
+      "type": "enumeration",
+      "enum": [
+        "Light",
+        "Dark"
+      ],
+      "default": "Light",
+      "required": true
+    },
+    "Posizionamento_Testo": {
+      "type": "enumeration",
+      "enum": [
+        "Sinistra",
+        "Destra"
+      ],
+      "default": "Sinistra",
+      "required": true
+    },
+    "Pattern_Background": {
+      "type": "enumeration",
+      "enum": [
+        "Nessuno",
+        "Punti",
+        "Solido"
+      ],
+      "default": "Nessuno",
+      "required": true
+    }
+  }
+}

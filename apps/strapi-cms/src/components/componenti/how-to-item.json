@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_componenti_how_to_items",
+  "info": {
+    "displayName": "HowToItem",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Icona": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Titolo": {
+      "type": "string",
+      "required": true
+    },
+    "Descrizione": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_sezioni_features",
+  "info": {
+    "displayName": "Feature",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Titolo": {
+      "type": "string",
+      "required": true
+    },
+    "Items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "componenti.feature-item",
+      "required": true,
+      "min": 3,
+      "max": 4
+    },
+    "Tema": {
+      "type": "enumeration",
+      "enum": [
+        "Light",
+        "Dark"
+      ],
+      "default": "Light",
+      "required": true
+    },
+    "Carosello_Mobile": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

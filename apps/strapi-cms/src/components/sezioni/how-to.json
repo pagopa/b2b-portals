@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_sezioni_how_tos",
+  "info": {
+    "displayName": "HowTo",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Titolo": {
+      "type": "string",
+      "required": false
+    },
+    "Steps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "componenti.how-to-item",
+      "required": true,
+      "min": 3
+    },
+    "Tema": {
+      "type": "enumeration",
+      "enum": [
+        "Light",
+        "Dark"
+      ],
+      "default": "Light",
+      "required": true
+    },
+    "Carosello_Mobile": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

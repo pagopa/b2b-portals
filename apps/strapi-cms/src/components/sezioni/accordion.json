@@ -1,0 +1,47 @@
+{
+  "collectionName": "components_sezioni_accordions",
+  "info": {
+    "displayName": "Accordion",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Titolo": {
+      "type": "string",
+      "required": true
+    },
+    "Sottotitolo": {
+      "type": "string",
+      "required": true
+    },
+    "Paragrafo": {
+      "type": "richtext",
+      "required": false
+    },
+    "Elementi": {
+      "type": "component",
+      "repeatable": true,
+      "component": "componenti.accordion-item",
+      "required": true
+    },
+    "Tema": {
+      "type": "enumeration",
+      "enum": [
+        "Light",
+        "Dark"
+      ],
+      "required": true,
+      "default": "Light"
+    },
+    "Posizionamento_Testo": {
+      "type": "enumeration",
+      "enum": [
+        "Sinistra",
+        "Centro",
+        "Destra"
+      ],
+      "default": "Sinistra",
+      "required": true
+    }
+  }
+}

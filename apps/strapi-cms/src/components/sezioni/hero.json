@@ -1,0 +1,71 @@
+{
+  "collectionName": "components_sezioni_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Titolo": {
+      "type": "string",
+      "required": true
+    },
+    "Bottone_Primario": {
+      "type": "component",
+      "repeatable": false,
+      "component": "componenti.bottone"
+    },
+    "Bottone_Secondario": {
+      "type": "component",
+      "repeatable": true,
+      "component": "componenti.bottone"
+    },
+    "Immagine": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Immagine_Background": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Tema": {
+      "type": "enumeration",
+      "enum": [
+        "Light",
+        "Dark"
+      ],
+      "default": "Light",
+      "required": true
+    },
+    "Posizionamento_Testo": {
+      "type": "enumeration",
+      "enum": [
+        "Sinistra",
+        "Destra"
+      ],
+      "default": "Sinistra",
+      "required": true
+    },
+    "Altezza_Sezione": {
+      "type": "enumeration",
+      "enum": [
+        "Bassa",
+        "Alta"
+      ],
+      "default": "Alta",
+      "required": true
+    },
+    "Paragrafo": {
+      "type": "richtext",
+      "required": false
+    }
+  }
+}

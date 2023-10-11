@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_componenti_accordion_items",
+  "info": {
+    "displayName": "AccordionItem"
+  },
+  "options": {},
+  "attributes": {
+    "Titolo": {
+      "type": "string",
+      "required": true
+    },
+    "Paragrafo": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
