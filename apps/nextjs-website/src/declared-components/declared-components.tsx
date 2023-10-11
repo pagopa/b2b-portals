@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video, Abstract, BannerLink, Header, PreHeader } from '@pagopa/pagopa-editorial-components';
+import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video, Abstract, BannerLink, Header, PreHeader, Footer } from '@pagopa/pagopa-editorial-components';
 import { ImgProps } from 'next/dist/shared/lib/get-img-props';
 import { AccordionItemProps } from '@pagopa/pagopa-editorial-components/dist/components/Accordion/AccordionItem';
 
@@ -28,6 +28,7 @@ export type ComponentData = {
   // decoration: Element | ImgProps;
   accordionItems: AccordionItemProps[];
   itemsAlignment: 'center' | 'left' | 'right';
+  textAlign: 'center' | 'left';
 
   items?: {
     stackIcon: {
@@ -165,6 +166,68 @@ export type ComponentData = {
   //     };
   //   }
   // }[];
+
+  // footerValues?: {
+  //   activeLanguage: {
+  //     id: string;
+  //     value: string;
+  //   };
+  //   companyLink: {
+  //     ariaLabel: string;
+  //     href: string;
+  //   };
+  //   languages: {
+  //     id: string;
+  //     value: string;
+  //   };
+  //   legalInfo: string;
+  //   links: {
+  //     aboutUs: {
+  //       links: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         label: string;
+  //         linkType: string;
+  //       };
+  //       title: string;
+  //     };
+  //     followUs: {
+  //       links: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         label: string;
+  //         linkType: string;
+  //       };
+  //       socialLinks: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         icon: string;
+  //       };
+  //       title: string;
+  //     };
+  //     resources: {
+  //       links: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         label: string;
+  //         linkType: string;
+  //         onClick: () => void;
+  //       };
+  //       title: string;
+  //     };
+  //     services: {
+  //       links: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         label: string;
+  //         linkType: string;
+  //       };
+  //       title: string;
+  //     };
+  //   };
+  //   onLanguageChanged: () => void;
+  // }[];
+
 };
 
 export function renderComponent(componentData: ComponentData, index: number) {
@@ -396,13 +459,13 @@ export function renderComponent(componentData: ComponentData, index: number) {
 
     // case 'preheader':
     //   const ctaButtonsLeftValueData = (componentData.ctaButtonsLeftValue || []).map((ctaButtonsLeftValue, ctaButtonLeftIndex) => ({
-            
+
     //     text: ctaButtonsLeftValue.leftCtas.ctaButtons.text || 'Default Button Text',
     //     variant: ctaButtonsLeftValue.leftCtas.ctaButtons.variant || 'outlined',
     //     color: ctaButtonsLeftValue.leftCtas.ctaButtons.color || 'primary',
     //     theme: ctaButtonsLeftValue.leftCtas.theme || 'light',
-        
-        
+
+
     //   }));
     //   const ctaButtonsRightValueData = (componentData.ctaButtonsRightValue || []).map((ctaButtonsRightValue, ctaButtonRightIndex) => ({
     //     // onClick: () => {
@@ -422,12 +485,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
     //       key={index}
     //     />
     //   );
-
-
-
-
-
-
 
 
     case 'stats':
@@ -450,7 +507,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
           key={index}
         />
       );
-
 
 
     // case 'quote':
@@ -502,11 +558,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
           key={index}
         />
       );
-
-
-
-
-
 
 
 
@@ -587,6 +638,88 @@ export function renderComponent(componentData: ComponentData, index: number) {
     //   );
 
 
+    // case 'form':
+    //   return (
+    //     <FormComponent
+    //       title={componentData.title || 'Titolo'}
+    //       buttonText={componentData.buttonText || 'Testo pulsante'}
+    //       key={index}
+    //     />
+    //   );
+
+
+
+    // case 'footer':
+    //   const footerValuesData = (componentData.footerValues || []).map((footerValues, itemIndex) => ({
+    //     activeLanguage: {
+    //       id: footerValues.activeLanguage.id,
+    //       value: footerValues.activeLanguage.value
+    //     },
+    //     companyLink: {
+    //       ariaLabel: footerValues.companyLink.ariaLabel,
+    //       href: footerValues.companyLink.href
+    //     },
+    //     languages: {
+    //       id: footerValues.languages.id,
+    //       value: footerValues.languages.value
+    //     },
+    //     legalInfo: footerValues.legalInfo,
+    //     links: {
+    //       aboutUs: {
+    //         links: {
+    //           ariaLabel: footerValues.links.aboutUs.links.ariaLabel,
+    //           href: footerValues.links.aboutUs.links.href,
+    //           label: footerValues.links.aboutUs.links.label,
+    //           linkType: footerValues.links.aboutUs.links.linkType,
+    //         },
+    //         title: footerValues.links.aboutUs.title,
+    //       },
+    //       followUs: {
+    //         links: {
+    //           ariaLabel: footerValues.links.followUs.links.ariaLabel,
+    //           href: footerValues.links.followUs.links.href,
+    //           label: footerValues.links.followUs.links.label,
+    //           linkType: footerValues.links.followUs.links.linkType,
+    //         },
+    //         socialLinks: {
+    //           ariaLabel: footerValues.links.followUs.socialLinks.ariaLabel,
+    //           href: footerValues.links.followUs.socialLinks.href,
+    //           icon: footerValues.links.followUs.socialLinks.icon,
+    //         },
+    //         title: footerValues.links.followUs.title,
+    //       },
+    //       resources: {
+    //         links: {
+    //           ariaLabel: footerValues.links.resources.links.ariaLabel,
+    //           href: footerValues.links.resources.links.href,
+    //           label: footerValues.links.resources.links.label,
+    //           linkType: footerValues.links.resources.links.linkType,
+    //           onClick: () => {},
+    //         },
+    //         title: footerValues.links.resources.title,
+    //       },
+    //       services: {
+    //         links: {
+    //           ariaLabel: footerValues.links.services.links.ariaLabel,
+    //           href: footerValues.links.services.links.href,
+    //           label: footerValues.links.services.links.label,
+    //           linkType: footerValues.links.services.links.linkType,
+    //         },
+    //         title: footerValues.links.services.title,
+    //       },
+    //     },
+    //     onLanguageChanged: () => {},
+    //   }));
+    //   return (
+    //     <Footer
+    //       activeLanguage={}
+    //       companyLink={}
+    //       languages={}
+    //       legalInfo={}
+    //       links={}
+    //       onLanguageChanged={}
+    //     />
+    //   );
 
     default:
       return null;
