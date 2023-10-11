@@ -1,4 +1,3 @@
-# Developers read only group
 resource "aws_iam_group" "developers_read_only" {
   name = "developers_read_only"
 }
