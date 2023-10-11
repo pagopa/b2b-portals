@@ -1,43 +1,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
       <url>
-        <loc>http://localhost:3000/faq</loc>
-        <lastmod>2023-10-05T14:28:24.047Z</lastmod>
+        <loc>http://localhost:3000</loc>
+        <lastmod>2023-10-11T15:47:29.913Z</lastmod>
       </url>
     
       <url>
-        <loc>http://localhost:3000/cittadini</loc>
-        <lastmod>2023-10-05T14:28:24.048Z</lastmod>
+        <loc>http://localhost:3000/pricing</loc>
+        <lastmod>2023-10-11T15:47:29.914Z</lastmod>
       </url>
     
       <url>
-        <loc>http://localhost:3000/pubbliche-amministrazioni</loc>
-        <lastmod>2023-10-05T14:28:24.048Z</lastmod>
+        <loc>http://localhost:3000/pricing/acquisto</loc>
+        <lastmod>2023-10-11T15:47:29.914Z</lastmod>
       </url>
     
       <url>
-        <loc>http://localhost:3000/pubbliche-amministrazioni/subroute1</loc>
-        <lastmod>2023-10-05T14:28:24.048Z</lastmod>
+        <loc>http://localhost:3000/pricing/acquisto/conferma</loc>
+        <lastmod>2023-10-11T15:47:29.914Z</lastmod>
       </url>
     
       <url>
-        <loc>http://localhost:3000/pubbliche-amministrazioni/subroute1/subsubroute1</loc>
-        <lastmod>2023-10-05T14:28:24.048Z</lastmod>
+        <loc>http://localhost:3000/pricing/enterprise</loc>
+        <lastmod>2023-10-11T15:47:29.914Z</lastmod>
       </url>
     
       <url>
-        <loc>http://localhost:3000/pubbliche-amministrazioni/subroute1/subsubroute2</loc>
-        <lastmod>2023-10-05T14:28:24.048Z</lastmod>
+        <loc>http://localhost:3000/contattaci</loc>
+        <lastmod>2023-10-11T15:47:29.914Z</lastmod>
       </url>
     
       <url>
-        <loc>http://localhost:3000/pubbliche-amministrazioni/subroute2</loc>
-        <lastmod>2023-10-05T14:28:24.048Z</lastmod>
-      </url>
-    
-      <url>
-        <loc>http://localhost:3000/pubbliche-amministrazioni/subroute3</loc>
-        <lastmod>2023-10-05T14:28:24.048Z</lastmod>
+        <loc>http://localhost:3000/contattaci/recapiti</loc>
+        <lastmod>2023-10-11T15:47:29.914Z</lastmod>
       </url>
     
   </urlset>

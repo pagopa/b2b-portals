@@ -20,7 +20,12 @@ function generateSitemap() {
   function collectSitemapEntries(route: Route, parentPath = ''): SitemapEntry[] {
     const entries: SitemapEntry[] = [];
 
-    const routeURL = `http://localhost:3000/${parentPath}${route.route}`;
+    if (route.route === '/') {
+      // Special handling for the root ("/") to avoid double slashes
+      var routeURL = 'http://localhost:3000';
+    } else {
+      var routeURL = `http://localhost:3000/${parentPath}${route.route}`;
+    }
 
     entries.push({
       loc: routeURL,

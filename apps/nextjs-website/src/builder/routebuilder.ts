@@ -17,21 +17,22 @@ const baseDir = path.join(currentDir, '../app');
 
 // Function to create routes recursively
 function createRoute(routeData: RouteData, parentDir: string) {
-  // Remove special characters like hyphens from routeData.route
-  const sanitizedRoute = routeData.route.replace(/[^a-zA-Z0-9-]/g, '');
+  if (routeData.route !== '/') { // Skip routes with route: "/"
+    // Remove special characters like hyphens from routeData.route
+    const sanitizedRoute = routeData.route.replace(/[^a-zA-Z0-9-]/g, '');
 
-  // Capitalize the first letter and the first letter after a hyphen for the function name
-  const routeName = sanitizedRoute.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+    // Capitalize the first letter and the first letter after a hyphen for the function name
+    const routeName = sanitizedRoute.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
 
-  const routeDir = path.join(parentDir, sanitizedRoute);
-  const routePath = path.join(routeDir, 'page.tsx');
+    const routeDir = path.join(parentDir, sanitizedRoute);
+    const routePath = path.join(routeDir, 'page.tsx');
 
-  // Create the directory if it doesn't exist
-  if (!fs.existsSync(routeDir)) {
-    fs.mkdirSync(routeDir, { recursive: true });
-  }
+    // Create the directory if it doesn't exist
+    if (!fs.existsSync(routeDir)) {
+      fs.mkdirSync(routeDir, { recursive: true });
+    }
 
-  const routeContent = `'use client'
+const routeContent = `'use client'
 import React from 'react';
 import { ComponentData, renderComponent } from '@/declared-components/declared-components';
 import dataStructure from '../../temporanydatas/datastructure.json';
@@ -47,14 +48,15 @@ function ${routeName}() {
 
 export default ${routeName};`;
 
-  // Write the route file
-  fs.writeFileSync(routePath, routeContent);
+    // Write the route file
+    fs.writeFileSync(routePath, routeContent);
 
-  // Handle sub-routes
-  if (routeData.subroutes && routeData.subroutes.length > 0) {
-    routeData.subroutes.forEach((subroute: RouteData) => {
-      createRoute(subroute, routeDir);
-    });
+    // Handle sub-routes
+    if (routeData.subroutes && routeData.subroutes.length > 0) {
+      routeData.subroutes.forEach((subroute: RouteData) => {
+        createRoute(subroute, routeDir);
+      });
+    }
   }
 }
 
@@ -69,9 +71,9 @@ function deleteSubdirectories(parentDir: string, routeData: RouteData) {
 
   existingSubdirs.forEach((dir) => {
     const dirPath = path.join(parentDir, dir);
-    if (dir !== 'node_modules' && !routeData.subroutes?.some((subroute) => subroute.route === dir)) {
-      // Check if the subdirectory is not in the JSON data and delete it
-      if (fs.lstatSync(dirPath).isDirectory()) {
+    if (dir !== 'node_modules') {
+      const shouldDelete = !routeData.subroutes?.some((subroute) => subroute.route === dir);
+      if (fs.lstatSync(dirPath).isDirectory() && shouldDelete) {
         deleteDirectoryRecursive(dirPath);
         console.log(`Deleted directory: ${dirPath}`);
       }
@@ -79,8 +81,8 @@ function deleteSubdirectories(parentDir: string, routeData: RouteData) {
   });
 }
 
-// Call the function to delete subdirectories for each route
-jsonData.forEach((routeData) => {
+// Call the function to delete subdirectories for each route, excluding the root
+jsonData.slice(1).forEach((routeData) => { // Start from index 1 to skip the root route
   const routeDir = path.join(baseDir, routeData.route);
   deleteSubdirectories(routeDir, routeData);
 });
