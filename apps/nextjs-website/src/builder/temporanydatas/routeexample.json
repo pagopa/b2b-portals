@@ -1,5 +1,18 @@
 [
   {
-    "route": "Navigazione"
+    "route": "Pricing",
+    "subroutes": [
+      {
+        "route": "Pricing/Acquisto",
+        "subroutes": [
+          {
+            "route": "Pricing/Acquisto/Conferma Acquisto"
+          }
+        ]
+      },
+      {
+        "route": "Pricing/Enterprise"
+      }
+    ]
   }
 ]
