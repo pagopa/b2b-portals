@@ -1,18 +1,18 @@
 [
+  { "route": "faq" },
+  { "route": "cittadini" },
   {
-    "route": "Pricing",
+    "route": "pubbliche-amministrazioni",
     "subroutes": [
       {
-        "route": "Pricing/Acquisto",
+        "route": "subroute1",
         "subroutes": [
-          {
-            "route": "Pricing/Acquisto/Conferma Acquisto"
-          }
+          { "route": "subsubroute1" },
+          { "route": "subsubroute2" }
         ]
       },
-      {
-        "route": "Pricing/Enterprise"
-      }
+      { "route": "subroute2" },
+      { "route": "subroute3" }
     ]
   }
 ]

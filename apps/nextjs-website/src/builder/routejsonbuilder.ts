@@ -1,6 +1,20 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+// Helper function to sanitize and transform strings
+function sanitizeString(input: string): string {
+  // Replace special characters with their corresponding letters
+  const sanitized = input
+    .replace(/[^a-zA-Z0-9 -/]/g, '') // Remove special characters except "-", "/", and " "
+    .replace(/[èé]/g, 'e') // Replace è and é with e
+    .replace(/[à]/g, 'a') // Replace à with a
+    .replace(/[ò]/g, 'o') // Replace ò with o
+    .replace(/[ì]/g, 'i') // Replace ì with i
+    .replace(/[ù]/g, 'u'); // Replace ù with u
+
+  return sanitized;
+}
+
 interface RouteData {
   route: string;
   subroutes?: RouteData[];
@@ -10,12 +24,12 @@ interface ItemAttributes {
   attributes: {
     title: string;
     visibile: boolean;
+    url: string; // Use the "url" property
     children?: {
       data: ItemAttributes[];
     };
   };
 }
-
 
 interface ApiData {
   data: {
@@ -27,17 +41,25 @@ interface ApiData {
   }[];
 }
 
-function extractRouteStructure(itemAttributes: ItemAttributes, parentRoute: string = ''): RouteData {
-  const { title, children } = itemAttributes.attributes; // Update this line
+function extractRouteStructure(attributes: ItemAttributes): RouteData {
+  const { title, children, url } = attributes.attributes;
+  const sanitizedUrl = sanitizeString(url); // Sanitize the "url" property
+  const routeWithoutSlashes = sanitizedUrl.replace(/\//g, ''); // Remove '/' symbols
 
-  console.log('Processing attributes:', itemAttributes.attributes);
+  console.log('Processing attributes:', attributes);
 
-  const routeObj: RouteData = { route: parentRoute + title }; // Update this line
+  let routeObj: RouteData;
+
+  if (title.toLowerCase() === 'home') {
+    routeObj = { route: '/' };
+  } else {
+    routeObj = { route: routeWithoutSlashes }; // Use the sanitized route
+  }
 
   console.log('Generated route:', routeObj.route);
 
   if (children && children.data && children.data.length > 0) {
-    routeObj.subroutes = children.data.map((child) => extractRouteStructure(child, routeObj.route + '/'));
+    routeObj.subroutes = children.data.map((child) => extractRouteStructure(child));
   }
 
   return routeObj;

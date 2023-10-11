@@ -11,7 +11,7 @@ interface SitemapEntry {
   lastmod: string;
 }
 
-const jsonFilePath = path.join(__dirname, '../temporanydatas/routeexample.json'); // Specify the path to your JSON file
+const jsonFilePath = path.join(__dirname, './temporanydatas/routeexample.json'); // Specify the path to your JSON file
 let routes: Route[] = [];
 
 // Function to generate the sitemap

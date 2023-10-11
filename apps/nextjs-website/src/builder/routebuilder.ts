@@ -7,7 +7,7 @@ interface RouteData {
 }
 
 // Read your JSON data
-const jsonData: RouteData[] = require('../temporanydatas/routeexample.json');
+const jsonData: RouteData[] = require('./temporanydatas/routeexample.json');
 
 // Get the directory where routebuilder.ts is located
 const currentDir = __dirname;
