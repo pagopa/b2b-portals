@@ -228,6 +228,78 @@ export type ComponentData = {
   //   onLanguageChanged: () => void;
   // }[];
 
+
+  // footerValues?: {
+  //   links: {
+  //     aboutUs: {
+  //       links: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         label: string;
+  //         linkType: string;
+  //       };
+  //       title: string;
+  //     };
+  //     followUs: {
+  //       links: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         label: string;
+  //         linkType: string;
+  //       };
+  //       socialLinks: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         icon: string;
+  //       };
+  //       title: string;
+  //     };
+  //     resources: {
+  //       links: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         label: string;
+  //         linkType: string;
+  //         onClick: () => void;
+  //       };
+  //       title: string;
+  //     };
+  //     services: {
+  //       links: {
+  //         ariaLabel: string;
+  //         href: string;
+  //         label: string;
+  //         linkType: string;
+  //       };
+  //       title: string;
+  //     };
+  //   };
+  // }[];
+
+  // footerLangValues?: {
+  //   activeLanguage: {
+  //     id: string;
+  //     value: string;
+  //   };
+  // }[];
+  
+  // footerLinkValues?: {
+  //   companyLink: {
+  //     ariaLabel: string;
+  //     href: string;
+  //   };
+  // }[];
+
+  // footerLanguagesValues?: {
+  //   languages: {
+  //     id: string;
+  //     value: string;
+  //   };
+  // }[];
+
+  // legalInfo: string;
+  // onLanguageChanged: () => void;
+
 };
 
 export function renderComponent(componentData: ComponentData, index: number) {
@@ -650,21 +722,70 @@ export function renderComponent(componentData: ComponentData, index: number) {
 
 
     // case 'footer':
+    //   // const footerValuesData = (componentData.footerValues || []).map((footerValues, itemIndex) => ({
+    //   //   activeLanguage: {
+    //   //     id: footerValues.activeLanguage.id,
+    //   //     value: footerValues.activeLanguage.value
+    //   //   },
+    //   //   companyLink: {
+    //   //     ariaLabel: footerValues.companyLink.ariaLabel,
+    //   //     href: footerValues.companyLink.href
+    //   //   },
+    //   //   languages: {
+    //   //     id: footerValues.languages.id,
+    //   //     value: footerValues.languages.value
+    //   //   },
+    //   //   legalInfo: footerValues.legalInfo,
+    //   //   links: {
+    //   //     aboutUs: {
+    //   //       links: {
+    //   //         ariaLabel: footerValues.links.aboutUs.links.ariaLabel,
+    //   //         href: footerValues.links.aboutUs.links.href,
+    //   //         label: footerValues.links.aboutUs.links.label,
+    //   //         linkType: footerValues.links.aboutUs.links.linkType,
+    //   //       },
+    //   //       title: footerValues.links.aboutUs.title,
+    //   //     },
+    //   //     followUs: {
+    //   //       links: {
+    //   //         ariaLabel: footerValues.links.followUs.links.ariaLabel,
+    //   //         href: footerValues.links.followUs.links.href,
+    //   //         label: footerValues.links.followUs.links.label,
+    //   //         linkType: footerValues.links.followUs.links.linkType,
+    //   //       },
+    //   //       socialLinks: {
+    //   //         ariaLabel: footerValues.links.followUs.socialLinks.ariaLabel,
+    //   //         href: footerValues.links.followUs.socialLinks.href,
+    //   //         icon: footerValues.links.followUs.socialLinks.icon,
+    //   //       },
+    //   //       title: footerValues.links.followUs.title,
+    //   //     },
+    //   //     resources: {
+    //   //       links: {
+    //   //         ariaLabel: footerValues.links.resources.links.ariaLabel,
+    //   //         href: footerValues.links.resources.links.href,
+    //   //         label: footerValues.links.resources.links.label,
+    //   //         linkType: footerValues.links.resources.links.linkType,
+    //   //         onClick: () => {},
+    //   //       },
+    //   //       title: footerValues.links.resources.title,
+    //   //     },
+    //   //     services: {
+    //   //       links: {
+    //   //         ariaLabel: footerValues.links.services.links.ariaLabel,
+    //   //         href: footerValues.links.services.links.href,
+    //   //         label: footerValues.links.services.links.label,
+    //   //         linkType: footerValues.links.services.links.linkType,
+    //   //       },
+    //   //       title: footerValues.links.services.title,
+    //   //     },
+    //   //   },
+    //   //   onLanguageChanged: () => {},
+    //   // }));
+
     //   const footerValuesData = (componentData.footerValues || []).map((footerValues, itemIndex) => ({
-    //     activeLanguage: {
-    //       id: footerValues.activeLanguage.id,
-    //       value: footerValues.activeLanguage.value
-    //     },
-    //     companyLink: {
-    //       ariaLabel: footerValues.companyLink.ariaLabel,
-    //       href: footerValues.companyLink.href
-    //     },
-    //     languages: {
-    //       id: footerValues.languages.id,
-    //       value: footerValues.languages.value
-    //     },
-    //     legalInfo: footerValues.legalInfo,
-    //     links: {
+        
+    //     // links: {
     //       aboutUs: {
     //         links: {
     //           ariaLabel: footerValues.links.aboutUs.links.ariaLabel,
@@ -707,19 +828,233 @@ export function renderComponent(componentData: ComponentData, index: number) {
     //         },
     //         title: footerValues.links.services.title,
     //       },
-    //     },
-    //     onLanguageChanged: () => {},
+    //     // }
+        
     //   }));
+
+    //   const footerLangValuesData = (componentData.footerLangValues || []).map((footerLangValues, itemIndex) => ({
+
+    //     // activeLanguage: {
+    //       id: footerLangValues.activeLanguage.id,
+    //       value: footerLangValues.activeLanguage.value
+    //     // }
+        
+    //   }));
+
+    //   const footerLinkValuesData = (componentData.footerLinkValues || []).map((footerLinkValues, itemIndex) => ({
+
+    //     // companyLink: {
+    //       ariaLabel: footerLinkValues.companyLink.ariaLabel,
+    //       href: footerLinkValues.companyLink.href
+    //     // }
+        
+    //   }));
+
+    //   const footerLanguagesValuesData = (componentData.footerLanguagesValues || []).map((footerLanguagesValues, itemIndex) => ({
+
+    //     // languages: {
+    //       id: footerLanguagesValues.languages.id,
+    //       value: footerLanguagesValues.languages.value
+    //     // }
+        
+    //   }));
+
     //   return (
     //     <Footer
-    //       activeLanguage={}
-    //       companyLink={}
-    //       languages={}
-    //       legalInfo={}
-    //       links={}
-    //       onLanguageChanged={}
+    //       legalInfo= {componentData.legalInfo || "Info Legali"}
+    //       activeLanguage={footerLangValuesData}
+    //       companyLink={footerLinkValuesData}
+    //       languages={footerLanguagesValuesData}
+    //       links={footerValuesData}
+    //       // onLanguageChanged={}
     //     />
     //   );
+
+    // attualmente il footer non funziona a causa della proprietà socialLinks che risulta mancante 
+
+
+    // copia del json del footer, non potevo commentarlo direttamente nel json 
+
+    // {
+    //   "type": "footer",
+    //   "activeLanguage":{
+    //     "id": "it",
+    //     "value": "Italiano"
+    //   },
+    //   "companyLink":{
+    //     "ariaLabel": "Link: vai al sito di PagoPA S.p.A.",
+    //     "href": "https://www.pagopa.it/"
+    //   },
+    //   "languages":[
+    //     {
+    //       "id": "it",
+    //       "value": "Italiano"
+    //     },
+    //     {
+    //       "id": "en",
+    //       "value": "Inglese"
+    //     },
+    //     {
+    //       "id": "fr",
+    //       "value": "Francese"
+    //     }
+    //   ],
+    //   "legalInfo":"/",
+    //   "links":{
+    //     "aboutUs":
+    //     {
+    //       "links": [
+    //         {
+    //           "ariaLabel": "Vai al link: Chi siamo",
+    //           "href": "#chi-siamo",
+    //           "label": "Chi siamo",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: PNRR",
+    //           "href": "#pnrr",
+    //           "label": "PNRR",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Media",
+    //           "href": "#media",
+    //           "label": "Media",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Lavora con noi",
+    //           "href": "#lavora-con-noi",
+    //           "label": "Lavora con noi",
+    //           "linkType": "internal"
+    //         }
+    //       ],
+    //       "title": "undefined"
+    //     },
+    //     "followUs": {
+    //       "links": [
+    //         {
+    //           "ariaLabel": "Vai al link: Accessibilità",
+    //           "href": "#accessibilità",
+    //           "label": "Accessibilità",
+    //           "linkType": "internal"
+    //         }
+    //       ],
+    //       "socialLinks": [
+    //         {
+    //           "aria-label": "Link: vai al sito LinkedIn di PagoPA S.p.A.",
+    //           "href": "https://www.linkedin.com/company/pagopa/",
+    //           "icon": "LinkedIn"
+    //         },
+    //         {
+    //           "aria-label": "Link: vai al sito Twitter di PagoPA S.p.A.",
+    //           "href": "https://twitter.com/pagopa",
+    //           "icon": "Twitter"
+    //         },
+    //         {
+    //           "aria-label": "Link: vai al sito Instagram di PagoPA S.p.A.",
+    //           "href": "https://www.instagram.com/pagopa/",
+    //           "icon": "Instagram"
+    //         }
+    //       ],
+    //       "title": "Seguici su"
+    //     },
+    //     "resources": {
+    //       "links": [
+    //         {
+    //           "ariaLabel": "Vai al link: Informativa Privacy",
+    //           "href": "#informativa-privacy",
+    //           "label": "Informativa Privacy",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Certificazioni",
+    //           "href": "#certificazioni",
+    //           "label": "Certificazioni",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Sicurezza delle informazioni",
+    //           "href": "#sicurezza-delle-informazioni",
+    //           "label": "Sicurezza delle informazioni",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Diritto alla protezione dei dati personali",
+    //           "label": "Diritto alla protezione dei dati personali",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Preferenze Cookie",
+    //           "href": "#preferenze-cookie",
+    //           "label": "Preferenze Cookie",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Termini e Condizioni",
+    //           "href": "#terms-conditions",
+    //           "label": "Termini e Condizioni",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Società trasparente",
+    //           "href": "#societa-trasparente",
+    //           "label": "Società trasparente",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Responsible Disclosure Policy",
+    //           "href": "#responsible-disclosure-policy",
+    //           "label": "Responsible Disclosure Policy",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Modello 321",
+    //           "href": "#modello-321",
+    //           "label": "Modello 321",
+    //           "linkType": "internal"
+    //         }
+    //       ],
+    //       "title": "Risorse"
+    //     },
+    //     "services": {
+    //       "links": [
+    //         {
+    //           "ariaLabel": "Vai al link: App IO",
+    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/app-io",
+    //           "label": "App IO",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Piattaforma pagoPA",
+    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-pagopa",
+    //           "label": "Piattaforma pagoPA",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Centro stella",
+    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/centro-stella-pagamenti-elettronici",
+    //           "label": "Centro stella",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Check IBAN",
+    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/check-iban",
+    //           "label": "Check IBAN",
+    //           "linkType": "internal"
+    //         },
+    //         {
+    //           "ariaLabel": "Vai al link: Piattaforma Notifiche Digitali",
+    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali",
+    //           "label": "Piattaforma Notifiche Digitali",
+    //           "linkType": "internal"
+    //         }
+    //       ],
+    //       "title": "PRODOTTI E SERVIZI"
+    //     }
+    //   },
+    //   "onLanguageChanged": "/"
+    //   },
 
     default:
       return null;
