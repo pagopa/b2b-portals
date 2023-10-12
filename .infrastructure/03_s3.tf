@@ -8,6 +8,8 @@ resource "aws_s3_bucket" "website-asset-bucket" {
   bucket = "media-library-s3-strapi-${local.account_id}"
 }
 
+### Bucket S3 for Media Library Strapi ###
+
 resource "aws_s3_bucket_public_access_block" "website-asset-bucket" {
   bucket                  = aws_s3_bucket.website-asset-bucket.id
   block_public_acls       = true
