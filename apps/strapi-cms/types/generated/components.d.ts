@@ -58,10 +58,13 @@ export interface SezioniAccordion extends Schema.Component {
   };
   attributes: {
     Titolo: Attribute.String & Attribute.Required;
-    Sottotitolo: Attribute.String & Attribute.Required;
+    Sottotitolo: Attribute.String;
     Paragrafo: Attribute.RichText;
     Elementi: Attribute.Component<'componenti.accordion-item', true> &
-      Attribute.Required;
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     Tema: Attribute.Enumeration<['Light', 'Dark']> &
       Attribute.Required &
       Attribute.DefaultTo<'Light'>;
@@ -70,6 +73,7 @@ export interface SezioniAccordion extends Schema.Component {
     > &
       Attribute.Required &
       Attribute.DefaultTo<'Sinistra'>;
+    ID_Sezione: Attribute.String;
   };
 }
 
@@ -95,6 +99,7 @@ export interface SezioniEditorial extends Schema.Component {
     Pattern_Background: Attribute.Enumeration<['Nessuno', 'Punti', 'Solido']> &
       Attribute.Required &
       Attribute.DefaultTo<'Nessuno'>;
+    ID_Sezione: Attribute.String;
   };
 }
 
@@ -105,7 +110,7 @@ export interface SezioniFeature extends Schema.Component {
     description: '';
   };
   attributes: {
-    Titolo: Attribute.String & Attribute.Required;
+    Titolo: Attribute.String;
     Items: Attribute.Component<'componenti.feature-item', true> &
       Attribute.Required &
       Attribute.SetMinMax<{
@@ -118,6 +123,7 @@ export interface SezioniFeature extends Schema.Component {
     Carosello_Mobile: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    ID_Sezione: Attribute.String;
   };
 }
 
@@ -143,6 +149,7 @@ export interface SezioniHero extends Schema.Component {
       Attribute.Required &
       Attribute.DefaultTo<'Alta'>;
     Paragrafo: Attribute.RichText;
+    ID_Sezione: Attribute.String;
   };
 }
 
@@ -165,6 +172,7 @@ export interface SezioniHowTo extends Schema.Component {
     Carosello_Mobile: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    ID_Sezione: Attribute.String;
   };
 }
 

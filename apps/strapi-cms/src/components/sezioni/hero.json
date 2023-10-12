@@ -66,6 +66,9 @@
     "Paragrafo": {
       "type": "richtext",
       "required": false
+    },
+    "ID_Sezione": {
+      "type": "string"
     }
   }
 }

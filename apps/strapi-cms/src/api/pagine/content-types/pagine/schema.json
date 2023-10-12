@@ -20,13 +20,14 @@
     },
     "slug": {
       "type": "string",
-      "required": false,
+      "required": true,
       "unique": true
     },
     "seo": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.seo"
+      "component": "shared.seo",
+      "required": true
     },
     "Sezioni": {
       "type": "dynamiczone",
@@ -37,7 +38,8 @@
         "sezioni.feature",
         "sezioni.how-to"
       ],
-      "required": true
+      "required": true,
+      "min": 1
     }
   }
 }

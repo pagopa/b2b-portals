@@ -412,8 +412,8 @@ export interface ApiPaginePagine extends Schema.CollectionType {
       Attribute.Required &
       Attribute.Private &
       Attribute.Unique;
-    slug: Attribute.String & Attribute.Unique;
-    seo: Attribute.Component<'shared.seo'>;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     Sezioni: Attribute.DynamicZone<
       [
         'sezioni.editorial',
@@ -423,7 +423,10 @@ export interface ApiPaginePagine extends Schema.CollectionType {
         'sezioni.how-to'
       ]
     > &
-      Attribute.Required;
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

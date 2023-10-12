@@ -62,6 +62,9 @@
       ],
       "default": "Nessuno",
       "required": true
+    },
+    "ID_Sezione": {
+      "type": "string"
     }
   }
 }
