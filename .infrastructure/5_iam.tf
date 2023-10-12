@@ -17,9 +17,6 @@ resource "aws_iam_role" "ecs-task-execution-role" {
 }
 EOF
 
-  tags = {
-    tag-key = "tag-value"
-  }
 }
 
 resource "aws_iam_role_policy_attachment" "ecs-task-execution" {

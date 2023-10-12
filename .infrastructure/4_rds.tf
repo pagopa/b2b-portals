@@ -1,9 +1,3 @@
-resource "random_string" "random" {
-  length  = 6
-  special = false
-  upper   = false
-}
-
 resource "aws_db_subnet_group" "website-cms" {
   name       = var.product_name
   subnet_ids = aws_subnet.website-cms-private.*.id

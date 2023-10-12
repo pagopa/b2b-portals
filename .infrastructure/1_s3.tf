@@ -22,13 +22,3 @@ resource "aws_s3_bucket_versioning" "website-asset-bucket" {
     status = "Enabled"
   }
 }
-
-data "aws_iam_policy_document" "website_iam_policy" {
-  statement {
-    actions = ["s3:GetObject", "s3:ListBucket"]
-    resources = [
-      "${aws_s3_bucket.website-asset-bucket.arn}",
-      "${aws_s3_bucket.website-asset-bucket.arn}/*"
-    ]
-  }
-}
