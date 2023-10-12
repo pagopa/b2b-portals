@@ -10,7 +10,7 @@
       "type": "string",
       "required": false
     },
-    "Steps": {
+    "Elementi": {
       "type": "component",
       "repeatable": true,
       "component": "componenti.how-to-item",

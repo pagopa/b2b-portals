@@ -10,7 +10,7 @@
       "type": "string",
       "required": false
     },
-    "Items": {
+    "Elementi": {
       "type": "component",
       "repeatable": true,
       "component": "componenti.feature-item",

@@ -111,7 +111,7 @@ export interface SezioniFeature extends Schema.Component {
   };
   attributes: {
     Titolo: Attribute.String;
-    Items: Attribute.Component<'componenti.feature-item', true> &
+    Elementi: Attribute.Component<'componenti.feature-item', true> &
       Attribute.Required &
       Attribute.SetMinMax<{
         min: 3;
@@ -161,7 +161,7 @@ export interface SezioniHowTo extends Schema.Component {
   };
   attributes: {
     Titolo: Attribute.String;
-    Steps: Attribute.Component<'componenti.how-to-item', true> &
+    Elementi: Attribute.Component<'componenti.how-to-item', true> &
       Attribute.Required &
       Attribute.SetMinMax<{
         min: 3;
