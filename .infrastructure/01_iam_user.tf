@@ -1,5 +1,6 @@
 resource "aws_iam_user" "mauro_dandrea" {
   # This force the deletion of the user and its login profile
+  # because we manually give access to the console
   force_destroy = "true"
 
   name = "mauro.dandrea@dgsspa.com"
