@@ -1,11 +1,6 @@
 resource "aws_db_subnet_group" "website-cms" {
   name       = var.product_name
   subnet_ids = aws_subnet.website-cms-private.*.id
-
-  tags = {
-    Name       = var.product_name
-    CostCenter = var.product_name
-  }
 }
 
 resource "aws_rds_cluster" "website-cms-database-cluster" {

@@ -1,5 +1,3 @@
-# alb.tf
-
 resource "aws_alb" "cms-load-balancer" {
   name            = var.cms_alb
   subnets         = aws_subnet.website-cms-public.*.id

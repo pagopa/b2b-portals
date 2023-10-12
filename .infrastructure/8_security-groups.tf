@@ -1,5 +1,4 @@
 ### AWS EC2 Security Group ###
-
 resource "aws_security_group" "website-cms-lb" {
   name        = "website-cms-lb"
   description = "Ingress - Load Balancer"
@@ -31,10 +30,6 @@ resource "aws_security_group" "website-cms-lb" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS009
-  }
-
-  tags = {
-    CostCenter = "website-cms"
   }
 }
 
@@ -81,9 +76,5 @@ resource "aws_security_group" "website-cms-database" {
     from_port   = 0
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS009
-  }
-
-  tags = {
-    CostCenter = "website-cms"
   }
 }

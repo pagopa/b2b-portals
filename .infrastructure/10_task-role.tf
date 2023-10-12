@@ -1,19 +1,12 @@
 resource "aws_iam_role" "task_role" {
   name               = var.ecs_task_role
   assume_role_policy = data.aws_iam_policy_document.task_role.json
-
-  tags = {
-    Name       = var.product_name
-    CostCenter = var.product_name
-  }
 }
 
 data "aws_iam_policy_document" "task_role" {
   statement {
-    effect = "Allow"
-
+    effect  = "Allow"
     actions = ["sts:AssumeRole"]
-
     principals {
       type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]

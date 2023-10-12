@@ -7,12 +7,6 @@
         "containerPort": 1337
       }
     ],
-    "environmentFiles": [
-                {    
-                    "value": "arn:aws:s3:::${bucket_name}/.env",
-                    "type": "s3"
-                }
-            ],
     "environment": [
       {
         "name": "NODE_ENV",
