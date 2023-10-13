@@ -24,7 +24,7 @@ interface ItemAttributes {
   attributes: {
     title: string;
     visibile: boolean;
-    url: string; // Use the "url" property
+    url: string;
     children?: {
       data: ItemAttributes[];
     };

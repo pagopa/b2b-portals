@@ -21,7 +21,7 @@ function createRoute(routeData, parentDir) {
         if (!fs.existsSync(routeDir_1)) {
             fs.mkdirSync(routeDir_1, { recursive: true });
         }
-        var routeContent = "'use client'\nimport React from 'react';\nimport { ComponentData, renderComponent } from '@/declared-components/declared-components';\nimport dataStructure from '../../temporanydatas/datastructure.json';\n\nfunction ".concat(routeName, "() {\n  const pageContent = dataStructure['").concat(sanitizedRoute, "'] || [];\n  return (\n    <div>\n      {pageContent.map((componentData, index) => renderComponent(componentData as ComponentData, index))}\n    </div>\n  );\n}\n\nexport default ").concat(routeName, ";");
+        var routeContent = "'use client'\nimport React from 'react';\nimport { ComponentData, renderComponent } from '@/declared-components/declared-components';\nimport pageData from '../../temporanydatas/pageData.json';\n\nfunction ".concat(routeName, "() {\n  const pageContent = pageData.data.find((item) => item.attributes.slug === '").concat(sanitizedRoute, "') || { attributes: { Sezioni: [] } };\n  const content = pageContent.attributes.Sezioni || [];\n  \n  return (\n    <div>\n      {content.map((componentData, index) => {\n        const renderedComponent = renderComponent(componentData as unknown as ComponentData, index);\n        return renderedComponent;\n      })}\n    </div>\n  );\n}\n\nexport default ").concat(routeName, ";");
         // Write the route file
         fs.writeFileSync(routePath, routeContent);
         // Handle sub-routes

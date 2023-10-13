@@ -1,13 +1,18 @@
-'use client'
+'use client';
 import React from 'react';
 import { ComponentData, renderComponent } from '@/declared-components/declared-components';
-import dataStructure from '../temporanydatas/datastructure.json';
+import pageData from '../temporanydatas/pageData.json';
 
 function Home() {
-  const pageContent = dataStructure['/'] || [];
+  const pageContent = pageData.data.find((item: any) => item.attributes.slug === 'home') || { attributes: { Sezioni: [] } };
+  const content = pageContent.attributes.Sezioni || [];
+
   return (
     <div>
-      {pageContent.map((componentData, index) => renderComponent(componentData as ComponentData, index))}
+      {content.map((componentData, index) => {
+        const renderedComponent = renderComponent(componentData as unknown as ComponentData, index);
+        return renderedComponent;
+      })}
     </div>
   );
 }

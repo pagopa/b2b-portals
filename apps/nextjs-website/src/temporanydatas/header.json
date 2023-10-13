@@ -1,0 +1,18 @@
+{
+  "data": {
+      "id": 1,
+      "attributes": {
+          "Nome_Prodotto": "Send",
+          "Beta": true,
+          "createdAt": "2023-10-12T09:55:19.979Z",
+          "updatedAt": "2023-10-12T11:48:28.697Z",
+          "publishedAt": "2023-10-12T11:47:47.688Z",
+          "Logo": {
+              "data": null
+          },
+          "Bottone_Primario": null,
+          "Bottone_Secondario": null
+      }
+  },
+  "meta": {}
+}

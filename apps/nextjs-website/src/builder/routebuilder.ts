@@ -35,18 +35,23 @@ function createRoute(routeData: RouteData, parentDir: string) {
 const routeContent = `'use client'
 import React from 'react';
 import { ComponentData, renderComponent } from '@/declared-components/declared-components';
-import dataStructure from '../../temporanydatas/datastructure.json';
+import pageData from '../../temporanydatas/pageData.json';
 
 function ${routeName}() {
-  const pageContent = dataStructure['${sanitizedRoute}'] || [];
+  const pageContent = pageData.data.find((item) => item.attributes.slug === '${sanitizedRoute}') || { attributes: { Sezioni: [] } };
+  const content = pageContent.attributes.Sezioni || [];
+  
   return (
     <div>
-      {pageContent.map((componentData, index) => renderComponent(componentData as ComponentData, index))}
+      {content.map((componentData, index) => {
+        const renderedComponent = renderComponent(componentData as unknown as ComponentData, index);
+        return renderedComponent;
+      })}
     </div>
   );
 }
 
-export default ${routeName};`;
+export default ${routeName};`;      
 
     // Write the route file
     fs.writeFileSync(routePath, routeContent);
