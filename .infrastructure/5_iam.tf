@@ -61,7 +61,7 @@ data "aws_iam_policy_document" "ecs-task-execution" {
       "s3:GetObject"
     ]
     resources = [
-      "${aws_s3_bucket.website-asset-bucket.arn}/.env"
+      "${aws_s3_bucket.cms_medialibrary_bucket.arn}/.env"
     ]
   }
 
@@ -71,7 +71,7 @@ data "aws_iam_policy_document" "ecs-task-execution" {
       "s3:GetBucketLocation"
     ]
     resources = [
-      "${aws_s3_bucket.website-asset-bucket.arn}"
+      "${aws_s3_bucket.cms_medialibrary_bucket.arn}"
     ]
   }
 }

@@ -13,7 +13,7 @@ data "template_file" "cms_app" {
     db_host              = aws_rds_cluster.website-cms-database-cluster.endpoint
     db_user              = aws_rds_cluster.website-cms-database-cluster.master_username
     db_password_arn      = aws_ssm_parameter.db_password.arn
-    bucket_name          = aws_s3_bucket.website-asset-bucket.bucket
+    bucket_name          = aws_s3_bucket.cms_medialibrary_bucket.bucket
     github_token_arn     = aws_ssm_parameter.github_token.arn
     admin_jwt_secret_arn = aws_ssm_parameter.admin_jwt_secret.arn
     db_name              = aws_rds_cluster.website-cms-database-cluster.database_name
