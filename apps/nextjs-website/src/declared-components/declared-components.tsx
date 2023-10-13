@@ -1,7 +1,5 @@
 import React from 'react';
-import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video, Abstract, BannerLink, Header, PreHeader, Footer } from '@pagopa/pagopa-editorial-components';
-import { ImgProps } from 'next/dist/shared/lib/get-img-props';
-import { AccordionItemProps } from '@pagopa/pagopa-editorial-components/dist/components/Accordion/AccordionItem';
+import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video, Abstract, BannerLink } from '@pagopa/pagopa-editorial-components';
 
 export type ComponentData = {
   type: string | 'button' | 'link';
@@ -18,35 +16,23 @@ export type ComponentData = {
   name?: string;
   background: string;
   buttonText: string;
-  text: string;
+  text: string | { title: string };
   autoplay: boolean;
   src: string;
-  description: string | Element;
+  description: string;
   layout: 'center' | 'left' | 'right';
   overline: string;
   reverse: boolean;
-  // decoration: Element | ImgProps;
-  accordionItems: AccordionItemProps[];
   itemsAlignment: 'center' | 'left' | 'right';
   textAlign: 'center' | 'left';
-
+  altText: string;
+  inverse: boolean;
+  useHoverlay: boolean;
+  pattern?: 'dots' | 'solid' | 'none';
+  rowMaxSteps: number;
+  stepsAlignment: 'center' | 'left' | 'right';
+  showCarouselMobile: boolean;
   items?: {
-    stackIcon: {
-      icon: string;
-    };
-    title: string;
-    subtitle: string;
-    // cardIcon: {
-    //   icon: string;
-    // };
-    // link: {
-    //   href: string;
-    //   text: string;
-    //   title: string;
-    // };
-    // text: {
-    //   title: string;
-    // } 
     fileName: string;
     href: string;
     label: string;
@@ -59,6 +45,10 @@ export type ComponentData = {
       icon: string;
     };
     title: string;
+  }[];
+  link?: {
+    href: string;
+    label: string;
   }[];
   kpiValues?: {
     caption: string;
@@ -166,160 +156,158 @@ export type ComponentData = {
   //     };
   //   }
   // }[];
-
-  // footerValues?: {
-  //   activeLanguage: {
-  //     id: string;
-  //     value: string;
-  //   };
-  //   companyLink: {
-  //     ariaLabel: string;
-  //     href: string;
-  //   };
-  //   languages: {
-  //     id: string;
-  //     value: string;
-  //   };
-  //   legalInfo: string;
-  //   links: {
-  //     aboutUs: {
-  //       links: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         label: string;
-  //         linkType: string;
-  //       };
-  //       title: string;
-  //     };
-  //     followUs: {
-  //       links: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         label: string;
-  //         linkType: string;
-  //       };
-  //       socialLinks: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         icon: string;
-  //       };
-  //       title: string;
-  //     };
-  //     resources: {
-  //       links: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         label: string;
-  //         linkType: string;
-  //         onClick: () => void;
-  //       };
-  //       title: string;
-  //     };
-  //     services: {
-  //       links: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         label: string;
-  //         linkType: string;
-  //       };
-  //       title: string;
-  //     };
-  //   };
-  //   onLanguageChanged: () => void;
-  // }[];
-
-
-  // footerValues?: {
-  //   links: {
-  //     aboutUs: {
-  //       links: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         label: string;
-  //         linkType: string;
-  //       };
-  //       title: string;
-  //     };
-  //     followUs: {
-  //       links: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         label: string;
-  //         linkType: string;
-  //       };
-  //       socialLinks: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         icon: string;
-  //       };
-  //       title: string;
-  //     };
-  //     resources: {
-  //       links: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         label: string;
-  //         linkType: string;
-  //         onClick: () => void;
-  //       };
-  //       title: string;
-  //     };
-  //     services: {
-  //       links: {
-  //         ariaLabel: string;
-  //         href: string;
-  //         label: string;
-  //         linkType: string;
-  //       };
-  //       title: string;
-  //     };
-  //   };
-  // }[];
-
-  // footerLangValues?: {
-  //   activeLanguage: {
-  //     id: string;
-  //     value: string;
-  //   };
-  // }[];
-  
-  // footerLinkValues?: {
-  //   companyLink: {
-  //     ariaLabel: string;
-  //     href: string;
-  //   };
-  // }[];
-
-  // footerLanguagesValues?: {
-  //   languages: {
-  //     id: string;
-  //     value: string;
-  //   };
-  // }[];
-
-  // legalInfo: string;
-  // onLanguageChanged: () => void;
-
+  cardsValues?: {
+    items: {
+      cardIcon: {
+        icon: string;
+      };
+      link: {
+        href: string;
+        text: string;
+        title: string;
+      };
+      text: string;
+      title: string;
+    };
+    text: {
+      title: string;
+    };
+    theme: 'light' | 'dark';
+  }[];
+  featureValues?: {
+    items: {
+      link: {
+        text: string;
+        url: string;
+      };
+      stackIcon: {
+        icon: string;
+      };
+      subtitle: string;
+      title: string;
+    }
+  }[];
 };
+
 
 export function renderComponent(componentData: ComponentData, index: number) {
   switch (componentData.type) {
 
+    // Priorità alta 
 
-    // Presenti nel documento su confluence
-
-    case 'abstract':
+    case 'hero':
       return (
-        <Abstract
-          description={componentData.description || 'Testo descrizione'}
-          layout={componentData.layout || 'center'}
-          overline={componentData.overline || 'Testo overline'}
-          background={componentData.background || 'Immagine background'}
-          theme={componentData.theme || 'light'}
+        <Hero
+          background={componentData.background}
+          size={componentData.size === 'small' || componentData.size === undefined ? 'small' : 'big'}
           title={componentData.title || 'Titolo'}
+          subtitle={componentData.subtitle}
+          ctaButtons={componentData.ctaButtons}
+          theme={componentData.theme || 'light'}
+          image={
+            <img
+              src={componentData.image}
+              alt="hero image"
+              style={{
+                width: '100%',
+                height: 'auto',
+                margin: 'auto',
+                display: 'block',
+                justifyItems: 'center',
+              }}
+            />
+          }
+          altText={componentData.altText}
+          inverse={componentData.inverse}
+          useHoverlay={componentData.useHoverlay}
           key={index}
         />
       );
+
+    // Hero - tutto ok tranne il colore dei pulsanti, non riesco a trovare il bianco   
+
+
+    case 'editorial':
+      return (
+        <Editorial
+          theme={componentData.theme !== undefined ? componentData.theme : 'light'}
+          image={
+            <img
+              src={componentData.image}
+              alt="hero image"
+              style={{
+                width: '100%',
+                height: 'auto',
+                margin: 'auto',
+                display: 'block',
+                justifyContent: 'center',
+                justifyItems: 'center',
+              }}
+            />
+          }
+          eyelet={componentData.eyelet}
+          title={componentData.title || 'Titolo'}
+          body={componentData.body || 'Descrizione'}
+          ctaButtons={componentData.ctaButtons}
+          reversed={componentData.reversed}
+          width={componentData.width === 'wide' || componentData.width === 'center' ? componentData.width : 'standard'}
+          pattern={componentData.pattern}
+          key={index}
+        />
+      );
+
+    // Editorial - tutto ok tranne il colore dei pulsanti, non riesco a trovare il bianco 
+
+
+    case 'howTo':
+      // const steps = (componentData.steps ?? []).map((step, itemIndex) => ({
+      //   stepIcon: {
+      //     icon: step.stepIcon.icon,
+      //   },
+      //   title: step.title,
+      //   description: step.description,
+      // }));
+      return (
+        <HowTo
+          title={componentData.title || 'Titolo'}
+          steps={componentData.steps}
+          theme={componentData.theme || 'light'}
+          link={componentData.link}
+          rowMaxSteps={componentData.rowMaxSteps}
+          stepsAlignment={componentData.stepsAlignment}
+          key={index}
+        />
+      );
+
+    // How To - come usare le proprietà rowMaxSteps e stepsAlignment + icone.
+    // theme dark non funziona
+
+
+    // case 'cards':
+    //   const cardsValuesData = (componentData.cardsValues || []).map((cardsValues, itemIndex) => ({
+    //     cardIcon: {
+    //       icon: cardsValues.items.cardIcon.icon,
+    //     },
+    //     link: {
+    //       href: cardsValues.items.link.href,
+    //       text: cardsValues.items.text,
+    //       title: cardsValues.items.title,
+    //     },
+    //     text: cardsValues.items.text,
+    //     title: cardsValues.items.title
+    //   })); 
+
+    //   return (
+    //     <Cards
+    //       items={cardsValuesData}
+    //       text={componentData.text}
+    //       theme={componentData.theme || 'light'}
+    //       key={index}
+    //     />
+    //   );
+
+    // // Impossibile trovare cards tra gli import
+
 
     case 'accordion':
       const accordionValuesData = (componentData.accordionValues || []).map((accordionValues, accordionValuesIndex) => ({
@@ -328,15 +316,84 @@ export function renderComponent(componentData: ComponentData, index: number) {
       }));
       return (
         <Accordion
-          accordionItems={accordionValuesData}
-          theme={componentData.theme || 'light'}
           title={componentData.title || 'Titolo'}
           subtitle={componentData.subtitle || 'Sottotitolo'}
           description={componentData.description || 'Testo descrizione'}
+          accordionItems={accordionValuesData}
+          theme={componentData.theme || 'light'}
           layout={componentData.layout || 'center'}
           key={index}
         />
       );
+
+    // Accordion OK  
+
+
+    // Priorità media 
+
+    case 'feature':
+      const featureValuesData = (componentData.featureValues ?? []).map((featureValues, itemIndex) => ({
+        link: {
+          text: featureValues.items.link.text
+        },
+        stackIcon: {
+          icon: featureValues.items.stackIcon.icon,
+        },
+        title: featureValues.items.title,
+        subtitle: featureValues.items.subtitle,
+      }));
+      return (
+        <Feature
+          theme={componentData.theme || 'light'}
+          title={componentData.title || 'Titolo'}
+          items={featureValuesData}
+          showCarouselMobile={componentData.showCarouselMobile}
+          background={componentData.background}
+          key={index}
+        />
+      );
+
+    // Feature non funziona... Si vede solo il titolo, stampando featureValuesData non si ottiene nulla 
+
+
+    case 'abstract':
+      return (
+        <Abstract
+          overline={componentData.overline || 'Testo overline'}
+          title={componentData.title || 'Titolo'}
+          description={componentData.description || 'Testo descrizione'}
+          layout={componentData.layout || 'center'}
+          background={componentData.background || 'Immagine background'}
+          theme={componentData.theme || 'light'}
+          key={index}
+        />
+      );
+
+    // Abstract ok   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     case 'bannerLink':
       const ctaButtonsData = (componentData.ctaButtons || []).map((ctaButton, ctaButtonIndex) => ({
@@ -360,33 +417,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
       );
 
 
-    // case 'cards':
-    //   const cardsValuesData = (componentData.items || []).map((item, itemIndex) => ({
-    //     items: {
-    //       cardIcon: {
-    //         icon: item.cardIcon.icon,
-    //       },
-    //       link: {
-    //         href: item.link.href,
-    //         text: item.text,
-    //         title: item.title,
-    //       },
-    //       text: {
-    //         title: item.text.title,
-    //       } 
-    //     }
-    //   }));
-    //   // text title forse va messo in un'altra costante 
-    //   return (
-    //     <Cards
-    //       items={cardsValuesData}
-    //       theme={componentData.theme || 'light'}
-    //       key={index}
-    //     />
-    //   );
-    // impossibile trovare cards tra gli import   
-
-
 
     case 'download':
       const downloadValuesData = (componentData.items || []).map((item, itemIndex) => ({
@@ -407,156 +437,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
       );
     // rivedere download
     // in download trovare il modo di impostare un type, va in contrasto con il type del json 
-
-
-
-    case 'editorial':
-      return (
-        <Editorial
-          theme={componentData.theme !== undefined ? componentData.theme : 'light'}
-          image={
-            <img
-              src={componentData.image}
-              alt="hero image"
-              style={{
-                width: '100%',
-                height: 'auto',
-                margin: 'auto',
-                display: 'block',
-                justifyContent: 'center',
-                justifyItems: 'center',
-              }}
-            />
-          }
-          title={componentData.title || 'Titolo'}
-          body={componentData.body || 'Descrizione'}
-          width={componentData.width === 'wide' || componentData.width === 'center' ? componentData.width : 'standard'}
-          reversed={componentData.reversed}
-          key={index}
-        />
-      );
-
-
-
-    case 'feature':
-      const items = (componentData.items ?? []).map((item, itemIndex) => ({
-        stackIcon: {
-          icon: item.stackIcon.icon,
-        },
-        title: item.title,
-        subtitle: item.subtitle,
-      }));
-      return (
-        <Feature
-          items={items}
-          title={componentData.title || 'Titolo'}
-          theme={componentData.theme || 'light'}
-          key={index}
-        />
-      );
-
-
-
-    case 'header':
-      const headerValueData = (componentData.headerValue ?? []).map((headerValue, itemIndex) => ({
-        active: headerValue.menu.active,
-        items: {
-          href: headerValue.menu.items.href,
-          key: headerValue.menu.items.key,
-          label: headerValue.menu.items.label,
-        },
-        label: headerValue.menu.label,
-        theme: headerValue.menu.theme,
-        // product: {
-        //   href: headerValue.product.href,
-        //   name: headerValue.product.name,
-        // }
-      }));
-      return (
-        <Header
-          menu={headerValueData}
-          theme={componentData.theme || 'light'}
-          product={componentData.product}
-          key={index}
-        />
-      );
-    // rivedere header, le voci di menu non vengono visualizzate 
-
-
-
-    case 'hero':
-      return (
-        <Hero
-          theme={componentData.theme || 'light'}
-          image={
-            <img
-              src={componentData.image}
-              alt="hero image"
-              style={{
-                width: '100%',
-                height: 'auto',
-                margin: 'auto',
-                display: 'block',
-                justifyItems: 'center',
-              }}
-            />
-          }
-          size={componentData.size === 'small' || componentData.size === undefined ? 'small' : 'big'}
-          title={componentData.title || 'Titolo'}
-          subtitle={componentData.subtitle}
-          key={index}
-        />
-      );
-
-
-
-    case 'howTo':
-      const steps = (componentData.steps ?? []).map((step, itemIndex) => ({
-        stepIcon: {
-          icon: step.stepIcon.icon,
-        },
-        title: step.title,
-        description: step.description,
-      }));
-      return (
-        <HowTo
-          steps={steps}
-          title={componentData.title || 'Titolo'}
-          theme={componentData.theme || 'light'}
-          key={index}
-        />
-      );
-
-
-
-    // case 'preheader':
-    //   const ctaButtonsLeftValueData = (componentData.ctaButtonsLeftValue || []).map((ctaButtonsLeftValue, ctaButtonLeftIndex) => ({
-
-    //     text: ctaButtonsLeftValue.leftCtas.ctaButtons.text || 'Default Button Text',
-    //     variant: ctaButtonsLeftValue.leftCtas.ctaButtons.variant || 'outlined',
-    //     color: ctaButtonsLeftValue.leftCtas.ctaButtons.color || 'primary',
-    //     theme: ctaButtonsLeftValue.leftCtas.theme || 'light',
-
-
-    //   }));
-    //   const ctaButtonsRightValueData = (componentData.ctaButtonsRightValue || []).map((ctaButtonsRightValue, ctaButtonRightIndex) => ({
-    //     // onClick: () => {
-    //     //   const path = ctaButtonsRightValue.rightCtas.ctaButtons.href || '/';
-    //     //   window.location.href = path;
-    //     // },
-    //     text: ctaButtonsRightValue.rightCtas.ctaButtons.text || 'Default Button Text',
-    //     variant: ctaButtonsRightValue.rightCtas.ctaButtons.variant || 'outlined',
-    //     color: ctaButtonsRightValue.rightCtas.ctaButtons.color || 'primary',
-    //   }));
-    //   return (
-    //     <PreHeader
-    //       leftCtas={ctaButtonsLeftValueData}
-    //       rightCtas={ctaButtonsRightValueData}
-    //       title={componentData.title || 'Titolo'}
-    //       // theme={componentData.theme || 'light'}
-    //       key={index}
-    //     />
-    //   );
 
 
     case 'stats':
@@ -719,342 +599,6 @@ export function renderComponent(componentData: ComponentData, index: number) {
     //     />
     //   );
 
-
-
-    // case 'footer':
-    //   // const footerValuesData = (componentData.footerValues || []).map((footerValues, itemIndex) => ({
-    //   //   activeLanguage: {
-    //   //     id: footerValues.activeLanguage.id,
-    //   //     value: footerValues.activeLanguage.value
-    //   //   },
-    //   //   companyLink: {
-    //   //     ariaLabel: footerValues.companyLink.ariaLabel,
-    //   //     href: footerValues.companyLink.href
-    //   //   },
-    //   //   languages: {
-    //   //     id: footerValues.languages.id,
-    //   //     value: footerValues.languages.value
-    //   //   },
-    //   //   legalInfo: footerValues.legalInfo,
-    //   //   links: {
-    //   //     aboutUs: {
-    //   //       links: {
-    //   //         ariaLabel: footerValues.links.aboutUs.links.ariaLabel,
-    //   //         href: footerValues.links.aboutUs.links.href,
-    //   //         label: footerValues.links.aboutUs.links.label,
-    //   //         linkType: footerValues.links.aboutUs.links.linkType,
-    //   //       },
-    //   //       title: footerValues.links.aboutUs.title,
-    //   //     },
-    //   //     followUs: {
-    //   //       links: {
-    //   //         ariaLabel: footerValues.links.followUs.links.ariaLabel,
-    //   //         href: footerValues.links.followUs.links.href,
-    //   //         label: footerValues.links.followUs.links.label,
-    //   //         linkType: footerValues.links.followUs.links.linkType,
-    //   //       },
-    //   //       socialLinks: {
-    //   //         ariaLabel: footerValues.links.followUs.socialLinks.ariaLabel,
-    //   //         href: footerValues.links.followUs.socialLinks.href,
-    //   //         icon: footerValues.links.followUs.socialLinks.icon,
-    //   //       },
-    //   //       title: footerValues.links.followUs.title,
-    //   //     },
-    //   //     resources: {
-    //   //       links: {
-    //   //         ariaLabel: footerValues.links.resources.links.ariaLabel,
-    //   //         href: footerValues.links.resources.links.href,
-    //   //         label: footerValues.links.resources.links.label,
-    //   //         linkType: footerValues.links.resources.links.linkType,
-    //   //         onClick: () => {},
-    //   //       },
-    //   //       title: footerValues.links.resources.title,
-    //   //     },
-    //   //     services: {
-    //   //       links: {
-    //   //         ariaLabel: footerValues.links.services.links.ariaLabel,
-    //   //         href: footerValues.links.services.links.href,
-    //   //         label: footerValues.links.services.links.label,
-    //   //         linkType: footerValues.links.services.links.linkType,
-    //   //       },
-    //   //       title: footerValues.links.services.title,
-    //   //     },
-    //   //   },
-    //   //   onLanguageChanged: () => {},
-    //   // }));
-
-    //   const footerValuesData = (componentData.footerValues || []).map((footerValues, itemIndex) => ({
-        
-    //     // links: {
-    //       aboutUs: {
-    //         links: {
-    //           ariaLabel: footerValues.links.aboutUs.links.ariaLabel,
-    //           href: footerValues.links.aboutUs.links.href,
-    //           label: footerValues.links.aboutUs.links.label,
-    //           linkType: footerValues.links.aboutUs.links.linkType,
-    //         },
-    //         title: footerValues.links.aboutUs.title,
-    //       },
-    //       followUs: {
-    //         links: {
-    //           ariaLabel: footerValues.links.followUs.links.ariaLabel,
-    //           href: footerValues.links.followUs.links.href,
-    //           label: footerValues.links.followUs.links.label,
-    //           linkType: footerValues.links.followUs.links.linkType,
-    //         },
-    //         socialLinks: {
-    //           ariaLabel: footerValues.links.followUs.socialLinks.ariaLabel,
-    //           href: footerValues.links.followUs.socialLinks.href,
-    //           icon: footerValues.links.followUs.socialLinks.icon,
-    //         },
-    //         title: footerValues.links.followUs.title,
-    //       },
-    //       resources: {
-    //         links: {
-    //           ariaLabel: footerValues.links.resources.links.ariaLabel,
-    //           href: footerValues.links.resources.links.href,
-    //           label: footerValues.links.resources.links.label,
-    //           linkType: footerValues.links.resources.links.linkType,
-    //           onClick: () => {},
-    //         },
-    //         title: footerValues.links.resources.title,
-    //       },
-    //       services: {
-    //         links: {
-    //           ariaLabel: footerValues.links.services.links.ariaLabel,
-    //           href: footerValues.links.services.links.href,
-    //           label: footerValues.links.services.links.label,
-    //           linkType: footerValues.links.services.links.linkType,
-    //         },
-    //         title: footerValues.links.services.title,
-    //       },
-    //     // }
-        
-    //   }));
-
-    //   const footerLangValuesData = (componentData.footerLangValues || []).map((footerLangValues, itemIndex) => ({
-
-    //     // activeLanguage: {
-    //       id: footerLangValues.activeLanguage.id,
-    //       value: footerLangValues.activeLanguage.value
-    //     // }
-        
-    //   }));
-
-    //   const footerLinkValuesData = (componentData.footerLinkValues || []).map((footerLinkValues, itemIndex) => ({
-
-    //     // companyLink: {
-    //       ariaLabel: footerLinkValues.companyLink.ariaLabel,
-    //       href: footerLinkValues.companyLink.href
-    //     // }
-        
-    //   }));
-
-    //   const footerLanguagesValuesData = (componentData.footerLanguagesValues || []).map((footerLanguagesValues, itemIndex) => ({
-
-    //     // languages: {
-    //       id: footerLanguagesValues.languages.id,
-    //       value: footerLanguagesValues.languages.value
-    //     // }
-        
-    //   }));
-
-    //   return (
-    //     <Footer
-    //       legalInfo= {componentData.legalInfo || "Info Legali"}
-    //       activeLanguage={footerLangValuesData}
-    //       companyLink={footerLinkValuesData}
-    //       languages={footerLanguagesValuesData}
-    //       links={footerValuesData}
-    //       // onLanguageChanged={}
-    //     />
-    //   );
-
-    // attualmente il footer non funziona a causa della proprietà socialLinks che risulta mancante 
-
-
-    // copia del json del footer, non potevo commentarlo direttamente nel json 
-
-    // {
-    //   "type": "footer",
-    //   "activeLanguage":{
-    //     "id": "it",
-    //     "value": "Italiano"
-    //   },
-    //   "companyLink":{
-    //     "ariaLabel": "Link: vai al sito di PagoPA S.p.A.",
-    //     "href": "https://www.pagopa.it/"
-    //   },
-    //   "languages":[
-    //     {
-    //       "id": "it",
-    //       "value": "Italiano"
-    //     },
-    //     {
-    //       "id": "en",
-    //       "value": "Inglese"
-    //     },
-    //     {
-    //       "id": "fr",
-    //       "value": "Francese"
-    //     }
-    //   ],
-    //   "legalInfo":"/",
-    //   "links":{
-    //     "aboutUs":
-    //     {
-    //       "links": [
-    //         {
-    //           "ariaLabel": "Vai al link: Chi siamo",
-    //           "href": "#chi-siamo",
-    //           "label": "Chi siamo",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: PNRR",
-    //           "href": "#pnrr",
-    //           "label": "PNRR",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Media",
-    //           "href": "#media",
-    //           "label": "Media",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Lavora con noi",
-    //           "href": "#lavora-con-noi",
-    //           "label": "Lavora con noi",
-    //           "linkType": "internal"
-    //         }
-    //       ],
-    //       "title": "undefined"
-    //     },
-    //     "followUs": {
-    //       "links": [
-    //         {
-    //           "ariaLabel": "Vai al link: Accessibilità",
-    //           "href": "#accessibilità",
-    //           "label": "Accessibilità",
-    //           "linkType": "internal"
-    //         }
-    //       ],
-    //       "socialLinks": [
-    //         {
-    //           "aria-label": "Link: vai al sito LinkedIn di PagoPA S.p.A.",
-    //           "href": "https://www.linkedin.com/company/pagopa/",
-    //           "icon": "LinkedIn"
-    //         },
-    //         {
-    //           "aria-label": "Link: vai al sito Twitter di PagoPA S.p.A.",
-    //           "href": "https://twitter.com/pagopa",
-    //           "icon": "Twitter"
-    //         },
-    //         {
-    //           "aria-label": "Link: vai al sito Instagram di PagoPA S.p.A.",
-    //           "href": "https://www.instagram.com/pagopa/",
-    //           "icon": "Instagram"
-    //         }
-    //       ],
-    //       "title": "Seguici su"
-    //     },
-    //     "resources": {
-    //       "links": [
-    //         {
-    //           "ariaLabel": "Vai al link: Informativa Privacy",
-    //           "href": "#informativa-privacy",
-    //           "label": "Informativa Privacy",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Certificazioni",
-    //           "href": "#certificazioni",
-    //           "label": "Certificazioni",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Sicurezza delle informazioni",
-    //           "href": "#sicurezza-delle-informazioni",
-    //           "label": "Sicurezza delle informazioni",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Diritto alla protezione dei dati personali",
-    //           "label": "Diritto alla protezione dei dati personali",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Preferenze Cookie",
-    //           "href": "#preferenze-cookie",
-    //           "label": "Preferenze Cookie",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Termini e Condizioni",
-    //           "href": "#terms-conditions",
-    //           "label": "Termini e Condizioni",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Società trasparente",
-    //           "href": "#societa-trasparente",
-    //           "label": "Società trasparente",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Responsible Disclosure Policy",
-    //           "href": "#responsible-disclosure-policy",
-    //           "label": "Responsible Disclosure Policy",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Modello 321",
-    //           "href": "#modello-321",
-    //           "label": "Modello 321",
-    //           "linkType": "internal"
-    //         }
-    //       ],
-    //       "title": "Risorse"
-    //     },
-    //     "services": {
-    //       "links": [
-    //         {
-    //           "ariaLabel": "Vai al link: App IO",
-    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/app-io",
-    //           "label": "App IO",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Piattaforma pagoPA",
-    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-pagopa",
-    //           "label": "Piattaforma pagoPA",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Centro stella",
-    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/centro-stella-pagamenti-elettronici",
-    //           "label": "Centro stella",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Check IBAN",
-    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/check-iban",
-    //           "label": "Check IBAN",
-    //           "linkType": "internal"
-    //         },
-    //         {
-    //           "ariaLabel": "Vai al link: Piattaforma Notifiche Digitali",
-    //           "href": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali",
-    //           "label": "Piattaforma Notifiche Digitali",
-    //           "linkType": "internal"
-    //         }
-    //       ],
-    //       "title": "PRODOTTI E SERVIZI"
-    //     }
-    //   },
-    //   "onLanguageChanged": "/"
-    //   },
 
     default:
       return null;

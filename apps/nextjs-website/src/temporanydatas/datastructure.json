@@ -1,338 +1,55 @@
 {
   "pubbliche-amministrazioni": [
-      {
-      "type": "newsroom",
-      "items":[
-        {
-          "date": {
-            "date": "new Date('2023-10-10T12:35:52.705Z'),"
-          },
-          "href": {
-            "label": "leggi",
-            "link": "https://google.it",
-            "title": "vai al sito"
-          },
-          "img": {
-            "alt": "A picture showing some books",
-            "src": "static/media/newsroom-cover.59549252.png"
-          },
-          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
-        },
-        {
-          "date": {
-            "date": "new Date('2023-10-10T12:35:52.705Z')"
-          },
-          "href": {
-            "label": "leggi",
-            "link": "https://google.it",
-            "title": "vai al sito"
-          },
-          "img": {
-            "alt": "A picture showing some books",
-            "src": "static/media/newsroom-cover.59549252.png"
-          },
-          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
-        },
-        {
-          "date": {
-            "date": "new Date('2023-10-10T12:35:52.705Z')"
-          },
-          "href": {
-            "label": "leggi",
-            "link": "https://google.it",
-            "title": "vai al sito"
-          },
-          "img": {
-            "alt": "A picture showing some books",
-            "src": "static/media/newsroom-cover.59549252.png"
-          },
-          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
-        },
-        {
-          "date": {
-            "date": "new Date('2023-10-10T12:35:52.705Z')"
-          },
-          "href": {
-            "label": "leggi",
-            "link": "https://google.it",
-            "title": "vai al sito"
-          },
-          "img": {
-            "alt": "A picture showing some books",
-            "src": "static/media/newsroom-cover.59549252.png"
-          },
-          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
-        },
-        {
-          "date": {
-            "date": "new Date('2023-10-10T12:35:52.705Z')"
-          },
-          "href": {
-            "label": "leggi",
-            "link": "https://google.it",
-            "title": "vai al sito"
-          },
-          "img": "<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>",
-          "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
-        }
-      ]
-    },
-    {
-      "type": "feature",
-      "items": [
-        {
-          "stackIcon": {
-            "icon": "./feature-icon-01.svg"
-          },
-          "subtitle": "Le notifiche sono inviate, gestite e monitorate tramite un solo canale, accessibile da più referenti dello stesso ente",
-          "title": "Unico"
-        },
-        {
-          "stackIcon": {
-            "icon": "./feature-icon-01.svg"
-          },
-          "subtitle": "Si possono caricare notifiche tramite API o manualmente: depositati i documenti, la piattaforma si occupa dell’invio e tiene traccia dei cambi di stato",
-          "title": "Semplice"
-        },
-        {
-          "stackIcon": {
-            "icon": "./feature-icon-01.svg"
-          },
-          "subtitle": "Se il destinatario ha un recapito digitale, i tempi di invio diminuiscono notevolmente",
-          "title": "Immediato"
-        },
-        {
-          "stackIcon": {
-            "icon": "./feature-icon-01.svg"
-          },
-          "subtitle": "Il processo di notificazione è normato e c’è maggiore certezza di consegna al destinatario",
-          "title": "Certo"
-        }
-      ],
-      "title": "Un solo modo per risparmiare in tanti modi",
-      "theme": "light"
-    },
-    {
-      "type": "header",
-      "theme": "dark",
-      "menu":[
-        {
-          "items": [
-            {
-              "href": "#",
-              "key": 1,
-              "label": "Voce menu secondo livello"
-            },
-            {
-              "href": "#",
-              "key": 2,
-              "label": "Voce menu secondo livello"
-            },
-            {
-              "href": "#",
-              "key": 3,
-              "label": "Voce menu secondo livello"
-            }
-          ],
-          "label": "Voce Menu 1",
-          "theme": "light"
-        },
-        {
-          "active": true,
-          "items": [
-            {
-              "href": "#",
-              "key": 1,
-              "label": "Secondo livello"
-            },
-            {
-              "href": "#",
-              "key": 2,
-              "label": "Secondo livello"
-            }
-          ],
-          "label": "Voce Menu 2",
-          "theme": "light"
-        },
-        {
-          "href": "/#",
-          "label": "Voce Menu 3",
-          "theme": "light"
-        }
-      ],
-      "product":{
-        "href": "/",
-        "name": "Nome del prodotto"
-      }
-    },
     {
       "type": "hero",
-      "theme": "dark",
-      "image": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
+      "background": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
       "size": "small",
       "title": "Inviare notifiche? Facile a dirsi.",
-      "subtitle": "E da oggi anche a farsi. SEND, Servizio Notifiche Digitali (anche nota come Piattaforma Notifiche Digitali di cui all'art. 26 del decreto-legge 76/2020 s.m.i.) digitalizza la gestione delle comunicazioni a valore legale, semplificando il processo per tutti: chi le invia, e chi le riceve."
-    },
-    {
-      "type": "download",
-      "items":[
+      "subtitle": "E da oggi anche a farsi. SEND, Servizio Notifiche Digitali (anche nota come Piattaforma Notifiche Digitali di cui all'art. 26 del decreto-legge 76/2020 s.m.i.) digitalizza la gestione delle comunicazioni a valore legale, semplificando il processo per tutti: chi le invia, e chi le riceve.",
+      "ctaButtons": [
         {
-          "fileName": "sample_1.pdf",
-          "href": "static/media/sample.ac0398d4.pdf",
-          "label": "Download 1 Lorem Ipsum"
+          "color": "primary",
+          "text": "Scopri di più",
+          "variant": "outlined"
         },
         {
-          "fileName": "sample_2.pdf",
-          "href": "static/media/sample.ac0398d4.pdf",
-          "label": "Download 2 Lorem Ipsum"
+          "color": "primary",
+          "text": "Accedi",
+          "variant": "contained"
         }
       ],
-      "subtitle":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
-      "theme":"light",
-      "title":"Download Area Lorem Ipsum",
-      "itemsAlignment": "center"
+      "theme": "dark",
+      "image": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
+      "altText": "altText",
+      "inverse": true,
+      "useHoverlay": true
     },
-    {
-      "type": "bannerLink",
-      "body":"Leggi le domande frequenti sull’adesione a pagoPA da parte degli Enti Creditori oppure scrivi a: account@pagopa.it",
-      "theme":"light",
-      "title":"Vuoi diventare un Partner tecnologico qualificato?",
-      "reverse":"false",
-      "ctaButtons":[
-        {
-          "variant": "outlined",
-          "text": "LEGGI LE FAQ",
-          "color": "primary",
-          "path": "/faq"
-        },
-        {
-          "variant": "outlined",
-          "text": "LEGGI LE PUBBLICHE AMMINISTRAZIONI",
-          "color": "primary",
-          "path": "/pubbliche-amministrazioni"
-        }
-      ]
-    },
-    {
-      "type": "abstract",
-      "description": "Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "layout": "center",
-      "overline": "Per i cittadini",
-      "theme": "light",
-      "title": "Lorem ipsum dolor sit amet, consectetur"
-    },
-    {
-      "type": "accordion",
-      "theme": "light",
-      "title": "mio accordion",
-      "accordionValues": [{
-        "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
-        "header": "Header"
-      },
-      {
-        "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
-        "header": "Header"
-      },
-      {
-        "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
-        "header": "Header"
-      }],
-      "subtitle": "sottotitolo mio accordion",
-      "description": "descrizione mio accordion"
-    },
-    {
-      "type": "video",
-      "autoplay": true,
-      "src": "https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4",
-      "subtitle": "Lorem ipsum dolor sit amet",
-      "theme": "light",
-      "title":"Lorem ipsum dolor sit amet"
-    },
-    {
-      "type": "listing",
-      "date":[{
-          "date": "2023-10-06T09:17:14.705Z",
-          "locale": "it-IT",
-          "options":{
-            "day": "06",
-            "month": "10",
-            "year": "2023"
-          },
-          "preDate": "Ultimo aggiornamento"
-      }],
-      "items":[
-        {
-          "href": "https://google.it",
-          "htmlTitle": "vai al sito",
-          "text": "Lorem ipsum dolor sit amet, consectetuer asipscing elit"
-        },
-        {
-          "text": "Lorem ipsum dolor sit amet, consectetuer asipscing elit"
-        },
-        {
-          "text": "Lorem ipsum dolor sit amet, consectetuer asipscing elit"
-        }
-      ],
-      "name":"Lorem ipsum dolor sit amet",
-      "theme":"light",
-      "title":"Lorem ipsum dolor sit amet"
-    },
-    {
-      "type": "download",
-      "items":[{
-          "fileName": "sample_1.pdf",
-          "href": "static/media/sample.ac0398d4.pdf",
-          "label": "Download 1 Lorem Ipsum"
-      }],
-      "subtitle":"Lorem ipsum dolor sit amet",
-      "theme":"light",
-      "title":"Download Area Lorem Ipsum"
-    },
-    
-    {
-      "type": "stats",
-      "theme": "light",
-      "title": "Carica l'atto. Poi, dimenticatene",
-      "body": "SEND si integra con il protocollo degli enti...",
-      "kpiCaption": "kpicaption text",
-      "kpiValues": [
-        {
-          "caption": "strawberry fields",
-          "id": 1,
-          "kpiIcon": {
-            "icon": "AllInclusive"
-          },
-          "value": 30000
-        },        
-        {
-          "caption": "strawberry",
-          "id": 2,
-          "kpiIcon": {
-            "icon": "AllInclusive"
-          },
-          "value": 3000
-        },        
-        {
-          "caption": "fields",
-          "id": 3,
-          "kpiIcon": {
-            "icon": "AllInclusive"
-          },
-          "value": 300
-        }
-      ]
-    },    
     {
       "type": "editorial",
-      "theme": "light",
-      "image": "https://notifichedigitali.pagopa.it/static/images/pa-infoblock-2.png",
-      "title": "Carica l'atto. Poi, dimenticatene",
-      "body": "SEND si integra con il protocollo degli enti e offre sia API per l'invio automatico delle notifiche, sia la possibilità di fare invii manuali. Una volta effettuato il caricamento degli atti e dei moduli di pagamento, la piattaforma genera lo IUN, un codice univoco identificativo della notifica. Successivamente, cerca nei suoi archivi e nei registri pubblici una PEC riconducibile al destinatario e invia la notifica. Poi, invia un avviso di cortesia agli altri recapiti digitali (app IO, email e SMS) del destinatario. Se il destinatario non ha indicato alcun recapito digitale e non ha accesso alla piattaforma, questa procede con la ricerca di un indirizzo fisico, e quindi con l'invio tramite raccomandata cartacea.",
+      "theme": "dark",
+      "image": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
+      "eyelet": "per i cittadini",
+      "title": "Non perderti più nessuna notifica",
+      "body": "Con Piattaforma Notifiche, ricevi e gestisci nello stesso spazio tutti gli atti di notifica che ti inviano Enti e Pubbliche Amministrazioni, come multe o certificati elettorali. E, grazie all'integrazione con pagoPA, puoi anche pagare eventuali costi. Così, risparmi tempo e denaro.",
+      "ctaButtons": [
+        {
+          "color": "primary",
+          "text": "Scopri di più",
+          "variant": "outlined"
+        },
+        {
+          "color": "primary",
+          "text": "Accedi",
+          "variant": "contained"
+        }
+      ],
+      "reversed": true,
       "width": "wide",
-      "reversed": true
+      "pattern": "dots"
     },
     {
       "type": "howTo",
+      "title": "Come funziona?",
       "steps": [
         {
           "description": "Con l’uso di API Key o manualmente, l’ente crea la richiesta di notifica e carica gli allegati.",
@@ -356,10 +73,135 @@
           "title": "La notifica viene inviata"
         }
       ],
-      "title": "Come funziona?",
-      "theme": "light"
+      "theme": "light",
+      "link": {
+        "href": "/",
+        "label": "see more"
+      }
+    },
+    {
+      "type": "cards",
+      "items": [
+        {
+          "cardIcon": {
+            "icon": "Air"
+          },
+          "link": {
+            "href": "https://google.com",
+            "text": "leggi",
+            "title": "vai al sito"
+          },
+          "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+          "title": "Title"
+        },
+        {
+          "cardIcon": {
+            "icon": "AccessAlarm"
+          },
+          "link": {
+            "href": "https://google.com",
+            "text": "leggi",
+            "title": "vai al sito"
+          },
+          "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+          "title": "Title"
+        },
+        {
+          "cardIcon": {
+            "icon": "AddReaction"
+          },
+          "link": {
+            "href": "https://google.com",
+            "text": "leggi",
+            "title": "vai al sito"
+          },
+          "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+          "title": "Title"
+        }
+      ],
+      "text": {
+        "title": "lorem ipsum"
+      },
+      "theme": "dark"
+    },
+    {
+      "type": "accordion",
+      "title": "mio accordion",
+      "subtitle": "sottotitolo mio accordion",
+      "description": "descrizione mio accordion",
+      "accordionValues": [{
+        "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
+        "header": "Header"
+      },
+      {
+        "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
+        "header": "Header"
+      },
+      {
+        "content": "Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.",
+        "header": "Header"
+      }],
+      "theme": "dark",
+      "layout": "left"
+    },
+    {
+      "type": "feature",
+      "theme": "light",
+      "title": "Feature",
+      "items":[
+        {
+          "link": {
+            "text": "Scopri di più",
+            "url": "#"
+          },
+          "stackIcon": {
+            "icon": "AccountBox"
+          },
+          "subtitle": "I tuoi dati e le informazioni contenute negli atti sono al sicuro",
+          "title": "Sicuro"
+        },
+        {
+          "link": {
+            "text": "Scopri di più",
+            "url": "#"
+          },
+          "stackIcon": {
+            "icon": "AccountBox"
+          },
+          "subtitle": "Un risparmio di denaro per tutti: cittadini imprese ed enti",
+          "title": "Conveniente"
+        },
+        {
+          "link": {
+            "text": "Scopri di più",
+            "url": "#"
+          },
+          "stackIcon": {
+            "icon": "AccountBox"
+          },
+          "subtitle": "I tempi di attesa tra l'invio e la ricezione delle notifiche spariscono",
+          "title": "Immediato"
+        }
+      ],
+      "showCarouselMobile": true,
+      "background": "green"
+    },
+    {
+      "type": "abstract",
+      "overline": "Per i cittadini",
+      "title": "Lorem ipsum dolor sit amet, consectetur",
+      "description": "Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "layout": "left",
+      "background": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
+      "theme": "dark"
     }
   ],
+
+
+
+
+
+
   "faq": [
     {
       "type": "hero",
