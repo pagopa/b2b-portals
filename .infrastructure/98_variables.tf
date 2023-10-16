@@ -20,3 +20,28 @@ variable "tags" {
     CreatedBy = "Terraform"
   }
 }
+
+### required for security group ALB, ECS and RDS
+variable "app_port" {
+  default = 1337
+}
+
+variable "db_cluster_identifier" {
+  description = "Database Cluster identifier"
+  default     = "cms-database-cluster"
+}
+
+variable "db_name" {
+  description = "Database Name"
+  default     = "strapidb"
+}
+
+variable "db_client" {
+  description = "Database client"
+  default     = "postgres"
+}
+
+variable "db_master_username" {
+  description = "Database Master Username"
+  default     = "postgres"
+}
