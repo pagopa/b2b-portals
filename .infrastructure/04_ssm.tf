@@ -10,7 +10,7 @@ resource "aws_ssm_parameter" "db_password" {
   value = random_password.database_password.result
 }
 
-resource "random_password" "jws_secret" {
+resource "random_password" "jwt_secret" {
   length           = 16
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
