@@ -4,4 +4,4 @@ export default function DynamicRoute() {
       <p>Ciao, sono una delle pagine dinamiche</p>
     </div>
   );
-};
+}
