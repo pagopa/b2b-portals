@@ -59,6 +59,57 @@
                     }
                 ]
             }
+        },
+        {
+            "id": 4,
+            "attributes": {
+                "slug": "perfezionamento",
+                "createdAt": "2023-10-12T11:41:53.588Z",
+                "updatedAt": "2023-10-12T11:41:55.067Z",
+                "publishedAt": "2023-10-12T11:41:55.061Z",
+                "Sezioni": [
+                    {
+                        "id": 4,
+                        "__component": "hero",
+                        "title": "Inviare notifiche? Facile a dirsi.",
+                        "theme": "dark",
+                        "size": "small",
+                        "image": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
+                        "subtitle": "E da oggi anche a farsi. SEND, Servizio Notifiche Digitali"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "attributes": {
+                "slug": "dipendenti",
+                "createdAt": "2023-10-12T11:41:53.588Z",
+                "updatedAt": "2023-10-12T11:41:55.067Z",
+                "publishedAt": "2023-10-12T11:41:55.061Z",
+                "Sezioni": [
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "attributes": {
+                "slug": "partite-iva",
+                "createdAt": "2023-10-12T11:41:53.588Z",
+                "updatedAt": "2023-10-12T11:41:55.067Z",
+                "publishedAt": "2023-10-12T11:41:55.061Z",
+                "Sezioni": [
+                    {
+                        "id": 6,
+                        "__component": "hero",
+                        "title": "Inviare notifiche? Facile a dirsi.",
+                        "theme": "dark",
+                        "size": "small",
+                        "image": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
+                        "subtitle": "E da oggi anche a farsi. SEND, Servizio Notifiche Digitali"
+                    }
+                ]
+            }
         }
     ]
   }

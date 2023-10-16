@@ -3,7 +3,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Header, PreHeader, Footer } from '@pagopa/pagopa-editorial-components';
 import './styles.css';
-import testData from '../temporanydatas/test.json';
+import preheaderfooterData from '../temporanydatas/preheader-footer-Data.json';
 import navigationData from '../temporanydatas/datastructure-copy.json';
 import headerData from '../temporanydatas/header.json';
 
@@ -13,17 +13,23 @@ export const metadata: Metadata = {
   description: 'New Page Created',
 };
 
-// Modify the recursive function to include visibility check
-function buildMenuStructure(itemAttributes): Menu[] {
+function buildMenuStructure(
+  itemAttributes: any[], // Replace 'any' with the actual type of itemAttributes
+  parentPath = ''
+): Menu[] {
   return itemAttributes
-    .filter((item) => item.attributes.visibile !== false) // Filter out items with "visible" set to false
+    .filter((item) => item.attributes.visibile !== false)
     .map((item) => {
       const { title, url, children } = item.attributes;
-      const subMenu = children ? buildMenuStructure(children.data) : [];
+
+      // Construct the href by combining the parent's path and the current item's url
+      const href = children ? `${parentPath}${url}` : url;
+
+      const subMenu = children ? buildMenuStructure(children.data, href) : [];
       return {
-        href: url,
+        href,
         label: title,
-        theme: 'light',
+        theme: 'light' || 'dark',
         items: subMenu.length > 0 ? subMenu : undefined,
       };
     });
@@ -32,7 +38,7 @@ function buildMenuStructure(itemAttributes): Menu[] {
 interface Menu {
   href: string;
   label: string;
-  theme: 'light';
+  theme: 'light' | 'dark';
   items?: Menu[];
 }
 
@@ -62,8 +68,8 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <PreHeader
-          leftCtas={testData.preHeader.leftCtas}
-          rightCtas={testData.preHeader.rightCtas}
+          leftCtas={preheaderfooterData.preHeader.leftCtas}
+          rightCtas={preheaderfooterData.preHeader.rightCtas}
         />
         
         {/* Use the Header component with the nested menu structure and product information */}
@@ -73,12 +79,12 @@ export default function RootLayout({
 
         {/* Add the Footer component with footer data */}
         <Footer
-          activeLanguage={testData.footer.activeLanguage}
-          companyLink={testData.footer.companyLink}
-          languages={testData.footer.languages}
-          legalInfo={testData.footer.legalInfo}
-          links={testData.footer.links}
-          onLanguageChanged={testData.footer.onLanguageChanged}
+          activeLanguage={preheaderfooterData.footer.activeLanguage}
+          companyLink={preheaderfooterData.footer.companyLink}
+          languages={preheaderfooterData.footer.languages}
+          legalInfo={preheaderfooterData.footer.legalInfo}
+          links={preheaderfooterData.footer.links}
+          onLanguageChanged={preheaderfooterData.footer.onLanguageChanged}
         />        
       </body>
     </html>

@@ -1,64 +1,257 @@
 {
+
     "data": [
+  
         {
+  
             "id": 1,
+  
             "attributes": {
-                "slug": "pubbliche-amministrazioni",
-                "createdAt": "2023-10-12T11:41:53.588Z",
-                "updatedAt": "2023-10-12T11:41:55.067Z",
-                "publishedAt": "2023-10-12T11:41:55.061Z",
-                "Sezioni": [
-                    {
-                        "id": 1,
-                        "__component": "hero",
-                        "title": "Inviare notifiche? Facile a dirsi.",
-                        "theme": "dark",
-                        "size": "small",
-                        "image": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
-                        "subtitle": "E da oggi anche a farsi. SEND, Servizio Notifiche Digitali"
-                    }
-                ]
+  
+                "title": "Navigazione",
+  
+                "slug": "navigazione",
+  
+                "createdAt": "2023-10-11T15:31:19.259Z",
+  
+                "updatedAt": "2023-10-16T07:30:53.340Z",
+  
+                "items": {
+  
+                    "data": [
+  
+                        {
+  
+                            "id": 1,
+  
+                            "attributes": {
+  
+                                "order": 0,
+  
+                                "title": "Home",
+  
+                                "url": "/",
+  
+                                "target": null,
+  
+                                "visibile": false,
+  
+                                "createdAt": "2023-10-12T11:03:12.185Z",
+  
+                                "updatedAt": "2023-10-16T07:30:53.264Z",
+  
+                                "children": {
+  
+                                    "data": []
+  
+                                }
+  
+                            }
+  
+                        },
+  
+                        {
+  
+                            "id": 2,
+  
+                            "attributes": {
+  
+                                "order": 1,
+  
+                                "title": "Enti",
+  
+                                "url": "/pubbliche-amministrazioni",
+  
+                                "target": null,
+  
+                                "visibile": true,
+  
+                                "createdAt": "2023-10-12T11:03:37.306Z",
+  
+                                "updatedAt": "2023-10-16T07:30:53.267Z",
+  
+                                "children": {
+  
+                                    "data": []
+  
+                                }
+  
+                            }
+  
+                        },
+  
+                        {
+  
+                            "id": 3,
+  
+                            "attributes": {
+  
+                                "order": 2,
+  
+                                "title": "Cittadini",
+  
+                                "url": "/cittadini",
+  
+                                "target": null,
+  
+                                "visibile": true,
+  
+                                "createdAt": "2023-10-12T11:04:24.478Z",
+  
+                                "updatedAt": "2023-10-16T07:30:53.269Z",
+  
+                                "children": {
+  
+                                    "data": [
+  
+                                        {
+  
+                                            "id": 6,
+  
+                                            "attributes": {
+  
+                                                "order": 0,
+  
+                                                "title": "Dipendenti",
+  
+                                                "url": "/dipendenti",
+  
+                                                "target": null,
+  
+                                                "visibile": true,
+  
+                                                "createdAt": "2023-10-16T07:29:57.693Z",
+  
+                                                "updatedAt": "2023-10-16T07:30:53.274Z",
+  
+                                                "children": {
+  
+                                                    "data": []
+  
+                                                }
+  
+                                            }
+  
+                                        },
+  
+                                        {
+  
+                                            "id": 7,
+  
+                                            "attributes": {
+  
+                                                "order": 1,
+  
+                                                "title": "Partite IVA",
+  
+                                                "url": "/partite-iva",
+  
+                                                "target": null,
+  
+                                                "visibile": true,
+  
+                                                "createdAt": "2023-10-16T07:30:53.213Z",
+  
+                                                "updatedAt": "2023-10-16T07:30:53.213Z",
+  
+                                                "children": {
+  
+                                                    "data": []
+  
+                                                }
+  
+                                            }
+  
+                                        }
+  
+                                    ]
+  
+                                }
+  
+                            }
+  
+                        },
+  
+                        {
+  
+                            "id": 4,
+  
+                            "attributes": {
+  
+                                "order": 3,
+  
+                                "title": "FAQ",
+  
+                                "url": "/faq",
+  
+                                "target": null,
+  
+                                "visibile": true,
+  
+                                "createdAt": "2023-10-12T11:04:24.479Z",
+  
+                                "updatedAt": "2023-10-16T07:30:53.271Z",
+  
+                                "children": {
+  
+                                    "data": []
+  
+                                }
+  
+                            }
+  
+                        },
+  
+                        {
+  
+                            "id": 5,
+  
+                            "attributes": {
+  
+                                "order": 4,
+  
+                                "title": "Perfezionamento",
+  
+                                "url": "/perfezionamento",
+  
+                                "target": null,
+  
+                                "visibile": null,
+  
+                                "createdAt": "2023-10-12T11:04:24.486Z",
+  
+                                "updatedAt": "2023-10-16T07:30:53.272Z",
+  
+                                "children": {
+  
+                                    "data": []
+  
+                                }
+  
+                            }
+  
+                        }
+  
+                    ]
+  
+                }
+  
             }
-        },
-        {
-            "id": 2,
-            "attributes": {
-                "slug": "cittadini",
-                "createdAt": "2023-10-12T11:41:53.588Z",
-                "updatedAt": "2023-10-12T11:41:55.067Z",
-                "publishedAt": "2023-10-12T11:41:55.061Z",
-                "Sezioni": [
-                    {
-                        "id": 2,
-                        "__component": "hero",
-                        "title": "Inviare notifiche? Facile a dirsi.",
-                        "theme": "dark",
-                        "size": "small",
-                        "image": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
-                        "subtitle": "E da oggi anche a farsi. SEND, Servizio Notifiche Digitali"
-                    }
-                ]
-            }
-        },
-        {
-            "id": 3,
-            "attributes": {
-                "slug": "faq",
-                "createdAt": "2023-10-12T11:41:53.588Z",
-                "updatedAt": "2023-10-12T11:41:55.067Z",
-                "publishedAt": "2023-10-12T11:41:55.061Z",
-                "Sezioni": [
-                    {
-                        "id": 3,
-                        "__component": "hero",
-                        "title": "Inviare notifiche? Facile a dirsi.",
-                        "theme": "dark",
-                        "size": "small",
-                        "image": "https://notifichedigitali.pagopa.it/static/images/pa-hero-foreground.png",
-                        "subtitle": "E da oggi anche a farsi. SEND, Servizio Notifiche Digitali"
-                    }
-                ]
-            }
+  
         }
-    ]
+  
+    ],
+  
+    "meta": {
+  
+        "page": 1,
+  
+        "pageSize": 25,
+  
+        "pageCount": 1,
+  
+        "total": 1
+  
+    }
+  
   }

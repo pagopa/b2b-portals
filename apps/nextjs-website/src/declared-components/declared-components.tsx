@@ -2,7 +2,7 @@ import React from 'react';
 import { Hero, Editorial, Feature, HowTo, Stats, Accordion, Download, Listing, Newsroom, Video, Abstract, BannerLink } from '@pagopa/pagopa-editorial-components';
 
 export type ComponentData = {
-  type: string | 'button' | 'link';
+  __component: string | 'button' | 'link';
   theme?: 'light' | 'dark';
   image?: string;
   size?: 'small' | 'big';
@@ -191,7 +191,7 @@ export type ComponentData = {
 
 
 export function renderComponent(componentData: ComponentData, index: number) {
-  switch (componentData.type) {
+  switch (componentData.__component) {
 
     // Priorità alta 
 
