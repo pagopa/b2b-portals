@@ -5,7 +5,7 @@ locals {
 }
 
 resource "aws_s3_bucket" "cms_medialibrary_bucket" {
-  bucket = "strapi-medialibrary-${local.account_id}"
+  bucket = "cms-medialibrary-${local.account_id}"
 }
 
 ### Bucket S3 for Media Library Strapi ###
