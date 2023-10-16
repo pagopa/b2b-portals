@@ -3,8 +3,7 @@ resource "random_integer" "bucket_random_integer" {
   max = 9999
 }
 
-### Bucket S3 for Media Library Strapi ###
-
+### Bucket S3 for Cms' Media Library ###
 resource "aws_s3_bucket" "cms_medialibrary_bucket" {
   bucket = "cms-medialibrary-${random_integer.bucket_random_integer.result}"
 }
