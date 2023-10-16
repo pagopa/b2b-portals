@@ -19,5 +19,5 @@ resource "random_password" "jwt_secret" {
 resource "aws_ssm_parameter" "admin_jwt_secret" {
   name  = "/website-strapi/admin_jwt_secret"
   type  = "SecureString"
-  value = random_password.jws_secret.result
+  value = random_password.jwt_secret.result
 }
