@@ -7,7 +7,7 @@ export default plugin => {
   // Define custom attributes for `MenuItem` the same way they would be defined
   // on any other schema.
   const customAttrs = {
-    pagine: {
+    pagina: {
       type: 'relation',
       relation: 'oneToOne',
       target: 'api::pagine.pagine',

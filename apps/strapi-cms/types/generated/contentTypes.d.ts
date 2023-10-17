@@ -644,7 +644,7 @@ export interface PluginMenusMenuItem extends Schema.CollectionType {
       'oneToOne',
       'plugin::menus.menu-item'
     >;
-    pagine: Attribute.Relation<
+    pagina: Attribute.Relation<
       'plugin::menus.menu-item',
       'oneToOne',
       'api::pagine.pagine'
