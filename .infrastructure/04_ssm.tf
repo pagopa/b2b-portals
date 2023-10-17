@@ -1,23 +1,23 @@
-resource "random_password" "database_password" {
+resource "random_password" "cms_database_password" {
   length           = 16
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
-resource "aws_ssm_parameter" "db_password" {
-  name  = "/website-strapi/db_password"
+resource "aws_ssm_parameter" "cms_database_password" {
+  name  = "/cms/database/password"
   type  = "SecureString"
-  value = random_password.database_password.result
+  value = random_password.cms_database_password.result
 }
 
-resource "random_password" "jwt_secret" {
+resource "random_password" "cms_admin_jwt_secret" {
   length           = 16
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
-resource "aws_ssm_parameter" "admin_jwt_secret" {
-  name  = "/website-strapi/admin_jwt_secret"
+resource "aws_ssm_parameter" "cms_admin_jwt_secret" {
+  name  = "/cms/admin_jwt_secret"
   type  = "SecureString"
-  value = random_password.jwt_secret.result
+  value = random_password.cms_admin_jwt_secret.result
 }
