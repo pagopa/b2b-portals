@@ -1,0 +1,33 @@
+{
+  // "extends": "@strapi/typescript-utils/tsconfigs/server",
+  "extends": [
+    "@strapi/typescript-utils/tsconfigs/server",
+    "../../tsconfig"
+  ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    // From "@strapi/typescript-utils/tsconfigs/server",
+    "moduleResolution": "Node",
+    "lib": ["ES2020"],
+    "incremental": true,
+    "resolveJsonModule": true,
+    "noEmitOnError": true
+  },
+  "include": [
+    "./",
+    "./**/*.ts",
+    "./**/*.js",
+    "src/**/*.json"
+  ],
+  "exclude": [
+    "node_modules/",
+    "build/",
+    "dist/",
+    ".cache/",
+    ".tmp/",
+    "src/admin/",
+    "**/*.test.*",
+    "src/plugins/**"
+  ]
+}
