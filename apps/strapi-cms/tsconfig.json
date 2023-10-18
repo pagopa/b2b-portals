@@ -1,13 +1,8 @@
 {
-  // "extends": "@strapi/typescript-utils/tsconfigs/server",
-  "extends": [
-    "@strapi/typescript-utils/tsconfigs/server",
-    "../../tsconfig"
-  ],
+  "extends": "../../tsconfig",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": ".",
-    // From "@strapi/typescript-utils/tsconfigs/server",
     "moduleResolution": "Node",
     "lib": ["ES2020"],
     "incremental": true,

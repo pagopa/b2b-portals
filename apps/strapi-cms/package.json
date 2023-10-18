@@ -1,18 +1,25 @@
 {
   "name": "strapi-cms",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.0",
   "scripts": {
+    "clean": "shx rm -rf dist/",
+    "compile": "npm run clean && tsc --noEmit",
     "dev": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
+    "lint": "eslint --ignore-path .gitignore src",
     "strapi": "strapi"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "typescript": "5.2.2",
+    "shx": "^0.3.4"
+  },
   "dependencies": {
-    "@strapi/strapi": "4.13.7",
-    "@strapi/plugin-users-permissions": "4.13.7",
     "@strapi/plugin-i18n": "4.13.7",
+    "@strapi/plugin-users-permissions": "4.13.7",
+    "@strapi/strapi": "4.13.7",
     "better-sqlite3": "8.6.0"
   },
   "strapi": {

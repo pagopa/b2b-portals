@@ -2,10 +2,6 @@
 
 This section details the steps needed to launch a bare Strapi instance on your local machine.
 
-## Requirements
-- [Node.js](https://nodejs.org/docs/latest-v18.x/api/index.html)
-- [npm CLI](https://docs.npmjs.com/cli/v9)
-
 ## Preliminary steps
 
 ### Create a .env file.
