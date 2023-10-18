@@ -10,7 +10,7 @@ resource "aws_rds_cluster" "cms_database_cluster" {
   engine_version         = "14.6"
   database_name          = var.db_name
   master_username        = var.db_master_username
-  master_password        = aws_ssm_parameter.db_password.value
+  master_password        = aws_ssm_parameter.cms_database_password.value
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.cms_database.id]
   db_subnet_group_name   = aws_db_subnet_group.cms_db_subnet.name
