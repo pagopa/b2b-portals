@@ -1,6 +1,6 @@
 {
     "root": true,
     "extends": [
-      "../../packages/eslint-config/eslint-strong.js"
+      "custom/eslint-strong"
     ]
   }
