@@ -16,8 +16,7 @@ resource "aws_ecr_lifecycle_policy" "policy" {
               "rulePriority": 1,
               "description": "Keep last 5 images",
               "selection": {
-                  "tagStatus": "tagged",
-                  "tagPrefixList": ["v"],
+                  "tagStatus": "any",
                   "countType": "imageCountMoreThan",
                   "countNumber": 5
               },
