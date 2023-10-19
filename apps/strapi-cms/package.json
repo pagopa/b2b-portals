@@ -8,7 +8,7 @@
     "dev": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "lint": "eslint --ignore-path .gitignore src",
+    "lint": "eslint --ignore-path .gitignore .",
     "strapi": "strapi"
   },
   "devDependencies": {
