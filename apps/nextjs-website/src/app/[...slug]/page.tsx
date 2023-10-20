@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation';
 import { MenuItem, Route, PageProps } from '../types';
 
+const dynamicParams = true;
+
 export async function generateStaticParams() {
   const data = await fetch('http://localhost:3000/navigationData.json');
   const jsonData: { data: Route[] } = await data.json();
@@ -33,10 +35,22 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: PageProps) {
   const { slug } = params;
-  const slugExists = await isSlugValid(slug);
 
-  if (!slugExists) {
-    return redirect('/404');
+  if (dynamicParams) {
+    const allParams = await generateStaticParams();
+    const slugPath = slug.join('/');
+
+    const modifiedSlugPath = slugPath.startsWith('/')
+      ? slugPath
+      : `/${slugPath}`;
+
+    const isValid = allParams.some(
+      (param) => param.slug.join('/') === modifiedSlugPath,
+    );
+
+    if (!isValid) {
+      redirect('/404');
+    }
   }
 
   return (
@@ -44,17 +58,4 @@ export default async function Page({ params }: PageProps) {
       <p>Ciao, sono la pagina “{slug.join('/')}”</p>
     </div>
   );
-}
-
-async function isSlugValid(slug: string[]) {
-  const allParams = await generateStaticParams();
-  let slugPath = slug.join('/');
-
-  if (slugPath !== '' && !slugPath.startsWith('/')) {
-    slugPath = `/${slugPath}`;
-  }
-
-  const isValid = allParams.some((param) => param.slug.join('/') === slugPath);
-
-  return isValid;
 }
