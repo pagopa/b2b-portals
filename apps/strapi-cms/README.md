@@ -1,35 +1,12 @@
-# How to run the bare Strapi CMS
+# Useful Strapi info
 
-This section details the steps needed to launch a bare Strapi instance on your local machine.
+This file describes some key points about Strapi that may help when first approaching the technology or while testing.
 
-## Preliminary steps
-
-### Create a .env file.
-You can use the .env.example file as reference.
-Simply copying it and renaming it to ".env" is completely acceptable.
-
-### Install all depencies
-Simply run the ```npm i``` command.
-
-## Commands
-You will only need to run one command to be up and running and that is
-```npm run dev```
-
-Upon running the command Strapi will do 3 things:
+## On launch
+Upon running ```npm run dev``` will do 3 things:
 1. Generate a JWT secret and place it into .env (unless it already exists);
 2. Build the admin panel's UI (if it wasnt' built already);
 3. Run the server at the address specified in the .env file (currently localhost:1337).
-
-## First Launch
-On first launch you will need to create the "Super Admin" user.
-
-You can do so by accessing http://localhost:1337/admin (you will be redirected to the appropriate page).
-
-## Subsequent launches
-Once the first admin user has been created, you'll be able to access the admin panel with the same credentials at http://localhost:1337/admin.
-
-
-# Useful information
 
 ## Database
 The current Strapi project utilizes a temporary SQLite file as DB.
