@@ -1,6 +1,6 @@
 [
   {
-    "name": "cms-strapi",
+    "name": "cms-docker",
     "image": "${image}",
     "portMappings": [
       {
