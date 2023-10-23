@@ -7,13 +7,11 @@ variable "aws_region" {
 variable "environment" {
   type        = string
   description = "Environment"
-  default     = "prod"
 }
 
 variable "github_repository" {
   type        = string
   description = "The repository where the IaC workflows will run"
-  default     = "repo"
 }
 
 variable "tags" {
