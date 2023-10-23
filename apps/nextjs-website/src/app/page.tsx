@@ -1,8 +1,11 @@
+'use client';
+import { Hero } from '@pagopa/pagopa-editorial-components';
+
 export default function Home() {
   return (
     <main>
       <div>
-        <p>Hello World!</p>
+        <Hero title={'Hello World!'} />
       </div>
     </main>
   );
