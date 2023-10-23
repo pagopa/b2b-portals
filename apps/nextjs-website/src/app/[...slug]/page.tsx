@@ -1,61 +1,27 @@
-import { redirect } from 'next/navigation';
-import { MenuItem, Route, PageProps } from '../types';
+import { getAllPages } from '@/lib/api';
 
-const dynamicParams = true;
+// Dynamic segments not included in generateStaticParams will return a 404.
+// more: https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams
+export const dynamicParams = false;
 
-export async function generateStaticParams() {
-  const data = await fetch('http://localhost:3000/navigationData.json');
-  const jsonData: { data: Route[] } = await data.json();
+// Statically generate routes at build time instead of on-demand at request time.
+// more: https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params
+export const generateStaticParams = async () => {
+  const { pages } = await getAllPages();
+  return pages;
+};
 
-  if (!jsonData.data[0]) {
-    throw new Error('No route available');
-  }
+type PageParams = {
+  params: { slug: string[] };
+};
 
-  const rootRoutes = jsonData.data[0].attributes.items.data;
-
-  const allParams: { slug: string[] }[] = [];
-
-  function collectParams(routes: MenuItem[], currentPath: string[] = []) {
-    for (const route of routes) {
-      const routePath = [...currentPath, route.attributes.url];
-      const dynamicParam = [routePath.join('')];
-
-      allParams.push({ slug: dynamicParam });
-
-      if (route.attributes.children.data.length > 0) {
-        collectParams(route.attributes.children.data, routePath);
-      }
-    }
-  }
-
-  collectParams(rootRoutes);
-
-  return allParams;
-}
-
-export default async function Page({ params }: PageProps) {
+const Page = ({ params }: PageParams) => {
   const { slug } = params;
-
-  if (dynamicParams) {
-    const allParams = await generateStaticParams();
-    const slugPath = slug.join('/');
-
-    const modifiedSlugPath = slugPath.startsWith('/')
-      ? slugPath
-      : `/${slugPath}`;
-
-    const isValid = allParams.some(
-      (param) => param.slug.join('/') === modifiedSlugPath,
-    );
-
-    if (!isValid) {
-      redirect('/404');
-    }
-  }
-
   return (
     <div>
-      <p>Ciao, sono la pagina “{slug.join('/')}”</p>
+      <p>This is the page {slug.join('/')}</p>
     </div>
   );
-}
+};
+
+export default Page;
