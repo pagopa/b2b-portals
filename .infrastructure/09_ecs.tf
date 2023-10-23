@@ -14,7 +14,6 @@ data "template_file" "cms_app" {
     db_user         = aws_rds_cluster.cms_database_cluster.master_username
     db_password_arn = aws_ssm_parameter.cms_database_password.arn
     bucket_name     = aws_s3_bucket.cms_medialibrary_bucket.bucket
-    #github_token_arn     = aws_ssm_parameter.github_token.arn
     admin_jwt_secret_arn = aws_ssm_parameter.cms_admin_jwt_secret.arn
     db_name              = aws_rds_cluster.cms_database_cluster.database_name
     db_client            = var.db_client
