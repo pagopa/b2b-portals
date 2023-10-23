@@ -16,6 +16,10 @@ Before you start, make sure you have complete the following steps:
 npm i
 ```
 
+Finally:
+- in the `strapi-cms` app (`apps/strapi-cms`), create a `.env` starting from `.env.example` and fill all the environment variables. (For local testing purposes, you may simply copy and rename the file.)
+
+
 ### Run the project locally
 
 Run the following command from the root folder.
@@ -23,6 +27,8 @@ Run the following command from the root folder.
 ``` bash
 npm run dev
 ```
+
+Open [http://localhost:1337/admin/](http://localhost:1337/admin/) with your browser to access the CMS admin panel. (You will be asked to create a user on first launch.)
 
 ## Commands Cheat Sheet
 
