@@ -1,7 +1,8 @@
+'use client';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import { PreHeader } from '@pagopa/pagopa-editorial-components';
+import preHeaderData from '../lib/temporanyData/preHeaderData.json';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 export const metadata: Metadata = {
   title: 'Page',
@@ -14,8 +15,41 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>{children}</body>
+    <html>
+      <body>
+        <PreHeader
+          leftCtas={{
+            ctaButtons: [
+              {
+                color: 'inherit',
+                href: '#',
+                text: 'Link',
+                variant: 'text',
+              },
+            ],
+            theme: 'light',
+          }}
+          rightCtas={{
+            ctaButtons: [
+              {
+                color: 'inherit',
+                onClick: function noRefCheck() {},
+                startIcon: <HelpOutlineIcon />,
+                text: 'Assistenza',
+                variant: 'text',
+              },
+            ],
+            theme: 'light',
+          }}
+        />
+
+        <PreHeader
+          leftCtas={preHeaderData.leftCtas}
+          rightCtas={preHeaderData.rightCtas}
+        />
+
+        {children}
+      </body>
     </html>
   );
 }
