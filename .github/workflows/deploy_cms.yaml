@@ -1,7 +1,7 @@
 name: Deploy CMS
 
 on:
-  pull_request:
+  push:
         branches: 'main'
         # Run only if there are at least one change matching the following paths
         paths:
