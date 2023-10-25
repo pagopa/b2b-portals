@@ -1,0 +1,24 @@
+{
+  "leftCtas": {
+    "ctaButtons": [
+      {
+        "color": "primary",
+        "href": "#",
+        "text": "Link",
+        "variant": "text"
+      }
+    ],
+    "theme": "light"
+  },
+  "rightCtas": {
+    "ctaButtons": [
+      {
+        "color": "primary",
+        "startIcon": "HelpOutlineIcon",
+        "text": "Assistenza",
+        "variant": "text"
+      }
+    ],
+    "theme": "light"
+  }
+}
