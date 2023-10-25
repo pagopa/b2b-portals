@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Nome": {
+    "name": {
       "type": "string",
       "required": true,
       "private": true
