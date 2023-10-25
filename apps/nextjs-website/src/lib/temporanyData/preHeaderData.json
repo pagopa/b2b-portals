@@ -2,7 +2,7 @@
   "leftCtas": {
     "ctaButtons": [
       {
-        "color": "primary",
+        "color": "inherit",
         "href": "#",
         "text": "Link",
         "variant": "text"
@@ -13,8 +13,9 @@
   "rightCtas": {
     "ctaButtons": [
       {
-        "color": "primary",
-        "startIcon": "HelpOutlineIcon",
+        "color": "inherit",
+        "onClick": null,
+        "startIcon": null,
         "text": "Assistenza",
         "variant": "text"
       }

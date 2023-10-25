@@ -1,8 +1,10 @@
 'use client';
 import type { Metadata } from 'next';
-import { PreHeader } from '@pagopa/pagopa-editorial-components';
+import { PreHeader, Header, Footer } from '@pagopa/pagopa-editorial-components';
 import preHeaderData from '../lib/temporanyData/preHeaderData.json';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import headerData from '../lib/temporanyData/headerData.json';
+import footerData from '../lib/temporanyData/footerData.json';
+import { getAllPages } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Page',
@@ -15,41 +17,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+
     <html>
+
       <body>
-        <PreHeader
-          leftCtas={{
-            ctaButtons: [
-              {
-                color: 'inherit',
-                href: '#',
-                text: 'Link',
-                variant: 'text',
-              },
-            ],
-            theme: 'light',
-          }}
-          rightCtas={{
-            ctaButtons: [
-              {
-                color: 'inherit',
-                onClick: function noRefCheck() {},
-                startIcon: <HelpOutlineIcon />,
-                text: 'Assistenza',
-                variant: 'text',
-              },
-            ],
-            theme: 'light',
-          }}
-        />
 
         <PreHeader
           leftCtas={preHeaderData.leftCtas}
           rightCtas={preHeaderData.rightCtas}
         />
+        
+        <Header
+          menu={headerData.menu}
+          product={headerData.product}
+          theme={headerData.theme}
+        />
 
         {children}
+
+        <Footer
+          activeLanguage={footerData.activeLanguage}
+          companyLink={footerData.companyLink}
+          languages={footerData.languages}
+          legalInfo={footerData.legalInfo}
+          links={footerData.links}
+          onLanguageChanged={footerData.onLanguageChanged}
+        />
+
       </body>
+
     </html>
+
   );
 }
