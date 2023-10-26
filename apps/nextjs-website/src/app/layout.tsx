@@ -23,7 +23,10 @@ export const metadata: Metadata = {
 const GenerateMenu = async (setMenu: Function) => {
   const { pages } = await getAllPages();
 
-  if (pages == null) return [];
+  if (pages == null) {
+    setMenu([]);
+    return;
+  }
 
   const visiblePages = pages.filter(page => page.visible);
 
