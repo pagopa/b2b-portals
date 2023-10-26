@@ -97,7 +97,7 @@ export const getAllPages = async () => {
 
     const pages: Page[] = await response.json();
 
-    const slugs: { slug: string[], title: string, visible: boolean }[] = [];
+    const slugs: { slug: string[], title: string, visible: boolean, id: number }[] = [];
 
     pages.forEach((page: Page) => {
       // Ignore any case in which the slug is null or the special 'home' case
@@ -115,7 +115,8 @@ export const getAllPages = async () => {
         slugs.push({
           slug: pageSlug,
           title: page.title,
-          visible: page.menuAttached ?? false
+          visible: page.menuAttached ?? false,
+          id: page.id
         });
       } else {
         // Build the slug of the page with a parent (max 5 levels deep)
@@ -139,7 +140,8 @@ export const getAllPages = async () => {
             slugs.push({
               slug: pageSlug,
               title: page.title,
-              visible: page.menuAttached ?? false
+              visible: page.menuAttached ?? false,
+              id: page.id
             });
             break;
           }

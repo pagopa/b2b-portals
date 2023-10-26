@@ -20,6 +20,112 @@ export const metadata: Metadata = {
   description: 'New Page Created',
 };
 
+const GenerateMenu = async (setMenu: Function) => {
+  const { pages } = await getAllPages();
+
+  if (pages == null) return [];
+
+  const visiblePages = pages.filter(page => page.visible);
+
+  const menu: MenuItem[] = [];
+
+  // Order visibilePages from deepest to first level slugs, without altering the display order
+  visiblePages.sort((a, b) => {
+    if (a.slug.length > b.slug.length) return 1;
+    if (a.slug.length == b.slug.length) return 0;
+    return -1;
+  });
+
+  visiblePages.forEach(page => {
+
+    switch (page.slug.length) {
+      case 1: //Add base level links
+        menu.push({
+          href: page.slug[0] ?? '/',
+          key: page.id.toString(),
+          label: page.title,
+          theme: 'light',
+        })
+        break;
+        case 2: //Only doing up to level two for menu
+          const parentSlug = page.slug[0] ?? '';
+
+          menu.forEach(menuItem => {
+            if (menuItem.href == parentSlug) {
+              if (menuItem.items == null) {
+                menuItem.items = [
+                  {
+                    href: page.slug.join('/'),
+                    key: page.id.toString(),
+                    label: page.title,
+                    theme: 'light',
+                  }
+                ]
+              } else {
+                menuItem.items.push({
+                  href: page.slug.join('/'),
+                  key: page.id.toString(),
+                  label: page.title,
+                  theme: 'light',
+                });
+              }
+            }
+          });
+          break;
+    }
+
+  });
+
+  setMenu(menu);
+};
+
+// export const FetchPages = async (setMenu: Function) => {
+//   const { pages } = await getAllPages();
+
+//   const menuHierarchy: { [key: string]: MenuItem[] } = {};
+
+//   for (const key in pages) {
+//     const page = pages[key];
+
+//     if (page.slug.length > 1) {
+//       // This page has sublevels
+//       let parent: { [key: string]: MenuItem[] } = menuHierarchy;
+
+//       for (let i = 0; i < page.slug.length - 1; i++) {
+//         const slug = page.slug[i];
+//         parent = parent[slug] = parent[slug] || [];
+//       }
+
+//       // Add the current page as an item under its parent
+//       if (parent) {
+//         parent.push({
+//           href: `/${page.slug.join('/')}`,
+//           key: page.slug[page.slug.length - 1],
+//           label: page.slug[page.slug.length - 1],
+//           theme: 'light',
+//         });
+//       }
+//     } else {
+//       // This page does not have sublevels
+//       const key = page.slug[0];
+//       menuHierarchy[key] = menuHierarchy[key] || [];
+
+//       menuHierarchy[key].push({
+//         href: `/${page.slug.join('/')}`,
+//         key: page.slug[0],
+//         label: page.slug[0],
+//         theme: 'light',
+//       });
+//     }
+//   }
+
+//   // Convert the menuHierarchy object to an array
+//   const transformedMenu = Object.values(menuHierarchy).flat();
+
+//   setMenu(transformedMenu);
+//   console.log('Menu Data:', transformedMenu);
+// };
+
 export default function RootLayout({
   children,
 }: {
@@ -27,56 +133,9 @@ export default function RootLayout({
 }) {
   const [menu, setMenu] = useState<MenuItem[]>([]);
 
-  useEffect(() => {
-    const fetchPages = async () => {
-      const { pages } = await getAllPages();
-    
-      const menuHierarchy: { [key: string]: MenuItem[] } = {};
-    
-      for (const key in pages) {
-        const page = pages[key];
-    
-        if (page.slug.length > 1) {
-          // This page has sublevels
-          let parent: { [key: string]: MenuItem[] } = menuHierarchy;
-    
-          for (let i = 0; i < page.slug.length - 1; i++) {
-            const slug = page.slug[i];
-            parent = parent[slug] = parent[slug] || [];
-          }
-    
-          // Add the current page as an item under its parent
-          if (parent) {
-            parent.push({
-              href: `/${page.slug.join('/')}`,
-              key: page.slug[page.slug.length - 1],
-              label: page.slug[page.slug.length - 1],
-              theme: 'light',
-            });
-          }
-        } else {
-          // This page does not have sublevels
-          const key = page.slug[0];
-          menuHierarchy[key] = menuHierarchy[key] || [];
-    
-          menuHierarchy[key].push({
-            href: `/${page.slug.join('/')}`,
-            key: page.slug[0],
-            label: page.slug[0],
-            theme: 'light',
-          });
-        }
-      }
-    
-      // Convert the menuHierarchy object to an array
-      const transformedMenu = Object.values(menuHierarchy).flat();
-    
-      setMenu(transformedMenu);
-      console.log('Menu Data:', transformedMenu);
-    };
-
-    fetchPages();
-  }, []);
+  // useEffect(() => {
+    GenerateMenu(setMenu);
+  // }, [])
 
   return (
     <html>
