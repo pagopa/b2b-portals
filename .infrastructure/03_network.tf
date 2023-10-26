@@ -22,7 +22,9 @@ module "vpc" {
   enable_dns_support           = true
 }
 
-### AWS Security Group ### Traffic to the DB should only come from ECS; Traffic to the ECS cluster should only come from the ALB
+### AWS Security Group ###
+# Traffic to the DB should only come from ECS
+# Traffic to the ECS cluster should only come from the ALB
 resource "aws_security_group" "cms_lb" {
   name        = "cms-lb"
   description = "Ingress - Load Balancer"
