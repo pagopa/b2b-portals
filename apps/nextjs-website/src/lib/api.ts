@@ -39,6 +39,30 @@ export const getAllPages = async () => {
       },
     });
 
+    // Fetch pre-header data
+    const preHeaderResult = await getPreHeaderData(); // Call the getPreHeaderData function
+    if (preHeaderResult.error) {
+      console.error(`Error fetching pre-header data: ${preHeaderResult.error}`);
+    } else {
+      console.log('Pre-Header Data:', preHeaderResult.preHeaderData);
+    }
+
+    // Fetch header data
+    const headerResult = await getHeaderData(); // Call the getHeaderData function
+    if (headerResult.error) {
+      console.error(`Error fetching header data: ${headerResult.error}`);
+    } else {
+      console.log('Header Data:', headerResult.headerData);
+    }
+
+    // Fetch footer data
+    const footerResult = await getFooterData(); // Call the getFooterData function
+    if (footerResult.error) {
+      console.error(`Error fetching footer data: ${footerResult.error}`);
+    } else {
+      console.log('Footer Data:', footerResult.footerData);
+    }
+
     if (!navigationResponse.ok) {
       return {
         error: 'Failed to fetch navigation data from the API',
@@ -134,6 +158,106 @@ export const getAllPages = async () => {
     return {
       error: 'An error occurred while fetching data',
       pages: [],
+    };
+  }
+};
+
+export const getPreHeaderData = async () => {
+  const preHeaderApiUrl: string = 'http://127.0.0.1:1337/api/pre-header/?populate=*';
+  const token: string =
+    'a7cc986b110df0aef1d499c2fbcdce5e6e5ca567127150a2dc00e2549c7b7960e73ede3425d676f04526e033a6f1227a9c1e0fa2269d4ff564a13ab52ce6ba8fce58d7d8b1298c42f1472ed7b83049b561c1c6e52b739a30dde44fd51bb3b8844b3e1ec35304e910a45dc2eaa0cd4d4a6486ebeb94a6078a78926c710866ed05';
+
+  try {
+    // Fetch pre-header data
+    const preHeaderResponse = await fetch(preHeaderApiUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!preHeaderResponse.ok) {
+      return {
+        error: 'Failed to fetch pre-header data from the API',
+      };
+    }
+
+    const preHeaderData = await preHeaderResponse.json();
+
+    return {
+      preHeaderData,
+    };
+  } catch (error) {
+    return {
+      error: 'An error occurred while fetching pre-header data',
+      preHeaderData: null,
+    };
+  }
+};
+
+export const getHeaderData = async () => {
+  const headerApiUrl: string = 'http://127.0.0.1:1337/api/header/?populate=*';
+  const token: string =
+    'a7cc986b110df0aef1d499c2fbcdce5e6e5ca567127150a2dc00e2549c7b7960e73ede3425d676f04526e033a6f1227a9c1e0fa2269d4ff564a13ab52ce6ba8fce58d7d8b1298c42f1472ed7b83049b561c1c6e52b739a30dde44fd51bb3b8844b3e1ec35304e910a45dc2eaa0cd4d4a6486ebeb94a6078a78926c710866ed05';
+
+  try {
+    // Fetch header data
+    const headerResponse = await fetch(headerApiUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!headerResponse.ok) {
+      return {
+        error: 'Failed to fetch header data from the API',
+      };
+    }
+
+    const headerData = await headerResponse.json();
+
+    return {
+      headerData,
+    };
+  } catch (error) {
+    return {
+      error: 'An error occurred while fetching header data',
+      headerData: null,
+    };
+  }
+};
+
+export const getFooterData = async () => {
+  const footerApiUrl: string =
+    'http://localhost:1337/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_resources.links,links_services.links';
+  const token: string =
+    'a7cc986b110df0aef1d499c2fbcdce5e6e5ca567127150a2dc00e2549c7b7960e73ede3425d676f04526e033a6f1227a9c1e0fa2269d4ff564a13ab52ce6ba8fce58d7d8b1298c42f1472ed7b83049b561c1c6e52b739a30dde44fd51bb3b8844b3e1ec35304e910a45dc2eaa0cd4d4a6486ebeb94a6078a78926c710866ed05';
+
+  try {
+    // Fetch footer data
+    const footerResponse = await fetch(footerApiUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!footerResponse.ok) {
+      return {
+        error: 'Failed to fetch footer data from the API',
+      };
+    }
+
+    const footerData = await footerResponse.json();
+
+    return {
+      footerData,
+    };
+  } catch (error) {
+    return {
+      error: 'An error occurred while fetching footer data',
+      footerData: null,
     };
   }
 };
