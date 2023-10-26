@@ -35,15 +35,15 @@ resource "aws_alb_listener" "front_end" {
 }
 
 locals {
-alb_origin_id = aws_alb.cms_load_balancer.id
+  alb_origin_id = aws_alb.cms_load_balancer.id
 }
 
 ### AWS CloudFront distribution ###
 resource "aws_cloudfront_distribution" "cms_dist" {
-  enabled             = true
+  enabled = true
   origin {
     domain_name = aws_alb.cms_load_balancer.dns_name
-	  origin_id   = aws_alb.cms_load_balancer.dns_name
+    origin_id   = aws_alb.cms_load_balancer.dns_name
     custom_origin_config {
       http_port              = 80
       https_port             = 443
@@ -51,7 +51,7 @@ resource "aws_cloudfront_distribution" "cms_dist" {
       origin_ssl_protocols   = ["TLSv1.2"]
     }
   }
-  
+
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
     cached_methods         = ["GET", "HEAD", "OPTIONS"]
@@ -65,7 +65,7 @@ resource "aws_cloudfront_distribution" "cms_dist" {
       }
     }
   }
-  
+
   restrictions {
     geo_restriction {
       restriction_type = "none"
