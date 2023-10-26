@@ -97,7 +97,12 @@ export const getAllPages = async () => {
 
     const pages: Page[] = await response.json();
 
-    const slugs: { slug: string[]; title: string; visible: boolean, id: number }[] = [];
+    const slugs: {
+      slug: string[];
+      title: string;
+      visible: boolean;
+      id: number;
+    }[] = [];
 
     pages.forEach((page: Page) => {
       // Ignore any case in which the slug is null or the special 'home' case
@@ -116,7 +121,7 @@ export const getAllPages = async () => {
           slug: pageSlug,
           title: page.title,
           visible: page.menuAttached ?? false,
-          id: page.id
+          id: page.id,
         });
       } else {
         // Build the slug of the page with a parent (max 5 levels deep)
@@ -141,7 +146,7 @@ export const getAllPages = async () => {
               slug: pageSlug,
               title: page.title,
               visible: page.menuAttached ?? false,
-              id: page.id
+              id: page.id,
             });
             break;
           }
@@ -201,22 +206,50 @@ export const getHeaderData = async () => {
     },
   });
 
-  if (!headerResponse.ok) {
-    return {
-      error: 'Failed to fetch header data',
-      headerData: null,
-    };
-  }
+  const headerData = await headerResponse.json();
+
+  // Extract the product data from the response
+  const productData = headerData.data.attributes;
+
+  // Create the product object
+  const product = {
+    name: productData.productName,
+    href: '/',
+  };
+
+  // Extract primaryButton and secondaryButton data
+  const primaryButtonData = productData.primaryButton;
+  const secondaryButtonData = productData.secondaryButton;
+
+  // Create the ctaButtons array based on the extracted data
+  const ctaButtons = [
+    {
+      color: primaryButtonData.color,
+      size: 'small',
+      text: primaryButtonData.text,
+      variant: primaryButtonData.variant,
+    },
+    {
+      color: secondaryButtonData.color,
+      size: 'small',
+      text: secondaryButtonData.text,
+      variant: secondaryButtonData.variant,
+    },
+  ];
+
+  console.log('ctaButtons:', ctaButtons);
 
   return {
-    headerData: await headerResponse.json(),
+    headerData,
+    product, // Include the product data
+    ctaButtons, // Include the ctaButtons data
     error: null, // No error occurred
   };
 };
 
 export const getFooterData = async () => {
   const footerApiUrl: string =
-    'http://localhost:1337/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_resources.links,links_services.links';
+    'http://127.0.0.1:1337/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_resources.links,links_services.links';
   const token: string =
     'a7cc986b110df0aef1d499c2fbcdce5e6e5ca567127150a2dc00e2549c7b7960e73ede3425d676f04526e033a6f1227a9c1e0fa2269d4ff564a13ab52ce6ba8fce58d7d8b1298c42f1472ed7b83049b561c1c6e52b739a30dde44fd51bb3b8844b3e1ec35304e910a45dc2eaa0cd4d4a6486ebeb94a6078a78926c710866ed05';
 

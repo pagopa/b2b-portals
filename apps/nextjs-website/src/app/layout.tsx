@@ -2,16 +2,18 @@
 import React, { useState } from 'react';
 import type { Metadata } from 'next';
 import { PreHeader, Header, Footer } from '@pagopa/pagopa-editorial-components';
-import preHeaderData from '../lib/temporanyData/preHeaderData.json';
-import headerData from '../lib/temporanyData/headerData.json';
-import footerData from '../lib/temporanyData/footerData.json';
-import { getAllPages } from '@/lib/api';
+import {
+  getAllPages,
+  getPreHeaderData,
+  getHeaderData,
+  getFooterData,
+} from '@/lib/api';
 
 interface MenuItem {
   href: string;
   key: string;
   label: string;
-  theme: string;
+  theme: 'light' | 'dark';
   items?: MenuItem[];
 }
 
@@ -80,14 +82,61 @@ const GenerateMenu = async (setMenu: Function) => {
   setMenu(menu);
 };
 
+const fetchPreHeaderData = async (setPreHeaderData: Function) => {
+  const data = await getPreHeaderData();
+  setPreHeaderData(data);
+};
+
+const fetchHeaderData = async (setHeaderData: Function) => {
+  const data = await getHeaderData();
+
+  if (!data.headerData) {
+    setHeaderData({
+      product: {
+        name: 'Default Product Name',
+        href: '/',
+      },
+      ctaButtons: [], // Default empty array for ctaButtons
+    });
+    return;
+  }
+
+  // Extract the product and ctaButtons data from headerData
+  const { product, ctaButtons } = data.headerData;
+
+  setHeaderData({
+    product: {
+      name: product.name,
+      href: product.href,
+    },
+    ctaButtons,
+  });
+};
+
+const fetchFooterData = async (setFooterData: Function) => {
+  const data = await getFooterData();
+  setFooterData(data);
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [menu, setMenu] = useState<MenuItem[]>([]);
+  const [preHeaderData, setPreHeaderData] = useState<any>([]);
+  const [headerData, setHeaderData] = useState<any>([]);
+  const [footerData, setFooterData] = useState<any>([]);
 
   GenerateMenu(setMenu);
+  fetchPreHeaderData(setPreHeaderData);
+  fetchHeaderData(setHeaderData);
+  fetchFooterData(setFooterData);
+
+  console.log('menu:', menu);
+  console.log('preHeaderData:', preHeaderData);
+  console.log('headerData:', headerData);
+  console.log('footerData:', footerData);
 
   return (
     <html>
@@ -100,6 +149,7 @@ export default function RootLayout({
         <Header
           menu={menu}
           product={headerData.product}
+          ctaButtons={headerData.ctaButtons}
           theme={headerData.theme}
         />
 
