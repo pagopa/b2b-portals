@@ -87,9 +87,7 @@ export default function RootLayout({
 }) {
   const [menu, setMenu] = useState<MenuItem[]>([]);
 
-  // useEffect(() => {
   GenerateMenu(setMenu);
-  // }, [])
 
   return (
     <html>
