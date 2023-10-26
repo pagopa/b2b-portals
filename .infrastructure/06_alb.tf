@@ -34,10 +34,6 @@ resource "aws_alb_listener" "front_end" {
   }
 }
 
-locals {
-  alb_origin_id = aws_alb.cms_load_balancer.id
-}
-
 ### AWS CloudFront distribution ###
 resource "aws_cloudfront_distribution" "cms_dist" {
   enabled = true
