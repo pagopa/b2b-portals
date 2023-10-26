@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_components_cta_buttons",
+  "info": {
+    "displayName": "CTA_Button",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "text",
+        "contained",
+        "outlined"
+      ],
+      "default": "text",
+      "required": true
+    },
+    "color": {
+      "type": "string",
+      "required": true,
+      "default": "inherit"
+    }
+  }
+}
