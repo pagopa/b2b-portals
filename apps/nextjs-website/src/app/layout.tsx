@@ -1,5 +1,5 @@
-'use client'
-import React, { useEffect, useState } from 'react';
+'use client';
+import React, { useState } from 'react';
 import type { Metadata } from 'next';
 import { PreHeader, Header, Footer } from '@pagopa/pagopa-editorial-components';
 import preHeaderData from '../lib/temporanyData/preHeaderData.json';
@@ -28,7 +28,7 @@ const GenerateMenu = async (setMenu: Function) => {
     return;
   }
 
-  const visiblePages = pages.filter(page => page.visible);
+  const visiblePages = pages.filter((page) => page.visible);
 
   const menu: MenuItem[] = [];
 
@@ -39,8 +39,7 @@ const GenerateMenu = async (setMenu: Function) => {
     return -1;
   });
 
-  visiblePages.forEach(page => {
-
+  visiblePages.forEach((page) => {
     switch (page.slug.length) {
       case 1: //Add base level links
         menu.push({
@@ -48,86 +47,38 @@ const GenerateMenu = async (setMenu: Function) => {
           key: page.id.toString(),
           label: page.title,
           theme: 'light',
-        })
+        });
         break;
-        case 2: //Only doing up to level two for menu
-          const parentSlug = page.slug[0] ?? '';
+      case 2: //Only doing up to level two for menu
+        const parentSlug = page.slug[0] ?? '';
 
-          menu.forEach(menuItem => {
-            if (menuItem.href == parentSlug) {
-              if (menuItem.items == null) {
-                menuItem.items = [
-                  {
-                    href: page.slug.join('/'),
-                    key: page.id.toString(),
-                    label: page.title,
-                    theme: 'light',
-                  }
-                ]
-              } else {
-                menuItem.items.push({
+        menu.forEach((menuItem) => {
+          if (menuItem.href == parentSlug) {
+            if (menuItem.items == null) {
+              menuItem.items = [
+                {
                   href: page.slug.join('/'),
                   key: page.id.toString(),
                   label: page.title,
                   theme: 'light',
-                });
-              }
+                },
+              ];
+            } else {
+              menuItem.items.push({
+                href: page.slug.join('/'),
+                key: page.id.toString(),
+                label: page.title,
+                theme: 'light',
+              });
             }
-          });
-          break;
+          }
+        });
+        break;
     }
-
   });
 
   setMenu(menu);
 };
-
-// export const FetchPages = async (setMenu: Function) => {
-//   const { pages } = await getAllPages();
-
-//   const menuHierarchy: { [key: string]: MenuItem[] } = {};
-
-//   for (const key in pages) {
-//     const page = pages[key];
-
-//     if (page.slug.length > 1) {
-//       // This page has sublevels
-//       let parent: { [key: string]: MenuItem[] } = menuHierarchy;
-
-//       for (let i = 0; i < page.slug.length - 1; i++) {
-//         const slug = page.slug[i];
-//         parent = parent[slug] = parent[slug] || [];
-//       }
-
-//       // Add the current page as an item under its parent
-//       if (parent) {
-//         parent.push({
-//           href: `/${page.slug.join('/')}`,
-//           key: page.slug[page.slug.length - 1],
-//           label: page.slug[page.slug.length - 1],
-//           theme: 'light',
-//         });
-//       }
-//     } else {
-//       // This page does not have sublevels
-//       const key = page.slug[0];
-//       menuHierarchy[key] = menuHierarchy[key] || [];
-
-//       menuHierarchy[key].push({
-//         href: `/${page.slug.join('/')}`,
-//         key: page.slug[0],
-//         label: page.slug[0],
-//         theme: 'light',
-//       });
-//     }
-//   }
-
-//   // Convert the menuHierarchy object to an array
-//   const transformedMenu = Object.values(menuHierarchy).flat();
-
-//   setMenu(transformedMenu);
-//   console.log('Menu Data:', transformedMenu);
-// };
 
 export default function RootLayout({
   children,
@@ -137,7 +88,7 @@ export default function RootLayout({
   const [menu, setMenu] = useState<MenuItem[]>([]);
 
   // useEffect(() => {
-    GenerateMenu(setMenu);
+  GenerateMenu(setMenu);
   // }, [])
 
   return (
@@ -147,7 +98,7 @@ export default function RootLayout({
           leftCtas={preHeaderData.leftCtas}
           rightCtas={preHeaderData.rightCtas}
         />
-        
+
         <Header
           menu={menu}
           product={headerData.product}

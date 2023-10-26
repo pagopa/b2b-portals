@@ -97,7 +97,7 @@ export const getAllPages = async () => {
 
     const pages: Page[] = await response.json();
 
-    const slugs: { slug: string[], title: string, visible: boolean, id: number }[] = [];
+    const slugs: { slug: string[]; title: string; visible: boolean }[] = [];
 
     pages.forEach((page: Page) => {
       // Ignore any case in which the slug is null or the special 'home' case
@@ -116,7 +116,6 @@ export const getAllPages = async () => {
           slug: pageSlug,
           title: page.title,
           visible: page.menuAttached ?? false,
-          id: page.id
         });
       } else {
         // Build the slug of the page with a parent (max 5 levels deep)
@@ -141,7 +140,6 @@ export const getAllPages = async () => {
               slug: pageSlug,
               title: page.title,
               visible: page.menuAttached ?? false,
-              id: page.id
             });
             break;
           }
@@ -150,9 +148,8 @@ export const getAllPages = async () => {
     });
 
     // Filter the slugs
-    const filteredSlugs = slugs
-      .filter((slugData) => slugData.slug != null);
-      // .map((slugData) => ({ slug: slugData.slug }));
+    const filteredSlugs = slugs.filter((slugData) => slugData.slug != null);
+    // .map((slugData) => ({ slug: slugData.slug }));
     return {
       pages: filteredSlugs, // Use the filtered slugs instead of the original slugs
     };
@@ -165,36 +162,29 @@ export const getAllPages = async () => {
 };
 
 export const getPreHeaderData = async () => {
-  const preHeaderApiUrl: string = 'http://127.0.0.1:1337/api/pre-header/?populate=*';
+  const preHeaderApiUrl: string =
+    'http://127.0.0.1:1337/api/pre-header/?populate=*';
   const token: string =
     'a7cc986b110df0aef1d499c2fbcdce5e6e5ca567127150a2dc00e2549c7b7960e73ede3425d676f04526e033a6f1227a9c1e0fa2269d4ff564a13ab52ce6ba8fce58d7d8b1298c42f1472ed7b83049b561c1c6e52b739a30dde44fd51bb3b8844b3e1ec35304e910a45dc2eaa0cd4d4a6486ebeb94a6078a78926c710866ed05';
 
-  try {
-    // Fetch pre-header data
-    const preHeaderResponse = await fetch(preHeaderApiUrl, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  const preHeaderResponse = await fetch(preHeaderApiUrl, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-    if (!preHeaderResponse.ok) {
-      return {
-        error: 'Failed to fetch pre-header data from the API',
-      };
-    }
-
-    const preHeaderData = await preHeaderResponse.json();
-
+  if (!preHeaderResponse.ok) {
     return {
-      preHeaderData,
-    };
-  } catch (error) {
-    return {
-      error: 'An error occurred while fetching pre-header data',
+      error: 'Failed to fetch pre-header data',
       preHeaderData: null,
     };
   }
+
+  return {
+    preHeaderData: await preHeaderResponse.json(),
+    error: null, // No error occurred
+  };
 };
 
 export const getHeaderData = async () => {
@@ -202,32 +192,24 @@ export const getHeaderData = async () => {
   const token: string =
     'a7cc986b110df0aef1d499c2fbcdce5e6e5ca567127150a2dc00e2549c7b7960e73ede3425d676f04526e033a6f1227a9c1e0fa2269d4ff564a13ab52ce6ba8fce58d7d8b1298c42f1472ed7b83049b561c1c6e52b739a30dde44fd51bb3b8844b3e1ec35304e910a45dc2eaa0cd4d4a6486ebeb94a6078a78926c710866ed05';
 
-  try {
-    // Fetch header data
-    const headerResponse = await fetch(headerApiUrl, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  const headerResponse = await fetch(headerApiUrl, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-    if (!headerResponse.ok) {
-      return {
-        error: 'Failed to fetch header data from the API',
-      };
-    }
-
-    const headerData = await headerResponse.json();
-
+  if (!headerResponse.ok) {
     return {
-      headerData,
-    };
-  } catch (error) {
-    return {
-      error: 'An error occurred while fetching header data',
+      error: 'Failed to fetch header data',
       headerData: null,
     };
   }
+
+  return {
+    headerData: await headerResponse.json(),
+    error: null, // No error occurred
+  };
 };
 
 export const getFooterData = async () => {
@@ -236,30 +218,22 @@ export const getFooterData = async () => {
   const token: string =
     'a7cc986b110df0aef1d499c2fbcdce5e6e5ca567127150a2dc00e2549c7b7960e73ede3425d676f04526e033a6f1227a9c1e0fa2269d4ff564a13ab52ce6ba8fce58d7d8b1298c42f1472ed7b83049b561c1c6e52b739a30dde44fd51bb3b8844b3e1ec35304e910a45dc2eaa0cd4d4a6486ebeb94a6078a78926c710866ed05';
 
-  try {
-    // Fetch footer data
-    const footerResponse = await fetch(footerApiUrl, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  const footerResponse = await fetch(footerApiUrl, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-    if (!footerResponse.ok) {
-      return {
-        error: 'Failed to fetch footer data from the API',
-      };
-    }
-
-    const footerData = await footerResponse.json();
-
+  if (!footerResponse.ok) {
     return {
-      footerData,
-    };
-  } catch (error) {
-    return {
-      error: 'An error occurred while fetching footer data',
+      error: 'Failed to fetch footer data',
       footerData: null,
     };
   }
+
+  return {
+    footerData: await footerResponse.json(),
+    error: null, // No error occurred
+  };
 };
