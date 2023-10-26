@@ -16,12 +16,12 @@ data "template_file" "cms_app" {
     bucket_name          = aws_s3_bucket.cms_medialibrary_bucket.bucket
     admin_jwt_secret_arn = aws_ssm_parameter.cms_admin_jwt_secret.arn
     db_name              = aws_rds_cluster.cms_database_cluster.database_name
-    db_client            = var.db_client
+    db_client            = "postgres"
   }
 }
 
 resource "aws_ecs_task_definition" "cms_task_def" {
-  family                   = var.ecs_task_def
+  family                   = "cms-task-def"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   task_role_arn            = aws_iam_role.task_role.arn
   network_mode             = "awsvpc"
@@ -32,8 +32,8 @@ resource "aws_ecs_task_definition" "cms_task_def" {
 }
 
 resource "aws_ecs_service" "cms_ecs_service" {
-  name                              = var.ecs_serv
-  cluster                           = var.ecs_cluster
+  name                              = "cms-ecs"
+  cluster                           = "cms-ecs-cluster"
   desired_count                     = 1
   launch_type                       = "FARGATE"
   force_new_deployment              = true
@@ -48,7 +48,7 @@ resource "aws_ecs_service" "cms_ecs_service" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.app.id
-    container_name   = var.container_name
+    container_name   = "cms-docker"
     container_port   = var.cms_app_port
   }
 }

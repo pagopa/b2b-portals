@@ -82,7 +82,7 @@ resource "aws_iam_policy" "ecs_task_execution" {
 }
 
 resource "aws_iam_role" "task_role" {
-  name               = var.ecs_task_role
+  name               = "ecs-task-role"
   assume_role_policy = data.aws_iam_policy_document.task_role.json
 }
 
