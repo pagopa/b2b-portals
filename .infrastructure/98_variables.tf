@@ -22,10 +22,9 @@ variable "tags" {
 }
 
 ### required for security group ALB, ECS and RDS
-variable "app_port" {
+variable "cms_app_port" {
   default = 1337
-}
-
+  
 variable "db_cluster_identifier" {
   description = "Database Cluster identifier"
   default     = "cms-database-cluster"
