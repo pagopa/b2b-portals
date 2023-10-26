@@ -16,9 +16,9 @@ resource "aws_alb_target_group" "cms" {
     healthy_threshold   = "3"
     interval            = "30"
     protocol            = "HTTP"
-    matcher             = "200"
+    matcher             = "204"
     timeout             = "3"
-    path                = "/"
+    path                = "/_health"
     unhealthy_threshold = "2"
   }
 }
