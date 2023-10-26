@@ -26,7 +26,6 @@ resource "aws_alb_target_group" "cms" {
 # Redirect all traffic from the ALB to the target group
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = aws_alb.cms_load_balancer.id
-  port              = 443
 
   default_action {
     target_group_arn = aws_alb_target_group.cms.id
