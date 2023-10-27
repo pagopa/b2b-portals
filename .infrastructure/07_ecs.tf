@@ -6,7 +6,7 @@ data "template_file" "cms_app" {
   template = file("./task-definitions/cms_app.json.tpl")
 
   vars = {
-    image                = aws_ecr_repository.image_repository.repository_url
+    image                = aws_ecr_repository.strapi_image_repository.repository_url
     fargate_cpu          = var.cms_app_cpu
     fargate_memory       = var.cms_app_memory
     aws_region           = var.aws_region
