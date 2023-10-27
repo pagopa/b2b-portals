@@ -26,8 +26,8 @@ module "vpc" {
 # Traffic to the DB should only come from ECS
 # Traffic to the ECS cluster should only come from the ALB
 
-data "aws_ec2_managed_prefix_list" "cloudfront" {   #For retrieve the Prefix_list_id of CloudFront
- name = "com.amazonaws.global.cloudfront.origin-facing"
+data "aws_ec2_managed_prefix_list" "cloudfront" { #For retrieve the Prefix_list_id of CloudFront
+  name = "com.amazonaws.global.cloudfront.origin-facing"
 }
 
 resource "aws_security_group" "cms_lb" {
@@ -36,9 +36,9 @@ resource "aws_security_group" "cms_lb" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    protocol    = "tcp"
-    from_port   = 80
-    to_port     = 80
+    protocol        = "tcp"
+    from_port       = 80
+    to_port         = 80
     prefix_list_ids = [data.aws_ec2_managed_prefix_list.cloudfront.id]
   }
 
@@ -50,9 +50,9 @@ resource "aws_security_group" "cms_lb" {
   }
 
   ingress {
-    protocol    = "tcp"
-    from_port   = var.cms_app_port
-    to_port     = var.cms_app_port
+    protocol        = "tcp"
+    from_port       = var.cms_app_port
+    to_port         = var.cms_app_port
     prefix_list_ids = [data.aws_ec2_managed_prefix_list.cloudfront.id]
   }
 
