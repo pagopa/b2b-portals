@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Metadata } from 'next';
 import { PreHeader, Header, Footer } from '@pagopa/pagopa-editorial-components';
 import {
@@ -83,14 +83,38 @@ const GenerateMenu = async (setMenu: Function) => {
 };
 
 const fetchPreHeaderData = async (setPreHeaderData: Function) => {
-  const data = await getPreHeaderData();
-  setPreHeaderData(data);
+  const { preHeaderData } = await getPreHeaderData();
+
+  setPreHeaderData({
+    leftCtas: {
+      theme: preHeaderData.data.attributes.theme.toLowerCase(),
+      ctaButtons: [
+        {
+          text: preHeaderData.data.attributes.leftCTAButton.text,
+          variant: preHeaderData.data.attributes.leftCTAButton.variant,
+          color: preHeaderData.data.attributes.leftCTAButton.color,
+          href: preHeaderData.data.attributes.leftCTAButton.href
+        }
+      ]
+    },
+    rightCtas: {
+      theme: preHeaderData.data.attributes.theme.toLowerCase(),
+      ctaButtons: [
+        {
+          text: preHeaderData.data.attributes.rightCTAButton.text,
+          variant: preHeaderData.data.attributes.rightCTAButton.variant,
+          color: preHeaderData.data.attributes.rightCTAButton.color,
+          href: preHeaderData.data.attributes.rightCTAButton.href
+        }
+      ]
+    }
+  });
 };
 
 const fetchHeaderData = async (setHeaderData: Function) => {
   const data = await getHeaderData();
 
-  if (!data.headerData) {
+  if (!data.headerData) { // TODO: Should probably throw error and abort build
     setHeaderData({
       product: {
         name: 'Default Product Name',
@@ -102,20 +126,77 @@ const fetchHeaderData = async (setHeaderData: Function) => {
   }
 
   // Extract the product and ctaButtons data from headerData
-  const { product, ctaButtons } = data.headerData;
-
   setHeaderData({
-    product: {
-      name: product.name,
-      href: product.href,
-    },
-    ctaButtons,
+    product: data.product,
+    ctaButtons: data.ctaButtons,
+    theme: 'light',
+    beta: data.headerData.data.beta
   });
 };
 
 const fetchFooterData = async (setFooterData: Function) => {
-  const data = await getFooterData();
-  setFooterData(data);
+  const { footerData } = await getFooterData();
+
+  const footerLinks = {
+    aboutUs: {
+      title: footerData.data.attributes.links_aboutUs.title ?? "",
+      links: footerData.data.attributes.links_aboutUs.links.map((link: { text: any; href: any; ariaLabel: any; linkType: any; }) => ({
+        label: link.text,
+        href: link.href,
+        ariaLabel: link.ariaLabel,
+        linkType: link.linkType
+      }))
+    },
+    followUs: {
+      title: footerData.data.attributes.links_followUs.title ?? "",
+      links: footerData.data.attributes.links_followUs.links.filter((link: { linkType: string; }) => link.linkType != "social").map((link: { text: any; href: any; ariaLabel: any; linkType: any; }) => ({
+        label: link.text,
+        href: link.href,
+        ariaLabel: link.ariaLabel,
+        linkType: link.linkType
+      })),
+      socialLinks: footerData.data.attributes.links_followUs.links.filter((link: { linkType: string; }) => link.linkType == "social").map((link: { icon: any; href: any; ariaLabel: any; }) => ({
+        icon: link.icon,
+        href: link.href,
+        "aria-label": link.ariaLabel
+      })),
+    },
+    resources: {
+      title: footerData.data.attributes.links_resources.title ?? "",
+      links: footerData.data.attributes.links_resources.links.map((link: { text: any; href: any; ariaLabel: any; linkType: any; }) => ({
+        label: link.text,
+        href: link.href,
+        ariaLabel: link.ariaLabel,
+        linkType: link.linkType
+      }))
+    },
+    services: {
+      title: footerData.data.attributes.links_services.title ?? "",
+      links: footerData.data.attributes.links_services.links.map((link: { text: any; href: any; ariaLabel: any; linkType: any; }) => ({
+        label: link.text,
+        href: link.href,
+        ariaLabel: link.ariaLabel,
+        linkType: link.linkType
+      }))
+    }
+  };
+
+
+  setFooterData({
+    links: footerLinks,
+    companyLink: footerData.data.attributes.companyLink,
+    legalInfo: footerData.data.attributes.legalInfo,
+    languages: [{
+      id: "it",
+      value: "Italiano"
+    }],
+    activeLanguage: {
+      id: "it",
+      value: "Italiano"
+    },
+    onLanguageChanged: () => {},
+
+  });
 };
 
 export default function RootLayout({
@@ -124,45 +205,49 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [menu, setMenu] = useState<MenuItem[]>([]);
-  const [preHeaderData, setPreHeaderData] = useState<any>([]);
-  const [headerData, setHeaderData] = useState<any>([]);
-  const [footerData, setFooterData] = useState<any>([]);
+  const [preHeaderData, setPreHeaderData] = useState<any>(null);
+  const [headerData, setHeaderData] = useState<any>(null);
+  const [footerData, setFooterData] = useState<any>(null);
 
-  GenerateMenu(setMenu);
-  fetchPreHeaderData(setPreHeaderData);
-  fetchHeaderData(setHeaderData);
-  fetchFooterData(setFooterData);
-
-  console.log('menu:', menu);
-  console.log('preHeaderData:', preHeaderData);
-  console.log('headerData:', headerData);
-  console.log('footerData:', footerData);
+  useEffect(() => {
+    GenerateMenu(setMenu);
+    fetchPreHeaderData(setPreHeaderData);
+    fetchHeaderData(setHeaderData);
+    fetchFooterData(setFooterData);
+  }, []);
 
   return (
     <html>
       <body>
-        <PreHeader
-          leftCtas={preHeaderData.leftCtas}
-          rightCtas={preHeaderData.rightCtas}
-        />
 
-        <Header
-          menu={menu}
-          product={headerData.product}
-          ctaButtons={headerData.ctaButtons}
-          theme={headerData.theme}
-        />
+        {preHeaderData != null &&
+          <PreHeader
+            leftCtas={preHeaderData.leftCtas}
+            rightCtas={preHeaderData.rightCtas}
+          />
+        }
+
+        {headerData != null && menu != null &&
+          <Header
+            menu={menu}
+            product={headerData.product}
+            ctaButtons={headerData.ctaButtons}
+            theme={headerData.theme}
+          />
+        }
 
         {children}
 
-        <Footer
-          activeLanguage={footerData.activeLanguage}
-          companyLink={footerData.companyLink}
-          languages={footerData.languages}
-          legalInfo={footerData.legalInfo}
-          links={footerData.links}
-          onLanguageChanged={footerData.onLanguageChanged}
-        />
+        {footerData != null &&
+          <Footer
+            activeLanguage={footerData.activeLanguage}
+            companyLink={footerData.companyLink}
+            languages={footerData.languages}
+            legalInfo={footerData.legalInfo}
+            links={footerData.links}
+            onLanguageChanged={footerData.onLanguageChanged}
+          />
+        }
       </body>
     </html>
   );

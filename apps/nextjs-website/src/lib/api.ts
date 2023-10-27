@@ -39,30 +39,6 @@ export const getAllPages = async () => {
       },
     });
 
-    // Fetch pre-header data
-    const preHeaderResult = await getPreHeaderData(); // Call the getPreHeaderData function
-    if (preHeaderResult.error) {
-      console.error(`Error fetching pre-header data: ${preHeaderResult.error}`);
-    } else {
-      console.log('Pre-Header Data:', preHeaderResult.preHeaderData);
-    }
-
-    // Fetch header data
-    const headerResult = await getHeaderData(); // Call the getHeaderData function
-    if (headerResult.error) {
-      console.error(`Error fetching header data: ${headerResult.error}`);
-    } else {
-      console.log('Header Data:', headerResult.headerData);
-    }
-
-    // Fetch footer data
-    const footerResult = await getFooterData(); // Call the getFooterData function
-    if (footerResult.error) {
-      console.error(`Error fetching footer data: ${footerResult.error}`);
-    } else {
-      console.log('Footer Data:', footerResult.footerData);
-    }
-
     if (!navigationResponse.ok) {
       return {
         error: 'Failed to fetch navigation data from the API',
@@ -236,8 +212,6 @@ export const getHeaderData = async () => {
       variant: secondaryButtonData.variant,
     },
   ];
-
-  console.log('ctaButtons:', ctaButtons);
 
   return {
     headerData,
