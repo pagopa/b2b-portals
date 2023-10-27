@@ -20,3 +20,8 @@ variable "tags" {
     CreatedBy = "Terraform"
   }
 }
+
+### required for security group ALB, ECS and RDS
+variable "cms_app_port" {
+  default = 1337
+}
