@@ -93,9 +93,9 @@ const fetchPreHeaderData = async (setPreHeaderData: Function) => {
           text: preHeaderData.data.attributes.leftCTAButton.text,
           variant: preHeaderData.data.attributes.leftCTAButton.variant,
           color: preHeaderData.data.attributes.leftCTAButton.color,
-          href: preHeaderData.data.attributes.leftCTAButton.href
-        }
-      ]
+          href: preHeaderData.data.attributes.leftCTAButton.href,
+        },
+      ],
     },
     rightCtas: {
       theme: preHeaderData.data.attributes.theme.toLowerCase(),
@@ -104,17 +104,18 @@ const fetchPreHeaderData = async (setPreHeaderData: Function) => {
           text: preHeaderData.data.attributes.rightCTAButton.text,
           variant: preHeaderData.data.attributes.rightCTAButton.variant,
           color: preHeaderData.data.attributes.rightCTAButton.color,
-          href: preHeaderData.data.attributes.rightCTAButton.href
-        }
-      ]
-    }
+          href: preHeaderData.data.attributes.rightCTAButton.href,
+        },
+      ],
+    },
   });
 };
 
 const fetchHeaderData = async (setHeaderData: Function) => {
   const data = await getHeaderData();
 
-  if (!data.headerData) { // TODO: Should probably throw error and abort build
+  if (!data.headerData) {
+    // TODO: Should probably throw error and abort build
     setHeaderData({
       product: {
         name: 'Default Product Name',
@@ -130,7 +131,7 @@ const fetchHeaderData = async (setHeaderData: Function) => {
     product: data.product,
     ctaButtons: data.ctaButtons,
     theme: 'light',
-    beta: data.headerData.data.beta
+    beta: data.headerData.data.beta,
   });
 };
 
@@ -139,63 +140,75 @@ const fetchFooterData = async (setFooterData: Function) => {
 
   const footerLinks = {
     aboutUs: {
-      title: footerData.data.attributes.links_aboutUs.title ?? "",
-      links: footerData.data.attributes.links_aboutUs.links.map((link: { text: any; href: any; ariaLabel: any; linkType: any; }) => ({
-        label: link.text,
-        href: link.href,
-        ariaLabel: link.ariaLabel,
-        linkType: link.linkType
-      }))
+      title: footerData.data.attributes.links_aboutUs.title ?? '',
+      links: footerData.data.attributes.links_aboutUs.links.map(
+        (link: { text: any; href: any; ariaLabel: any; linkType: any }) => ({
+          label: link.text,
+          href: link.href,
+          ariaLabel: link.ariaLabel,
+          linkType: link.linkType,
+        }),
+      ),
     },
     followUs: {
-      title: footerData.data.attributes.links_followUs.title ?? "",
-      links: footerData.data.attributes.links_followUs.links.filter((link: { linkType: string; }) => link.linkType != "social").map((link: { text: any; href: any; ariaLabel: any; linkType: any; }) => ({
-        label: link.text,
-        href: link.href,
-        ariaLabel: link.ariaLabel,
-        linkType: link.linkType
-      })),
-      socialLinks: footerData.data.attributes.links_followUs.links.filter((link: { linkType: string; }) => link.linkType == "social").map((link: { icon: any; href: any; ariaLabel: any; }) => ({
-        icon: link.icon,
-        href: link.href,
-        "aria-label": link.ariaLabel
-      })),
+      title: footerData.data.attributes.links_followUs.title ?? '',
+      links: footerData.data.attributes.links_followUs.links
+        .filter((link: { linkType: string }) => link.linkType != 'social')
+        .map(
+          (link: { text: any; href: any; ariaLabel: any; linkType: any }) => ({
+            label: link.text,
+            href: link.href,
+            ariaLabel: link.ariaLabel,
+            linkType: link.linkType,
+          }),
+        ),
+      socialLinks: footerData.data.attributes.links_followUs.links
+        .filter((link: { linkType: string }) => link.linkType == 'social')
+        .map((link: { icon: any; href: any; ariaLabel: any }) => ({
+          icon: link.icon,
+          href: link.href,
+          'aria-label': link.ariaLabel,
+        })),
     },
     resources: {
-      title: footerData.data.attributes.links_resources.title ?? "",
-      links: footerData.data.attributes.links_resources.links.map((link: { text: any; href: any; ariaLabel: any; linkType: any; }) => ({
-        label: link.text,
-        href: link.href,
-        ariaLabel: link.ariaLabel,
-        linkType: link.linkType
-      }))
+      title: footerData.data.attributes.links_resources.title ?? '',
+      links: footerData.data.attributes.links_resources.links.map(
+        (link: { text: any; href: any; ariaLabel: any; linkType: any }) => ({
+          label: link.text,
+          href: link.href,
+          ariaLabel: link.ariaLabel,
+          linkType: link.linkType,
+        }),
+      ),
     },
     services: {
-      title: footerData.data.attributes.links_services.title ?? "",
-      links: footerData.data.attributes.links_services.links.map((link: { text: any; href: any; ariaLabel: any; linkType: any; }) => ({
-        label: link.text,
-        href: link.href,
-        ariaLabel: link.ariaLabel,
-        linkType: link.linkType
-      }))
-    }
+      title: footerData.data.attributes.links_services.title ?? '',
+      links: footerData.data.attributes.links_services.links.map(
+        (link: { text: any; href: any; ariaLabel: any; linkType: any }) => ({
+          label: link.text,
+          href: link.href,
+          ariaLabel: link.ariaLabel,
+          linkType: link.linkType,
+        }),
+      ),
+    },
   };
-
 
   setFooterData({
     links: footerLinks,
     companyLink: footerData.data.attributes.companyLink,
     legalInfo: footerData.data.attributes.legalInfo,
-    languages: [{
-      id: "it",
-      value: "Italiano"
-    }],
+    languages: [
+      {
+        id: 'it',
+        value: 'Italiano',
+      },
+    ],
     activeLanguage: {
-      id: "it",
-      value: "Italiano"
+      id: 'it',
+      value: 'Italiano',
     },
     onLanguageChanged: () => {},
-
   });
 };
 
@@ -219,26 +232,25 @@ export default function RootLayout({
   return (
     <html>
       <body>
-
-        {preHeaderData != null &&
+        {preHeaderData != null && (
           <PreHeader
             leftCtas={preHeaderData.leftCtas}
             rightCtas={preHeaderData.rightCtas}
           />
-        }
+        )}
 
-        {headerData != null && menu != null &&
+        {headerData != null && menu != null && (
           <Header
             menu={menu}
             product={headerData.product}
             ctaButtons={headerData.ctaButtons}
             theme={headerData.theme}
           />
-        }
+        )}
 
         {children}
 
-        {footerData != null &&
+        {footerData != null && (
           <Footer
             activeLanguage={footerData.activeLanguage}
             companyLink={footerData.companyLink}
@@ -247,7 +259,7 @@ export default function RootLayout({
             links={footerData.links}
             onLanguageChanged={footerData.onLanguageChanged}
           />
-        }
+        )}
       </body>
     </html>
   );
