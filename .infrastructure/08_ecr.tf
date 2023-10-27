@@ -1,13 +1,13 @@
-resource "aws_ecr_repository" "image_repository" {
-  name = var.ecr_repository
+resource "aws_ecr_repository" "strapi_image_repository" {
+  name = "strapi"
 
   image_scanning_configuration {
     scan_on_push = true
   }
 }
 
-resource "aws_ecr_lifecycle_policy" "policy" {
-  repository = aws_ecr_repository.image_repository.name
+resource "aws_ecr_lifecycle_policy" "strapi_policy" {
+  repository = aws_ecr_repository.strapi_image_repository.name
 
   policy = <<EOF
   {

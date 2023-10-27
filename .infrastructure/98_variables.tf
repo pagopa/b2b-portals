@@ -26,17 +26,12 @@ variable "cms_app_port" {
   default = 1337
 }
 
-variable "fargate_cpu" {
+variable "cms_app_cpu" {
   description = "Fargate instance CPU units to provision (1 vCPU = 1024 CPU units)"
-  default     = "4096" ##### 4 vCPU
+  default     = "1024" ##### 4 vCPU
 }
 
-variable "fargate_memory" {
+variable "cms_app_memory" {
   description = "Fargate instance memory to provision (in MiB)"
-  default     = "16384" ##### 16 GB RAM
-}
-
-variable "ecr_repository" {
-  description = "Repository ECR Name for container image"
-  default     = "strapi"
+  default     = "3072" ##### 16 GB RAM
 }

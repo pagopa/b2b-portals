@@ -7,8 +7,8 @@ data "template_file" "cms_app" {
 
   vars = {
     image                = aws_ecr_repository.image_repository.repository_url
-    fargate_cpu          = var.fargate_cpu
-    fargate_memory       = var.fargate_memory
+    fargate_cpu          = var.cms_app_cpu
+    fargate_memory       = var.cms_app_memory
     aws_region           = var.aws_region
     db_host              = aws_rds_cluster.cms_database_cluster.endpoint
     db_user              = aws_rds_cluster.cms_database_cluster.master_username
@@ -26,8 +26,8 @@ resource "aws_ecs_task_definition" "cms_task_def" {
   task_role_arn            = aws_iam_role.task_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = var.fargate_cpu
-  memory                   = var.fargate_memory
+  cpu                      = var.cms_app_cpu
+  memory                   = var.cms_app_memory
   container_definitions    = data.template_file.cms_app.rendered
 }
 
