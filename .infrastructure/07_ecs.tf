@@ -47,7 +47,7 @@ resource "aws_ecs_service" "cms_ecs_service" {
   }
 
   load_balancer {
-    target_group_arn = aws_alb_target_group.app.id
+    target_group_arn = aws_alb_target_group.cms.id
     container_name   = "cms-docker"
     container_port   = var.cms_app_port
   }
