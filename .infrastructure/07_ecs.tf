@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "cms_ecs_cluster" {
-  name = var.ecs_cluster
+  name = "cms-ecs-cluster"
 }
 
 data "template_file" "cms_app" {
