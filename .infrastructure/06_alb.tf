@@ -1,7 +1,7 @@
 resource "aws_alb" "cms_load_balancer" {
   name            = "cms-load-balancer"
   subnets         = module.vpc.public_subnets
-  security_groups = [aws_security_group.cms_lb.id,aws_security_group.cms_lb_app_port.id]
+  security_groups = [aws_security_group.cms_lb.id, aws_security_group.cms_lb_app_port.id]
   internal        = false
 }
 
