@@ -17,6 +17,7 @@ data "template_file" "cms_app" {
     admin_jwt_secret_arn = aws_ssm_parameter.cms_admin_jwt_secret.arn
     db_name              = aws_rds_cluster.cms_database_cluster.database_name
     db_client            = "postgres"
+    container_port       = var.cms_app_port
   }
 }
 
@@ -33,7 +34,7 @@ resource "aws_ecs_task_definition" "cms_task_def" {
 
 resource "aws_ecs_service" "cms_ecs_service" {
   name                              = "cms-ecs"
-  cluster                           = "cms-ecs-cluster"
+  cluster                           = aws_ecs_cluster.cms_ecs_cluster.id
   desired_count                     = 1
   launch_type                       = "FARGATE"
   force_new_deployment              = true

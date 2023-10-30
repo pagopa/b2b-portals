@@ -4,7 +4,7 @@
     "image": "${image}",
     "portMappings": [
       {
-        "containerPort": 1337
+        "containerPort": "${container_port}"
       }
     ],
     "environment": [
