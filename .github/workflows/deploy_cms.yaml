@@ -47,11 +47,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
     
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@68827325e0b33c7199eb31dd4e31fbe9023e06e3 # v3.0.0
+      #- name: Set up QEMU
+      #  uses: docker/setup-qemu-action@68827325e0b33c7199eb31dd4e31fbe9023e06e3 # v3.0.0
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
+      #- name: Set up Docker Buildx
+      #  uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
 
       - name: Configure AWS Credentials
         uses: ./.github/actions/configure-aws-credentials
@@ -59,16 +59,32 @@ jobs:
           aws_region: ${{ env.AWS_REGION || 'eu-south-1' }}
           role_to_assume: ${{ secrets.IAM_ROLE }}
 
-      - name: Docker image Build
-        run: docker build -t cms-strapi:latest .
+      #- name: Docker image Build
+      #  run: docker build -t cms-strapi:latest .
 
-      - name: Docker image Tag
-        run: docker tag cms-strapi:latest 949355639119.dkr.ecr.eu-south-1.amazonaws.com/cms-strapi:latest
+      #- name: Docker image Tag
+      #  run: docker tag cms-strapi:latest 949355639119.dkr.ecr.eu-south-1.amazonaws.com/cms-strapi:latest
 
-      - name: Login to ECR
-        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
-        with:
-            registry: 949355639119.dkr.ecr.eu-south-1.amazonaws.com
+      #- name: Login to ECR
+      #  uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+      #  with:
+      #      registry: 949355639119.dkr.ecr.eu-south-1.amazonaws.com
     
-      - name: Docker image Push
-        run: aws ecr get-login-password --region eu-south-1 | docker push 949355639119.dkr.ecr.eu-south-1.amazonaws.com/cms-strapi:latest
+      #- name: Docker image Push
+      #  run: aws ecr get-login-password --region eu-south-1 | docker push 949355639119.dkr.ecr.eu-south-1.amazonaws.com/cms-strapi:latest
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
+
+      - name: Build Push and Tag
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: strapi
+          IMAGE_TAG: latest
+        with:
+            context: apps/strapi-cms
+            push: true
+            tags: ${{ steps.login-ecr.outputs.registry }}/strapi:latest
+            provenance: false
