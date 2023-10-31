@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pages",
+  "info": {
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "Pagine",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "private": true
+    },
+    "slug": {
+      "type": "string",
+      "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "required": true,
+      "unique": true
+    }
+  }
+}
