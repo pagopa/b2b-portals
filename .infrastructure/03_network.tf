@@ -49,6 +49,26 @@ resource "aws_security_group" "cms_lb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# The soft limit of Security Group rule is 60. 
+# The aws_ec2_managed_prefix_list.cloudfront counts as 55 rules
+# For this reason we need to create 2 different Security Group to use the managed_prefix_list.cloudfront for 80 and 1337 port
+resource "aws_security_group" "cms_lb_app_port" {
+  name        = "cms-lb-app-port"
+  description = "Ingress - Load Balancer"
+  vpc_id      = module.vpc.vpc_id
+
   ingress {
     protocol        = "tcp"
     from_port       = var.cms_app_port
