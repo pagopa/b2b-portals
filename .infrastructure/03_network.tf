@@ -25,16 +25,21 @@ module "vpc" {
 ### AWS Security Group ###
 # Traffic to the DB should only come from ECS
 # Traffic to the ECS cluster should only come from the ALB
+
+data "aws_ec2_managed_prefix_list" "cloudfront" { #For retrieve the Prefix_list_id of CloudFront
+  name = "com.amazonaws.global.cloudfront.origin-facing"
+}
+
 resource "aws_security_group" "cms_lb" {
   name        = "cms-lb"
   description = "Ingress - Load Balancer"
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    protocol    = "tcp"
-    from_port   = 80
-    to_port     = 80
-    cidr_blocks = ["0.0.0.0/0"]
+    protocol        = "tcp"
+    from_port       = 80
+    to_port         = 80
+    prefix_list_ids = [data.aws_ec2_managed_prefix_list.cloudfront.id]
   }
 
   ingress {
@@ -44,11 +49,31 @@ resource "aws_security_group" "cms_lb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    protocol    = "tcp"
-    from_port   = var.cms_app_port
-    to_port     = var.cms_app_port
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# The soft limit of Security Group rule is 60. 
+# The aws_ec2_managed_prefix_list.cloudfront counts as 55 rules
+# For this reason we need to create 2 different Security Group to use the managed_prefix_list.cloudfront for 80 and 1337 port
+resource "aws_security_group" "cms_lb_app_port" {
+  name        = "cms-lb-app-port"
+  description = "Ingress - Load Balancer"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    protocol        = "tcp"
+    from_port       = var.cms_app_port
+    to_port         = var.cms_app_port
+    prefix_list_ids = [data.aws_ec2_managed_prefix_list.cloudfront.id]
   }
 
   egress {
@@ -56,6 +81,10 @@ resource "aws_security_group" "cms_lb" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
