@@ -1,41 +1,9 @@
 import path from 'path';
 
-type ConnectionDetails = {
-  connection: {
-    filename?: string;
-    host?: string;
-    port?: number;
-    database?: string;
-    user?: string;
-    password?: string;
-    schema?: string;
-    ssl?: {
-      key?: string;
-      cert?: string;
-      ca?: string;
-      capath?: string;
-      cipher?: string;
-      rejectUnauthorized?: boolean;
-    } | boolean;
-  }
-  useNullAsDefault?: boolean;
-  debug?: boolean;
-};
-
-type EnvFn = {
-  (variableName: string, defaultValue?: string | undefined): string;
-  int: (variableName: string, defaultValue?: number | undefined) => number;
-  bool: (variableName: string, defaultValue?: boolean | undefined) => boolean;
-}
-
-type Params = {
-  env: EnvFn;
-}
-
-export default ({ env }: Params) => {
+export default ({ env }: any) => {
   const client: string = env('DATABASE_CLIENT');
 
-  const connections: {[key:string]: ConnectionDetails} = {
+  const connections = {
     sqlite: {
       connection: {
         filename: path.join(__dirname, '..', '..', env('DATABASE_FILENAME', '.tmp/data.db')),
@@ -66,7 +34,7 @@ export default ({ env }: Params) => {
   return {
     connection: {
       client,
-      ...(connections[client] ?? {}),
+      ...(client === 'sqlite' || client === 'postgres') ? connections[client] : {},
       acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
     },
   };
