@@ -50,11 +50,8 @@ export default function RootLayout({
   }, []);
 
   return (
-
     <html>
-
       <body>
-
         {preHeaderData != null && (
           <PreHeader
             leftCtas={preHeaderData.leftCtas}
@@ -63,10 +60,7 @@ export default function RootLayout({
         )}
 
         {children}
-
       </body>
-
     </html>
-
   );
 }
