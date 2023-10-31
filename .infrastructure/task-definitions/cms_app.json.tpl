@@ -25,7 +25,7 @@
         "value": "${db_name}"
       },
       {
-        "name": "BUCKET_NAME",
+        "name": "AWS_BUCKET",
         "value": "${bucket_name}"
       },
       {
@@ -39,6 +39,14 @@
       {
         "name": "DATABASE_PORT",
         "value": "5432"
+      },
+      {
+        "name": "DATABASE_SCHEMA",
+        "value": "send"
+      },
+      {
+        "name": "AWS_REGION",
+        "value": "${aws_region}"
       }
     ],
     "secrets" : [
@@ -49,6 +57,22 @@
       {
         "name": "ADMIN_JWT_SECRET",
         "valueFrom": "${admin_jwt_secret_arn}"
+      },
+      {
+        "name": "APP_KEYS",
+        "valueFrom": "${app_keys}"
+      },
+      {
+        "name": "API_TOKEN_SALT",
+        "valueFrom": "${api_token_salt}"
+      },
+      {
+        "name": "TRANSFER_TOKEN_SALT",
+        "valueFrom": "${transfer_token_salt}"
+      },
+      {
+        "name": "JWT_SECRET",
+        "valueFrom": "${jwt_secret}"
       }
     ]
   }

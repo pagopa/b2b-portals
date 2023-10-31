@@ -18,6 +18,12 @@ data "template_file" "cms_app" {
     db_name              = aws_rds_cluster.cms_database_cluster.database_name
     db_client            = "postgres"
     container_port       = var.cms_app_port
+    app_keys             = aws_ssm_parameter.cms_app_keys.arn
+    api_token_salt       = aws_ssm_parameter.cms_api_token_salt.arn
+    transfer_token_salt  = aws_ssm_parameter.cms_transfer_token_salt.arn
+    jwt_secret           = aws_ssm_parameter.cms_jwt_secret.arn
+    aws_region           = var.aws_region
+
   }
 }
 
