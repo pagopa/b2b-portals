@@ -72,8 +72,10 @@ const GeneratePagesFromNavItems = (
 
 export const getAllPages = async () => {
   // Step 1: Fetch the navigation ID
-  const navigationApiUrl: string = 'http://127.0.0.1:1337/api/navigation';
-  const token = process.env['REACT_APP_STRAPI_API_TOKEN'];
+  const token = process.env['NEXT_STRAPI_API_TOKEN'];
+  const apiBaseUrl = process.env['NEXT_PUBLIC_API_BASE_URL'];
+  const navigationApiPath = '/api/navigation';
+  const navigationApiUrl = `${apiBaseUrl}${navigationApiPath}`;
 
   const navigationResponse = await fetch(navigationApiUrl, {
     method: 'GET',
@@ -99,7 +101,7 @@ export const getAllPages = async () => {
   const navigationId = navigationData[0].id;
 
   // Step 2: Fetch the page data using the navigation ID
-  const navigationRenderApiUrl: string = `http://127.0.0.1:1337/api/navigation/render/${navigationId}`;
+  const navigationRenderApiUrl: string = `${apiBaseUrl}${navigationApiPath}/render/${navigationId}`;
 
   const response = await fetch(navigationRenderApiUrl, {
     method: 'GET',
