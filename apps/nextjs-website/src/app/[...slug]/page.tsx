@@ -1,4 +1,4 @@
-import { getAllPages } from "@/lib/api";
+import { getAllPages } from '@/lib/api';
 
 export const dynamicParams = false;
 
@@ -15,7 +15,7 @@ const Page = ({ params }: PageParams) => {
   const { slug } = params;
   return (
     <div>
-      <p>This is the page {slug.join("/")}</p>
+      <p>This is the page {slug.join('/')}</p>
     </div>
   );
 };
