@@ -5,7 +5,7 @@ on:
         branches: 'main'
         # Run only if there are at least one change matching the following paths
         paths:
-          - 'apps/strapi-cms/*'
+          - 'apps/strapi-cms/**'
           - '.github/workflows/deploy_cms.yaml'
 
   workflow_dispatch:
