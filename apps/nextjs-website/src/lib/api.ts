@@ -25,7 +25,7 @@ interface NavigationItem {
   };
 }
 
-interface Page {
+export interface Page {
   readonly id: number;
   readonly title: string;
   readonly slug: ReadonlyArray<string>;
