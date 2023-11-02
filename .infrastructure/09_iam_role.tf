@@ -51,6 +51,10 @@ data "aws_iam_policy_document" "ecs_task_execution" {
     resources = [
       aws_ssm_parameter.cms_database_password.arn,
       aws_ssm_parameter.cms_admin_jwt_secret.arn,
+      aws_ssm_parameter.cms_app_keys.arn,
+      aws_ssm_parameter.cms_api_token_salt.arn,
+      aws_ssm_parameter.cms_transfer_token_salt.arn,
+      aws_ssm_parameter.cms_jwt_secret.arn
     ]
   }
 
