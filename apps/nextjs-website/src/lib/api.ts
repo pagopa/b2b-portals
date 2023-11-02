@@ -124,23 +124,22 @@ export const getAllPages = async () => {
 };
 
 export interface PreHeaderData {
-  readonly leftCtas: {
-    readonly ctaButtons: {
-      readonly color: string;
-      readonly href: string;
-      readonly text: string;
-      readonly variant: string;
-    }[];
-    readonly theme: string;
-  };
-  readonly rightCtas: {
-    readonly ctaButtons: {
-      readonly color: string;
-      readonly href: string;
-      readonly text: string;
-      readonly variant: string;
-    }[];
-    readonly theme: string;
+  readonly data: {
+    readonly attributes: {
+      readonly theme: string;
+      readonly leftCTAButton: {
+        readonly text: string;
+        readonly variant: string;
+        readonly color: string;
+        readonly href: string;
+      };
+      readonly rightCTAButton: {
+        readonly text: string;
+        readonly variant: string;
+        readonly color: string;
+        readonly href: string;
+      };
+    };
   };
 }
 
@@ -163,7 +162,7 @@ export const getPreHeaderData = async () => {
     };
   }
 
-  const preHeaderData = await preHeaderResponse.json();
+  const preHeaderData: PreHeaderData = await preHeaderResponse.json();
 
   if (!preHeaderData) {
     return {
