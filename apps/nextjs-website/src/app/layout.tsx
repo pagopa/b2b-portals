@@ -11,31 +11,7 @@ export const metadata: Metadata = {
 
 const fetchPreHeaderData = async (setPreHeaderData: Function) => {
   const { preHeaderData } = await getPreHeaderData();
-
-  setPreHeaderData({
-    leftCtas: {
-      theme: preHeaderData.data.attributes.theme.toLowerCase(),
-      ctaButtons: [
-        {
-          text: preHeaderData.data.attributes.leftCTAButton.text,
-          variant: preHeaderData.data.attributes.leftCTAButton.variant,
-          color: preHeaderData.data.attributes.leftCTAButton.color,
-          href: preHeaderData.data.attributes.leftCTAButton.href,
-        },
-      ],
-    },
-    rightCtas: {
-      theme: preHeaderData.data.attributes.theme.toLowerCase(),
-      ctaButtons: [
-        {
-          text: preHeaderData.data.attributes.rightCTAButton.text,
-          variant: preHeaderData.data.attributes.rightCTAButton.variant,
-          color: preHeaderData.data.attributes.rightCTAButton.color,
-          href: preHeaderData.data.attributes.rightCTAButton.href,
-        },
-      ],
-    },
-  });
+  setPreHeaderData(preHeaderData);
 };
 
 export default function RootLayout({

@@ -123,6 +123,27 @@ export const getAllPages = async () => {
   return { pages };
 };
 
+export interface PreHeaderData {
+  readonly leftCtas: {
+    readonly ctaButtons: {
+      readonly color: string;
+      readonly href: string;
+      readonly text: string;
+      readonly variant: string;
+    }[];
+    readonly theme: string;
+  };
+  readonly rightCtas: {
+    readonly ctaButtons: {
+      readonly color: string;
+      readonly href: string;
+      readonly text: string;
+      readonly variant: string;
+    }[];
+    readonly theme: string;
+  };
+}
+
 export const getPreHeaderData = async () => {
   const token = process.env['NEXT_STRAPI_API_TOKEN'];
   const apiBaseUrl = process.env['NEXT_PUBLIC_API_BASE_URL'];
@@ -142,8 +163,43 @@ export const getPreHeaderData = async () => {
     };
   }
 
+  const preHeaderData = await preHeaderResponse.json();
+
+  if (!preHeaderData) {
+    return {
+      error: 'No pre-header data found',
+      preHeaderData: null,
+    };
+  }
+
+  // Perform data transformation here
+  const transformedData = {
+    leftCtas: {
+      theme: preHeaderData.data.attributes.theme.toLowerCase(),
+      ctaButtons: [
+        {
+          text: preHeaderData.data.attributes.leftCTAButton.text,
+          variant: preHeaderData.data.attributes.leftCTAButton.variant,
+          color: preHeaderData.data.attributes.leftCTAButton.color,
+          href: preHeaderData.data.attributes.leftCTAButton.href,
+        },
+      ],
+    },
+    rightCtas: {
+      theme: preHeaderData.data.attributes.theme.toLowerCase(),
+      ctaButtons: [
+        {
+          text: preHeaderData.data.attributes.rightCTAButton.text,
+          variant: preHeaderData.data.attributes.rightCTAButton.variant,
+          color: preHeaderData.data.attributes.rightCTAButton.color,
+          href: preHeaderData.data.attributes.rightCTAButton.href,
+        },
+      ],
+    },
+  };
+
   return {
-    preHeaderData: await preHeaderResponse.json(),
+    preHeaderData: transformedData,
     error: null, // No error occurred
   };
 };
