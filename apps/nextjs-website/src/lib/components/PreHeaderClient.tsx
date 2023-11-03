@@ -9,6 +9,8 @@ export const PreHeaderClient: React.FC = async () => {
     null
   );
 
+  const [isLoading, setLoading] = useState(true);
+
   useEffect(() => {
     getPreHeaderData().then((res) => {
       if (!res.error) {
@@ -18,6 +20,10 @@ export const PreHeaderClient: React.FC = async () => {
       setLoading(false);
     });
   }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (preHeaderData && preHeaderData.leftCtas && preHeaderData.rightCtas) {
     return (
