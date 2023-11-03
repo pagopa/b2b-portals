@@ -42,7 +42,7 @@
       },
       {
         "name": "DATABASE_SCHEMA",
-        "value": "send"
+        "value": "public"
       },
       {
         "name": "AWS_REGION",
