@@ -30,7 +30,3 @@ export const PreHeaderClient: React.FC = async () => {
 
   return null;
 };
-
-function setLoading(_arg0: boolean) {
-  throw new Error('Function not implemented.');
-}
