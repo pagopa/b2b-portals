@@ -47,6 +47,14 @@
       {
         "name": "AWS_REGION",
         "value": "${aws_region}"
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "value": "${access_key_id}"
+      },
+      {
+        "name": "AWS_ACCESS_SECRET",
+        "value": "${access_key_secret}"
       }
     ],
     "secrets" : [

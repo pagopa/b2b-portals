@@ -23,7 +23,8 @@ data "template_file" "cms_app" {
     transfer_token_salt  = aws_ssm_parameter.cms_transfer_token_salt.arn
     jwt_secret           = aws_ssm_parameter.cms_jwt_secret.arn
     aws_region           = var.aws_region
-
+    access_key_id        = aws_iam_access_key.strapi.id
+    access_key_secret    = aws_iam_access_key.strapi.secret
   }
 }
 
