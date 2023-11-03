@@ -1,10 +1,12 @@
 import { getAllPages } from '@/lib/api';
+import { Page } from '@/lib/api';
 
 export const dynamicParams = false;
 
 export const generateStaticParams = async () => {
   const { pages } = await getAllPages();
-  return pages;
+  const retVal: Page[] = pages ? [...pages] : [];
+  return retVal;
 };
 
 type PageParams = {

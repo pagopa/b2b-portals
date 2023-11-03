@@ -1,16 +1,23 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PreHeader } from '@pagopa/pagopa-editorial-components';
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import { getPreHeaderData } from '@/lib/api';
 
-const fetchPreHeaderData = async () => {
-  const { preHeaderData } = await getPreHeaderData();
-  return preHeaderData;
-};
-
 export const PreHeaderClient: React.FC = async () => {
-  const preHeaderData: PreHeaderProps | null = await fetchPreHeaderData();
+  const [preHeaderData, setPreHeaderData] = useState<PreHeaderProps | null>(
+    null
+  );
+
+  useEffect(() => {
+    getPreHeaderData().then((res) => {
+      if (!res.error) {
+        setPreHeaderData(res.preHeaderData);
+      }
+
+      setLoading(false);
+    });
+  }, []);
 
   if (preHeaderData && preHeaderData.leftCtas && preHeaderData.rightCtas) {
     return (
@@ -23,3 +30,7 @@ export const PreHeaderClient: React.FC = async () => {
 
   return null;
 };
+
+function setLoading(_arg0: boolean) {
+  throw new Error('Function not implemented.');
+}
