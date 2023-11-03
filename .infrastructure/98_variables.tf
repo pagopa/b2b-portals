@@ -26,14 +26,13 @@ variable "cms_app_port" {
   default = 1337
 }
 
-### required for Stati Site on AWS
+### required for Strapi Site on AWS
 variable "dns_domain_name" {
-  description = "DNS domain for the Developer Portal product"
+  description = "DNS domain for the B2B Portal product"
   type        = string
 }
 
 variable "use_custom_certificate" {
   type        = bool
   description = "Enable CDN https support with a custom certificate instead using the default one"
-  default     = true
 }
