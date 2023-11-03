@@ -35,4 +35,5 @@ variable "dns_domain_name" {
 variable "use_custom_certificate" {
   type        = bool
   description = "Enable CDN https support with a custom certificate instead using the default one"
+  default = true
 }
