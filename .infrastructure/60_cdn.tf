@@ -29,9 +29,9 @@ resource "aws_cloudfront_distribution" "website" {
 
   default_cache_behavior {
     # HTTPS requests we permit the distribution to serve
-    allowed_methods            = ["GET", "HEAD", "OPTIONS"]
-    cached_methods             = ["GET", "HEAD"]
-    target_origin_id           = aws_s3_bucket.website.bucket
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = aws_s3_bucket.website.bucket
 
     forwarded_values {
       query_string = false
@@ -46,7 +46,7 @@ resource "aws_cloudfront_distribution" "website" {
     default_ttl            = 3600  # default time for objects to live in the distribution cache
     max_ttl                = 86400 # max time for objects to live in the distribution cache
   }
-  
+
   restrictions {
     geo_restriction {
       restriction_type = "none"
