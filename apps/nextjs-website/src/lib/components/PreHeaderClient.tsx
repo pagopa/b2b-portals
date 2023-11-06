@@ -1,27 +1,31 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PreHeader } from '@pagopa/pagopa-editorial-components';
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import { getPreHeaderData } from '@/lib/api';
 
-export const PreHeaderClient: React.FC = async () => {
-  const [preHeaderData, setPreHeaderData] = useState<PreHeaderProps | null>(
-    null
-  );
+export const PreHeaderClient: React.FC = () => {
+  const [preHeaderData, setPreHeaderData] = useState<
+    PreHeaderProps | null | 'error'
+  >(null);
 
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getPreHeaderData().then((res) => {
+  getPreHeaderData()
+    .then((res) => {
       if (!res.error) {
         setPreHeaderData(res.preHeaderData);
       }
-
-      setLoading(false);
+      return true;
+    })
+    .catch(() => {
+      setPreHeaderData(null);
+      return false;
     });
-  }, []);
 
-  if (isLoading) {
+  if (preHeaderData === 'error') {
+    return <div />;
+  }
+
+  if (preHeaderData === null) {
     return <div>Loading...</div>;
   }
 
