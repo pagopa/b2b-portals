@@ -7,7 +7,6 @@ resource "aws_acm_certificate" "website" {
     create_before_destroy = true
   }
 
-  provider = aws.eu-south-1
 }
 
 resource "aws_acm_certificate" "auth" {
@@ -18,5 +17,4 @@ resource "aws_acm_certificate" "auth" {
     create_before_destroy = true
   }
 
-  provider = aws.eu-south-1
 }
