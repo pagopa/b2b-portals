@@ -13,11 +13,13 @@ export const PreHeaderClient: React.FC = () => {
     .then((res) => {
       if (!res.error) {
         setPreHeaderData(res.preHeaderData);
+      } else {
+        setPreHeaderData('error');
       }
       return true;
     })
     .catch(() => {
-      setPreHeaderData(null);
+      setPreHeaderData('error');
       return false;
     });
 
