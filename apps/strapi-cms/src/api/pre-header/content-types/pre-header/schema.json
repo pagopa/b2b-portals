@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "pre_headers",
+  "info": {
+    "singularName": "pre-header",
+    "pluralName": "pre-headers",
+    "displayName": "PreHeader",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "leftCTAButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.cta-button",
+      "required": false
+    },
+    "rightCTAButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.cta-button",
+      "required": false
+    }
+  }
+}
