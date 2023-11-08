@@ -1,24 +1,25 @@
+import { z } from 'zod';
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 
-export interface PreHeaderData {
-  readonly data: {
-    readonly attributes: {
-      readonly theme: string;
-      readonly leftCTAButton: {
-        readonly text: string;
-        readonly variant: string;
-        readonly color: string;
-        readonly href: string;
-      };
-      readonly rightCTAButton: {
-        readonly text: string;
-        readonly variant: string;
-        readonly color: string;
-        readonly href: string;
-      };
-    };
-  };
-}
+const PreHeaderDataSchema = z.object({
+  data: z.object({
+    attributes: z.object({
+      theme: z.string(),
+      leftCTAButton: z.object({
+        text: z.string(),
+        variant: z.string(),
+        color: z.string(),
+        href: z.string(),
+      }),
+      rightCTAButton: z.object({
+        text: z.string(),
+        variant: z.string(),
+        color: z.string(),
+        href: z.string(),
+      }),
+    }),
+  }),
+});
 
 export const getPreHeaderData = async () => {
   const token = process.env['NEXT_STRAPI_API_TOKEN'];
@@ -39,7 +40,8 @@ export const getPreHeaderData = async () => {
     };
   }
 
-  const preHeaderData: PreHeaderData = await preHeaderResponse.json();
+  const preHeaderJson = await preHeaderResponse.json();
+  const preHeaderData = PreHeaderDataSchema.parse(preHeaderJson);
 
   if (!preHeaderData) {
     return {
