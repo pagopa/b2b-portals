@@ -1,48 +1,73 @@
+import { z } from 'zod';
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 
-interface NavigationItem {
-  readonly order: number;
-  readonly id: number;
-  readonly title: string;
-  readonly type: string;
-  readonly path: string;
-  readonly externalPath: string | null;
-  readonly uiRouterKey: string;
-  readonly menuAttached: boolean;
-  readonly collapsed: boolean;
-  readonly createdAt: string;
-  readonly updatedAt: string;
-  readonly parent: NavigationItem | null;
-  readonly related: {
-    readonly id: number;
-    readonly Nome: string;
-    readonly slug: string;
-    readonly createdAt: string;
-    readonly updatedAt: string;
-    readonly publishedAt: string;
-    readonly __contentType: string;
-    readonly navigationItemId: number;
-    readonly createdBy: string;
-    readonly updatedBy: string;
-  };
-}
+// Zod schemas for validation
+const RelatedSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  slug: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  publishedAt: z.string(),
+  __contentType: z.string(),
+  navigationItemId: z.number(),
+  createdBy: z.object({ name: z.string().optional() }).nullable(),
+  updatedBy: z.object({ name: z.string().optional() }).nullable(),
+});
 
-export interface Page {
-  readonly id: number;
-  readonly title: string;
-  readonly slug: ReadonlyArray<string>;
-  readonly visible: boolean;
-}
+const ParentSchema = z
+  .object({
+    id: z.number(),
+    title: z.string(),
+    type: z.string(),
+    path: z.string(),
+    externalPath: z.string().nullable(),
+    uiRouterKey: z.string(),
+    menuAttached: z.boolean(),
+    order: z.number(),
+    collapsed: z.boolean(),
+    additionalFields: z.unknown().nullable(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+  })
+  .nullable();
 
-const GeneratePagesFromNavItems = (
-  navItems: ReadonlyArray<NavigationItem>
-): ReadonlyArray<Page> => {
-  const isEmptyOrHomePage = (navItem: NavigationItem) =>
+const NavigationItemSchema = z.lazy(() =>
+  z.object({
+    order: z.number(),
+    id: z.number(),
+    title: z.string(),
+    type: z.string(),
+    path: z.string(),
+    externalPath: z.string().nullable(),
+    uiRouterKey: z.string(),
+    menuAttached: z.boolean(),
+    collapsed: z.boolean(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    parent: ParentSchema,
+    related: RelatedSchema,
+    items: z.unknown().nullable(),
+  })
+);
+
+const PageSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  slug: z.array(z.string()),
+  visible: z.boolean(),
+});
+
+const makePagesFromNavItems = (
+  navItemsData: ReadonlyArray<unknown>
+): ReadonlyArray<typeof PageSchema._input> => {
+  const navItems = navItemsData.map((item) => NavigationItemSchema.parse(item));
+  const isEmptyOrHomePage = (navItem: typeof NavigationItemSchema._input) =>
     navItem.related.slug == null ||
     navItem.related.slug.toLowerCase().trim() === 'home';
 
   const getParentSlugsChain = (
-    navItem: NavigationItem,
+    navItem: typeof NavigationItemSchema._input,
     chain: ReadonlyArray<string> = []
   ): ReadonlyArray<string> => {
     if (!navItem.parent) {
@@ -56,7 +81,7 @@ const GeneratePagesFromNavItems = (
     }
   };
 
-  const pages: ReadonlyArray<Page> = navItems
+  const pages: ReadonlyArray<typeof PageSchema._input> = navItems
     .filter((navItem) => !isEmptyOrHomePage(navItem))
     .map((navItem) => {
       const pageSlug = [navItem.related.slug, ...getParentSlugsChain(navItem)];
@@ -69,7 +94,7 @@ const GeneratePagesFromNavItems = (
       };
     });
 
-  return pages.filter((p) => p.slug.join('') !== '');
+  return pages.map((page) => PageSchema.parse(page));
 };
 
 export const getAllPages = async () => {
@@ -118,9 +143,10 @@ export const getAllPages = async () => {
     };
   }
 
-  const navItems: ReadonlyArray<NavigationItem> = await response.json();
+  const navItems: ReadonlyArray<unknown> = await response.json();
 
-  const pages: ReadonlyArray<Page> = GeneratePagesFromNavItems(navItems);
+  const pages: ReadonlyArray<typeof PageSchema._input> =
+    makePagesFromNavItems(navItems);
 
   return { pages };
 };
