@@ -1,7 +1,0 @@
-{
-    "root": true,
-    "extends": [
-      "custom/eslint-strong"
-    ],
-    "ignorePatterns": ["config/*.ts", "types/**", "database/**", "src/admin/**"]
-  }
