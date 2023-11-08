@@ -59,3 +59,50 @@ resource "aws_cloudfront_distribution" "website" {
     ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
   }
 }
+
+## MediaLibrary Strapi CDN
+resource "aws_cloudfront_distribution" "cms_medialibrary" {
+
+  origin {
+    domain_name = aws_s3_bucket.cms_medialibrary_bucket.bucket_regional_domain_name
+    origin_id   = aws_s3_bucket.cms_medialibrary_bucket.bucket
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.main.cloudfront_access_identity_path
+    }
+  }
+
+  enabled             = true # enable CloudFront distribution
+  is_ipv6_enabled     = true
+  comment             = "CloudFront distribution for the medialibrary cms."
+
+  default_cache_behavior {
+    # HTTPS requests we permit the distribution to serve
+    allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    cached_methods         = ["GET", "HEAD", "OPTIONS"]
+    target_origin_id = aws_s3_bucket.cms_medialibrary_bucket.bucket
+
+    forwarded_values {
+      query_string = false
+      headers      = []
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0     # min time for objects to live in the distribution cache
+    default_ttl            = 3600  # default time for objects to live in the distribution cache
+    max_ttl                = 86400 # max time for objects to live in the distribution cache
+  }
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+}
