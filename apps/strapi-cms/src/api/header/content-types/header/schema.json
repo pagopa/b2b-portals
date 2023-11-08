@@ -21,16 +21,6 @@
       "default": false,
       "required": true
     },
-    "primaryButton": {
-      "type": "component",
-      "repeatable": false,
-      "component": "components.cta-button"
-    },
-    "secondaryButton": {
-      "type": "component",
-      "repeatable": false,
-      "component": "components.cta-button"
-    },
     "avatar": {
       "type": "media",
       "multiple": false,
@@ -43,6 +33,21 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button",
+      "max": 2
     }
   }
 }

@@ -908,6 +908,9 @@ export interface ApiFooterFooter extends Schema.SingleType {
       Attribute.Required;
     links_services: Attribute.Component<'components.link-group'> &
       Attribute.Required;
+    showFundedByNextGenerationEULogo: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -939,12 +942,17 @@ export interface ApiHeaderHeader extends Schema.SingleType {
   attributes: {
     productName: Attribute.String & Attribute.Required;
     beta: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    primaryButton: Attribute.Component<'components.cta-button'>;
-    secondaryButton: Attribute.Component<'components.cta-button'>;
     avatar: Attribute.Media;
     reverse: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    theme: Attribute.Enumeration<['light', 'dark']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'light'>;
+    ctaButtons: Attribute.Component<'components.cta-button', true> &
+      Attribute.SetMinMax<{
+        max: 2;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -998,11 +1006,8 @@ export interface ApiPreHeaderPreHeader extends Schema.SingleType {
     draftAndPublish: false;
   };
   attributes: {
-    theme: Attribute.Enumeration<['light', 'dark']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'light'>;
-    leftCTAButton: Attribute.Component<'components.cta-button'>;
-    rightCTAButton: Attribute.Component<'components.cta-button'>;
+    leftCtas: Attribute.Component<'components.cta-group'>;
+    rightCtas: Attribute.Component<'components.cta-group'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

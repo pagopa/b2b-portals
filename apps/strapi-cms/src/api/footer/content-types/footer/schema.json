@@ -45,6 +45,11 @@
       "repeatable": false,
       "component": "components.link-group",
       "required": true
+    },
+    "showFundedByNextGenerationEULogo": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

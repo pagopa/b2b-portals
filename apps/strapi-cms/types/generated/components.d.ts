@@ -4,6 +4,7 @@ export interface ComponentsCtaButton extends Schema.Component {
   collectionName: 'components_components_cta_buttons';
   info: {
     displayName: 'CTAButton';
+    description: '';
   };
   attributes: {
     text: Attribute.String & Attribute.Required;
@@ -16,6 +17,23 @@ export interface ComponentsCtaButton extends Schema.Component {
     > &
       Attribute.Required &
       Attribute.DefaultTo<'inherit'>;
+    icon: Attribute.String;
+  };
+}
+
+export interface ComponentsCtaGroup extends Schema.Component {
+  collectionName: 'components_components_cta_groups';
+  info: {
+    displayName: 'CTAGroup';
+  };
+  attributes: {
+    ctaButtons: Attribute.Component<'components.cta-button', true>;
+    reverse: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    theme: Attribute.Enumeration<['light', 'dark']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'light'>;
   };
 }
 
@@ -50,12 +68,42 @@ export interface ComponentsLink extends Schema.Component {
   };
 }
 
+export interface SectionsHero extends Schema.Component {
+  collectionName: 'components_sections_heroes';
+  info: {
+    displayName: 'Hero';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    subtitle: Attribute.RichText;
+    ctaButtons: Attribute.Component<'components.cta-button', true> &
+      Attribute.SetMinMax<{
+        max: 2;
+      }>;
+    image: Attribute.Media;
+    background: Attribute.Media;
+    theme: Attribute.Enumeration<['light', 'dark']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'light'>;
+    inverse: Attribute.Boolean & Attribute.DefaultTo<false>;
+    size: Attribute.Enumeration<['small', 'big']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'small'>;
+    useHoverlay: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Shared {
     export interface Components {
       'components.cta-button': ComponentsCtaButton;
+      'components.cta-group': ComponentsCtaGroup;
       'components.link-group': ComponentsLinkGroup;
       'components.link': ComponentsLink;
+      'sections.hero': SectionsHero;
     }
   }
 }

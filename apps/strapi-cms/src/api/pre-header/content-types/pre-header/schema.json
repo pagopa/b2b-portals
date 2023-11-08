@@ -12,26 +12,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "theme": {
-      "type": "enumeration",
-      "enum": [
-        "light",
-        "dark"
-      ],
-      "default": "light",
-      "required": true
-    },
-    "leftCTAButton": {
+    "leftCtas": {
       "type": "component",
       "repeatable": false,
-      "component": "components.cta-button",
-      "required": false
+      "component": "components.cta-group"
     },
-    "rightCTAButton": {
+    "rightCtas": {
       "type": "component",
       "repeatable": false,
-      "component": "components.cta-button",
-      "required": false
+      "component": "components.cta-group"
     }
   }
 }
