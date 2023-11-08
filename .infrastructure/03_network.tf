@@ -32,9 +32,9 @@ resource "aws_security_group" "cms_lb" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    protocol        = "tcp"
-    from_port       = 80
-    to_port         = 80
+    protocol    = "tcp"
+    from_port   = 80
+    to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -45,10 +45,10 @@ resource "aws_security_group" "cms_lb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-    ingress {
-    protocol        = "tcp"
-    from_port       = var.cms_app_port
-    to_port         = var.cms_app_port
+  ingress {
+    protocol    = "tcp"
+    from_port   = var.cms_app_port
+    to_port     = var.cms_app_port
     cidr_blocks = ["0.0.0.0/0"]
   }
 
