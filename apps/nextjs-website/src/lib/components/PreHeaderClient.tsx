@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { PreHeader } from '@pagopa/pagopa-editorial-components';
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
-import { getPreHeaderData } from '@/lib/api';
+import { getPreHeaderData } from '@/lib/layoutAPI';
 
 export const PreHeaderClient: React.FC = () => {
   const [preHeaderData, setPreHeaderData] = useState<
