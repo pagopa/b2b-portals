@@ -72,14 +72,14 @@ resource "aws_cloudfront_distribution" "cms_medialibrary" {
     }
   }
 
-  enabled             = true # enable CloudFront distribution
-  is_ipv6_enabled     = true
-  comment             = "CloudFront distribution for the medialibrary cms."
+  enabled         = true # enable CloudFront distribution
+  is_ipv6_enabled = true
+  comment         = "CloudFront distribution for the medialibrary cms."
 
   default_cache_behavior {
     # HTTPS requests we permit the distribution to serve
-    allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
-    cached_methods         = ["GET", "HEAD", "OPTIONS"]
+    allowed_methods  = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_s3_bucket.cms_medialibrary_bucket.bucket
 
     forwarded_values {
