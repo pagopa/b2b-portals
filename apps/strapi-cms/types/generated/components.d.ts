@@ -68,6 +68,35 @@ export interface ComponentsLink extends Schema.Component {
   };
 }
 
+export interface SectionsEditorial extends Schema.Component {
+  collectionName: 'components_sections_editorials';
+  info: {
+    displayName: 'Editorial';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    eyelet: Attribute.String;
+    body: Attribute.RichText & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    theme: Attribute.Enumeration<['light', 'dark']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'light'>;
+    pattern: Attribute.Enumeration<['none', 'dots', 'solid']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'none'>;
+    width: Attribute.Enumeration<['standard', 'wide', 'center']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'standard'>;
+    reversed: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    ctaButtons: Attribute.Component<'components.cta-button', true> &
+      Attribute.SetMinMax<{
+        max: 2;
+      }>;
+  };
+}
+
 export interface SectionsHero extends Schema.Component {
   collectionName: 'components_sections_heroes';
   info: {
@@ -103,6 +132,7 @@ declare module '@strapi/strapi' {
       'components.cta-group': ComponentsCtaGroup;
       'components.link-group': ComponentsLinkGroup;
       'components.link': ComponentsLink;
+      'sections.editorial': SectionsEditorial;
       'sections.hero': SectionsHero;
     }
   }
