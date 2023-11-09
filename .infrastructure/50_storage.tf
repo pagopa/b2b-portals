@@ -30,7 +30,7 @@ resource "random_integer" "website_bucket_random_integer" {
 }
 
 resource "aws_s3_bucket" "website" {
-  bucket = "website-b2b-${random_integer.website_bucket_random_integer.result}"
+  bucket = "website-bucket-${random_integer.website_bucket_random_integer.result}"
 }
 
 resource "aws_s3_bucket_public_access_block" "website" {
