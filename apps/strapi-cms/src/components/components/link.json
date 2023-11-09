@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_components_links",
+  "info": {
+    "displayName": "Link",
+    "icon": "link",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "linkType": {
+      "type": "enumeration",
+      "enum": [
+        "internal",
+        "external",
+        "wrapper",
+        "social"
+      ],
+      "default": "internal",
+      "required": true
+    },
+    "ariaLabel": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    }
+  }
+}
