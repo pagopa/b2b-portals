@@ -68,34 +68,6 @@ export interface ComponentsLink extends Schema.Component {
   };
 }
 
-export interface SectionsHero extends Schema.Component {
-  collectionName: 'components_sections_heroes';
-  info: {
-    displayName: 'Hero';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    subtitle: Attribute.RichText;
-    ctaButtons: Attribute.Component<'components.cta-button', true> &
-      Attribute.SetMinMax<{
-        max: 2;
-      }>;
-    image: Attribute.Media;
-    background: Attribute.Media;
-    theme: Attribute.Enumeration<['light', 'dark']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'light'>;
-    inverse: Attribute.Boolean & Attribute.DefaultTo<false>;
-    size: Attribute.Enumeration<['small', 'big']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'small'>;
-    useHoverlay: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-  };
-}
-
 declare module '@strapi/strapi' {
   export module Shared {
     export interface Components {
@@ -103,7 +75,6 @@ declare module '@strapi/strapi' {
       'components.cta-group': ComponentsCtaGroup;
       'components.link-group': ComponentsLinkGroup;
       'components.link': ComponentsLink;
-      'sections.hero': SectionsHero;
     }
   }
 }
