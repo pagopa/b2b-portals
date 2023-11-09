@@ -35,3 +35,15 @@ variable "cms_app_memory" {
   description = "Fargate instance memory to provision (in MiB)"
   default     = "3072" ##### 3 GB RAM
 }
+
+### required for Strapi Site on AWS - to be uncommented when when available dns domain
+# variable "dns_domain_name" {
+#  description = "DNS domain for the B2B Portal product"
+#  type        = string
+# }
+
+variable "use_custom_certificate" {
+  type        = bool
+  description = "Enable CDN https support with a custom certificate instead using the default one"
+  default     = false # set true when available dns and custom certificate
+}
