@@ -18,7 +18,7 @@ resource "aws_cloudfront_distribution" "website" {
   is_ipv6_enabled     = true
   comment             = "CloudFront distribution for the static website."
   default_root_object = "index.html"
-  
+
   # to be uncommented when when available dns domain
   # aliases = var.use_custom_certificate && var.dns_domain_name != "" ? [format("www.%s", var.dns_domain_name), var.dns_domain_name] : []
 
