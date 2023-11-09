@@ -1,20 +1,40 @@
 import { z } from 'zod';
-import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 
-const PreHeaderDataSchema = z.object({
+const PreHeaderTheme = z.union([
+  z.literal('dark'),
+  z.literal('light'),
+]);
+
+const CTAButtonVariant = z.union([
+  z.literal('text'),
+  z.literal('outlined'),
+  z.literal('contained'),
+]);
+
+const CTAButtonColor = z.union([
+  z.literal('inherit'),
+  z.literal('primary'),
+  z.literal('secondary'),
+  z.literal('success'),
+  z.literal('error'),
+  z.literal('info'),
+  z.literal('warning'),
+]);
+
+export const PreHeaderDataSchema = z.object({
   data: z.object({
     attributes: z.object({
-      theme: z.string(),
+      theme: PreHeaderTheme,
       leftCTAButton: z.object({
         text: z.string(),
-        variant: z.string(),
-        color: z.string(),
+        variant: CTAButtonVariant,
+        color: CTAButtonColor,
         href: z.string(),
       }),
       rightCTAButton: z.object({
         text: z.string(),
-        variant: z.string(),
-        color: z.string(),
+        variant: CTAButtonVariant,
+        color: CTAButtonColor,
         href: z.string(),
       }),
     }),
@@ -50,85 +70,26 @@ export const getPreHeaderData = async () => {
     };
   }
 
-  type PreHeaderTheme = 'dark' | 'light';
-
-  const theme: PreHeaderTheme = ['dark', 'light'].includes(
-    preHeaderData.data.attributes.theme.toLowerCase()
-  )
-    ? (preHeaderData.data.attributes.theme.toLowerCase() as PreHeaderTheme)
-    : 'light';
-
-  type CTAButtonVariant = 'text' | 'outlined' | 'contained';
-
-  const leftCTAVariant: CTAButtonVariant = [
-    'text',
-    'outlined',
-    'contained',
-  ].includes(preHeaderData.data.attributes.leftCTAButton.variant)
-    ? (preHeaderData.data.attributes.leftCTAButton.variant as CTAButtonVariant)
-    : 'text';
-
-  const rightCTAVariant: CTAButtonVariant = [
-    'text',
-    'outlined',
-    'contained',
-  ].includes(preHeaderData.data.attributes.rightCTAButton.variant)
-    ? (preHeaderData.data.attributes.rightCTAButton.variant as CTAButtonVariant)
-    : 'text';
-
-  type CTAButtonColor =
-    | 'inherit'
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'error'
-    | 'info'
-    | 'warning';
-
-  const leftCTAColor: CTAButtonColor = [
-    'inherit',
-    'primary',
-    'secondary',
-    'success',
-    'error',
-    'info',
-    'warning',
-  ].includes(preHeaderData.data.attributes.leftCTAButton.color)
-    ? (preHeaderData.data.attributes.leftCTAButton.color as CTAButtonColor)
-    : 'inherit';
-
-  const rightCTAColor: CTAButtonColor = [
-    'inherit',
-    'primary',
-    'secondary',
-    'success',
-    'error',
-    'info',
-    'warning',
-  ].includes(preHeaderData.data.attributes.rightCTAButton.color)
-    ? (preHeaderData.data.attributes.rightCTAButton.color as CTAButtonColor)
-    : 'inherit';
-
   // Perform data transformation here
-  const transformedData: PreHeaderProps = {
+  const transformedData= {
     leftCtas: {
-      theme,
+      closed,
       ctaButtons: [
         {
           text: preHeaderData.data.attributes.leftCTAButton.text,
-          variant: leftCTAVariant,
-          color: leftCTAColor,
+          variant: CTAButtonVariant,
+          color: CTAButtonColor,
           href: preHeaderData.data.attributes.leftCTAButton.href,
         },
       ],
     },
     rightCtas: {
-      theme,
+      theme: PreHeaderTheme,
       ctaButtons: [
         {
           text: preHeaderData.data.attributes.rightCTAButton.text,
-          variant: rightCTAVariant,
-          color: rightCTAColor,
+          variant: CTAButtonVariant,
+          color: CTAButtonColor,
           href: preHeaderData.data.attributes.rightCTAButton.href,
         },
       ],

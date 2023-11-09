@@ -1,12 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import { PreHeader } from '@pagopa/pagopa-editorial-components';
-import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
-import { getPreHeaderData } from '@/lib/API/preHeaderAPI';
+import { getPreHeaderData, PreHeaderDataSchema } from '@/lib/API/preHeaderAPI';
 
 export const PreHeaderClient: React.FC = () => {
   const [preHeaderData, setPreHeaderData] = useState<
-    PreHeaderProps | null | 'error'
+    typeof PreHeaderDataSchema | null | 'error'
   >(null);
 
   getPreHeaderData()
