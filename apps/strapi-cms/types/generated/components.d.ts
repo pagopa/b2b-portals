@@ -37,6 +37,26 @@ export interface ComponentsCtaGroup extends Schema.Component {
   };
 }
 
+export interface ComponentsFeatureItem extends Schema.Component {
+  collectionName: 'components_components_feature_items';
+  info: {
+    displayName: 'FeatureItem';
+    description: '';
+  };
+  attributes: {
+    icon: Attribute.String;
+    iconColor: Attribute.Enumeration<
+      ['inherit', 'primary', 'secondary', 'success', 'error', 'info', 'warning']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'inherit'>;
+    title: Attribute.String & Attribute.Required;
+    subtitle: Attribute.String & Attribute.Required;
+    linkText: Attribute.String;
+    linkURL: Attribute.String;
+  };
+}
+
 export interface ComponentsLinkGroup extends Schema.Component {
   collectionName: 'components_components_link_groups';
   info: {
@@ -65,6 +85,24 @@ export interface ComponentsLink extends Schema.Component {
       Attribute.DefaultTo<'internal'>;
     ariaLabel: Attribute.String;
     icon: Attribute.String;
+  };
+}
+
+export interface ComponentsStep extends Schema.Component {
+  collectionName: 'components_components_steps';
+  info: {
+    displayName: 'Step';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.RichText & Attribute.Required;
+    icon: Attribute.String;
+    iconColor: Attribute.Enumeration<
+      ['inherit', 'primary', 'secondary', 'success', 'error', 'info', 'warning']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'inherit'>;
   };
 }
 
@@ -97,6 +135,30 @@ export interface SectionsEditorial extends Schema.Component {
   };
 }
 
+export interface SectionsFeature extends Schema.Component {
+  collectionName: 'components_sections_features';
+  info: {
+    displayName: 'Feature';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    theme: Attribute.Enumeration<['light', 'dark']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'light'>;
+    showCarouselMobile: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    background: Attribute.String;
+    items: Attribute.Component<'components.feature-item', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 3;
+        max: 4;
+      }>;
+  };
+}
+
 export interface SectionsHero extends Schema.Component {
   collectionName: 'components_sections_heroes';
   info: {
@@ -125,15 +187,43 @@ export interface SectionsHero extends Schema.Component {
   };
 }
 
+export interface SectionsHowTo extends Schema.Component {
+  collectionName: 'components_sections_how_tos';
+  info: {
+    displayName: 'HowTo';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    theme: Attribute.Enumeration<['light', 'dark']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'light'>;
+    link: Attribute.Component<'components.link'>;
+    rowMaxSteps: Attribute.Integer;
+    stepsAlignment: Attribute.Enumeration<['center', 'left', 'right']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'center'>;
+    steps: Attribute.Component<'components.step', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 2;
+      }>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Shared {
     export interface Components {
       'components.cta-button': ComponentsCtaButton;
       'components.cta-group': ComponentsCtaGroup;
+      'components.feature-item': ComponentsFeatureItem;
       'components.link-group': ComponentsLinkGroup;
       'components.link': ComponentsLink;
+      'components.step': ComponentsStep;
       'sections.editorial': SectionsEditorial;
+      'sections.feature': SectionsFeature;
       'sections.hero': SectionsHero;
+      'sections.how-to': SectionsHowTo;
     }
   }
 }

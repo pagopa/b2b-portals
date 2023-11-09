@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_components_steps",
+  "info": {
+    "displayName": "Step",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "icon": {
+      "type": "string"
+    },
+    "iconColor": {
+      "type": "enumeration",
+      "enum": [
+        "inherit",
+        "primary",
+        "secondary",
+        "success",
+        "error",
+        "info",
+        "warning"
+      ],
+      "required": true,
+      "default": "inherit"
+    }
+  }
+}
