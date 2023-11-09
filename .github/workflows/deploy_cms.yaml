@@ -51,7 +51,6 @@ jobs:
           aws_region: ${{ env.AWS_REGION || 'eu-south-1' }}
           role_to_assume: ${{ secrets.IAM_ROLE }}
 
-
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
