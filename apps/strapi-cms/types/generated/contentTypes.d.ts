@@ -984,6 +984,18 @@ export interface ApiPagePage extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Private;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    sections: Attribute.DynamicZone<
+      [
+        'sections.editorial',
+        'sections.feature',
+        'sections.hero',
+        'sections.how-to'
+      ]
+    > &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
