@@ -1,42 +1,44 @@
 'use client';
 import React, { useState } from 'react';
-import { PreHeader } from '@pagopa/pagopa-editorial-components';
-import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
-import { getPreHeaderData } from '@/lib/API/preHeaderAPI';
+import { Header } from '@pagopa/pagopa-editorial-components';
+import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
+import { getHeaderData } from '@/lib/API/HeaderAPI';
 
-export const PreHeaderClient: React.FC = () => {
-  const [preHeaderData, setPreHeaderData] = useState<
-    PreHeaderProps | null | 'error'
+export const HeaderClient: React.FC = () => {
+  const [headerData, setHeaderData] = useState<
+    HeaderProps | null | 'error'
   >(null);
 
-  getPreHeaderData()
+  getHeaderData()
     .then((res) => {
       if (!res.error) {
-        setPreHeaderData(res.preHeaderData);
+        setHeaderData(res.headerData);
       } else {
-        setPreHeaderData('error');
+        setHeaderData('error');
       }
       return true;
     })
     .catch(() => {
-      setPreHeaderData('error');
+      setHeaderData('error');
       return false;
     });
 
-  if (preHeaderData === 'error') {
+  if (headerData === 'error') {
     return <div />;
   }
 
-  if (preHeaderData === null) {
+  if (headerData === null) {
     return <div>Loading...</div>;
   }
 
-  if (preHeaderData && preHeaderData.leftCtas && preHeaderData.rightCtas) {
+  if (headerData && headerData.menu && headerData.product && headerData.ctaButtons && headerData.theme) {
     return (
-      <PreHeader
-        leftCtas={preHeaderData.leftCtas}
-        rightCtas={preHeaderData.rightCtas}
-      />
+        <Header
+          menu={headerData.menu}
+          product={headerData.product}
+          ctaButtons={headerData.ctaButtons}
+          theme={headerData.theme}
+        />
     );
   }
 

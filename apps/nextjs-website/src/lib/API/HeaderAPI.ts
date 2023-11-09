@@ -1,124 +1,87 @@
 import { z } from 'zod';
-import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
+import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 
-const PreHeaderDataSchema = z.object({
-  data: z.object({
-    attributes: z.object({
-      theme: z.string(),
-      leftCTAButton: z.object({
-        text: z.string(),
-        variant: z.string(),
-        color: z.string(),
-        href: z.string(),
-      }),
-      rightCTAButton: z.object({
-        text: z.string(),
-        variant: z.string(),
-        color: z.string(),
-        href: z.string(),
-      }),
-    }),
-  }),
+const HeaderButtonSchema = z.object({
+  color: z.string(),
+  onClick: z.function().optional(),
+  size: z.string(),
+  text: z.string(),
+  variant: z.string(),
 });
 
-export const getPreHeaderData = async () => {
+const HeaderMenuItemSchema = z.object({
+  items: z.array(
+    z.object({
+      href: z.string(),
+      key: z.number(),
+      label: z.string(),
+    })
+  ),
+  label: z.string(),
+  theme: z.string(),
+  active: z.boolean().optional(),
+  href: z.string().optional(),
+});
+
+const HeaderProductSchema = z.object({
+  href: z.string(),
+  name: z.string(),
+});
+
+const HeaderDataSchema = z.object({
+  avatar: z
+    .object({
+      alt: z.string(),
+      src: z.string(),
+    })
+    .optional(),
+  beta: z.boolean().optional(),
+  ctaButtons: z.array(HeaderButtonSchema).optional(),
+  reverse: z.boolean().optional(),
+  menu: z.array(HeaderMenuItemSchema),
+  product: HeaderProductSchema,
+  theme: z.string(),
+});
+
+export const getHeaderData = async () => {
   const token = process.env['NEXT_STRAPI_API_TOKEN'];
   const apiBaseUrl = process.env['NEXT_PUBLIC_API_BASE_URL'];
-  const preHeaderApiUrl: string = `${apiBaseUrl}/api/pre-header/?populate=*`;
+  const HeaderApiUrl: string = `${apiBaseUrl}/api/header/?populate=*`;
 
-  const preHeaderResponse = await fetch(preHeaderApiUrl, {
+  const HeaderResponse = await fetch(HeaderApiUrl, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-  if (!preHeaderResponse.ok) {
+  if (!HeaderResponse.ok) {
     return {
-      error: 'Failed to fetch pre-header data',
-      preHeaderData: null,
+      error: 'Failed to fetch header data',
+      headerData: null,
     };
   }
 
-  const preHeaderJson = await preHeaderResponse.json();
-  const preHeaderData = PreHeaderDataSchema.parse(preHeaderJson);
+  const HeaderJson = await HeaderResponse.json();
+  const headerData = HeaderDataSchema.parse(HeaderJson);
 
-  if (!preHeaderData) {
+  if (!headerData) {
     return {
-      error: 'No pre-header data found',
-      preHeaderData: null,
+      error: 'No header data found',
+      headerData: null,
     };
   }
-
-  type PreHeaderTheme = 'dark' | 'light';
-
-  const theme: PreHeaderTheme = ['dark', 'light'].includes(
-    preHeaderData.data.attributes.theme.toLowerCase()
-  )
-    ? (preHeaderData.data.attributes.theme.toLowerCase() as PreHeaderTheme)
-    : 'light';
-
-  type CTAButtonVariant = 'text' | 'outlined' | 'contained';
-
-  const leftCTAVariant: CTAButtonVariant = [
-    'text',
-    'outlined',
-    'contained',
-  ].includes(preHeaderData.data.attributes.leftCTAButton.variant)
-    ? (preHeaderData.data.attributes.leftCTAButton.variant as CTAButtonVariant)
-    : 'text';
-
-  const rightCTAVariant: CTAButtonVariant = [
-    'text',
-    'outlined',
-    'contained',
-  ].includes(preHeaderData.data.attributes.rightCTAButton.variant)
-    ? (preHeaderData.data.attributes.rightCTAButton.variant as CTAButtonVariant)
-    : 'text';
-
-  type CTAButtonColor =
-    | 'inherit'
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'error'
-    | 'info'
-    | 'warning';
-
-  const leftCTAColor: CTAButtonColor = [
-    'inherit',
-    'primary',
-    'secondary',
-    'success',
-    'error',
-    'info',
-    'warning',
-  ].includes(preHeaderData.data.attributes.leftCTAButton.color)
-    ? (preHeaderData.data.attributes.leftCTAButton.color as CTAButtonColor)
-    : 'inherit';
-
-  const rightCTAColor: CTAButtonColor = [
-    'inherit',
-    'primary',
-    'secondary',
-    'success',
-    'error',
-    'info',
-    'warning',
-  ].includes(preHeaderData.data.attributes.rightCTAButton.color)
-    ? (preHeaderData.data.attributes.rightCTAButton.color as CTAButtonColor)
-    : 'inherit';
 
   // Perform data transformation here
-  const transformedData: PreHeaderProps = {
+  const transformedData: HeaderProps = {
     leftCtas: {
       theme,
       ctaButtons: [
         {
-          text: preHeaderData.data.attributes.leftCTAButton.text,
+          text: headerData.data.attributes.leftCTAButton.text,
           variant: leftCTAVariant,
           color: leftCTAColor,
-          href: preHeaderData.data.attributes.leftCTAButton.href,
+          href: headerData.data.attributes.leftCTAButton.href,
         },
       ],
     },
@@ -126,17 +89,17 @@ export const getPreHeaderData = async () => {
       theme,
       ctaButtons: [
         {
-          text: preHeaderData.data.attributes.rightCTAButton.text,
+          text: headerData.data.attributes.rightCTAButton.text,
           variant: rightCTAVariant,
           color: rightCTAColor,
-          href: preHeaderData.data.attributes.rightCTAButton.href,
+          href: headerData.data.attributes.rightCTAButton.href,
         },
       ],
     },
   };
 
   return {
-    preHeaderData: transformedData,
+    headerData: transformedData,
     error: null, // No error occurred
   };
 };
