@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "pre_headers",
+  "info": {
+    "singularName": "pre-header",
+    "pluralName": "pre-headers",
+    "displayName": "PreHeader",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "leftCtas": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.cta-group"
+    },
+    "rightCtas": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.cta-group"
+    }
+  }
+}

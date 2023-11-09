@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_components_cta_groups",
+  "info": {
+    "displayName": "CTAGroup"
+  },
+  "options": {},
+  "attributes": {
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button"
+    },
+    "reverse": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    }
+  }
+}
