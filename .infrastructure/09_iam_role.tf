@@ -61,16 +61,6 @@ data "aws_iam_policy_document" "ecs_task_execution" {
   statement {
     effect = "Allow"
     actions = [
-      "s3:GetObject"
-    ]
-    resources = [
-      "${aws_s3_bucket.cms_medialibrary_bucket.arn}/.env"
-    ]
-  }
-
-  statement {
-    effect = "Allow"
-    actions = [
       "s3:GetBucketLocation"
     ]
     resources = [
