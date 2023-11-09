@@ -60,9 +60,9 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: strapi
-          IMAGE_TAG: latest
+          IMAGE_TAG: ${{ github.sha }}
         with:
             context: apps/strapi-cms
             push: true
-            tags: ${{ steps.login-ecr.outputs.registry }}/strapi:latest
+            tags: ${{ steps.login-ecr.outputs.registry }}/strapi:${{ github.sha }}
             provenance: false
