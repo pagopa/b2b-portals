@@ -108,7 +108,7 @@ resource "aws_iam_role" "deploy_ecs" {
 }
 
 resource "aws_iam_policy" "deploy_ecs" {
-  name        = "PagoPaECSDeploy"
+  name        = "DeployECS"
   description = "Policy to allow deploy on ECS."
 
   policy = jsonencode(
