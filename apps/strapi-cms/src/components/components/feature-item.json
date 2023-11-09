@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_components_feature_items",
+  "info": {
+    "displayName": "FeatureItem",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string"
+    },
+    "iconColor": {
+      "type": "enumeration",
+      "enum": [
+        "inherit",
+        "primary",
+        "secondary",
+        "success",
+        "error",
+        "info",
+        "warning"
+      ],
+      "default": "inherit",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string",
+      "required": true
+    },
+    "linkText": {
+      "type": "string"
+    },
+    "linkURL": {
+      "type": "string"
+    }
+  }
+}
