@@ -21,7 +21,27 @@ const CTAButtonColor = z.union([
   z.literal('warning'),
 ]);
 
-export const PreHeaderDataSchema = z.object({
+interface PreHeaderData {
+  readonly data: {
+    readonly attributes: {
+      readonly theme: 'light' | 'dark';
+      readonly leftCTAButton: {
+        readonly text: string;
+        readonly variant: 'text' | 'outlined' | 'contained';
+        readonly color: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
+        readonly href: string;
+      };
+      readonly rightCTAButton: {
+        readonly text: string;
+        readonly variant: 'text' | 'outlined' | 'contained';
+        readonly color: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
+        readonly href: string;
+      };
+    };
+  };
+}
+
+export const PreHeaderDataSchema: z.ZodType<PreHeaderData> = z.object({
   data: z.object({
     attributes: z.object({
       theme: PreHeaderTheme,
@@ -73,7 +93,7 @@ export const getPreHeaderData = async () => {
   // Perform data transformation here
   const transformedData= {
     leftCtas: {
-      closed,
+      theme: PreHeaderTheme,
       ctaButtons: [
         {
           text: preHeaderData.data.attributes.leftCTAButton.text,

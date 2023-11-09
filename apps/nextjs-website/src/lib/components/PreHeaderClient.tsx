@@ -11,7 +11,7 @@ export const PreHeaderClient: React.FC = () => {
   getPreHeaderData()
     .then((res) => {
       if (!res.error) {
-        setPreHeaderData(res.preHeaderData);
+        setPreHeaderData(res.preHeaderData as unknown as typeof PreHeaderDataSchema);
       } else {
         setPreHeaderData('error');
       }
