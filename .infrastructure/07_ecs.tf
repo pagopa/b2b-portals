@@ -41,7 +41,7 @@ resource "aws_ecs_task_definition" "cms_task_def" {
 resource "aws_ecs_service" "cms_ecs_service" {
   name                              = "cms-ecs"
   cluster                           = aws_ecs_cluster.cms_ecs_cluster.id
-  desired_count                     = 1
+  desired_count                     = 0
   launch_type                       = "FARGATE"
   force_new_deployment              = true
   task_definition                   = aws_ecs_task_definition.cms_task_def.arn
