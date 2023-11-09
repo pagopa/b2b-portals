@@ -55,8 +55,8 @@ resource "aws_cloudfront_distribution" "website" {
 
   viewer_certificate {
     cloudfront_default_certificate = var.use_custom_certificate ? false : true
-    acm_certificate_arn            = var.use_custom_certificate ? aws_acm_certificate.website.arn : null
-    ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
+    # acm_certificate_arn            = var.use_custom_certificate ? aws_acm_certificate.website.arn : null
+    # ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
   }
 }
 
