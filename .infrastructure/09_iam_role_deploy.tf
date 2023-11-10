@@ -1,38 +1,40 @@
 data "aws_caller_identity" "current" {}
 
+data "aws_iam_policy_document" "deploy_github" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    principals {
+      type        = "Federated"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/token.actions.githubusercontent.com"]
+    }
+    condition {
+      test     = "StringLike"
+      variable = "token.actions.githubusercontent.com:sub"
+      values   = ["repo:${var.github_repository}:*"]
+    }
+
+    condition {
+      test     = "ForAllValues:StringEquals"
+      variable = "token.actions.githubusercontent.com:iss"
+      values   = ["https://token.actions.githubusercontent.com"]
+    }
+
+    condition {
+      test     = "ForAllValues:StringEquals"
+      variable = "token.actions.githubusercontent.com:aud"
+      values   = ["sts.amazonaws.com"]
+    }
+  }
+}
+
 ###############################################################################
 #                      IAM Role to use on deploy website                       #
 ###############################################################################
 resource "aws_iam_role" "deploy_website" {
   name        = "GitHubActionDeployWebsite"
   description = "Role to assume to deploy the website"
-}
-
-resource "aws_iam_policy" "deploy_github" {
-  name        = "DeployGitHub"
-  description = "Policy to allow to deploy from GitHub"
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow",
-        Principal = {
-          "Federated" : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/token.actions.githubusercontent.com"
-        },
-        Action = "sts:AssumeRoleWithWebIdentity",
-        Condition = {
-          StringLike = {
-            "token.actions.githubusercontent.com:sub" : "repo:${var.github_repository}:*"
-          },
-          "ForAllValues:StringEquals" = {
-            "token.actions.githubusercontent.com:iss" : "https://token.actions.githubusercontent.com",
-            "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"
-          }
-        }
-      }
-    ]
-  })
+  assume_role_policy = data.aws_iam_policy_document.deploy_github.json
 }
 
 resource "aws_iam_policy" "deploy_website" {
@@ -81,10 +83,6 @@ resource "aws_iam_role_policy_attachment" "deploy_website" {
   policy_arn = aws_iam_policy.deploy_website.arn
 }
 
-resource "aws_iam_role_policy_attachment" "deploy_website_github" {
-  role       = aws_iam_role.deploy_website.name
-  policy_arn = aws_iam_policy.deploy_github.arn
-}
 
 ###############################################################################
 #                      IAM Role to use on deploy CMS                       #
@@ -92,6 +90,7 @@ resource "aws_iam_role_policy_attachment" "deploy_website_github" {
 resource "aws_iam_role" "deploy_ecs" {
   name        = "GitHubActionDeployECS"
   description = "Role to assume to deploy on ECS."
+  assume_role_policy = data.aws_iam_policy_document.deploy_github.json
 }
 
 resource "aws_iam_policy" "deploy_ecs" {
@@ -128,9 +127,4 @@ resource "aws_iam_policy" "deploy_ecs" {
 resource "aws_iam_role_policy_attachment" "deploy_ecs" {
   role       = aws_iam_role.deploy_ecs.name
   policy_arn = aws_iam_policy.deploy_ecs.arn
-}
-
-resource "aws_iam_role_policy_attachment" "deploy_ecs_github" {
-  role       = aws_iam_role.deploy_ecs.name
-  policy_arn = aws_iam_policy.deploy_github.arn
 }
