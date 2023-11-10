@@ -103,22 +103,22 @@ resource "aws_iam_policy" "deploy_ecs" {
     Statement = [
       {
         Action = [
-            "ecs:DescribeTaskDefinition",
-            "ecs:RegisterTaskDefinition",
-            "ecs:DescribeServices",
-            "ecs:UpdateService"
+          "ecs:DescribeTaskDefinition",
+          "ecs:RegisterTaskDefinition",
+          "ecs:DescribeServices",
+          "ecs:UpdateService"
         ]
-        Effect = "Allow"
+        Effect   = "Allow"
         Resource = "*"
       },
       {
         Action = [
-            "iam:PassRole"
+          "iam:PassRole"
         ]
         Effect = "Allow"
         Resource = [
-            aws_iam_role.ecs_task_execution_role.arn,
-            aws_iam_role.task_role.arn
+          aws_iam_role.ecs_task_execution_role.arn,
+          aws_iam_role.task_role.arn
         ]
       }
     ]
