@@ -19,11 +19,18 @@ const CTAButtonColor = z.union([
 ]);
 
 export interface HeaderButton {
-  readonly color: string;
+  readonly color:
+    | 'inherit'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'error'
+    | 'info'
+    | 'warning';
   readonly onClick?: () => void | undefined;
   readonly size: string;
   readonly text: string;
-  readonly variant: string;
+  readonly variant: 'text' | 'outlined' | 'contained';
 }
 
 export interface HeaderMenuItem {
