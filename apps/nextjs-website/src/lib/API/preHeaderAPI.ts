@@ -1,3 +1,4 @@
+import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import { z } from 'zod';
 
 const PreHeaderTheme = z.union([z.literal('dark'), z.literal('light')]);
@@ -18,7 +19,7 @@ const CTAButtonColor = z.union([
   z.literal('warning'),
 ]);
 
-interface PreHeaderData {
+interface PreHeaderAPIResponse {
   readonly data: {
     readonly attributes: {
       readonly theme: 'light' | 'dark';
@@ -52,25 +53,26 @@ interface PreHeaderData {
   };
 }
 
-export const PreHeaderDataSchema: z.ZodType<PreHeaderData> = z.object({
-  data: z.object({
-    attributes: z.object({
-      theme: PreHeaderTheme,
-      leftCTAButton: z.object({
-        text: z.string(),
-        variant: CTAButtonVariant,
-        color: CTAButtonColor,
-        href: z.string(),
-      }),
-      rightCTAButton: z.object({
-        text: z.string(),
-        variant: CTAButtonVariant,
-        color: CTAButtonColor,
-        href: z.string(),
+export const PreHeaderAPIResponseSchema: z.ZodType<PreHeaderAPIResponse> =
+  z.object({
+    data: z.object({
+      attributes: z.object({
+        theme: PreHeaderTheme,
+        leftCTAButton: z.object({
+          text: z.string(),
+          variant: CTAButtonVariant,
+          color: CTAButtonColor,
+          href: z.string(),
+        }),
+        rightCTAButton: z.object({
+          text: z.string(),
+          variant: CTAButtonVariant,
+          color: CTAButtonColor,
+          href: z.string(),
+        }),
       }),
     }),
-  }),
-});
+  });
 
 export const getPreHeaderData = async () => {
   const token = process.env['NEXT_STRAPI_API_TOKEN'];
@@ -92,9 +94,9 @@ export const getPreHeaderData = async () => {
   }
 
   const preHeaderJson = await preHeaderResponse.json();
-  const preHeaderData = PreHeaderDataSchema.parse(preHeaderJson);
+  const preHeaderAPIResponse = PreHeaderAPIResponseSchema.parse(preHeaderJson);
 
-  if (!preHeaderData) {
+  if (!preHeaderAPIResponse) {
     return {
       error: 'No pre-header data found',
       preHeaderData: null,
@@ -102,26 +104,26 @@ export const getPreHeaderData = async () => {
   }
 
   // Perform data transformation here
-  const transformedData = {
+  const transformedData: PreHeaderProps = {
     leftCtas: {
-      theme: PreHeaderTheme,
+      theme: preHeaderAPIResponse.data.attributes.theme,
       ctaButtons: [
         {
-          text: preHeaderData.data.attributes.leftCTAButton.text,
-          variant: CTAButtonVariant,
-          color: CTAButtonColor,
-          href: preHeaderData.data.attributes.leftCTAButton.href,
+          text: preHeaderAPIResponse.data.attributes.leftCTAButton.text,
+          variant: preHeaderAPIResponse.data.attributes.leftCTAButton.variant,
+          color: preHeaderAPIResponse.data.attributes.leftCTAButton.color,
+          href: preHeaderAPIResponse.data.attributes.leftCTAButton.href,
         },
       ],
     },
     rightCtas: {
-      theme: PreHeaderTheme,
+      theme: preHeaderAPIResponse.data.attributes.theme,
       ctaButtons: [
         {
-          text: preHeaderData.data.attributes.rightCTAButton.text,
-          variant: CTAButtonVariant,
-          color: CTAButtonColor,
-          href: preHeaderData.data.attributes.rightCTAButton.href,
+          text: preHeaderAPIResponse.data.attributes.rightCTAButton.text,
+          variant: preHeaderAPIResponse.data.attributes.rightCTAButton.variant,
+          color: preHeaderAPIResponse.data.attributes.rightCTAButton.color,
+          href: preHeaderAPIResponse.data.attributes.rightCTAButton.href,
         },
       ],
     },
