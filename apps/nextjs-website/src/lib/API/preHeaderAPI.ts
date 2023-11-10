@@ -1,10 +1,7 @@
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import { z } from 'zod';
 
-const PreHeaderTheme = z.union([
-  z.literal('dark'),
-  z.literal('light'),
-]);
+const PreHeaderTheme = z.union([z.literal('dark'), z.literal('light')]);
 
 const CTAButtonVariant = z.union([
   z.literal('text'),
@@ -29,38 +26,53 @@ interface PreHeaderAPIResponse {
       readonly leftCTAButton: {
         readonly text: string;
         readonly variant: 'text' | 'outlined' | 'contained';
-        readonly color: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
+        readonly color:
+          | 'inherit'
+          | 'primary'
+          | 'secondary'
+          | 'success'
+          | 'error'
+          | 'info'
+          | 'warning';
         readonly href: string;
       };
       readonly rightCTAButton: {
         readonly text: string;
         readonly variant: 'text' | 'outlined' | 'contained';
-        readonly color: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
+        readonly color:
+          | 'inherit'
+          | 'primary'
+          | 'secondary'
+          | 'success'
+          | 'error'
+          | 'info'
+          | 'warning';
         readonly href: string;
       };
     };
   };
 }
 
-export const PreHeaderAPIResponseSchema: z.ZodType<PreHeaderAPIResponse> = z.object({
-  data: z.object({
-    attributes: z.object({
-      theme: PreHeaderTheme,
-      leftCTAButton: z.object({
-        text: z.string(),
-        variant: CTAButtonVariant,
-        color: CTAButtonColor,
-        href: z.string(),
-      }),
-      rightCTAButton: z.object({
-        text: z.string(),
-        variant: CTAButtonVariant,
-        color: CTAButtonColor,
-        href: z.string(),
+export const PreHeaderAPIResponseSchema: z.ZodType<PreHeaderAPIResponse> =
+  z.object({
+    data: z.object({
+      attributes: z.object({
+        theme: PreHeaderTheme,
+        leftCTAButton: z.object({
+          text: z.string(),
+          variant: CTAButtonVariant,
+          color: CTAButtonColor,
+          href: z.string(),
+        }),
+        rightCTAButton: z.object({
+          text: z.string(),
+          variant: CTAButtonVariant,
+          color: CTAButtonColor,
+          href: z.string(),
+        }),
       }),
     }),
-  }),
-});
+  });
 
 export const getPreHeaderData = async () => {
   const token = process.env['NEXT_STRAPI_API_TOKEN'];
@@ -92,7 +104,7 @@ export const getPreHeaderData = async () => {
   }
 
   // Perform data transformation here
-  const transformedData: PreHeaderProps= {
+  const transformedData: PreHeaderProps = {
     leftCtas: {
       theme: preHeaderAPIResponse.data.attributes.theme,
       ctaButtons: [
