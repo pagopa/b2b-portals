@@ -1,34 +1,81 @@
 import { z } from 'zod';
-import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 
-const HeaderButtonSchema = z.object({
-  color: z.string(),
+const HeaderTheme = z.union([z.literal('dark'), z.literal('light')]);
+
+const CTAButtonVariant = z.union([
+  z.literal('text'),
+  z.literal('outlined'),
+  z.literal('contained'),
+]);
+
+const CTAButtonColor = z.union([
+  z.literal('inherit'),
+  z.literal('primary'),
+  z.literal('secondary'),
+  z.literal('success'),
+  z.literal('error'),
+  z.literal('info'),
+  z.literal('warning'),
+]);
+
+export interface HeaderButton {
+  readonly color: string;
+  readonly onClick?: () => void | undefined;
+  readonly size: string;
+  readonly text: string;
+  readonly variant: string;
+}
+
+export interface HeaderMenuItem {
+  readonly items?: ReadonlyArray<HeaderMenuItem>;
+  readonly label: string;
+  readonly theme: 'light' | 'dark';
+  readonly active?: boolean | undefined;
+  readonly href?: string | undefined;
+}
+
+export interface HeaderProduct {
+  readonly href: string;
+  readonly name: string;
+}
+
+export interface HeaderData {
+  readonly avatar?: {
+    readonly alt: string;
+    readonly src: string;
+  };
+  readonly beta?: boolean;
+  readonly ctaButtons?: ReadonlyArray<HeaderButton>;
+  readonly reverse?: boolean;
+  readonly menu: ReadonlyArray<HeaderMenuItem>;
+  readonly product: HeaderProduct;
+  readonly theme: 'dark' | 'light';
+}
+
+export const HeaderButtonSchema = z.object({
+  color: CTAButtonColor,
   onClick: z.function().optional(),
   size: z.string(),
   text: z.string(),
-  variant: z.string(),
+  variant: CTAButtonVariant,
 });
 
-const HeaderMenuItemSchema = z.object({
-  items: z.array(
-    z.object({
-      href: z.string(),
-      key: z.number(),
-      label: z.string(),
-    })
-  ),
+export const HeaderMenuItemSchema: z.ZodType<HeaderMenuItem> = z.object({
+  items: z.lazy(() => HeaderMenuItemsArraySchema),
   label: z.string(),
-  theme: z.string(),
+  theme: HeaderTheme,
   active: z.boolean().optional(),
   href: z.string().optional(),
 });
 
-const HeaderProductSchema = z.object({
+const HeaderMenuItemsArraySchema = z.array(HeaderMenuItemSchema);
+
+export const HeaderProductSchema = z.object({
   href: z.string(),
   name: z.string(),
 });
 
-const HeaderDataSchema = z.object({
+export const HeaderDataSchema = z.object({
   avatar: z
     .object({
       alt: z.string(),
@@ -40,7 +87,7 @@ const HeaderDataSchema = z.object({
   reverse: z.boolean().optional(),
   menu: z.array(HeaderMenuItemSchema),
   product: HeaderProductSchema,
-  theme: z.string(),
+  theme: HeaderTheme,
 });
 
 export const getHeaderData = async () => {
@@ -72,34 +119,8 @@ export const getHeaderData = async () => {
     };
   }
 
-  // Perform data transformation here
-  const transformedData: HeaderProps = {
-    leftCtas: {
-      theme,
-      ctaButtons: [
-        {
-          text: headerData.data.attributes.leftCTAButton.text,
-          variant: leftCTAVariant,
-          color: leftCTAColor,
-          href: headerData.data.attributes.leftCTAButton.href,
-        },
-      ],
-    },
-    rightCtas: {
-      theme,
-      ctaButtons: [
-        {
-          text: headerData.data.attributes.rightCTAButton.text,
-          variant: rightCTAVariant,
-          color: rightCTAColor,
-          href: headerData.data.attributes.rightCTAButton.href,
-        },
-      ],
-    },
-  };
-
   return {
-    headerData: transformedData,
+    headerData,
     error: null, // No error occurred
   };
 };
