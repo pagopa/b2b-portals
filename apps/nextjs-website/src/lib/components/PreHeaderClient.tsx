@@ -5,26 +5,22 @@ import { PreHeader } from '@pagopa/pagopa-editorial-components';
 import { getPreHeaderData } from '@/lib/API/preHeaderAPI';
 
 export const PreHeaderClient: React.FC = () => {
-  const [preHeaderData, setPreHeaderData] = useState<
-    PreHeaderProps | null
-  >(null);
+  const [preHeaderData, setPreHeaderData] = useState<PreHeaderProps | null>(
+    null
+  );
 
   getPreHeaderData()
-    .then((res) => {
-      if (!res.error) {
-        setPreHeaderData(res.preHeaderData);
-      }
-      return true;
-    })
-    .catch(() => {
-      return false;
-    });
+    .then((res) => (!res.error ? setPreHeaderData(res.preHeaderData) : true))
+    .catch(() => false);
 
   return (
-    preHeaderData && preHeaderData.leftCtas && preHeaderData.rightCtas &&
-    <PreHeader
-      leftCtas={preHeaderData.leftCtas}
-      rightCtas={preHeaderData.rightCtas}
-    />
+    preHeaderData &&
+    preHeaderData.leftCtas &&
+    preHeaderData.rightCtas && (
+      <PreHeader
+        leftCtas={preHeaderData.leftCtas}
+        rightCtas={preHeaderData.rightCtas}
+      />
+    )
   );
 };
