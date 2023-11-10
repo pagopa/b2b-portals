@@ -31,7 +31,7 @@ const PreHeaderAPIResponseSchema: z.ZodType =
   });
 
 export const getPreHeaderData = async () => {
-  const token = process.env['NEXT_STRAPI_API_TOKEN'];
+  const token = process.env['NEXT_PUBLIC_STRAPI_API_TOKEN'];
   const apiBaseUrl = process.env['NEXT_PUBLIC_API_BASE_URL'];
   const preHeaderApiUrl: string = `${apiBaseUrl}/api/pre-header/?populate=leftCtas.ctaButtons,rightCtas.ctaButtons`;
 
