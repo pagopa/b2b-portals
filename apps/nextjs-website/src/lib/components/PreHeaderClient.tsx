@@ -6,39 +6,25 @@ import { getPreHeaderData } from '@/lib/API/preHeaderAPI';
 
 export const PreHeaderClient: React.FC = () => {
   const [preHeaderData, setPreHeaderData] = useState<
-    PreHeaderProps | null | 'error'
+    PreHeaderProps | null
   >(null);
 
   getPreHeaderData()
     .then((res) => {
       if (!res.error) {
         setPreHeaderData(res.preHeaderData);
-      } else {
-        setPreHeaderData('error');
       }
       return true;
     })
     .catch(() => {
-      setPreHeaderData('error');
       return false;
     });
 
-  if (preHeaderData === 'error') {
-    return <div />;
-  }
-
-  if (preHeaderData === null) {
-    return <div>Loading...</div>;
-  }
-
-  if (preHeaderData && preHeaderData.leftCtas && preHeaderData.rightCtas) {
-    return (
-      <PreHeader
-        leftCtas={preHeaderData.leftCtas}
-        rightCtas={preHeaderData.rightCtas}
-      />
-    );
-  }
-
-  return null;
+  return (
+    preHeaderData && preHeaderData.leftCtas && preHeaderData.rightCtas &&
+    <PreHeader
+      leftCtas={preHeaderData.leftCtas}
+      rightCtas={preHeaderData.rightCtas}
+    />
+  );
 };
