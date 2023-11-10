@@ -32,8 +32,8 @@ data "aws_iam_policy_document" "deploy_github" {
 #                      IAM Role to use on deploy website                       #
 ###############################################################################
 resource "aws_iam_role" "deploy_website" {
-  name        = "GitHubActionDeployWebsite"
-  description = "Role to assume to deploy the website"
+  name               = "GitHubActionDeployWebsite"
+  description        = "Role to assume to deploy the website"
   assume_role_policy = data.aws_iam_policy_document.deploy_github.json
 }
 
@@ -88,8 +88,8 @@ resource "aws_iam_role_policy_attachment" "deploy_website" {
 #                      IAM Role to use on deploy CMS                       #
 ###############################################################################
 resource "aws_iam_role" "deploy_ecs" {
-  name        = "GitHubActionDeployECS"
-  description = "Role to assume to deploy on ECS."
+  name               = "GitHubActionDeployECS"
+  description        = "Role to assume to deploy on ECS."
   assume_role_policy = data.aws_iam_policy_document.deploy_github.json
 }
 
