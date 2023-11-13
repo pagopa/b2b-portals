@@ -1,27 +1,9 @@
-import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import { z } from 'zod';
+import {
+  ThemeSchema,
+  CtaButtonsSchema,
+} from '../../components/reusable/z-declaration';
 
-// TODO: Extract this to a 'utils.ts' type file so that it can be reused for all components
-const ThemeSchema = z.enum(['light', 'dark']);
-
-// TODO: Extract this to a 'utils.ts' type file so that it can be reused for all components
-const CtaButtonsSchema = z.object({
-  text: z.string(),
-  href: z.string(),
-  variant: z.enum(['text', 'outlined', 'contained']),
-  color: z.enum([
-    'inherit',
-    'primary',
-    'secondary',
-    'success',
-    'error',
-    'info',
-    'warning',
-  ]),
-  icon: z.string().nullable(),
-});
-
-// TODO: Extract this to a 'utils.ts' type file so that it can be reused for all components
 const CtaGroupSchema = z.object({
   theme: ThemeSchema,
   reverse: z.boolean(),
@@ -67,7 +49,7 @@ export const getPreHeaderData = async () => {
   }
 
   // Perform data transformation here
-  const transformedData: PreHeaderProps = preHeaderAPIResponse.data.attributes;
+  const transformedData = preHeaderAPIResponse.data.attributes;
 
   return {
     preHeaderData: transformedData,
