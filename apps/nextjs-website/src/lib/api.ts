@@ -99,7 +99,7 @@ const makePagesFromNavItems = (
 export const getAllPages = async () => {
   // Step 1: Fetch the navigation ID
   const token = process.env['NEXT_STRAPI_API_TOKEN'];
-  const apiBaseUrl = process.env['NEXT_PUBLIC_API_BASE_URL'];
+  const apiBaseUrl = process.env['STRAPI_API_BASE_URL'];
   const navigationApiPath = '/api/navigation';
   const navigationApiUrl = `${apiBaseUrl}${navigationApiPath}`;
 

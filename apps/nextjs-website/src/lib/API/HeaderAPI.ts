@@ -99,7 +99,7 @@ export const HeaderDataSchema = z.object({
 
 export const getHeaderData = async () => {
   const token = process.env['NEXT_STRAPI_API_TOKEN'];
-  const apiBaseUrl = process.env['NEXT_PUBLIC_API_BASE_URL'];
+  const apiBaseUrl = process.env['STRAPI_API_BASE_URL'];
   const HeaderApiUrl: string = `${apiBaseUrl}/api/header/?populate=*`;
 
   const HeaderResponse = await fetch(HeaderApiUrl, {
