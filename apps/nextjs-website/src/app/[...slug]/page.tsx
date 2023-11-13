@@ -6,10 +6,7 @@ export const dynamicParams = false;
 
 // Statically generate routes at build time instead of on-demand at request time.
 // more: https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params
-export const generateStaticParams = async () => {
-  const { pages } = await getAllPages();
-  return pages;
-};
+export const generateStaticParams = () => getAllPages();
 
 type PageParams = {
   params: { slug: string[] };
