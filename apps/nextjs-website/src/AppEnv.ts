@@ -4,8 +4,8 @@ import * as E from 'fp-ts/lib/Either';
 import * as PR from 'io-ts/lib/PathReporter';
 
 const ConfigCodec = t.type({
-  NEXT_STRAPI_API_TOKEN: t.string,
-  NEXT_PUBLIC_API_BASE_URL: t.string,
+  STRAPI_API_TOKEN: t.string,
+  STRAPI_API_BASE_URL: t.string,
 });
 
 export type Config = t.TypeOf<typeof ConfigCodec>;

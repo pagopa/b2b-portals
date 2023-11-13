@@ -3,8 +3,8 @@ import { getNavigation } from '../navigation';
 
 const makeTestAppEnv = () => {
   const config = {
-    NEXT_STRAPI_API_TOKEN: 'aStrapiToken',
-    NEXT_PUBLIC_API_BASE_URL: 'aStrapiApiBaseUrl',
+    STRAPI_API_TOKEN: 'aStrapiToken',
+    STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };
@@ -55,11 +55,11 @@ describe('getNavigation', () => {
     await getNavigation('main-menu', appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.NEXT_PUBLIC_API_BASE_URL}/api/navigation/render/main-menu?type=FLAT`,
+      `${config.STRAPI_API_BASE_URL}/api/navigation/render/main-menu?type=FLAT`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.NEXT_STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
         },
       }
     );

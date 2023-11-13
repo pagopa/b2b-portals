@@ -26,11 +26,11 @@ export const getNavigation = (
 ): Promise<Navigation> =>
   extractFromResponse(
     fetchFun(
-      `${config.NEXT_PUBLIC_API_BASE_URL}/api/navigation/render/${menuName}?type=FLAT`,
+      `${config.STRAPI_API_BASE_URL}/api/navigation/render/${menuName}?type=FLAT`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.NEXT_STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
         },
       }
     ),
