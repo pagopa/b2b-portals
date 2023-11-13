@@ -1,9 +1,9 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
+import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 import { PreHeaderClient } from '@/components/PreHeaderClient';
 import { getPreHeaderData } from '@/lib/api/preHeaderAPI';
-import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 import { HeaderClient } from '@/components/HeaderClient';
 import { getHeaderData } from '@/lib/api/HeaderAPI';
 

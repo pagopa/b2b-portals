@@ -1,6 +1,9 @@
 import { z } from 'zod';
-import { ThemeSchema, CTAButtonVariant, CTAButtonColor } from '../../components/reusable/z-declaration';
-import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
+import {
+  ThemeSchema,
+  CTAButtonVariant,
+  CTAButtonColor,
+} from '../../components/reusable/z-declaration';
 
 export const HeaderButtonSchema = z.object({
   color: CTAButtonColor,
