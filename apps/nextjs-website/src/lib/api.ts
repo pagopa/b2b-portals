@@ -16,6 +16,6 @@ const appEnv = pipe(
 
 // Return all the pages
 export const getAllPages = async (): Promise<ReadonlyArray<Page>> => {
-  const navigation = await getNavigation('main-menu', appEnv);
+  const navigation = await getNavigation('main-navigation', appEnv);
   return makePageListFromNavigation(navigation);
 };
