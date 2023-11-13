@@ -3,5 +3,16 @@
   "extends": [
     "custom/eslint-recommended",
     "next/core-web-vitals"
+  ],
+  "overrides": [
+    {
+      // Exclude tests from this rule, allowing us to use describe() and it()
+      "files": [
+        "**/__tests__/**/*.ts"
+      ],
+      "rules": {
+        "functional/no-return-void": "off"
+      }
+    }
   ]
 }
