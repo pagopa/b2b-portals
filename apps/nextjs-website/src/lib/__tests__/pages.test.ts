@@ -1,4 +1,3 @@
-/* eslint-disable functional/no-return-void */
 import { describe, it, expect } from 'vitest';
 import { makePageListFromNavigation } from '../pages';
 

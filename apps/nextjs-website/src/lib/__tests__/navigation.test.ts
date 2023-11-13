@@ -1,4 +1,3 @@
-/* eslint-disable functional/no-return-void */
 import { describe, it, expect, vi } from 'vitest';
 import { getNavigation } from '../navigation';
 
