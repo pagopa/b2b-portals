@@ -6,7 +6,6 @@
   ],
   "overrides": [
     {
-      // Exclude tests from this rule, allowing us to use describe() and it()
       "files": [
         "**/__tests__/**/*.ts"
       ],
