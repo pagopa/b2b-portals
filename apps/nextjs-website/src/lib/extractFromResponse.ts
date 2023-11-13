@@ -15,7 +15,7 @@ export const extractFromResponse = <A, O, I>(
     // handle any error on json function
     TE.chain((response) => TE.tryCatch(() => response.json(), E.toError)),
     TE.chainEitherK((json) =>
-      // decode the respone with the given codec
+      // decode the response with the given codec
       pipe(
         codec.decode(json),
         E.mapLeft((errors) => new Error(PR.failure(errors).join('\n')))
