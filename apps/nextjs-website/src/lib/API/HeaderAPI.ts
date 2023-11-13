@@ -1,63 +1,6 @@
 import { z } from 'zod';
-
-const HeaderTheme = z.union([z.literal('dark'), z.literal('light')]);
-
-const CTAButtonVariant = z.union([
-  z.literal('text'),
-  z.literal('outlined'),
-  z.literal('contained'),
-]);
-
-const CTAButtonColor = z.union([
-  z.literal('inherit'),
-  z.literal('primary'),
-  z.literal('secondary'),
-  z.literal('success'),
-  z.literal('error'),
-  z.literal('info'),
-  z.literal('warning'),
-]);
-
-export interface HeaderButton {
-  readonly color:
-    | 'inherit'
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'error'
-    | 'info'
-    | 'warning';
-  readonly onClick?: () => void | undefined;
-  readonly size: string;
-  readonly text: string;
-  readonly variant: 'text' | 'outlined' | 'contained';
-}
-
-export interface HeaderMenuItem {
-  readonly items?: ReadonlyArray<HeaderMenuItem>;
-  readonly label: string;
-  readonly theme: 'light' | 'dark';
-  readonly active?: boolean | undefined;
-  readonly href?: string | undefined;
-}
-
-export interface HeaderProduct {
-  readonly href: string;
-  readonly name: string;
-}
-
-export interface HeaderData {
-  readonly avatar?: {
-    readonly alt: string;
-    readonly src: string;
-  };
-  readonly beta?: boolean;
-  readonly ctaButtons?: ReadonlyArray<HeaderButton>;
-  readonly reverse?: boolean;
-  readonly menu: ReadonlyArray<HeaderMenuItem>;
-  readonly product: HeaderProduct;
-  readonly theme: 'dark' | 'light';
-}
+import { ThemeSchema, CTAButtonVariant, CTAButtonColor } from '../Reusable/z-declaration';
+import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 
 export const HeaderButtonSchema = z.object({
   color: CTAButtonColor,
@@ -67,10 +10,10 @@ export const HeaderButtonSchema = z.object({
   variant: CTAButtonVariant,
 });
 
-export const HeaderMenuItemSchema: z.ZodType<HeaderMenuItem> = z.object({
+export const HeaderMenuItemSchema: z.ZodType = z.object({
   items: z.lazy(() => HeaderMenuItemsArraySchema),
   label: z.string(),
-  theme: HeaderTheme,
+  theme: ThemeSchema,
   active: z.boolean().optional(),
   href: z.string().optional(),
 });
@@ -94,7 +37,7 @@ export const HeaderDataSchema = z.object({
   reverse: z.boolean().optional(),
   menu: z.array(HeaderMenuItemSchema),
   product: HeaderProductSchema,
-  theme: HeaderTheme,
+  theme: ThemeSchema,
 });
 
 export const getHeaderData = async () => {

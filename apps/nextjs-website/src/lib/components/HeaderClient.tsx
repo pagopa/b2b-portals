@@ -1,36 +1,14 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Header } from '@pagopa/pagopa-editorial-components';
-import { getHeaderData, HeaderData } from '@/lib/API/HeaderAPI';
+import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 
-export const HeaderClient: React.FC = () => {
-  const [headerData, setHeaderData] = useState<HeaderData | null | 'error'>(
-    null
-  );
-
-  getHeaderData()
-    .then((res) => {
-      if (!res.error) {
-        setHeaderData(res.headerData as HeaderData);
-      } else {
-        setHeaderData('error');
-      }
-      return true;
-    })
-    .catch(() => {
-      setHeaderData('error');
-      return false;
-    });
-
-  if (headerData === 'error') {
-    return <div />;
-  }
-
-  if (headerData === null) {
-    return <div>Loading...</div>;
-  }
-
-  return (
+export const HeaderClient: React.FC<HeaderProps> = async (headerData) =>
+  headerData &&
+  headerData.menu &&
+  headerData.product &&
+  headerData.ctaButtons &&
+  headerData.theme && (
     <Header
       menu={headerData.menu}
       product={headerData.product}
@@ -38,4 +16,3 @@ export const HeaderClient: React.FC = () => {
       theme={headerData.theme}
     />
   );
-};
