@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ThemeSchema, CTAButtonVariant, CTAButtonColor } from '../Reusable/z-declaration';
+import { ThemeSchema, CTAButtonVariant, CTAButtonColor } from '../../components/reusable/z-declaration';
 import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 
 export const HeaderButtonSchema = z.object({
@@ -25,7 +25,7 @@ export const HeaderProductSchema = z.object({
   name: z.string(),
 });
 
-export const HeaderDataSchema = z.object({
+export const HeaderDataSchema: z.ZodType = z.object({
   avatar: z
     .object({
       alt: z.string(),

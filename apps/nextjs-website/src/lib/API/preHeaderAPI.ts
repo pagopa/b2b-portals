@@ -1,22 +1,6 @@
 import { z } from 'zod';
-import { ThemeSchema } from '../Reusable/z-declaration';
+import { ThemeSchema, CtaButtonsSchema } from '../../components/reusable/z-declaration';
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
-
-const CtaButtonsSchema = z.object({
-  text: z.string(),
-  href: z.string(),
-  variant: z.enum(['text', 'outlined', 'contained']),
-  color: z.enum([
-    'inherit',
-    'primary',
-    'secondary',
-    'success',
-    'error',
-    'info',
-    'warning',
-  ]),
-  icon: z.string().nullable(),
-});
 
 const CtaGroupSchema = z.object({
   theme: ThemeSchema,
