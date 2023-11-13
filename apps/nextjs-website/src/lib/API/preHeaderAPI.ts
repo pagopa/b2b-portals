@@ -1,34 +1,41 @@
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
-import { ZodError, z } from 'zod';
+import { z } from 'zod';
 
-// TODO: Extract this to a "utils.ts" type file so that it can be reused for all components
+// TODO: Extract this to a 'utils.ts' type file so that it can be reused for all components
 const ThemeSchema = z.enum(['light', 'dark']);
 
-// TODO: Extract this to a "utils.ts" type file so that it can be reused for all components
+// TODO: Extract this to a 'utils.ts' type file so that it can be reused for all components
 const CtaButtonsSchema = z.object({
   text: z.string(),
   href: z.string(),
   variant: z.enum(['text', 'outlined', 'contained']),
-  color: z.enum(['inherit', 'primary', 'secondary', 'success', 'error', 'info', 'warning']),
-  icon: z.string().nullable()
-})
+  color: z.enum([
+    'inherit',
+    'primary',
+    'secondary',
+    'success',
+    'error',
+    'info',
+    'warning',
+  ]),
+  icon: z.string().nullable(),
+});
 
-// TODO: Extract this to a "utils.ts" type file so that it can be reused for all components
+// TODO: Extract this to a 'utils.ts' type file so that it can be reused for all components
 const CtaGroupSchema = z.object({
   theme: ThemeSchema,
   reverse: z.boolean(),
-  ctaButtons: z.array(CtaButtonsSchema).nullable()
+  ctaButtons: z.array(CtaButtonsSchema).nullable(),
 });
 
-const PreHeaderAPIResponseSchema: z.ZodType =
-  z.object({
-    data: z.object({
-      attributes: z.object({
-        leftCtas: CtaGroupSchema,
-        rightCtas: CtaGroupSchema
-      }),
+const PreHeaderAPIResponseSchema: z.ZodType = z.object({
+  data: z.object({
+    attributes: z.object({
+      leftCtas: CtaGroupSchema,
+      rightCtas: CtaGroupSchema,
     }),
-  });
+  }),
+});
 
 export const getPreHeaderData = async () => {
   const token = process.env['STRAPI_API_TOKEN'];

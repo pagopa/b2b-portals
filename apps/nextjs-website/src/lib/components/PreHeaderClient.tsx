@@ -5,10 +5,13 @@ import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/compone
 
 export const PreHeaderClient: React.FC<PreHeaderProps> = async (preHeaderData) => {
   return (
-    preHeaderData && preHeaderData.leftCtas && preHeaderData.rightCtas &&
-    <PreHeader
-      leftCtas={preHeaderData.leftCtas}
-      rightCtas={preHeaderData.rightCtas}
-    />
+    preHeaderData &&
+    preHeaderData.leftCtas &&
+    preHeaderData.rightCtas && (
+      <PreHeader
+        leftCtas={preHeaderData.leftCtas}
+        rightCtas={preHeaderData.rightCtas}
+      />
+    )
   );
 };
