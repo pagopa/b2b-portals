@@ -2,10 +2,7 @@ import { getAllPages } from '@/lib/api';
 
 export const dynamicParams = false;
 
-export const generateStaticParams = async () => {
-  const { pages } = await getAllPages();
-  return pages ? [...pages] : [];
-};
+export const generateStaticParams = () => getAllPages();
 
 type PageParams = {
   params: { slug: string[] };
