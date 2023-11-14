@@ -43,6 +43,11 @@
       "component": "components.step",
       "required": true,
       "min": 2
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$",
+      "unique": true
     }
   }
 }

@@ -40,6 +40,16 @@
     },
     "icon": {
       "type": "string"
+    },
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "default": "medium",
+      "required": true
     }
   }
 }
