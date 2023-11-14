@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { makePageListFromNavigation } from '../pages';
+import { makePageListFromNavigation } from '../api/navigation/pages';
 
 const parentNavItem = {
   order: 1,
