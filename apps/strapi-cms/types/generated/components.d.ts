@@ -18,6 +18,9 @@ export interface ComponentsCtaButton extends Schema.Component {
       Attribute.Required &
       Attribute.DefaultTo<'inherit'>;
     icon: Attribute.String;
+    size: Attribute.Enumeration<['small', 'medium', 'large']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'medium'>;
   };
 }
 
@@ -110,6 +113,7 @@ export interface SectionsEditorial extends Schema.Component {
   collectionName: 'components_sections_editorials';
   info: {
     displayName: 'Editorial';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -132,6 +136,7 @@ export interface SectionsEditorial extends Schema.Component {
       Attribute.SetMinMax<{
         max: 2;
       }>;
+    sectionID: Attribute.String & Attribute.Unique;
   };
 }
 
@@ -156,6 +161,7 @@ export interface SectionsFeature extends Schema.Component {
         min: 3;
         max: 4;
       }>;
+    sectionID: Attribute.String & Attribute.Unique;
   };
 }
 
@@ -184,6 +190,7 @@ export interface SectionsHero extends Schema.Component {
     useHoverlay: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<true>;
+    sectionID: Attribute.String & Attribute.Unique;
   };
 }
 
@@ -208,6 +215,7 @@ export interface SectionsHowTo extends Schema.Component {
       Attribute.SetMinMax<{
         min: 2;
       }>;
+    sectionID: Attribute.String & Attribute.Unique;
   };
 }
 
