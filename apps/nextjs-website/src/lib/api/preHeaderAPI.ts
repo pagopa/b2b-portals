@@ -22,7 +22,6 @@ const PreHeaderAPIResponseCodec = t.type({
 });
 
 // Types
-export type CtaGroup = t.TypeOf<typeof CtaGroupCodec>;
 export type PreHeaderAPIResponse = t.TypeOf<typeof PreHeaderAPIResponseCodec>;
 
 export const getPreHeaderData = ({
