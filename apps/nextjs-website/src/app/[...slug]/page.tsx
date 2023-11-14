@@ -1,4 +1,5 @@
 import { getAllPages } from '@/lib/api';
+import { Page } from '@/lib/pages';
 
 // Dynamic segments not included in generateStaticParams will return a 404.
 // more: https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams
@@ -6,7 +7,7 @@ export const dynamicParams = false;
 
 // Statically generate routes at build time instead of on-demand at request time.
 // more: https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params
-export const generateStaticParams = () => getAllPages();
+export const generateStaticParams = () => getAllPages() as Promise<Page[]>;
 
 type PageParams = {
   params: { slug: string[] };
