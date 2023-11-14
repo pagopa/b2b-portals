@@ -27,11 +27,24 @@ export const CTAButtonSize = t.keyof({
   large: null,
 });
 
-export const CtaButtonsSchema = t.type({
-  text: t.string,
-  href: t.string,
-  variant: CTAButtonVariant,
-  color: CTAButtonColor,
-  icon: t.union([t.string, t.nullType]),
-  size: t.union([CTAButtonSize, t.nullType]),
-});
+export const CtaButtonsSchema = t.intersection([
+  t.type({
+    text: t.string,
+    href: t.string,
+    variant: CTAButtonVariant,
+    color: CTAButtonColor
+  }),
+  t.partial({
+    icon: t.string,
+    size: CTAButtonSize
+  })
+]);
+
+export const CtaGroupCodec = t.intersection([
+  t.type({
+    theme: ThemeSchema,
+  }),
+  t.partial({
+    ctaButtons: t.array(CtaButtonsSchema),
+  }),
+]);

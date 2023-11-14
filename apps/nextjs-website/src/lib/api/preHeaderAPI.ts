@@ -1,30 +1,39 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from '../extractFromResponse';
-import {
-  ThemeSchema,
-  CtaButtonsSchema,
-} from '@/components/reusable/io-ts-declarations';
+import { CtaGroupCodec } from '@/components/reusable/io-ts-declarations';
 import { AppEnv } from '@/AppEnv';
-
-// Codecs
-const CtaGroupCodec = t.type({
-  theme: ThemeSchema,
-  ctaButtons: t.union([t.array(CtaButtonsSchema), t.nullType]),
-});
 
 const PreHeaderAPIResponseCodec = t.type({
   data: t.type({
-    attributes: t.type({
-      leftCtas: CtaGroupCodec,
-      rightCtas: CtaGroupCodec,
-    }),
+    attributes: t.union([
+      t.type({
+        rightCtas: CtaGroupCodec,
+        leftCtas: CtaGroupCodec,
+      }),
+      t.intersection([
+        t.type({
+          rightCtas: CtaGroupCodec,
+        }),
+        t.partial({
+          leftCtas: CtaGroupCodec,
+        })
+      ]),
+      t.intersection([
+        t.type({
+          leftCtas: CtaGroupCodec,
+        }),
+        t.partial({
+          rightCtas: CtaGroupCodec,
+        })
+      ]),
+    ]),
   }),
 });
 
 // Types
 export type PreHeaderAPIResponse = t.TypeOf<typeof PreHeaderAPIResponseCodec>;
 
-export const getPreHeaderData = ({
+export const getPreHeader = ({
   config,
   fetchFun,
 }: AppEnv): Promise<PreHeaderAPIResponse> =>

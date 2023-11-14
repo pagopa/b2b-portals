@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import { PreHeaderClient } from '@/components/PreHeaderClient';
-import { getPreHeaderData } from '@/lib/api/preHeaderAPI';
+import { getPreHeaderData } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Page',
@@ -14,13 +14,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const preHeaderAPIRes = await getPreHeaderData();
-  const preHeaderData: PreHeaderProps | null = preHeaderAPIRes.preHeaderData;
+  const preHeaderData: PreHeaderProps = await getPreHeaderData();
 
   return (
     <html>
       <body>
-        {preHeaderData && <PreHeaderClient {...preHeaderData} />}
+        <PreHeaderClient {...preHeaderData} />
         {children}
       </body>
     </html>

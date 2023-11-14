@@ -4,6 +4,8 @@ import * as E from 'fp-ts/lib/Either';
 import { getNavigation } from './api/navigation/navigationAPI';
 import { Page, makePageListFromNavigation } from './api/navigation/pages';
 import { makeAppEnv } from '@/AppEnv';
+import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
+import { getPreHeader } from './api/preHeaderAPI';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -19,3 +21,9 @@ export const getAllPages = async (): Promise<ReadonlyArray<Page>> => {
   const navigation = await getNavigation('main-navigation', appEnv);
   return makePageListFromNavigation(navigation);
 };
+
+//Return data for preHeader
+export const getPreHeaderData = async (): Promise<PreHeaderProps> => {
+  const preHeaderAPIRes = await getPreHeader(appEnv);
+  return preHeaderAPIRes.data.attributes;
+}
