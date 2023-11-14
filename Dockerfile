@@ -5,13 +5,16 @@ FROM ${NODE_IMAGE} as build
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev > /dev/null 2>&1
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
+COPY tsconfig.json ./
 
 WORKDIR /opt/
-COPY package*.json ./
-RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install --only=production
+COPY /apps/strapi-cms/package*.json ./
+RUN ls
+RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install
 ENV PATH /opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
-COPY . .
+COPY /apps/strapi-cms/ .
+RUN ls
 RUN npm run build
 
 # Creating final production image
@@ -19,6 +22,7 @@ FROM ${NODE_IMAGE} as buildfinal
 RUN apk add --no-cache vips-dev
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
+COPY tsconfig.json ./
 WORKDIR /opt/
 COPY --from=build /opt/node_modules ./node_modules
 WORKDIR /opt/app
