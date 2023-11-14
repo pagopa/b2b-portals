@@ -32,12 +32,12 @@ export const CtaButtonsSchema = t.intersection([
     text: t.string,
     href: t.string,
     variant: CTAButtonVariant,
-    color: CTAButtonColor
+    color: CTAButtonColor,
   }),
   t.partial({
     icon: t.string,
-    size: CTAButtonSize
-  })
+    size: CTAButtonSize,
+  }),
 ]);
 
 export const CtaGroupCodec = t.intersection([

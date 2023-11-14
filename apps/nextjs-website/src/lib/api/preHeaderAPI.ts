@@ -16,7 +16,7 @@ const PreHeaderAPIResponseCodec = t.type({
         }),
         t.partial({
           leftCtas: CtaGroupCodec,
-        })
+        }),
       ]),
       t.intersection([
         t.type({
@@ -24,7 +24,7 @@ const PreHeaderAPIResponseCodec = t.type({
         }),
         t.partial({
           rightCtas: CtaGroupCodec,
-        })
+        }),
       ]),
     ]),
   }),
