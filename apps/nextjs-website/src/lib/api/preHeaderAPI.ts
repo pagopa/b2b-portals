@@ -1,14 +1,15 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from '../extractFromResponse';
+import {
+  ThemeSchema,
+  CtaButtonsSchema,
+} from '@/components/reusable/io-ts-declarations';
 import { AppEnv } from '@/AppEnv';
 
-// io-ts Codecs
-const CtaButtonsSchema = t.array.nullable;
-const ThemeSchema = /* Your io-ts definition for ThemeSchema */;
-
+// Codecs
 const CtaGroupCodec = t.type({
   theme: ThemeSchema,
-  ctaButtons: CtaButtonsSchema,
+  ctaButtons: t.union([t.array(CtaButtonsSchema), t.nullType]),
 });
 
 const PreHeaderAPIResponseCodec = t.type({
@@ -24,9 +25,10 @@ const PreHeaderAPIResponseCodec = t.type({
 export type CtaGroup = t.TypeOf<typeof CtaGroupCodec>;
 export type PreHeaderAPIResponse = t.TypeOf<typeof PreHeaderAPIResponseCodec>;
 
-export const getPreHeaderData = (
-  { config, fetchFun }: AppEnv
-): Promise<PreHeaderAPIResponse> =>
+export const getPreHeaderData = ({
+  config,
+  fetchFun,
+}: AppEnv): Promise<PreHeaderAPIResponse> =>
   extractFromResponse(
     fetchFun(
       `${config.STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas.ctaButtons,rightCtas.ctaButtons`,
