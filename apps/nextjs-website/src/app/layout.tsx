@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
-import { PreHeaderClient } from '@/components/PreHeaderClient';
+import { PreHeaderClient } from '@/components/PreHeader';
 import { getPreHeaderData } from '@/lib/api';
 
 export const metadata: Metadata = {

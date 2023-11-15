@@ -14,10 +14,8 @@ const makeTestAppEnv = () => {
 // Response example for getPreHeader
 const preHeaderResponse = {
   data: {
-    id: 1,
     attributes: {
       createdAt: '2023-11-15T15:49:03.807Z',
-      updatedAt: '2023-11-15T15:49:03.807Z',
       leftCtas: {
         id: 1,
         reverse: false,
@@ -50,13 +48,15 @@ const preHeaderResponse = {
           },
         ],
       },
+      updatedAt: '2023-11-15T15:49:03.807Z',
     },
+    id: 1,
   },
   meta: {},
 };
 
 describe('getPreHeader', () => {
-  it('should call /api/pre-header/?populate=leftCtas.ctaButtons,rightCtas.ctaButtons type GET', async () => {
+  it('should call /api/pre-header type GET', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
     const { config } = appEnv;
 
