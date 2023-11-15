@@ -1,7 +1,8 @@
 {
   "collectionName": "components_sections_editorials",
   "info": {
-    "displayName": "Editorial"
+    "displayName": "Editorial",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -17,12 +18,12 @@
       "required": true
     },
     "image": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "theme": {
       "type": "enumeration",
@@ -63,6 +64,12 @@
       "repeatable": true,
       "component": "components.cta-button",
       "max": 2
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$",
+      "required": false,
+      "unique": true
     }
   }
 }
