@@ -56,7 +56,7 @@ const preHeaderResponse = {
 };
 
 describe('getPreHeader', () => {
-  it('should call /api/pre-header type GET', async () => {
+  it('should call /api/pre-header/?populate=leftCtas.ctaButtons,rightCtas.ctaButtons type GET', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
     const { config } = appEnv;
 
