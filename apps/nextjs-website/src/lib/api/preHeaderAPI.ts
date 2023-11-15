@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from '../extractFromResponse';
-import { CtaGroupCodec } from '@/components/reusable/io-ts-declarations';
+import { CtaGroupCodec } from '../../components/reusable/io-ts-declarations';
 import { AppEnv } from '@/AppEnv';
 
 const PreHeaderAPIResponseCodec = t.strict({
