@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "extends": [
+    "custom/eslint-recommended",
+    "next/core-web-vitals"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/__tests__/**/*.ts"
+      ],
+      "rules": {
+        "functional/no-return-void": "off"
+      }
+    }
+  ]
+}
