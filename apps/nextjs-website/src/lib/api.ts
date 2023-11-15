@@ -7,7 +7,7 @@ import { type AvatarProps } from '@mui/material';
 import { getNavigation } from './api/navigation/navigationAPI';
 import { Page, makePageListFromNavigation } from './api/navigation/pages';
 import { getPreHeader } from './api/preHeaderAPI';
-
+import { getHeader } from './api/headerAPI';
 import { makeMenuFromNavigation } from './api/navigation/menu';
 import { makeAppEnv } from '@/AppEnv';
 

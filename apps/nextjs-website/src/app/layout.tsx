@@ -8,7 +8,7 @@ import { HeaderClient } from '@/components/HeaderClient';
 import { getPreHeaderData } from '@/lib/api';
 import { getHeaderData } from '@/lib/api';
 import { FooterClient } from '@/components/FooterClient';
-import { getFooterData } from '@/lib/api';
+import { getFooterData } from '@/lib/api/footerAPI';
 
 export const metadata: Metadata = {
   title: 'Page',
