@@ -15,7 +15,6 @@ const makeTestAppEnv = () => {
 const preHeaderResponse = {
   data: {
     attributes: {
-      createdAt: '2023-11-15T15:49:03.807Z',
       leftCtas: {
         id: 1,
         reverse: false,
@@ -48,11 +47,8 @@ const preHeaderResponse = {
           },
         ],
       },
-      updatedAt: '2023-11-15T15:49:03.807Z',
     },
-    id: 1,
   },
-  meta: {},
 };
 
 describe('getPreHeader', () => {
