@@ -35,7 +35,7 @@ export const CtaButtonsSchema = t.intersection([
     color: CTAButtonColor,
   }),
   t.partial({
-    icon: t.string,
+    icon: t.union([t.string, t.null]),
     size: CTAButtonSize,
   }),
 ]);
