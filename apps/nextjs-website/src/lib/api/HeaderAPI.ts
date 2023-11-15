@@ -4,74 +4,29 @@ import { AppEnv } from '@/AppEnv';
 import {
   ThemeSchema,
   CtaButtonsSchema,
-} from '@/components/reusable/io-ts-declarations';
+  StrapiImageSchema,
+} from '@/types/io-ts-declarations';
 
-// Dropdown version
-const HeaderDropdownMenuItemCodec = t.type({
-  items: t.array(
-    t.type({
-      href: t.string,
-      key: t.number,
-      label: t.string,
-    })
-  ),
-  label: t.string,
-  theme: ThemeSchema,
-  active: t.union([t.boolean, t.undefined]),
-});
-
-// Direct link version
-const HeaderDirectLinkMenuItemCodec = t.type({
-  href: t.string,
-  label: t.string,
-  theme: ThemeSchema,
-  active: t.union([t.boolean, t.undefined]),
-});
-
-// Either only Dropdown, only Direct link, or both versions
-export const HeaderMenuItemCodec = t.union([
-  t.type({
-    HeaderDropdownMenuItemCodec,
-    HeaderDirectLinkMenuItemCodec,
+export const HeaderDataCodec = t.strict({
+  data: t.strict({
+    attributes: t.intersection([
+      t.strict({
+        productName: t.string,
+        beta: t.boolean,
+        reverse: t.boolean,
+        theme: ThemeSchema,
+      }),
+      t.partial({
+        avatar: StrapiImageSchema,
+        ctaButtons: t.array(CtaButtonsSchema),
+      }),
+    ]),
   }),
-  t.intersection([
-    t.type({
-      HeaderDropdownMenuItemCodec,
-    }),
-    t.partial({
-      HeaderDirectLinkMenuItemCodec,
-    }),
-  ]),
-  t.intersection([
-    t.type({
-      HeaderDirectLinkMenuItemCodec,
-    }),
-    t.partial({
-      HeaderDropdownMenuItemCodec,
-    }),
-  ]),
-]);
-
-export const HeaderMenuItemsArrayCodec = t.array(HeaderMenuItemCodec);
-
-export const HeaderProductCodec = t.type({
-  href: t.string,
-  name: t.string,
-});
-
-export const HeaderDataCodec = t.type({
-  avatar: t.union([t.type({ alt: t.string, src: t.string }), t.nullType]),
-  beta: t.union([t.boolean, t.undefined]),
-  ctaButtons: t.union([t.array(CtaButtonsSchema), t.nullType]),
-  reverse: t.union([t.boolean, t.undefined]),
-  menu: HeaderMenuItemsArrayCodec,
-  product: HeaderProductCodec,
-  theme: ThemeSchema,
 });
 
 export type HeaderAPIResponse = t.TypeOf<typeof HeaderDataCodec>;
 
-export const getHeaderData = ({
+export const getHeader = ({
   config,
   fetchFun,
 }: AppEnv): Promise<HeaderAPIResponse> =>

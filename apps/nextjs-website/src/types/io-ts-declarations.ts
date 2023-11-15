@@ -35,7 +35,7 @@ export const CtaButtonsSchema = t.intersection([
     color: CTAButtonColor,
   }),
   t.partial({
-    icon: t.string,
+    icon: t.union([t.string, t.null]),
     size: CTAButtonSize,
   }),
 ]);
@@ -48,3 +48,12 @@ export const CtaGroupCodec = t.intersection([
     ctaButtons: t.array(CtaButtonsSchema),
   }),
 ]);
+
+export const StrapiImageSchema = t.type({
+  data: t.type({
+    attributes: t.type({
+      alternativeText: t.union([t.string, t.null]),
+      url: t.string,
+    }),
+  }),
+});

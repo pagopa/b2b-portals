@@ -1,17 +1,17 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from '../extractFromResponse';
-import { CtaGroupCodec } from '@/components/reusable/io-ts-declarations';
+import { CtaGroupCodec } from '@/types/io-ts-declarations';
 import { AppEnv } from '@/AppEnv';
 
-const PreHeaderAPIResponseCodec = t.type({
-  data: t.type({
+const PreHeaderAPIResponseCodec = t.strict({
+  data: t.strict({
     attributes: t.union([
-      t.type({
+      t.strict({
         rightCtas: CtaGroupCodec,
         leftCtas: CtaGroupCodec,
       }),
       t.intersection([
-        t.type({
+        t.strict({
           rightCtas: CtaGroupCodec,
         }),
         t.partial({
@@ -19,7 +19,7 @@ const PreHeaderAPIResponseCodec = t.type({
         }),
       ]),
       t.intersection([
-        t.type({
+        t.strict({
           leftCtas: CtaGroupCodec,
         }),
         t.partial({

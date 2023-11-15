@@ -1,6 +1,6 @@
 import { pipe } from 'fp-ts/lib/function';
 import * as RA from 'fp-ts/lib/ReadonlyArray';
-import { Navigation } from './navigation';
+import { Navigation } from './api/navigation/navigationAPI';
 
 export type Page = {
   readonly slug: ReadonlyArray<string>;

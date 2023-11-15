@@ -5,7 +5,7 @@ import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components
 import { PreHeaderClient } from '@/components/PreHeaderClient';
 import { HeaderClient } from '@/components/HeaderClient';
 import { getPreHeaderData } from '@/lib/api';
-import { getHeaderData } from '@/lib/api/HeaderAPI';
+import { getHeaderData } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Page',

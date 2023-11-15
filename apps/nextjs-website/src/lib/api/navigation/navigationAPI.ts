@@ -8,6 +8,7 @@ const ParentCodec = t.strict({
   id: t.number,
   title: t.string,
   path: t.string,
+  menuAttached: t.boolean,
 });
 const NavItemCodec = t.intersection([
   ParentCodec,
