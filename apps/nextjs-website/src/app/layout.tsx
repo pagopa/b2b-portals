@@ -18,13 +18,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const preHeaderData: PreHeaderProps = await getPreHeaderData();
-  const HeaderData: HeaderProps = await getHeaderData();
+  const headerData: HeaderProps = await getHeaderData();
 
   return (
     <html>
       <body>
         <PreHeaderClient {...preHeaderData} />
-        <HeaderClient {...HeaderData} />
+        <HeaderClient {...headerData} />
         {children}
       </body>
     </html>

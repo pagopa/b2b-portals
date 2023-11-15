@@ -1,79 +1,86 @@
-import { z } from 'zod';
+import * as t from 'io-ts';
+import { extractFromResponse } from '../extractFromResponse';
+import { AppEnv } from '@/AppEnv';
 import {
   ThemeSchema,
-  CTAButtonVariant,
-  CTAButtonColor,
-} from '../../components/reusable/z-declaration';
+  CtaButtonsSchema,
+} from '@/components/reusable/io-ts-declarations';
 
-export const HeaderButtonSchema = z.object({
-  color: CTAButtonColor,
-  onClick: z.function().optional(),
-  size: z.string(),
-  text: z.string(),
-  variant: CTAButtonVariant,
-});
-
-export const HeaderMenuItemSchema: z.ZodType = z.object({
-  items: z.lazy(() => HeaderMenuItemsArraySchema),
-  label: z.string(),
-  theme: ThemeSchema,
-  active: z.boolean().optional(),
-  href: z.string().optional(),
-});
-
-const HeaderMenuItemsArraySchema = z.array(HeaderMenuItemSchema);
-
-export const HeaderProductSchema = z.object({
-  href: z.string(),
-  name: z.string(),
-});
-
-export const HeaderDataSchema: z.ZodType = z.object({
-  avatar: z
-    .object({
-      alt: z.string(),
-      src: z.string(),
+// Dropdown version
+const HeaderDropdownMenuItemCodec = t.type({
+  items: t.array(
+    t.type({
+      href: t.string,
+      key: t.number,
+      label: t.string,
     })
-    .optional(),
-  beta: z.boolean().optional(),
-  ctaButtons: z.array(HeaderButtonSchema).optional(),
-  reverse: z.boolean().optional(),
-  menu: z.array(HeaderMenuItemSchema),
-  product: HeaderProductSchema,
+  ),
+  label: t.string,
+  theme: ThemeSchema,
+  active: t.union([t.boolean, t.undefined]),
+});
+
+// Direct link version
+const HeaderDirectLinkMenuItemCodec = t.type({
+  href: t.string,
+  label: t.string,
+  theme: ThemeSchema,
+  active: t.union([t.boolean, t.undefined]),
+});
+
+// Either only Dropdown, only Direct link, or both versions
+export const HeaderMenuItemCodec = t.union([
+  t.type({
+    HeaderDropdownMenuItemCodec,
+    HeaderDirectLinkMenuItemCodec,
+  }),
+  t.intersection([
+    t.type({
+      HeaderDropdownMenuItemCodec,
+    }),
+    t.partial({
+      HeaderDirectLinkMenuItemCodec,
+    }),
+  ]),
+  t.intersection([
+    t.type({
+      HeaderDirectLinkMenuItemCodec,
+    }),
+    t.partial({
+      HeaderDropdownMenuItemCodec,
+    }),
+  ]),
+]);
+
+export const HeaderMenuItemsArrayCodec = t.array(HeaderMenuItemCodec);
+
+export const HeaderProductCodec = t.type({
+  href: t.string,
+  name: t.string,
+});
+
+export const HeaderDataCodec = t.type({
+  avatar: t.union([t.type({ alt: t.string, src: t.string }), t.nullType]),
+  beta: t.union([t.boolean, t.undefined]),
+  ctaButtons: t.union([t.array(CtaButtonsSchema), t.nullType]),
+  reverse: t.union([t.boolean, t.undefined]),
+  menu: HeaderMenuItemsArrayCodec,
+  product: HeaderProductCodec,
   theme: ThemeSchema,
 });
 
-export const getHeaderData = async () => {
-  const token = process.env['NEXT_STRAPI_API_TOKEN'];
-  const apiBaseUrl = process.env['NEXT_STRAPI_API_BASE_URL'];
-  const HeaderApiUrl: string = `${apiBaseUrl}/api/header/?populate=*`;
+export type HeaderAPIResponse = t.TypeOf<typeof HeaderDataCodec>;
 
-  const HeaderResponse = await fetch(HeaderApiUrl, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  if (!HeaderResponse.ok) {
-    return {
-      error: 'Failed to fetch header data',
-      headerData: null,
-    };
-  }
-
-  const HeaderJson = await HeaderResponse.json();
-  const headerData = HeaderDataSchema.parse(HeaderJson);
-
-  if (!headerData) {
-    return {
-      error: 'No header data found',
-      headerData: null,
-    };
-  }
-
-  return {
-    headerData,
-    error: null, // No error occurred
-  };
-};
+export const getHeaderData = ({
+  config,
+  fetchFun,
+}: AppEnv): Promise<HeaderAPIResponse> =>
+  extractFromResponse(
+    fetchFun(`${config.STRAPI_API_BASE_URL}/api/header/?populate=*`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
+      },
+    }),
+    HeaderDataCodec
+  );
