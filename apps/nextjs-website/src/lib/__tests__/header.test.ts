@@ -12,44 +12,42 @@ const makeTestAppEnv = () => {
 };
 
 // response example
-const headerResponse = [
-  {
-    data: {
-      id: 1,
-      attributes: {
-        productName: 'Test',
-        beta: false,
-        reverse: false,
-        theme: 'light',
-        createdAt: '2023-11-16T10:15:25.977Z',
-        updatedAt: '2023-11-16T10:16:47.232Z',
-        avatar: {
-          data: null,
-        },
-        ctaButtons: [
-          {
-            id: 3,
-            text: 'test',
-            href: '/',
-            variant: 'text',
-            color: 'inherit',
-            icon: null,
-            size: 'medium',
-          },
-          {
-            id: 4,
-            text: 'test2',
-            href: '/',
-            variant: 'text',
-            color: 'inherit',
-            icon: null,
-            size: 'medium',
-          },
-        ],
+const headerResponse = {
+  data: {
+    id: 1,
+    attributes: {
+      productName: 'Test',
+      beta: false,
+      reverse: false,
+      theme: 'light',
+      createdAt: '2023-11-16T10:15:25.977Z',
+      updatedAt: '2023-11-16T10:16:47.232Z',
+      avatar: {
+        data: null,
       },
+      ctaButtons: [
+        {
+          id: 3,
+          text: 'test',
+          href: '/',
+          variant: 'text',
+          color: 'inherit',
+          icon: null,
+          size: 'medium',
+        },
+        {
+          id: 4,
+          text: 'test2',
+          href: '/',
+          variant: 'text',
+          color: 'inherit',
+          icon: null,
+          size: 'medium',
+        },
+      ],
     },
   },
-];
+};
 
 describe('getHeader', () => {
   it('should call /api/header type GET', async () => {
