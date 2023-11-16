@@ -2,7 +2,7 @@ import { getAllPages } from '@/lib/api';
 import { Page } from '@/lib/api/navigation/pages';
 
 export const dynamicParams = false;
-export const generateStaticParams = () => getAllPages() as Promise<Page[]>;
+export const generateStaticParams = () => getAllPages();
 
 type PageParams = {
   params: { slug: string[] };
