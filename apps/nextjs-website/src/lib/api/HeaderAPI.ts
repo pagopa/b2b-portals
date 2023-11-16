@@ -32,7 +32,7 @@ export const getHeader = ({
 }: AppEnv): Promise<HeaderAPIResponse> =>
   extractFromResponse(
     fetchFun(
-      `${config.STRAPI_API_BASE_URL}/api/header/?populate=avatar, ctaButtons`,
+      `${config.STRAPI_API_BASE_URL}/api/header/?populate=avatar,ctaButtons`,
       {
         method: 'GET',
         headers: {
