@@ -43,6 +43,7 @@ export const CtaButtonsSchema = t.intersection([
 export const CtaGroupCodec = t.intersection([
   t.type({
     theme: ThemeSchema,
+    reverse: t.boolean,
   }),
   t.partial({
     ctaButtons: t.array(CtaButtonsSchema),

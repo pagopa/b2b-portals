@@ -57,7 +57,7 @@ describe('getPreHeader', () => {
     const { config } = appEnv;
 
     fetchMock.mockResolvedValueOnce({
-      json: () => Promise.resolve({}),
+      json: () => Promise.resolve(preHeaderResponse),
     } as unknown as Response);
 
     await getPreHeader(appEnv);
