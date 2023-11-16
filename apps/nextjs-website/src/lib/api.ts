@@ -30,7 +30,7 @@ export const getHeaderData = async (): Promise<HeaderProps> => {
 
   return {
     theme: headerAPIRes.data.attributes.theme,
-    avatar: headerAPIRes.data.attributes.avatar?.data.attributes
+    avatar: headerAPIRes.data.attributes.avatar?.data?.attributes
       .url as AvatarProps,
     beta: headerAPIRes.data.attributes.beta,
     reverse: headerAPIRes.data.attributes.reverse,
