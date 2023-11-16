@@ -1,8 +1,8 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
-import { HeaderClient } from '@/components/HeaderClient';
-import { getHeaderData } from '@/lib/api';
+import { FooterProps } from '@pagopa/pagopa-editorial-components/dist/components/Footer';
+import { FooterClient } from '@/components/FooterClient';
+import { getFooterData } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Page',
@@ -14,13 +14,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const headerData: HeaderProps = await getHeaderData();
+  const footerData: FooterProps = await getFooterData();
 
   return (
     <html>
       <body>
-        <HeaderClient {...headerData} />
         {children}
+        <FooterClient {...footerData} />
       </body>
     </html>
   );

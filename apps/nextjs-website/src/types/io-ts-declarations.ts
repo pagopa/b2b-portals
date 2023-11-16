@@ -60,3 +60,8 @@ export const StrapiImageSchema = t.type({
     t.null,
   ]),
 });
+
+export const linkTypes = t.keyof({
+  internal: null,
+  external: null,
+});
