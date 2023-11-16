@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import { extractFromResponse } from './extractFromResponse';
+import { extractFromResponse } from '../../extractFromResponse';
 import { AppEnv } from '@/AppEnv';
 
 // Codec

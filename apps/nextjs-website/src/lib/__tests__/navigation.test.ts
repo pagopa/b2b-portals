@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { getNavigation } from '../navigation';
+import { getNavigation } from '../api/navigation/navigationAPI';
 
 const makeTestAppEnv = () => {
   const config = {

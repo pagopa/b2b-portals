@@ -1,21 +1,27 @@
+import React from 'react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
+import { PreHeaderClient } from '@/components/PreHeader';
+import { getPreHeaderData } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Page',
   description: 'New Page Created',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const preHeaderData: PreHeaderProps = await getPreHeaderData();
+
   return (
-    <html lang='en'>
-      <body className={inter.className}>{children}</body>
+    <html>
+      <body>
+        <PreHeaderClient {...preHeaderData} />
+        {children}
+      </body>
     </html>
   );
 }
