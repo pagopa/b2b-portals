@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import { extractFromResponse } from './extractFromResponse';
+import { extractFromResponse } from '../../extractFromResponse';
 import { AppEnv } from '@/AppEnv';
 
 // Codec
@@ -8,6 +8,7 @@ const ParentCodec = t.strict({
   id: t.number,
   title: t.string,
   path: t.string,
+  menuAttached: t.boolean,
 });
 const NavItemCodec = t.intersection([
   ParentCodec,
