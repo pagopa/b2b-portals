@@ -1,11 +1,11 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from '../extractFromResponse';
-import { AppEnv } from '@/AppEnv';
 import {
   ThemeSchema,
   CtaButtonsSchema,
   StrapiImageSchema,
-} from '@/types/io-ts-declarations';
+} from '../../types/io-ts-declarations';
+import { AppEnv } from '@/AppEnv';
 
 export const HeaderDataCodec = t.strict({
   data: t.strict({
@@ -31,11 +31,14 @@ export const getHeader = ({
   fetchFun,
 }: AppEnv): Promise<HeaderAPIResponse> =>
   extractFromResponse(
-    fetchFun(`${config.STRAPI_API_BASE_URL}/api/header/?populate=*`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
-      },
-    }),
+    fetchFun(
+      `${config.STRAPI_API_BASE_URL}/api/header/?populate=avatar, ctaButtons`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
+        },
+      }
+    ),
     HeaderDataCodec
   );
