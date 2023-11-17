@@ -1,7 +1,7 @@
 /** This file contains all the functions useful to get data from external resources */
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
-import { getNavigation } from './navigation';
+import { getNavigation } from './fetch/navigation';
 import { Page, makePageListFromNavigation } from './pages';
 import { makeAppEnv } from '@/AppEnv';
 
