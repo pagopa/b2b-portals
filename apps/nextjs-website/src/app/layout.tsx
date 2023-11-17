@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import PreHeader from '@/components/PreHeader';
 import { getPreHeaderProps } from '@/lib/api';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Page',
@@ -18,7 +15,7 @@ export default async function RootLayout({
   const preHeaderProps = await getPreHeaderProps();
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body>
         <PreHeader {...preHeaderProps} />
         {children}
       </body>

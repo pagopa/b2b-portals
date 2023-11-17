@@ -3,7 +3,7 @@ import { extractFromResponse } from './extractFromResponse';
 import { ThemeCodec } from './types/Theme';
 import { AppEnv } from '@/AppEnv';
 
-export const CtaButtonSchema = t.intersection([
+const CtaButtonCodec = t.intersection([
   t.strict({
     text: t.string,
     href: t.string,
@@ -38,7 +38,7 @@ export const CtaGroupCodec = t.intersection([
     reverse: t.boolean,
   }),
   t.partial({
-    ctaButtons: t.array(CtaButtonSchema),
+    ctaButtons: t.array(CtaButtonCodec),
   }),
 ]);
 
