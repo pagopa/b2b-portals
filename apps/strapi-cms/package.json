@@ -18,10 +18,11 @@
     "typescript": "5.2.2"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.15.4",
-    "@strapi/plugin-users-permissions": "4.15.4",
+    "@strapi/plugin-i18n": "4.13.7",
+    "@strapi/plugin-users-permissions": "4.13.7",
     "@strapi/provider-upload-aws-s3": "^4.15.4",
-    "@strapi/strapi": "4.15.4",
+    "@strapi/strapi": "4.13.7",
+    "aws-sdk": "^2.1490.0",
     "better-sqlite3": "8.6.0",
     "pg": "^8.11.3",
     "strapi-plugin-navigation": "^2.2.16"
