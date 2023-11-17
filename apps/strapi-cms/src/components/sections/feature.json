@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_sections_features",
+  "info": {
+    "displayName": "Feature",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "showCarouselMobile": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "background": {
+      "type": "string"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.feature-item",
+      "required": true,
+      "max": 4,
+      "min": 3
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$",
+      "unique": true
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "collectionName": "components_sections_editorials",
+  "info": {
+    "displayName": "Editorial",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "eyelet": {
+      "type": "string"
+    },
+    "body": {
+      "type": "richtext",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "pattern": {
+      "type": "enumeration",
+      "enum": [
+        "none",
+        "dots",
+        "solid"
+      ],
+      "default": "none",
+      "required": true
+    },
+    "width": {
+      "type": "enumeration",
+      "enum": [
+        "standard",
+        "wide",
+        "center"
+      ],
+      "default": "standard",
+      "required": true
+    },
+    "reversed": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button",
+      "max": 2
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$",
+      "required": false,
+      "unique": true
+    }
+  }
+}

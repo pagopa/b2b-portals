@@ -22,6 +22,17 @@
       "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
       "required": true,
       "unique": true
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.editorial",
+        "sections.feature",
+        "sections.hero",
+        "sections.how-to"
+      ],
+      "required": true,
+      "min": 1
     }
   }
 }

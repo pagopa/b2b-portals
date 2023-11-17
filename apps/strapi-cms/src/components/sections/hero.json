@@ -1,0 +1,72 @@
+{
+  "collectionName": "components_sections_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "richtext"
+    },
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button",
+      "max": 2
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "background": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "inverse": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "small",
+        "big"
+      ],
+      "default": "small",
+      "required": true
+    },
+    "useHoverlay": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$",
+      "unique": true
+    }
+  }
+}
