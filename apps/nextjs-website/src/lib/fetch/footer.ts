@@ -9,7 +9,7 @@ const CompanyLinkCodec = t.strict({
   ariaLabel: t.union([t.string, t.null]),
 });
 
-export const FooterLinkCodec = t.strict({
+const FooterLinkCodec = t.strict({
   text: t.union([t.string, t.null]),
   href: t.string,
   linkType: LinkTypesCodec,
@@ -38,6 +38,7 @@ const FooterCodec = t.strict({
 
 // Types
 export type Footer = t.TypeOf<typeof FooterCodec>;
+export type FooterSection = t.TypeOf<typeof FooterSectionCodec>;
 
 export const getFooter = ({ config, fetchFun }: AppEnv): Promise<Footer> =>
   extractFromResponse(

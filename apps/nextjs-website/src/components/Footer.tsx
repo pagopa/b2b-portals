@@ -7,6 +7,6 @@ import {
 
 const Footer: React.FC<Omit<FooterProps, 'onLanguageChanged'>> = (
   footerData
-) => <FooterEC {...footerData} onLanguageChanged={() => {}} />;
+) => <FooterEC {...footerData} onLanguageChanged={() => true} />;
 
 export default Footer;
