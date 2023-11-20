@@ -14,26 +14,17 @@ const makeTestAppEnv = () => {
 // response example
 const footerResponse = {
   data: {
-    id: 1,
     attributes: {
       legalInfo: 'test legal',
       showFundedByNextGenerationEULogo: false,
-      createdAt: '2023-11-16T15:09:53.280Z',
-      updatedAt: '2023-11-16T15:33:50.162Z',
       companyLink: {
-        id: 1,
-        text: 'testCompanyLink',
         href: '/',
-        linkType: 'internal',
         ariaLabel: null,
-        icon: null,
       },
       links_aboutUs: {
-        id: 1,
         title: 'aboutUs',
         links: [
           {
-            id: 2,
             text: 'aboutUsLinkExample1',
             href: '/',
             linkType: 'internal',
@@ -41,7 +32,6 @@ const footerResponse = {
             icon: null,
           },
           {
-            id: 6,
             text: 'aboutUsLinkExample2',
             href: '/',
             linkType: 'internal',
@@ -51,11 +41,9 @@ const footerResponse = {
         ],
       },
       links_followUs: {
-        id: 2,
         title: 'followUs',
         links: [
           {
-            id: 3,
             text: 'followUsLinkExample1',
             href: '/',
             linkType: 'internal',
@@ -63,7 +51,6 @@ const footerResponse = {
             icon: null,
           },
           {
-            id: 7,
             text: 'followUsLinkExample2',
             href: '/',
             linkType: 'internal',
@@ -71,7 +58,6 @@ const footerResponse = {
             icon: null,
           },
           {
-            id: 10,
             text: 'facebook',
             href: '/',
             linkType: 'social',
@@ -81,11 +67,9 @@ const footerResponse = {
         ],
       },
       links_resources: {
-        id: 3,
         title: 'Resources',
         links: [
           {
-            id: 4,
             text: 'ResourcesLinkExample1',
             href: '/',
             linkType: 'internal',
@@ -93,7 +77,6 @@ const footerResponse = {
             icon: null,
           },
           {
-            id: 8,
             text: 'ResourcesLinkExample2',
             href: '/',
             linkType: 'internal',
@@ -103,11 +86,9 @@ const footerResponse = {
         ],
       },
       links_services: {
-        id: 4,
         title: 'Services',
         links: [
           {
-            id: 5,
             text: 'ServicesLinkExample1',
             href: '/',
             linkType: 'internal',
@@ -115,7 +96,6 @@ const footerResponse = {
             icon: null,
           },
           {
-            id: 9,
             text: 'ServicesLinkExample2',
             href: '/',
             linkType: 'internal',
