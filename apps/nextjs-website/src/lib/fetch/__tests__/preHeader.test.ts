@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { getPreHeader } from '../api/preHeaderAPI';
+import { getPreHeader } from '../preHeader';
 
 const makeTestAppEnv = () => {
   const config = {
@@ -73,7 +73,7 @@ describe('getPreHeader', () => {
     );
   });
 
-  it('should parse preHeader without error', async () => {
+  it('should parse preHeader response without error', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
 
     fetchMock.mockResolvedValueOnce({

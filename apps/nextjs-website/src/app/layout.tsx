@@ -1,8 +1,6 @@
-import React from 'react';
 import type { Metadata } from 'next';
-import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
-import { PreHeaderClient } from '@/components/PreHeader';
-import { getPreHeaderData } from '@/lib/api';
+import PreHeader from '@/components/PreHeader';
+import { getPreHeaderProps } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Page',
@@ -14,12 +12,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const preHeaderData: PreHeaderProps = await getPreHeaderData();
-
+  const preHeaderProps = await getPreHeaderProps();
   return (
-    <html>
+    <html lang='en'>
       <body>
-        <PreHeaderClient {...preHeaderData} />
+        <PreHeader {...preHeaderProps} />
         {children}
       </body>
     </html>

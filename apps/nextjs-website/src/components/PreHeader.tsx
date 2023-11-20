@@ -1,8 +1,12 @@
 'use client';
 import React from 'react';
-import { PreHeader } from '@pagopa/pagopa-editorial-components';
-import { PreHeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
+import {
+  PreHeaderProps,
+  PreHeader as PreHeaderEC,
+} from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 
-export const PreHeaderClient: React.FC<PreHeaderProps> = (preHeaderData) => (
-  <PreHeader {...preHeaderData} />
+const PreHeader: React.FC<PreHeaderProps> = (preHeaderData) => (
+  <PreHeaderEC {...preHeaderData} />
 );
+
+export default PreHeader;
