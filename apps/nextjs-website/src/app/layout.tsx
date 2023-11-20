@@ -14,7 +14,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const footerData: FooterProps = await getFooterData();
+  const footerData: Omit<FooterProps, 'onLanguageChanged'> =
+    await getFooterData();
 
   return (
     <html>

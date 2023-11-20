@@ -1,31 +1,33 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from '../extractFromResponse';
-import { linkTypes } from '../../types/io-ts-declarations';
+import { LinkTypes } from '../../types/io-ts-declarations';
 import { AppEnv } from '@/AppEnv';
 
 // Codec
-const FooterLinkCodec = t.strict({
-  id: t.number,
-  text: t.string,
+const CompanyLinkCodec = t.strict({
   href: t.string,
-  linkType: linkTypes,
-  ariaLabel: t.string,
+  ariaLabel: t.union([t.string, t.null]),
+});
+
+export const FooterLinkCodec = t.strict({
+  text: t.union([t.string, t.null]),
+  href: t.string,
+  linkType: LinkTypes,
+  ariaLabel: t.union([t.string, t.null]),
   icon: t.union([t.string, t.null]),
 });
 
 const FooterSectionCodec = t.strict({
-  id: t.number,
-  title: t.string,
+  title: t.union([t.string, t.null]),
   links: t.array(FooterLinkCodec),
 });
 
 const FooterCodec = t.strict({
   data: t.strict({
-    id: t.number,
     attributes: t.strict({
       legalInfo: t.string,
       showFundedByNextGenerationEULogo: t.boolean,
-      companyLink: FooterLinkCodec,
+      companyLink: CompanyLinkCodec,
       links_aboutUs: FooterSectionCodec,
       links_followUs: FooterSectionCodec,
       links_resources: FooterSectionCodec,
