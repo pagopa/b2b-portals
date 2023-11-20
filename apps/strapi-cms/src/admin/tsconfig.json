@@ -9,7 +9,6 @@
     "allowJs": true,
     "incremental": true,
     "jsx": "react-jsx",
-
     "target": "es2021",
     "module": "commonjs",
     "esModuleInterop": true,
