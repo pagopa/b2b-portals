@@ -1,8 +1,9 @@
 /** This file contains all the functions useful to get data from external resources */
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
-import { getNavigation } from './navigation';
 import { Page, makePageListFromNavigation } from './pages';
+import { getNavigation } from './fetch/navigation';
+import { PreHeader, getPreHeader } from './fetch/preHeader';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -18,4 +19,14 @@ const appEnv = pipe(
 export const getAllPages = async (): Promise<ReadonlyArray<Page>> => {
   const navigation = await getNavigation('main-navigation', appEnv);
   return makePageListFromNavigation(navigation);
+};
+
+// Return PreHeaderProps
+export const getPreHeaderProps = async (): Promise<
+  PreHeader['data']['attributes']
+> => {
+  const {
+    data: { attributes },
+  } = await getPreHeader(appEnv);
+  return attributes;
 };

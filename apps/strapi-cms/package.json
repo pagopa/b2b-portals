@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "scripts": {
     "clean": "shx rm -rf dist/",
-    "compile": "npm run clean && tsc --noEmit",
+    "generate": "strapi ts:generate-types",
+    "precompile": "npm run clean && npm run generate",
+    "compile": "tsc --noEmit",
+    "predev": "npm run compile",
     "dev": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
