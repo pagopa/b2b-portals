@@ -1,21 +1,24 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import PreHeader from '@/components/PreHeader';
+import { getPreHeaderProps } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Page',
   description: 'New Page Created',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const preHeaderProps = await getPreHeaderProps();
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body>
+        <PreHeader {...preHeaderProps} />
+        {children}
+      </body>
     </html>
   );
 }
