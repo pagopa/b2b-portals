@@ -4,6 +4,8 @@ import * as E from 'fp-ts/lib/Either';
 import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
+import { Header, getHeader } from './fetch/header';
+import { makeMenuFromNavigation } from './fetch/menu';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -29,4 +31,26 @@ export const getPreHeaderProps = async (): Promise<
     data: { attributes },
   } = await getPreHeader(appEnv);
   return attributes;
+};
+
+export const getHeaderProps = async (): Promise<Header['data']['attributes']> => {
+  const headerAPIRes = await getHeader(appEnv);
+  const menuAPIRes = await getNavigation('main-navigation', appEnv);
+
+  return {
+    theme: headerAPIRes.data.attributes.theme,
+    avatar: headerAPIRes.data.attributes.avatar,
+    beta: headerAPIRes.data.attributes.beta,
+    reverse: headerAPIRes.data.attributes.reverse,
+    product: {
+      name: headerAPIRes.data.attributes.productName,
+      href: '/',
+    },
+    ...(headerAPIRes.data.attributes.ctaButtons && {
+      ctaButtons: headerAPIRes.data.attributes.ctaButtons,
+    }),
+    menu: Array.from(
+      makeMenuFromNavigation(menuAPIRes, headerAPIRes.data.attributes.theme)
+    ),
+  };
 };
