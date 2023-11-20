@@ -7,6 +7,8 @@ export default ({ env }: any) => ({
         secretAccessKey: env('AWS_ACCESS_SECRET'),
         region: env('AWS_REGION'),
         params: {
+          ACL: 'private',
+          signedUrlExpires: 15 * 60,
           Bucket: env('AWS_BUCKET_NAME'),
         },
       },
