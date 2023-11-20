@@ -19,7 +19,11 @@ resource "aws_iam_policy" "upload_image" {
     Statement = [
       {
         Action = [
-          "s3:*"
+          "s3:DeleteObject",
+          "s3:GetObject",
+          "s3:GetObjectAttributes",
+          "s3:ListBucket",
+          "s3:PutObject"
         ]
         Effect   = "Allow"
         Resource = format("%s/*", aws_s3_bucket.cms_medialibrary_bucket.arn)
