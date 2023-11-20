@@ -24,10 +24,7 @@ export const HeaderDataCodec = t.strict({
 
 export type Header = t.TypeOf<typeof HeaderDataCodec>;
 
-export const getHeader = ({
-  config,
-  fetchFun,
-}: AppEnv): Promise<Header> =>
+export const getHeader = ({ config, fetchFun }: AppEnv): Promise<Header> =>
   extractFromResponse(
     fetchFun(
       `${config.STRAPI_API_BASE_URL}/api/header/?populate=avatar,ctaButtons`,
