@@ -25,7 +25,7 @@
         "value": "${db_name}"
       },
       {
-        "name": "AWS_BUCKET",
+        "name": "AWS_BUCKET_NAME",
         "value": "${bucket_name}"
       },
       {
