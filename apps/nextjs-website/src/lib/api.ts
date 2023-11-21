@@ -4,6 +4,7 @@ import * as E from 'fp-ts/lib/Either';
 import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
+import { Components, getComponents } from './fetch/components';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -30,3 +31,13 @@ export const getPreHeaderProps = async (): Promise<
   } = await getPreHeader(appEnv);
   return attributes;
 };
+
+// Return ComponentsProps for a specific page ID
+export const getComponentsProps = async (
+  idprops: number
+): Promise<Components> =>
+  getComponents({
+    config: appEnv.config,
+    fetchFun: appEnv.fetchFun,
+    id: idprops,
+  });
