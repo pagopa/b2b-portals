@@ -7,6 +7,10 @@ const parentNavItem = {
   title: 'Parent',
   path: 'parent',
   parent: null,
+  related: {
+    id: 2,
+    slug: 'parent',
+  },
 };
 const childNavItem = {
   order: 1,
@@ -14,6 +18,10 @@ const childNavItem = {
   title: 'Child',
   path: 'child',
   parent: parentNavItem,
+  related: {
+    id: 3,
+    slug: 'child',
+  },
 };
 
 describe('makePageListFromNavigation', () => {
@@ -23,7 +31,14 @@ describe('makePageListFromNavigation', () => {
   });
   it('should return pages list given a navigation with homepage', () => {
     const actual = makePageListFromNavigation([
-      { order: 1, id: 1, title: 'Home', path: '/', parent: null },
+      {
+        order: 1,
+        id: 1,
+        title: 'Home',
+        path: '/',
+        parent: null,
+        related: { id: 1, slug: '/' },
+      },
     ]);
     const expected = [{ slug: [] }];
     expect(actual).toStrictEqual(expected);

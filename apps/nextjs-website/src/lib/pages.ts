@@ -4,6 +4,7 @@ import { Navigation } from './fetch/navigation';
 
 export type Page = {
   readonly slug: ReadonlyArray<string>;
+  readonly id: number;
 };
 
 const makeSlugList = (
@@ -25,5 +26,8 @@ export const makePageListFromNavigation = (
 ): ReadonlyArray<Page> =>
   pipe(
     navigation,
-    RA.map((item) => ({ slug: makeSlugList(item, navigation) }))
+    RA.map((item) => ({
+      slug: makeSlugList(item, navigation),
+      id: item.related.id,
+    }))
   );

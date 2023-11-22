@@ -2,31 +2,26 @@ import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
 import { AppEnv } from '@/AppEnv';
 
-const AttributesCodec = t.strict({
-  slug: t.string,
-  sections: t.array(
-    t.strict({
-      id: t.number,
-      __component: t.string,
-    })
-  ),
-});
-
-const ComponentsCodec = t.strict({
+const PageCodec = t.strict({
   data: t.strict({
-    id: t.number,
-    attributes: AttributesCodec,
+    attributes: t.strict({
+      sections: t.array(
+        t.strict({
+          __component: t.string,
+        })
+      ),
+    }),
   }),
 });
 
 // Types
-export type Components = t.TypeOf<typeof ComponentsCodec>;
+export type PageData = t.TypeOf<typeof PageCodec>;
 
-export const getComponents = ({
+export const getPage = ({
   config,
   fetchFun,
   id,
-}: Readonly<AppEnv & { readonly id: number }>): Promise<Readonly<Components>> =>
+}: AppEnv & { readonly id: number }): Promise<Readonly<PageData>> =>
   extractFromResponse(
     fetchFun(
       `${config.STRAPI_API_BASE_URL}/api/pages/${id}?populate[sections][populate][0]=ctaButtons,image,background,items,link,steps`,
@@ -37,5 +32,5 @@ export const getComponents = ({
         },
       }
     ),
-    ComponentsCodec
+    PageCodec
   );

@@ -13,6 +13,10 @@ const NavItemCodec = t.intersection([
   ParentCodec,
   t.strict({
     parent: t.union([ParentCodec, t.null]),
+    related: t.strict({
+      id: t.number,
+      slug: t.string,
+    }),
   }),
 ]);
 const NavigationCodec = t.readonlyArray(NavItemCodec);

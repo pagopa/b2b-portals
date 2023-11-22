@@ -1,4 +1,4 @@
-import { getAllPages } from '@/lib/api';
+import { getAllPages, getPageProps } from '@/lib/api';
 import { Page } from '@/lib/pages';
 
 // Dynamic segments not included in generateStaticParams will return a 404.
@@ -13,11 +13,22 @@ type PageParams = {
   params: { slug: string[] };
 };
 
-const Page = ({ params }: PageParams) => {
+const Page = async ({ params }: PageParams) => {
   const { slug } = params;
+  const allPages = await getAllPages(); // Gets result directly from internal cache
+
+  const pageID = allPages.filter(
+    (page) => slug.join('') === page.slug.join('')
+  )[0]?.id;
+  if (!pageID) {
+    return null;
+  }
+
+  const pageProps = await getPageProps(pageID);
   return (
     <div>
       <p>This is the page {slug.join('/')}</p>
+      <p>These are my props {JSON.stringify(pageProps)}</p>
     </div>
   );
 };
