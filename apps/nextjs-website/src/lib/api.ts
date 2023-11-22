@@ -6,7 +6,7 @@ import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
 import { getHeader } from './fetch/header';
-import { makeMenuFromNavigation } from './fetch/menu';
+import { makeMenuFromNavigation } from './menu';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env

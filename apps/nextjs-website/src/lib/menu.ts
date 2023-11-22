@@ -1,5 +1,5 @@
 import { type MenuDropdownProp } from '@pagopa/pagopa-editorial-components/dist/components/Header/components/MenuDropdown';
-import { Navigation } from './navigation';
+import { Navigation } from './fetch/navigation';
 
 const makeMenuItemFromNavItem = (
   item: Navigation[0],

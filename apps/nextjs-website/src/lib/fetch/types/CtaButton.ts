@@ -1,5 +1,4 @@
 import * as t from 'io-ts';
-import { ThemeCodec } from './Theme';
 
 const CTAButtonVariant = t.keyof({
   text: null,
@@ -23,7 +22,7 @@ const CTAButtonSize = t.keyof({
   large: null,
 });
 
-export const CtaButtonsSchema = t.intersection([
+export const CTAButtonSchema = t.intersection([
   t.type({
     text: t.string,
     href: t.string,
@@ -36,15 +35,4 @@ export const CtaButtonsSchema = t.intersection([
   }),
 ]);
 
-export type ctaButtons = t.TypeOf<typeof CtaButtonsSchema>;
-
-export const CtaGroupCodec = t.intersection([
-  t.type({
-    theme: ThemeCodec,
-  }),
-  t.partial({
-    ctaButtons: t.array(CtaButtonsSchema),
-  }),
-]);
-
-export type ctapreButtons = t.TypeOf<typeof CtaGroupCodec>;
+export type ctaButtons = t.TypeOf<typeof CTAButtonSchema>;

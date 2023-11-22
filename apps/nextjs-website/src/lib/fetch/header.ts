@@ -1,7 +1,7 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
 import { ThemeCodec } from './types/Theme';
-import { CtaButtonsSchema } from './types/ctaButtons';
+import { CTAButtonSchema } from './types/CtaButton';
 import { StrapiImageSchema } from './types/StrapiImage';
 import { AppEnv } from '@/AppEnv';
 
@@ -16,7 +16,7 @@ export const HeaderDataCodec = t.strict({
       }),
       t.partial({
         avatar: StrapiImageSchema,
-        ctaButtons: t.array(CtaButtonsSchema),
+        ctaButtons: t.array(CTAButtonSchema),
       }),
     ]),
   }),

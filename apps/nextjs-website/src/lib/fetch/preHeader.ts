@@ -1,29 +1,29 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { CtaGroupCodec } from './types/ctaButtons';
+import { CTAGroupCodec } from './types/CtaGroup';
 import { AppEnv } from '@/AppEnv';
 
 const PreHeaderCodec = t.strict({
   data: t.strict({
     attributes: t.union([
       t.strict({
-        rightCtas: CtaGroupCodec,
-        leftCtas: CtaGroupCodec,
+        rightCtas: CTAGroupCodec,
+        leftCtas: CTAGroupCodec,
       }),
       t.intersection([
         t.strict({
-          rightCtas: CtaGroupCodec,
+          rightCtas: CTAGroupCodec,
         }),
         t.partial({
-          leftCtas: CtaGroupCodec,
+          leftCtas: CTAGroupCodec,
         }),
       ]),
       t.intersection([
         t.strict({
-          leftCtas: CtaGroupCodec,
+          leftCtas: CTAGroupCodec,
         }),
         t.partial({
-          rightCtas: CtaGroupCodec,
+          rightCtas: CTAGroupCodec,
         }),
       ]),
     ]),
