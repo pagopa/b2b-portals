@@ -40,14 +40,17 @@ describe('makePageListFromNavigation', () => {
         related: { id: 1, slug: '/' },
       },
     ]);
-    const expected = [{ slug: [] }];
+    const expected = [{ slug: [], id: 1 }];
     expect(actual).toStrictEqual(expected);
   });
   it('should return pages list given a navigation with parent', () => {
     const actual = makePageListFromNavigation([parentNavItem, childNavItem]);
     const expected = [
-      { slug: [parentNavItem.path] },
-      { slug: [parentNavItem.path, childNavItem.path] },
+      { slug: [parentNavItem.path], id: parentNavItem.related.id },
+      {
+        slug: [parentNavItem.path, childNavItem.path],
+        id: childNavItem.related.id,
+      },
     ];
     expect(actual).toStrictEqual(expected);
   });
