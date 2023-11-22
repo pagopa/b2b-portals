@@ -1,4 +1,6 @@
 import { type MenuDropdownProp } from '@pagopa/pagopa-editorial-components/dist/components/Header/components/MenuDropdown';
+import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
+import { Header } from './fetch/header';
 import { Navigation } from './fetch/navigation';
 
 const makeMenuItemFromNavItem = (
@@ -25,10 +27,35 @@ const makeMenuItemFromNavItem = (
   };
 };
 
-export const makeMenuFromNavigation = (
+const makeMenuFromNavigation = (
   navigation: Navigation,
   theme: 'light' | 'dark'
 ): ReadonlyArray<MenuDropdownProp> =>
   navigation
     .filter((item) => !item.parent && item.menuAttached)
     .map((item) => makeMenuItemFromNavItem(item, navigation, theme));
+
+export const makeHeaderProps = (
+  navigation: Navigation,
+  header: Header
+): HeaderProps => ({
+  theme: header.data.attributes.theme,
+  ...(header.data.attributes.avatar &&
+    header.data.attributes.avatar.data && {
+      avatar: {
+        src: header.data.attributes.avatar.data.attributes.url,
+      },
+    }),
+  beta: header.data.attributes.beta,
+  reverse: header.data.attributes.reverse,
+  product: {
+    name: header.data.attributes.productName,
+    href: '/',
+  },
+  ...(header.data.attributes.ctaButtons && {
+    ctaButtons: header.data.attributes.ctaButtons,
+  }),
+  menu: Array.from(
+    makeMenuFromNavigation(navigation, header.data.attributes.theme)
+  ),
+});

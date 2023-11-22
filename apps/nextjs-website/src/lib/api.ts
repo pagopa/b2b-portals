@@ -6,7 +6,7 @@ import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
 import { getHeader } from './fetch/header';
-import { makeMenuFromNavigation } from './menu';
+import { makeHeaderProps } from './header';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -35,27 +35,7 @@ export const getPreHeaderProps = async (): Promise<
 };
 
 export const getHeaderProps = async (): Promise<HeaderProps> => {
-  const headerAPIRes = await getHeader(appEnv);
-  const headerData = headerAPIRes.data.attributes;
-  const menuAPIRes = await getNavigation('main-navigation', appEnv);
-
-  return {
-    theme: headerData.theme,
-    ...(headerData.avatar &&
-      headerData.avatar.data && {
-        avatar: {
-          src: headerData.avatar.data.attributes.url,
-        },
-      }),
-    beta: headerData.beta,
-    reverse: headerData.reverse,
-    product: {
-      name: headerData.productName,
-      href: '/',
-    },
-    ...(headerData.ctaButtons && {
-      ctaButtons: headerData.ctaButtons,
-    }),
-    menu: Array.from(makeMenuFromNavigation(menuAPIRes, headerData.theme)),
-  };
+  const header = await getHeader(appEnv);
+  const navigation = await getNavigation('main-navigation', appEnv);
+  return makeHeaderProps(navigation, header);
 };
