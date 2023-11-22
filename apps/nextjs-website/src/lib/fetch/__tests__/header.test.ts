@@ -20,19 +20,16 @@ const headerResponse = {
       reverse: false,
       theme: 'light',
       avatar: {
-        data: null,
+        data: {
+          attributes: {
+            url: '/uploads/file_e4c03befba.png',
+            alternativeText: null,
+          },
+        },
       },
       ctaButtons: [
         {
           text: 'test',
-          href: '/',
-          variant: 'text',
-          color: 'inherit',
-          icon: null,
-          size: 'medium',
-        },
-        {
-          text: 'test2',
           href: '/',
           variant: 'text',
           color: 'inherit',

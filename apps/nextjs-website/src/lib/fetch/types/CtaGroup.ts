@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { ThemeCodec } from './Theme';
-import { CTAButtonSchema } from './CtaButton';
+import { CTAButtonSchema } from './CTAButton';
 
 export const CTAGroupCodec = t.intersection([
   t.type({

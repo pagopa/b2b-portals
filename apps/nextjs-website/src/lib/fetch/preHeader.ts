@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { CTAGroupCodec } from './types/CtaGroup';
+import { CTAGroupCodec } from './types/CTAGroup';
 import { AppEnv } from '@/AppEnv';
 
 const PreHeaderCodec = t.strict({

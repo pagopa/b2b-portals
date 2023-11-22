@@ -1,7 +1,7 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
 import { ThemeCodec } from './types/Theme';
-import { CTAButtonSchema } from './types/CtaButton';
+import { CTAButtonSchema } from './types/CTAButton';
 import { StrapiImageSchema } from './types/StrapiImage';
 import { AppEnv } from '@/AppEnv';
 

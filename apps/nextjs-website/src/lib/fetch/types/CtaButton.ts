@@ -34,5 +34,3 @@ export const CTAButtonSchema = t.intersection([
     size: CTAButtonSize,
   }),
 ]);
-
-export type ctaButtons = t.TypeOf<typeof CTAButtonSchema>;
