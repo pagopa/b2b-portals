@@ -17,7 +17,12 @@ npm i
 ```
 
 Finally:
-- in the `strapi-cms` app (`apps/strapi-cms`), create a `.env` starting from `.env.example` and fill all the environment variables. (For local testing purposes, you may simply copy and rename the file.)
+- in the `strapi-cms` app (`apps/strapi-cms`), create a `.env` starting from `.env.example`, setting the `DATABASE_CLIENT` variable to either 'sqlite' or 'postgres'.
+(It is completely acceptable to simply copy and rename the file. In which case `DATABASE_CLIENT` will already be set to 'sqlite'.)
+
+While SQLite requires no further configuration, some extra steps need to be taken to utilize PostgreSQL:
+- A local instance of PostgreSQL must be running. It must also contain a schema that's either empty or that's only been accessed by Strapi itself in the past.
+- The variables listed under `#POSTGRESQL` in the `.env.example` file must be filled out.
 
 
 ### Run the project locally
