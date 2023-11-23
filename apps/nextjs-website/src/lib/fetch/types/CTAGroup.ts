@@ -3,7 +3,7 @@ import { ThemeCodec } from './Theme';
 import { CTAButtonSchema } from './CTAButton';
 
 export const CTAGroupCodec = t.intersection([
-  t.type({
+  t.strict({
     theme: ThemeCodec,
   }),
   t.partial({
