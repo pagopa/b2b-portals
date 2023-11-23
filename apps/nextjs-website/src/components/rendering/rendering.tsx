@@ -1,27 +1,28 @@
 import React from 'react';
+import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
+import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import Hero from '../Hero';
 import Editorial from '../Editorial';
-import toberemoved from './toberemoved.jpg'; //to be removed, only example for avoid image error
+import {
+  SectionDataToEditorialProps,
+  SectionDataToHeroProps,
+} from './sectionDataToProps';
+import { PageData } from '@/lib/fetch/page';
 
-export type ComponentData = {
-  __component: string;
-};
-
-export function rendering(componentData: ComponentData, index: number) {
+export function rendering(
+  componentData: PageData['data']['attributes']['sections'][0],
+  index: number
+) {
+  // eslint-disable-next-line no-underscore-dangle
   switch (componentData.__component) {
     case 'sections.hero':
-      return <Hero key={index} title={'test title'} />;
+      const HeroSectionProps: HeroProps = SectionDataToHeroProps(componentData);
+      return <Hero key={index} {...HeroSectionProps} />; // id={componentData.sectionID}
 
     case 'sections.editorial':
-      return (
-        <Editorial
-          key={index}
-          title={'test title'}
-          width={'center'}
-          body={'test body'}
-          image={toberemoved}
-        />
-      );
+      const EditorialSectionProps: EditorialProps =
+        SectionDataToEditorialProps(componentData);
+      return <Editorial key={index} {...EditorialSectionProps} />; // id={componentData.sectionID}
 
     default:
       return null;
