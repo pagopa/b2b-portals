@@ -1,25 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { makeHeaderProps } from '../header'; // Adjust the import path based on your file structure
+import { makeHeaderProps } from '../header';
 import { Header } from '../fetch/header';
 import { CTAButtonType } from '../fetch/types/CTAButton';
-
-const parentNavItem = {
-  order: 1,
-  id: 1,
-  title: 'Parent',
-  path: 'parent',
-  parent: null,
-  menuAttached: true,
-};
-
-const childNavItem = {
-  order: 1,
-  id: 2,
-  title: 'Child',
-  path: 'child',
-  parent: parentNavItem,
-  menuAttached: true,
-};
+import { parentNavItem, childNavItem } from './data';
 
 const navigationWithParentAndChild = [parentNavItem, childNavItem];
 
@@ -47,7 +30,7 @@ const header: Header = {
         data: {
           attributes: {
             url: 'path/to/avatar.jpg',
-            alternativeText: 'Alt text', // Add this line if alternativeText is part of your data structure
+            alternativeText: 'Alt text',
           },
         },
       },
@@ -101,7 +84,7 @@ describe('makeHeaderProps', () => {
             },
           ],
         },
-      ], // You may need to adjust this based on your specific implementation
+      ],
     };
     expect(actual).toStrictEqual(expected);
   });
@@ -132,7 +115,7 @@ describe('makeHeaderProps', () => {
             },
           ],
         },
-      ], // You may need to adjust this based on your specific implementation
+      ],
     };
     expect(actual).toStrictEqual(expected);
   });

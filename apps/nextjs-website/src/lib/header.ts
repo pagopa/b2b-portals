@@ -15,14 +15,14 @@ const makeMenuItemFromNavItem = (
         child.parent && child.parent.id === item.id && child.menuAttached
     )
     .map((child) => ({
-      href: '/' + item.path + '/' + child.path,
+      href: `/${item.path}/${child.path}`,
       label: child.title,
     }));
 
   return {
     theme,
     label: title,
-    href: '/' + path,
+    href: `/${path}`,
     ...(itemsArray.length > 0 && { items: itemsArray }),
   };
 };

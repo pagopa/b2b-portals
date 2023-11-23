@@ -1,22 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { makePageListFromNavigation } from '../pages';
-
-const parentNavItem = {
-  order: 1,
-  id: 1,
-  title: 'Parent',
-  path: 'parent',
-  parent: null,
-  menuAttached: true,
-};
-const childNavItem = {
-  order: 1,
-  id: 2,
-  title: 'Child',
-  path: 'child',
-  parent: parentNavItem,
-  menuAttached: true,
-};
+import { parentNavItem, childNavItem } from './data';
 
 describe('makePageListFromNavigation', () => {
   it('should return empty list given empty navigation', () => {
