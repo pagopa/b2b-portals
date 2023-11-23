@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { makeHeaderProps } from '../header'; // Adjust the import path based on your file structure
+import { Header } from '../fetch/header';
+import { CTAButtonType } from '../fetch/types/CTAButton';
 
 const parentNavItem = {
   order: 1,
@@ -21,10 +23,26 @@ const childNavItem = {
 
 const navigationWithParentAndChild = [parentNavItem, childNavItem];
 
-const header = {
+const productName = 'My Product';
+const ctaButtons: ReadonlyArray<CTAButtonType> = [
+  {
+    text: 'Primary',
+    href: 'primary.com',
+    variant: 'contained',
+    color: 'inherit',
+  },
+  {
+    text: 'Secondary',
+    href: 'secondary.com',
+    variant: 'outlined',
+    color: 'inherit',
+  },
+];
+
+const header: Header = {
   data: {
     attributes: {
-      theme: 'light' || 'dark',
+      theme: 'light',
       avatar: {
         data: {
           attributes: {
@@ -35,8 +53,23 @@ const header = {
       },
       beta: true,
       reverse: false,
-      productName: 'My Product',
-      ctaButtons: ['Button 1', 'Button 2'],
+      productName,
+      ctaButtons: Array.from(ctaButtons),
+    },
+  },
+};
+
+const headerNoAvatar: Header = {
+  data: {
+    attributes: {
+      theme: 'light',
+      avatar: {
+        data: null,
+      },
+      beta: true,
+      reverse: false,
+      productName,
+      ctaButtons: Array.from(ctaButtons),
     },
   },
 };
@@ -52,27 +85,54 @@ describe('makeHeaderProps', () => {
       beta: true,
       reverse: false,
       product: {
-        name: 'My Product',
+        name: productName,
         href: '/',
       },
-      ctaButtons: ['Button 1', 'Button 2'],
-      menu: [], // You may need to adjust this based on your specific implementation
+      ctaButtons,
+      menu: [
+        {
+          href: '/parent',
+          label: 'Parent',
+          theme: 'light',
+          items: [
+            {
+              href: '/parent/child',
+              label: 'Child',
+            },
+          ],
+        },
+      ], // You may need to adjust this based on your specific implementation
     };
     expect(actual).toStrictEqual(expected);
   });
 
   it('should return header props without avatar when avatar is not present', () => {
-    const actual = makeHeaderProps(navigationWithParentAndChild, header);
+    const actual = makeHeaderProps(
+      navigationWithParentAndChild,
+      headerNoAvatar
+    );
     const expected = {
       theme: 'light',
       beta: true,
       reverse: false,
       product: {
-        name: 'My Product',
+        name: productName,
         href: '/',
       },
-      ctaButtons: ['Button 1', 'Button 2'],
-      menu: [],
+      ctaButtons,
+      menu: [
+        {
+          href: '/parent',
+          label: 'Parent',
+          theme: 'light',
+          items: [
+            {
+              href: '/parent/child',
+              label: 'Child',
+            },
+          ],
+        },
+      ], // You may need to adjust this based on your specific implementation
     };
     expect(actual).toStrictEqual(expected);
   });

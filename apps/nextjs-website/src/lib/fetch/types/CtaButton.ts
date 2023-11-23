@@ -23,7 +23,7 @@ const CTAButtonSize = t.keyof({
 });
 
 export const CTAButtonSchema = t.intersection([
-  t.type({
+  t.strict({
     text: t.string,
     href: t.string,
     variant: CTAButtonVariant,
@@ -34,3 +34,5 @@ export const CTAButtonSchema = t.intersection([
     size: CTAButtonSize,
   }),
 ]);
+
+export type CTAButtonType = t.TypeOf<typeof CTAButtonSchema>;
