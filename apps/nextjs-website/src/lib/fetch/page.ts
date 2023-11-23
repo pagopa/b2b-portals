@@ -147,6 +147,8 @@ const PageCodec = t.strict({
 
 // Types
 export type PageData = t.TypeOf<typeof PageCodec>;
+export type HeroSectionData = t.TypeOf<typeof HeroSectionCodec>;
+export type EditorialSectionData = t.TypeOf<typeof EditorialSectionCodec>;
 
 export const getPage = (
   id: number,

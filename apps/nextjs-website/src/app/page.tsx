@@ -1,5 +1,6 @@
-import { ComponentData, rendering } from '@/components/rendering/rendering';
+import { rendering } from '@/components/rendering/rendering';
 import { getPageProps } from '@/lib/api';
+import { PageData } from '@/lib/fetch/page';
 
 export default async function Home() {
   // Props fetching will be updated when Home is turned into a Strapi Single Type
@@ -13,7 +14,7 @@ export default async function Home() {
 
       {content.map((componentData, index) => {
         const renderedComponent = rendering(
-          componentData as unknown as ComponentData,
+          componentData as unknown as PageData['data']['attributes']['sections'][0],
           index
         );
         return renderedComponent;
