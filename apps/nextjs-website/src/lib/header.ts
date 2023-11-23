@@ -6,7 +6,7 @@ import { Navigation } from './fetch/navigation';
 const makeMenuItemFromNavItem = (
   item: Navigation[0],
   navigation: Navigation,
-  theme: 'light' | 'dark'
+  theme: Header['data']['attributes']['theme']
 ): MenuDropdownProp => {
   const { title, path } = item;
   const itemsArray = navigation
@@ -29,7 +29,7 @@ const makeMenuItemFromNavItem = (
 
 const makeMenuFromNavigation = (
   navigation: Navigation,
-  theme: 'light' | 'dark'
+  theme: Header['data']['attributes']['theme']
 ): ReadonlyArray<MenuDropdownProp> =>
   navigation
     .filter((item) => !item.parent && item.menuAttached)
