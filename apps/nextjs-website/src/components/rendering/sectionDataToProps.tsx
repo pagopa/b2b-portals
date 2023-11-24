@@ -1,6 +1,7 @@
 import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
-import { EditorialSectionData, HeroSectionData } from '@/lib/fetch/page';
+import { EditorialSectionData, FeatureSectionData, HeroSectionData } from '@/lib/fetch/page';
+import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
 
 export const SectionDataToHeroProps = ({
   title,
@@ -46,4 +47,24 @@ export const SectionDataToEditorialProps = ({
       alt={image.data?.attributes.alternativeText ?? ''}
     />
   ),
+});
+
+
+export const SectionDataToFeatureProps = ({
+  title,
+  theme,
+  showCarouselMobile,
+  items,
+}: FeatureSectionData): FeatureProps => ({
+  title,
+  theme,
+  showCarouselMobile,
+  items: items.map(item => ({ 
+    icon: item.icon,
+    iconColor: item.iconColor,
+    title: item.title,
+    subtitle: item.subtitle,
+    linkText: item.linkText,
+    linkURL: item.linkURL,
+  })),
 });

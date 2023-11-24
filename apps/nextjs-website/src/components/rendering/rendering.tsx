@@ -5,9 +5,11 @@ import Hero from '../Hero';
 import Editorial from '../Editorial';
 import {
   SectionDataToEditorialProps,
+  SectionDataToFeatureProps,
   SectionDataToHeroProps,
 } from './sectionDataToProps';
 import { PageData } from '@/lib/fetch/page';
+import Feature, { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
 
 export function rendering(
   componentData: PageData['data']['attributes']['sections'][0],
@@ -23,6 +25,10 @@ export function rendering(
       const EditorialSectionProps: EditorialProps =
         SectionDataToEditorialProps(componentData);
       return <Editorial key={index} {...EditorialSectionProps} />; // id={componentData.sectionID}
+
+    case 'sections.feature':
+      const FeatureSectionProps: FeatureProps = SectionDataToFeatureProps(componentData);
+      return <Feature key={index} {...FeatureSectionProps} />; // id={componentData.sectionID}
 
     default:
       return null;

@@ -137,10 +137,33 @@ const EditorialSectionCodec = t.strict({
   ),
 });
 
+const FeatureSectionCodec = t.strict({
+  __component: t.literal('sections.feature'),
+  title: t.string,
+  theme: ThemeCodec,
+  showCarouselMobile: t.boolean,
+  background: t.union([t.string, t.null]),
+  sectionID: t.union([t.string, t.null]),
+  items: t.array(
+    t.strict({
+      id: t.number,
+      icon: t.string,
+      iconColor: t.keyof({
+        inherit: null,
+      }),
+      title: t.string,
+      subtitle: t.string,
+      linkText: t.string,
+      linkURL: t.string,
+    })
+  ),
+});
+
+
 const PageCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
-      sections: t.array(t.union([HeroSectionCodec, EditorialSectionCodec])),
+      sections: t.array(t.union([HeroSectionCodec, EditorialSectionCodec, FeatureSectionCodec])),
     }),
   }),
 });
@@ -149,6 +172,7 @@ const PageCodec = t.strict({
 export type PageData = t.TypeOf<typeof PageCodec>;
 export type HeroSectionData = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSectionData = t.TypeOf<typeof EditorialSectionCodec>;
+export type FeatureSectionData = t.TypeOf<typeof FeatureSectionCodec>;
 
 export const getPage = ({
   config,
