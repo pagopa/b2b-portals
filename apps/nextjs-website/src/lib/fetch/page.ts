@@ -138,7 +138,7 @@ const EditorialSectionCodec = t.strict({
 });
 
 const LinkCodec = t.strict({
-  text: t.string,
+  text: t.union([t.string, t.null]),
   href: t.string,
   linkType: t.keyof({
     internal: null,
@@ -176,7 +176,7 @@ const HowToSectionCodec = t.strict({
     left: null,
     right: null,
   }),
-  link: LinkCodec,
+  link: t.union([LinkCodec, t.null]),
   steps: t.array(StepCodec),
 });
 

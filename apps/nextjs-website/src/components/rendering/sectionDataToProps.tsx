@@ -1,6 +1,7 @@
 import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
 import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/HowTo';
+import * as MuiIcons from '@mui/icons-material';
 import {
   EditorialSectionData,
   HeroSectionData,
@@ -65,9 +66,20 @@ export const SectionDataToHowToProps = ({
   theme,
   ...(rowMaxSteps && { rowMaxSteps }),
   stepsAlignment,
-  link: {
-    label: link.text,
-    href: link.href,
-  },
-  steps,
+  ...(link && {
+    link: {
+      href: link.href,
+      label: link.text ?? link.href,
+    },
+  }),
+  steps: steps.map((step) => ({
+    title: step.title,
+    description: step.description, // TODO: Parse rich text (markdown)
+    ...(step.icon && {
+      stepIcon: {
+        icon: step.icon as keyof typeof MuiIcons,
+        color: step.iconColor,
+      },
+    }),
+  })),
 });
