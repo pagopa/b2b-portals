@@ -1,7 +1,11 @@
 import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
-import { EditorialSectionData, FeatureSectionData, HeroSectionData } from '@/lib/fetch/page';
 import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
+import {
+  EditorialSectionData,
+  FeatureSectionData,
+  HeroSectionData,
+} from '@/lib/fetch/page';
 
 export const SectionDataToHeroProps = ({
   title,
@@ -17,7 +21,7 @@ export const SectionDataToHeroProps = ({
   subtitle, // TODO: Parse rich text (markdown)
   useHoverlay,
   size,
-  image: 'http://localhost:1337' + (image.data?.attributes.url ?? ''), // TODO: Sub "http://localhost:1337" for config.STRAPI_API_BASE_URL
+  image: 'http://localhost:1337' + (image.data?.attributes.url ?? ''), // TODO: Sub 'http://localhost:1337' for config.STRAPI_API_BASE_URL
   altText: image.data?.attributes.alternativeText ?? '',
   inverse,
   background: background.data?.attributes.url,
@@ -43,12 +47,11 @@ export const SectionDataToEditorialProps = ({
   ctaButtons,
   image: (
     <img
-      src={'http://localhost:1337' + (image.data?.attributes.url ?? '')} // TODO: Sub "http://localhost:1337" for config.STRAPI_API_BASE_URL
+      src={'http://localhost:1337' + (image.data?.attributes.url ?? '')} // TODO: Sub 'http://localhost:1337' for config.STRAPI_API_BASE_URL
       alt={image.data?.attributes.alternativeText ?? ''}
     />
   ),
 });
-
 
 export const SectionDataToFeatureProps = ({
   title,
@@ -59,7 +62,7 @@ export const SectionDataToFeatureProps = ({
   title,
   theme,
   showCarouselMobile,
-  items: items.map(item => ({ 
+  items: items.map((item) => ({
     icon: item.icon,
     iconColor: item.iconColor,
     title: item.title,

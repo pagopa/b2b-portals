@@ -159,11 +159,12 @@ const FeatureSectionCodec = t.strict({
   ),
 });
 
-
 const PageCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
-      sections: t.array(t.union([HeroSectionCodec, EditorialSectionCodec, FeatureSectionCodec])),
+      sections: t.array(
+        t.union([HeroSectionCodec, EditorialSectionCodec, FeatureSectionCodec])
+      ),
     }),
   }),
 });
