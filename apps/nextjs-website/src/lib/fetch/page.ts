@@ -137,10 +137,56 @@ const EditorialSectionCodec = t.strict({
   ),
 });
 
+const LinkCodec = t.strict({
+  text: t.string,
+  href: t.string,
+  linkType: t.keyof({
+    internal: null,
+    external: null,
+    wrapper: null,
+    social: null,
+  }),
+  ariaLabel: t.union([t.string, t.null]),
+  icon: t.union([t.string, t.null]),
+});
+
+const StepCodec = t.strict({
+  id: t.number,
+  title: t.string,
+  description: t.string,
+  icon: t.union([t.string, t.null]),
+  iconColor: t.keyof({
+    inherit: null,
+    primary: null,
+    secondary: null,
+    success: null,
+    error: null,
+    info: null,
+    warning: null,
+  }),
+});
+
+const HowToSectionCodec = t.strict({
+  __component: t.literal('sections.how-to'),
+  title: t.string,
+  theme: ThemeCodec,
+  rowMaxSteps: t.number,
+  stepsAlignment: t.keyof({
+    center: null,
+    left: null,
+    right: null,
+  }),
+  sectionID: t.union([t.string, t.null]),
+  link: LinkCodec,
+  steps: t.array(StepCodec),
+});
+
 const PageCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
-      sections: t.array(t.union([HeroSectionCodec, EditorialSectionCodec])),
+      sections: t.array(
+        t.union([HeroSectionCodec, EditorialSectionCodec, HowToSectionCodec])
+      ),
     }),
   }),
 });
@@ -149,6 +195,7 @@ const PageCodec = t.strict({
 export type PageData = t.TypeOf<typeof PageCodec>;
 export type HeroSectionData = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSectionData = t.TypeOf<typeof EditorialSectionCodec>;
+export type HowToSectionData = t.TypeOf<typeof HowToSectionCodec>;
 
 export const getPage = ({
   config,
