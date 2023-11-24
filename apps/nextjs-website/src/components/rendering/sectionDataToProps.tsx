@@ -63,7 +63,7 @@ export const SectionDataToHowToProps = ({
 }: HowToSectionData): HowToProps => ({
   title,
   theme,
-  rowMaxSteps,
+  ...(rowMaxSteps && { rowMaxSteps }),
   stepsAlignment,
   link: {
     label: link.text,

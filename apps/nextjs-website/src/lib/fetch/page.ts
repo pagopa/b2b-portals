@@ -170,13 +170,12 @@ const HowToSectionCodec = t.strict({
   __component: t.literal('sections.how-to'),
   title: t.string,
   theme: ThemeCodec,
-  rowMaxSteps: t.number,
+  rowMaxSteps: t.union([t.number, t.null]),
   stepsAlignment: t.keyof({
     center: null,
     left: null,
     right: null,
   }),
-  sectionID: t.union([t.string, t.null]),
   link: LinkCodec,
   steps: t.array(StepCodec),
 });
