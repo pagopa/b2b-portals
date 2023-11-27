@@ -19,6 +19,10 @@ export const parentNavItem: Navigation[0] = {
   title: 'Parent',
   path: 'parent',
   parent: null,
+  related: {
+    id: 1,
+    slug: "Home",
+},
   menuAttached: true,
   related: {
     id: 5,
