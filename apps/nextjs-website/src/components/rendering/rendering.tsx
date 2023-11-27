@@ -1,12 +1,7 @@
 import React from 'react';
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
-import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import Hero from '../Hero';
-import Editorial from '../Editorial';
-import {
-  SectionDataToEditorialProps,
-  SectionDataToHeroProps,
-} from './sectionDataToProps';
+import { SectionDataToHeroProps } from './sectionDataToProps';
 import { PageData } from '@/lib/fetch/page';
 
 export function rendering(
@@ -18,11 +13,6 @@ export function rendering(
     case 'sections.hero':
       const HeroSectionProps: HeroProps = SectionDataToHeroProps(componentData);
       return <Hero key={index} {...HeroSectionProps} />; // id={componentData.sectionID}
-
-    case 'sections.editorial':
-      const EditorialSectionProps: EditorialProps =
-        SectionDataToEditorialProps(componentData);
-      return <Editorial key={index} {...EditorialSectionProps} />; // id={componentData.sectionID}
 
     default:
       return null;
