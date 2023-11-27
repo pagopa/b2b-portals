@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import PreHeader from '@/components/PreHeader';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getFooterProps, getPreHeaderProps } from '@/lib/api';
+import { getPreHeaderProps, getHeaderProps, getFooterProps } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Page',
@@ -14,11 +15,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const preHeaderProps = await getPreHeaderProps();
+  const headerProps = await getHeaderProps();
   const footerProps = await getFooterProps();
+
   return (
     <html lang='en'>
       <body>
         <PreHeader {...preHeaderProps} />
+        <Header {...headerProps} />
         {children}
         <Footer {...footerProps} />
       </body>

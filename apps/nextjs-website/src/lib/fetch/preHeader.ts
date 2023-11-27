@@ -1,68 +1,29 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { ThemeCodec } from './types/Theme';
+import { CTAGroupCodec } from './types/CTAGroup';
 import { AppEnv } from '@/AppEnv';
-
-const CtaButtonCodec = t.intersection([
-  t.strict({
-    text: t.string,
-    href: t.string,
-    variant: t.keyof({
-      text: null,
-      outlined: null,
-      contained: null,
-    }),
-    color: t.keyof({
-      inherit: null,
-      primary: null,
-      secondary: null,
-      success: null,
-      error: null,
-      info: null,
-      warning: null,
-    }),
-  }),
-  t.partial({
-    icon: t.union([t.string, t.null]),
-    size: t.keyof({
-      small: null,
-      medium: null,
-      large: null,
-    }),
-  }),
-]);
-
-export const CtaGroupCodec = t.intersection([
-  t.strict({
-    theme: ThemeCodec,
-    reverse: t.boolean,
-  }),
-  t.partial({
-    ctaButtons: t.array(CtaButtonCodec),
-  }),
-]);
 
 const PreHeaderCodec = t.strict({
   data: t.strict({
     attributes: t.union([
       t.strict({
-        rightCtas: CtaGroupCodec,
-        leftCtas: CtaGroupCodec,
+        rightCtas: CTAGroupCodec,
+        leftCtas: CTAGroupCodec,
       }),
       t.intersection([
         t.strict({
-          rightCtas: CtaGroupCodec,
+          rightCtas: CTAGroupCodec,
         }),
         t.partial({
-          leftCtas: CtaGroupCodec,
+          leftCtas: CTAGroupCodec,
         }),
       ]),
       t.intersection([
         t.strict({
-          leftCtas: CtaGroupCodec,
+          leftCtas: CTAGroupCodec,
         }),
         t.partial({
-          rightCtas: CtaGroupCodec,
+          rightCtas: CTAGroupCodec,
         }),
       ]),
     ]),

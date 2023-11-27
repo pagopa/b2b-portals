@@ -7,10 +7,13 @@ import {
   FooterLinksType,
   LinkType,
 } from '@pagopa/pagopa-editorial-components/dist/components/Footer/types';
+import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
 import { getFooter, type FooterSection } from './fetch/footer';
+import { getHeader } from './fetch/header';
+import { makeHeaderProps } from './header';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -36,6 +39,12 @@ export const getPreHeaderProps = async (): Promise<
     data: { attributes },
   } = await getPreHeader(appEnv);
   return attributes;
+};
+
+export const getHeaderProps = async (): Promise<HeaderProps> => {
+  const header = await getHeader(appEnv);
+  const navigation = await getNavigation('main-navigation', appEnv);
+  return makeHeaderProps(navigation, header);
 };
 
 const generateLinks = (
