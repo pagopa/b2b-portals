@@ -10,10 +10,7 @@ const makeMenuItemFromNavItem = (
 ): MenuDropdownProp => {
   const { title, path } = item;
   const itemsArray = navigation
-    .filter(
-      (child) =>
-        child.parent && child.parent.id === item.id && child.menuAttached
-    )
+    .filter((child) => child.parent?.id === item.id && child.menuAttached)
     .map((child) => ({
       href: `/${item.path}/${child.path}`,
       label: child.title,
