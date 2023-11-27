@@ -1,9 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { makeHeaderProps } from '../header';
 import { Header } from '../fetch/header';
-import * as data from './data';
-
-const navigation = [data.parentNavItem, data.childNavItem];
+import * as data from '../fetch/__tests__/data';
 
 const header: Header = {
   data: {
@@ -34,6 +32,7 @@ const header: Header = {
 
 describe('makeHeaderProps', () => {
   it('should return header props with avatar when avatar is present', () => {
+    const navigation = [data.parentNavItem, data.childNavItem];
     const actual = makeHeaderProps(navigation, header);
     const expected = {
       theme: 'light',
