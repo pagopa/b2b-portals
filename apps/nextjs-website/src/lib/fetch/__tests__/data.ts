@@ -7,6 +7,10 @@ export const homepageNavItem: Navigation[0] = {
   path: '/',
   parent: null,
   menuAttached: false,
+  related: {
+    id: 1,
+    slug: '/',
+  },
 };
 
 export const parentNavItem: Navigation[0] = {
@@ -16,6 +20,10 @@ export const parentNavItem: Navigation[0] = {
   path: 'parent',
   parent: null,
   menuAttached: true,
+  related: {
+    id: 2,
+    slug: 'parent',
+  },
 };
 
 export const childNavItem: Navigation[0] = {
@@ -25,4 +33,8 @@ export const childNavItem: Navigation[0] = {
   path: 'child',
   parent: parentNavItem,
   menuAttached: true,
+  related: {
+    id: 3,
+    slug: 'child',
+  },
 };

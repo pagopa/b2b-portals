@@ -7,6 +7,7 @@ import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
 import { getHeader } from './fetch/header';
 import { makeHeaderProps } from './header';
+import { PageData, getPage } from './fetch/page';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -38,4 +39,18 @@ export const getHeaderProps = async (): Promise<HeaderProps> => {
   const header = await getHeader(appEnv);
   const navigation = await getNavigation('main-navigation', appEnv);
   return makeHeaderProps(navigation, header);
+};
+
+// Return PageProps for a specific page ID
+export const getPageProps = async (
+  pageID: number
+): Promise<PageData['data']['attributes']> => {
+  const {
+    data: { attributes },
+  } = await getPage({
+    config: appEnv.config,
+    fetchFun: appEnv.fetchFun,
+    id: pageID,
+  });
+  return attributes;
 };
