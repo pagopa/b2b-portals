@@ -31,7 +31,6 @@ export const getPreHeaderProps = async (): Promise<
   const {
     data: { attributes },
   } = await getPreHeader(appEnv);
-
   return attributes;
 };
 
