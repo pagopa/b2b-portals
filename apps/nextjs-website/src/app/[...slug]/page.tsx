@@ -1,4 +1,5 @@
 import { getAllPages } from '@/lib/api';
+import { Page } from '@/lib/pages';
 
 // Dynamic segments not included in generateStaticParams will return a 404.
 // more: https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams

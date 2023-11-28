@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import { getPreHeaderProps, getHeaderProps } from '@/lib/api';
+import '@/styles/default.css';
 
 export const metadata: Metadata = {
   title: 'Page',
