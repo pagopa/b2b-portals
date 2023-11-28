@@ -77,6 +77,7 @@ describe('getNavigation', () => {
         id: 1,
         order: 1,
         parent: null,
+        menuAttached: true,
         path: '/',
         title: 'Homepage',
         related: {
