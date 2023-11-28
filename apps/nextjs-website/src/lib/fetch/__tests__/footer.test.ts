@@ -60,7 +60,7 @@ const footerResponse = {
           {
             text: 'facebook',
             href: '/',
-            linkType: 'social',
+            linkType: 'external',
             ariaLabel: null,
             icon: null,
           },

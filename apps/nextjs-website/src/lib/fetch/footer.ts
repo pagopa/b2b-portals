@@ -28,17 +28,16 @@ const FooterCodec = t.strict({
       legalInfo: t.string,
       showFundedByNextGenerationEULogo: t.boolean,
       companyLink: CompanyLinkCodec,
-      links_aboutUs: FooterSectionCodec,
-      links_followUs: FooterSectionCodec,
-      links_resources: FooterSectionCodec,
       links_services: FooterSectionCodec,
+      links_aboutUs: FooterSectionCodec,
+      links_resources: FooterSectionCodec,
+      links_followUs: FooterSectionCodec,
     }),
   }),
 });
 
 // Types
 export type Footer = t.TypeOf<typeof FooterCodec>;
-export type FooterSection = t.TypeOf<typeof FooterSectionCodec>;
 
 export const getFooter = ({ config, fetchFun }: AppEnv): Promise<Footer> =>
   extractFromResponse(
