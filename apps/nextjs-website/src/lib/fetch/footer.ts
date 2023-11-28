@@ -18,7 +18,7 @@ const FooterLinkCodec = t.strict({
 });
 
 const FooterSectionCodec = t.strict({
-  title: t.union([t.string, t.null]),
+  title: t.string,
   links: t.array(FooterLinkCodec),
 });
 
@@ -38,7 +38,6 @@ const FooterCodec = t.strict({
 
 // Types
 export type Footer = t.TypeOf<typeof FooterCodec>;
-export type FooterSection = t.TypeOf<typeof FooterSectionCodec>;
 
 export const getFooter = ({ config, fetchFun }: AppEnv): Promise<Footer> =>
   extractFromResponse(
