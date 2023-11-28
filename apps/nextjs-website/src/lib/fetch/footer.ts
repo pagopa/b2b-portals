@@ -18,7 +18,7 @@ const FooterLinkCodec = t.strict({
 });
 
 const FooterSectionCodec = t.strict({
-  title: t.string,
+  title: t.union([t.string, t.null]),
   links: t.array(FooterLinkCodec),
 });
 
@@ -28,10 +28,10 @@ const FooterCodec = t.strict({
       legalInfo: t.string,
       showFundedByNextGenerationEULogo: t.boolean,
       companyLink: CompanyLinkCodec,
-      links_aboutUs: FooterSectionCodec,
-      links_followUs: FooterSectionCodec,
-      links_resources: FooterSectionCodec,
       links_services: FooterSectionCodec,
+      links_aboutUs: FooterSectionCodec,
+      links_resources: FooterSectionCodec,
+      links_followUs: FooterSectionCodec,
     }),
   }),
 });

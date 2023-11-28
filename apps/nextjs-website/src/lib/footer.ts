@@ -27,21 +27,27 @@ export const makeFooterProps = (footer: Footer): FooterProps => {
     legalInfo: attributes.legalInfo,
     links: {
       aboutUs: {
-        title: attributes.links_aboutUs.title,
+        ...(attributes.links_aboutUs.title && {
+          title: attributes.links_aboutUs.title,
+        }),
         links: Array.from(generateLinks(attributes.links_aboutUs)),
       },
-      followUs: {
-        title: attributes.links_followUs.title,
-        links: Array.from(generateLinks(attributes.links_followUs)),
-        socialLinks: Array.from(generateLinks(attributes.links_followUs, true)),
-      },
       resources: {
-        title: attributes.links_resources.title,
+        ...(attributes.links_resources.title && {
+          title: attributes.links_resources.title,
+        }),
         links: Array.from(generateLinks(attributes.links_resources)),
       },
       services: {
-        title: attributes.links_services.title,
+        ...(attributes.links_services.title && {
+          title: attributes.links_services.title,
+        }),
         links: Array.from(generateLinks(attributes.links_services)),
+      },
+      followUs: {
+        title: attributes.links_followUs.title || '',
+        links: Array.from(generateLinks(attributes.links_followUs)),
+        socialLinks: Array.from(generateLinks(attributes.links_followUs, true)),
       },
     },
     languages: [
