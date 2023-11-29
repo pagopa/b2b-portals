@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
-import { getPreHeaderProps, getHeaderProps } from '@/lib/api';
-import '@/styles/default.css';
+import Footer from '@/components/Footer';
+import { getPreHeaderProps, getHeaderProps, getFooterProps } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Page',
@@ -16,6 +16,7 @@ export default async function RootLayout({
 }) {
   const preHeaderProps = await getPreHeaderProps();
   const headerProps = await getHeaderProps();
+  const footerProps = await getFooterProps();
 
   return (
     <html lang='en'>
@@ -23,6 +24,7 @@ export default async function RootLayout({
         <PreHeader {...preHeaderProps} />
         <Header {...headerProps} />
         {children}
+        <Footer {...footerProps} />
       </body>
     </html>
   );
