@@ -19,6 +19,7 @@ const formatValidMuiIcon = (input?: string | null): string | null => {
     .join('');
 };
 
+// Add styles, SEO related values and extra JS parameters for singular components
 const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
   ...props,
   ...(props.leftCtas?.ctaButtons && {
@@ -34,6 +35,7 @@ const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
           fontWeight: 'bold',
           letterSpacing: '0',
         },
+        startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
       })),
     },
   }),
