@@ -3,17 +3,21 @@ import React from 'react';
 import { PreHeader as PreHeaderEC } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import '@/styles/preHeader.css';
 import Icon from '@mui/material/Icon';
+// Only temporarily importing every icon. A task is planned to sub this for a restricted set of accepted icon names.
 import * as MuiIcons from '@mui/icons-material';
 import { PreHeader } from '@/lib/fetch/preHeader';
-// TODO: Component styles are loaded client-side (even if we move the import to a server side component above this one). This causes a flash of the unstyled component (even when everything is rendered as static HTML) that needs to be fixed.
 
-const formatValidMuiIcon = (input?: string | null): string | null => {
-  if (!input || !(input in MuiIcons)) {
+const isValidMuiIcon = (iconName?: string | null): boolean =>
+  !!iconName && iconName in MuiIcons;
+
+const formatValidMuiIcon = (iconName?: string | null): string | null => {
+  if (!iconName || !(iconName in MuiIcons)) {
+    // Not using isValidMuiIcon because typescript doesn't register iconName as non-null if we do
     return null;
   }
 
   // Convert from camel case (anExample) or pascal case (AnExample) to snake case (an_example)
-  return input
+  return iconName
     .replace(/(?:^|\.?)([A-Z])/g, (_, y) => `_${y.toLowerCase()}`)
     .split(/^_/)
     .join('');
@@ -35,7 +39,9 @@ const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
           fontWeight: 'bold',
           letterSpacing: '0',
         },
-        startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+        ...(isValidMuiIcon(ctaBtn.icon) && {
+          startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+        }),
       })),
     },
   }),
@@ -52,7 +58,9 @@ const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
           fontWeight: '600',
           letterSpacing: '.3px',
         },
-        startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+        ...(isValidMuiIcon(ctaBtn.icon) && {
+          startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+        }),
       })),
     },
   }),
