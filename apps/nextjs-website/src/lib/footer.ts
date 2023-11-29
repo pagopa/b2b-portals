@@ -1,20 +1,28 @@
 import { FooterProps as FooterPropsEC } from '@pagopa/pagopa-editorial-components/dist/components/Footer';
-import { FooterLinksType } from '@pagopa/mui-italia/dist/components/Footer';
+import {
+  FooterLinksType,
+  LinkType,
+} from '@pagopa/pagopa-editorial-components/dist/components/Footer/types';
 import { Footer } from './fetch/footer';
-
 export type FooterProps = Omit<FooterPropsEC, 'onLanguageChanged'>;
 
 const generateLinks = (
   section: Footer['data']['attributes']['links_aboutUs'],
   isSocialLink = false
 ): ReadonlyArray<FooterLinksType> =>
-  section.links.map((link) => ({
-    label: link.text ?? link.href,
-    href: link.href,
-    ariaLabel: link.ariaLabel ?? link.href,
-    linkType: link.linkType,
-    ...(isSocialLink && { icon: link.icon }),
-  }));
+  section.links
+    .filter((link) =>
+      isSocialLink
+        ? link.linkType === 'social' && link.icon
+        : ['internal', 'external'].includes(link.linkType)
+    )
+    .map((link) => ({
+      label: link.text ?? link.href,
+      href: link.href,
+      ariaLabel: link.ariaLabel ?? link.href,
+      linkType: isSocialLink ? 'external' : (link.linkType as LinkType),
+      ...(isSocialLink && { icon: link.icon }),
+    }));
 
 export const makeFooterProps = (footer: Footer): FooterProps => {
   const { attributes } = footer.data;
