@@ -16,10 +16,8 @@ const makeLink = ({ text, linkType, ariaLabel, href }: Link) => {
   return linkType !== 'social' ? [{ ...base, linkType }] : [];
 };
 
-const makeSocialLink = ({ text, icon, linkType, ariaLabel, href }: Link) => {
+const makeSocialLink = ({ icon, linkType }: Link) => {
   const base = {
-    href,
-    ariaLabel: ariaLabel ?? href,
     // This cast is required until the task B2BP-271 is done
     ...(icon && { icon: icon as IconNames }),
   };
