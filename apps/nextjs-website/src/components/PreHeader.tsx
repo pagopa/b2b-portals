@@ -3,8 +3,9 @@ import React from 'react';
 import { PreHeader as PreHeaderEC } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import '@/styles/preHeader.css';
 import Icon from '@mui/material/Icon';
-// Only temporarily importing every icon. A task is planned to sub this for a restricted set of accepted icon names.
-import * as MuiIcons from '@mui/icons-material';
+// Only temporarily importing every icon.
+// A task (https://pagopa.atlassian.net/browse/B2BP-271?atlOrigin=eyJpIjoiNzNmODE1NWZmYWI0NDkzNmExYjBjNjlkMDk2MzE0OTEiLCJwIjoiaiJ9)
+// is planned to sub this for a restricted set of accepted icon names.import * as MuiIcons from '@mui/icons-material';
 import { PreHeader } from '@/lib/fetch/preHeader';
 
 const isValidMuiIcon = (iconName?: string | null): boolean =>
