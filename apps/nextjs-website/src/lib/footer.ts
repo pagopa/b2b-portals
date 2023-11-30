@@ -18,7 +18,6 @@ const makeLink = ({ text, linkType, ariaLabel, href }: Link) => {
 
 const makeSocialLink = ({ text, icon, linkType, ariaLabel, href }: Link) => {
   const base = {
-    label: text ?? href,
     href,
     ariaLabel: ariaLabel ?? href,
     // This cast is required until the task B2BP-271 is done
