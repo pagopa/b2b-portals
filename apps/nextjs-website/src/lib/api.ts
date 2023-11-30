@@ -5,8 +5,10 @@ import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components
 import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
+import { getFooter } from './fetch/footer';
 import { getHeader } from './fetch/header';
 import { makeHeaderProps } from './header';
+import { FooterProps, makeFooterProps } from './footer';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -38,4 +40,9 @@ export const getHeaderProps = async (): Promise<HeaderProps> => {
   const header = await getHeader(appEnv);
   const navigation = await getNavigation('main-navigation', appEnv);
   return makeHeaderProps(navigation, header);
+};
+
+export const getFooterProps = async (): Promise<FooterProps> => {
+  const footer = await getFooter(appEnv);
+  return makeFooterProps(footer);
 };
