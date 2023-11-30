@@ -60,4 +60,4 @@ export const getPageProps = async (
     id: pageID,
   });
   return attributes;
- };
+};

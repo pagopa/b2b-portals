@@ -9,7 +9,7 @@ describe('makePageListFromNavigation', () => {
   });
   it('should return pages list given a navigation with homepage', () => {
     const actual = makePageListFromNavigation([data.homepageNavItem]);
-    const expected = [{ slug: [], id: 1 }];
+    const expected = [{ slug: [], id: 4 }];
     expect(actual).toStrictEqual(expected);
   });
   it('should return pages list given a navigation with parent', () => {
