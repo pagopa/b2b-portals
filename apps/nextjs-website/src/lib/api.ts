@@ -9,6 +9,7 @@ import { getFooter } from './fetch/footer';
 import { getHeader } from './fetch/header';
 import { makeHeaderProps } from './header';
 import { FooterProps, makeFooterProps } from './footer';
+import { HomeData, getHome } from './fetch/home';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -45,4 +46,16 @@ export const getHeaderProps = async (): Promise<HeaderProps> => {
 export const getFooterProps = async (): Promise<FooterProps> => {
   const footer = await getFooter(appEnv);
   return makeFooterProps(footer);
+};
+
+export const getHomeProps = async (): Promise<
+  HomeData['data']['attributes']
+> => {
+  const {
+    data: { attributes },
+  } = await getHome({
+    config: appEnv.config,
+    fetchFun: appEnv.fetchFun,
+  });
+  return attributes;
 };

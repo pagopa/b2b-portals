@@ -14,9 +14,9 @@ const makeSlugList = (
   if (parent) {
     const parentNav = navigation.find(({ id }) => id === parent.id);
     const parentSlug = parentNav ? makeSlugList(parentNav, navigation) : [];
-    return path !== '/' ? [...parentSlug, path] : [];
+    return [...parentSlug, path];
   } else {
-    return path !== '/' ? [path] : [];
+    return [path];
   }
 };
 
