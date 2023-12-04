@@ -1,14 +1,8 @@
-import { getAllPages, getPageProps } from '@/lib/api';
+import { getPageProps } from '@/lib/api';
 
 export default async function Home() {
-  const allPages = await getAllPages(); // Gets result directly from internal cache
-
-  const pageID = allPages.filter((page) => '' === page.slug.join(''))[0]?.id;
-  if (!pageID) {
-    return null;
-  }
-
-  const pageProps = await getPageProps(pageID);
+  // Props fetching will be updated when Home is turned into a Strapi Single Type
+  const pageProps = await getPageProps('');
   return (
     <div>
       <p>This is the Home page</p>

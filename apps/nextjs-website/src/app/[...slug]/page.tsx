@@ -14,22 +14,18 @@ type PageParams = {
 
 const Page = async ({ params }: PageParams) => {
   const { slug } = params;
-  const allPages = await getAllPages(); // Gets result directly from internal cache
+  const pageProps = await getPageProps(slug.join('/'));
 
-  const pageID = allPages.filter(
-    (page) => slug.join('') === page.slug.join('')
-  )[0]?.id;
-  if (!pageID) {
-    return null;
+  if (pageProps) {
+    return (
+      <div>
+        <p>This is the page {slug.join('/')}</p>
+        <p>These are my props {JSON.stringify(pageProps)}</p>
+      </div>
+    );
   }
 
-  const pageProps = await getPageProps(pageID);
-  return (
-    <div>
-      <p>This is the page {slug.join('/')}</p>
-      <p>These are my props {JSON.stringify(pageProps)}</p>
-    </div>
-  );
+  return null;
 };
 
 export default Page;

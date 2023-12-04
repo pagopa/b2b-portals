@@ -50,14 +50,21 @@ export const getFooterProps = async (): Promise<FooterProps> => {
 
 // Return PageProps for a specific page ID
 export const getPageProps = async (
-  pageID: number
-): Promise<PageData['data']['attributes']> => {
+  path: string
+): Promise<PageData['data']['attributes'] | null> => {
+  const allPages = await getAllPages();
+
+  const pageID = allPages.filter((page) => path === page.slug.join('/'))[0]?.id;
+
+  if (!pageID) {
+    return null;
+  }
+
   const {
     data: { attributes },
-  } = await getPage({
+  } = await getPage(pageID, {
     config: appEnv.config,
     fetchFun: appEnv.fetchFun,
-    id: pageID,
   });
   return attributes;
 };
