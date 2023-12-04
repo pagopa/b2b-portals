@@ -24,6 +24,9 @@ inputs:
   strapi_api_url:
     description: 'The API URL to communicate with Strapi'
     required: false
+  cdn_path:
+    description: 'The CDN bucket S3 URL'
+    required: false
 
 runs:
   using: "composite"
@@ -56,6 +59,7 @@ runs:
         NEXT_TELEMETRY_DISABLED: "1"
         STRAPI_TOKEN: ${{ inputs.strapi_token }}
         STRAPI_API_URL: ${{ inputs.strapi_api_url }}
+        CDN_PATH: ${{ inputs.cdn_path }}
       shell: bash
       run: npm run build -w nextjs-website
 
