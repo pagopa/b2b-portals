@@ -3,42 +3,12 @@ import { extractFromResponse } from './extractFromResponse';
 import { ThemeCodec } from './types/Theme';
 import { AppEnv } from '@/AppEnv';
 
-const HeroSectionCodec = t.strict({
-  __component: t.literal('sections.hero'),
+const BannerlinkSectionCodec = t.strict({
+  __component: t.literal('sections.banner-link'),
   title: t.string,
-  subtitle: t.union([t.string, t.null]),
+  body: t.string,
   theme: ThemeCodec,
-  inverse: t.boolean,
-  size: t.keyof({
-    small: null,
-    big: null,
-  }),
-  useHoverlay: t.boolean,
-  sectionID: t.union([t.string, t.null]),
-  image: t.strict({
-    // TODO: Replace with StrapiImageSchema when merged
-    data: t.union([
-      t.type({
-        attributes: t.type({
-          alternativeText: t.union([t.string, t.null]),
-          url: t.string,
-        }),
-      }),
-      t.null,
-    ]),
-  }),
-  background: t.strict({
-    // TODO: Replace with StrapiImageSchema when merged
-    data: t.union([
-      t.type({
-        attributes: t.type({
-          alternativeText: t.union([t.string, t.null]),
-          url: t.string,
-        }),
-      }),
-      t.null,
-    ]),
-  }),
+  reverse: t.boolean,
   ctaButtons: t.array(
     // TODO: Replace with CTAButtonSchema when merged
     t.intersection([
@@ -75,14 +45,14 @@ const HeroSectionCodec = t.strict({
 const PageCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
-      sections: t.array(HeroSectionCodec),
+      sections: t.array(BannerlinkSectionCodec),
     }),
   }),
 });
 
 // Types
 export type PageData = t.TypeOf<typeof PageCodec>;
-export type HeroSectionData = t.TypeOf<typeof HeroSectionCodec>;
+export type BannerlinkSectionData = t.TypeOf<typeof BannerlinkSectionCodec>;
 
 export const getPage = ({
   config,
