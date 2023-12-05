@@ -3,7 +3,10 @@ import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/H
 import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import Hero from '../Hero';
 import Editorial from '../Editorial';
-import { SectionDataToHeroProps, SectionDataToEditorialProps } from './sectionDataToProps';
+import {
+  SectionDataToHeroProps,
+  SectionDataToEditorialProps,
+} from './sectionDataToProps';
 import { PageData } from '@/lib/fetch/page';
 
 export function rendering(

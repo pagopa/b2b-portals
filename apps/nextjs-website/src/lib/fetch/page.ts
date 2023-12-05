@@ -72,7 +72,6 @@ const HeroSectionCodec = t.strict({
   ),
 });
 
-
 const EditorialSectionCodec = t.strict({
   __component: t.literal('sections.editorial'),
   title: t.string,
@@ -80,13 +79,13 @@ const EditorialSectionCodec = t.strict({
   body: t.string,
   theme: ThemeCodec,
   pattern: t.keyof({
-    // TODO: Move to separate Codec?
+    // Move to separate Codec?
     none: null,
     dots: null,
     solid: null,
   }),
   width: t.keyof({
-    // TODO: Move to separate Codec?
+    // Move to separate Codec?
     standard: null,
     wide: null,
     center: null,

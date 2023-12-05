@@ -16,7 +16,7 @@ export const SectionDataToHeroProps = ({
   subtitle, // TODO: Parse rich text (markdown)
   useHoverlay,
   size,
-  image: 'http://localhost:1337' + (image.data?.attributes.url ?? ''), // TODO: Sub "http://localhost:1337" for config.STRAPI_API_BASE_URL
+  image: 'http://localhost:1337' + (image.data?.attributes.url ?? ''), // TODO: Sub "http://localhost:1337" for Media Library URL
   altText: image.data?.attributes.alternativeText ?? '',
   inverse,
   background: background.data?.attributes.url,
@@ -42,7 +42,7 @@ export const SectionDataToEditorialProps = ({
   ctaButtons,
   image: (
     <img
-      src={'http://localhost:1337' + (image.data?.attributes.url ?? '')} // TODO: Sub "http://localhost:1337" for config.STRAPI_API_BASE_URL
+      src={'http://localhost:1337' + (image.data?.attributes.url ?? '')} // TODO: Sub "http://localhost:1337" for Media Library URL
       alt={image.data?.attributes.alternativeText ?? ''}
     />
   ),
