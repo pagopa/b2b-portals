@@ -8,7 +8,8 @@ export function rendering(
   componentData: PageData['data']['attributes']['sections'][0],
   index: number
 ) {
-  // eslint-disable-next-line no-underscore-dangle
+  // Temporarily disable no-small-switch rule (new cases will be added with PRs for other components)
+  // eslint-disable-next-line no-underscore-dangle,sonarjs/no-small-switch
   switch (componentData.__component) {
     case 'sections.hero':
       const HeroSectionProps: HeroProps = SectionDataToHeroProps(componentData);
