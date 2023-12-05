@@ -8,9 +8,6 @@ export default async function Home() {
 
   return (
     <div>
-      <p>This is the Home page</p>
-      <p>These are my props {JSON.stringify(pageProps)}</p>
-
       {content.map((componentData, index) => rendering(componentData, index))}
     </div>
   );
