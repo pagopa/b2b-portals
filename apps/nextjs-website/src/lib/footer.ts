@@ -68,5 +68,7 @@ export const makeFooterProps = (footer: Footer): FooterProps => {
       id: 'it',
       value: 'Italiano',
     },
+    showFundedByNextGenerationEULogo:
+      attributes.showFundedByNextGenerationEULogo,
   };
 };
