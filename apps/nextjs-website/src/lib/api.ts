@@ -62,9 +62,6 @@ export const getPageProps = async (
 
   const {
     data: { attributes },
-  } = await getPage(pageID, {
-    config: appEnv.config,
-    fetchFun: appEnv.fetchFun,
-  });
+  } = await getPage(pageID, appEnv);
   return attributes;
 };
