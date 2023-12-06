@@ -10,16 +10,6 @@
 #pre-header > * {
   flex: 1;
 }
-#pre-header .MuiButtonBase-root {
-  font-size: 0.875rem;
-  padding: 0;
-  line-height: 1.25;
-  color: #17324D;
-}
-#pre-header .MuiButtonBase-root:hover {
-  background-color: transparent;
-  color: rgba(23, 50, 77, 0.8);
-}
 #pre-header .MuiStack-root {
   padding: 0;
-}/*# sourceMappingURL=preHeader.css.map */
+}
