@@ -1,0 +1,28 @@
+#hero .MuiTypography-h1 {
+
+  color: white !important;
+
+}
+
+#hero .MuiTypography-body1 {
+
+  color: white !important;
+
+}
+
+#hero .MuiButtonBase-root {
+
+  color: #0066CC;
+  background-color: white;
+
+}
+
+#hero .MuiGrid-root figure {
+
+  width: '100%';
+  height: 'auto';
+  margin: 'auto';
+  display: 'block';
+  justify-items: 'center';
+
+}
