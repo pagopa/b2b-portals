@@ -52,7 +52,7 @@ export const getFooterProps = async (): Promise<FooterProps> => {
 export const getPageProps = async (
   path: string
 ): Promise<PageData['data']['attributes'] | null> => {
-  const allPages = await getAllPages();
+  const allPages = await getAllPages(); //Fetches directly from NextJS internal cache (will not query server each time)
 
   const pageID = allPages.filter((page) => path === page.slug.join('/'))[0]?.id;
 
