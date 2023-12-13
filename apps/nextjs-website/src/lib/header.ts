@@ -35,24 +35,29 @@ const makeMenuFromNavigation = (
 export const makeHeaderProps = (
   navigation: Navigation,
   header: Header
-): HeaderProps => ({
-  theme: header.data.attributes.theme,
-  ...(header.data.attributes.avatar &&
-    header.data.attributes.avatar.data && {
-      avatar: {
-        src: header.data.attributes.avatar.data.attributes.url,
-      },
+): HeaderProps =>
+  ({
+    theme: header.data.attributes.theme,
+    ...(header.data.attributes.avatar &&
+      header.data.attributes.avatar.data && {
+        avatar: {
+          src: header.data.attributes.avatar.data.attributes.url,
+        },
+      }),
+    beta: header.data.attributes.beta,
+    reverse: header.data.attributes.reverse,
+    product: {
+      name: header.data.attributes.productName,
+      href: '/',
+    },
+    ...(header.data.attributes.ctaButtons && {
+      ctaButtons: header.data.attributes.ctaButtons,
     }),
-  beta: header.data.attributes.beta,
-  reverse: header.data.attributes.reverse,
-  product: {
-    name: header.data.attributes.productName,
-    href: '/',
-  },
-  ...(header.data.attributes.ctaButtons && {
-    ctaButtons: header.data.attributes.ctaButtons,
-  }),
-  menu: Array.from(
-    makeMenuFromNavigation(navigation, header.data.attributes.theme)
-  ),
-});
+    menu: Array.from(
+      makeMenuFromNavigation(navigation, header.data.attributes.theme)
+    ),
+  } as HeaderProps);
+{
+  /* Currently casting to HeaderProps due to confusing TS error
+It says that no value other than "inherit" and "primary" is valid for a button's color (which is not actually true) */
+}
