@@ -38,6 +38,21 @@ const navigationResponse = [
       navigationItemId: 1,
       createdBy: {},
       updatedBy: {},
+      sections: [
+        {
+          __component: 'sections.hero',
+          image: null,
+          background: null,
+          ctaButtons: [],
+          inverse: false,
+          sectionID: null,
+          size: 'small',
+          subtitle: 'subtitle',
+          theme: 'light',
+          title: 'light',
+          useHoverlay: true,
+        },
+      ],
     },
     items: null,
   },
@@ -55,7 +70,7 @@ describe('getNavigation', () => {
     await getNavigation('main-menu', appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/navigation/render/main-menu?type=FLAT`,
+      `${config.STRAPI_API_BASE_URL}/api/navigation/render/main-menu?type=FLAT&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items&populate[sections][populate][4]=link&populate[sections][populate][5]=steps`,
       {
         method: 'GET',
         headers: {
@@ -81,8 +96,22 @@ describe('getNavigation', () => {
         path: '/',
         title: 'Homepage',
         related: {
-          id: 2,
           slug: 'homepage',
+          sections: [
+            {
+              __component: 'sections.hero',
+              image: null,
+              background: null,
+              ctaButtons: [],
+              inverse: false,
+              sectionID: null,
+              size: 'small',
+              subtitle: 'subtitle',
+              theme: 'light',
+              title: 'light',
+              useHoverlay: true,
+            },
+          ],
         },
       },
     ];

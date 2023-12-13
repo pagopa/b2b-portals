@@ -8,8 +8,22 @@ export const homepageNavItem: Navigation[0] = {
   parent: null,
   menuAttached: false,
   related: {
-    id: 4,
     slug: '/',
+    sections: [
+      {
+        __component: 'sections.hero',
+        image: null,
+        background: null,
+        ctaButtons: [],
+        inverse: false,
+        sectionID: null,
+        size: 'small',
+        subtitle: 'subtitle',
+        theme: 'light',
+        title: 'light',
+        useHoverlay: true,
+      },
+    ],
   },
 };
 
@@ -21,8 +35,22 @@ export const parentNavItem: Navigation[0] = {
   parent: null,
   menuAttached: true,
   related: {
-    id: 5,
     slug: 'parent-slug',
+    sections: [
+      {
+        __component: 'sections.editorial',
+        image: null,
+        ctaButtons: [],
+        sectionID: null,
+        theme: 'light',
+        title: 'light',
+        body: 'body',
+        eyelet: 'eyelet',
+        pattern: 'dots',
+        reversed: false,
+        width: 'standard',
+      },
+    ],
   },
 };
 
@@ -34,7 +62,21 @@ export const childNavItem: Navigation[0] = {
   parent: parentNavItem,
   menuAttached: true,
   related: {
-    id: 6,
     slug: 'child-slug',
+    sections: [
+      {
+        __component: 'sections.hero',
+        image: null,
+        background: null,
+        ctaButtons: [],
+        inverse: false,
+        sectionID: null,
+        size: 'small',
+        subtitle: 'subtitle',
+        theme: 'light',
+        title: 'light',
+        useHoverlay: true,
+      },
+    ],
   },
 };
