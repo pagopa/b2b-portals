@@ -9,6 +9,7 @@ import { getFooter } from './fetch/footer';
 import { getHeader } from './fetch/header';
 import { makeHeaderProps } from './header';
 import { FooterProps, makeFooterProps } from './footer';
+import { PageData, getPage } from './fetch/page';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -45,4 +46,18 @@ export const getHeaderProps = async (): Promise<HeaderProps> => {
 export const getFooterProps = async (): Promise<FooterProps> => {
   const footer = await getFooter(appEnv);
   return makeFooterProps(footer);
+};
+
+// Return PageProps for a specific page ID
+export const getPageProps = async (
+  pageID: number
+): Promise<PageData['data']['attributes']> => {
+  const {
+    data: { attributes },
+  } = await getPage({
+    config: appEnv.config,
+    fetchFun: appEnv.fetchFun,
+    id: pageID,
+  });
+  return attributes;
 };
