@@ -1,8 +1,7 @@
 import { getPageProps } from '@/lib/api';
 
 export default async function Home() {
-  // Props fetching will be updated when Home is turned into a Strapi Single Type
-  const pageProps = await getPageProps('home');
+  const pageProps = await getPageProps('homepage');
   return (
     <div>
       <p>This is the Home page</p>

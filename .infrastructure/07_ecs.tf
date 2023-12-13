@@ -24,6 +24,7 @@ data "template_file" "cms_app" {
     jwt_secret           = aws_ssm_parameter.cms_jwt_secret.arn
     access_key_id        = aws_iam_access_key.strapi.id
     access_key_secret    = aws_iam_access_key.strapi.secret
+    bucket_full_url      = aws_s3_bucket.cms_medialibrary_bucket.bucket_regional_domain_name
   }
 }
 
