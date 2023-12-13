@@ -16,14 +16,14 @@ on:
         default: 'warning'
         type: choice
         options:
-        - warning
+          - warning
       environment:
         description: 'The environment used as target'
         type: choice
         required: true
         default: prod
         options:
-        - prod
+          - prod
 
 defaults:
   run:
@@ -44,7 +44,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
-    
+
       - name: Configure AWS Credentials
         uses: ./.github/actions/configure-aws-credentials
         with:
@@ -69,7 +69,7 @@ jobs:
 
       - name: Generate task-definition file
         run: aws ecs describe-task-definition --task-definition cms-task-def --query taskDefinition > task-definition.json
-     
+
       - name: Update ImageTag in task-definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@4225e0b507142a2e432b018bc3ccb728559b437a # v1.2.0
