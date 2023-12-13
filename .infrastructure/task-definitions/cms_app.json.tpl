@@ -25,7 +25,7 @@
         "value": "${db_name}"
       },
       {
-        "name": "AWS_BUCKET",
+        "name": "AWS_BUCKET_NAME",
         "value": "${bucket_name}"
       },
       {
@@ -55,6 +55,10 @@
       {
         "name": "AWS_ACCESS_SECRET",
         "value": "${access_key_secret}"
+      },
+	    {
+        "name": "AWS_BUCKET_FULL_URL",
+        "value": "${bucket_full_url}"
       }
     ],
     "secrets" : [
