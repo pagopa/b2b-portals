@@ -23,6 +23,26 @@ resource "aws_s3_bucket_versioning" "cms_medialibrary_bucket" {
   }
 }
 
+data "aws_iam_policy_document" "cms_iam_policy" {
+  statement {
+    actions = ["s3:GetObject", "s3:ListBucket"]
+    resources = [
+      "${aws_s3_bucket.cms_medialibrary_bucket.arn}",
+      "${aws_s3_bucket.cms_medialibrary_bucket.arn}/*"
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.main.iam_arn]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "cloudfront_cms" {
+  bucket = aws_s3_bucket.cms_medialibrary_bucket.id
+  policy = data.aws_iam_policy_document.cms_iam_policy.json
+}
+
 ## Infra for Static Site on AWS
 resource "random_integer" "website_bucket_random_integer" {
   min = 1
