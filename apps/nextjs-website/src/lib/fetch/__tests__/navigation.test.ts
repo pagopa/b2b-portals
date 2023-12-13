@@ -80,6 +80,10 @@ describe('getNavigation', () => {
         menuAttached: true,
         path: '/',
         title: 'Homepage',
+        related: {
+          id: 2,
+          slug: 'homepage',
+        },
       },
     ];
 
