@@ -343,14 +343,6 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-### Sass ###
-.sass-cache/
-*.css.map
-*.sass.map
-*.scss.map
-*.sass
-*.scss
-
 ### StorybookJs ###
 # gitignore template for the Storybook, UI guide for front apps
 # website: https://storybook.js.org/
