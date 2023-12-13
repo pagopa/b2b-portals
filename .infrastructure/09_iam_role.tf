@@ -91,17 +91,35 @@ data "aws_iam_policy_document" "task_role" {
   }
 }
 
-resource "aws_iam_role_policy_attachment" "ecs_container_rds_full_access" {
+resource "aws_iam_role_policy_attachment" "ecs_container_ec2" {
   role       = aws_iam_role.task_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonRDSFullAccess"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
-resource "aws_iam_role_policy_attachment" "ecs_container_ec2_full_access" {
-  role       = aws_iam_role.task_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+data "aws_iam_policy_document" "ecs_task_role_s3" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:DeleteObject",
+      "s3:GetObject",
+      "s3:GetObjectAttributes",
+      "s3:ListBucket",
+      "s3:PutObject",
+      "s3:PutObjectAcl"
+    ]
+    resources = [
+      "${aws_s3_bucket.cms_medialibrary_bucket.arn}"
+    ]
+  }
 }
 
-resource "aws_iam_role_policy_attachment" "ecs_container_s3_full_access" {
+resource "aws_iam_policy" "ecs_task_role_s3" {
+  name   = "CMSTaskRolePoliciesS3"
+  path   = "/"
+  policy = data.aws_iam_policy_document.ecs_task_role_s3.json
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_container_s3" {
   role       = aws_iam_role.task_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+  policy_arn = aws_iam_policy.ecs_task_role_s3.arn
 }
