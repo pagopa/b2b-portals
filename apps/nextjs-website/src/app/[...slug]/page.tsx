@@ -14,7 +14,7 @@ type PageParams = {
 
 const Page = async ({ params }: PageParams) => {
   const { slug } = params;
-  const pageProps = await getPageProps(slug.join('/'));
+  const pageProps = await getPageProps(slug);
 
   if (pageProps) {
     return (
