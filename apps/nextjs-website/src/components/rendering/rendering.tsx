@@ -14,12 +14,24 @@ export function rendering(componentData: PageSection, index: number) {
   switch (componentData.__component) {
     case 'sections.hero':
       const HeroSectionProps: HeroProps = SectionDataToHeroProps(componentData);
-      return <Hero key={index} {...HeroSectionProps} />; // id={componentData.sectionID}
+      return (
+        <Hero
+          key={index}
+          {...HeroSectionProps}
+          sectionID={componentData.sectionID ?? undefined}
+        />
+      );
 
     case 'sections.editorial':
       const EditorialSectionProps: EditorialProps =
         SectionDataToEditorialProps(componentData);
-      return <Editorial key={index} {...EditorialSectionProps} />; // id={componentData.sectionID}
+      return (
+        <Editorial
+          key={index}
+          {...EditorialSectionProps}
+          sectionID={componentData.sectionID ?? undefined}
+        />
+      );
 
     default:
       return null;
