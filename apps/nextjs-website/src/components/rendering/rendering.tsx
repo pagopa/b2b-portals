@@ -10,7 +10,13 @@ export function rendering(componentData: PageSection, index: number) {
   switch (componentData.__component) {
     case 'sections.hero':
       const HeroSectionProps: HeroProps = SectionDataToHeroProps(componentData);
-      return <Hero key={index} {...HeroSectionProps} />; // id={componentData.sectionID}
+      return (
+        <Hero
+          key={index}
+          {...HeroSectionProps}
+          sectionID={componentData.sectionID ?? undefined}
+        />
+      );
 
     default:
       return null;
