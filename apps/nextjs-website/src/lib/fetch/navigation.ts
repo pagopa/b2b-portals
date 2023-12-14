@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { PageSectionCodec } from './types/page';
+import { PageSectionCodec } from './types/PageSection';
 import { AppEnv } from '@/AppEnv';
 
 // Codec
