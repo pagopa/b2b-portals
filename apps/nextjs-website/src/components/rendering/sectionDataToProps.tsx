@@ -1,6 +1,6 @@
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
 import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
-import { HeroSectionData, EditorialSectionData } from '@/lib/fetch/page';
+import { EditorialSection, HeroSection } from '@/lib/fetch/types/PageSection';
 
 export const SectionDataToHeroProps = ({
   title,
@@ -11,15 +11,15 @@ export const SectionDataToHeroProps = ({
   image,
   background,
   ctaButtons,
-}: HeroSectionData): HeroProps => ({
+}: HeroSection): HeroProps => ({
   title,
   subtitle, // TODO: Parse rich text (markdown)
   useHoverlay,
   size,
-  image: 'http://localhost:1337' + (image.data?.attributes.url ?? ''), // TODO: Sub "http://localhost:1337" for Media Library URL
-  altText: image.data?.attributes.alternativeText ?? '',
+  image: image?.url ? 'http://localhost:1337' + image.url : undefined, // TODO: Sub "http://localhost:1337" for Media Library URL
+  altText: image?.alternativeText ?? '',
   inverse,
-  background: background.data?.attributes.url,
+  background: background?.url,
   ctaButtons,
 });
 
@@ -32,7 +32,7 @@ export const SectionDataToEditorialProps = ({
   reversed,
   image,
   ctaButtons,
-}: EditorialSectionData): EditorialProps => ({
+}: EditorialSection): EditorialProps => ({
   title,
   ...(eyelet && { eyelet }),
   body, // TODO: Parse rich text (markdown)
@@ -42,8 +42,8 @@ export const SectionDataToEditorialProps = ({
   ctaButtons,
   image: (
     <img
-      src={'http://localhost:1337' + (image.data?.attributes.url ?? '')} // TODO: Sub "http://localhost:1337" for Media Library URL
-      alt={image.data?.attributes.alternativeText ?? ''}
+      src={image?.url ? 'http://localhost:1337' + image.url : undefined} // TODO: Sub "http://localhost:1337" for Media Library URL
+      alt={image?.alternativeText ?? ''}
     />
   ),
 });

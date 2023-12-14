@@ -7,12 +7,9 @@ import {
   SectionDataToHeroProps,
   SectionDataToEditorialProps,
 } from './sectionDataToProps';
-import { PageData } from '@/lib/fetch/page';
+import { PageSection } from '@/lib/fetch/types/PageSection';
 
-export function rendering(
-  componentData: PageData['data']['attributes']['sections'][0],
-  index: number
-) {
+export function rendering(componentData: PageSection, index: number) {
   // eslint-disable-next-line no-underscore-dangle
   switch (componentData.__component) {
     case 'sections.hero':
