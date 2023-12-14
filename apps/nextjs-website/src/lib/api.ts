@@ -9,7 +9,6 @@ import { getFooter } from './fetch/footer';
 import { getHeader } from './fetch/header';
 import { makeHeaderProps } from './header';
 import { FooterProps, makeFooterProps } from './footer';
-import { PageData, getPage } from './fetch/page';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env

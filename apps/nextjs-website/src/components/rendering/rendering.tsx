@@ -2,12 +2,9 @@ import React from 'react';
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
 import Hero from '../Hero';
 import { SectionDataToHeroProps } from './sectionDataToProps';
-import { PageData } from '@/lib/fetch/page';
+import { PageSection } from '@/lib/fetch/types/PageSection';
 
-export function rendering(
-  componentData: PageData['data']['attributes']['sections'][0],
-  index: number
-) {
+export function rendering(componentData: PageSection, index: number) {
   // Temporarily disable no-small-switch rule (new cases will be added with PRs for other components)
   // eslint-disable-next-line no-underscore-dangle,sonarjs/no-small-switch
   switch (componentData.__component) {
