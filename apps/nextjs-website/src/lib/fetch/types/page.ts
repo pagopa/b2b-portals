@@ -1,4 +1,6 @@
 import * as t from 'io-ts';
+import { CTAButtonSchema } from './CTAButton';
+import { ImageDataCodec } from './StrapiImage';
 
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
@@ -12,51 +14,9 @@ const HeroSectionCodec = t.strict({
   }),
   useHoverlay: t.boolean,
   sectionID: t.union([t.string, t.null]),
-  image: t.union([
-    t.strict({
-      alternativeText: t.union([t.string, t.null]),
-      url: t.string,
-    }),
-    t.null,
-  ]),
-  background: t.union([
-    t.strict({
-      alternativeText: t.union([t.string, t.null]),
-      url: t.string,
-    }),
-    t.null,
-  ]),
-  ctaButtons: t.array(
-    // TODO: Replace with CTAButtonSchema when merged
-    t.intersection([
-      t.type({
-        text: t.string,
-        href: t.string,
-        variant: t.keyof({
-          text: null,
-          outlined: null,
-          contained: null,
-        }),
-        color: t.keyof({
-          inherit: null,
-          primary: null,
-          secondary: null,
-          success: null,
-          error: null,
-          info: null,
-          warning: null,
-        }),
-      }),
-      t.partial({
-        icon: t.union([t.string, t.null]),
-        size: t.keyof({
-          small: null,
-          medium: null,
-          large: null,
-        }),
-      }),
-    ])
-  ),
+  image: t.union([ImageDataCodec, t.null]),
+  background: t.union([ImageDataCodec, t.null]),
+  ctaButtons: t.array(CTAButtonSchema),
 });
 
 const EditorialSectionCodec = t.strict({
@@ -79,44 +39,8 @@ const EditorialSectionCodec = t.strict({
   }),
   reversed: t.boolean,
   sectionID: t.union([t.string, t.null]),
-  image: t.union([
-    t.strict({
-      alternativeText: t.union([t.string, t.null]),
-      url: t.string,
-    }),
-    t.null,
-  ]),
-  ctaButtons: t.array(
-    // TODO: Replace with CTAButtonSchema when merged
-    t.intersection([
-      t.type({
-        text: t.string,
-        href: t.string,
-        variant: t.keyof({
-          text: null,
-          outlined: null,
-          contained: null,
-        }),
-        color: t.keyof({
-          inherit: null,
-          primary: null,
-          secondary: null,
-          success: null,
-          error: null,
-          info: null,
-          warning: null,
-        }),
-      }),
-      t.partial({
-        icon: t.union([t.string, t.null]),
-        size: t.keyof({
-          small: null,
-          medium: null,
-          large: null,
-        }),
-      }),
-    ])
-  ),
+  image: t.union([ImageDataCodec, t.null]),
+  ctaButtons: t.array(CTAButtonSchema),
 });
 
 export const PageSectionCodec = t.union([
