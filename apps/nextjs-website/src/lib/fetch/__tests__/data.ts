@@ -8,7 +8,6 @@ export const homepageNavItem: Navigation[0] = {
   parent: null,
   menuAttached: false,
   related: {
-    slug: '/',
     sections: [
       {
         __component: 'sections.hero',
@@ -35,7 +34,6 @@ export const parentNavItem: Navigation[0] = {
   parent: null,
   menuAttached: true,
   related: {
-    slug: 'parent-slug',
     sections: [
       {
         __component: 'sections.editorial',
@@ -62,7 +60,6 @@ export const childNavItem: Navigation[0] = {
   parent: parentNavItem,
   menuAttached: true,
   related: {
-    slug: 'child-slug',
     sections: [
       {
         __component: 'sections.hero',

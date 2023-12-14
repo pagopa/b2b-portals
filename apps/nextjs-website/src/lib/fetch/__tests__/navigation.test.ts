@@ -96,7 +96,6 @@ describe('getNavigation', () => {
         path: '/',
         title: 'Homepage',
         related: {
-          slug: 'homepage',
           sections: [
             {
               __component: 'sections.hero',

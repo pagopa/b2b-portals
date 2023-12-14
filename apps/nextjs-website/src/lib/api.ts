@@ -47,8 +47,10 @@ export const getFooterProps = async (): Promise<FooterProps> => {
   return makeFooterProps(footer);
 };
 
-// Return PageProps for a specific page ID
-export const getPageProps = async (path: string): Promise<Page | undefined> => {
+// Return PageProps given the page path
+export const getPageProps = async (
+  slug: ReadonlyArray<string>
+): Promise<Page | undefined> => {
   const allPages = await getAllPages();
-  return allPages.find((page) => path === page.slug.join('/'));
+  return allPages.find((page) => slug.toString() === page.slug.toString());
 };

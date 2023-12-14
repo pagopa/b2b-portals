@@ -1,7 +1,7 @@
 import { getPageProps } from '@/lib/api';
 
 export default async function Home() {
-  const pageProps = await getPageProps('homepage');
+  const pageProps = await getPageProps(['homepage']);
   return (
     <div>
       <p>This is the Home page</p>
