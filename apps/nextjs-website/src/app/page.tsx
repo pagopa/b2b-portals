@@ -1,12 +1,11 @@
-'use client';
-import { Hero } from '@pagopa/pagopa-editorial-components';
+import { getPageProps } from '@/lib/api';
 
-export default function Home() {
+export default async function Home() {
+  const pageProps = await getPageProps(['homepage']);
   return (
-    <main>
-      <div>
-        <Hero title={'Hello World!'} />
-      </div>
-    </main>
+    <div>
+      <p>This is the Home page</p>
+      <p>These are my props {JSON.stringify(pageProps)}</p>
+    </div>
   );
 }
