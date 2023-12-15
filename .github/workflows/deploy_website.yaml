@@ -50,8 +50,8 @@ jobs:
           iam_role: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
           bucket: ${{ vars.S3_BUCKET_NAME }}
           cloudfront_distribution_id: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
-          strapi_token: ${{ secrets.STRAPI_TOKEN }}
-          strapi_api_url: ${{ vars.STRAPI_URL }}
+          strapi_api_token: ${{ secrets.STRAPI_TOKEN }}
+          strapi_api_base_url: ${{ vars.STRAPI_URL }}
           cdn_path: ${{ vars.CDN_PATH }}
 
   manual_deploy:
@@ -71,6 +71,6 @@ jobs:
           iam_role: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
           bucket: ${{ vars.S3_BUCKET_NAME }}
           cloudfront_distribution_id: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
-          strapi_token: ${{ secrets.STRAPI_TOKEN }}
-          strapi_api_url: ${{ vars.STRAPI_URL }}
+          strapi_api_token: ${{ secrets.STRAPI_TOKEN }}
+          strapi_api_base_url: ${{ vars.STRAPI_URL }}
           cdn_path: ${{ vars.CDN_PATH }}
