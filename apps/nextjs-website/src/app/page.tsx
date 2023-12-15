@@ -5,9 +5,5 @@ export default async function Home() {
   const pageProps = await getPageProps(['homepage']);
   const content = pageProps?.sections || [];
 
-  return (
-    <div>
-      {content.map((componentData, index) => rendering(componentData, index))}
-    </div>
-  );
+  return <div>{content.map((componentData) => rendering(componentData))}</div>;
 }

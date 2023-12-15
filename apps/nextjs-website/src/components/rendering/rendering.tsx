@@ -4,7 +4,7 @@ import Hero from '../Hero';
 import { SectionDataToHeroProps } from './sectionDataToProps';
 import { PageSection } from '@/lib/fetch/types/PageSection';
 
-export function rendering(componentData: PageSection, index: number) {
+export function rendering(componentData: PageSection) {
   // Temporarily disable no-small-switch rule (new cases will be added with PRs for other components)
   // eslint-disable-next-line no-underscore-dangle,sonarjs/no-small-switch
   switch (componentData.__component) {
@@ -12,7 +12,6 @@ export function rendering(componentData: PageSection, index: number) {
       const HeroSectionProps: HeroProps = SectionDataToHeroProps(componentData);
       return (
         <Hero
-          key={index}
           {...HeroSectionProps}
           sectionID={componentData.sectionID ?? undefined}
         />
