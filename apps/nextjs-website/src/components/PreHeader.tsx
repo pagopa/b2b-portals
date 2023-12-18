@@ -26,13 +26,24 @@ const formatValidMuiIcon = (iconName?: string | null): string | null => {
     .join('');
 };
 
+interface Palette {
+  primary: string;
+  secondary: string;
+}
+
+interface Theme {
+  palette: {
+    text: Palette;
+  };
+}
+
 const preHeaderTextButtonStyle = {
   padding: '0',
-  color: '#17324D',
+  color: (theme: Theme) => `${theme.palette.text.primary}`,
   backgroundColor: 'transparent',
   '&:hover': {
     backgroundColor: 'transparent',
-    color: 'rgba(23, 50, 77, 0.8)',
+    color: (theme: Theme) => `${theme.palette.text.secondary}`,
   },
 };
 
@@ -87,7 +98,7 @@ const PreHeader: React.FC<PreHeader['data']['attributes']> = (
 ) => (
   <Stack
     sx={{
-      borderBottom: '1px solid #E3E7EB',
+      borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
       minHeight: '48px',
       padding: '0 24px',
       display: 'flex',
@@ -101,7 +112,7 @@ const PreHeader: React.FC<PreHeader['data']['attributes']> = (
     }}
   >
     {/* Currently casting to PreHeaderProps due to confusing TS error
-    It says that no value other than "inherit" and "primary" is valid for a button's color (which is not actually true) */}
+    It says that no value other than 'inherit' and 'primary' is valid for a button's color (which is not actually true) */}
     <PreHeaderEC {...(RefinePreHeaderProps(preHeaderData) as PreHeaderProps)} />
   </Stack>
 );
