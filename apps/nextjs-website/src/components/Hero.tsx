@@ -33,8 +33,8 @@ const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
           color:
             HeroData.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
         },
-        ':first-child': {
-          ':first-child': {
+        ':first-of-type': {
+          ':first-of-type': {
             backgroundColor:
               HeroData.theme === 'dark' ? 'primary.dark' : 'background.paper',
             backgroundImage:
@@ -45,7 +45,7 @@ const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
         },
         '.MuiGrid-root': {
           '.MuiGrid-root': {
-            ':first-child': {
+            ':first-of-type': {
               padding: '0 2rem',
             },
           },
