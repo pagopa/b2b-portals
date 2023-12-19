@@ -1,5 +1,5 @@
-import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
+import { ExtendedHeroProps } from '@/lib/fetch/types/ExtendedPropTypes';
 
 export const SectionDataToHeroProps = ({
   title,
@@ -10,16 +10,21 @@ export const SectionDataToHeroProps = ({
   image,
   background,
   ctaButtons,
-}: HeroSection): HeroProps => ({
+  theme,
+}: HeroSection): ExtendedHeroProps => ({
   title,
   subtitle, // TODO: Parse rich text (markdown)
   useHoverlay,
   size,
-  image: image?.url ? 'http://localhost:1337' + image.url : undefined, // TODO: Sub 'http://localhost:1337' for config.STRAPI_API_BASE_URL
+  image: image?.url ? 'http://localhost:1337' + image.url : undefined, // TODO: Sub 'http://localhost:1337' for MEDIA_LIBRARY_URL
   altText: image?.alternativeText ?? '',
   inverse,
   background: background?.url
-    ? 'http://localhost:1337' + background.url
-    : undefined, // TODO: Sub 'http://localhost:1337' for config.STRAPI_API_BASE_URL
-  ctaButtons,
+    ? 'http://localhost:1337' + background.url // TODO: Sub 'http://localhost:1337' for MEDIA_LIBRARY_URL
+    : undefined,
+  ctaButtons: ctaButtons.map((ctaBtn) => ({
+    ...ctaBtn,
+    color: theme === 'dark' ? 'negative' : 'primary',
+  })),
+  theme,
 });
