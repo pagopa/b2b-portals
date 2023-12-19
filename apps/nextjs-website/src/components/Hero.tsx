@@ -55,17 +55,31 @@ const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
               ':first-of-type': {
                 padding: '0',
                 [theme.breakpoints.up('md')]: {
-                  padding: '0 2rem',
+                  padding: '0 0.5rem',
                 },
               },
             },
           },
           '.MuiBox-root': {
+            ':first-of-type': {
+              padding: '0 0.8rem',
+              [theme.breakpoints.up('md')]: {
+                padding: '0 0.5rem',
+              },
+            },
+          },
+          '.MuiContainer-root': {
             '.MuiGrid-root': {
-              ':first-of-type': {
-                padding: '0',
-                [theme.breakpoints.up('md')]: {
-                  padding: '0 2rem',
+              '.MuiGrid-root': {
+                '.MuiStack-root': {
+                  ':first-of-type': {
+                    margin: '0',
+                    padding: '2rem 0',
+                    [theme.breakpoints.up('md')]: {
+                      margin: '0',
+                      padding: '0',
+                    },
+                  },
                 },
               },
             },
