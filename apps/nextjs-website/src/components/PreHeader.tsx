@@ -26,29 +26,19 @@ const formatValidMuiIcon = (iconName?: string | null): string | null => {
     .join('');
 };
 
-interface Palette {
-  primary: string;
-  secondary: string;
-}
-
-interface Theme {
-  palette: {
-    text: Palette;
-  };
-}
-
-const preHeaderTextButtonStyle = {
+const preHeaderNakedButtonStyle = {
   padding: '0',
-  color: (theme: Theme) => `${theme.palette.text.primary}`,
+  color: 'text.primary', // Theme-aware property --> equivalent to (theme) => theme.palette.text.primary
   backgroundColor: 'transparent',
   '&:hover': {
     backgroundColor: 'transparent',
-    color: (theme: Theme) => `${theme.palette.text.secondary}`,
+    color: 'text.secondary', // Theme-aware property --> equivalent to (theme) => theme.palette.text.secondary
   },
 };
 
 // Add styles, SEO related values and extra JS parameters for singular components
-// Styling 'text' variant as 'naked' for PreHeader (since editorial-components does not accept 'naked' variant)
+// Styling 'naked' variant for PreHeader using 'text' variant as a base
+// (since editorial-components does not accept 'naked' variant)
 const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
   ...props,
   ...(props.leftCtas?.ctaButtons && {
@@ -56,14 +46,15 @@ const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
       ...props.leftCtas,
       ctaButtons: props.leftCtas.ctaButtons.map((ctaBtn) => ({
         ...ctaBtn,
-        disableRipple: ctaBtn.variant === 'text',
-        disableTouchRipple: ctaBtn.variant === 'text',
         target: '_blank',
         rel: 'noopener noreferrer',
+        disableRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+        disableTouchRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+        variant: ctaBtn.variant === 'text' ? 'text' : ctaBtn.variant, // To be replaced by 'naked' when implemented on Strapi's side
         sx: {
           fontWeight: 'bold',
           letterSpacing: '0',
-          ...(ctaBtn.variant === 'text' && { ...preHeaderTextButtonStyle }),
+          ...(ctaBtn.variant === 'text' && { ...preHeaderNakedButtonStyle }), // To be replaced by 'naked' when implemented on Strapi's side
         },
         ...(isValidMuiIcon(ctaBtn.icon) && {
           startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
@@ -76,14 +67,15 @@ const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
       ...props.rightCtas,
       ctaButtons: props.rightCtas.ctaButtons.map((ctaBtn) => ({
         ...ctaBtn,
-        disableRipple: ctaBtn.variant === 'text',
-        disableTouchRipple: ctaBtn.variant === 'text',
         target: '_blank',
         rel: 'noopener noreferrer',
+        disableRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+        disableTouchRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+        variant: ctaBtn.variant === 'text' ? 'text' : ctaBtn.variant, // To be replaced by 'naked' when implemented on Strapi's side
         sx: {
           fontWeight: '600',
           letterSpacing: '.3px',
-          ...(ctaBtn.variant === 'text' && { ...preHeaderTextButtonStyle }),
+          ...(ctaBtn.variant === 'text' && { ...preHeaderNakedButtonStyle }), // To be replaced by 'naked' when implemented on Strapi's side
         },
         ...(isValidMuiIcon(ctaBtn.icon) && {
           startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
@@ -96,9 +88,12 @@ const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
 const PreHeader: React.FC<PreHeader['data']['attributes']> = (
   preHeaderData: PreHeader['data']['attributes']
 ) => (
+  // Using sx over styled() because, for styled() to work, the component (in this case PreHeaderEC)
+  // needs to take a className parameter and set it to itself (which PreHeaderEC does not)
   <Stack
     sx={{
-      borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+      borderBottom: 1,
+      borderBottomColor: 'divider', // Theme-aware property --> equivalent to (theme) => theme.palette.divider
       minHeight: '48px',
       padding: '0 24px',
       display: 'flex',
