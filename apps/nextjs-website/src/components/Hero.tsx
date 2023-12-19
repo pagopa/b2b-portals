@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { Hero as HeroEC } from '@pagopa/pagopa-editorial-components';
-import { Icon, Stack } from '@mui/material';
+import { Icon, Stack, useTheme } from '@mui/material';
 import { ExtendedHeroProps } from '@/lib/fetch/types/ExtendedPropTypes';
 import { formatValidMuiIcon, isValidMuiIcon } from '@/utils';
 
@@ -21,40 +21,61 @@ const AddIconToButtons = (
 
 const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
   HeroData
-) => (
-  <section id={HeroData.sectionID}>
-    <Stack
-      sx={{
-        h1: {
-          color:
-            HeroData.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
-        },
-        p: {
-          color:
-            HeroData.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
-        },
-        ':first-of-type': {
-          ':first-of-type': {
-            backgroundColor:
-              HeroData.theme === 'dark' ? 'primary.dark' : 'background.paper',
-            backgroundImage:
-              HeroData.background != null
-                ? `url('${HeroData.background}')`
-                : 'none',
+) => {
+  const theme = useTheme();
+
+  return (
+    <section id={HeroData.sectionID}>
+      <Stack
+        sx={{
+          h1: {
+            color:
+              HeroData.theme === 'dark'
+                ? 'primary.contrastText'
+                : 'text.primary',
           },
-        },
-        '.MuiGrid-root': {
-          '.MuiGrid-root': {
+          p: {
+            color:
+              HeroData.theme === 'dark'
+                ? 'primary.contrastText'
+                : 'text.primary',
+          },
+          ':first-of-type': {
             ':first-of-type': {
-              padding: '0 2rem',
+              backgroundColor:
+                HeroData.theme === 'dark' ? 'primary.dark' : 'background.paper',
+              backgroundImage:
+                HeroData.background != null
+                  ? `url('${HeroData.background}')`
+                  : 'none',
             },
           },
-        },
-      }}
-    >
-      <HeroEC {...AddIconToButtons(HeroData)} />
-    </Stack>
-  </section>
-);
+          '.MuiGrid-root': {
+            '.MuiGrid-root': {
+              ':first-of-type': {
+                padding: '0',
+                [theme.breakpoints.up('md')]: {
+                  padding: '0 2rem',
+                },
+              },
+            },
+          },
+          '.MuiBox-root': {
+            '.MuiGrid-root': {
+              ':first-of-type': {
+                padding: '0',
+                [theme.breakpoints.up('md')]: {
+                  padding: '0 2rem',
+                },
+              },
+            },
+          },
+        }}
+      >
+        <HeroEC {...AddIconToButtons(HeroData)} />
+      </Stack>
+    </section>
+  );
+};
 
 export default Hero;
