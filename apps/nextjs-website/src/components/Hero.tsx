@@ -55,7 +55,7 @@ const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
               ':first-of-type': {
                 padding: '0',
                 [theme.breakpoints.up('md')]: {
-                  padding: '0 5rem',
+                  padding: '0 0.5rem',
                 },
               },
             },
