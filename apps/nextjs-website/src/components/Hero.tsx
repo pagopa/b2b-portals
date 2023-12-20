@@ -55,7 +55,7 @@ const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
               ':first-of-type': {
                 padding: '0',
                 [theme.breakpoints.up('md')]: {
-                  padding: '0 0.5rem',
+                  padding: '0 5rem',
                 },
               },
             },
@@ -74,8 +74,8 @@ const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
                 '.MuiStack-root': {
                   ':first-of-type': {
                     margin: '0',
-                    padding: '2rem 0',
-                    [theme.breakpoints.up('md')]: {
+                    padding: '2rem 0 0 0',
+                    [theme.breakpoints.up('lg')]: {
                       margin: '0',
                       padding: '0',
                     },
