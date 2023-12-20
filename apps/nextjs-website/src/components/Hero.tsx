@@ -28,28 +28,6 @@ const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
     <section id={HeroData.sectionID}>
       <Stack
         sx={{
-          h1: {
-            color:
-              HeroData.theme === 'dark'
-                ? 'primary.contrastText'
-                : 'text.primary',
-          },
-          p: {
-            color:
-              HeroData.theme === 'dark'
-                ? 'primary.contrastText'
-                : 'text.primary',
-          },
-          ':first-of-type': {
-            ':first-of-type': {
-              backgroundColor:
-                HeroData.theme === 'dark' ? 'primary.dark' : 'background.paper',
-              backgroundImage:
-                HeroData.background != null
-                  ? `url('${HeroData.background}')`
-                  : 'none',
-            },
-          },
           '.MuiGrid-root': {
             '.MuiGrid-root': {
               ':first-of-type': {
