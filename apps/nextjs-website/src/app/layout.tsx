@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import { ThemeProvider } from '@mui/system';
-import { theme } from '@pagopa/mui-italia';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -21,22 +19,13 @@ export default async function RootLayout({
   const footerProps = await getFooterProps();
 
   return (
-    <ThemeProvider theme={theme}>
-      <html lang='en'>
-        <head>
-          {/* Import needed by <Icon /> to render MUI Icons */}
-          <link
-            href='https://fonts.googleapis.com/icon?family=Material+Icons'
-            rel='stylesheet'
-          />
-        </head>
-        <body style={{ margin: 0 }}>
-          <PreHeader {...preHeaderProps} />
-          <Header {...headerProps} />
-          {children}
-          <Footer {...footerProps} />
-        </body>
-      </html>
-    </ThemeProvider>
+    <html lang='en'>
+      <body>
+        <PreHeader {...preHeaderProps} />
+        <Header {...headerProps} />
+        {children}
+        <Footer {...footerProps} />
+      </body>
+    </html>
   );
 }
