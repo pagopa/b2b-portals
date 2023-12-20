@@ -1,14 +1,15 @@
 import React from 'react';
-import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import Editorial from '../Editorial';
 import { SectionDataToEditorialProps } from './sectionDataToProps';
 import { PageSection } from '@/lib/fetch/types/PageSection';
+import { ExtendedEditorialProps } from '@/lib/fetch/types/ExtendedPropTypes';
 
 export function rendering(componentData: PageSection, index: number) {
-  // eslint-disable-next-line no-underscore-dangle
+  // Temporarily disable no-small-switch rule (new cases will be added with PRs for other components)
+  // eslint-disable-next-line no-underscore-dangle,sonarjs/no-small-switch
   switch (componentData.__component) {
     case 'sections.editorial':
-      const EditorialSectionProps: EditorialProps =
+      const EditorialSectionProps: ExtendedEditorialProps =
         SectionDataToEditorialProps(componentData);
       return (
         <Editorial

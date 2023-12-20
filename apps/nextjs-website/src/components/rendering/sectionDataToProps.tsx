@@ -1,6 +1,6 @@
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
-import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import { EditorialSection, HeroSection } from '@/lib/fetch/types/PageSection';
+import { ExtendedEditorialProps } from '@/lib/fetch/types/ExtendedPropTypes';
 
 export const SectionDataToHeroProps = ({
   title,
@@ -32,18 +32,23 @@ export const SectionDataToEditorialProps = ({
   reversed,
   image,
   ctaButtons,
-}: EditorialSection): EditorialProps => ({
+  theme,
+}: EditorialSection): ExtendedEditorialProps => ({
   title,
   ...(eyelet && { eyelet }),
   body, // TODO: Parse rich text (markdown)
   reversed,
   width,
   pattern,
-  ctaButtons,
+  ctaButtons: ctaButtons.map((ctaBtn) => ({
+    ...ctaBtn,
+    color: theme === 'dark' ? 'negative' : 'primary',
+  })),
   image: (
     <img
       src={image?.url ? 'http://localhost:1337' + image.url : undefined} // TODO: Sub "http://localhost:1337" for Media Library URL
       alt={image?.alternativeText ?? ''}
     />
   ),
+  theme,
 });

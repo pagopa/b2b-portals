@@ -1,15 +1,22 @@
 'use client';
 import React from 'react';
-import {
-  EditorialProps,
-  Editorial as EditorialEC,
-} from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
+import { Editorial as EditorialEC } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
+import { Stack } from '@mui/material';
+import { ExtendedEditorialProps } from '@/lib/fetch/types/ExtendedPropTypes';
 
 const Editorial: React.FC<
-  EditorialProps & { sectionID: string | undefined }
+  ExtendedEditorialProps & { sectionID: string | undefined }
 > = (EditorialData) => (
   <section id={EditorialData.sectionID}>
-    <EditorialEC {...EditorialData} />
+    <Stack
+      sx={{
+        img: {
+          maxHeight: 490,
+        },
+      }}
+    >
+      <EditorialEC {...EditorialData} />
+    </Stack>
   </section>
 );
 
