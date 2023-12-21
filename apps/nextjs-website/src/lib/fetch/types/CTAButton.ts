@@ -6,16 +6,6 @@ const CTAButtonVariant = t.keyof({
   contained: null,
 });
 
-const CTAButtonColor = t.keyof({
-  inherit: null,
-  primary: null,
-  secondary: null,
-  success: null,
-  error: null,
-  info: null,
-  warning: null,
-});
-
 const CTAButtonSize = t.keyof({
   small: null,
   medium: null,
@@ -27,7 +17,6 @@ export const CTAButtonSchema = t.intersection([
     text: t.string,
     href: t.string,
     variant: CTAButtonVariant,
-    color: CTAButtonColor,
   }),
   t.partial({
     icon: t.union([t.string, t.null]),
