@@ -13,17 +13,17 @@ const Editorial: React.FC<
         img: {
           maxHeight: 490,
         },
-        '.markdown': {
-          margin: 0,
-          fontFamily: '"Titillium Web",sans-serif',
-          fontWeight: 400,
-          fontSize: '1rem',
-          lineHeight: 1.4,
+        '.MuiTypography-root': {
           color:
             EditorialData.theme === 'dark'
               ? 'primary.contrastText'
               : 'text.primary',
-          letterSpacing: '0.15px',
+          a: {
+            color:
+              EditorialData.theme === 'dark'
+                ? 'primary.contrastText'
+                : 'text.primary',
+          },
         },
       }}
     >
