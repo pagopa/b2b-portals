@@ -32,7 +32,6 @@ const headerResponse = {
           text: 'test',
           href: '/',
           variant: 'text',
-          color: 'inherit',
           icon: null,
           size: 'medium',
         },
