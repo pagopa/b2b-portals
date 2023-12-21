@@ -1,4 +1,5 @@
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
+import { MDtoJSX } from './MDtoJSX';
 import { EditorialSection, HeroSection } from '@/lib/fetch/types/PageSection';
 import { ExtendedEditorialProps } from '@/lib/fetch/types/ExtendedPropTypes';
 
@@ -13,7 +14,7 @@ export const SectionDataToHeroProps = ({
   ctaButtons,
 }: HeroSection): HeroProps => ({
   title,
-  subtitle, // TODO: Parse rich text (markdown)
+  subtitle: MDtoJSX(subtitle ?? ''),
   useHoverlay,
   size,
   image: image?.url ? 'http://localhost:1337' + image.url : undefined, // TODO: Sub "http://localhost:1337" for Media Library URL
@@ -36,7 +37,7 @@ export const SectionDataToEditorialProps = ({
 }: EditorialSection): ExtendedEditorialProps => ({
   title,
   ...(eyelet && { eyelet }),
-  body, // TODO: Parse rich text (markdown)
+  body: MDtoJSX(body),
   reversed,
   width,
   pattern,
