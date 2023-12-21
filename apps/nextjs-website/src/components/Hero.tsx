@@ -62,6 +62,18 @@ const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
               },
             },
           },
+          '.MuiTypography-root': {
+            color:
+              HeroData.theme === 'dark'
+                ? 'primary.contrastText'
+                : 'text.primary',
+            a: {
+              color:
+                HeroData.theme === 'dark'
+                  ? 'primary.contrastText'
+                  : 'text.primary',
+            },
+          },
         }}
       >
         <HeroEC {...AddIconToButtons(HeroData)} />

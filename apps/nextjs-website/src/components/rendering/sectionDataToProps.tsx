@@ -1,3 +1,4 @@
+import { MDtoJSX } from './MDtoJSX';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 import { ExtendedHeroProps } from '@/lib/fetch/types/ExtendedPropTypes';
 
@@ -13,7 +14,7 @@ export const SectionDataToHeroProps = ({
   theme,
 }: HeroSection): ExtendedHeroProps => ({
   title,
-  subtitle, // TODO: Parse rich text (markdown)
+  subtitle: MDtoJSX(subtitle ?? ''),
   useHoverlay,
   size,
   image: image?.url ? 'http://localhost:1337' + image.url : undefined, // TODO: Sub 'http://localhost:1337' for MEDIA_LIBRARY_URL
