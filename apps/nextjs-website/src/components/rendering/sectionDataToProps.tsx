@@ -37,7 +37,7 @@ export const SectionDataToEditorialProps = ({
 }: EditorialSection): ExtendedEditorialProps => ({
   title,
   ...(eyelet && { eyelet }),
-  body: MDtoJSX(body),
+  body: MDtoJSX(body, 'body2'),
   reversed,
   width,
   pattern,
