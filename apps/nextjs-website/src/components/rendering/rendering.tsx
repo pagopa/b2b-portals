@@ -11,14 +11,11 @@ import {
   SectionDataToFeatureProps,
   SectionDataToHowToProps,
 } from './sectionDataToProps';
-import { PageData } from '@/lib/fetch/page';
+import { PageSection } from '@/lib/fetch/types/PageSection';
 import { ExtendedEditorialProps } from '@/lib/fetch/types/ExtendedPropTypes';
 import { ExtendedHeroProps } from '@/lib/fetch/types/ExtendedPropTypes';
 
-export function rendering(
-  componentData: PageData['data']['attributes']['sections'][0],
-  index: number
-) {
+export function rendering(componentData: PageSection) {
   // eslint-disable-next-line no-underscore-dangle
   switch (componentData.__component) {
     case 'sections.hero':
@@ -36,7 +33,6 @@ export function rendering(
           SectionDataToEditorialProps(componentData);
         return (
           <Editorial
-            key={index}
             {...EditorialSectionProps}
             sectionID={componentData.sectionID ?? undefined}
           />
@@ -45,12 +41,12 @@ export function rendering(
     case 'sections.feature':
       const FeatureSectionProps: FeatureProps =
         SectionDataToFeatureProps(componentData);
-      return <Feature key={index} {...FeatureSectionProps} />; // id={componentData.sectionID}
+      return <Feature {...FeatureSectionProps} />; // id={componentData.sectionID}
 
     case 'sections.how-to':
       const HowToSectionProps: HowToProps =
         SectionDataToHowToProps(componentData);
-      return <HowTo key={index} {...HowToSectionProps} />; // id={componentData.sectionID}
+      return <HowTo {...HowToSectionProps} />; // id={componentData.sectionID}
 
     default:
       return null;

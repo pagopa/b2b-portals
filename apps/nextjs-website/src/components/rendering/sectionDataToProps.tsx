@@ -1,10 +1,13 @@
 import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
 import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/HowTo';
-import { ExtendedEditorialProps, ExtendedHeroProps } from '@/lib/fetch/types/ExtendedPropTypes';
+import * as MuiIcons from '@mui/icons-material';
 import { MDtoJSX } from './MDtoJSX';
+import {
+  ExtendedEditorialProps,
+  ExtendedHeroProps,
+} from '@/lib/fetch/types/ExtendedPropTypes';
 import { EditorialSection, HeroSection } from '@/lib/fetch/types/PageSection';
 import { FeatureSectionData, HowToSectionData } from '@/lib/fetch/page';
-import * as MuiIcons from '@mui/icons-material';
 
 export const SectionDataToHeroProps = ({
   title,
@@ -57,13 +60,12 @@ export const SectionDataToEditorialProps = ({
   })),
   image: (
     <img
-      src={image?.url ? 'http://localhost:1337' + image.url : undefined} // TODO: Sub "http://localhost:1337" for Media Library URL
+      src={image?.url ? 'http://localhost:1337' + image.url : undefined} // TODO: Sub 'http://localhost:1337' for Media Library URL
       alt={image?.alternativeText ?? ''}
     />
   ),
   theme,
 });
-
 
 export const SectionDataToFeatureProps = ({
   title,
