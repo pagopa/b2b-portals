@@ -28,6 +28,7 @@ const Header: React.FC<HeaderProps> = (headerData) => {
           '.MuiStack-root': {
             a: {
               display: 'flex',
+              justifyContent: 'left',
             },
             '.MuiStack-root': {
               // Popup on hover

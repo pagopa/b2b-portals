@@ -11,7 +11,12 @@ const Editorial: React.FC<
     <Stack
       sx={{
         img: {
+          width: '100%',
+          height: 'auto',
           maxHeight: 490,
+          margin: 'auto',
+          display: 'block',
+          justifyItems: 'center',
         },
         '.MuiTypography-root': {
           color:
