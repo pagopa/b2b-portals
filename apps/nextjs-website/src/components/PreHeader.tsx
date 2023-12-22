@@ -1,12 +1,14 @@
 'use client';
 import React from 'react';
-import { PreHeader as PreHeaderEC } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
-import '@/styles/preHeader.css';
+import {
+  PreHeader as PreHeaderEC,
+  PreHeaderProps,
+} from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import Icon from '@mui/material/Icon';
 // Only temporarily importing every icon. A task is planned to sub this for a restricted set of accepted icon names.
 import * as MuiIcons from '@mui/icons-material';
+import { Stack } from '@mui/material';
 import { PreHeader } from '@/lib/fetch/preHeader';
-import buttonStyles from '@/styles/sx/button.json';
 
 const isValidMuiIcon = (iconName?: string | null): boolean =>
   !!iconName && iconName in MuiIcons;
@@ -24,7 +26,19 @@ const formatValidMuiIcon = (iconName?: string | null): string | null => {
     .join('');
 };
 
+const preHeaderNakedButtonStyle = {
+  padding: '0',
+  color: 'text.primary', // Theme-aware property --> equivalent to (theme) => theme.palette.text.primary
+  backgroundColor: 'transparent',
+  '&:hover': {
+    backgroundColor: 'transparent',
+    color: 'text.secondary', // Theme-aware property --> equivalent to (theme) => theme.palette.text.secondary
+  },
+};
+
 // Add styles, SEO related values and extra JS parameters for singular components
+// Styling 'naked' variant for PreHeader using 'text' variant as a base
+// (since editorial-components does not accept 'naked' variant)
 const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
   ...props,
   ...(props.leftCtas?.ctaButtons && {
@@ -32,16 +46,15 @@ const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
       ...props.leftCtas,
       ctaButtons: props.leftCtas.ctaButtons.map((ctaBtn) => ({
         ...ctaBtn,
-        disableRipple: true,
-        disableTouchRipple: true,
         target: '_blank',
         rel: 'noopener noreferrer',
+        disableRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+        disableTouchRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+        variant: ctaBtn.variant === 'text' ? 'text' : ctaBtn.variant, // To be replaced by 'naked' when implemented on Strapi's side
         sx: {
           fontWeight: 'bold',
           letterSpacing: '0',
-          ...buttonStyles.common,
-          ...(props.leftCtas &&
-            buttonStyles[ctaBtn.variant][props.leftCtas.theme]),
+          ...(ctaBtn.variant === 'text' && { ...preHeaderNakedButtonStyle }), // To be replaced by 'naked' when implemented on Strapi's side
         },
         ...(isValidMuiIcon(ctaBtn.icon) && {
           startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
@@ -54,16 +67,15 @@ const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
       ...props.rightCtas,
       ctaButtons: props.rightCtas.ctaButtons.map((ctaBtn) => ({
         ...ctaBtn,
-        disableRipple: true,
-        disableTouchRipple: true,
         target: '_blank',
         rel: 'noopener noreferrer',
+        disableRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+        disableTouchRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+        variant: ctaBtn.variant === 'text' ? 'text' : ctaBtn.variant, // To be replaced by 'naked' when implemented on Strapi's side
         sx: {
           fontWeight: '600',
           letterSpacing: '.3px',
-          ...buttonStyles.common,
-          ...(props.rightCtas &&
-            buttonStyles[ctaBtn.variant][props.rightCtas.theme]),
+          ...(ctaBtn.variant === 'text' && { ...preHeaderNakedButtonStyle }), // To be replaced by 'naked' when implemented on Strapi's side
         },
         ...(isValidMuiIcon(ctaBtn.icon) && {
           startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
@@ -76,9 +88,28 @@ const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
 const PreHeader: React.FC<PreHeader['data']['attributes']> = (
   preHeaderData: PreHeader['data']['attributes']
 ) => (
-  <div id='pre-header'>
-    <PreHeaderEC {...RefinePreHeaderProps(preHeaderData)} />
-  </div>
+  // Using sx over styled() because, for styled() to work, the component (in this case PreHeaderEC)
+  // needs to take a className parameter and set it to itself (which PreHeaderEC does not)
+  <Stack
+    sx={{
+      borderBottom: 1,
+      borderBottomColor: 'divider', // Theme-aware property --> equivalent to (theme) => theme.palette.divider
+      minHeight: '48px',
+      padding: '0 24px',
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      '> *': {
+        flex: '1',
+        padding: '0 !important',
+      },
+    }}
+  >
+    {/* Currently casting to PreHeaderProps due to confusing TS error
+    It says that no value other than 'inherit' and 'primary' is valid for a button's color (which is not actually true) */}
+    <PreHeaderEC {...(RefinePreHeaderProps(preHeaderData) as PreHeaderProps)} />
+  </Stack>
 );
 
 export default PreHeader;

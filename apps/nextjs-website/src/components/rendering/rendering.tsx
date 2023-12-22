@@ -1,22 +1,19 @@
 import React from 'react';
-import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
-import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
 import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/HowTo';
-import { BannerLinkProps } from '@pagopa/pagopa-editorial-components/dist/components/BannerLink';
 import Hero from '../Hero';
 import Editorial from '../Editorial';
 import Feature from '../Feature';
 import HowTo from '../HowTo';
-import BannerLink from '../Bannerlink';
 import {
   SectionDataToHeroProps,
   SectionDataToEditorialProps,
   SectionDataToFeatureProps,
   SectionDataToHowToProps,
-  SectionDataToBannerlinkProps,
 } from './sectionDataToProps';
 import { PageData } from '@/lib/fetch/page';
+import { ExtendedEditorialProps } from '@/lib/fetch/types/ExtendedPropTypes';
+import { ExtendedHeroProps } from '@/lib/fetch/types/ExtendedPropTypes';
 
 export function rendering(
   componentData: PageData['data']['attributes']['sections'][0],
@@ -25,13 +22,25 @@ export function rendering(
   // eslint-disable-next-line no-underscore-dangle
   switch (componentData.__component) {
     case 'sections.hero':
-      const HeroSectionProps: HeroProps = SectionDataToHeroProps(componentData);
-      return <Hero key={index} {...HeroSectionProps} />; // id={componentData.sectionID}
+      const HeroSectionProps: ExtendedHeroProps =
+        SectionDataToHeroProps(componentData);
+      return (
+        <Hero
+          {...HeroSectionProps}
+          sectionID={componentData.sectionID ?? undefined}
+        />
+      );
 
-    case 'sections.editorial':
-      const EditorialSectionProps: EditorialProps =
-        SectionDataToEditorialProps(componentData);
-      return <Editorial key={index} {...EditorialSectionProps} />; // id={componentData.sectionID}
+      case 'sections.editorial':
+        const EditorialSectionProps: ExtendedEditorialProps =
+          SectionDataToEditorialProps(componentData);
+        return (
+          <Editorial
+            key={index}
+            {...EditorialSectionProps}
+            sectionID={componentData.sectionID ?? undefined}
+          />
+        );
 
     case 'sections.feature':
       const FeatureSectionProps: FeatureProps =
@@ -42,11 +51,6 @@ export function rendering(
       const HowToSectionProps: HowToProps =
         SectionDataToHowToProps(componentData);
       return <HowTo key={index} {...HowToSectionProps} />; // id={componentData.sectionID}
-
-    case 'sections.banner-link':
-      const BannerlinkSectionProps: BannerLinkProps =
-        SectionDataToBannerlinkProps(componentData);
-      return <BannerLink key={index} {...BannerlinkSectionProps} />; // id={componentData.sectionID}
 
     default:
       return null;

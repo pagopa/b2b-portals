@@ -1,16 +1,10 @@
-import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero';
-import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
 import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/HowTo';
-import { BannerLinkProps } from '@pagopa/pagopa-editorial-components/dist/components/BannerLink';
+import { ExtendedEditorialProps, ExtendedHeroProps } from '@/lib/fetch/types/ExtendedPropTypes';
+import { MDtoJSX } from './MDtoJSX';
+import { EditorialSection, HeroSection } from '@/lib/fetch/types/PageSection';
+import { FeatureSectionData, HowToSectionData } from '@/lib/fetch/page';
 import * as MuiIcons from '@mui/icons-material';
-import {
-  HeroSectionData,
-  EditorialSectionData,
-  FeatureSectionData,
-  HowToSectionData,
-  BannerlinkSectionData,
-} from '@/lib/fetch/page';
 
 export const SectionDataToHeroProps = ({
   title,
@@ -21,16 +15,23 @@ export const SectionDataToHeroProps = ({
   image,
   background,
   ctaButtons,
-}: HeroSectionData): HeroProps => ({
+  theme,
+}: HeroSection): ExtendedHeroProps => ({
   title,
-  subtitle, // TODO: Parse rich text (markdown)
+  subtitle: MDtoJSX(subtitle ?? ''),
   useHoverlay,
   size,
-  image: 'http://localhost:1337' + (image.data?.attributes.url ?? ''), // TODO: Sub 'http://localhost:1337' for Media Library URL
-  altText: image.data?.attributes.alternativeText ?? '',
+  image: image?.url ? 'http://localhost:1337' + image.url : undefined, // TODO: Sub 'http://localhost:1337' for MEDIA_LIBRARY_URL
+  altText: image?.alternativeText ?? '',
   inverse,
-  background: background.data?.attributes.url,
-  ctaButtons,
+  background: background?.url
+    ? 'http://localhost:1337' + background.url // TODO: Sub 'http://localhost:1337' for MEDIA_LIBRARY_URL
+    : undefined,
+  ctaButtons: ctaButtons.map((ctaBtn) => ({
+    ...ctaBtn,
+    color: theme === 'dark' ? 'negative' : 'primary',
+  })),
+  theme,
 });
 
 export const SectionDataToEditorialProps = ({
@@ -42,21 +43,27 @@ export const SectionDataToEditorialProps = ({
   reversed,
   image,
   ctaButtons,
-}: EditorialSectionData): EditorialProps => ({
+  theme,
+}: EditorialSection): ExtendedEditorialProps => ({
   title,
   ...(eyelet && { eyelet }),
-  body, // TODO: Parse rich text (markdown)
+  body: MDtoJSX(body, 'body2'),
   reversed,
   width,
   pattern,
-  ctaButtons,
+  ctaButtons: ctaButtons.map((ctaBtn) => ({
+    ...ctaBtn,
+    color: theme === 'dark' ? 'negative' : 'primary',
+  })),
   image: (
     <img
-      src={'http://localhost:1337' + (image.data?.attributes.url ?? '')} // TODO: Sub 'http://localhost:1337' for Media Library URL
-      alt={image.data?.attributes.alternativeText ?? ''}
+      src={image?.url ? 'http://localhost:1337' + image.url : undefined} // TODO: Sub "http://localhost:1337" for Media Library URL
+      alt={image?.alternativeText ?? ''}
     />
   ),
+  theme,
 });
+
 
 export const SectionDataToFeatureProps = ({
   title,
@@ -105,18 +112,4 @@ export const SectionDataToHowToProps = ({
       },
     }),
   })),
-});
-
-export const SectionDataToBannerlinkProps = ({
-  title,
-  body,
-  reverse,
-  ctaButtons,
-  theme,
-}: BannerlinkSectionData): BannerLinkProps => ({
-  title,
-  body, // TODO: Parse rich text (markdown)
-  reverse,
-  ctaButtons,
-  theme,
 });

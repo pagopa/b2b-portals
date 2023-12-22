@@ -40,7 +40,9 @@ export const makeHeaderProps = (
   ...(header.data.attributes.avatar &&
     header.data.attributes.avatar.data && {
       avatar: {
-        src: header.data.attributes.avatar.data.attributes.url,
+        src:
+          'http://localhost:1337' +
+          header.data.attributes.avatar.data.attributes.url, // TODO: Replace localhost with MEDIA_LIBRARY_URL when merged
       },
     }),
   beta: header.data.attributes.beta,
@@ -50,7 +52,10 @@ export const makeHeaderProps = (
     href: '/',
   },
   ...(header.data.attributes.ctaButtons && {
-    ctaButtons: header.data.attributes.ctaButtons,
+    ctaButtons: header.data.attributes.ctaButtons.map((ctaBtn) => ({
+      ...ctaBtn,
+      color: header.data.attributes.theme === 'dark' ? 'negative' : 'primary',
+    })),
   }),
   menu: Array.from(
     makeMenuFromNavigation(navigation, header.data.attributes.theme)
