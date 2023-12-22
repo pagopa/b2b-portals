@@ -1,5 +1,6 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
+import { PageSectionCodec } from './types/PageSection';
 import { AppEnv } from '@/AppEnv';
 
 // Codec
@@ -10,13 +11,13 @@ const ParentCodec = t.strict({
   path: t.string,
   menuAttached: t.boolean,
 });
+
 const NavItemCodec = t.intersection([
   ParentCodec,
   t.strict({
     parent: t.union([ParentCodec, t.null]),
     related: t.strict({
-      id: t.number,
-      slug: t.string,
+      sections: t.array(PageSectionCodec),
     }),
   }),
 ]);
@@ -31,7 +32,7 @@ export const getNavigation = (
 ): Promise<Navigation> =>
   extractFromResponse(
     fetchFun(
-      `${config.STRAPI_API_BASE_URL}/api/navigation/render/${menuName}?type=FLAT`,
+      `${config.STRAPI_API_BASE_URL}/api/navigation/render/${menuName}?type=FLAT&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items&populate[sections][populate][4]=link&populate[sections][populate][5]=steps`,
       {
         method: 'GET',
         headers: {

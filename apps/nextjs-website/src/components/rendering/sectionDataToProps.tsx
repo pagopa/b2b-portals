@@ -9,6 +9,8 @@ import {
 import { EditorialSection, HeroSection } from '@/lib/fetch/types/PageSection';
 import { FeatureSectionData, HowToSectionData } from '@/lib/fetch/page';
 
+const localhostBaseUrl = 'http://localhost:1337';
+
 export const SectionDataToHeroProps = ({
   title,
   subtitle,
@@ -24,12 +26,10 @@ export const SectionDataToHeroProps = ({
   subtitle: MDtoJSX(subtitle ?? ''),
   useHoverlay,
   size,
-  image: image?.url ? 'http://localhost:1337' + image.url : undefined, // TODO: Sub 'http://localhost:1337' for MEDIA_LIBRARY_URL
+  image: image?.url ? localhostBaseUrl + image.url : undefined,
   altText: image?.alternativeText ?? '',
   inverse,
-  background: background?.url
-    ? 'http://localhost:1337' + background.url // TODO: Sub 'http://localhost:1337' for MEDIA_LIBRARY_URL
-    : undefined,
+  background: background?.url ? localhostBaseUrl + background.url : undefined,
   ctaButtons: ctaButtons.map((ctaBtn) => ({
     ...ctaBtn,
     color: theme === 'dark' ? 'negative' : 'primary',
@@ -60,7 +60,7 @@ export const SectionDataToEditorialProps = ({
   })),
   image: (
     <img
-      src={image?.url ? 'http://localhost:1337' + image.url : undefined} // TODO: Sub 'http://localhost:1337' for Media Library URL
+      src={image?.url ? localhostBaseUrl + image.url : undefined}
       alt={image?.alternativeText ?? ''}
     />
   ),

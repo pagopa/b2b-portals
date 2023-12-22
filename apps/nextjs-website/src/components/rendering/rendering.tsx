@@ -28,15 +28,15 @@ export function rendering(componentData: PageSection) {
         />
       );
 
-      case 'sections.editorial':
-        const EditorialSectionProps: ExtendedEditorialProps =
-          SectionDataToEditorialProps(componentData);
-        return (
-          <Editorial
-            {...EditorialSectionProps}
-            sectionID={componentData.sectionID ?? undefined}
-          />
-        );
+    case 'sections.editorial':
+      const EditorialSectionProps: ExtendedEditorialProps =
+        SectionDataToEditorialProps(componentData);
+      return (
+        <Editorial
+          {...EditorialSectionProps}
+          sectionID={componentData.sectionID ?? undefined}
+        />
+      );
 
     case 'sections.feature':
       const FeatureSectionProps: FeatureProps =

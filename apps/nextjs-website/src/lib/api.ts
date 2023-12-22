@@ -9,7 +9,6 @@ import { getFooter } from './fetch/footer';
 import { getHeader } from './fetch/header';
 import { makeHeaderProps } from './header';
 import { FooterProps, makeFooterProps } from './footer';
-import { PageData, getPage } from './fetch/page';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -48,23 +47,10 @@ export const getFooterProps = async (): Promise<FooterProps> => {
   return makeFooterProps(footer);
 };
 
-// Return PageProps for a specific page ID
+// Return PageProps given the page path
 export const getPageProps = async (
-  path: string
-): Promise<PageData['data']['attributes'] | null> => {
+  slug: ReadonlyArray<string>
+): Promise<Page | undefined> => {
   const allPages = await getAllPages();
-
-  const pageID = allPages.filter((page) => path === page.slug.join('/'))[0]?.id;
-
-  if (!pageID) {
-    return null;
-  }
-
-  const {
-    data: { attributes },
-  } = await getPage(pageID, {
-    config: appEnv.config,
-    fetchFun: appEnv.fetchFun,
-  });
-  return attributes;
+  return allPages.find((page) => slug.toString() === page.slug.toString());
 };
