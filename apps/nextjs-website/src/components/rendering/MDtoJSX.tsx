@@ -7,7 +7,7 @@ export const MDtoJSX = (
   markdownText: string,
   typographyVariant: Variant = 'body1'
 ): JSX.Element => (
-  <Typography variant={typographyVariant}>
+  <Typography variant={typographyVariant} component='div'>
     {parse(marked.parse(markdownText, { async: false }) as string)}
   </Typography>
 );
