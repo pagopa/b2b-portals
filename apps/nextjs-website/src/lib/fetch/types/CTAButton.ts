@@ -9,11 +9,7 @@ const CTAButtonVariant = t.keyof({
 const CTAButtonColor = t.keyof({
   inherit: null,
   primary: null,
-  secondary: null,
-  success: null,
   error: null,
-  info: null,
-  warning: null,
 });
 
 const CTAButtonSize = t.keyof({
