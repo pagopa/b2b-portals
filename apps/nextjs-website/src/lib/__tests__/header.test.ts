@@ -37,7 +37,7 @@ describe('makeHeaderProps', () => {
     const expected = {
       theme: 'light',
       avatar: {
-        src: 'path/to/avatar.jpg',
+        src: 'http://localhost:1337path/to/avatar.jpg',
       },
       beta: true,
       reverse: false,
@@ -45,7 +45,14 @@ describe('makeHeaderProps', () => {
         name: 'aProductName',
         href: '/',
       },
-      ctaButtons: header.data.attributes.ctaButtons,
+      ctaButtons: [
+        {
+          text: 'Primary',
+          href: 'primary.com',
+          variant: 'contained',
+          color: 'primary',
+        },
+      ],
       menu: [
         {
           href: '/parent',
