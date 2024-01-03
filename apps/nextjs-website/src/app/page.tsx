@@ -1,4 +1,4 @@
-import { rendering } from '@/components/rendering/pageSection';
+import { rendering } from '@/components/pageSection/pageSection';
 import { getPageProps } from '@/lib/api';
 
 export default async function Home() {
