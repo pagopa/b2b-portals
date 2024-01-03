@@ -4,32 +4,18 @@ import { Hero as HeroEC } from '@pagopa/pagopa-editorial-components';
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero/index';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 
-export const SectionDataToHeroProps = ({
-  title,
-  subtitle,
-  inverse,
-  size,
-  useHoverlay,
-  image,
-  background,
-  ctaButtons,
-}: HeroSection): HeroProps => ({
-  title,
-  subtitle, // TODO: Parse rich text (markdown)
-  useHoverlay,
-  size,
-  image: image?.url ? 'http://localhost:1337' + image.url : undefined, // TODO: Sub "http://localhost:1337" for config.STRAPI_API_BASE_URL
-  altText: image?.alternativeText ?? '',
-  inverse,
-  background: background?.url,
-  ctaButtons,
+const makeHeroProps = (props: HeroSection): HeroProps => ({
+  ...props,
+  image: props.image?.url
+    ? 'http://localhost:1337' + props.image.url
+    : undefined, // TODO: Sub "http://localhost:1337" for config.STRAPI_API_BASE_URL
+  altText: props.image?.alternativeText ?? '',
+  background: props.background?.url,
 });
 
-const Hero: React.FC<HeroProps & { sectionID: string | undefined }> = (
-  HeroData
-) => (
-  <section id={HeroData.sectionID}>
-    <HeroEC {...HeroData} />;
+const Hero = (props: HeroSection) => (
+  <section id={props.sectionID || undefined}>
+    <HeroEC {...makeHeroProps(props)} />;
   </section>
 );
 
