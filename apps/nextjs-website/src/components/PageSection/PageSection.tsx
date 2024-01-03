@@ -14,4 +14,3 @@ const PageSection = (props: PageSectionData) => {
 };
 
 export default PageSection;
-
