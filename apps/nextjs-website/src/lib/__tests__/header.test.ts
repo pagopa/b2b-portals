@@ -10,7 +10,7 @@ const header: Header = {
       avatar: {
         data: {
           attributes: {
-            url: '/path/to/avatar.jpg',
+            url: 'path/to/avatar.jpg',
             alternativeText: 'Alt text',
           },
         },
@@ -23,6 +23,7 @@ const header: Header = {
           text: 'Primary',
           href: 'primary.com',
           variant: 'contained',
+          color: 'inherit',
         },
       ],
     },
@@ -36,7 +37,7 @@ describe('makeHeaderProps', () => {
     const expected = {
       theme: 'light',
       avatar: {
-        src: 'http://localhost:1337/path/to/avatar.jpg',
+        src: 'path/to/avatar.jpg',
       },
       beta: true,
       reverse: false,
@@ -44,10 +45,7 @@ describe('makeHeaderProps', () => {
         name: 'aProductName',
         href: '/',
       },
-      ctaButtons: header.data.attributes.ctaButtons?.map((ctaBtn) => ({
-        ...ctaBtn,
-        color: 'primary',
-      })),
+      ctaButtons: header.data.attributes.ctaButtons,
       menu: [
         {
           href: '/parent',
