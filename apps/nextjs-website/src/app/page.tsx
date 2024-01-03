@@ -1,9 +1,9 @@
-import { rendering } from '@/components/pageSection/pageSection';
+import PageSection from '@/components/PageSection/PageSection';
 import { getPageProps } from '@/lib/api';
 
 export default async function Home() {
   const pageProps = await getPageProps(['homepage']);
-  const content = pageProps?.sections || [];
+  const sections = pageProps?.sections || [];
 
-  return <div>{content.map((componentData) => rendering(componentData))}</div>;
+  return <div>{sections.map(PageSection)}</div>;
 }
