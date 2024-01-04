@@ -5,7 +5,7 @@ import {
   Footer as FooterEC,
 } from '@pagopa/pagopa-editorial-components/dist/components/Footer';
 import { Stack } from '@mui/material';
-import { MarkdownRenderer } from './MarkdownRenderer';
+import MarkdownRenderer from './MarkdownRenderer';
 
 const makeFooterProps = (
   props: Omit<FooterProps, 'onLanguageChanged'>
@@ -13,7 +13,7 @@ const makeFooterProps = (
   ...props,
   legalInfo:
     typeof props.legalInfo === 'string'
-      ? MarkdownRenderer(props.legalInfo, 'caption')
+      ? MarkdownRenderer({ markdown: props.legalInfo, variant: 'caption' })
       : props.legalInfo,
 });
 
