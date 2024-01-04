@@ -5,12 +5,12 @@ import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components
 import { Stack } from '@mui/material';
 import { usePathname } from 'next/navigation';
 
-const Header: React.FC<HeaderProps> = (headerData) => {
+const Header = (props: HeaderProps) => {
   const pathname = usePathname();
 
   const headerDataWithActiveLink = {
-    ...headerData,
-    menu: headerData.menu.map((link) => ({
+    ...props,
+    menu: props.menu.map((link) => ({
       ...link,
       active: pathname.includes(link.href ?? ''),
     })),
@@ -33,9 +33,7 @@ const Header: React.FC<HeaderProps> = (headerData) => {
         },
         b: {
           color:
-            headerData.theme === 'dark'
-              ? 'primary.contrastText'
-              : 'text.primary',
+            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
         },
         '.MuiChip-root': {
           width: 'auto',
