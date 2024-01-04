@@ -18,10 +18,5 @@ export const SectionDataToEditorialProps = ({
   width,
   pattern,
   ctaButtons,
-  image: (
-    <img
-      src={image?.url ? 'http://localhost:1337' + image.url : undefined} // TODO: Sub "http://localhost:1337" for Media Library URL
-      alt={image?.alternativeText ?? ''}
-    />
-  ),
+  image: <img src={image?.url} alt={image?.alternativeText ?? ''} />,
 });
