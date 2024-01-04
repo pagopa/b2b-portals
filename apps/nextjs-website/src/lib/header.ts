@@ -50,10 +50,7 @@ export const makeHeaderProps = (
     href: '/',
   },
   ...(header.data.attributes.ctaButtons && {
-    ctaButtons: header.data.attributes.ctaButtons.map((ctaBtn) => ({
-      ...ctaBtn,
-      color: header.data.attributes.theme === 'dark' ? 'negative' : 'primary',
-    })),
+    ctaButtons: header.data.attributes.ctaButtons,
   }),
   menu: Array.from(
     makeMenuFromNavigation(navigation, header.data.attributes.theme)
