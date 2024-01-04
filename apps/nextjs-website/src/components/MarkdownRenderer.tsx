@@ -8,6 +8,10 @@ export const MarkdownRenderer = (
   typographyVariant: Variant = 'body1'
 ): JSX.Element => (
   <Typography variant={typographyVariant} component='div'>
-    {parse(marked.parse(markdownText, { async: false }).toString())}
+    {
+      // @ts-expect-error: Temporary workaround until the library offers
+      // improved API. See: https://github.com/markedjs/marked/pull/3116
+      parse(marked.parse(markdownText, { async: false }))
+    }
   </Typography>
 );
