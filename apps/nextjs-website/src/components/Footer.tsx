@@ -5,13 +5,16 @@ import {
   Footer as FooterEC,
 } from '@pagopa/pagopa-editorial-components/dist/components/Footer';
 import { Stack } from '@mui/material';
-import { MDtoJSX } from './rendering/MDtoJSX';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
-const RefineFooterProps = (
+const makeFooterProps = (
   props: Omit<FooterProps, 'onLanguageChanged'>
 ): Omit<FooterProps, 'onLanguageChanged'> => ({
   ...props,
-  legalInfo: MDtoJSX(props.legalInfo as string, 'caption'),
+  legalInfo:
+    typeof props.legalInfo === 'string'
+      ? MarkdownRenderer(props.legalInfo, 'caption')
+      : props.legalInfo,
 });
 
 const Footer: React.FC<Omit<FooterProps, 'onLanguageChanged'>> = (
@@ -44,10 +47,7 @@ const Footer: React.FC<Omit<FooterProps, 'onLanguageChanged'>> = (
       },
     }}
   >
-    <FooterEC
-      {...RefineFooterProps(footerData)}
-      onLanguageChanged={() => true}
-    />
+    <FooterEC {...makeFooterProps(footerData)} onLanguageChanged={() => true} />
   </Stack>
 );
 export default Footer;
