@@ -1,11 +1,9 @@
+import PageSection from '@/components/PageSection/PageSection';
 import { getPageProps } from '@/lib/api';
 
 export default async function Home() {
   const pageProps = await getPageProps(['homepage']);
-  return (
-    <div>
-      <p>This is the Home page</p>
-      <p>These are my props {JSON.stringify(pageProps)}</p>
-    </div>
-  );
+  const sections = pageProps?.sections || [];
+
+  return <div>{sections.map(PageSection)}</div>;
 }
