@@ -45,14 +45,7 @@ describe('makeHeaderProps', () => {
         name: 'aProductName',
         href: '/',
       },
-      ctaButtons: [
-        {
-          text: 'Primary',
-          href: 'primary.com',
-          variant: 'contained',
-          color: 'primary',
-        },
-      ],
+      ctaButtons: header.data.attributes.ctaButtons,
       menu: [
         {
           href: '/parent',
