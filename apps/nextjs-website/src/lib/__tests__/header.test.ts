@@ -23,6 +23,7 @@ const header: Header = {
           text: 'Primary',
           href: 'primary.com',
           variant: 'contained',
+          color: 'inherit',
         },
       ],
     },

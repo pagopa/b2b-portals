@@ -1,9 +1,6 @@
 'use client';
 import React from 'react';
-import {
-  PreHeader as PreHeaderEC,
-  PreHeaderProps,
-} from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
+import { PreHeader as PreHeaderEC } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import Icon from '@mui/material/Icon';
 // Only temporarily importing every icon. A task is planned to sub this for a restricted set of accepted icon names.
 import * as MuiIcons from '@mui/icons-material';
@@ -36,53 +33,36 @@ const preHeaderNakedButtonStyle = {
   },
 };
 
+const makeCtas = (
+  props: NonNullable<PreHeader['data']['attributes']['leftCtas']>,
+  side: 'left' | 'right'
+) => ({
+  ...props,
+  ctaButtons:
+    props?.ctaButtons?.map((ctaBtn) => ({
+      ...ctaBtn,
+      target: '_blank',
+      rel: 'noopener noreferrer',
+      disableRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+      disableTouchRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
+      sx: {
+        fontWeight: side === 'left' ? 'bold' : '600',
+        letterSpacing: side === 'left' ? '0' : '.3px',
+        ...(ctaBtn.variant === 'text' && { ...preHeaderNakedButtonStyle }), // To be replaced by 'naked' when implemented on Strapi's side
+      },
+      ...(isValidMuiIcon(ctaBtn.icon) && {
+        startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+      }),
+    })) ?? [],
+});
+
 // Add styles, SEO related values and extra JS parameters for singular components
 // Styling 'naked' variant for PreHeader using 'text' variant as a base
 // (since editorial-components does not accept 'naked' variant)
-const RefinePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
+const makePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
   ...props,
-  ...(props.leftCtas?.ctaButtons && {
-    leftCtas: {
-      ...props.leftCtas,
-      ctaButtons: props.leftCtas.ctaButtons.map((ctaBtn) => ({
-        ...ctaBtn,
-        target: '_blank',
-        rel: 'noopener noreferrer',
-        disableRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
-        disableTouchRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
-        variant: ctaBtn.variant === 'text' ? 'text' : ctaBtn.variant, // To be replaced by 'naked' when implemented on Strapi's side
-        sx: {
-          fontWeight: 'bold',
-          letterSpacing: '0',
-          ...(ctaBtn.variant === 'text' && { ...preHeaderNakedButtonStyle }), // To be replaced by 'naked' when implemented on Strapi's side
-        },
-        ...(isValidMuiIcon(ctaBtn.icon) && {
-          startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
-        }),
-      })),
-    },
-  }),
-  ...(props.rightCtas?.ctaButtons && {
-    rightCtas: {
-      ...props.rightCtas,
-      ctaButtons: props.rightCtas.ctaButtons.map((ctaBtn) => ({
-        ...ctaBtn,
-        target: '_blank',
-        rel: 'noopener noreferrer',
-        disableRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
-        disableTouchRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
-        variant: ctaBtn.variant === 'text' ? 'text' : ctaBtn.variant, // To be replaced by 'naked' when implemented on Strapi's side
-        sx: {
-          fontWeight: '600',
-          letterSpacing: '.3px',
-          ...(ctaBtn.variant === 'text' && { ...preHeaderNakedButtonStyle }), // To be replaced by 'naked' when implemented on Strapi's side
-        },
-        ...(isValidMuiIcon(ctaBtn.icon) && {
-          startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
-        }),
-      })),
-    },
-  }),
+  ...(props.leftCtas && { leftCtas: makeCtas(props.leftCtas, 'left') }),
+  ...(props.rightCtas && { rightCtas: makeCtas(props.rightCtas, 'right') }),
 });
 
 const PreHeader: React.FC<PreHeader['data']['attributes']> = (
@@ -106,9 +86,7 @@ const PreHeader: React.FC<PreHeader['data']['attributes']> = (
       },
     }}
   >
-    {/* Currently casting to PreHeaderProps due to confusing TS error
-    It says that no value other than 'inherit' and 'primary' is valid for a button's color (which is not actually true) */}
-    <PreHeaderEC {...(RefinePreHeaderProps(preHeaderData) as PreHeaderProps)} />
+    <PreHeaderEC {...makePreHeaderProps(preHeaderData)} />
   </Stack>
 );
 
