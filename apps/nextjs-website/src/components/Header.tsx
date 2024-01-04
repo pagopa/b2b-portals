@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Header as HeaderEC } from '@pagopa/pagopa-editorial-components/dist/components/Header';
 import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 import { Stack } from '@mui/material';
@@ -7,19 +7,14 @@ import { usePathname } from 'next/navigation';
 
 const Header: React.FC<HeaderProps> = (headerData) => {
   const pathname = usePathname();
-  const [headerDataWithActiveLink, setHeaderDataWithActiveLink] =
-    useState(headerData);
 
-  // eslint-disable-next-line functional/no-return-void
-  useEffect(() => {
-    setHeaderDataWithActiveLink({
-      ...headerData,
-      menu: headerData.menu.map((link) => ({
-        ...link,
-        active: pathname.includes(link.href ?? ''),
-      })),
-    });
-  }, [pathname]);
+  const headerDataWithActiveLink = {
+    ...headerData,
+    menu: headerData.menu.map((link) => ({
+      ...link,
+      active: pathname.includes(link.href ?? ''),
+    })),
+  };
 
   return (
     <Stack
