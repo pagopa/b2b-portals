@@ -6,9 +6,7 @@ import { HeroSection } from '@/lib/fetch/types/PageSection';
 
 const makeHeroProps = (props: HeroSection): HeroProps => ({
   ...props,
-  image: props.image?.url
-    ? 'http://localhost:1337' + props.image.url
-    : undefined, // TODO: Sub "http://localhost:1337" for config.STRAPI_API_BASE_URL
+  image: props.image?.url,
   altText: props.image?.alternativeText ?? '',
   background: props.background?.url,
 });
