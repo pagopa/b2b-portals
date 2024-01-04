@@ -1,31 +1,22 @@
 'use client';
 import React from 'react';
 import { Hero as HeroEC } from '@pagopa/pagopa-editorial-components';
-import { Icon, Stack, useTheme } from '@mui/material';
-import { ExtendedHeroProps } from '@/lib/fetch/types/ExtendedPropTypes';
-import { formatValidMuiIcon, isValidMuiIcon } from '@/utils';
+import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero/index';
+import { Stack, useTheme } from '@mui/material';
+import { HeroSection } from '@/lib/fetch/types/PageSection';
 
-const AddIconToButtons = (
-  props: ExtendedHeroProps & { sectionID: string | undefined }
-) => ({
+const makeHeroProps = (props: HeroSection): HeroProps => ({
   ...props,
-  ...(props.ctaButtons && {
-    ctaButtons: props.ctaButtons.map((ctaBtn) => ({
-      ...ctaBtn,
-      ...(isValidMuiIcon(ctaBtn.icon) && {
-        startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
-      }),
-    })),
-  }),
+  image: props.image?.url,
+  altText: props.image?.alternativeText ?? '',
+  background: props.background?.url,
 });
 
-const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
-  HeroData
-) => {
+const Hero = (props: HeroSection) => {
   const theme = useTheme();
 
   return (
-    <section id={HeroData.sectionID}>
+    <section id={props.sectionID || undefined}>
       <Stack
         sx={{
           '.MuiGrid-root': {
@@ -64,19 +55,17 @@ const Hero: React.FC<ExtendedHeroProps & { sectionID: string | undefined }> = (
           },
           '.MuiTypography-root': {
             color:
-              HeroData.theme === 'dark'
-                ? 'primary.contrastText'
-                : 'text.primary',
+              props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
             a: {
               color:
-                HeroData.theme === 'dark'
+                props.theme === 'dark'
                   ? 'primary.contrastText'
                   : 'text.primary',
             },
           },
         }}
       >
-        <HeroEC {...AddIconToButtons(HeroData)} />
+        <HeroEC {...makeHeroProps(props)} />
       </Stack>
     </section>
   );
