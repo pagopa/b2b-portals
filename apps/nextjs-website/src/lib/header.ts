@@ -40,9 +40,7 @@ export const makeHeaderProps = (
   ...(header.data.attributes.avatar &&
     header.data.attributes.avatar.data && {
       avatar: {
-        src:
-          'http://localhost:1337' +
-          header.data.attributes.avatar.data.attributes.url, // TODO: Replace localhost with MEDIA_LIBRARY_URL when merged
+        src: header.data.attributes.avatar.data.attributes.url,
       },
     }),
   beta: header.data.attributes.beta,

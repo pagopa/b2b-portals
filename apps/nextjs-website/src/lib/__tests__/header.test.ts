@@ -37,7 +37,7 @@ describe('makeHeaderProps', () => {
     const expected = {
       theme: 'light',
       avatar: {
-        src: 'http://localhost:1337path/to/avatar.jpg',
+        src: 'path/to/avatar.jpg',
       },
       beta: true,
       reverse: false,
