@@ -1,12 +1,9 @@
-'use client';
-import { Hero } from '@pagopa/pagopa-editorial-components';
+import PageSection from '@/components/PageSection/PageSection';
+import { getPageProps } from '@/lib/api';
 
-export default function Home() {
-  return (
-    <main>
-      <div>
-        <Hero title={'Hello World!'} />
-      </div>
-    </main>
-  );
+export default async function Home() {
+  const pageProps = await getPageProps(['homepage']);
+  const sections = pageProps?.sections || [];
+
+  return <div>{sections.map(PageSection)}</div>;
 }
