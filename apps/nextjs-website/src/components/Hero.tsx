@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import { Hero as HeroEC } from '@pagopa/pagopa-editorial-components';
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero/index';
 import { HeroSection } from '@/lib/fetch/types/PageSection';

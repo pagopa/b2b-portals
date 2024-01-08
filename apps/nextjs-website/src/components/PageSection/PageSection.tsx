@@ -1,13 +1,15 @@
 import React from 'react';
 import Hero from '../Hero';
+import Editorial from '../Editorial';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
-  // Temporarily disable no-small-switch rule (new cases will be added with PRs for other components)
-  // eslint-disable-next-line no-underscore-dangle,sonarjs/no-small-switch
+  // eslint-disable-next-line no-underscore-dangle
   switch (props.__component) {
     case 'sections.hero':
       return <Hero {...props} />;
+    case 'sections.editorial':
+      return <Editorial {...props} />;
     default:
       return null;
   }
