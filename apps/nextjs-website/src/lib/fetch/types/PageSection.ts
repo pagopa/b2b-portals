@@ -50,3 +50,4 @@ export const PageSectionCodec = t.union([
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
 export type HeroSection = t.TypeOf<typeof HeroSectionCodec>;
+export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
