@@ -18,7 +18,9 @@
     "@pagopa/mui-italia": "^1.0.1",
     "@pagopa/pagopa-editorial-components": "^2.1.3",
     "fp-ts": "^2.16.1",
+    "html-react-parser": "^5.0.11",
     "io-ts": "^2.2.20",
+    "marked": "^11.1.0",
     "next": "13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
