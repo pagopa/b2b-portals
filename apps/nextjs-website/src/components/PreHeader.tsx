@@ -4,7 +4,7 @@ import { PreHeader as PreHeaderEC } from '@pagopa/pagopa-editorial-components/di
 import Icon from '@mui/material/Icon';
 import { Stack } from '@mui/material';
 import { PreHeader } from '@/lib/fetch/preHeader';
-import { formatValidMuiIcon, isValidMuiIcon } from '@/utils';
+import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
 
 const preHeaderNakedButtonStyle = {
   padding: '0',

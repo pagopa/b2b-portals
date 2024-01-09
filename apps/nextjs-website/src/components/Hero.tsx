@@ -4,7 +4,7 @@ import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/H
 import { Icon, Stack, useTheme } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
-import { formatValidMuiIcon, isValidMuiIcon } from '@/utils';
+import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
 
 const makeHeroProps = (props: HeroSection): HeroProps => ({
   ...props,
