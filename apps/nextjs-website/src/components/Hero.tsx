@@ -1,14 +1,24 @@
 'use client';
 import { Hero as HeroEC } from '@pagopa/pagopa-editorial-components';
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero/index';
-import { Stack, useTheme } from '@mui/material';
+import { Icon, Stack, useTheme } from '@mui/material';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
+import { formatValidMuiIcon, isValidMuiIcon } from '@/utils';
 
 const makeHeroProps = (props: HeroSection): HeroProps => ({
   ...props,
   image: props.image?.url,
   altText: props.image?.alternativeText ?? '',
   background: props.background?.url,
+  ...(props.ctaButtons && {
+    ctaButtons: props.ctaButtons.map((ctaBtn) => ({
+      ...ctaBtn,
+      color: props.theme === 'dark' ? 'negative' : 'primary',
+      ...(isValidMuiIcon(ctaBtn.icon) && {
+        startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+      }),
+    })),
+  }),
 });
 
 const Hero = (props: HeroSection) => {
