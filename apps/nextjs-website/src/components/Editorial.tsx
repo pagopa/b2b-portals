@@ -4,7 +4,7 @@ import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/compone
 import { Icon, Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
-import { formatValidMuiIcon, isValidMuiIcon } from '@/utils';
+import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
 
 const makeEditorialProps = ({
   eyelet,
