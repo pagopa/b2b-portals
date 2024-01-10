@@ -2,6 +2,32 @@ resource "aws_cloudfront_origin_access_identity" "main" {
   comment = "Identity to access S3 bucket."
 }
 
+resource "aws_cloudfront_response_headers_policy" "websites" {
+  name    = "websites"
+  comment = "Response custom headers for public static website"
+
+  dynamic "custom_headers_config" {
+    for_each = length(var.cdn_custom_headers) > 0 ? ["dummy"] : []
+    content {
+      dynamic "items" {
+        for_each = var.cdn_custom_headers
+        content {
+          header   = items.value.header
+          override = items.value.override
+          value    = items.value.value
+        }
+      }
+    }
+  }
+
+  security_headers_config {
+    content_security_policy {
+      content_security_policy = format("script-src %s; style-src %s; object-src %s; form-action %s; font-src %s; connect-src %s; img-src %s; frame-src %s", local.script_src, local.style_src, local.object_src, local.form_action, local.font_src, local.connect_src, local.img_src, local.frame_src)
+      override                = true
+    }
+  }
+}
+
 ## Static website CDN
 resource "aws_cloudfront_distribution" "website" {
 
@@ -33,6 +59,7 @@ resource "aws_cloudfront_distribution" "website" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = aws_s3_bucket.website.bucket
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.websites.id
 
     forwarded_values {
       query_string = false
