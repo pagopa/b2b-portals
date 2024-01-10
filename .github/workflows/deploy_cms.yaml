@@ -40,6 +40,9 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: false
     environment: ${{ inputs.environment }}
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout
