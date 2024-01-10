@@ -26,3 +26,9 @@ It's crucial to remember that adding content types and components through the us
 
 ## Updating code
 After updating the project's code and before running ```npm run dev``` it is advisable to run the ```npm run build``` command to rebuild the admin panel's UI in case any of the changes affected it.
+
+# AWS S3 bucket as Media Library
+To facilitate local testing, the .env.example file sets the provider to the default 'local' one.
+
+For production the UPLOAD_PLUGIN_PROVIDER environment variable must be set to 'aws-s3' as such ```UPLOAD_PLUGIN_PROVIDER=aws-s3```.
+It can alternatively be completely omitted, as 'aws-s3' is the default value for the provider, so as to not mistakenly run a production instance of Strapi using the 'local' provider.
