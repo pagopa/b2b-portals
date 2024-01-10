@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../Hero';
 import Editorial from '../Editorial';
+import HowTo from '../HowTo';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
@@ -10,6 +11,8 @@ const PageSection = (props: PageSectionData) => {
       return <Hero {...props} />;
     case 'sections.editorial':
       return <Editorial {...props} />;
+      case 'sections.how-to':
+        return <HowTo {...props} />;
     default:
       return null;
   }
