@@ -43,11 +43,35 @@ const EditorialSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSchema),
 });
 
+const FeatureSectionCodec = t.strict({
+  __component: t.literal('sections.feature'),
+  title: t.string,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  showCarouselMobile: t.boolean,
+  background: t.union([t.string, t.null]),
+  sectionID: t.union([t.string, t.null]),
+  items: t.array(
+    t.strict({
+      id: t.number,
+      icon: t.string,
+      iconColor: t.keyof({
+        inherit: null,
+      }),
+      title: t.string,
+      subtitle: t.string,
+      linkText: t.string,
+      linkURL: t.string,
+    })
+  ),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
+  FeatureSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
 export type HeroSection = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
+export type FeatureSectionData = t.TypeOf<typeof FeatureSectionCodec>;
