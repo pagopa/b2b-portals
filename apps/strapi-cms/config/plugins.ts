@@ -1,7 +1,7 @@
 export default ({ env }: any) => ({
   upload: {
     config: {
-      provider: env('AWS_PROVIDER', 'aws-s3'),
+      provider: env('UPLOAD_PLUGIN_PROVIDER', 'aws-s3'),
       providerOptions: {
         accessKeyId: env('AWS_ACCESS_KEY_ID'),
         secretAccessKey: env('AWS_ACCESS_SECRET'),

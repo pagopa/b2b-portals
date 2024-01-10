@@ -30,5 +30,5 @@ After updating the project's code and before running ```npm run dev``` it is adv
 # AWS S3 bucket as Media Library
 To facilitate local testing, the .env.example file sets the provider to the default 'local' one.
 
-For production the AWS_PROVIDER environment variable must be set to 'aws-s3' as such ```AWS_PROVIDER=aws-s3```.
+For production the UPLOAD_PLUGIN_PROVIDER environment variable must be set to 'aws-s3' as such ```UPLOAD_PLUGIN_PROVIDER=aws-s3```.
 It can alternatively be completely omitted, as 'aws-s3' is the default value for the provider, so as to not mistakenly run a production instance of Strapi using the 'local' provider.
