@@ -69,3 +69,15 @@ resource "aws_ssm_parameter" "cms_transfer_token_salt" {
   type  = "SecureString"
   value = random_password.cms_transfer_token_salt.result
 }
+
+resource "aws_ssm_parameter" "cms_access_key_id" {
+  name  = "/cms/access_key_id"
+  type  = "SecureString"
+  value = aws_iam_access_key.strapi.id
+}
+
+resource "aws_ssm_parameter" "cms_access_key_secret" {
+  name  = "/cms/access_key_secret"
+  type  = "SecureString"
+  value = aws_iam_access_key.strapi.secret
+}

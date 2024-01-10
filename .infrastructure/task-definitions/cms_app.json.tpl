@@ -48,14 +48,6 @@
         "name": "AWS_REGION",
         "value": "${aws_region}"
       },
-      {
-        "name": "AWS_ACCESS_KEY_ID",
-        "value": "${access_key_id}"
-      },
-      {
-        "name": "AWS_ACCESS_SECRET",
-        "value": "${access_key_secret}"
-      },
 	    {
         "name": "AWS_BUCKET_FULL_URL",
         "value": "${bucket_full_url}"
@@ -85,6 +77,14 @@
       {
         "name": "JWT_SECRET",
         "valueFrom": "${jwt_secret}"
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "valueFrom": "${access_key_id}"
+      },
+      {
+        "name": "AWS_ACCESS_SECRET",
+        "valueFrom": "${access_key_secret}"
       }
     ]
   }
