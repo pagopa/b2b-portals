@@ -1,0 +1,19 @@
+{
+  "name": "cloudfront-functions",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "shx rm -rf dist/",
+    "compile": "npm run clean && tsc",
+    "lint": "eslint src",
+    "test": "npm run compile && vitest"
+  },
+  "devDependencies": {
+    "@types/aws-cloudfront-function": "^1.0.2",
+    "eslint": "^8.40.0",
+    "eslint-config-custom": "*",
+    "vitest": "^0.34.6",
+    "shx": "^0.3.4",
+    "typescript": "^5.0.2"
+  }
+}
