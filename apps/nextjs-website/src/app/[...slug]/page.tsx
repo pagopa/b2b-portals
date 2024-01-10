@@ -1,5 +1,6 @@
 import { Page } from '@/lib/pages';
 import { getAllPages, getPageProps } from '@/lib/api';
+import PageSection from '@/components/PageSection/PageSection';
 
 // Dynamic segments not included in generateStaticParams will return a 404.
 // more: https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams
@@ -22,17 +23,9 @@ type PageParams = {
 const Page = async ({ params }: PageParams) => {
   const { slug } = params;
   const pageProps = await getPageProps(slug);
+  const sections = pageProps?.sections || [];
 
-  if (pageProps) {
-    return (
-      <div>
-        <p>This is the page {slug.join('/')}</p>
-        <p>These are my props {JSON.stringify(pageProps)}</p>
-      </div>
-    );
-  }
-
-  return null;
+  return pageProps ? <div>{sections.map(PageSection)}</div> : null;
 };
 
 export default Page;
