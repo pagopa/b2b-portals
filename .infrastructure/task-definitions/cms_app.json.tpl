@@ -51,6 +51,10 @@
 	    {
         "name": "AWS_BUCKET_FULL_URL",
         "value": "${bucket_full_url}"
+      },
+      {
+        "name": "CDN_URL",
+        "value": "${cdn_url}"
       }
     ],
     "secrets" : [
