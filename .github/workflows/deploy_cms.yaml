@@ -53,7 +53,7 @@ jobs:
         uses: ./.github/actions/configure-aws-credentials
         with:
           aws_region: ${{ env.AWS_REGION || 'eu-south-1' }}
-          role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_CMS }}
+          role-to-assume: ${{ secrets.IAM_ROLE_DEPLOY_CMS }}
 
       - name: Login to Amazon ECR
         id: login-ecr
