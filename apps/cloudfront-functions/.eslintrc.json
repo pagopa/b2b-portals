@@ -2,15 +2,5 @@
   "root": true,
   "extends": [
     "custom/eslint-recommended"
-  ],
-  "overrides": [
-    {
-      "files": [
-        "**/__tests__/**/*.ts"
-      ],
-      "rules": {
-        "functional/no-return-void": "off"
-      }
-    }
   ]
 }
