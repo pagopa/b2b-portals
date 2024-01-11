@@ -2,7 +2,7 @@ name: Deploy CMS
 
 on:
   push:
-        branches: ['main']
+        branches: ['workflow-github-deploy-cms-modify-role-to-assume']
         # Run only if there are at least one change matching the following paths
         paths:
           - 'apps/strapi-cms/**'
