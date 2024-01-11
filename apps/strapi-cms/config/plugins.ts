@@ -3,14 +3,17 @@ export default ({ env }: any) => ({
     config: {
       provider: env('UPLOAD_PLUGIN_PROVIDER', 'aws-s3'),
       providerOptions: {
-        accessKeyId: env('AWS_ACCESS_KEY_ID'),
-        secretAccessKey: env('AWS_ACCESS_SECRET'),
-        region: env('AWS_REGION'),
-        params: {
-          ACL: 'private',
-          signedUrlExpires: 15 * 60,
-          Bucket: env('AWS_BUCKET_NAME'),
-        },
+        baseUrl: env('CDN_URL'),
+        s3Options: {
+          accessKeyId: env('AWS_ACCESS_KEY_ID'),
+          secretAccessKey: env('AWS_ACCESS_SECRET'),
+          region: env('AWS_REGION'),
+          params: {
+            ACL: 'private',
+            signedUrlExpires: 15 * 60,
+            Bucket: env('AWS_BUCKET_NAME'),
+          },
+        }
       },
     },
   },
