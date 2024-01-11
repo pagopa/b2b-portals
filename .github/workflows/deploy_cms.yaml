@@ -44,6 +44,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout
@@ -53,7 +54,7 @@ jobs:
         uses: ./.github/actions/configure-aws-credentials
         with:
           aws_region: ${{ env.AWS_REGION || 'eu-south-1' }}
-          role-to-assume: ${{ secrets.IAM_ROLE_DEPLOY_CMS }}
+          role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_CMS }}
 
       - name: Login to Amazon ECR
         id: login-ecr
