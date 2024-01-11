@@ -7,6 +7,14 @@ on:
         paths:
           - 'apps/strapi-cms/**'
           - '.github/workflows/deploy_cms.yaml'
+        inputs:
+          environment:
+            description: 'The environment used as target'
+            type: choice
+            required: true
+            default: prod
+            options:
+              - prod
 
   workflow_dispatch:
     inputs:
@@ -44,7 +52,6 @@ jobs:
     permissions:
       id-token: write
       contents: read
-      pull-requests: write
 
     steps:
       - name: Checkout
