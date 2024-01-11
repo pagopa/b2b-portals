@@ -1,19 +1,17 @@
 export default ({ env }: any) => ({
   upload: {
     config: {
-      provider: env('UPLOAD_PLUGIN_PROVIDER', 'aws-s3'),
+      provider: env('UPLOAD_PLUGIN_PROVIDER', 'strapi-provider-upload-aws-s3-plus-cdn'),
       providerOptions: {
-        baseUrl: env('CDN_URL'),
-        s3Options: {
-          accessKeyId: env('AWS_ACCESS_KEY_ID'),
-          secretAccessKey: env('AWS_ACCESS_SECRET'),
-          region: env('AWS_REGION'),
-          params: {
-            ACL: 'private',
-            signedUrlExpires: 15 * 60,
-            Bucket: env('AWS_BUCKET_NAME'),
-          },
-        }
+        accessKeyId: env('AWS_ACCESS_KEY_ID'),
+        secretAccessKey: env('AWS_ACCESS_SECRET'),
+        region: env('AWS_REGION'),
+        params: {
+          ACL: 'private',
+          signedUrlExpires: 15 * 60,
+          Bucket: env('AWS_BUCKET_NAME'),
+        },
+        cdnUrl: env('CDN_URL'),
       },
     },
   },
