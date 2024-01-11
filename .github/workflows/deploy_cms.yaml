@@ -7,14 +7,6 @@ on:
         paths:
           - 'apps/strapi-cms/**'
           - '.github/workflows/deploy_cms.yaml'
-        inputs:
-          environment:
-            description: 'The environment used as target'
-            type: choice
-            required: true
-            default: prod
-            options:
-              - prod
 
   workflow_dispatch:
     inputs:
@@ -47,7 +39,7 @@ jobs:
     name: Build and push CMS image
     runs-on: ubuntu-latest
     continue-on-error: false
-    environment: ${{ inputs.environment }}
+   # environment: ${{ inputs.environment }}
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
       id-token: write
