@@ -5,16 +5,13 @@
 /* eslint-disable functional/no-expression-statements */
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const handler = (
+export const handler = (
   event: AWSCloudFrontFunction.Event
 ): AWSCloudFrontFunction.Request => {
   if (event.context.eventType === 'viewer-request') {
     // do the rewrite
     const { request } = event;
     const uri = request.uri;
-
-    // Check if the uri refers to a gitbook assets
-    const isGitbookAssets = uri.startsWith('/gitbook/docs');
 
     // Add the .html extension if missing
     if (!uri.endsWith('/') && !isGitbookAssets && !/\.[a-zA-Z]+$/.test(uri)) {

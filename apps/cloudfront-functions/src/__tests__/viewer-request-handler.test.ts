@@ -2,6 +2,7 @@ import rewire from 'rewire';
 
 // rewire doesn't work with ts file. As workaround import the compiled js file
 const rewired = rewire('../../dist/viewer-request-handler');
+// eslint-disable-next-line no-underscore-dangle
 const handler = rewired.__get__('handler');
 
 const makeEvent = (uri: string): AWSCloudFrontFunction.Event => ({
@@ -17,7 +18,7 @@ const makeEvent = (uri: string): AWSCloudFrontFunction.Event => ({
   },
   request: {
     method: 'GET',
-    uri: uri,
+    uri,
     querystring: {},
     headers: {},
     cookies: {},
@@ -36,10 +37,5 @@ describe('handler', () => {
     expect(handler(makeEvent(example0)).uri).toBe(`${example0}.html`);
     const example1 = '/i-s/g/mo/v1.0';
     expect(handler(makeEvent(example1)).uri).toBe(`${example1}.html`);
-  });
-  it('should not add the html suffix to gitbook assets', () => {
-    expect(handler(makeEvent('/gitbook/docs/n/.gitbook/assets/0')).uri).toBe(
-      '/gitbook/docs/n/.gitbook/assets/0'
-    );
   });
 });
