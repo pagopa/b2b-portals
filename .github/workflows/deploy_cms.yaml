@@ -43,11 +43,11 @@ jobs:
       matrix:
         environment: [ 'prod' ]
     environment: ${{ matrix.environment }}
-   # environment: ${{ inputs.environment }}
+    # environment: ${{ inputs.environment }}
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
-    permissions:
-      id-token: write
-      contents: read
+    #permissions:
+    #  id-token: write
+    #  contents: read
 
     steps:
       - name: Checkout
