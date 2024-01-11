@@ -39,6 +39,10 @@ jobs:
     name: Build and push CMS image
     runs-on: ubuntu-latest
     continue-on-error: false
+    strategy:
+      matrix:
+        environment: [ 'prod' ]
+    environment: ${{ matrix.environment }}
    # environment: ${{ inputs.environment }}
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
