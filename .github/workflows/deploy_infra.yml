@@ -40,6 +40,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+      
+      - name: Compile Cloudfront Functions
+        run: npm run compile -w cloudfront-functions
 
       - name: Configure AWS Credentials
         uses: ./.github/actions/configure-aws-credentials
@@ -53,6 +56,8 @@ jobs:
           environment: ${{ inputs.environment }}
 
       - name: Terraform Apply
-
+        env:
+          # publish the cloudfront functions
+          TF_VAR_publish_cloudfront_functions: true
         run: |
           ./terraform.sh apply ${{ inputs.environment }} -auto-approve
