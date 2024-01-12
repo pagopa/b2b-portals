@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import rewire from 'rewire';
 
+// the path is not ../../dist/<file> because the resolution starts from the
+// 'cloudfront-functions' folder
 const rewired = rewire('./dist/viewer-request-handler');
 /* eslint-disable-next-line no-underscore-dangle */
 const handler = rewired.__get__('handler');
