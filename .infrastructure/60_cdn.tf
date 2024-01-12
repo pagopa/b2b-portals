@@ -8,7 +8,7 @@ resource "aws_cloudfront_function" "website_viewer_request_handler" {
   runtime = "cloudfront-js-1.0"
   # publish this version only if the env is true
   publish = var.publish_cloudfront_functions
-  code    = file("${path.module}/../apps/cloudfront-functions/src/viewer-request-handler.js")
+  code    = file("${path.module}/../apps/cloudfront-functions/dist/viewer-request-handler.js")
 }
 
 ## Static website CDN
