@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { handler } from '../viewer-request-handler';
+import rewire from 'rewire';
+
+const rewired = rewire('./dist/viewer-request-handler');
+/* eslint-disable-next-line no-underscore-dangle */
+const handler = rewired.__get__('handler');
 
 const makeEvent = (uri: string): AWSCloudFrontFunction.Event => ({
   version: '1.0',
