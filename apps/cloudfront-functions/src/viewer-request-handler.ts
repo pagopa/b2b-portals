@@ -5,7 +5,7 @@
 /* eslint-disable functional/no-expression-statements */
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const handler = (
+export const handler = (
   event: AWSCloudFrontFunction.Event
 ): AWSCloudFrontFunction.Request => {
   if (event.context.eventType === 'viewer-request') {
@@ -13,8 +13,12 @@ const handler = (
     const { request } = event;
     const uri = request.uri;
 
-    // Add the .html extension if missing
-    if (!uri.endsWith('/') && !/\.[a-zA-Z]+$/.test(uri)) {
+    // Add the .html extension if missing and the uri does not end with .woff2
+    if (
+      !uri.endsWith('/') &&
+      !uri.endsWith('.woff2') &&
+      !/\.[a-zA-Z]+$/.test(uri)
+    ) {
       request.uri += '.html';
     }
 
