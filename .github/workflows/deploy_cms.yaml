@@ -17,13 +17,6 @@ on:
         type: choice
         options:
           - warning
-      environment:
-        description: 'The environment used as target'
-        type: choice
-        required: true
-        default: prod
-        options:
-          - prod
 
 defaults:
   run:
@@ -39,8 +32,11 @@ jobs:
     name: Build and push CMS image
     runs-on: ubuntu-latest
     continue-on-error: false
-    environment: ${{ inputs.environment }}
-
+    strategy:
+      matrix:
+        environment: [ 'prod' ]
+    environment: ${{ matrix.environment }}
+    
     steps:
       - name: Checkout
         uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0

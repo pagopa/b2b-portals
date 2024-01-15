@@ -22,9 +22,10 @@ data "template_file" "cms_app" {
     api_token_salt       = aws_ssm_parameter.cms_api_token_salt.arn
     transfer_token_salt  = aws_ssm_parameter.cms_transfer_token_salt.arn
     jwt_secret           = aws_ssm_parameter.cms_jwt_secret.arn
-    access_key_id        = aws_iam_access_key.strapi.id
-    access_key_secret    = aws_iam_access_key.strapi.secret
+    access_key_id        = aws_ssm_parameter.cms_access_key_id.arn
+    access_key_secret    = aws_ssm_parameter.cms_access_key_secret.arn
     bucket_full_url      = aws_s3_bucket.cms_medialibrary_bucket.bucket_regional_domain_name
+    cdn_url              = "https://${aws_cloudfront_distribution.cms_medialibrary.domain_name}/"
   }
 }
 
