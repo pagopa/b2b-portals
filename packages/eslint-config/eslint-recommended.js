@@ -6,4 +6,14 @@ module.exports = {
     // Load pagopa eslint config
     "@pagopa/eslint-config/recommended",
   ],
+  "overrides": [
+    {
+      "files": [
+        "**/__tests__/**/*.ts"
+      ],
+      "rules": {
+        "functional/no-return-void": "off"
+      }
+    }
+  ]
 }

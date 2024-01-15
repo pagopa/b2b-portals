@@ -54,7 +54,9 @@ data "aws_iam_policy_document" "ecs_task_execution" {
       aws_ssm_parameter.cms_app_keys.arn,
       aws_ssm_parameter.cms_api_token_salt.arn,
       aws_ssm_parameter.cms_transfer_token_salt.arn,
-      aws_ssm_parameter.cms_jwt_secret.arn
+      aws_ssm_parameter.cms_jwt_secret.arn,
+      aws_ssm_parameter.cms_access_key_id.arn,
+      aws_ssm_parameter.cms_access_key_secret.arn
     ]
   }
 
