@@ -6,13 +6,16 @@
     "clean": "shx rm -rf dist/",
     "compile": "npm run clean && tsc",
     "lint": "eslint src",
+    "pretest": "npm run compile",
     "test": "vitest"
   },
   "devDependencies": {
     "@types/aws-cloudfront-function": "^1.0.4",
+    "@types/rewire": "^2.5.30",
     "@vitest/coverage-v8": "^1.1.3",
     "eslint": "^8.56.0",
     "eslint-config-custom": "*",
+    "rewire": "^7.0.0",
     "shx": "^0.3.4",
     "typescript": "^5.3.3",
     "vitest": "^1.1.3"
