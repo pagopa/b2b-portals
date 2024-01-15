@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import { Feature as FeatureEC } from '@pagopa/pagopa-editorial-components';
 import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
 import { FeatureSection } from '@/lib/fetch/types/PageSection';
