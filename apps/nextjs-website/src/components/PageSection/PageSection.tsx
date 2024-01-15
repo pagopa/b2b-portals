@@ -11,8 +11,8 @@ const PageSection = (props: PageSectionData) => {
       return <Hero {...props} />;
     case 'sections.editorial':
       return <Editorial {...props} />;
-      case 'sections.how-to':
-        return <HowTo {...props} />;
+    case 'sections.how-to':
+      return <HowTo {...props} />;
     default:
       return null;
   }

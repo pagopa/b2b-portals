@@ -1,8 +1,35 @@
 'use client';
-import React from 'react';
 import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/HowTo';
 import { HowTo as HowToEC } from '@pagopa/pagopa-editorial-components';
+import * as MuiIcons from '@mui/icons-material';
+import { HowToSection } from '@/lib/fetch/types/PageSection';
 
-const HowTo: React.FC<HowToProps> = (howtoData) => <HowToEC {...howtoData} />;
+const makeHowToProps = ({
+  rowMaxSteps,
+  link,
+  steps,
+  ...rest
+}: HowToSection): HowToProps => ({
+  ...(rowMaxSteps && { rowMaxSteps }),
+  ...(link && {
+    link: {
+      href: link.href,
+      label: link.text ?? link.href,
+    },
+  }),
+  steps: steps.map((step) => ({
+    title: step.title,
+    description: step.description, // TODO: Parse rich text (markdown)
+    ...(step.icon && {
+      stepIcon: {
+        icon: step.icon as keyof typeof MuiIcons,
+        color: step.iconColor,
+      },
+    }),
+  })),
+  ...rest,
+});
+
+const HowTo = (props: HowToSection) => <HowToEC {...makeHowToProps(props)} />;
 
 export default HowTo;
