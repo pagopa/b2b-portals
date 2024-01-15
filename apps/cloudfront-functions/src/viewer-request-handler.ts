@@ -17,7 +17,7 @@ const handler = (
     if (
       !uri.endsWith('/') &&
       !uri.endsWith('.woff2') &&
-      !/\.[a-zA-Z]+$/.test(uri)
+      !/\.[0-9a-zA-Z]+$/.test(uri)
     ) {
       request.uri += '.html';
     }
