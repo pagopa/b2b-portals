@@ -5,7 +5,7 @@
 /* eslint-disable functional/no-expression-statements */
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const handler = (
+const handler = (
   event: AWSCloudFrontFunction.Event
 ): AWSCloudFrontFunction.Request => {
   if (event.context.eventType === 'viewer-request') {
