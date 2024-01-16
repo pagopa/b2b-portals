@@ -47,3 +47,9 @@ variable "use_custom_certificate" {
   description = "Enable CDN https support with a custom certificate instead using the default one"
   default     = false # set true when available dns and custom certificate
 }
+
+variable "publish_cloudfront_functions" {
+  type        = bool
+  description = "Defines if cloudfront functions should be published"
+  default     = false
+}
