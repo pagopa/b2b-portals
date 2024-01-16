@@ -43,11 +43,22 @@ const EditorialSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSchema),
 });
 
+
+const StripeLinkSectionCodec = t.strict({
+  __component: t.literal('sections.stripelink'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  subtitle: t.union([t.string, t.type({})]),
+  icon: t.union([t.string, t.null]),  //icon: t.union([EIconProps, t.undefined]),  era fatto così inizialmente 
+  buttonText: t.string,
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
+  StripeLinkSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
 export type HeroSection = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
+export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
