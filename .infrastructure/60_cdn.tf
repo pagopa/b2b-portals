@@ -19,6 +19,7 @@ resource "aws_cloudfront_response_headers_policy" "websites" {
       }
     }
   }
+ }
 
 ## Function to manipulate the request
 resource "aws_cloudfront_function" "website_viewer_request_handler" {
