@@ -43,11 +43,52 @@ const EditorialSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSchema),
 });
 
+const BannerlinkSectionCodec = t.strict({
+  __component: t.literal('sections.banner-link'),
+  title: t.string,
+  body: t.string,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  reverse: t.boolean,
+  ctaButtons: t.array(
+    // TODO: Replace with CTAButtonSchema when merged
+    t.intersection([
+      t.type({
+        text: t.string,
+        href: t.string,
+        variant: t.keyof({
+          text: null,
+          outlined: null,
+          contained: null,
+        }),
+        color: t.keyof({
+          inherit: null,
+          primary: null,
+          secondary: null,
+          success: null,
+          error: null,
+          info: null,
+          warning: null,
+        }),
+      }),
+      t.partial({
+        icon: t.union([t.string, t.null]),
+        size: t.keyof({
+          small: null,
+          medium: null,
+          large: null,
+        }),
+      }),
+    ])
+  ),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
+  BannerlinkSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
 export type HeroSection = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
+export type BannerlinkSection = t.TypeOf<typeof BannerlinkSectionCodec>;
