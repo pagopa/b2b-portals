@@ -43,7 +43,7 @@ const EditorialSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSchema),
 });
 
-const BannerlinkSectionCodec = t.strict({
+const BannerLinkSectionCodec = t.strict({
   __component: t.literal('sections.banner-link'),
   title: t.string,
   body: t.string,
@@ -85,10 +85,10 @@ const BannerlinkSectionCodec = t.strict({
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
-  BannerlinkSectionCodec,
+  BannerLinkSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
 export type HeroSection = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
-export type BannerlinkSection = t.TypeOf<typeof BannerlinkSectionCodec>;
+export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
