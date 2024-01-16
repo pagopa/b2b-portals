@@ -80,6 +80,7 @@ const BannerLinkSectionCodec = t.strict({
       }),
     ])
   ),
+  decoration: t.union([ImageDataCodec, t.null]),
 });
 
 export const PageSectionCodec = t.union([

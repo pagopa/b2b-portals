@@ -9,10 +9,17 @@ import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
 
 const makeBannerLinkProps = ({
   body,
+  decoration,
   ctaButtons,
   ...rest
 }: BannerLinkSection): BannerLinkProps => ({
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
+  ...(decoration && {
+    decoration: {
+      url: decoration.url,
+      alt: decoration.alternativeText,
+    },
+  }),
   ctaButtons: ctaButtons.map((ctaBtn) => ({
     ...ctaBtn,
     color: rest.theme === 'dark' ? 'negative' : 'primary',
