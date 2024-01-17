@@ -21,7 +21,9 @@ const makeFeatureProps = ({
 });
 
 const Feature = (props: FeatureSection) => (
-  <FeatureEC {...makeFeatureProps(props)} />
+  <section>
+    <FeatureEC {...makeFeatureProps(props)} />
+  </section>
 );
 
 export default Feature;
