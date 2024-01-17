@@ -55,6 +55,10 @@
       {
         "name": "CDN_URL",
         "value": "${cdn_url}"
+      },
+      {
+        "name": "AWS_BUCKET_ENDPOINT",
+        "value": "${aws_bucket_endpoint}"
       }
     ],
     "secrets" : [
