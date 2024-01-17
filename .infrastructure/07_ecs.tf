@@ -25,7 +25,8 @@ data "template_file" "cms_app" {
     access_key_id        = aws_ssm_parameter.cms_access_key_id.arn
     access_key_secret    = aws_ssm_parameter.cms_access_key_secret.arn
     bucket_full_url      = aws_s3_bucket.cms_medialibrary_bucket.bucket_regional_domain_name
-    cdn_url              = "https://${aws_cloudfront_distribution.cms_medialibrary.domain_name}/"
+    cdn_url              = "https://${aws_cloudfront_distribution.cms_medialibrary.domain_name}"
+    aws_bucket_endpoint  = "https://s3.${var.aws_region}.amazonaws.com"
   }
 }
 
