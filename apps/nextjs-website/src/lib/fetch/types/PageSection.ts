@@ -43,12 +43,12 @@ const EditorialSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSchema),
 });
 
-
 const StripeLinkSectionCodec = t.strict({
   __component: t.literal('sections.stripelink'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  subtitle: t.union([t.string, t.type({})]),
-  icon: t.union([t.string, t.null]),  //icon: t.union([EIconProps, t.undefined]),  era fatto così inizialmente 
+  subtitle: t.string,
+  // icon: t.union([EIconProps, t.undefined]),  era fatto così inizialmente
+  icon: t.union([t.string, t.null]),
   buttonText: t.string,
 });
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import Hero from '../Hero';
 import Editorial from '../Editorial';
-import StripeLink from '../Stripelink';
+import StripeLink from '../StripeLink';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
-
 
 const PageSection = (props: PageSectionData) => {
   // eslint-disable-next-line no-underscore-dangle
