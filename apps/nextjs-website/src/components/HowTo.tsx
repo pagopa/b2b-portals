@@ -30,6 +30,10 @@ const makeHowToProps = ({
   ...rest,
 });
 
-const HowTo = (props: HowToSection) => <HowToEC {...makeHowToProps(props)} />;
+const HowTo = (props: HowToSection) => (
+  <section>
+    <HowToEC {...makeHowToProps(props)} />
+  </section>
+);
 
 export default HowTo;
