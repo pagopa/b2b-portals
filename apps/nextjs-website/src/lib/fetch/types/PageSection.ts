@@ -43,11 +43,33 @@ const EditorialSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSchema),
 });
 
+const CardsSectionCodec = t.strict({
+  __component: t.literal('sections.cards'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  text: t.type({
+    title: t.string,
+    subtitle: t.union([t.string, t.undefined]),
+    body: t.string,
+  }),
+  items: t.array(t.type({
+    cardIcon: t.union([t.string, t.null]),
+    title: t.string,
+    text: t.string,
+    link: t.type({
+      href: t.string,
+      title: t.string,
+      text: t.string,
+    }),
+  })),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
+  CardsSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
 export type HeroSection = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
+export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
