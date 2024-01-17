@@ -30,7 +30,9 @@ const makeBannerLinkProps = ({
 });
 
 const BannerLink = (props: BannerLinkSection) => (
-  <BannerLinkEC {...makeBannerLinkProps(props)} />
+  <section>
+    <BannerLinkEC {...makeBannerLinkProps(props)} />
+  </section>
 );
 
 export default BannerLink;
