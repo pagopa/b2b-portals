@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import { BannerLink as BannerLinkEC } from '@pagopa/pagopa-editorial-components';
 import { BannerLinkProps } from '@pagopa/pagopa-editorial-components/dist/components/BannerLink';
 import { Icon } from '@mui/material';
