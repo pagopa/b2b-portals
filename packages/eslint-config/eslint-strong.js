@@ -1,9 +1,9 @@
 module.exports = {
   root: true,
   extends: [
-    // Load common config
-    "./eslint-config.js",
-    // Load pagopa eslint config
+    // Load recommended config
+    "./eslint-recommended.js",
+    // Load PagoPA eslint config
     "@pagopa/eslint-config/strong",
   ],
   overrides: [
