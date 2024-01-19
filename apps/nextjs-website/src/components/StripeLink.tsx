@@ -3,6 +3,9 @@ import React from 'react';
 import { EIconProps } from '@pagopa/pagopa-editorial-components/dist/components/EIcon';
 import { ReactElement } from 'react';
 import { StripeLinkSection } from '@/lib/fetch/types/PageSection';
+import MarkdownRenderer from './MarkdownRenderer';
+import { formatValidMuiIcon, isValidMuiIcon } from './Icons';
+import { Icon } from '@mui/material';
 // import MarkdownRenderer from './MarkdownRenderer';
 
 interface StripeLinkProps {
@@ -14,11 +17,13 @@ interface StripeLinkProps {
 
 const makeStripeLinkProps = ({
   subtitle,
-  buttonText,
+  icon,
   ...rest
 }: StripeLinkSection): StripeLinkProps => ({
-  subtitle,
-  buttonText,
+  subtitle: MarkdownRenderer({ markdown: subtitle, variant: 'body2' }),
+  ...(isValidMuiIcon(icon) && {
+    icon: <Icon>{formatValidMuiIcon(icon)}</Icon>,
+  }),
   ...rest,
 });
 

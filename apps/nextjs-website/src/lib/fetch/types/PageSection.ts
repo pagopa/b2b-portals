@@ -47,8 +47,7 @@ const StripeLinkSectionCodec = t.strict({
   __component: t.literal('sections.stripelink'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   subtitle: t.string,
-  // icon: t.union([EIconProps, t.undefined]),  era fatto così inizialmente
-  icon: t.union([t.string, t.null]),
+  icon: t.union([t.string, t.null]), // Will become an enum of limited MUI Icons
   buttonText: t.string,
 });
 
