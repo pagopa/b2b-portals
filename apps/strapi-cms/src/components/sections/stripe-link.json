@@ -1,7 +1,8 @@
 {
   "collectionName": "components_sections_stripe_links",
   "info": {
-    "displayName": "StripeLink"
+    "displayName": "StripeLink",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -18,14 +19,10 @@
       "type": "richtext",
       "required": true
     },
-    "icon": {
-      "allowedTypes": [
-        "images"
-      ],
-      "type": "media",
-      "multiple": false
-    },
     "buttonText": {
+      "type": "string"
+    },
+    "icon": {
       "type": "string"
     }
   }
