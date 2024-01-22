@@ -2,4 +2,4 @@
 "cloudfront-functions": patch
 ---
 
-manage the ".html" extension to not be added improperly
+prevent the ".html" extension being added to any url ending in an extension (.jpg, .html, .woff2, etc...)
