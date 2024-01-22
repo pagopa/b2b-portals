@@ -8,7 +8,6 @@ const ParentCodec = t.strict({
   order: t.number,
   id: t.number,
   title: t.string,
-  path: t.string,
   menuAttached: t.boolean,
 });
 
@@ -17,6 +16,7 @@ const NavItemCodec = t.intersection([
   t.strict({
     parent: t.union([ParentCodec, t.null]),
     related: t.strict({
+      slug: t.string,
       sections: t.array(PageSectionCodec),
     }),
   }),
