@@ -4,10 +4,10 @@ export const homepageNavItem: Navigation[0] = {
   order: 1,
   id: 1,
   title: 'Home',
-  path: '/',
   parent: null,
   menuAttached: false,
   related: {
+    slug: 'homepage',
     sections: [
       {
         __component: 'sections.hero',
@@ -30,10 +30,10 @@ export const parentNavItem: Navigation[0] = {
   order: 2,
   id: 2,
   title: 'Parent',
-  path: 'parent',
   parent: null,
   menuAttached: true,
   related: {
+    slug: 'parent',
     sections: [
       {
         __component: 'sections.editorial',
@@ -56,10 +56,10 @@ export const childNavItem: Navigation[0] = {
   order: 3,
   id: 3,
   title: 'Child',
-  path: 'child',
   parent: parentNavItem,
   menuAttached: true,
   related: {
+    slug: 'child',
     sections: [
       {
         __component: 'sections.hero',
