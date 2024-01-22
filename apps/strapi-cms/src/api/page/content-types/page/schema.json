@@ -30,7 +30,8 @@
         "sections.feature",
         "sections.hero",
         "sections.how-to",
-        "sections.banner-link"
+        "sections.banner-link",
+        "sections.accordion"
       ],
       "required": true,
       "min": 1
