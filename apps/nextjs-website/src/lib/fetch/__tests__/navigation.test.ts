@@ -18,7 +18,6 @@ const navigationResponse = [
     id: 1,
     title: 'Homepage',
     type: 'INTERNAL',
-    path: '/',
     externalPath: null,
     uiRouterKey: 'homepage-1',
     menuAttached: true,
@@ -93,9 +92,9 @@ describe('getNavigation', () => {
         order: 1,
         parent: null,
         menuAttached: true,
-        path: '/',
         title: 'Homepage',
         related: {
+          slug: 'homepage',
           sections: [
             {
               __component: 'sections.hero',
