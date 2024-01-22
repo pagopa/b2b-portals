@@ -8,18 +8,18 @@ const makeMenuItemFromNavItem = (
   navigation: Navigation,
   theme: Header['data']['attributes']['theme']
 ): MenuDropdownProp => {
-  const { title, path } = item;
+  const { title, related } = item;
   const itemsArray = navigation
     .filter((child) => child.parent?.id === item.id && child.menuAttached)
     .map((child) => ({
-      href: `/${item.path}/${child.path}`,
+      href: `/${item.related.slug}/${child.related.slug}`,
       label: child.title,
     }));
 
   return {
     theme,
     label: title,
-    href: `/${path}`,
+    href: `/${related.slug}`,
     ...(itemsArray.length > 0 && { items: itemsArray }),
   };
 };
