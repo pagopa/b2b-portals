@@ -19,11 +19,11 @@ describe('makePageListFromNavigation', () => {
     const actual = makePageListFromNavigation(navigation);
     const expected = [
       {
-        slug: [data.parentNavItem.path],
+        slug: [data.parentNavItem.related.slug],
         sections: data.parentNavItem.related.sections,
       },
       {
-        slug: [data.parentNavItem.path, data.childNavItem.path],
+        slug: [data.parentNavItem.related.slug, data.childNavItem.related.slug],
         sections: data.childNavItem.related.sections,
       },
     ];
