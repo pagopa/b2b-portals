@@ -14,7 +14,7 @@ export const generateStaticParams = async (): Promise<Page[]> =>
   // "generateStaticParams"; __return_type__: Promise<readonly Page[]>; }' does
   // not satisfy the constraint '{ __tag__: "generateStaticParams";
   // __return_type__: any[] | Promise<any[]>; }'.
-  [...(await getAllPages())];
+  [...(await getAllPages())].filter((page) => page.slug[0] !== 'homepage');
 
 type PageParams = {
   params: { slug: string[] };

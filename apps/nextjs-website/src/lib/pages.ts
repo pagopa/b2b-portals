@@ -16,9 +16,9 @@ const makeSlugList = (
   if (parent) {
     const parentNav = navigation.find(({ id }) => id === parent.id);
     const parentSlug = parentNav ? makeSlugList(parentNav, navigation) : [];
-    return related.slug !== 'homepage' ? [...parentSlug, related.slug] : [];
+    return [...parentSlug, related.slug];
   } else {
-    return related.slug !== 'homepage' ? [related.slug] : [];
+    return [related.slug];
   }
 };
 

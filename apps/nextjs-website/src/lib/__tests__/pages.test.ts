@@ -10,7 +10,7 @@ describe('makePageListFromNavigation', () => {
   it('should return pages list given a navigation with homepage', () => {
     const actual = makePageListFromNavigation([data.homepageNavItem]);
     const expected = [
-      { slug: [], sections: data.homepageNavItem.related.sections },
+      { slug: ['homepage'], sections: data.homepageNavItem.related.sections },
     ];
     expect(actual).toStrictEqual(expected);
   });
