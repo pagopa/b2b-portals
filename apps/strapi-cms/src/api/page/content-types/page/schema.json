@@ -29,7 +29,9 @@
         "sections.editorial",
         "sections.feature",
         "sections.hero",
-        "sections.how-to"
+        "sections.how-to",
+        "sections.banner-link",
+        "sections.accordion"
       ],
       "required": true,
       "min": 1

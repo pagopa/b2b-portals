@@ -12,13 +12,13 @@ const makeSlugList = (
   item: Navigation[0],
   navigation: Navigation
 ): ReadonlyArray<string> => {
-  const { path, parent } = item;
+  const { related, parent } = item;
   if (parent) {
     const parentNav = navigation.find(({ id }) => id === parent.id);
     const parentSlug = parentNav ? makeSlugList(parentNav, navigation) : [];
-    return path !== '/' ? [...parentSlug, path] : [];
+    return related.slug !== 'homepage' ? [...parentSlug, related.slug] : [];
   } else {
-    return path !== '/' ? [path] : [];
+    return related.slug !== 'homepage' ? [related.slug] : [];
   }
 };
 

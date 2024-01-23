@@ -2,6 +2,34 @@ resource "aws_cloudfront_origin_access_identity" "main" {
   comment = "Identity to access S3 bucket."
 }
 
+resource "aws_cloudfront_response_headers_policy" "websites" {
+  name    = "websites"
+  comment = "Response custom headers for public static website"
+
+  dynamic "custom_headers_config" {
+    for_each = length(var.cdn_custom_headers) > 0 ? ["dummy"] : []
+    content {
+      dynamic "items" {
+        for_each = var.cdn_custom_headers
+        content {
+          header   = items.value.header
+          override = items.value.override
+          value    = items.value.value
+        }
+      }
+    }
+  }
+}
+
+## Function to manipulate the request
+resource "aws_cloudfront_function" "website_viewer_request_handler" {
+  name    = "website-viewer-request-handler"
+  runtime = "cloudfront-js-2.0"
+  # publish this version only if the env is true
+  publish = var.publish_cloudfront_functions
+  code    = file("${path.module}/../apps/cloudfront-functions/dist/viewer-request-handler.js")
+}
+
 ## Static website CDN
 resource "aws_cloudfront_distribution" "website" {
 
@@ -30,9 +58,10 @@ resource "aws_cloudfront_distribution" "website" {
 
   default_cache_behavior {
     # HTTPS requests we permit the distribution to serve
-    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = aws_s3_bucket.website.bucket
+    allowed_methods            = ["GET", "HEAD", "OPTIONS"]
+    cached_methods             = ["GET", "HEAD"]
+    target_origin_id           = aws_s3_bucket.website.bucket
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.websites.id
 
     forwarded_values {
       query_string = false
@@ -46,6 +75,11 @@ resource "aws_cloudfront_distribution" "website" {
     min_ttl                = 0     # min time for objects to live in the distribution cache
     default_ttl            = 3600  # default time for objects to live in the distribution cache
     max_ttl                = 86400 # max time for objects to live in the distribution cache
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.website_viewer_request_handler.arn
+    }
   }
 
   restrictions {

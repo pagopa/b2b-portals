@@ -21,6 +21,17 @@ variable "tags" {
   }
 }
 
+variable "cdn_custom_headers" {
+  type = list(object(
+    {
+      header   = string
+      override = bool
+      value    = string
+    }
+  ))
+  default = []
+}
+
 ### required for security group ALB, ECS and RDS
 variable "cms_app_port" {
   default = 1337
@@ -46,4 +57,10 @@ variable "use_custom_certificate" {
   type        = bool
   description = "Enable CDN https support with a custom certificate instead using the default one"
   default     = false # set true when available dns and custom certificate
+}
+
+variable "publish_cloudfront_functions" {
+  type        = bool
+  description = "Defines if cloudfront functions should be published"
+  default     = false
 }
