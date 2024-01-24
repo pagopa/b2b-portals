@@ -17,7 +17,7 @@ export const generateStaticParams = async (): Promise<Page[]> =>
   [...(await getAllPages())];
 
 type PageParams = {
-  params: { slug: string[] };
+  params: { slug?: string[] };
 };
 
 const Page = async ({ params }: PageParams) => {
