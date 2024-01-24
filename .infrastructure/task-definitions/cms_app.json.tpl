@@ -59,6 +59,22 @@
       {
         "name": "AWS_BUCKET_ENDPOINT",
         "value": "${aws_bucket_endpoint}"
+      },
+      {
+        "name": "REPO_OWNER",
+        "value": "${repo_owner}"
+      },
+      {
+        "name": "REPO_NAME",
+        "value": "${repo_name}"
+      },
+      {
+        "name": "WORKFLOW_ID",
+        "value": "${workflow_id}"
+      },
+      {
+        "name": "TARGET_BRANCH",
+        "value": "${target_branch}"
       }
     ],
     "secrets" : [
@@ -93,6 +109,10 @@
       {
         "name": "AWS_ACCESS_SECRET",
         "valueFrom": "${access_key_secret}"
+      },
+      {
+        "name": "GITHUB_PAT",
+        "valueFrom": "${github_pat}"
       }
     ]
   }
