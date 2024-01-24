@@ -31,7 +31,7 @@ const makeHowToProps = ({
 });
 
 const HowTo = (props: HowToSection) => (
-  <section>
+  <section id={props.sectionID || undefined}>
     <HowToEC {...makeHowToProps(props)} />
   </section>
 );

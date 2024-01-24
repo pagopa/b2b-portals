@@ -99,6 +99,7 @@ const HowToSectionCodec = t.strict({
   }),
   link: t.union([LinkCodec, t.null]),
   steps: t.array(StepCodec),
+  sectionID: t.union([t.string, t.null]),
 });
 
 export const PageSectionCodec = t.union([
