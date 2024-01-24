@@ -1,5 +1,5 @@
 ---
-"strapi-cms": patch
+"strapi-cms": minor
 ---
 
-Added Update Static Content plugin for static site deployment
+Add Update Static Content plugin for static site deployment
