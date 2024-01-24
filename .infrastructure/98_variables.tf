@@ -21,6 +21,17 @@ variable "tags" {
   }
 }
 
+variable "cdn_custom_headers" {
+  type = list(object(
+    {
+      header   = string
+      override = bool
+      value    = string
+    }
+  ))
+  default = []
+}
+
 ### required for security group ALB, ECS and RDS
 variable "cms_app_port" {
   default = 1337

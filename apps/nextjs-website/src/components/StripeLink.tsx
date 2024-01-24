@@ -2,11 +2,10 @@
 import React from 'react';
 import { EIconProps } from '@pagopa/pagopa-editorial-components/dist/components/EIcon';
 import { ReactElement } from 'react';
-import { StripeLinkSection } from '@/lib/fetch/types/PageSection';
-import MarkdownRenderer from './MarkdownRenderer';
-import { formatValidMuiIcon, isValidMuiIcon } from './Icons';
 import { Icon } from '@mui/material';
-// import MarkdownRenderer from './MarkdownRenderer';
+import { formatValidMuiIcon, isValidMuiIcon } from './Icons';
+import MarkdownRenderer from './MarkdownRenderer';
+import { StripeLinkSection } from '@/lib/fetch/types/PageSection';
 
 interface StripeLinkProps {
   theme: 'dark' | 'light';

@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../Hero';
 import Editorial from '../Editorial';
+import Accordion from '../Accordion';
 import StripeLink from '../StripeLink';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
@@ -11,6 +12,8 @@ const PageSection = (props: PageSectionData) => {
       return <Hero {...props} />;
     case 'sections.editorial':
       return <Editorial {...props} />;
+    case 'sections.accordion':
+      return <Accordion {...props} />;
     case 'sections.stripelink':
       return <StripeLink {...props} />;
     default:
