@@ -2,6 +2,6 @@
   "root": true,
   "extends": [
     "custom/eslint-recommended",
-    "next/core-web-vitals"
+    "custom/eslint-nextjs"
   ]
 }
