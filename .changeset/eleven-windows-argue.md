@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-Updating the "Accordion" component for the sectionID props both on NextJS and Strapi
+Update the "Accordion" component adding the sectionID
