@@ -43,6 +43,21 @@ const EditorialSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSchema),
 });
 
+const AccordionSectionCodec = t.strict({
+  __component: t.literal('sections.accordion'),
+  title: t.string,
+  subtitle: t.string,
+  description: t.union([t.string, t.literal('JSX.Element')]),
+  accordionItems: t.array(
+    t.strict({
+      header: t.string,
+      content: t.union([t.string, t.literal('JSX.Element')]),
+    })
+  ),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  layout: t.union([t.literal('left'), t.literal('center'), t.literal('right')]),
+});
+
 const CardsSectionCodec = t.strict({
   __component: t.literal('sections.cards'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
@@ -51,25 +66,29 @@ const CardsSectionCodec = t.strict({
     subtitle: t.union([t.string, t.undefined]),
     body: t.string,
   }),
-  items: t.array(t.type({
-    cardIcon: t.union([t.string, t.null]),
-    title: t.string,
-    text: t.string,
-    link: t.type({
-      href: t.string,
+  items: t.array(
+    t.type({
+      cardIcon: t.union([t.string, t.null]),
       title: t.string,
       text: t.string,
-    }),
-  })),
+      link: t.type({
+        href: t.string,
+        title: t.string,
+        text: t.string,
+      }),
+    })
+  ),
 });
 
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
+  AccordionSectionCodec,
   CardsSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
 export type HeroSection = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
+export type AccordionSection = t.TypeOf<typeof AccordionSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
