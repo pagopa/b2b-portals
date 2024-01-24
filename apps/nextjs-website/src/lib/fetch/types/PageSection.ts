@@ -43,6 +43,21 @@ const EditorialSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSchema),
 });
 
+const AccordionSectionCodec = t.strict({
+  __component: t.literal('sections.accordion'),
+  title: t.string,
+  subtitle: t.string,
+  description: t.union([t.string, t.literal('JSX.Element')]),
+  accordionItems: t.array(
+    t.strict({
+      header: t.string,
+      content: t.union([t.string, t.literal('JSX.Element')]),
+    })
+  ),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  layout: t.union([t.literal('left'), t.literal('center'), t.literal('right')]),
+});
+
 const BannerLinkSectionCodec = t.strict({
   __component: t.literal('sections.banner-link'),
   title: t.string,
@@ -86,10 +101,12 @@ const BannerLinkSectionCodec = t.strict({
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
+  AccordionSectionCodec,
   BannerLinkSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
 export type HeroSection = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
+export type AccordionSection = t.TypeOf<typeof AccordionSectionCodec>;
 export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
