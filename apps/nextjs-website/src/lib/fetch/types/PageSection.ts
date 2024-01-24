@@ -68,14 +68,14 @@ const FeatureSectionCodec = t.strict({
   items: t.array(
     t.strict({
       id: t.number,
-      icon: t.string,
+      icon: t.union([t.string, t.null]),
       iconColor: t.keyof({
         inherit: null,
       }),
       title: t.string,
       subtitle: t.string,
-      linkText: t.string,
-      linkURL: t.string,
+      linkText: t.union([t.string, t.null]),
+      linkURL: t.union([t.string, t.null]),
     })
   ),
 });
