@@ -21,7 +21,7 @@ const makeFeatureProps = ({
 });
 
 const Feature = (props: FeatureSection) => (
-  <section>
+  <section id={props.sectionID || undefined}>
     <FeatureEC {...makeFeatureProps(props)} />
   </section>
 );
