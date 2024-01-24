@@ -1,6 +1,8 @@
 'use client';
 import { Feature as FeatureEC } from '@pagopa/pagopa-editorial-components';
 import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
+import { Icon } from '@mui/material';
+import { formatValidMuiIcon, isValidMuiIcon } from './Icons';
 import { FeatureSection } from '@/lib/fetch/types/PageSection';
 
 const makeFeatureProps = ({
@@ -9,12 +11,15 @@ const makeFeatureProps = ({
   ...rest
 }: FeatureSection): FeatureProps => ({
   items: items.map((item) => ({
-    icon: item.icon,
-    iconColor: item.iconColor,
+    stackIcon: {
+      ...(isValidMuiIcon(item.icon) && {
+        startIcon: <Icon>{formatValidMuiIcon(item.icon)}</Icon>,
+      }),
+      color: item.iconColor,
+    },
     title: item.title,
     subtitle: item.subtitle,
-    linkText: item.linkText,
-    linkURL: item.linkURL,
+    link: { text: item.linkText || '', url: item.linkURL || '' },
   })),
   ...(background && { background }),
   ...rest,
