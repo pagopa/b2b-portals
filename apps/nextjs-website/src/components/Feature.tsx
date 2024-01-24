@@ -19,7 +19,8 @@ const makeFeatureProps = ({
     },
     title: item.title,
     subtitle: item.subtitle,
-    link: { text: item.linkText || '', url: item.linkURL || '' },
+    ...(item.linkText &&
+      item.linkURL && { link: { text: item.linkText, url: item.linkURL } }),
   })),
   ...(background && { background }),
   ...rest,
