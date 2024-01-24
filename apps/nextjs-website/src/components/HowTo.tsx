@@ -3,6 +3,7 @@ import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/
 import { HowTo as HowToEC } from '@pagopa/pagopa-editorial-components';
 import { Icon } from '@mui/material';
 import { formatValidMuiIcon, isValidMuiIcon } from './Icons';
+import MarkdownRenderer from './MarkdownRenderer';
 import { HowToSection } from '@/lib/fetch/types/PageSection';
 
 const makeHowToProps = ({
@@ -20,7 +21,7 @@ const makeHowToProps = ({
   }),
   steps: steps.map((step) => ({
     title: step.title,
-    description: step.description, // TODO: Parse rich text (markdown)
+    description: MarkdownRenderer({ markdown: step.description ?? '' }),
     ...(step.icon && {
       stepIcon: {
         ...(isValidMuiIcon(step.icon) && {
