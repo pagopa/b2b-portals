@@ -23,7 +23,7 @@ const makeAccordionProps = ({
 });
 
 const Accordion = (props: AccordionSection) => (
-  <section>
+  <section id={props.sectionID || undefined}>
     <AccordionEC {...makeAccordionProps(props)} />
   </section>
 );
