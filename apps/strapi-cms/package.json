@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "configdump": "strapi config:dump -f viewconfig.json",
+    "configrestore": "strapi config:restore -f viewconfig.json -s merge",
     "clean": "shx rm -rf dist/",
     "generate": "strapi ts:generate-types",
     "precompile": "npm run clean && npm run generate",
