@@ -17,12 +17,14 @@ export const generateStaticParams = async (): Promise<Page[]> =>
   [...(await getAllPages())];
 
 type PageParams = {
-  params: { slug: string[] };
+  params: { slug?: string[] };
 };
 
 const Page = async ({ params }: PageParams) => {
   const { slug } = params;
-  const pageProps = await getPageProps(slug);
+  // slug is undefined for homepage (apparently due to generateStaticParams)
+  // so we need to convert it back to [] (which is what getAllPages returns and what getPageProps expects)
+  const pageProps = await getPageProps(slug ?? []);
   const sections = pageProps?.sections || [];
 
   return pageProps ? <div>{sections.map(PageSection)}</div> : null;
