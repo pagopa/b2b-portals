@@ -56,6 +56,7 @@ const AccordionSectionCodec = t.strict({
   ),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   layout: t.union([t.literal('left'), t.literal('center'), t.literal('right')]),
+  sectionID: t.union([t.string, t.null]),
 });
 
 const CardsSectionCodec = t.strict({
