@@ -42,6 +42,11 @@
       "component": "components.accordion-item",
       "required": true,
       "min": 1
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$",
+      "unique": true
     }
   }
 }
