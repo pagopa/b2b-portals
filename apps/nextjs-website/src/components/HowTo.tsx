@@ -1,7 +1,8 @@
 'use client';
 import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/HowTo';
 import { HowTo as HowToEC } from '@pagopa/pagopa-editorial-components';
-import * as MuiIcons from '@mui/icons-material';
+import { Icon } from '@mui/material';
+import { formatValidMuiIcon, isValidMuiIcon } from './Icons';
 import { HowToSection } from '@/lib/fetch/types/PageSection';
 
 const makeHowToProps = ({
@@ -22,7 +23,9 @@ const makeHowToProps = ({
     description: step.description, // TODO: Parse rich text (markdown)
     ...(step.icon && {
       stepIcon: {
-        icon: step.icon as keyof typeof MuiIcons,
+        ...(isValidMuiIcon(step.icon) && {
+          icon: <Icon>{formatValidMuiIcon(step.icon)}</Icon>,
+        }),
         color: step.iconColor,
       },
     }),
