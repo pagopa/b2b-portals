@@ -64,37 +64,7 @@ const BannerLinkSectionCodec = t.strict({
   body: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   reverse: t.boolean,
-  ctaButtons: t.array(
-    // TODO: Replace with CTAButtonSchema when merged
-    t.intersection([
-      t.type({
-        text: t.string,
-        href: t.string,
-        variant: t.keyof({
-          text: null,
-          outlined: null,
-          contained: null,
-        }),
-        color: t.keyof({
-          inherit: null,
-          primary: null,
-          secondary: null,
-          success: null,
-          error: null,
-          info: null,
-          warning: null,
-        }),
-      }),
-      t.partial({
-        icon: t.union([t.string, t.null]),
-        size: t.keyof({
-          small: null,
-          medium: null,
-          large: null,
-        }),
-      }),
-    ])
-  ),
+  ctaButtons: t.array(CTAButtonSchema),
   decoration: t.union([ImageDataCodec, t.null]),
 });
 

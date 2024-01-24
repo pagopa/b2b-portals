@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-Implementing BannerLink component from Editorial-Components repository
+Implement BannerLink component from Editorial-Components library
