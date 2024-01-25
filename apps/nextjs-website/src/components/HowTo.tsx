@@ -3,6 +3,7 @@ import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/
 import { HowTo as HowToEC } from '@pagopa/pagopa-editorial-components';
 // Temporarily importing the entirety of MuiIcons
 // Will be subbed for a small set of allowed icons
+// Reference task B2BP-271
 import * as MuiIcons from '@mui/icons-material';
 import { isValidMuiIcon } from './Icons';
 import MarkdownRenderer from './MarkdownRenderer';
