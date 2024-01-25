@@ -10,6 +10,14 @@ output "cms_dns_load_balancer" {
   value = aws_alb.cms_load_balancer.dns_name
 }
 
-output "name_servers_records" {
-  value = aws_route53_zone.b2b_portals.name_servers
+## output "name_servers_records" {
+##   value = aws_route53_zone.b2b_portals.name_servers
+## }
+
+output "dns_zone_name" {
+  value = try(module.dns_zone[0].route53_zone_name, null)
+}
+
+output "dns_servers" {
+  value = try(module.dns_zone[0].route53_zone_name_servers, null)
 }
