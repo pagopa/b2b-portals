@@ -1,8 +1,10 @@
 'use client';
 import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/HowTo';
 import { HowTo as HowToEC } from '@pagopa/pagopa-editorial-components';
-import { Icon } from '@mui/material';
-import { formatValidMuiIcon, isValidMuiIcon } from './Icons';
+// Temporarily importing the entirety of MuiIcons
+// Will be subbed for a small set of allowed icons
+import * as MuiIcons from '@mui/icons-material';
+import { isValidMuiIcon } from './Icons';
 import MarkdownRenderer from './MarkdownRenderer';
 import { HowToSection } from '@/lib/fetch/types/PageSection';
 
@@ -25,7 +27,7 @@ const makeHowToProps = ({
     ...(step.icon && {
       stepIcon: {
         ...(isValidMuiIcon(step.icon) && {
-          icon: <Icon>{formatValidMuiIcon(step.icon)}</Icon>,
+          icon: step.icon as keyof typeof MuiIcons, // Temporary (see at the top of the file)
         }),
         color: step.iconColor,
       },
