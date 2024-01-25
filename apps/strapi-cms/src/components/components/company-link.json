@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_components_company_links",
+  "info": {
+    "displayName": "companyLink",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "ariaLabel": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
