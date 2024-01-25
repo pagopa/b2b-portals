@@ -64,3 +64,8 @@ variable "publish_cloudfront_functions" {
   description = "Defines if cloudfront functions should be published"
   default     = false
 }
+
+variable "dns_domain_name" {
+  description = "DNS domain for the b2bportals"
+  type        = string
+}

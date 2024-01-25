@@ -9,3 +9,5 @@ cdn_custom_headers = [
     value    = "noindex"
   }
 ]
+
+dns_domain_name = "b2bportals.pagopa.it"  
