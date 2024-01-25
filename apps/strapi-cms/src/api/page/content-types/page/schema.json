@@ -31,6 +31,7 @@
         "sections.hero",
         "sections.how-to",
         "sections.banner-link",
+        "sections.accordion",
         "sections.stripe-link"
       ],
       "required": true,

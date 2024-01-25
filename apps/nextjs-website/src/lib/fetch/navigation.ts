@@ -8,7 +8,6 @@ const ParentCodec = t.strict({
   order: t.number,
   id: t.number,
   title: t.string,
-  path: t.string,
   menuAttached: t.boolean,
 });
 
@@ -17,6 +16,7 @@ const NavItemCodec = t.intersection([
   t.strict({
     parent: t.union([ParentCodec, t.null]),
     related: t.strict({
+      slug: t.string,
       sections: t.array(PageSectionCodec),
     }),
   }),
@@ -32,7 +32,7 @@ export const getNavigation = (
 ): Promise<Navigation> =>
   extractFromResponse(
     fetchFun(
-      `${config.STRAPI_API_BASE_URL}/api/navigation/render/${menuName}?type=FLAT&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items&populate[sections][populate][4]=link&populate[sections][populate][5]=steps`,
+      `${config.STRAPI_API_BASE_URL}/api/navigation/render/${menuName}?type=FLAT&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems`,
       {
         method: 'GET',
         headers: {
