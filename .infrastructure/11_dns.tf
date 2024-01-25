@@ -7,7 +7,8 @@ module "dns_zone" {
   version = "~> 2.0"
   
   zones = {
-  var.dns_domain_name = {
-    comment = "terraform-aws-modules-examples.com (production)"
+    var.dns_domain_name = {
+      comment = "terraform-aws-modules-examples.com (production)"
+    }
   }
 }
