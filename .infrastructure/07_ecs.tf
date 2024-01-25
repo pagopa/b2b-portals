@@ -27,6 +27,11 @@ data "template_file" "cms_app" {
     bucket_full_url      = aws_s3_bucket.cms_medialibrary_bucket.bucket_regional_domain_name
     cdn_url              = "https://${aws_cloudfront_distribution.cms_medialibrary.domain_name}"
     aws_bucket_endpoint  = "https://s3.${var.aws_region}.amazonaws.com"
+    repo_owner           = "pagopa"
+    repo_name            = "b2b-portals"
+    workflow_id          = "deploy_website.yaml"
+    target_branch        = "main"
+    github_pat           = aws_ssm_parameter.cms_github_pat.arn
   }
 }
 

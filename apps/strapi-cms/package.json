@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "configdump": "strapi config:dump -f viewconfig.json",
+    "configrestore": "strapi config:restore -f viewconfig.json -s merge",
     "clean": "shx rm -rf dist/",
     "generate": "strapi ts:generate-types",
     "precompile": "npm run clean && npm run generate",
@@ -27,7 +29,8 @@
     "@strapi/strapi": "4.13.7",
     "better-sqlite3": "8.6.0",
     "pg": "^8.11.3",
-    "strapi-plugin-navigation": "^2.2.16"
+    "strapi-plugin-navigation": "^2.2.16",
+    "strapi-plugin-update-static-content": "^1.0.8"
   },
   "strapi": {
     "uuid": "81c5ca34-58ca-4e66-b893-4644728c7403"
