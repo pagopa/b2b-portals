@@ -3,7 +3,7 @@ import Hero from '../Hero';
 import Editorial from '../Editorial';
 import Accordion from '../Accordion';
 import Feature from '../Feature';
-import BannerLink from '../Bannerlink';
+import BannerLink from '../Bannerlink2';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
