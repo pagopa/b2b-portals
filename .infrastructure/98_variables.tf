@@ -66,6 +66,6 @@ variable "publish_cloudfront_functions" {
 }
 
 variable "dns_domain_name" {
-  description = "DNS domain for the b2bportals"
+  description = "DNS domain for the b2b portals"
   type        = string
 }
