@@ -59,6 +59,28 @@ const AccordionSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const FeatureSectionCodec = t.strict({
+  __component: t.literal('sections.feature'),
+  title: t.string,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  showCarouselMobile: t.boolean,
+  background: t.union([t.string, t.null]),
+  sectionID: t.union([t.string, t.null]),
+  items: t.array(
+    t.strict({
+      id: t.number,
+      icon: t.union([t.string, t.null]),
+      iconColor: t.keyof({
+        inherit: null,
+      }),
+      title: t.string,
+      subtitle: t.string,
+      linkText: t.union([t.string, t.null]),
+      linkURL: t.union([t.string, t.null]),
+    })
+  ),
+});
+
 const LinkCodec = t.strict({
   text: t.union([t.string, t.null]),
   href: t.string,
@@ -107,6 +129,7 @@ export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
   AccordionSectionCodec,
+  FeatureSectionCodec,
   HowToSectionCodec,
 ]);
 
@@ -114,4 +137,5 @@ export type PageSection = t.TypeOf<typeof PageSectionCodec>;
 export type HeroSection = t.TypeOf<typeof HeroSectionCodec>;
 export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
 export type AccordionSection = t.TypeOf<typeof AccordionSectionCodec>;
+export type FeatureSection = t.TypeOf<typeof FeatureSectionCodec>;
 export type HowToSection = t.TypeOf<typeof HowToSectionCodec>;

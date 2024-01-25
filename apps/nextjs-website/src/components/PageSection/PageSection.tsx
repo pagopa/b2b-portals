@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from '../Hero';
 import Editorial from '../Editorial';
 import Accordion from '../Accordion';
+import Feature from '../Feature';
 import HowTo from '../HowTo';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
@@ -14,6 +15,8 @@ const PageSection = (props: PageSectionData) => {
       return <Editorial {...props} />;
     case 'sections.accordion':
       return <Accordion {...props} />;
+    case 'sections.feature':
+      return <Feature {...props} />;
     case 'sections.how-to':
       return <HowTo {...props} />;
     default:
