@@ -4,6 +4,7 @@ import Editorial from '../Editorial';
 import Accordion from '../Accordion';
 import Feature from '../Feature';
 import HowTo from '../HowTo';
+import BannerLink from '../BannerLink';
 import StripeLink from '../StripeLink';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
@@ -20,6 +21,8 @@ const PageSection = (props: PageSectionData) => {
       return <Feature {...props} />;
     case 'sections.how-to':
       return <HowTo {...props} />;
+    case 'sections.banner-link':
+      return <BannerLink {...props} />;
     case 'sections.stripelink':
       return <StripeLink {...props} />;
     default:
