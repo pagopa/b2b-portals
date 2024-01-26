@@ -14,6 +14,6 @@ output "dns_zone_name" {
   value = try(module.dns_zone[0].route53_zone_name, null)
 }
 
-output "dns_servers" {
+output "dns_name_servers" {
   value = try(module.dns_zone[0].route53_zone_name_servers, null)
 }
