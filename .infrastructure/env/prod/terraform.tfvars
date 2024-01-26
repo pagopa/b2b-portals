@@ -10,8 +10,4 @@ cdn_custom_headers = [
   }
 ]
 
-dns_domain_name = {
-  "b2bportals.pagopa.it" = {
-    comment = "DNS domain for the b2b portals"
-  }
-} 
+dns_domain_name = "b2bportals.pagopa.it"
