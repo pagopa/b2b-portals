@@ -3,4 +3,4 @@
 "strapi-cms": minor
 ---
 
-Implementing BannerLink component
+Add BannerLink component
