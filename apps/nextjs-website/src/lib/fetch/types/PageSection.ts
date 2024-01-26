@@ -125,6 +125,16 @@ const HowToSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const BannerLinkSectionCodec = t.strict({
+  __component: t.literal('sections.banner-link'),
+  title: t.string,
+  body: t.string,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  reverse: t.boolean,
+  ctaButtons: t.array(CTAButtonSchema),
+  decoration: t.union([ImageDataCodec, t.null]),
+});
+
 const CardsSectionCodec = t.strict({
   __component: t.literal('sections.cards'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
@@ -153,6 +163,7 @@ export const PageSectionCodec = t.union([
   AccordionSectionCodec,
   FeatureSectionCodec,
   HowToSectionCodec,
+  BannerLinkSectionCodec,
   CardsSectionCodec,
 ]);
 
@@ -162,4 +173,5 @@ export type EditorialSection = t.TypeOf<typeof EditorialSectionCodec>;
 export type AccordionSection = t.TypeOf<typeof AccordionSectionCodec>;
 export type FeatureSection = t.TypeOf<typeof FeatureSectionCodec>;
 export type HowToSection = t.TypeOf<typeof HowToSectionCodec>;
+export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
