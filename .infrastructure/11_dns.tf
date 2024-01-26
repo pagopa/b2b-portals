@@ -1,5 +1,4 @@
 module "dns_zone" {
-  source  = "terraform-aws-modules/route53/aws//modules/zones"
-  version = "~> 2.0"
+  source  = "git::github.com/terraform-aws-modules/terraform-aws-route53.git?ref=bc63328714550fd903d2574b263833c9ce1c867e" # v2.11.0"
   zones   = var.dns_domain_name
 }
