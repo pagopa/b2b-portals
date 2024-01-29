@@ -82,7 +82,17 @@ resource "aws_ssm_parameter" "cms_access_key_secret" {
   value = aws_iam_access_key.strapi.secret
 }
 
+resource "random_password" "cms_github_pat" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
 resource "aws_ssm_parameter" "cms_github_pat" {
-  name = "/cms/github_pat"
-  type = "SecureString"
+  name  = "/cms/github_pat"
+  type  = "SecureString"
+  value = random_password.cms_github_pat.result
+  lifecycle {
+    ignore_changes = [value]
+  }
 }
