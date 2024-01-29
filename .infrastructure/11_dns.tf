@@ -10,20 +10,16 @@ module "records" {
   zone_id = module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]]
 
   records = [
+    for_each = var.dns_delegate_records
     {
-      name = "b2b"
+      name = each.key
       type = "NS"
       ttl  = 3600
-      records = [
-        "ns-1673.awsdns-17.co.uk",
-        "ns-1032.awsdns-01.org",
-        "ns-921.awsdns-51.net",
-        "ns-275.awsdns-34.com"
-      ]
+      records = [each.value]
     },
     {
-      name    = "alb"
-      type    = "CNAME"
+      name    = keys(var.dns_domain_name)[0]
+      type    = "A"
       ttl     = 3600
       records = [aws_alb.cms_load_balancer.dns_name]
     }
