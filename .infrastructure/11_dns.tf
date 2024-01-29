@@ -15,7 +15,7 @@ module "records" {
       name     = each.key
       type     = "NS"
       ttl      = 3600
-      records  = [each.value]
+      records  = each.value
     },
     {
       name    = keys(var.dns_domain_name)[0]
