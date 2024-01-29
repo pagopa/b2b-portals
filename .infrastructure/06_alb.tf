@@ -27,9 +27,28 @@ resource "aws_alb_target_group" "cms" {
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = aws_alb.cms_load_balancer.id
   port              = 80
+  protocol          = "HTTP"
 
   default_action {
-    target_group_arn = aws_alb_target_group.cms.id
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "front_end_https" {
+  load_balancer_arn = aws_alb.cms_load_balancer.id
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = module.acm.acm_certificate_arn
+
+  default_action {
     type             = "forward"
+    target_group_arn = aws_lb_target_group.front_end.arn
   }
 }
