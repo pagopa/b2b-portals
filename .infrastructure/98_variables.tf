@@ -47,12 +47,6 @@ variable "cms_app_memory" {
   default     = "3072" ##### 3 GB RAM
 }
 
-### required for Strapi Site on AWS - to be uncommented when when available dns domain
-# variable "dns_domain_name" {
-#  description = "DNS domain for the B2B Portal product"
-#  type        = string
-# }
-
 variable "use_custom_certificate" {
   type        = bool
   description = "Enable CDN https support with a custom certificate instead using the default one"
@@ -63,4 +57,10 @@ variable "publish_cloudfront_functions" {
   type        = bool
   description = "Defines if cloudfront functions should be published"
   default     = false
+}
+
+variable "dns_domain_name" {
+  description = "DNS domain for the b2b portals"
+  type        = map(any)
+  default     = null
 }
