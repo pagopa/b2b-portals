@@ -2,4 +2,4 @@
 "strapi-cms": minor
 ---
 
-Added StripeLink section to Strapi
+Add StripeLink section to Strapi
