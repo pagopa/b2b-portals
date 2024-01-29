@@ -83,6 +83,6 @@ resource "aws_ssm_parameter" "cms_access_key_secret" {
 }
 
 resource "aws_ssm_parameter" "cms_github_pat" {
-  name  = "/cms/github_pat"
-  type  = "SecureString"
+  name = "/cms/github_pat"
+  type = "SecureString"
 }
