@@ -1,16 +1,13 @@
 {
   "collectionName": "components_sections_banner_links",
   "info": {
-    "displayName": "BannerLink"
+    "displayName": "BannerLink",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
-    },
-    "body": {
-      "type": "richtext",
       "required": true
     },
     "reverse": {
@@ -34,11 +31,16 @@
       "required": true
     },
     "decoration": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "body": {
+      "type": "text",
+      "required": true
     }
   }
 }
