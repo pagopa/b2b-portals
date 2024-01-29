@@ -2,4 +2,4 @@
 "strapi-cms": minor
 ---
 
-Added Cards section to Strapi
+Add Cards section to Strapi
