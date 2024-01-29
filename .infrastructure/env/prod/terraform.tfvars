@@ -9,3 +9,9 @@ cdn_custom_headers = [
     value    = "noindex"
   }
 ]
+
+dns_domain_name = {
+  "b2bportals.pagopa.it" = {
+    comment = "DNS domain for the b2b portals"
+  }
+} 

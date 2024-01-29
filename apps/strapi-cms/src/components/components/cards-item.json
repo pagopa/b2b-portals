@@ -1,0 +1,52 @@
+{
+  "collectionName": "components_components_cards_items",
+  "info": {
+    "displayName": "CardsItem",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "textAlign": {
+      "type": "enumeration",
+      "enum": [
+        "center",
+        "left"
+      ],
+      "default": "center",
+      "required": true
+    },
+    "cardIcon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "label": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "masonry": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "linkHref": {
+      "type": "string"
+    },
+    "linkText": {
+      "type": "string"
+    },
+    "linkTitle": {
+      "type": "string"
+    }
+  }
+}
