@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_sections_stripe_links",
+  "info": {
+    "displayName": "StripeLink",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "subtitle": {
+      "type": "richtext",
+      "required": true
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    }
+  }
+}
