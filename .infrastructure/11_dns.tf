@@ -12,10 +12,10 @@ module "records" {
   records = [
     {
       for_each = var.dns_delegate_records
-      name = each.key
-      type = "NS"
-      ttl  = 3600
-      records = [each.value]
+      name     = each.key
+      type     = "NS"
+      ttl      = 3600
+      records  = [each.value]
     },
     {
       name    = keys(var.dns_domain_name)[0]
