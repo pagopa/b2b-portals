@@ -7,5 +7,4 @@ resource "aws_acm_certificate" "cms" {
     create_before_destroy = true
   }
 
-  provider = aws.eu-south-1
 }

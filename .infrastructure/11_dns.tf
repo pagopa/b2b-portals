@@ -16,7 +16,7 @@ resource "aws_route53_record" "cms_delegate" {
   records = each.value
 }
 
-#Validation
+# Validation
 resource "aws_route53_record" "certificate" {
   for_each = {
     for dvo in aws_acm_certificate.cms.domain_validation_options : dvo.domain_name => {
