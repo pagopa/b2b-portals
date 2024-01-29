@@ -11,11 +11,11 @@ module "records" {
 
   records = [
     {
-      for rs in var.dns_delegate_records :
-      name = rs.key
+      for_each = var.dns_delegate_records
+      name = each.key
       type = "NS"
       ttl  = 3600
-      records = [rs.value]
+      records = [each.value]
     },
     {
       name    = keys(var.dns_domain_name)[0]
