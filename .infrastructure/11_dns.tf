@@ -10,12 +10,12 @@ module "records" {
   zone_id = module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]]
 
   records = [
-    for_each = var.dns_delegate_records
     {
-      name = each.key
+      for rs in var.dns_delegate_records :
+      name = rs.key
       type = "NS"
       ttl  = 3600
-      records = [each.value]
+      records = [rs.value]
     },
     {
       name    = keys(var.dns_domain_name)[0]
