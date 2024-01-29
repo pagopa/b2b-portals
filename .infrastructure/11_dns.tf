@@ -34,9 +34,9 @@ module "records" {
 
   records = [
     {
-      name = "cms"
-      type = "CNAME"
-      ttl  = 3600
+      name    = "cms"
+      type    = "CNAME"
+      ttl     = 3600
       records = [aws_alb.cms_load_balancer.dns_name]
     }
   ]
