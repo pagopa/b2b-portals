@@ -19,7 +19,7 @@ module "records" {
       "ns-275.awsdns-34.com"]
     },
     {
-      name    = keys(var.dns_domain_name)[0]
+      name    = ""
       type    = "A"
       ttl     = 3600
       records = [aws_alb.cms_load_balancer.dns_name]
