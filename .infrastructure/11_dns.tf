@@ -3,9 +3,33 @@ module "dns_zone" {
   zones  = var.dns_domain_name
 }
 
-resource "aws_route53_record" "cms" {
-  zone_id = module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]]
-  name    = "cms"
-  type    = "CNAME"
-  records = [aws_alb.cms_load_balancer.dns_name]
-  ttl     = 3600
+# Delegation
+resource "aws_route53_record" "cms_delegate" {
+  for_each = var.dns_delegate_records
+
+  allow_overwrite = true
+  name            = each.key
+  ttl             = 3600
+  type            = "NS"
+  zone_id         = module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]]
+
+  records = each.value
+}
+
+#Validation
+resource "aws_route53_record" "certificate" {
+  for_each = {
+    for dvo in aws_acm_certificate.cms.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+
+  allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 3600 # 1 hour
+  type            = each.value.type
+  zone_id         = keys(var.dns_domain_name)[0]
+}
