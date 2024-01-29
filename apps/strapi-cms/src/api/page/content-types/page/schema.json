@@ -32,7 +32,8 @@
         "sections.how-to",
         "sections.banner-link",
         "sections.accordion",
-        "sections.cards"
+        "sections.cards",
+        "sections.stripe-link"
       ],
       "required": true,
       "min": 1
