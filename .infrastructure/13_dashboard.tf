@@ -8,7 +8,7 @@ resource "aws_cloudwatch_dashboard" "main" {
       ecs_cluster_name        = aws_ecs_cluster.cms_ecs_cluster.name
       ecs_cms_service_name    = aws_ecs_service.cms_ecs_service.name,
       rds_aurora_cluster_name = aws_rds_cluster.cms_database_cluster.cluster_identifier
-      alb_fe_arn_suffix       = "",
+      alb_fe_arn_suffix       = ""
     }
   )
 }
