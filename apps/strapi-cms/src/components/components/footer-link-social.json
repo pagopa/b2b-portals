@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_components_footer_link_socials",
+  "info": {
+    "displayName": "footerLinkSocial"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "Instagram",
+        "LinkedIn",
+        "Facebook",
+        "Twitter",
+        "X",
+        "Medium"
+      ],
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "ariaLabel": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
