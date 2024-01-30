@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_components_footer_links",
+  "info": {
+    "displayName": "footerLink",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "ariaLabel": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
