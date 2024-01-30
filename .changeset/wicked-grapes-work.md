@@ -3,4 +3,4 @@
 "strapi-cms": minor
 ---
 
-Simplified Footer data structure
+Simplify Footer data structure
