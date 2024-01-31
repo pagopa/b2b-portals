@@ -1,7 +1,8 @@
 {
   "collectionName": "components_components_footer_link_socials",
   "info": {
-    "displayName": "footerLinkSocial"
+    "displayName": "footerLinkSocial",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -11,9 +12,7 @@
         "Instagram",
         "LinkedIn",
         "Facebook",
-        "Twitter",
-        "X",
-        "Medium"
+        "Twitter"
       ],
       "required": true
     },
