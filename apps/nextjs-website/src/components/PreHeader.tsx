@@ -7,7 +7,7 @@ import Icon from '@mui/material/Icon';
 import { Stack } from '@mui/material';
 import { CtaProps } from '@pagopa/pagopa-editorial-components/dist/components/Ctas';
 import { PreHeader } from '@/lib/fetch/preHeader';
-import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
+import { formatValidMuiIcon } from '@/components/Icons';
 
 const preHeaderNakedButtonStyle = {
   padding: '0',
@@ -38,7 +38,7 @@ const makeCtas = (
       letterSpacing: side === 'left' ? '0' : '.3px',
       ...(ctaBtn.variant === 'naked' && { ...preHeaderNakedButtonStyle }),
     },
-    ...(isValidMuiIcon(ctaBtn.icon) && {
+    ...(ctaBtn.icon && {
       startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
     }),
   })),
