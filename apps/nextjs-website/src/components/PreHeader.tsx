@@ -1,8 +1,11 @@
 'use client';
-import React from 'react';
-import { PreHeader as PreHeaderEC } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
+import {
+  PreHeader as PreHeaderEC,
+  PreHeaderProps,
+} from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
 import Icon from '@mui/material/Icon';
 import { Stack } from '@mui/material';
+import { CtaProps } from '@pagopa/pagopa-editorial-components/dist/components/Ctas';
 import { PreHeader } from '@/lib/fetch/preHeader';
 import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
 
@@ -16,41 +19,39 @@ const preHeaderNakedButtonStyle = {
   },
 };
 
-const makeCtas = (
-  props: NonNullable<PreHeader['data']['attributes']['leftCtas']>,
-  side: 'left' | 'right'
-) => ({
-  ...props,
-  ctaButtons:
-    props?.ctaButtons?.map((ctaBtn) => ({
-      ...ctaBtn,
-      target: '_blank',
-      rel: 'noopener noreferrer',
-      disableRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
-      disableTouchRipple: ctaBtn.variant === 'text', // To be replaced by 'naked' when implemented on Strapi's side
-      sx: {
-        fontWeight: side === 'left' ? 'bold' : '600',
-        letterSpacing: side === 'left' ? '0' : '.3px',
-        ...(ctaBtn.variant === 'text' && { ...preHeaderNakedButtonStyle }), // To be replaced by 'naked' when implemented on Strapi's side
-      },
-      ...(isValidMuiIcon(ctaBtn.icon) && {
-        startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
-      }),
-    })) ?? [],
-});
-
 // Add styles, SEO related values and extra JS parameters for singular components
 // Styling 'naked' variant for PreHeader using 'text' variant as a base
 // (since editorial-components does not accept 'naked' variant)
-const makePreHeaderProps = (props: PreHeader['data']['attributes']) => ({
-  ...props,
-  ...(props.leftCtas && { leftCtas: makeCtas(props.leftCtas, 'left') }),
-  ...(props.rightCtas && { rightCtas: makeCtas(props.rightCtas, 'right') }),
+const makeCtas = (
+  ctaButtons: PreHeader['data']['attributes']['leftCtas'],
+  side: 'left' | 'right'
+): CtaProps => ({
+  theme: 'light',
+  ctaButtons: ctaButtons.map((ctaBtn) => ({
+    ...ctaBtn,
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    disableRipple: ctaBtn.variant === 'naked',
+    disableTouchRipple: ctaBtn.variant === 'naked',
+    sx: {
+      fontWeight: side === 'left' ? 'bold' : '600',
+      letterSpacing: side === 'left' ? '0' : '.3px',
+      ...(ctaBtn.variant === 'naked' && { ...preHeaderNakedButtonStyle }),
+    },
+    ...(isValidMuiIcon(ctaBtn.icon) && {
+      startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+    }),
+  })),
 });
 
-const PreHeader: React.FC<PreHeader['data']['attributes']> = (
-  preHeaderData: PreHeader['data']['attributes']
-) => (
+const makePreHeaderProps = (
+  props: PreHeader['data']['attributes']
+): PreHeaderProps => ({
+  leftCtas: makeCtas(props.leftCtas, 'left'),
+  rightCtas: makeCtas(props.rightCtas, 'right'),
+});
+
+const PreHeader = (preHeaderData: PreHeader['data']['attributes']) => (
   // Using sx over styled() because, for styled() to work, the component (in this case PreHeaderEC)
   // needs to take a className parameter and set it to itself (which PreHeaderEC does not)
   <Stack
@@ -66,6 +67,9 @@ const PreHeader: React.FC<PreHeader['data']['attributes']> = (
       '> *': {
         flex: '1',
         padding: '0 !important',
+        '.MuiStack-root': {
+          alignItems: 'center',
+        },
       },
     }}
   >
