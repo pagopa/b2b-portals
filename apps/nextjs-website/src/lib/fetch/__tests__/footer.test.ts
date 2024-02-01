@@ -15,92 +15,72 @@ const makeTestAppEnv = () => {
 const footerResponse = {
   data: {
     attributes: {
-      legalInfo: 'test legal',
-      showFundedByNextGenerationEULogo: false,
+      legalInfo:
+        '**PagoPA S.p.A.** — società per azioni con socio unico - capitale sociale di euro 1,000,000 interamente versato - sede legale in Roma, Piazza Colonna 370,\nCAP 00187 - n. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009',
+      showFundedByNextGenerationEULogo: true,
       companyLink: {
-        href: '/',
-        ariaLabel: null,
+        href: 'https://www.pagopa.it/',
+        ariaLabel: 'Link: vai al sito di PagoPA S.p.A.',
       },
       links_aboutUs: {
-        title: 'aboutUs',
+        title: null,
         links: [
           {
-            text: 'aboutUsLinkExample1',
+            label: 'Chi siamo',
             href: '/',
-            linkType: 'internal',
-            ariaLabel: null,
-            icon: null,
+            ariaLabel: 'Chi siamo',
           },
           {
-            text: 'aboutUsLinkExample2',
-            href: '/',
-            linkType: 'internal',
-            ariaLabel: null,
-            icon: null,
+            label: 'PNRR',
+            href: '/PNRR',
+            ariaLabel: 'PNRR',
+          },
+          {
+            label: 'Media',
+            href: '/media',
+            ariaLabel: 'Media',
+          },
+          {
+            label: 'Lavora con noi',
+            href: '/lavora-con-noi',
+            ariaLabel: 'Lavora con noi',
           },
         ],
       },
       links_followUs: {
-        title: 'followUs',
+        title: 'SEGUICI SU',
+        socialLinks: [
+          {
+            icon: 'LinkedIn',
+            href: 'linkedin.com',
+            ariaLabel: 'LinkedIn',
+          },
+        ],
         links: [
           {
-            text: 'followUsLinkExample1',
-            href: '/',
-            linkType: 'internal',
-            ariaLabel: null,
-            icon: null,
-          },
-          {
-            text: 'followUsLinkExample2',
-            href: '/',
-            linkType: 'internal',
-            ariaLabel: null,
-            icon: null,
-          },
-          {
-            text: 'facebook',
-            href: '/',
-            linkType: 'external',
-            ariaLabel: null,
-            icon: null,
+            label: 'Accessibilità',
+            href: 'accessibilità',
+            ariaLabel: 'Accessibilità',
           },
         ],
       },
       links_resources: {
-        title: 'Resources',
+        title: 'RISORSE',
         links: [
           {
-            text: 'ResourcesLinkExample1',
-            href: '/',
-            linkType: 'internal',
-            ariaLabel: null,
-            icon: null,
-          },
-          {
-            text: 'ResourcesLinkExample2',
-            href: '/',
-            linkType: 'internal',
-            ariaLabel: null,
-            icon: null,
+            label: 'Test',
+            href: '/test',
+            ariaLabel: 'test',
           },
         ],
       },
       links_services: {
-        title: 'Services',
+        title: 'PRODOTTI E SERVIZI',
         links: [
           {
-            text: 'ServicesLinkExample1',
-            href: '/',
-            linkType: 'internal',
-            ariaLabel: null,
-            icon: null,
-          },
-          {
-            text: 'ServicesLinkExample2',
-            href: '/',
-            linkType: 'internal',
-            ariaLabel: null,
-            icon: null,
+            label: 'Test',
+            href: '/test',
+            ariaLabel: 'test',
           },
         ],
       },
@@ -120,7 +100,7 @@ describe('getFooter', () => {
     await getFooter(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_resources.links,links_services.links`,
+      `${config.STRAPI_API_BASE_URL}/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
       {
         method: 'GET',
         headers: {
