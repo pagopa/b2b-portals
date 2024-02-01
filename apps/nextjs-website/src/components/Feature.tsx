@@ -35,11 +35,15 @@ const Feature = (props: FeatureSection) => (
         '.MuiGrid-root': {
           width: '100%',
           gap: '20px',
+          padding: '0',
         },
         '.MuiGrid-item': {
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
+        },
+        '.MuiTypography-root': {
+          fontFamily: '"Titillium Web",sans-serif;',
         },
       }}
     >
