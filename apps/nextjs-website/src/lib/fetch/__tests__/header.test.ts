@@ -17,22 +17,11 @@ const headerResponse = {
     attributes: {
       productName: 'Test',
       beta: false,
-      reverse: false,
-      theme: 'light',
-      avatar: {
-        data: {
-          attributes: {
-            url: '/uploads/file_e4c03befba.png',
-            alternativeText: null,
-          },
-        },
-      },
       ctaButtons: [
         {
           text: 'test',
           href: '/',
-          variant: 'text',
-          color: 'inherit',
+          variant: 'contained',
           icon: null,
           size: 'medium',
         },
@@ -53,7 +42,7 @@ describe('getHeader', () => {
     await getHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/header/?populate=avatar,ctaButtons`,
+      `${config.STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons`,
       {
         method: 'GET',
         headers: {

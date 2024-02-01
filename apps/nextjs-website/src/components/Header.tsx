@@ -1,20 +1,38 @@
 'use client';
-import React from 'react';
 import { Header as HeaderEC } from '@pagopa/pagopa-editorial-components/dist/components/Header';
 import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
-import { Stack } from '@mui/material';
+import { Icon, Stack } from '@mui/material';
 import { usePathname } from 'next/navigation';
+import { formatValidMuiIcon, isValidMuiIcon } from './Icons';
+import { HeaderWithNavigation } from '@/lib/fetch/header';
 
-const Header = (props: HeaderProps) => {
+const makeHeaderProps = (
+  { ctaButtons, productName, menu, ...rest }: HeaderWithNavigation,
+  pathname: string
+): HeaderProps => ({
+  ...(ctaButtons &&
+    ctaButtons.length > 0 && {
+      ctaButtons: ctaButtons.map((ctaBtn) => ({
+        ...ctaBtn,
+        ...(isValidMuiIcon(ctaBtn.icon) && {
+          startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+        }),
+      })),
+    }),
+  product: {
+    name: productName,
+    href: '/',
+  },
+  // Add active link logic
+  menu: menu.map((link) => ({
+    ...link,
+    active: pathname.includes(link.href ?? ''),
+  })),
+  ...rest,
+});
+
+const Header = (props: HeaderWithNavigation) => {
   const pathname = usePathname();
-
-  const headerDataWithActiveLink = {
-    ...props,
-    menu: props.menu.map((link) => ({
-      ...link,
-      active: pathname.includes(link.href ?? ''),
-    })),
-  };
 
   return (
     <Stack
@@ -43,7 +61,7 @@ const Header = (props: HeaderProps) => {
         },
       }}
     >
-      <HeaderEC {...headerDataWithActiveLink} />
+      <HeaderEC {...makeHeaderProps(props, pathname)} />
     </Stack>
   );
 };

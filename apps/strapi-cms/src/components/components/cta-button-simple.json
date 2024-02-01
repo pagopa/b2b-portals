@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_components_cta_button_simples",
+  "info": {
+    "displayName": "CTAButton_Simple"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "contained",
+        "outlined"
+      ],
+      "required": true,
+      "default": "contained"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "HelpOutlineOutlined"
+      ]
+    },
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "default": "medium",
+      "required": true
+    }
+  }
+}
