@@ -4,7 +4,7 @@ import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/compone
 import { Icon, Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
-import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
+import { formatValidMuiIcon } from '@/components/Icons';
 
 const makeEditorialProps = ({
   eyelet,
@@ -16,11 +16,11 @@ const makeEditorialProps = ({
   ...(eyelet && { eyelet }),
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: <img src={image?.url} alt={image?.alternativeText ?? ''} />,
-  ctaButtons: ctaButtons.map((ctaBtn) => ({
+  ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
     ...ctaBtn,
     color: rest.theme === 'dark' ? 'negative' : 'primary',
-    ...(isValidMuiIcon(ctaBtn.icon) && {
-      startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+    ...(icon && {
+      startIcon: <Icon>{formatValidMuiIcon(icon)}</Icon>,
     }),
   })),
   ...rest,
