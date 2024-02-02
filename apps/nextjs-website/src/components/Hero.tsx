@@ -4,22 +4,29 @@ import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/H
 import { Icon, Stack, useTheme } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
-import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
+import { formatValidMuiIcon } from '@/components/Icons';
 
-const makeHeroProps = (props: HeroSection): HeroProps => ({
-  ...props,
+const makeHeroProps = ({
+  theme,
+  subtitle,
+  image,
+  background,
+  ctaButtons,
+  ...rest
+}: HeroSection): HeroProps => ({
+  ...rest,
   useHoverlay: false,
-  subtitle: MarkdownRenderer({ markdown: props.subtitle ?? '' }),
-  image: props.image?.url,
-  altText: props.image?.alternativeText ?? '',
-  background: props.background?.url,
-  ...(props.ctaButtons &&
-    props.ctaButtons.length > 0 && {
-      ctaButtons: props.ctaButtons?.map((ctaBtn) => ({
+  subtitle: MarkdownRenderer({ markdown: subtitle ?? '' }),
+  image: image?.url,
+  altText: image?.alternativeText ?? '',
+  background: background?.url,
+  ...(ctaButtons &&
+    ctaButtons.length > 0 && {
+      ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
-        color: props.theme === 'dark' ? 'negative' : 'primary',
-        ...(isValidMuiIcon(ctaBtn.icon) && {
-          startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+        color: theme === 'dark' ? 'negative' : 'primary',
+        ...(icon && {
+          startIcon: <Icon>{formatValidMuiIcon(icon)}</Icon>,
         }),
       })),
     }),
