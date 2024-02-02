@@ -7,6 +7,7 @@ import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import { formatValidMuiIcon } from '@/components/Icons';
 
 const makeEditorialProps = ({
+  theme,
   eyelet,
   body,
   image,
@@ -15,10 +16,10 @@ const makeEditorialProps = ({
 }: EditorialSection): EditorialProps => ({
   ...(eyelet && { eyelet }),
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
-  image: <img src={image?.url} alt={image?.alternativeText ?? ''} />,
+  image: <img src={image.url} alt={image.alternativeText ?? undefined} />,
   ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
     ...ctaBtn,
-    color: rest.theme === 'dark' ? 'negative' : 'primary',
+    color: theme === 'dark' ? 'negative' : 'primary',
     ...(icon && {
       startIcon: <Icon>{formatValidMuiIcon(icon)}</Icon>,
     }),
