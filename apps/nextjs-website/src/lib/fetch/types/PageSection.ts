@@ -36,7 +36,7 @@ const EditorialSectionCodec = t.strict({
   }),
   reversed: t.boolean,
   sectionID: t.union([t.string, t.null]),
-  image: t.union([ImageDataCodec, t.null]),
+  image: ImageDataCodec,
   ctaButtons: t.array(CTAButton_SimpleSchema),
 });
 
