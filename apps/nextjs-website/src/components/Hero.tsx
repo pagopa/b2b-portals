@@ -8,19 +8,21 @@ import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
 
 const makeHeroProps = (props: HeroSection): HeroProps => ({
   ...props,
+  useHoverlay: false,
   subtitle: MarkdownRenderer({ markdown: props.subtitle ?? '' }),
   image: props.image?.url,
   altText: props.image?.alternativeText ?? '',
   background: props.background?.url,
-  ...(props.ctaButtons && {
-    ctaButtons: props.ctaButtons.map((ctaBtn) => ({
-      ...ctaBtn,
-      color: props.theme === 'dark' ? 'negative' : 'primary',
-      ...(isValidMuiIcon(ctaBtn.icon) && {
-        startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
-      }),
-    })),
-  }),
+  ...(props.ctaButtons &&
+    props.ctaButtons.length > 0 && {
+      ctaButtons: props.ctaButtons?.map((ctaBtn) => ({
+        ...ctaBtn,
+        color: props.theme === 'dark' ? 'negative' : 'primary',
+        ...(isValidMuiIcon(ctaBtn.icon) && {
+          startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
+        }),
+      })),
+    }),
 });
 
 const Hero = (props: HeroSection) => {
