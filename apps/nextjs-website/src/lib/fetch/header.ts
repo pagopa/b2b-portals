@@ -9,7 +9,7 @@ export const HeaderDataCodec = t.strict({
     attributes: t.strict({
       productName: t.string,
       beta: t.boolean,
-      ctaButtons: t.union([t.array(CTAButton_SimpleSchema), t.null]),
+      ctaButtons: t.array(CTAButton_SimpleSchema),
     }),
   }),
 });
