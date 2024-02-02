@@ -1,6 +1,7 @@
 'use client';
 import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/HowTo';
 import { HowTo as HowToEC } from '@pagopa/pagopa-editorial-components';
+import { Stack } from '@mui/material';
 // Temporarily importing the entirety of MuiIcons
 // Will be subbed for a small set of allowed icons
 // Reference task B2BP-271
@@ -39,7 +40,16 @@ const makeHowToProps = ({
 
 const HowTo = (props: HowToSection) => (
   <section id={props.sectionID || undefined}>
-    <HowToEC {...makeHowToProps(props)} />
+    <Stack
+      sx={{
+        '.MuiSvgIcon-fontSizeMedium': { width: '64px', height: '64px' },
+        '.MuiTypography-root': {
+          fontFamily: '"Titillium Web",sans-serif;',
+        },
+      }}
+    >
+      <HowToEC {...makeHowToProps(props)} />
+    </Stack>
   </section>
 );
 
