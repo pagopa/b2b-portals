@@ -16,10 +16,10 @@ const makeHeroProps = ({
 }: HeroSection): HeroProps => ({
   ...rest,
   useHoverlay: false,
-  subtitle: MarkdownRenderer({ markdown: subtitle ?? '' }),
-  image: image?.url,
-  altText: image?.alternativeText ?? '',
-  background: background?.url,
+  ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
+  ...(image && { image: image.url }),
+  ...(image && image.alternativeText && { altText: image.alternativeText }),
+  ...(background && { background: background.url }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
