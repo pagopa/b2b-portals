@@ -38,9 +38,16 @@ const Feature = (props: FeatureSection) => {
           '.MuiLink-root': {
             // Buttons
             fontFamily: '"Titillium Web",sans-serif;',
+            color:
+              props.theme === 'dark' ? 'primary.contrastText' : 'primary.main',
+          },
+          '.MuiSvgIcon-root': {
+            // Buttons Arrow + Icons
+            color:
+              props.theme === 'dark' ? 'primary.contrastText' : 'primary.main',
           },
           '.MuiTypography-root.MuiTypography-body1': {
-            // Icons
+            // Icons container
             textAlign: 'center',
           },
           '.MuiMobileStepper-root': {
