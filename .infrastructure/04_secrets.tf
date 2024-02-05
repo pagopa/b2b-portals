@@ -93,6 +93,9 @@ resource "aws_ssm_parameter" "cms_github_pat" {
   type  = "SecureString"
   value = random_password.cms_github_pat.result
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [
+      # Ignore changes to value, because the value is updated manually
+      value
+    ]
   }
 }
