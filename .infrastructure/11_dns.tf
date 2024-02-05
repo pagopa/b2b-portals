@@ -13,10 +13,7 @@ module "records" {
       name = ""
       type = "NS"
       ttl  = 3600
-      records = ["ns-1673.awsdns-17.co.uk",
-        "ns-1032.awsdns-01.org",
-        "ns-921.awsdns-51.net",
-      "ns-275.awsdns-34.com"]
+      records = module.dns_zone.route53_zone_name_servers
     },
     {
       name    = ""
