@@ -15,38 +15,53 @@ const makeTestAppEnv = () => {
 const preHeaderResponse = {
   data: {
     attributes: {
-      leftCtas: {
-        id: 1,
-        reverse: false,
-        theme: 'light',
-        ctaButtons: [
-          {
-            id: 1,
-            text: 'ctaLeft',
-            href: '/',
-            variant: 'text',
-            color: 'inherit',
-            icon: null,
-            size: 'medium',
-          },
-        ],
-      },
-      rightCtas: {
-        id: 2,
-        reverse: false,
-        theme: 'light',
-        ctaButtons: [
-          {
-            id: 2,
-            text: 'ctaRight',
-            href: '/',
-            variant: 'text',
-            color: 'inherit',
-            icon: null,
-            size: 'medium',
-          },
-        ],
-      },
+      createdAt: '2023-11-20T15:35:53.598Z',
+      updatedAt: '2024-01-31T15:12:25.352Z',
+      leftCtas: [
+        {
+          id: 1,
+          text: 'PagoPA S.p.A.',
+          href: 'https://www.pagopa.it',
+          icon: null,
+          variant: 'naked',
+          size: 'medium',
+        },
+      ],
+      rightCtas: [
+        {
+          id: 2,
+          text: 'Assistenza',
+          href: 'mailto:destinatari-send@assistenza.pagopa.it',
+          icon: 'HelpOutlineOutlined',
+          variant: 'naked',
+          size: 'medium',
+        },
+      ],
+    },
+  },
+};
+
+const preHeaderResponseAfterCodec = {
+  data: {
+    attributes: {
+      leftCtas: [
+        {
+          text: 'PagoPA S.p.A.',
+          href: 'https://www.pagopa.it',
+          icon: null,
+          variant: 'naked',
+          size: 'medium',
+        },
+      ],
+      rightCtas: [
+        {
+          text: 'Assistenza',
+          href: 'mailto:destinatari-send@assistenza.pagopa.it',
+          icon: 'HelpOutlineOutlined',
+          variant: 'naked',
+          size: 'medium',
+        },
+      ],
     },
   },
 };
@@ -63,7 +78,7 @@ describe('getPreHeader', () => {
     await getPreHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas.ctaButtons,rightCtas.ctaButtons`,
+      `${config.STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {
@@ -83,6 +98,6 @@ describe('getPreHeader', () => {
     const actual = getPreHeader(appEnv);
 
     // Use preHeaderResponse directly as the expected value
-    expect(await actual).toStrictEqual(preHeaderResponse);
+    expect(await actual).toStrictEqual(preHeaderResponseAfterCodec);
   });
 });
