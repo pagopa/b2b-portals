@@ -1,4 +1,6 @@
 import * as t from 'io-ts';
+import { MUIButtonSizeCodec } from './mui/ButtonSize';
+import { MUIButtonIconCodec } from './mui/ButtonIcon';
 
 const CTAButtonVariant = t.keyof({
   text: null,
@@ -30,3 +32,11 @@ export const CTAButtonSchema = t.intersection([
     size: CTAButtonSize,
   }),
 ]);
+
+export const CTAButtonSimpleCodec = t.strict({
+  text: t.string,
+  href: t.string,
+  variant: t.keyof({ contained: null, outlined: null }),
+  size: MUIButtonSizeCodec,
+  icon: t.union([MUIButtonIconCodec, t.null]),
+});
