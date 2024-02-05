@@ -35,6 +35,9 @@ const Feature = (props: FeatureSection) => {
     <section id={props.sectionID || undefined}>
       <Stack
         sx={{
+          section: {
+            ...(props.theme === 'light' && { backgroundColor: '#FAFAFA' }), // Using value found in SEND website over Figma
+          },
           '.MuiLink-root': {
             // Buttons
             fontFamily: '"Titillium Web",sans-serif;',
@@ -43,8 +46,7 @@ const Feature = (props: FeatureSection) => {
           },
           '.MuiSvgIcon-root': {
             // Buttons Arrow + Icons
-            color:
-              props.theme === 'dark' ? 'primary.contrastText' : 'primary.main',
+            ...(props.theme === 'light' && { color: 'primary.main' }),
           },
           '.MuiTypography-root.MuiTypography-body1': {
             // Icons container
