@@ -46,12 +46,12 @@ const EditorialSectionCodec = t.strict({
 const AccordionSectionCodec = t.strict({
   __component: t.literal('sections.accordion'),
   title: t.string,
-  subtitle: t.string,
-  description: t.union([t.string, t.literal('JSX.Element')]),
+  subtitle: t.union([t.string, t.null]),
+  description: t.union([t.string, t.null]),
   accordionItems: t.array(
     t.strict({
       header: t.string,
-      content: t.union([t.string, t.literal('JSX.Element')]),
+      content: t.string,
     })
   ),
   theme: t.union([t.literal('light'), t.literal('dark')]),

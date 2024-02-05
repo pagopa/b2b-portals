@@ -1,32 +1,28 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { CTAGroupCodec } from './types/CTAGroup';
+import { MUIButtonSizeCodec } from './types/mui/ButtonSize';
+import { MUIButtonIconCodec } from './types/mui/ButtonIcon';
 import { AppEnv } from '@/AppEnv';
+
+const PreHeaderButtonCodec = t.strict({
+  text: t.string,
+  href: t.string,
+  icon: t.union([MUIButtonIconCodec, t.null]),
+  size: MUIButtonSizeCodec,
+  variant: t.keyof({
+    naked: null, // Unique to PreHeader
+    text: null,
+    outlined: null,
+    contained: null,
+  }),
+});
 
 const PreHeaderCodec = t.strict({
   data: t.strict({
-    attributes: t.union([
-      t.strict({
-        rightCtas: CTAGroupCodec,
-        leftCtas: CTAGroupCodec,
-      }),
-      t.intersection([
-        t.strict({
-          rightCtas: CTAGroupCodec,
-        }),
-        t.partial({
-          leftCtas: CTAGroupCodec,
-        }),
-      ]),
-      t.intersection([
-        t.strict({
-          leftCtas: CTAGroupCodec,
-        }),
-        t.partial({
-          rightCtas: CTAGroupCodec,
-        }),
-      ]),
-    ]),
+    attributes: t.strict({
+      leftCtas: t.array(PreHeaderButtonCodec),
+      rightCtas: t.array(PreHeaderButtonCodec),
+    }),
   }),
 });
 
@@ -39,7 +35,7 @@ export const getPreHeader = ({
 }: AppEnv): Promise<PreHeader> =>
   extractFromResponse(
     fetchFun(
-      `${config.STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas.ctaButtons,rightCtas.ctaButtons`,
+      `${config.STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {
