@@ -4,7 +4,7 @@ import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components
 import { Icon, Stack } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import { formatValidMuiIcon } from './Icons';
-import { HeaderWithNavigation } from '@/lib/fetch/header';
+import { HeaderWithNavigation } from '@/lib/header';
 
 const makeHeaderProps = (
   { ctaButtons, productName, menu, ...rest }: HeaderWithNavigation,

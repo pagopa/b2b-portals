@@ -33,7 +33,7 @@ export const CTAButtonSchema = t.intersection([
   }),
 ]);
 
-export const CTAButton_SimpleSchema = t.strict({
+export const CTAButtonSimpleCodec = t.strict({
   text: t.string,
   href: t.string,
   variant: t.keyof({ contained: null, outlined: null }),

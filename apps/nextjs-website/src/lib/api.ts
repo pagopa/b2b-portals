@@ -5,8 +5,8 @@ import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
-import { HeaderWithNavigation, getHeader } from './fetch/header';
-import { makeHeaderWithNavigation } from './header';
+import { getHeader } from './fetch/header';
+import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env

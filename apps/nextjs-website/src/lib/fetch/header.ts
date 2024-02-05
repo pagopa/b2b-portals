@@ -1,7 +1,6 @@
 import * as t from 'io-ts';
-import { NavigationProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/components/Navigation';
 import { extractFromResponse } from './extractFromResponse';
-import { CTAButton_SimpleSchema } from './types/CTAButton';
+import { CTAButtonSimpleCodec } from './types/CTAButton';
 import { AppEnv } from '@/AppEnv';
 
 export const HeaderDataCodec = t.strict({
@@ -9,15 +8,12 @@ export const HeaderDataCodec = t.strict({
     attributes: t.strict({
       productName: t.string,
       beta: t.boolean,
-      ctaButtons: t.array(CTAButton_SimpleSchema),
+      ctaButtons: t.array(CTAButtonSimpleCodec),
     }),
   }),
 });
 
 export type Header = t.TypeOf<typeof HeaderDataCodec>;
-
-export type HeaderWithNavigation = Header['data']['attributes'] &
-  NavigationProps;
 
 export const getHeader = ({ config, fetchFun }: AppEnv): Promise<Header> =>
   extractFromResponse(
