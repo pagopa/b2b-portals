@@ -14,13 +14,17 @@
   "attributes": {
     "leftCtas": {
       "type": "component",
-      "repeatable": false,
-      "component": "components.cta-group"
+      "repeatable": true,
+      "component": "components.pre-header-button",
+      "required": true,
+      "min": 1
     },
     "rightCtas": {
       "type": "component",
-      "repeatable": false,
-      "component": "components.cta-group"
+      "repeatable": true,
+      "component": "components.pre-header-button",
+      "required": true,
+      "min": 1
     }
   }
 }
