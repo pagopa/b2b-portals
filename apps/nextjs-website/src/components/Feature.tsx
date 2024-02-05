@@ -1,7 +1,7 @@
 'use client';
 import { Feature as FeatureEC } from '@pagopa/pagopa-editorial-components';
 import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
-import { Stack } from '@mui/material';
+import { Stack, useTheme } from '@mui/material';
 // Only temporarily importing every icon. A task is planned to sub this for a restricted set of accepted icon names.
 import * as MuiIcons from '@mui/icons-material';
 import { isValidMuiIcon } from './Icons';
@@ -28,28 +28,44 @@ const makeFeatureProps = ({
   ...rest,
 });
 
-const Feature = (props: FeatureSection) => (
-  <section id={props.sectionID || undefined}>
-    <Stack
-      sx={{
-        '.MuiGrid-root': {
-          width: '100%',
-          gap: '20px',
-          padding: '0',
-        },
-        '.MuiGrid-item': {
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-        },
-        '.MuiTypography-root': {
-          fontFamily: '"Titillium Web",sans-serif;',
-        },
-      }}
-    >
-      <FeatureEC {...makeFeatureProps(props)} />
-    </Stack>
-  </section>
-);
+const Feature = (props: FeatureSection) => {
+  const theme = useTheme();
+
+  return (
+    <section id={props.sectionID || undefined}>
+      <Stack
+        sx={{
+          '.MuiLink-root': {
+            // Buttons
+            fontFamily: '"Titillium Web",sans-serif;',
+          },
+          '.MuiTypography-root.MuiTypography-body1': {
+            // Icons
+            textAlign: 'center',
+          },
+          '.MuiMobileStepper-root': {
+            // Carousel dots container
+            backgroundColor: 'transparent',
+          },
+          [theme.breakpoints.down('md')]: {
+            // Mobile view (vertically stacked items or carousel)
+            '.MuiGrid-item': {
+              // Items
+              width: '100%',
+              '.MuiTypography-body2': {
+                // Subtitle
+                maxWidth: 300,
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              },
+            },
+          },
+        }}
+      >
+        <FeatureEC {...makeFeatureProps(props)} />
+      </Stack>
+    </section>
+  );
+};
 
 export default Feature;
