@@ -10,9 +10,9 @@ module "records" {
 
   records = [
     {
-      name = ""
-      type = "NS"
-      ttl  = 3600
+      name    = ""
+      type    = "NS"
+      ttl     = 3600
       records = module.dns_zone.route53_zone_name_servers
     },
     {
