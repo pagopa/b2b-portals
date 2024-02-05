@@ -1,7 +1,7 @@
 'use client';
 import { HowToProps } from '@pagopa/pagopa-editorial-components/dist/components/HowTo';
 import { HowTo as HowToEC } from '@pagopa/pagopa-editorial-components';
-import { Stack } from '@mui/material';
+import { Stack, useTheme } from '@mui/material';
 // Temporarily importing the entirety of MuiIcons
 // Will be subbed for a small set of allowed icons
 // Reference task B2BP-271
@@ -38,19 +38,45 @@ const makeHowToProps = ({
   ...rest,
 });
 
-const HowTo = (props: HowToSection) => (
-  <section id={props.sectionID || undefined}>
-    <Stack
-      sx={{
-        '.MuiSvgIcon-fontSizeMedium': { width: '64px', height: '64px' },
-        '.MuiTypography-root': {
-          fontFamily: '"Titillium Web",sans-serif;',
-        },
-      }}
-    >
-      <HowToEC {...makeHowToProps(props)} />
-    </Stack>
-  </section>
-);
+const HowTo = (props: HowToSection) => {
+  const theme = useTheme();
+
+  return (
+    <section id={props.sectionID || undefined}>
+      <Stack
+        sx={{
+          section: {
+            ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
+            img: {
+              display: 'none',
+            },
+          },
+          '.MuiSvgIcon-root': {
+            ...(props.theme === 'light' && { color: 'primary.main' }),
+          },
+          '.MuiSvgIcon-fontSizeMedium': { width: '4rem', height: '4rem' },
+          '.MuiLink-root': {
+            // Bottom Link
+            fontFamily: '"Titillium Web",sans-serif;',
+            fontSize: '1.125rem', // 18px
+          },
+          '.MuiTypography-body1': {
+            ...(props.theme === 'dark' && { color: 'primary.contrastText' }),
+            fontSize: '1rem', // 16px
+          },
+          [theme.breakpoints.down('md')]: {
+            '.MuiGrid-item:last-child': {
+              maxWidth: 300,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            },
+          },
+        }}
+      >
+        <HowToEC {...makeHowToProps(props)} />
+      </Stack>
+    </section>
+  );
+};
 
 export default HowTo;
