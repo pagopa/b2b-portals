@@ -1,8 +1,6 @@
 'use client';
 import { Feature as FeatureEC } from '@pagopa/pagopa-editorial-components';
 import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
-// Only temporarily importing every icon. A task is planned to sub this for a restricted set of accepted icon names.
-import * as MuiIcons from '@mui/icons-material';
 import { isValidMuiIcon } from './Icons';
 import { FeatureSection } from '@/lib/fetch/types/PageSection';
 
@@ -14,7 +12,7 @@ const makeFeatureProps = ({
   items: items.map((item) => ({
     stackIcon: {
       ...(isValidMuiIcon(item.icon) && {
-        icon: item.icon as keyof typeof MuiIcons,
+        icon: item.icon,
       }),
       color: item.iconColor,
     },
