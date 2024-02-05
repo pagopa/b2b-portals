@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_components_pre_header_buttons",
+  "info": {
+    "displayName": "PreHeaderButton"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "HelpOutlineOutlined"
+      ]
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "naked",
+        "text",
+        "outlined",
+        "contained"
+      ],
+      "required": true,
+      "default": "naked"
+    },
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "required": true,
+      "default": "medium"
+    }
+  }
+}
