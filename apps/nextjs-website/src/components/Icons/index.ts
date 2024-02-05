@@ -1,8 +1,9 @@
 // Only temporarily importing every icon. A task is planned to sub this for a restricted set of accepted icon names.
 import * as MuiIcons from '@mui/icons-material';
 
-export const isValidMuiIcon = (iconName?: string | null): boolean =>
-  !!iconName && iconName in MuiIcons;
+export const isValidMuiIcon = (
+  iconName?: string | null
+): iconName is keyof typeof MuiIcons => !!iconName && iconName in MuiIcons;
 
 export const formatValidMuiIcon = (iconName?: string | null): string | null => {
   if (!iconName || !(iconName in MuiIcons)) {
