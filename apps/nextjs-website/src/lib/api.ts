@@ -1,13 +1,12 @@
 /** This file contains all the functions useful to get data from external resources */
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
-import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
 import { getHeader } from './fetch/header';
-import { makeHeaderProps } from './header';
+import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -35,10 +34,10 @@ export const getPreHeaderProps = async (): Promise<
   return attributes;
 };
 
-export const getHeaderProps = async (): Promise<HeaderProps> => {
+export const getHeaderProps = async (): Promise<HeaderWithNavigation> => {
   const header = await getHeader(appEnv);
   const navigation = await getNavigation('main-navigation', appEnv);
-  return makeHeaderProps(navigation, header);
+  return makeHeaderWithNavigation(navigation, header);
 };
 
 export const getFooterProps = async (): Promise<
