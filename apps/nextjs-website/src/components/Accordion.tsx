@@ -6,15 +6,15 @@ import MarkdownRenderer from './MarkdownRenderer';
 import { AccordionSection } from '@/lib/fetch/types/PageSection';
 
 const makeAccordionProps = ({
-  title,
   subtitle,
   description,
   accordionItems,
   ...rest
 }: AccordionSection): AccordionProps => ({
-  title,
-  subtitle,
-  description: MarkdownRenderer({ markdown: description, variant: 'body2' }),
+  ...(subtitle && { subtitle }),
+  ...(description && {
+    description: MarkdownRenderer({ markdown: description, variant: 'body2' }),
+  }),
   accordionItems: accordionItems.map(({ header, content }) => ({
     header,
     content: MarkdownRenderer({ markdown: content, variant: 'body2' }),
