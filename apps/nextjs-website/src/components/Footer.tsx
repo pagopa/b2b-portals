@@ -47,10 +47,16 @@ const makeFooterProps = ({
         linkType: 'internal', // unused
         ...link,
       })),
-      socialLinks: links_followUs.socialLinks.map((link) => ({
-        linkType: 'internal', // unused
-        ...link,
-      })),
+      socialLinks: links_followUs.socialLinks.map(
+        ({ icon, href, ariaLabel }) => ({
+          icon,
+          href,
+          linktype: 'external', // default
+          'aria-label': ariaLabel,
+          // above conversion is needed because social icons just pass through all props other than icon
+          // this means we need to format them as if they were HTML attributes
+        })
+      ),
     },
   },
   languages: [
