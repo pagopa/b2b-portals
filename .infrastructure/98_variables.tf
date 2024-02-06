@@ -64,9 +64,3 @@ variable "dns_domain_name" {
   type        = map(any)
   default     = null
 }
-
-variable "dns_delegate_records" {
-  type        = map(any)
-  description = "DNS delegate records"
-  default     = {}
-}
