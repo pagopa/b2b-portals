@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import { CTAButtonSchema } from './CTAButton';
+import { CTAButtonSchema, CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
 
 const HeroSectionCodec = t.strict({
@@ -12,11 +12,10 @@ const HeroSectionCodec = t.strict({
     small: null,
     big: null,
   }),
-  useHoverlay: t.boolean,
   sectionID: t.union([t.string, t.null]),
   image: t.union([ImageDataCodec, t.null]),
   background: t.union([ImageDataCodec, t.null]),
-  ctaButtons: t.array(CTAButtonSchema),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
 });
 
 const EditorialSectionCodec = t.strict({
