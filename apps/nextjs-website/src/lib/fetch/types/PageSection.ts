@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import { CTAButtonSchema } from './CTAButton';
+import { CTAButtonSchema, CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
 
 const HeroSectionCodec = t.strict({
@@ -12,11 +12,10 @@ const HeroSectionCodec = t.strict({
     small: null,
     big: null,
   }),
-  useHoverlay: t.boolean,
   sectionID: t.union([t.string, t.null]),
   image: t.union([ImageDataCodec, t.null]),
   background: t.union([ImageDataCodec, t.null]),
-  ctaButtons: t.array(CTAButtonSchema),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
 });
 
 const EditorialSectionCodec = t.strict({
@@ -46,12 +45,12 @@ const EditorialSectionCodec = t.strict({
 const AccordionSectionCodec = t.strict({
   __component: t.literal('sections.accordion'),
   title: t.string,
-  subtitle: t.string,
-  description: t.union([t.string, t.literal('JSX.Element')]),
+  subtitle: t.union([t.string, t.null]),
+  description: t.union([t.string, t.null]),
   accordionItems: t.array(
     t.strict({
       header: t.string,
-      content: t.union([t.string, t.literal('JSX.Element')]),
+      content: t.string,
     })
   ),
   theme: t.union([t.literal('light'), t.literal('dark')]),
