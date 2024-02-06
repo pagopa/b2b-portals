@@ -36,6 +36,9 @@ const Feature = (props: FeatureSection) => {
           section: {
             ...(props.theme === 'light' && { backgroundColor: '#FAFAFA' }), // Using value found in SEND website over Figma
           },
+          '.MuiGrid-item': {
+            width: '100%',
+          },
           '.MuiLink-root': {
             // Buttons
             fontFamily: '"Titillium Web",sans-serif;',
