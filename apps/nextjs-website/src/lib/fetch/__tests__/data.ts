@@ -36,7 +36,10 @@ export const parentNavItem: Navigation[0] = {
     sections: [
       {
         __component: 'sections.editorial',
-        image: null,
+        image: {
+          url: 'someUrl',
+          alternativeText: null,
+        },
         ctaButtons: [],
         sectionID: null,
         theme: 'light',
