@@ -25,21 +25,19 @@ const EditorialSectionCodec = t.strict({
   body: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   pattern: t.keyof({
-    // Move to separate Codec?
     none: null,
     dots: null,
     solid: null,
   }),
   width: t.keyof({
-    // Move to separate Codec?
     standard: null,
     wide: null,
     center: null,
   }),
   reversed: t.boolean,
   sectionID: t.union([t.string, t.null]),
-  image: t.union([ImageDataCodec, t.null]),
-  ctaButtons: t.array(CTAButtonSchema),
+  image: ImageDataCodec,
+  ctaButtons: t.array(CTAButtonSimpleCodec),
 });
 
 const AccordionSectionCodec = t.strict({
