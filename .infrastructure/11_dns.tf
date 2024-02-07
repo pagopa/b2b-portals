@@ -10,16 +10,13 @@ module "records" {
 
   records = [
     {
-      name    = ""
-      type    = "NS"
-      ttl     = 3600
-      records = [keys(module.dns_zone.route53_zone_name_servers)[0]]
-    },
-    {
-      name    = ""
-      type    = "A"
-      ttl     = 3600
-      records = [aws_alb.cms_load_balancer.dns_name]
+      name = ""
+      type = "A"
+      alias = {
+        name                   = aws_alb.cms_load_balancer.dns_name
+        zone_id                = aws_alb.cms_load_balancer.zone_id
+        evaluate_target_health = false
+      }
     }
   ]
 
