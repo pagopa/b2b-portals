@@ -34,7 +34,7 @@ const Feature = (props: FeatureSection) => {
       <Stack
         sx={{
           section: {
-            ...(props.theme === 'light' && { backgroundColor: '#FAFAFA' }), // Using value found in SEND website over Figma
+            ...(props.theme === 'light' && { backgroundColor: 'background.default' }),
           },
           '.MuiGrid-item': {
             width: '100%',
