@@ -1,6 +1,7 @@
 import * as t from 'io-ts';
 import { CTAButtonSchema, CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
+import { HowToStepMUIIconCodec } from './mui/HowToStepIcon';
 
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
@@ -79,39 +80,21 @@ const FeatureSectionCodec = t.strict({
 });
 
 const LinkCodec = t.strict({
-  text: t.union([t.string, t.null]),
+  label: t.string,
   href: t.string,
-  linkType: t.keyof({
-    internal: null,
-    external: null,
-    wrapper: null,
-    social: null,
-  }),
-  ariaLabel: t.union([t.string, t.null]),
-  icon: t.union([t.string, t.null]),
 });
 
 const StepCodec = t.strict({
-  id: t.number,
   title: t.string,
   description: t.string,
-  icon: t.union([t.string, t.null]),
-  iconColor: t.keyof({
-    inherit: null,
-    primary: null,
-    secondary: null,
-    success: null,
-    error: null,
-    info: null,
-    warning: null,
-  }),
+  icon: t.union([HowToStepMUIIconCodec, t.null]),
 });
 
 const HowToSectionCodec = t.strict({
   __component: t.literal('sections.how-to'),
   title: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  rowMaxSteps: t.union([t.number, t.null]),
+  rowMaxSteps: t.Int,
   stepsAlignment: t.keyof({
     center: null,
     left: null,

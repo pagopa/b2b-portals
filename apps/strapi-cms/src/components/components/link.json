@@ -7,29 +7,13 @@
   },
   "options": {},
   "attributes": {
-    "text": {
-      "type": "string"
+    "label": {
+      "type": "string",
+      "required": true
     },
     "href": {
       "type": "string",
       "required": true
-    },
-    "linkType": {
-      "type": "enumeration",
-      "enum": [
-        "internal",
-        "external",
-        "wrapper",
-        "social"
-      ],
-      "default": "internal",
-      "required": true
-    },
-    "ariaLabel": {
-      "type": "string"
-    },
-    "icon": {
-      "type": "string"
     }
   }
 }
