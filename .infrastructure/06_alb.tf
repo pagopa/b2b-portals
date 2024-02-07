@@ -49,6 +49,6 @@ resource "aws_lb_listener" "front_end_https" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.front_end.arn
+    target_group_arn = aws_alb_target_group.cms.arn
   }
 }
