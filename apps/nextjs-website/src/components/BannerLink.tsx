@@ -12,8 +12,10 @@ const makeBannerLinkProps = ({
 }: BannerLinkSection): BannerLinkProps => ({
   ...(decoration && {
     decoration: {
-      url: decoration.url,
+      src: decoration.url,
       alt: decoration.alternativeText,
+      width: '60px',
+      height: '60px',
     },
   }),
   ...(ctaButtons.length > 0 && {
