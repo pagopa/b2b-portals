@@ -1,6 +1,7 @@
 import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
+import { FeatureItemMUIIconCodec } from './mui/FeatureItemIcon';
 import { HowToStepMUIIconCodec } from './mui/HowToStepIcon';
 
 const HeroSectionCodec = t.strict({
@@ -57,26 +58,22 @@ const AccordionSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const FeatureItemCodec = t.strict({
+  id: t.number,
+  icon: FeatureItemMUIIconCodec,
+  title: t.string,
+  subtitle: t.string,
+  linkText: t.union([t.string, t.null]),
+  linkURL: t.union([t.string, t.null]),
+});
+
 const FeatureSectionCodec = t.strict({
   __component: t.literal('sections.feature'),
   title: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   showCarouselMobile: t.boolean,
-  background: t.union([t.string, t.null]),
   sectionID: t.union([t.string, t.null]),
-  items: t.array(
-    t.strict({
-      id: t.number,
-      icon: t.union([t.string, t.null]),
-      iconColor: t.keyof({
-        inherit: null,
-      }),
-      title: t.string,
-      subtitle: t.string,
-      linkText: t.union([t.string, t.null]),
-      linkURL: t.union([t.string, t.null]),
-    })
-  ),
+  items: t.array(FeatureItemCodec),
 });
 
 const LinkCodec = t.strict({

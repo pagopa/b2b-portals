@@ -2,27 +2,21 @@
 import { Feature as FeatureEC } from '@pagopa/pagopa-editorial-components';
 import { FeatureProps } from '@pagopa/pagopa-editorial-components/dist/components/Feature/Feature';
 import { Stack, useTheme } from '@mui/material';
-import { isValidMuiIcon } from './Icons';
 import { FeatureSection } from '@/lib/fetch/types/PageSection';
 
 const makeFeatureProps = ({
   items,
-  background,
   ...rest
 }: FeatureSection): FeatureProps => ({
   items: items.map((item) => ({
-    stackIcon: {
-      ...(isValidMuiIcon(item.icon) && {
-        icon: item.icon,
-      }),
-      color: item.iconColor,
-    },
+    stackIcon: { icon: item.icon },
     title: item.title,
     subtitle: item.subtitle,
     ...(item.linkText &&
-      item.linkURL && { link: { text: item.linkText, url: item.linkURL } }),
+      item.linkURL && {
+        link: { text: item.linkText, url: item.linkURL },
+      }),
   })),
-  ...(background && { background }),
   ...rest,
 });
 
