@@ -2,4 +2,4 @@
 "strapi-cms": minor
 ---
 
-Simplify Accordion Section
+Remove uniqueness from sectionID of Accordion section
