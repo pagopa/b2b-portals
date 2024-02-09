@@ -6,23 +6,6 @@
   },
   "options": {},
   "attributes": {
-    "icon": {
-      "type": "string"
-    },
-    "iconColor": {
-      "type": "enumeration",
-      "enum": [
-        "inherit",
-        "primary",
-        "secondary",
-        "success",
-        "error",
-        "info",
-        "warning"
-      ],
-      "default": "inherit",
-      "required": true
-    },
     "title": {
       "type": "string",
       "required": true
@@ -36,6 +19,20 @@
     },
     "linkURL": {
       "type": "string"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "HubOutlined",
+        "AutoFixHighOutlined",
+        "MarkunreadMailboxOutlined",
+        "CheckCircleOutlined",
+        "SavingsOutlined",
+        "HourglassEmptyRounded",
+        "EnergySavingsLeafOutlined",
+        "CloudOutlined"
+      ],
+      "required": true
     }
   }
 }
