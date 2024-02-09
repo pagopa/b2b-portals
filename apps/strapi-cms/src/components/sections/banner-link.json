@@ -10,17 +10,6 @@
       "type": "string",
       "required": true
     },
-    "reverse": {
-      "type": "boolean",
-      "default": false,
-      "required": true
-    },
-    "ctaButtons": {
-      "type": "component",
-      "repeatable": true,
-      "component": "components.cta-button",
-      "max": 2
-    },
     "theme": {
       "type": "enumeration",
       "enum": [
@@ -41,6 +30,16 @@
     "body": {
       "type": "text",
       "required": true
+    },
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button-simple",
+      "max": 2
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
     }
   }
 }

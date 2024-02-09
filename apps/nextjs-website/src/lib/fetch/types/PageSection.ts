@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import { CTAButtonSchema, CTAButtonSimpleCodec } from './CTAButton';
+import { CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
 import { HowToStepMUIIconCodec } from './mui/HowToStepIcon';
 
@@ -110,9 +110,9 @@ const BannerLinkSectionCodec = t.strict({
   title: t.string,
   body: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  reverse: t.boolean,
-  ctaButtons: t.array(CTAButtonSchema),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
   decoration: t.union([ImageDataCodec, t.null]),
+  sectionID: t.union([t.string, t.null]),
 });
 
 export const PageSectionCodec = t.union([
