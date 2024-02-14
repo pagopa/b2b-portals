@@ -25,7 +25,11 @@
       "component": "components.link"
     },
     "rowMaxSteps": {
-      "type": "integer"
+      "type": "integer",
+      "default": 4,
+      "required": true,
+      "max": 6,
+      "min": 1
     },
     "stepsAlignment": {
       "type": "enumeration",
@@ -47,7 +51,7 @@
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$",
-      "unique": true
+      "unique": false
     }
   }
 }

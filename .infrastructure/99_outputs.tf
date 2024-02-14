@@ -11,9 +11,9 @@ output "cms_dns_load_balancer" {
 }
 
 output "dns_zone_name" {
-  value = try(module.dns_zone[0].route53_zone_name, null)
+  value = try(module.dns_zone.route53_zone_name, null)
 }
 
 output "dns_name_servers" {
-  value = try(module.dns_zone[0].route53_zone_name_servers, null)
+  value = try(module.dns_zone.route53_zone_name_servers, null)
 }

@@ -1,6 +1,8 @@
 import * as t from 'io-ts';
-import { CTAButtonSchema, CTAButtonSimpleCodec } from './CTAButton';
+import { CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
+import { FeatureItemMUIIconCodec } from './mui/FeatureItemIcon';
+import { HowToStepMUIIconCodec } from './mui/HowToStepIcon';
 
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
@@ -25,21 +27,19 @@ const EditorialSectionCodec = t.strict({
   body: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   pattern: t.keyof({
-    // Move to separate Codec?
     none: null,
     dots: null,
     solid: null,
   }),
   width: t.keyof({
-    // Move to separate Codec?
     standard: null,
     wide: null,
     center: null,
   }),
   reversed: t.boolean,
   sectionID: t.union([t.string, t.null]),
-  image: t.union([ImageDataCodec, t.null]),
-  ctaButtons: t.array(CTAButtonSchema),
+  image: ImageDataCodec,
+  ctaButtons: t.array(CTAButtonSimpleCodec),
 });
 
 const AccordionSectionCodec = t.strict({
@@ -58,62 +58,40 @@ const AccordionSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const FeatureItemCodec = t.strict({
+  id: t.number,
+  icon: FeatureItemMUIIconCodec,
+  title: t.string,
+  subtitle: t.string,
+  linkText: t.union([t.string, t.null]),
+  linkURL: t.union([t.string, t.null]),
+});
+
 const FeatureSectionCodec = t.strict({
   __component: t.literal('sections.feature'),
   title: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   showCarouselMobile: t.boolean,
-  background: t.union([t.string, t.null]),
   sectionID: t.union([t.string, t.null]),
-  items: t.array(
-    t.strict({
-      id: t.number,
-      icon: t.union([t.string, t.null]),
-      iconColor: t.keyof({
-        inherit: null,
-      }),
-      title: t.string,
-      subtitle: t.string,
-      linkText: t.union([t.string, t.null]),
-      linkURL: t.union([t.string, t.null]),
-    })
-  ),
+  items: t.array(FeatureItemCodec),
 });
 
 const LinkCodec = t.strict({
-  text: t.union([t.string, t.null]),
+  label: t.string,
   href: t.string,
-  linkType: t.keyof({
-    internal: null,
-    external: null,
-    wrapper: null,
-    social: null,
-  }),
-  ariaLabel: t.union([t.string, t.null]),
-  icon: t.union([t.string, t.null]),
 });
 
 const StepCodec = t.strict({
-  id: t.number,
   title: t.string,
   description: t.string,
-  icon: t.union([t.string, t.null]),
-  iconColor: t.keyof({
-    inherit: null,
-    primary: null,
-    secondary: null,
-    success: null,
-    error: null,
-    info: null,
-    warning: null,
-  }),
+  icon: t.union([HowToStepMUIIconCodec, t.null]),
 });
 
 const HowToSectionCodec = t.strict({
   __component: t.literal('sections.how-to'),
   title: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  rowMaxSteps: t.union([t.number, t.null]),
+  rowMaxSteps: t.Int,
   stepsAlignment: t.keyof({
     center: null,
     left: null,
@@ -129,9 +107,9 @@ const BannerLinkSectionCodec = t.strict({
   title: t.string,
   body: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  reverse: t.boolean,
-  ctaButtons: t.array(CTAButtonSchema),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
   decoration: t.union([ImageDataCodec, t.null]),
+  sectionID: t.union([t.string, t.null]),
 });
 
 const CardsSectionCodec = t.strict({
