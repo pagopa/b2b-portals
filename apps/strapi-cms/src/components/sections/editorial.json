@@ -59,17 +59,17 @@
       "default": false,
       "required": true
     },
-    "ctaButtons": {
-      "type": "component",
-      "repeatable": true,
-      "component": "components.cta-button",
-      "max": 2
-    },
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$",
       "required": false,
-      "unique": true
+      "unique": false
+    },
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button-simple",
+      "max": 2
     }
   }
 }

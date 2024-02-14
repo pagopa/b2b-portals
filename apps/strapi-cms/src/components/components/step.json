@@ -15,21 +15,17 @@
       "required": true
     },
     "icon": {
-      "type": "string"
-    },
-    "iconColor": {
       "type": "enumeration",
       "enum": [
-        "inherit",
-        "primary",
-        "secondary",
-        "success",
-        "error",
-        "info",
-        "warning"
-      ],
-      "required": true,
-      "default": "inherit"
+        "UploadFileOutlined",
+        "CachedRounded",
+        "ForwardToInboxOutlined",
+        "MarkEmailReadOutlined",
+        "NotificationsActiveOutlined",
+        "GradingOutlined",
+        "AccountBalanceWalletOutlined",
+        "GroupAddOutlined"
+      ]
     }
   }
 }

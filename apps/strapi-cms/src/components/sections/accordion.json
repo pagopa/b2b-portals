@@ -46,7 +46,7 @@
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$",
-      "unique": true
+      "unique": false
     }
   }
 }

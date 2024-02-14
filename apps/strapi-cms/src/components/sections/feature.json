@@ -24,9 +24,6 @@
       "default": false,
       "required": true
     },
-    "background": {
-      "type": "string"
-    },
     "items": {
       "type": "component",
       "repeatable": true,
@@ -38,7 +35,7 @@
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$",
-      "unique": true
+      "unique": false
     }
   }
 }
