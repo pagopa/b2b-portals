@@ -1,0 +1,5 @@
+---
+"nextjs-website": minor
+---
+
+Update Editorial-Components version from 2.1.3 to 2.2.1
