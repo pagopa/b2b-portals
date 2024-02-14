@@ -139,12 +139,12 @@ const CardsSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   text: t.type({
     title: t.string,
-    subtitle: t.union([t.string, t.undefined]),
+    subtitle: t.string,
     body: t.string,
   }),
   items: t.array(
     t.type({
-      cardIcon: t.union([t.string, t.null]),
+      cardIcon: t.string,
       title: t.string,
       text: t.string,
       link: t.type({
