@@ -106,6 +106,7 @@ describe('getFooter', () => {
         headers: {
           Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
         },
+        cache: 'no-store',
       }
     );
   });
