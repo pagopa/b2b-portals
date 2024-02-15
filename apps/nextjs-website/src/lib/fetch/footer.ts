@@ -58,6 +58,7 @@ export const getFooter = ({ config, fetchFun }: AppEnv): Promise<FooterData> =>
         headers: {
           Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
         },
+        cache: 'no-store',
       }
     ),
     FooterDataCodec
