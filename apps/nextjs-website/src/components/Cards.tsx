@@ -43,43 +43,44 @@ const makeCardsProps = ({
 });
 
 const Cards = (props: CardsSection) => (
-  <Stack
-    sx={{
-      section: {
-        ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
-        img: {
-          display: 'none',
+  <section id={props.sectionID || undefined}>
+    <Stack
+      sx={{
+        section: {
+          ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
+          img: {
+            display: 'none',
+          },
         },
-      },
-      '.MuiSvgIcon-fontSizeMedium': {
-        width: '2rem',
-        height: '2rem',
-        marginLeft: '0.5rem',
-      },
-      '.MuiLink-root': {
-        fontFamily: '"Titillium Web",sans-serif;',
-        fontSize: '1.125rem', // 18px
-        fontWeight: 700,
-      },
-      '.MuiTypography-body2': {
-        color: props.theme === 'dark' ? 'primary.contrastText' : 'primary.main',
-      },
-      '.MuiTypography-body1': {
-        fontSize: '1.125rem', // 18px
-      },
-      '.MuiTypography-h2': {
-        fontSize: '2rem', // 32px
-        fontWeight: 700,
-      },
-      '.MuiTypography-h6': {
-        fontWeight: 700,
-      },
-    }}
-  >
-    <section id={props.sectionID || undefined}>
+        '.MuiSvgIcon-fontSizeMedium': {
+          width: '2rem',
+          height: '2rem',
+          marginLeft: '0.5rem',
+        },
+        '.MuiLink-root': {
+          fontFamily: '"Titillium Web",sans-serif;',
+          fontSize: '1.125rem', // 18px
+          fontWeight: 700,
+        },
+        '.MuiTypography-body2': {
+          color:
+            props.theme === 'dark' ? 'primary.contrastText' : 'primary.main',
+        },
+        '.MuiTypography-body1': {
+          fontSize: '1.125rem', // 18px
+        },
+        '.MuiTypography-h2': {
+          fontSize: '2rem', // 32px
+          fontWeight: 700,
+        },
+        '.MuiTypography-h6': {
+          fontWeight: 700,
+        },
+      }}
+    >
       <CardsEC {...makeCardsProps(props)} />
-    </section>
-  </Stack>
+    </Stack>
+  </section>
 );
 
 export default Cards;
