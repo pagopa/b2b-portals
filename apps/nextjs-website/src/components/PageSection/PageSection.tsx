@@ -23,7 +23,7 @@ const PageSection = (props: PageSectionData) => {
       return <HowTo {...props} />;
     case 'sections.banner-link':
       return <BannerLink {...props} />;
-    case 'sections.stripelink':
+    case 'sections.stripe-link':
       return <StripeLink {...props} />;
     default:
       return null;

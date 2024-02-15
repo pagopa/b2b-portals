@@ -3,6 +3,7 @@ import { CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
 import { FeatureItemMUIIconCodec } from './mui/FeatureItemIcon';
 import { HowToStepMUIIconCodec } from './mui/HowToStepIcon';
+import { StripeLinkMUIIconCodec } from './mui/StripeLinkIcon';
 
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
@@ -113,11 +114,11 @@ const BannerLinkSectionCodec = t.strict({
 });
 
 const StripeLinkSectionCodec = t.strict({
-  __component: t.literal('sections.stripelink'),
+  __component: t.literal('sections.stripe-link'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   subtitle: t.string,
-  icon: t.union([t.string, t.null]), // Will become an enum of limited MUI Icons
-  buttonText: t.string,
+  icon: t.union([StripeLinkMUIIconCodec, t.null]),
+  buttonText: t.union([t.string, t.null]),
 });
 
 export const PageSectionCodec = t.union([
