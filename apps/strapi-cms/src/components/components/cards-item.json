@@ -15,14 +15,6 @@
       "default": "center",
       "required": true
     },
-    "cardIcon": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "label": {
       "type": "string"
     },
@@ -47,6 +39,12 @@
     },
     "linkTitle": {
       "type": "string"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "AccessAlarm"
+      ]
     }
   }
 }

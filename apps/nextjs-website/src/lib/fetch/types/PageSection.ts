@@ -3,6 +3,7 @@ import { CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
 import { FeatureItemMUIIconCodec } from './mui/FeatureItemIcon';
 import { HowToStepMUIIconCodec } from './mui/HowToStepIcon';
+import { CardsItemMUIIconCodec } from './mui/CardsItemIcon';
 
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
@@ -112,26 +113,26 @@ const BannerLinkSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const CardsItemCodec = t.strict({
+  textAlign: t.union([t.literal('left'), t.literal('center')]),
+  label: t.union([t.string, t.null]),
+  title: t.string,
+  text: t.string,
+  masonry: t.boolean,
+  linkHref: t.union([t.string, t.null]),
+  linkText: t.union([t.string, t.null]),
+  linkTitle: t.union([t.string, t.null]),
+  icon: t.union([CardsItemMUIIconCodec, t.null]),
+});
+
 const CardsSectionCodec = t.strict({
   __component: t.literal('sections.cards'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  text: t.type({
-    title: t.string,
-    subtitle: t.string,
-    body: t.string,
-  }),
-  items: t.array(
-    t.type({
-      cardIcon: t.string,
-      title: t.string,
-      text: t.string,
-      link: t.type({
-        href: t.string,
-        title: t.string,
-        text: t.string,
-      }),
-    })
-  ),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  items: t.array(CardsItemCodec),
+  sectionID: t.union([t.string, t.null]),
 });
 
 export const PageSectionCodec = t.union([

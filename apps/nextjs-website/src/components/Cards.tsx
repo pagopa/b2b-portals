@@ -1,42 +1,48 @@
 'use client';
 import { Cards as CardsEC } from '@pagopa/pagopa-editorial-components';
 import { CardsProps } from '@pagopa/pagopa-editorial-components/dist/components/Cards';
-import { Icon } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { CardsSection } from '@/lib/fetch/types/PageSection';
-import { formatValidMuiIcon, isValidMuiIcon } from '@/components/Icons';
 
 const makeCardsProps = ({
-  theme,
-  text,
   items,
+  title,
+  subtitle,
+  body,
   ...rest
 }: CardsSection): CardsProps => ({
-  theme,
   text: {
-    title: text.title,
-    subtitle: text.subtitle,
-    body: MarkdownRenderer({ markdown: text.body, variant: 'body2' }),
+    title,
+    ...(subtitle && { subtitle }),
+    ...(body && {
+      body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
+    }),
   },
-  items: items.map((item) => ({
-    cardIcon: {
-      ...(isValidMuiIcon(item.cardIcon) && {
-        icon: <Icon>{formatValidMuiIcon(item.cardIcon)}</Icon>,
+  items: items.map(
+    ({ icon, label, linkHref, linkText, linkTitle, ...item }) => ({
+      ...(icon && {
+        cardIcon: {
+          icon,
+        },
       }),
-    },
-    title: item.title,
-    text: item.text,
-    link: {
-      href: item.link.href,
-      title: item.link.title,
-      text: item.link.text,
-    },
-  })),
+      ...(label && { label }),
+      ...(linkHref &&
+        linkText &&
+        linkTitle && {
+          link: {
+            href: linkHref,
+            text: linkText,
+            title: linkTitle,
+          },
+        }),
+      ...item,
+    })
+  ),
   ...rest,
 });
 
 const Cards = (props: CardsSection) => (
-  <section>
+  <section id={props.sectionID || undefined}>
     <CardsEC {...makeCardsProps(props)} />
   </section>
 );

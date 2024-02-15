@@ -22,15 +22,19 @@
     "subtitle": {
       "type": "string"
     },
-    "body": {
-      "type": "richtext"
-    },
     "items": {
       "type": "component",
       "repeatable": true,
       "component": "components.cards-item",
       "required": true,
       "min": 1
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "body": {
+      "type": "richtext"
     }
   }
 }

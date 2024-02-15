@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-Implemented Cards component from Editorial-Components
+Implement Cards component from Editorial-Components
