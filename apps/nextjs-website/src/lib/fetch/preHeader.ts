@@ -41,6 +41,7 @@ export const getPreHeader = ({
         headers: {
           Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
         },
+        cache: 'no-store',
       }
     ),
     PreHeaderCodec
