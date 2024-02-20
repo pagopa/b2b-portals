@@ -9,7 +9,10 @@
     "lint": "eslint src"
   },
   "devDependencies": {
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
     "@pagopa/pagopa-editorial-components": "^2.1.4",
+    "@types/react": "^18.2.57",
     "eslint": "^8.56.0",
     "eslint-config-custom": "^0.0.0",
     "react": "^18.2.0",
