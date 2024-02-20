@@ -17,6 +17,9 @@ on:
         type: choice
         options:
           - warning
+      tags:
+        description: 'Tag image for Manual Rollback'
+        required: true
 
 defaults:
   run:
@@ -28,8 +31,9 @@ permissions:
   contents: read    # This is required for actions/checkout
 
 jobs:
-  deploy:
+  cd_deploy:
     name: Build and push CMS image
+    if: github.event_name == 'push' && github.event.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     continue-on-error: false
     strategy:
@@ -73,6 +77,48 @@ jobs:
            task-definition: apps/strapi-cms/task-definition.json
            container-name: cms-docker
            image: ${{ steps.login-ecr.outputs.registry }}/strapi:${{ github.sha }}
+
+      - name: Deploy new ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a # v1.4.11
+        with:
+            task-definition: ${{ steps.task-def.outputs.task-definition }}
+            service: cms-ecs
+            cluster: cms-ecs-cluster
+
+  manual_deploy:
+    name: Manual Deploy CMS image
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    strategy:
+      matrix:
+        environment: [ 'prod' ]
+    environment: ${{ matrix.environment }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+
+      - name: Configure AWS Credentials
+        uses: ./.github/actions/configure-aws-credentials
+        with:
+          aws_region: ${{ env.AWS_REGION || 'eu-south-1' }}
+          role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_CMS }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
+
+      - name: Generate task-definition file
+        run: aws ecs describe-task-definition --task-definition cms-task-def --query taskDefinition > task-definition.json
+
+      - name: Update ImageTag in task-definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@4225e0b507142a2e432b018bc3ccb728559b437a # v1.2.0
+        with:
+           task-definition: apps/strapi-cms/task-definition.json
+           container-name: cms-docker
+           image: ${{ steps.login-ecr.outputs.registry }}/strapi:${{ inputs.tags }}
 
       - name: Deploy new ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a # v1.4.11
