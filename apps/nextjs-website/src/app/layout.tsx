@@ -5,6 +5,7 @@ import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getPreHeaderProps, getHeaderProps, getFooterProps } from '@/lib/api';
+import './styles.css';
 
 export const metadata: Metadata = {
   title: 'Page',
@@ -23,13 +24,6 @@ export default async function RootLayout({
   return (
     <ThemeProvider theme={theme}>
       <html lang='en'>
-        <head>
-          {/* Import needed by <Icon /> to render MUI Icons */}
-          <link
-            href='https://fonts.googleapis.com/icon?family=Material+Icons'
-            rel='stylesheet'
-          />
-        </head>
         <body style={{ margin: 0 }}>
           <PreHeader {...preHeaderProps} />
           <Header {...headerProps} />

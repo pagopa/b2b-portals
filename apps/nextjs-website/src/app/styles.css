@@ -1,0 +1,33 @@
+/* Styles needed by <Icon /> to render MUI Icons */
+
+/* Using css is preferable over the previous solution in terms of performance.
+<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+LightHouse showed the above to be render blocking for a loss of about 750ms */
+
+/* <style jsx global> has been tested as well.
+The above would trigger a NextJS error since the tag can only be used
+in a client component */
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v141/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+    format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
