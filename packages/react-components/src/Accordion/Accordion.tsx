@@ -1,3 +1,4 @@
+// This component is a copy of the @pagopa/pagopa-editorial-components Accordion component.
 import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 import { AccordionItem, type AccordionItemProps } from './AccordionItem';
 export interface AccordionProps {
