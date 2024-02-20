@@ -7,7 +7,6 @@ export interface AccordionProps {
   description?: string | JSX.Element;
   accordionItems: AccordionItemProps[];
   theme: 'light' | 'dark';
-
   layout?: 'left' | 'center' | 'right';
 }
 
