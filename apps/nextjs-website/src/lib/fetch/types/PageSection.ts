@@ -114,11 +114,9 @@ const BannerLinkSectionCodec = t.strict({
 });
 
 const CardsItemCodec = t.strict({
-  textAlign: t.union([t.literal('left'), t.literal('center')]),
   label: t.union([t.string, t.null]),
   title: t.string,
   text: t.string,
-  masonry: t.boolean,
   linkHref: t.union([t.string, t.null]),
   linkText: t.union([t.string, t.null]),
   linkTitle: t.union([t.string, t.null]),

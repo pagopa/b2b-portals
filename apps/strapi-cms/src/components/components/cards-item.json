@@ -6,15 +6,6 @@
   },
   "options": {},
   "attributes": {
-    "textAlign": {
-      "type": "enumeration",
-      "enum": [
-        "center",
-        "left"
-      ],
-      "default": "center",
-      "required": true
-    },
     "label": {
       "type": "string"
     },
@@ -24,11 +15,6 @@
     },
     "text": {
       "type": "text",
-      "required": true
-    },
-    "masonry": {
-      "type": "boolean",
-      "default": false,
       "required": true
     },
     "linkHref": {
