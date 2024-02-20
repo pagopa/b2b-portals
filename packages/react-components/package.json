@@ -1,0 +1,9 @@
+{
+  "name": "react-components",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {
+    "eslint-config-custom": "^0.0.0"
+  }
+}
