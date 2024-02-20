@@ -1,7 +1,9 @@
 'use client';
 import React from 'react';
-import { Accordion as AccordionEC } from '@pagopa/pagopa-editorial-components';
-import { AccordionProps } from '@pagopa/pagopa-editorial-components/dist/components/Accordion/Accordion';
+import {
+  Accordion as AccordionEC,
+  AccordionProps,
+} from 'react-components/dist/Accordion';
 import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { AccordionSection } from '@/lib/fetch/types/PageSection';
