@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_shared_seos",
+  "info": {
+    "displayName": "seo",
+    "icon": "search",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "metaTitle": {
+      "required": true,
+      "type": "string",
+      "maxLength": 60
+    },
+    "metaDescription": {
+      "type": "string",
+      "required": true,
+      "maxLength": 160,
+      "minLength": 50
+    },
+    "keywords": {
+      "type": "text",
+      "regex": "[^,]+"
+    },
+    "canonicalURL": {
+      "type": "string"
+    },
+    "ogTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "ogDescription": {
+      "type": "string",
+      "maxLength": 65
+    }
+  }
+}
