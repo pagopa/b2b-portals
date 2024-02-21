@@ -8,7 +8,7 @@
     "name": {
       "type": "string",
       "required": true,
-      "maxLength": 30
+      "maxLength": 45
     },
     "shortName": {
       "type": "string",
