@@ -52,7 +52,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
 
       - name: Build Push and Tag
-        continue-on-error: true
+        continue-on-error: true # Set to true for manual deployment in case of rollback because this step would fail if the image is already present in the ECR
         uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5.1.0
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
