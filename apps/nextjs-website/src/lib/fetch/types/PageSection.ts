@@ -3,6 +3,7 @@ import { CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
 import { FeatureItemMUIIconCodec } from './mui/FeatureItemIcon';
 import { HowToStepMUIIconCodec } from './mui/HowToStepIcon';
+import { StripeLinkMUIIconCodec } from './mui/StripeLinkIcon';
 import { CardsItemMUIIconCodec } from './mui/CardsItemIcon';
 
 const HeroSectionCodec = t.strict({
@@ -113,6 +114,14 @@ const BannerLinkSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const StripeLinkSectionCodec = t.strict({
+  __component: t.literal('sections.stripe-link'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  subtitle: t.string,
+  icon: t.union([StripeLinkMUIIconCodec, t.null]),
+  buttonText: t.union([t.string, t.null]),
+});
+
 const CardsItemCodec = t.strict({
   label: t.union([t.string, t.null]),
   title: t.string,
@@ -140,6 +149,7 @@ export const PageSectionCodec = t.union([
   FeatureSectionCodec,
   HowToSectionCodec,
   BannerLinkSectionCodec,
+  StripeLinkSectionCodec,
   CardsSectionCodec,
 ]);
 
@@ -150,4 +160,5 @@ export type AccordionSection = t.TypeOf<typeof AccordionSectionCodec>;
 export type FeatureSection = t.TypeOf<typeof FeatureSectionCodec>;
 export type HowToSection = t.TypeOf<typeof HowToSectionCodec>;
 export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
+export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
