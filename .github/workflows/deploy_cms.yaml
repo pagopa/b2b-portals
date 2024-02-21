@@ -28,7 +28,7 @@ permissions:
   contents: read    # This is required for actions/checkout
 
 jobs:
-  cd_deploy:
+  deploy:
     name: Build and push CMS image
     runs-on: ubuntu-latest
     continue-on-error: false
