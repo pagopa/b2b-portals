@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-Move Material Icons font to css from link tag
+Convert <Icon> to our own MUIIcon
