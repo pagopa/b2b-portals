@@ -5,7 +5,6 @@ import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getPreHeaderProps, getHeaderProps, getFooterProps } from '@/lib/api';
-import './styles.css';
 
 export const metadata: Metadata = {
   title: 'Page',

@@ -3,11 +3,10 @@ import {
   PreHeader as PreHeaderEC,
   PreHeaderProps,
 } from '@pagopa/pagopa-editorial-components/dist/components/PreHeader';
-import Icon from '@mui/material/Icon';
 import { Stack } from '@mui/material';
 import { CtaProps } from '@pagopa/pagopa-editorial-components/dist/components/Ctas';
 import { PreHeader } from '@/lib/fetch/preHeader';
-import { formatValidMuiIcon } from '@/components/Icons';
+import MUIIcon from '@/components/MUIIcon';
 
 const preHeaderNakedButtonStyle = {
   padding: '0',
@@ -38,9 +37,7 @@ const makeCtas = (
       letterSpacing: side === 'left' ? '0' : '.3px',
       ...(ctaBtn.variant === 'naked' && { ...preHeaderNakedButtonStyle }),
     },
-    ...(ctaBtn.icon && {
-      startIcon: <Icon>{formatValidMuiIcon(ctaBtn.icon)}</Icon>,
-    }),
+    ...(ctaBtn.icon && { startIcon: MUIIcon(ctaBtn.icon) }),
   })),
 });
 
