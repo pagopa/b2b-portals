@@ -1,10 +1,10 @@
 'use client';
 import { Hero as HeroEC } from '@pagopa/pagopa-editorial-components';
 import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/Hero/index';
-import { Icon, Stack, useTheme } from '@mui/material';
+import { Stack, useTheme } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
-import { formatValidMuiIcon } from '@/components/Icons';
+import MUIIcon from '@/components/MUIIcon';
 
 const makeHeroProps = ({
   theme,
@@ -25,9 +25,7 @@ const makeHeroProps = ({
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
         color: theme === 'dark' ? 'negative' : 'primary',
-        ...(icon && {
-          startIcon: <Icon>{formatValidMuiIcon(icon)}</Icon>,
-        }),
+        ...(icon && { startIcon: MUIIcon(icon) }),
       })),
     }),
 });

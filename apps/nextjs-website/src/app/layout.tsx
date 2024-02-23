@@ -23,13 +23,6 @@ export default async function RootLayout({
   return (
     <ThemeProvider theme={theme}>
       <html lang='en'>
-        <head>
-          {/* Import needed by <Icon /> to render MUI Icons */}
-          <link
-            href='https://fonts.googleapis.com/icon?family=Material+Icons'
-            rel='stylesheet'
-          />
-        </head>
         <body style={{ margin: 0 }}>
           <PreHeader {...preHeaderProps} />
           <Header {...headerProps} />

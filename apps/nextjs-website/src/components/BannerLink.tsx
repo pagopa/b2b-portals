@@ -1,9 +1,8 @@
 'use client';
 import { BannerLink as BannerLinkEC } from '@pagopa/pagopa-editorial-components';
 import { BannerLinkProps } from '@pagopa/pagopa-editorial-components/dist/components/BannerLink';
-import { Icon } from '@mui/material';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
-import { formatValidMuiIcon } from '@/components/Icons';
+import MUIIcon from '@/components/MUIIcon';
 
 const makeBannerLinkProps = ({
   decoration,
@@ -22,7 +21,7 @@ const makeBannerLinkProps = ({
     ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
       ...ctaBtn,
       color: rest.theme === 'dark' ? 'negative' : 'primary',
-      ...(icon && { startIcon: <Icon>{formatValidMuiIcon(icon)}</Icon> }),
+      ...(icon && { startIcon: MUIIcon(icon) }),
     })),
   }),
   ...rest,
