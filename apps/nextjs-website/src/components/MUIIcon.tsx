@@ -1,5 +1,4 @@
 import { HelpOutlineOutlined } from '@mui/icons-material';
-import { AllowedMUIIcon } from '@/lib/fetch/types/mui/AllowedIcon';
 
 // Return requested MUI Icon
 // This solution was preferred over the previous usage of <Icon>
@@ -10,6 +9,7 @@ const iconMapping = {
   HelpOutlineOutlined: <HelpOutlineOutlined />,
 };
 
-const MUIIcon = (name: AllowedMUIIcon): JSX.Element => iconMapping[name];
+const MUIIcon = (name: keyof typeof iconMapping): JSX.Element =>
+  iconMapping[name];
 
 export default MUIIcon;
