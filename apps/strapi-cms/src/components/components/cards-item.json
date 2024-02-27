@@ -6,23 +6,6 @@
   },
   "options": {},
   "attributes": {
-    "textAlign": {
-      "type": "enumeration",
-      "enum": [
-        "center",
-        "left"
-      ],
-      "default": "center",
-      "required": true
-    },
-    "cardIcon": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "label": {
       "type": "string"
     },
@@ -34,11 +17,6 @@
       "type": "text",
       "required": true
     },
-    "masonry": {
-      "type": "boolean",
-      "default": false,
-      "required": true
-    },
     "linkHref": {
       "type": "string"
     },
@@ -47,6 +25,12 @@
     },
     "linkTitle": {
       "type": "string"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "AccessAlarm"
+      ]
     }
   }
 }
