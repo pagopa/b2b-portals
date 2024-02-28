@@ -22,11 +22,15 @@ const StripeLink = (props: StripeLinkSection) => (
   <Stack
     sx={{
       '.MuiSvgIcon-root': {
-        color: props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
+        color: 'primary.contrastText',
       },
       '.MuiButton-root': {
-        fontWeight: 700,
+        fontWeight: 600,
         fontSize: '1rem',
+        '.MuiSvgIcon-root': {
+          color:
+            props.theme === 'dark' ? 'primary.contrastText' : 'primary.main',
+        },
       },
     }}
   >
