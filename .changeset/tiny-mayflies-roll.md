@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-Implemented StripeLink style
+Implement StripeLink style
