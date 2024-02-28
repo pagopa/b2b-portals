@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_manifests",
+  "info": {
+    "displayName": "manifest"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 45
+    },
+    "shortName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 12
+    }
+  }
+}

@@ -1,10 +1,10 @@
 'use client';
 import { Editorial as EditorialEC } from '@pagopa/pagopa-editorial-components';
 import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
-import { Icon, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
-import { formatValidMuiIcon } from '@/components/Icons';
+import MUIIcon from '@/components/MUIIcon';
 
 const makeEditorialProps = ({
   theme,
@@ -22,9 +22,7 @@ const makeEditorialProps = ({
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
         color: theme === 'dark' ? 'negative' : 'primary',
-        ...(icon && {
-          startIcon: <Icon>{formatValidMuiIcon(icon)}</Icon>,
-        }),
+        ...(icon && { startIcon: MUIIcon(icon) }),
       })),
     }),
   ...rest,

@@ -25,7 +25,8 @@
     "icon": {
       "type": "enumeration",
       "enum": [
-        "Code"
+        "Code",
+        "SpeakerNotes"
       ]
     }
   }

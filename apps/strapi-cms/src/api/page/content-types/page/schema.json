@@ -37,6 +37,12 @@
       ],
       "required": true,
       "min": 1
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo",
+      "required": true
     }
   }
 }

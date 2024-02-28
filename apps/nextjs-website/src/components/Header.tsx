@@ -1,9 +1,9 @@
 'use client';
 import { Header as HeaderEC } from '@pagopa/pagopa-editorial-components/dist/components/Header';
 import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
-import { Icon, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { usePathname } from 'next/navigation';
-import { formatValidMuiIcon } from './Icons';
+import MUIIcon from './MUIIcon';
 import { HeaderWithNavigation } from '@/lib/header';
 
 const makeHeaderProps = (
@@ -14,9 +14,7 @@ const makeHeaderProps = (
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
-        ...(icon && {
-          startIcon: <Icon>{formatValidMuiIcon(icon)}</Icon>,
-        }),
+        ...(icon && { startIcon: MUIIcon(icon) }),
       })),
     }),
   product: {
