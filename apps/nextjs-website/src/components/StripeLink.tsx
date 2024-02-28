@@ -25,7 +25,7 @@ const StripeLink = (props: StripeLinkSection) => (
         color: 'primary.contrastText',
       },
       '.MuiButton-root': {
-        fontWeight: 600,
+        fontWeight: 700,
         fontSize: '1rem',
         '.MuiSvgIcon-root': {
           color:
