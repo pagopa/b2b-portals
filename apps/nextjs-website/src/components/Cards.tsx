@@ -64,7 +64,12 @@ const Cards = (props: CardsSection) => (
         },
         '.MuiTypography-body2': {
           color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'primary.main',
+            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
+          a: {
+            fontWeight: 700,
+            color:
+              props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
+          },
         },
         '.MuiTypography-body1': {
           fontSize: '1.125rem', // 18px
