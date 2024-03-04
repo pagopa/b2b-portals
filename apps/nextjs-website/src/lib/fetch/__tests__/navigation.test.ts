@@ -37,6 +37,16 @@ const navigationResponse = [
       navigationItemId: 1,
       createdBy: {},
       updatedBy: {},
+      seo: {
+        id: 1,
+        metaTitle: 'SEND - Test SEO',
+        metaDescription:
+          'Demo demo demo demo demo demo demo demo demo demo demo demo',
+        keywords: 'keyword1\nkeyword2\nkeyword3',
+        canonicalURL: 'https://dsf3knok9k0v5.cloudfront.net/seo-test-canonical',
+        ogTitle: 'Titling for the og',
+        ogDescription: 'Description for the og',
+      },
       sections: [
         {
           __component: 'sections.hero',
@@ -68,7 +78,7 @@ describe('getNavigation', () => {
     await getNavigation('main-menu', appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/navigation/render/main-menu?type=FLAT&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration`,
+      `${config.STRAPI_API_BASE_URL}/api/navigation/render/main-menu?type=FLAT&populate[seo][populate][0]=*&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration`,
       {
         method: 'GET',
         headers: {
@@ -94,6 +104,16 @@ describe('getNavigation', () => {
         title: 'Homepage',
         related: {
           slug: 'homepage',
+          seo: {
+            metaTitle: 'SEND - Test SEO',
+            metaDescription:
+              'Demo demo demo demo demo demo demo demo demo demo demo demo',
+            keywords: 'keyword1\nkeyword2\nkeyword3',
+            canonicalURL:
+              'https://dsf3knok9k0v5.cloudfront.net/seo-test-canonical',
+            ogTitle: 'Titling for the og',
+            ogDescription: 'Description for the og',
+          },
           sections: [
             {
               __component: 'sections.hero',
