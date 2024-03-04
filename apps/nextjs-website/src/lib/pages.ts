@@ -1,13 +1,13 @@
 import { pipe } from 'fp-ts/lib/function';
 import * as RA from 'fp-ts/lib/ReadonlyArray';
 import { Navigation } from './fetch/navigation';
-import { PageSection } from './fetch/types/PageSection';
 import { PageSEO } from './fetch/types/SEO';
+import { PageSection } from './fetch/types/PageSection';
 
 export type Page = {
   readonly slug: ReadonlyArray<string>;
-  readonly sections: ReadonlyArray<PageSection>;
   readonly seo: PageSEO;
+  readonly sections: ReadonlyArray<PageSection>;
 };
 
 const makeSlugList = (
