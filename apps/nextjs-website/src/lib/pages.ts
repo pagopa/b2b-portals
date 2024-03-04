@@ -31,7 +31,7 @@ export const makePageListFromNavigation = (
     navigation,
     RA.map((item) => ({
       slug: makeSlugList(item, navigation),
-      sections: item.related.sections,
       seo: item.related.seo,
+      sections: item.related.sections,
     }))
   );
