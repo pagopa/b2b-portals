@@ -32,16 +32,28 @@ const Editorial = (props: EditorialSection) => (
   <section id={props.sectionID || undefined}>
     <Stack
       sx={{
+        section: {
+          ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
+        },
         img: {
           maxHeight: 490,
         },
         '.MuiTypography-root': {
           color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
+            props.theme === 'dark' ? 'primary.contrastText' : 'text.secondary',
           a: {
             color:
               props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
+            fontWeight: 'bold',
           },
+        },
+        '.MuiTypography-h4': {
+          color:
+            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
+        },
+        '.MuiTypography-body2': {
+          color:
+            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
         },
       }}
     >
