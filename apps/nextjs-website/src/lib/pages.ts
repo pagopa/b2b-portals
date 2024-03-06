@@ -1,10 +1,12 @@
 import { pipe } from 'fp-ts/lib/function';
 import * as RA from 'fp-ts/lib/ReadonlyArray';
 import { Navigation } from './fetch/navigation';
+import { PageSEO } from './fetch/types/SEO';
 import { PageSection } from './fetch/types/PageSection';
 
 export type Page = {
   readonly slug: ReadonlyArray<string>;
+  readonly seo: PageSEO;
   readonly sections: ReadonlyArray<PageSection>;
 };
 
@@ -29,6 +31,7 @@ export const makePageListFromNavigation = (
     navigation,
     RA.map((item) => ({
       slug: makeSlugList(item, navigation),
+      seo: item.related.seo,
       sections: item.related.sections,
     }))
   );
