@@ -28,38 +28,39 @@ const makeEditorialProps = ({
   ...rest,
 });
 
-const Editorial = (props: EditorialSection) => (
-  <section id={props.sectionID || undefined}>
-    <Stack
-      sx={{
-        section: {
-          ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
-        },
-        img: {
-          maxHeight: 490,
-        },
-        '.MuiTypography-root': {
-          color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'text.secondary',
-          a: {
-            color:
-              props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
-            fontWeight: 'bold',
+const Editorial = (props: EditorialSection) => {
+  const themeColor =
+    props.theme === 'dark' ? 'primary.contrastText' : 'text.primary';
+
+  return (
+    <section id={props.sectionID || undefined}>
+      <Stack
+        sx={{
+          section: {
+            ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
           },
-        },
-        '.MuiTypography-h4': {
-          color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
-        },
-        '.MuiTypography-body2': {
-          color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
-        },
-      }}
-    >
-      <EditorialEC {...makeEditorialProps(props)} />
-    </Stack>
-  </section>
-);
+          img: {
+            maxHeight: 490,
+          },
+          '.MuiTypography-root': {
+            color: themeColor,
+            a: {
+              color: themeColor,
+              fontWeight: 'bold',
+            },
+          },
+          '.MuiTypography-h4': {
+            color: themeColor,
+          },
+          '.MuiTypography-body2': {
+            color: themeColor,
+          },
+        }}
+      >
+        <EditorialEC {...makeEditorialProps(props)} />
+      </Stack>
+    </section>
+  );
+};
 
 export default Editorial;
