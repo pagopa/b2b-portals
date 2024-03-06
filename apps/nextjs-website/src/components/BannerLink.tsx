@@ -3,7 +3,7 @@ import { BannerLink as BannerLinkEC } from '@pagopa/pagopa-editorial-components'
 import { BannerLinkProps } from '@pagopa/pagopa-editorial-components/dist/components/BannerLink';
 import MarkdownRenderer from './MarkdownRenderer';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
-import MUIIcon from '@/components/Icon';
+import Icon from '@/components/Icon';
 
 const makeBannerLinkProps = ({
   body,
@@ -24,7 +24,7 @@ const makeBannerLinkProps = ({
     ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
       ...ctaBtn,
       color: rest.theme === 'dark' ? 'negative' : 'primary',
-      ...(icon && { startIcon: MUIIcon(icon) }),
+      ...(icon && { startIcon: Icon(icon) }),
     })),
   }),
   ...rest,

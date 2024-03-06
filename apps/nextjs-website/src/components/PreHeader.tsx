@@ -6,7 +6,7 @@ import {
 import { Stack } from '@mui/material';
 import { CtaProps } from '@pagopa/pagopa-editorial-components/dist/components/Ctas';
 import { PreHeader } from '@/lib/fetch/preHeader';
-import MUIIcon from '@/components/Icon';
+import Icon from '@/components/Icon';
 
 const preHeaderNakedButtonStyle = {
   padding: '0',
@@ -37,7 +37,7 @@ const makeCtas = (
       letterSpacing: side === 'left' ? '0' : '.3px',
       ...(ctaBtn.variant === 'naked' && { ...preHeaderNakedButtonStyle }),
     },
-    ...(ctaBtn.icon && { startIcon: MUIIcon(ctaBtn.icon) }),
+    ...(ctaBtn.icon && { startIcon: Icon(ctaBtn.icon) }),
   })),
 });
 

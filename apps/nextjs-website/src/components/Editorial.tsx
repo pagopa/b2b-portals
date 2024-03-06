@@ -4,7 +4,7 @@ import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/compone
 import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
-import MUIIcon from '@/components/Icon';
+import Icon from '@/components/Icon';
 
 const makeEditorialProps = ({
   theme,
@@ -22,7 +22,7 @@ const makeEditorialProps = ({
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
         color: theme === 'dark' ? 'negative' : 'primary',
-        ...(icon && { startIcon: MUIIcon(icon) }),
+        ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
   ...rest,
