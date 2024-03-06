@@ -27,10 +27,6 @@
         "images"
       ]
     },
-    "body": {
-      "type": "text",
-      "required": true
-    },
     "ctaButtons": {
       "type": "component",
       "repeatable": true,
@@ -40,6 +36,10 @@
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "body": {
+      "type": "richtext",
+      "required": true
     }
   }
 }
