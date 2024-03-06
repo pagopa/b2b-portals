@@ -18,16 +18,16 @@
     "buttonText": {
       "type": "string"
     },
-    "subtitle": {
-      "type": "text",
-      "required": true
-    },
     "icon": {
       "type": "enumeration",
       "enum": [
         "Code",
         "SpeakerNotes"
       ]
+    },
+    "subtitle": {
+      "type": "richtext",
+      "required": true
     }
   }
 }
