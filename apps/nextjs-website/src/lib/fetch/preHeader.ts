@@ -1,7 +1,7 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { MUIButtonSizeCodec } from './types/mui/ButtonSize';
-import { MUIButtonIconCodec } from './types/mui/ButtonIcon';
+import { MUIButtonSizeCodec } from './types/MUIButtonSize';
+import { MUIButtonIconCodec } from './types/icons/ButtonIcon';
 import { AppEnv } from '@/AppEnv';
 
 const PreHeaderButtonCodec = t.strict({

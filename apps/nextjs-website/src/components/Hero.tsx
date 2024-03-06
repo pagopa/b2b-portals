@@ -4,7 +4,7 @@ import { HeroProps } from '@pagopa/pagopa-editorial-components/dist/components/H
 import { Stack, useTheme } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
-import MUIIcon from '@/components/MUIIcon';
+import Icon from '@/components/Icon';
 
 const makeHeroProps = ({
   theme,
@@ -25,7 +25,7 @@ const makeHeroProps = ({
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
         color: theme === 'dark' ? 'negative' : 'primary',
-        ...(icon && { startIcon: MUIIcon(icon) }),
+        ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
 });

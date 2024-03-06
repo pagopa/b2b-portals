@@ -3,7 +3,7 @@ import { Header as HeaderEC } from '@pagopa/pagopa-editorial-components/dist/com
 import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 import { Stack } from '@mui/material';
 import { usePathname } from 'next/navigation';
-import MUIIcon from './MUIIcon';
+import Icon from './Icon';
 import { HeaderWithNavigation } from '@/lib/header';
 
 const makeHeaderProps = (
@@ -14,7 +14,7 @@ const makeHeaderProps = (
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
-        ...(icon && { startIcon: MUIIcon(icon) }),
+        ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
   product: {

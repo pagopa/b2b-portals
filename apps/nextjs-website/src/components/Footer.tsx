@@ -5,6 +5,7 @@ import {
 } from '@pagopa/pagopa-editorial-components/dist/components/Footer';
 import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
+import Icon from './Icon';
 import { FooterData } from '@/lib/fetch/footer';
 
 const makeFooterProps = ({
@@ -49,7 +50,7 @@ const makeFooterProps = ({
       })),
       socialLinks: links_followUs.socialLinks.map(
         ({ icon, href, ariaLabel }) => ({
-          icon,
+          icon: Icon(icon),
           href,
           linktype: 'external', // default
           'aria-label': ariaLabel,
