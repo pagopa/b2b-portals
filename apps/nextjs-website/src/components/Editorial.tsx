@@ -28,26 +28,39 @@ const makeEditorialProps = ({
   ...rest,
 });
 
-const Editorial = (props: EditorialSection) => (
-  <section id={props.sectionID || undefined}>
-    <Stack
-      sx={{
-        img: {
-          maxHeight: 490,
-        },
-        '.MuiTypography-root': {
-          color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
-          a: {
-            color:
-              props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
+const Editorial = (props: EditorialSection) => {
+  const themeColor =
+    props.theme === 'dark' ? 'primary.contrastText' : 'text.primary';
+
+  return (
+    <section id={props.sectionID || undefined}>
+      <Stack
+        sx={{
+          section: {
+            ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
           },
-        },
-      }}
-    >
-      <EditorialEC {...makeEditorialProps(props)} />
-    </Stack>
-  </section>
-);
+          img: {
+            maxHeight: 490,
+          },
+          '.MuiTypography-root': {
+            color: themeColor,
+            a: {
+              color: themeColor,
+              fontWeight: 'bold',
+            },
+          },
+          '.MuiTypography-h4': {
+            color: themeColor,
+          },
+          '.MuiTypography-body2': {
+            color: themeColor,
+          },
+        }}
+      >
+        <EditorialEC {...makeEditorialProps(props)} />
+      </Stack>
+    </section>
+  );
+};
 
 export default Editorial;
