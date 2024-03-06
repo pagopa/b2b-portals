@@ -3,7 +3,7 @@ import { Cards as CardsEC } from '@pagopa/pagopa-editorial-components';
 import { CardsProps } from '@pagopa/pagopa-editorial-components/dist/components/Cards';
 import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
-import MUIIcon from './MUIIcon';
+import Icon from './Icon';
 import { CardsSection } from '@/lib/fetch/types/PageSection';
 
 const makeLinksArray = ({
@@ -78,7 +78,7 @@ const makeCardsProps = ({
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
         color: rest.theme === 'dark' ? 'negative' : 'primary',
-        ...(icon && { startIcon: MUIIcon(icon) }),
+        ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
   ...rest,
