@@ -14,7 +14,7 @@
   "attributes": {
     "productName": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "beta": {
       "type": "boolean",
@@ -26,6 +26,13 @@
       "repeatable": true,
       "component": "components.cta-button-simple",
       "max": 2
+    },
+    "logo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

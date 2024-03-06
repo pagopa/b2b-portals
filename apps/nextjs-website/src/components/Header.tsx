@@ -7,9 +7,16 @@ import MUIIcon from './MUIIcon';
 import { HeaderWithNavigation } from '@/lib/header';
 
 const makeHeaderProps = (
-  { ctaButtons, productName, menu, ...rest }: HeaderWithNavigation,
+  { ctaButtons, productName, menu, logo, ...rest }: HeaderWithNavigation,
   pathname: string
 ): HeaderProps => ({
+  ...(logo.data && { logo: logo.data.attributes.url }),
+  ...(productName && {
+    product: {
+      name: productName,
+      href: '/',
+    },
+  }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
@@ -17,10 +24,6 @@ const makeHeaderProps = (
         ...(icon && { startIcon: MUIIcon(icon) }),
       })),
     }),
-  product: {
-    name: productName,
-    href: '/',
-  },
   // Add active link logic
   menu: menu.map((link) => ({
     ...link,
