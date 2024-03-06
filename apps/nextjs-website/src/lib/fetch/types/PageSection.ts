@@ -1,10 +1,10 @@
 import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
 import { ImageDataCodec } from './StrapiImage';
-import { FeatureItemMUIIconCodec } from './mui/FeatureItemIcon';
-import { HowToStepMUIIconCodec } from './mui/HowToStepIcon';
-import { StripeLinkMUIIconCodec } from './mui/StripeLinkIcon';
-import { CardsItemMUIIconCodec } from './mui/CardsItemIcon';
+import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
+import { HowToStepMUIIconCodec } from './icons/HowToStepIcon';
+import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
+import { CardsItemMUIIconCodec } from './icons/CardsItemIcon';
 
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),

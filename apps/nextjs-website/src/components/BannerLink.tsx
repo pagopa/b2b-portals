@@ -3,7 +3,7 @@ import { BannerLink as BannerLinkEC } from '@pagopa/pagopa-editorial-components'
 import { BannerLinkProps } from '@pagopa/pagopa-editorial-components/dist/components/BannerLink';
 import MarkdownRenderer from './MarkdownRenderer';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
-import MUIIcon from '@/components/MUIIcon';
+import MUIIcon from '@/components/Icon';
 
 const makeBannerLinkProps = ({
   body,

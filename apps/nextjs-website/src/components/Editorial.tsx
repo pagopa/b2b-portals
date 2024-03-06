@@ -4,7 +4,7 @@ import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/compone
 import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
-import MUIIcon from '@/components/MUIIcon';
+import MUIIcon from '@/components/Icon';
 
 const makeEditorialProps = ({
   theme,

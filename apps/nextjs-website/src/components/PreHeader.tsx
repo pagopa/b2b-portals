@@ -6,7 +6,7 @@ import {
 import { Stack } from '@mui/material';
 import { CtaProps } from '@pagopa/pagopa-editorial-components/dist/components/Ctas';
 import { PreHeader } from '@/lib/fetch/preHeader';
-import MUIIcon from '@/components/MUIIcon';
+import MUIIcon from '@/components/Icon';
 
 const preHeaderNakedButtonStyle = {
   padding: '0',
