@@ -5,7 +5,7 @@ import {
   LinkedIn,
   Twitter,
 } from '@mui/icons-material';
-import Medium from './icons/Medium';
+import { MediumIcon } from '@pagopa/mui-italia/dist/icons/MediumIcon';
 
 const iconMapping = {
   // Button Icons
@@ -16,7 +16,7 @@ const iconMapping = {
   LinkedIn: <LinkedIn />,
   Facebook: <Facebook />,
   Twitter: <Twitter />,
-  Medium: <Medium />,
+  Medium: <MediumIcon />,
 };
 
 const Icon = (name: keyof typeof iconMapping): JSX.Element => iconMapping[name];
