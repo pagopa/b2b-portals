@@ -5,6 +5,7 @@ import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import MUIIcon from '@/components/MUIIcon';
+import { sendTheme } from '../app/theme';
 
 const makeEditorialProps = ({
   theme,
@@ -32,6 +33,11 @@ const Editorial = (props: EditorialSection) => (
   <section id={props.sectionID || undefined}>
     <Stack
       sx={{
+        section: {
+          ...(props.theme === 'dark' && {
+            backgroundColor: sendTheme.palette.background.default,
+          }),
+        },
         img: {
           maxHeight: 490,
         },

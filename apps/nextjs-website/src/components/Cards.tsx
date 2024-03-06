@@ -4,6 +4,7 @@ import { CardsProps } from '@pagopa/pagopa-editorial-components/dist/components/
 import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { CardsSection } from '@/lib/fetch/types/PageSection';
+import { sendTheme } from "../app/theme";
 
 const makeCardsProps = ({
   items,
@@ -47,7 +48,7 @@ const Cards = (props: CardsSection) => (
     <Stack
       sx={{
         section: {
-          ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
+          ...(props.theme === 'dark' && { backgroundColor: sendTheme.palette.background.default }),
           img: {
             display: 'none',
           },
