@@ -5,7 +5,25 @@ import {
 } from '@pagopa/pagopa-editorial-components/dist/components/Footer';
 import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
+import { RenderInternalIcon } from './icons/RenderInternalIcon';
 import { FooterData } from '@/lib/fetch/footer';
+import {
+  IsMUISocialIcon,
+  type MUISocialIcon,
+} from '@/lib/fetch/types/mui/SocialIcon';
+import { InternalSocialIcon } from '@/lib/fetch/types/InternalIcons';
+
+const RenderFooterSocialIcon = (
+  icon: FooterData['data']['attributes']['links_followUs']['socialLinks'][0]['icon']
+): NonNullable<FooterProps['links']['followUs']['socialLinks'][0]['icon']> => {
+  // Un-elegant solution to make TS know the returned value is one of MUISocialIcon
+  // Which means EC component can render it itself
+  if (IsMUISocialIcon(icon)) {
+    return icon as MUISocialIcon;
+  }
+
+  return RenderInternalIcon(icon as InternalSocialIcon);
+};
 
 const makeFooterProps = ({
   legalInfo,
@@ -49,7 +67,7 @@ const makeFooterProps = ({
       })),
       socialLinks: links_followUs.socialLinks.map(
         ({ icon, href, ariaLabel }) => ({
-          icon,
+          icon: RenderFooterSocialIcon(icon),
           href,
           linktype: 'external', // default
           'aria-label': ariaLabel,

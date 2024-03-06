@@ -1,6 +1,7 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
 import { MUISocialIconCodec } from './types/mui/SocialIcon';
+import { InternalSocialIconCodec } from './types/InternalIcons';
 import { AppEnv } from '@/AppEnv';
 
 // Codec
@@ -16,7 +17,7 @@ const FooterLinkCodec = t.strict({
 });
 
 const FooterLinkSocialCodec = t.strict({
-  icon: MUISocialIconCodec,
+  icon: t.union([MUISocialIconCodec, InternalSocialIconCodec]),
   href: t.string,
   ariaLabel: t.string,
 });
