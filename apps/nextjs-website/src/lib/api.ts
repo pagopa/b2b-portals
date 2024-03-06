@@ -7,6 +7,7 @@ import { PreHeader, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
 import { getHeader } from './fetch/header';
 import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
+import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
@@ -55,4 +56,13 @@ export const getPageProps = async (
 ): Promise<Page | undefined> => {
   const allPages = await getAllPages();
   return allPages.find((page) => slug.toString() === page.slug.toString());
+};
+
+export const getSiteWideSEO = async (): Promise<
+  SiteWideSEO['data']['attributes']
+> => {
+  const {
+    data: { attributes },
+  } = await fetchSiteWideSEO(appEnv);
+  return attributes;
 };
