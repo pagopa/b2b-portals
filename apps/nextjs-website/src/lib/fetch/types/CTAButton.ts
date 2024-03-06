@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
-import { MUIButtonSizeCodec } from './mui/ButtonSize';
-import { MUIButtonIconCodec } from './mui/ButtonIcon';
+import { MUIButtonSizeCodec } from './MUIButtonSize';
+import { MUIButtonIconCodec } from './icons/ButtonIcon';
 
 const CTAButtonVariant = t.keyof({
   text: null,

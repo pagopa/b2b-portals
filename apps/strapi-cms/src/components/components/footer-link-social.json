@@ -12,7 +12,8 @@
         "Instagram",
         "LinkedIn",
         "Facebook",
-        "Twitter"
+        "Twitter",
+        "Medium"
       ],
       "required": true
     },
