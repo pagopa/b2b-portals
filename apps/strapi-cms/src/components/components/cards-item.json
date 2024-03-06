@@ -15,7 +15,7 @@
     },
     "text": {
       "type": "text",
-      "required": true
+      "required": false
     },
     "linkHref": {
       "type": "string"
@@ -31,6 +31,15 @@
       "enum": [
         "AccessAlarm"
       ]
+    },
+    "link2Href": {
+      "type": "string"
+    },
+    "link2Text": {
+      "type": "string"
+    },
+    "link2Title": {
+      "type": "string"
     }
   }
 }

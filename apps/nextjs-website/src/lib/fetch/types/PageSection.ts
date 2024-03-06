@@ -125,10 +125,13 @@ const StripeLinkSectionCodec = t.strict({
 const CardsItemCodec = t.strict({
   label: t.union([t.string, t.null]),
   title: t.string,
-  text: t.string,
+  text: t.union([t.string, t.null]),
   linkHref: t.union([t.string, t.null]),
   linkText: t.union([t.string, t.null]),
   linkTitle: t.union([t.string, t.null]),
+  link2Href: t.union([t.string, t.null]),
+  link2Text: t.union([t.string, t.null]),
+  link2Title: t.union([t.string, t.null]),
   icon: t.union([CardsItemMUIIconCodec, t.null]),
 });
 
@@ -138,6 +141,7 @@ const CardsSectionCodec = t.strict({
   title: t.string,
   subtitle: t.union([t.string, t.null]),
   body: t.union([t.string, t.null]),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
   items: t.array(CardsItemCodec),
   sectionID: t.union([t.string, t.null]),
 });
