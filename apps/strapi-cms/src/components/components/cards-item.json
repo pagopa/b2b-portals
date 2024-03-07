@@ -15,22 +15,20 @@
     },
     "text": {
       "type": "text",
-      "required": true
-    },
-    "linkHref": {
-      "type": "string"
-    },
-    "linkText": {
-      "type": "string"
-    },
-    "linkTitle": {
-      "type": "string"
+      "required": false
     },
     "icon": {
       "type": "enumeration",
       "enum": [
         "AccessAlarm"
       ]
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.link",
+      "required": false,
+      "max": 2
     }
   }
 }

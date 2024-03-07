@@ -35,6 +35,12 @@
     },
     "body": {
       "type": "richtext"
+    },
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button-simple",
+      "max": 2
     }
   }
 }
