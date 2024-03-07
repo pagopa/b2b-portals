@@ -126,12 +126,7 @@ const CardsItemCodec = t.strict({
   label: t.union([t.string, t.null]),
   title: t.string,
   text: t.union([t.string, t.null]),
-  linkHref: t.union([t.string, t.null]),
-  linkText: t.union([t.string, t.null]),
-  linkTitle: t.union([t.string, t.null]),
-  link2Href: t.union([t.string, t.null]),
-  link2Text: t.union([t.string, t.null]),
-  link2Title: t.union([t.string, t.null]),
+  links: t.array(LinkCodec),
   icon: t.union([CardsItemMUIIconCodec, t.null]),
 });
 

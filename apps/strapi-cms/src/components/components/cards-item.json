@@ -17,29 +17,18 @@
       "type": "text",
       "required": false
     },
-    "linkHref": {
-      "type": "string"
-    },
-    "linkText": {
-      "type": "string"
-    },
-    "linkTitle": {
-      "type": "string"
-    },
     "icon": {
       "type": "enumeration",
       "enum": [
         "AccessAlarm"
       ]
     },
-    "link2Href": {
-      "type": "string"
-    },
-    "link2Text": {
-      "type": "string"
-    },
-    "link2Title": {
-      "type": "string"
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.link",
+      "required": false,
+      "max": 2
     }
   }
 }
