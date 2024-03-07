@@ -8,7 +8,7 @@ export const HeaderDataCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
       logo: StrapiImageSchema,
-      productName: t.union([t.string, t.null]),
+      productName: t.string,
       beta: t.boolean,
       ctaButtons: t.array(CTAButtonSimpleCodec),
     }),

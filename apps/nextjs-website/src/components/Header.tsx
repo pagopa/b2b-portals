@@ -14,15 +14,13 @@ const makeHeaderProps = (
     logo: {
       src: logo.data.attributes.url,
       href: '/',
-      alt: logo.data.attributes.alternativeText ?? (productName ?? ''),
+      alt: logo.data.attributes.alternativeText ?? productName,
     },
   }),
-  ...(productName && {
-    product: {
-      name: productName,
-      href: '/',
-    },
-  }),
+  product: {
+    name: productName,
+    href: '/',
+  },
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
@@ -33,7 +31,10 @@ const makeHeaderProps = (
   // Add active link logic
   menu: menu.map((link) => ({
     ...link,
-    active: pathname.includes(link.href ?? ''),
+    active: pathname === link.href,
+    sx: {
+      color: pathname === link.href ? 'primary.main' : 'text.secondary',
+    },
   })),
   ...rest,
 });
@@ -46,19 +47,24 @@ const Header = (props: HeaderWithNavigation) => {
       sx={{
         nav: {
           '.MuiStack-root': {
+            borderColor: 'primary.main',
             a: {
               display: 'flex',
               justifyContent: 'left',
+              '&.MuiTypography-body1': {
+                color: 'text.secondary',
+              },
+            },
+            '.MuiTypography-root': {
+              textDecoration: 'none',
+              fontWeight: 600,
+              fontSize: '1rem',
             },
             '.MuiStack-root': {
               // Popup on hover
               zIndex: 10,
             },
           },
-        },
-        b: {
-          color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
         },
         '.MuiChip-root': {
           width: 'auto',
