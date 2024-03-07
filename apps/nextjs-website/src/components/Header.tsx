@@ -75,11 +75,13 @@ const Header = (props: HeaderWithNavigation) => {
               fontWeight: 600,
               fontSize: '1rem',
             },
-            '.MuiStack-root': {
-              // Popup on hover
-              zIndex: 10,
-              boxShadow: theme.custom.boxShadow,
-            },
+            '& .MuiStack-root': {
+                zIndex: 10,
+                boxShadow: theme.custom.boxShadow,
+              '& .MuiStack-root': {
+                boxShadow: 'none',
+              },
+            },      
           },
         },
         '.MuiChip-root': {
