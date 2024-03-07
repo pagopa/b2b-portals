@@ -10,7 +10,13 @@ const makeHeaderProps = (
   { ctaButtons, productName, menu, logo, ...rest }: HeaderWithNavigation,
   pathname: string
 ): HeaderProps => ({
-  ...(logo.data && { logo: logo.data.attributes.url }),
+  ...(logo.data && {
+    logo: {
+      src: logo.data.attributes.url,
+      href: '/',
+      alt: logo.data.attributes.alternativeText ?? (productName ?? ''),
+    },
+  }),
   ...(productName && {
     product: {
       name: productName,
