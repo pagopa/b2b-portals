@@ -24,9 +24,9 @@ COPY --from=build /opt/node_modules ./node_modules
 WORKDIR /opt/app
 COPY --from=build /opt/app ./
 ENV PATH /opt/node_modules/.bin:$PATH
-RUN npm run configrestore
 
 RUN chown -R node:node /opt/app
 USER node
 EXPOSE 1337
+RUN npm run configrestore
 CMD npm run start
