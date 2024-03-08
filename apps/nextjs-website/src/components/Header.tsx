@@ -3,23 +3,8 @@ import { Header as HeaderEC } from '@pagopa/pagopa-editorial-components/dist/com
 import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/Header';
 import { Stack } from '@mui/material';
 import { usePathname } from 'next/navigation';
-import { theme } from '../app/theme';
 import Icon from './Icon';
 import { HeaderWithNavigation } from '@/lib/header';
-
-declare module '@mui/material/styles' {
-  interface Theme {
-    custom: {
-      boxShadow: string;
-    };
-  }
-  // allow configuration using `createTheme`
-  interface ThemeOptions {
-    custom?: {
-      boxShadow?: string;
-    };
-  }
-}
 
 const makeHeaderProps = (
   { ctaButtons, productName, menu, logo, ...rest }: HeaderWithNavigation,
@@ -77,7 +62,7 @@ const Header = (props: HeaderWithNavigation) => {
             },
             '& .MuiStack-root': {
               zIndex: 10,
-              boxShadow: theme.custom.boxShadow,
+              boxShadow: 'custom.boxShadow',
               '& .MuiStack-root': {
                 boxShadow: 'none',
               },
