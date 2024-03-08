@@ -4,7 +4,7 @@ import { HeaderProps } from '@pagopa/pagopa-editorial-components/dist/components
 import { Stack } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import { theme } from '../app/theme';
-import MUIIcon from './MUIIcon';
+import Icon from './Icon';
 import { HeaderWithNavigation } from '@/lib/header';
 
 declare module '@mui/material/styles' {
@@ -40,7 +40,7 @@ const makeHeaderProps = (
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
-        ...(icon && { startIcon: MUIIcon(icon) }),
+        ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
   // Add active link logic
@@ -81,7 +81,7 @@ const Header = (props: HeaderWithNavigation) => {
               '& .MuiStack-root': {
                 boxShadow: 'none',
               },
-            },      
+            },
           },
         },
         '.MuiChip-root': {
