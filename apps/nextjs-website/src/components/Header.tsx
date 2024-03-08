@@ -7,9 +7,20 @@ import Icon from './Icon';
 import { HeaderWithNavigation } from '@/lib/header';
 
 const makeHeaderProps = (
-  { ctaButtons, productName, menu, ...rest }: HeaderWithNavigation,
+  { ctaButtons, productName, menu, logo, ...rest }: HeaderWithNavigation,
   pathname: string
 ): HeaderProps => ({
+  ...(logo.data && {
+    logo: {
+      src: logo.data.attributes.url,
+      href: '/',
+      alt: logo.data.attributes.alternativeText ?? productName,
+    },
+  }),
+  product: {
+    name: productName,
+    href: '/',
+  },
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
@@ -17,14 +28,13 @@ const makeHeaderProps = (
         ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
-  product: {
-    name: productName,
-    href: '/',
-  },
   // Add active link logic
   menu: menu.map((link) => ({
     ...link,
-    active: pathname.includes(link.href ?? ''),
+    active: pathname === link.href,
+    sx: {
+      color: pathname === link.href ? 'primary.main' : 'text.secondary',
+    },
   })),
   ...rest,
 });
@@ -37,19 +47,27 @@ const Header = (props: HeaderWithNavigation) => {
       sx={{
         nav: {
           '.MuiStack-root': {
+            borderColor: 'primary.main',
             a: {
               display: 'flex',
               justifyContent: 'left',
+              '&.MuiTypography-body1': {
+                color: 'text.secondary',
+              },
             },
-            '.MuiStack-root': {
-              // Popup on hover
+            '.MuiTypography-root': {
+              textDecoration: 'none',
+              fontWeight: 600,
+              fontSize: '1rem',
+            },
+            '& .MuiStack-root': {
               zIndex: 10,
+              boxShadow: 'custom.boxShadow',
+              '& .MuiStack-root': {
+                boxShadow: 'none',
+              },
             },
           },
-        },
-        b: {
-          color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
         },
         '.MuiChip-root': {
           width: 'auto',
