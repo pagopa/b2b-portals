@@ -76,8 +76,8 @@ const Header = (props: HeaderWithNavigation) => {
               fontSize: '1rem',
             },
             '& .MuiStack-root': {
-                zIndex: 10,
-                boxShadow: theme.custom.boxShadow,
+              zIndex: 10,
+              boxShadow: theme.custom.boxShadow,
               '& .MuiStack-root': {
                 boxShadow: 'none',
               },
