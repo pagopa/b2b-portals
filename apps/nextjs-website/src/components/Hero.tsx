@@ -38,7 +38,8 @@ const Hero = (props: HeroSection) => {
       <Stack
         sx={{
           section: {
-            ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
+            backgroundColor:
+              props.theme === 'dark' ? 'primary.main' : 'background.paper',
           },
           '.MuiGrid-root': {
             '.MuiGrid-root': {
