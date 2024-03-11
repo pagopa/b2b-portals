@@ -26,6 +26,9 @@ const headerResponse = {
           size: 'medium',
         },
       ],
+      logo: {
+        data: null,
+      },
     },
   },
 };
@@ -42,7 +45,7 @@ describe('getHeader', () => {
     await getHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons`,
+      `${config.STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons,logo`,
       {
         method: 'GET',
         headers: {

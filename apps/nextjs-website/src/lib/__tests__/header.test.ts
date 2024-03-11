@@ -17,6 +17,9 @@ const header: Header = {
           icon: null,
         },
       ],
+      logo: {
+        data: null,
+      },
     },
   },
 };
