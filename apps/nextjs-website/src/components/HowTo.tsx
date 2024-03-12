@@ -33,7 +33,7 @@ const HowTo = (props: HowToSection) => {
         sx={{
           section: {
             ...(props.theme === 'dark' && {
-              backgroundColor: 'custom.color',
+              backgroundColor: 'custom.backgroundColorDark',
             }),
             img: {
               display: 'none',

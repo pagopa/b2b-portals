@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-Implemented custom color for background to match the legacy version
+Implement custom color for background to match the legacy version

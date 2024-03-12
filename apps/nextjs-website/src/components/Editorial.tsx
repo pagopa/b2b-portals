@@ -38,7 +38,7 @@ const Editorial = (props: EditorialSection) => {
         sx={{
           section: {
             ...(props.theme === 'dark' && {
-              backgroundColor: 'custom.color',
+              backgroundColor: 'custom.backgroundColorDark',
             }),
           },
           img: {
