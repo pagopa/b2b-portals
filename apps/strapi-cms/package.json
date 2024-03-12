@@ -11,7 +11,7 @@
     "compile": "tsc --noEmit",
     "predev": "npm run compile",
     "dev": "strapi develop",
-    "start": "strapi start",
+    "start": "npm run configrestore && strapi start",
     "build": "strapi build",
     "lint": "eslint --ignore-path .gitignore .",
     "strapi": "strapi"

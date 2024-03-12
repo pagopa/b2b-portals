@@ -2,4 +2,4 @@
 "strapi-cms": patch
 ---
 
-Configure Strapi UI for production
+Add configrestore cmd before start + Configure Strapi UI for production
