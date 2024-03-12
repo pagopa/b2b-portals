@@ -4,8 +4,8 @@ import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/compone
 import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
-import MUIIcon from '@/components/MUIIcon';
-import { sendTheme } from '../app/theme';
+import Icon from '@/components/Icon';
+import { theme } from '../app/theme';
 
 const makeEditorialProps = ({
   theme,
@@ -23,37 +23,47 @@ const makeEditorialProps = ({
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
         color: theme === 'dark' ? 'negative' : 'primary',
-        ...(icon && { startIcon: MUIIcon(icon) }),
+        ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
   ...rest,
 });
 
-const Editorial = (props: EditorialSection) => (
-  <section id={props.sectionID || undefined}>
-    <Stack
-      sx={{
-        section: {
-          ...(props.theme === 'dark' && {
-            backgroundColor: sendTheme.palette.background.default,
-          }),
-        },
-        img: {
-          maxHeight: 490,
-        },
-        '.MuiTypography-root': {
-          color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
-          a: {
-            color:
-              props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
+const Editorial = (props: EditorialSection) => {
+  const themeColor =
+    props.theme === 'dark' ? 'primary.contrastText' : 'text.primary';
+
+  return (
+    <section id={props.sectionID || undefined}>
+      <Stack
+        sx={{
+          section: {
+            ...(props.theme === 'dark' && {
+              backgroundColor: theme.palette.background.default,
+            }),
           },
-        },
-      }}
-    >
-      <EditorialEC {...makeEditorialProps(props)} />
-    </Stack>
-  </section>
-);
+          img: {
+            maxHeight: 490,
+          },
+          '.MuiTypography-root': {
+            color: themeColor,
+            a: {
+              color: themeColor,
+              fontWeight: 'bold',
+            },
+          },
+          '.MuiTypography-h4': {
+            color: themeColor,
+          },
+          '.MuiTypography-body2': {
+            color: themeColor,
+          },
+        }}
+      >
+        <EditorialEC {...makeEditorialProps(props)} />
+      </Stack>
+    </section>
+  );
+};
 
 export default Editorial;
