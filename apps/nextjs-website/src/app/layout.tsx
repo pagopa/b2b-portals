@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@mui/system';
+import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
