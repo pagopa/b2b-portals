@@ -5,7 +5,6 @@ import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
-import { theme } from '../app/theme';
 
 const makeEditorialProps = ({
   theme,
@@ -39,7 +38,7 @@ const Editorial = (props: EditorialSection) => {
         sx={{
           section: {
             ...(props.theme === 'dark' && {
-              backgroundColor: theme.palette.background.default,
+              backgroundColor: 'custom.color',
             }),
           },
           img: {

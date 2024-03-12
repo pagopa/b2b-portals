@@ -9,8 +9,8 @@ export const theme = createTheme(MUIItaliaTheme, {
     },
   },
   palette: {
-    background: {
-      default: "#0B3EE3",
+    custom: {
+      color: '#0B3EE3',
     },
   },
 });

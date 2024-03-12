@@ -4,7 +4,6 @@ import { HowTo as HowToEC } from '@pagopa/pagopa-editorial-components';
 import { Stack, useTheme } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { HowToSection } from '@/lib/fetch/types/PageSection';
-import { sendTheme } from '../app/theme';
 
 const makeHowToProps = ({
   link,
@@ -33,7 +32,9 @@ const HowTo = (props: HowToSection) => {
       <Stack
         sx={{
           section: {
-            ...(props.theme === 'dark' && { backgroundColor: sendTheme.palette.background.default }),
+            ...(props.theme === 'dark' && {
+              backgroundColor: 'custom.color',
+            }),
             img: {
               display: 'none',
             },

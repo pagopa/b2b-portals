@@ -5,7 +5,6 @@ import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import Icon from './Icon';
 import { CardsSection } from '@/lib/fetch/types/PageSection';
-import { sendTheme } from "../app/theme";
 
 const makeCardsProps = ({
   items,
@@ -49,7 +48,9 @@ const Cards = (props: CardsSection) => (
     <Stack
       sx={{
         section: {
-          ...(props.theme === 'dark' && { backgroundColor: sendTheme.palette.background.default }),
+          ...(props.theme === 'dark' && {
+            backgroundColor: 'custom.color',
+          }),
           img: {
             display: 'none',
           },
