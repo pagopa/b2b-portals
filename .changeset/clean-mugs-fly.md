@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-fixed bug about bg colour on Hero component
+Fix background color always dark on Hero component
