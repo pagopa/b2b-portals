@@ -16,7 +16,7 @@
     "@mui/icons-material": "^5.14.14",
     "@mui/material": "^5.14.14",
     "@pagopa/mui-italia": "^1.0.1",
-    "@pagopa/pagopa-editorial-components": "^3.1.0",
+    "@pagopa/pagopa-editorial-components": "^3.1.1",
     "fp-ts": "^2.16.1",
     "html-react-parser": "^5.0.11",
     "io-ts": "^2.2.20",
