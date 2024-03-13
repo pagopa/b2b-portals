@@ -8,4 +8,9 @@ export const theme = createTheme(MUIItaliaTheme, {
       boxShadow: '-6px -6px 19px 2px #002B551A',
     },
   },
+  palette: {
+    custom: {
+      backgroundColorDark: '#0B3EE3',
+    },
+  },
 });

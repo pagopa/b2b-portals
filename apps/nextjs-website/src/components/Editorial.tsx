@@ -37,7 +37,9 @@ const Editorial = (props: EditorialSection) => {
       <Stack
         sx={{
           section: {
-            ...(props.theme === 'dark' && { backgroundColor: 'pagoPA.main' }),
+            ...(props.theme === 'dark' && {
+              backgroundColor: 'custom.backgroundColorDark',
+            }),
           },
           img: {
             maxHeight: 490,
