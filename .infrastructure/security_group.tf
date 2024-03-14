@@ -1,7 +1,6 @@
 ### AWS Security Group ###
 # Traffic to the DB should only come from ECS
 # Traffic to the ECS cluster should only come from the ALB
-
 resource "aws_security_group" "cms_lb" {
   name        = "cms-lb"
   description = "Ingress - Load Balancer"
@@ -61,7 +60,6 @@ resource "aws_security_group" "ecs_tasks" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
 
 ### AWS RDS Security Group ###
 # Traffic to the DB should only come from ECS
