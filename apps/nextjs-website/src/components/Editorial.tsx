@@ -20,11 +20,10 @@ const makeEditorialProps = ({
   image: (
     <Image
       src={image.url}
-      width={500}
-      height={500}
-      layout='responsive'
-      unoptimized={true}
-      alt={image.alternativeText ?? 'no alt'}
+      alt={image.alternativeText ?? ''}
+      // Needed by Image, will be overwritten
+      width={0}
+      height={0}
     />
   ),
   ...(ctaButtons &&
