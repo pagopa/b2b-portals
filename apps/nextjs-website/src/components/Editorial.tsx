@@ -2,6 +2,7 @@
 import { Editorial as EditorialEC } from '@pagopa/pagopa-editorial-components';
 import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
 import { Stack } from '@mui/material';
+import Image from 'next/image';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
@@ -16,7 +17,15 @@ const makeEditorialProps = ({
 }: EditorialSection): EditorialProps => ({
   ...(eyelet && { eyelet }),
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
-  image: <img src={image.url} alt={image.alternativeText ?? undefined} />,
+  image: (
+    <Image
+      src={image.url}
+      alt={image.alternativeText ?? ''}
+      // Needed by Image, will be overwritten
+      width={0}
+      height={0}
+    />
+  ),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
@@ -43,6 +52,7 @@ const Editorial = (props: EditorialSection) => {
           },
           img: {
             maxHeight: 490,
+            width: '100%',
           },
           '.MuiTypography-root': {
             color: themeColor,
