@@ -93,7 +93,7 @@ const Footer = (props: FooterData['data']['attributes']) => (
               // NextGenEU logo
               marginTop: 'auto',
             },
-            '&.MuiBox-root > :nth-last-of-type(1)': {
+            '&.MuiBox-root > .MuiStack-root:nth-last-of-type(1)': {
               // div before NextGenEU logo
               marginBottom: '48px',
             },
