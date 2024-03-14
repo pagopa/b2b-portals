@@ -16,10 +16,14 @@ jobs:
   infrastructure_checks:
     strategy:
       matrix:
-        environment: [prod] # add dev enviroment if necessary
+        environment: [prod] # add dev environment if necessary
     name: Infra checks
     runs-on: ubuntu-latest
     environment: ${{ matrix.environment }}
+
+    concurrency:
+      group: terraform-${{ matrix.environment }}
+      cancel-in-progress: false
 
     steps:
       - name: Checkout code
