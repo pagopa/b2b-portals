@@ -126,3 +126,31 @@ resource "aws_iam_role_policy_attachment" "ecs_container_s3" {
   role       = aws_iam_role.task_role.name
   policy_arn = aws_iam_policy.ecs_task_role_s3.arn
 }
+
+###############################################################################
+#                      IAM Role to use on deploy CMS                       #
+###############################################################################
+resource "aws_iam_role" "deploy_ecs" {
+  name               = "GitHubActionDeployECS"
+  description        = "Role to assume to deploy on ECS."
+  assume_role_policy = data.aws_iam_policy_document.deploy_github.json
+}
+
+resource "aws_iam_role_policy_attachment" "deploy_ecs" {
+  role       = aws_iam_role.deploy_ecs.name
+  policy_arn = aws_iam_policy.deploy_ecs.arn
+}
+
+###############################################################################
+#                      IAM Role to use on deploy website                       #
+###############################################################################
+resource "aws_iam_role" "deploy_website" {
+  name               = "GitHubActionDeployWebsite"
+  description        = "Role to assume to deploy the website"
+  assume_role_policy = data.aws_iam_policy_document.deploy_github.json
+}
+
+resource "aws_iam_role_policy_attachment" "deploy_website" {
+  role       = aws_iam_role.deploy_website.name
+  policy_arn = aws_iam_policy.deploy_website.arn
+}

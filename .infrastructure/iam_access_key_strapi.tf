@@ -1,8 +1,3 @@
-### Necessary to Strapi for Upload and Download object to/from Media Library S3
-resource "aws_iam_user" "strapi" {
-  name = "Strapi"
-}
-
 resource "aws_iam_access_key" "strapi" {
   user = aws_iam_user.strapi.name
 }

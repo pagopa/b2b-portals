@@ -17,3 +17,9 @@ resource "aws_iam_user_policy_attachment" "change_password" {
   user       = aws_iam_user.mauro_dandrea.name
   policy_arn = "arn:aws:iam::aws:policy/IAMUserChangePassword"
 }
+
+
+### Necessary to Strapi for Upload and Download object to/from Media Library S3
+resource "aws_iam_user" "strapi" {
+  name = "Strapi"
+}
