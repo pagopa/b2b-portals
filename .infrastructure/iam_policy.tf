@@ -108,3 +108,142 @@ resource "aws_iam_policy" "deploy_ecs" {
     ]
   })
 }
+
+resource "aws_iam_policy" "upload_image" {
+  name        = "S3UploadImages"
+  path        = "/"
+  description = "Policy to allow to manage files in S3 bucket"
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "s3:DeleteObject",
+          "s3:GetObject",
+          "s3:GetObjectAttributes",
+          "s3:ListBucket",
+          "s3:PutObject"
+        ]
+        Effect   = "Allow"
+        Resource = format("%s/*", aws_s3_bucket.cms_medialibrary_bucket.arn)
+      },
+    ]
+  })
+}
+
+resource "aws_iam_policy_attachment" "strapi-policy" {
+  name       = "strapi-policy"
+  users      = [aws_iam_user.strapi.name]
+  policy_arn = aws_iam_policy.upload_image.arn
+}
+
+data "aws_iam_policy_document" "ecs_task_execution" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:DescribeParameters"
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:GetParameters"
+    ]
+    resources = [
+      aws_ssm_parameter.cms_database_password.arn,
+      aws_ssm_parameter.cms_admin_jwt_secret.arn,
+      aws_ssm_parameter.cms_app_keys.arn,
+      aws_ssm_parameter.cms_api_token_salt.arn,
+      aws_ssm_parameter.cms_transfer_token_salt.arn,
+      aws_ssm_parameter.cms_jwt_secret.arn,
+      aws_ssm_parameter.cms_access_key_id.arn,
+      aws_ssm_parameter.cms_access_key_secret.arn,
+      aws_ssm_parameter.cms_github_pat.arn
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:GetBucketLocation"
+    ]
+    resources = [
+      aws_s3_bucket.cms_medialibrary_bucket.arn
+    ]
+  }
+}
+
+resource "aws_iam_policy" "ecs_task_execution" {
+  name   = "CMSTaskExecutionPolicies"
+  path   = "/"
+  policy = data.aws_iam_policy_document.ecs_task_execution.json
+}
+
+data "aws_iam_policy_document" "task_role" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["ecs-tasks.amazonaws.com"]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "ecs_task_role_s3" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:DeleteObject",
+      "s3:GetObject",
+      "s3:GetObjectAttributes",
+      "s3:ListBucket",
+      "s3:PutObject",
+      "s3:PutObjectAcl"
+    ]
+    resources = [
+      aws_s3_bucket.cms_medialibrary_bucket.arn
+    ]
+  }
+}
+
+resource "aws_iam_policy" "ecs_task_role_s3" {
+  name   = "CMSTaskRolePoliciesS3"
+  path   = "/"
+  policy = data.aws_iam_policy_document.ecs_task_role_s3.json
+}
+
+data "aws_iam_policy_document" "cms_iam_policy" {
+  statement {
+    actions = ["s3:GetObject", "s3:ListBucket"]
+    resources = [
+      aws_s3_bucket.cms_medialibrary_bucket.arn,
+      "${aws_s3_bucket.cms_medialibrary_bucket.arn}/*"
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.main.iam_arn]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "website_iam_policy" {
+  statement {
+    actions = ["s3:GetObject", "s3:ListBucket"]
+    resources = [
+      "${aws_s3_bucket.website.arn}",
+      "${aws_s3_bucket.website.arn}/*"
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.main.iam_arn]
+    }
+  }
+}
