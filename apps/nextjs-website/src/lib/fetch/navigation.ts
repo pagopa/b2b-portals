@@ -35,7 +35,7 @@ export const getNavigation = (
   extractFromResponse(
     fetchFun(
       // All query parameters in the following URL indicate specific fields that would not otherwise be automatically returned by Strapi
-      `${config.STRAPI_API_BASE_URL}/api/navigation/render/${menuName}?type=FLAT&populate[seo][populate][0]=*&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items.links&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration`,
+      `${config.STRAPI_API_BASE_URL}/api/navigation/render/${menuName}?type=FLAT&populate[seo][populate][0]=metaTitle&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items.links&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration`,
       {
         method: 'GET',
         headers: {
