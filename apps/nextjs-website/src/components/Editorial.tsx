@@ -19,7 +19,7 @@ const makeEditorialProps = ({
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: (
     <Image
-      src={`http://localhost:1337${image.url}`}
+      src={image.url}
       width={500}
       height={500}
       layout='responsive'
