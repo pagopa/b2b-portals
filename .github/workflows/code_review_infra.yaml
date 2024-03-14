@@ -25,6 +25,9 @@ jobs:
       group: terraform-${{ matrix.environment }}
       cancel-in-progress: false
 
+    env:
+      terraform_working_directory: apps/infrastructure/src
+
     steps:
       - name: Checkout code
         uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
@@ -48,7 +51,8 @@ jobs:
         uses: ./.github/actions/setup-terraform
         with:
           environment: ${{ matrix.environment }}
+          working_directory: ${{ env.terraform_working_directory }}
 
       - name: Terraform Plan
-        working-directory: apps/infrastructure/src
+        working-directory: ${{ env.terraform_working_directory }}
         run: ./terraform.sh plan ${{ matrix.environment }}

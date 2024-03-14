@@ -5,13 +5,16 @@ inputs:
   environment:
     description: 'The environment where to execute commands'
     required: true
+  working_directory:
+    description: 'The directory to use as working directory'
+    required: true
 
 runs:
   using: "composite"
   steps:
     - name: Set Terraform version
       shell: bash
-      working-directory: apps/infrastructure/src
+      working-directory: ${{ inputs.working_directory }}
       run: echo "TERRAFORM_VERSION=`cat .terraform-version`" >> $GITHUB_ENV
 
     - name: Setup Terraform
@@ -21,10 +24,10 @@ runs:
 
     - name: Check Terraform format
       shell: bash
-      working-directory: apps/infrastructure/src
+      working-directory: ${{ inputs.working_directory }}
       run: terraform fmt -check -recursive
 
     - name: Terraform Init
       shell: bash
-      working-directory: apps/infrastructure/src
+      working-directory: ${{ inputs.working_directory }}
       run: ./terraform.sh init ${{ inputs.environment }}
