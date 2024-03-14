@@ -11,7 +11,7 @@ Make sure you don't have a `*.tfstate` file within the `.infrastructure/.terrafo
 
 ### Step 1: Disable the backend
 
-Comment the `backend "s3" {}` line from `00-main.tf` file:
+Comment the `backend "s3" {}` line from `main.tf` file:
 
 ``` sh
 terraform {
@@ -62,7 +62,7 @@ Copy the output provided by terraform, you need the following two outputs:
 
 ### Step 3: Add the backend and upload the local state
 
-Remove the comment from the line `backend "s3" {}` from `00-main.tf` file:
+Remove the comment from the line `backend "s3" {}` from `main.tf` file:
 
 ``` sh
 terraform {
