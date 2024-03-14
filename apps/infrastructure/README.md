@@ -7,7 +7,7 @@ The following tools are required to setup and manage a new environment.
 
 ## How setup a new environment
 
-Make sure you don't have a `*.tfstate` file within the `.infrastructure/.terraform` folder. If you have any, delete them.
+Make sure you don't have a `*.tfstate` file within the `apps/infrastructure/.terraform` folder. If you have any, delete them.
 
 ### Step 1: Disable the backend
 
@@ -34,7 +34,7 @@ terraform {
 The following steps require a valid aws session
 
 ``` sh
-cd .infrastructure
+cd apps/infrastructure/src
 
 # create an empty terraform vars file
 touch env/<env_name>/terraform.tfvars
