@@ -5,7 +5,7 @@ on:
     branches: '**'
     # Run only if there are at least one change matching the following paths
     paths:
-      - '.infrastructure/**'
+      - 'apps/infrastructure/src/**'
       - '.github/workflows/code_review_infra.yaml'
 
 permissions:
@@ -24,6 +24,9 @@ jobs:
     concurrency:
       group: terraform-${{ matrix.environment }}
       cancel-in-progress: false
+
+    env:
+      terraform_working_directory: apps/infrastructure/src
 
     steps:
       - name: Checkout code
@@ -48,7 +51,8 @@ jobs:
         uses: ./.github/actions/setup-terraform
         with:
           environment: ${{ matrix.environment }}
+          working_directory: ${{ env.terraform_working_directory }}
 
       - name: Terraform Plan
-        working-directory: .infrastructure
+        working-directory: ${{ env.terraform_working_directory }}
         run: ./terraform.sh plan ${{ matrix.environment }}
