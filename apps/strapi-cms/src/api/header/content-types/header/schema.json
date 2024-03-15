@@ -26,6 +26,14 @@
       "repeatable": true,
       "component": "components.cta-button-simple",
       "max": 2
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

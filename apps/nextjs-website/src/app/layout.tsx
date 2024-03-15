@@ -1,15 +1,9 @@
-import type { Metadata } from 'next';
-import { ThemeProvider } from '@mui/system';
-import { theme } from '@pagopa/mui-italia';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getPreHeaderProps, getHeaderProps, getFooterProps } from '@/lib/api';
-
-export const metadata: Metadata = {
-  title: 'Page',
-  description: 'New Page Created',
-};
 
 export default async function RootLayout({
   children,
@@ -22,7 +16,7 @@ export default async function RootLayout({
 
   return (
     <ThemeProvider theme={theme}>
-      <html lang='en'>
+      <html lang='it'>
         <body style={{ margin: 0 }}>
           <PreHeader {...preHeaderProps} />
           <Header {...headerProps} />

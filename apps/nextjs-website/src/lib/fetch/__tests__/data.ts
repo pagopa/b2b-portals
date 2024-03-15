@@ -8,6 +8,14 @@ export const homepageNavItem: Navigation[0] = {
   menuAttached: false,
   related: {
     slug: 'homepage',
+    seo: {
+      metaTitle: 'SEND - PagoPA',
+      metaDescription: 'Homepage description',
+      keywords: 'homepage1\nhomepage2\nhomepage3',
+      canonicalURL: 'https://dsf3knok9k0v5.cloudfront.net/homepage-canonical',
+      ogTitle: 'Homepage og title',
+      ogDescription: 'Homepage og description',
+    },
     sections: [
       {
         __component: 'sections.hero',
@@ -33,12 +41,23 @@ export const parentNavItem: Navigation[0] = {
   menuAttached: true,
   related: {
     slug: 'parent',
+    seo: {
+      metaTitle: 'SEND - Parent',
+      metaDescription: 'Parent description',
+      keywords: 'parent1\nparent2\nparent3',
+      canonicalURL: 'https://dsf3knok9k0v5.cloudfront.net/parent-canonical',
+      ogTitle: 'Parent og title',
+      ogDescription: 'Parent og description',
+    },
     sections: [
       {
         __component: 'sections.editorial',
         image: {
           url: 'someUrl',
           alternativeText: null,
+          width: 1000,
+          height: 1000,
+          mime: 'image/jpeg',
         },
         ctaButtons: [],
         sectionID: null,
@@ -62,6 +81,14 @@ export const childNavItem: Navigation[0] = {
   menuAttached: true,
   related: {
     slug: 'child',
+    seo: {
+      metaTitle: 'SEND - Child',
+      metaDescription: 'Child description',
+      keywords: 'child1\nchild2\nchild3',
+      canonicalURL: 'https://dsf3knok9k0v5.cloudfront.net/child-canonical',
+      ogTitle: 'Child og title',
+      ogDescription: 'Child og description',
+    },
     sections: [
       {
         __component: 'sections.hero',
