@@ -1,4 +1,3 @@
-// This component is a copy of the @pagopa/pagopa-editorial-components AccordionItem component.
 import React from 'react';
 import MUIAccordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';

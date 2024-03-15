@@ -4,8 +4,9 @@
     "module": "esnext",
     "rootDir": "src",
     "outDir": "dist",
-    "jsx": "preserve",
-    "moduleResolution": "node"
+    "jsx": "react-jsx",
+    "moduleResolution": "node",    
+    "sourceMap": false,
   },
   "include": ["src"]
 }
