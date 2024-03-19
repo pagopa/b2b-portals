@@ -35,6 +35,9 @@ const HowTo = (props: HowToSection) => {
             ...(props.theme === 'dark' && {
               backgroundColor: 'custom.backgroundColorDark',
             }),
+            ...(props.theme === 'light' && {
+              backgroundColor: 'custom.backgroundColorLightGrey',
+            }),
             img: {
               display: 'none',
             },
@@ -55,6 +58,11 @@ const HowTo = (props: HowToSection) => {
               marginLeft: 'auto',
               marginRight: 'auto',
             },
+          },
+          '.MuiTypography-overline': {
+            ...(props.theme === 'light' && { color: 'primary.dark' }),
+            fontWeight: '400',
+            opacity: '1',
           },
         }}
       >
