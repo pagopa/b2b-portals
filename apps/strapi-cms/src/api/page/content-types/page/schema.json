@@ -33,7 +33,8 @@
         "sections.banner-link",
         "sections.accordion",
         "sections.cards",
-        "sections.stripe-link"
+        "sections.stripe-link",
+        "sections.one-trust"
       ],
       "required": true,
       "min": 1
