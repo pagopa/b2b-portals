@@ -1,4 +1,3 @@
-// eslint-disable next/no-before-interactive-script-outside-document
 'use client';
 import { useEffect } from 'react';
 import { OneTrustSectionProps } from '@/lib/fetch/types/PageSection';
