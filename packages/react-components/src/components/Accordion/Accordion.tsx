@@ -1,5 +1,6 @@
 import { Box, Container, Grid, Stack, Typography } from '@mui/material';
-import { AccordionItem, type AccordionItemProps } from './AccordionItem';
+import type { AccordionItemProps } from './AccordionItem';
+import { AccordionItem } from './AccordionItem';
 export interface AccordionProps {
   title: string;
   subtitle?: string;
