@@ -29,7 +29,7 @@ const Feature = (props: FeatureSection) => {
         sx={{
           section: {
             ...(props.theme === 'light' && {
-              backgroundColor: 'background.default',
+              backgroundColor: 'custom.backgroundColorLightGrey',
             }),
           },
           '.MuiGrid-item': {
