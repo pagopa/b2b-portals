@@ -67,6 +67,11 @@ const Editorial = (props: EditorialSection) => {
           '.MuiTypography-body2': {
             color: themeColor,
           },
+          '.MuiTypography-overline': {
+            ...(props.theme === 'light' && {
+              color: 'text.secondary',
+            }),
+          },
         }}
       >
         <EditorialEC {...makeEditorialProps(props)} />
