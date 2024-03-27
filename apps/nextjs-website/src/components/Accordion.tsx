@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Accordion as AccordionEC,
   AccordionProps,
-} from 'react-components/src/components/Accordion/Accordion';
+} from '@react-components/Accordion';
 import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import { AccordionSection } from '@/lib/fetch/types/PageSection';
