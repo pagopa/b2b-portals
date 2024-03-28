@@ -1,5 +1,11 @@
 # strapi-cms
 
+## 0.1.1
+
+### Patch Changes
+
+- fd0d810: Add OneTrust section
+
 ## 0.1.0
 
 ### Minor Changes
