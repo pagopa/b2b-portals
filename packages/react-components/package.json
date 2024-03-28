@@ -1,0 +1,24 @@
+{
+  "name": "react-components",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "shx rm -rf dist/",
+    "precompile": "npm run clean",
+    "compile": "tsc",
+    "watch": "tsc --watch",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "@pagopa/pagopa-editorial-components": "^3.1.2",
+    "@types/react": "^18.2.67",
+    "eslint": "^8.56.0",
+    "eslint-config-custom": "^0.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "shx": "^0.3.4",
+    "typescript": "^5.4.2"
+  }
+}
