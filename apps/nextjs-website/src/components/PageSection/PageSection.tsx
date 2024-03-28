@@ -7,6 +7,7 @@ import HowTo from '../HowTo';
 import BannerLink from '../BannerLink';
 import StripeLink from '../StripeLink';
 import Cards from '../Cards';
+import OneTrustSection from '../OneTrust';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
@@ -28,6 +29,8 @@ const PageSection = (props: PageSectionData) => {
       return <StripeLink {...props} />;
     case 'sections.cards':
       return <Cards {...props} />;
+    case 'sections.one-trust':
+      return <OneTrustSection {...props} />;
     default:
       return null;
   }

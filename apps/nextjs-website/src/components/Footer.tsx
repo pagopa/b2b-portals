@@ -76,6 +76,7 @@ const makeFooterProps = ({
 
 const Footer = (props: FooterData['data']['attributes']) => (
   <Stack
+    width='100%'
     sx={{
       '.MuiTypography-root.MuiTypography-caption p': {
         // legalInfo

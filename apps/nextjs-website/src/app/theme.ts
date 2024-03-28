@@ -6,6 +6,8 @@ export const theme = createTheme(MUIItaliaTheme, {
   shadows: {
     custom: {
       boxShadow: '-6px -6px 19px 2px #002B551A',
+      otMenuMobile:
+        'rgb(0 43 85 / 10%) 0px 2px 4px -1px, rgb(0 43 85 / 5%) 0px 4px 5px',
     },
   },
   palette: {

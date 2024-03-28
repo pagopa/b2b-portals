@@ -141,6 +141,11 @@ const CardsSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const OneTrustSectionPropsCodec = t.strict({
+  __component: t.literal('sections.one-trust'),
+  oneTrustNoticeURL: t.string,
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -150,6 +155,7 @@ export const PageSectionCodec = t.union([
   BannerLinkSectionCodec,
   StripeLinkSectionCodec,
   CardsSectionCodec,
+  OneTrustSectionPropsCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -161,3 +167,4 @@ export type HowToSection = t.TypeOf<typeof HowToSectionCodec>;
 export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
 export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
+export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_sections_one_trusts",
+  "info": {
+    "displayName": "OneTrust"
+  },
+  "options": {},
+  "attributes": {
+    "oneTrustNoticeURL": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

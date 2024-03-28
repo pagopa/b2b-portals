@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
+import Script from 'next/script';
 import { theme } from './theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
@@ -22,6 +23,12 @@ export default async function RootLayout({
           <Header {...headerProps} />
           {children}
           <Footer {...footerProps} />
+          <Script
+            src='/scripts/otnotice-1.0.min.js'
+            type='text/javascript'
+            id='otprivacy-notice-script'
+            strategy='beforeInteractive'
+          />
         </body>
       </html>
     </ThemeProvider>
