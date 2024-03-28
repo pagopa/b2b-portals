@@ -143,7 +143,7 @@ const CardsSectionCodec = t.strict({
 
 const OneTrustSectionPropsCodec = t.strict({
   __component: t.literal('sections.one-trust'),
-  cdnURL: t.string,
+  oneTrustNoticeURL: t.string,
 });
 
 export const PageSectionCodec = t.union([

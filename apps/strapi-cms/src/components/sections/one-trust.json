@@ -5,7 +5,7 @@
   },
   "options": {},
   "attributes": {
-    "cdnURL": {
+    "oneTrustNoticeURL": {
       "type": "string",
       "required": true
     }
