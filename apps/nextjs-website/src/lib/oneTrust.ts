@@ -3,7 +3,7 @@ export const ExtractNoticeIDFromOneTrustURL = (
 ): string | null => {
   // Check that given URL comes from onetrust.com and points to a .json file as it should
   if (
-    !oneTrustNoticeURL.includes('onetrust.com') ||
+    !oneTrustNoticeURL.includes('onetrust.com/') ||
     !oneTrustNoticeURL.endsWith('.json')
   ) {
     return null;
