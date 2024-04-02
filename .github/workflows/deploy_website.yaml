@@ -87,11 +87,11 @@ jobs:
 
       - name: Set Variabile CLOUDFRONT_DISTRIBUTION_ID
         id: set_cdn_distribution_id
-        run: echo "cdn_id=$(if [[ "${{ inputs.tenant }}" == "send" ]]; then echo "${{ vars.CLOUDFRONT_DISTRIBUTION_ID_send }}"; elif [[ "${{ inputs.tenant }}" == "appio" ]]; then echo "${{ vars.CLOUDFRONT_DISTRIBUTION_ID_appio }}"; else echo "Tenant non valido";fi )" >> $GITHUB_OUTPUT
+        run: echo "cdn_id=$(if [[ "${{ inputs.tenant }}" == "send" ]]; then echo "${{ vars.CLOUDFRONT_DISTRIBUTION_ID_send }}"; elif [[ "${{ inputs.tenant }}" == "appio" ]]; then echo "${{ vars.CLOUDFRONT_DISTRIBUTION_ID_appio }}"; else echo "Tenant not valid";fi )" >> $GITHUB_OUTPUT
       
       - name: Set Variabile CDN_PATH
         id: set_cdn_path
-        run: echo "cnd_path=$(if [[ "${{ inputs.tenant }}" == "send" ]]; then echo "${{ vars.CDN_PATH_send }}"; elif [[ "${{ inputs.tenant }}" == "appio" ]]; then echo "${{ vars.CDN_PATH_appio }}"; else echo "Tenant non valido";fi )" >> $GITHUB_OUTPUT      
+        run: echo "cnd_path=$(if [[ "${{ inputs.tenant }}" == "send" ]]; then echo "${{ vars.CDN_PATH_send }}"; elif [[ "${{ inputs.tenant }}" == "appio" ]]; then echo "${{ vars.CDN_PATH_appio }}"; else echo "Tenant not valid";fi )" >> $GITHUB_OUTPUT      
 
       - name: Deploy website
         uses: ./.github/actions/deploy
