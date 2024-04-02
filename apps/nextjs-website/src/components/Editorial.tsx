@@ -13,6 +13,7 @@ const makeEditorialProps = ({
   body,
   image,
   ctaButtons,
+  storeButtons,
   ...rest
 }: EditorialSection): EditorialProps => ({
   ...(eyelet && { eyelet }),
@@ -34,6 +35,12 @@ const makeEditorialProps = ({
         ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
+  ...(storeButtons && {
+    storeButtons: {
+      ...(storeButtons.hrefGoogle && { hrefGoogle: storeButtons.hrefGoogle }),
+      ...(storeButtons.hrefApple && { hrefApple: storeButtons.hrefApple }),
+    },
+  }),
   ...rest,
 });
 
