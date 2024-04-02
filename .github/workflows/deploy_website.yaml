@@ -15,6 +15,10 @@ on:
         default: prod
         options:
           - prod
+      tenant:
+        description: 'The tenant inherent to the site'
+        type: string
+        required: true
 
   # Allows external webhook trigger
   repository_dispatch:
@@ -46,6 +50,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      
+      - name: Set Variabile CLOUDFRONT_DISTRIBUTION_ID
+        id: set_cdn_distribution_id
+        run: echo "cdn_id=$(if [[ "${{ inputs.tenant }}" == "send" ]]; then echo "${{ vars.CLOUDFRONT_DISTRIBUTION_ID_send }}"; elif [[ "${{ inputs.tenant }}" == "appio" ]]; then echo "${{ vars.CLOUDFRONT_DISTRIBUTION_ID_appio }}"; else echo "Tenant non valido";fi )" >> $GITHUB_OUTPUT
+      
+      - name: Set Variabile CDN_PATH
+        id: set_cdn_path
+        run: echo "cnd_path=$(if [[ "${{ inputs.tenant }}" == "send" ]]; then echo "${{ vars.CDN_PATH_send }}"; elif [[ "${{ inputs.tenant }}" == "appio" ]]; then echo "${{ vars.CDN_PATH_appio }}"; else echo "Tenant non valido";fi )" >> $GITHUB_OUTPUT      
 
       - name: Deploy website
         uses: ./.github/actions/deploy
@@ -53,10 +65,11 @@ jobs:
           environment: ${{ matrix.environment }}
           iam_role: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
           bucket: ${{ vars.S3_BUCKET_NAME }}
-          cloudfront_distribution_id: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+          cloudfront_distribution_id: ${{ steps.set_cdn_distribution_id.outputs.cdn_id }}
           strapi_api_token: ${{ secrets.STRAPI_TOKEN }}
           strapi_api_base_url: ${{ vars.STRAPI_URL }}
-          cdn_path: ${{ vars.CDN_PATH }}
+          cdn_path: ${{ steps.set_cdn_path.outputs.cdn_path }}
+          tenant: ${{ inputs.tenant }}
 
   manual_deploy:
     name: Deploy to S3 (manual trigger) - (${{ inputs.environment }})
@@ -72,13 +85,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
 
+      - name: Set Variabile CLOUDFRONT_DISTRIBUTION_ID
+        id: set_cdn_distribution_id
+        run: echo "cdn_id=$(if [[ "${{ inputs.tenant }}" == "send" ]]; then echo "${{ vars.CLOUDFRONT_DISTRIBUTION_ID_send }}"; elif [[ "${{ inputs.tenant }}" == "appio" ]]; then echo "${{ vars.CLOUDFRONT_DISTRIBUTION_ID_appio }}"; else echo "Tenant non valido";fi )" >> $GITHUB_OUTPUT
+      
+      - name: Set Variabile CDN_PATH
+        id: set_cdn_path
+        run: echo "cnd_path=$(if [[ "${{ inputs.tenant }}" == "send" ]]; then echo "${{ vars.CDN_PATH_send }}"; elif [[ "${{ inputs.tenant }}" == "appio" ]]; then echo "${{ vars.CDN_PATH_appio }}"; else echo "Tenant non valido";fi )" >> $GITHUB_OUTPUT      
+
       - name: Deploy website
         uses: ./.github/actions/deploy
         with:
           environment: ${{ inputs.environment }}
           iam_role: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
           bucket: ${{ vars.S3_BUCKET_NAME }}
-          cloudfront_distribution_id: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+          cloudfront_distribution_id: ${{ steps.set_cdn_distribution_id.outputs.cdn_id }}
           strapi_api_token: ${{ secrets.STRAPI_TOKEN }}
           strapi_api_base_url: ${{ vars.STRAPI_URL }}
-          cdn_path: ${{ vars.CDN_PATH }}
+          cdn_path: ${{ steps.set_cdn_path.outputs.cdn_path }}
+          tenant: ${{ inputs.tenant }}
