@@ -6,7 +6,7 @@
     "clean": "shx rm -rf dist/",
     "precompile": "npm run clean",
     "compile": "tsc",
-    "watch": "tsc --watch",
+    "dev": "tsc --watch",
     "lint": "eslint src"
   },
   "devDependencies": {
