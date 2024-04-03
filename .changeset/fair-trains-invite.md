@@ -3,4 +3,4 @@
 "strapi-cms": minor
 ---
 
-Adapt to EC version 3.2.0
+Adapt to EC version 4.0.0
