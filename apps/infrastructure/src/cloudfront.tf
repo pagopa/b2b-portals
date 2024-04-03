@@ -58,10 +58,9 @@ resource "aws_cloudfront_distribution" "website" {
 
   default_cache_behavior {
     # HTTPS requests we permit the distribution to serve
-    allowed_methods            = ["GET", "HEAD", "OPTIONS"]
-    cached_methods             = ["GET", "HEAD"]
-    target_origin_id           = aws_s3_bucket.website.bucket
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.websites.id
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = aws_s3_bucket.website.bucket
 
     forwarded_values {
       query_string = false
