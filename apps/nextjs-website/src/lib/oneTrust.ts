@@ -1,4 +1,4 @@
-export const ExtractNoticeIDFromOneTrustURL = (
+export const extractNoticeIDFromOneTrustURL = (
   OTNoticeURLString: string
 ): string | null => {
   // Check that given URL comes from onetrust.com and points to a .json file as it should before parsing
