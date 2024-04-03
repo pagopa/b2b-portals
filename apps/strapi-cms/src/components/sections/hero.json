@@ -47,6 +47,7 @@
       "type": "enumeration",
       "enum": [
         "small",
+        "medium",
         "big"
       ],
       "default": "small",
