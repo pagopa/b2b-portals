@@ -93,6 +93,10 @@ const Hero = (props: HeroProps) => {
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
     >
+      {(size === 'medium' || size === 'big') && (
+        <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
+      )}
+
       <Grid
         item
         xs={12}
@@ -131,12 +135,23 @@ const Hero = (props: HeroProps) => {
             <Image
               alt={altText}
               src={image}
-              layout='fill'
-              objectFit='contain'
-              objectPosition='center'
+              width={0}
+              height={0}
+              style={{
+                objectFit: 'contain',
+                objectPosition: 'center',
+                width: '100%',
+                height: '100%',
+                maxHeight: minHeight,
+                userSelect: 'none',
+              }}
             />
           )}
         </Grid>
+      )}
+
+      {(size === 'medium' || size === 'big') && (
+        <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
       )}
     </EContainer>
   );
