@@ -15,9 +15,12 @@ const makeHeroProps = ({
   ...rest,
   useHoverlay: false,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
-  ...(image && { image: image.url }),
-  ...(image && image.alternativeText && { altText: image.alternativeText }),
-  ...(background && { background: background.url }),
+  ...(image && { image: `http://localhost:1337${image.url}` }),
+  ...(image &&
+    image.alternativeText && {
+      altText: `http://localhost:1337${image.alternativeText}`,
+    }),
+  ...(background && { background: `http://localhost:1337${background.url}` }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
