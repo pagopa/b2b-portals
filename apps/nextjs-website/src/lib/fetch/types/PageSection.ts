@@ -14,12 +14,18 @@ const HeroSectionCodec = t.strict({
   inverse: t.boolean,
   size: t.keyof({
     small: null,
+    medium: null,
     big: null,
   }),
   sectionID: t.union([t.string, t.null]),
   image: t.union([ImageDataCodec, t.null]),
   background: t.union([ImageDataCodec, t.null]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
+});
+
+const StoreButtonsCodec = t.strict({
+  hrefGoogle: t.union([t.string, t.null]),
+  hrefApple: t.union([t.string, t.null]),
 });
 
 const EditorialSectionCodec = t.strict({
@@ -42,6 +48,7 @@ const EditorialSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   image: ImageDataCodec,
   ctaButtons: t.array(CTAButtonSimpleCodec),
+  storeButtons: t.union([StoreButtonsCodec, t.null]),
 });
 
 const AccordionSectionCodec = t.strict({
@@ -141,6 +148,11 @@ const CardsSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const OneTrustSectionPropsCodec = t.strict({
+  __component: t.literal('sections.one-trust'),
+  oneTrustNoticeURL: t.string,
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -150,6 +162,7 @@ export const PageSectionCodec = t.union([
   BannerLinkSectionCodec,
   StripeLinkSectionCodec,
   CardsSectionCodec,
+  OneTrustSectionPropsCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -161,3 +174,4 @@ export type HowToSection = t.TypeOf<typeof HowToSectionCodec>;
 export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
 export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
+export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
