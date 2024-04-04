@@ -17,12 +17,16 @@ const makeHeroProps = ({
   theme,
   useHoverlay: false,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
+  // START
+  // to be reverted to original file after the layout check
   ...(image && { image: `http://localhost:1337${image.url}` }),
   ...(image &&
     image.alternativeText && {
       altText: `http://localhost:1337${image.alternativeText}`,
     }),
   ...(background && { background: `http://localhost:1337${background.url}` }),
+  // to be reverted to original file after the layout check
+  // END
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
