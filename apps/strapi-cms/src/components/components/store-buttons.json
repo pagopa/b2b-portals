@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_components_store_buttons",
+  "info": {
+    "displayName": "StoreButtons"
+  },
+  "options": {},
+  "attributes": {
+    "hrefGoogle": {
+      "type": "string"
+    },
+    "hrefApple": {
+      "type": "string"
+    }
+  }
+}
