@@ -29,7 +29,7 @@ inputs:
     required: false
   tenant:
     description: 'The Tenant inherent to the website'
-    required: false
+    required: true
 
 runs:
   using: "composite"
