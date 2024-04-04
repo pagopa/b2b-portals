@@ -39,4 +39,5 @@ export const CTAButtonSimpleCodec = t.strict({
   variant: t.keyof({ contained: null, outlined: null }),
   size: MUIButtonSizeCodec,
   icon: t.union([MUIButtonIconCodec, t.null]),
+  color: t.keyof({ primary: null, inherit: null }),
 });

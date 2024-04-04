@@ -14,6 +14,7 @@ const makeHeroProps = ({
   ...rest
 }: HeroSection): HeroProps => ({
   ...rest,
+  theme,
   useHoverlay: false,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
   ...(image && { image: image.url }),
@@ -23,14 +24,12 @@ const makeHeroProps = ({
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
-        color: theme === 'dark' ? 'negative' : 'primary',
+        color: theme === 'dark' ? 'inherit' : 'primary',
         ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
 });
 
-const Hero = (props: HeroSection) => {
-  return <HeroEC {...makeHeroProps(props)} />;
-};
+const Hero = (props: HeroSection) => <HeroEC {...makeHeroProps(props)} />;
 
 export default Hero;

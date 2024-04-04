@@ -15,6 +15,7 @@ const header: Header = {
           variant: 'contained',
           size: 'medium',
           icon: null,
+          color: 'primary',
         },
       ],
       logo: {

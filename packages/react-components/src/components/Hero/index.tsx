@@ -20,7 +20,13 @@ export interface HeroProps extends CommonProps, HeroTextProps {
 
 interface CtaButton extends Partial<ButtonProps> {
   text: string;
+  startIcon?: JSX.Element;
+  color: "primary" | "inherit";
+  href: string;
+  variant: "contained" | "outlined";
+  size: "small" | "medium" | "large";
 }
+
 
 interface HeroTextProps extends CommonProps {
   title: string;

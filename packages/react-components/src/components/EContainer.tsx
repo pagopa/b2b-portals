@@ -35,9 +35,9 @@ const EContainer = (props: Props) => {
       sx={{ px: { xs: 4 }, position: 'relative', overflow: 'hidden' }}
       py={py}
       px={px}
-      bgcolor={!backgroundIsJSX ? background : undefined}
+      bgcolor={!backgroundIsJSX ? background as string : undefined}
     >
-      {backgroundIsJSX && background}
+      {backgroundIsJSX && background as React.ReactNode}
       <Container maxWidth="lg" disableGutters>
         <Grid
           container

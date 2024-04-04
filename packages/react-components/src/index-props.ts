@@ -1,5 +1,5 @@
 import { HeroProps } from "./components/Hero";
 
-export {
+export type {
   HeroProps
 };
