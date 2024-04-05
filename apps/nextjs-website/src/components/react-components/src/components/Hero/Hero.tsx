@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Stack, Typography, Grid } from '@mui/material';
+import { Box, Stack, Grid, useTheme } from '@mui/material';
+import Image from 'next/image';
 import { isJSX } from '../../utils';
 import EContainer from '../EContainer';
 import { HeroProps, HeroTextProps } from './Hero.types';
@@ -9,6 +10,7 @@ import {
   getMinHeight,
   getOverlay,
   getBackgroundColor,
+  renderTitle,
 } from './Hero.helpers';
 
 const HeroTextContent = ({
@@ -18,7 +20,12 @@ const HeroTextContent = ({
   theme,
   size,
 }: HeroTextProps) => {
-  const textColor = theme === 'dark' ? 'primary.contrastText' : 'text.primary';
+  const muiTheme = useTheme();
+  const textColor =
+    theme === 'dark'
+      ? muiTheme.palette.primary.contrastText
+      : muiTheme.palette.text.primary;
+
   return (
     <Stack
       justifyContent={size === 'small' ? 'center' : { md: 'center' }}
@@ -29,13 +36,7 @@ const HeroTextContent = ({
     >
       <Box mb={size === 'small' ? 0 : { xs: 6, md: 4 }}>
         <>
-          <Typography
-            variant='h1'
-            color={textColor}
-            mb={size === 'small' ? 0 : 2}
-          >
-            {title}
-          </Typography>
+          {renderTitle({ title, textColor, size })}
           {renderSubtitle({ subtitle, textColor })}
         </>
       </Box>
@@ -106,13 +107,21 @@ const Hero = (props: HeroProps) => {
         <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
       )}
       {(size === 'medium' || size === 'big') && image && (
-        <Grid item lg={6} mb={{ xs: 4, lg: 0 }} component='figure'>
+        <Grid
+          item
+          lg={6}
+          mb={{ xs: 4, lg: 0 }}
+          component='figure'
+          sx={{ width: '100%' }}
+        >
           {isJSX(image) ? (
             image
           ) : (
-            <img
+            <Image
               alt={altText}
               src={image}
+              width={0}
+              height={0}
               style={{
                 objectFit: 'contain',
                 objectPosition: 'center',
