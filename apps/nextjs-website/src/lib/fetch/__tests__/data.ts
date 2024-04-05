@@ -68,6 +68,7 @@ export const parentNavItem: Navigation[0] = {
         pattern: 'dots',
         reversed: false,
         width: 'standard',
+        storeButtons: null,
       },
     ],
   },
