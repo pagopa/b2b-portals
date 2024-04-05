@@ -96,47 +96,24 @@ const Hero = (props: HeroProps) => {
       {(size === 'medium' || size === 'big') && (
         <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
       )}
-
       <Grid
         item
-        xs={12}
-        lg={size === 'medium' || size === 'big' ? 4 : 12}
-        sx={{
-          minHeight: { lg: minHeight },
-          ...(size === 'medium' || size === 'big'
-            ? {
-                marginRight: { lg: '2em' },
-              }
-            : {}),
-        }}
+        lg={size === 'small' ? 12 : 3}
+        sx={{ minHeight: { lg: minHeight } }}
       >
         <HeroTextContent {...props} />
       </Grid>
-
+      {(size === 'medium' || size === 'big') && (
+        <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
+      )}
       {(size === 'medium' || size === 'big') && image && (
-        <Grid
-          item
-          xs={12}
-          lg={5}
-          mb={{ xs: 4, lg: 0 }}
-          sx={{
-            minHeight: { lg: minHeight },
-            ...(size === 'medium' || size === 'big'
-              ? {
-                  marginLeft: { lg: '2em' },
-                }
-              : {}),
-          }}
-          component='figure'
-        >
+        <Grid item lg={6} mb={{ xs: 4, lg: 0 }} component='figure'>
           {isJSX(image) ? (
             image
           ) : (
-            <Image
+            <img
               alt={altText}
               src={image}
-              width={0}
-              height={0}
               style={{
                 objectFit: 'contain',
                 objectPosition: 'center',
@@ -149,7 +126,6 @@ const Hero = (props: HeroProps) => {
           )}
         </Grid>
       )}
-
       {(size === 'medium' || size === 'big') && (
         <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
       )}
