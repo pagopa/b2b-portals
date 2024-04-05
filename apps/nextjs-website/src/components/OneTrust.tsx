@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { Box } from '@mui/material';
-import { ExtractNoticeIDFromOneTrustURL } from '@/lib/oneTrust';
+import { extractNoticeIDFromOneTrustURL } from '@/lib/oneTrust';
 import { OneTrustSectionProps } from '@/lib/fetch/types/PageSection';
 
 // Declare OneTrust object created by otnotice-1.0.min.js
@@ -20,7 +20,7 @@ const OneTrustSection = (props: OneTrustSectionProps) => {
   const { oneTrustNoticeURL } = props;
   // Extrapolate notice ID and build the ID of the div to be populated
   // akin to how otnotice-1.0.min.js does
-  const divID = `otnotice-${ExtractNoticeIDFromOneTrustURL(oneTrustNoticeURL)}`;
+  const divID = `otnotice-${extractNoticeIDFromOneTrustURL(oneTrustNoticeURL)}`;
 
   // eslint-disable-next-line functional/no-return-void
   useEffect(() => {
