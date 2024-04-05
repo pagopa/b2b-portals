@@ -27,9 +27,6 @@ inputs:
   cdn_path:
     description: 'The CDN bucket S3 URL'
     required: false
-  tenant:
-    description: 'The Tenant inherent to the website'
-    required: true
 
 runs:
   using: "composite"
@@ -65,7 +62,7 @@ runs:
 
     - name: Deploy to S3 Bucket
       shell: bash
-      run: aws s3 sync ./apps/nextjs-website/out s3://${{ inputs.bucket }}/${{ inputs.tenant }} --delete
+      run: aws s3 sync ./apps/nextjs-website/out s3://${{ inputs.bucket }}/${{ inputs.environment }} --delete
 
     - name: Create AWS Cloudfront Invalidation
       shell: bash
