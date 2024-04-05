@@ -1,6 +1,60 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Button, Typography } from '@mui/material';
 import { CtaButton } from './Hero.types';
+
+export const renderStringTitle = (
+  title: string,
+  textColor: string,
+  size: 'small' | 'medium' | 'big' | undefined
+) => (
+  <Typography variant='h1' color={textColor} mb={size === 'small' ? 0 : 2}>
+    {title}
+  </Typography>
+);
+
+const renderElementTitle = (
+  title: JSX.Element,
+  textColor: string,
+  _size: 'small' | 'medium' | 'big' | undefined
+) =>
+  React.isValidElement(title)
+    ? React.cloneElement(
+        title as ReactElement<{ style?: React.CSSProperties }>,
+        { style: { color: textColor } }
+      )
+    : null;
+
+export const renderTitle = ({
+  title,
+  textColor,
+  size,
+}: {
+  title: string | JSX.Element | undefined;
+  textColor: string;
+  size: 'small' | 'medium' | 'big' | undefined;
+}) => {
+  if (!title) {
+    return null;
+  }
+
+  return typeof title === 'string'
+    ? renderStringTitle(title, textColor, size)
+    : renderElementTitle(title, textColor, size);
+};
+
+const renderStringSubtitle = (subtitle: string, textColor: string) => (
+  <Typography variant='body1' style={{ color: textColor }}>
+    {subtitle}
+  </Typography>
+);
+
+const renderElementSubtitle = (subtitle: JSX.Element, textColor: string) =>
+  React.isValidElement(subtitle)
+    ? React.cloneElement(
+        subtitle as ReactElement<{ style?: React.CSSProperties }>,
+        { style: { color: textColor } }
+      )
+    : null;
 
 export const renderSubtitle = ({
   subtitle,
@@ -12,15 +66,19 @@ export const renderSubtitle = ({
   if (!subtitle) {
     return null;
   }
-  if (React.isValidElement(subtitle)) {
-    return subtitle;
-  }
-  return (
-    <Typography variant='body1' color={textColor}>
-      {subtitle}
-    </Typography>
-  );
+
+  return typeof subtitle === 'string'
+    ? renderStringSubtitle(subtitle, textColor)
+    : renderElementSubtitle(subtitle, textColor);
 };
+
+const renderCtaButton = (button: CtaButton, i: number) => (
+  <Button key={`${button.text}-${i}`} {...button}>
+    {button.text}
+  </Button>
+);
+
+const renderElementButton = (button: JSX.Element) => button;
 
 export const renderButtons = ({
   ctaButtons,
@@ -28,16 +86,9 @@ export const renderButtons = ({
   ctaButtons: ReadonlyArray<CtaButton | JSX.Element>;
 }) =>
   ctaButtons.map((button, i) =>
-    React.isValidElement(button) ? (
-      button
-    ) : (
-      <Button
-        key={`${(button as CtaButton).text}-${i}`}
-        {...(button as CtaButton)}
-      >
-        {(button as CtaButton).text}
-      </Button>
-    )
+    React.isValidElement(button)
+      ? renderElementButton(button)
+      : renderCtaButton(button as CtaButton, i)
   );
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
