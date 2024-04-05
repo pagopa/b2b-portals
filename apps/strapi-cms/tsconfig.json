@@ -39,7 +39,6 @@
     ".cache/",
     ".tmp/",
     "src/admin/",
-    "src/api/",
     "**/*.test.*",
     "src/plugins/**"
   ]
