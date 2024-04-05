@@ -19,16 +19,16 @@ resource "aws_cloudfront_distribution" "my_distributions" {
   #aliases = ["${each.value.url_tenant}"]  # Alias di dominio univoco per ogni distribuzione
 
   custom_error_response {
-  error_code         = 404
-  response_code      = 404
-  response_page_path = "/404.html"
+    error_code         = 404
+    response_code      = 404
+    response_page_path = "/404.html"
   }
 
   default_cache_behavior {
     # HTTPS requests we permit the distribution to serve
-    allowed_methods            = ["GET", "HEAD", "OPTIONS"]
-    cached_methods             = ["GET", "HEAD"]
-    target_origin_id           = each.value.origin_id
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = each.value.origin_id
     #response_headers_policy_id = aws_cloudfront_response_headers_policy.websites.id
 
     forwarded_values {
