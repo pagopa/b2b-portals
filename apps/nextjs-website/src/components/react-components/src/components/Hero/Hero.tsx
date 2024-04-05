@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { Box, Stack, Typography, Grid } from '@mui/material';
 import { isJSX } from '../../utils';
 import EContainer from '../EContainer';
