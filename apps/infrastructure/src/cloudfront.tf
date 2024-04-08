@@ -100,8 +100,8 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
   for_each = var.cdn_configs
 
   origin {
-    domain_name = each.value.origin_domain
-    origin_id   = each.value.origin_id
+    domain_name = aws_s3_bucket.website.bucket_regional_domain_name
+    origin_id   = aws_s3_bucket.website.bucket
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.main.cloudfront_access_identity_path
     }
@@ -126,7 +126,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
     # HTTPS requests we permit the distribution to serve
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = each.value.origin_id
+    target_origin_id = aws_s3_bucket.website.bucket
     #response_headers_policy_id = aws_cloudfront_response_headers_policy.websites.id
 
     forwarded_values {

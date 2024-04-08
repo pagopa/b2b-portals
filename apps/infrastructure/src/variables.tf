@@ -67,8 +67,6 @@ variable "dns_domain_name" {
 
 variable "cdn_configs" {
   type = map(object({
-    origin_domain = string
-    origin_id     = string
     origin_path   = string
     url_tenant    = string
     #ssl_cert_arn  = string
@@ -76,15 +74,11 @@ variable "cdn_configs" {
 
   default = {
     "cdn_send" = {
-      origin_domain = aws_s3_bucket.website.bucket_regional_domain_name
-      origin_id     = aws_s3_bucket.website.bucket
       origin_path   = "/send"
       url_tenant    = "notifichedigitali.pagopa.it"
       #ssl_cert_arn  = module.acm.acm_certificate_arn
     },
     "cdn_appio" = {
-      origin_domain = aws_s3_bucket.website.bucket_regional_domain_name
-      origin_id     = aws_s3_bucket.website.bucket
       origin_path   = "/appio"
       url_tenant    = "io.italia.it"
       #ssl_cert_arn  = module.acm.acm_certificate_arn
