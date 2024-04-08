@@ -67,20 +67,20 @@ variable "dns_domain_name" {
 
 variable "cdn_configs" {
   type = map(object({
-    origin_path   = string
-    url_tenant    = string
+    origin_path = string
+    url_tenant  = string
     #ssl_cert_arn  = string
   }))
 
   default = {
     "cdn_send" = {
-      origin_path   = "/send"
-      url_tenant    = "notifichedigitali.pagopa.it"
+      origin_path = "/send"
+      url_tenant  = "notifichedigitali.pagopa.it"
       #ssl_cert_arn  = module.acm.acm_certificate_arn
     },
     "cdn_appio" = {
-      origin_path   = "/appio"
-      url_tenant    = "io.italia.it"
+      origin_path = "/appio"
+      url_tenant  = "io.italia.it"
       #ssl_cert_arn  = module.acm.acm_certificate_arn
     }
   }
