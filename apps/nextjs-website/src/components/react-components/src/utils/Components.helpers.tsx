@@ -1,6 +1,21 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { Button, Typography } from '@mui/material';
-import { CtaButton } from './Hero.types';
+import { useTheme } from '@mui/material/styles';
+import { isJSX } from '../utils';
+import { CtaButton } from './Components.types';
+
+{
+  /* COMMON PROPS */
+}
+
+export const useBackgroundColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark' ? palette.primary.dark : palette.background.paper;
+};
+
+{
+  /* HERO PROPS */
+}
 
 export const renderStringTitle = (
   title: string,
@@ -24,7 +39,7 @@ const renderElementTitle = (
       )
     : null;
 
-export const renderTitle = ({
+export const renderHeroTitle = ({
   title,
   textColor,
   size,
@@ -101,5 +116,66 @@ export const getOverlay = (useHoverlay: boolean, theme: string) =>
       : 'linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), '
     : '';
 
-export const getBackgroundColor = (theme: string) =>
-  theme === 'dark' ? 'primary.dark' : 'primary.paper';
+{
+  /* EDITORIAL PROPS */
+}
+
+export const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(
+        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+      );
+      return undefined;
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        return undefined;
+      };
+    } else {
+      return undefined;
+    }
+  }, []);
+
+  return isMobile;
+};
+
+export const renderEyelet = (eyeletColor: string, eyelet?: string) => {
+  if (!eyelet) {
+    return null;
+  }
+
+  return (
+    <Typography variant='overline' color={eyeletColor}>
+      {eyelet}
+    </Typography>
+  );
+};
+
+export const renderEditorialTitle = (
+  title: string | JSX.Element,
+  textColor: string
+) =>
+  isJSX(title) ? (
+    title
+  ) : (
+    <Typography color={textColor} variant='h4'>
+      {title}
+    </Typography>
+  );
+
+export const renderBody = (body: string | JSX.Element, textColor: string) =>
+  isJSX(body) ? (
+    React.cloneElement(body, { color: textColor })
+  ) : (
+    <Typography color={textColor} variant='body2'>
+      {body}
+    </Typography>
+  );

@@ -1,29 +1,14 @@
-import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
-import { type CommonProps } from '../../types/components';
 import EContainer from '../EContainer';
+import { EditorialProps } from '../../utils/Components.types';
 import {
-  Content as EditorialContent,
-  type EditorialContentProps,
-} from './Content';
-import {
-  Ctas as EditorialCtas,
-  type EditorialCtaProps,
-  type StoreButtonsProps,
-} from './Ctas';
-import { Image as EditorialImage, type EditorialImageProps } from './Image';
-
-export interface EditorialProps
-  extends CommonProps,
-    EditorialContentProps,
-    EditorialCtaProps,
-    EditorialImageProps {
-  reversed?: boolean;
-  width: 'wide' | 'standard' | 'center';
-  storeButtons?: StoreButtonsProps;
-}
+  useIsMobile,
+  useBackgroundColor,
+} from '../../utils/Components.helpers';
+import { Content as EditorialContent } from './Content';
+import { Ctas as EditorialCtas } from './Ctas';
+import { Image as EditorialImage } from './Image';
 
 const Editorial = (props: EditorialProps) => {
   const {
@@ -38,33 +23,9 @@ const Editorial = (props: EditorialProps) => {
     width = 'standard',
     reversed = false,
   } = props;
-  const { palette } = useTheme();
 
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
-  );
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(
-        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
-      );
-      return undefined;
-    };
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        return undefined;
-      };
-    } else {
-      return undefined;
-    }
-  }, []);
-
-  const backgroundColor =
-    theme === 'dark' ? palette.primary.dark : palette.background.paper;
+  const isMobile = useIsMobile();
+  const backgroundColor = useBackgroundColor(theme);
 
   const columns = {
     wide: 6,
