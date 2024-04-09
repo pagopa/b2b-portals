@@ -35,7 +35,6 @@ export const Image = ({ image, pattern = 'none' }: EditorialImageProps) => {
         boxSizing: 'border-box',
         width: '100%',
         height: 'auto',
-        paddingBottom: '40px',
         ...patterns[pattern],
       }}
     >

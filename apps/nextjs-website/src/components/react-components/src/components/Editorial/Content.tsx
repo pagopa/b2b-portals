@@ -1,8 +1,12 @@
+import React from 'react';
 import { useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { type CommonProps } from '../../types/components';
-import { isJSX } from '../../utils';
+import {
+  renderBody,
+  renderEditorialTitle,
+  renderEyelet,
+} from '../../utils/Components.helpers';
 
 export interface EditorialContentProps extends CommonProps {
   title: string;
@@ -25,19 +29,9 @@ export const Content = ({
 
   return (
     <Stack maxWidth={{ md: maxTextWidth }} gap={2}>
-      <Typography variant='overline' color={eyeletColor}>
-        {eyelet}
-      </Typography>
-      <Typography color={textColor} variant='h4'>
-        {title}
-      </Typography>
-      {isJSX(body) ? (
-        body
-      ) : (
-        <Typography color={textColor} variant='body2'>
-          {body}
-        </Typography>
-      )}
+      {renderEyelet(eyeletColor, eyelet)}
+      {renderEditorialTitle(title, textColor)}
+      {renderBody(body, textColor)}
     </Stack>
   );
 };
