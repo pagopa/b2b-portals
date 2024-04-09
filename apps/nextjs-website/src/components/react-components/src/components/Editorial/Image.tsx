@@ -1,13 +1,8 @@
 import Box from '@mui/material/Box';
 import { SxProps } from '@mui/system';
 import { Theme } from '@mui/material/styles';
-import { ReactElement, cloneElement } from 'react';
-import { CommonProps } from '../../types/components';
-
-export interface EditorialImageProps extends CommonProps {
-  image: ReactElement;
-  pattern?: 'dots' | 'solid' | 'none';
-}
+import { cloneElement } from 'react';
+import { EditorialImageProps } from '../../utils/Components.types';
 
 const translateTopRight = 'translate(40px, -30px)';
 const scaleAndTranslateBottomLeft = 'translate(-20px, 10px) scale(0.89)';
@@ -28,6 +23,7 @@ export const Image = ({ image, pattern = 'none' }: EditorialImageProps) => {
     },
     none: {},
   };
+  const { style } = image.props;
 
   return (
     <Box
@@ -40,6 +36,7 @@ export const Image = ({ image, pattern = 'none' }: EditorialImageProps) => {
     >
       {cloneElement(image, {
         style: {
+          ...style,
           objectFit: 'cover',
           objectPosition: 'center',
           height: 'auto',
