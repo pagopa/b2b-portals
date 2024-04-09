@@ -1,27 +1,16 @@
 import Image from 'next/image';
 import Button, { type ButtonProps } from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { type CommonProps } from '../../types/components';
 import appleBadge from '../../../../../../public/editorial-images/app-store-badge.png';
 import googleBadge from '../../../../../../public/editorial-images/google-play-badge.png';
+import {
+  CtaButtonProps,
+  CtaEditorialButton,
+  EditorialCtaProps,
+} from '../../utils/Components.types';
+import { useButtonColor } from '../../utils/Components.helpers';
 
-interface CtaButtonProps extends Partial<ButtonProps> {
-  text: string;
-}
-
-type CtaButton = CtaButtonProps | JSX.Element;
-
-export interface StoreButtonsProps {
-  hrefGoogle?: string;
-  hrefApple?: string;
-}
-
-export interface EditorialCtaProps extends CommonProps {
-  ctaButtons?: CtaButton[];
-  storeButtons?: StoreButtonsProps;
-}
-
-const isButtonProps = (button: CtaButton): button is CtaButtonProps =>
+const isButtonProps = (button: CtaEditorialButton): button is CtaButtonProps =>
   typeof button === 'object' && 'text' in button;
 
 export const Ctas = ({
@@ -29,13 +18,15 @@ export const Ctas = ({
   storeButtons,
   theme,
 }: EditorialCtaProps) => {
+  const color = useButtonColor(theme);
+
   const buttonsTheme: ButtonProps[] = [
     {
-      color: theme === 'dark' ? 'negative' : 'primary',
+      color,
       variant: 'contained',
     },
     {
-      color: theme === 'dark' ? 'negative' : 'primary',
+      color,
       variant: 'outlined',
     },
   ];
@@ -96,14 +87,14 @@ export const Ctas = ({
         )}
       </Stack>
     );
-  } else if (ctaButtons?.length) {
+  } else if (Array.isArray(ctaButtons) && ctaButtons.length > 0) {
     return (
       <Stack
         direction={{ md: 'row-reverse', xs: 'row' }}
         justifyContent='left'
         spacing={2}
       >
-        {ctaButtons.map((button: CtaButton, i) =>
+        {ctaButtons.map((button: CtaEditorialButton, i) =>
           isButtonProps(button) ? (
             <Button
               sx={{ width: { md: 'auto', xs: '100%' } }}
