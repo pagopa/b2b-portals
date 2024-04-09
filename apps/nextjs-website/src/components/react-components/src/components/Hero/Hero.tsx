@@ -3,15 +3,15 @@ import { Box, Stack, Grid, useTheme } from '@mui/material';
 import Image from 'next/image';
 import { isJSX } from '../../utils';
 import EContainer from '../EContainer';
-import { HeroProps, HeroTextProps } from './Hero.types';
+import { HeroProps, HeroTextProps } from '../../utils/Components.types';
 import {
+  renderHeroTitle,
   renderSubtitle,
   renderButtons,
   getMinHeight,
   getOverlay,
-  getBackgroundColor,
-  renderTitle,
-} from './Hero.helpers';
+  useBackgroundColor,
+} from '../../utils/Components.helpers';
 
 const HeroTextContent = ({
   title,
@@ -36,7 +36,7 @@ const HeroTextContent = ({
     >
       <Box mb={size === 'small' ? 0 : { xs: 6, md: 4 }}>
         <>
-          {renderTitle({ title, textColor, size })}
+          {renderHeroTitle({ title, textColor, size })}
           {renderSubtitle({ subtitle, textColor })}
         </>
       </Box>
@@ -66,7 +66,7 @@ const Hero = (props: HeroProps) => {
 
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
-  const backgroundColor = getBackgroundColor(theme);
+  const backgroundColor = useBackgroundColor(theme);
 
   const BackgroundImage = isJSX(background) ? (
     background
