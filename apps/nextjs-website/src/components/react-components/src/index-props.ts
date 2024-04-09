@@ -1,3 +1,4 @@
 import { HeroProps } from './components/Hero/Hero.types';
+import { EditorialProps } from './components/Editorial/Editorial';
 
-export type { HeroProps };
+export type { HeroProps, EditorialProps };
