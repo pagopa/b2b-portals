@@ -3,30 +3,19 @@ import Button, { type ButtonProps } from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import appleBadge from '../../../../../../public/editorial-images/app-store-badge.png';
 import googleBadge from '../../../../../../public/editorial-images/google-play-badge.png';
-import {
-  CtaButtonProps,
-  CtaEditorialButton,
-  EditorialCtaProps,
-} from '../../utils/Components.types';
-import { useButtonColor } from '../../utils/Components.helpers';
-
-const isButtonProps = (button: CtaEditorialButton): button is CtaButtonProps =>
-  typeof button === 'object' && 'text' in button;
+import { EditorialCtaProps } from '../../utils/Components.types';
+import { RenderButtons } from '../../utils/Components.helpers';
 
 export const Ctas = ({
   ctaButtons,
   storeButtons,
   theme,
 }: EditorialCtaProps) => {
-  const color = useButtonColor(theme);
-
   const buttonsTheme: ButtonProps[] = [
     {
-      color,
       variant: 'contained',
     },
     {
-      color,
       variant: 'outlined',
     },
   ];
@@ -94,20 +83,14 @@ export const Ctas = ({
         justifyContent='left'
         spacing={2}
       >
-        {ctaButtons.map((button: CtaEditorialButton, i) =>
-          isButtonProps(button) ? (
-            <Button
-              sx={{ width: { md: 'auto', xs: '100%' } }}
-              key={`${button.text}-${i}`}
-              {...buttonsTheme[i]}
-              {...button}
-            >
-              {button.text}
-            </Button>
-          ) : (
-            button
-          )
-        )}
+        {RenderButtons({
+          ctaButtons: ctaButtons.map((button, i) => ({
+            ...button,
+            sx: { width: { md: 'auto', xs: '100%' } },
+            ...buttonsTheme[i],
+          })),
+          theme,
+        })}
       </Stack>
     );
   } else {

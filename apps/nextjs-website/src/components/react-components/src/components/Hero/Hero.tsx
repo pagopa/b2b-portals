@@ -1,16 +1,17 @@
 import React from 'react';
-import { Box, Stack, Grid, useTheme } from '@mui/material';
+import { Box, Stack, Grid } from '@mui/material';
 import Image from 'next/image';
 import { isJSX } from '../../utils';
 import EContainer from '../EContainer';
 import { HeroProps, HeroTextProps } from '../../utils/Components.types';
 import {
-  renderHeroTitle,
-  renderSubtitle,
-  renderButtons,
+  RenderHeroTitle,
+  RenderSubtitle,
+  RenderButtons,
   getMinHeight,
   getOverlay,
   useBackgroundColor,
+  useTextColor,
 } from '../../utils/Components.helpers';
 
 const HeroTextContent = ({
@@ -20,11 +21,7 @@ const HeroTextContent = ({
   theme,
   size,
 }: HeroTextProps) => {
-  const muiTheme = useTheme();
-  const textColor =
-    theme === 'dark'
-      ? muiTheme.palette.primary.contrastText
-      : muiTheme.palette.text.primary;
+  const textColor = useTextColor(theme);
 
   return (
     <Stack
@@ -36,8 +33,8 @@ const HeroTextContent = ({
     >
       <Box mb={size === 'small' ? 0 : { xs: 6, md: 4 }}>
         <>
-          {renderHeroTitle({ title, textColor, size })}
-          {renderSubtitle({ subtitle, textColor })}
+          {RenderHeroTitle({ title, textColor, size })}
+          {RenderSubtitle({ subtitle, textColor })}
         </>
       </Box>
       {ctaButtons?.length ? (
@@ -46,7 +43,7 @@ const HeroTextContent = ({
           spacing={2}
           mb={{ xs: 8, lg: 0 }}
         >
-          {renderButtons({ ctaButtons })}
+          {RenderButtons({ ctaButtons, theme })}
         </Stack>
       ) : null}
     </Stack>
