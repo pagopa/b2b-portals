@@ -3,6 +3,14 @@ import { type ButtonProps } from '@mui/material';
 import { type CommonProps, type Generic } from '../types/components';
 
 {
+  /* COMMON PROPS */
+}
+
+export interface CtaButtonProps extends Partial<ButtonProps> {
+  readonly text: string;
+}
+
+{
   /* HERO PROPS */
 }
 
@@ -14,14 +22,10 @@ export interface HeroProps extends CommonProps, HeroTextProps {
   readonly useHoverlay?: boolean;
 }
 
-export interface CtaButton extends Partial<ButtonProps> {
-  readonly text: string;
-}
-
 export interface HeroTextProps extends CommonProps {
   readonly title: string;
   readonly subtitle?: string | Generic;
-  readonly ctaButtons?: ReadonlyArray<CtaButton | Generic>;
+  readonly ctaButtons?: ReadonlyArray<CtaButtonProps | Generic>;
   readonly size?: 'medium' | 'big' | 'small';
 }
 
@@ -50,10 +54,6 @@ export interface EditorialImageProps extends CommonProps {
   readonly pattern?: 'dots' | 'solid' | 'none';
 }
 
-export interface CtaButtonProps extends Partial<ButtonProps> {
-  readonly text: string;
-}
-
 export type CtaEditorialButton = CtaButtonProps | JSX.Element;
 
 export interface StoreButtonsProps {
@@ -62,6 +62,6 @@ export interface StoreButtonsProps {
 }
 
 export interface EditorialCtaProps extends CommonProps {
-  readonly ctaButtons?: ReadonlyArray<CtaButton>;
+  readonly ctaButtons?: ReadonlyArray<CtaButtonProps>;
   readonly storeButtons?: StoreButtonsProps;
 }

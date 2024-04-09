@@ -30,7 +30,6 @@ const makeEditorialProps = ({
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
-        color: theme === 'dark' ? 'negative' : 'primary',
         ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
