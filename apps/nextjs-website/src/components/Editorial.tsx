@@ -1,13 +1,14 @@
 'use client';
 import { Editorial as EditorialEC } from '@pagopa/pagopa-editorial-components';
 import { EditorialProps } from '@pagopa/pagopa-editorial-components/dist/components/Editorial';
-import googleStoreImage from '@pagopa/pagopa-editorial-components/dist/assets/images/google-play-badge.png';
-import appleStoreImage from '@pagopa/pagopa-editorial-components/dist/assets/images/app-store-badge.png';
 import { Stack } from '@mui/material';
 import Image from 'next/image';
 import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
+
+const googleStoreImage = '/pagopa-images/google-play-badge.png';
+const appleStoreImage = '/pagopa-images/app-store-badge.png';
 
 const makeEditorialProps = ({
   theme,
@@ -41,11 +42,11 @@ const makeEditorialProps = ({
     storeButtons: {
       ...(storeButtons.hrefGoogle && {
         hrefGoogle: storeButtons.hrefGoogle,
-        googleImage: googleStoreImage,
+        googleBadge: googleStoreImage,
       }),
       ...(storeButtons.hrefApple && {
         hrefApple: storeButtons.hrefApple,
-        appleImage: appleStoreImage,
+        appleBadge: appleStoreImage,
       }),
     },
   }),
