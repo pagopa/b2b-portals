@@ -2,10 +2,10 @@ import React, { ReactElement, useState, useEffect } from 'react';
 import { Button, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { isJSX } from '../utils';
-import { CtaButton } from './Components.types';
+import { CtaButtonProps } from './Components.types';
 
 {
-  /* COMMON PROPS */
+  /* COMMON ELEMENTS */
 }
 
 export const useBackgroundColor = (theme: 'dark' | 'light') => {
@@ -28,8 +28,36 @@ export const useExtraTextColor = (theme: 'dark' | 'light') => {
 export const useButtonColor = (theme: 'dark' | 'light') =>
   theme === 'dark' ? 'negative' : 'primary';
 
+const renderCtaButton = (
+  button: CtaButtonProps,
+  i: number,
+  color: 'primary' | 'negative'
+) => (
+  <Button key={`${button.text}-${i}`} color={color} {...button}>
+    {button.text}
+  </Button>
+);
+
+const renderElementButton = (button: JSX.Element) => button;
+
+export const RenderButtons = ({
+  ctaButtons,
+  theme,
+}: {
+  ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
+  theme: 'dark' | 'light';
+}) => {
+  const buttonColor = useButtonColor(theme);
+
+  return ctaButtons.map((button, i) =>
+    React.isValidElement(button)
+      ? renderElementButton(button)
+      : renderCtaButton(button as CtaButtonProps, i, buttonColor)
+  );
+};
+
 {
-  /* HERO PROPS */
+  /* HERO ELEMENTS */
 }
 
 export const renderStringTitle = (
@@ -54,7 +82,7 @@ const renderElementTitle = (
       )
     : null;
 
-export const renderHeroTitle = ({
+export const RenderHeroTitle = ({
   title,
   textColor,
   size,
@@ -86,7 +114,7 @@ const renderElementSubtitle = (subtitle: JSX.Element, textColor: string) =>
       )
     : null;
 
-export const renderSubtitle = ({
+export const RenderSubtitle = ({
   subtitle,
   textColor,
 }: {
@@ -102,25 +130,6 @@ export const renderSubtitle = ({
     : renderElementSubtitle(subtitle, textColor);
 };
 
-const renderCtaButton = (button: CtaButton, i: number) => (
-  <Button key={`${button.text}-${i}`} {...button}>
-    {button.text}
-  </Button>
-);
-
-const renderElementButton = (button: JSX.Element) => button;
-
-export const renderButtons = ({
-  ctaButtons,
-}: {
-  ctaButtons: ReadonlyArray<CtaButton | JSX.Element>;
-}) =>
-  ctaButtons.map((button, i) =>
-    React.isValidElement(button)
-      ? renderElementButton(button)
-      : renderCtaButton(button as CtaButton, i)
-  );
-
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
   size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
 
@@ -132,7 +141,7 @@ export const getOverlay = (useHoverlay: boolean, theme: string) =>
     : '';
 
 {
-  /* EDITORIAL PROPS */
+  /* EDITORIAL ELEMENTS */
 }
 
 export const useIsMobile = () => {
@@ -162,7 +171,7 @@ export const useIsMobile = () => {
   return isMobile;
 };
 
-export const renderEyelet = (eyeletColor: string, eyelet?: string) => {
+export const RenderEyelet = (eyeletColor: string, eyelet?: string) => {
   if (!eyelet) {
     return null;
   }
@@ -174,7 +183,7 @@ export const renderEyelet = (eyeletColor: string, eyelet?: string) => {
   );
 };
 
-export const renderEditorialTitle = (
+export const RenderEditorialTitle = (
   title: string | JSX.Element,
   textColor: string
 ) =>
@@ -186,7 +195,7 @@ export const renderEditorialTitle = (
     </Typography>
   );
 
-export const renderBody = (body: string | JSX.Element, textColor: string) =>
+export const RenderBody = (body: string | JSX.Element, textColor: string) =>
   isJSX(body) ? (
     React.cloneElement(body, { color: textColor })
   ) : (
