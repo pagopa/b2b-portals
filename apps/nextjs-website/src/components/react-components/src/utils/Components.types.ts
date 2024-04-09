@@ -1,11 +1,6 @@
+import { ReactElement } from 'react';
 import { type ButtonProps } from '@mui/material';
 import { type CommonProps, type Generic } from '../types/components';
-import { EditorialContentProps } from '../components/Editorial/Content';
-import {
-  EditorialCtaProps,
-  StoreButtonsProps,
-} from '../components/Editorial/Ctas';
-import { EditorialImageProps } from '../components/Editorial/Image';
 
 {
   /* HERO PROPS */
@@ -41,5 +36,32 @@ export interface EditorialProps
     EditorialImageProps {
   readonly reversed?: boolean;
   readonly width: 'wide' | 'standard' | 'center';
+  readonly storeButtons?: StoreButtonsProps;
+}
+
+export interface EditorialContentProps extends CommonProps {
+  readonly title: string;
+  readonly eyelet?: string;
+  readonly body: string | JSX.Element;
+}
+
+export interface EditorialImageProps extends CommonProps {
+  readonly image: ReactElement;
+  readonly pattern?: 'dots' | 'solid' | 'none';
+}
+
+export interface CtaButtonProps extends Partial<ButtonProps> {
+  readonly text: string;
+}
+
+export type CtaEditorialButton = CtaButtonProps | JSX.Element;
+
+export interface StoreButtonsProps {
+  readonly hrefGoogle?: string;
+  readonly hrefApple?: string;
+}
+
+export interface EditorialCtaProps extends CommonProps {
+  readonly ctaButtons?: ReadonlyArray<CtaButton>;
   readonly storeButtons?: StoreButtonsProps;
 }
