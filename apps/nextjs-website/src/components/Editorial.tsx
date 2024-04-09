@@ -1,12 +1,13 @@
 'use client';
 import Image from 'next/image';
+import { Editorial as EditorialEC } from './react-components/src';
+import { EditorialProps } from './react-components/src/index-props';
 import MarkdownRenderer from './MarkdownRenderer';
-import { Editorial as EditorialRC } from '@react-components/components';
-import { EditorialProps } from '@react-components/types';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 
 const makeEditorialProps = ({
+  theme,
   eyelet,
   body,
   image,
@@ -14,13 +15,13 @@ const makeEditorialProps = ({
   storeButtons,
   ...rest
 }: EditorialSection): EditorialProps => ({
+  theme,
   ...(eyelet && { eyelet }),
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: (
     <Image
-      src={image.url}
+      src={`http://localhost:1337${image.url}`}
       alt={image.alternativeText ?? ''}
-      // Needed by Image, will be overwritten
       width={0}
       height={0}
     />
@@ -29,6 +30,7 @@ const makeEditorialProps = ({
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
+        color: theme === 'dark' ? 'negative' : 'primary',
         ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
@@ -42,7 +44,7 @@ const makeEditorialProps = ({
 });
 
 const Editorial = (props: EditorialSection) => (
-  <EditorialRC {...makeEditorialProps(props)} />
+  <EditorialEC {...makeEditorialProps(props)} />
 );
 
 export default Editorial;
