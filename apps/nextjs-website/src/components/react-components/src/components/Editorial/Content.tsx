@@ -1,18 +1,14 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import { type CommonProps } from '../../types/components';
+import { EditorialContentProps } from '../../utils/Components.types';
 import {
   renderBody,
   renderEditorialTitle,
   renderEyelet,
+  useExtraTextColor,
+  useTextColor,
 } from '../../utils/Components.helpers';
-
-export interface EditorialContentProps extends CommonProps {
-  title: string;
-  eyelet?: string;
-  body: string | JSX.Element;
-}
 
 export const Content = ({
   eyelet,
@@ -20,11 +16,9 @@ export const Content = ({
   body,
   theme,
 }: EditorialContentProps) => {
-  const { palette, breakpoints } = useTheme();
-  const eyeletColor =
-    theme === 'dark' ? palette.primary.contrastText : palette.text.secondary;
-  const textColor =
-    theme === 'dark' ? palette.primary.contrastText : palette.text.primary;
+  const { breakpoints } = useTheme();
+  const eyeletColor = useExtraTextColor(theme);
+  const textColor = useTextColor(theme);
   const maxTextWidth = breakpoints.values.md / 2;
 
   return (

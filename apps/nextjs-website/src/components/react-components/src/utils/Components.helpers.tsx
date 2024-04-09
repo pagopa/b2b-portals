@@ -13,6 +13,21 @@ export const useBackgroundColor = (theme: 'dark' | 'light') => {
   return theme === 'dark' ? palette.primary.dark : palette.background.paper;
 };
 
+export const useTextColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark' ? palette.primary.contrastText : palette.text.primary;
+};
+
+export const useExtraTextColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.primary.contrastText
+    : palette.text.secondary;
+};
+
+export const useButtonColor = (theme: 'dark' | 'light') =>
+  theme === 'dark' ? 'negative' : 'primary';
+
 {
   /* HERO PROPS */
 }
