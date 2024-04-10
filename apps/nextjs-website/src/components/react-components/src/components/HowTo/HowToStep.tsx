@@ -6,8 +6,8 @@ import { Generic } from '../../types/components';
 import { HowToStepProps } from '../../utils/Components.types';
 import {
   ArrowIcon,
+  RenderGenericTitle,
   RenderHowToDescription,
-  RenderHowToTitle,
   RenderHowToStepNum,
   useTextColor,
   useTextAlternativeColor,
@@ -85,7 +85,12 @@ export const HowToStep = ({
       )}
 
       {/** Step title */}
-      {RenderHowToTitle(title, color3)}
+      <RenderGenericTitle
+        variant='h6'
+        component='p'
+        color={color3}
+        title={title}
+      />
 
       {/** Step description */}
       {RenderHowToDescription(description, color3)}
