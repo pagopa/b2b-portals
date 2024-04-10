@@ -1,8 +1,8 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, TypographyProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { isJSX } from '../utils';
-import { CtaButtonProps } from './Components.types';
+import { CtaButtonProps, Step } from './Components.types';
 
 {
   /* COMMON ELEMENTS */
@@ -13,9 +13,19 @@ export const useBackgroundColor = (theme: 'dark' | 'light') => {
   return theme === 'dark' ? palette.primary.dark : palette.background.paper;
 };
 
+export const useBackgroundColorAlternative = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark' ? palette.primary.dark : palette.background.default;
+};
+
 export const useTextColor = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
   return theme === 'dark' ? palette.primary.contrastText : palette.text.primary;
+};
+
+export const useTextAlternativeColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark' ? palette.primary.contrastText : palette.primary.dark;
 };
 
 export const useExtraTextColor = (theme: 'dark' | 'light') => {
@@ -203,3 +213,71 @@ export const RenderBody = (body: string | JSX.Element, textColor: string) =>
       {body}
     </Typography>
   );
+
+{
+  /* HOWTO ELEMENTS */
+}
+
+export const ArrowIcon = ({ color = 'none' }: { color?: string }) => (
+  <svg
+    aria-hidden='true'
+    height='24'
+    viewBox='0 0 44 24'
+    width='44'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      clipRule='evenodd'
+      d='m31.5429 1.04289c.3905-.39052 1.0237-.39052 1.4142 0l10.25 10.25001c.1953.1953.2929.4512.2929.7071s-.0976.5118-.2929.7071l-10.25 10.25c-.3905.3905-1.0237.3905-1.4142 0s-.3905-1.0237 0-1.4142l8.5429-8.5429h-38.5858c-.552284 0-1-.4477-1-1s.447716-1 1-1h38.5858l-8.5429-8.5429c-.3905-.39051-.3905-1.02369 0-1.41421z'
+      fill={color}
+      fillRule='evenodd'
+    />
+  </svg>
+);
+
+export const groupStepsByRows = (
+  steps: ReadonlyArray<Step>,
+  rowMaxSteps: number
+): Step[][] => {
+  const numSteps = steps.length;
+  return new Array(Math.ceil(numSteps / rowMaxSteps))
+    .fill(undefined)
+    .map((_, i) => steps.slice(i * rowMaxSteps, i * rowMaxSteps + rowMaxSteps));
+};
+
+export const RenderHowToDescription = (
+  description: string | JSX.Element,
+  color: string
+) =>
+  typeof description === 'string' ? (
+    <Typography color={color} variant='body2'>
+      {description}
+    </Typography>
+  ) : (
+    React.cloneElement(description, { color })
+  );
+
+export const RenderHowToTitle = (title: string | JSX.Element, color: string) =>
+  typeof title === 'string' ? (
+    <Typography color={color} variant='h5' component='p'>
+      {title}
+    </Typography>
+  ) : (
+    React.cloneElement(title, { color })
+  );
+
+export const RenderHowToStepNum = ({
+  variant = 'body1',
+  component = 'p',
+  color,
+  stepNum,
+}: {
+  variant?: TypographyProps['variant'];
+  component?: TypographyProps['component'];
+  color: string;
+  stepNum: number;
+}) => (
+  <Typography color={color} variant={variant} component={component}>
+    {`0${stepNum}`}
+  </Typography>
+);
