@@ -97,7 +97,7 @@ resource "aws_cloudfront_distribution" "website" {
 }
 
 resource "aws_cloudfront_distribution" "cdn_multi_website" {
-  for_each = var.cdn_configs
+  for_each = var.websites_configs
 
   origin {
     domain_name = aws_s3_bucket.website.bucket_regional_domain_name
@@ -114,7 +114,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
   default_root_object = "index.html"
 
   # to be uncommented when when available dns domain
-  #aliases = ["${each.value.url_tenant}"]  # Alias di dominio univoco per ogni distribuzione
+  #aliases = ["${each.value.url_tenant}"]
 
   custom_error_response {
     error_code         = 404
