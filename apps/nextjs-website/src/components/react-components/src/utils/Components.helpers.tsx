@@ -66,6 +66,32 @@ export const RenderButtons = ({
   );
 };
 
+export const RenderGenericTitle = ({
+  title,
+  color,
+  variant = 'body1',
+  component = 'p',
+  textAlign = 'center',
+}: {
+  title: string | JSX.Element;
+  color: string;
+  variant?: TypographyProps['variant'];
+  component?: TypographyProps['component'];
+  textAlign?: TypographyProps['align'];
+}) =>
+  typeof title === 'string' ? (
+    <Typography
+      color={color}
+      variant={variant}
+      component={component}
+      align={textAlign}
+    >
+      {title}
+    </Typography>
+  ) : (
+    React.cloneElement(title, { color })
+  );
+
 {
   /* HERO ELEMENTS */
 }
@@ -255,15 +281,6 @@ export const RenderHowToDescription = (
     </Typography>
   ) : (
     React.cloneElement(description, { color })
-  );
-
-export const RenderHowToTitle = (title: string | JSX.Element, color: string) =>
-  typeof title === 'string' ? (
-    <Typography color={color} variant='h5' component='p'>
-      {title}
-    </Typography>
-  ) : (
-    React.cloneElement(title, { color })
   );
 
 export const RenderHowToStepNum = ({
