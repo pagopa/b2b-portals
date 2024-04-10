@@ -4,11 +4,13 @@ import { EIcon } from '../EIcon';
 import {
   RenderGenericTitle,
   useTextColor,
+  useTextAlternativeColor,
 } from '../../utils/Components.helpers';
 import Subtitle from './Subtitle';
 
 export const FeatureStackItem = ({ item, theme }: FeatureStackItemProps) => {
   const textColor = useTextColor(theme);
+  const textColorAlternative = useTextAlternativeColor(theme);
 
   return (
     <Stack
@@ -31,7 +33,7 @@ export const FeatureStackItem = ({ item, theme }: FeatureStackItemProps) => {
             width: '64px',
           },
         }}
-        color={textColor}
+        color={textColorAlternative}
       >
         <EIcon {...item?.stackIcon} />
       </Box>
