@@ -1,10 +1,10 @@
 * @pagopa/b2bportals-maintain
 
 # Website
-apps/nextjs-website/ @simosalsi
+apps/nextjs-website/ @pagopa/b2bportals-maintain @simosalsi
 
 # CMS
-apps/strapi-cms/ @simosalsi
+apps/strapi-cms/ @pagopa/b2bportals-maintain @simosalsi
 
 # Lint rules
 **/.eslintrc.json @pagopa/b2bportals-maintain
