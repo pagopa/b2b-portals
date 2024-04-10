@@ -11,4 +11,9 @@ apps/strapi-cms/ @simosalsi
 
 .changeset/README.md @pagopa/b2bportals-maintain
 .changeset/config.json @pagopa/b2bportals-maintain
+
+# No owner is required for changeset files
 .changeset/*
+
+# Required to merge Push next releases PR
+package-lock.json @pagopa/b2bportals-maintain @simosalsi
