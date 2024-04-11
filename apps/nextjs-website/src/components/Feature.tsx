@@ -1,6 +1,6 @@
 'use client';
-import { Feature as FeatureEC } from './react-components/src';
-import { FeatureProps } from './react-components/src/index-props';
+import { Feature as FeatureEC } from '@react-components';
+import { FeatureProps } from '@react-components-props';
 import { FeatureSection } from '@/lib/fetch/types/PageSection';
 
 const makeFeatureProps = ({
