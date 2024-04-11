@@ -5,6 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Typography } from '@mui/material';
 import { AccordionItemProps } from '../../utils/Components.types';
+import { RenderGenericBody } from '../../utils/Components.helpers';
 
 export const AccordionItem: React.FC<AccordionItemProps> = ({
   header,
@@ -34,7 +35,10 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       </AccordionSummary>
       <AccordionDetails>
         {typeof content === 'string' ? (
-          <Typography variant="body2">{content}</Typography>
+          <RenderGenericBody
+            variant='body2'
+            body={content}
+          />
         ) : (
           content
         )}

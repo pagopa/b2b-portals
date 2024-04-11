@@ -171,17 +171,20 @@ export const RenderGenericBody = ({
   variant = 'body2',
 }: {
   body: string | JSX.Element | undefined;
-  textColor: string;
+  textColor?: string;
   textAlign?: TypographyProps['align'];
   variant?: TypographyProps['variant'];
 }) => {
+  const theme = useTheme();
+  const defaultTextColor = textColor || theme.palette.text.primary;
+
   if (!body) {
     return null;
   }
 
   return typeof body === 'string'
-    ? renderStringBody(body, textColor, textAlign, variant)
-    : renderElementBody(body, textColor, textAlign, variant);
+    ? renderStringBody(body, defaultTextColor, textAlign, variant)
+    : renderElementBody(body, defaultTextColor, textAlign, variant);
 };
 
 {
