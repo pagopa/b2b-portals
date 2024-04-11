@@ -34,14 +34,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        {typeof content === 'string' ? (
-          <RenderGenericBody
-            variant='body2'
-            body={content}
-          />
-        ) : (
-          content
-        )}
+        <RenderGenericBody variant='body2' body={content} />
       </AccordionDetails>
     </MUIAccordion>
   );
