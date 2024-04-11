@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import { EditorialContentProps } from '../../utils/Components.types';
 import {
-  RenderBody,
+  RenderGenericBody,
   RenderEditorialTitle,
   RenderEyelet,
   useExtraTextColor,
@@ -25,7 +25,10 @@ export const Content = ({
     <Stack maxWidth={{ md: maxTextWidth }} gap={2}>
       {RenderEyelet(eyeletColor, eyelet)}
       {RenderEditorialTitle(title, textColor)}
-      {RenderBody(body, textColor)}
+      <RenderGenericBody
+        textColor={textColor}
+        body={body}
+      />
     </Stack>
   );
 };

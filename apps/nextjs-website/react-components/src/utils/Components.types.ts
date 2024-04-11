@@ -122,3 +122,21 @@ export interface FeatureProps {
   readonly showCarouselMobile?: boolean;
   readonly background?: string;
 }
+
+{
+  /* ACCORDION PROPS */
+}
+
+export interface AccordionItemProps {
+  header: string;
+  content: string | JSX.Element;
+}
+
+export interface AccordionProps {
+  title: string;
+  subtitle?: string;
+  description?: string | JSX.Element;
+  accordionItems: AccordionItemProps[];
+  theme: 'light' | 'dark';
+  layout?: 'left' | 'center' | 'right';
+}
