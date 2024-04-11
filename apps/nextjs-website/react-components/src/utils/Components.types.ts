@@ -9,6 +9,7 @@ import { EIconProps } from '../components/EIcon';
 
 export interface CtaButtonProps extends Partial<ButtonProps> {
   readonly text: string;
+  variant?: 'contained' | 'outlined';
 }
 
 {
@@ -139,4 +140,25 @@ export interface AccordionProps {
   accordionItems: AccordionItemProps[];
   theme: 'light' | 'dark';
   layout?: 'left' | 'center' | 'right';
+}
+
+{
+  /* BANNERLINK PROPS */
+}
+
+type ImgProps = React.DetailedHTMLProps<
+  React.ImgHTMLAttributes<HTMLImageElement>,
+  HTMLImageElement
+>;
+
+export interface BannerLinkProps
+  extends CommonProps,
+    BannerLinkContentProps {
+  ctaButtons?: CtaButtonProps[];
+  decoration?: ImgProps | Generic;
+}
+
+export interface BannerLinkContentProps extends CommonProps {
+  title: string;
+  body: string | JSX.Element;
 }

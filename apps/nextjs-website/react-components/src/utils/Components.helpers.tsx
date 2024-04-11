@@ -43,7 +43,7 @@ const renderCtaButton = (
   i: number,
   color: 'primary' | 'negative'
 ) => (
-  <Button key={`${button.text}-${i}`} color={color} {...button}>
+  <Button key={`${button.text}-${i}`} color={color} variant={button.variant || 'contained'} {...button}>
     {button.text}
   </Button>
 );
