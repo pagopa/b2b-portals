@@ -92,6 +92,98 @@ export const RenderGenericTitle = ({
     React.cloneElement(title, { color })
   );
 
+const renderStringSubtitle = (
+  subtitle: string,
+  textColor: string,
+  textAlign: TypographyProps['align'] = 'inherit',
+  variant: TypographyProps['variant'] = 'body1'
+) => (
+  <Typography variant={variant} style={{ color: textColor }} align={textAlign}>
+    {subtitle}
+  </Typography>
+);
+
+const renderElementSubtitle = (
+  subtitle: JSX.Element,
+  textColor: string,
+  textAlign: TypographyProps['align'] = 'inherit',
+  variant: TypographyProps['variant'] = 'body1'
+) =>
+  React.isValidElement(subtitle)
+    ? React.cloneElement(
+        subtitle as ReactElement<
+          TypographyProps & { style?: React.CSSProperties }
+        >,
+        { style: { color: textColor }, align: textAlign, variant: variant }
+      )
+    : null;
+
+export const RenderGenericSubtitle = ({
+  subtitle,
+  textColor,
+  textAlign = 'center',
+  variant = 'body1',
+}: {
+  subtitle: string | JSX.Element | undefined;
+  textColor: string;
+  textAlign?: TypographyProps['align'];
+  variant?: TypographyProps['variant'];
+}) => {
+  if (!subtitle) {
+    return null;
+  }
+
+  return typeof subtitle === 'string'
+    ? renderStringSubtitle(subtitle, textColor, textAlign, variant)
+    : renderElementSubtitle(subtitle, textColor, textAlign, variant);
+};
+
+const renderStringBody = (
+  body: string,
+  textColor: string,
+  textAlign: TypographyProps['align'] = 'inherit',
+  variant: TypographyProps['variant'] = 'body2'
+) => (
+  <Typography variant={variant} style={{ color: textColor }} align={textAlign}>
+    {body}
+  </Typography>
+);
+
+const renderElementBody = (
+  body: JSX.Element,
+  textColor: string,
+  textAlign: TypographyProps['align'] = 'inherit',
+  variant: TypographyProps['variant'] = 'body2'
+) =>
+  React.isValidElement(body)
+    ? React.cloneElement(
+        body as ReactElement<
+          TypographyProps & { style?: React.CSSProperties }
+        >,
+        { style: { color: textColor }, align: textAlign, variant: variant }
+      )
+    : null;
+
+export const RenderGenericBody = ({
+  body,
+  textColor,
+  textAlign = 'inherit',
+  variant = 'body2',
+}: {
+  body: string | JSX.Element | undefined;
+  textColor: string;
+  textAlign?: TypographyProps['align'];
+  variant?: TypographyProps['variant'];
+}) => {
+  if (!body) {
+    return null;
+  }
+
+  return typeof body === 'string'
+    ? renderStringBody(body, textColor, textAlign, variant)
+    : renderElementBody(body, textColor, textAlign, variant);
+};
+
 {
   /* HERO ELEMENTS */
 }
@@ -134,36 +226,6 @@ export const RenderHeroTitle = ({
   return typeof title === 'string'
     ? renderStringTitle(title, textColor, size)
     : renderElementTitle(title, textColor, size);
-};
-
-const renderStringSubtitle = (subtitle: string, textColor: string) => (
-  <Typography variant='body1' style={{ color: textColor }}>
-    {subtitle}
-  </Typography>
-);
-
-const renderElementSubtitle = (subtitle: JSX.Element, textColor: string) =>
-  React.isValidElement(subtitle)
-    ? React.cloneElement(
-        subtitle as ReactElement<{ style?: React.CSSProperties }>,
-        { style: { color: textColor } }
-      )
-    : null;
-
-export const RenderSubtitle = ({
-  subtitle,
-  textColor,
-}: {
-  subtitle: string | JSX.Element | undefined;
-  textColor: string;
-}) => {
-  if (!subtitle) {
-    return null;
-  }
-
-  return typeof subtitle === 'string'
-    ? renderStringSubtitle(subtitle, textColor)
-    : renderElementSubtitle(subtitle, textColor);
 };
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
@@ -228,15 +290,6 @@ export const RenderEditorialTitle = (
   ) : (
     <Typography color={textColor} variant='h4'>
       {title}
-    </Typography>
-  );
-
-export const RenderBody = (body: string | JSX.Element, textColor: string) =>
-  isJSX(body) ? (
-    React.cloneElement(body, { color: textColor })
-  ) : (
-    <Typography color={textColor} variant='body2'>
-      {body}
     </Typography>
   );
 

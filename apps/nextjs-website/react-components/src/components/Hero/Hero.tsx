@@ -6,7 +6,7 @@ import EContainer from '../EContainer';
 import { HeroProps, HeroTextProps } from '../../utils/Components.types';
 import {
   RenderHeroTitle,
-  RenderSubtitle,
+  RenderGenericSubtitle,
   RenderButtons,
   getMinHeight,
   getOverlay,
@@ -34,7 +34,11 @@ const HeroTextContent = ({
       <Box mb={size === 'small' ? 0 : { xs: 6, md: 4 }}>
         <>
           {RenderHeroTitle({ title, textColor, size })}
-          {RenderSubtitle({ subtitle, textColor })}
+          <RenderGenericSubtitle
+            variant='h6'
+            textColor={textColor}
+            subtitle={subtitle}
+          />
         </>
       </Box>
       {ctaButtons?.length ? (
