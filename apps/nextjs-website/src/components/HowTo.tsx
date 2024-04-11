@@ -1,7 +1,7 @@
 'use client';
 import MarkdownRenderer from './MarkdownRenderer';
-import { HowTo as HowToEC } from './react-components/src';
-import { HowToProps } from './react-components/src/index-props';
+import { HowTo as HowToEC } from '@react-components';
+import { HowToProps } from '@react-components-props';
 import { HowToSection } from '@/lib/fetch/types/PageSection';
 
 const makeHowToProps = ({

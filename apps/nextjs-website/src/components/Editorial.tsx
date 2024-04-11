@@ -1,8 +1,8 @@
 'use client';
 import Image from 'next/image';
-import { Editorial as EditorialEC } from './react-components/src';
-import { EditorialProps } from './react-components/src/index-props';
 import MarkdownRenderer from './MarkdownRenderer';
+import { Editorial as EditorialEC } from '@react-components';
+import { EditorialProps } from '@react-components-props';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 
