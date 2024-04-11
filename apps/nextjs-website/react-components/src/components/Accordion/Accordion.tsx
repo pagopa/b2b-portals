@@ -54,18 +54,12 @@ const Accordion = (props: AccordionProps) => {
               {/** Description */}
               {description && (
                 <>
-                  {typeof description === 'string' ? (
-                    <RenderGenericBody
-                      variant='body2'
-                      textColor={textColor}
-                      body={description}
-                      textAlign={textAlignment}
-                    />
-                  ) : (
-                    <Box textAlign={textAlignment} color={textColor}>
-                      {description}
-                    </Box>
-                  )}
+                  <RenderGenericBody
+                    variant='body2'
+                    textColor={textColor}
+                    body={description}
+                    textAlign={textAlignment}
+                  />
                 </>
               )}
             </Stack>
