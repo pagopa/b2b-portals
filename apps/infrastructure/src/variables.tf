@@ -75,10 +75,10 @@ variable "websites_configs" {
     "send" = {
       origin_path = "/send"
       url_tenant  = "notifichedigitali.pagopa.it"
-    },
-    "appio" = {
-      origin_path = "/appio"
-      url_tenant  = "io.italia.it"
-    }
+    } #,
+    #"appio" = {
+    #  origin_path = "/appio"
+    #  url_tenant  = "io.italia.it"
+    #}
   }
 }
