@@ -35,9 +35,10 @@ const HeroTextContent = ({
         <>
           {RenderHeroTitle({ title, textColor, size })}
           <RenderGenericSubtitle
-            variant='h6'
+            variant='body2'
             textColor={textColor}
             subtitle={subtitle}
+            textAlign='left'
           />
         </>
       </Box>

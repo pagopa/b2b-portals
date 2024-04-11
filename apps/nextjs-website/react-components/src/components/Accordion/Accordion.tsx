@@ -7,7 +7,7 @@ import {
 } from '../../utils/Components.helpers';
 import { AccordionProps } from '../../utils/Components.types';
 
-export const Accordion = (props: AccordionProps) => {
+const Accordion = (props: AccordionProps) => {
   const {
     title,
     subtitle,
@@ -54,12 +54,18 @@ export const Accordion = (props: AccordionProps) => {
               {/** Description */}
               {description && (
                 <>
-                  <RenderGenericBody
-                    variant='body2'
-                    textColor={textColor}
-                    body={description}
-                    textAlign={textAlignment}
-                  />
+                  {typeof description === 'string' ? (
+                    <RenderGenericBody
+                      variant='body2'
+                      textColor={textColor}
+                      body={description}
+                      textAlign={textAlignment}
+                    />
+                  ) : (
+                    <Box textAlign={textAlignment} color={textColor}>
+                      {description}
+                    </Box>
+                  )}
                 </>
               )}
             </Stack>
@@ -83,3 +89,5 @@ export const Accordion = (props: AccordionProps) => {
     </Box>
   );
 };
+
+export default Accordion;
