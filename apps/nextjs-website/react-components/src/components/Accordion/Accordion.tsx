@@ -23,6 +23,9 @@ const Accordion = (props: AccordionProps) => {
   const isCenterLayout = layout === 'center';
   const textAlignment = isCenterLayout ? 'center' : 'left';
 
+  console.log('layout:', layout);
+  console.log('order:', layout === 'right' ? -1 : 1);
+
   return (
     <Box sx={{ py: { xs: 4, md: 10 } }} bgcolor={bgcolor} component='section'>
       <Container>
@@ -64,20 +67,20 @@ const Accordion = (props: AccordionProps) => {
               )}
             </Stack>
           </Grid>
-        </Grid>
-        <Grid
-          item
-          order={layout === 'right' ? -1 : 1}
-          xs={12}
-          md={isCenterLayout ? 12 : 8}
-          mt={5}
-        >
-          {/** Accordions */}
-          <Stack spacing={2}>
-            {accordionItems.map((accordionItem, i) => (
-              <AccordionItem key={i} {...accordionItem} />
-            ))}
-          </Stack>
+          <Grid
+            item
+            xs={12}
+            md={isCenterLayout ? 12 : 8}
+            mt={5}
+            sx={{ order: layout === 'right' ? -1 : 1 }}
+          >
+            {/** Accordions */}
+            <Stack spacing={2}>
+              {accordionItems.map((accordionItem, i) => (
+                <AccordionItem key={i} {...accordionItem} />
+              ))}
+            </Stack>
+          </Grid>
         </Grid>
       </Container>
     </Box>
