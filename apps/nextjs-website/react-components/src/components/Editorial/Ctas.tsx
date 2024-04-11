@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Button, { type ButtonProps } from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import appleBadge from '../../../../../../public/editorial-images/app-store-badge.png';
-import googleBadge from '../../../../../../public/editorial-images/google-play-badge.png';
+import appleBadge from '../../../../public/editorial-images/app-store-badge.png';
+import googleBadge from '../../../../public/editorial-images/google-play-badge.png';
 import { EditorialCtaProps } from '../../utils/Components.types';
 import { RenderButtons } from '../../utils/Components.helpers';
 
