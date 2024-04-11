@@ -48,7 +48,13 @@ const HeroTextContent = ({
           spacing={2}
           mb={{ xs: 8, lg: 0 }}
         >
-          {RenderButtons({ ctaButtons, theme })}
+        {RenderButtons({
+          ctaButtons: ctaButtons.map((button) => ({
+            ...button,
+            sx: { width: { md: 'auto', xs: '100%' } },
+          })),
+          theme,
+        })}
         </Stack>
       ) : null}
     </Stack>
