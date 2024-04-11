@@ -3,7 +3,7 @@ description: Deploy on AWS S3 Bucket
 
 inputs:
   environment:
-    description: 'The environment target'
+    description: 'The Tenant for which static site will be built'
     required: true
   iam_role:
     description: 'The IAM Role to use to perform the deploy'
