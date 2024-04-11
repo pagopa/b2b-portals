@@ -5,7 +5,7 @@ import EContainer from '../EContainer';
 import {
   groupStepsByRows,
   useBackgroundColorAlternative,
-  useTextAlternativeColor,
+  useTextColor,
 } from '../../utils/Components.helpers';
 import { HowToProps } from '../../utils/Components.types';
 import { HowToStep } from './HowToStep';
@@ -20,7 +20,7 @@ const HowTo = (props: HowToProps) => {
     stepsAlignment = 'center',
   } = props;
   const backgroundColor = useBackgroundColorAlternative(theme);
-  const textColor = useTextAlternativeColor(theme);
+  const textColor = useTextColor(theme);
 
   const alignment = { center: 'center', left: 'start', right: 'end' }[
     stepsAlignment
