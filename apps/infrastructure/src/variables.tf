@@ -66,6 +66,7 @@ variable "dns_domain_name" {
 }
 
 variable "websites_configs" {
+  description = "Website configurations to create CDNs and SSL certificates for multi-tenancy"
   type = map(object({
     origin_path = string
     url_tenant  = string
