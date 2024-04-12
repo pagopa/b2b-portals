@@ -1,17 +1,18 @@
 import React from 'react';
-import { Box, Stack, Grid, useTheme } from '@mui/material';
+import { Box, Stack, Grid } from '@mui/material';
 import Image from 'next/image';
 import { isJSX } from '../../utils';
-import EContainer from '../EContainer';
-import { HeroProps, HeroTextProps } from './Hero.types';
+import ContainerRC from '../common/Container';
+import { HeroProps, HeroTextProps } from '../../utils/Components.types';
 import {
-  renderSubtitle,
-  renderButtons,
+  Title,
+  Subtitle,
+  CtaButtons,
   getMinHeight,
   getOverlay,
-  getBackgroundColor,
-  renderTitle,
-} from './Hero.helpers';
+  useBackgroundColor,
+  useTextColor,
+} from '../../utils/Components.helpers';
 
 const HeroTextContent = ({
   title,
@@ -20,11 +21,7 @@ const HeroTextContent = ({
   theme,
   size,
 }: HeroTextProps) => {
-  const muiTheme = useTheme();
-  const textColor =
-    theme === 'dark'
-      ? muiTheme.palette.primary.contrastText
-      : muiTheme.palette.text.primary;
+  const textColor = useTextColor(theme);
 
   return (
     <Stack
@@ -36,8 +33,19 @@ const HeroTextContent = ({
     >
       <Box mb={size === 'small' ? 0 : { xs: 6, md: 4 }}>
         <>
-          {renderTitle({ title, textColor, size })}
-          {renderSubtitle({ subtitle, textColor })}
+          <Title
+            variant='h1'
+            textColor={textColor}
+            title={title}
+            textAlign='left'
+            marginBottom={size === 'small' ? 0 : 2}
+          />
+          <Subtitle
+            variant='body2'
+            textColor={textColor}
+            subtitle={subtitle}
+            textAlign='left'
+          />
         </>
       </Box>
       {ctaButtons?.length ? (
@@ -46,7 +54,13 @@ const HeroTextContent = ({
           spacing={2}
           mb={{ xs: 8, lg: 0 }}
         >
-          {renderButtons({ ctaButtons })}
+        {CtaButtons({
+          ctaButtons: ctaButtons.map((button) => ({
+            ...button,
+            sx: { width: { md: 'auto', xs: '100%' } },
+          })),
+          theme,
+        })}
         </Stack>
       ) : null}
     </Stack>
@@ -66,7 +80,7 @@ const Hero = (props: HeroProps) => {
 
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
-  const backgroundColor = getBackgroundColor(theme);
+  const backgroundColor = useBackgroundColor(theme);
 
   const BackgroundImage = isJSX(background) ? (
     background
@@ -89,7 +103,7 @@ const Hero = (props: HeroProps) => {
   );
 
   return (
-    <EContainer
+    <ContainerRC
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
     >
@@ -137,7 +151,7 @@ const Hero = (props: HeroProps) => {
       {(size === 'medium' || size === 'big') && (
         <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
       )}
-    </EContainer>
+    </ContainerRC>
   );
 };
 

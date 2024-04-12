@@ -2,8 +2,8 @@ import React from 'react';
 import Box, { type BoxProps } from '@mui/material/Box';
 import Grid, { type GridProps } from '@mui/material/Grid';
 import { Container } from '@mui/system';
-import { type Generic } from '../types/components';
-import { isJSX } from '../utils';
+import { type Generic } from '../../types/components';
+import { isJSX } from '../../utils';
 
 interface ContainerProps {
   alignItems?: GridProps['alignItems'];
@@ -16,7 +16,7 @@ interface ContainerProps {
   sx?: GridProps['sx'];
 }
 
-const EContainer = (props: ContainerProps) => {
+const ContainerRC = (props: ContainerProps) => {
   const {
     alignItems,
     background,
@@ -53,4 +53,4 @@ const EContainer = (props: ContainerProps) => {
   );
 };
 
-export default EContainer;
+export default ContainerRC;

@@ -1,5 +1,18 @@
 import { type ButtonProps } from '@mui/material';
-import { type CommonProps, type Generic } from '../../types/components';
+import { type CommonProps, type Generic } from '../types/components';
+
+{
+  /* COMMON PROPS */
+}
+
+export interface CtaButtonProps extends Partial<ButtonProps> {
+  readonly text: string;
+  variant?: 'contained' | 'outlined';
+}
+
+{
+  /* HERO PROPS */
+}
 
 export interface HeroProps extends CommonProps, HeroTextProps {
   readonly image?: string | Generic;
@@ -9,13 +22,9 @@ export interface HeroProps extends CommonProps, HeroTextProps {
   readonly useHoverlay?: boolean;
 }
 
-export interface CtaButton extends Partial<ButtonProps> {
-  readonly text: string;
-}
-
 export interface HeroTextProps extends CommonProps {
   readonly title: string;
   readonly subtitle?: string | Generic;
-  readonly ctaButtons?: ReadonlyArray<CtaButton | Generic>;
+  readonly ctaButtons?: ReadonlyArray<CtaButtonProps | Generic>;
   readonly size?: 'medium' | 'big' | 'small';
 }

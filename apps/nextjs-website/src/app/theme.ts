@@ -1,6 +1,6 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
-import { theme as MUIItaliaTheme } from '@pagopa/mui-italia';
+import { theme as MUIItaliaTheme } from '../../../../node_modules/@pagopa/mui-italia/dist/theme';
 
 export const theme = createTheme(MUIItaliaTheme, {
   shadows: {

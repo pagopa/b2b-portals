@@ -18,7 +18,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@react-components": ["./react-components/index.ts"],
-      "@react-components-props": ["./react-components/index-props.ts"],
+      "@react-components-types": ["./react-components/utils/Components.types.ts"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

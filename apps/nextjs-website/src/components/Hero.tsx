@@ -1,7 +1,7 @@
 'use client';
 import MarkdownRenderer from './MarkdownRenderer';
 import { Hero as HeroRC } from '@react-components';
-import { HeroProps } from '@react-components-props';
+import { HeroProps } from '@react-components-types';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 
