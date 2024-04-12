@@ -64,21 +64,3 @@ variable "dns_domain_name" {
   type        = map(any)
   default     = null
 }
-
-variable "websites_configs" {
-  type = map(object({
-    origin_path = string
-    url_tenant  = string
-  }))
-
-  default = {
-    "send" = {
-      origin_path = "/send"
-      url_tenant  = "notifichedigitali.pagopa.it"
-    } #,
-    #"appio" = {
-    #  origin_path = "/appio"
-    #  url_tenant  = "io.italia.it"
-    #}
-  }
-}
