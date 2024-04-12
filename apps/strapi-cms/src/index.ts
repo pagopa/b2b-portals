@@ -1,5 +1,3 @@
-// Disable all eslint rules that directly contradict how Strapi works
-/* eslint-disable functional/no-return-void, functional/no-expression-statements, functional/immutable-data, functional/no-try-statements */
 import { Strapi } from '@strapi/strapi';
 import axios, { AxiosResponse } from 'axios';
 import { Context } from 'koa';
