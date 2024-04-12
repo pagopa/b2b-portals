@@ -1,1 +1,20 @@
 * @pagopa/b2bportals-maintain
+
+# Website
+apps/nextjs-website/ @pagopa/b2bportals-maintain @simosalsi @Meolocious
+
+# CMS
+apps/strapi-cms/ @pagopa/b2bportals-maintain @simosalsi @Meolocious
+
+# Lint rules
+**/.eslintrc.json @pagopa/b2bportals-maintain
+
+.changeset/README.md @pagopa/b2bportals-maintain
+.changeset/config.json @pagopa/b2bportals-maintain
+
+# No owner is required for changeset files
+.changeset/*
+
+# Required to merge Push next releases PR
+package-lock.json @pagopa/b2bportals-maintain @simosalsi @Meolocious @maurodandrea
+**/CHANGELOG.md @pagopa/b2bportals-maintain @simosalsi @Meolocious @maurodandrea
