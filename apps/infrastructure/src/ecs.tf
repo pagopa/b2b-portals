@@ -56,7 +56,7 @@ resource "aws_ecs_service" "cms_ecs_service" {
   health_check_grace_period_seconds = 60000
 
   lifecycle {
-    ignore_changes = [task_definition]
+    ignore_changes = [task_definition] # CMS Deployment is managed by the "Deploy CMS" GitHub Action
   }
 
   network_configuration {
