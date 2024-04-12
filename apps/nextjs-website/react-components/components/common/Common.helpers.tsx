@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Button, Typography, TypographyProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { CtaButtonProps } from './Components.types';
+import { CtaButtonProps } from '../../types/common/Common.types';
 
 {
   /* COMMON ELEMENTS */
@@ -109,7 +109,7 @@ const ElementTitle = (
           style: { color: textColor, marginBottom },
         }
       )
-    : null;
+      : null;
 
 export const Title = ({
   title,
@@ -128,7 +128,14 @@ export const Title = ({
 }) => {
   return typeof title === 'string'
     ? StringTitle(title, textColor, variant, component, textAlign, marginBottom)
-    : ElementTitle(title, textColor, variant, component, textAlign, marginBottom);
+    : ElementTitle(
+        title,
+        textColor,
+        variant,
+        component,
+        textAlign,
+        marginBottom
+      );
 };
 
 const StringSubtitle = (
@@ -165,7 +172,7 @@ const ElementSubtitle = (
           variant: variant,
         }
       )
-    : null;
+      : null;
 
 export const Subtitle = ({
   subtitle,
@@ -185,20 +192,8 @@ export const Subtitle = ({
   }
 
   return typeof subtitle === 'string'
-    ? StringSubtitle(
-        subtitle,
-        textColor,
-        textAlign,
-        variant,
-        marginBottom
-      )
-    : ElementSubtitle(
-        subtitle,
-        textColor,
-        textAlign,
-        variant,
-        marginBottom
-      );
+    ? StringSubtitle(subtitle, textColor, textAlign, variant, marginBottom)
+    : ElementSubtitle(subtitle, textColor, textAlign, variant, marginBottom);
 };
 
 const StringBody = (
@@ -257,25 +252,5 @@ export const Body = ({
 
   return typeof body === 'string'
     ? StringBody(body, defaultTextColor, textAlign, variant, marginBottom)
-    : ElementBody(
-        body,
-        defaultTextColor,
-        textAlign,
-        variant,
-        marginBottom
-      );
+    : ElementBody(body, defaultTextColor, textAlign, variant, marginBottom);
 };
-
-{
-  /* HERO ELEMENTS */
-}
-
-export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
-  size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
-
-export const getOverlay = (useHoverlay: boolean, theme: string) =>
-  useHoverlay
-    ? theme === 'dark'
-      ? 'linear-gradient(0deg, rgba(0, 98, 195, 0.65), rgba(0, 98, 195, 0.65)), '
-      : 'linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), '
-    : '';

@@ -1,14 +1,5 @@
-import { type ButtonProps } from '@mui/material';
-import { type CommonProps, type Generic } from '../types/components';
-
-{
-  /* COMMON PROPS */
-}
-
-export interface CtaButtonProps extends Partial<ButtonProps> {
-  readonly text: string;
-  variant?: 'contained' | 'outlined';
-}
+import { type CommonProps, type Generic } from '../common/Common.types';
+import { CtaButtonProps } from '../common/Common.types';
 
 {
   /* HERO PROPS */

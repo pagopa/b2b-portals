@@ -1,18 +1,17 @@
 import React from 'react';
 import { Box, Stack, Grid } from '@mui/material';
 import Image from 'next/image';
-import { isJSX } from '../../utils';
-import ContainerRC from '../common/Container';
-import { HeroProps, HeroTextProps } from '../../utils/Components.types';
+import { isJSX } from '../../types/common/Common.types';
+import ContainerRC from '../common/ContainerRC';
+import { HeroProps, HeroTextProps } from '../../types/Hero/Hero.types';
 import {
   Title,
   Subtitle,
   CtaButtons,
-  getMinHeight,
-  getOverlay,
   useBackgroundColor,
   useTextColor,
-} from '../../utils/Components.helpers';
+} from '../common/Common.helpers';
+import { getMinHeight, getOverlay } from './Hero.helpers';
 
 const HeroTextContent = ({
   title,
@@ -54,13 +53,13 @@ const HeroTextContent = ({
           spacing={2}
           mb={{ xs: 8, lg: 0 }}
         >
-        {CtaButtons({
-          ctaButtons: ctaButtons.map((button) => ({
-            ...button,
-            sx: { width: { md: 'auto', xs: '100%' } },
-          })),
-          theme,
-        })}
+          {CtaButtons({
+            ctaButtons: ctaButtons.map((button) => ({
+              ...button,
+              sx: { width: { md: 'auto', xs: '100%' } },
+            })),
+            theme,
+          })}
         </Stack>
       ) : null}
     </Stack>

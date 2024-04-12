@@ -2,8 +2,8 @@ import React from 'react';
 import Box, { type BoxProps } from '@mui/material/Box';
 import Grid, { type GridProps } from '@mui/material/Grid';
 import { Container } from '@mui/system';
-import { type Generic } from '../../types/components';
-import { isJSX } from '../../utils';
+import { type Generic } from '../../types/common/Common.types';
+import { isJSX } from '../../types/common/Common.types';
 
 interface ContainerProps {
   alignItems?: GridProps['alignItems'];
