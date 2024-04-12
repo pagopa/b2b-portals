@@ -31,12 +31,6 @@ module "cdn_websites_ssl_certificate" {
 
   domain_name = each.value.url_tenant
 
-  #zone_id     = "zone_id of DNS zone where is configured website's domain" # useful if create_route53_records  = true
-
-  #subject_alternative_names = [    # useful if the site has an alternative domain
-  #  "www.${each.value.url_tenant}"
-  #]
-
   wait_for_validation = false
   validation_method   = "DNS"
   dns_ttl             = 3600
