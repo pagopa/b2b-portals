@@ -1,5 +1,5 @@
 ---
-"infrastructure": patch
+"infrastructure": minor
 ---
 
-[B2BP-512] - Create SSL certificate for cdn websites
+Create SSL certificate for cdn websites
