@@ -4,6 +4,7 @@ import { HowToProps } from './utils/Components.types';
 import { FeatureProps } from './utils/Components.types';
 import { AccordionProps } from './utils/Components.types';
 import { BannerLinkProps } from './utils/Components.types';
+import { CardsProps } from './utils/Components.types';
 
 export type {
   HeroProps,
@@ -12,4 +13,5 @@ export type {
   FeatureProps,
   AccordionProps,
   BannerLinkProps,
+  CardsProps,
 };

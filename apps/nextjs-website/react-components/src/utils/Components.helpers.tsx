@@ -72,12 +72,14 @@ export const RenderGenericTitle = ({
   variant = 'body1',
   component = 'p',
   textAlign = 'center',
+  marginBottom = 0,
 }: {
   title: string | JSX.Element;
   color: string;
   variant?: TypographyProps['variant'];
   component?: TypographyProps['component'];
   textAlign?: TypographyProps['align'];
+  marginBottom?: number | string;
 }) =>
   typeof title === 'string' ? (
     <Typography
@@ -85,20 +87,22 @@ export const RenderGenericTitle = ({
       variant={variant}
       component={component}
       align={textAlign}
+      style={{ marginBottom }}
     >
       {title}
     </Typography>
   ) : (
-    React.cloneElement(title, { color })
+    React.cloneElement(title, { color, style: { marginBottom } })
   );
 
 const renderStringSubtitle = (
   subtitle: string,
   textColor: string,
   textAlign: TypographyProps['align'] = 'inherit',
-  variant: TypographyProps['variant'] = 'body1'
+  variant: TypographyProps['variant'] = 'body1',
+  marginBottom: number | string = 0
 ) => (
-  <Typography variant={variant} style={{ color: textColor }} align={textAlign}>
+  <Typography variant={variant} style={{ color: textColor, marginBottom }} align={textAlign}>
     {subtitle}
   </Typography>
 );
@@ -107,14 +111,15 @@ const renderElementSubtitle = (
   subtitle: JSX.Element,
   textColor: string,
   textAlign: TypographyProps['align'] = 'inherit',
-  variant: TypographyProps['variant'] = 'body1'
+  variant: TypographyProps['variant'] = 'body1',
+  marginBottom: number | string = 0
 ) =>
   React.isValidElement(subtitle)
     ? React.cloneElement(
         subtitle as ReactElement<
           TypographyProps & { style?: React.CSSProperties }
         >,
-        { style: { color: textColor }, align: textAlign, variant: variant }
+        { style: { color: textColor, marginBottom }, align: textAlign, variant: variant }
       )
     : null;
 
@@ -123,28 +128,31 @@ export const RenderGenericSubtitle = ({
   textColor,
   textAlign = 'center',
   variant = 'body1',
+  marginBottom = 0,
 }: {
   subtitle: string | JSX.Element | undefined;
   textColor: string;
   textAlign?: TypographyProps['align'];
   variant?: TypographyProps['variant'];
+  marginBottom?: number | string;
 }) => {
   if (!subtitle) {
     return null;
   }
 
   return typeof subtitle === 'string'
-    ? renderStringSubtitle(subtitle, textColor, textAlign, variant)
-    : renderElementSubtitle(subtitle, textColor, textAlign, variant);
+    ? renderStringSubtitle(subtitle, textColor, textAlign, variant, marginBottom)
+    : renderElementSubtitle(subtitle, textColor, textAlign, variant, marginBottom);
 };
 
 const renderStringBody = (
   body: string,
   textColor: string,
   textAlign: TypographyProps['align'] = 'inherit',
-  variant: TypographyProps['variant'] = 'body2'
+  variant: TypographyProps['variant'] = 'body2',
+  marginBottom: number | string = 0
 ) => (
-  <Typography variant={variant} style={{ color: textColor }} align={textAlign}>
+  <Typography variant={variant} style={{ color: textColor, marginBottom }} align={textAlign}>
     {body}
   </Typography>
 );
@@ -153,14 +161,15 @@ const renderElementBody = (
   body: JSX.Element,
   textColor: string,
   textAlign: TypographyProps['align'] = 'inherit',
-  variant: TypographyProps['variant'] = 'body2'
+  variant: TypographyProps['variant'] = 'body2',
+  marginBottom: number | string = 0
 ) =>
   React.isValidElement(body)
     ? React.cloneElement(
         body as ReactElement<
           TypographyProps & { style?: React.CSSProperties }
         >,
-        { style: { color: textColor }, align: textAlign, variant: variant }
+        { style: { color: textColor, marginBottom }, align: textAlign, variant: variant }
       )
     : null;
 
@@ -169,11 +178,13 @@ export const RenderGenericBody = ({
   textColor,
   textAlign = 'inherit',
   variant = 'body2',
+  marginBottom = 0,
 }: {
   body: string | JSX.Element | undefined;
   textColor?: string;
   textAlign?: TypographyProps['align'];
   variant?: TypographyProps['variant'];
+  marginBottom?: number | string;
 }) => {
   const theme = useTheme();
   const defaultTextColor = textColor || theme.palette.text.primary;
@@ -183,8 +194,8 @@ export const RenderGenericBody = ({
   }
 
   return typeof body === 'string'
-    ? renderStringBody(body, defaultTextColor, textAlign, variant)
-    : renderElementBody(body, defaultTextColor, textAlign, variant);
+    ? renderStringBody(body, defaultTextColor, textAlign, variant, marginBottom)
+    : renderElementBody(body, defaultTextColor, textAlign, variant, marginBottom);
 };
 
 {
