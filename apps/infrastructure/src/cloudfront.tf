@@ -90,10 +90,7 @@ resource "aws_cloudfront_distribution" "website" { # delete when is online a Mul
   }
 
   viewer_certificate {
-    # set default = true in variable "use_custom_certificate" when available and validate a tenant certificate
-    cloudfront_default_certificate = var.use_custom_certificate ? false : true
-
-    # uncomment next 2 lines when the certificates for the tenants are available and validated
+    cloudfront_default_certificate = true
     # acm_certificate_arn            = var.use_custom_certificate ? aws_acm_certificate.website.arn : null
     # ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
   }
@@ -116,8 +113,8 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
   comment             = "CloudFront distribution for the static website."
   default_root_object = "index.html"
 
-  # to be uncommented when when available dns domain
-  #aliases = ["${each.value.url_tenant}"]
+  # to be uncommented when available dns domain and certificate is validated
+  aliases = ["${each.value.url_tenant}"]
 
   custom_error_response {
     error_code         = 404
@@ -159,9 +156,10 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
   }
 
   viewer_certificate {
+    # set default = true in variable "use_custom_certificate" when available and validate a tenant certificate
     cloudfront_default_certificate = var.use_custom_certificate ? false : true
-    # acm_certificate_arn            = var.use_custom_certificate ? module.cdn_websites_ssl_certificate[each.key].acm_certificate_arn : null
-    # ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
+    acm_certificate_arn            = var.use_custom_certificate ? module.cdn_websites_ssl_certificate[each.key].acm_certificate_arn : null
+    ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
   }
 }
 
