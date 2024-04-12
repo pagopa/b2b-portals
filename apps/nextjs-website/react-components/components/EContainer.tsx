@@ -5,7 +5,7 @@ import { Container } from '@mui/system';
 import { type Generic } from '../types/components';
 import { isJSX } from '../utils';
 
-interface Props {
+interface ContainerProps {
   alignItems?: GridProps['alignItems'];
   background?: string | Generic;
   children: React.ReactNode;
@@ -16,7 +16,7 @@ interface Props {
   sx?: GridProps['sx'];
 }
 
-const EContainer = (props: Props) => {
+const EContainer = (props: ContainerProps) => {
   const {
     alignItems,
     background,
