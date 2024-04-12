@@ -12,9 +12,7 @@ on:
         description: 'The tenant environment used as target'
         type: choice
         required: true
-        default: prod # line to modify/delete as soon as the github vars/secrets are reorganized
         options:
-          - prod # line to delete as soon as the github vars/secrets are reorganized
           - send
           - appio
 
@@ -37,7 +35,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     strategy:
       matrix:
-        environment: [ 'prod' ] # line to modify with values [ 'send','appio' ] as soon as the github vars/secrets are reorganized
+        environment: [ 'send','appio' ] # add new tenant after creating the relevant environment vars/secrets github
 
     environment: ${{ matrix.environment }}
 
