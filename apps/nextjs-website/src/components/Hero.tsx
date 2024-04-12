@@ -6,7 +6,6 @@ import { HeroSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 
 const makeHeroProps = ({
-  theme,
   subtitle,
   image,
   background,
@@ -14,7 +13,6 @@ const makeHeroProps = ({
   ...rest
 }: HeroSection): HeroProps => ({
   ...rest,
-  theme,
   useHoverlay: false,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
   ...(image && { image: image.url }),
@@ -24,7 +22,6 @@ const makeHeroProps = ({
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
         ...ctaBtn,
-        color: theme === 'dark' ? 'negative' : 'primary',
         ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
