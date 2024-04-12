@@ -2,4 +2,4 @@
 'nextjs-website': minor
 ---
 
-Implement EC 'Hero' component inside Next.JS
+Migrate Hero component from EC to B2BP
