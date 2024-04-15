@@ -1,11 +1,9 @@
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import EContainer from '../EContainer';
-import { EditorialProps } from '../../utils/Components.types';
-import {
-  useIsMobile,
-  useBackgroundColor,
-} from '../../utils/Components.helpers';
+import ContainerRC from '../common/ContainerRC';
+import { EditorialProps } from '../../types/Editorial/Editorial.types'
+import { useIsMobile } from './Editorial.helpers';
+import { BackgroundColor } from '../common/Common.helpers';
 import { Content as EditorialContent } from './Content';
 import { Ctas as EditorialCtas } from './Ctas';
 import { Image as EditorialImage } from './Image';
@@ -25,7 +23,7 @@ const Editorial = (props: EditorialProps) => {
   } = props;
 
   const isMobile = useIsMobile();
-  const backgroundColor = useBackgroundColor(theme);
+  const backgroundColor = BackgroundColor(theme);
 
   const columns = {
     wide: 6,
@@ -45,7 +43,7 @@ const Editorial = (props: EditorialProps) => {
     width === 'standard' ? { ...styles.half, ...styles.offset } : styles.half;
 
   return (
-    <EContainer
+    <ContainerRC
       alignItems='center'
       background={backgroundColor}
       direction={containerDirection}
@@ -61,7 +59,7 @@ const Editorial = (props: EditorialProps) => {
       <Grid item md={columns[width]}>
         <EditorialImage {...{ pattern, image, theme }} />
       </Grid>
-    </EContainer>
+    </ContainerRC>
   );
 };
 

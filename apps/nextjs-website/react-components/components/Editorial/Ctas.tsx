@@ -1,24 +1,16 @@
 import Image from 'next/image';
-import Button, { type ButtonProps } from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import appleBadge from '../../../../public/editorial-images/app-store-badge.png';
 import googleBadge from '../../../../public/editorial-images/google-play-badge.png';
-import { EditorialCtaProps } from '../../utils/Components.types';
-import { RenderButtons } from '../../utils/Components.helpers';
+import { EditorialCtaProps } from '../../types/Editorial/Editorial.types';
+import { CtaButtons } from '../common/Common';
 
 export const Ctas = ({
   ctaButtons,
   storeButtons,
   theme,
 }: EditorialCtaProps) => {
-  const buttonsTheme: ButtonProps[] = [
-    {
-      variant: 'contained',
-    },
-    {
-      variant: 'outlined',
-    },
-  ];
 
   if (storeButtons?.hrefGoogle || storeButtons?.hrefApple) {
     return (
@@ -83,11 +75,10 @@ export const Ctas = ({
         justifyContent='left'
         spacing={2}
       >
-        {RenderButtons({
-          ctaButtons: ctaButtons.map((button, i) => ({
+        {CtaButtons({
+          ctaButtons: ctaButtons.map((button) => ({
             ...button,
             sx: { width: { md: 'auto', xs: '100%' } },
-            ...buttonsTheme[i],
           })),
           theme,
         })}

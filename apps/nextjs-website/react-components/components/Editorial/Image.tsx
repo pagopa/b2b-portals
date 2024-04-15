@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { SxProps } from '@mui/system';
 import { Theme } from '@mui/material/styles';
 import { cloneElement } from 'react';
-import { EditorialImageProps } from '../../utils/Components.types';
+import { EditorialImageProps } from '../../types/Editorial/Editorial.types';
 
 const translateTopRight = 'translate(40px, -30px)';
 const scaleAndTranslateBottomLeft = 'translate(-20px, 10px) scale(0.89)';

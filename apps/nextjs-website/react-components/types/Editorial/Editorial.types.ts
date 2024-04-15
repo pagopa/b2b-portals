@@ -1,37 +1,5 @@
 import { ReactElement } from 'react';
-import { type ButtonProps } from '@mui/material';
-import { type CommonProps, type Generic } from '../types/components';
-
-{
-  /* COMMON PROPS */
-}
-
-export interface CtaButtonProps extends Partial<ButtonProps> {
-  readonly text: string;
-}
-
-{
-  /* HERO PROPS */
-}
-
-export interface HeroProps extends CommonProps, HeroTextProps {
-  readonly image?: string | Generic;
-  readonly altText?: string;
-  readonly inverse?: boolean;
-  readonly background?: string | Generic;
-  readonly useHoverlay?: boolean;
-}
-
-export interface HeroTextProps extends CommonProps {
-  readonly title: string;
-  readonly subtitle?: string | Generic;
-  readonly ctaButtons?: ReadonlyArray<CtaButtonProps | Generic>;
-  readonly size?: 'medium' | 'big' | 'small';
-}
-
-{
-  /* EDITORIAL PROPS */
-}
+import { CtaButtonProps, type CommonProps } from '../common/Common.types';
 
 export interface EditorialProps
   extends CommonProps,
