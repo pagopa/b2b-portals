@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import appleBadge from '../../../../public/editorial-images/app-store-badge.png';
-import googleBadge from '../../../../public/editorial-images/google-play-badge.png';
+import appleBadge from '../../../public/editorial-images/app-store-badge.png';
+import googleBadge from '../../../public/editorial-images/google-play-badge.png';
 import { EditorialCtaProps } from '../../types/Editorial/Editorial.types';
 import { CtaButtons } from '../common/Common';
 
