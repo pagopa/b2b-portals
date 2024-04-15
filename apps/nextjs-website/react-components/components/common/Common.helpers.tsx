@@ -34,26 +34,6 @@ export const useExtraTextColor = (theme: 'dark' | 'light') => {
     : palette.text.secondary;
 };
 
-export const useButtonColor = (theme: 'dark' | 'light') =>
-  theme === 'dark' ? 'negative' : 'primary';
-
-const CtaButton = (
-  button: CtaButtonProps,
-  i: number,
-  color: 'primary' | 'negative'
-) => (
-  <Button
-    key={`${button.text}-${i}`}
-    color={color}
-    variant={button.variant || 'contained'}
-    {...button}
-  >
-    {button.text}
-  </Button>
-);
-
-const ElementButton = (button: JSX.Element) => button;
-
 export const CtaButtons = ({
   ctaButtons,
   theme,
@@ -61,12 +41,21 @@ export const CtaButtons = ({
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
   theme: 'dark' | 'light';
 }) => {
-  const buttonColor = useButtonColor(theme);
+  const buttonColor = theme === 'dark' ? 'negative' : 'primary';
 
   return ctaButtons.map((button, i) =>
     React.isValidElement(button)
-      ? ElementButton(button)
-      : CtaButton(button as CtaButtonProps, i, buttonColor)
+      ? button
+      : (
+          <Button
+            key={`${(button as CtaButtonProps).text}-${i}`}
+            color={buttonColor}
+            variant={(button as CtaButtonProps).variant || 'contained'}
+            {...(button as CtaButtonProps)}
+          >
+            {(button as CtaButtonProps).text}
+          </Button>
+        )
   );
 };
 
