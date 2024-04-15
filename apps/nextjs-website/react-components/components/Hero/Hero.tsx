@@ -8,9 +8,8 @@ import {
   Title,
   Subtitle,
   CtaButtons,
-  useBackgroundColor,
-  useTextColor,
-} from '../common/Common.helpers';
+} from '../common/Common';
+import { BackgroundColor, TextColor } from '../common/Common.helpers';
 import { getMinHeight, getOverlay } from './Hero.helpers';
 
 const HeroTextContent = ({
@@ -20,7 +19,7 @@ const HeroTextContent = ({
   theme,
   size,
 }: HeroTextProps) => {
-  const textColor = useTextColor(theme);
+  const textColor = TextColor(theme);
 
   return (
     <Stack
@@ -79,7 +78,7 @@ const Hero = (props: HeroProps) => {
 
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
-  const backgroundColor = useBackgroundColor(theme);
+  const backgroundColor = BackgroundColor(theme);
 
   const BackgroundImage = isJSX(background) ? (
     background
