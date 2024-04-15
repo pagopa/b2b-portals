@@ -1,5 +1,21 @@
 # nextjs-website
 
+## 0.2.0
+
+### Minor Changes
+
+- a02571b: Update EC from 3.1.2 to 4.0.0
+- c2d2cd1: Update NextJS to 14.1.0
+- 573daf1: Update EC from 3.1.1 to 3.1.2
+- 5cadaf1: Fix Ui on EC components from B2BP prospective
+- 182a23c: Migrate Hero component from EC to B2BP
+
+### Patch Changes
+
+- fd0d810: Add OneTrustSection
+- 20d7446: Style OneTrustSection
+- eac0df4: Change :nth-last-child to :nth-last-of-type to remove warning
+
 ## 0.1.0
 
 ### Minor Changes
