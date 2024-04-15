@@ -1,5 +1,15 @@
 # strapi-cms
 
+## 0.2.0
+
+### Minor Changes
+
+- a02571b: Update strapi with new size for 'Hero' component and add new functionality for the new 'Editorial' component badges
+
+### Patch Changes
+
+- fd0d810: Add OneTrust section
+
 ## 0.1.0
 
 ### Minor Changes
