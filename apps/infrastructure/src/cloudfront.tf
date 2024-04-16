@@ -113,7 +113,6 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
   comment             = "CloudFront distribution for the static website."
   default_root_object = "index.html"
 
-  # to be uncommented when available dns domain and certificate is validated
   aliases = ["${each.value.url_tenant}"]
 
   custom_error_response {
@@ -159,6 +158,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
     cloudfront_default_certificate = var.use_custom_certificate ? false : true
     acm_certificate_arn            = var.use_custom_certificate ? module.cdn_websites_ssl_certificate[each.key].acm_certificate_arn : null
     ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
+    minimum_protocol_version       = "TLSv1.2_2021"
   }
 }
 
