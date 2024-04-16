@@ -127,7 +127,6 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = aws_s3_bucket.website.bucket
-    #response_headers_policy_id = aws_cloudfront_response_headers_policy.websites.id
 
     forwarded_values {
       query_string = false
