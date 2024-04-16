@@ -1,3 +1,4 @@
+/* eslint-disable functional/immutable-data */
 import { Strapi } from '@strapi/strapi';
 import axios, { AxiosResponse } from 'axios';
 import { Context } from 'koa';

@@ -42,11 +42,10 @@ module.exports = {
     },
     {
       // Exclude Strapi's index file, allowing us to use lifecycle functions
-      files: ['**/strapi-cms/src/index.ts'],
+      files: ['src/index.ts'],
       rules: {
         'functional/no-expression-statements': 'off',
         'functional/no-return-void': 'off',
-        'functional/immutable-data': 'off',
         'functional/no-try-statements': 'off',
       },
     },
