@@ -17,6 +17,7 @@
     "strapi": "strapi"
   },
   "devDependencies": {
+    "@types/koa": "^2.15.0",
     "eslint": "^8.50.0",
     "eslint-config-custom": "*",
     "shx": "^0.3.4",
@@ -28,6 +29,7 @@
     "@strapi/plugin-users-permissions": "4.13.7",
     "@strapi/provider-upload-aws-s3": "^4.17.0",
     "@strapi/strapi": "4.13.7",
+    "axios": "^1.6.8",
     "better-sqlite3": "8.6.0",
     "pg": "^8.11.3",
     "strapi-plugin-navigation": "^2.2.16",
