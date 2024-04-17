@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Grid, MobileStepper, useTheme } from '@mui/material';
 import SwipeableViews from 'react-swipeable-views';
-import EContainer from '../EContainer';
+import EContainer from '../../src/components/EContainer';
 import {
   useTextColor,
   useBackgroundColorAlternative,
   RenderGenericTitle,
-} from '../../utils/Components.helpers';
-import { FeatureProps } from '../../utils/Components.types';
+} from '../../src/utils/Components.helpers';
+import { FeatureProps } from '../../src/utils/Components.types';
 import { FeatureStackItem } from './FeatureStackItem';
 
 const Feature = (props: FeatureProps) => {
