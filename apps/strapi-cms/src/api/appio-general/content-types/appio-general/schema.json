@@ -1,0 +1,45 @@
+{
+  "kind": "singleType",
+  "collectionName": "appio_generals",
+  "info": {
+    "singularName": "appio-general",
+    "pluralName": "appio-generals",
+    "displayName": "Generale (AppIO)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "favicon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "appleTouchIcon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "manifest": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.manifest",
+      "required": true
+    }
+  }
+}
