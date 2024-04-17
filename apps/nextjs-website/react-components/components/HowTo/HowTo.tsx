@@ -1,14 +1,15 @@
 import React from 'react';
-import { Box, Grid, Link, Stack, Typography } from '@mui/material';
+import { Box, Grid, Link, Stack } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import EContainer from '../EContainer';
+import ContainerRC from '../common/ContainerRC';
+import { groupStepsByRows } from './HowTo.helpers';
 import {
-  groupStepsByRows,
-  useBackgroundColorAlternative,
-  useTextColor,
-} from '../../utils/Components.helpers';
-import { HowToProps } from '../../utils/Components.types';
+  TextColor,
+  BackgroundColorAlternative,
+} from '../common/Common.helpers';
+import { HowToProps } from '../../types/HowTo/HowTo.types';
 import { HowToStep } from './HowToStep';
+import { Title } from '../common/Common';
 
 const HowTo = (props: HowToProps) => {
   const {
@@ -19,8 +20,8 @@ const HowTo = (props: HowToProps) => {
     rowMaxSteps = 4,
     stepsAlignment = 'center',
   } = props;
-  const backgroundColor = useBackgroundColorAlternative(theme);
-  const textColor = useTextColor(theme);
+  const textColor = TextColor(theme);
+  const backgroundColor = BackgroundColorAlternative(theme);
 
   const alignment = { center: 'center', left: 'start', right: 'end' }[
     stepsAlignment
@@ -29,16 +30,16 @@ const HowTo = (props: HowToProps) => {
   const stepsRows = groupStepsByRows(steps, rowMaxSteps);
 
   return (
-    <EContainer background={backgroundColor} py={{ xs: 6, md: 8 }}>
+    <ContainerRC background={backgroundColor} py={{ xs: 6, md: 8 }}>
       <Grid item xs={12}>
         {/** Section title */}
-        <Typography
-          color={textColor}
-          sx={{ textAlign: 'center', mb: 8 }}
+        <Title
           variant='h4'
-        >
-          {title}
-        </Typography>
+          component='p'
+          textColor={textColor}
+          title={title}
+          marginBottom={8}
+        />
       </Grid>
       <Grid item>
         {/** Steps */}
@@ -82,7 +83,7 @@ const HowTo = (props: HowToProps) => {
           </Link>
         )}
       </Grid>
-    </EContainer>
+    </ContainerRC>
   );
 };
 

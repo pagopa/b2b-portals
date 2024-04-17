@@ -1,8 +1,7 @@
 import React from 'react';
 import * as MuiIcons from '@mui/icons-material';
 import { Typography, type SvgIconProps } from '@mui/material';
-import { isJSX } from '../utils';
-import { type Generic } from '../types/components';
+import { isJSX, Generic } from '../../types/common/Common.types';
 
 export interface EIconProps extends Omit<SvgIconProps, 'color'> {
   icon?: keyof typeof MuiIcons | Generic;

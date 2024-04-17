@@ -1,17 +1,13 @@
 import React from 'react';
 import * as MuiIcons from '@mui/icons-material';
 import { Stack, Box } from '@mui/material';
-import { EIcon } from '../EIcon';
-import { Generic } from '../../types/components';
-import { HowToStepProps } from '../../utils/Components.types';
-import {
-  ArrowIcon,
-  RenderHowToDescription,
-  RenderHowToTitle,
-  RenderHowToStepNum,
-  useTextColor,
-  useTextAlternativeColor,
-} from '../../utils/Components.helpers';
+import { EIcon } from '../common/EIcon';
+import { Generic } from '../../types/common/Common.types';
+import { HowToStepProps } from '../../types/HowTo/HowTo.types';
+import { ArrowIcon } from './HowTo.helpers';
+import { TextColor, TextAlternativeColor } from '../common/Common.helpers';
+import { Title, Body } from '../common/Common';
+import { HowToStepNum } from './HowTo.helpers';
 
 type IconProp = keyof typeof MuiIcons | Generic;
 
@@ -32,20 +28,16 @@ export const HowToStep = ({
 }: HowToStepProps) => {
   const isDarkTheme = theme === 'dark';
   const stepNum = index + 1;
-  const color = isDarkTheme ? 'white' : 'primary';
-  const color2 = useTextAlternativeColor(theme);
-  const color3 = useTextColor(theme);
+  const customHowToColour = isDarkTheme ? 'white' : 'primary';
+  const color2 = TextAlternativeColor(theme);
+  const color3 = TextColor(theme);
 
   return (
     <Stack spacing={1} component='article'>
       {/** Step with icon */}
       {stepIcon && (
         <Stack spacing={1.2}>
-          <RenderHowToStepNum
-            variant='overline'
-            color={color2}
-            stepNum={stepNum}
-          />
+          <HowToStepNum variant='overline' color={color2} stepNum={stepNum} />
           <Stack
             justifyContent='space-between'
             alignItems='center'
@@ -76,19 +68,19 @@ export const HowToStep = ({
 
       {/** Step without icon */}
       {!stepIcon && (
-        <RenderHowToStepNum
+        <HowToStepNum
           variant='h6'
           component='p'
-          color={color}
+          color={customHowToColour}
           stepNum={stepNum}
         />
       )}
 
       {/** Step title */}
-      {RenderHowToTitle(title, color3)}
+      <Title variant='h5' component='p' textColor={color3} title={title} />
 
       {/** Step description */}
-      {RenderHowToDescription(description, color3)}
+      <Body textColor={color3} body={description} />
     </Stack>
   );
 };
