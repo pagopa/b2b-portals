@@ -110,7 +110,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
 
   enabled             = true # enable CloudFront distribution
   is_ipv6_enabled     = true
-  comment             = "CloudFront distribution for the static website."
+  comment             = "CloudFront distribution for the static website ${each.key}"
   default_root_object = "index.html"
 
   aliases = ["${each.value.url_tenant}"]
