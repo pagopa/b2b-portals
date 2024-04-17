@@ -68,7 +68,7 @@ export const Ctas = ({
         )}
       </Stack>
     );
-  } else if (Array.isArray(ctaButtons) && ctaButtons.length > 0) {
+  } if (Array.isArray(ctaButtons) && ctaButtons.length > 0) {
     return (
       <Stack
         direction={{ md: 'row-reverse', xs: 'row' }}

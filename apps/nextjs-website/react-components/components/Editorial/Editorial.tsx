@@ -1,22 +1,33 @@
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import ContainerRC from '../common/ContainerRC';
-import { EditorialProps } from '../../types/Editorial/Editorial.types'
+import { EditorialProps } from '../../types/Editorial/Editorial.types';
 import { useIsMobile } from './Editorial.helpers';
 import { BackgroundColor } from '../common/Common.helpers';
 import { Content as EditorialContent } from './Content';
 import { Ctas as EditorialCtas } from './Ctas';
 import { Image as EditorialImage } from './Image';
 
+const styles = {
+  half: {
+    display: 'grid',
+    justifyContent: 'center',
+  },
+  offset: {
+    marginLeft: '8.33%',
+    paddingRight: '4.15%',
+  },
+};
+
 const Editorial = (props: EditorialProps) => {
   const {
     image,
-    eyelet = '',
+    eyelet,
     title,
     body,
     theme,
-    ctaButtons = [],
-    storeButtons = {},
+    ctaButtons,
+    storeButtons,
     pattern = 'none',
     width = 'standard',
     reversed = false,
@@ -52,8 +63,17 @@ const Editorial = (props: EditorialProps) => {
     >
       <Grid item md={columns[width]} sx={gridItemStyles}>
         <Stack gap={4}>
-          <EditorialContent {...{ eyelet, body, title, theme }} />
-          <EditorialCtas {...{ ctaButtons, storeButtons, theme }} />
+          <EditorialContent
+            theme={theme}
+            title={title}
+            body={body}
+            {...(eyelet && { eyelet })}
+          />
+          <EditorialCtas
+            theme={theme}
+            {...(ctaButtons && { ctaButtons })}
+            {...(storeButtons && { storeButtons })}
+          />
         </Stack>
       </Grid>
       <Grid item md={columns[width]}>
@@ -64,14 +84,3 @@ const Editorial = (props: EditorialProps) => {
 };
 
 export default Editorial;
-
-const styles = {
-  half: {
-    display: 'grid',
-    justifyContent: 'center',
-  },
-  offset: {
-    marginLeft: '8.33%',
-    paddingRight: '4.15%',
-  },
-};
