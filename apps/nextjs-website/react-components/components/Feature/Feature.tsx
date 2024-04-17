@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Grid, MobileStepper, useTheme } from '@mui/material';
 import SwipeableViews from 'react-swipeable-views';
-import EContainer from '../../src/components/EContainer';
+import ContainerRC from '../common/ContainerRC';
 import {
-  useTextColor,
-  useBackgroundColorAlternative,
-  RenderGenericTitle,
-} from '../../src/utils/Components.helpers';
-import { FeatureProps } from '../../src/utils/Components.types';
+  TextColor,
+  BackgroundColorAlternative,
+} from '../common/Common.helpers';
+import { Title } from '../common/Common';
+import { FeatureProps } from '../../types/Feature/Feature.types';
 import { FeatureStackItem } from './FeatureStackItem';
 
 const Feature = (props: FeatureProps) => {
@@ -20,11 +20,11 @@ const Feature = (props: FeatureProps) => {
     return step;
   };
 
-  const textColor = useTextColor(theme);
-  const backgroundColorAlernative = useBackgroundColorAlternative(theme);
+  const textColor = TextColor(theme);
+  const backgroundColorAlernative = BackgroundColorAlternative(theme);
 
   return (
-    <EContainer
+    <ContainerRC
       background={background ?? backgroundColorAlernative}
       py={{
         xs: 4,
@@ -33,7 +33,7 @@ const Feature = (props: FeatureProps) => {
       }}
     >
       <Grid item xs={12}>
-        <RenderGenericTitle variant='h4' color={textColor} title={title} />
+        <Title variant='h4' textColor={textColor} title={title} />
       </Grid>
       <Grid item mt={8} justifyContent='center'>
         <Grid container spacing={{ xs: 6, md: 4 }} justifyContent='center'>
@@ -82,7 +82,7 @@ const Feature = (props: FeatureProps) => {
           )}
         </Grid>
       </Grid>
-    </EContainer>
+    </ContainerRC>
   );
 };
 
