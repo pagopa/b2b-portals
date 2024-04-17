@@ -64,3 +64,18 @@ variable "dns_domain_name" {
   type        = map(any)
   default     = null
 }
+
+variable "websites_configs" {
+  description = "Website configurations to create CDNs and SSL certificates for multi-tenancy"
+  type = map(object({
+    origin_path = string
+    url_tenant  = string
+  }))
+
+  default = {
+    "send" = {
+      origin_path = "/send"
+      url_tenant  = "notifichedigitali.pagopa.it"
+    }
+  }
+}

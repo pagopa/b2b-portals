@@ -55,6 +55,10 @@ resource "aws_ecs_service" "cms_ecs_service" {
   task_definition                   = aws_ecs_task_definition.cms_task_def.arn
   health_check_grace_period_seconds = 60000
 
+  lifecycle {
+    ignore_changes = [task_definition] # CMS Deployment is managed by the "Deploy CMS" GitHub Action
+  }
+
   network_configuration {
     security_groups  = [aws_security_group.ecs_tasks.id]
     subnets          = module.vpc.private_subnets
