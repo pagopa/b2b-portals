@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "appio_pre_headers",
+  "info": {
+    "singularName": "appio-pre-header",
+    "pluralName": "appio-pre-headers",
+    "displayName": "PreHeader (AppIO)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "leftCtas": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.pre-header-button",
+      "required": true,
+      "min": 1
+    },
+    "rightCtas": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.pre-header-button",
+      "required": true,
+      "min": 1
+    }
+  }
+}

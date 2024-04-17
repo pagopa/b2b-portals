@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "send_generals",
+  "info": {
+    "singularName": "send-general",
+    "pluralName": "send-generals",
+    "displayName": "Generale (SEND)",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "favicon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "appleTouchIcon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "manifest": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.manifest",
+      "required": true
+    }
+  }
+}
