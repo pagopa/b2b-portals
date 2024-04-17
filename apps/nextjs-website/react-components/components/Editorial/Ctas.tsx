@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import appleBadge from '../../../public/editorial-images/app-store-badge.png';
-import googleBadge from '../../../public/editorial-images/google-play-badge.png';
+import { appleBadgeBase64 } from './BadgeImages/appleBadgeBase64';
+import { googleBadgeBase64 } from './BadgeImages/googleBadgeBase64';
 import { EditorialCtaProps } from '../../types/Editorial/Editorial.types';
 import { CtaButtons } from '../common/Common';
 
@@ -39,7 +39,7 @@ export const Ctas = ({
             href={storeButtons.hrefGoogle}
           >
             <Image
-              src={googleBadge}
+              src={googleBadgeBase64}
               alt='Download on Google Play'
               height={0}
               width={0}
@@ -58,7 +58,7 @@ export const Ctas = ({
             href={storeButtons.hrefApple}
           >
             <Image
-              src={appleBadge}
+              src={appleBadgeBase64}
               alt='Download on App store'
               height={0}
               width={0}
