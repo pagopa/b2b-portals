@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "send_pre_headers",
+  "info": {
+    "singularName": "send-pre-header",
+    "pluralName": "send-pre-headers",
+    "displayName": "PreHeader (SEND)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "leftCtas": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.pre-header-button",
+      "required": true,
+      "min": 1
+    },
+    "rightCtas": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.pre-header-button",
+      "required": true,
+      "min": 1
+    }
+  }
+}

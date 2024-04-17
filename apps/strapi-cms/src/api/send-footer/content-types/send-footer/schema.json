@@ -1,0 +1,54 @@
+{
+  "kind": "singleType",
+  "collectionName": "send_footers",
+  "info": {
+    "singularName": "send-footer",
+    "pluralName": "send-footers",
+    "displayName": "Footer (SEND)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "legalInfo": {
+      "type": "richtext",
+      "required": true
+    },
+    "showFundedByNextGenerationEULogo": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "companyLink": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.company-link",
+      "required": true
+    },
+    "links_aboutUs": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.footer-link-group",
+      "required": true
+    },
+    "links_services": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.footer-link-group",
+      "required": true
+    },
+    "links_resources": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.footer-link-group",
+      "required": true
+    },
+    "links_followUs": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.footer-link-group-with-social",
+      "required": true
+    }
+  }
+}
