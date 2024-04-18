@@ -50,7 +50,7 @@ variable "cms_app_memory" {
 variable "use_custom_certificate" {
   type        = bool
   description = "Enable CDN https support with a custom certificate instead using the default one"
-  default     = false # set true when available dns and custom certificate
+  default     = true
 }
 
 variable "publish_cloudfront_functions" {
