@@ -1,11 +1,11 @@
 import { Box, Container, Grid, Stack } from '@mui/material';
 import { AccordionItem } from './AccordionItem';
+import { Title, Subtitle, Body } from '../common/Common';
+import { AccordionProps } from '../../types/Accordion/Accordion.types';
 import {
-  RenderGenericTitle,
-  RenderGenericSubtitle,
-  RenderGenericBody,
-} from '../../utils/Components.helpers';
-import { AccordionProps } from '../../utils/Components.types';
+  BackgroundColorAlternative,
+  TextColor,
+} from '../common/Common.helpers';
 
 const Accordion = (props: AccordionProps) => {
   const {
@@ -16,27 +16,27 @@ const Accordion = (props: AccordionProps) => {
     theme,
     layout = 'left',
   } = props;
-  const isDarkTheme = theme === 'dark';
-  const bgcolor = isDarkTheme ? 'primary.main' : '#FAFAFA';
-  const textColor = isDarkTheme ? 'white' : 'text.primary';
 
+  const textColor = TextColor(theme);
+  const backgroundColor = BackgroundColorAlternative(theme);
   const isCenterLayout = layout === 'center';
   const textAlignment = isCenterLayout ? 'center' : 'left';
 
-  console.log('layout:', layout);
-  console.log('order:', layout === 'right' ? -1 : 1);
-
   return (
-    <Box sx={{ py: { xs: 4, md: 10 } }} bgcolor={bgcolor} component='section'>
+    <Box
+      sx={{ py: { xs: 4, md: 10 } }}
+      bgcolor={backgroundColor}
+      component='section'
+    >
       <Container>
         <Grid spacing={{ xs: 5, md: isCenterLayout ? 7 : 16 }} container>
           <Grid item xs={12} md={isCenterLayout ? 12 : 4}>
             <Stack px={{ xs: 1, md: 0 }} spacing={{ xs: 2, md: 5 }}>
               {/** Title */}
 
-              <RenderGenericTitle
+              <Title
                 variant='h4'
-                color={textColor}
+                textColor={textColor}
                 title={title}
                 textAlign={textAlignment}
               />
@@ -45,7 +45,7 @@ const Accordion = (props: AccordionProps) => {
 
               {subtitle && (
                 <>
-                  <RenderGenericSubtitle
+                  <Subtitle
                     variant='h6'
                     textColor={textColor}
                     subtitle={subtitle}
@@ -57,7 +57,7 @@ const Accordion = (props: AccordionProps) => {
               {/** Description */}
               {description && (
                 <>
-                  <RenderGenericBody
+                  <Body
                     variant='body2'
                     textColor={textColor}
                     body={description}
