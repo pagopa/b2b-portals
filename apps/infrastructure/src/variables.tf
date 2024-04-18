@@ -75,7 +75,7 @@ variable "websites_configs" {
   default = {
     "send" = {
       origin_path = "/send"
-      url_tenant  = "notifichedigitali.pagopa.it"
+      url_tenant  = "test-portal.pn.pagopa.it" # set to "notifichedigitali.pagopa.it" after finishing testing with test domain
     }
   }
 }
