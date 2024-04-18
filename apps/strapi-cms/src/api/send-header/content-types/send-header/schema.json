@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "send_headers",
+  "info": {
+    "singularName": "send-header",
+    "pluralName": "send-headers",
+    "displayName": "Header (SEND)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "productName": {
+      "type": "string",
+      "required": true
+    },
+    "beta": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button-simple",
+      "max": 2
+    },
+    "logo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

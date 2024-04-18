@@ -50,7 +50,7 @@ variable "cms_app_memory" {
 variable "use_custom_certificate" {
   type        = bool
   description = "Enable CDN https support with a custom certificate instead using the default one"
-  default     = false # set true when available dns and custom certificate
+  default     = true
 }
 
 variable "publish_cloudfront_functions" {
@@ -63,4 +63,19 @@ variable "dns_domain_name" {
   description = "DNS domain for the b2b portals"
   type        = map(any)
   default     = null
+}
+
+variable "websites_configs" {
+  description = "Website configurations to create CDNs and SSL certificates for multi-tenancy"
+  type = map(object({
+    origin_path = string
+    url_tenant  = string
+  }))
+
+  default = {
+    "send" = {
+      origin_path = "/send"
+      url_tenant  = "test-portal.pn.pagopa.it" # set to "notifichedigitali.pagopa.it" after finishing testing with test domain
+    }
+  }
 }
