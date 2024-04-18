@@ -16,7 +16,7 @@ interface ContainerProps {
   sx?: GridProps['sx'];
 }
 
-const ContainerRC = (props: ContainerProps) => {
+const ContainerRCXL = (props: ContainerProps) => {
   const {
     alignItems,
     background,
@@ -38,7 +38,7 @@ const ContainerRC = (props: ContainerProps) => {
       bgcolor={!backgroundIsJSX ? background : undefined}
     >
       {backgroundIsJSX && background}
-      <Container maxWidth='lg' disableGutters>
+      <Container maxWidth='xl' disableGutters>
         <Grid
           container
           direction={direction}
@@ -53,4 +53,4 @@ const ContainerRC = (props: ContainerProps) => {
   );
 };
 
-export default ContainerRC;
+export default ContainerRCXL;

@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import ContainerRC from '../common/ContainerRC';
+import ContainerRCXL from '../common/ContainerRCXL';
 import { EditorialProps } from '../../types/Editorial/Editorial.types';
 import { useIsMobile } from './Editorial.helpers';
 import { BackgroundColor } from '../common/Common.helpers';
@@ -54,7 +54,7 @@ const Editorial = (props: EditorialProps) => {
     width === 'standard' ? { ...styles.half, ...styles.offset } : styles.half;
 
   return (
-    <ContainerRC
+    <ContainerRCXL
       alignItems='center'
       background={backgroundColor}
       direction={containerDirection}
@@ -79,7 +79,7 @@ const Editorial = (props: EditorialProps) => {
       <Grid item md={columns[width]}>
         <EditorialImage {...{ pattern, image, theme }} />
       </Grid>
-    </ContainerRC>
+    </ContainerRCXL>
   );
 };
 
