@@ -2,12 +2,12 @@ import { useTheme } from '@mui/material/styles';
 
 export const BackgroundColor = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
-  return theme === 'dark' ? palette.primary.dark : palette.background.paper;
+  return theme === 'dark' ? palette.custom.backgroundColorDark : palette.background.paper;
 };
 
 export const BackgroundColorAlternative = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
-  return theme === 'dark' ? palette.primary.dark : palette.background.default;
+  return theme === 'dark' ? palette.custom.backgroundColorDark : palette.background.default;
 };
 
 export const TextColor = (theme: 'dark' | 'light') => {

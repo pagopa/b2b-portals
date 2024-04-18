@@ -33,7 +33,7 @@ export const HowToStep = ({
   const color3 = TextColor(theme);
 
   return (
-    <Stack spacing={1} component='article'>
+    <Stack spacing={1} component='article' sx={{ maxWidth: '15em' }}>
       {/** Step with icon */}
       {stepIcon && (
         <Stack spacing={1.2}>
@@ -77,7 +77,7 @@ export const HowToStep = ({
       )}
 
       {/** Step title */}
-      <Title variant='h5' component='p' textColor={color3} title={title} />
+      <Title variant='h6' component='p' textColor={color3} title={title} textAlign='left'/>
 
       {/** Step description */}
       <Body textColor={color3} body={description} />

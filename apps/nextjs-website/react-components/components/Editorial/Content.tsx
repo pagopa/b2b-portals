@@ -20,7 +20,7 @@ export const Content = ({
   return (
     <Stack maxWidth={{ md: maxTextWidth }} gap={2}>
       {Eyelet(eyeletColor, eyelet)}
-      <Title textColor={textColor} title={title} variant='h4'/>
+      <Title textColor={textColor} title={title} variant='h4' textAlign='left'/>
       <Body textColor={textColor} body={body} variant='body2'/>
     </Stack>
   );

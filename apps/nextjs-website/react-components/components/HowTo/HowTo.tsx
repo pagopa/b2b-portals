@@ -38,17 +38,23 @@ const HowTo = (props: HowToProps) => {
           component='p'
           textColor={textColor}
           title={title}
-          marginBottom={8}
+          marginBottom={32}
         />
       </Grid>
-      <Grid item>
+      <Grid
+        item
+        container
+        direction='column'
+        justifyContent='center'
+        alignItems='center'
+      >
         {/** Steps */}
         {stepsRows.map((stepRow, i) => (
           <Stack
             direction={{ md: 'row' }}
             justifyContent={alignment}
             spacing={{ xs: 4, md: 8 }}
-            sx={{ mt: i > 0 ? { xs: 4, md: 8 } : 0 }}
+            sx={{ mt: i > 0 ? { xs: 4, md: 8 } : 0, marginX: 'auto' }}
             key={i}
           >
             {stepRow.map((step, j) => (
@@ -67,7 +73,12 @@ const HowTo = (props: HowToProps) => {
         {/** Link */}
         {link && (
           <Link
-            sx={{ display: 'flex', alignItems: 'center', mt: 6 }}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              mt: 6,
+              alignSelf: 'flex-start',
+            }}
             href={link.href}
             target={link.target}
             color={textColor}

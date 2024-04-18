@@ -11,7 +11,6 @@ export const Ctas = ({
   storeButtons,
   theme,
 }: EditorialCtaProps) => {
-
   if (storeButtons?.hrefGoogle || storeButtons?.hrefApple) {
     return (
       <Stack
@@ -20,9 +19,10 @@ export const Ctas = ({
           '@media screen and (min-width: 420px)': {
             flexDirection: 'row-reverse',
           },
+          rowGap: 2,
+          columnGap: 2,
         }}
         justifyContent='left'
-        spacing={2}
         alignItems='baseline'
       >
         {storeButtons.hrefGoogle && (
@@ -68,7 +68,8 @@ export const Ctas = ({
         )}
       </Stack>
     );
-  } if (Array.isArray(ctaButtons) && ctaButtons.length > 0) {
+  }
+  if (Array.isArray(ctaButtons) && ctaButtons.length > 0) {
     return (
       <Stack
         direction={{ md: 'row-reverse', xs: 'row' }}
