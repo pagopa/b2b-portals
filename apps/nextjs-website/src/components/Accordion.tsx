@@ -9,10 +9,8 @@ const makeAccordionProps = ({
   subtitle,
   description,
   accordionItems,
-  theme,
   ...rest
 }: AccordionSection): AccordionProps => ({
-  theme,
   ...(subtitle && { subtitle }),
   ...(description && {
     description: MarkdownRenderer({ markdown: description, variant: 'body2' }),
@@ -20,7 +18,7 @@ const makeAccordionProps = ({
   accordionItems: accordionItems.map(({ header, content }) => ({
     header,
     content: MarkdownRenderer({ markdown: content, variant: 'body2' }),
-    theme,
+    theme: rest.theme,
   })),
   ...rest,
 });
