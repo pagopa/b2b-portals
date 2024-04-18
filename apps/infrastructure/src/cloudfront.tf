@@ -123,7 +123,7 @@ resource "aws_cloudfront_distribution" "website" { # delete when is online a Mul
 #  }
 
 #  default_cache_behavior {
-    # HTTPS requests we permit the distribution to serve
+# HTTPS requests we permit the distribution to serve
 #    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
 #    cached_methods   = ["GET", "HEAD"]
 #    target_origin_id = aws_s3_bucket.website.bucket
@@ -155,7 +155,7 @@ resource "aws_cloudfront_distribution" "website" { # delete when is online a Mul
 #  }
 
 #  viewer_certificate {
-    # set default = true in variable "use_custom_certificate" when available and validate a tenant certificate
+# set default = true in variable "use_custom_certificate" when available and validate a tenant certificate
 #    cloudfront_default_certificate = var.use_custom_certificate ? false : true
 #    acm_certificate_arn            = var.use_custom_certificate ? module.cdn_websites_ssl_certificate[each.key].acm_certificate_arn : null
 #    ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
