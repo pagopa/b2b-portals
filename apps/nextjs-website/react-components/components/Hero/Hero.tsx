@@ -39,7 +39,7 @@ const HeroTextContent = ({
             marginBottom={size === 'small' ? 0 : 2}
           />
           <Subtitle
-            variant='body2'
+            variant='body1'
             textColor={textColor}
             subtitle={subtitle}
             textAlign='left'
