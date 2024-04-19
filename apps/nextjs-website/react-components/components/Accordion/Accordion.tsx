@@ -44,26 +44,22 @@ const Accordion = (props: AccordionProps) => {
               {/** Subtitle */}
 
               {subtitle && (
-                <>
-                  <Subtitle
-                    variant='h6'
-                    textColor={textColor}
-                    subtitle={subtitle}
-                    textAlign={textAlignment}
-                  />
-                </>
+                <Subtitle
+                  variant='h6'
+                  textColor={textColor}
+                  subtitle={subtitle}
+                  textAlign={textAlignment}
+                />
               )}
 
               {/** Description */}
               {description && (
-                <>
-                  <Body
-                    variant='body2'
-                    textColor={textColor}
-                    body={description}
-                    textAlign={textAlignment}
-                  />
-                </>
+                <Body
+                  variant='body2'
+                  textColor={textColor}
+                  body={description}
+                  textAlign={textAlignment}
+                />
               )}
             </Stack>
           </Grid>
