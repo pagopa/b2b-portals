@@ -68,17 +68,17 @@ variable "dns_domain_name" {
 variable "websites_configs" {
   description = "Website configurations to create CDNs and SSL certificates for multi-tenancy"
   type = map(object({
-    origin_path = string
-    url_tenant  = string
-    create_certificate = bool
+    origin_path         = string
+    url_tenant          = string
+    create_certificate  = bool
     create_distribution = bool
   }))
 
   default = {
     "send" = {
-      origin_path = "/send"
-      url_tenant  = "notifichedigitali.pagopa.it"
-      create_certificate = true
+      origin_path         = "/send"
+      url_tenant          = "notifichedigitali.pagopa.it"
+      create_certificate  = true
       create_distribution = false
     }
   }
