@@ -6,6 +6,14 @@ import { isJSX } from '../../types/common/Common.types';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
 
+const styles = {
+  main: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: { md: '64px 24px', xs: '32px 24px' },
+  },
+};
+
 const BannerLink = (props: BannerLinkProps) => {
   const { theme, body, title, ctaButtons, decoration = <></> } = props;
   const backgroundColor = BackgroundColor(theme);
@@ -37,11 +45,3 @@ const BannerLink = (props: BannerLinkProps) => {
 };
 
 export default BannerLink;
-
-const styles = {
-  main: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: { md: '64px 24px', xs: '32px 24px' },
-  },
-};
