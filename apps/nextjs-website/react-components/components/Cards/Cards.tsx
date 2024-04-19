@@ -1,14 +1,11 @@
 import { Box, Grid, Stack, Typography } from '@mui/material';
-import EContainer from '../EContainer';
+import ContainerRC from '../common/ContainerRC';
 import Item from './item';
 import { type ReactNode } from 'react';
-import { CardsProps, CtaButtonProps } from '../../utils/Components.types';
-import {
-  RenderButtons,
-  RenderGenericBody,
-  RenderGenericSubtitle,
-  RenderGenericTitle,
-} from '../../utils/Components.helpers';
+import { CardsProps } from '../../types/Cards/Cards.types';
+import { CtaButtonProps } from '../../types/common/Common.types';
+import { CtaButtons } from '../common/Common';
+import { Title, Subtitle, Body } from '../common/Common';
 
 const ItemsContainer = ({
   masonry,
@@ -43,7 +40,7 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
   const isMasonry = !!text?.body && !!text?.subtitle;
 
   return (
-    <EContainer
+    <ContainerRC
       background={background}
       py={8}
       sx={{
@@ -62,16 +59,16 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
         }}
         component={'div'}
       >
-        <RenderGenericTitle
+        <Title
           variant='h2'
-          color={'inherit'}
+          textColor={'inherit'}
           title={text.title}
           textAlign='left'
           marginBottom={5}
         />
 
         {isMasonry && (
-          <RenderGenericSubtitle
+          <Subtitle
             variant='h6'
             textColor={'inherit'}
             subtitle={text.subtitle}
@@ -80,7 +77,7 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
           />
         )}
         {isMasonry ? (
-          <RenderGenericBody
+          <Body
             variant='body1'
             textColor={'inherit'}
             body={text.body}
@@ -94,7 +91,7 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
             mb={{ xs: 8, lg: 0 }}
           >
             {ctaButtons?.length &&
-              RenderButtons({
+              CtaButtons({
                 ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
                   ...button,
                   sx: { width: { md: 'auto', xs: '100%' } },
@@ -150,7 +147,7 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
           </ItemsContainer>
         )}
       </Box>
-    </EContainer>
+    </ContainerRC>
   );
 };
 

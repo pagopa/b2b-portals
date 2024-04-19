@@ -1,8 +1,8 @@
 'use client';
 import MarkdownRenderer from './MarkdownRenderer';
 import Icon from './Icon';
-import { Cards as CardsEC } from '@react-components';
-import { CardsProps } from '@react-components-props';
+import { Cards as CardsRC } from '@react-components/components';
+import { CardsProps } from '@react-components/types';
 import { CardsSection } from '@/lib/fetch/types/PageSection';
 
 const makeCardsProps = ({
@@ -41,6 +41,6 @@ const makeCardsProps = ({
   ...rest,
 });
 
-const Cards = (props: CardsSection) => <CardsEC {...makeCardsProps(props)} />;
+const Cards = (props: CardsSection) => <CardsRC {...makeCardsProps(props)} />;
 
 export default Cards;

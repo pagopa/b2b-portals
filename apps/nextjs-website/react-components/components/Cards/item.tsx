@@ -1,8 +1,8 @@
 import { Card, CardContent, Typography, Stack, Link, Box } from '@mui/material';
-import { EIcon } from '../EIcon';
+import { EIcon } from '../common/EIcon';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { IItem } from '../../utils/Components.types';
-import { RenderGenericBody, RenderGenericTitle } from '../../utils/Components.helpers';
+import { IItem } from '../../types/Cards/Cards.types';
+import { Title, Body } from '../common/Common';
 
 const Item = ({
   title,
@@ -25,29 +25,30 @@ const Item = ({
       }}
     >
       <CardContent>
-        <Stack px={4} justifyContent="flex-start" alignItems={textAlign}>
-          <Box mb={2} color="primary.dark">
-            {cardIcon?.icon && <EIcon icon={cardIcon.icon} fontSize="large" />}
+        <Stack px={4} justifyContent='flex-start' alignItems={textAlign}>
+          <Box mb={2} color='primary.dark'>
+            {cardIcon?.icon && <EIcon icon={cardIcon.icon} fontSize='large' />}
           </Box>
           {label && (
             <Typography
               mb={1}
-              textTransform="uppercase"
-              fontSize="12px"
-              fontWeight="600"
-              color="text.secondary"
+              textTransform='uppercase'
+              fontSize='12px'
+              fontWeight='600'
+              color='text.secondary'
             >
               {label}
             </Typography>
           )}
-          <RenderGenericTitle
+          <Title
             variant='h5'
-            color={'inherit'}
+            textColor={'inherit'}
             title={title}
             marginBottom={1}
           />
-          <RenderGenericBody
+          <Body
             variant='body2'
+            textColor={'inherit'}
             body={text}
             marginBottom={5}
             textAlign={textAlign}
@@ -57,15 +58,15 @@ const Item = ({
                 <Stack
                   key={index}
                   mt={2}
-                  direction="row"
-                  alignItems="center"
-                  color="primary.main"
+                  direction='row'
+                  alignItems='center'
+                  color='primary.main'
                   justifyContent={textAlign}
                 >
                   <Link
-                    color="primary.main"
-                    underline="none"
-                    textTransform="capitalize"
+                    color='primary.main'
+                    underline='none'
+                    textTransform='capitalize'
                     href={link.href}
                     title={link.title}
                     fontSize={14}
