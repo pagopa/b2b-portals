@@ -158,8 +158,8 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
   }
 
   viewer_certificate {
-    # set default = true in variable "use_custom_certificate" when available and validate a tenant certificate
-    cloudfront_default_certificate = var.use_custom_certificate ? false : true
+    # set cdn_use_custom_certificate = true in variable "websites_configs" when tenant certificate is validated
+    cloudfront_default_certificate = each.value.cdn_use_custom_certificate ? false : true
     acm_certificate_arn            = var.use_custom_certificate ? module.cdn_websites_ssl_certificate[each.key].acm_certificate_arn : null
     ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
     minimum_protocol_version       = "TLSv1.2_2021"
