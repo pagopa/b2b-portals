@@ -18,6 +18,7 @@ const makeAccordionProps = ({
   accordionItems: accordionItems.map(({ header, content }) => ({
     header,
     content: MarkdownRenderer({ markdown: content, variant: 'body2' }),
+    theme: rest.theme,
   })),
   ...rest,
 });
