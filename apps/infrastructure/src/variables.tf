@@ -70,12 +70,16 @@ variable "websites_configs" {
   type = map(object({
     origin_path = string
     url_tenant  = string
+    create_certificate = bool
+    create_distribution = bool
   }))
 
   default = {
     "send" = {
       origin_path = "/send"
       url_tenant  = "notifichedigitali.pagopa.it"
+      create_certificate = true
+      create_distribution = false
     }
   }
 }
