@@ -1,8 +1,7 @@
 'use client';
-import { BannerLink as BannerLinkEC } from '@pagopa/pagopa-editorial-components';
-import { BannerLinkProps } from '@pagopa/pagopa-editorial-components/dist/components/BannerLink';
-import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
+import { BannerLink as BannerLinkRC } from '@react-components/components';
+import { BannerLinkProps } from '@react-components/types';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 
@@ -16,7 +15,7 @@ const makeBannerLinkProps = ({
   ...(decoration && {
     decoration: {
       src: decoration.url,
-      alt: decoration.alternativeText,
+      alt: decoration.alternativeText || undefined,
       width: '60px',
       height: '60px',
     },
@@ -24,7 +23,6 @@ const makeBannerLinkProps = ({
   ...(ctaButtons.length > 0 && {
     ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
       ...ctaBtn,
-      color: rest.theme === 'dark' ? 'negative' : 'primary',
       ...(icon && { startIcon: Icon(icon) }),
     })),
   }),
@@ -32,18 +30,7 @@ const makeBannerLinkProps = ({
 });
 
 const BannerLink = (props: BannerLinkSection) => (
-  <section id={props.sectionID || undefined}>
-    <Stack
-      sx={{
-        '.MuiTypography-body2': {
-          color:
-            props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
-        },
-      }}
-    >
-      <BannerLinkEC {...makeBannerLinkProps(props)} />
-    </Stack>
-  </section>
+  <BannerLinkRC {...makeBannerLinkProps(props)} />
 );
 
 export default BannerLink;
