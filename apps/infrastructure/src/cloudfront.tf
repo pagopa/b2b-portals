@@ -117,7 +117,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
   comment             = "CloudFront distribution for the static website ${each.key}"
   default_root_object = "index.html"
 
-  aliases = ["${each.value.url_tenant}"]
+  aliases = each.value.cdn_use_custom_certificate ? ["${each.value.url_tenant}"] : []
 
   custom_error_response {
     error_code         = 404
