@@ -2,4 +2,4 @@
 "infrastructure": minor
 ---
 
-Create CDN for SEND Production environment
+Set ssl custom certificate for CDN SEND Production environment
