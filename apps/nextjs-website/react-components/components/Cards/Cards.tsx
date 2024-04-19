@@ -1,11 +1,11 @@
 import { Box, Stack, Typography } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import Item from './item';
+import Item from './CardsItem';
 import { CardsProps } from '../../types/Cards/Cards.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
 import { CtaButtons } from '../common/Common';
 import { Title, Subtitle, Body } from '../common/Common';
-import { ItemsContainer } from './Cards.helpers';
+import { CardsItemContainer } from './Cards.helpers';
 
 const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
   const background = theme === 'dark' ? 'primary.dark' : 'background.paper';
@@ -87,7 +87,7 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
       >
         {isMasonry ? (
           <>
-            <ItemsContainer masonry={isMasonry}>
+            <CardsItemContainer masonry={isMasonry}>
               {items.slice(0, Math.ceil(items.length / 2)).map((item, i) => (
                 <Item
                   key={`${item.title}-${i}`}
@@ -96,8 +96,8 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
                   masonry={isMasonry}
                 />
               ))}
-            </ItemsContainer>
-            <ItemsContainer masonry={isMasonry}>
+            </CardsItemContainer>
+            <CardsItemContainer masonry={isMasonry}>
               {items.slice(Math.ceil(items.length / 2)).map((item, i) => (
                 <Item
                   key={`${item.title}-${i}`}
@@ -106,10 +106,10 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
                   masonry={isMasonry}
                 />
               ))}
-            </ItemsContainer>
+            </CardsItemContainer>
           </>
         ) : (
-          <ItemsContainer masonry={isMasonry}>
+          <CardsItemContainer masonry={isMasonry}>
             {items.map((item, i) => (
               <Item
                 key={`${item.title}-${i}`}
@@ -118,7 +118,7 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
                 masonry={isMasonry}
               />
             ))}
-          </ItemsContainer>
+          </CardsItemContainer>
         )}
       </Box>
     </ContainerRC>

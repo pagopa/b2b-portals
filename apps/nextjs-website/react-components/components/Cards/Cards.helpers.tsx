@@ -1,7 +1,7 @@
 import { Grid, Stack } from '@mui/material';
 import { type ReactNode } from 'react';
 
-export const ItemsContainer = ({
+export const CardsItemContainer = ({
   masonry,
   children,
 }: {

@@ -1,10 +1,10 @@
 import { Card, CardContent, Typography, Stack, Link, Box } from '@mui/material';
 import { EIcon } from '../common/EIcon';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { CardsItem } from '../../types/Cards/Cards.types';
+import { CardsItemProps } from '../../types/Cards/Cards.types';
 import { Title, Body } from '../common/Common';
 
-const Item = ({
+const CardsItem = ({
   title,
   text,
   cardIcon,
@@ -12,7 +12,7 @@ const Item = ({
   textAlign,
   label,
   masonry,
-}: CardsItem) => {
+}: CardsItemProps) => {
   return (
     <Card
       elevation={16}
@@ -84,4 +84,4 @@ const Item = ({
   );
 };
 
-export default Item;
+export default CardsItem;
