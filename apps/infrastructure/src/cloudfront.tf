@@ -96,72 +96,71 @@ resource "aws_cloudfront_distribution" "website" { # delete when is online a Mul
   }
 }
 
-# uncomment this resource cdn_multi_website after send validate SSL certificate for cdn
-#resource "aws_cloudfront_distribution" "cdn_multi_website" {
-#  for_each = var.websites_configs
+resource "aws_cloudfront_distribution" "cdn_multi_website" {
+  for_each = var.websites_configs
 
-#  origin {
-#    domain_name = aws_s3_bucket.website.bucket_regional_domain_name
-#    origin_id   = aws_s3_bucket.website.bucket
-#    s3_origin_config {
-#      origin_access_identity = aws_cloudfront_origin_access_identity.main.cloudfront_access_identity_path
-#    }
-#    origin_path = each.value.origin_path
-#  }
+  origin {
+    domain_name = aws_s3_bucket.website.bucket_regional_domain_name
+    origin_id   = aws_s3_bucket.website.bucket
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.main.cloudfront_access_identity_path
+    }
+    origin_path = each.value.origin_path
+  }
 
-#  enabled             = true # enable CloudFront distribution
-#  is_ipv6_enabled     = true
-#  comment             = "CloudFront distribution for the static website ${each.key}"
-#  default_root_object = "index.html"
+  enabled             = true # enable CloudFront distribution
+  is_ipv6_enabled     = true
+  comment             = "CloudFront distribution for the static website ${each.key}"
+  default_root_object = "index.html"
 
-#  aliases = ["${each.value.url_tenant}"]
+  aliases = ["${each.value.url_tenant}"]
 
-#  custom_error_response {
-#    error_code         = 404
-#    response_code      = 404
-#    response_page_path = "/404.html"
-#  }
+  custom_error_response {
+    error_code         = 404
+    response_code      = 404
+    response_page_path = "/404.html"
+  }
 
-#  default_cache_behavior {
-# HTTPS requests we permit the distribution to serve
-#    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-#    cached_methods   = ["GET", "HEAD"]
-#    target_origin_id = aws_s3_bucket.website.bucket
+  default_cache_behavior {
+    # HTTPS requests we permit the distribution to serve
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = aws_s3_bucket.website.bucket
 
-#    forwarded_values {
-#      query_string = false
-#      headers      = []
-#      cookies {
-#        forward = "none"
-#      }
-#    }
+    forwarded_values {
+      query_string = false
+      headers      = []
+      cookies {
+        forward = "none"
+      }
+    }
 
-#    viewer_protocol_policy = "redirect-to-https"
-#    min_ttl                = 0     # min time for objects to live in the distribution cache
-#    default_ttl            = 3600  # default time for objects to live in the distribution cache
-#    max_ttl                = 86400 # max time for objects to live in the distribution cache
-#    compress               = true
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0     # min time for objects to live in the distribution cache
+    default_ttl            = 3600  # default time for objects to live in the distribution cache
+    max_ttl                = 86400 # max time for objects to live in the distribution cache
+    compress               = true
 
-#    function_association {
-#      event_type   = "viewer-request"
-#      function_arn = aws_cloudfront_function.website_viewer_request_handler.arn
-#    }
-#  }
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.website_viewer_request_handler.arn
+    }
+  }
 
-#  restrictions {
-#    geo_restriction {
-#      restriction_type = "none"
-#    }
-#  }
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
 
-#  viewer_certificate {
-# set default = true in variable "use_custom_certificate" when available and validate a tenant certificate
-#    cloudfront_default_certificate = var.use_custom_certificate ? false : true
-#    acm_certificate_arn            = var.use_custom_certificate ? module.cdn_websites_ssl_certificate[each.key].acm_certificate_arn : null
-#    ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
-#    minimum_protocol_version       = "TLSv1.2_2021"
-#  }
-#}
+  viewer_certificate {
+    # set default = true in variable "use_custom_certificate" when available and validate a tenant certificate
+    cloudfront_default_certificate = var.use_custom_certificate ? false : true
+    acm_certificate_arn            = var.use_custom_certificate ? module.cdn_websites_ssl_certificate[each.key].acm_certificate_arn : null
+    ssl_support_method             = var.use_custom_certificate ? "sni-only" : null
+    minimum_protocol_version       = "TLSv1.2_2021"
+  }
+}
 
 ## MediaLibrary Strapi CDN
 resource "aws_cloudfront_distribution" "cms_medialibrary" {
