@@ -1,15 +1,14 @@
 import { Box, Container, Stack } from '@mui/material';
-import {
-  RenderButtons,
-  useBackgroundColor,
-} from '../../utils/Components.helpers';
+import { CtaButtons } from '../common/Common';
+import { BackgroundColor } from '../common/Common.helpers';
 import { Content as BannerLinkContent } from './Content';
-import { isJSX } from '../../utils';
-import { BannerLinkProps, CtaButtonProps } from '../../utils/Components.types';
+import { isJSX } from '../../types/common/Common.types';
+import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
+import { CtaButtonProps } from '../../types/common/Common.types';
 
 const BannerLink = (props: BannerLinkProps) => {
   const { theme, body, title, ctaButtons, decoration = <></> } = props;
-  const backgroundColor = useBackgroundColor(theme);
+  const backgroundColor = BackgroundColor(theme);
 
   return (
     <Box bgcolor={backgroundColor} component='section'>
@@ -24,7 +23,7 @@ const BannerLink = (props: BannerLinkProps) => {
           ) : null}
           <BannerLinkContent {...{ body, title, theme }} />
           {ctaButtons?.length &&
-            RenderButtons({
+            CtaButtons({
               ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
                 ...button,
                 sx: { width: { md: 'auto', xs: '100%' } },

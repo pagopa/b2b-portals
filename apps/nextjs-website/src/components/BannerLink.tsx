@@ -1,7 +1,7 @@
 'use client';
 import MarkdownRenderer from './MarkdownRenderer';
-import { BannerLink as BannerLinkEC } from '@react-components';
-import { BannerLinkProps } from '@react-components-props';
+import { BannerLink as BannerLinkRC } from '@react-components/components';
+import { BannerLinkProps } from '@react-components/types';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 
@@ -30,7 +30,7 @@ const makeBannerLinkProps = ({
 });
 
 const BannerLink = (props: BannerLinkSection) => (
-  <BannerLinkEC {...makeBannerLinkProps(props)} />
+  <BannerLinkRC {...makeBannerLinkProps(props)} />
 );
 
 export default BannerLink;

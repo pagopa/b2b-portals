@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import MarkdownRenderer from './MarkdownRenderer';
-import { Accordion as AccordionEC } from '@react-components';
-import { AccordionProps } from '@react-components-props';
+import { Accordion as AccordionRC } from '@react-components/components';
+import { AccordionProps } from '@react-components/types';
 import { AccordionSection } from '@/lib/fetch/types/PageSection';
 
 const makeAccordionProps = ({
@@ -23,7 +23,7 @@ const makeAccordionProps = ({
 });
 
 const Accordion = (props: AccordionSection) => (
-  <AccordionEC {...makeAccordionProps(props)} />
+  <AccordionRC {...makeAccordionProps(props)} />
 );
 
 export default Accordion;
