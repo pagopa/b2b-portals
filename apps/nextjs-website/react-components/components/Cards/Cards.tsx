@@ -1,37 +1,11 @@
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import Item from './item';
-import { type ReactNode } from 'react';
 import { CardsProps } from '../../types/Cards/Cards.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
 import { CtaButtons } from '../common/Common';
 import { Title, Subtitle, Body } from '../common/Common';
-
-const ItemsContainer = ({
-  masonry,
-  children,
-}: {
-  masonry: boolean;
-  children: ReactNode[];
-}) => {
-  return masonry ? (
-    <Stack
-      sx={{
-        display: 'flex',
-        flexFlow: 'column wrap',
-        gap: '20px',
-        alignItems: 'center',
-        width: { xs: '100%', sm: '50%' },
-      }}
-    >
-      {children}
-    </Stack>
-  ) : (
-    <Grid container justifyContent='center' gap={2.5}>
-      {children}
-    </Grid>
-  );
-};
+import { ItemsContainer } from './Cards.helpers';
 
 const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
   const background = theme === 'dark' ? 'primary.dark' : 'background.paper';
