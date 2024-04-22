@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'The Tenant for which the static site will be built
+        description: 'The Tenant for which the static site will be built'
         type: choice
         required: true
         options:
