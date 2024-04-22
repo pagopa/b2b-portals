@@ -4,5 +4,6 @@ import HowTo from './HowTo/HowTo';
 import Accordion from './Accordion/Accordion';
 import BannerLink from './BannerLink/BannerLink';
 import Cards from './Cards/Cards';
+import Footer from './Footer/Footer';
 
-export { Hero, Editorial, HowTo, Accordion, BannerLink, Cards };
+export { Hero, Editorial, HowTo, Accordion, BannerLink, Cards, Footer };

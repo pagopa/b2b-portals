@@ -24,3 +24,5 @@ export interface CtaButtonProps extends Partial<ButtonProps> {
   readonly text: string;
   variant?: 'contained' | 'outlined';
 }
+
+export const hrefNoOp = 'javascript:void(0)';
