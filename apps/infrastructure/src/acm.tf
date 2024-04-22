@@ -18,7 +18,11 @@ module "acm" {
 module "cdn_websites_ssl_certificate" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-acm.git?ref=8d0b22f1f242a1b36e29b8cb38aaeac9b887500d" # v5.0.0
 
-  for_each = var.websites_configs
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_certificate
+  }
 
   providers = {
     aws = aws.us-east-1
