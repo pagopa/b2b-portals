@@ -73,6 +73,7 @@ variable "websites_configs" {
     create_certificate         = bool
     create_distribution        = bool
     cdn_use_custom_certificate = bool
+    cdn_use_alias              = bool
   }))
 
   default = {
@@ -82,6 +83,7 @@ variable "websites_configs" {
       create_certificate         = true
       create_distribution        = true
       cdn_use_custom_certificate = true
+      cdn_use_alias              = false
     },
     "appio" = {
       origin_path                = "/appio"
@@ -89,6 +91,7 @@ variable "websites_configs" {
       create_certificate         = false
       create_distribution        = true
       cdn_use_custom_certificate = false
+      cdn_use_alias              = false
     }
   }
 }
