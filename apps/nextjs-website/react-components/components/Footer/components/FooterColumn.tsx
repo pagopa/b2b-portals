@@ -1,5 +1,5 @@
 import { Link, Stack, Typography } from '@mui/material';
-import { hrefNoOp } from '../../../types/common/Common.types';
+import { hrefNoOp } from '../Footer.helpers';
 import { LogoPagoPACompany } from '../assets/LogoPagoPACompany';
 import { EIcon } from '../../../components/common/EIcon';
 import { FooterColumnProps } from '../../..//types/Footer/Footer.types';
