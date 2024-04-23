@@ -1,8 +1,8 @@
 import { Link, Stack, Typography } from '@mui/material';
 import { hrefNoOp } from '../Footer.helpers';
-import { LogoPagoPACompany } from '../assets/LogoPagoPACompany';
-import { EIcon } from '../../../components/common/EIcon';
-import { FooterColumnProps } from '../../..//types/Footer/Footer.types';
+import { LogoPagoPACompany } from '../assets/LogoPagoPACompany/LogoPagoPACompany';
+import { EIcon } from '../../common/EIcon';
+import { FooterColumnProps } from '../../../types/Footer/Footer.types';
 import { Button } from '@mui/material';
 
 export const FooterColumn = ({
@@ -11,7 +11,7 @@ export const FooterColumn = ({
   icons,
 }: FooterColumnProps) => (
   <Stack spacing={2} display='flex' alignItems={{ xs: 'center', sm: 'start' }}>
-    {data?.title && <Typography variant='overline'>{data.title}</Typography>}
+    {data.title && <Typography variant='overline'>{data.title}</Typography>}
 
     {companyLink && (
       <Button
@@ -52,7 +52,7 @@ export const FooterColumn = ({
       textAlign={{ xs: 'center', sm: 'left' }}
       sx={{ padding: 0, listStyle: 'none' }}
     >
-      {data?.links.map(({ href = hrefNoOp, label, ariaLabel, onClick }, i) => (
+      {data.links.map(({ href = hrefNoOp, label, ariaLabel, onClick }, i) => (
         <li key={i}>
           <Link
             aria-label={ariaLabel}

@@ -1,8 +1,8 @@
 import { Box, Container } from '@mui/material';
-import { FundedByNextGenerationEU } from './assets/FundedByNextGenerationEU';
-import { FooterColumn } from './components/FooterColumn';
-import { LangSwitch } from './components/LangSwitch';
-import { LegalInfo } from './components/LegalInfo';
+import { FundedByNextGenerationEU } from './assets/FundedByNextGenerationEU/FundedByNextGenerationEU';
+import { FooterColumn } from './helpers/FooterColumn';
+import { LangSwitch } from './helpers/LangSwitch';
+import { LegalInfo } from './helpers/LegalInfo';
 import { FooterProps } from '../../types/Footer/Footer.types';
 
 const Footer = ({
@@ -38,10 +38,8 @@ const Footer = ({
         alignItems={{ sm: 'flex-start', xs: 'center' }}
       >
         <FooterColumn data={followUs} icons={followUs.socialLinks} />
-        {!!langProps?.languages?.length && <LangSwitch {...langProps} />}
-        {showFundedByNextGenerationEULogo && (
-          <FundedByNextGenerationEU size={180} />
-        )}
+        {langProps.languages.length > 0 && <LangSwitch {...langProps} />}
+        {showFundedByNextGenerationEULogo && ( <FundedByNextGenerationEU size={180} /> )}
       </Box>
     </Container>
     <LegalInfo data={legalInfo} />

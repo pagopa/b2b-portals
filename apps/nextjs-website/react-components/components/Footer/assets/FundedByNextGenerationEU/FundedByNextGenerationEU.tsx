@@ -1,7 +1,5 @@
-// Components
 import { styled } from '@mui/material';
-
-import { theme } from '@pagopa/mui-italia/dist/theme';
+import { theme } from '@pagopa/mui-italia';
 
 // Partials
 import {
@@ -16,10 +14,10 @@ const StyledSvg = styled('svg')({
   userSelect: 'none',
 });
 
-export type NextGeneratioNEUVariants = 'filled' | 'outline' | 'color';
-export type NextGenerationEUColors = 'light' | 'dark' | 'pantone';
+type NextGeneratioNEUVariants = 'filled' | 'outline' | 'color';
+type NextGenerationEUColors = 'light' | 'dark' | 'pantone';
 
-export interface FundedByNextGenerationEUPropsProps {
+interface FundedByNextGenerationEUProps {
   /** Provides a human-readable title for the element that contains it. */
   title?: string;
   /** Width of the component. Height is set automatically. */
@@ -53,7 +51,7 @@ export const FundedByNextGenerationEU = ({
   size = 200,
   color = 'dark',
   variant = 'outline',
-}: FundedByNextGenerationEUPropsProps): JSX.Element => (
+}: FundedByNextGenerationEUProps): JSX.Element => (
   <StyledSvg
     viewBox="0 0 1174 270"
     focusable="false"
@@ -67,6 +65,6 @@ export const FundedByNextGenerationEU = ({
     }}
   >
     {variant === 'color' ? variantColorMap[color] : variantMap[variant]}
-    <title id="logo-next-genEU-titleID">{title}</title>
+    <title id="logo-next-gen-eu-title">{title}</title>
   </StyledSvg>
 );

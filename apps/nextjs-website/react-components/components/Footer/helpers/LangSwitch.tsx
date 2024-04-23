@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
 import { Menu, MenuItem, Typography, Box, Stack } from '@mui/material';
 import { ButtonNaked } from './ButtonNaked';
-import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
+import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@mui/icons-material';
 import { LangSwitchProps } from '../../../types/Footer/Footer.types';
 
 export function LangSwitch({
@@ -38,9 +37,9 @@ export function LangSwitch({
         </Box>
 
         {menuOpen ? (
-          <KeyboardArrowUpRoundedIcon fontSize='small' />
+          <KeyboardArrowDownRounded fontSize='small' />
         ) : (
-          <KeyboardArrowDownRoundedIcon fontSize='small' />
+          <KeyboardArrowUpRounded fontSize='small' />
         )}
       </ButtonNaked>
       {!!languages?.length && anchorEl && (

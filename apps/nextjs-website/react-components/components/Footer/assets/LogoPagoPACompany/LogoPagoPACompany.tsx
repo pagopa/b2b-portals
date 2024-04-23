@@ -1,17 +1,15 @@
-// Components
 import { styled } from '@mui/material';
-
-import { theme } from '@pagopa/mui-italia/dist/theme';
+import { theme } from '@pagopa/mui-italia';
 
 const StyledSvg = styled('svg')({
   display: 'inline-block',
   userSelect: 'none',
 });
 
-export type LogoPACompanyColors = 'default' | 'light' | 'dark';
-export type LogoPACompanyVariants = 'default' | 'flat';
+type LogoPACompanyColors = 'default' | 'light' | 'dark';
+type LogoPACompanyVariants = 'default' | 'flat';
 
-export interface LogoPagoPACompanyProps {
+interface LogoPagoPACompanyProps {
   /** Provides a human-readable title for the element that contains it. */
   title?: string;
   /** Width of the component. Height is set automatically. */
@@ -45,7 +43,7 @@ export const LogoPagoPACompany = ({
   >
     {variant === 'default' ? <DefaultVariant /> : <FlatVariant />}
 
-    <title id="logo-pagoPA-company-titleID">{title}</title>
+    <title id="logo-pagopa-company-title">{title}</title>
   </StyledSvg>
 );
 
