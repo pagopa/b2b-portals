@@ -79,7 +79,14 @@ variable "websites_configs" {
     "send" = {
       origin_path                = "/send"
       url_tenant                 = "notifichedigitali.pagopa.it"
-      create_certificate         = true
+      create_certificate         = false
+      create_distribution        = true
+      cdn_use_custom_certificate = false
+    },
+    "appio" = {
+      origin_path                = "/appio"
+      url_tenant                 = "io.italia.it"
+      create_certificate         = false
       create_distribution        = true
       cdn_use_custom_certificate = true
     }
