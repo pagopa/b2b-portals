@@ -88,7 +88,7 @@ variable "websites_configs" {
       url_tenant                 = "io.italia.it"
       create_certificate         = false
       create_distribution        = true
-      cdn_use_custom_certificate = true
+      cdn_use_custom_certificate = false
     }
   }
 }
