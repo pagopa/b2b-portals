@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
-import { Menu, MenuItem, Typography, Box, Stack } from '@mui/material';
-import { ButtonNaked } from './ButtonNaked';
-import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@mui/icons-material';
+import { Menu, MenuItem, Typography, Box, Stack, Button } from '@mui/material';
+import {
+  KeyboardArrowDownRounded,
+  KeyboardArrowUpRounded,
+} from '@mui/icons-material';
 import { LangSwitchProps } from '../../../types/Footer/Footer.types';
 
 export function LangSwitch({
@@ -19,12 +21,17 @@ export function LangSwitch({
 
   return (
     <Stack display='flex' flexDirection='column' aria-label='cambia la lingua'>
-      <ButtonNaked
+      <Button
         sx={{
+          fontWeight: '600',
+          letterSpacing: 0.3,
           color: 'text.primary',
           height: 'auto',
           display: 'flex',
         }}
+        variant='text'
+        size='small'
+        disableRipple
         aria-label='lingua'
         aria-haspopup='true'
         aria-expanded={menuOpen}
@@ -41,7 +48,7 @@ export function LangSwitch({
         ) : (
           <KeyboardArrowUpRounded fontSize='small' />
         )}
-      </ButtonNaked>
+      </Button>
       {!!languages?.length && anchorEl && (
         <Menu
           anchorEl={anchorEl?.current}

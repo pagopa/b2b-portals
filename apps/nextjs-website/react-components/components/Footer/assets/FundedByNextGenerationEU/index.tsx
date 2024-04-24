@@ -1,18 +1,11 @@
-import { styled } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
-
-// Partials
+import { StyledSvg } from '../Assets.helpers';
 import {
   SvgFilled,
   SvgOutline,
   SvgColorDark,
   SvgColorLight,
-} from '../FundedByNextGenerationEU/partials';
-
-const StyledSvg = styled('svg')({
-  display: 'inline-block',
-  userSelect: 'none',
-});
+} from './partials';
 
 type NextGeneratioNEUVariants = 'filled' | 'outline' | 'color';
 type NextGenerationEUColors = 'light' | 'dark' | 'pantone';

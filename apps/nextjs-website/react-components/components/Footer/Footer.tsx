@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material';
-import { FundedByNextGenerationEU } from './assets/FundedByNextGenerationEU/FundedByNextGenerationEU';
+import { FundedByNextGenerationEU } from './assets/FundedByNextGenerationEU';
 import { FooterColumn } from './helpers/FooterColumn';
 import { LangSwitch } from './helpers/LangSwitch';
 import { LegalInfo } from './helpers/LegalInfo';

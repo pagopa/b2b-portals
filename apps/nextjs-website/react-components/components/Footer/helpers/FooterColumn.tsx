@@ -1,6 +1,6 @@
 import { Link, Stack, Typography } from '@mui/material';
 import { hrefNoOp } from '../Footer.helpers';
-import { LogoPagoPACompany } from '../assets/LogoPagoPACompany/LogoPagoPACompany';
+import { LogoPagoPACompany } from '../assets/LogoPagoPACompany';
 import { EIcon } from '../../common/EIcon';
 import { FooterColumnProps } from '../../../types/Footer/Footer.types';
 import { Button } from '@mui/material';
@@ -33,7 +33,7 @@ export const FooterColumn = ({
         alignItems={{ xs: 'center', sm: 'start' }}
         sx={{ padding: 0, mt: 0.5, listStyle: 'none' }}
       >
-        {icons?.map(
+        {icons.map(
           ({ icon, href = hrefNoOp, onClick, ...rest }, i) =>
             icon && (
               <li key={i}>
