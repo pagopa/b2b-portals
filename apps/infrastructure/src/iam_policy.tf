@@ -158,9 +158,10 @@ resource "aws_iam_policy" "deploy_website" {
           "cloudfront:CreateInvalidation"
         ]
         Effect = "Allow"
-        Resource = [
-          aws_cloudfront_distribution.website.arn
-        ]
+        Resource = concat(
+          [aws_cloudfront_distribution.website.arn],
+          [for name, distribution in aws_cloudfront_distribution.cdn_multi_website : distribution.arn]
+        )
       }
     ]
   })
