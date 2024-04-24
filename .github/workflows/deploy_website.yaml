@@ -9,12 +9,12 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'The environment used as target'
+        description: 'The Tenant for which the static site will be built'
         type: choice
         required: true
-        default: prod
         options:
-          - prod
+          - send
+          - appio
 
   # Allows external webhook trigger
   repository_dispatch:
@@ -35,7 +35,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     strategy:
       matrix:
-        environment: [ 'prod' ]
+        environment: [ 'send','appio' ] # add new tenant after creating the relevant environment vars/secrets github
 
     environment: ${{ matrix.environment }}
 
@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
-
+      
       - name: Deploy website
         uses: ./.github/actions/deploy
         with:

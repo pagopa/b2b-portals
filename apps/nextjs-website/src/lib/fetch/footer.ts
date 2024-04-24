@@ -1,4 +1,5 @@
 import * as t from 'io-ts';
+import tenants from '../tenants';
 import { extractFromResponse } from './extractFromResponse';
 import { SocialIconCodec } from './types/icons/SocialIcon';
 import { AppEnv } from '@/AppEnv';
@@ -52,7 +53,9 @@ export type FooterData = t.TypeOf<typeof FooterDataCodec>;
 export const getFooter = ({ config, fetchFun }: AppEnv): Promise<FooterData> =>
   extractFromResponse(
     fetchFun(
-      `${config.STRAPI_API_BASE_URL}/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
+      `${config.STRAPI_API_BASE_URL}/api/${
+        tenants[config.ENVIRONMENT].footer
+      }/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
       {
         method: 'GET',
         headers: {
