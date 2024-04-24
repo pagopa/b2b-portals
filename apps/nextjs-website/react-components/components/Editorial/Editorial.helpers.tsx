@@ -3,13 +3,13 @@ import { Typography } from '@mui/material';
 
 export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+    typeof window !== 'undefined' ? window.innerWidth <= 900 : false
   );
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(
-        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+        typeof window !== 'undefined' ? window.innerWidth <= 900 : false
       );
       return undefined;
     };
