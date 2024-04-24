@@ -1,4 +1,5 @@
 import * as t from 'io-ts';
+import tenants from '../tenants';
 import { extractFromResponse } from './extractFromResponse';
 import { StrapiImageRequiredSchema } from './types/StrapiImage';
 import { AppEnv } from '@/AppEnv';
@@ -25,7 +26,9 @@ export const fetchSiteWideSEO = ({
 }: AppEnv): Promise<SiteWideSEO> =>
   extractFromResponse(
     fetchFun(
-      `${config.STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      `${config.STRAPI_API_BASE_URL}/api/${
+        tenants[config.ENVIRONMENT].general
+      }?populate=metaImage,favicon,appleTouchIcon,manifest`,
       {
         method: 'GET',
         headers: {

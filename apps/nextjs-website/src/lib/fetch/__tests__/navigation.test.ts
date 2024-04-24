@@ -1,10 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getNavigation } from '../navigation';
+import tenants from '../../tenants';
+import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
-  const config = {
+  const config: Config = {
     STRAPI_API_TOKEN: 'aStrapiToken',
     STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
+    ENVIRONMENT: 'send',
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };
@@ -67,7 +70,7 @@ const navigationResponse = [
 ];
 
 describe('getNavigation', () => {
-  it('should call /api/navigation/render type FLAT', async () => {
+  it('should call /api/navigation/render type FLAT based on tenant', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
     const { config } = appEnv;
 
@@ -75,10 +78,12 @@ describe('getNavigation', () => {
       json: () => Promise.resolve([]),
     } as unknown as Response);
 
-    await getNavigation('main-menu', appEnv);
+    await getNavigation(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/navigation/render/main-menu?type=FLAT&populate[seo][populate][0]=metaTitle&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items.links&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration&populate[sections][populate][8]=storeButtons`,
+      `${config.STRAPI_API_BASE_URL}/api/navigation/render/${
+        tenants[config.ENVIRONMENT].navigation
+      }?type=FLAT&populate[seo][populate][0]=metaTitle&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items.links&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration`,
       {
         method: 'GET',
         headers: {
@@ -94,7 +99,7 @@ describe('getNavigation', () => {
       json: () => Promise.resolve(navigationResponse),
     } as unknown as Response);
 
-    const actual = getNavigation('main-menu', appEnv);
+    const actual = getNavigation(appEnv);
     const expected = [
       {
         id: 1,

@@ -1,10 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
 import { fetchSiteWideSEO } from '../siteWideSEO';
+import tenants from '../../tenants';
+import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
-  const config = {
+  const config: Config = {
     STRAPI_API_TOKEN: 'aStrapiToken',
     STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
+    ENVIRONMENT: 'send',
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };
@@ -57,7 +60,7 @@ const siteWideSEOResponse = {
 };
 
 describe('fetchSiteWideSEO', () => {
-  it('should call /api/general type GET', async () => {
+  it('should call /api/general type GET based on tenant', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
     const { config } = appEnv;
 
@@ -68,7 +71,9 @@ describe('fetchSiteWideSEO', () => {
     await fetchSiteWideSEO(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      `${config.STRAPI_API_BASE_URL}/api/${
+        tenants[config.ENVIRONMENT].general
+      }?populate=metaImage,favicon,appleTouchIcon,manifest`,
       {
         method: 'GET',
         headers: {

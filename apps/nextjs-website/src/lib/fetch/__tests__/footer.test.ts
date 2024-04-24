@@ -1,10 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getFooter } from '../footer';
+import tenants from '../../tenants';
+import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
-  const config = {
+  const config: Config = {
     STRAPI_API_TOKEN: 'aStrapiToken',
     STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
+    ENVIRONMENT: 'send',
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };
@@ -89,7 +92,7 @@ const footerResponse = {
 };
 
 describe('getFooter', () => {
-  it('should call /api/footer type GET', async () => {
+  it('should call /api/footer type GET based on tenant', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
     const { config } = appEnv;
 
@@ -100,7 +103,9 @@ describe('getFooter', () => {
     await getFooter(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
+      `${config.STRAPI_API_BASE_URL}/api/${
+        tenants[config.ENVIRONMENT].footer
+      }/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
       {
         method: 'GET',
         headers: {
