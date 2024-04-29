@@ -3,7 +3,6 @@ import { hrefNoOp } from '../Footer.helpers';
 import { LogoPagoPACompany } from '../assets/LogoPagoPACompany';
 import { EIcon } from '../../common/EIcon';
 import { FooterColumnProps } from '../../../types/Footer/Footer.types';
-import { Button } from '@mui/material';
 
 export const FooterColumn = ({
   data,
@@ -14,14 +13,13 @@ export const FooterColumn = ({
     {data.title && <Typography variant='overline'>{data.title}</Typography>}
 
     {companyLink && (
-      <Button
-        role='link'
+      <Link
         aria-label={companyLink.ariaLabel}
         href={companyLink.href ?? hrefNoOp}
         sx={{ display: 'inline-flex' }}
       >
         <LogoPagoPACompany />
-      </Button>
+      </Link>
     )}
 
     {icons && (

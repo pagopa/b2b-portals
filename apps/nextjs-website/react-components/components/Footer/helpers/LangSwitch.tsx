@@ -28,6 +28,11 @@ export function LangSwitch({
           color: 'text.primary',
           height: 'auto',
           display: 'flex',
+          padding: 0,
+          marginBottom: 1,
+          '&:hover': {
+            backgroundColor: 'transparent',
+          },
         }}
         variant='text'
         size='small'
