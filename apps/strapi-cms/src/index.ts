@@ -43,8 +43,21 @@ export default {
       userRole: 'SEND Editor' | 'AppIO Editor'
     ): Promise<AxiosResponse | IServiceError> => {
       try {
-        const { owner, repo, workflowId, branch, githubToken } =
-          strapi.config.get(UpdateStaticContentPluginName);
+        const owner = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('owner');
+        const repo = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('repo');
+        const workflowId = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('workflowId');
+        const branch = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('branch');
+        const githubToken = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('githubToken');
 
         return await axios.post(
           `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches`,
