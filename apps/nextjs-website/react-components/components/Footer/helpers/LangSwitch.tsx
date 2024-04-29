@@ -54,7 +54,7 @@ export function LangSwitch({
       </Button>
       {languages.length > 0 && anchorEl && (
         <Menu
-          anchorEl={anchorEl?.current}
+          anchorEl={anchorEl.current}
           sx={{ display: 'flex' }}
           open={menuOpen}
           onClose={() => {
