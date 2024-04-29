@@ -5,6 +5,7 @@ import { AccordionProps } from './Accordion/Accordion.types';
 import { BannerLinkProps } from './BannerLink/BannerLink.types';
 import { CardsProps } from './Cards/Cards.types';
 import { FooterProps } from './Footer/Footer.types';
+import { EditorialSwitchProps } from './Editorial-Switch/Editorial-Switch.types';
 
 export type {
   HeroProps,
@@ -14,4 +15,5 @@ export type {
   BannerLinkProps,
   CardsProps,
   FooterProps,
+  EditorialSwitchProps
 };
