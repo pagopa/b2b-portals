@@ -1,6 +1,6 @@
 import { theme } from '@pagopa/mui-italia';
-import { StyledSvg } from '../Assets.helpers';
 import { DefaultVariant, FlatVariant } from './partials';
+import { SvgIcon } from '@mui/material';
 
 type LogoPACompanyColors = 'default' | 'light' | 'dark';
 type LogoPACompanyVariants = 'default' | 'flat';
@@ -27,7 +27,7 @@ export const LogoPagoPACompany = ({
   color = 'default',
   variant = 'default',
 }: LogoPagoPACompanyProps): JSX.Element => (
-  <StyledSvg
+  <SvgIcon
     viewBox="0 0 119 33"
     focusable="false"
     aria-labelledby="logo-pagoPA-company-titleID"
@@ -35,10 +35,12 @@ export const LogoPagoPACompany = ({
     sx={{
       width: size,
       fill: colorMap[color],
+      display: 'inline-block',
+      userSelect: 'none',
     }}
   >
     {variant === 'default' ? <DefaultVariant /> : <FlatVariant />}
 
     <title id="logo-pagopa-company-title">{title}</title>
-  </StyledSvg>
+  </SvgIcon>
 );

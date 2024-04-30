@@ -1,5 +1,5 @@
 import { theme } from '@pagopa/mui-italia';
-import { StyledSvg } from '../Assets.helpers';
+import { SvgIcon } from '@mui/material';
 import {
   SvgFilled,
   SvgOutline,
@@ -7,7 +7,7 @@ import {
   SvgColorLight,
 } from './partials';
 
-type NextGeneratioNEUVariants = 'filled' | 'outline' | 'color';
+type NextGenerationEUVariants = 'filled' | 'outline' | 'color';
 type NextGenerationEUColors = 'light' | 'dark' | 'pantone';
 
 interface FundedByNextGenerationEUProps {
@@ -17,7 +17,7 @@ interface FundedByNextGenerationEUProps {
   size?: number;
   /** The variant to use. If the color variant is set,
    * the color property is ignored. */
-  variant?: NextGeneratioNEUVariants;
+  variant?: NextGenerationEUVariants;
   /** The color of the component. */
   color?: NextGenerationEUColors;
 }
@@ -45,7 +45,7 @@ export const FundedByNextGenerationEU = ({
   color = 'dark',
   variant = 'outline',
 }: FundedByNextGenerationEUProps): JSX.Element => (
-  <StyledSvg
+  <SvgIcon
     viewBox="0 0 1174 270"
     focusable="false"
     role="img"
@@ -55,9 +55,11 @@ export const FundedByNextGenerationEU = ({
       /* If the color variant is set,
       the following property is ignored */
       fill: colorMap[color],
+      display: 'inline-block',
+      userSelect: 'none',
     }}
   >
     {variant === 'color' ? variantColorMap[color] : variantMap[variant]}
     <title id="logo-next-gen-eu-title">{title}</title>
-  </StyledSvg>
+  </SvgIcon>
 );
