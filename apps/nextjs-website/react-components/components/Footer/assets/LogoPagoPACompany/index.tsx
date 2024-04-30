@@ -34,6 +34,7 @@ export const LogoPagoPACompany = ({
     role="img"
     sx={{
       width: size,
+      height: 'auto',
       fill: colorMap[color],
       display: 'inline-block',
       userSelect: 'none',

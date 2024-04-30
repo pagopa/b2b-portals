@@ -52,6 +52,7 @@ export const FundedByNextGenerationEU = ({
     aria-labelledby="logo-next-genEU-titleID"
     sx={{
       width: size,
+      height: 'auto',
       /* If the color variant is set,
       the following property is ignored */
       fill: colorMap[color],
