@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Menu, MenuItem, Typography, Box, Stack, Button } from '@mui/material';
+import { Menu, MenuItem, Stack, Button } from '@mui/material';
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
@@ -41,22 +41,20 @@ export function LangSwitch({
         aria-haspopup='true'
         aria-expanded={menuOpen}
         onClick={toggleMenu}
+        ref={anchorEl}
+        endIcon={
+          menuOpen ? (
+            <KeyboardArrowDownRounded fontSize='small' />
+          ) : (
+            <KeyboardArrowUpRounded fontSize='small' />
+          )
+        }
       >
-        <Box ref={anchorEl}>
-          <Typography color='inherit' variant='subtitle2'>
-            {activeLanguage.value}
-          </Typography>
-        </Box>
-
-        {menuOpen ? (
-          <KeyboardArrowDownRounded fontSize='small' />
-        ) : (
-          <KeyboardArrowUpRounded fontSize='small' />
-        )}
+        {activeLanguage.value}
       </Button>
-      {!!languages?.length && anchorEl && (
+      {languages.length > 0 && anchorEl && (
         <Menu
-          anchorEl={anchorEl?.current}
+          anchorEl={anchorEl.current}
           sx={{ display: 'flex' }}
           open={menuOpen}
           onClose={() => {
