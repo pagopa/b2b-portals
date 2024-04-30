@@ -1,11 +1,8 @@
 'use client';
-import {
-  FooterProps,
-  Footer as FooterEC,
-} from '@pagopa/pagopa-editorial-components/dist/components/Footer';
-import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
 import Icon from './Icon';
+import { Footer as FooterRC } from '@react-components/components';
+import { FooterProps } from '@react-components/types';
 import { FooterData } from '@/lib/fetch/footer';
 
 const makeFooterProps = ({
@@ -75,35 +72,6 @@ const makeFooterProps = ({
 });
 
 const Footer = (props: FooterData['data']['attributes']) => (
-  <Stack
-    width='100%'
-    sx={{
-      '.MuiTypography-root.MuiTypography-caption p': {
-        // legalInfo
-        margin: 0,
-      },
-      footer: {
-        padding: 0,
-        borderTop: 1,
-        borderTopColor: 'divider',
-        '> :first-of-type': {
-          // links section
-          '> *': {
-            flex: 1,
-            '&.MuiBox-root svg:not(.MuiSvgIcon-root)': {
-              // NextGenEU logo
-              marginTop: 'auto',
-            },
-            '&.MuiBox-root > .MuiStack-root:nth-last-of-type(1)': {
-              // div before NextGenEU logo
-              marginBottom: '48px',
-            },
-          },
-        },
-      },
-    }}
-  >
-    <FooterEC {...makeFooterProps(props)} />
-  </Stack>
+  <FooterRC {...makeFooterProps(props)} />
 );
 export default Footer;
