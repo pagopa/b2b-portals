@@ -5,5 +5,15 @@ import Accordion from './Accordion/Accordion';
 import BannerLink from './BannerLink/BannerLink';
 import Cards from './Cards/Cards';
 import Footer from './Footer/Footer';
+import EditorialSwitch from './Editorial-Switch/Editorial-Switch';
 
-export { Hero, Editorial, HowTo, Accordion, BannerLink, Cards, Footer };
+export {
+  Hero,
+  Editorial,
+  HowTo,
+  Accordion,
+  BannerLink,
+  Cards,
+  Footer,
+  EditorialSwitch,
+};
