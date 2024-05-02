@@ -1,10 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getHeader } from '../header';
+import tenants from '../../tenants';
+import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
-  const config = {
+  const config: Config = {
     STRAPI_API_TOKEN: 'aStrapiToken',
     STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
+    ENVIRONMENT: 'send',
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };
@@ -34,7 +37,7 @@ const headerResponse = {
 };
 
 describe('getHeader', () => {
-  it('should call /api/header type GET', async () => {
+  it('should call /api/header type GET based on tenant', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
     const { config } = appEnv;
 
@@ -45,7 +48,9 @@ describe('getHeader', () => {
     await getHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons,logo`,
+      `${config.STRAPI_API_BASE_URL}/api/${
+        tenants[config.ENVIRONMENT].header
+      }/?populate=ctaButtons,logo`,
       {
         method: 'GET',
         headers: {

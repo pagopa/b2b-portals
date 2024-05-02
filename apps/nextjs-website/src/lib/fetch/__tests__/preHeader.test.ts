@@ -1,10 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getPreHeader } from '../preHeader';
+import tenants from '../../tenants';
+import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
-  const config = {
+  const config: Config = {
     STRAPI_API_TOKEN: 'aStrapiToken',
     STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
+    ENVIRONMENT: 'send',
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };
@@ -67,7 +70,7 @@ const preHeaderResponseAfterCodec = {
 };
 
 describe('getPreHeader', () => {
-  it('should call /api/pre-header type GET', async () => {
+  it('should call /api/pre-header type GET based on tenant', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
     const { config } = appEnv;
 
@@ -78,7 +81,9 @@ describe('getPreHeader', () => {
     await getPreHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas,rightCtas`,
+      `${config.STRAPI_API_BASE_URL}/api/${
+        tenants[config.ENVIRONMENT].preHeader
+      }/?populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {

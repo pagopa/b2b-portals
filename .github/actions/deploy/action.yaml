@@ -3,7 +3,7 @@ description: Deploy on AWS S3 Bucket
 
 inputs:
   environment:
-    description: 'The environment target'
+    description: 'The Tenant for which the static site will be built'
     required: true
   iam_role:
     description: 'The IAM Role to use to perform the deploy'
@@ -62,7 +62,7 @@ runs:
 
     - name: Deploy to S3 Bucket
       shell: bash
-      run: aws s3 sync ./apps/nextjs-website/out s3://${{ inputs.bucket }} --delete
+      run: aws s3 sync ./apps/nextjs-website/out s3://${{ inputs.bucket }}/${{ inputs.environment }} --delete
 
     - name: Create AWS Cloudfront Invalidation
       shell: bash

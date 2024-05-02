@@ -50,7 +50,7 @@ variable "cms_app_memory" {
 variable "use_custom_certificate" {
   type        = bool
   description = "Enable CDN https support with a custom certificate instead using the default one"
-  default     = false # set true when available dns and custom certificate
+  default     = true
 }
 
 variable "publish_cloudfront_functions" {
@@ -68,14 +68,30 @@ variable "dns_domain_name" {
 variable "websites_configs" {
   description = "Website configurations to create CDNs and SSL certificates for multi-tenancy"
   type = map(object({
-    origin_path = string
-    url_tenant  = string
+    origin_path                = string
+    url_tenant                 = string
+    create_certificate         = bool
+    create_distribution        = bool
+    cdn_use_custom_certificate = bool
+    cdn_use_alias              = bool
   }))
 
   default = {
     "send" = {
-      origin_path = "/send"
-      url_tenant  = "notifichedigitali.pagopa.it"
+      origin_path                = "/send"
+      url_tenant                 = "notifichedigitali.pagopa.it"
+      create_certificate         = true
+      create_distribution        = true
+      cdn_use_custom_certificate = true
+      cdn_use_alias              = false
+    },
+    "appio" = {
+      origin_path                = "/appio"
+      url_tenant                 = "io.italia.it"
+      create_certificate         = false
+      create_distribution        = true
+      cdn_use_custom_certificate = false
+      cdn_use_alias              = false
     }
   }
 }
