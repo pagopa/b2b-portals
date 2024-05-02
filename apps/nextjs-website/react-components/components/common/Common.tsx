@@ -76,7 +76,7 @@ export const Title = ({
   variant = 'body1',
   component = 'p',
   textAlign = 'center',
-  marginTop= 0,
+  marginTop = 0,
   marginBottom = 0,
 }: {
   title: string | JSX.Element;
