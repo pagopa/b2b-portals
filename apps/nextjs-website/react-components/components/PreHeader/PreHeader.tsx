@@ -2,9 +2,7 @@ import Stack from '@mui/material/Stack/Stack';
 import { PreHeaderProps } from '../../types/PreHeader/PreHeader.types';
 import { CtaButtons } from '../common/Common';
 
-const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => {
-
-  return (
+const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
   <Stack
     display='flex'
     flexDirection='row'
@@ -51,6 +49,6 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => {
       </Stack>
     )}
   </Stack>
-)};
+);
 
 export default PreHeader;
