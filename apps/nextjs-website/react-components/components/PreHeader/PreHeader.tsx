@@ -12,7 +12,7 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
     justifyContent='space-between'
     flexWrap='wrap'
   >
-    {leftCtas && (
+    {leftCtas && leftCtas.length > 0 && (
       <Stack direction='row'>
         {CtaButtons({
           ctaButtons: leftCtas.map((leftCtaButton) => ({
@@ -25,7 +25,7 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
         })}
       </Stack>
     )}
-    {rightCtas && (
+    {rightCtas && rightCtas.length > 0 && (
       <Stack direction='row-reverse'>
         {CtaButtons({
           ctaButtons: rightCtas.map((rightCtaButton) => ({
