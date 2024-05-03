@@ -11,7 +11,6 @@ const PreHeaderButtonCodec = t.strict({
   icon: t.union([MUIButtonIconCodec, t.null]),
   size: MUIButtonSizeCodec,
   variant: t.keyof({
-    naked: null, // Unique to PreHeader
     text: null,
     outlined: null,
     contained: null,
