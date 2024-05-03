@@ -15,14 +15,12 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
     {leftCtas && (
       <Stack direction='row'>
         {CtaButtons({
-          ctaButtons: [
-            {
-              ...leftCtas,
-              variant: 'text',
-              disableRipple: true,
-              sx: { width: { md: 'auto', xs: '100%' } },
-            },
-          ],
+          ctaButtons: leftCtas.map((leftCtaButton) => ({
+            ...leftCtaButton,
+            variant: 'text',
+            disableRipple: true,
+            sx: { width: { md: 'auto', xs: '100%' } },
+          })),
           theme: 'light',
         })}
       </Stack>
@@ -30,14 +28,12 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
     {rightCtas && (
       <Stack direction='row-reverse'>
         {CtaButtons({
-          ctaButtons: [
-            {
-              ...rightCtas,
-              variant: 'text',
-              disableRipple: true,
-              sx: { width: { md: 'auto', xs: '100%' } },
-            },
-          ],
+          ctaButtons: rightCtas.map((rightCtaButton) => ({
+            ...rightCtaButton,
+            variant: 'text',
+            disableRipple: true,
+            sx: { width: { md: 'auto', xs: '100%' } },
+          })),
           theme: 'light',
         })}
       </Stack>
