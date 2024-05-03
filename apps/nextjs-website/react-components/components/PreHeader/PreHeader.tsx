@@ -2,15 +2,17 @@ import Stack from '@mui/material/Stack/Stack';
 import { PreHeaderProps } from '../../types/PreHeader/PreHeader.types';
 import { CtaButtons } from '../common/Common';
 
-const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
+const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => {
+
+  return (
   <Stack
     display='flex'
     flexDirection='row'
     bgcolor='background.paper'
-    paddingY={2}
     paddingX={{ xs: 2, sm: 4 }}
     justifyContent='space-between'
     flexWrap='wrap'
+    sx={ {borderBottom: '1px solid #E3E7EB' } }
   >
     {leftCtas && leftCtas.length > 0 && (
       <Stack direction='row'>
@@ -18,9 +20,14 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
           ctaButtons: leftCtas.map((leftCtaButton) => ({
             ...leftCtaButton,
             variant: 'text',
-            disableRipple: true,
-            sx: { width: { md: 'auto', xs: '100%' } },
+            sx: {
+              width: { md: 'auto', xs: '100%', padding: 0, fontSize: '0.875rem', lineHeight: 1.25, color: '#17324D' },
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+            },
           })),
+          disableRipple: true,
           theme: 'light',
         })}
       </Stack>
@@ -31,14 +38,19 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
           ctaButtons: rightCtas.map((rightCtaButton) => ({
             ...rightCtaButton,
             variant: 'text',
-            disableRipple: true,
-            sx: { width: { md: 'auto', xs: '100%' } },
+            sx: {
+              width: { md: 'auto', xs: '100%', padding: 0, fontSize: '0.875rem', lineHeight: 1.25, color: '#17324D' },
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+            },
           })),
+          disableRipple: true,
           theme: 'light',
         })}
       </Stack>
     )}
   </Stack>
-);
+)};
 
 export default PreHeader;

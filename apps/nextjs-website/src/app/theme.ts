@@ -14,6 +14,7 @@ export const theme = createTheme(MUIItaliaTheme, {
     custom: {
       backgroundColorDark: '#0B3EE3',
       backgroundColorLightGrey: '#FAFAFA',
+      divider: '#E3E7EB',
     },
   },
 });

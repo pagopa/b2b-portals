@@ -5,9 +5,11 @@ import { CtaButtonProps } from '../../types/common/Common.types';
 export const CtaButtons = ({
   ctaButtons,
   theme,
+  disableRipple = false,
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
   theme: 'dark' | 'light';
+  disableRipple?: boolean;
 }) => {
   const buttonColor = theme === 'dark' ? 'negative' : 'primary';
 
@@ -19,6 +21,7 @@ export const CtaButtons = ({
         key={`${(button as CtaButtonProps).text}-${i}`}
         color={buttonColor}
         variant={(button as CtaButtonProps).variant || 'contained'}
+        disableRipple={disableRipple}
         {...(button as CtaButtonProps)}
       >
         {(button as CtaButtonProps).text}
