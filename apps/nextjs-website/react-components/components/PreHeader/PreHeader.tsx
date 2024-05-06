@@ -25,14 +25,18 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
             ...leftCtaButton,
             variant: 'text',
             sx: {
-              width: { md: 'auto', xs: '100%', padding: 0, fontSize: '0.875rem', lineHeight: 1.25, color: colorMap.textColor },
+              width: { md: 'auto', xs: '100%' },
+              padding: 0,
+              fontSize: '0.875rem',
+              lineHeight: 1.25,
+              color: colorMap.textColor,
               '&:hover': {
+                // Style needed to override default 'text' variant MUI Button styles
                 backgroundColor: 'transparent',
               },
             },
           })),
           disableRipple: true,
-          theme: 'light',
         })}
       </Stack>
     )}
@@ -43,14 +47,18 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
             ...rightCtaButton,
             variant: 'text',
             sx: {
-              width: { md: 'auto', xs: '100%', padding: 0, fontSize: '0.875rem', lineHeight: 1.25, color: colorMap.textColor },
+              width: { md: 'auto', xs: '100%' },
+              padding: 0,
+              fontSize: '0.875rem',
+              lineHeight: 1.25,
+              color: colorMap.textColor,
               '&:hover': {
+                // Style needed to override default 'text' variant MUI Button styles
                 backgroundColor: 'transparent',
               },
             },
           })),
           disableRipple: true,
-          theme: 'light',
         })}
       </Stack>
     )}

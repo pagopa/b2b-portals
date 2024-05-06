@@ -1,5 +1,5 @@
 'use client';
-import { PreHeader as PreHeaderEC } from '@react-components/components';
+import { PreHeader as PreHeaderRC } from '@react-components/components';
 import { PreHeaderProps } from '@react-components/types';
 import { PreHeader } from '@/lib/fetch/preHeader';
 import Icon from '@/components/Icon';
@@ -13,7 +13,6 @@ const makeCtas = (
 ): CtaButtonProps[] =>
   ctaButtons.map((ctaBtn) => ({
     ...ctaBtn,
-    text: ctaBtn.text || '',
     target: '_blank',
     rel: 'noopener noreferrer',
     variant: 'text',
@@ -28,7 +27,7 @@ const makePreHeaderProps = (
 });
 
 const PreHeader = (preHeaderData: PreHeader['data']['attributes']) => (
-  <PreHeaderEC {...makePreHeaderProps(preHeaderData)} />
+  <PreHeaderRC {...makePreHeaderProps(preHeaderData)} />
 );
 
 export default PreHeader;
