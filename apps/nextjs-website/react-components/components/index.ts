@@ -6,6 +6,7 @@ import BannerLink from './BannerLink/BannerLink';
 import Cards from './Cards/Cards';
 import Footer from './Footer/Footer';
 import EditorialSwitch from './Editorial-Switch/Editorial-Switch';
+import PreHeader from './PreHeader/PreHeader';
 
 export {
   Hero,
@@ -16,4 +17,5 @@ export {
   Cards,
   Footer,
   EditorialSwitch,
+  PreHeader
 };
