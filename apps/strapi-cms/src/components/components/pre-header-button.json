@@ -22,7 +22,6 @@
     "variant": {
       "type": "enumeration",
       "enum": [
-        "naked",
         "text",
         "outlined",
         "contained"
