@@ -33,8 +33,3 @@ export const ExtraTextColor = (theme: 'dark' | 'light') => {
     ? palette.primary.contrastText
     : palette.text.secondary;
 };
-
-export const TextColorWhiteOnly = () => {
-  const { palette } = useTheme();
-  return palette.primary.contrastText;
-};
