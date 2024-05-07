@@ -10,6 +10,13 @@ export const BackgroundColorAlternative = (theme: 'dark' | 'light') => {
   return theme === 'dark' ? palette.primary.dark : palette.background.default;
 };
 
+export const ExtraBackgroundColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+  ? palette.text.primary
+  : palette.primary.dark;
+};
+
 export const TextColor = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
   return theme === 'dark' ? palette.primary.contrastText : palette.text.primary;
@@ -25,4 +32,9 @@ export const ExtraTextColor = (theme: 'dark' | 'light') => {
   return theme === 'dark'
     ? palette.primary.contrastText
     : palette.text.secondary;
+};
+
+export const TextColorWhiteOnly = () => {
+  const { palette } = useTheme();
+  return palette.primary.contrastText;
 };

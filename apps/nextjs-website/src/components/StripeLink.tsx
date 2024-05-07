@@ -16,14 +16,7 @@ const makeStripeLinkProps = ({
       icon,
     },
   }),
-  ...(buttonText &&
-    buttonText.length > 0 && {
-      ctaButtons: buttonText.map(({ icon, ...button }) => ({
-        ...button,
-        size: 'small',
-        ...(buttonText.icon && { endIcon: Icon(buttonText.icon) }),
-      })),
-    }),
+  ...(buttonText && { buttonText }),
   ...rest,
 });
 

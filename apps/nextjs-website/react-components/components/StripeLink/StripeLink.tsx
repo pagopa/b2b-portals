@@ -1,16 +1,19 @@
-import { Grid, Stack } from '@mui/material';
+import { Grid, Stack, Button } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import { EIcon } from '../common/EIcon';
 import { StripeLinkProps } from '../../types/StripeLink/StripeLink.types';
-import { CtaButtons, Subtitle } from '../common/Common';
-import { BackgroundColor, TextColor } from '../common/Common.helpers';
+import { Subtitle } from '../common/Common';
+import { BackgroundColor, ExtraBackgroundColor, TextAlternativeColor, TextColorWhiteOnly } from '../common/Common.helpers';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
-  const textColor = TextColor(theme);
+  const textAlternativeColor = TextAlternativeColor(theme);
+  const textColorWhiteOnly = TextColorWhiteOnly();
   const backgroundColor = BackgroundColor(theme);
+  const extraBackgroundColor = ExtraBackgroundColor(theme);  
 
   return (
-    <ContainerRC background={backgroundColor} py={2}>
+    <ContainerRC background={extraBackgroundColor} py={2}>
       <Grid item>
         <Stack
           direction={{ md: 'row', xs: 'column' }}
@@ -23,23 +26,27 @@ const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
             sx={{
               display: { md: 'flex', xs: 'none' },
               visibility: { md: 'visible', xs: 'hidden' },
+              color: textColorWhiteOnly,
             }}
           />
           <Subtitle
             variant='body2'
-            textColor={textColor}
+            textColor={textColorWhiteOnly}
             subtitle={subtitle}
             textAlign='left'
           />
-          {buttonText && buttonText.length > 0 && CtaButtons({
-            ctaButtons: buttonText.map((button) => ({
-              ...button,
-              sx: {
-                width: { md: 'auto', xs: '100%' },
-              },
-            })),
-            theme,
-          })}
+          <Button
+            variant="contained"
+            size="small"
+            sx={{
+              backgroundColor: backgroundColor,
+              color: textAlternativeColor,
+              ':hover': { backgroundColor: backgroundColor },
+            }}
+            endIcon={<ArrowForwardIcon color="inherit"></ArrowForwardIcon>}
+          >
+            {buttonText}
+          </Button>
         </Stack>
       </Grid>
     </ContainerRC>
