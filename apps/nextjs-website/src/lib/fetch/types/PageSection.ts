@@ -126,7 +126,7 @@ const StripeLinkSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   subtitle: t.string,
   icon: t.union([StripeLinkMUIIconCodec, t.null]),
-  buttonText: t.union([t.string, t.null]),
+  buttonText: t.array(CTAButtonSimpleCodec),
 });
 
 const CardsItemCodec = t.strict({

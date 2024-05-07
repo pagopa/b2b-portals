@@ -7,6 +7,7 @@ import Cards from './Cards/Cards';
 import Footer from './Footer/Footer';
 import EditorialSwitch from './Editorial-Switch/Editorial-Switch';
 import PreHeader from './PreHeader/PreHeader';
+import StripeLink from './StripeLink/StripeLink';
 
 export {
   Hero,
@@ -17,5 +18,6 @@ export {
   Cards,
   Footer,
   EditorialSwitch,
-  PreHeader
+  PreHeader,
+  StripeLink
 };

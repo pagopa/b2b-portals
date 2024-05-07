@@ -7,6 +7,7 @@ import { CardsProps } from './Cards/Cards.types';
 import { FooterProps } from './Footer/Footer.types';
 import { EditorialSwitchProps } from './Editorial-Switch/Editorial-Switch.types';
 import { PreHeaderProps } from './PreHeader/PreHeader.types';
+import { StripeLinkProps } from './StripeLink/StripeLink.types';
 
 export type {
   HeroProps,
@@ -17,5 +18,6 @@ export type {
   CardsProps,
   FooterProps,
   EditorialSwitchProps,
-  PreHeaderProps
+  PreHeaderProps,
+  StripeLinkProps
 };
