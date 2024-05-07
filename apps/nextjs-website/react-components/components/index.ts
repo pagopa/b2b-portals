@@ -19,5 +19,5 @@ export {
   Footer,
   EditorialSwitch,
   PreHeader,
-  StripeLink
+  StripeLink,
 };

@@ -35,18 +35,20 @@ const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
             subtitle={subtitle}
             textAlign='left'
           />
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              backgroundColor: backgroundColor,
-              color: textAlternativeColor,
-              ':hover': { backgroundColor: backgroundColor },
-            }}
-            endIcon={<ArrowForwardIcon color="inherit"></ArrowForwardIcon>}
-          >
-            {buttonText}
-          </Button>
+          {buttonText && buttonText.length > 0 && (
+            <Button
+              variant="contained"
+              size="small"
+              sx={{
+                backgroundColor: backgroundColor,
+                color: textAlternativeColor,
+                ':hover': { backgroundColor: backgroundColor },
+              }}
+              endIcon={<ArrowForwardIcon color="inherit"></ArrowForwardIcon>}
+            >
+              {buttonText}
+            </Button>
+          )}
         </Stack>
       </Grid>
     </ContainerRC>
