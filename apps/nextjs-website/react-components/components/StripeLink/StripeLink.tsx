@@ -3,12 +3,12 @@ import ContainerRC from '../common/ContainerRC';
 import { EIcon } from '../common/EIcon';
 import { StripeLinkProps } from '../../types/StripeLink/StripeLink.types';
 import { Subtitle } from '../common/Common';
-import { BackgroundColor, ExtraBackgroundColor, TextAlternativeColor, TextColorWhiteOnly } from '../common/Common.helpers';
+import { BackgroundColor, ExtraBackgroundColor, TextAlternativeColor, TextColor } from '../common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
   const textAlternativeColor = TextAlternativeColor(theme);
-  const textColorWhiteOnly = TextColorWhiteOnly();
+  const textColorWhiteOnly = TextColor('dark');
   const backgroundColor = BackgroundColor(theme);
   const extraBackgroundColor = ExtraBackgroundColor(theme);  
 
@@ -35,7 +35,7 @@ const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
             subtitle={subtitle}
             textAlign='left'
           />
-          {buttonText && buttonText.length > 0 && (
+          {buttonText && (
             <Button
               variant="contained"
               size="small"
