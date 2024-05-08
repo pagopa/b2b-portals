@@ -1,8 +1,8 @@
 'use client';
-import { Header as HeaderRC } from '@react-components/components';
-import { HeaderProps } from '@react-components/types';
 import { usePathname } from 'next/navigation';
 import Icon from './Icon';
+import { Header as HeaderRC } from '@react-components/components';
+import { HeaderProps } from '@react-components/types';
 import { HeaderWithNavigation } from '@/lib/header';
 
 const makeHeaderProps = (

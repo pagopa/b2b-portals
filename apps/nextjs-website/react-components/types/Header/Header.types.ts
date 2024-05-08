@@ -2,7 +2,7 @@ import { AvatarProps, LinkProps } from "@mui/material";
 import { CommonProps, CtaButtonProps, Generic } from "../common/Common.types";
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
-  ctaButtons: CtaButtonProps[];
+  ctaButtons?: CtaButtonProps[];
 }
 
 interface DropdownLink extends LinkProps {
