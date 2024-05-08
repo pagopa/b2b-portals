@@ -8,13 +8,14 @@ import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { CtaButtons } from '../common/Common';
 import { BackgroundColor } from '../common/Common.helpers';
 
-export const Header = ({
+const Header = ({
   product,
   theme,
   menu,
   ctaButtons,
   avatar,
   beta,
+  logo,
 }: HeaderProps) => {
   const [headerOpen, setHeaderOpen] = useState(false);
 
@@ -41,7 +42,7 @@ export const Header = ({
   const backgroundColor = BackgroundColor(theme);
 
   const HeaderCtas = () => {
-    ctaButtons && ctaButtons.length > 0 && (
+    return ctaButtons && ctaButtons.length > 0 ? (
       <Stack direction='row'>
         {CtaButtons({
           ctaButtons: ctaButtons.map((CtaButton) => ({
@@ -51,7 +52,7 @@ export const Header = ({
           theme,
         })}
       </Stack>
-    );
+    ) : null;
   };
 
   return (
@@ -78,7 +79,9 @@ export const Header = ({
             product={product}
             {...(beta ? { beta } : {})}
             {...(avatar ? { avatar } : {})}
+            {...(logo ? { logo } : {})}
           />
+
           <Stack
             sx={{ display: { md: 'none' } }}
             direction='row'
@@ -88,6 +91,7 @@ export const Header = ({
             <Box sx={{ display: { xs: 'none', sm: 'block', md: 'none' } }}>
               <HeaderCtas />
             </Box>
+
             <HamburgerMenu
               onOpen={openHeader}
               onClose={closeHeader}
@@ -107,6 +111,7 @@ export const Header = ({
           }}
         >
           <Navigation {...{ menu, theme }} />
+
           <Box sx={{ display: { sm: 'none', md: 'block' } }}>
             <HeaderCtas />
           </Box>
@@ -115,3 +120,5 @@ export const Header = ({
     </Box>
   );
 };
+
+export default Header;

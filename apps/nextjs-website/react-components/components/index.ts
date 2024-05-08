@@ -8,6 +8,7 @@ import Footer from './Footer/Footer';
 import EditorialSwitch from './Editorial-Switch/Editorial-Switch';
 import PreHeader from './PreHeader/PreHeader';
 import StripeLink from './StripeLink/StripeLink';
+import Header from './Header/Header';
 
 export {
   Hero,
@@ -20,4 +21,5 @@ export {
   EditorialSwitch,
   PreHeader,
   StripeLink,
+  Header,
 };

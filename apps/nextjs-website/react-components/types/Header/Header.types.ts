@@ -1,9 +1,9 @@
 import { AvatarProps, LinkProps } from "@mui/material";
 import { CommonProps, CtaButtonProps, Generic } from "../common/Common.types";
 
-interface BottomHeaderProps extends CtaButtonProps, NavigationProps, TitleProps {}
-
-export interface HeaderProps extends CommonProps, BottomHeaderProps {}
+export interface HeaderProps extends HeaderTitleProps, NavigationProps {
+  ctaButtons: CtaButtonProps[];
+}
 
 interface DropdownLink extends LinkProps {
   label: string;
@@ -23,7 +23,7 @@ export interface NavigationProps extends CommonProps {
   menu: MenuDropdownProp[];
 }
 
-export interface TitleProps extends CommonProps {
+export interface HeaderTitleProps extends CommonProps {
   product: {
     name: string;
     href?: string;

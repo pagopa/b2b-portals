@@ -6,7 +6,7 @@ import {
   useTheme,
   Link,
 } from '@mui/material';
-import { TitleProps } from '../../../types/Header/Header.types';
+import { HeaderTitleProps } from '../../../types/Header/Header.types';
 
 export const Content = ({
   avatar,
@@ -14,7 +14,7 @@ export const Content = ({
   product: { name: productName, href: productHref },
   theme,
   logo,
-}: TitleProps) => {
+}: HeaderTitleProps) => {
   const { palette, spacing } = useTheme();
   const textColor =
     theme === 'dark' ? palette.primary.contrastText : palette.text.primary;
