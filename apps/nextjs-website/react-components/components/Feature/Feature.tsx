@@ -36,7 +36,7 @@ const Feature = ({
       <Grid item xs={12}>
         <Title variant='h4' textColor={textColor} title={title} />
       </Grid>
-      <Grid item mt={8} justifyContent='center'>
+      <Grid item mt={8} justifyContent='center' sx={{ width: '100%' }}>
         <Grid container spacing={{ xs: 6, md: 4 }} justifyContent='center'>
           {items.map((item, index) => (
             <Grid

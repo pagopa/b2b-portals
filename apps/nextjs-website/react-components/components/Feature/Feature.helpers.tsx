@@ -25,7 +25,7 @@ const FeatureCarousel = ({
   };
 
   return (
-    <Grid item display={{ md: 'none' }}>
+    <Grid item display={{ md: 'none' }} sx={{ width: '100%' }}>
       <Slider {...slickSettings}>
         {items.map((item, index) => (
           <div key={index}>
