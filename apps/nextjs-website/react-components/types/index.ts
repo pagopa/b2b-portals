@@ -8,6 +8,7 @@ import { FooterProps } from './Footer/Footer.types';
 import { EditorialSwitchProps } from './Editorial-Switch/Editorial-Switch.types';
 import { PreHeaderProps } from './PreHeader/PreHeader.types';
 import { StripeLinkProps } from './StripeLink/StripeLink.types';
+import { HeaderProps } from './Header/Header.types';
 
 export type {
   HeroProps,
@@ -19,5 +20,6 @@ export type {
   FooterProps,
   EditorialSwitchProps,
   PreHeaderProps,
-  StripeLinkProps
+  StripeLinkProps,
+  HeaderProps,
 };
