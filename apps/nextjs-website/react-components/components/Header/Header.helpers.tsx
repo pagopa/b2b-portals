@@ -1,12 +1,12 @@
 import { Stack, useTheme, type Theme } from '@mui/material';
 import { DialogBubbleProps } from '../../types/Header/Header.types';
 
-const useStyles = (mui: Theme) => ({
+const useStyles = (muiTheme: Theme) => ({
   bubbleContainer: {
     transform: 'rotate(180deg)',
     position: 'absolute',
     marginTop: '42px',
-    padding: mui.spacing(2),
+    padding: muiTheme.spacing(2),
     direction: 'rtl',
     textAlign: 'left',
     borderRadius: '4px',
@@ -18,11 +18,11 @@ export const DialogBubble = ({
   children,
   ...stackProps
 }: DialogBubbleProps) => {
-  const mui = useTheme();
-  const styles = useStyles(mui);
+  const muiTheme = useTheme();
+  const styles = useStyles(muiTheme);
   return (
     <Stack
-      sx={{ ...styles.bubbleContainer, bgcolor: mui.palette.common.white }}
+      sx={{ ...styles.bubbleContainer, bgcolor: muiTheme.palette.common.white }}
       aria-haspopup="true"
     >
       <Stack sx={styles.bubble} {...stackProps}>
