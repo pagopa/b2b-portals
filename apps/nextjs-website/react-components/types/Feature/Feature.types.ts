@@ -1,4 +1,5 @@
 import { EIconProps } from "../../components/common/EIcon";
+import { Theme } from "../common/Common.types";
 
 export interface FeatureItem {
   readonly stackIcon?: EIconProps;
@@ -28,4 +29,12 @@ export interface SubtitleProps {
   textLink?: string;
   url?: string;
   theme: 'dark' | 'light';
+}
+
+export interface FeatureCarouselProps {
+  items: readonly FeatureItem[];
+  activeStep: number;
+  handleStepChange: (step: number) => void;
+  theme: Theme;
+  themeComponentDirection: 'rtl' | 'ltr';
 }

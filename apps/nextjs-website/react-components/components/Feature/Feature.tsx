@@ -18,7 +18,7 @@ const Feature = ({
   background,
 }: FeatureProps) => {
   const [activeStep, setActiveStep] = useState(0);
-  const themeComponent = useTheme();
+  const muiTheme = useTheme();
 
   const handleStepChange = (step: number) => {
     setActiveStep(step);
@@ -55,7 +55,7 @@ const Feature = ({
               handleStepChange={handleStepChange}
               theme={theme}
               themeComponentDirection={
-                themeComponent.direction === 'rtl' ? 'rtl' : 'ltr'
+                muiTheme.direction === 'rtl' ? 'rtl' : 'ltr'
               }
             />
           )}

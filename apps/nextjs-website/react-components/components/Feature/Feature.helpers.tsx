@@ -4,16 +4,7 @@ import { Grid } from '@mui/material';
 import { FeatureStackItem } from './FeatureStackItem';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Theme } from '../../types/common/Common.types';
-import { FeatureItem } from '../../types/Feature/Feature.types';
-
-interface FeatureCarouselProps {
-  items: readonly FeatureItem[];
-  activeStep: number;
-  handleStepChange: (step: number) => void;
-  theme: Theme;
-  themeComponentDirection: 'rtl' | 'ltr';
-}
+import { FeatureCarouselProps } from '../../types/Feature/Feature.types';
 
 const FeatureCarousel = ({
   items,
