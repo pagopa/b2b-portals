@@ -211,7 +211,7 @@ export const Body = ({
   marginBottom = 0,
 }: {
   body: string | JSX.Element | undefined;
-  textColor: string; // textColor is now required
+  textColor: string;
   textAlign?: TypographyProps['align'];
   variant?: TypographyProps['variant'];
   marginBottom?: number | string;

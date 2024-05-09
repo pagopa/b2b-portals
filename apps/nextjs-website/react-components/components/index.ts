@@ -9,6 +9,7 @@ import EditorialSwitch from './Editorial-Switch/Editorial-Switch';
 import PreHeader from './PreHeader/PreHeader';
 import StripeLink from './StripeLink/StripeLink';
 import Header from './Header/Header';
+import Feature from './Feature/Feature';
 
 export {
   Hero,
@@ -22,4 +23,5 @@ export {
   PreHeader,
   StripeLink,
   Header,
+  Feature,
 };
