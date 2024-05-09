@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { Grid, MobileStepper, useTheme } from '@mui/material';
-import SwipeableViews from 'react-swipeable-views';
+import React, { useState } from 'react';
+import { Grid, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import {
   TextColor,
@@ -9,9 +8,15 @@ import {
 import { Title } from '../common/Common';
 import { FeatureProps } from '../../types/Feature/Feature.types';
 import { FeatureStackItem } from './FeatureStackItem';
+import FeatureCarousel from './Feature.helpers';
 
-const Feature = (props: FeatureProps) => {
-  const { title, items, theme, showCarouselMobile, background } = props;
+const Feature = ({
+  title,
+  items,
+  theme,
+  showCarouselMobile,
+  background,
+}: FeatureProps) => {
   const [activeStep, setActiveStep] = useState(0);
   const themeComponent = useTheme();
 
@@ -26,11 +31,7 @@ const Feature = (props: FeatureProps) => {
   return (
     <ContainerRC
       background={background ?? backgroundColorAlernative}
-      py={{
-        xs: 4,
-        sm: 4,
-        md: 8,
-      }}
+      py={{ xs: 4, sm: 4, md: 8 }}
     >
       <Grid item xs={12}>
         <Title variant='h4' textColor={textColor} title={title} />
@@ -48,37 +49,15 @@ const Feature = (props: FeatureProps) => {
             </Grid>
           ))}
           {showCarouselMobile && (
-            <Grid item display={{ md: 'none' }}>
-              <SwipeableViews
-                axis={themeComponent.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents
-                autoPlay={false}
-              >
-                {items.map((item, index) => (
-                  <FeatureStackItem theme={theme} item={item} key={index} />
-                ))}
-              </SwipeableViews>
-              <MobileStepper
-                sx={{
-                  my: 2,
-                  justifyContent: 'center',
-                  bgcolor:
-                    theme === 'light' ? 'background.paper' : 'primary.main',
-                  '& .MuiMobileStepper-dotActive': {
-                    backgroundColor:
-                      theme === 'light' ? 'primary.main' : 'background.paper',
-                  },
-                }}
-                variant='dots'
-                steps={items.length}
-                position='static'
-                activeStep={activeStep}
-                backButton={undefined}
-                nextButton={undefined}
-              />
-            </Grid>
+            <FeatureCarousel
+              items={items}
+              activeStep={activeStep}
+              handleStepChange={handleStepChange}
+              theme={theme}
+              themeComponentDirection={
+                themeComponent.direction === 'rtl' ? 'rtl' : 'ltr'
+              }
+            />
           )}
         </Grid>
       </Grid>
