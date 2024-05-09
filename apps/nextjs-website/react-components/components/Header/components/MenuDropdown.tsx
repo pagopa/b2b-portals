@@ -8,29 +8,27 @@ import {
   type Theme,
 } from '@mui/material';
 import { useState } from 'react';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { ArrowDropDown } from '@mui/icons-material';
 import { DialogBubble } from '../Header.helpers';
 import { isJSX } from '../../../types/common/Common.types';
 import { DropdownItem, MenuDropdownProp } from '../../../types/Header/Header.types';
+import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 
 const TIMEOUT_LENGTH = 100;
 
-const useStyles = (props: MenuDropdownProp, mui: Theme) => {
-  const textColor =
-    props.theme === 'dark'
-      ? mui.palette.primary.contrastText
-      : mui.palette.primary.dark;
+const useStyles = ({ theme, active, items }: MenuDropdownProp, { palette, spacing }: Theme) => {
+  const textColor = TextAlternativeColor(theme);
 
   return {
     menu: {
       paddingY: { md: 2 },
       borderColor: textColor,
       borderBottomStyle: 'solid',
-      borderBottomWidth: { md: props.active ? 3 : 0, xs: 0 },
+      borderBottomWidth: { md: active ? 3 : 0, xs: 0 },
     },
     item: {
       cursor: {
-        md: props.items?.length ? 'default' : 'pointer',
+        md: items?.length ? 'default' : 'pointer',
         xs: 'pointer',
       },
       flexDirection: 'row',
@@ -38,8 +36,8 @@ const useStyles = (props: MenuDropdownProp, mui: Theme) => {
       textDecoration: 'none',
     },
     link: {
-      color: { xs: textColor, md: mui.palette.primary.contrastText },
-      textIndent: { xs: mui.spacing(2), md: 0 },
+      color: { xs: textColor, md: palette.primary.contrastText },
+      textIndent: { xs: spacing(2), md: 0 },
     },
     arrowAnimate: {
       transition: 'transform 0.2s',
@@ -122,7 +120,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
           {label}
         </Typography>
         {hasLinks && (
-          <ArrowDropDownIcon
+          <ArrowDropDown
             color="inherit"
             fontSize="small"
             sx={{

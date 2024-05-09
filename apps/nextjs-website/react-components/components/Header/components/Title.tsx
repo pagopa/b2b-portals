@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { HeaderTitleProps } from '../../../types/Header/Header.types';
 
-export const Content = ({
+export const HeaderTitle = ({
   avatar,
   beta,
   product: { name: productName, href: productHref },
@@ -22,12 +22,13 @@ export const Content = ({
 
   return (
     <Stack direction="column" alignItems="center" gap={1}>
-      {logo && (
+      {logo ? (
         <Link href={logo.href}>
           <img src={logo.src} alt={logo.alt} height={48} />
         </Link>
-      )}
-      {avatar && <Avatar {...avatar} />}
+      ) : avatar ? (
+        <Avatar {...avatar} />
+      ) : null}
       {!logo && (
         <Typography
           color={textColor}

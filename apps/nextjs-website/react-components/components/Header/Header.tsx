@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import { useEffect, useState } from 'react';
 import { HamburgerMenu } from './components/HamburgerMenu';
 import { Navigation } from './components/Navigation';
-import { Content } from './components/Title';
+import { HeaderTitle } from './components/Title';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { CtaButtons } from '../common/Common';
 import { BackgroundColor } from '../common/Common.helpers';
@@ -17,25 +17,21 @@ const Header = ({
   beta,
   logo,
 }: HeaderProps) => {
-  const [headerOpen, setHeaderOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const openHeader = () => {
-    setHeaderOpen(true);
+    setMenuOpen(true);
   };
 
   const closeHeader = () => {
-    setHeaderOpen(false);
-  };
-
-  const onResize = () => {
-    closeHeader();
+    setMenuOpen(false);
   };
 
   useEffect(() => {
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', closeHeader);
 
     return () => {
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener('resize', closeHeader);
     };
   }, []);
 
@@ -74,7 +70,7 @@ const Header = ({
             alignItems: 'center',
           }}
         >
-          <Content
+          <HeaderTitle
             theme={theme}
             product={product}
             {...(beta ? { beta } : {})}
@@ -95,7 +91,7 @@ const Header = ({
             <HamburgerMenu
               onOpen={openHeader}
               onClose={closeHeader}
-              open={headerOpen}
+              open={menuOpen}
             />
           </Stack>
         </Stack>
@@ -107,7 +103,7 @@ const Header = ({
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: { md: 'center', xs: 'flex-start' },
             gap: { xs: 2 },
-            display: { xs: headerOpen ? 'flex' : 'none', md: 'flex' },
+            display: { xs: menuOpen ? 'flex' : 'none', md: 'flex' },
           }}
         >
           <Navigation {...{ menu, theme }} />
