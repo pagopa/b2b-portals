@@ -1,4 +1,5 @@
-import { AvatarProps, LinkProps } from "@mui/material";
+import { ReactNode } from "react";
+import { AvatarProps, LinkProps, StackProps } from "@mui/material";
 import { CommonProps, CtaButtonProps, Generic } from "../common/Common.types";
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
@@ -35,4 +36,8 @@ export interface HeaderTitleProps extends CommonProps {
     alt: string;
     href: string;
   };
+}
+
+export interface DialogBubbleProps extends StackProps {
+  children: ReactNode;
 }

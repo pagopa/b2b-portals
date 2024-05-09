@@ -17,6 +17,8 @@ const Header = ({
   beta,
   logo,
 }: HeaderProps) => {
+  const backgroundColor = BackgroundColor(theme);
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const openHeader = () => {
@@ -34,8 +36,6 @@ const Header = ({
       window.removeEventListener('resize', closeHeader);
     };
   }, []);
-
-  const backgroundColor = BackgroundColor(theme);
 
   const HeaderCtas = () => {
     return ctaButtons && ctaButtons.length > 0 ? (
