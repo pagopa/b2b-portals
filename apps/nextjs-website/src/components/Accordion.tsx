@@ -1,9 +1,8 @@
 'use client';
 import React from 'react';
-import { Accordion as AccordionEC } from '@pagopa/pagopa-editorial-components';
-import { AccordionProps } from '@pagopa/pagopa-editorial-components/dist/components/Accordion/Accordion';
-import { Stack } from '@mui/material';
 import MarkdownRenderer from './MarkdownRenderer';
+import { Accordion as AccordionRC } from '@react-components/components';
+import { AccordionProps } from '@react-components/types';
 import { AccordionSection } from '@/lib/fetch/types/PageSection';
 
 const makeAccordionProps = ({
@@ -19,33 +18,13 @@ const makeAccordionProps = ({
   accordionItems: accordionItems.map(({ header, content }) => ({
     header,
     content: MarkdownRenderer({ markdown: content, variant: 'body2' }),
+    theme: rest.theme,
   })),
   ...rest,
 });
 
 const Accordion = (props: AccordionSection) => (
-  <section id={props.sectionID || undefined}>
-    <Stack
-      sx={{
-        '.MuiGrid-item .MuiBox-root': {
-          // prevent targeting text inside accordion
-          '.MuiTypography-body2': {
-            // description
-            color:
-              props.theme === 'dark' ? 'primary.contrastText' : 'text.primary',
-            a: {
-              color:
-                props.theme === 'dark'
-                  ? 'primary.contrastText'
-                  : 'text.primary',
-            },
-          },
-        },
-      }}
-    >
-      <AccordionEC {...makeAccordionProps(props)} />
-    </Stack>
-  </section>
+  <AccordionRC {...makeAccordionProps(props)} />
 );
 
 export default Accordion;

@@ -21,7 +21,7 @@ const appEnv = pipe(
 
 // Return all the pages
 export const getAllPages = async (): Promise<ReadonlyArray<Page>> => {
-  const navigation = await getNavigation('main-navigation', appEnv);
+  const navigation = await getNavigation(appEnv);
   return makePageListFromNavigation(navigation);
 };
 
@@ -37,7 +37,7 @@ export const getPreHeaderProps = async (): Promise<
 
 export const getHeaderProps = async (): Promise<HeaderWithNavigation> => {
   const header = await getHeader(appEnv);
-  const navigation = await getNavigation('main-navigation', appEnv);
+  const navigation = await getNavigation(appEnv);
   return makeHeaderWithNavigation(navigation, header);
 };
 

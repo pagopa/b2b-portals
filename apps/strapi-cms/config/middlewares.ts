@@ -4,24 +4,14 @@ export default ({ env }: any) => [
     name: 'strapi::security',
     config: {
       contentSecurityPolicy: {
-        useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:'],
           'img-src': [
             "'self'",
             'data:',
             'blob:',
-            'market-assets.strapi.io',
-            env('AWS_BUCKET_FULL_URL'),
+            'strapi.io',
+            env('CDN_URL'),
           ],
-          'media-src': [
-            "'self'",
-            'data:',
-            'blob:',
-            'market-assets.strapi.io',
-            env('AWS_BUCKET_FULL_URL'),
-          ],
-          upgradeInsecureRequests: null,
         },
       },
     },
