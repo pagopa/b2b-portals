@@ -22,14 +22,14 @@ export const HeaderTitle = ({
 
   return (
     <Stack direction="column" alignItems="center" gap={1}>
-      {logo ? (
+      {logo && (
         <Link href={logo.href}>
           <img src={logo.src} alt={logo.alt} height={48} />
         </Link>
-      ) : avatar ? (
-        <Avatar {...avatar} />
-      ) : null}
+      )}
       {!logo && (
+      <>
+        {avatar && <Avatar {...avatar} />}
         <Typography
           color={textColor}
           fontSize={{ xs: spacing(3), sm: spacing(3.5) }}
@@ -44,6 +44,7 @@ export const HeaderTitle = ({
             <b>{productName}</b>
           )}
         </Typography>
+      </>
       )}
       {beta && (
         <Chip

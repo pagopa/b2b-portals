@@ -80,9 +80,9 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
 
   // style
   const hasLinks = items?.length;
-  const mui = useTheme();
-  const md = useMediaQuery(mui.breakpoints.up('md'));
-  const styles = useStyles(props, mui);
+  const muiTheme = useTheme();
+  const md = useMediaQuery(muiTheme.breakpoints.up('md'));
+  const styles = useStyles(props, muiTheme);
 
   const dropdownVisible = menuHover || dropdownHover;
 
