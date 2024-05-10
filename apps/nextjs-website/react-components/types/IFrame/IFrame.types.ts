@@ -1,5 +1,3 @@
-import { CommonProps } from "../common/Common.types";
-
-export interface IFrameProps extends CommonProps {
+export interface IFrameProps {
   src: string;
 }
