@@ -1,7 +1,9 @@
-import { type MenuDropdownProp } from '@pagopa/pagopa-editorial-components/dist/components/Header/components/MenuDropdown';
-import { NavigationProps } from '@pagopa/pagopa-editorial-components/dist/components/Header/components/Navigation';
 import { Header } from './fetch/header';
 import { Navigation } from './fetch/navigation';
+import {
+  MenuDropdownProp,
+  NavigationProps,
+} from '@react-components/types/Header/Header.types';
 
 export type HeaderWithNavigation = Header['data']['attributes'] &
   NavigationProps;
