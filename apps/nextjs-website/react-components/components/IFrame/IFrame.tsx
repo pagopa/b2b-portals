@@ -37,7 +37,7 @@ const IFrame: React.FC<IFrameProps> = ({ src }) => {
       ref={iframeRef}
       src={src}
       onLoad={resizeIFrameToFitContent}
-      style={{ width: "100%", border: "none" }}
+      style={{ width: "100%", border: "none", height: "100vh" }}
     />
   );
 };
