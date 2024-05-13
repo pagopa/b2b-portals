@@ -5,10 +5,12 @@ import { Box } from '@mui/material';
 
 export const CtaButtons = ({
   ctaButtons,
-  theme,
+  theme = 'light',
+  disableRipple = false,
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
-  theme: 'dark' | 'light';
+  theme?: 'dark' | 'light';
+  disableRipple?: boolean;
 }) => {
   const buttonColor = theme === 'dark' ? 'negative' : 'primary';
 
@@ -20,6 +22,7 @@ export const CtaButtons = ({
         key={`${(button as CtaButtonProps).text}-${i}`}
         color={buttonColor}
         variant={(button as CtaButtonProps).variant || 'contained'}
+        disableRipple={disableRipple}
         {...(button as CtaButtonProps)}
       >
         {(button as CtaButtonProps).text}
@@ -34,6 +37,7 @@ const StringTitle = (
   variant: TypographyProps['variant'] = 'body1',
   component: TypographyProps['component'] = 'p',
   textAlign: TypographyProps['align'] = 'center',
+  marginTop: number | string = 0,
   marginBottom: number | string = 0
 ) => (
   <Typography
@@ -41,7 +45,7 @@ const StringTitle = (
     variant={variant}
     component={component}
     align={textAlign}
-    style={{ marginBottom }}
+    style={{ marginTop, marginBottom }}
   >
     {title}
   </Typography>
@@ -53,6 +57,7 @@ const ElementTitle = (
   variant: TypographyProps['variant'] = 'body1',
   component: TypographyProps['component'] = 'p',
   textAlign: TypographyProps['align'] = 'center',
+  marginTop: number | string = 0,
   marginBottom: number | string = 0
 ) =>
   React.isValidElement(title)
@@ -64,7 +69,7 @@ const ElementTitle = (
           variant,
           component,
           align: textAlign,
-          style: { color: textColor, marginBottom },
+          style: { color: textColor, marginTop, marginBottom },
         }
       )
     : null;
@@ -75,6 +80,7 @@ export const Title = ({
   variant = 'body1',
   component = 'p',
   textAlign = 'center',
+  marginTop = 0,
   marginBottom = 0,
 }: {
   title: string | JSX.Element;
@@ -82,16 +88,26 @@ export const Title = ({
   variant?: TypographyProps['variant'];
   component?: TypographyProps['component'];
   textAlign?: TypographyProps['align'];
+  marginTop?: number | string;
   marginBottom?: number | string;
 }) => {
   return typeof title === 'string'
-    ? StringTitle(title, textColor, variant, component, textAlign, marginBottom)
+    ? StringTitle(
+        title,
+        textColor,
+        variant,
+        component,
+        textAlign,
+        marginTop,
+        marginBottom
+      )
     : ElementTitle(
         title,
         textColor,
         variant,
         component,
         textAlign,
+        marginTop,
         marginBottom
       );
 };

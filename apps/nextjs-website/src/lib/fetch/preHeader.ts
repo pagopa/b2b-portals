@@ -10,12 +10,6 @@ const PreHeaderButtonCodec = t.strict({
   href: t.string,
   icon: t.union([MUIButtonIconCodec, t.null]),
   size: MUIButtonSizeCodec,
-  variant: t.keyof({
-    naked: null, // Unique to PreHeader
-    text: null,
-    outlined: null,
-    contained: null,
-  }),
 });
 
 const PreHeaderCodec = t.strict({
