@@ -85,7 +85,7 @@ variable "websites_configs" {
       create_distribution        = true
       cdn_use_custom_certificate = true
       cdn_use_alias              = false
-      cdn_indexing_enable        = false
+      cdn_indexing_enable        = true
     },
     "appio" = {
       origin_path                = "/appio"
