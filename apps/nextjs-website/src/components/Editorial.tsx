@@ -1,10 +1,10 @@
-"use client";
-import Image from "next/image";
-import MarkdownRenderer from "./MarkdownRenderer";
-import { Editorial as EditorialRC } from "@react-components/components";
-import { EditorialProps } from "@react-components/types";
-import { EditorialSection } from "@/lib/fetch/types/PageSection";
-import Icon from "@/components/Icon";
+'use client';
+import Image from 'next/image';
+import MarkdownRenderer from './MarkdownRenderer';
+import { Editorial as EditorialRC } from '@react-components/components';
+import { EditorialProps } from '@react-components/types';
+import { EditorialSection } from '@/lib/fetch/types/PageSection';
+import Icon from '@/components/Icon';
 
 const makeEditorialProps = ({
   eyelet,
@@ -15,13 +15,14 @@ const makeEditorialProps = ({
   ...rest
 }: EditorialSection): EditorialProps => ({
   ...(eyelet && { eyelet }),
-  body: MarkdownRenderer({ markdown: body, variant: "body2" }),
+  body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: (
-    <img
-      src={`
-http://localhost:1337
-${image.url}`}
-      alt={image.alternativeText ?? undefined}
+    <Image
+      src={image.url}
+      alt={image.alternativeText ?? ''}
+      // Needed by Image, will be overwritten
+      width={0}
+      height={0}
     />
   ),
   ...(ctaButtons &&
