@@ -6,7 +6,7 @@ import { HeroProps } from '@react-components/types';
 
 // Define the default export with metadata about your component
 export default {
-  title: 'Components/Hero/Dark',
+  title: 'Components/Hero/Light',
   component: Hero,
 } as Meta;
 
@@ -28,11 +28,11 @@ const ctaButtons: HeroProps['ctaButtons'] = [
 
 const defaults: Partial<HeroProps> = {
   ...heroCommonProps,
-  theme: 'dark',
+  theme: 'light',
 };
 
-export const DarkHeroBigWithBackground = Template.bind({});
-DarkHeroBigWithBackground.args = {
+export const LightHeroBigWithBackground = Template.bind({});
+LightHeroBigWithBackground.args = {
   ...defaults,
   ctaButtons,
   size: 'big',
@@ -40,11 +40,10 @@ DarkHeroBigWithBackground.args = {
   useHoverlay: false,
   altText: 'Alt text for image',
   image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroBigWithBackgroundNoButtons = Template.bind({});
-DarkHeroBigWithBackgroundNoButtons.args = {
+export const LightHeroBigWithBackgroundNoButtons = Template.bind({});
+LightHeroBigWithBackgroundNoButtons.args = {
   ...defaults,
   ctaButtons: [],
   size: 'big',
@@ -52,11 +51,10 @@ DarkHeroBigWithBackgroundNoButtons.args = {
   useHoverlay: false,
   altText: 'Alt text for image',
   image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroBigWithBackgroundInverted = Template.bind({});
-DarkHeroBigWithBackgroundInverted.args = {
+export const LightHeroBigWithBackgroundInverted = Template.bind({});
+LightHeroBigWithBackgroundInverted.args = {
   ...defaults,
   ctaButtons,
   size: 'big',
@@ -64,11 +62,10 @@ DarkHeroBigWithBackgroundInverted.args = {
   useHoverlay: false,
   altText: 'Alt text for image',
   image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroMediumWithBackground = Template.bind({});
-DarkHeroMediumWithBackground.args = {
+export const LightHeroMediumWithBackground = Template.bind({});
+LightHeroMediumWithBackground.args = {
   ...defaults,
   ctaButtons,
   size: 'medium',
@@ -76,11 +73,10 @@ DarkHeroMediumWithBackground.args = {
   useHoverlay: false,
   altText: 'Alt text for image',
   image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroMediumWithBackgroundNoButtons = Template.bind({});
-DarkHeroMediumWithBackgroundNoButtons.args = {
+export const LightHeroMediumWithBackgroundNoButtons = Template.bind({});
+LightHeroMediumWithBackgroundNoButtons.args = {
   ...defaults,
   ctaButtons: [],
   size: 'medium',
@@ -88,11 +84,10 @@ DarkHeroMediumWithBackgroundNoButtons.args = {
   useHoverlay: false,
   altText: 'Alt text for image',
   image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroMediumWithBackgroundInverted = Template.bind({});
-DarkHeroMediumWithBackgroundInverted.args = {
+export const LightHeroMediumWithBackgroundInverted = Template.bind({});
+LightHeroMediumWithBackgroundInverted.args = {
   ...defaults,
   ctaButtons,
   size: 'medium',
@@ -100,14 +95,12 @@ DarkHeroMediumWithBackgroundInverted.args = {
   useHoverlay: false,
   altText: 'Alt text for image',
   image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroSmallWithBackground = Template.bind({});
-DarkHeroSmallWithBackground.args = {
+export const LightHeroSmallWithBackground = Template.bind({});
+LightHeroSmallWithBackground.args = {
   ...defaults,
   subtitle: '',
   size: 'small',
   useHoverlay: false,
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };

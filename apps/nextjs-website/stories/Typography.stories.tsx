@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Foundation/Typography",
+  title: "General/Typography",
   component: Typography,
   argTypes: {
     variant: {

@@ -9,7 +9,7 @@ interface CtaButtonsProps {
 }
 
 const meta: Meta<CtaButtonsProps> = {
-  title: 'Foundation/Buttons',
+  title: 'General/Buttons',
   component: CtaButtons,
   parameters: {
     layout: 'centered'
