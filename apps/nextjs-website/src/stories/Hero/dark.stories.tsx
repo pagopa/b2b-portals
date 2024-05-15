@@ -39,9 +39,10 @@ Default.args = {
   ...heroCommonProps,
   size: 'medium',
   inverse: false,
-  background: <Image src={background} alt='Background image' />,
   theme: 'dark',
-  image: <Image src={image} alt='Hero image' />,
   altText: 'Alt text for image',
   ctaButtons,
+  image: 'https://picsum.photos/600/450',
+  background: 'https://picsum.photos/600/450',
+  useHoverlay: false,
 };
