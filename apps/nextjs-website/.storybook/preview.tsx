@@ -18,6 +18,12 @@ const preview: Preview = {
       },
     },
     layout: 'fullscreen',
+    backgrounds: {
+      values: [
+        { name: 'light', value: '#FFFFFF' },
+        { name: 'dark', value: '#0B3EE3' },
+      ],
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
