@@ -1,0 +1,52 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+import { Theme } from '../src/app/theme';
+
+<Meta title='Colors' />
+
+<h2>SEND</h2>
+<br />
+<ColorPalette>
+  <ColorItem
+    title='backgroundColor'
+    colors={{
+      Light: theme.palette.background.paper,
+      Dark: theme.palette.primary.dark,
+    }}
+  />
+  <ColorItem
+    title='BackgroundColorAlternative'
+    colors={{
+      Light: theme.palette.background.default,
+      Dark: theme.palette.primary.dark,
+    }}
+  />
+  <ColorItem
+    title='ExtraBackgroundColor'
+    colors={{
+      Light: palette.primary.dark,
+      Dark: palette.text.primary,
+    }}
+  />
+  <ColorItem
+    title='TextColor'
+    colors={{
+      Light: theme.palette.text.primary,
+      Dark: theme.palette.primary.contrastText,
+    }}
+  />
+  <ColorItem
+    title='TextAlternativeColor'
+    subtitle='Fill color for different components in various states'
+    colors={{
+      Light: theme.palette.primary.dark,
+      Dark: theme.palette.primary.contrastText,
+    }}
+  />
+  <ColorItem
+    title='ExtraTextColor'
+    colors={{
+      Light: theme.palette.text.secondary,
+      Dark: theme.palette.primary.contrastText,
+    }}
+  />
+</ColorPalette>
