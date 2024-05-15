@@ -154,7 +154,7 @@ const OneTrustSectionPropsCodec = t.strict({
 });
 
 const IFrameSectionCodec = t.strict({
-  __component: t.literal('sections.iframe'),
+  __component: t.literal('sections.i-frame'),
   src: t.string,
 });
 
@@ -181,4 +181,4 @@ export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
 export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
-export type IFrameSection = t.TypeOf<typeof IFrameSectionCodec>;
+export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;

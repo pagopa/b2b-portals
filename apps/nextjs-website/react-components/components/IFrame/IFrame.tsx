@@ -1,37 +1,33 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { IFrameProps } from "../../types/IFrame/IFrame.types";
-import { calculateIFrameHeight } from "./IFrame.helpers";
 
 const IFrame = (props: IFrameProps) => {
   const { src } = props;
-
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const timeout = 500;
+  const iFrameRef = useRef<HTMLIFrameElement>(null);
 
   const resizeIFrameToFitContent = () => {
-    const iFrame = iframeRef.current;
-    if (!iFrame) return;
 
     setTimeout(() => {
-      iFrame.style.height = calculateIFrameHeight(iFrame);
-    }, timeout);
+    const iFrame = iFrameRef.current;
+    if (!iFrame) return;
+      // Resize adding a 16px margin to avoid awkward 1-pixel scrollbars on resize.
+      // A better solution would be to have the body inside the iFrame have overflow-y: hidden, but that's out of our control.
+      // @ts-ignore
+      iFrame.height = (iFrame.contentWindow?.document.body.scrollHeight ?? 0) + 16;
+    }, 500);
   };
 
   useLayoutEffect(() => {
     window.addEventListener("resize", resizeIFrameToFitContent);
-    resizeIFrameToFitContent();
-
-    return () => {
-      window.removeEventListener("resize", resizeIFrameToFitContent);
-    };
+    resizeIFrameToFitContent(); // For Chrome-based browsers, since the iFrame's onLoad function doesn't trigger for them
   }, [src]);
 
   return (
     <iframe
-      ref={iframeRef}
+      ref={iFrameRef}
       src={src}
       onLoad={resizeIFrameToFitContent}
-      style={{ width: "100%", border: "none", height: "100vh" }}
+      style={{ width: "100%", border: "none" }}
     />
   );
 };

@@ -32,7 +32,7 @@ const PageSection = (props: PageSectionData) => {
       return <Cards {...props} />;
     case 'sections.one-trust':
       return <OneTrustSection {...props} />;
-    case 'sections.iframe':
+    case 'sections.i-frame':
       return <IFrameSection {...props} />;
     default:
       return null;

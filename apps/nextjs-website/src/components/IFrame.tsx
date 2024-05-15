@@ -1,14 +1,9 @@
 "use client";
 import { IFrame as IFrameRC } from "@react-components/components";
-import { IFrameSection } from "@/lib/fetch/types/PageSection";
-import { IFrameProps } from "@react-components/types/IFrame/IFrame.types";
+import { IFrameSectionProps } from "@/lib/fetch/types/PageSection";
 
-const makeIFrameProps = ({ src }: IFrameSection): IFrameProps => ({
-  src,
-});
-
-const IFrame = (props: IFrameSection) => (
-  <IFrameRC {...makeIFrameProps(props)} />
+const IFrame = (props: IFrameSectionProps) => (
+  <IFrameRC {...props} />
 );
 
 export default IFrame;
