@@ -224,7 +224,7 @@ resource "aws_cloudfront_distribution" "storybook" {
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.main.cloudfront_access_identity_path
     }
-    origin_path = "storybook"
+    origin_path = "/storybook"
   }
 
   enabled             = true # enable CloudFront distribution
