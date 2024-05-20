@@ -1,0 +1,61 @@
+name: Deploy Storybook
+
+on:
+  pull_request:
+    types:
+      - closed # Trigger when the PR is closed
+    branches:
+      - 'main' # Target branch is main
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+    working-directory: apps/nextjs-website
+
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+
+  build:
+    name: Build and Deploy Storybook
+    runs-on: ubuntu-latest
+    
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.17"
+
+      - name: Install dependencies
+        shell: bash
+        run: npm install
+
+      - name: Create Storybook
+        shell: bash
+        run: npm run build-storybook
+
+      - name: Configure AWS Credentials
+        uses: ./.github/actions/configure-aws-credentials
+        with:
+          aws_region: ${{ env.AWS_REGION || 'eu-south-1' }}
+          role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
+          
+      - name: Deploy to S3 Bucket
+        shell: bash
+        run: aws s3 sync ./storybook-static s3://${{ vars.S3_BUCKET_NAME }}/storybook --delete
+
+      - name: Create AWS Cloudfront Invalidation
+        shell: bash
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID_STORYBOOK }} --paths "/*"
+      
