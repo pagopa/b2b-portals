@@ -4,6 +4,10 @@ import { CtaButtonsProps, commonButtonsMeta } from './buttonsCommons';
 const meta: Meta<CtaButtonsProps> = {
   title: 'General/Buttons/Dark',
   ...commonButtonsMeta,
+  parameters: {
+    ...commonButtonsMeta.parameters,
+    backgrounds: { default: 'dark' }
+  },
 };
  
 export default meta;

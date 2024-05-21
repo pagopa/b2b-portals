@@ -24,11 +24,6 @@ const preview: Preview = {
         { name: 'dark', value: '#0B3EE3' },
       ],
     },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i
-      },
-    },
     docs: {
       toc: true,
     },
