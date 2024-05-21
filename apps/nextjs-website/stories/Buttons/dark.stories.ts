@@ -1,32 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CtaButtons } from '@react-components/components/common/Common';
-import { CtaButtonsProps } from './buttonsCommons';
-
+import { CtaButtonsProps, commonButtonsMeta } from './buttonsCommons';
+ 
 const meta: Meta<CtaButtonsProps> = {
   title: 'General/Buttons/Dark',
-  component: CtaButtons,
-  parameters: {
-    layout: 'centered'
-  },
-  argTypes: {
-    theme: {
-      control: {
-        type: 'select',
-        options: ['dark', 'light'],
-      },
-    },
-    disableRipple: {
-      control: 'boolean',
-    },
-    ctaButtons: {
-      control: 'object',
-    },
-  },
+  ...commonButtonsMeta,
 };
-
+ 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
+ 
 export const DarkButtonsSingleButtonContained: Story = {
   args: {
     ctaButtons: [
@@ -36,7 +18,7 @@ export const DarkButtonsSingleButtonContained: Story = {
     disableRipple: false,
   },
 };
-
+ 
 export const DarkButtonsSingleButtonContainedNoRipple: Story = {
   args: {
     ctaButtons: [
@@ -46,7 +28,7 @@ export const DarkButtonsSingleButtonContainedNoRipple: Story = {
     disableRipple: true,
   },
 };
-
+ 
 export const DarkButtonsSingleButtonOutlined: Story = {
   args: {
     ctaButtons: [
@@ -56,7 +38,7 @@ export const DarkButtonsSingleButtonOutlined: Story = {
     disableRipple: false,
   },
 };
-
+ 
 export const DarkButtonsSingleButtonOutlinedNoRipple: Story = {
   args: {
     ctaButtons: [
@@ -66,7 +48,7 @@ export const DarkButtonsSingleButtonOutlinedNoRipple: Story = {
     disableRipple: true,
   },
 };
-
+ 
 export const DarkButtonsTwoButtons: Story = {
   args: {
     ctaButtons: [
@@ -77,7 +59,7 @@ export const DarkButtonsTwoButtons: Story = {
     disableRipple: false,
   },
 };
-
+ 
 export const DarkButtonsTwoButtonsNoRipple: Story = {
   args: {
     ctaButtons: [
