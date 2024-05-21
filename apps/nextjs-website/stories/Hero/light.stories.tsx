@@ -1,6 +1,6 @@
 // Import the necessary modules
 import { Meta } from '@storybook/react';
-import { Template, defaultsLightWithButtons, defaultsLightWithoutButtons } from './heroCommons';
+import { HeroTemplate, defaultsLightWithButtons, defaultsLightWithoutButtons } from './heroCommons';
 import { Hero } from '@react-components/components';
 
 // Define the default export with metadata about your component
@@ -9,84 +9,84 @@ export default {
   component: Hero,
 } as Meta;
 
-export const LightHeroBig = Template.bind({});
+export const LightHeroBig = HeroTemplate.bind({});
 LightHeroBig.args = {
   ...defaultsLightWithButtons,
   size: 'big',
   inverse: false,
 };
 
-export const LightHeroBigNoButtons = Template.bind({});
+export const LightHeroBigNoButtons = HeroTemplate.bind({});
 LightHeroBigNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
   inverse: false,
 };
 
-export const LightHeroBigInverted = Template.bind({});
+export const LightHeroBigInverted = HeroTemplate.bind({});
 LightHeroBigInverted.args = {
   ...defaultsLightWithButtons,
   size: 'big',
   inverse: true,
 };
 
-export const LightHeroBigInvertedNoButtons = Template.bind({});
+export const LightHeroBigInvertedNoButtons = HeroTemplate.bind({});
 LightHeroBigInvertedNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
   inverse: true,
 };
 
-export const LightHeroMedium = Template.bind({});
+export const LightHeroMedium = HeroTemplate.bind({});
 LightHeroMedium.args = {
   ...defaultsLightWithButtons,
   size: 'medium',
   inverse: false,
 };
 
-export const LightHeroMediumNoButtons = Template.bind({});
+export const LightHeroMediumNoButtons = HeroTemplate.bind({});
 LightHeroMediumNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
   inverse: false,
 };
 
-export const LightHeroMediumInverted = Template.bind({});
+export const LightHeroMediumInverted = HeroTemplate.bind({});
 LightHeroMediumInverted.args = {
   ...defaultsLightWithButtons,
   size: 'medium',
   inverse: true,
 };
 
-export const LightHeroMediumInvertedNoButtons = Template.bind({});
+export const LightHeroMediumInvertedNoButtons = HeroTemplate.bind({});
 LightHeroMediumInvertedNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
   inverse: true,
 };
 
-export const LightHeroSmall = Template.bind({});
+export const LightHeroSmall = HeroTemplate.bind({});
 LightHeroSmall.args = {
   ...defaultsLightWithButtons,
   size: 'small',
   inverse: false,
 };
 
-export const LightHeroSmallNoButtons = Template.bind({});
+export const LightHeroSmallNoButtons = HeroTemplate.bind({});
 LightHeroSmallNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'small',
   inverse: false,
 };
 
-export const LightHeroSmallInverted = Template.bind({});
+export const LightHeroSmallInverted = HeroTemplate.bind({});
 LightHeroSmallInverted.args = {
   ...defaultsLightWithButtons,
   size: 'small',
   inverse: true,
 };
 
-export const LightHeroSmallInvertedNoButtons = Template.bind({});
+export const LightHeroSmallInvertedNoButtons = HeroTemplate.bind({});
 LightHeroSmallInvertedNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'small',
