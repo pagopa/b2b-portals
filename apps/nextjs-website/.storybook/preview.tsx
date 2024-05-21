@@ -26,8 +26,7 @@ const preview: Preview = {
     },
     controls: {
       matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
+        color: /(background|color)$/i
       },
     },
     docs: {
