@@ -18,4 +18,5 @@ export async function GET(request: Request) {
 
   draftMode().enable();
   redirect(slug); // TODO: Use slug fetched by navigation to prevent open redirect vulnerabilities
+  // TODO: We'll probably sub the redirect for the actual generation of the page, which will be served directly to the client
 }
