@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CtaButtons } from '@react-components/components/common/Common';
-import { CtaButtonProps } from '@react-components/types/common/Common.types';
-
-interface CtaButtonsProps {
-  readonly ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
-  readonly theme?: 'dark' | 'light';
-  readonly disableRipple?: boolean;
-}
+import { CtaButtonsProps } from './buttonsCommons';
 
 const meta: Meta<CtaButtonsProps> = {
   title: 'General/Buttons/Light',
@@ -40,6 +34,16 @@ export const LightButtonsSingleButtonContained: Story = {
     ],
     theme: 'light',
     disableRipple: false,
+  },
+};
+
+export const LightButtonsSingleButtonContainedNoRipple: Story = {
+  args: {
+    ctaButtons: [
+      { text: 'Button', variant: 'contained' },
+    ],
+    theme: 'light',
+    disableRipple: true,
   },
 };
 
