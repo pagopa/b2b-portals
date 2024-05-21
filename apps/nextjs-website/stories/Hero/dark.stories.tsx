@@ -1,17 +1,13 @@
 // Import the necessary modules
-import { StoryFn, Meta } from '@storybook/react';
-import { defaultsDarkWithButtons, defaultsDarkWithoutButtons } from './heroCommons';
+import { Meta } from '@storybook/react';
+import { Template, defaultsDarkWithButtons, defaultsDarkWithoutButtons } from './heroCommons';
 import { Hero } from '@react-components/components';
-import { HeroProps } from '@react-components/types';
 
 // Define the default export with metadata about your component
 export default {
   title: 'Components/Hero/Dark',
   component: Hero,
 } as Meta;
-
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<HeroProps> = (args) => <Hero {...args} />;
 
 export const DarkHeroBig = Template.bind({});
 DarkHeroBig.args = {
