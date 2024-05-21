@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-Creating Storybook for B2BP RC components
+Create Storybook for B2BP RC components
