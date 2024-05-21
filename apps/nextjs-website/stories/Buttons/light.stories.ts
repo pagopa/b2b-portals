@@ -9,7 +9,7 @@ interface CtaButtonsProps {
 }
 
 const meta: Meta<CtaButtonsProps> = {
-  title: 'General/Buttons',
+  title: 'General/Buttons/Light',
   component: CtaButtons,
   parameters: {
     layout: 'centered'
@@ -33,7 +33,7 @@ const meta: Meta<CtaButtonsProps> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LightThemeButtonsSingleButtonContained: Story = {
+export const LightButtonsSingleButtonContained: Story = {
   args: {
     ctaButtons: [
       { text: 'Button', variant: 'contained' },
@@ -43,7 +43,7 @@ export const LightThemeButtonsSingleButtonContained: Story = {
   },
 };
 
-export const LightThemeButtonsSingleButtonOutlined: Story = {
+export const LightButtonsSingleButtonOutlined: Story = {
   args: {
     ctaButtons: [
       { text: 'Button', variant: 'outlined' },
@@ -53,7 +53,7 @@ export const LightThemeButtonsSingleButtonOutlined: Story = {
   },
 };
 
-export const LightThemeButtonsSingleButtonOutlinedNoRipple: Story = {
+export const LightButtonsSingleButtonOutlinedNoRipple: Story = {
   args: {
     ctaButtons: [
       { text: 'Button', variant: 'outlined' },
@@ -63,7 +63,7 @@ export const LightThemeButtonsSingleButtonOutlinedNoRipple: Story = {
   },
 };
 
-export const LightThemeButtonsTwoButtons: Story = {
+export const LightButtonsTwoButtons: Story = {
   args: {
     ctaButtons: [
       { text: 'Button 1', variant: 'contained' },
@@ -74,65 +74,13 @@ export const LightThemeButtonsTwoButtons: Story = {
   },
 };
 
-export const LightThemeButtonsTwoButtonsNoRipple: Story = {
+export const LightButtonsTwoButtonsNoRipple: Story = {
   args: {
     ctaButtons: [
       { text: 'Button 1', variant: 'contained' },
       { text: 'Button 2', variant: 'outlined' },
     ],
     theme: 'light',
-    disableRipple: true,
-  },
-};
-
-export const DarkThemeButtonsSingleButtonContained: Story = {
-  args: {
-    ctaButtons: [
-      { text: 'Button', variant: 'contained' },
-    ],
-    theme: 'dark',
-    disableRipple: false,
-  },
-};
-
-export const DarkThemeButtonsSingleButtonOutlined: Story = {
-  args: {
-    ctaButtons: [
-      { text: 'Button', variant: 'outlined' },
-    ],
-    theme: 'dark',
-    disableRipple: false,
-  },
-};
-
-export const DarkThemeButtonsSingleButtonOutlinedNoRipple: Story = {
-  args: {
-    ctaButtons: [
-      { text: 'Button', variant: 'outlined' },
-    ],
-    theme: 'dark',
-    disableRipple: true,
-  },
-};
-
-export const DarkThemeButtonsTwoButtons: Story = {
-  args: {
-    ctaButtons: [
-      { text: 'Button 1', variant: 'contained' },
-      { text: 'Button 2', variant: 'outlined' },
-    ],
-    theme: 'dark',
-    disableRipple: false,
-  },
-};
-
-export const DarkThemeButtonsTwoButtonsNoRipple: Story = {
-  args: {
-    ctaButtons: [
-      { text: 'Button 1', variant: 'contained' },
-      { text: 'Button 2', variant: 'outlined' },
-    ],
-    theme: 'dark',
     disableRipple: true,
   },
 };
