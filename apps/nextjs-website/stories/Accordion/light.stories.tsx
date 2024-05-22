@@ -1,8 +1,6 @@
-// Import the necessary modules
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { Accordion } from '@react-components/components';
-import { AccordionProps } from '@react-components/types';
-import { AccordionItemProps } from '@react-components/types/Accordion/Accordion.types';
+import { defaultPropsLight, AccordionTemplate } from './accordionCommons';
 
 // Define the default export with metadata about your component
 export default {
@@ -10,132 +8,86 @@ export default {
   component: Accordion,
 } as Meta;
 
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<AccordionProps> = (args) => <Accordion {...args} />;
-
-// Define your accordion items
-const accordionItems: AccordionItemProps[] = [
-  {
-    header: 'Accordion Item 1',
-    content: 'This is the content for accordion item 1.',
-    theme: 'light',
-  },
-  {
-    header: 'Accordion Item 2',
-    content: 'This is the content for accordion item 2.',
-    theme: 'light',
-  },
-];
-
-// Define the default props
-const defaultProps: Partial<AccordionProps> = {
-  title: 'Accordion Title',
-};
-
-export const AccordionLightLeftLayoutFull = Template.bind({});
+export const AccordionLightLeftLayoutFull = AccordionTemplate.bind({});
 AccordionLightLeftLayoutFull.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
   description: 'This is a description for the accordion.',
-  theme: 'light',
   layout: 'left',
 };
 
-export const AccordionLightCenterLayoutFull = Template.bind({});
+export const AccordionLightCenterLayoutFull = AccordionTemplate.bind({});
 AccordionLightCenterLayoutFull.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
   description: 'This is a description for the accordion.',
-  theme: 'light',
   layout: 'center',
 };
 
-export const AccordionLightRightLayoutFull = Template.bind({});
+export const AccordionLightRightLayoutFull = AccordionTemplate.bind({});
 AccordionLightRightLayoutFull.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
   description: 'This is a description for the accordion.',
-  theme: 'light',
   layout: 'right',
 };
 
-export const AccordionLightLeftLayoutOnlyTitle = Template.bind({});
+export const AccordionLightLeftLayoutOnlyTitle = AccordionTemplate.bind({});
 AccordionLightLeftLayoutOnlyTitle.args = {
-  ...defaultProps,
-  accordionItems,
-  theme: 'light',
+  ...defaultPropsLight,
   layout: 'left',
 };
 
-export const AccordionLightCenterLayoutOnlyTitle = Template.bind({});
+export const AccordionLightCenterLayoutOnlyTitle = AccordionTemplate.bind({});
 AccordionLightCenterLayoutOnlyTitle.args = {
-  ...defaultProps,
-  accordionItems,
-  theme: 'light',
+  ...defaultPropsLight,
   layout: 'center',
 };
 
-export const AccordionLightRightLayoutOnlyTitle = Template.bind({});
+export const AccordionLightRightLayoutOnlyTitle = AccordionTemplate.bind({});
 AccordionLightRightLayoutOnlyTitle.args = {
-  ...defaultProps,
-  accordionItems,
-  theme: 'light',
+  ...defaultPropsLight,
   layout: 'right',
 };
 
-export const AccordionLightLeftLayoutWithSubtitle = Template.bind({});
+export const AccordionLightLeftLayoutWithSubtitle = AccordionTemplate.bind({});
 AccordionLightLeftLayoutWithSubtitle.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
-  theme: 'light',
   layout: 'left',
 };
 
-export const AccordionLightCenterLayoutWithSubtitle = Template.bind({});
+export const AccordionLightCenterLayoutWithSubtitle = AccordionTemplate.bind({});
 AccordionLightCenterLayoutWithSubtitle.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
-  theme: 'light',
   layout: 'center',
 };
 
-export const AccordionLightRightLayoutWithSubtitle = Template.bind({});
+export const AccordionLightRightLayoutWithSubtitle = AccordionTemplate.bind({});
 AccordionLightRightLayoutWithSubtitle.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
-  theme: 'light',
   layout: 'right',
 };
 
-export const AccordionLightLeftLayoutWithDescription = Template.bind({});
+export const AccordionLightLeftLayoutWithDescription = AccordionTemplate.bind({});
 AccordionLightLeftLayoutWithDescription.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsLight,
   description: 'This is a description for the accordion.',
-  theme: 'light',
   layout: 'left',
 };
 
-export const AccordionLightCenterLayoutWithDescription = Template.bind({});
+export const AccordionLightCenterLayoutWithDescription = AccordionTemplate.bind({});
 AccordionLightCenterLayoutWithDescription.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsLight,
   description: 'This is a description for the accordion.',
-  theme: 'light',
   layout: 'center',
 };
 
-export const AccordionLightRightLayoutWithDescription = Template.bind({});
+export const AccordionLightRightLayoutWithDescription = AccordionTemplate.bind({});
 AccordionLightRightLayoutWithDescription.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsLight,
   description: 'This is a description for the accordion.',
-  theme: 'light',
   layout: 'right',
 };
