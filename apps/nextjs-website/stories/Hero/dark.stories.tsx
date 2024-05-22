@@ -1,13 +1,13 @@
-// Import the necessary modules
 import { Meta } from '@storybook/react';
-import { HeroTemplate, defaultsDarkWithButtons, defaultsDarkWithoutButtons } from './heroCommons';
 import { Hero } from '@react-components/components';
+import { HeroProps } from '@react-components/types';
+import { HeroTemplate, defaultsDarkWithButtons, defaultsDarkWithoutButtons } from './heroCommons';
 
 // Define the default export with metadata about your component
 export default {
   title: 'Components/Hero/Dark',
   component: Hero,
-} as Meta;
+} as Meta<HeroProps>;
 
 export const DarkHeroBig = HeroTemplate.bind({});
 DarkHeroBig.args = {

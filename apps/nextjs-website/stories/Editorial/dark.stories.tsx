@@ -1,12 +1,13 @@
 import { Meta } from '@storybook/react';
 import { Editorial } from '@react-components/components';
+import { EditorialProps } from '@react-components/types';
 import { EditorialTemplate, defaultPropsDark, generateCtaButtons } from './editorialCommons';
 
 // Define the default export with metadata about your component
 export default {
   title: 'Components/Editorial/Dark',
   component: Editorial,
-} as Meta;
+} as Meta<EditorialProps>;
 
 export const DarkEditorialFullOneButtonNoPattern = EditorialTemplate.bind({});
 DarkEditorialFullOneButtonNoPattern.args = {

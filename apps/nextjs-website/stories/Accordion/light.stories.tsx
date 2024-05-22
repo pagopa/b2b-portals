@@ -6,7 +6,7 @@ import { defaultPropsLight, AccordionTemplate } from './accordionCommons';
 export default {
   title: 'Components/Accordion/Light',
   component: Accordion,
-} as Meta;
+} as Meta<typeof Accordion>;
 
 export const AccordionLightLeftLayoutFull = AccordionTemplate.bind({});
 AccordionLightLeftLayoutFull.args = {

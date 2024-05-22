@@ -1,12 +1,13 @@
 import { Meta } from '@storybook/react';
 import { Cards } from '@react-components/components';
+import { CardsProps } from '@react-components/types';
 import { CardsTemplate, defaultPropsLightThree, defaultPropsLightThreeWithLinks, defaultPropsLightFour, defaultPropsLightFourWithLinks } from './cardsCommons';
 
 // Define the default export with metadata about your component
 export default {
   title: 'Components/Cards/Light',
   component: Cards,
-} as Meta;
+} as Meta<CardsProps>;
 
 export const LightCardsThreeColumnOnlyTitleNoLinks = CardsTemplate.bind({});
 LightCardsThreeColumnOnlyTitleNoLinks.args = {

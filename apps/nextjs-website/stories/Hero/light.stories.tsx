@@ -1,13 +1,13 @@
-// Import the necessary modules
 import { Meta } from '@storybook/react';
-import { HeroTemplate, defaultsLightWithButtons, defaultsLightWithoutButtons } from './heroCommons';
 import { Hero } from '@react-components/components';
+import { HeroProps } from '@react-components/types';
+import { HeroTemplate, defaultsLightWithButtons, defaultsLightWithoutButtons } from './heroCommons';
 
 // Define the default export with metadata about your component
 export default {
   title: 'Components/Hero/Light',
   component: Hero,
-} as Meta;
+} as Meta<HeroProps>;
 
 export const LightHeroBig = HeroTemplate.bind({});
 LightHeroBig.args = {

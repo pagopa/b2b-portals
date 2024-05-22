@@ -6,7 +6,7 @@ import { defaultPropsDark, AccordionTemplate } from './accordionCommons';
 export default {
   title: 'Components/Accordion/Dark',
   component: Accordion,
-} as Meta;
+} as Meta<typeof Accordion>;
 
 export const AccordionDarkLeftLayoutFull = AccordionTemplate.bind({});
 AccordionDarkLeftLayoutFull.args = {
