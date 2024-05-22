@@ -159,7 +159,7 @@ resource "aws_iam_policy" "deploy_website" {
         ]
         Effect = "Allow"
         Resource = concat(
-          [aws_cloudfront_distribution.website.arn],
+          [aws_cloudfront_distribution.website.arn, aws_cloudfront_distribution.storybook.arn],
           [for name, distribution in aws_cloudfront_distribution.cdn_multi_website : distribution.arn]
         )
       }
