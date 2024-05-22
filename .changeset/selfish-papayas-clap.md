@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-Implement Cards from RC to Storybook
+Add Cards to Storybook
