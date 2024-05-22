@@ -1,5 +1,4 @@
 import type { StorybookConfig } from "@storybook/nextjs";
-
 import { join, dirname } from "path";
 
 /**
@@ -15,17 +14,14 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-onboarding"),
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@chromatic-com/storybook"),
     getAbsolutePath("@storybook/addon-interactions"),
-    "@chromatic-com/storybook"
   ],
   framework: {
     name: getAbsolutePath("@storybook/nextjs"),
     options: {},
   },
   docs: {
-    defaultName: 'Documentation',
-  },
-  staticDirs: ["../public"],
+    defaultName: 'Docs',
+  }
 };
 export default config;
