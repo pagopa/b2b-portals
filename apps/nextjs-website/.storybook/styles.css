@@ -1,0 +1,7 @@
+/* Override the default Storybook styles, workaround necessary due to bug on storybook itself */
+.sbdocs-content {
+  width: 100% !important;
+  max-width: inherit !important;
+  padding-left: 20px;
+  padding-right: 20px;
+}
