@@ -1,8 +1,6 @@
-// Import the necessary modules
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { Editorial } from '@react-components/components';
-import { EditorialProps } from '@react-components/types/Editorial/Editorial.types';
-import { CtaButtonProps } from '@react-components/types/common/Common.types';
+import { EditorialTemplate, defaultPropsDark, generateCtaButtons } from './editorialCommons';
 
 // Define the default export with metadata about your component
 export default {
@@ -10,102 +8,82 @@ export default {
   component: Editorial,
 } as Meta;
 
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<EditorialProps> = (args) => <Editorial {...args} />;
-
-// Function to generate CTA buttons
-const generateCtaButtons = (count: number): CtaButtonProps[] =>
-  Array.from({ length: count }, (_, i) => ({
-    text: `CTA Button ${i + 1}`,
-    variant: 'contained',
-  })
-);
-
-// Define the default props
-const defaultProps: Partial<EditorialProps> = {
-  theme: 'dark',
-  title: 'Editorial Title',
-  body: 'Editorial Body',
-  width: 'standard',
-  image: <img src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png' alt="placeholder" />,
-};
-
-export const DarkEditorialFullOneButtonNoPattern = Template.bind({});
+export const DarkEditorialFullOneButtonNoPattern = EditorialTemplate.bind({});
 DarkEditorialFullOneButtonNoPattern.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
 };
 
-export const DarkEditorialFullOneButtonNoPatternReversed = Template.bind({});
+export const DarkEditorialFullOneButtonNoPatternReversed = EditorialTemplate.bind({});
 DarkEditorialFullOneButtonNoPatternReversed.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   reversed: true,
 };
 
-export const DarkEditorialFullOneButtonWithPattern = Template.bind({});
+export const DarkEditorialFullOneButtonWithPattern = EditorialTemplate.bind({});
 DarkEditorialFullOneButtonWithPattern.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   pattern: 'dots',
 };
 
-export const DarkEditorialFullOneButtonWithPatternReversed = Template.bind({});
+export const DarkEditorialFullOneButtonWithPatternReversed = EditorialTemplate.bind({});
 DarkEditorialFullOneButtonWithPatternReversed.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   reversed: true,
   pattern: 'dots',
 };
 
-export const DarkEditorialFullTwoButtons = Template.bind({});
+export const DarkEditorialFullTwoButtons = EditorialTemplate.bind({});
 DarkEditorialFullTwoButtons.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(2),
   eyelet: 'Editorial Eyelet',
 };
 
-export const DarkEditorialFullTwoButtonsReversed = Template.bind({});
+export const DarkEditorialFullTwoButtonsReversed = EditorialTemplate.bind({});
 DarkEditorialFullTwoButtonsReversed.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(2),
   eyelet: 'Editorial Eyelet',
   reversed: true,
 };
 
-export const DarkEditorialFullNoButtons = Template.bind({});
+export const DarkEditorialFullNoButtons = EditorialTemplate.bind({});
 DarkEditorialFullNoButtons.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   eyelet: 'Editorial Eyelet',
 };
 
-export const DarkEditorialFullReversedNoButtons = Template.bind({});
+export const DarkEditorialFullReversedNoButtons = EditorialTemplate.bind({});
 DarkEditorialFullReversedNoButtons.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   eyelet: 'Editorial Eyelet',
   reversed: true,
 };
 
-export const DarkEditorialNoEyelet = Template.bind({});
+export const DarkEditorialNoEyelet = EditorialTemplate.bind({});
 DarkEditorialNoEyelet.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1)
 };
 
-export const DarkEditorialNoEyeletReversed = Template.bind({});
+export const DarkEditorialNoEyeletReversed = EditorialTemplate.bind({});
 DarkEditorialNoEyeletReversed.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   reversed: true,
 };
 
-export const DarkEditorialFullStoreButtons = Template.bind({});
+export const DarkEditorialFullStoreButtons = EditorialTemplate.bind({});
 DarkEditorialFullStoreButtons.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   storeButtons: {
@@ -114,9 +92,9 @@ DarkEditorialFullStoreButtons.args = {
   },
 };
 
-export const DarkEditorialFullStoreButtonsReversed = Template.bind({});
+export const DarkEditorialFullStoreButtonsReversed = EditorialTemplate.bind({});
 DarkEditorialFullStoreButtonsReversed.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   storeButtons: {
@@ -126,9 +104,9 @@ DarkEditorialFullStoreButtonsReversed.args = {
   reversed: true,
 };
 
-export const DarkEditorialFullOneStoreButtons = Template.bind({});
+export const DarkEditorialFullOneStoreButtons = EditorialTemplate.bind({});
 DarkEditorialFullOneStoreButtons.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   storeButtons: {
@@ -136,9 +114,9 @@ DarkEditorialFullOneStoreButtons.args = {
   },
 };
 
-export const DarkEditorialFullOneStoreButtonsReversed = Template.bind({});
+export const DarkEditorialFullOneStoreButtonsReversed = EditorialTemplate.bind({});
 DarkEditorialFullOneStoreButtonsReversed.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   storeButtons: {
