@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-Implement Editorial from RC to Storybook
+Add Editorial to Storybook
