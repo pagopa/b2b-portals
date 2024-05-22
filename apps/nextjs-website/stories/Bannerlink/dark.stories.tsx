@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import { BannerLink } from '@react-components/components';
-import { BannerLinkTemplate, defaultPropsDark } from './bannerlinkCommonts';
+import { BannerLinkTemplate, defaultPropsDark } from './bannerlinkCommons';
 
 // Define the default export with metadata about your component
 export default {
