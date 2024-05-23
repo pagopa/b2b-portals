@@ -59,17 +59,17 @@ const HowTo = (props: HowToProps) => {
             sx={{
               mt: i > 0 ? { xs: 4, md: 8 } : 0,
               marginX: 'auto',
-              width: '100%'
+              width: '100%',
             }}
             key={i}
           >
             {stepRow.map((step, j) => (
-              <Box 
-                key={j} 
-                flex={0.25} 
-                width="100%"
+              <Box
+                key={j}
+                flex={0.25}
+                width='100%'
                 sx={{
-                  minWidth: 'auto'
+                  minWidth: 'auto',
                 }}
               >
                 <HowToStep

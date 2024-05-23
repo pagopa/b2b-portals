@@ -46,7 +46,12 @@ export const HowToStepNum = ({
   fontSize?: string | number;
   marginBottom?: number | string;
 }) => (
-  <Typography color={color} variant={variant} component={component} style={{ fontWeight, fontSize, marginBottom }}>
+  <Typography
+    color={color}
+    variant={variant}
+    component={component}
+    style={{ fontWeight, fontSize, marginBottom }}
+  >
     {`0${stepNum}`}
   </Typography>
 );
