@@ -1,47 +1,38 @@
-// Import the necessary modules
 import { StoryFn, Meta } from '@storybook/react';
 import { StripeLink } from '@react-components/components';
-import { StripeLinkProps } from '@react-components/types';
+import { StripeLinkTemplate, defaultPropsDark } from './stripelinkCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof StripeLink> = {
   title: 'Components/StripeLink/Dark',
   component: StripeLink,
-} as Meta;
-
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<StripeLinkProps> = (args) => <StripeLink {...args} />;
-
-// Define the default props
-const defaultProps: Partial<StripeLinkProps> = {
-  theme: 'dark',
-  subtitle: 'Stripe Link Subtitle',
 };
+export default meta;
 
-export const DarkStripeLinkFull = Template.bind({});
+export const DarkStripeLinkFull: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
 DarkStripeLinkFull.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   icon: {
     icon: 'MarkEmailReadOutlined',
   },
   buttonText: 'Click Me',
 };
 
-export const DarkStripeLinkNoIcon = Template.bind({});
+export const DarkStripeLinkNoIcon: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
 DarkStripeLinkNoIcon.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   buttonText: 'Click Me',
 };
 
-export const DarkStripeLinkNoButton = Template.bind({});
+export const DarkStripeLinkNoButton: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
 DarkStripeLinkNoButton.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
   icon: {
     icon: 'MarkEmailReadOutlined',
   },
 };
 
-export const DarkStripeLinkNoIconNoButton = Template.bind({});
+export const DarkStripeLinkNoIconNoButton: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
 DarkStripeLinkNoIconNoButton.args = {
-  ...defaultProps,
+  ...defaultPropsDark,
 };

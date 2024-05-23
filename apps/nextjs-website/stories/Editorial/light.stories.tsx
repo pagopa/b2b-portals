@@ -1,111 +1,107 @@
-// Import the necessary modules
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Editorial } from '@react-components/components';
-import { EditorialProps } from '@react-components/types/Editorial/Editorial.types';
-import { CtaButtonProps } from '@react-components/types/common/Common.types';
+import {
+  EditorialTemplate,
+  defaultPropsLight,
+  generateCtaButtons,
+} from './editorialCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof Editorial> = {
   title: 'Components/Editorial/Light',
   component: Editorial,
-} as Meta;
-
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<EditorialProps> = (args) => <Editorial {...args} />;
-
-// Function to generate CTA buttons
-const generateCtaButtons = (count: number): CtaButtonProps[] =>
-  Array.from({ length: count }, (_, i) => ({
-    text: `CTA Button ${i + 1}`,
-    variant: 'contained',
-  })
-);
-
-// Define the default props
-const defaultProps: Partial<EditorialProps> = {
-  theme: 'light',
-  title: 'Editorial Title',
-  body: 'Editorial Body',
-  width: 'standard',
-  image: <img src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png' alt="placeholder" />,
 };
+export default meta;
 
-export const LightEditorialFullOneButtonNoPattern = Template.bind({});
+export const LightEditorialFullOneButtonNoPattern: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialFullOneButtonNoPattern.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
 };
 
-export const LightEditorialFullOneButtonNoPatternReversed = Template.bind({});
+export const LightEditorialFullOneButtonNoPatternReversed: StoryFn<
+  typeof Editorial
+> = EditorialTemplate.bind({});
 LightEditorialFullOneButtonNoPatternReversed.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   reversed: true,
 };
 
-export const LightEditorialFullOneButtonWithPattern = Template.bind({});
+export const LightEditorialFullOneButtonWithPattern: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialFullOneButtonWithPattern.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   pattern: 'dots',
 };
 
-export const LightEditorialFullOneButtonWithPatternReversed = Template.bind({});
+export const LightEditorialFullOneButtonWithPatternReversed: StoryFn<
+  typeof Editorial
+> = EditorialTemplate.bind({});
 LightEditorialFullOneButtonWithPatternReversed.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   reversed: true,
   pattern: 'dots',
 };
 
-export const LightEditorialFullTwoButtons = Template.bind({});
+export const LightEditorialFullTwoButtons: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialFullTwoButtons.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(2),
   eyelet: 'Editorial Eyelet',
 };
 
-export const LightEditorialFullTwoButtonsReversed = Template.bind({});
+export const LightEditorialFullTwoButtonsReversed: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialFullTwoButtonsReversed.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(2),
   eyelet: 'Editorial Eyelet',
   reversed: true,
 };
 
-export const LightEditorialFullNoButtons = Template.bind({});
+export const LightEditorialFullNoButtons: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialFullNoButtons.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   eyelet: 'Editorial Eyelet',
 };
 
-export const LightEditorialFullReversedNoButtons = Template.bind({});
+export const LightEditorialFullReversedNoButtons: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialFullReversedNoButtons.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   eyelet: 'Editorial Eyelet',
   reversed: true,
 };
 
-export const LightEditorialNoEyelet = Template.bind({});
+export const LightEditorialNoEyelet: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialNoEyelet.args = {
-  ...defaultProps,
-  ctaButtons: generateCtaButtons(1)
+  ...defaultPropsLight,
+  ctaButtons: generateCtaButtons(1),
 };
 
-export const LightEditorialNoEyeletReversed = Template.bind({});
+export const LightEditorialNoEyeletReversed: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialNoEyeletReversed.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(1),
   reversed: true,
 };
 
-export const LightEditorialFullStoreButtons = Template.bind({});
+export const LightEditorialFullStoreButtons: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialFullStoreButtons.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   storeButtons: {
@@ -114,9 +110,10 @@ LightEditorialFullStoreButtons.args = {
   },
 };
 
-export const LightEditorialFullStoreButtonsReversed = Template.bind({});
+export const LightEditorialFullStoreButtonsReversed: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialFullStoreButtonsReversed.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   storeButtons: {
@@ -126,23 +123,26 @@ LightEditorialFullStoreButtonsReversed.args = {
   reversed: true,
 };
 
-export const LightEditorialFullOneStoreButtons = Template.bind({});
+export const LightEditorialFullOneStoreButtons: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
 LightEditorialFullOneStoreButtons.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   storeButtons: {
-    hrefApple: 'https://apple.com'
+    hrefApple: 'https://apple.com',
   },
 };
 
-export const LightEditorialFullOneStoreButtonsReversed = Template.bind({});
+export const LightEditorialFullOneStoreButtonsReversed: StoryFn<
+  typeof Editorial
+> = EditorialTemplate.bind({});
 LightEditorialFullOneStoreButtonsReversed.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
   storeButtons: {
-    hrefGoogle: 'https://play.google.com'
+    hrefGoogle: 'https://play.google.com',
   },
   reversed: true,
 };

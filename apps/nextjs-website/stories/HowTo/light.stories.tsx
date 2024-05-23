@@ -1,53 +1,17 @@
-// Import the necessary modules
 import { StoryFn, Meta } from '@storybook/react';
 import { HowTo } from '@react-components/components';
-import { HowToProps } from '@react-components/types';
-import { HowToStepProps } from '@react-components/types/HowTo/HowTo.types';
+import { HowToTemplate, defaultPropsLightWithIcon, defaultPropsLightWithoutIcon } from './howtoCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof HowTo> = {
   title: 'Components/HowTo/Light',
   component: HowTo,
-} as Meta;
-
-// Function to generate steps
-const generateStepsWithIcons = (count: number): HowToStepProps[] =>
-  Array.from({ length: count }, (_, i) => ({
-    title: `Step ${i + 1}`,
-    description: `This is step ${i + 1}`,
-    stepIcon: {
-      icon: 'MarkEmailReadOutlined',
-    },
-    index: i,
-    theme: 'light',
-    isLastStep: i === count - 1,
-  })
-);
-
-// Function to generate steps
-const generateStepsWithoutIcons = (count: number): HowToStepProps[] =>
-  Array.from({ length: count }, (_, i) => ({
-    title: `Step ${i + 1}`,
-    description: `This is step ${i + 1}`,
-    index: i,
-    theme: 'light',
-    isLastStep: i === count - 1,
-  })
-);
-
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<HowToProps> = (args) => <HowTo {...args} />;
-
-// Define the default props
-const defaultProps: Partial<HowToProps> = {
-  theme: 'light',
-  title: 'How To Title',
 };
+export default meta;
 
-export const LightHowToFull = Template.bind({});
+export const LightHowToFull: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 LightHowToFull.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsLightWithIcon,
   link: {
     label: 'Learn More',
     href: '#'
@@ -55,35 +19,31 @@ LightHowToFull.args = {
   stepsAlignment: 'center',
 };
 
-export const LightHowToFullNoLink = Template.bind({});
+export const LightHowToFullNoLink: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 LightHowToFullNoLink.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsLightWithIcon,
   stepsAlignment: 'center',
 };
 
-export const LightHowToNoIcons = Template.bind({});
+export const LightHowToNoIcons: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 LightHowToNoIcons.args = {
-  ...defaultProps,
+  ...defaultPropsLightWithoutIcon,
   link: {
     label: 'Learn More',
     href: '#'
   },
-  steps: generateStepsWithoutIcons(4),
   stepsAlignment: 'center',
 };
 
-export const LightHowToNoLinkNoIcons = Template.bind({});
+export const LightHowToNoLinkNoIcons: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 LightHowToNoLinkNoIcons.args = {
-  ...defaultProps,
-  steps: generateStepsWithoutIcons(4),
+  ...defaultPropsLightWithoutIcon,
   stepsAlignment: 'center',
 };
 
-export const LightHowToFullCenter = Template.bind({});
+export const LightHowToFullCenter: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 LightHowToFullCenter.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsLightWithIcon,
   link: {
     label: 'Learn More',
     href: '#'
@@ -91,10 +51,9 @@ LightHowToFullCenter.args = {
   stepsAlignment: 'center',
 };
 
-export const LightHowToFullLeft = Template.bind({});
+export const LightHowToFullLeft: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 LightHowToFullLeft.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsLightWithIcon,
   link: {
     label: 'Learn More',
     href: '#'
@@ -102,10 +61,9 @@ LightHowToFullLeft.args = {
   stepsAlignment: 'left',
 };
 
-export const LightHowToFullRight = Template.bind({});
+export const LightHowToFullRight: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 LightHowToFullRight.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsLightWithIcon,
   link: {
     label: 'Learn More',
     href: '#'
