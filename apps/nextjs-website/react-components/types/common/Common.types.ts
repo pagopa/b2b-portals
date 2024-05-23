@@ -23,4 +23,5 @@ export const isJSX = <T>(arg: T | Generic): arg is Generic =>
 export interface CtaButtonProps extends Partial<ButtonProps> {
   readonly text: string;
   variant?: 'contained' | 'outlined' | 'text';
+  readonly disableRipple?: boolean;
 }

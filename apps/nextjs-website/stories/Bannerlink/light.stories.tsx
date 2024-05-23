@@ -1,35 +1,23 @@
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { BannerLink } from '@react-components/components';
-import { BannerLinkProps } from '@react-components/types';
+import { BannerLinkTemplate, defaultPropsLight } from './bannerlinkCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof BannerLink> = {
   title: 'Components/BannerLink/Light',
   component: BannerLink,
-} as Meta;
-
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<BannerLinkProps> = (args) => <BannerLink {...args} />;
-
-// Define the default props
-const defaultProps: Partial<BannerLinkProps> = {
-  title: 'Banner Link Title',
-  theme: 'light',
-  ctaButtons: [
-    {
-      text: 'Click Me',
-      variant: 'contained',
-    },
-  ],
 };
+export default meta;
 
-export const BannerLinkFull = Template.bind({});
+export const BannerLinkFull: StoryFn<typeof BannerLink> =
+  BannerLinkTemplate.bind({});
 BannerLinkFull.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
   body: 'This is a description for the banner link.',
 };
 
-export const BannerLinkOnlyTitle = Template.bind({});
+export const BannerLinkOnlyTitle: StoryFn<typeof BannerLink> =
+  BannerLinkTemplate.bind({});
 BannerLinkOnlyTitle.args = {
-  ...defaultProps,
+  ...defaultPropsLight,
 };

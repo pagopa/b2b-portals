@@ -1,141 +1,108 @@
-// Import the necessary modules
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Accordion } from '@react-components/components';
-import { AccordionProps } from '@react-components/types';
-import { AccordionItemProps } from '@react-components/types/Accordion/Accordion.types';
+import { defaultPropsDark, AccordionTemplate } from './accordionCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof Accordion> = {
   title: 'Components/Accordion/Dark',
   component: Accordion,
-} as Meta;
-
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<AccordionProps> = (args) => <Accordion {...args} />;
-
-// Define your accordion items
-const accordionItems: AccordionItemProps[] = [
-  {
-    header: 'Accordion Item 1',
-    content: 'This is the content for accordion item 1.',
-    theme: 'dark',
-  },
-  {
-    header: 'Accordion Item 2',
-    content: 'This is the content for accordion item 2.',
-    theme: 'dark',
-  },
-];
-
-// Define the default props
-const defaultProps: Partial<AccordionProps> = {
-  title: 'Accordion Title',
 };
+export default meta;
 
-export const AccordionDarkLeftLayoutFull = Template.bind({});
+export const AccordionDarkLeftLayoutFull: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkLeftLayoutFull.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsDark,
   subtitle: 'Accordion Subtitle',
   description: 'This is a description for the accordion.',
-  theme: 'dark',
   layout: 'left',
 };
 
-export const AccordionDarkCenterLayoutFull = Template.bind({});
+export const AccordionDarkCenterLayoutFull: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkCenterLayoutFull.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsDark,
   subtitle: 'Accordion Subtitle',
   description: 'This is a description for the accordion.',
-  theme: 'dark',
   layout: 'center',
 };
 
-export const AccordionDarkRightLayoutFull = Template.bind({});
+export const AccordionDarkRightLayoutFull: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkRightLayoutFull.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsDark,
   subtitle: 'Accordion Subtitle',
   description: 'This is a description for the accordion.',
-  theme: 'dark',
   layout: 'right',
 };
 
-export const AccordionDarkLeftLayoutOnlyTitle = Template.bind({});
+export const AccordionDarkLeftLayoutOnlyTitle: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkLeftLayoutOnlyTitle.args = {
-  ...defaultProps,
-  accordionItems,
-  theme: 'dark',
+  ...defaultPropsDark,
   layout: 'left',
 };
 
-export const AccordionDarkCenterLayoutOnlyTitle = Template.bind({});
+export const AccordionDarkCenterLayoutOnlyTitle: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkCenterLayoutOnlyTitle.args = {
-  ...defaultProps,
-  accordionItems,
-  theme: 'dark',
+  ...defaultPropsDark,
   layout: 'center',
 };
 
-export const AccordionDarkRightLayoutOnlyTitle = Template.bind({});
+export const AccordionDarkRightLayoutOnlyTitle: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkRightLayoutOnlyTitle.args = {
-  ...defaultProps,
-  accordionItems,
-  theme: 'dark',
+  ...defaultPropsDark,
   layout: 'right',
 };
 
-export const AccordionDarkLeftLayoutWithSubtitle = Template.bind({});
+export const AccordionDarkLeftLayoutWithSubtitle: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkLeftLayoutWithSubtitle.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsDark,
   subtitle: 'Accordion Subtitle',
-  theme: 'dark',
   layout: 'left',
 };
 
-export const AccordionDarkCenterLayoutWithSubtitle = Template.bind({});
+export const AccordionDarkCenterLayoutWithSubtitle: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkCenterLayoutWithSubtitle.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsDark,
   subtitle: 'Accordion Subtitle',
-  theme: 'dark',
   layout: 'center',
 };
 
-export const AccordionDarkRightLayoutWithSubtitle = Template.bind({});
+export const AccordionDarkRightLayoutWithSubtitle: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkRightLayoutWithSubtitle.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsDark,
   subtitle: 'Accordion Subtitle',
-  theme: 'dark',
   layout: 'right',
 };
 
-export const AccordionDarkLeftLayoutWithDescription = Template.bind({});
+export const AccordionDarkLeftLayoutWithDescription: StoryFn<typeof Accordion> =
+  AccordionTemplate.bind({});
 AccordionDarkLeftLayoutWithDescription.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsDark,
   description: 'This is a description for the accordion.',
-  theme: 'dark',
   layout: 'left',
 };
 
-export const AccordionDarkCenterLayoutWithDescription = Template.bind({});
+export const AccordionDarkCenterLayoutWithDescription: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
 AccordionDarkCenterLayoutWithDescription.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsDark,
   description: 'This is a description for the accordion.',
-  theme: 'dark',
   layout: 'center',
 };
 
-export const AccordionDarkRightLayoutWithDescription = Template.bind({});
+export const AccordionDarkRightLayoutWithDescription: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
 AccordionDarkRightLayoutWithDescription.args = {
-  ...defaultProps,
-  accordionItems,
+  ...defaultPropsDark,
   description: 'This is a description for the accordion.',
-  theme: 'dark',
   layout: 'right',
 };
