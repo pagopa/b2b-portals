@@ -6,48 +6,37 @@ import { CtaButtonProps } from '@react-components/types/common/Common.types';
 import { HelpOutlineOutlined } from '@mui/icons-material';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof PreHeader> = {
   title: 'Components/PreHeader/Light',
   component: PreHeader,
-} as Meta;
+};
+export default meta;
 
 // Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<PreHeaderProps> = (args) => <PreHeader {...args} />;
+const PreHeaderTemplate: StoryFn<PreHeaderProps> = (args) => <PreHeader {...args} />;
 
-// Define the left default props
-const defaultLeftCtaButtonProps: CtaButtonProps = {
+// Function to generate default CTA button props
+const generateCtaButtonProps = (withIcon: boolean): CtaButtonProps => ({
   text: 'Click Me',
-  variant: 'contained',
-};
+  ...(withIcon ? { startIcon: <HelpOutlineOutlined /> } : {}),
+});
 
-// Define the right default props
-const defaultRightCtaButtonProps: CtaButtonProps = {
-  text: 'Click Me',
-  variant: 'contained',
-  startIcon: <HelpOutlineOutlined />
-};
+// Function to generate PreHeaderProps
+const generatePreHeaderProps = (withIcon: boolean): Partial<PreHeaderProps> => ({
+  leftCtas: [generateCtaButtonProps(false)],
+  rightCtas: [generateCtaButtonProps(withIcon)],
+});
 
-const defaultRightCtaButtonPropsNoIcon: CtaButtonProps = {
-  text: 'Click Me',
-  variant: 'contained',
-};
+// Define the default props
+const defaultProps = generatePreHeaderProps(true);
+const defaultPropsNoIcon = generatePreHeaderProps(false);
 
-const defaultProps: Partial<PreHeaderProps> = {
-  leftCtas: [defaultLeftCtaButtonProps],
-  rightCtas: [defaultRightCtaButtonProps],
-};
-
-const defaultPropsNoIcon: Partial<PreHeaderProps> = {
-  leftCtas: [defaultLeftCtaButtonProps],
-  rightCtas: [defaultRightCtaButtonPropsNoIcon],
-};
-
-export const DefaultPreHeader = Template.bind({});
+export const DefaultPreHeader: StoryFn<typeof PreHeader> = PreHeaderTemplate.bind({});
 DefaultPreHeader.args = {
   ...defaultProps,
 };
 
-export const DefaultPreHeaderNoIcon = Template.bind({});
+export const DefaultPreHeaderNoIcon: StoryFn<typeof PreHeader> = PreHeaderTemplate.bind({});
 DefaultPreHeaderNoIcon.args = {
   ...defaultPropsNoIcon,
 };
