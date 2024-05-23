@@ -3,6 +3,7 @@ import {
   HeroTemplate,
   defaultsLightWithButtons,
   defaultsLightWithoutButtons,
+  defaultsLightWithoutButtonsNoSubtitle,
 } from './heroCommons';
 import { Hero } from '@react-components/components';
 
@@ -20,9 +21,7 @@ LightHeroBig.args = {
   inverse: false,
 };
 
-export const LightHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {}
-);
+export const LightHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
 LightHeroBigNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
@@ -93,19 +92,11 @@ LightHeroSmallNoButtons.args = {
   inverse: false,
 };
 
-export const LightHeroSmallInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
+export const LightHeroSmallNoSubtitle: StoryFn<typeof Hero> = HeroTemplate.bind(
   {}
 );
-LightHeroSmallInverted.args = {
-  ...defaultsLightWithButtons,
-  size: 'small',
-  inverse: true,
-};
-
-export const LightHeroSmallInvertedNoButtons: StoryFn<typeof Hero> =
-  HeroTemplate.bind({});
-LightHeroSmallInvertedNoButtons.args = {
-  ...defaultsLightWithoutButtons,
+LightHeroSmallNoSubtitle.args = {
+  ...defaultsLightWithoutButtonsNoSubtitle,
   size: 'small',
   inverse: true,
 };

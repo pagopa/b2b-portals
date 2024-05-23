@@ -1,69 +1,11 @@
 import React from 'react';
-import { Box, Stack, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import Image from 'next/image';
 import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
-import { HeroProps, HeroTextProps } from '../../types/Hero/Hero.types';
-import {
-  Title,
-  Subtitle,
-  CtaButtons,
-} from '../common/Common';
-import { BackgroundColor, TextColor } from '../common/Common.helpers';
-import { getMinHeight, getOverlay } from './Hero.helpers';
-
-const HeroTextContent = ({
-  title,
-  subtitle,
-  ctaButtons,
-  theme,
-  size,
-}: HeroTextProps) => {
-  const textColor = TextColor(theme);
-
-  return (
-    <Stack
-      justifyContent={size === 'small' ? 'center' : { md: 'center' }}
-      alignItems={size === 'small' ? 'center' : 'inherit'}
-      sx={{ minHeight: 'inherit' }}
-      mt={{ xs: 9, lg: 0 }}
-      component='section'
-    >
-      <Box mb={size === 'small' ? 0 : { xs: 6, md: 4 }}>
-        <>
-          <Title
-            variant='h1'
-            textColor={textColor}
-            title={title}
-            textAlign='left'
-            marginBottom={size === 'small' ? 0 : 2}
-          />
-          <Subtitle
-            variant='body1'
-            textColor={textColor}
-            subtitle={subtitle}
-            textAlign='left'
-          />
-        </>
-      </Box>
-      {ctaButtons?.length ? (
-        <Stack
-          direction={{ xs: 'column', md: 'row' }}
-          spacing={2}
-          mb={{ xs: 8, lg: 0 }}
-        >
-          {CtaButtons({
-            ctaButtons: ctaButtons.map((button) => ({
-              ...button,
-              sx: { width: { md: 'auto', xs: '100%' } },
-            })),
-            theme,
-          })}
-        </Stack>
-      ) : null}
-    </Stack>
-  );
-};
+import { HeroProps } from '../../types/Hero/Hero.types';
+import { BackgroundColor } from '../common/Common.helpers';
+import { HeroTextContent, getMinHeight, getOverlay } from './Hero.helpers';
 
 const Hero = (props: HeroProps) => {
   const {
@@ -102,7 +44,7 @@ const Hero = (props: HeroProps) => {
 
   return (
     <ContainerRC
-      maxWidth="xl"
+      maxWidth='xl'
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
     >
@@ -111,21 +53,19 @@ const Hero = (props: HeroProps) => {
       )}
       <Grid
         item
-        lg={size === 'small' ? 12 : 3}
-        sx={{ minHeight: { lg: minHeight } }}
+        lg={size === 'small' ? 12 : 4}
+        sx={{ minHeight: { lg: minHeight }, width: '100%'}}
       >
         <HeroTextContent {...props} />
       </Grid>
-      {(size === 'medium' || size === 'big') && (
-        <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
-      )}
       {(size === 'medium' || size === 'big') && image && (
         <Grid
           item
           lg={6}
           mb={{ xs: 4, lg: 0 }}
-          component='figure'
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', display: 'flex' }}
+          justifyContent={inverse ? "start" : "end"}
+          alignItems="center"
         >
           {isJSX(image) ? (
             image
@@ -137,11 +77,10 @@ const Hero = (props: HeroProps) => {
               height={0}
               style={{
                 objectFit: 'contain',
-                objectPosition: 'center',
-                width: '100%',
-                height: '100%',
+                width: '80%',
+                height: '80%',
                 maxHeight: minHeight,
-                userSelect: 'none',
+                userSelect: 'none'
               }}
             />
           )}
