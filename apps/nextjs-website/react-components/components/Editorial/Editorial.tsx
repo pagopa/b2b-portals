@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import ContainerRCXL from "../common/ContainerRCXL";
+import ContainerRC from "../common/ContainerRC";
 import { EditorialProps } from "../../types/Editorial/Editorial.types";
 import { useIsMobile } from "./Editorial.helpers";
 import { BackgroundColor } from "../common/Common.helpers";
@@ -39,7 +39,8 @@ const Editorial = (props: EditorialProps) => {
   if (width === "standard") {
     // Se 'width' è 'standard', utilizza questo layout specifico
     return (
-      <ContainerRCXL
+      <ContainerRC
+        maxWidth="xl"
         alignItems="center"
         background={backgroundColor}
         direction={isMobile ? "column" : reversed ? "row-reverse" : "row"}
@@ -71,7 +72,7 @@ const Editorial = (props: EditorialProps) => {
         </Grid>
 
         <Grid item md={1} sx={{ display: { xs: "none", md: "block" } }} />
-      </ContainerRCXL>
+      </ContainerRC>
     );
   }
 
@@ -93,7 +94,8 @@ const Editorial = (props: EditorialProps) => {
   const gridItemStyles = { ...styles.half };
 
   return (
-    <ContainerRCXL
+    <ContainerRC
+      maxWidth="xl"
       alignItems="center"
       background={backgroundColor}
       direction={containerDirection}
@@ -118,7 +120,7 @@ const Editorial = (props: EditorialProps) => {
       <Grid item md={columns[width]}>
         <EditorialImage {...{ pattern, image, theme }} />
       </Grid>
-    </ContainerRCXL>
+    </ContainerRC>
   );
 };
 

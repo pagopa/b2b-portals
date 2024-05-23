@@ -31,5 +31,11 @@ export const theme = createTheme(MUIItaliaTheme, {
       backgroundColorLightGrey: '#FAFAFA',
       divider: '#E3E7EB',
     },
+    primary: {
+      dark: '#0B3EE3',
+    },
+    background: {
+      default: '#FAFAFA',
+    },
   },
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Stack, Grid } from '@mui/material';
 import Image from 'next/image';
 import { isJSX } from '../../types/common/Common.types';
-import ContainerRCXL from '../common/ContainerRCXL';
+import ContainerRC from '../common/ContainerRC';
 import { HeroProps, HeroTextProps } from '../../types/Hero/Hero.types';
 import {
   Title,
@@ -101,7 +101,8 @@ const Hero = (props: HeroProps) => {
   );
 
   return (
-    <ContainerRCXL
+    <ContainerRC
+      maxWidth="xl"
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
     >
@@ -149,7 +150,7 @@ const Hero = (props: HeroProps) => {
       {(size === 'medium' || size === 'big') && (
         <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
       )}
-    </ContainerRCXL>
+    </ContainerRC>
   );
 };
 
