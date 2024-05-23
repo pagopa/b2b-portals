@@ -1,4 +1,3 @@
-// Import the necessary modules
 import { Meta, StoryFn } from '@storybook/react';
 import {
   HeroTemplate,

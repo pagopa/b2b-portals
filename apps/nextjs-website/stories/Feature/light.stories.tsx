@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Feature } from '@react-components/components';
 import { FeatureTemplate, defaultPropsLightWithLinks, defaultPropsLightWithoutLinks } from './featureCommons';
 
@@ -8,23 +8,23 @@ export default {
   component: Feature,
 } as Meta;
 
-export const LightFeatureFull = FeatureTemplate.bind({});
+export const LightFeatureFull: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 LightFeatureFull.args = {
   ...defaultPropsLightWithLinks
 };
 
-export const LightFeatureNoLinks = FeatureTemplate.bind({});
+export const LightFeatureNoLinks: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 LightFeatureNoLinks.args = {
   ...defaultPropsLightWithoutLinks
 };
 
-export const LightFeatureFullWithCarouselMobileOnly = FeatureTemplate.bind({});
+export const LightFeatureFullWithCarouselMobileOnly: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 LightFeatureFullWithCarouselMobileOnly.args = {
   ...defaultPropsLightWithLinks,
   showCarouselMobile: true,
 };
 
-export const LightFeatureFullWithCustomBackground = FeatureTemplate.bind({});
+export const LightFeatureFullWithCustomBackground: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 LightFeatureFullWithCustomBackground.args = {
   ...defaultPropsLightWithLinks,
   background: '#000',

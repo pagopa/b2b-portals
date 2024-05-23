@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Feature } from '@react-components/components';
 import { FeatureTemplate, defaultPropsDarkWithLinks, defaultPropsDarkWithoutLinks } from './featureCommons';
 
@@ -8,23 +8,23 @@ export default {
   component: Feature,
 } as Meta;
 
-export const DarkFeatureFull = FeatureTemplate.bind({});
+export const DarkFeatureFull: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 DarkFeatureFull.args = {
   ...defaultPropsDarkWithLinks
 };
 
-export const DarkFeatureNoLinks = FeatureTemplate.bind({});
+export const DarkFeatureNoLinks: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 DarkFeatureNoLinks.args = {
   ...defaultPropsDarkWithoutLinks
 };
 
-export const DarkFeatureFullWithCarouselMobileOnly = FeatureTemplate.bind({});
+export const DarkFeatureFullWithCarouselMobileOnly: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 DarkFeatureFullWithCarouselMobileOnly.args = {
   ...defaultPropsDarkWithLinks,
   showCarouselMobile: true,
 };
 
-export const DarkFeatureFullWithCustomBackground = FeatureTemplate.bind({});
+export const DarkFeatureFullWithCustomBackground: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 DarkFeatureFullWithCustomBackground.args = {
   ...defaultPropsDarkWithLinks,
   background: '#000',
