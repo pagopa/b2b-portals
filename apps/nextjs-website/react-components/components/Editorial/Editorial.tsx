@@ -1,22 +1,18 @@
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import ContainerRC from "../common/ContainerRC";
-import { EditorialProps } from "../../types/Editorial/Editorial.types";
-import { useIsMobile } from "./Editorial.helpers";
-import { BackgroundColor } from "../common/Common.helpers";
-import { Content as EditorialContent } from "./Content";
-import { Ctas as EditorialCtas } from "./Ctas";
-import { Image as EditorialImage } from "./Image";
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import ContainerRC from '../common/ContainerRC';
+import { EditorialProps } from '../../types/Editorial/Editorial.types';
+import { useIsMobile } from './Editorial.helpers';
+import { BackgroundColor } from '../common/Common.helpers';
+import { Content as EditorialContent } from './Content';
+import { Ctas as EditorialCtas } from './Ctas';
+import { Image as EditorialImage } from './Image';
 
 const styles = {
   half: {
-    display: "grid",
-    justifyContent: "center",
+    display: 'grid',
+    justifyContent: 'center',
   },
-  // offset: {
-  //   marginLeft: "8.33%",
-  //   paddingRight: "4.15%",
-  // },
 };
 
 const Editorial = (props: EditorialProps) => {
@@ -28,26 +24,26 @@ const Editorial = (props: EditorialProps) => {
     theme,
     ctaButtons,
     storeButtons,
-    pattern = "none",
-    width = "standard",
+    pattern = 'none',
+    width = 'standard',
     reversed = false,
   } = props;
 
   const isMobile = useIsMobile();
   const backgroundColor = BackgroundColor(theme);
 
-  if (width === "standard") {
-    // Se 'width' è 'standard', utilizza questo layout specifico
+  if (width === 'standard') {
+    // If 'width' is 'standard' use this layout
     return (
       <ContainerRC
-        size="xl"
-        alignItems="center"
+        size='xl'
+        alignItems='center'
         background={backgroundColor}
-        direction={isMobile ? "column" : reversed ? "row-reverse" : "row"}
+        direction={isMobile ? 'column' : reversed ? 'row-reverse' : 'row'}
         py={8}
         spacing={2}
       >
-        <Grid item md={1} sx={{ display: { xs: "none", md: "block" } }} />
+        <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
         <Grid item xs={12} md={4}>
           <Stack gap={4}>
@@ -65,18 +61,18 @@ const Editorial = (props: EditorialProps) => {
           </Stack>
         </Grid>
 
-        <Grid item md={1} sx={{ display: { xs: "none", md: "block" } }} />
+        <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
         <Grid item xs={12} md={5}>
           <EditorialImage {...{ pattern, image, theme }} />
         </Grid>
 
-        <Grid item md={1} sx={{ display: { xs: "none", md: "block" } }} />
+        <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
       </ContainerRC>
     );
   }
 
-  // Altrimenti, utilizza il layout originale
+  // Otherwise use original layout
   const columns = {
     wide: 6,
     center: 4,
@@ -84,19 +80,18 @@ const Editorial = (props: EditorialProps) => {
 
   const containerDirection = isMobile
     ? reversed
-      ? "column-reverse"
-      : "column"
+      ? 'column-reverse'
+      : 'column'
     : reversed
-    ? "row-reverse"
-    : "row";
+      ? 'row-reverse'
+      : 'row';
 
-  // const gridItemStyles = { ...styles.half, ...styles.offset };
   const gridItemStyles = { ...styles.half };
 
   return (
     <ContainerRC
-      size="xl"
-      alignItems="center"
+      size='xl'
+      alignItems='center'
       background={backgroundColor}
       direction={containerDirection}
       py={8}
