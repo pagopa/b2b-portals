@@ -19,17 +19,6 @@
         "HelpOutlineOutlined"
       ]
     },
-    "variant": {
-      "type": "enumeration",
-      "enum": [
-        "naked",
-        "text",
-        "outlined",
-        "contained"
-      ],
-      "required": true,
-      "default": "naked"
-    },
     "size": {
       "type": "enumeration",
       "enum": [

@@ -4,10 +4,12 @@ import { CtaButtonProps } from '../../types/common/Common.types';
 
 export const CtaButtons = ({
   ctaButtons,
-  theme,
+  theme = 'light',
+  disableRipple = false,
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
-  theme: 'dark' | 'light';
+  theme?: 'dark' | 'light';
+  disableRipple?: boolean;
 }) => {
   const buttonColor = theme === 'dark' ? 'negative' : 'primary';
 
@@ -19,6 +21,7 @@ export const CtaButtons = ({
         key={`${(button as CtaButtonProps).text}-${i}`}
         color={buttonColor}
         variant={(button as CtaButtonProps).variant || 'contained'}
+        disableRipple={disableRipple}
         {...(button as CtaButtonProps)}
       >
         {(button as CtaButtonProps).text}
@@ -88,7 +91,15 @@ export const Title = ({
   marginBottom?: number | string;
 }) => {
   return typeof title === 'string'
-    ? StringTitle(title, textColor, variant, component, textAlign, marginTop, marginBottom)
+    ? StringTitle(
+        title,
+        textColor,
+        variant,
+        component,
+        textAlign,
+        marginTop,
+        marginBottom
+      )
     : ElementTitle(
         title,
         textColor,
@@ -200,7 +211,7 @@ export const Body = ({
   marginBottom = 0,
 }: {
   body: string | JSX.Element | undefined;
-  textColor: string; // textColor is now required
+  textColor: string;
   textAlign?: TypographyProps['align'];
   variant?: TypographyProps['variant'];
   marginBottom?: number | string;

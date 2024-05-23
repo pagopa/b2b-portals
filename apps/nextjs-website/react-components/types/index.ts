@@ -6,6 +6,10 @@ import { BannerLinkProps } from './BannerLink/BannerLink.types';
 import { CardsProps } from './Cards/Cards.types';
 import { FooterProps } from './Footer/Footer.types';
 import { EditorialSwitchProps } from './Editorial-Switch/Editorial-Switch.types';
+import { PreHeaderProps } from './PreHeader/PreHeader.types';
+import { StripeLinkProps } from './StripeLink/StripeLink.types';
+import { HeaderProps } from './Header/Header.types';
+import { FeatureProps } from './Feature/Feature.types';
 import { IFrameProps } from './IFrame/IFrame.types';
 
 export type {
@@ -16,6 +20,10 @@ export type {
   BannerLinkProps,
   CardsProps,
   FooterProps,
-  EditorialSwitchProps, 
+  EditorialSwitchProps,
+  PreHeaderProps,
+  StripeLinkProps,
+  HeaderProps,
+  FeatureProps,
   IFrameProps,
 };
