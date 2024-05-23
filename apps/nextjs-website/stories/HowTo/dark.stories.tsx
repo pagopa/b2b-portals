@@ -1,53 +1,17 @@
-// Import the necessary modules
 import { StoryFn, Meta } from '@storybook/react';
 import { HowTo } from '@react-components/components';
-import { HowToProps } from '@react-components/types';
-import { HowToStepProps } from '@react-components/types/HowTo/HowTo.types';
+import { HowToTemplate, defaultPropsDarkWithIcon, defaultPropsDarkWithoutIcon } from './howtoCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof HowTo> = {
   title: 'Components/HowTo/Dark',
   component: HowTo,
-} as Meta;
-
-// Function to generate steps
-const generateStepsWithIcons = (count: number): HowToStepProps[] =>
-  Array.from({ length: count }, (_, i) => ({
-    title: `Step ${i + 1}`,
-    description: `This is step ${i + 1}`,
-    stepIcon: {
-      icon: 'MarkEmailReadOutlined',
-    },
-    index: i,
-    theme: 'dark',
-    isLastStep: i === count - 1,
-  })
-);
-
-// Function to generate steps
-const generateStepsWithoutIcons = (count: number): HowToStepProps[] =>
-  Array.from({ length: count }, (_, i) => ({
-    title: `Step ${i + 1}`,
-    description: `This is step ${i + 1}`,
-    index: i,
-    theme: 'dark',
-    isLastStep: i === count - 1,
-  })
-);
-
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<HowToProps> = (args) => <HowTo {...args} />;
-
-// Define the default props
-const defaultProps: Partial<HowToProps> = {
-  theme: 'dark',
-  title: 'How To Title',
 };
+export default meta;
 
-export const DarkHowToFull = Template.bind({});
+export const DarkHowToFull: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 DarkHowToFull.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsDarkWithIcon,
   link: {
     label: 'Learn More',
     href: '#'
@@ -55,35 +19,31 @@ DarkHowToFull.args = {
   stepsAlignment: 'center',
 };
 
-export const DarkHowToFullNoLink = Template.bind({});
+export const DarkHowToFullNoLink: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 DarkHowToFullNoLink.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsDarkWithIcon,
   stepsAlignment: 'center',
 };
 
-export const DarkHowToNoIcons = Template.bind({});
+export const DarkHowToNoIcons: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 DarkHowToNoIcons.args = {
-  ...defaultProps,
+  ...defaultPropsDarkWithoutIcon,
   link: {
     label: 'Learn More',
     href: '#'
   },
-  steps: generateStepsWithoutIcons(4),
   stepsAlignment: 'center',
 };
 
-export const DarkHowToNoLinkNoIcons = Template.bind({});
+export const DarkHowToNoLinkNoIcons: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 DarkHowToNoLinkNoIcons.args = {
-  ...defaultProps,
-  steps: generateStepsWithoutIcons(4),
+  ...defaultPropsDarkWithoutIcon,
   stepsAlignment: 'center',
 };
 
-export const DarkHowToFullCenter = Template.bind({});
+export const DarkHowToFullCenter: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 DarkHowToFullCenter.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsDarkWithIcon,
   link: {
     label: 'Learn More',
     href: '#'
@@ -91,10 +51,9 @@ DarkHowToFullCenter.args = {
   stepsAlignment: 'center',
 };
 
-export const DarkHowToFullLeft = Template.bind({});
+export const DarkHowToFullLeft: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 DarkHowToFullLeft.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsDarkWithIcon,
   link: {
     label: 'Learn More',
     href: '#'
@@ -102,10 +61,9 @@ DarkHowToFullLeft.args = {
   stepsAlignment: 'left',
 };
 
-export const DarkHowToFullRight = Template.bind({});
+export const DarkHowToFullRight: StoryFn<typeof HowTo> = HowToTemplate.bind({});
 DarkHowToFullRight.args = {
-  ...defaultProps,
-  steps: generateStepsWithIcons(4),
+  ...defaultPropsDarkWithIcon,
   link: {
     label: 'Learn More',
     href: '#'
