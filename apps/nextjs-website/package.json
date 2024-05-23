@@ -19,6 +19,7 @@
     "@pagopa/pagopa-editorial-components": "^4.0.0",
     "fp-ts": "^2.16.1",
     "html-react-parser": "^5.0.11",
+    "iframe-resizer": "^4.4.0",
     "io-ts": "^2.2.20",
     "marked": "^11.1.0",
     "next": "14.1.0",
