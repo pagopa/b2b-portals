@@ -1,20 +1,23 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { BannerLink } from '@react-components/components';
 import { BannerLinkTemplate, defaultPropsLight } from './bannerlinkCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof BannerLink> = {
   title: 'Components/BannerLink/Light',
   component: BannerLink,
-} as Meta;
+};
+export default meta;
 
-export const BannerLinkFull = BannerLinkTemplate.bind({});
+export const BannerLinkFull: StoryFn<typeof BannerLink> =
+  BannerLinkTemplate.bind({});
 BannerLinkFull.args = {
   ...defaultPropsLight,
   body: 'This is a description for the banner link.',
 };
 
-export const BannerLinkOnlyTitle = BannerLinkTemplate.bind({});
+export const BannerLinkOnlyTitle: StoryFn<typeof BannerLink> =
+  BannerLinkTemplate.bind({});
 BannerLinkOnlyTitle.args = {
   ...defaultPropsLight,
 };
