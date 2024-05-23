@@ -3,10 +3,11 @@ import { Feature } from '@react-components/components';
 import { FeatureTemplate, defaultPropsLightWithLinks, defaultPropsLightWithoutLinks } from './featureCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof Feature> = {
   title: 'Components/Feature/Light',
   component: Feature,
-} as Meta;
+};
+export default meta;
 
 export const LightFeatureFull: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 LightFeatureFull.args = {

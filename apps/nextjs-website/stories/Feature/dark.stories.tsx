@@ -3,10 +3,11 @@ import { Feature } from '@react-components/components';
 import { FeatureTemplate, defaultPropsDarkWithLinks, defaultPropsDarkWithoutLinks } from './featureCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof Feature> = {
   title: 'Components/Feature/Dark',
   component: Feature,
-} as Meta;
+};
+export default meta;
 
 export const DarkFeatureFull: StoryFn<typeof Feature> = FeatureTemplate.bind({});
 DarkFeatureFull.args = {
