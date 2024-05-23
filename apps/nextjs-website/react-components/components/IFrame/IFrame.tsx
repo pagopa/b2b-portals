@@ -1,25 +1,13 @@
-import React, { useEffect, useRef } from "react";
-import { IFrameProps } from "../../types/IFrame/IFrame.types";
-import { iframeResizer } from 'iframe-resizer';
+import React from 'react';
+import { IFrameProps } from '../../types/IFrame/IFrame.types';
+import IframeResizer from '@iframe-resizer/react';
 
-const IFrame = (props: IFrameProps) => {
-  const { src } = props;
-  const iFrameRef = useRef<HTMLIFrameElement>(null);
-
-  useEffect(() => {
-    if (iFrameRef.current) {
-      iframeResizer({}, iFrameRef.current);
-    }
-  }, [src]);
-
-  return (
-    <iframe
-      ref={iFrameRef}
-      src={src}
-      style={{ width: "1px", minWidth: "100%", border: "none" }}
-    />
-  );
-};
+const IFrame = ({ src }: IFrameProps) => (
+  <IframeResizer
+    license='GPLv3' // Open Source License
+    src={src}
+    style={{ width: '100%', height: '100vh', border: 'none' }}
+  />
+);
 
 export default IFrame;
-
