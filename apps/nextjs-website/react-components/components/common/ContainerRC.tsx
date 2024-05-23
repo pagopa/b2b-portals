@@ -14,7 +14,7 @@ interface ContainerProps {
   px?: BoxProps['px'];
   spacing?: GridProps['spacing'];
   sx?: GridProps['sx'];
-  maxWidth?: 'lg' | 'xl';
+  size?: 'lg' | 'xl';
 }
 
 const ContainerRC = (props: ContainerProps) => {
@@ -27,7 +27,7 @@ const ContainerRC = (props: ContainerProps) => {
     px,
     spacing = 0,
     sx = {},
-    maxWidth = 'lg',
+    size = 'lg',
   } = props;
   const backgroundIsJSX = isJSX(background);
 
@@ -40,7 +40,7 @@ const ContainerRC = (props: ContainerProps) => {
       bgcolor={!backgroundIsJSX ? background : undefined}
     >
       {backgroundIsJSX && background}
-      <Container maxWidth={maxWidth} disableGutters>
+      <Container maxWidth={size} disableGutters>
         <Grid
           container
           direction={direction}

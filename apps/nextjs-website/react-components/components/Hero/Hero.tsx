@@ -44,7 +44,7 @@ const Hero = (props: HeroProps) => {
 
   return (
     <ContainerRC
-      maxWidth='xl'
+      size='xl'
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
     >

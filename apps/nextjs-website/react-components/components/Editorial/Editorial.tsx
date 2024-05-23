@@ -40,7 +40,7 @@ const Editorial = (props: EditorialProps) => {
     // Se 'width' è 'standard', utilizza questo layout specifico
     return (
       <ContainerRC
-        maxWidth="xl"
+        size="xl"
         alignItems="center"
         background={backgroundColor}
         direction={isMobile ? "column" : reversed ? "row-reverse" : "row"}
@@ -95,7 +95,7 @@ const Editorial = (props: EditorialProps) => {
 
   return (
     <ContainerRC
-      maxWidth="xl"
+      size="xl"
       alignItems="center"
       background={backgroundColor}
       direction={containerDirection}

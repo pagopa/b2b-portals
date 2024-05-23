@@ -182,7 +182,7 @@ const StringBody = (
     style={{ color: textColor, marginBottom }}
     align={textAlign}
     sx={{
-      '& a': {
+      'a': {
         color: textColor,
         '&:hover': {
           color: textColor,
@@ -204,7 +204,7 @@ const ElementBody = (
   React.isValidElement(body) ? (
     <Box
       sx={{
-        '& a': {
+        'a': {
           color: textColor,
           '&:hover': {
             color: textColor,
