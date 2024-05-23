@@ -47,6 +47,8 @@ const HowTo = (props: HowToProps) => {
         direction='column'
         justifyContent='center'
         alignItems='center'
+        gap='24px'
+        sx={{ paddingLeft: '2em', paddingRight: '2em' }}
       >
         {/** Steps */}
         {stepsRows.map((stepRow, i) => (
@@ -54,11 +56,22 @@ const HowTo = (props: HowToProps) => {
             direction={{ md: 'row' }}
             justifyContent={alignment}
             spacing={{ xs: 4, md: 8 }}
-            sx={{ mt: i > 0 ? { xs: 4, md: 8 } : 0, marginX: 'auto' }}
+            sx={{
+              mt: i > 0 ? { xs: 4, md: 8 } : 0,
+              marginX: 'auto',
+              width: '100%'
+            }}
             key={i}
           >
             {stepRow.map((step, j) => (
-              <Box key={j} flex={0.25}>
+              <Box 
+                key={j} 
+                flex={0.25} 
+                width="100%"
+                sx={{
+                  minWidth: 'auto'
+                }}
+              >
                 <HowToStep
                   index={i * rowMaxSteps + j}
                   theme={theme}

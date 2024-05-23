@@ -33,54 +33,80 @@ export const HowToStep = ({
   const color3 = TextColor(theme);
 
   return (
-    <Stack spacing={1} component='article' sx={{ maxWidth: '15em' }}>
+    <Stack spacing={1} component='article' sx={{ maxWidth: '15em', minWidth: 'auto' }}>
       {/** Step with icon */}
       {stepIcon && (
         <Stack spacing={1.2}>
-          <HowToStepNum variant='overline' color={color2} stepNum={stepNum} />
-          <Stack
-            justifyContent='space-between'
-            alignItems='center'
-            direction='row'
-            color={isDarkTheme ? 'white' : undefined}
-          >
-            {stepIcon && isIconProp(stepIcon.icon) && (
-              <EIcon
-                {...stepIcon}
-                icon={stepIcon.icon}
-                color={color2}
-                sx={{ width: '64px', height: '64px' }}
-              />
-            )}
-            {!isLastStep && (
-              <Box
-                sx={{
-                  opacity: 1,
-                  transform: { xs: 'rotate(90deg)', md: 'none' },
-                }}
-              >
-                <ArrowIcon color={color2} />
-              </Box>
-            )}
+          <Stack spacing={1.2}>
+            <HowToStepNum variant='overline' color={color2} stepNum={stepNum} />
+            <Stack
+              justifyContent='space-between'
+              alignItems='center'
+              direction='row'
+              color={isDarkTheme ? 'white' : undefined}
+            >
+              {stepIcon && isIconProp(stepIcon.icon) && (
+                <EIcon
+                  {...stepIcon}
+                  icon={stepIcon.icon}
+                  color={color2}
+                  sx={{ width: '64px', height: '64px' }}
+                />
+              )}
+              {!isLastStep && (
+                <Box
+                  sx={{
+                    opacity: 1,
+                    transform: { xs: 'rotate(90deg)', md: 'none' },
+                  }}
+                >
+                  <ArrowIcon color={color2} />
+                </Box>
+              )}
+            </Stack>
           </Stack>
+
+          {/** Step title */}
+          <Title variant='h6' component='p' textColor={color3} title={title} textAlign='left'/>
+
+          {/** Step description */}
+          <Body textColor={color3} body={description} />
         </Stack>
       )}
 
       {/** Step without icon */}
       {!stepIcon && (
-        <HowToStepNum
-          variant='h6'
-          component='p'
-          color={customHowToColour}
-          stepNum={stepNum}
-        />
+        <Stack spacing={1.2} >
+          <HowToStepNum
+            variant='h6'
+            component='p'
+            color={customHowToColour}
+            stepNum={stepNum}
+            marginBottom={12}
+          />
+
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              width: '100%',
+              opacity: 1,
+              transform: { xs: 'rotate(90deg)', md: 'none' },
+              minHeight: '2em'
+            }}
+          >
+            {!isLastStep && <ArrowIcon color={color2} />}
+          </Box>
+
+          <Title variant='h6' component='p' textColor={color3} title={title} textAlign='left'/>
+
+          <Body textColor={color3} body={description} />
+            
+        </Stack>
+        
       )}
 
-      {/** Step title */}
-      <Title variant='h6' component='p' textColor={color3} title={title} textAlign='left'/>
-
-      {/** Step description */}
-      <Body textColor={color3} body={description} />
     </Stack>
   );
 };
