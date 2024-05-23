@@ -1,14 +1,22 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Cards } from '@react-components/components';
-import { CardsTemplate, defaultPropsDarkThree, defaultPropsDarkThreeWithLinks, defaultPropsDarkFour, defaultPropsDarkFourWithLinks } from './cardsCommons';
+import {
+  CardsTemplate,
+  defaultPropsDarkThree,
+  defaultPropsDarkThreeWithLinks,
+  defaultPropsDarkFour,
+  defaultPropsDarkFourWithLinks,
+} from './cardsCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof Cards> = {
   title: 'Components/Cards/Dark',
   component: Cards,
-} as Meta;
+};
+export default meta;
 
-export const DarkCardsThreeColumnOnlyTitleNoLinks = CardsTemplate.bind({});
+export const DarkCardsThreeColumnOnlyTitleNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 DarkCardsThreeColumnOnlyTitleNoLinks.args = {
   ...defaultPropsDarkThree,
   text: {
@@ -16,7 +24,8 @@ DarkCardsThreeColumnOnlyTitleNoLinks.args = {
   },
 };
 
-export const DarkCardsThreeColumnOnlyTitleWithLinks = CardsTemplate.bind({});
+export const DarkCardsThreeColumnOnlyTitleWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 DarkCardsThreeColumnOnlyTitleWithLinks.args = {
   ...defaultPropsDarkThreeWithLinks,
   text: {
@@ -24,7 +33,8 @@ DarkCardsThreeColumnOnlyTitleWithLinks.args = {
   },
 };
 
-export const DarkCardsFourColumnOnlyTitleNoLinks = CardsTemplate.bind({});
+export const DarkCardsFourColumnOnlyTitleNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 DarkCardsFourColumnOnlyTitleNoLinks.args = {
   ...defaultPropsDarkFour,
   text: {
@@ -32,7 +42,8 @@ DarkCardsFourColumnOnlyTitleNoLinks.args = {
   },
 };
 
-export const DarkCardsFourColumnOnlyTitleWithLinks = CardsTemplate.bind({});
+export const DarkCardsFourColumnOnlyTitleWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 DarkCardsFourColumnOnlyTitleWithLinks.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {
@@ -40,7 +51,8 @@ DarkCardsFourColumnOnlyTitleWithLinks.args = {
   },
 };
 
-export const DarkCardsWithTextNoLinks = CardsTemplate.bind({});
+export const DarkCardsWithTextNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 DarkCardsWithTextNoLinks.args = {
   ...defaultPropsDarkFour,
   text: {
@@ -50,7 +62,8 @@ DarkCardsWithTextNoLinks.args = {
   },
 };
 
-export const DarkCardsWithTextWithLinks = CardsTemplate.bind({});
+export const DarkCardsWithTextWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 DarkCardsWithTextWithLinks.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {
@@ -60,7 +73,8 @@ DarkCardsWithTextWithLinks.args = {
   },
 };
 
-export const DarkCardsWithTextandButtonNoLinks = CardsTemplate.bind({});
+export const DarkCardsWithTextandButtonNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 DarkCardsWithTextandButtonNoLinks.args = {
   ...defaultPropsDarkFour,
   text: {
@@ -76,7 +90,8 @@ DarkCardsWithTextandButtonNoLinks.args = {
   ],
 };
 
-export const DarkCardsWithTextandButtonWithLinks = CardsTemplate.bind({});
+export const DarkCardsWithTextandButtonWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 DarkCardsWithTextandButtonWithLinks.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {

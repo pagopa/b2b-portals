@@ -1,92 +1,107 @@
-// Import the necessary modules
-import { Meta } from '@storybook/react';
-import { HeroTemplate, defaultsDarkWithButtons, defaultsDarkWithoutButtons } from './heroCommons';
+import { Meta, StoryFn } from '@storybook/react';
+import {
+  HeroTemplate,
+  defaultsDarkWithButtons,
+  defaultsDarkWithoutButtons,
+} from './heroCommons';
 import { Hero } from '@react-components/components';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof Hero> = {
   title: 'Components/Hero/Dark',
   component: Hero,
-} as Meta;
+};
+export default meta;
 
-export const DarkHeroBig = HeroTemplate.bind({});
+export const DarkHeroBig: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroBig.args = {
   ...defaultsDarkWithButtons,
   size: 'big',
   inverse: false,
 };
 
-export const DarkHeroBigNoButtons = HeroTemplate.bind({});
+export const DarkHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroBigNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'big',
   inverse: false,
 };
 
-export const DarkHeroBigInverted = HeroTemplate.bind({});
+export const DarkHeroBigInverted: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroBigInverted.args = {
   ...defaultsDarkWithButtons,
   size: 'big',
   inverse: true,
 };
 
-export const DarkHeroBigInvertedNoButtons = HeroTemplate.bind({});
+export const DarkHeroBigInvertedNoButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
 DarkHeroBigInvertedNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'big',
   inverse: true,
 };
 
-export const DarkHeroMedium = HeroTemplate.bind({});
+export const DarkHeroMedium: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroMedium.args = {
   ...defaultsDarkWithButtons,
   size: 'medium',
   inverse: false,
 };
 
-export const DarkHeroMediumNoButtons = HeroTemplate.bind({});
+export const DarkHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
 DarkHeroMediumNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'medium',
   inverse: false,
 };
 
-export const DarkHeroMediumInverted = HeroTemplate.bind({});
+export const DarkHeroMediumInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
 DarkHeroMediumInverted.args = {
   ...defaultsDarkWithButtons,
   size: 'medium',
   inverse: true,
 };
 
-export const DarkHeroMediumInvertedNoButtons = HeroTemplate.bind({});
+export const DarkHeroMediumInvertedNoButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
 DarkHeroMediumInvertedNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'medium',
   inverse: true,
 };
 
-export const DarkHeroSmall = HeroTemplate.bind({});
+export const DarkHeroSmall: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroSmall.args = {
   ...defaultsDarkWithButtons,
   size: 'small',
   inverse: false,
 };
 
-export const DarkHeroSmallNoButtons = HeroTemplate.bind({});
+export const DarkHeroSmallNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
 DarkHeroSmallNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'small',
   inverse: false,
 };
 
-export const DarkHeroSmallInverted = HeroTemplate.bind({});
+export const DarkHeroSmallInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
 DarkHeroSmallInverted.args = {
   ...defaultsDarkWithButtons,
   size: 'small',
   inverse: true,
 };
 
-export const DarkHeroSmallInvertedNoButtons = HeroTemplate.bind({});
+export const DarkHeroSmallInvertedNoButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
 DarkHeroSmallInvertedNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'small',
