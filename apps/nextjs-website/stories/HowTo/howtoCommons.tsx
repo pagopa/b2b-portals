@@ -9,8 +9,8 @@ export const HowToTemplate: StoryFn<HowToProps> = (args) => <HowTo {...args} />;
 // Function to generate steps
 const generateSteps = (count: number, theme: 'dark' | 'light', withIcons: boolean): HowToStepProps[] =>
   Array.from({ length: count }, (_, i) => ({
-    title: `Il destinatario la riceve`,
-    description: `Il destinatario accede alla piattaforma. Lì, può scaricare i documenti notificati e pagare contestualmente quanto dovuto, grazie all'integrazione con pagoPA. Se la riceve tramite IO, può fare tutto direttamente in app.`,
+    title: `Step ${i + 1}`,
+    description: `This is step ${i + 1}`,
     ...(withIcons ? { stepIcon: { icon: 'MarkEmailReadOutlined' } } : {}),
     index: i,
     theme,
