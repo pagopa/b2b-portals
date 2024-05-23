@@ -7,13 +7,13 @@ import { HowToStepProps } from '@react-components/types/HowTo/HowTo.types';
 export const HowToTemplate: StoryFn<HowToProps> = (args) => <HowTo {...args} />;
 
 // Function to generate steps
-const generateSteps = (count: number, withIcons: boolean): HowToStepProps[] =>
+const generateSteps = (count: number, theme: 'dark' | 'light', withIcons: boolean): HowToStepProps[] =>
   Array.from({ length: count }, (_, i) => ({
     title: `Step ${i + 1}`,
     description: `This is step ${i + 1}`,
     ...(withIcons ? { stepIcon: { icon: 'MarkEmailReadOutlined' } } : {}),
     index: i,
-    theme: 'dark',
+    theme,
     isLastStep: i === count - 1,
   })
 );
@@ -21,8 +21,8 @@ const generateSteps = (count: number, withIcons: boolean): HowToStepProps[] =>
 // Function to generate default props
 const generateDefaultProps = (theme: 'dark' | 'light', withIcons: boolean): Partial<HowToProps> => ({
   theme,
-  title: 'How To Title',
-  steps: generateSteps(4, withIcons),
+  title: 'HowTo Title',
+  steps: generateSteps(4, theme, withIcons),
 });
 
 // Define the default props
