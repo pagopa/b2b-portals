@@ -8,11 +8,6 @@ on:
       - 'main' # Target branch is main
   workflow_dispatch:
 
-defaults:
-  run:
-    shell: bash
-    working-directory: apps/nextjs-website
-
 # These permissions are needed to interact with GitHub's OIDC Token endpoint.
 permissions:
   id-token: write
@@ -41,6 +36,7 @@ jobs:
 
       - name: Create Storybook
         shell: bash
+        working-directory: ./apps/nextjs-website
         run: npm run build-storybook
 
       - name: Configure AWS Credentials
@@ -51,7 +47,7 @@ jobs:
           
       - name: Deploy to S3 Bucket
         shell: bash
-        run: aws s3 sync ./storybook-static s3://${{ vars.S3_BUCKET_NAME }}/storybook --delete
+        run: aws s3 sync ./apps/nextjs-website/storybook-static s3://${{ vars.S3_BUCKET_NAME }}/storybook --delete
 
       - name: Create AWS Cloudfront Invalidation
         shell: bash
