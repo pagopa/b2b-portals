@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-Implement PreHeader from RC to Storybook
+Add PreHeader to Storybook
