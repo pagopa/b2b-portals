@@ -7,12 +7,18 @@ declare module '@mui/material/styles' {
     readonly custom: {
       readonly backgroundColorDark: string;
       readonly backgroundColorLightGrey: string;
+      readonly divider: string;
+      readonly primaryColorDark: string;
+      readonly backgroundColorDefault: string;
     };
   }
   interface PaletteOptions {
     readonly custom?: {
       readonly backgroundColorDark?: string;
       readonly backgroundColorLightGrey?: string;
+      readonly divider?: string;
+      readonly primaryColorDark?: string;
+      readonly backgroundColorDefault?: string;
     };
   }
 }
@@ -30,12 +36,8 @@ export const theme = createTheme(MUIItaliaTheme, {
       backgroundColorDark: '#0B3EE3',
       backgroundColorLightGrey: '#FAFAFA',
       divider: '#E3E7EB',
-    },
-    primary: {
-      dark: '#0B3EE3',
-    },
-    background: {
-      default: '#FAFAFA',
+      primaryColorDark: '#0B3EE3',
+      backgroundColorDefault: '#FAFAFA',
     },
   },
 });
