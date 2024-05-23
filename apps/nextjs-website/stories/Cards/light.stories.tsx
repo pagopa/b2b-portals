@@ -1,92 +1,60 @@
-// Import the necessary modules
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Cards } from '@react-components/components';
-import { CardsProps } from '@react-components/types';
-import { CardsItemProps } from '@react-components/types/Cards/Cards.types';
+import {
+  CardsTemplate,
+  defaultPropsLightThree,
+  defaultPropsLightThreeWithLinks,
+  defaultPropsLightFour,
+  defaultPropsLightFourWithLinks,
+} from './cardsCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof Cards> = {
   title: 'Components/Cards/Light',
   component: Cards,
-} as Meta;
-
-// Function to generate items
-const generateItems = (count: number): CardsItemProps[] =>
-  Array.from({ length: count }, (_, i) => ({
-    title: `Card ${i + 1}`,
-    text: `This is card ${i + 1}`,
-    cardIcon: {
-      icon: 'AccessAlarm',
-    }
-  })
-);
-
-// Function to generate items
-const generateItemsWithLinks = (count: number): CardsItemProps[] =>
-  Array.from({ length: count }, (_, i) => ({
-    title: `Card ${i + 1}`,
-    text: `This is card ${i + 1}`,
-    cardIcon: {
-      icon: 'AccessAlarm',
-    },
-    links: [
-      {
-        text: `Link ${i + 1}`,
-        href: '#',
-      },
-    ],
-  })
-);
-
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<CardsProps> = (args) => <Cards {...args} />;
-
-// Define the default props
-const defaultProps: Partial<CardsProps> = {
-  theme: 'light',
-  items: generateItems(3),
 };
+export default meta;
 
-export const LightCardsThreeColumnOnlyTitleNoLinks = Template.bind({});
+export const LightCardsThreeColumnOnlyTitleNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsThreeColumnOnlyTitleNoLinks.args = {
-  ...defaultProps,
-  items: generateItems(3),
+  ...defaultPropsLightThree,
   text: {
     title: 'Cards Title',
   },
 };
 
-export const LightCardsThreeColumnOnlyTitleWithLinks = Template.bind({});
+export const LightCardsThreeColumnOnlyTitleWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsThreeColumnOnlyTitleWithLinks.args = {
-  ...defaultProps,
-  items: generateItemsWithLinks(3),
+  ...defaultPropsLightThreeWithLinks,
   text: {
     title: 'Cards Title',
   },
 };
 
-export const LightCardsFourColumnOnlyTitleNoLinks = Template.bind({});
+export const LightCardsFourColumnOnlyTitleNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsFourColumnOnlyTitleNoLinks.args = {
-  ...defaultProps,
-  items: generateItems(4),
+  ...defaultPropsLightFour,
   text: {
     title: 'Cards Title',
   },
 };
 
-export const LightCardsFourColumnOnlyTitleWithLinks = Template.bind({});
+export const LightCardsFourColumnOnlyTitleWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsFourColumnOnlyTitleWithLinks.args = {
-  ...defaultProps,
-  items: generateItemsWithLinks(4),
+  ...defaultPropsLightFourWithLinks,
   text: {
     title: 'Cards Title',
   },
 };
 
-export const LightCardsWithTextNoLinks = Template.bind({});
+export const LightCardsWithTextNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsWithTextNoLinks.args = {
-  ...defaultProps,
-  items: generateItems(4),
+  ...defaultPropsLightFour,
   text: {
     title: 'Cards Title',
     subtitle: 'Cards Subtitle',
@@ -94,10 +62,10 @@ LightCardsWithTextNoLinks.args = {
   },
 };
 
-export const LightCardsWithTextWithLinks = Template.bind({});
+export const LightCardsWithTextWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsWithTextWithLinks.args = {
-  ...defaultProps,
-  items: generateItemsWithLinks(4),
+  ...defaultPropsLightFourWithLinks,
   text: {
     title: 'Cards Title',
     subtitle: 'Cards Subtitle',
@@ -105,10 +73,10 @@ LightCardsWithTextWithLinks.args = {
   },
 };
 
-export const LightCardsWithTextandButtonNoLinks = Template.bind({});
+export const LightCardsWithTextandButtonNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsWithTextandButtonNoLinks.args = {
-  ...defaultProps,
-  items: generateItems(4),
+  ...defaultPropsLightFour,
   text: {
     title: 'Cards Title',
     subtitle: 'Cards Subtitle',
@@ -122,10 +90,10 @@ LightCardsWithTextandButtonNoLinks.args = {
   ],
 };
 
-export const LightCardsWithTextandButtonWithLinks = Template.bind({});
+export const LightCardsWithTextandButtonWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsWithTextandButtonWithLinks.args = {
-  ...defaultProps,
-  items: generateItemsWithLinks(4),
+  ...defaultPropsLightFourWithLinks,
   text: {
     title: 'Cards Title',
     subtitle: 'Cards Subtitle',

@@ -1,113 +1,109 @@
-// Import the necessary modules
-import { StoryFn, Meta } from '@storybook/react';
-import { heroCommonProps } from './heroCommons';
+import { Meta, StoryFn } from '@storybook/react';
+import {
+  HeroTemplate,
+  defaultsDarkWithButtons,
+  defaultsDarkWithoutButtons,
+} from './heroCommons';
 import { Hero } from '@react-components/components';
-import { HeroProps } from '@react-components/types';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof Hero> = {
   title: 'Components/Hero/Dark',
   component: Hero,
-} as Meta;
-
-// Define a "Template" function that sets how args map to rendering
-const Template: StoryFn<HeroProps> = (args) => <Hero {...args} />;
-
-const ctaButtons: HeroProps['ctaButtons'] = [
-  {
-    text: 'Button 1',
-    variant: 'contained',
-    disableRipple: false,
-  },
-  {
-    text: 'Button 2',
-    variant: 'outlined',
-    disableRipple: false,
-  },
-];
-
-const defaults: Partial<HeroProps> = {
-  ...heroCommonProps,
-  theme: 'dark',
 };
+export default meta;
 
-export const DarkHeroBigWithBackground = Template.bind({});
-DarkHeroBigWithBackground.args = {
-  ...defaults,
-  ctaButtons,
+export const DarkHeroBig: StoryFn<typeof Hero> = HeroTemplate.bind({});
+DarkHeroBig.args = {
+  ...defaultsDarkWithButtons,
   size: 'big',
   inverse: false,
-  useHoverlay: false,
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroBigWithBackgroundNoButtons = Template.bind({});
-DarkHeroBigWithBackgroundNoButtons.args = {
-  ...defaults,
-  ctaButtons: [],
+export const DarkHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
+DarkHeroBigNoButtons.args = {
+  ...defaultsDarkWithoutButtons,
   size: 'big',
   inverse: false,
-  useHoverlay: false,
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroBigWithBackgroundInverted = Template.bind({});
-DarkHeroBigWithBackgroundInverted.args = {
-  ...defaults,
-  ctaButtons,
+export const DarkHeroBigInverted: StoryFn<typeof Hero> = HeroTemplate.bind({});
+DarkHeroBigInverted.args = {
+  ...defaultsDarkWithButtons,
   size: 'big',
   inverse: true,
-  useHoverlay: false,
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroMediumWithBackground = Template.bind({});
-DarkHeroMediumWithBackground.args = {
-  ...defaults,
-  ctaButtons,
+export const DarkHeroBigInvertedNoButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+DarkHeroBigInvertedNoButtons.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'big',
+  inverse: true,
+};
+
+export const DarkHeroMedium: StoryFn<typeof Hero> = HeroTemplate.bind({});
+DarkHeroMedium.args = {
+  ...defaultsDarkWithButtons,
   size: 'medium',
   inverse: false,
-  useHoverlay: false,
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroMediumWithBackgroundNoButtons = Template.bind({});
-DarkHeroMediumWithBackgroundNoButtons.args = {
-  ...defaults,
-  ctaButtons: [],
+export const DarkHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
+DarkHeroMediumNoButtons.args = {
+  ...defaultsDarkWithoutButtons,
   size: 'medium',
   inverse: false,
-  useHoverlay: false,
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroMediumWithBackgroundInverted = Template.bind({});
-DarkHeroMediumWithBackgroundInverted.args = {
-  ...defaults,
-  ctaButtons,
+export const DarkHeroMediumInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
+DarkHeroMediumInverted.args = {
+  ...defaultsDarkWithButtons,
   size: 'medium',
   inverse: true,
-  useHoverlay: false,
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
 };
 
-export const DarkHeroSmallWithBackground = Template.bind({});
-DarkHeroSmallWithBackground.args = {
-  ...defaults,
-  subtitle: '',
+export const DarkHeroMediumInvertedNoButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+DarkHeroMediumInvertedNoButtons.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'medium',
+  inverse: true,
+};
+
+export const DarkHeroSmall: StoryFn<typeof Hero> = HeroTemplate.bind({});
+DarkHeroSmall.args = {
+  ...defaultsDarkWithButtons,
   size: 'small',
-  useHoverlay: false,
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+  inverse: false,
+};
+
+export const DarkHeroSmallNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
+DarkHeroSmallNoButtons.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'small',
+  inverse: false,
+};
+
+export const DarkHeroSmallInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
+DarkHeroSmallInverted.args = {
+  ...defaultsDarkWithButtons,
+  size: 'small',
+  inverse: true,
+};
+
+export const DarkHeroSmallInvertedNoButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+DarkHeroSmallInvertedNoButtons.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'small',
+  inverse: true,
 };
