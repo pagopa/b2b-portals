@@ -1,14 +1,22 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Cards } from '@react-components/components';
-import { CardsTemplate, defaultPropsLightThree, defaultPropsLightThreeWithLinks, defaultPropsLightFour, defaultPropsLightFourWithLinks } from './cardsCommons';
+import {
+  CardsTemplate,
+  defaultPropsLightThree,
+  defaultPropsLightThreeWithLinks,
+  defaultPropsLightFour,
+  defaultPropsLightFourWithLinks,
+} from './cardsCommons';
 
 // Define the default export with metadata about your component
-export default {
+const meta: Meta<typeof Cards> = {
   title: 'Components/Cards/Light',
   component: Cards,
-} as Meta;
+};
+export default meta;
 
-export const LightCardsThreeColumnOnlyTitleNoLinks = CardsTemplate.bind({});
+export const LightCardsThreeColumnOnlyTitleNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsThreeColumnOnlyTitleNoLinks.args = {
   ...defaultPropsLightThree,
   text: {
@@ -16,7 +24,8 @@ LightCardsThreeColumnOnlyTitleNoLinks.args = {
   },
 };
 
-export const LightCardsThreeColumnOnlyTitleWithLinks = CardsTemplate.bind({});
+export const LightCardsThreeColumnOnlyTitleWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsThreeColumnOnlyTitleWithLinks.args = {
   ...defaultPropsLightThreeWithLinks,
   text: {
@@ -24,7 +33,8 @@ LightCardsThreeColumnOnlyTitleWithLinks.args = {
   },
 };
 
-export const LightCardsFourColumnOnlyTitleNoLinks = CardsTemplate.bind({});
+export const LightCardsFourColumnOnlyTitleNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsFourColumnOnlyTitleNoLinks.args = {
   ...defaultPropsLightFour,
   text: {
@@ -32,7 +42,8 @@ LightCardsFourColumnOnlyTitleNoLinks.args = {
   },
 };
 
-export const LightCardsFourColumnOnlyTitleWithLinks = CardsTemplate.bind({});
+export const LightCardsFourColumnOnlyTitleWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsFourColumnOnlyTitleWithLinks.args = {
   ...defaultPropsLightFourWithLinks,
   text: {
@@ -40,7 +51,8 @@ LightCardsFourColumnOnlyTitleWithLinks.args = {
   },
 };
 
-export const LightCardsWithTextNoLinks = CardsTemplate.bind({});
+export const LightCardsWithTextNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsWithTextNoLinks.args = {
   ...defaultPropsLightFour,
   text: {
@@ -50,7 +62,8 @@ LightCardsWithTextNoLinks.args = {
   },
 };
 
-export const LightCardsWithTextWithLinks = CardsTemplate.bind({});
+export const LightCardsWithTextWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsWithTextWithLinks.args = {
   ...defaultPropsLightFourWithLinks,
   text: {
@@ -60,7 +73,8 @@ LightCardsWithTextWithLinks.args = {
   },
 };
 
-export const LightCardsWithTextandButtonNoLinks = CardsTemplate.bind({});
+export const LightCardsWithTextandButtonNoLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsWithTextandButtonNoLinks.args = {
   ...defaultPropsLightFour,
   text: {
@@ -76,7 +90,8 @@ LightCardsWithTextandButtonNoLinks.args = {
   ],
 };
 
-export const LightCardsWithTextandButtonWithLinks = CardsTemplate.bind({});
+export const LightCardsWithTextandButtonWithLinks: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
 LightCardsWithTextandButtonWithLinks.args = {
   ...defaultPropsLightFourWithLinks,
   text: {
