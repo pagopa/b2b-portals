@@ -3,6 +3,7 @@ import {
   HeroTemplate,
   defaultsDarkWithButtons,
   defaultsDarkWithoutButtons,
+  defaultsDarkWithoutButtonsNoSubtitle,
 } from './heroCommons';
 import { Hero } from '@react-components/components';
 
@@ -91,19 +92,11 @@ DarkHeroSmallNoButtons.args = {
   inverse: false,
 };
 
-export const DarkHeroSmallInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
+export const DarkHeroSmallNoSubtitle: StoryFn<typeof Hero> = HeroTemplate.bind(
   {}
 );
-DarkHeroSmallInverted.args = {
-  ...defaultsDarkWithButtons,
-  size: 'small',
-  inverse: true,
-};
-
-export const DarkHeroSmallInvertedNoButtons: StoryFn<typeof Hero> =
-  HeroTemplate.bind({});
-DarkHeroSmallInvertedNoButtons.args = {
-  ...defaultsDarkWithoutButtons,
+DarkHeroSmallNoSubtitle.args = {
+  ...defaultsDarkWithoutButtonsNoSubtitle,
   size: 'small',
   inverse: true,
 };

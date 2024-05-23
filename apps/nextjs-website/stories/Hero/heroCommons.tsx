@@ -21,44 +21,24 @@ const ctaButtons: HeroProps['ctaButtons'] = [
   },
 ];
 
-export const defaultsDarkWithButtons: Partial<HeroProps> = {
-  theme: 'dark',
+const createHeroProps = (
+  theme: 'dark' | 'light',
+  withButtons: boolean,
+  withSubtitle: boolean
+): Partial<HeroProps> => ({
+  theme,
   useHoverlay: false,
   title,
-  subtitle,
-  ctaButtons,
+  subtitle: withSubtitle ? subtitle : '',
+  ctaButtons: withButtons ? ctaButtons : [],
   altText: 'Alt text for image',
   image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
   background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
-};
+});
 
-export const defaultsDarkWithoutButtons: Partial<HeroProps> = {
-  theme: 'dark',
-  useHoverlay: false,
-  title,
-  subtitle,
-  ctaButtons: [],
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
-};
-
-export const defaultsLightWithButtons: Partial<HeroProps> = {
-  theme: 'light',
-  useHoverlay: false,
-  title,
-  subtitle,
-  ctaButtons,
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-};
-
-export const defaultsLightWithoutButtons: Partial<HeroProps> = {
-  theme: 'light',
-  useHoverlay: false,
-  title,
-  subtitle,
-  ctaButtons: [],
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-};
+export const defaultsDarkWithButtons = createHeroProps('dark', true, true);
+export const defaultsDarkWithoutButtons = createHeroProps('dark', false, true);
+export const defaultsDarkWithoutButtonsNoSubtitle = createHeroProps('dark', false, false);
+export const defaultsLightWithButtons = createHeroProps('light', true, true);
+export const defaultsLightWithoutButtons = createHeroProps('light', false, true);
+export const defaultsLightWithoutButtonsNoSubtitle = createHeroProps('light', false, false);
