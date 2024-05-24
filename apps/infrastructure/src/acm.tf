@@ -36,3 +36,19 @@ module "cdn_websites_ssl_certificate" {
 
   create_route53_records = false
 }
+
+## Certificate HTTPS for Storybook
+module "cdn_storybook_ssl_certificate" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-acm.git?ref=8d0b22f1f242a1b36e29b8cb38aaeac9b887500d" # v5.0.0
+
+  domain_name = "storybook.${keys(var.dns_domain_name)[0]}"
+  zone_id     = module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]]
+
+  subject_alternative_names = [
+    "www.storybook.${keys(var.dns_domain_name)[0]}"
+  ]
+
+  wait_for_validation = true
+  validation_method   = "DNS"
+  dns_ttl             = 3600
+}
