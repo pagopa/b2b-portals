@@ -23,7 +23,7 @@ resource "aws_cloudwatch_dashboard" "main" {
           "view" : "timeSeries",
           "stacked" : false,
           "metrics" : [
-            ["AWS/CloudFront", "Requests", "Region", "Global", "DistributionId", aws_cloudfront_distribution.website.id, { "region" : "us-east-1" }]
+            ["AWS/CloudFront", "Requests", "Region", "Global", "DistributionId", aws_cloudfront_distribution.cdn_multi_website.id, { "region" : "us-east-1" }]
           ],
           "region" : var.aws_region,
           "title" : "# Requests"
@@ -42,7 +42,7 @@ resource "aws_cloudwatch_dashboard" "main" {
           "stat" : "Average",
           "period" : 300,
           "metrics" : [
-            ["AWS/CloudFront", "TotalErrorRate", "Region", "Global", "DistributionId", aws_cloudfront_distribution.website.id, { "region" : "us-east-1" }],
+            ["AWS/CloudFront", "TotalErrorRate", "Region", "Global", "DistributionId", aws_cloudfront_distribution.cdn_multi_website.id, { "region" : "us-east-1" }],
             [".", "4xxErrorRate", ".", ".", ".", ".", { "region" : "eu-south-1" }],
             [".", "5xxErrorRate", ".", ".", ".", ".", { "region" : "eu-south-1" }]
           ],
@@ -62,7 +62,7 @@ resource "aws_cloudwatch_dashboard" "main" {
           "stat" : "Average",
           "period" : 300,
           "metrics" : [
-            ["AWS/CloudFront", "FunctionInvocations", "FunctionName", "rewrite-request", "Region", "Global", "DistributionId", aws_cloudfront_distribution.website.id, { "region" : "us-east-1" }]
+            ["AWS/CloudFront", "FunctionInvocations", "FunctionName", "rewrite-request", "Region", "Global", "DistributionId", aws_cloudfront_distribution.cdn_multi_website.id, { "region" : "us-east-1" }]
           ],
           "title" : "Rewrite Function"
         }

@@ -154,7 +154,7 @@ module "cloudfront_5xx_error_rate_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
     Region         = "Global" # Global because CloudFront is a global service
   }
 }
@@ -177,7 +177,7 @@ module "cloudfront_origin_latency_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
     Region         = "Global" # Global because CloudFront is a global service
   }
 }
@@ -200,7 +200,7 @@ module "cloudfront_function_validation_errors_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
     Region         = "Global" # Global because CloudFront is a global service
     FunctionName   = aws_cloudfront_function.website_viewer_request_handler.name
   }
@@ -224,7 +224,7 @@ module "cloudfront_function_execution_errors_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
     Region         = "Global" # Global because CloudFront is a global service
     FunctionName   = aws_cloudfront_function.website_viewer_request_handler.name
   }
@@ -248,7 +248,7 @@ module "cloudfront_function_throttled_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
     Region         = "Global" # Global because CloudFront is a global service
     FunctionName   = aws_cloudfront_function.website_viewer_request_handler.name
   }
