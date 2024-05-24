@@ -14,6 +14,7 @@ const SiteWideSEOCodec = t.strict({
         name: t.string,
         shortName: t.string,
       }),
+      matomoID: t.union([t.string, t.null]),
     }),
   }),
 });

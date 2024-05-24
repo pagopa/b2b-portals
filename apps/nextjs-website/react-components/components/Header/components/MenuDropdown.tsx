@@ -25,6 +25,7 @@ const useStyles = ({ theme, active, items }: MenuDropdownProp, { palette, spacin
       borderColor: textColor,
       borderBottomStyle: 'solid',
       borderBottomWidth: { md: active ? 3 : 0, xs: 0 },
+      zIndex: 1,
     },
     item: {
       cursor: {

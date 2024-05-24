@@ -1,10 +1,6 @@
 import { type CommonProps, type Generic } from '../common/Common.types';
 import { CtaButtonProps } from '../common/Common.types';
 
-{
-  /* HERO PROPS */
-}
-
 export interface HeroProps extends CommonProps, HeroTextProps {
   readonly image?: string | Generic;
   readonly altText?: string;

@@ -55,6 +55,7 @@ const Header = ({
     <Box
       bgcolor={backgroundColor}
       paddingX={{ xs: 1, sm: 3 }}
+      paddingY={3}
       component='header'
       role='banner'
     >
@@ -103,7 +104,7 @@ const Header = ({
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: { md: 'center', xs: 'flex-start' },
             gap: { xs: 2 },
-            display: { xs: menuOpen ? 'flex' : 'none', md: 'flex' },
+            display: { xs: menuOpen ? 'flex' : 'none', md: 'flex' }
           }}
         >
           <Navigation {...{ menu, theme }} />

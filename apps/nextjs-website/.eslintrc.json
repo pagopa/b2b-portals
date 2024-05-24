@@ -2,6 +2,7 @@
   "root": true,
   "extends": [
     "custom/eslint-recommended",
-    "custom/eslint-nextjs"
+    "custom/eslint-nextjs",
+    "plugin:storybook/recommended"
   ]
 }

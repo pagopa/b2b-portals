@@ -38,21 +38,40 @@ const HowTo = (props: HowToProps) => {
           component='p'
           textColor={textColor}
           title={title}
-          marginBottom={8}
+          marginBottom={32}
         />
       </Grid>
-      <Grid item>
+      <Grid
+        item
+        container
+        direction='column'
+        justifyContent='center'
+        alignItems='center'
+        gap='24px'
+        sx={{ paddingLeft: '2em', paddingRight: '2em' }}
+      >
         {/** Steps */}
         {stepsRows.map((stepRow, i) => (
           <Stack
             direction={{ md: 'row' }}
             justifyContent={alignment}
             spacing={{ xs: 4, md: 8 }}
-            sx={{ mt: i > 0 ? { xs: 4, md: 8 } : 0 }}
+            sx={{
+              mt: i > 0 ? { xs: 4, md: 8 } : 0,
+              marginX: 'auto',
+              width: '100%',
+            }}
             key={i}
           >
             {stepRow.map((step, j) => (
-              <Box key={j} flex={0.25}>
+              <Box
+                key={j}
+                flex={0.25}
+                width='100%'
+                sx={{
+                  minWidth: 'auto',
+                }}
+              >
                 <HowToStep
                   index={i * rowMaxSteps + j}
                   theme={theme}
@@ -67,7 +86,12 @@ const HowTo = (props: HowToProps) => {
         {/** Link */}
         {link && (
           <Link
-            sx={{ display: 'flex', alignItems: 'center', mt: 6 }}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              mt: 6,
+              alignSelf: 'flex-start',
+            }}
             href={link.href}
             target={link.target}
             color={textColor}

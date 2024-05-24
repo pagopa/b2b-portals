@@ -8,12 +8,15 @@
     "start": "next start",
     "compile": "tsc --noEmit",
     "test": "vitest --coverage",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.14",
+    "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.14.14",
     "@pagopa/mui-italia": "^1.0.1",
     "fp-ts": "^2.16.1",
@@ -27,6 +30,12 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^8.1.0",
+    "@storybook/addon-interactions": "^8.1.0",
+    "@storybook/addon-links": "^8.1.0",
+    "@storybook/addon-onboarding": "^8.1.0",
+    "@storybook/nextjs": "^8.1.0",
+    "@storybook/react": "^8.1.0",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
@@ -38,6 +47,8 @@
     "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-storybook": "^0.8.0",
+    "storybook": "^8.1.0",
     "typescript": "5.2.2",
     "vitest": "^0.34.6"
   }
