@@ -232,6 +232,8 @@ resource "aws_cloudfront_distribution" "storybook" {
   comment             = "CloudFront distribution for the storybook."
   default_root_object = "index.html"
 
+  aliases = module.cdn_storybook_ssl_certificate.distinct_domain_names
+
   custom_error_response {
     error_code         = 404
     response_code      = 404
