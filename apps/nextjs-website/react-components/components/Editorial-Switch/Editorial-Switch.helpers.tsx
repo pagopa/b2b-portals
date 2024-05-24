@@ -55,9 +55,9 @@ const SplitButton = ({
   selectedButton,
   onButtonClick,
 }: {
-  buttons: string[];
-  selectedButton: string;
-  onButtonClick: (button: string) => void;
+  buttons: { id: string; text: string }[];
+  selectedButton: { id: string; text: string };
+  onButtonClick: (button: { id: string; text: string }) => void;
   theme: string;
 }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -68,7 +68,7 @@ const SplitButton = ({
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleMenuItemClick = (button: string) => {
+  const handleMenuItemClick = (button: { id: string; text: string }) => {
     onButtonClick(button);
     setOpen(false);
   };
@@ -92,7 +92,7 @@ const SplitButton = ({
             onButtonClick(selectedButton);
           }}
         >
-          {selectedButton}
+          {selectedButton.text} {/* Use the text property of the selectedButton object */}
         </Button>
         <Button
           aria-controls={open ? 'split-button-menu' : undefined}
@@ -122,13 +122,13 @@ const SplitButton = ({
       >
         {buttons.map((button) => (
           <MenuItem
-            key={button}
-            selected={button === selectedButton}
+            key={button.id}
+            selected={button.id === selectedButton.id}
             onClick={() => {
               handleMenuItemClick(button);
             }}
           >
-            {button}
+            {button.text} {/* Use the text property of the button object */}
           </MenuItem>
         ))}
       </Menu>
@@ -141,7 +141,7 @@ export const ButtonSwitchRowBlock = ({
   onButtonClick,
   theme,
   selectedButton,
-}: ButtonSwitchRowBlockProps & { selectedButton: string }) => {
+}: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
@@ -153,7 +153,7 @@ export const ButtonSwitchRowBlock = ({
     >
       {CtaButtons({
         ctaButtons: buttons.map((button) => ({
-          text: button,
+          text: button.text, // Use the text property of the button object
           sx: { width: { md: 'auto', xs: '100%' } },
           variant: 'outlined',
         })),

@@ -1,5 +1,3 @@
-// EditorialSwitch.stories.tsx
-
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { EditorialSwitch } from '@react-components/components';
@@ -21,12 +19,16 @@ Default.args = {
   width: 'wide',
   toptitle: 'Top Title',
   topsubtitle: 'Top Subtitle',
-  buttons: ['Button 1', 'Button 2'],
+  buttons: [
+    { id: '1', text: 'Button 1' },
+    { id: '2', text: 'Button 2' },
+  ],
   content: [
     {
-      eyelet: 'Eyelet',
-      body: 'Body',
-      title: 'Title',
+      id: '1',
+      eyelet: 'Eyelet Content 1',
+      body: 'Body Content 1',
+      title: 'Title Content 1',
       pattern: 'dots',
       image: <img src="https://notifichedigitali.pagopa.it/static/images/pa-infoblock-3.png" alt="Placeholder" />,
       ctaButtons: [
@@ -39,9 +41,10 @@ Default.args = {
       ],
     },
     {
-      eyelet: 'Eyelet',
-      body: 'Body',
-      title: 'Title',
+      id: '2',
+      eyelet: 'Eyelet Content 2',
+      body: 'Body Content 2',
+      title: 'Title Content 2',
       pattern: 'none',
       image: <img src="https://notifichedigitali.pagopa.it/static/images/pa-infoblock-3.png" alt="Placeholder" />,
       ctaButtons: [
