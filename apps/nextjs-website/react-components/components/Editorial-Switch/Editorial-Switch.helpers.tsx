@@ -3,13 +3,14 @@ import {
   ButtonSwitchRowBlockProps,
   TitleSubtitleBlockProps,
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
-import { Subtitle, Title } from '../common/Common';
+import { CtaButtons, Subtitle, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import {
   Button,
   ButtonGroup,
   Menu,
   MenuItem,
+  Stack,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -143,27 +144,22 @@ export const ButtonSwitchRowBlock = ({
 }: ButtonSwitchRowBlockProps & { selectedButton: string }) => {
   const muiTheme = useTheme();
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
+  const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
   return isLarge ? (
-    <ButtonGroup
-      variant='outlined'
-      aria-label='outlined button group'
-      sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      role='group'
+    <Stack
+      direction={isSmallScreen ? 'column' : 'row'}
+      justifyContent='left'
     >
-      {buttons.map((button, index) => {
-        return (
-          <Button
-            key={index}
-            onClick={() => {
-              onButtonClick(button);
-            }}
-          >
-            {button}
-          </Button>
-        );
+      {CtaButtons({
+        ctaButtons: buttons.map((button) => ({
+          text: button,
+          sx: { width: { md: 'auto', xs: '100%' } },
+          variant: 'outlined',
+        })),
+        theme,
       })}
-    </ButtonGroup>
+    </Stack>
   ) : (
     <SplitButton
       buttons={buttons}
