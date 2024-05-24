@@ -63,7 +63,7 @@ module "storybook_records_www" {
       name = "www.storybook"
       type = "A"
       alias = {
-        name                   = module.storybook_records.route53_record_fqdn
+        name                   = module.storybook_records[0].route53_record_name
         zone_id                = module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]]
         evaluate_target_health = false
       }
