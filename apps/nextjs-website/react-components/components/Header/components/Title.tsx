@@ -21,10 +21,10 @@ export const HeaderTitle = ({
   const label = 'beta';
 
   return (
-    <Stack direction="column" alignItems="center" gap={1}>
+    <Stack direction="row" alignItems="center" gap={1} sx={{ height:'100%'}}>
       {logo && (
-        <Link href={logo.href}>
-          <img src={logo.src} alt={logo.alt} height={48} />
+        <Link  alignItems="center" height='10.25em' sx={{ display: 'flex', height:'100%', justifyContent: 'center' }} href={logo.href}>
+          <img src={logo.src} alt={logo.alt} />
         </Link>
       )}
       {!logo && (
