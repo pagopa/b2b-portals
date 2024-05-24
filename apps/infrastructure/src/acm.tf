@@ -48,6 +48,10 @@ module "cdn_storybook_ssl_certificate" {
     "www.storybook.${keys(var.dns_domain_name)[0]}"
   ]
 
+  providers = {
+    aws = aws.us-east-1
+  }
+
   wait_for_validation = true
   validation_method   = "DNS"
   dns_ttl             = 3600
