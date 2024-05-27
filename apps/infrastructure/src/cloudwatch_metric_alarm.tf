@@ -139,7 +139,13 @@ module "alb_error_4xx_alarm" {
 module "cloudfront_5xx_error_rate_alarm" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=0b4aa2b9aa19060205965a938de89a7bf0ff477b" # v5.1.0
 
-  alarm_name        = "Send | Website | CloudFront 5xxErrorRate"
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_distribution
+  }
+
+  alarm_name        = "${each.key} | Website | CloudFront 5xxErrorRate"
   actions_enabled   = true
   alarm_description = "This alarm monitors the percentage of 5xx error responses from origin server"
   metric_name       = "5xxErrorRate"
@@ -154,7 +160,7 @@ module "cloudfront_5xx_error_rate_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website[each.key].id
     Region         = "Global" # Global because CloudFront is a global service
   }
 }
@@ -162,7 +168,13 @@ module "cloudfront_5xx_error_rate_alarm" {
 module "cloudfront_origin_latency_alarm" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=0b4aa2b9aa19060205965a938de89a7bf0ff477b" # v5.1.0
 
-  alarm_name        = "Send | Website | CloudFront Origin Latency"
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_distribution
+  }
+
+  alarm_name        = "${each.key} | Website | CloudFront Origin Latency"
   actions_enabled   = true
   alarm_description = "This alarm is used to detect problems with the origin server taking too long to respond"
   metric_name       = "OriginLatency"
@@ -177,7 +189,7 @@ module "cloudfront_origin_latency_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website[each.key].id
     Region         = "Global" # Global because CloudFront is a global service
   }
 }
@@ -185,7 +197,13 @@ module "cloudfront_origin_latency_alarm" {
 module "cloudfront_function_validation_errors_alarm" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=0b4aa2b9aa19060205965a938de89a7bf0ff477b" # v5.1.0
 
-  alarm_name        = "Send | Website | CloudFront Function | FunctionValidationErrors"
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_distribution
+  }
+
+  alarm_name        = "${each.key} | Website | CloudFront Function | FunctionValidationErrors"
   actions_enabled   = true
   alarm_description = "This alarm is used to detect validation errors from CloudFront functions"
   metric_name       = "FunctionValidationErrors"
@@ -200,7 +218,7 @@ module "cloudfront_function_validation_errors_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website[each.key].id
     Region         = "Global" # Global because CloudFront is a global service
     FunctionName   = aws_cloudfront_function.website_viewer_request_handler.name
   }
@@ -209,7 +227,13 @@ module "cloudfront_function_validation_errors_alarm" {
 module "cloudfront_function_execution_errors_alarm" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=0b4aa2b9aa19060205965a938de89a7bf0ff477b" # v5.1.0
 
-  alarm_name        = "Send | Website | CloudFront Function | Execution Errors"
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_distribution
+  }
+
+  alarm_name        = "${each.key} | Website | CloudFront Function | Execution Errors"
   actions_enabled   = true
   alarm_description = "This alarm is used to detect execution errors from CloudFront functions"
   metric_name       = "FunctionExecutionErrors"
@@ -224,7 +248,7 @@ module "cloudfront_function_execution_errors_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website[each.key].id
     Region         = "Global" # Global because CloudFront is a global service
     FunctionName   = aws_cloudfront_function.website_viewer_request_handler.name
   }
@@ -233,7 +257,13 @@ module "cloudfront_function_execution_errors_alarm" {
 module "cloudfront_function_throttled_alarm" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=0b4aa2b9aa19060205965a938de89a7bf0ff477b" # v5.1.0
 
-  alarm_name        = "Send | Website | CloudFront Function | Throttle"
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_distribution
+  }
+
+  alarm_name        = "${each.key} | Website | CloudFront Function | Throttle"
   actions_enabled   = true
   alarm_description = "This alarm can detect when the CloudFront function is taking too long to respond"
   metric_name       = "FunctionThrottles"
@@ -248,7 +278,7 @@ module "cloudfront_function_throttled_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    DistributionId = aws_cloudfront_distribution.cdn_multi_website.id
+    DistributionId = aws_cloudfront_distribution.cdn_multi_website[each.key].id
     Region         = "Global" # Global because CloudFront is a global service
     FunctionName   = aws_cloudfront_function.website_viewer_request_handler.name
   }
