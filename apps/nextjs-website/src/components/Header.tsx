@@ -11,7 +11,7 @@ const makeHeaderProps = (
 ): HeaderProps => ({
   ...(logo.data && {
     logo: {
-      src: logo.data.attributes.url,
+      src: 'https://notifichedigitali.pagopa.it/static/images/logo.svg',
       href: '/',
       alt: logo.data.attributes.alternativeText ?? productName,
     },
