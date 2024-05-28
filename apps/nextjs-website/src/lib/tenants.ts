@@ -1,4 +1,11 @@
 const tenants = {
+  demo: {
+    general: 'general',
+    preHeader: 'pre-header',
+    header: 'header',
+    footer: 'footer',
+    navigation: 'demo-main-navigation',
+  },
   send: {
     general: 'send-general',
     preHeader: 'send-pre-header',
