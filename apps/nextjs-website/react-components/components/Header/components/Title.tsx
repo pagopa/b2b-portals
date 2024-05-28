@@ -5,6 +5,7 @@ import {
   Chip,
   useTheme,
   Link,
+  Box,
 } from '@mui/material';
 import { HeaderTitleProps } from '../../../types/Header/Header.types';
 
@@ -23,9 +24,19 @@ export const HeaderTitle = ({
   return (
     <Stack direction="row" alignItems="center" gap={1} sx={{ height:'100%'}}>
       {logo && (
-        <Link  alignItems="center" height='10.25em' sx={{ display: 'flex', height:'100%', maxheight: 64, justifyContent: 'center' }} href={logo.href}>
-          <img src={logo.src} alt={logo.alt} />
-        </Link>
+        <Box sx={{ maxHeight: 64 }}>
+          <Link  
+            alignItems="center" 
+            sx={{ 
+              display: 'flex', 
+              height: '100%', 
+              justifyContent: 'center'
+            }} 
+            href={logo.href}
+          >
+            <img src={logo.src} alt={logo.alt} />
+          </Link>
+        </Box>
       )}
       {!logo && (
       <>
