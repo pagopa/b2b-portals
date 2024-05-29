@@ -6,6 +6,7 @@ import {
   useMediaQuery,
   Link,
   type Theme,
+  Box,
 } from '@mui/material';
 import { useState } from 'react';
 import { ArrowDropDown } from '@mui/icons-material';
@@ -16,28 +17,27 @@ import { TextAlternativeColor } from '@react-components/components/common/Common
 
 const TIMEOUT_LENGTH = 100;
 
-const useStyles = ({ theme, active, items }: MenuDropdownProp, { palette, spacing }: Theme) => {
+const useStyles = ({ theme, active, items }: MenuDropdownProp, { spacing }: Theme) => {
   const textColor = TextAlternativeColor(theme);
 
   return {
     menu: {
-      paddingY: { md: 2 },
       borderColor: textColor,
       borderBottomStyle: 'solid',
+      width: '100%',
       borderBottomWidth: { md: active ? 3 : 0, xs: 0 },
-      zIndex: 1,
+      zIndex: 10,
     },
     item: {
       cursor: {
         md: items?.length ? 'default' : 'pointer',
         xs: 'pointer',
       },
-      flexDirection: 'row',
       color: textColor,
       textDecoration: 'none',
     },
     link: {
-      color: { xs: textColor, md: palette.primary.contrastText },
+      color: textColor,
       textIndent: { xs: spacing(2), md: 0 },
     },
     arrowAnimate: {
@@ -116,20 +116,23 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
 
   return (
     <Stack sx={styles.menu} {...menuEventsHandlers}>
-      <Link sx={styles.item} {...button}>
-        <Typography variant="sidenav" color="inherit">
-          {label}
-        </Typography>
+      <Box sx={{ width: '100%', minWidth:'max-content', height:'100%', gap:1.5, display:'flex', flexDirection:'row', justifyContent:'center', alignContent:'center'}} >
+        <Link sx={styles.item} {...button} style={{ justifyContent:'center', alignContent:'center', }}>
+          <Typography variant="sidenav" color="inherit" sx={{ display:'flex', }}>
+            {label}
+          </Typography>
+        </Link>
         {hasLinks && (
           <ArrowDropDown
             color="inherit"
             fontSize="small"
             sx={{
               ...(!md && dropdownVisible && styles.arrowAnimate),
+              height:'100%',
             }}
           />
         )}
-      </Link>
+      </Box>
       {hasLinks && dropdownVisible && (
         <Dropdown gap={1}>
           {items?.map((item: DropdownItem, index) =>

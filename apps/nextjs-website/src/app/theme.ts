@@ -21,6 +21,18 @@ declare module '@mui/material/styles' {
       readonly backgroundColorDefault?: string;
     };
   }
+  interface Shadows {
+    custom?: {
+      readonly boxShadow?: string;
+      readonly otMenuMobile?: string;
+    };
+  }
+  interface ShadowsOptions {
+    custom?: {
+      readonly boxShadow?: string;
+      readonly otMenuMobile?: string;
+    };
+  }
 }
 
 export const theme = createTheme(MUIItaliaTheme, {

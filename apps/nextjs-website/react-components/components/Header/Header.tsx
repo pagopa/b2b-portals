@@ -54,15 +54,15 @@ const Header = ({
   return (
     <Box
       bgcolor={backgroundColor}
-      paddingX={{ xs: 1, sm: 3 }}
-      paddingY={3}
       component='header'
       role='banner'
+      sx={{ height:136 }}
     >
       <Stack
         direction={{ md: 'row' }}
         paddingY={{ xs: 2, sm: 3, md: 0 }}
-        gap={4}
+        gap={2}
+        style={{ height:'100%' }}
       >
         <Stack
           sx={{
@@ -100,6 +100,7 @@ const Header = ({
         <Stack
           sx={{
             justifyContent: 'space-between',
+            height: '100%',
             width: '100%',
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: { md: 'center', xs: 'flex-start' },
