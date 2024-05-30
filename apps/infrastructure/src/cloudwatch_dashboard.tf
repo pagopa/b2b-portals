@@ -49,8 +49,8 @@ resource "aws_cloudwatch_dashboard" "main" {
           "period" : 300,
           "metrics" : [
             ["AWS/CloudFront", "TotalErrorRate", "Region", "Global", "DistributionId", aws_cloudfront_distribution.cdn_multi_website[each.key].id, { "region" : "us-east-1" }],
-            [".", "4xxErrorRate", ".", ".", ".", ".", { "region" : "eu-south-1" }],
-            [".", "5xxErrorRate", ".", ".", ".", ".", { "region" : "eu-south-1" }]
+            [".", "4xxErrorRate", ".", ".", ".", ".", { "region" : var.aws_region}],
+            [".", "5xxErrorRate", ".", ".", ".", ".", { "region" : var.aws_region }]
           ],
           "title" : "Error Rate"
         }
