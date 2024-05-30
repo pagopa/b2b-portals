@@ -11,7 +11,6 @@ import {
 import { useState } from 'react';
 import { ArrowDropDown } from '@mui/icons-material';
 import { DialogBubble } from '../Header.helpers';
-import { isJSX } from '../../../types/common/Common.types';
 import { DropdownItem, MenuDropdownProp } from '../../../types/Header/Header.types';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 
@@ -25,8 +24,9 @@ const useStyles = ({ theme, active, items }: MenuDropdownProp, { spacing }: Them
       borderColor: textColor,
       borderBottomStyle: 'solid',
       width: '100%',
-      borderBottomWidth: { md: active ? 3 : 0, xs: 0 },
-      zIndex: 10,
+      borderBottomWidth: 3,
+      borderBottomColor: { md: active ? textColor : 'transparent', xs: 'transparent' },
+      backgroundColor: { xs: 'white', md: 'transparent' },
     },
     item: {
       cursor: {
@@ -94,31 +94,51 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
       }
     : {
         onClick: toggleMenu,
-      };
+      }
+  ;
+
+  const DropdownParent = ({
+    children,
+    ...props
+  }: React.PropsWithChildren<Omit<StackProps, 'ref'>>) => (
+    <Box
+      component="div"
+      {...props}
+      onMouseEnter={hoverOnDropdown}
+      onMouseLeave={leavesDropdown}
+    >
+      {children}
+    </Box>
+  );
 
   const Dropdown = ({
     children,
     ...stackProps
-  }: { children: JSX.Element[] } & StackProps) =>
-    md ? (
-      <DialogBubble
-        {...stackProps}
-        onMouseEnter={hoverOnDropdown}
-        onMouseLeave={leavesDropdown}
-      >
-        {children}
-      </DialogBubble>
-    ) : (
-      <Stack {...stackProps} onClick={toggleMenu}>
-        {children}
-      </Stack>
-    );
+  }: React.PropsWithChildren<StackProps>) => (
+    <DialogBubble
+      {...stackProps}
+      onMouseEnter={hoverOnDropdown}
+      onMouseLeave={leavesDropdown}
+    >
+      {children}
+    </DialogBubble>
+  );
 
   return (
-    <Stack sx={styles.menu} {...menuEventsHandlers}>
-      <Box sx={{ width: '100%', minWidth:'max-content', height:'100%', gap:1.5, display:'flex', flexDirection:'row', justifyContent:'center', alignContent:'center'}} >
-        <Link sx={styles.item} {...button} style={{ justifyContent:'center', alignContent:'center', }}>
-          <Typography variant="sidenav" color="inherit" sx={{ display:'flex', }}>
+    <Stack sx={styles.menu}>
+      <Box sx={{ 
+        width: '100%', 
+        minWidth:'max-content', 
+        height:'100%', 
+        gap: { xs: 1, md: 1.5 }, 
+        display:'flex', 
+        flexDirection:'row', 
+        justifyContent: { xs: 'left', md: 'center' },
+        alignItems: { xs: 'center', md: 'center' },
+        paddingLeft: { xs: 2, md: 0 },
+      }}>
+        <Link sx={{ ...styles.item, justifyContent: { xs: 'left', md: 'center' }, alignContent: { xs: 'left', md: 'center' }}} {...button}>
+          <Typography variant="sidenav" color="inherit" sx={{ display:'flex' }}>
             {label}
           </Typography>
         </Link>
@@ -129,28 +149,30 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             sx={{
               ...(!md && dropdownVisible && styles.arrowAnimate),
               height:'100%',
+              cursor: 'pointer',
             }}
+            {...menuEventsHandlers}
           />
         )}
       </Box>
       {hasLinks && dropdownVisible && (
-        <Dropdown gap={1}>
-          {items?.map((item: DropdownItem, index) =>
-            isJSX(item) ? (
-              item
-            ) : (
-              <Link
-                variant="body1"
-                underline="none"
-                key={item.key ?? index}
-                sx={styles.link}
-                {...item}
-              >
-                {item.label}
-              </Link>
-            )
+        <DropdownParent>
+          {hasLinks && dropdownVisible && (
+            <Dropdown gap={1}>
+              {items?.map((item: DropdownItem, index) => (
+                <Link
+                  variant="body1"
+                  underline="none"
+                  key={item.key ?? index}
+                  sx={styles.link}
+                  {...item}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </Dropdown>
           )}
-        </Dropdown>
+        </DropdownParent>
       )}
     </Stack>
   );

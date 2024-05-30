@@ -6,10 +6,10 @@ const useStyles = (muiTheme: Theme) => ({
   bubbleContainer: {
     transform: 'rotate(180deg)',
     position: 'absolute',
-    marginTop: '90px',
+    marginTop: { xs: '0px', md: '-30px' },
     padding: muiTheme.spacing(2),
     direction: 'rtl',
-    textAlign: 'left',
+    textAlign: { xs: 'right', md: 'left' },
     borderRadius: '4px',
     zIndex: 1,
   },
@@ -26,7 +26,11 @@ export const DialogBubble = ({
   
   return (
     <Stack
-      sx={{ ...styles.bubbleContainer, bgcolor: muiTheme.palette.common.white, boxShadow: shadows.custom.otMenuMobile }}
+      sx={{ 
+        ...styles.bubbleContainer, 
+        bgcolor: muiTheme.palette.common.white, 
+        boxShadow: { xs: shadows.custom.boxShadow, md: shadows.custom.otMenuMobile } 
+      }}
       aria-haspopup="true"
     >
       <Stack sx={styles.bubble} {...stackProps}>
