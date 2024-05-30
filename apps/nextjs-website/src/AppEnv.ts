@@ -6,7 +6,11 @@ import * as PR from 'io-ts/lib/PathReporter';
 const ConfigCodec = t.type({
   STRAPI_API_TOKEN: t.string,
   STRAPI_API_BASE_URL: t.string,
-  ENVIRONMENT: t.union([t.literal('send'), t.literal('appio')]),
+  ENVIRONMENT: t.union([
+    t.literal('demo'),
+    t.literal('send'),
+    t.literal('appio'),
+  ]),
 });
 
 export type Config = t.TypeOf<typeof ConfigCodec>;
