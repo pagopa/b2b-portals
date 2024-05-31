@@ -56,12 +56,12 @@ const Header = ({
       bgcolor={backgroundColor}
       component='header'
       role='banner'
-      sx={{ height: { xs: 'auto', md: 136 } }}
+      sx={{ height: { xs: 'auto', md: 130 } }}
     >
       <Stack
         direction={{ md: 'row' }}
         paddingY={{ xs: 1, sm: 3, md: 0 }}
-        gap={{ xs: 2, md: 4 }}
+        gap={{ xs: 2, md: 2 }}
         style={{ height:'100%' }}
       >
         <Stack

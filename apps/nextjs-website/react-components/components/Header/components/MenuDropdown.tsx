@@ -16,7 +16,7 @@ import { TextAlternativeColor } from '@react-components/components/common/Common
 
 const TIMEOUT_LENGTH = 100;
 
-const useStyles = ({ theme, active, items }: MenuDropdownProp, { spacing }: Theme) => {
+const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
   const textColor = TextAlternativeColor(theme);
 
   return {
@@ -27,14 +27,6 @@ const useStyles = ({ theme, active, items }: MenuDropdownProp, { spacing }: Them
       borderBottomWidth: 3,
       borderBottomColor: { md: active ? textColor : 'transparent', xs: 'transparent' },
       backgroundColor: { xs: 'white', md: 'transparent' },
-    },
-    item: {
-      cursor: {
-        md: items?.length ? 'default' : 'pointer',
-        xs: 'pointer',
-      },
-      color: textColor,
-      textDecoration: 'none',
     },
     link: {
       color: textColor,
@@ -137,8 +129,8 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
         alignItems: { xs: 'center', md: 'center' },
         paddingLeft: { xs: 2, md: 0 },
       }}>
-        <Link sx={{ ...styles.item, justifyContent: { xs: 'left', md: 'center' }, alignContent: { xs: 'left', md: 'center' }}} {...button}>
-          <Typography variant="sidenav" color="inherit" sx={{ display:'flex' }}>
+        <Link sx={{ justifyContent: { xs: 'left', md: 'center' }, alignContent: { xs: 'left', md: 'center' }}} style={{ color:muiTheme.palette.text.secondary, textDecoration: 'none' }} {...button}>
+          <Typography variant="sidenav" color="inherit" sx={{ display:'flex', textDecoration: 'none', fontSize: '1em' }}>
             {label}
           </Typography>
         </Link>
