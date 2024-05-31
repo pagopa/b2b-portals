@@ -5,7 +5,7 @@ import { theme } from '@pagopa/mui-italia';
 
 const colorMap = {
   textColor: theme.palette.text.primary,
-  dividerColor: theme.palette.background.default,
+  dividerColor: theme.palette.divider,
 };
 
 const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
@@ -13,7 +13,7 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
     display='flex'
     flexDirection='row'
     bgcolor='background.paper'
-    paddingX={{ xs: 2, sm: 4 }}
+    paddingX={3}
     justifyContent='space-between'
     flexWrap='wrap'
     sx={{ borderBottom: `1px solid ${colorMap.dividerColor}` }}
@@ -30,9 +30,12 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
               fontSize: '0.875rem',
               lineHeight: 1.25,
               color: colorMap.textColor,
+              fontWeight: 700,
+              minHeight: '48px',
               '&:hover': {
                 // Style needed to override default 'text' variant MUI Button styles
                 backgroundColor: 'transparent',
+                opacity: 0.8,
               },
             },
           })),
@@ -52,9 +55,12 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
               fontSize: '0.875rem',
               lineHeight: 1.25,
               color: colorMap.textColor,
+              fontWeight: 600,
+              minHeight: '48px',
               '&:hover': {
                 // Style needed to override default 'text' variant MUI Button styles
                 backgroundColor: 'transparent',
+                opacity: 0.8,
               },
             },
           })),
