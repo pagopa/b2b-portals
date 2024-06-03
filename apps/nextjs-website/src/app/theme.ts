@@ -22,13 +22,13 @@ declare module '@mui/material/styles' {
     };
   }
   interface Shadows {
-    custom?: {
+    readonly custom?: {
       readonly boxShadow?: string;
       readonly otMenuMobile?: string;
     };
   }
   interface ShadowsOptions {
-    custom?: {
+    readonly custom?: {
       readonly boxShadow?: string;
       readonly otMenuMobile?: string;
     };

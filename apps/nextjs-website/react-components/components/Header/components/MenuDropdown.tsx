@@ -29,7 +29,6 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
       backgroundColor: { xs: 'white', md: 'transparent' },
     },
     link: {
-      color: textColor,
       textIndent: { xs: spacing(2), md: 0 },
     },
     arrowAnimate: {
@@ -47,7 +46,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
   const [menuHover, setMenuHover] = useState(false);
   const [dropdownHover, setDropdownHover] = useState(false);
 
-  const hoverOnMenu = () => {
+  const clickOnMenu = () => {
     setMenuHover(true);
   };
 
@@ -80,13 +79,13 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
   const dropdownVisible = menuHover || dropdownHover;
 
   const menuEventsHandlers = md
-    ? {
-        onMouseEnter: hoverOnMenu,
-        onMouseLeave: leavesMenu,
-      }
-    : {
-        onClick: toggleMenu,
-      }
+  ? {
+      onClick: clickOnMenu,
+      onMouseLeave: leavesMenu,
+    }
+  : {
+      onClick: toggleMenu,
+    }
   ;
 
   const DropdownParent = ({
@@ -129,7 +128,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
         alignItems: { xs: 'center', md: 'center' },
         paddingLeft: { xs: 2, md: 0 },
       }}>
-        <Link sx={{ justifyContent: { xs: 'left', md: 'center' }, alignContent: { xs: 'left', md: 'center' }}} style={{ color:muiTheme.palette.text.secondary, textDecoration: 'none' }} {...button}>
+        <Link sx={{ justifyContent: { xs: 'left', md: 'center' }, alignContent: { xs: 'left', md: 'center' }}} style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none' }} {...button}>
           <Typography variant="sidenav" color="inherit" sx={{ display:'flex', textDecoration: 'none', fontSize: '1em' }}>
             {label}
           </Typography>
@@ -157,6 +156,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
                   underline="none"
                   key={item.key ?? index}
                   sx={styles.link}
+                  style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none', fontSize: '1em', fontWeight: 600 }}
                   {...item}
                 >
                   {item.label}
