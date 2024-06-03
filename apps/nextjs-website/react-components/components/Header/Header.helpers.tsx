@@ -21,15 +21,14 @@ export const DialogBubble = ({
   ...stackProps
 }: DialogBubbleProps) => {
   const muiTheme = useTheme();
-  const styles = useStyles(muiTheme);  
-  const { shadows } = useTheme();
+  const styles = useStyles(muiTheme);
   
   return (
     <Stack
       sx={{ 
         ...styles.bubbleContainer, 
         bgcolor: muiTheme.palette.common.white, 
-        boxShadow: { xs: shadows.custom.boxShadow, md: shadows.custom.otMenuMobile } 
+        boxShadow: { xs: 'custom.boxShadow', md: 'custom.otMenuMobile' } 
       }}
       aria-haspopup="true"
     >
