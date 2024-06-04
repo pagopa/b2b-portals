@@ -27,7 +27,7 @@ export const DialogBubble = ({
     <Stack
       sx={{ 
         ...styles.bubbleContainer, 
-        bgcolor: muiTheme.palette.common.white, 
+        bgcolor: 'common.white', 
         boxShadow: { xs: 'custom.boxShadow', md: 'custom.otMenuMobile' } 
       }}
       aria-haspopup="true"
