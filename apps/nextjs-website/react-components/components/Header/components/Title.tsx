@@ -7,6 +7,7 @@ import {
   Link,
 } from '@mui/material';
 import { HeaderTitleProps } from '../../../types/Header/Header.types';
+import { TextColor } from '@react-components/components/common/Common.helpers';
 
 export const HeaderTitle = ({
   avatar,
@@ -15,16 +16,22 @@ export const HeaderTitle = ({
   theme,
   logo,
 }: HeaderTitleProps) => {
-  const { palette, spacing } = useTheme();
-  const textColor =
-    theme === 'dark' ? palette.primary.contrastText : palette.text.primary;
+  const { spacing } = useTheme();
+  const textColor = TextColor(theme);
   const label = 'beta';
 
   return (
-    <Stack direction="row" alignItems="center" gap={1} sx={{ height:'100%'}}>
+    <Stack direction="row" alignItems="center" gap={1} paddingX={3} paddingY={2}>
       {logo && (
-        <Link  alignItems="center" height='10.25em' sx={{ display: 'flex', height:'100%', justifyContent: 'center' }} href={logo.href}>
-          <img src={logo.src} alt={logo.alt} />
+        <Link  
+          alignItems="center" 
+          sx={{ 
+            display: 'flex',
+            justifyContent: 'center'
+          }} 
+          href={logo.href}
+        >
+          <img src={logo.src} alt={logo.alt} style={{ height:70 }}/>
         </Link>
       )}
       {!logo && (
