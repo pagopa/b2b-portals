@@ -107,3 +107,17 @@ variable "websites_configs" {
     }
   }
 }
+
+variable "nextjs_app_port" {
+  default = 3000
+}
+
+variable "nextjs_app_cpu" {
+  description = "Fargate instance CPU units to provision (1 vCPU = 1024 CPU units)"
+  default     = "1024" ##### 1 vCPU
+}
+
+variable "nextjs_app_memory" {
+  description = "Fargate instance memory to provision (in MiB)"
+  default     = "3072" ##### 3 GB RAM
+}
