@@ -1,0 +1,90 @@
+name: Deploy NextJS
+
+on:
+  push:
+        branches: ['main']
+        # Run only if there are at least one change matching the following paths  
+        paths:
+          - '.github/workflows/deploy_nextjs.yaml'
+          - 'apps/nextjs-website/**'
+
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - warning
+      environment:
+        description: 'The environment used  as target'
+        type: choice
+        required: true
+        default: prod
+        options:
+          - prod
+
+defaults:
+  run:
+    shell: bash
+    working-directory: apps/nextjs-website
+
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+
+jobs:
+  deploy:
+    name: Build and push NextJS image
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    strategy:
+      matrix:
+        environment: [ 'prod' ]
+    environment: ${{ matrix.environment }}
+
+    steps:      
+      - name: Checkout
+        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+    
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@50ac8dd1e1b10d09dac7b8727528b91bed831ac0
+        with:
+            aws-region: eu-south-1
+            role-to-assume: ${{ secrets.IAM_ROLE_DEPLOY_CMS }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
+
+      - name: Build Push and Tag
+        id: build-image
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: nextjs
+          IMAGE_TAG: ${{ github.sha }}
+        with:
+            context: apps/nextjs-website
+            push: true
+            tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+            provenance: false
+
+      - name: Generate definition file
+        run: aws ecs describe-task-definition --task-definition nextjs-task-def --query taskDefinition > task-definition.json
+       
+      - name: Update Image in task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+           task-definition: apps/nextjs-website/task-definition.json
+           container-name: nextjs-docker
+           image: ${{ steps.login-ecr.outputs.registry }}/nextjs:${{ github.sha }}
+
+      - name: Deploy new ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a # v1.4.11
+        with:
+           task-definition: ${{ steps.task-def.outputs.task-definition }}
+           service: nextjs-ecs
+           cluster: cms-ecs-cluster
