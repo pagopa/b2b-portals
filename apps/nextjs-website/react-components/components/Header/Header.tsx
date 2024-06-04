@@ -62,7 +62,7 @@ const Header = ({
         direction={{ md: 'row' }}
         paddingY={{ xs: 1, sm: 3, md: 0 }}
         gap={{ xs: 2, md: 2 }}
-        style={{ height:'100%' }}
+        sx={{ height:'100%' }}
       >
         <Stack
           sx={{
@@ -82,7 +82,7 @@ const Header = ({
           <Stack
             sx={{ 
               display: { md: 'none' },
-              marginRight: { xs: 4, md: 0 }, // Add this line
+              marginRight: { xs: 4, md: 0 },
             }}
             direction='row'
             alignItems='center'
