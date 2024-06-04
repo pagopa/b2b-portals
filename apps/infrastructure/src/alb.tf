@@ -55,7 +55,7 @@ resource "aws_lb_listener" "front_end_https" {
 
 resource "aws_lb_listener_certificate" "lb_nextjs_certificate" {
   listener_arn    = aws_lb_listener.front_end_https.arn
-  certificate_arn = aws_acm_certificate.preview_strapi_ssl_certificate.arn
+  certificate_arn = module.preview_strapi_ssl_certificate.arn
 }
 
 resource "aws_lb_listener_rule" "nextjs_rule" {
@@ -64,7 +64,7 @@ resource "aws_lb_listener_rule" "nextjs_rule" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.nextjs.arn
+    target_group_arn = aws_alb_target_group.nextjs.arn
   }
 
   condition {
