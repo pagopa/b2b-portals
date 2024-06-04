@@ -153,6 +153,18 @@ const OneTrustSectionPropsCodec = t.strict({
   oneTrustNoticeURL: t.string,
 });
 
+const FormSectionCodec = t.strict({
+  __component: t.literal('sections.form'),
+  title: t.string,
+  subtitle: t.string,
+  privacyText: t.string,
+  privacyLink: t.string,
+  privacyLinkText: t.string,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  buttonText: t.string,
+});
+
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -163,6 +175,7 @@ export const PageSectionCodec = t.union([
   StripeLinkSectionCodec,
   CardsSectionCodec,
   OneTrustSectionPropsCodec,
+  FormSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -175,3 +188,4 @@ export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
 export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
+export type FormSection = t.TypeOf<typeof FormSectionCodec>; 
