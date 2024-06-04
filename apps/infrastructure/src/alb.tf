@@ -55,7 +55,7 @@ resource "aws_lb_listener" "front_end_https" {
 
 resource "aws_lb_listener_certificate" "lb_nextjs_certificate" {
   listener_arn    = aws_lb_listener.front_end_https.arn
-  certificate_arn = module.preview_strapi_ssl_certificate.arn
+  certificate_arn = module.preview_strapi_ssl_certificate.acm_certificate_arn
 }
 
 resource "aws_lb_listener_rule" "nextjs_rule" {
