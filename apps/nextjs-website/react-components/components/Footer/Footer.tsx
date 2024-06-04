@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 import { FundedByNextGenerationEU } from './assets/FundedByNextGenerationEU';
 import { FooterColumn } from './helpers/FooterColumn';
 import { LangSwitch } from './helpers/LangSwitch';
@@ -29,21 +29,43 @@ const Footer = ({
         gap: 4,
       }}
     >
-      <FooterColumn data={aboutUs} companyLink={companyLink} />
-      <FooterColumn data={services} />
-      <FooterColumn data={resources} />
-      <Box
-        display='flex'
-        flexDirection='column'
-        alignItems={{ sm: 'flex-start', xs: 'center' }}
-      >
-        <FooterColumn data={followUs} icons={followUs.socialLinks} />
-        {langProps.languages.length > 0 && <LangSwitch {...langProps} />}
-        {showFundedByNextGenerationEULogo && ( <FundedByNextGenerationEU size={180} /> )}
-      </Box>
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={3}>
+          <FooterColumn data={aboutUs} companyLink={companyLink} />
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <FooterColumn data={services} />
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <FooterColumn data={resources} />
+        </Grid>
+        <Grid 
+          item 
+          xs={12} 
+          sm={3} 
+          container 
+          direction='column' 
+          justifyContent={{ xs: 'center', sm: 'space-between' }} 
+          alignItems={{ xs: 'center', sm: 'flex-start' }}
+        >
+          <Box width='100%'>
+            <FooterColumn data={followUs} icons={followUs.socialLinks} />
+            {langProps.languages.length > 0 && <LangSwitch {...langProps} />}
+          </Box>
+          {showFundedByNextGenerationEULogo && (
+            <Box sx={{ mt: 2 }}>
+              <FundedByNextGenerationEU size={180} />
+            </Box>
+          )}
+        </Grid>
+      </Grid>
     </Container>
     <LegalInfo data={legalInfo} />
   </Box>
 );
 
 export default Footer;
+
+
+
+
