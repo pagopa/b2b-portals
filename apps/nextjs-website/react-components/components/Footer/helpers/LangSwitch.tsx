@@ -20,7 +20,13 @@ export function LangSwitch({
   const anchorEl = useRef(null);
 
   return (
-    <Stack display='flex' flexDirection='column' aria-label='cambia la lingua'>
+    <Stack
+      display='flex'
+      flexDirection='column'
+      aria-label='cambia la lingua'
+      alignItems={{ xs: 'center', sm: 'flex-start' }}
+      width='100%'
+    >
       <Button
         sx={{
           fontWeight: '600',
@@ -33,6 +39,7 @@ export function LangSwitch({
           '&:hover': {
             backgroundColor: 'transparent',
           },
+          justifyContent: 'flex-start',
         }}
         variant='text'
         size='small'
