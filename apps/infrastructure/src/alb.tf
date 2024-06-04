@@ -1,7 +1,7 @@
 resource "aws_alb" "cms_load_balancer" {
   name            = "cms-load-balancer"
   subnets         = module.vpc.public_subnets
-  security_groups = [aws_security_group.cms_lb.id]
+  security_groups = [aws_security_group.cms_lb.id, aws_security_group.nextjs_lb.id]
   internal        = false
 }
 
@@ -50,5 +50,44 @@ resource "aws_lb_listener" "front_end_https" {
   default_action {
     type             = "forward"
     target_group_arn = aws_alb_target_group.cms.arn
+  }
+}
+
+resource "aws_lb_listener_certificate" "lb_nextjs_certificate" {
+  listener_arn    = aws_lb_listener.front_end_https.arn
+  certificate_arn = module.preview_strapi_ssl_certificate.acm_certificate_arn
+}
+
+resource "aws_lb_listener_rule" "nextjs_rule" {
+  listener_arn = aws_lb_listener.front_end_https.arn
+  priority     = 100
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.nextjs.arn
+  }
+
+  condition {
+    host_header {
+      values = ["preview.${keys(var.dns_domain_name)[0]}", "www.preview.${keys(var.dns_domain_name)[0]}"]
+    }
+  }
+}
+
+resource "aws_alb_target_group" "nextjs" {
+  name        = "nextjs-target-group"
+  port        = var.nextjs_app_port
+  protocol    = "HTTP"
+  vpc_id      = module.vpc.vpc_id
+  target_type = "ip"
+
+  health_check {
+    healthy_threshold   = "3"
+    interval            = "30"
+    protocol            = "HTTP"
+    matcher             = "401"
+    timeout             = "3"
+    path                = "/"
+    unhealthy_threshold = "2"
   }
 }
