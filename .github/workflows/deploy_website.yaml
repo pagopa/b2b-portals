@@ -15,6 +15,7 @@ on:
         options:
           - send
           - appio
+          - demo
 
   # Allows external webhook trigger
   repository_dispatch:
@@ -35,7 +36,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     strategy:
       matrix:
-        environment: [ 'send','appio' ] # add new tenant after creating the relevant environment vars/secrets github
+        environment: [ 'send','appio','demo' ] # add new tenant after creating the relevant environment vars/secrets github
 
     environment: ${{ matrix.environment }}
 

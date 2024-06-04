@@ -5,6 +5,7 @@ import appleBadgeBase64 from './BadgeImages/appleBadgeBase64';
 import googleBadgeBase64 from './BadgeImages/googleBadgeBase64';
 import { EditorialCtaProps } from '../../types/Editorial/Editorial.types';
 import { CtaButtons } from '../common/Common';
+import { useTheme, useMediaQuery } from '@mui/material';
 
 export const Ctas = ({
   ctaButtons,
@@ -12,18 +13,16 @@ export const Ctas = ({
   theme,
 }: EditorialCtaProps) => {
 
+  const muiTheme = useTheme();
+  const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
+
   if (storeButtons?.hrefGoogle || storeButtons?.hrefApple) {
     return (
       <Stack
-        sx={{
-          flexDirection: 'column',
-          '@media screen and (min-width: 420px)': {
-            flexDirection: 'row-reverse',
-          },
-        }}
         justifyContent='left'
-        spacing={2}
         alignItems='baseline'
+        spacing={2}
+        direction={isSmallScreen ? 'column' : 'row'}
       >
         {storeButtons.hrefGoogle && (
           <Button
@@ -68,10 +67,11 @@ export const Ctas = ({
         )}
       </Stack>
     );
-  } if (Array.isArray(ctaButtons) && ctaButtons.length > 0) {
+  }
+  if (Array.isArray(ctaButtons) && ctaButtons.length > 0) {
     return (
       <Stack
-        direction={{ md: 'row-reverse', xs: 'row' }}
+        direction={isSmallScreen ? 'column' : 'row'}
         justifyContent='left'
         spacing={2}
       >

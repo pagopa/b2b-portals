@@ -1,6 +1,12 @@
 resource "aws_cloudwatch_dashboard" "main" {
   dashboard_name = "Main"
 
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_distribution
+  }
+
   dashboard_body = jsonencode({
     widgets = [
       {
@@ -23,7 +29,7 @@ resource "aws_cloudwatch_dashboard" "main" {
           "view" : "timeSeries",
           "stacked" : false,
           "metrics" : [
-            ["AWS/CloudFront", "Requests", "Region", "Global", "DistributionId", aws_cloudfront_distribution.website.id, { "region" : "us-east-1" }]
+            ["AWS/CloudFront", "Requests", "Region", "Global", "DistributionId", aws_cloudfront_distribution.cdn_multi_website[each.key].id, { "region" : "us-east-1" }]
           ],
           "region" : var.aws_region,
           "title" : "# Requests"
@@ -42,9 +48,9 @@ resource "aws_cloudwatch_dashboard" "main" {
           "stat" : "Average",
           "period" : 300,
           "metrics" : [
-            ["AWS/CloudFront", "TotalErrorRate", "Region", "Global", "DistributionId", aws_cloudfront_distribution.website.id, { "region" : "us-east-1" }],
-            [".", "4xxErrorRate", ".", ".", ".", ".", { "region" : "eu-south-1" }],
-            [".", "5xxErrorRate", ".", ".", ".", ".", { "region" : "eu-south-1" }]
+            ["AWS/CloudFront", "TotalErrorRate", "Region", "Global", "DistributionId", aws_cloudfront_distribution.cdn_multi_website[each.key].id, { "region" : "us-east-1" }],
+            [".", "4xxErrorRate", ".", ".", ".", ".", { "region" : var.aws_region }],
+            [".", "5xxErrorRate", ".", ".", ".", ".", { "region" : var.aws_region }]
           ],
           "title" : "Error Rate"
         }
@@ -62,7 +68,7 @@ resource "aws_cloudwatch_dashboard" "main" {
           "stat" : "Average",
           "period" : 300,
           "metrics" : [
-            ["AWS/CloudFront", "FunctionInvocations", "FunctionName", "rewrite-request", "Region", "Global", "DistributionId", aws_cloudfront_distribution.website.id, { "region" : "us-east-1" }]
+            ["AWS/CloudFront", "FunctionInvocations", "FunctionName", "rewrite-request", "Region", "Global", "DistributionId", aws_cloudfront_distribution.cdn_multi_website[each.key].id, { "region" : "us-east-1" }]
           ],
           "title" : "Rewrite Function"
         }
