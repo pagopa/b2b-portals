@@ -9,6 +9,12 @@ import { getHeader } from './fetch/header';
 import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { makeAppEnv } from '@/AppEnv';
+import {
+  PageIDs,
+  fetchAllPageIDs,
+  fetchPageFromID,
+} from './fetch/preview';
+import { PageSection } from './fetch/types/PageSection';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -65,4 +71,43 @@ export const getSiteWideSEO = async (): Promise<
     data: { attributes },
   } = await fetchSiteWideSEO(appEnv);
   return attributes;
+};
+
+export const getAllPageIDs = async (): Promise<PageIDs['data']> => {
+  const { data } = await fetchAllPageIDs(appEnv);
+  return data;
+};
+
+export const getPageSectionsFromID = async (
+  pageID: number
+): Promise<Array<PageSection>> => {
+  const {
+    data: { attributes },
+  } = await fetchPageFromID({ ...appEnv, pageID });
+
+  return attributes.sections.map((section) => {
+    switch (section.__component) {
+      case 'sections.hero':
+        return {
+          ...section,
+          image: section.image.data?.attributes ?? null,
+          background: section.background.data?.attributes ?? null,
+        };
+
+      case 'sections.editorial':
+        return {
+          ...section,
+          image: section.image.data.attributes,
+        };
+
+      case 'sections.banner-link':
+        return {
+          ...section,
+          decoration: section.decoration.data?.attributes ?? null,
+        };
+
+      default:
+        return section;
+    }
+  });
 };
