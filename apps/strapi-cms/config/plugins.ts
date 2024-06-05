@@ -41,4 +41,24 @@ export default ({ env }: any) => ({
       branch: env('TARGET_BRANCH', 'main'),
     },
   },
+  'preview-button': {
+    enabled: true,
+    config: {
+      contentTypes: [
+        {
+          uid: 'api::page.page',
+          draft: {
+            url: env('PREVIEW_URL'),
+            query: {
+              pageID: '{id}',
+              secret: env('PREVIEW_TOKEN'),
+            },
+            openTarget: '_blank',
+            copy: false,
+            alwaysVisible: true,
+          },
+        }
+      ]
+    }
+  }
 });
