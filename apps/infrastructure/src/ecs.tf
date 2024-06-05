@@ -83,6 +83,7 @@ data "template_file" "nextjs_app" {
     container_port   = var.nextjs_app_port
     strapi_api_token = aws_ssm_parameter.strapi_api_token.arn
     strapi_api_url   = "https://${keys(var.dns_domain_name)[0]}"
+    preview_token    = aws_ssm_parameter.preview_token.arn
   }
 }
 
