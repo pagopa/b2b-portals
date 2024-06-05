@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import Item from './CardsItem';
 import { CardsProps } from '../../types/Cards/Cards.types';
@@ -8,10 +8,11 @@ import { Title, Subtitle, Body } from '../common/Common';
 import { CardsItemContainer } from './Cards.helpers';
 
 const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
-  const background = theme === 'dark' ? 'primary.dark' : 'background.paper';
+  const { palette } = useTheme();
+  const background = theme === 'dark' ? palette.custom.backgroundColorDark : 'background.paper';
   const textColor = theme === 'dark' ? 'primary.contrastText' : 'text.primary';
 
-  const isMasonry = !!text?.body && !!text?.subtitle;
+  const isMasonry = !!text?.body;
 
   return (
     <ContainerRC
@@ -37,27 +38,27 @@ const Cards = ({ items, theme, text, ctaButtons }: CardsProps) => {
           variant='h2'
           textColor={'inherit'}
           title={text.title}
-          textAlign='left'
+          textAlign={isMasonry ? 'left' : 'center'}
           marginBottom={5}
         />
 
-        {isMasonry && (
+        {text.subtitle && (
           <Subtitle
             variant='h6'
             textColor={'inherit'}
             subtitle={text.subtitle}
-            textAlign='left'
+            textAlign={isMasonry ? 'left' : 'center'}
             marginBottom={5}
           />
         )}
-        {isMasonry ? (
+        {text.body && (
           <Body
             variant='body1'
             textColor={'inherit'}
             body={text.body}
             marginBottom={5}
           />
-        ) : null}
+        )}
         {ctaButtons?.length ? (
           <Stack
             direction={{ xs: 'column', md: 'row' }}
