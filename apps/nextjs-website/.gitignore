@@ -350,3 +350,5 @@ dist
 storybook-static/
 
 # End of https://www.toptal.com/developers/gitignore/api/node,emacs,macos,storybookjs,intellij+all,nextjs
+
+*storybook.log

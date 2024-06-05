@@ -6,37 +6,29 @@ import {
   useMediaQuery,
   Link,
   type Theme,
+  Box,
 } from '@mui/material';
 import { useState } from 'react';
 import { ArrowDropDown } from '@mui/icons-material';
 import { DialogBubble } from '../Header.helpers';
-import { isJSX } from '../../../types/common/Common.types';
 import { DropdownItem, MenuDropdownProp } from '../../../types/Header/Header.types';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 
 const TIMEOUT_LENGTH = 100;
 
-const useStyles = ({ theme, active, items }: MenuDropdownProp, { palette, spacing }: Theme) => {
+const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
   const textColor = TextAlternativeColor(theme);
 
   return {
     menu: {
-      paddingY: { md: 2 },
       borderColor: textColor,
       borderBottomStyle: 'solid',
-      borderBottomWidth: { md: active ? 3 : 0, xs: 0 },
-    },
-    item: {
-      cursor: {
-        md: items?.length ? 'default' : 'pointer',
-        xs: 'pointer',
-      },
-      flexDirection: 'row',
-      color: textColor,
-      textDecoration: 'none',
+      width: '100%',
+      borderBottomWidth: 3,
+      borderBottomColor: { md: active ? textColor : 'transparent', xs: 'transparent' },
+      backgroundColor: { xs: 'white', md: 'transparent' },
     },
     link: {
-      color: { xs: textColor, md: palette.primary.contrastText },
       textIndent: { xs: spacing(2), md: 0 },
     },
     arrowAnimate: {
@@ -54,7 +46,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
   const [menuHover, setMenuHover] = useState(false);
   const [dropdownHover, setDropdownHover] = useState(false);
 
-  const hoverOnMenu = () => {
+  const clickOnMenu = () => {
     setMenuHover(true);
   };
 
@@ -87,66 +79,92 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
   const dropdownVisible = menuHover || dropdownHover;
 
   const menuEventsHandlers = md
-    ? {
-        onMouseEnter: hoverOnMenu,
-        onMouseLeave: leavesMenu,
-      }
-    : {
-        onClick: toggleMenu,
-      };
+  ? {
+      onClick: clickOnMenu,
+      onMouseLeave: leavesMenu,
+    }
+  : {
+      onClick: toggleMenu,
+    }
+  ;
+
+  const DropdownParent = ({
+    children,
+    ...props
+  }: React.PropsWithChildren<Omit<StackProps, 'ref'>>) => (
+    <Box
+      component="div"
+      {...props}
+      onMouseEnter={hoverOnDropdown}
+      onMouseLeave={leavesDropdown}
+    >
+      {children}
+    </Box>
+  );
 
   const Dropdown = ({
     children,
     ...stackProps
-  }: { children: JSX.Element[] } & StackProps) =>
-    md ? (
-      <DialogBubble
-        {...stackProps}
-        onMouseEnter={hoverOnDropdown}
-        onMouseLeave={leavesDropdown}
-      >
-        {children}
-      </DialogBubble>
-    ) : (
-      <Stack {...stackProps} onClick={toggleMenu}>
-        {children}
-      </Stack>
-    );
+  }: React.PropsWithChildren<StackProps>) => (
+    <DialogBubble
+      {...stackProps}
+      onMouseEnter={hoverOnDropdown}
+      onMouseLeave={leavesDropdown}
+    >
+      {children}
+    </DialogBubble>
+  );
 
   return (
-    <Stack sx={styles.menu} {...menuEventsHandlers}>
-      <Link sx={styles.item} {...button}>
-        <Typography variant="sidenav" color="inherit">
-          {label}
-        </Typography>
+    <Stack sx={styles.menu}>
+      <Box sx={{ 
+        width: '100%', 
+        minWidth:'max-content', 
+        height:'100%', 
+        gap: { xs: 1, md: 1.5 }, 
+        display:'flex', 
+        flexDirection:'row', 
+        justifyContent: { xs: 'left', md: 'center' },
+        alignItems: { xs: 'center', md: 'center' },
+        paddingLeft: { xs: 2, md: 0 },
+      }}>
+        <Link sx={{ justifyContent: { xs: 'left', md: 'center' }, alignContent: { xs: 'left', md: 'center' }}} style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none' }} {...button}>
+          <Typography variant="sidenav" color="inherit" sx={{ display:'flex', textDecoration: 'none', fontSize: '1em' }}>
+            {label}
+          </Typography>
+        </Link>
         {hasLinks && (
           <ArrowDropDown
             color="inherit"
             fontSize="small"
             sx={{
               ...(!md && dropdownVisible && styles.arrowAnimate),
+              height:'100%',
+              cursor: 'pointer',
             }}
+            {...menuEventsHandlers}
           />
         )}
-      </Link>
+      </Box>
       {hasLinks && dropdownVisible && (
-        <Dropdown gap={1}>
-          {items?.map((item: DropdownItem, index) =>
-            isJSX(item) ? (
-              item
-            ) : (
-              <Link
-                variant="body1"
-                underline="none"
-                key={item.key ?? index}
-                sx={styles.link}
-                {...item}
-              >
-                {item.label}
-              </Link>
-            )
+        <DropdownParent>
+          {hasLinks && dropdownVisible && (
+            <Dropdown gap={1}>
+              {items?.map((item: DropdownItem, index) => (
+                <Link
+                  variant="body1"
+                  underline="none"
+                  key={item.key ?? index}
+                  sx={styles.link}
+                  style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none', fontSize: '1em', fontWeight: 600 }}
+                  {...item}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </Dropdown>
           )}
-        </Dropdown>
+        </DropdownParent>
       )}
     </Stack>
   );

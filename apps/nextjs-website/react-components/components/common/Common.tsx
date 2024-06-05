@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Button, Typography, TypographyProps } from '@mui/material';
 import { CtaButtonProps } from '../../types/common/Common.types';
+import { Box } from '@mui/material';
 
 export const CtaButtons = ({
   ctaButtons,
@@ -180,6 +181,14 @@ const StringBody = (
     variant={variant}
     style={{ color: textColor, marginBottom }}
     align={textAlign}
+    sx={{
+      'a': {
+        color: textColor,
+        '&:hover': {
+          color: textColor,
+        },
+      },
+    }}
   >
     {body}
   </Typography>
@@ -192,16 +201,27 @@ const ElementBody = (
   variant: TypographyProps['variant'] = 'body2',
   marginBottom: number | string = 0
 ) =>
-  React.isValidElement(body)
-    ? React.cloneElement(
+  React.isValidElement(body) ? (
+    <Box
+      sx={{
+        'a': {
+          color: textColor,
+          '&:hover': {
+            color: textColor,
+          },
+        },
+      }}
+    >
+      {React.cloneElement(
         body as ReactElement<TypographyProps & { style?: React.CSSProperties }>,
         {
           style: { color: textColor, marginBottom },
           align: textAlign,
           variant: variant,
         }
-      )
-    : null;
+      )}
+    </Box>
+  ) : null;
 
 export const Body = ({
   body,

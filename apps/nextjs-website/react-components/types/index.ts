@@ -10,6 +10,7 @@ import { PreHeaderProps } from './PreHeader/PreHeader.types';
 import { StripeLinkProps } from './StripeLink/StripeLink.types';
 import { HeaderProps } from './Header/Header.types';
 import { FeatureProps } from './Feature/Feature.types';
+import { IFrameProps } from './IFrame/IFrame.types';
 
 export type {
   HeroProps,
@@ -24,4 +25,5 @@ export type {
   StripeLinkProps,
   HeaderProps,
   FeatureProps,
+  IFrameProps,
 };

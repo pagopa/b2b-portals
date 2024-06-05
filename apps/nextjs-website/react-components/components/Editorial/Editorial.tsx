@@ -13,10 +13,6 @@ const styles = {
     display: 'grid',
     justifyContent: 'center',
   },
-  offset: {
-    marginLeft: '8.33%',
-    paddingRight: '4.15%',
-  },
 };
 
 const Editorial = (props: EditorialProps) => {
@@ -36,9 +32,49 @@ const Editorial = (props: EditorialProps) => {
   const isMobile = useIsMobile();
   const backgroundColor = BackgroundColor(theme);
 
+  if (width === 'standard') {
+    // If 'width' is 'standard' use this layout
+    return (
+      <ContainerRC
+        size='xl'
+        alignItems='center'
+        background={backgroundColor}
+        direction={isMobile ? 'column' : reversed ? 'row-reverse' : 'row'}
+        py={8}
+        spacing={2}
+      >
+        <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
+
+        <Grid item xs={12} md={4}>
+          <Stack gap={4}>
+            <EditorialContent
+              theme={theme}
+              title={title}
+              body={body}
+              {...(eyelet && { eyelet })}
+            />
+            <EditorialCtas
+              theme={theme}
+              {...(ctaButtons && { ctaButtons })}
+              {...(storeButtons && { storeButtons })}
+            />
+          </Stack>
+        </Grid>
+
+        <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
+
+        <Grid item xs={12} md={5}>
+          <EditorialImage {...{ pattern, image, theme }} />
+        </Grid>
+
+        <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
+      </ContainerRC>
+    );
+  }
+
+  // Otherwise use original layout
   const columns = {
     wide: 6,
-    standard: 5,
     center: 4,
   };
 
@@ -47,14 +83,14 @@ const Editorial = (props: EditorialProps) => {
       ? 'column-reverse'
       : 'column'
     : reversed
-    ? 'row-reverse'
-    : 'row';
+      ? 'row-reverse'
+      : 'row';
 
-  const gridItemStyles =
-    width === 'standard' ? { ...styles.half, ...styles.offset } : styles.half;
+  const gridItemStyles = { ...styles.half };
 
   return (
     <ContainerRC
+      size='xl'
       alignItems='center'
       background={backgroundColor}
       direction={containerDirection}

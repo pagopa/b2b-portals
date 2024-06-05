@@ -57,6 +57,7 @@ const siteWideSEOResponse = {
         name: 'SEND-PagoPA - Servizio di Notifiche Digitali',
         shortName: 'SEND-PagoPA',
       },
+      matomoID: '12',
     },
   },
 };

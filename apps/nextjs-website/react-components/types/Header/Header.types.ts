@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { AvatarProps, LinkProps, StackProps } from "@mui/material";
-import { CommonProps, CtaButtonProps, Generic } from "../common/Common.types";
+import { CommonProps, CtaButtonProps } from "../common/Common.types";
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
   ctaButtons?: CtaButtonProps[];
@@ -10,7 +10,7 @@ interface DropdownLink extends LinkProps {
   label: string;
 }
 
-export type DropdownItem = Generic | DropdownLink;
+export type DropdownItem = DropdownLink;
 
 export interface MenuDropdownProp
   extends Partial<Omit<LinkProps, 'children'>>,

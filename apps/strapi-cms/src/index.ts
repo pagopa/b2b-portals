@@ -10,6 +10,7 @@ interface IServiceError {
 
 const environmentFromUserRole = {
   'AppIO Editor': 'appio', // eslint-disable-line @typescript-eslint/naming-convention
+  'Demo Editor': 'demo', // eslint-disable-line @typescript-eslint/naming-convention
   'SEND Editor': 'send', // eslint-disable-line @typescript-eslint/naming-convention
 };
 
