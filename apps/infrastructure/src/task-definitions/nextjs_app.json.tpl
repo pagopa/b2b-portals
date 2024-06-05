@@ -11,7 +11,8 @@
       "logDriver": "awslogs",
       "options": {
         "awslogs-group": "nextjs-ecs-task",
-        "awslogs-region": "eu-south-1"
+        "awslogs-region": "eu-south-1",
+        "awslogs-stream-prefix": "nextjs"
       }
     },
     "environment": [
