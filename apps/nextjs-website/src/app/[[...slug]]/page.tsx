@@ -1,6 +1,11 @@
 import { Metadata } from 'next';
 import { Page } from '@/lib/pages';
-import { getAllPages, getPageProps, getSiteWideSEO } from '@/lib/api';
+import {
+  getAllPages,
+  getPageProps,
+  getSiteWideSEO,
+  isPreviewMode,
+} from '@/lib/api';
 import PageSection from '@/components/PageSection/PageSection';
 
 // Statically generate routes at build time instead of on-demand at request time.
@@ -11,7 +16,9 @@ export const generateStaticParams = async (): Promise<Page[]> =>
   // "generateStaticParams"; __return_type__: Promise<readonly Page[]>; }' does
   // not satisfy the constraint '{ __tag__: "generateStaticParams";
   // __return_type__: any[] | Promise<any[]>; }'.
-  [...(await getAllPages())];
+
+  // No need to prerender static routes when in Preview Mode
+  isPreviewMode() ? [] : [...(await getAllPages())];
 
 export async function generateMetadata({
   params,
@@ -53,7 +60,12 @@ type PageParams = {
   params: { slug?: string[] };
 };
 
-const Page = async ({ params }: PageParams) => {
+const WebPage = async ({ params }: PageParams) => {
+  // Prevent any page other than /preview from showing when in Preview Mode
+  if (isPreviewMode()) {
+    return null;
+  }
+
   const { slug } = params;
   // slug is undefined for homepage (apparently due to generateStaticParams)
   // so we need to convert it back to [] (which is what getAllPages returns and what getPageProps expects)
@@ -67,4 +79,4 @@ const Page = async ({ params }: PageParams) => {
   return <div>{sections.map(PageSection)}</div>;
 };
 
-export default Page;
+export default WebPage;
