@@ -21,18 +21,26 @@
         "value": "${aws_region}"
       },
       {
-        "name": "DRAFT_MODE",
+        "name": "PREVIEW_MODE",
         "value": "true"
       },
       {
         "name": "STRAPI_API_BASE_URL",
         "value": "${strapi_api_url}"
+      },
+      {
+        "name": "ENVIRONMENT",
+        "value": "demo"
       }
     ],
     "secrets" : [
       {
         "name": "STRAPI_API_TOKEN",
         "valueFrom": "${strapi_api_token}"
+      },
+      {
+        "name": "PREVIEW_TOKEN",
+        "valueFrom": "${preview_token}"
       }
     ]
   }
