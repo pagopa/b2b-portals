@@ -111,7 +111,8 @@ data "aws_iam_policy_document" "ecs_task_execution" {
       aws_ssm_parameter.cms_access_key_id.arn,
       aws_ssm_parameter.cms_access_key_secret.arn,
       aws_ssm_parameter.cms_github_pat.arn,
-      aws_ssm_parameter.strapi_api_token.arn
+      aws_ssm_parameter.strapi_api_token.arn,
+      aws_ssm_parameter.preview_token.arn
     ]
   }
 
