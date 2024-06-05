@@ -11,8 +11,9 @@ import {
   Divider,
 } from '@mui/material';
 import { FormProps } from '@react-components/types/Form/Form.types';
+import { TextColor, BackgroundColorAlternative } from '../common/Common.helpers'; 
 
-const Form = ({
+const Form: React.FC<FormProps> = ({
   title,
   subtitle,
   privacyText,
@@ -20,15 +21,10 @@ const Form = ({
   privacyLinkText,
   buttonText,
   theme,
-}: FormProps) => {
-  const backgroundColor = theme === 'dark' ? '#333' : 'white';
-  const textColor = theme === 'dark' ? 'white' : 'black';
-  const backgroundImage =
-    'https://firma.io.italia.it/static/hero-solid-light-e572933ea5002ad32c30da3444b1d1fc.jpg';
-
-  const inputStyles = {
-    backgroundColor: 'white',
-  };
+  backgroundImage,
+}) => {
+  const backgroundColor = BackgroundColorAlternative(theme); 
+  const textColor = TextColor(theme); 
 
   return (
     <Box
@@ -49,7 +45,7 @@ const Form = ({
           right: 0,
           bottom: 0,
           left: 0,
-          backgroundImage: `url(${backgroundImage})`,
+          backgroundImage: `url(${backgroundImage ?? ''})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           zIndex: 1,
@@ -66,61 +62,39 @@ const Form = ({
         },
       }}
     >
-      <Typography
-        variant='h3'
-        gutterBottom
-        sx={{ position: 'relative', zIndex: 3 }}
-      >
+      <Typography variant='h3' gutterBottom sx={{ position: 'relative', zIndex: 3 }}>
         {title}
       </Typography>
-      <Typography
-        variant='body1'
-        gutterBottom
-        sx={{ position: 'relative', zIndex: 3, mb: 2 }}
-      >
+      <Typography variant='body1' gutterBottom sx={{ position: 'relative', zIndex: 3, mb: 2 }}>
         {subtitle}
       </Typography>
-      <Grid
-        container
-        spacing={2}
-        sx={{ mb: 2, position: 'relative', zIndex: 3 }}
-      >
+      <Grid container spacing={2} sx={{ mb: 2, position: 'relative', zIndex: 3 }}>
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
-            <OutlinedInput placeholder='Nome' sx={inputStyles} />
+            <OutlinedInput placeholder='Nome' sx={{ backgroundColor: 'white' }} />
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
-            <OutlinedInput placeholder='Cognome' sx={inputStyles} />
+            <OutlinedInput placeholder='Cognome' sx={{ backgroundColor: 'white' }} />
           </FormControl>
         </Grid>
         <Grid item xs={12}>
           <FormControl fullWidth>
-            <OutlinedInput
-              placeholder='Indirizzo e-mail aziendale'
-              sx={inputStyles}
-            />
+            <OutlinedInput placeholder='Indirizzo e-mail aziendale' sx={{ backgroundColor: 'white' }} />
           </FormControl>
         </Grid>
         <Grid item xs={12}>
           <FormControl fullWidth>
-            <OutlinedInput placeholder='Nome ente' sx={inputStyles} />
+            <OutlinedInput placeholder='Nome ente' sx={{ backgroundColor: 'white' }} />
           </FormControl>
         </Grid>
       </Grid>
-      <Typography
-        variant='body2'
-        sx={{ mb: 2, position: 'relative', zIndex: 3 }}
-      >
+      <Typography variant='body2' sx={{ mb: 2, position: 'relative', zIndex: 3 }}>
         {privacyText} <Link href={privacyLink}>{privacyLinkText}</Link>
       </Typography>
       <Divider sx={{ mb: 2, position: 'relative', zIndex: 3 }} />
-      <Button
-        variant='contained'
-        color='primary'
-        sx={{ position: 'relative', zIndex: 3 }}
-      >
+      <Button variant='contained' color='primary' sx={{ position: 'relative', zIndex: 3 }}>
         {buttonText}
       </Button>
     </Box>

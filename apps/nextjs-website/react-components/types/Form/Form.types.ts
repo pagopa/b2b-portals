@@ -9,6 +9,5 @@ export interface FormProps extends CommonProps {
   readonly privacyLinkText: string;
   readonly theme: Readonly<'light' | 'dark'>;
   readonly buttonText: string;
+  readonly backgroundImage?: string;
 }
-
-export interface FormSection extends FormProps {}
