@@ -10,6 +10,7 @@ import PreHeader from './PreHeader/PreHeader';
 import StripeLink from './StripeLink/StripeLink';
 import Header from './Header/Header';
 import Feature from './Feature/Feature';
+import IFrame from './IFrame/IFrame';
 
 export {
   Hero,
@@ -24,4 +25,5 @@ export {
   StripeLink,
   Header,
   Feature,
+  IFrame,
 };

@@ -7,6 +7,14 @@
         "containerPort": ${container_port}
       }
     ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "strapi-ecs-task",
+        "awslogs-region": "eu-south-1",
+        "awslogs-stream-prefix": "strapi"
+      }
+    },
     "environment": [
       {
         "name": "NODE_ENV",
@@ -75,6 +83,10 @@
       {
         "name": "TARGET_BRANCH",
         "value": "${target_branch}"
+      },
+      {
+        "name": "PREVIEW_URL",
+        "value": "${preview_url}"
       }
     ],
     "secrets" : [
@@ -113,6 +125,10 @@
       {
         "name": "GITHUB_PAT",
         "valueFrom": "${github_pat}"
+      },
+      {
+        "name": "PREVIEW_TOKEN",
+        "valueFrom": "${preview_token}"
       }
     ]
   }

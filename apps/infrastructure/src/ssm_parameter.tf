@@ -99,3 +99,39 @@ resource "aws_ssm_parameter" "cms_github_pat" {
     ]
   }
 }
+
+resource "random_password" "strapi_api_token" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+resource "aws_ssm_parameter" "strapi_api_token" {
+  name  = "/cms/strapi_api_token"
+  type  = "SecureString"
+  value = random_password.strapi_api_token.result
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to value, because the value is updated manually
+      value
+    ]
+  }
+}
+
+resource "random_password" "preview_token" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+resource "aws_ssm_parameter" "preview_token" {
+  name  = "/cms/preview_token"
+  type  = "SecureString"
+  value = random_password.preview_token.result
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to value, because the value is updated manually
+      value
+    ]
+  }
+}

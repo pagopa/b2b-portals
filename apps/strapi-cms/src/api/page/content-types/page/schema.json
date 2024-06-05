@@ -34,7 +34,8 @@
         "sections.accordion",
         "sections.cards",
         "sections.stripe-link",
-        "sections.one-trust"
+        "sections.one-trust",
+        "sections.i-frame"
       ],
       "required": true,
       "min": 1

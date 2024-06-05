@@ -95,6 +95,29 @@ variable "websites_configs" {
       cdn_use_custom_certificate = false
       cdn_use_alias              = false
       cdn_indexing_enable        = false
+    },
+    "demo" = {
+      origin_path                = "/demo"
+      url_tenant                 = "demo.b2bportals.pagopa.it"
+      create_certificate         = false
+      create_distribution        = true
+      cdn_use_custom_certificate = false
+      cdn_use_alias              = false
+      cdn_indexing_enable        = false
     }
   }
+}
+
+variable "nextjs_app_port" {
+  default = 3000
+}
+
+variable "nextjs_app_cpu" {
+  description = "Fargate instance CPU units to provision (1 vCPU = 1024 CPU units)"
+  default     = "1024" ##### 1 vCPU
+}
+
+variable "nextjs_app_memory" {
+  description = "Fargate instance memory to provision (in MiB)"
+  default     = "3072" ##### 3 GB RAM
 }
