@@ -38,5 +38,3 @@ const PreviewPage = async ({
 };
 
 export default PreviewPage;
-
-// TODO: Remove this page from SSG (currently generates an empty page)
