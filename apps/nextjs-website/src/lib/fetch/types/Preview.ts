@@ -174,4 +174,6 @@ export type PreviewHowToSection = t.TypeOf<typeof HowToSectionCodec>;
 export type PreviewBannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
 export type PreviewStripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
 export type PreviewCardsSection = t.TypeOf<typeof CardsSectionCodec>;
-export type PreviewOneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
+export type PreviewOneTrustSectionProps = t.TypeOf<
+  typeof OneTrustSectionPropsCodec
+>;

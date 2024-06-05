@@ -1,8 +1,12 @@
 const { env } = require('process');
 
 const nextConfig =
-  env.DRAFT_MODE === 'true'
-    ? {}
+  env.PREVIEW_MODE === 'true'
+    ? {
+        images: {
+          unoptimized: true,
+        },
+      }
     : {
         output: 'export',
         images: {

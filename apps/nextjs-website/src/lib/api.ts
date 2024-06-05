@@ -8,13 +8,9 @@ import { FooterData, getFooter } from './fetch/footer';
 import { getHeader } from './fetch/header';
 import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
-import { makeAppEnv } from '@/AppEnv';
-import {
-  PageIDs,
-  fetchAllPageIDs,
-  fetchPageFromID,
-} from './fetch/preview';
+import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
+import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -80,12 +76,13 @@ export const getAllPageIDs = async (): Promise<PageIDs['data']> => {
 
 export const getPageSectionsFromID = async (
   pageID: number
-): Promise<Array<PageSection>> => {
+): Promise<ReadonlyArray<PageSection>> => {
   const {
     data: { attributes },
   } = await fetchPageFromID({ ...appEnv, pageID });
 
   return attributes.sections.map((section) => {
+    // eslint-disable-next-line no-underscore-dangle
     switch (section.__component) {
       case 'sections.hero':
         return {
@@ -111,3 +108,7 @@ export const getPageSectionsFromID = async (
     }
   });
 };
+
+export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
+
+export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
