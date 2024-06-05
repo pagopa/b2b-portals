@@ -61,7 +61,7 @@ type PageParams = {
 };
 
 const WebPage = async ({ params }: PageParams) => {
-  // Prevent any page other than /preview from showing when  in Preview Mode
+  // Prevent any page other than /preview from showing when in Preview Mode
   if (isPreviewMode()) {
     return null;
   }
