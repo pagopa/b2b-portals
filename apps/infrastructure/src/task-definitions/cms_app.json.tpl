@@ -7,6 +7,14 @@
         "containerPort": ${container_port}
       }
     ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "ecs-task",
+        "awslogs-region": "eu-south-1",
+        "awslogs-stream-prefix": "strapi-ecs"
+      }
+    },
     "environment": [
       {
         "name": "NODE_ENV",

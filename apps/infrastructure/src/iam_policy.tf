@@ -249,3 +249,24 @@ resource "aws_iam_policy" "ecs_task_role_s3" {
   path   = "/"
   policy = data.aws_iam_policy_document.ecs_task_role_s3.json
 }
+
+resource "aws_iam_policy" "logs_ecs" {
+  name        = "LogECS"
+  description = "Policy to allow Logs in ECS."
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+          "logs:DescribeLogStreams"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}
