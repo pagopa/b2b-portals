@@ -12,7 +12,7 @@ const makeFormProps = ({
   ...rest
 }: FormSection): FormProps => ({
   ...rest,
-  privacyText: MarkdownRenderer({ markdown: privacyText }),
+  privacyText: MarkdownRenderer({ markdown: privacyText, variant: 'body2' }),
   privacyLink,
   buttonText,
   privacyLinkText,

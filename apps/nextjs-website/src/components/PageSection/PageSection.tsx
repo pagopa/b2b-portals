@@ -8,9 +8,9 @@ import BannerLink from '../BannerLink';
 import StripeLink from '../StripeLink';
 import Cards from '../Cards';
 import OneTrustSection from '../OneTrust';
+import IFrameSection from '../IFrame';
 import Form from '../Form';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
-
 
 const PageSection = (props: PageSectionData) => {
   // eslint-disable-next-line no-underscore-dangle
@@ -33,7 +33,9 @@ const PageSection = (props: PageSectionData) => {
       return <Cards {...props} />;
     case 'sections.one-trust':
       return <OneTrustSection {...props} />;
-    case 'sections.form':  
+    case 'sections.i-frame':
+      return <IFrameSection {...props} />;
+    case 'sections.form':
       return <Form {...props} />;
     default:
       return null;

@@ -11,6 +11,8 @@ const ConfigCodec = t.type({
     t.literal('send'),
     t.literal('appio'),
   ]),
+  PREVIEW_MODE: t.union([t.string, t.undefined]),
+  PREVIEW_TOKEN: t.union([t.string, t.undefined]),
 });
 
 export type Config = t.TypeOf<typeof ConfigCodec>;

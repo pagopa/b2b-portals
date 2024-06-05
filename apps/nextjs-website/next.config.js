@@ -1,9 +1,17 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    output: 'export',
-    images: {
-        unoptimized: true,
-    },
-}
+const { env } = require('process');
 
-module.exports = nextConfig
+const nextConfig =
+  env.PREVIEW_MODE === 'true'
+    ? {
+        images: {
+          unoptimized: true,
+        },
+      }
+    : {
+        output: 'export',
+        images: {
+          unoptimized: true,
+        },
+      };
+
+module.exports = nextConfig;

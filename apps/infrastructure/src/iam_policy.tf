@@ -110,7 +110,9 @@ data "aws_iam_policy_document" "ecs_task_execution" {
       aws_ssm_parameter.cms_jwt_secret.arn,
       aws_ssm_parameter.cms_access_key_id.arn,
       aws_ssm_parameter.cms_access_key_secret.arn,
-      aws_ssm_parameter.cms_github_pat.arn
+      aws_ssm_parameter.cms_github_pat.arn,
+      aws_ssm_parameter.strapi_api_token.arn,
+      aws_ssm_parameter.preview_token.arn
     ]
   }
 
@@ -247,4 +249,25 @@ resource "aws_iam_policy" "ecs_task_role_s3" {
   name   = "CMSTaskRolePoliciesS3"
   path   = "/"
   policy = data.aws_iam_policy_document.ecs_task_role_s3.json
+}
+
+resource "aws_iam_policy" "logs_ecs" {
+  name        = "LogECS"
+  description = "Policy to allow Logs in ECS."
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+          "logs:DescribeLogStreams"
+        ]
+        Effect   = "Allow"
+        Resource = [aws_cloudwatch_log_group.nextjs_ecs_task.arn, aws_cloudwatch_log_group.strapi_ecs_task.arn]
+      }
+    ]
+  })
 }

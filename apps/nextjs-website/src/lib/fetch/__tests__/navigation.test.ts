@@ -8,6 +8,8 @@ const makeTestAppEnv = () => {
     STRAPI_API_TOKEN: 'aStrapiToken',
     STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
     ENVIRONMENT: 'send',
+    PREVIEW_MODE: undefined,
+    PREVIEW_TOKEN: undefined,
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };

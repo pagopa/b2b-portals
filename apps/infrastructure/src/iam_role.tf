@@ -34,6 +34,11 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_policy" {
   policy_arn = aws_iam_policy.ecs_task_execution.arn
 }
 
+resource "aws_iam_role_policy_attachment" "logs_ecs" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = aws_iam_policy.logs_ecs.arn
+}
+
 resource "aws_iam_role" "task_role" {
   name               = "ecs-task-role"
   assume_role_policy = data.aws_iam_policy_document.task_role.json
