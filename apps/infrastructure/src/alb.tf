@@ -87,7 +87,7 @@ resource "aws_alb_target_group" "nextjs" {
     protocol            = "HTTP"
     matcher             = "401"
     timeout             = "3"
-    path                = "/"
+    path                = "/preview"
     unhealthy_threshold = "2"
   }
 }
