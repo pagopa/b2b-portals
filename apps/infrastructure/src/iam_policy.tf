@@ -265,7 +265,7 @@ resource "aws_iam_policy" "logs_ecs" {
           "logs:DescribeLogStreams"
         ]
         Effect   = "Allow"
-        Resource = "*"
+        Resource = [aws_cloudwatch_log_group.nextjs_ecs_task.arn, aws_cloudwatch_log_group.strapi_ecs_task.arn]
       }
     ]
   })
