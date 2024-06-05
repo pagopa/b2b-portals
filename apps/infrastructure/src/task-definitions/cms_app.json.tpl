@@ -83,6 +83,10 @@
       {
         "name": "TARGET_BRANCH",
         "value": "${target_branch}"
+      },
+      {
+        "name": "PREVIEW_URL",
+        "value": "${preview_url}"
       }
     ],
     "secrets" : [
@@ -121,6 +125,10 @@
       {
         "name": "GITHUB_PAT",
         "valueFrom": "${github_pat}"
+      },
+      {
+        "name": "PREVIEW_TOKEN",
+        "valueFrom": "${preview_token}"
       }
     ]
   }
