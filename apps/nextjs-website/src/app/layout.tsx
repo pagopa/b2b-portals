@@ -16,9 +16,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const previewMode = isPreviewMode();
-
-  if (previewMode) {
+  if (isPreviewMode()) {
     return (
       <ThemeProvider theme={theme}>
         <html lang='it'>
