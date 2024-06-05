@@ -9,6 +9,7 @@ import {
   getHeaderProps,
   getFooterProps,
   getSiteWideSEO,
+  isPreviewMode,
 } from '@/lib/api';
 
 const MatomoScript = (id: string): string => `
@@ -33,6 +34,24 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  if (isPreviewMode()) {
+    return (
+      <ThemeProvider theme={theme}>
+        <html lang='it'>
+          <body style={{ margin: 0 }}>
+            {children}
+            <Script
+              src='/scripts/otnotice-1.0.min.js'
+              type='text/javascript'
+              id='otprivacy-notice-script'
+              strategy='beforeInteractive'
+            />
+          </body>
+        </html>
+      </ThemeProvider>
+    );
+  }
+
   const preHeaderProps = await getPreHeaderProps();
   const headerProps = await getHeaderProps();
   const footerProps = await getFooterProps();
