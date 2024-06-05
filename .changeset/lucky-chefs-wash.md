@@ -2,4 +2,4 @@
 "infrastructure": minor
 ---
 
-[B2BP-659] - add env var ecs strapi preview
+Add PREVIEW_TOKEN and PREVIEW_URL env vars
