@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import Item from './CardsItem';
 import { CardsProps } from '../../types/Cards/Cards.types';
@@ -6,6 +6,7 @@ import { CtaButtonProps } from '../../types/common/Common.types';
 import { CtaButtons } from '../common/Common';
 import { Title, Subtitle, Body } from '../common/Common';
 import { CardsItemContainer } from './Cards.helpers';
+import { BackgroundColor, TextColor } from '../common/Common.helpers';
 
 const Cards = ({
   items,
@@ -14,17 +15,15 @@ const Cards = ({
   ctaButtons,
   textPosition = 'left',
 }: CardsProps) => {
-  const { palette } = useTheme();
-  const background =
-    theme === 'dark' ? palette.custom.backgroundColorDark : 'background.paper';
-  const textColor = theme === 'dark' ? 'primary.contrastText' : 'text.primary';
+  const backgroundColor = BackgroundColor(theme);
+  const textColor = TextColor(theme);
 
   const flexDirection = textPosition === 'right' ? 'row-reverse' : 'row';
   const isCenter = textPosition === 'center';
 
   return (
     <ContainerRC
-      background={background}
+      background={backgroundColor}
       py={8}
       sx={{
         display: 'flex',
