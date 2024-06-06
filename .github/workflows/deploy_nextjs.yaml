@@ -73,7 +73,6 @@ jobs:
             build-args: |
                 ENVIRONMENT=demo
                 PREVIEW_MODE=true
-                PREVIEW_URL=${{ vars.PREVIEW_URL }}
                 STRAPI_API_TOKEN=${{ secrets.STRAPI_TOKEN }}
                 PREVIEW_TOKEN=${{ secrets.PREVIEW_TOKEN }}
                 STRAPI_API_BASE_URL=${{ vars.STRAPI_URL }}
