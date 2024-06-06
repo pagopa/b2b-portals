@@ -12,7 +12,7 @@ const Cards = ({
   theme,
   text,
   ctaButtons,
-  textPosition = 'right',
+  textPosition = 'left',
 }: CardsProps) => {
   const { palette } = useTheme();
   const background =

@@ -15,67 +15,201 @@ const meta: Meta<typeof Cards> = {
 };
 export default meta;
 
-export const DarkCardsThreeColumnOnlyTitleNoLinks: StoryFn<typeof Cards> =
+export const DarkCardsThreeColumnOnlyTitleNoLinksLeft: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsThreeColumnOnlyTitleNoLinks.args = {
+DarkCardsThreeColumnOnlyTitleNoLinksLeft.args = {
   ...defaultPropsDarkThree,
   text: {
     title: 'Cards Title',
   },
+  textPosition: 'left',
 };
 
-export const DarkCardsThreeColumnOnlyTitleWithLinks: StoryFn<typeof Cards> =
+export const DarkCardsThreeColumnOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsThreeColumnOnlyTitleWithLinks.args = {
+DarkCardsThreeColumnOnlyTitleNoLinksRight.args = {
+  ...defaultPropsDarkThree,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'right', 
+};
+
+export const DarkCardsThreeColumnOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsThreeColumnOnlyTitleNoLinksCenter.args = {
+  ...defaultPropsDarkThree,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'center',
+};
+
+export const DarkCardsThreeColumnOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsThreeColumnOnlyTitleWithLinksLeft.args = {
   ...defaultPropsDarkThreeWithLinks,
   text: {
     title: 'Cards Title',
   },
+  textPosition: 'left',
 };
 
-export const DarkCardsFourColumnOnlyTitleNoLinks: StoryFn<typeof Cards> =
+export const DarkCardsThreeColumnOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsFourColumnOnlyTitleNoLinks.args = {
+DarkCardsThreeColumnOnlyTitleWithLinksRight.args = {
+  ...defaultPropsDarkThreeWithLinks,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'right', 
+};
+
+export const DarkCardsThreeColumnOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsThreeColumnOnlyTitleWithLinksCenter.args = {
+  ...defaultPropsDarkThreeWithLinks,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'center',
+};
+
+export const DarkCardsFourColumnOnlyTitleNoLinksLeft: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsFourColumnOnlyTitleNoLinksLeft.args = {
   ...defaultPropsDarkFour,
   text: {
     title: 'Cards Title',
   },
+  textPosition: 'left',
 };
 
-export const DarkCardsFourColumnOnlyTitleWithLinks: StoryFn<typeof Cards> =
+export const DarkCardsFourColumnOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsFourColumnOnlyTitleWithLinks.args = {
+DarkCardsFourColumnOnlyTitleNoLinksRight.args = {
+  ...defaultPropsDarkFour,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'right', 
+};
+
+export const DarkCardsFourColumnOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsFourColumnOnlyTitleNoLinksCenter.args = {
+  ...defaultPropsDarkFour,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'center',
+};
+
+export const DarkCardsFourColumnOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsFourColumnOnlyTitleWithLinksLeft.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {
     title: 'Cards Title',
   },
+  textPosition: 'left',
 };
 
-export const DarkCardsWithTextNoLinks: StoryFn<typeof Cards> =
+export const DarkCardsFourColumnOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsWithTextNoLinks.args = {
+DarkCardsFourColumnOnlyTitleWithLinksRight.args = {
+  ...defaultPropsDarkFourWithLinks,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'right', 
+};
+
+export const DarkCardsFourColumnOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsFourColumnOnlyTitleWithLinksCenter.args = {
+  ...defaultPropsDarkFourWithLinks,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'center',
+};
+
+export const DarkCardsWithTextNoLinksLeft: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsWithTextNoLinksLeft.args = {
   ...defaultPropsDarkFour,
   text: {
     title: 'Cards Title',
     subtitle: 'Cards Subtitle',
     body: 'This is a description for the cards.',
   },
+  textPosition: 'left',
 };
 
-export const DarkCardsWithTextWithLinks: StoryFn<typeof Cards> =
+export const DarkCardsWithTextNoLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsWithTextWithLinks.args = {
+DarkCardsWithTextNoLinksRight.args = {
+  ...defaultPropsDarkFour,
+  text: {
+    title: 'Cards Title',
+    subtitle: 'Cards Subtitle',
+    body: 'This is a description for the cards.',
+  },
+  textPosition: 'right', 
+};
+
+export const DarkCardsWithTextNoLinksCenter: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsWithTextNoLinksCenter.args = {
+  ...defaultPropsDarkFour,
+  text: {
+    title: 'Cards Title',
+    subtitle: 'Cards Subtitle',
+    body: 'This is a description for the cards.',
+  },
+  textPosition: 'center',
+};
+
+export const DarkCardsWithTextWithLinksLeft: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsWithTextWithLinksLeft.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {
     title: 'Cards Title',
     subtitle: 'Cards Subtitle',
     body: 'This is a description for the cards.',
   },
+  textPosition: 'left',
 };
 
-export const DarkCardsWithTextandButtonNoLinks: StoryFn<typeof Cards> =
+export const DarkCardsWithTextWithLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsWithTextandButtonNoLinks.args = {
+DarkCardsWithTextWithLinksRight.args = {
+  ...defaultPropsDarkFourWithLinks,
+  text: {
+    title: 'Cards Title',
+    subtitle: 'Cards Subtitle',
+    body: 'This is a description for the cards.',
+  },
+  textPosition: 'right', 
+};
+
+export const DarkCardsWithTextWithLinksCenter: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsWithTextWithLinksCenter.args = {
+  ...defaultPropsDarkFourWithLinks,
+  text: {
+    title: 'Cards Title',
+    subtitle: 'Cards Subtitle',
+    body: 'This is a description for the cards.',
+  },
+  textPosition: 'center',
+};
+
+export const DarkCardsWithTextandButtonNoLinksLeft: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsWithTextandButtonNoLinksLeft.args = {
   ...defaultPropsDarkFour,
   text: {
     title: 'Cards Title',
@@ -88,11 +222,48 @@ DarkCardsWithTextandButtonNoLinks.args = {
       variant: 'contained',
     },
   ],
+  textPosition: 'left',
 };
 
-export const DarkCardsWithTextandButtonWithLinks: StoryFn<typeof Cards> =
+export const DarkCardsWithTextandButtonNoLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsWithTextandButtonWithLinks.args = {
+DarkCardsWithTextandButtonNoLinksRight.args = {
+  ...defaultPropsDarkFour,
+  text: {
+    title: 'Cards Title',
+    subtitle: 'Cards Subtitle',
+    body: 'This is a description for the cards.',
+  },
+  ctaButtons: [
+    {
+      text: 'Click Me',
+      variant: 'contained',
+    },
+  ],
+  textPosition: 'right', 
+};
+
+export const DarkCardsWithTextandButtonNoLinksCenter: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsWithTextandButtonNoLinksCenter.args = {
+  ...defaultPropsDarkFour,
+  text: {
+    title: 'Cards Title',
+    subtitle: 'Cards Subtitle',
+    body: 'This is a description for the cards.',
+  },
+  ctaButtons: [
+    {
+      text: 'Click Me',
+      variant: 'contained',
+    },
+  ],
+  textPosition: 'center',
+};
+
+export const DarkCardsWithTextandButtonWithLinksLeft: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsWithTextandButtonWithLinksLeft.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {
     title: 'Cards Title',
@@ -105,4 +276,41 @@ DarkCardsWithTextandButtonWithLinks.args = {
       variant: 'contained',
     },
   ],
+  textPosition: 'left',
+};
+
+export const DarkCardsWithTextandButtonWithLinksRight: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsWithTextandButtonWithLinksRight.args = {
+  ...defaultPropsDarkFourWithLinks,
+  text: {
+    title: 'Cards Title',
+    subtitle: 'Cards Subtitle',
+    body: 'This is a description for the cards.',
+  },
+  ctaButtons: [
+    {
+      text: 'Click Me',
+      variant: 'contained',
+    },
+  ],
+  textPosition: 'right', 
+};
+
+export const DarkCardsWithTextandButtonWithLinksCenter: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsWithTextandButtonWithLinksCenter.args = {
+  ...defaultPropsDarkFourWithLinks,
+  text: {
+    title: 'Cards Title',
+    subtitle: 'Cards Subtitle',
+    body: 'This is a description for the cards.',
+  },
+  ctaButtons: [
+    {
+      text: 'Click Me',
+      variant: 'contained',
+    },
+  ],
+  textPosition: 'center',
 };
