@@ -15,29 +15,29 @@ const meta: Meta<typeof Cards> = {
 };
 export default meta;
 
-export const LightCardsThreeColumnOnlyTitleNoLinksLeft: StoryFn<typeof Cards> =
+export const LightCardsOnlyTitleNoLinksLeft: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsThreeColumnOnlyTitleNoLinksLeft.args = {
+LightCardsOnlyTitleNoLinksLeft.args = {
   ...defaultPropsLightThree,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'left', 
+  textPosition: 'left',
 };
 
-export const LightCardsThreeColumnOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
+export const LightCardsOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsThreeColumnOnlyTitleNoLinksRight.args = {
+LightCardsOnlyTitleNoLinksRight.args = {
   ...defaultPropsLightThree,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
-export const LightCardsThreeColumnOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
+export const LightCardsOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsThreeColumnOnlyTitleNoLinksCenter.args = {
+LightCardsOnlyTitleNoLinksCenter.args = {
   ...defaultPropsLightThree,
   text: {
     title: 'Cards Title',
@@ -45,29 +45,29 @@ LightCardsThreeColumnOnlyTitleNoLinksCenter.args = {
   textPosition: 'center',
 };
 
-export const LightCardsThreeColumnOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
+export const LightCardsOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsThreeColumnOnlyTitleWithLinksLeft.args = {
+LightCardsOnlyTitleWithLinksLeft.args = {
   ...defaultPropsLightThreeWithLinks,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'left', 
+  textPosition: 'left',
 };
 
-export const LightCardsThreeColumnOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
+export const LightCardsOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsThreeColumnOnlyTitleWithLinksRight.args = {
+LightCardsOnlyTitleWithLinksRight.args = {
   ...defaultPropsLightThreeWithLinks,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
-export const LightCardsThreeColumnOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
+export const LightCardsOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsThreeColumnOnlyTitleWithLinksCenter.args = {
+LightCardsOnlyTitleWithLinksCenter.args = {
   ...defaultPropsLightThreeWithLinks,
   text: {
     title: 'Cards Title',
@@ -75,29 +75,29 @@ LightCardsThreeColumnOnlyTitleWithLinksCenter.args = {
   textPosition: 'center',
 };
 
-export const LightCardsFourColumnOnlyTitleNoLinksLeft: StoryFn<typeof Cards> =
+export const LightCardsNoLinksLeft: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsFourColumnOnlyTitleNoLinksLeft.args = {
+LightCardsNoLinksLeft.args = {
   ...defaultPropsLightFour,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'left', 
+  textPosition: 'left',
 };
 
-export const LightCardsFourColumnOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
+export const LightCardsNoLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsFourColumnOnlyTitleNoLinksRight.args = {
+LightCardsNoLinksRight.args = {
   ...defaultPropsLightFour,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
-export const LightCardsFourColumnOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
+export const LightCardsNoLinksCenter: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsFourColumnOnlyTitleNoLinksCenter.args = {
+LightCardsNoLinksCenter.args = {
   ...defaultPropsLightFour,
   text: {
     title: 'Cards Title',
@@ -105,29 +105,29 @@ LightCardsFourColumnOnlyTitleNoLinksCenter.args = {
   textPosition: 'center',
 };
 
-export const LightCardsFourColumnOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
+export const LightCardsWithLinksLeft: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsFourColumnOnlyTitleWithLinksLeft.args = {
+LightCardsWithLinksLeft.args = {
   ...defaultPropsLightFourWithLinks,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'left', 
+  textPosition: 'left',
 };
 
-export const LightCardsFourColumnOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
+export const LightCardsWithLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsFourColumnOnlyTitleWithLinksRight.args = {
+LightCardsWithLinksRight.args = {
   ...defaultPropsLightFourWithLinks,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
-export const LightCardsFourColumnOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
+export const LightCardsWithLinksCenter: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-LightCardsFourColumnOnlyTitleWithLinksCenter.args = {
+LightCardsWithLinksCenter.args = {
   ...defaultPropsLightFourWithLinks,
   text: {
     title: 'Cards Title',
@@ -144,7 +144,7 @@ LightCardsWithTextNoLinksLeft.args = {
     subtitle: 'Cards Subtitle',
     body: 'This is a description for the cards.',
   },
-  textPosition: 'left', 
+  textPosition: 'left',
 };
 
 export const LightCardsWithTextNoLinksRight: StoryFn<typeof Cards> =
@@ -156,7 +156,7 @@ LightCardsWithTextNoLinksRight.args = {
     subtitle: 'Cards Subtitle',
     body: 'This is a description for the cards.',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
 export const LightCardsWithTextNoLinksCenter: StoryFn<typeof Cards> =
@@ -180,7 +180,7 @@ LightCardsWithTextWithLinksLeft.args = {
     subtitle: 'Cards Subtitle',
     body: 'This is a description for the cards.',
   },
-  textPosition: 'left', 
+  textPosition: 'left',
 };
 
 export const LightCardsWithTextWithLinksRight: StoryFn<typeof Cards> =
@@ -192,7 +192,7 @@ LightCardsWithTextWithLinksRight.args = {
     subtitle: 'Cards Subtitle',
     body: 'This is a description for the cards.',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
 export const LightCardsWithTextWithLinksCenter: StoryFn<typeof Cards> =
@@ -222,7 +222,7 @@ LightCardsWithTextandButtonNoLinksLeft.args = {
       variant: 'contained',
     },
   ],
-  textPosition: 'left', 
+  textPosition: 'left',
 };
 
 export const LightCardsWithTextandButtonNoLinksRight: StoryFn<typeof Cards> =
@@ -240,7 +240,7 @@ LightCardsWithTextandButtonNoLinksRight.args = {
       variant: 'contained',
     },
   ],
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
 export const LightCardsWithTextandButtonNoLinksCenter: StoryFn<typeof Cards> =
@@ -276,7 +276,7 @@ LightCardsWithTextandButtonWithLinksLeft.args = {
       variant: 'contained',
     },
   ],
-  textPosition: 'left', 
+  textPosition: 'left',
 };
 
 export const LightCardsWithTextandButtonWithLinksRight: StoryFn<typeof Cards> =
@@ -294,7 +294,7 @@ LightCardsWithTextandButtonWithLinksRight.args = {
       variant: 'contained',
     },
   ],
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
 export const LightCardsWithTextandButtonWithLinksCenter: StoryFn<typeof Cards> =

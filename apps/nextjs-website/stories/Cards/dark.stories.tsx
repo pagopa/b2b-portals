@@ -15,9 +15,9 @@ const meta: Meta<typeof Cards> = {
 };
 export default meta;
 
-export const DarkCardsThreeColumnOnlyTitleNoLinksLeft: StoryFn<typeof Cards> =
+export const DarkCardsOnlyTitleNoLinksLeft: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsThreeColumnOnlyTitleNoLinksLeft.args = {
+DarkCardsOnlyTitleNoLinksLeft.args = {
   ...defaultPropsDarkThree,
   text: {
     title: 'Cards Title',
@@ -25,19 +25,19 @@ DarkCardsThreeColumnOnlyTitleNoLinksLeft.args = {
   textPosition: 'left',
 };
 
-export const DarkCardsThreeColumnOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
+export const DarkCardsOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsThreeColumnOnlyTitleNoLinksRight.args = {
+DarkCardsOnlyTitleNoLinksRight.args = {
   ...defaultPropsDarkThree,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
-export const DarkCardsThreeColumnOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
+export const DarkCardsOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsThreeColumnOnlyTitleNoLinksCenter.args = {
+DarkCardsOnlyTitleNoLinksCenter.args = {
   ...defaultPropsDarkThree,
   text: {
     title: 'Cards Title',
@@ -45,9 +45,9 @@ DarkCardsThreeColumnOnlyTitleNoLinksCenter.args = {
   textPosition: 'center',
 };
 
-export const DarkCardsThreeColumnOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
+export const DarkCardsOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsThreeColumnOnlyTitleWithLinksLeft.args = {
+DarkCardsOnlyTitleWithLinksLeft.args = {
   ...defaultPropsDarkThreeWithLinks,
   text: {
     title: 'Cards Title',
@@ -55,19 +55,19 @@ DarkCardsThreeColumnOnlyTitleWithLinksLeft.args = {
   textPosition: 'left',
 };
 
-export const DarkCardsThreeColumnOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
+export const DarkCardsOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsThreeColumnOnlyTitleWithLinksRight.args = {
+DarkCardsOnlyTitleWithLinksRight.args = {
   ...defaultPropsDarkThreeWithLinks,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
-export const DarkCardsThreeColumnOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
+export const DarkCardsOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsThreeColumnOnlyTitleWithLinksCenter.args = {
+DarkCardsOnlyTitleWithLinksCenter.args = {
   ...defaultPropsDarkThreeWithLinks,
   text: {
     title: 'Cards Title',
@@ -75,9 +75,9 @@ DarkCardsThreeColumnOnlyTitleWithLinksCenter.args = {
   textPosition: 'center',
 };
 
-export const DarkCardsFourColumnOnlyTitleNoLinksLeft: StoryFn<typeof Cards> =
+export const DarkCardsNoLinksLeft: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsFourColumnOnlyTitleNoLinksLeft.args = {
+DarkCardsNoLinksLeft.args = {
   ...defaultPropsDarkFour,
   text: {
     title: 'Cards Title',
@@ -85,19 +85,19 @@ DarkCardsFourColumnOnlyTitleNoLinksLeft.args = {
   textPosition: 'left',
 };
 
-export const DarkCardsFourColumnOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
+export const DarkCardsNoLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsFourColumnOnlyTitleNoLinksRight.args = {
+DarkCardsNoLinksRight.args = {
   ...defaultPropsDarkFour,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
-export const DarkCardsFourColumnOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
+export const DarkCardsNoLinksCenter: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsFourColumnOnlyTitleNoLinksCenter.args = {
+DarkCardsNoLinksCenter.args = {
   ...defaultPropsDarkFour,
   text: {
     title: 'Cards Title',
@@ -105,9 +105,9 @@ DarkCardsFourColumnOnlyTitleNoLinksCenter.args = {
   textPosition: 'center',
 };
 
-export const DarkCardsFourColumnOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
+export const DarkCardsWithLinksLeft: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsFourColumnOnlyTitleWithLinksLeft.args = {
+DarkCardsWithLinksLeft.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {
     title: 'Cards Title',
@@ -115,19 +115,19 @@ DarkCardsFourColumnOnlyTitleWithLinksLeft.args = {
   textPosition: 'left',
 };
 
-export const DarkCardsFourColumnOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
+export const DarkCardsWithLinksRight: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsFourColumnOnlyTitleWithLinksRight.args = {
+DarkCardsWithLinksRight.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {
     title: 'Cards Title',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
-export const DarkCardsFourColumnOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
+export const DarkCardsWithLinksCenter: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
-DarkCardsFourColumnOnlyTitleWithLinksCenter.args = {
+DarkCardsWithLinksCenter.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {
     title: 'Cards Title',
@@ -156,7 +156,7 @@ DarkCardsWithTextNoLinksRight.args = {
     subtitle: 'Cards Subtitle',
     body: 'This is a description for the cards.',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
 export const DarkCardsWithTextNoLinksCenter: StoryFn<typeof Cards> =
@@ -192,7 +192,7 @@ DarkCardsWithTextWithLinksRight.args = {
     subtitle: 'Cards Subtitle',
     body: 'This is a description for the cards.',
   },
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
 export const DarkCardsWithTextWithLinksCenter: StoryFn<typeof Cards> =
@@ -240,7 +240,7 @@ DarkCardsWithTextandButtonNoLinksRight.args = {
       variant: 'contained',
     },
   ],
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
 export const DarkCardsWithTextandButtonNoLinksCenter: StoryFn<typeof Cards> =
@@ -294,7 +294,7 @@ DarkCardsWithTextandButtonWithLinksRight.args = {
       variant: 'contained',
     },
   ],
-  textPosition: 'right', 
+  textPosition: 'right',
 };
 
 export const DarkCardsWithTextandButtonWithLinksCenter: StoryFn<typeof Cards> =
