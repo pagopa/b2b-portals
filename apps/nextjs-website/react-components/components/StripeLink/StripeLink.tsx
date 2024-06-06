@@ -21,7 +21,7 @@ const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
     <ContainerRC
       background={extraBackgroundColor}
       py={2}
-      sx={{ justifyContent: { xs: 'start', md: 'center' } }}
+      sx={{ justifyContent: { xs: 'start', md: 'start' } }}
     >
       <Grid item>
         <Stack
