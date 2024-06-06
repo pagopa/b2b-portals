@@ -21,7 +21,7 @@ const BannerLink = (props: BannerLinkProps) => {
   return (
     <Box bgcolor={backgroundColor} component='section'>
       <Container>
-        <Stack gap={4} sx={styles.main}>
+        <Stack gap={2} sx={styles.main}>
           {decoration ? (
             isJSX(decoration) ? (
               decoration
@@ -34,7 +34,7 @@ const BannerLink = (props: BannerLinkProps) => {
             CtaButtons({
               ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
                 ...button,
-                sx: { width: { md: 'auto', xs: '100%' } },
+                sx: { width: 'auto' },
               })),
               theme,
             })}

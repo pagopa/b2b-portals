@@ -10,7 +10,7 @@ export const Content = ({ title, body, theme }: BannerLinkContentProps) => {
 
   return (
     <Stack textAlign='center' gap={spacing(2)}>
-      <Title variant='h6' textColor={textColor} title={title} />
+      <Title variant='h4' textColor={textColor} title={title} />
       <Body variant='body2' textColor={textColor} body={body} />
     </Stack>
   );
