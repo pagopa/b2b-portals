@@ -3,18 +3,20 @@ import { type ReactNode } from 'react';
 
 export const CardsItemContainer = ({
   masonry,
+  center,
   children,
 }: {
   masonry: boolean;
+  center?: boolean;
   children: ReactNode[];
 }) => {
   return masonry ? (
     <Stack
       sx={{
         display: 'flex',
-        flexFlow: 'column wrap',
+        flexFlow: center ? 'row wrap' : 'column wrap',
         gap: '20px',
-        alignItems: 'center',
+        alignItems: center ? 'center' : 'flex-start',
         width: { xs: '100%', sm: '50%' },
       }}
     >
