@@ -3,13 +3,14 @@ import {
   ButtonSwitchRowBlockProps,
   TitleSubtitleBlockProps,
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
-import { Subtitle, Title } from '../common/Common';
+import { CtaButtons, Subtitle, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import {
   Button,
   ButtonGroup,
   Menu,
   MenuItem,
+  Stack,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -28,6 +29,9 @@ export const TitleSubtitleBlock = ({
         display: 'grid',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: '1rem',
+        marginTop: '1rem',
+        marginBottom: '1rem',
       }}
     >
       <Title
@@ -54,9 +58,9 @@ const SplitButton = ({
   selectedButton,
   onButtonClick,
 }: {
-  buttons: string[];
-  selectedButton: string;
-  onButtonClick: (button: string) => void;
+  buttons: { id: string; text: string }[];
+  selectedButton: { id: string; text: string };
+  onButtonClick: (button: { id: string; text: string }) => void;
   theme: string;
 }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -67,7 +71,7 @@ const SplitButton = ({
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleMenuItemClick = (button: string) => {
+  const handleMenuItemClick = (button: { id: string; text: string }) => {
     onButtonClick(button);
     setOpen(false);
   };
@@ -91,7 +95,7 @@ const SplitButton = ({
             onButtonClick(selectedButton);
           }}
         >
-          {selectedButton}
+          {selectedButton.text}{' '}
         </Button>
         <Button
           aria-controls={open ? 'split-button-menu' : undefined}
@@ -121,13 +125,13 @@ const SplitButton = ({
       >
         {buttons.map((button) => (
           <MenuItem
-            key={button}
-            selected={button === selectedButton}
+            key={button.id}
+            selected={button.id === selectedButton.id}
             onClick={() => {
               handleMenuItemClick(button);
             }}
           >
-            {button}
+            {button.text} {/* Use the text property of the button object */}
           </MenuItem>
         ))}
       </Menu>
@@ -140,30 +144,23 @@ export const ButtonSwitchRowBlock = ({
   onButtonClick,
   theme,
   selectedButton,
-}: ButtonSwitchRowBlockProps & { selectedButton: string }) => {
+}: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
+  const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
   return isLarge ? (
-    <ButtonGroup
-      variant='outlined'
-      aria-label='outlined button group'
-      sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      role='group'
-    >
-      {buttons.map((button, index) => {
-        return (
-          <Button
-            key={index}
-            onClick={() => {
-              onButtonClick(button);
-            }}
-          >
-            {button}
-          </Button>
-        );
+    <Stack direction={isSmallScreen ? 'column' : 'row'} justifyContent='left' spacing={2}>
+      {CtaButtons({
+        ctaButtons: buttons.map((button) => ({
+          text: button.text,
+          sx: { width: { md: 'auto', xs: '100%' } },
+          variant: 'outlined',
+          onClick: () => onButtonClick(button),
+        })),
+        theme,
       })}
-    </ButtonGroup>
+    </Stack>
   ) : (
     <SplitButton
       buttons={buttons}
