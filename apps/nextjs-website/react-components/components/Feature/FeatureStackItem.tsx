@@ -41,16 +41,7 @@ export const FeatureStackItem = ({ item, theme }: FeatureStackItemProps) => {
           textColor={textColor}
           title={item.title}
         />
-        <>
-          {item.link ? (
-            <Subtitle
-              theme={theme}
-              subtitle={item.subtitle}
-              textLink={item.link.text}
-              url={item.link.url}
-            />
-          ) : null}
-        </>
+        <Subtitle theme={theme} item={item} />
       </Stack>
     </Stack>
   );
