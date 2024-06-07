@@ -17,16 +17,18 @@ import {
 } from '../common/Common.helpers';
 import { CtaButtons } from '../common/Common';
 
-const Form: React.FC<FormProps> = ({
-  title,
-  subtitle,
-  privacyText,
-  privacyLink,
-  privacyLinkText,
-  buttonText,
-  theme,
-  backgroundImage,
-}) => {
+const Form = (props: FormProps) => {
+  const {
+    title,
+    subtitle,
+    privacyText,
+    privacyLink,
+    privacyLinkText,
+    theme,
+    backgroundImage,
+    ctaButtons,
+  } = props;
+
   const backgroundColor = BackgroundColorAlternative(theme);
   const textColor = TextColor(theme);
   const linkColor = LinkColor(theme);
@@ -139,16 +141,13 @@ const Form: React.FC<FormProps> = ({
           backgroundColor: textColor,
         }}
       />
-      <CtaButtons
-        ctaButtons={[
-          {
-            text: buttonText,
-            sx: { position: 'relative', zIndex: 3 },
-            variant: 'contained',
-          },
-        ]}
-        theme={theme}
-      />
+      {CtaButtons({
+        ctaButtons: (ctaButtons).map((button) => ({
+          ...button,
+          sx: { width: { md: 'auto', xs: '100%' } },
+        })),
+        theme,
+      })}
     </Box>
   );
 };

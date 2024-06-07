@@ -9,8 +9,10 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   privacyLink: '#',
   privacyLinkText: 'informativa sul trattamento dei dati personali',
   theme,
-  buttonText: 'Invia Richiesta',
   backgroundImage: '#',
+  ctaButtons: [{
+    text: 'Invia Richiesta',
+  }],
 });
 
 export const FormTemplate: StoryFn<FormProps> = (args) => <Form {...args} />;

@@ -1,4 +1,4 @@
-import { type CommonProps } from '../common/Common.types';
+import { CtaButtonProps, type CommonProps } from '../common/Common.types';
 
 export interface FormProps extends CommonProps {
   readonly title: string;
@@ -7,6 +7,6 @@ export interface FormProps extends CommonProps {
   readonly privacyLink: string;
   readonly privacyLinkText: string;
   readonly theme: 'light' | 'dark';
-  readonly buttonText: string;
   readonly backgroundImage?: string;
+  readonly ctaButtons: ReadonlyArray<CtaButtonProps>;
 }
