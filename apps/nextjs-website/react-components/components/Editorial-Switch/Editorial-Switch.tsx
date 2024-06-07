@@ -42,12 +42,10 @@ const EditorialSwitch = (props: EditorialSwitchProps) => {
     pattern = 'none',
   } = props;
   const [selectedButton, setSelectedButton] = useState(buttons[0]);
-  const [currentContent, setCurrentContent] = useState<ContentItem | undefined>(
-    content[0]
-  );
+  const [currentContent, setCurrentContent] = useState<ContentItem | undefined>(content[0]);
 
-  const handleButtonClick = (button: string) => {
-    const buttonIndex = buttons.indexOf(button);
+  const handleButtonClick = (button: { id: string; text: string }) => {
+    const buttonIndex = buttons.findIndex(b => b.id === button.id);
     if (buttonIndex !== -1) {
       setSelectedButton(button);
       setCurrentContent(content[buttonIndex]);
