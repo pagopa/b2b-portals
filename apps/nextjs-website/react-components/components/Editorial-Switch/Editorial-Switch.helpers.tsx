@@ -29,6 +29,9 @@ export const TitleSubtitleBlock = ({
         display: 'grid',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: '1rem',
+        marginTop: '1rem',
+        marginBottom: '1rem',
       }}
     >
       <Title
@@ -92,7 +95,7 @@ const SplitButton = ({
             onButtonClick(selectedButton);
           }}
         >
-          {selectedButton.text} {/* Use the text property of the selectedButton object */}
+          {selectedButton.text}{' '}
         </Button>
         <Button
           aria-controls={open ? 'split-button-menu' : undefined}
@@ -147,15 +150,13 @@ export const ButtonSwitchRowBlock = ({
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
   return isLarge ? (
-    <Stack
-      direction={isSmallScreen ? 'column' : 'row'}
-      justifyContent='left'
-    >
+    <Stack direction={isSmallScreen ? 'column' : 'row'} justifyContent='left' spacing={2}>
       {CtaButtons({
         ctaButtons: buttons.map((button) => ({
-          text: button.text, // Use the text property of the button object
+          text: button.text,
           sx: { width: { md: 'auto', xs: '100%' } },
           variant: 'outlined',
+          onClick: () => onButtonClick(button),
         })),
         theme,
       })}
