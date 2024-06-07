@@ -12,12 +12,14 @@ export interface TitleSubtitleBlockProps {
 }
 
 export interface ButtonSwitchRowBlockProps {
-  buttons: string[];
-  onButtonClick: (button: string) => void;
+  buttons: { id: string; text: string }[];
+  onButtonClick: (button: { id: string; text: string }) => void;
+  selectedButton: { id: string; text: string };
   theme: 'dark' | 'light';
 }
 
 export interface ContentItem {
+  id: string;
   eyelet: string;
   body: string;
   title: string;
@@ -35,6 +37,6 @@ export interface EditorialSwitchProps
   width: 'wide' | 'standard' | 'center';
   toptitle: string;
   topsubtitle?: string;
-  buttons: string[];
+  buttons: { id: string; text: string }[];
   content: ContentItem[];
 }
