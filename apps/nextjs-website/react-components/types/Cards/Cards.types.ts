@@ -1,5 +1,5 @@
-import { EIconProps } from "../../components/common/EIcon";
-import { CommonProps, CtaButtonProps, Generic } from "../common/Common.types";
+import { EIconProps } from '../../components/common/EIcon';
+import { CommonProps, CtaButtonProps, Generic } from '../common/Common.types';
 
 export interface CardsProps extends CommonProps {
   items: CardsItemProps[];
@@ -9,6 +9,7 @@ export interface CardsProps extends CommonProps {
     body?: string | Generic;
   };
   ctaButtons?: CtaButtonProps[];
+  textPosition?: 'left' | 'right' | 'center';
 }
 
 export interface CardsItemProps {

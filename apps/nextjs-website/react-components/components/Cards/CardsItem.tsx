@@ -19,13 +19,13 @@ const CardsItem = ({
       sx={{
         display: 'flex',
         minHeight: '100px',
-        width: 'auto',
+        width: '100%',
         flex: { md: masonry ? '0 0 auto' : '1 1 0' },
         borderRadius: '16px',
       }}
     >
       <CardContent>
-        <Stack px={4} justifyContent='flex-start' alignItems={textAlign}>
+        <Stack px={4} justifyContent='flex-start' alignItems='flex-start' fontFamily='"Titillium Web",sans-serif'>
           <Box mb={2} color='primary.dark'>
             {cardIcon?.icon && <EIcon icon={cardIcon.icon} fontSize='large' />}
           </Box>
@@ -45,6 +45,7 @@ const CardsItem = ({
             textColor={'inherit'}
             title={title}
             marginBottom={1}
+            textAlign='left'
           />
           <Body
             variant='body2'
@@ -61,7 +62,7 @@ const CardsItem = ({
                   direction='row'
                   alignItems='center'
                   color='primary.main'
-                  justifyContent={textAlign}
+                  justifyContent='flex-start'
                 >
                   <Link
                     color='primary.main'
@@ -70,11 +71,11 @@ const CardsItem = ({
                     href={link.href}
                     title={link.title}
                     fontSize={14}
-                    fontWeight={400}
+                    fontWeight={600}
                   >
                     {link.text}
                   </Link>
-                  <ArrowRightAltIcon sx={{ color: 'inerith', fontSize: 18 }} />
+                  <ArrowRightAltIcon sx={{ color: 'inherit', fontSize: 18, marginLeft: 1 }} />
                 </Stack>
               ))
             : null}
