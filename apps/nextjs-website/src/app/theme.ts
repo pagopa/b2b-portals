@@ -10,6 +10,7 @@ declare module '@mui/material/styles' {
       readonly divider: string;
       readonly primaryColorDark: string;
       readonly backgroundColorDefault: string;
+      readonly darkLinkColor: string;
     };
   }
   interface PaletteOptions {
@@ -19,6 +20,7 @@ declare module '@mui/material/styles' {
       readonly divider?: string;
       readonly primaryColorDark?: string;
       readonly backgroundColorDefault?: string;
+      readonly darkLinkColor?: string;
     };
   }
 }
@@ -38,6 +40,7 @@ export const theme = createTheme(MUIItaliaTheme, {
       divider: '#E3E7EB',
       primaryColorDark: '#0B3EE3',
       backgroundColorDefault: '#FAFAFA',
+      darkLinkColor: '#1A73E8',
     },
   },
 });

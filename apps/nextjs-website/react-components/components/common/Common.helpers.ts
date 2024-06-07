@@ -39,3 +39,10 @@ export const ExtraTextColor = (theme: 'dark' | 'light') => {
     ? palette.primary.contrastText
     : palette.text.secondary;
 };
+
+export const LinkColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.primary.contrastText
+    : palette.custom.darkLinkColor;
+};
