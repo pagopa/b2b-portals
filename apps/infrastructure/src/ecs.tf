@@ -184,6 +184,10 @@ resource "aws_ecs_task_definition" "cms_multitenant_task_def" {
 }
 
 resource "aws_ecs_service" "cms_multitenant_ecs_service" {
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  }
   name                              = "cms-ecs-${each.key}"
   cluster                           = aws_ecs_cluster.cms_ecs_cluster.id
   desired_count                     = 1
