@@ -101,6 +101,6 @@ resource "aws_s3_bucket_policy" "cloudfront_cms_multitenant" {
     key => config
   }
   bucket = aws_s3_bucket.cms_multitenant_medialibrary_bucket[each.key].id
-  policy = data.aws_iam_policy_document.cms_iam_policy.json
+  policy = data.aws_iam_policy_document.cms_iam_policy[each.key].json
 }
 
