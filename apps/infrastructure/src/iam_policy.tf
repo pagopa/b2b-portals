@@ -234,8 +234,8 @@ resource "aws_iam_policy" "upload_image" {
         ]
         Effect = "Allow"
         Resource = concat(
-          [format("%s/*", aws_s3_bucket.cms_medialibrary_bucket.arn)],
-          [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : format("%s/*", bucket.arn)]
+          ["${aws_s3_bucket.cms_medialibrary_bucket.arn}/*"],
+          [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : "${bucket.arn}/*"]
         )
       },
     ]
