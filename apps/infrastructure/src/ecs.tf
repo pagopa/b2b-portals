@@ -183,7 +183,7 @@ resource "aws_ecs_task_definition" "cms_multitenant_task_def" {
   container_definitions    = data.template_file.cms_multitenant_app[each.key].rendered
 }
 
-resource "aws_ecs_service" "cms_ecs_service" {
+resource "aws_ecs_service" "cms_multitenant_ecs_service" {
   name                              = "cms-ecs-${each.key}"
   cluster                           = aws_ecs_cluster.cms_ecs_cluster.id
   desired_count                     = 1
