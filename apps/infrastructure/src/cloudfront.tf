@@ -227,7 +227,7 @@ resource "aws_cloudfront_distribution" "cms_multitenant_medialibrary" {
 
   enabled         = true # enable CloudFront distribution
   is_ipv6_enabled = true
-  comment         = "CloudFront distribution for the medialibrary cms."
+  comment         = "CloudFront distribution for the ${each.key} medialibrary cms."
 
   default_cache_behavior {
     # HTTPS requests we permit the distribution to serve
