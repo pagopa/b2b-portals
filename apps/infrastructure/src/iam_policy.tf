@@ -30,6 +30,10 @@ data "aws_iam_policy_document" "deploy_github" {
 }
 
 data "aws_iam_policy_document" "cms_iam_policy" {
+    for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  } 
   statement {
     actions = ["s3:GetObject", "s3:ListBucket"]
     resources = concat(
