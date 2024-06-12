@@ -34,7 +34,7 @@ data "aws_iam_policy_document" "cms_iam_policy" {
     actions = ["s3:GetObject", "s3:ListBucket"]
     resources = concat(
       [aws_s3_bucket.cms_medialibrary_bucket.arn,
-      "${aws_s3_bucket.cms_medialibrary_bucket.arn}/*"
+        "${aws_s3_bucket.cms_medialibrary_bucket.arn}/*"
       ],
       [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn],
       [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : "${bucket.arn}/*"]
@@ -232,7 +232,7 @@ resource "aws_iam_policy" "upload_image" {
           "s3:ListBucket",
           "s3:PutObject"
         ]
-        Effect   = "Allow"
+        Effect = "Allow"
         Resource = concat(
           [format("%s/*", aws_s3_bucket.cms_medialibrary_bucket.arn)],
           [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : format("%s/*", bucket.arn)]
