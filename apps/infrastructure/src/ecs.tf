@@ -150,7 +150,7 @@ data "template_file" "cms_multitenant_app" {
     db_client            = "postgres"
     container_port       = var.cms_app_port
     app_keys             = aws_ssm_parameter.cms_app_keys.arn
-    api_token_salt       = aws_ssm_parameter.cms_api_token_salt.arn
+    api_token_salt       = aws_ssm_parameter.cms_multitenant_api_token_salt[each.key].arn
     transfer_token_salt  = aws_ssm_parameter.cms_transfer_token_salt.arn
     jwt_secret           = aws_ssm_parameter.cms_jwt_secret.arn
     access_key_id        = aws_ssm_parameter.cms_access_key_id.arn

@@ -52,6 +52,7 @@ resource "random_password" "cms_api_token_salt" {
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
+### Remove this resource once the new multitenancy is complete
 resource "aws_ssm_parameter" "cms_api_token_salt" {
   name  = "/cms/api_token_salt"
   type  = "SecureString"
@@ -134,4 +135,24 @@ resource "aws_ssm_parameter" "preview_token" {
       value
     ]
   }
+}
+
+resource "random_password" "cms_multitenant_api_token_salt" {
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  }
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+resource "aws_ssm_parameter" "cms_multitenant_api_token_salt" {
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  }
+  name  = "/cms/api_token_salt_${each.key}"
+  type  = "SecureString"
+  value = random_password.cms_multitenant_api_token_salt[each.key].result
 }
