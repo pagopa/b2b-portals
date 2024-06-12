@@ -36,13 +36,9 @@ data "aws_iam_policy_document" "cms_iam_policy" {
   } 
   statement {
     actions = ["s3:GetObject", "s3:ListBucket"]
-    resources = concat(
-      [aws_s3_bucket.cms_medialibrary_bucket.arn,
-        "${aws_s3_bucket.cms_medialibrary_bucket.arn}/*"
-      ],
-      [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn],
-      [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : "${bucket.arn}/*"]
-    )
+    resources = [aws_s3_bucket.cms_multitenant_medialibrary_bucket[each.key].arn,
+        "${aws_s3_bucket.cms_multitenant_medialibrary_bucket[each.key].arn}/*"
+      ]
 
     principals {
       type        = "AWS"
