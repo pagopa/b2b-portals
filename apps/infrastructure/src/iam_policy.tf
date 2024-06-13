@@ -44,6 +44,24 @@ data "aws_iam_policy_document" "cms_iam_policy" {
   }
 }
 
+data "aws_iam_policy_document" "cms_multitenant_iam_policy" {
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  }
+  statement {
+    actions = ["s3:GetObject", "s3:ListBucket"]
+    resources = [aws_s3_bucket.cms_multitenant_medialibrary_bucket[each.key].arn,
+      "${aws_s3_bucket.cms_multitenant_medialibrary_bucket[each.key].arn}/*"
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.main.iam_arn]
+    }
+  }
+}
+
 data "aws_iam_policy_document" "website_iam_policy" {
   statement {
     actions = ["s3:GetObject", "s3:ListBucket"]
@@ -81,9 +99,10 @@ data "aws_iam_policy_document" "ecs_task_role_s3" {
       "s3:PutObject",
       "s3:PutObjectAcl"
     ]
-    resources = [
-      aws_s3_bucket.cms_medialibrary_bucket.arn
-    ]
+    resources = concat(
+      [aws_s3_bucket.cms_medialibrary_bucket.arn],
+      [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn]
+    )
   }
 }
 
@@ -121,11 +140,13 @@ data "aws_iam_policy_document" "ecs_task_execution" {
     actions = [
       "s3:GetBucketLocation"
     ]
-    resources = [
-      aws_s3_bucket.cms_medialibrary_bucket.arn
-    ]
+    resources = concat(
+      [aws_s3_bucket.cms_medialibrary_bucket.arn],
+      [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn]
+    )
   }
 }
+
 
 resource "aws_iam_policy" "deploy_website" {
   name        = "DeployWebsite"
@@ -226,8 +247,11 @@ resource "aws_iam_policy" "upload_image" {
           "s3:ListBucket",
           "s3:PutObject"
         ]
-        Effect   = "Allow"
-        Resource = format("%s/*", aws_s3_bucket.cms_medialibrary_bucket.arn)
+        Effect = "Allow"
+        Resource = concat(
+          ["${aws_s3_bucket.cms_medialibrary_bucket.arn}/*"],
+          [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : "${bucket.arn}/*"]
+        )
       },
     ]
   })
