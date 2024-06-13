@@ -112,7 +112,7 @@ module "cms_multitenant_records" {
       }
     },
     {
-      name = "www.${each.key}."
+      name = "www.${each.key}"
       type = "A"
       alias = {
         name                   = aws_alb.cms_load_balancer.dns_name
