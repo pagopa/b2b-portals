@@ -130,7 +130,6 @@ resource "aws_lb_listener_rule" "cms_rule" {
     key => config
   }
   listener_arn = aws_lb_listener.front_end_https.arn
-  priority     = 100
 
   action {
     type             = "forward"
