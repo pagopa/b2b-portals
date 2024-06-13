@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Grid,
@@ -8,6 +8,7 @@ import {
   Link,
   FormControl,
   Divider,
+  Button,
 } from '@mui/material';
 import { FormProps } from '@react-components/types/Form/Form.types';
 import {
@@ -15,7 +16,6 @@ import {
   BackgroundColorAlternative,
   LinkColor,
 } from '../common/Common.helpers';
-import { CtaButtons } from '../common/Common';
 
 const Form = (props: FormProps) => {
   const {
@@ -29,9 +29,28 @@ const Form = (props: FormProps) => {
     ctaButtons,
   } = props;
 
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    organization: '',
+  });
+
   const backgroundColor = BackgroundColorAlternative(theme);
   const textColor = TextColor(theme);
   const linkColor = LinkColor(theme);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleButtonClick = () => {
+    console.log(formData);
+  };
 
   return (
     <Box
@@ -92,6 +111,9 @@ const Form = (props: FormProps) => {
           <FormControl fullWidth>
             <OutlinedInput
               placeholder='Nome'
+              name='firstName'
+              value={formData.firstName}
+              onChange={handleInputChange}
               sx={{ backgroundColor: 'white', color: 'black' }}
             />
           </FormControl>
@@ -100,6 +122,9 @@ const Form = (props: FormProps) => {
           <FormControl fullWidth>
             <OutlinedInput
               placeholder='Cognome'
+              name='lastName'
+              value={formData.lastName}
+              onChange={handleInputChange}
               sx={{ backgroundColor: 'white', color: 'black' }}
             />
           </FormControl>
@@ -108,6 +133,9 @@ const Form = (props: FormProps) => {
           <FormControl fullWidth>
             <OutlinedInput
               placeholder='Indirizzo e-mail aziendale'
+              name='email'
+              value={formData.email}
+              onChange={handleInputChange}
               sx={{ backgroundColor: 'white', color: 'black' }}
             />
           </FormControl>
@@ -116,6 +144,9 @@ const Form = (props: FormProps) => {
           <FormControl fullWidth>
             <OutlinedInput
               placeholder='Nome ente'
+              name='organization'
+              value={formData.organization}
+              onChange={handleInputChange}
               sx={{ backgroundColor: 'white', color: 'black' }}
             />
           </FormControl>
@@ -141,13 +172,15 @@ const Form = (props: FormProps) => {
           backgroundColor: textColor,
         }}
       />
-      {CtaButtons({
-        ctaButtons: (ctaButtons).map((button) => ({
-          ...button,
-          sx: { width: { md: 'auto', xs: '100%' } },
-        })),
-        theme,
-      })}
+      {ctaButtons && ctaButtons.length > 0 && (
+        <Button
+          variant='contained'
+          sx={{ width: { md: 'auto', xs: '100%' }, zIndex: 4 }}
+          onClick={handleButtonClick}
+        >
+          {ctaButtons[0]?.text}
+        </Button>
+      )}
     </Box>
   );
 };
