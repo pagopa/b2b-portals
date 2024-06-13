@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Stack } from '@mui/material';
+import { Box, Grid, Stack, ButtonGroup, Button } from '@mui/material';
 import { Ctas as EditorialCtas } from '../Editorial/Ctas';
 import { Image as EditorialImage } from '../Editorial/Image';
 import { Content as EditorialContent } from '../Editorial/Content';
@@ -38,7 +38,7 @@ const EditorialSwitch = ({
   pattern = 'none',
 }: EditorialSwitchProps) => {
   if (!sections || sections.length === 0) {
-    return <div>No sections available</div>;
+    return <div>No sections available</div>; // Or any other fallback behavior
   }
 
   const initialSection = sections[0] as Section;
@@ -96,12 +96,35 @@ const EditorialSwitch = ({
           topsubtitle={topsubtitle || ''}
           theme={theme}
         />
-        <ButtonSwitchRowBlock
-          buttons={sections.map((s) => s.button)}
-          selectedButton={selectedSection.button}
-          onButtonClick={handleButtonClick}
-          theme={theme}
-        />
+        {isMobile ? (
+          <ButtonSwitchRowBlock
+            buttons={sections.map((s) => s.button)}
+            selectedButton={selectedSection.button}
+            onButtonClick={handleButtonClick}
+            theme={theme}
+          />
+        ) : (
+          <ButtonGroup variant="outlined" aria-label="buttonGroup" sx={{ margin: '16px 0' }}>
+            {sections.map((section) => (
+              <Button
+                key={section.button.id}
+                onClick={() => handleButtonClick(section.button)}
+                sx={{
+                  backgroundColor: section.button.id === selectedSection.button.id ? (theme === 'light' ? '#e3f2fd' : 'white') : 'transparent',
+                  color: section.button.id === selectedSection.button.id ? (theme === 'light' ? '#1976d2' : '#1976d2') : (theme === 'light' ? '#1976d2' : 'white'),
+                  borderColor: theme === 'light' ? '#1976d2' : 'white',
+                  '&:hover': {
+                    backgroundColor: section.button.id === selectedSection.button.id ? (theme === 'light' ? '#bbdefb' : 'white') : 'rgba(255, 255, 255, 0.1)',
+                    color: theme === 'light' ? '#1976d2' : 'white',
+                    borderColor: theme === 'light' ? '#1976d2' : 'white',
+                  },
+                }}
+              >
+                {section.button.text}
+              </Button>
+            ))}
+          </ButtonGroup>
+        )}
       </ContainerRC>
       {selectedSection && (
         <ContainerRC
