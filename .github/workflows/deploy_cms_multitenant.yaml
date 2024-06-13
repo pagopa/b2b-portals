@@ -1,5 +1,4 @@
-### Remove this workflow once the new multitenancy is complete
-name: Deploy CMS
+name: Deploy CMS Multitenant
 
 on:
   push:
@@ -35,7 +34,7 @@ jobs:
     continue-on-error: false
     strategy:
       matrix:
-        environment: [ 'prod' ]
+        environment: [ 'send','appio','demo' ]
     environment: ${{ matrix.environment }}
 
     concurrency:
@@ -72,23 +71,23 @@ jobs:
         with:
             context: apps/strapi-cms
             push: true
-            tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+            tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}-${{ matrix.environment }}:${{ env.IMAGE_TAG }}
             provenance: false
 
       - name: Generate task-definition file
-        run: aws ecs describe-task-definition --task-definition cms-task-def --query taskDefinition > task-definition.json
+        run: aws ecs describe-task-definition --task-definition cms-task-def-${{ matrix.environment }} --query taskDefinition > task-definition-${{ matrix.environment }}.json
 
       - name: Update ImageTag in task-definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@4225e0b507142a2e432b018bc3ccb728559b437a # v1.2.0
         with:
-           task-definition: apps/strapi-cms/task-definition.json
+           task-definition: apps/strapi-cms/task-definition-${{ matrix.environment }}.json
            container-name: cms-docker
-           image: ${{ steps.login-ecr.outputs.registry }}/strapi:${{ github.sha }}
+           image: ${{ steps.login-ecr.outputs.registry }}/strapi-${{ matrix.environment }}:${{ github.sha }}
 
       - name: Deploy new ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a # v1.4.11
         with:
             task-definition: ${{ steps.task-def.outputs.task-definition }}
-            service: cms-ecs
+            service: cms-ecs-${{ matrix.environment }}
             cluster: cms-ecs-cluster
