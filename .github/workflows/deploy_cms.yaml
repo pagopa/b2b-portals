@@ -90,7 +90,7 @@ jobs:
         with:
             task-definition: ${{ steps.task-def.outputs.task-definition }}
             service: cms-ecs
-            cluster: cms-ecs-cluster.
+            cluster: cms-ecs-cluster
 
   deploy_multitenant:
     name: Build and push CMS Multitenant image
@@ -131,11 +131,11 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: strapi
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: ${{ github.sha }}-${{ matrix.environment }}
         with:
             context: apps/strapi-cms
             push: true
-            tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}-${{ matrix.environment }}:${{ env.IMAGE_TAG }}
+            tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
             provenance: false
 
       - name: Generate task-definition file
@@ -147,7 +147,7 @@ jobs:
         with:
            task-definition: apps/strapi-cms/task-definition-${{ matrix.environment }}.json
            container-name: cms-docker
-           image: ${{ steps.login-ecr.outputs.registry }}/strapi-${{ matrix.environment }}:${{ github.sha }}
+           image: ${{ steps.login-ecr.outputs.registry }}/strapi:${{ github.sha }}-${{ matrix.environment }}
 
       - name: Deploy new ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a # v1.4.11
