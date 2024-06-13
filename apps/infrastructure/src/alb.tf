@@ -114,3 +114,31 @@ resource "aws_alb_target_group" "cms_multitenant" {
     unhealthy_threshold = "2"
   }
 }
+
+resource "aws_lb_listener_certificate" "lb_cms_certificate" {
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  }
+  listener_arn    = aws_lb_listener.front_end_https.arn
+  certificate_arn = module.cms_multitenant_ssl_certificate[each.key].acm_certificate_arn
+}
+
+resource "aws_lb_listener_rule" "cms_rule" {
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  }
+  listener_arn = aws_lb_listener.front_end_https.arn
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.cms_multitenant[each.key].arn
+  }
+
+  condition {
+    host_header {
+      values = ["${each.key}.${keys(var.dns_domain_name)[0]}", "www.${each.key}.${keys(var.dns_domain_name)[0]}"]
+    }
+  }
+}
