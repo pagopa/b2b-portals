@@ -1,11 +1,6 @@
 name: Deploy Website
 
 on:
-  pull_request:
-    types:
-      - closed # Trigger when the PR is closed
-    branches:
-      - 'main' # Target branch is main
   workflow_dispatch:
     inputs:
       environment:
