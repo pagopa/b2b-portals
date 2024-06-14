@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Grid, Stack, ButtonGroup, Button } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Ctas as EditorialCtas } from '../Editorial/Ctas';
 import { Image as EditorialImage } from '../Editorial/Image';
 import { Content as EditorialContent } from '../Editorial/Content';
@@ -71,6 +72,8 @@ const EditorialSwitch = ({
       return () => {};
     }
   }, []);
+  
+  const { palette } = useTheme();
 
   const backgroundColor = BackgroundColor(theme);
 
@@ -110,15 +113,16 @@ const EditorialSwitch = ({
                 key={section.button.id}
                 onClick={() => handleButtonClick(section.button)}
                 sx={{
-                  backgroundColor: section.button.id === selectedSection.button.id ? (theme === 'light' ? '#e3f2fd' : 'white') : 'transparent',
-                  color: section.button.id === selectedSection.button.id ? (theme === 'light' ? '#1976d2' : '#1976d2') : (theme === 'light' ? '#1976d2' : 'white'),
-                  borderColor: theme === 'light' ? '#1976d2' : 'white',
+                  backgroundColor: section.button.id === selectedSection.button.id ? (theme === 'light' ? palette.custom.backgroundColorDark : palette.background.paper) : 'transparent',
+                  color: section.button.id === selectedSection.button.id ? (theme === 'light' ? palette.primary.contrastText : palette.custom.primaryColorDark) : (theme === 'light' ? palette.custom.primaryColorDark : palette.primary.contrastText),
+                  borderColor: theme === 'light' ? palette.custom.primaryColorDark : palette.background.paper,
                   '&:hover': {
-                    backgroundColor: section.button.id === selectedSection.button.id ? (theme === 'light' ? '#bbdefb' : 'white') : 'rgba(255, 255, 255, 0.1)',
-                    color: theme === 'light' ? '#1976d2' : 'white',
-                    borderColor: theme === 'light' ? '#1976d2' : 'white',
+                    backgroundColor: section.button.id ? (theme === 'light' ? palette.custom.primaryColorDark : palette.background.paper) : 'rgba(255, 255, 255, 0.1)',
+                    color: theme === 'light' ? palette.primary.contrastText : palette.custom.primaryColorDark,
+                    borderColor: section.button.id ? ( theme === 'light' ? palette.custom.primaryColorDark : palette.background.paper ) : 'rgba(255, 255, 255, 0.1)',
                   },
                 }}
+                disableRipple
               >
                 {section.button.text}
               </Button>
