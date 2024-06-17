@@ -1,9 +1,6 @@
 import {
-  EditorialContentProps,
   EditorialCtaProps,
-  EditorialImageProps,
 } from '../Editorial/Editorial.types';
-import { CommonProps } from '../common/Common.types';
 
 export interface TitleSubtitleBlockProps {
   toptitle: string;
@@ -25,18 +22,36 @@ export interface ContentItem {
   title: string;
   ctaButtons?: EditorialCtaProps['ctaButtons'];
   pattern: 'dots' | 'solid' | 'none';
-  image: EditorialImageProps['image'];
+  image: {
+    src: string;
+    alt: string;
+  };
+}
+export interface Section {
+  button: {
+    id: string;
+    text: string;
+  };
+  content: {
+    id: string;
+    eyelet: string;
+    body: string;
+    title: string;
+    ctaButtons?: { text: string }[];
+    pattern: 'dots' | 'solid' | 'none';
+    image: {
+      src: string;
+      alt: string;
+    };
+  };
 }
 
-export interface EditorialSwitchProps
-  extends CommonProps,
-    EditorialContentProps,
-    EditorialCtaProps,
-    EditorialImageProps {
+export interface EditorialSwitchProps {
+  sections: Section[];
+  theme: 'light' | 'dark';
   reversed?: boolean;
-  width: 'wide' | 'standard' | 'center';
+  width?: 'wide' | 'standard' | 'center';
   toptitle: string;
   topsubtitle?: string;
-  buttons: { id: string; text: string }[];
-  content: ContentItem[];
+  pattern?: 'dots' | 'solid' | 'none';
 }
