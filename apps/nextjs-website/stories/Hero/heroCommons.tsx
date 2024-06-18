@@ -25,16 +25,20 @@ const createHeroProps = (
   theme: 'dark' | 'light',
   withButtons: boolean,
   withSubtitle: boolean
-): Partial<HeroProps> => ({
-  theme,
-  useHoverlay: false,
-  title,
-  subtitle: withSubtitle ? subtitle : '',
-  ctaButtons: withButtons ? ctaButtons : [],
-  altText: 'Alt text for image',
-  image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-  background: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
-});
+): Partial<HeroProps> => {
+  let props: Partial<HeroProps> = {
+    theme,
+    useHoverlay: false,
+    title,
+    subtitle: withSubtitle ? subtitle : '',
+    ctaButtons: withButtons ? ctaButtons : [],
+    altText: 'Alt text for image',
+    image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
+    background: theme === 'dark' ? 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png' : '',
+  };
+
+  return props;
+};
 
 export const defaultsDarkWithButtons = createHeroProps('dark', true, true);
 export const defaultsDarkWithoutButtons = createHeroProps('dark', false, true);
