@@ -120,19 +120,20 @@ data "aws_iam_policy_document" "ecs_task_execution" {
     actions = [
       "ssm:GetParameters"
     ]
-    resources = [
-      aws_ssm_parameter.cms_database_password.arn,
-      aws_ssm_parameter.cms_admin_jwt_secret.arn,
-      aws_ssm_parameter.cms_app_keys.arn,
-      aws_ssm_parameter.cms_api_token_salt.arn,
-      aws_ssm_parameter.cms_transfer_token_salt.arn,
-      aws_ssm_parameter.cms_jwt_secret.arn,
-      aws_ssm_parameter.cms_access_key_id.arn,
-      aws_ssm_parameter.cms_access_key_secret.arn,
-      aws_ssm_parameter.cms_github_pat.arn,
-      aws_ssm_parameter.strapi_api_token.arn,
-      aws_ssm_parameter.preview_token.arn
-    ]
+    resources = concat(
+      [aws_ssm_parameter.cms_database_password.arn,
+        aws_ssm_parameter.cms_admin_jwt_secret.arn,
+        aws_ssm_parameter.cms_app_keys.arn,
+        aws_ssm_parameter.cms_api_token_salt.arn,
+        aws_ssm_parameter.cms_transfer_token_salt.arn,
+        aws_ssm_parameter.cms_jwt_secret.arn,
+        aws_ssm_parameter.cms_access_key_id.arn,
+        aws_ssm_parameter.cms_access_key_secret.arn,
+        aws_ssm_parameter.cms_github_pat.arn,
+        aws_ssm_parameter.strapi_api_token.arn,
+      aws_ssm_parameter.preview_token.arn],
+      [for name, parameter in aws_ssm_parameter.cms_multitenant_api_token_salt : parameter.arn]
+    )
   }
 
   statement {
