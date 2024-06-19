@@ -158,6 +158,18 @@ const IFrameSectionCodec = t.strict({
   src: t.string,
 });
 
+const FormSectionCodec = t.strict({
+  __component: t.literal('sections.form'),
+  title: t.string,
+  subtitle: t.string,
+  privacyText: t.string,
+  privacyLink: t.string,
+  privacyLinkText: t.string,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
+  submitHandler: t.Function,
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -169,6 +181,7 @@ export const PageSectionCodec = t.union([
   CardsSectionCodec,
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
+  FormSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -182,3 +195,4 @@ export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
+export type FormSection = t.TypeOf<typeof FormSectionCodec>;

@@ -11,6 +11,7 @@ import StripeLink from './StripeLink/StripeLink';
 import Header from './Header/Header';
 import Feature from './Feature/Feature';
 import IFrame from './IFrame/IFrame';
+import Form from './Form/Form';
 
 export {
   Hero,
@@ -26,4 +27,5 @@ export {
   Header,
   Feature,
   IFrame,
+  Form,
 };
