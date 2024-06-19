@@ -10,14 +10,14 @@ import {
   Divider,
   Button,
 } from '@mui/material';
-import { FormProps } from '@react-components/types/Form/Form.types';
+import { FormData, FormProps } from '@react-components/types/Form/Form.types';
 import {
   TextColor,
   BackgroundColorAlternative,
   LinkColor,
 } from '../common/Common.helpers';
 
-const Form = (props: FormProps) => {
+const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
   const {
     title,
     subtitle,
@@ -49,7 +49,7 @@ const Form = (props: FormProps) => {
   };
 
   const handleButtonClick = () => {
-    console.log(formData);
+    props.onSubmit(formData);
   };
 
   return (

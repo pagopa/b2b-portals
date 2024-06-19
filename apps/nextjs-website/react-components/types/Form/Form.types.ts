@@ -10,3 +10,10 @@ export interface FormProps extends CommonProps {
   readonly backgroundImage?: string;
   readonly ctaButtons: ReadonlyArray<CtaButtonProps>;
 }
+
+export interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  organization: string;
+};

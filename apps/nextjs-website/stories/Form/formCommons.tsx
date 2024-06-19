@@ -15,7 +15,7 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   }],
 });
 
-export const FormTemplate: StoryFn<FormProps> = (args) => <Form {...args} />;
+export const FormTemplate: StoryFn<FormProps> = (args) => <Form {...args} onSubmit={() => alert('Form submitted')} />;
 
 export const defaultPropsDark = generateFormProps('dark');
 export const defaultPropsLight = generateFormProps('light');

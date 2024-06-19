@@ -167,6 +167,7 @@ const FormSectionCodec = t.strict({
   privacyLinkText: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
+  submitHandler: t.Function,
 });
 
 export const PageSectionCodec = t.union([
