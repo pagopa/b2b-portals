@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:18-alpine@sha256:e37da457874383fa9217067867ec85fe8fe59f0bfa351ec9752a95438680056e
 RUN apk add --no-cache g++ make py3-pip libc6-compat
 ARG ENVIRONMENT
 ENV ENVIRONMENT=${ENVIRONMENT}
