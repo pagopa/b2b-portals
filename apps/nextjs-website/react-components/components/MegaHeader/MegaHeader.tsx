@@ -3,8 +3,8 @@ import { AppBar, Toolbar, IconButton, Typography, Button, Box, useMediaQuery } f
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { styled, useTheme } from '@mui/material/styles';
-import { MenuItem, defaultMenuItems, defaultSocialMediaLinks } from '../../../stories/MegaHeader/megaheaderCommons';
-import { SocialMediaLink } from '@react-components/types/MegaHeader/MegaHeader.types';
+import { MenuItem, SocialMediaLink } from '@react-components/types/MegaHeader/MegaHeader.types';
+import { defaultMenuItems, defaultSocialMediaLinks } from '../../../stories/MegaHeader/light.stories';
 
 type MegaHeaderProps = {
   menuItems?: MenuItem[];
@@ -212,7 +212,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
           {!isMobile && (
             <>
               <Nav>
-                {menuItems.map((menuItem, index) => (
+                {menuItems.map((menuItem: MenuItem, index) => (
                   <li key={index}>
                     <a href="#" className="menuPrimaryItem" onClick={(e) => handleClick(e, menuItem.primary)}>{menuItem.primary}</a>
                     <Dropdown className={dropdownOpen[menuItem.primary] ? 'open' : ''}>
@@ -242,7 +242,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
         </Content>
       </Container>
       <MobileMenu id="mobileMenu" className={mobileMenuOpen ? 'open' : ''}>
-        {menuItems.map((menuItem, index) => (
+        {menuItems.map((menuItem: MenuItem, index) => (
           <React.Fragment key={index}>
             <a href="#" className="mobileMenuPrimaryItem" onClick={(e) => handleClick(e, `mobile${menuItem.primary}`)}>{menuItem.primary}</a>
             <Box className={`dropdownMobile ${dropdownOpen[`mobile${menuItem.primary}`] ? 'open' : ''}`}>
