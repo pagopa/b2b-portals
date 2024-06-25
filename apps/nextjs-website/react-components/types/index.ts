@@ -12,6 +12,7 @@ import { HeaderProps } from './Header/Header.types';
 import { FeatureProps } from './Feature/Feature.types';
 import { IFrameProps } from './IFrame/IFrame.types';
 import { FormProps } from './Form/Form.types';
+import { MegaHeaderProps } from './MegaHeader/MegaHeader.types';
 
 export type {
   HeroProps,
@@ -28,4 +29,5 @@ export type {
   FeatureProps,
   IFrameProps,
   FormProps,
+  MegaHeaderProps,
 };
