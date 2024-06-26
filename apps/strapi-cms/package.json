@@ -17,6 +17,7 @@
     "strapi": "strapi"
   },
   "devDependencies": {
+    "@types/pg": "^8.11.6",
     "eslint": "^8.50.0",
     "eslint-config-custom": "*",
     "shx": "^0.3.4",
