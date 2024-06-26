@@ -11,7 +11,6 @@ const makeTestAppEnv = () => {
   const config: Config = {
     STRAPI_API_TOKEN: 'aStrapiToken',
     STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
-    ENVIRONMENT: 'send',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
   };
