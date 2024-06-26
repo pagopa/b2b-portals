@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getFooter } from '../footer';
-import tenants from '../../tenants';
 import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
@@ -105,9 +104,7 @@ describe('getFooter', () => {
     await getFooter(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/${
-        tenants[config.ENVIRONMENT].footer
-      }/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
+      `${config.STRAPI_API_BASE_URL}/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
       {
         method: 'GET',
         headers: {

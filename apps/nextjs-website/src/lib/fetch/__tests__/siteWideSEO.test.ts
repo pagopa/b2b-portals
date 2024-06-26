@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
 import { fetchSiteWideSEO } from '../siteWideSEO';
-import tenants from '../../tenants';
 import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
@@ -74,9 +73,7 @@ describe('fetchSiteWideSEO', () => {
     await fetchSiteWideSEO(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/${
-        tenants[config.ENVIRONMENT].general
-      }?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      `${config.STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
       {
         method: 'GET',
         headers: {

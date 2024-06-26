@@ -1,5 +1,4 @@
 import * as t from 'io-ts';
-import tenants from '../tenants';
 import { extractFromResponse } from './extractFromResponse';
 import { CTAButtonSimpleCodec } from './types/CTAButton';
 import { StrapiImageSchema } from './types/StrapiImage';
@@ -21,9 +20,7 @@ export type Header = t.TypeOf<typeof HeaderDataCodec>;
 export const getHeader = ({ config, fetchFun }: AppEnv): Promise<Header> =>
   extractFromResponse(
     fetchFun(
-      `${config.STRAPI_API_BASE_URL}/api/${
-        tenants[config.ENVIRONMENT].header
-      }/?populate=ctaButtons,logo`,
+      `${config.STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons,logo`,
       {
         method: 'GET',
         headers: {

@@ -1,5 +1,4 @@
 import * as t from 'io-ts';
-import tenants from '../tenants';
 import { extractFromResponse } from './extractFromResponse';
 import { MUIButtonSizeCodec } from './types/MUIButtonSize';
 import { MUIButtonIconCodec } from './types/icons/ButtonIcon';
@@ -30,9 +29,7 @@ export const getPreHeader = ({
 }: AppEnv): Promise<PreHeader> =>
   extractFromResponse(
     fetchFun(
-      `${config.STRAPI_API_BASE_URL}/api/${
-        tenants[config.ENVIRONMENT].preHeader
-      }/?populate=leftCtas,rightCtas`,
+      `${config.STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {

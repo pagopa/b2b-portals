@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getPreHeader } from '../preHeader';
-import tenants from '../../tenants';
 import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
@@ -79,9 +78,7 @@ describe('getPreHeader', () => {
     await getPreHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/${
-        tenants[config.ENVIRONMENT].preHeader
-      }/?populate=leftCtas,rightCtas`,
+      `${config.STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {

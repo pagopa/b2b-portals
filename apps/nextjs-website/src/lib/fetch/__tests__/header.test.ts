@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getHeader } from '../header';
-import tenants from '../../tenants';
 import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
@@ -50,9 +49,7 @@ describe('getHeader', () => {
     await getHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/${
-        tenants[config.ENVIRONMENT].header
-      }/?populate=ctaButtons,logo`,
+      `${config.STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons,logo`,
       {
         method: 'GET',
         headers: {
