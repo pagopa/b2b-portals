@@ -23,11 +23,16 @@ export default {
       statement_timeout: 5000,
       user: process.env['DATABASE_USERNAME'],
     });
-    await client.connect();
-    await client.query(
-      `CREATE SCHEMA IF NOT EXISTS ${process.env['DATABASE_SCHEMA']};`
-    );
-    await client.end();
+    try {
+      await client.connect();
+      await client.query(
+        `CREATE SCHEMA IF NOT EXISTS ${process.env['DATABASE_SCHEMA']};`
+      );
+      await client.end();
+    } catch {
+      // Do nothing, but handle exception to be able to run 'npm run compile' in Github tests
+      // If we are unable to connect to the DB, the build will fail later anyway as it should
+    }
 
     // Override Update Static Content plugin functionality
     strapi
