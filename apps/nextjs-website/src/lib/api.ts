@@ -1,6 +1,7 @@
 /** This file contains all the functions useful to get data from external resources */
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
+import { Config, makeAppEnv } from '../AppEnv';
 import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
@@ -10,7 +11,6 @@ import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
-import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -69,17 +69,20 @@ export const getSiteWideSEO = async (): Promise<
   return attributes;
 };
 
-export const getAllPageIDs = async (): Promise<PageIDs['data']> => {
-  const { data } = await fetchAllPageIDs(appEnv);
+export const getAllPageIDs = async (
+  tenant: Config['ENVIRONMENT']
+): Promise<PageIDs['data']> => {
+  const { data } = await fetchAllPageIDs({ ...appEnv, tenant });
   return data;
 };
 
 export const getPageSectionsFromID = async (
+  tenant: Config['ENVIRONMENT'],
   pageID: number
 ): Promise<ReadonlyArray<PageSection>> => {
   const {
     data: { attributes },
-  } = await fetchPageFromID({ ...appEnv, pageID });
+  } = await fetchPageFromID({ ...appEnv, tenant, pageID });
 
   return attributes.sections.map((section) => {
     // eslint-disable-next-line no-underscore-dangle
@@ -112,3 +115,15 @@ export const getPageSectionsFromID = async (
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
+
+export const tenantStrapiApiBaseUrl = {
+  demo: appEnv.config.DEMO_STRAPI_API_BASE_URL,
+  send: appEnv.config.SEND_STRAPI_API_BASE_URL,
+  appio: appEnv.config.APPIO_STRAPI_API_BASE_URL,
+};
+
+export const tenantStrapiApiToken = {
+  demo: appEnv.config.DEMO_STRAPI_API_TOKEN,
+  send: appEnv.config.SEND_STRAPI_API_TOKEN,
+  appio: appEnv.config.APPIO_STRAPI_API_TOKEN,
+};

@@ -1,11 +1,16 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getHeader } from '../header';
-import { Config } from '@/AppEnv';
+import { Config } from '../../../AppEnv';
 
 const makeTestAppEnv = () => {
   const config: Config = {
-    STRAPI_API_TOKEN: 'aStrapiToken',
-    STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
+    DEMO_STRAPI_API_TOKEN: 'demoStrapiToken',
+    DEMO_STRAPI_API_BASE_URL: 'demoStrapiApiBaseUrl',
+    SEND_STRAPI_API_BASE_URL: 'sendStrapiToken',
+    SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
+    APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
+    APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
+    ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
   };
@@ -48,11 +53,11 @@ describe('getHeader', () => {
     await getHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons,logo`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons,logo`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
         },
       }
     );

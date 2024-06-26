@@ -1,11 +1,16 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getFooter } from '../footer';
-import { Config } from '@/AppEnv';
+import { Config } from '../../../AppEnv';
 
 const makeTestAppEnv = () => {
   const config: Config = {
-    STRAPI_API_TOKEN: 'aStrapiToken',
-    STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
+    DEMO_STRAPI_API_TOKEN: 'demoStrapiToken',
+    DEMO_STRAPI_API_BASE_URL: 'demoStrapiApiBaseUrl',
+    SEND_STRAPI_API_BASE_URL: 'sendStrapiToken',
+    SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
+    APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
+    APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
+    ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
   };
@@ -103,11 +108,11 @@ describe('getFooter', () => {
     await getFooter(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
         },
       }
     );
