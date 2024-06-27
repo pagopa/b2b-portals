@@ -119,7 +119,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
     >
       <MailOutlineIcon sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }} />
       <Typography
-        variant='h3'
+        variant='h4'
         gutterBottom
         sx={{ position: 'relative', zIndex: 3, color: textColor }}
       >
@@ -192,9 +192,9 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
       </Grid>
       {checkboxTitle && (
         <Typography
-          variant='h5'
+          variant='h6'
           gutterBottom
-          sx={{ position: 'relative', zIndex: 3, mb: 2, color: textColor }}
+          sx={{ position: 'relative', zIndex: 3, mb: 2, color: textColor, fontWeight: "700" }}
         >
           {checkboxTitle}
         </Typography>
@@ -296,7 +296,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
       {showCheckboxInfo && (
         <Typography
           variant='body2'
-          sx={{ mb: 2, position: 'relative', zIndex: 3, color: textColor }}
+          sx={{ mb: 2, position: 'relative', zIndex: 3, color: textColor, textAlign: "start" }}
         >
           *Campo obbligatorio, con possibilità di risposta multipla
         </Typography>
