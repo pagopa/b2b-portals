@@ -129,15 +129,3 @@ export const getPageSectionsFromID = async (
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
-
-// export const tenantStrapiApiBaseUrl = {
-//   demo: appEnv.config.DEMO_STRAPI_API_BASE_URL,
-//   send: appEnv.config.SEND_STRAPI_API_BASE_URL,
-//   appio: appEnv.config.APPIO_STRAPI_API_BASE_URL,
-// };
-
-// export const tenantStrapiApiToken = {
-//   demo: appEnv.config.DEMO_STRAPI_API_TOKEN,
-//   send: appEnv.config.SEND_STRAPI_API_TOKEN,
-//   appio: appEnv.config.APPIO_STRAPI_API_TOKEN,
-// };
