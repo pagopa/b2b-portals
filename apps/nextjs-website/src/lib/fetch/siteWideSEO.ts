@@ -1,7 +1,7 @@
 import * as t from 'io-ts';
-import tenants from '../tenants';
 import { extractFromResponse } from './extractFromResponse';
 import { StrapiImageRequiredSchema } from './types/StrapiImage';
+import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
 const SiteWideSEOCodec = t.strict({
@@ -27,13 +27,13 @@ export const fetchSiteWideSEO = ({
 }: AppEnv): Promise<SiteWideSEO> =>
   extractFromResponse(
     fetchFun(
-      `${config.STRAPI_API_BASE_URL}/api/${
-        tenants[config.ENVIRONMENT].general
-      }?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      `${
+        extractTenantStrapiApiData(config).baseUrl
+      }/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
         },
       }
     ),
