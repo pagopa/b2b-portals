@@ -47,9 +47,7 @@ export const fetchPageFromID = ({
   config,
   fetchFun,
   pageID,
-}: AppEnv & {
-  readonly pageID: number;
-}): Promise<PageData> =>
+}: AppEnv & { readonly pageID: number }): Promise<PageData> =>
   extractFromResponse(
     fetchFun(
       `${
