@@ -9,7 +9,7 @@ export const Content = ({ title, theme }: PreFooterContentProps) => {
   const textColor = TextColor(theme);
 
   return (
-    <Stack textAlign='center' gap={spacing(2)}>
+    <Stack textAlign='center' gap={spacing(2)} sx={{ flex: 1 }}>
       <Title variant='h4' textColor={textColor} title={title} />
     </Stack>
   );
