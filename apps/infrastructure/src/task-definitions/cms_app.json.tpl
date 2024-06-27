@@ -87,6 +87,10 @@
       {
         "name": "PREVIEW_URL",
         "value": "${preview_url}"
+      },
+      {
+        "name": "ENVIRONMENT",
+        "value": "${environment}"
       }
     ],
     "secrets" : [
