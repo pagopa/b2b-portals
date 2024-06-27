@@ -41,7 +41,7 @@ const PreFooter = (props: PreFooterProps) => {
               <img {...decoration} />
             )
           ) : null}
-          <Typography variant='h4' color={theme === 'dark' ? 'white' : 'black'} mb={2}>{title}</Typography>
+          <Typography variant='h4' color={theme === 'dark' ? 'white' : 'black'} mb={isSmallScreen ? 2 : 'unset'}>{title}</Typography>
           {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
             <Stack
               justifyContent='center'
