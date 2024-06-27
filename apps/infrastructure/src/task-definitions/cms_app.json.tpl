@@ -50,7 +50,7 @@
       },
       {
         "name": "DATABASE_SCHEMA",
-        "value": "public"
+        "value": "${db_schema}"
       },
       {
         "name": "AWS_REGION",
@@ -87,6 +87,10 @@
       {
         "name": "PREVIEW_URL",
         "value": "${preview_url}"
+      },
+      {
+        "name": "ENVIRONMENT",
+        "value": "${environment}"
       }
     ],
     "secrets" : [

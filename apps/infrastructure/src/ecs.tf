@@ -35,6 +35,8 @@ data "template_file" "cms_app" {
     github_pat           = aws_ssm_parameter.cms_github_pat.arn
     preview_token        = aws_ssm_parameter.preview_token.arn
     preview_url          = "https://preview.${keys(var.dns_domain_name)[0]}/preview"
+    environment          = "production"
+    db_schema            = "public"
   }
 }
 
@@ -165,6 +167,8 @@ data "template_file" "cms_multitenant_app" {
     github_pat           = aws_ssm_parameter.cms_github_pat.arn
     preview_token        = aws_ssm_parameter.preview_token.arn
     preview_url          = "https://preview.${keys(var.dns_domain_name)[0]}/preview"
+    environment          = "${each.key}"
+    db_schema            = "${each.key}"
   }
 }
 
