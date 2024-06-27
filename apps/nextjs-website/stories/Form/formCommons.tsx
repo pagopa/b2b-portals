@@ -5,7 +5,6 @@ import Form from '@react-components/components/Form/Form';
 const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   title: 'Resta aggiornato, iscriviti alla newsletter!',
   subtitle: '',
-  privacyTextRecaptcha: 'Form protetto tramite reCAPTCHA e Google',
   privacyLinkRecaptchaPolicy: 'https://policies.google.com/privacy',
   privacyLinkTextRecaptchaPolicy: 'Privacy Policy',
   privacyLinkRecaptchaTerms: 'https://policies.google.com/terms',

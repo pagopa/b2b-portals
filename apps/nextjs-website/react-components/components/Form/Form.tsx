@@ -121,14 +121,14 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
       <Typography
         variant='h4'
         gutterBottom
-        sx={{ position: 'relative', zIndex: 3, color: textColor }}
+        sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
       >
         {title}
       </Typography>
       <Typography
         variant='body1'
         gutterBottom
-        sx={{ position: 'relative', zIndex: 3, mb: 2, color: textColor }}
+        sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor, }}
       >
         {subtitle}
       </Typography>
@@ -167,7 +167,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
           <Grid item xs={12}>
             <FormControl fullWidth>
               <OutlinedInput
-                placeholder='Indirizzo e-mail aziendale'
+                placeholder='Indirizzo e-mail'
                 name='email'
                 value={formData.email}
                 onChange={handleInputChange}
@@ -194,7 +194,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
         <Typography
           variant='h6'
           gutterBottom
-          sx={{ position: 'relative', zIndex: 3, mb: 2, color: textColor, fontWeight: "700" }}
+          sx={{ position: 'relative', zIndex: 3, mb: 2, mt: 4, color: textColor, fontWeight: "700" }}
         >
           {checkboxTitle}
         </Typography>
@@ -296,7 +296,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
       {showCheckboxInfo && (
         <Typography
           variant='body2'
-          sx={{ mb: 2, position: 'relative', zIndex: 3, color: textColor, textAlign: "start" }}
+          sx={{ mb: 2, position: 'relative', zIndex: 3, color: textColor }}
         >
           *Campo obbligatorio, con possibilità di risposta multipla
         </Typography>
@@ -326,14 +326,14 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
         Form protetto tramite reCAPTCHA e Google{' '}
         <Link
           href={privacyLinkRecaptchaPolicy}
-          sx={{ color: 'grey.600', textDecorationColor: 'grey.600' }}
+          sx={{ color: 'grey.600', textDecorationColor: 'grey.600', textDecoration: 'underline' }}
         >
           {privacyLinkTextRecaptchaPolicy}
         </Link>{' '}
         e{' '}
         <Link
           href={privacyLinkRecaptchaTerms}
-          sx={{ color: 'grey.600', textDecorationColor: 'grey.600' }}
+          sx={{ color: 'grey.600', textDecorationColor: 'grey.600', textDecoration: 'underline' }}
         >
           {privacyLinkTextRecaptchaTerms}
         </Link>{' '}

@@ -3,7 +3,6 @@ import { CtaButtonProps, type CommonProps } from '../common/Common.types';
 export interface FormProps extends CommonProps {
   readonly title: string;
   readonly subtitle: string;
-  readonly privacyTextRecaptcha: string;
   readonly privacyLinkRecaptchaPolicy: string;
   readonly privacyLinkTextRecaptchaPolicy: string;
   readonly privacyLinkRecaptchaTerms: string;
