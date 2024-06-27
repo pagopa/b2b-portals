@@ -5,7 +5,7 @@ import {
   fetchAllPageIDs,
   fetchPageFromID,
 } from '../preview';
-import { Config } from '../../../AppEnv';
+import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
   const config: Config = {

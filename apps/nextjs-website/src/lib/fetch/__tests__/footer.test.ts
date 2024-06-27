@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getFooter } from '../footer';
-import { Config } from '../../../AppEnv';
+import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
   const config: Config = {

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getHeader } from '../header';
-import { Config } from '../../../AppEnv';
+import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
   const config: Config = {
