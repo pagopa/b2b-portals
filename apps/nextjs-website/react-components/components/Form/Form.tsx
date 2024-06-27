@@ -78,7 +78,9 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
   };
 
   const handleButtonClick = () => {
-    props.onSubmit({ ...formData, ...checkboxes });
+    const allData = { ...formData, ...checkboxes };
+    console.log(allData);
+    props.onSubmit(allData);
   };
 
   return (
