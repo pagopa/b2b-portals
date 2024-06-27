@@ -30,5 +30,5 @@ export const PreFooterNoStoreButtons: StoryFn<typeof PreFooter> =
   PreFooterTemplate.bind({});
 PreFooterNoStoreButtons.args = {
   ...defaultPropsLight,
-  storeButtons: {} as StoreButtonsProps, 
+  // storeButtons: {} as StoreButtonsProps, 
 };

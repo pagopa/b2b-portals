@@ -9,7 +9,7 @@ export const PreFooterTemplate: StoryFn<PreFooterProps> = (args) => <PreFooter {
 const generateDefaultProps = (theme: 'light' | 'dark'): Partial<PreFooterProps> => ({
   title: 'This is the Title',
   theme,
-  storeButtons: {} as StoreButtonsProps, // Ensure storeButtons is defined but empty
+  // storeButtons: {} as StoreButtonsProps, // Ensure storeButtons is defined but empty
 });
 
 // Define the default props with light theme
@@ -18,7 +18,7 @@ export const defaultPropsLight = generateDefaultProps('light');
 // Define the default props with dark theme
 export const defaultPropsDark = generateDefaultProps('dark');
 
-(defaultPropsDark.storeButtons as StoreButtonsProps) = {
-  hrefGoogle: 'https://play.google.com',
-  hrefApple: 'https://apple.com',
-};
+// (defaultPropsDark.storeButtons as StoreButtonsProps) = {
+//   hrefGoogle: 'https://play.google.com',
+//   hrefApple: 'https://apple.com',
+// };
