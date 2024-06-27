@@ -50,7 +50,7 @@
       },
       {
         "name": "DATABASE_SCHEMA",
-        "value": "public"
+        "value": "${db_schema}"
       },
       {
         "name": "AWS_REGION",
