@@ -11,6 +11,8 @@ declare module '@mui/material/styles' {
       readonly primaryColorDark: string;
       readonly backgroundColorDefault: string;
       readonly darkLinkColor: string;
+      readonly grayLinkColor: string;
+      readonly blackOpacized: string;
     };
   }
   interface PaletteOptions {
@@ -21,6 +23,8 @@ declare module '@mui/material/styles' {
       readonly primaryColorDark?: string;
       readonly backgroundColorDefault?: string;
       readonly darkLinkColor?: string;
+      readonly grayLinkColor?: string;
+      readonly blackOpacized?: string;
     };
   }
 }
@@ -41,6 +45,8 @@ export const theme = createTheme(MUIItaliaTheme, {
       primaryColorDark: '#0B3EE3',
       backgroundColorDefault: '#FAFAFA',
       darkLinkColor: '#1A73E8',
+      grayLinkColor: '#F4F5F8',
+      blackOpacized: '#00000050',
     },
   },
 });

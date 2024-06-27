@@ -46,3 +46,10 @@ export const LinkColor = (theme: 'dark' | 'light') => {
     ? palette.primary.contrastText
     : palette.custom.darkLinkColor;
 };
+
+export const GrayLinkColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.grayLinkColor
+    : palette.custom.blackOpacized;
+};

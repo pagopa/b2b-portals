@@ -7,16 +7,16 @@ import {
   Typography,
   Link,
   FormControl,
-  Divider,
   Button,
-  Checkbox,
 } from '@mui/material';
 import { FormData, FormProps } from '@react-components/types/Form/Form.types';
 import {
   TextColor,
   BackgroundColorAlternative,
+  GrayLinkColor,
 } from '../common/Common.helpers';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { OptionRow } from './Form.helpers';
 
 const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
   const {
@@ -60,6 +60,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
 
   const backgroundColor = BackgroundColorAlternative(theme);
   const textColor = TextColor(theme);
+  const graylinkColor = GrayLinkColor(theme);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -119,7 +120,9 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
         },
       }}
     >
-      <MailOutlineIcon sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }} />
+      <MailOutlineIcon
+        sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }}
+      />
       <Typography
         variant='h4'
         gutterBottom
@@ -130,7 +133,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
       <Typography
         variant='body1'
         gutterBottom
-        sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor, }}
+        sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor }}
       >
         {subtitle}
       </Typography>
@@ -196,7 +199,14 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
         <Typography
           variant='h6'
           gutterBottom
-          sx={{ position: 'relative', zIndex: 3, mb: 2, mt: 4, color: textColor, fontWeight: "700" }}
+          sx={{
+            position: 'relative',
+            zIndex: 3,
+            mb: 2,
+            mt: 4,
+            color: textColor,
+            fontWeight: '700',
+          }}
         >
           {checkboxTitle}
         </Typography>
@@ -207,92 +217,50 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
         sx={{ mb: 2, position: 'relative', zIndex: 3, textAlign: 'left' }}
       >
         {showCitizen && (
-          <Grid container alignItems='center' justifyContent='space-between'>
-            <Grid item xs>
-              <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                Cittadino
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Checkbox
-                checked={checkboxes.citizen}
-                onChange={handleCheckboxChange}
-                name='citizen'
-              />
-            </Grid>
-            <Divider sx={{ width: '100%' }} />
-          </Grid>
+          <OptionRow
+            color={textColor}
+            label='Cittadino'
+            checked={checkboxes.citizen}
+            onChange={handleCheckboxChange}
+            name='citizen'
+          />
         )}
         {showPublicEmployee && (
-          <Grid container alignItems='center' justifyContent='space-between'>
-            <Grid item xs>
-              <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                Dipendente / Consulente di un ente pubblico
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Checkbox
-                checked={checkboxes.publicEmployee}
-                onChange={handleCheckboxChange}
-                name='publicEmployee'
-              />
-            </Grid>
-            <Divider sx={{ width: '100%' }} />
-          </Grid>
+          <OptionRow
+            color={textColor}
+            label='Dipendente / Consulente di un ente pubblico'
+            checked={checkboxes.publicEmployee}
+            onChange={handleCheckboxChange}
+            name='publicEmployee'
+          />
         )}
         {showTechPartner && (
-          <Grid container alignItems='center' justifyContent='space-between'>
-            <Grid item xs={10}>
-              <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                Partner tecnologico di un ente pubblico
-              </Typography>
-              <Typography variant='body2' sx={{ color: textColor }}>
-                (presso società in-house, software house, ecc.)
-              </Typography>
-            </Grid>
-            <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Checkbox
-                checked={checkboxes.techPartner}
-                onChange={handleCheckboxChange}
-                name='techPartner'
-              />
-            </Grid>
-            <Divider sx={{ width: '100%' }} />
-          </Grid>
+          <OptionRow
+            color={textColor}
+            label='Partner tecnologico di un ente pubblico'
+            additionalText='(presso società in-house, software house, ecc.)'
+            checked={checkboxes.techPartner}
+            onChange={handleCheckboxChange}
+            name='techPartner'
+          />
         )}
         {showDeveloper && (
-          <Grid container alignItems='center' justifyContent='space-between'>
-            <Grid item xs>
-              <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                Sviluppatore
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Checkbox
-                checked={checkboxes.developer}
-                onChange={handleCheckboxChange}
-                name='developer'
-              />
-            </Grid>
-            <Divider sx={{ width: '100%' }} />
-          </Grid>
+          <OptionRow
+            color={textColor}
+            label='Sviluppatore'
+            checked={checkboxes.developer}
+            onChange={handleCheckboxChange}
+            name='developer'
+          />
         )}
         {showJournalist && (
-          <Grid container alignItems='center' justifyContent='space-between'>
-            <Grid item xs>
-              <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                Giornalista
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Checkbox
-                checked={checkboxes.journalist}
-                onChange={handleCheckboxChange}
-                name='journalist'
-              />
-            </Grid>
-            <Divider sx={{ width: '100%' }} />
-          </Grid>
+          <OptionRow
+            color={textColor}
+            label='Giornalista'
+            checked={checkboxes.journalist}
+            onChange={handleCheckboxChange}
+            name='journalist'
+          />
         )}
       </Grid>
       {showCheckboxInfo && (
@@ -318,24 +286,33 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
           fontWeight='bold'
           sx={{ mt: 2, position: 'relative', zIndex: 3, color: textColor }}
         >
-          Inserendo il tuo indirizzo email stai accettando la nostra informativa sul trattamento dei dati personali per la newsletter.
+          Inserendo il tuo indirizzo email stai accettando la nostra informativa
+          sul trattamento dei dati personali per la newsletter.
         </Typography>
       )}
       <Typography
         variant='body2'
-        sx={{ mt: 2, position: 'relative', zIndex: 3, color: 'grey.600' }}
+        sx={{ mt: 2, position: 'relative', zIndex: 3, color: graylinkColor }}
       >
         Form protetto tramite reCAPTCHA e Google{' '}
         <Link
           href={privacyLinkRecaptchaPolicy}
-          sx={{ color: 'grey.600', textDecorationColor: 'grey.600', textDecoration: 'underline' }}
+          sx={{
+            color: graylinkColor,
+            textDecorationColor: graylinkColor,
+            textDecoration: 'underline',
+          }}
         >
           {privacyLinkTextRecaptchaPolicy}
         </Link>{' '}
         e{' '}
         <Link
           href={privacyLinkRecaptchaTerms}
-          sx={{ color: 'grey.600', textDecorationColor: 'grey.600', textDecoration: 'underline' }}
+          sx={{
+            color: graylinkColor,
+            textDecorationColor: graylinkColor,
+            textDecoration: 'underline',
+          }}
         >
           {privacyLinkTextRecaptchaTerms}
         </Link>{' '}
