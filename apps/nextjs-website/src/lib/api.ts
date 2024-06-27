@@ -1,6 +1,7 @@
 /** This file contains all the functions useful to get data from external resources */
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
+import { AppEnv, Config, makeAppEnv } from '../AppEnv';
 import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
@@ -10,7 +11,6 @@ import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
-import { makeAppEnv } from '@/AppEnv';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -69,17 +69,34 @@ export const getSiteWideSEO = async (): Promise<
   return attributes;
 };
 
-export const getAllPageIDs = async (): Promise<PageIDs['data']> => {
-  const { data } = await fetchAllPageIDs(appEnv);
+export const getAllPageIDs = async (
+  tenant: Config['ENVIRONMENT']
+): Promise<PageIDs['data']> => {
+  const appEnvWithRequestedTenant: AppEnv = {
+    config: {
+      ...appEnv.config,
+      ENVIRONMENT: tenant,
+    },
+    fetchFun: appEnv.fetchFun,
+  };
+  const { data } = await fetchAllPageIDs(appEnvWithRequestedTenant);
   return data;
 };
 
 export const getPageSectionsFromID = async (
+  tenant: Config['ENVIRONMENT'],
   pageID: number
 ): Promise<ReadonlyArray<PageSection>> => {
+  const appEnvWithRequestedTenant: AppEnv = {
+    config: {
+      ...appEnv.config,
+      ENVIRONMENT: tenant,
+    },
+    fetchFun: appEnv.fetchFun,
+  };
   const {
     data: { attributes },
-  } = await fetchPageFromID({ ...appEnv, pageID });
+  } = await fetchPageFromID({ ...appEnvWithRequestedTenant, pageID });
 
   return attributes.sections.map((section) => {
     // eslint-disable-next-line no-underscore-dangle

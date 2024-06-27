@@ -9,9 +9,13 @@ import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
   const config: Config = {
-    STRAPI_API_TOKEN: 'aStrapiToken',
-    STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
-    ENVIRONMENT: 'send',
+    DEMO_STRAPI_API_TOKEN: 'demoStrapiToken',
+    DEMO_STRAPI_API_BASE_URL: 'demoStrapiApiBaseUrl',
+    SEND_STRAPI_API_BASE_URL: 'sendStrapiToken',
+    SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
+    APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
+    APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
+    ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
   };
@@ -74,11 +78,11 @@ describe('fetchAllPageIDs', () => {
     await fetchAllPageIDs(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/pages?publicationState=preview`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?publicationState=preview`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
         },
         cache: 'no-cache',
       }
@@ -107,14 +111,17 @@ describe('fetchPageFromID', () => {
       json: () => Promise.resolve(pageDataResponse),
     } as unknown as Response);
 
-    await fetchPageFromID({ ...appEnv, pageID: pageIDExample });
+    await fetchPageFromID({
+      ...appEnv,
+      pageID: pageIDExample,
+    });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/pages/${pageIDExample}?publicationState=preview&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items.links&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration&populate[sections][populate][8]=storeButtons`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages/${pageIDExample}?publicationState=preview&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items.links&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration&populate[sections][populate][8]=storeButtons`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
         },
         cache: 'no-cache',
       }
@@ -128,7 +135,10 @@ describe('fetchPageFromID', () => {
       json: () => Promise.resolve(pageDataResponse),
     } as unknown as Response);
 
-    const actual = fetchPageFromID({ ...appEnv, pageID: pageIDExample });
+    const actual = fetchPageFromID({
+      ...appEnv,
+      pageID: pageIDExample,
+    });
 
     expect(await actual).toStrictEqual(pageDataResponse);
   });

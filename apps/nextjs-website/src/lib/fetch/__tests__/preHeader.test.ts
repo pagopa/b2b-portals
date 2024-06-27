@@ -1,13 +1,16 @@
 import { describe, it, expect, vi } from 'vitest';
 import { getPreHeader } from '../preHeader';
-import tenants from '../../tenants';
 import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
   const config: Config = {
-    STRAPI_API_TOKEN: 'aStrapiToken',
-    STRAPI_API_BASE_URL: 'aStrapiApiBaseUrl',
-    ENVIRONMENT: 'send',
+    DEMO_STRAPI_API_TOKEN: 'demoStrapiToken',
+    DEMO_STRAPI_API_BASE_URL: 'demoStrapiApiBaseUrl',
+    SEND_STRAPI_API_BASE_URL: 'sendStrapiToken',
+    SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
+    APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
+    APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
+    ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
   };
@@ -79,13 +82,11 @@ describe('getPreHeader', () => {
     await getPreHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.STRAPI_API_BASE_URL}/api/${
-        tenants[config.ENVIRONMENT].preHeader
-      }/?populate=leftCtas,rightCtas`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
         },
       }
     );
