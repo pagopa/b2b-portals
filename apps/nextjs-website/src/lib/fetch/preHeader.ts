@@ -1,8 +1,8 @@
 import * as t from 'io-ts';
-import { tenantStrapiApiBaseUrl, tenantStrapiApiToken } from '../api';
 import { extractFromResponse } from './extractFromResponse';
 import { MUIButtonSizeCodec } from './types/MUIButtonSize';
 import { MUIButtonIconCodec } from './types/icons/ButtonIcon';
+import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
 const PreHeaderButtonCodec = t.strict({
@@ -31,12 +31,12 @@ export const getPreHeader = ({
   extractFromResponse(
     fetchFun(
       `${
-        tenantStrapiApiBaseUrl[config.ENVIRONMENT]
+        extractTenantStrapiApiData(config).baseUrl
       }/api/pre-header/?populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${tenantStrapiApiToken[config.ENVIRONMENT]}`,
+          Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
         },
       }
     ),

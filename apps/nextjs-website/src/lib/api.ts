@@ -1,7 +1,7 @@
 /** This file contains all the functions useful to get data from external resources */
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
-import { Config, makeAppEnv } from '../AppEnv';
+import { AppEnv, Config, makeAppEnv } from '../AppEnv';
 import { Page, makePageListFromNavigation } from './pages';
 import { getNavigation } from './fetch/navigation';
 import { PreHeader, getPreHeader } from './fetch/preHeader';
@@ -72,7 +72,14 @@ export const getSiteWideSEO = async (): Promise<
 export const getAllPageIDs = async (
   tenant: Config['ENVIRONMENT']
 ): Promise<PageIDs['data']> => {
-  const { data } = await fetchAllPageIDs({ ...appEnv, tenant });
+  const appEnvWithRequestedTenant: AppEnv = {
+    config: {
+      ...appEnv.config,
+      ENVIRONMENT: tenant,
+    },
+    fetchFun: appEnv.fetchFun,
+  };
+  const { data } = await fetchAllPageIDs(appEnvWithRequestedTenant);
   return data;
 };
 
@@ -80,9 +87,16 @@ export const getPageSectionsFromID = async (
   tenant: Config['ENVIRONMENT'],
   pageID: number
 ): Promise<ReadonlyArray<PageSection>> => {
+  const appEnvWithRequestedTenant: AppEnv = {
+    config: {
+      ...appEnv.config,
+      ENVIRONMENT: tenant,
+    },
+    fetchFun: appEnv.fetchFun,
+  };
   const {
     data: { attributes },
-  } = await fetchPageFromID({ ...appEnv, tenant, pageID });
+  } = await fetchPageFromID({ ...appEnvWithRequestedTenant, pageID });
 
   return attributes.sections.map((section) => {
     // eslint-disable-next-line no-underscore-dangle
@@ -116,14 +130,14 @@ export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
 
-export const tenantStrapiApiBaseUrl = {
-  demo: appEnv.config.DEMO_STRAPI_API_BASE_URL,
-  send: appEnv.config.SEND_STRAPI_API_BASE_URL,
-  appio: appEnv.config.APPIO_STRAPI_API_BASE_URL,
-};
+// export const tenantStrapiApiBaseUrl = {
+//   demo: appEnv.config.DEMO_STRAPI_API_BASE_URL,
+//   send: appEnv.config.SEND_STRAPI_API_BASE_URL,
+//   appio: appEnv.config.APPIO_STRAPI_API_BASE_URL,
+// };
 
-export const tenantStrapiApiToken = {
-  demo: appEnv.config.DEMO_STRAPI_API_TOKEN,
-  send: appEnv.config.SEND_STRAPI_API_TOKEN,
-  appio: appEnv.config.APPIO_STRAPI_API_TOKEN,
-};
+// export const tenantStrapiApiToken = {
+//   demo: appEnv.config.DEMO_STRAPI_API_TOKEN,
+//   send: appEnv.config.SEND_STRAPI_API_TOKEN,
+//   appio: appEnv.config.APPIO_STRAPI_API_TOKEN,
+// };
