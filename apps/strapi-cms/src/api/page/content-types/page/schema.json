@@ -21,7 +21,7 @@
       "type": "string",
       "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
       "required": true,
-      "unique": false
+      "unique": true
     },
     "sections": {
       "type": "dynamiczone",
