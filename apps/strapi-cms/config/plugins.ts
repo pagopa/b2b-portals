@@ -43,7 +43,7 @@ export default ({ env }: any) => ({
     },
   },
   'preview-button': {
-    enabled: false,
+    enabled: true,
     config: {
       contentTypes: [
         {
@@ -53,6 +53,7 @@ export default ({ env }: any) => ({
             query: {
               pageID: '{id}',
               secret: env('PREVIEW_TOKEN'),
+              tenant: env('ENVIRONMENT'),
             },
             openTarget: '_blank',
             copy: false,
