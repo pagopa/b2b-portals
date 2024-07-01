@@ -48,4 +48,3 @@ export const defaultPropsLight = {
   showDeveloper: true,
   showJournalist: true,
 };
-

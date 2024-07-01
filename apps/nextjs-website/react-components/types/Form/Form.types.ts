@@ -1,4 +1,4 @@
-import { CtaButtonProps, type CommonProps } from '../common/Common.types';
+import { CommonProps, CtaButtonProps } from "../common/Common.types";
 
 export interface FormProps extends CommonProps {
   readonly title: string;
@@ -24,17 +24,11 @@ export interface FormProps extends CommonProps {
   readonly showPrivacyDisclaimer?: boolean;
   readonly privacyDisclaimerText?: string;
 }
-
-
-
 export interface FormData {
   firstName?: string;
   lastName?: string;
   email: string;
   organization?: string;
-  citizen: boolean;
-  publicEmployee: boolean;
-  techPartner: boolean;
-  developer: boolean;
-  journalist: boolean;
+  selectedOption: 'citizen' | 'publicEmployee' | 'techPartner' | 'developer' | 'journalist' | '';
 }
+
