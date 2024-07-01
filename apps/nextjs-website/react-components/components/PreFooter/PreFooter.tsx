@@ -5,8 +5,10 @@ import { BackgroundColor } from '../common/Common.helpers';
 import { isJSX } from '../../types/common/Common.types';
 import { PreFooterProps } from '@react-components/types/PreFooter/PreFooter';
 import { useTheme, useMediaQuery } from '@mui/material';
-import googleBadgeBase64 from './BadgeImages/googleBadgeBase64';
-import appleBadgeBase64 from './BadgeImages/appleBadgeBase64';
+import googleBadgeLightBase64 from './BadgeImages/googleBadgeLightBase64';
+import appleBadgeLightBase64 from './BadgeImages/appleBadgeLightBase64';
+import googleBadgeDarkBase64 from './BadgeImages/googleBadgeDarkBase64';
+import appleBadgeDarkBase64 from './BadgeImages/appleBadgeDarkBase64';
 
 const styles = {
   main: (isSmallScreen: boolean) => ({
@@ -30,8 +32,10 @@ const PreFooter = (props: PreFooterProps) => {
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
   
-
   const decorationUrl = decoration && 'url' in decoration ? decoration.url : '';
+  
+  const googleBadgeBase64 = theme === 'dark' ? googleBadgeLightBase64 : googleBadgeDarkBase64;
+  const appleBadgeBase64 = theme === 'dark' ? appleBadgeLightBase64 : appleBadgeDarkBase64;
 
   return (
     <Box component='section' sx={styles.backgroundImage(isSmallScreen, theme, decorationUrl)}>
