@@ -66,7 +66,9 @@ const Nav = styled('ul')({
   },
 });
 
-const Dropdown = styled(Box)(({ theme }) => ({
+// removed theme for lint, to be checked the usage of it before merging
+
+const Dropdown = styled(Box)(({ }) => ({
   display: 'none',
   position: 'absolute',
   top: '100%',
@@ -118,7 +120,9 @@ const ButtonStyled = styled(Button)({
   whiteSpace: 'nowrap',
 });
 
-const MobileMenu = styled(Box)(({ theme }) => ({
+// removed theme for lint, to be checked the usage of it before merging
+
+const MobileMenu = styled(Box)(({ }) => ({
   display: 'none',
   position: 'fixed',
   top: 0,
