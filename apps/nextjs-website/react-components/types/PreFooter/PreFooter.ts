@@ -1,9 +1,4 @@
-import { CommonProps, Generic } from '../common/Common.types';
-
-type ImgProps = React.DetailedHTMLProps<
-  React.ImgHTMLAttributes<HTMLImageElement>,
-  HTMLImageElement
->;
+import { CommonProps } from '../common/Common.types';
 
 export interface StoreButtonsProps {
   readonly hrefGoogle?: string;
@@ -12,7 +7,7 @@ export interface StoreButtonsProps {
 
 export interface PreFooterProps extends CommonProps, PreFooterContentProps {
   readonly storeButtons?: StoreButtonsProps;
-  decoration?: ImgProps | Generic | { url: string };
+  decoration?: { url: string };
 }
 
 export interface PreFooterContentProps extends CommonProps {

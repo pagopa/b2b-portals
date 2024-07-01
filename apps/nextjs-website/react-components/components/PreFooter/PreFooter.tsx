@@ -2,7 +2,6 @@ import { Box, Container, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
 import { BackgroundColor } from '../common/Common.helpers';
-import { isJSX } from '../../types/common/Common.types';
 import { PreFooterProps } from '@react-components/types/PreFooter/PreFooter';
 import { useTheme, useMediaQuery } from '@mui/material';
 import googleBadgeLightBase64 from './BadgeImages/googleBadgeLightBase64';
@@ -32,7 +31,7 @@ const PreFooter = (props: PreFooterProps) => {
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
   
-  const decorationUrl = decoration && 'url' in decoration ? decoration.url : '';
+  const decorationUrl = decoration ? decoration.url : '';
   
   const googleBadgeBase64 = theme === 'dark' ? googleBadgeLightBase64 : googleBadgeDarkBase64;
   const appleBadgeBase64 = theme === 'dark' ? appleBadgeLightBase64 : appleBadgeDarkBase64;
@@ -41,7 +40,6 @@ const PreFooter = (props: PreFooterProps) => {
     <Box component='section' sx={styles.backgroundImage(isSmallScreen, theme, decorationUrl)}>
       <Container>
         <Box sx={styles.main(isSmallScreen)}>
-          {decoration && isJSX(decoration) ? decoration : null}
           <Typography variant='h4' color={theme === 'dark' ? 'white' : 'black'} mb={isSmallScreen ? 2 : 'unset'}>{title}</Typography>
           {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
             <Stack
