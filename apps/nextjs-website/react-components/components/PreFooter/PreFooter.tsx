@@ -27,11 +27,13 @@ const styles = {
     backgroundSize: isSmallScreen ? 'cover' : '30%',
     backgroundPosition: isSmallScreen ? 'center' : 'right',
     backgroundRepeat: 'no-repeat',
+    right: 0,
   }),
   container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
   },
 };
 
@@ -52,13 +54,14 @@ const PreFooter = (props: PreFooterProps) => {
       role='presentation'
       sx={{
         position: 'absolute',
-        inset: 0,
+        top: 0,
+        right: 0,
         zIndex: 0,
         height: '100%',
-        width: '100%',
+        width: isSmallScreen ? '100%' : '30%',
         objectFit: 'cover',
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: isSmallScreen ? 'center' : 'right',
         backgroundImage: `url(${background ?? ''})`,
       }}
     />
@@ -138,4 +141,3 @@ const PreFooter = (props: PreFooterProps) => {
 };
 
 export default PreFooter;
-
