@@ -34,6 +34,7 @@ export default ({ env }: any) => ({
   'update-static-content': {
     enabled: true,
     config: {
+      environment: env('ENVIRONMENT'),
       githubToken: env('GITHUB_PAT'),
       owner: env('REPO_OWNER', 'pagopa'),
       repo: env('REPO_NAME', 'b2b-portals'),
@@ -52,6 +53,7 @@ export default ({ env }: any) => ({
             query: {
               pageID: '{id}',
               secret: env('PREVIEW_TOKEN'),
+              tenant: env('ENVIRONMENT'),
             },
             openTarget: '_blank',
             copy: false,
