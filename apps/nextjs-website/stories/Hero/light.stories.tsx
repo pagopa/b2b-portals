@@ -18,6 +18,7 @@ export const LightHeroBig: StoryFn<typeof Hero> = HeroTemplate.bind({});
 LightHeroBig.args = {
   ...defaultsLightWithButtons,
   size: 'big',
+  displayMode: 'image',
   inverse: false,
 };
 
@@ -25,6 +26,7 @@ export const LightHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({})
 LightHeroBigNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
+  displayMode: 'image',
   inverse: false,
 };
 
@@ -32,6 +34,7 @@ export const LightHeroBigInverted: StoryFn<typeof Hero> = HeroTemplate.bind({});
 LightHeroBigInverted.args = {
   ...defaultsLightWithButtons,
   size: 'big',
+  displayMode: 'image',
   inverse: true,
 };
 
@@ -40,6 +43,7 @@ export const LightHeroBigInvertedNoButtons: StoryFn<typeof Hero> =
 LightHeroBigInvertedNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
+  displayMode: 'image',
   inverse: true,
 };
 
@@ -47,6 +51,7 @@ export const LightHeroMedium: StoryFn<typeof Hero> = HeroTemplate.bind({});
 LightHeroMedium.args = {
   ...defaultsLightWithButtons,
   size: 'medium',
+  displayMode: 'image',
   inverse: false,
 };
 
@@ -56,6 +61,7 @@ export const LightHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
 LightHeroMediumNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
+  displayMode: 'image',
   inverse: false,
 };
 
@@ -65,6 +71,7 @@ export const LightHeroMediumInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
 LightHeroMediumInverted.args = {
   ...defaultsLightWithButtons,
   size: 'medium',
+  displayMode: 'image',
   inverse: true,
 };
 
@@ -73,6 +80,7 @@ export const LightHeroMediumInvertedNoButtons: StoryFn<typeof Hero> =
 LightHeroMediumInvertedNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
+  displayMode: 'image',
   inverse: true,
 };
 
@@ -99,4 +107,16 @@ LightHeroSmallNoSubtitle.args = {
   ...defaultsLightWithoutButtonsNoSubtitle,
   size: 'small',
   inverse: true,
+};
+
+export const LightHeroMediumCounter: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
+LightHeroMediumCounter.args = {
+  ...defaultsLightWithoutButtons,
+  size: 'medium',
+  displayMode: 'counter',
+  counterNumber: 123,
+  counterText: 'Lorem ipsum',
+  inverse: false,
 };
