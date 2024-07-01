@@ -18,10 +18,22 @@ inputs:
     description: 'The AWS region selected'
     required: false
     default: 'eu-south-1'
-  strapi_api_token:
+  send_strapi_api_token:
     description: 'The Token to communicate with Strapi'
     required: false
-  strapi_api_base_url:
+  send_strapi_api_base_url:
+    description: 'The API URL to communicate with Strapi'
+    required: false
+  appio_strapi_api_token:
+    description: 'The Token to communicate with Strapi'
+    required: false
+  appio_strapi_api_base_url:
+    description: 'The API URL to communicate with Strapi'
+    required: false
+  demo_strapi_api_token:
+    description: 'The Token to communicate with Strapi'
+    required: false
+  demo_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
   cdn_path:
@@ -48,8 +60,12 @@ runs:
       env:
         ENVIRONMENT: ${{ inputs.environment }}
         NEXT_TELEMETRY_DISABLED: "1"
-        STRAPI_API_TOKEN: ${{ inputs.strapi_api_token }}
-        STRAPI_API_BASE_URL: ${{ inputs.strapi_api_base_url }}
+        SEND_STRAPI_API_TOKEN: ${{ inputs.send_strapi_api_token }}
+        SEND_STRAPI_API_BASE_URL: ${{ inputs.send_strapi_api_base_url }}
+        APPIO_STRAPI_API_TOKEN: ${{ inputs.appio_strapi_api_token }}
+        APPIO_STRAPI_API_BASE_URL: ${{ inputs.appio_strapi_api_base_url }}
+        DEMO_STRAPI_API_TOKEN: ${{ inputs.demo_strapi_api_token }}
+        DEMO_STRAPI_API_BASE_URL: ${{ inputs.demo_strapi_api_base_url }}
         CDN_PATH: ${{ inputs.cdn_path }}
       shell: bash
       run: npm run build -w nextjs-website
