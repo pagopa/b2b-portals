@@ -12,7 +12,7 @@ export interface StoreButtonsProps {
 
 export interface PreFooterProps extends CommonProps, PreFooterContentProps {
   readonly storeButtons?: StoreButtonsProps;
-  decoration?: ImgProps | Generic;
+  decoration?: ImgProps | Generic | { url: string };
 }
 
 export interface PreFooterContentProps extends CommonProps {

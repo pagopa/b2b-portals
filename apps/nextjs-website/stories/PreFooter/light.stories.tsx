@@ -1,7 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { PreFooter } from '@react-components/components';
 import { PreFooterTemplate, defaultPropsLight } from './prefooterCommons';
-import { StoreButtonsProps } from '@react-components/types/Editorial/Editorial.types';
 
 // Define the default export with metadata about your component
 const meta: Meta<typeof PreFooter> = {
@@ -24,11 +23,4 @@ export const PreFooterOnlyTitle: StoryFn<typeof PreFooter> =
   PreFooterTemplate.bind({});
 PreFooterOnlyTitle.args = {
   ...defaultPropsLight,
-};
-
-export const PreFooterNoStoreButtons: StoryFn<typeof PreFooter> =
-  PreFooterTemplate.bind({});
-PreFooterNoStoreButtons.args = {
-  ...defaultPropsLight,
-  // storeButtons: {} as StoreButtonsProps, 
 };

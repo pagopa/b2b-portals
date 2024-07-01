@@ -13,12 +13,12 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: isSmallScreen ? 'column' : 'row', 
+    flexDirection: isSmallScreen ? 'column' : 'row',
     padding: { md: '64px 24px', xs: '32px 24px' },
   }),
-  backgroundImage: (isSmallScreen: boolean, theme: 'light' | 'dark') => ({
+  backgroundImage: (isSmallScreen: boolean, theme: 'light' | 'dark', decorationUrl: string) => ({
     backgroundColor: theme === 'dark' ? '#031344' : BackgroundColor(theme),
-    backgroundImage: 'url(https://s3-alpha-sig.figma.com/img/ae80/98d2/364735b02ccaf9e7f95fd6af6989f154?Expires=1720396800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ohlkbH8BdmJlKp2p6st585VhvjuedEEU9TXArCHlshf9IeSMGvvkjpFlyT1CFUfpgIk8g5IJZrCehDTGfqeqkir8OgblfzX1htJ~FvPCX2V8W-zA3MGgPipQAe46FVAyJNUMPVaI0SWYLDCTUq-UTXgStL-KIkaszBwyGq1-UKk0zBSF4kDAXSzwQJOfbw7OdAcNcVjg8ecZtMx1XMuzle2kOjtXgDc0z7lLRkxiZn558CSMqf-GdvlfRRwChYlFTFm2u~XYUs-H-2~Vocjjn7prAtudZCmPCjVhHa8Qg6locTt7jPIkUgX7xcYNut6Qsi1i9hRnWEDzZPFWBhWOEw__)',
+    backgroundImage: `url(${decorationUrl})`,
     backgroundSize: isSmallScreen ? 'cover' : '30%',
     backgroundPosition: isSmallScreen ? 'center' : 'right',
     backgroundRepeat: 'no-repeat',
@@ -26,21 +26,18 @@ const styles = {
 };
 
 const PreFooter = (props: PreFooterProps) => {
-  const { theme, title, decoration = <></>, storeButtons } = props;
+  const { theme, title, decoration, storeButtons } = props;
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
+  
+
+  const decorationUrl = decoration && 'url' in decoration ? decoration.url : '';
 
   return (
-    <Box component='section' sx={styles.backgroundImage(isSmallScreen, theme)}>
+    <Box component='section' sx={styles.backgroundImage(isSmallScreen, theme, decorationUrl)}>
       <Container>
         <Box sx={styles.main(isSmallScreen)}>
-          {decoration ? (
-            isJSX(decoration) ? (
-              decoration
-            ) : (
-              <img {...decoration} />
-            )
-          ) : null}
+          {decoration && isJSX(decoration) ? decoration : null}
           <Typography variant='h4' color={theme === 'dark' ? 'white' : 'black'} mb={isSmallScreen ? 2 : 'unset'}>{title}</Typography>
           {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
             <Stack
@@ -48,7 +45,7 @@ const PreFooter = (props: PreFooterProps) => {
               alignItems='center'
               spacing={2}
               direction={isSmallScreen ? 'column' : 'row'}
-              sx={{ marginLeft: isSmallScreen ? 0 : 2 }} 
+              sx={{ marginLeft: isSmallScreen ? 0 : 2 }}
             >
               {storeButtons.hrefGoogle && (
                 <Button
@@ -89,18 +86,7 @@ const PreFooter = (props: PreFooterProps) => {
                 </Button>
               )}
             </Stack>
-          ) : (
-            <Stack
-              justifyContent='center'
-              alignItems='center'
-              spacing={2}
-              direction={isSmallScreen ? 'column' : 'row'}
-              sx={{ marginLeft: isSmallScreen ? 0 : 2 }}
-            >
-              <Button variant='contained' color='primary'>Button 1</Button>
-              <Button variant='contained' color='primary'>Button 2</Button>
-            </Stack>
-          )}
+          ) : null}
         </Box>
       </Container>
     </Box>
