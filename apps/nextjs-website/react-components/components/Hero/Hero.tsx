@@ -69,10 +69,10 @@ const Hero = (props: HeroProps) => {
           mb={{ xs: 4, lg: 0 }}
           sx={{
             width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: displayMode === 'counter' ? 'end' : 'center',
-            justifyContent: 'center',
+            display: displayMode === 'counter' ? 'grid' : 'flex',
+            flexDirection: displayMode === 'counter' ? 'initial' : 'column',
+            alignItems: displayMode === 'counter' ? 'start' : 'center',
+            justifyContent: displayMode === 'counter' ? 'end' : 'center',
             bgcolor: 'green',
           }}
         >
