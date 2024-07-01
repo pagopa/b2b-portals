@@ -1,4 +1,3 @@
-'use client';
 import React, { useState } from 'react';
 import {
   Box,
@@ -222,10 +221,10 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
                 <Grid item sx={{ textAlign: 'right' }}>
                   <FormControlLabel
                     value='citizen'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor } }} />}
+                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
                     label=''
                     labelPlacement='end'
-                    sx={{ ml: 0 }}
+                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
                   />
                 </Grid>
               </Grid>
@@ -242,10 +241,10 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
                 <Grid item sx={{ textAlign: 'right' }}>
                   <FormControlLabel
                     value='publicEmployee'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor } }} />}
+                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
                     label=''
                     labelPlacement='end'
-                    sx={{ ml: 0 }}
+                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
                   />
                 </Grid>
               </Grid>
@@ -265,10 +264,10 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
                 <Grid item sx={{ textAlign: 'right' }}>
                   <FormControlLabel
                     value='techPartner'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor } }} />}
+                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
                     label=''
                     labelPlacement='end'
-                    sx={{ ml: 0 }}
+                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
                   />
                 </Grid>
               </Grid>
@@ -285,10 +284,10 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
                 <Grid item sx={{ textAlign: 'right' }}>
                   <FormControlLabel
                     value='developer'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor } }} />}
+                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
                     label=''
                     labelPlacement='end'
-                    sx={{ ml: 0 }}
+                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
                   />
                 </Grid>
               </Grid>
@@ -305,10 +304,10 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
                 <Grid item sx={{ textAlign: 'right' }}>
                   <FormControlLabel
                     value='journalist'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor } }} />}
+                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
                     label=''
                     labelPlacement='end'
-                    sx={{ ml: 0 }}
+                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
                   />
                 </Grid>
               </Grid>
