@@ -170,6 +170,27 @@ const FormSectionCodec = t.strict({
   submitHandler: t.Function,
 });
 
+const MegaHeaderSectionCodec = t.strict({
+  __component: t.literal('sections.mega-header'),
+  menuItems: t.array(
+    t.strict({
+      primary: t.string,
+      secondary: t.array(
+        t.strict({
+          title: t.string,
+          items: t.array(t.string),
+        })
+      ),
+    })
+  ),
+  socialMediaLinks: t.array(
+    t.strict({
+      icon: t.string,
+      href: t.string,
+    })
+  ),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -182,6 +203,7 @@ export const PageSectionCodec = t.union([
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
   FormSectionCodec,
+  MegaHeaderSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -196,3 +218,4 @@ export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
+export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
