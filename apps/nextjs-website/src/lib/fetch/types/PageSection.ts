@@ -175,6 +175,7 @@ const PreFooterSectionCodec = t.strict({
   title: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
+  background: t.union([ImageDataCodec, t.null]),
 });
 
 export const PageSectionCodec = t.union([

@@ -5,8 +5,10 @@ import { PreFooterProps } from '@react-components/types';
 
 const makePreFooterProps = ({
   storeButtons,
+  background,
   ...rest
 }: PreFooterSection): PreFooterProps => ({
+  ...(background && { background: background.url }),
   ...(storeButtons && {
     storeButtons: {
       ...(storeButtons.hrefGoogle && { hrefGoogle: storeButtons.hrefGoogle }),
