@@ -170,6 +170,14 @@ const FormSectionCodec = t.strict({
   submitHandler: t.Function,
 });
 
+const PreFooterSectionCodec = t.strict({
+  __component: t.literal('sections.pre-footer'),
+  title: t.string,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  storeButtons: t.union([StoreButtonsCodec, t.null]),
+  background: t.union([ImageDataCodec, t.null]),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -182,6 +190,7 @@ export const PageSectionCodec = t.union([
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
   FormSectionCodec,
+  PreFooterSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -196,3 +205,4 @@ export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
+export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
