@@ -12,7 +12,7 @@ declare module '@mui/material/styles' {
       readonly backgroundColorDefault: string;
       readonly darkLinkColor: string;
       readonly grayLinkColor: string;
-      readonly blackOpacized: string;
+      readonly black50: string;
     };
   }
   interface PaletteOptions {
@@ -46,7 +46,7 @@ export const theme = createTheme(MUIItaliaTheme, {
       backgroundColorDefault: '#FAFAFA',
       darkLinkColor: '#1A73E8',
       grayLinkColor: '#F4F5F8',
-      blackOpacized: '#00000050',
+      black50: '#00000050',
     },
   },
 });

@@ -51,5 +51,5 @@ export const GrayLinkColor = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
   return theme === 'dark'
     ? palette.custom.grayLinkColor
-    : palette.custom.blackOpacized;
+    : palette.custom.black50;
 };
