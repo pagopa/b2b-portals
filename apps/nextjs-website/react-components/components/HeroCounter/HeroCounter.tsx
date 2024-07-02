@@ -1,10 +1,10 @@
 import React from 'react';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Typography, Link } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroCounterProps } from '@react-components/types/HeroCounter/HeroCounter.types';
 import { BackgroundColor, TextColor } from '../common/Common.helpers';
-import { HeroCounterTextContent } from './HeroCounter.helpers';
 
 const HeroCounter = (props: HeroCounterProps) => {
   const {
@@ -13,6 +13,10 @@ const HeroCounter = (props: HeroCounterProps) => {
     theme = 'dark',
     counterNumber = 0,
     counterText,
+    title,
+    subtitle,
+    linkText,
+    linkUrl,
   } = props;
 
   const backgroundColor = BackgroundColor(theme);
@@ -43,54 +47,53 @@ const HeroCounter = (props: HeroCounterProps) => {
       size='xl'
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
+      sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, alignItems: 'center', justifyContent: 'space-between', py: 4 }}
     >
-      <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
-      <Grid
-        item
-        lg={4}
-        sx={{ minHeight: '480px', width: '100%' }}
-      >
-        <HeroCounterTextContent {...props} />
-      </Grid>
-      <Grid
-        item
-        lg={6}
-        mb={{ xs: 4, lg: 0 }}
-        sx={{
-          width: '100%',
-          display: 'grid',
-          flexDirection: 'initial',
-          alignItems: 'start',
-          justifyContent: 'end',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            justifyContent: 'start',
-            paddingTop: '1rem',
-            paddingBottom: '1rem',
-          }}
-        >
-          <div
-            style={{
+      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <Typography variant='h1' color={textColor} mb={2}>
+          {title}
+        </Typography>
+        <Typography variant='body1' color={textColor} mb={2}>
+          {subtitle}
+        </Typography>
+        {linkText && linkUrl && (
+          <Link
+            href={linkUrl}
+            sx={{
               display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              justifyContent: 'start',
+              alignItems: 'center',
+              color: theme === 'dark' ? '#fff' : '#0062c3',
+              mt: 2,
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              fontSize: '1rem',
             }}
           >
-            <Typography color={textColor} sx={{ fontSize: '8rem' }}>
-              {counterNumber}
-            </Typography>
-            <Typography variant='body1' color={textColor}>
-              {counterText}
-            </Typography>
-          </div>
-        </div>
-      </Grid>
-      <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
+            {linkText}
+            <ArrowForwardIcon
+              sx={{
+                display: 'inline-block',
+                ml: 1,
+                transition: 'transform 0.2s',
+                '&:hover': {
+                  transform: 'translateX(2px)',
+                },
+              }}
+            />
+          </Link>
+        )}
+      </Box>
+      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: { lg: 'flex-end', xs: 'flex-start' }, justifyContent: 'center', textAlign: { lg: 'right', xs: 'left' } }}>
+        <Typography
+          color={theme === 'light' ? 'blue' : textColor}
+          sx={{ fontSize: '8rem' }}
+        >
+          {counterNumber}
+        </Typography>
+        <Typography variant='body1' color={textColor}>
+          {counterText}
+        </Typography>
+      </Box>
     </ContainerRC>
   );
 };
