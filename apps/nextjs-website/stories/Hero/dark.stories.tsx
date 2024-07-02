@@ -18,7 +18,6 @@ export const DarkHeroBig: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroBig.args = {
   ...defaultsDarkWithButtons,
   size: 'big',
-  displayMode: 'image',
   inverse: false,
 };
 
@@ -26,7 +25,6 @@ export const DarkHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroBigNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'big',
-  displayMode: 'image',
   inverse: false,
 };
 
@@ -34,7 +32,6 @@ export const DarkHeroBigInverted: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroBigInverted.args = {
   ...defaultsDarkWithButtons,
   size: 'big',
-  displayMode: 'image',
   inverse: true,
 };
 
@@ -43,7 +40,6 @@ export const DarkHeroBigInvertedNoButtons: StoryFn<typeof Hero> =
 DarkHeroBigInvertedNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'big',
-  displayMode: 'image',
   inverse: true,
 };
 
@@ -51,7 +47,6 @@ export const DarkHeroMedium: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroMedium.args = {
   ...defaultsDarkWithButtons,
   size: 'medium',
-  displayMode: 'image',
   inverse: false,
 };
 
@@ -61,7 +56,6 @@ export const DarkHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
 DarkHeroMediumNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'medium',
-  displayMode: 'image',
   inverse: false,
 };
 
@@ -71,7 +65,6 @@ export const DarkHeroMediumInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
 DarkHeroMediumInverted.args = {
   ...defaultsDarkWithButtons,
   size: 'medium',
-  displayMode: 'image',
   inverse: true,
 };
 
@@ -80,7 +73,6 @@ export const DarkHeroMediumInvertedNoButtons: StoryFn<typeof Hero> =
 DarkHeroMediumInvertedNoButtons.args = {
   ...defaultsDarkWithoutButtons,
   size: 'medium',
-  displayMode: 'image',
   inverse: true,
 };
 
@@ -107,16 +99,4 @@ DarkHeroSmallNoSubtitle.args = {
   ...defaultsDarkWithoutButtonsNoSubtitle,
   size: 'small',
   inverse: true,
-};
-
-export const DarkHeroMediumCounter: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {}
-);
-DarkHeroMediumCounter.args = {
-  ...defaultsDarkWithoutButtons,
-  size: 'medium',
-  displayMode: 'counter',
-  counterNumber: 123,
-  counterText: 'Lorem ipsum',
-  inverse: false,
 };

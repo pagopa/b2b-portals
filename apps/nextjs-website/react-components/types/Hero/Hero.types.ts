@@ -7,9 +7,6 @@ export interface HeroProps extends CommonProps, HeroTextProps {
   readonly inverse?: boolean;
   readonly background?: string | Generic;
   readonly useHoverlay?: boolean;
-  readonly displayMode?: 'image' | 'counter'; // New property to select between image or counter
-  readonly counterNumber?: number; // New property for counter number
-  readonly counterText?: string; // New property for counter text
 }
 
 export interface HeroTextProps extends CommonProps {

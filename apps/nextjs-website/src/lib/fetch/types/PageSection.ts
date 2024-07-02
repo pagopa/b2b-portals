@@ -170,6 +170,23 @@ const FormSectionCodec = t.strict({
   submitHandler: t.Function,
 });
 
+const HeroCounterSectionCodec = t.strict({
+  __component: t.literal('sections.hero-counter'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  inverse: t.boolean,
+  size: t.keyof({
+    small: null,
+    medium: null,
+    big: null,
+  }),
+  sectionID: t.union([t.string, t.null]),
+  background: t.union([ImageDataCodec, t.null]),
+  counterNumber: t.number,
+  counterText: t.string,
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -182,6 +199,7 @@ export const PageSectionCodec = t.union([
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
   FormSectionCodec,
+  HeroCounterSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -196,3 +214,4 @@ export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
+export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
