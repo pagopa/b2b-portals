@@ -2,7 +2,6 @@ import { Box, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
 import { BackgroundColor } from '../common/Common.helpers';
-import { isJSX } from '../../types/common/Common.types';
 import { PreFooterProps } from '@react-components/types/PreFooter/PreFooter';
 import { useTheme, useMediaQuery } from '@mui/material';
 import googleBadgeLightBase64 from './BadgeImages/googleBadgeLightBase64';
@@ -11,7 +10,6 @@ import googleBadgeDarkBase64 from './BadgeImages/googleBadgeDarkBase64';
 import appleBadgeDarkBase64 from './BadgeImages/appleBadgeDarkBase64';
 import ContainerRC from '../common/ContainerRC';
 
-                
 const styles = {
   main: (isSmallScreen: boolean) => ({
     display: 'flex',
@@ -47,32 +45,26 @@ const PreFooter = (props: PreFooterProps) => {
   const appleBadgeBase64 =
     theme === 'dark' ? appleBadgeLightBase64 : appleBadgeDarkBase64;
 
-  const BackgroundImage = isJSX(background) ? (
-    background
-  ) : (
-    <Box
-      role='presentation'
-      sx={{
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        zIndex: 0,
-        height: '100%',
-        width: isSmallScreen ? '100%' : '30%',
-        objectFit: 'cover',
-        backgroundSize: 'cover',
-        backgroundPosition: isSmallScreen ? 'center' : 'right',
-        backgroundImage: `url(${background ?? ''})`,
-      }}
-    />
-  );
-
   const backgroundColor = BackgroundColor(theme);
 
   return (
     <Box component='section' sx={styles.backgroundImage(isSmallScreen, theme)}>
       <Box sx={{ position: 'relative', overflow: 'hidden' }}>
-        {BackgroundImage}
+        <Box
+          role='presentation'
+          sx={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            zIndex: 0,
+            height: '100%',
+            width: isSmallScreen ? '100%' : '30%',
+            objectFit: 'cover',
+            backgroundSize: 'cover',
+            backgroundPosition: isSmallScreen ? 'center' : 'right',
+            backgroundImage: `url(${background ?? ''})`,
+          }}
+        />
         <ContainerRC
           background={!background ? backgroundColor : 'transparent'}
           sx={styles.container}

@@ -1,4 +1,4 @@
-import { CommonProps, Generic } from '../common/Common.types';
+import { CommonProps } from '../common/Common.types';
 
 export interface StoreButtonsProps {
   readonly hrefGoogle?: string;
@@ -7,7 +7,7 @@ export interface StoreButtonsProps {
 
 export interface PreFooterProps extends CommonProps, PreFooterContentProps {
   readonly storeButtons?: StoreButtonsProps;
-  readonly background?: string | Generic;
+  readonly background?: string;
 }
 
 export interface PreFooterContentProps extends CommonProps {
