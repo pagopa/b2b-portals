@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-Implement new PreFooter component for AppIO
+Implement new PreFooter component
