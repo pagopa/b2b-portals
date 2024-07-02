@@ -8,7 +8,6 @@ import { BackgroundColor, TextColor } from '../common/Common.helpers';
 
 const HeroCounter = (props: HeroCounterProps) => {
   const {
-    inverse = false,
     background,
     theme = 'dark',
     counterNumber = 0,
@@ -46,7 +45,7 @@ const HeroCounter = (props: HeroCounterProps) => {
     <ContainerRC
       size='xl'
       background={!background ? backgroundColor : BackgroundImage}
-      direction={inverse ? 'row-reverse' : 'row'}
+      direction='row'
       sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, alignItems: 'center', justifyContent: 'space-between', py: 4 }}
     >
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
