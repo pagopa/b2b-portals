@@ -1,13 +1,11 @@
 'use client';
-import MarkdownRenderer from './MarkdownRenderer';
 import { Form as FormRC } from '@react-components/components';
 import { FormProps } from '@react-components/types';
 import { FormSection } from '@/lib/fetch/types/PageSection';
 import { FormData } from '@react-components/types/Form/Form.types';
 
-const makeFormProps = ({ privacyText, ...rest }: FormSection): FormProps => ({
+const makeFormProps = ({ ...rest }: FormSection): FormProps => ({
   ...rest,
-  privacyText: MarkdownRenderer({ markdown: privacyText, variant: 'body2' }),
 });
 
 const Form = (props: FormSection) => {
