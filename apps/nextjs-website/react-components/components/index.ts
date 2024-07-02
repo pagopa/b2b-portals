@@ -12,6 +12,7 @@ import Header from './Header/Header';
 import Feature from './Feature/Feature';
 import IFrame from './IFrame/IFrame';
 import Form from './Form/Form';
+import PreFooter from './PreFooter/PreFooter';
 
 export {
   Hero,
@@ -28,4 +29,5 @@ export {
   Feature,
   IFrame,
   Form,
+  PreFooter,
 };
