@@ -1,5 +1,25 @@
 # strapi-cms
 
+## 0.3.0
+
+### Minor Changes
+
+- da99f38: Duplicated Single Types for SEND and AppIO tenants
+- 2aa32a4: Migrate Strapi to new separated-tenants architecture
+- 00928c7: Add Iframe to Strapi CMS
+- 6b5aa74: Make Update Static Content Plugin Multi-Tenant
+
+### Patch Changes
+
+- c678af8: Make Page's slug field not unique
+- e7ab09f: Add Preview Mode
+- 9094255: Move @types/koa depedency from devDependencies to standard dependecies
+- 3aac78d: Add Matomo Analytics
+- 757e909: Switched from strapi.config.get to strapi.plugin.config to fetch Update Static Content plugin configuration
+- 1b20d8e: Re-enabled Preview Button inside Strapi
+- e9511dd: Add Demo Tenant
+- 611a2c5: Updated security middleware configuration
+
 ## 0.2.0
 
 ### Minor Changes
