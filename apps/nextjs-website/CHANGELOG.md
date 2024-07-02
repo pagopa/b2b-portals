@@ -1,5 +1,59 @@
 # nextjs-website
 
+## 0.3.0
+
+### Minor Changes
+
+- 80e1e13: Migrate StripeLink component from EC to B2BP
+- bba6cb7: Fix PreHeader layout
+- a27b79f: Fix Storybook Hero Light
+- 14e0ee8: Migrate Accordion component from EC to B2BP
+- 0b0e1d8: Fix Footer layout elements
+- 0d4fdd2: Adapt NextJS to new separated-tenants architecture
+- b06ec3a: Migrate Editorial component from EC to B2BP
+- 255f730: Migrate Header component from EC to B2BP
+- aa3390f: Fix BannerLink font style
+- 7a271ca: Add HowTo to Storybook
+- 6a713e4: Fix Feature component subtitle rendering
+- b118c40: Fix Editorial-Switch storybook error
+- c5a4902: Add BannerLink to Storybook
+- 6052ab2: Add Accordion to Storybook
+- d6b0e9e: Migrate BannerLink component from EC to B2BP
+- c3ccbf6: Add NextJS Preview Mode ENV VARS
+- 950d998: Migrate Feature component from EC to B2BP
+- a2a9777: Add PreHeader to Storybook
+- d4e9286: Migrate Footer component from EC to B2BP
+- dbf3920: Create new component 'Form' on RC and B2BP
+- c0158a8: Fix buttons palette colour
+- 0cfd3b2: Add Editorial-Switch to Storybook
+- 7f019f2: Make NextJS fetch data based on tenant
+- 66b61dd: Migrate Cards component from EC to B2BP
+- 57cf421: Fix Stripelink layout
+- 897652e: Migrate PreHeader component from EC to B2BP
+- 0a34b9f: Fix Accordion style layout
+- d2e6ee5: Add StripeLink to Storybook
+- c632d85: Add Header to Storybook with style fix
+- adf5ea1: Add Cards to Storybook
+- 24a7b11: Create Storybook for B2BP RC components
+- 143594f: Implement new PreFooter component
+- 33c0f5c: Fix header height, update storybook version from 8.1.0 to 8.1.4
+- 00928c7: Implement Iframe component inside B2BP
+- 600267c: Migrate HowTo component from EC to B2BP
+- a235bc7: Add Footer to Storybook
+- b7c87d3: Add Feature to Storybook
+- a2e07b0: Add Editorial to Storybook
+- ef79697: Fix Cards component Style
+- 0a60ec4: Remove EC dependencies from Next.JS
+
+### Patch Changes
+
+- 3aac78d: Add Matomo Analytics
+- 2d22d70: Add Preview Mode
+- e9511dd: Add Demo Tenant
+- 65b828d: Add @mui/lab dependency required by mui-italia
+- 0652c77: Implemented @iframe-resizer/react into iFrame
+- 66c7bcf: Update Strapi API call to populate storeButtons inside navigation
+
 ## 0.2.0
 
 ### Minor Changes
