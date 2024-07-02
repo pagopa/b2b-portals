@@ -4,11 +4,10 @@ import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroCounterProps } from '@react-components/types/HeroCounter/HeroCounter.types';
 import { BackgroundColor, TextColor } from '../common/Common.helpers';
-import { HeroCounterTextContent, getMinHeight } from './HeroCounter.helpers';
+import { HeroCounterTextContent } from './HeroCounter.helpers';
 
 const HeroCounter = (props: HeroCounterProps) => {
   const {
-    size,
     inverse = false,
     background,
     theme = 'dark',
@@ -16,7 +15,6 @@ const HeroCounter = (props: HeroCounterProps) => {
     counterText,
   } = props;
 
-  const minHeight = getMinHeight(size);
   const backgroundColor = BackgroundColor(theme);
   const textColor = TextColor(theme);
 
@@ -46,62 +44,53 @@ const HeroCounter = (props: HeroCounterProps) => {
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
     >
-      {(size === 'medium' || size === 'big') && (
-        <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
-      )}
+      <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
       <Grid
         item
-        lg={size === 'small' ? 12 : 4}
-        sx={{ minHeight: { lg: minHeight }, width: '100%' }}
+        lg={4}
+        sx={{ minHeight: '480px', width: '100%' }}
       >
         <HeroCounterTextContent {...props} />
       </Grid>
-      {(size === 'medium' || size === 'big') && (
-        <Grid
-          item
-          lg={6}
-          mb={{ xs: 4, lg: 0 }}
-          sx={{
-            width: '100%',
-            display: 'grid',
-            flexDirection: 'initial',
-            alignItems: 'start',
-            justifyContent: 'end',
-            bgcolor: 'green',
+      <Grid
+        item
+        lg={6}
+        mb={{ xs: 4, lg: 0 }}
+        sx={{
+          width: '100%',
+          display: 'grid',
+          flexDirection: 'initial',
+          alignItems: 'start',
+          justifyContent: 'end',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'start',
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
           }}
         >
           <div
             style={{
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'flex-start',
               justifyContent: 'start',
-              backgroundColor: 'gray',
-              paddingTop: '1rem',
-              paddingBottom: '1rem',
             }}
           >
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                justifyContent: 'start',
-                backgroundColor: 'red',
-              }}
-            >
-              <Typography color={textColor} sx={{ fontSize: '8rem' }}>
-                {counterNumber}
-              </Typography>
-              <Typography variant='body1' color={textColor}>
-                {counterText}
-              </Typography>
-            </div>
+            <Typography color={textColor} sx={{ fontSize: '8rem' }}>
+              {counterNumber}
+            </Typography>
+            <Typography variant='body1' color={textColor}>
+              {counterText}
+            </Typography>
           </div>
-        </Grid>
-      )}
-      {(size === 'medium' || size === 'big') && (
-        <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
-      )}
+        </div>
+      </Grid>
+      <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
     </ContainerRC>
   );
 };

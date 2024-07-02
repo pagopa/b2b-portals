@@ -12,13 +12,16 @@ const meta: Meta<typeof HeroCounter> = {
 };
 export default meta;
 
-export const DarkHeroCounterMediumCounter: StoryFn<typeof HeroCounter> = HeroCounterTemplate.bind(
+export const DarkHeroCounter: StoryFn<typeof HeroCounter> = HeroCounterTemplate.bind(
   {}
 );
-DarkHeroCounterMediumCounter.args = {
+DarkHeroCounter.args = {
   ...defaultsDarkWithoutButtons,
-  size: 'medium',
-  counterNumber: 123,
-  counterText: 'Lorem ipsum',
+  counterNumber: 124,
+  counterText: 'Enti disponibili',
   inverse: false,
+  title: 'Enti locali',
+  subtitle: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`,
+  linkText: 'Sto cercando un Ente nazionale',
+  linkUrl: '#',
 };

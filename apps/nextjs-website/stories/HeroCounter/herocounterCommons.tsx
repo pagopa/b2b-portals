@@ -5,8 +5,8 @@ import { HeroCounterProps } from "@react-components/types";
 // Define a "Template" function that sets how args map to rendering
 export const HeroCounterTemplate: StoryFn<HeroCounterProps> = (args) => <HeroCounter {...args} />;
 
-const title = 'Lorem ipsum dolor sit amet, consectetur';
-const subtitle = `Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
+const title = 'Enti locali';
+const subtitle = `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`;
 
 const createHeroCounterProps = (
   theme: 'dark' | 'light',
@@ -17,6 +17,8 @@ const createHeroCounterProps = (
     title,
     subtitle: withSubtitle ? subtitle : '',
     background: theme === 'dark' ? 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png' : '',
+    linkText: 'Sto cercando un Ente nazionale',
+    linkUrl: '#',
   };
 
   return props;

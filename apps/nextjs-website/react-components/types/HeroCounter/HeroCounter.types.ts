@@ -10,5 +10,6 @@ export interface HeroCounterProps extends CommonProps, HeroCounterTextProps {
 export interface HeroCounterTextProps extends CommonProps {
   readonly title: string;
   readonly subtitle?: string | Generic;
-  readonly size?: 'medium' | 'big' | 'small';
+  readonly linkText?: string;
+  readonly linkUrl?: string;
 }
