@@ -105,6 +105,90 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
     {}
   );
 
+  const formFields = [
+    {
+      name: 'firstName',
+      placeholder: 'Nome',
+      showCondition: showFirstName,
+      validationErrorKey: 'firstName',
+    },
+    {
+      name: 'lastName',
+      placeholder: 'Cognome',
+      showCondition: showLastName,
+      validationErrorKey: 'lastName',
+    },
+    {
+      name: 'email',
+      placeholder: 'Indirizzo e-mail',
+      showCondition: showEmail,
+      validationErrorKey: 'email',
+    },
+    {
+      name: 'organization',
+      placeholder: 'Nome ente',
+      showCondition: showOrganization,
+      validationErrorKey: 'organization',
+    },
+  ];
+
+  interface RenderFieldParams {
+    name: string;
+    placeholder: string;
+    showCondition: boolean;
+    validationErrorKey: string;
+  }
+
+  function isValidKey(key: any): key is keyof ValidationErrors {
+    return (
+      key === 'firstName' ||
+      key === 'lastName' ||
+      key === 'email' ||
+      key === 'organization'
+    );
+  }
+
+  const renderField = ({
+    name,
+    placeholder,
+    showCondition,
+    validationErrorKey,
+  }: RenderFieldParams) => {
+    if (!showCondition) return null;
+
+    const isError =
+      isValidKey(validationErrorKey) && !!validationErrors[validationErrorKey];
+    const fieldValue = isValidKey(name) ? formData[name] : '';
+    return (
+      <Grid
+        item
+        xs={12}
+        sm={name === 'firstName' || name === 'lastName' ? 6 : 12}
+      >
+        <FormControl fullWidth error={isError}>
+          <OutlinedInput
+            placeholder={placeholder}
+            name={name}
+            value={fieldValue}
+            onChange={handleInputChange}
+            sx={{ backgroundColor: 'white', color: 'black' }}
+          />
+          {isError && (
+            <Typography
+              id={`${name}-error-text`}
+              variant='caption'
+              sx={{ color: 'error.main' }}
+            >
+              {isValidKey(validationErrorKey)
+                ? validationErrors[validationErrorKey]
+                : ''}
+            </Typography>
+          )}
+        </FormControl>
+      </Grid>
+    );
+  };
+
   return (
     <Box
       sx={{
@@ -163,95 +247,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
         spacing={2}
         sx={{ mb: 2, position: 'relative', zIndex: 3 }}
       >
-        {showFirstName && (
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth error={!!validationErrors.firstName}>
-              <OutlinedInput
-                placeholder='Nome'
-                name='firstName'
-                value={formData.firstName}
-                onChange={handleInputChange}
-                sx={{ backgroundColor: 'white', color: 'black' }}
-                aria-describedby='firstName-error-text'
-              />
-              {validationErrors.firstName && (
-                <Typography
-                  id='firstName-error-text'
-                  variant='caption'
-                  sx={{ color: 'error.main' }}
-                >
-                  {validationErrors.firstName}
-                </Typography>
-              )}
-            </FormControl>
-          </Grid>
-        )}
-        {showLastName && (
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth error={!!validationErrors.lastName}>
-              <OutlinedInput
-                placeholder='Cognome'
-                name='lastName'
-                value={formData.lastName}
-                onChange={handleInputChange}
-                sx={{ backgroundColor: 'white', color: 'black' }}
-              />
-              {validationErrors.lastName && (
-                <Typography
-                  id='lastName-error-text'
-                  variant='caption'
-                  sx={{ color: 'error.main' }}
-                >
-                  {validationErrors.lastName}
-                </Typography>
-              )}
-            </FormControl>
-          </Grid>
-        )}
-        {showEmail && (
-          <Grid item xs={12}>
-            <FormControl fullWidth error={!!validationErrors.email}>
-              <OutlinedInput
-                placeholder='Indirizzo e-mail'
-                name='email'
-                value={formData.email}
-                onChange={handleInputChange}
-                sx={{ backgroundColor: 'white', color: 'black' }}
-              />
-              {validationErrors.email && (
-                <Typography
-                  id='email-error-text'
-                  variant='caption'
-                  sx={{ color: 'error.main' }}
-                >
-                  {validationErrors.email}
-                </Typography>
-              )}
-            </FormControl>
-          </Grid>
-        )}
-        {showOrganization && (
-          <Grid item xs={12}>
-            <FormControl fullWidth error={!!validationErrors.organization}>
-              <OutlinedInput
-                placeholder='Nome ente'
-                name='organization'
-                value={formData.organization}
-                onChange={handleInputChange}
-                sx={{ backgroundColor: 'white', color: 'black' }}
-              />
-              {validationErrors.organization && (
-                <Typography
-                  id='organization-error-text'
-                  variant='caption'
-                  sx={{ color: 'error.main' }}
-                >
-                  {validationErrors.organization}
-                </Typography>
-              )}
-            </FormControl>
-          </Grid>
-        )}
+        {formFields.map(renderField)}
       </Grid>
       {checkboxTitle && (
         <Typography

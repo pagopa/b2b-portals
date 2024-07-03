@@ -16,10 +16,10 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
       text: 'Iscriviti',
     },
   ],
-  showFirstName: false,
-  showLastName: false,
+  showFirstName: true,
+  showLastName: true,
   showEmail: true,
-  showOrganization: false,
+  showOrganization: true,
   formCategories: [
     { label: 'Cittadino' },
     { label: 'Dipendente/ Consulente di un ente pubblico' },
