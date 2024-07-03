@@ -12,7 +12,7 @@ type MegaHeaderProps = {
 
 const Container = styled(AppBar)({
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'center', 
   padding: '10px 0',
   backgroundColor: '#ffffff',
   position: 'fixed',
@@ -27,7 +27,7 @@ const Content = styled(Toolbar)({
   justifyContent: 'space-between',
   alignItems: 'center',
   width: '100%',
-  margin: '0 20px',
+  boxSizing: 'border-box', 
 });
 
 const Logo = styled('div')({
@@ -65,7 +65,7 @@ const Nav = styled('ul')({
   },
 });
 
-const Dropdown = styled(Box)(({ }) => ({
+const Dropdown = styled(Box)({
   display: 'none',
   position: 'absolute',
   top: '100%',
@@ -87,7 +87,7 @@ const Dropdown = styled(Box)(({ }) => ({
   '& a:hover': {
     backgroundColor: '#f1f1f1',
   },
-}));
+});
 
 const DropdownTitle = styled(Typography)({
   fontWeight: 'bold',
@@ -108,7 +108,7 @@ const Icons = styled(Box)({
   },
 });
 
-const ButtonStyled = styled(Button)(({ }) => ({
+const ButtonStyled = styled(Button)({
   backgroundColor: '#0066cc',
   color: 'white',
   padding: '10px 20px',
@@ -127,9 +127,9 @@ const ButtonStyled = styled(Button)(({ }) => ({
   '&:visited': {
     color: 'white',
   },
-}));
+});
 
-const MobileMenu = styled(Box)(({ }) => ({
+const MobileMenu = styled(Box)({
   display: 'none',
   position: 'fixed',
   top: 0,
@@ -140,8 +140,8 @@ const MobileMenu = styled(Box)(({ }) => ({
   zIndex: 999,
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
   overflowY: 'auto',
+  paddingTop: '60px', 
   '&.open': {
     display: 'flex',
   },
@@ -172,6 +172,7 @@ const MobileMenu = styled(Box)(({ }) => ({
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
+    marginTop: '20px', 
   },
   '& .mobileMenuSecondaryItem': {
     fontSize: 16,
@@ -182,7 +183,7 @@ const MobileMenu = styled(Box)(({ }) => ({
     alignItems: 'center',
     textAlign: 'center',
   },
-}));
+});
 
 const MegaHeader = (props: MegaHeaderProps) => {
   const {
