@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Button, Box, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import { styled, useTheme } from '@mui/material/styles';
 import { MenuItem, SocialMediaLink } from '@react-components/types/MegaHeader/MegaHeader.types';
 import { defaultMenuItems, defaultSocialMediaLinks } from '../../../stories/MegaHeader/megaheaderCommon';
-
 
 type MegaHeaderProps = {
   menuItems?: MenuItem[];
@@ -67,8 +65,6 @@ const Nav = styled('ul')({
   },
 });
 
-// removed theme for lint, to be checked the usage of it before merging
-
 const Dropdown = styled(Box)(({ }) => ({
   display: 'none',
   position: 'absolute',
@@ -112,16 +108,26 @@ const Icons = styled(Box)({
   },
 });
 
-const ButtonStyled = styled(Button)({
+const ButtonStyled = styled(Button)(({ }) => ({
   backgroundColor: '#0066cc',
   color: 'white',
   padding: '10px 20px',
   borderRadius: 5,
   textDecoration: 'none',
   whiteSpace: 'nowrap',
-});
-
-// removed theme for lint, to be checked the usage of it before merging
+  '&:hover': {
+    backgroundColor: '#005bb5',
+  },
+  '&:focus': {
+    backgroundColor: '#005bb5',
+  },
+  '&:active': {
+    backgroundColor: '#004999',
+  },
+  '&:visited': {
+    color: 'white',
+  },
+}));
 
 const MobileMenu = styled(Box)(({ }) => ({
   display: 'none',
@@ -162,11 +168,19 @@ const MobileMenu = styled(Box)(({ }) => ({
   '& .mobileMenuPrimaryItem': {
     fontSize: 21,
     fontWeight: 600,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
   },
   '& .mobileMenuSecondaryItem': {
     fontSize: 16,
     fontWeight: 300,
     color: '#0066cc',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
   },
 }));
 
@@ -179,11 +193,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState<{ [key: string]: boolean }>({});
+  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>, menu: string) => {
     event.preventDefault();
-    setDropdownOpen((prev) => ({ ...prev, [menu]: !prev[menu] }));
+    setDropdownOpen(prev => (prev === menu ? null : menu));
   };
 
   const handleMobileMenuToggle = () => {
@@ -220,7 +234,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                 {menuItems.map((menuItem: MenuItem, index) => (
                   <li key={index}>
                     <a href="#" className="menuPrimaryItem" onClick={(e) => handleClick(e, menuItem.primary)}>{menuItem.primary}</a>
-                    <Dropdown className={dropdownOpen[menuItem.primary] ? 'open' : ''}>
+                    <Dropdown className={dropdownOpen === menuItem.primary ? 'open' : ''}>
                       {menuItem.secondary.map((submenu, subIndex) => (
                         <div key={subIndex}>
                           {submenu.title && <DropdownTitle>{submenu.title}</DropdownTitle>}
@@ -235,14 +249,14 @@ const MegaHeader = (props: MegaHeaderProps) => {
               </Nav>
               <Icons>
                 {socialMediaLinks.map((link, index) => (
-                  <a key={index} href={link.href}><img src={link.icon} alt="social icon" /></a>
+                  <a key={index} href={link.href}>{link.icon}</a>
                 ))}
               </Icons>
-              <ButtonStyled href="#" sx={{ backgroundColor: '#0066cc', color: 'white' }}>Gestisci accesso</ButtonStyled>
+              <ButtonStyled href="#">Gestisci accesso</ButtonStyled>
             </>
           )}
-          <IconButton className="hamburger" onClick={handleMobileMenuToggle} sx={{ display: { md: 'none' } }}>
-            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          <IconButton className="hamburger" onClick={handleMobileMenuToggle} sx={{ display: { md: 'none' }, color: '#0066cc' }}>
+            <MenuIcon />
           </IconButton>
         </Content>
       </Container>
@@ -250,7 +264,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
         {menuItems.map((menuItem: MenuItem, index) => (
           <React.Fragment key={index}>
             <a href="#" className="mobileMenuPrimaryItem" onClick={(e) => handleClick(e, `mobile${menuItem.primary}`)}>{menuItem.primary}</a>
-            <Box className={`dropdownMobile ${dropdownOpen[`mobile${menuItem.primary}`] ? 'open' : ''}`}>
+            <Box className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''}`}>
               {menuItem.secondary.map((submenu, subIndex) => (
                 <div key={subIndex}>
                   {submenu.title && <DropdownTitle>{submenu.title}</DropdownTitle>}
@@ -264,10 +278,10 @@ const MegaHeader = (props: MegaHeaderProps) => {
         ))}
         <Icons id="mobileIcons">
           {socialMediaLinks.map((link, index) => (
-            <a key={index} href={link.href}><img src={link.icon} alt="social icon" /></a>
+            <a key={index} href={link.href}>{link.icon}</a>
           ))}
         </Icons>
-        <ButtonStyled href="#" sx={{ backgroundColor: '#0066cc', color: 'white' }}>Gestisci accesso</ButtonStyled>
+        <ButtonStyled href="#">Gestisci accesso</ButtonStyled>
       </MobileMenu>
     </>
   );

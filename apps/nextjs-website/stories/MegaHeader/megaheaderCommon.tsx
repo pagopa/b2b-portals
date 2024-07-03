@@ -1,5 +1,4 @@
-// apps/nextjs-website/stories/MegaHeader/common.ts
-
+import { Twitter, Instagram, Facebook, LinkedIn, YouTube } from '@mui/icons-material';
 import { MenuItem, SocialMediaLink } from '@react-components/types/MegaHeader/MegaHeader.types';
 
 export const defaultMenuItems: MenuItem[] = [
@@ -25,9 +24,9 @@ export const defaultMenuItems: MenuItem[] = [
 ];
 
 export const defaultSocialMediaLinks: SocialMediaLink[] = [
-  { icon: 'https://example.com/twitter-icon.png', href: '#' },
-  { icon: 'https://example.com/instagram-icon.png', href: '#' },
-  { icon: 'https://example.com/facebook-icon.png', href: '#' },
-  { icon: 'https://example.com/linkedin-icon.png', href: '#' },
-  { icon: 'https://example.com/youtube-icon.png', href: '#' },
+  { icon: <Twitter sx={{ color: '#0066cc' }} />, href: '#' },
+  { icon: <Instagram sx={{ color: '#0066cc' }} />, href: '#' },
+  { icon: <Facebook sx={{ color: '#0066cc' }} />, href: '#' },
+  { icon: <LinkedIn sx={{ color: '#0066cc' }} />, href: '#' },
+  { icon: <YouTube sx={{ color: '#0066cc' }} />, href: '#' },
 ];
