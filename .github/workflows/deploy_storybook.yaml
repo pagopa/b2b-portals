@@ -1,11 +1,13 @@
 name: Deploy Storybook
 
 on:
-  pull_request:
-    types:
-      - closed # Trigger when the PR is closed
-    branches:
-      - 'main' # Target branch is main
+  push:
+    branches: ['main']
+    # Run only if there are at least one change matching the following paths  
+    paths:
+      - '.github/workflows/deploy_storybook.yaml'
+      - 'apps/nextjs-website/**'
+  
   workflow_dispatch:
 
 # These permissions are needed to interact with GitHub's OIDC Token endpoint.
