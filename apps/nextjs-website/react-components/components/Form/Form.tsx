@@ -48,20 +48,11 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
     lastName: '',
     email: '',
     organization: '',
+    selectedOption: '',
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const [selectedOption, setSelectedOption] = useState('');
-
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(event.target.value);
+    setFormData({ ...formData, selectedOption: event.target.value }); // Update formData with selectedOption
   };
 
   const handleButtonClick = () => {
@@ -72,6 +63,47 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
     ...category,
     key: `category-${index}`,
   }));
+
+  const validateRequired = (value: string) => value.trim() !== '';
+  const validateEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const handleInputChange = (event: {
+    target: { name: string; value: string };
+  }) => {
+    const { name, value } = event.target;
+    let isValid = true;
+    let errorMessage = '';
+
+    if (name === 'email') {
+      isValid = validateEmail(value);
+      errorMessage = 'Invalid email address';
+    } else {
+      isValid = validateRequired(value);
+      errorMessage = 'This field is required';
+    }
+
+    if (isValid) {
+      setFormData({ ...formData, [name]: value });
+      setValidationErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
+    } else {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: errorMessage,
+      }));
+    }
+  };
+
+  interface ValidationErrors {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    organization?: string;
+  }
+
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
+    {}
+  );
 
   return (
     <Box
@@ -133,20 +165,30 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
       >
         {showFirstName && (
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
+            <FormControl fullWidth error={!!validationErrors.firstName}>
               <OutlinedInput
                 placeholder='Nome'
                 name='firstName'
                 value={formData.firstName}
                 onChange={handleInputChange}
                 sx={{ backgroundColor: 'white', color: 'black' }}
+                aria-describedby='firstName-error-text'
               />
+              {validationErrors.firstName && (
+                <Typography
+                  id='firstName-error-text'
+                  variant='caption'
+                  sx={{ color: 'error.main' }}
+                >
+                  {validationErrors.firstName}
+                </Typography>
+              )}
             </FormControl>
           </Grid>
         )}
         {showLastName && (
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
+            <FormControl fullWidth error={!!validationErrors.lastName}>
               <OutlinedInput
                 placeholder='Cognome'
                 name='lastName'
@@ -154,12 +196,21 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
                 onChange={handleInputChange}
                 sx={{ backgroundColor: 'white', color: 'black' }}
               />
+              {validationErrors.lastName && (
+                <Typography
+                  id='lastName-error-text'
+                  variant='caption'
+                  sx={{ color: 'error.main' }}
+                >
+                  {validationErrors.lastName}
+                </Typography>
+              )}
             </FormControl>
           </Grid>
         )}
         {showEmail && (
           <Grid item xs={12}>
-            <FormControl fullWidth>
+            <FormControl fullWidth error={!!validationErrors.email}>
               <OutlinedInput
                 placeholder='Indirizzo e-mail'
                 name='email'
@@ -167,12 +218,21 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
                 onChange={handleInputChange}
                 sx={{ backgroundColor: 'white', color: 'black' }}
               />
+              {validationErrors.email && (
+                <Typography
+                  id='email-error-text'
+                  variant='caption'
+                  sx={{ color: 'error.main' }}
+                >
+                  {validationErrors.email}
+                </Typography>
+              )}
             </FormControl>
           </Grid>
         )}
         {showOrganization && (
           <Grid item xs={12}>
-            <FormControl fullWidth>
+            <FormControl fullWidth error={!!validationErrors.organization}>
               <OutlinedInput
                 placeholder='Nome ente'
                 name='organization'
@@ -180,6 +240,15 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
                 onChange={handleInputChange}
                 sx={{ backgroundColor: 'white', color: 'black' }}
               />
+              {validationErrors.organization && (
+                <Typography
+                  id='organization-error-text'
+                  variant='caption'
+                  sx={{ color: 'error.main' }}
+                >
+                  {validationErrors.organization}
+                </Typography>
+              )}
             </FormControl>
           </Grid>
         )}
@@ -200,13 +269,15 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
           {checkboxTitle}
         </Typography>
       )}
-      <FormCategories
-        formCategories={updatedFormCategories}
-        textColor={textColor}
-        borderColor={borderColor}
-        selectedOption={selectedOption}
-        handleRadioChange={handleRadioChange}
-      />
+      {updatedFormCategories.length > 0 && (
+        <FormCategories
+          formCategories={updatedFormCategories}
+          textColor={textColor}
+          borderColor={borderColor}
+          selectedOption={formData.selectedOption}
+          handleRadioChange={handleRadioChange}
+        />
+      )}
       {showCheckboxInfo && (
         <Typography
           variant='body2'

@@ -158,13 +158,13 @@ const IFrameSectionCodec = t.strict({
   src: t.string,
 });
 
-const FormCategoryCodec = t.strict({
-  key: t.string,
-  label: t.string,
-  additionalLabel: t.union([t.string, t.undefined]),
-});
-
-const FormCategoriesCodec = t.array(FormCategoryCodec);
+const FormCategoriesCodec = t.array(
+  t.strict({
+    key: t.string,
+    label: t.string,
+    additionalLabel: t.union([t.string, t.undefined]),
+  })
+);
 
 const FormSectionCodec = t.strict({
   __component: t.literal('sections.form'),
