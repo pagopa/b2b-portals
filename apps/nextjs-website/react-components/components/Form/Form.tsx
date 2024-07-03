@@ -6,9 +6,6 @@ import {
   Typography,
   Link,
   FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
   Button,
 } from '@mui/material';
 import { FormData, FormProps } from '@react-components/types/Form/Form.types';
@@ -18,6 +15,7 @@ import {
   GrayLinkColor,
 } from '../common/Common.helpers';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { FormCategories } from './Form.helpers';
 
 const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
   const {
@@ -34,15 +32,16 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
     showLastName = true,
     showEmail = true,
     showOrganization = true,
-    showCitizen = true,
-    showPublicEmployee = true,
-    showTechPartner = true,
-    showDeveloper = true,
-    showJournalist = true,
+    formCategories,
     checkboxTitle,
     showCheckboxInfo = true,
     showPrivacyDisclaimer = true,
   } = props;
+
+  const backgroundColor = BackgroundColorAlternative(theme);
+  const textColor = TextColor(theme);
+  const graylinkColor = GrayLinkColor(theme);
+  const borderColor = theme === 'light' ? graylinkColor : 'white';
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -50,12 +49,6 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
     email: '',
     organization: '',
   });
-
-  const [selectedOption, setSelectedOption] = useState<'citizen' | 'publicEmployee' | 'techPartner' | 'developer' | 'journalist' | ''>('');
-
-  const backgroundColor = BackgroundColorAlternative(theme);
-  const textColor = TextColor(theme);
-  const graylinkColor = GrayLinkColor(theme);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -65,17 +58,20 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
     }));
   };
 
-  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(e.target.value as 'citizen' | 'publicEmployee' | 'techPartner' | 'developer' | 'journalist');
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption(event.target.value);
   };
 
   const handleButtonClick = () => {
-    const allData: FormData = { ...formData, selectedOption };
-    console.log(allData);
-    props.onSubmit(allData);
+    props.onSubmit(formData);
   };
 
-  const borderColor = theme === 'light' ? graylinkColor : 'white';
+  const updatedFormCategories = formCategories.map((category, index) => ({
+    ...category,
+    key: `category-${index}`,
+  }));
 
   return (
     <Box
@@ -204,121 +200,23 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
           {checkboxTitle}
         </Typography>
       )}
-      <RadioGroup value={selectedOption} onChange={handleRadioChange}>
-        <Grid
-          container
-          spacing={1}
-          sx={{ mb: 2, position: 'relative', zIndex: 3, textAlign: 'left' }}
-        >
-          {showCitizen && (
-            <>
-              <Grid container alignItems='center' justifyContent='space-between' sx={{ borderBottom: `1px solid ${borderColor}` }}>
-                <Grid item xs>
-                  <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                    Cittadino
-                  </Typography>
-                </Grid>
-                <Grid item sx={{ textAlign: 'right' }}>
-                  <FormControlLabel
-                    value='citizen'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
-                    label=''
-                    labelPlacement='end'
-                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
-                  />
-                </Grid>
-              </Grid>
-            </>
-          )}
-          {showPublicEmployee && (
-            <>
-              <Grid container alignItems='center' justifyContent='space-between' sx={{ borderBottom: `1px solid ${borderColor}` }}>
-                <Grid item xs>
-                  <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                    Dipendente / Consulente di un ente pubblico
-                  </Typography>
-                </Grid>
-                <Grid item sx={{ textAlign: 'right' }}>
-                  <FormControlLabel
-                    value='publicEmployee'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
-                    label=''
-                    labelPlacement='end'
-                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
-                  />
-                </Grid>
-              </Grid>
-            </>
-          )}
-          {showTechPartner && (
-            <>
-              <Grid container alignItems='center' justifyContent='space-between' sx={{ borderBottom: `1px solid ${borderColor}` }}>
-                <Grid item xs>
-                  <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                    Partner tecnologico di un ente pubblico
-                  </Typography>
-                  <Typography variant='body2' sx={{ color: textColor }}>
-                    (presso società in-house, software house, ecc.)
-                  </Typography>
-                </Grid>
-                <Grid item sx={{ textAlign: 'right' }}>
-                  <FormControlLabel
-                    value='techPartner'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
-                    label=''
-                    labelPlacement='end'
-                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
-                  />
-                </Grid>
-              </Grid>
-            </>
-          )}
-          {showDeveloper && (
-            <>
-              <Grid container alignItems='center' justifyContent='space-between' sx={{ borderBottom: `1px solid ${borderColor}` }}>
-                <Grid item xs>
-                  <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                    Sviluppatore
-                  </Typography>
-                </Grid>
-                <Grid item sx={{ textAlign: 'right' }}>
-                  <FormControlLabel
-                    value='developer'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
-                    label=''
-                    labelPlacement='end'
-                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
-                  />
-                </Grid>
-              </Grid>
-            </>
-          )}
-          {showJournalist && (
-            <>
-              <Grid container alignItems='center' justifyContent='space-between' sx={{ borderBottom: `1px solid ${borderColor}` }}>
-                <Grid item xs>
-                  <Typography variant='body1' fontWeight='bold' sx={{ color: textColor }}>
-                    Giornalista
-                  </Typography>
-                </Grid>
-                <Grid item sx={{ textAlign: 'right' }}>
-                  <FormControlLabel
-                    value='journalist'
-                    control={<Radio sx={{ color: textColor, '&.Mui-checked': { color: textColor }, '&:hover': { bgcolor: 'transparent' } }} />}
-                    label=''
-                    labelPlacement='end'
-                    sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
-                  />
-                </Grid>
-              </Grid>
-            </>
-          )}
-        </Grid>
-      </RadioGroup>
+      <FormCategories
+        formCategories={updatedFormCategories}
+        textColor={textColor}
+        borderColor={borderColor}
+        selectedOption={selectedOption}
+        handleRadioChange={handleRadioChange}
+      />
       {showCheckboxInfo && (
         <Typography
           variant='body2'
-          sx={{ mb: 2, position: 'relative', zIndex: 3, color: textColor, textAlign: 'start' }}
+          sx={{
+            mb: 2,
+            position: 'relative',
+            zIndex: 3,
+            color: textColor,
+            textAlign: 'start',
+          }}
         >
           *Campo obbligatorio
         </Typography>
@@ -328,6 +226,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
           variant='contained'
           sx={{ width: { md: 'auto', xs: '100%' }, zIndex: 4 }}
           onClick={handleButtonClick}
+          color={theme === 'dark' ? 'negative' : 'primary'}
         >
           {ctaButtons[0]?.text}
         </Button>

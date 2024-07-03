@@ -158,6 +158,14 @@ const IFrameSectionCodec = t.strict({
   src: t.string,
 });
 
+const FormCategoryCodec = t.strict({
+  key: t.string,
+  label: t.string,
+  additionalLabel: t.union([t.string, t.undefined]),
+});
+
+const FormCategoriesCodec = t.array(FormCategoryCodec);
+
 const FormSectionCodec = t.strict({
   __component: t.literal('sections.form'),
   title: t.string,
@@ -166,6 +174,7 @@ const FormSectionCodec = t.strict({
   privacyLinkTextRecaptchaPolicy: t.string,
   privacyLinkRecaptchaTerms: t.string,
   privacyLinkTextRecaptchaTerms: t.string,
+  formCategories: FormCategoriesCodec,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
   submitHandler: t.Function,

@@ -24,7 +24,7 @@ declare module '@mui/material/styles' {
       readonly backgroundColorDefault?: string;
       readonly darkLinkColor?: string;
       readonly grayLinkColor?: string;
-      readonly blackOpacized?: string;
+      readonly black50?: string;
     };
   }
 }

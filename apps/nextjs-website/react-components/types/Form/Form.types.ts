@@ -14,21 +14,37 @@ export interface FormProps extends CommonProps {
   readonly showLastName?: boolean;
   readonly showEmail?: boolean;
   readonly showOrganization?: boolean;
-  readonly showCitizen?: boolean;
-  readonly showPublicEmployee?: boolean;
-  readonly showTechPartner?: boolean;
-  readonly showDeveloper?: boolean;
-  readonly showJournalist?: boolean;
   readonly checkboxTitle?: string;
   readonly showCheckboxInfo?: boolean;
   readonly showPrivacyDisclaimer?: boolean;
   readonly privacyDisclaimerText?: string;
+  readonly formCategories: {
+    label: string;
+    additionalLabel?: string;
+  }[];
 }
 export interface FormData {
   firstName?: string;
   lastName?: string;
   email: string;
   organization?: string;
-  selectedOption: 'citizen' | 'publicEmployee' | 'techPartner' | 'developer' | 'journalist' | '';
 }
 
+export interface OptionRowProps {
+  label: string;
+  checked: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+  additionalText?: string;
+  color: string;
+}
+
+export interface FormCategoryProps {
+  formCategories: {
+    key: string;
+    label: string;
+    additionalLabel?: string;
+  }[];
+  textColor: string;
+  borderColor: string;
+}

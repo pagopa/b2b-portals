@@ -11,25 +11,32 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   privacyLinkTextRecaptchaTerms: 'Termini di servizio',
   theme,
   backgroundImage: '#',
-  ctaButtons: [{
-    text: 'Iscriviti',
-  }],
+  ctaButtons: [
+    {
+      text: 'Iscriviti',
+    },
+  ],
   showFirstName: false,
   showLastName: false,
   showEmail: true,
   showOrganization: false,
-  showCitizen: true,
-  showPublicEmployee: true,
-  showTechPartner: true,
-  showDeveloper: true,
-  showJournalist: true,
+  formCategories: [
+    { label: 'Cittadino' },
+    { label: 'Dipendente/ Consulente di un ente pubblico' },
+    { label: 'Partner tecnologico di un ente pubblico', additionalLabel: '(presso  società in-house, software house, ecc.)' },
+    { label: 'Sviluppatore' },
+    { label: 'Giornalista' },
+  ],
   checkboxTitle: 'Vorrei ricevere news sul progetto IO in qualità di*:',
   showCheckboxInfo: true,
   showPrivacyDisclaimer: true,
-  privacyDisclaimerText: 'Inserendo il tuo indirizzo email stai accettando la nostra informativa sul trattamento dei dati personali per la newsletter.',
+  privacyDisclaimerText:
+    'Inserendo il tuo indirizzo email stai accettando la nostra informativa sul trattamento dei dati personali per la newsletter.',
 });
 
-export const FormTemplate: StoryFn<FormProps> = (args) => <Form {...args} onSubmit={() => alert('Form submitted')} />;
+export const FormTemplate: StoryFn<FormProps> = (args) => (
+  <Form {...args} onSubmit={() => alert('Form submitted')} />
+);
 
 export const defaultPropsDark = {
   ...generateFormProps('dark'),
