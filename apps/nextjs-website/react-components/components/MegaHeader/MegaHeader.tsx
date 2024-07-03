@@ -4,7 +4,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { styled, useTheme } from '@mui/material/styles';
 import { MenuItem, SocialMediaLink } from '@react-components/types/MegaHeader/MegaHeader.types';
-import { defaultMenuItems, defaultSocialMediaLinks } from '../../../stories/MegaHeader/light.stories';
+import { defaultMenuItems, defaultSocialMediaLinks } from '../../../stories/MegaHeader/megaheaderCommon';
+
 
 type MegaHeaderProps = {
   menuItems?: MenuItem[];
