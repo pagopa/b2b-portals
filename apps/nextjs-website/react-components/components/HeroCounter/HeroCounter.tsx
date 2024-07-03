@@ -46,13 +46,27 @@ const HeroCounter = (props: HeroCounterProps) => {
       size='xl'
       background={!background ? backgroundColor : BackgroundImage}
       direction='row'
-      sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, alignItems: 'center', justifyContent: 'space-between', py: 4 }}
+      sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', lg: 'row' },
+        alignItems: { lg: 'center', xs: 'flex-start' },
+        justifyContent: 'space-between',
+        py: 4,
+      }}
     >
-      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <Typography variant='h1' color={textColor} mb={2}>
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: { xs: 'flex-start' },
+        }}
+      >
+        <Typography variant='h1' color={textColor} mb={2} sx={{ fontSize: '3.5rem!important' }}>
           {title}
         </Typography>
-        <Typography variant='body1' color={textColor} mb={2}>
+        <Typography variant='body1' color={textColor} mb={2} sx={{ fontSize: '1rem' }}>
           {subtitle}
         </Typography>
         {linkText && linkUrl && (
@@ -61,7 +75,7 @@ const HeroCounter = (props: HeroCounterProps) => {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              color: theme === 'dark' ? '#fff' : '#0062c3',
+              color: theme === 'dark' ? '#fff' : '#0B3EE3',
               mt: 2,
               textDecoration: 'none',
               fontWeight: 'bold',
@@ -73,6 +87,7 @@ const HeroCounter = (props: HeroCounterProps) => {
               sx={{
                 display: 'inline-block',
                 ml: 1,
+                fontSize: '1rem',
                 transition: 'transform 0.2s',
                 '&:hover': {
                   transform: 'translateX(2px)',
@@ -82,14 +97,23 @@ const HeroCounter = (props: HeroCounterProps) => {
           </Link>
         )}
       </Box>
-      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: { lg: 'flex-end', xs: 'flex-start' }, justifyContent: 'center', textAlign: { lg: 'right', xs: 'left' } }}>
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: { lg: 'flex-end', xs: 'flex-start' },
+          justifyContent: 'center',
+          textAlign: { lg: 'right', xs: 'left' },
+        }}
+      >
         <Typography
-          color={theme === 'light' ? 'blue' : textColor}
+          color={theme === 'light' ? '#0B3EE3' : textColor}
           sx={{ fontSize: '8rem' }}
         >
           {counterNumber}
         </Typography>
-        <Typography variant='body1' color={textColor}>
+        <Typography variant='body1' color={textColor} sx={{ fontSize: '1.125rem', fontWeight: 600 }}>
           {counterText}
         </Typography>
       </Box>
