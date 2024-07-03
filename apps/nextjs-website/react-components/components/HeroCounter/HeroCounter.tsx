@@ -5,6 +5,7 @@ import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroCounterProps } from '@react-components/types/HeroCounter/HeroCounter.types';
 import { BackgroundColor, TextColor } from '../common/Common.helpers';
+import { useTheme } from '@mui/material/styles';
 
 const HeroCounter = (props: HeroCounterProps) => {
   const {
@@ -27,7 +28,7 @@ const HeroCounter = (props: HeroCounterProps) => {
     <Box
       role='presentation'
       sx={{
-        px: { xs: 4 },
+        px: 4,
         position: 'absolute',
         inset: 0,
         zIndex: -10,
@@ -40,6 +41,8 @@ const HeroCounter = (props: HeroCounterProps) => {
       }}
     />
   );
+
+  const { palette } = useTheme();
 
   return (
     <ContainerRC
@@ -60,7 +63,7 @@ const HeroCounter = (props: HeroCounterProps) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: { xs: 'flex-start' },
+          alignItems: 'flex-start',
         }}
       >
         <Typography variant='h1' color={textColor} mb={2} sx={{ fontSize: '3.5rem!important' }}>
@@ -75,7 +78,7 @@ const HeroCounter = (props: HeroCounterProps) => {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              color: theme === 'dark' ? '#fff' : '#0B3EE3',
+              color: theme === 'dark' ? textColor : palette.custom.primaryColorDark,
               mt: 2,
               textDecoration: 'none',
               fontWeight: 'bold',
@@ -108,13 +111,13 @@ const HeroCounter = (props: HeroCounterProps) => {
         }}
       >
         <Typography
-          color={theme === 'light' ? '#0B3EE3' : textColor}
-          sx={{ fontSize: '8rem' }}
+          color={theme === 'light' ? palette.custom.primaryColorDark : textColor}
+          sx={{ fontSize: '8rem', display: 'flex', flexDirection: 'column', alignItems: 'start', lineHeight: 1.1 }}
         >
           {counterNumber}
-        </Typography>
-        <Typography variant='body1' color={textColor} sx={{ fontSize: '1.125rem', fontWeight: 600 }}>
-          {counterText}
+          <Typography variant='body1' color={textColor} sx={{ fontSize: '1.125rem', fontWeight: 600, padding: '0px 10px' }}>
+            {counterText}
+          </Typography>
         </Typography>
       </Box>
     </ContainerRC>
