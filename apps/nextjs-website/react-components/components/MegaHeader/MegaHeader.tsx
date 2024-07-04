@@ -52,13 +52,19 @@ const Nav = styled('ul')({
   },
   '& a': {
     textDecoration: 'none',
-    color: '#0073e6',
     padding: 10,
     cursor: 'pointer',
+    color: '#2B2E38',
+    fontSize: 16,
+    fontWeight: 400,
   },
   '& .menuPrimaryItem': {
-    fontSize: 16,
-    fontWeight: 600,
+    '&:hover, &.active': {
+      color: '#0B3EE3',
+      fontWeight: 600,
+      backgroundColor: '#F4F4F4',
+      borderRadius: 6,
+    },
   },
   '& .menuSecondaryItem': {
     fontSize: 16,
@@ -78,7 +84,7 @@ const Dropdown = styled(Box)({
   borderRadius: 6,
   '&.open': {
     display: 'block',
-    width: 'max-content',
+    width: '100%',
   },
   '& a': {
     display: 'block',
@@ -131,7 +137,7 @@ const MobileMenu = styled(Box)({
   flexDirection: 'column',
   alignItems: 'flex-start',
   overflowY: 'auto',
-  paddingTop: '80px', // Added padding to ensure visibility
+  paddingTop: '80px',
   '&.open': {
     display: 'flex',
   },
@@ -216,26 +222,19 @@ const MegaHeader = (props: MegaHeaderProps) => {
         <Content>
           <Logo>
             <img src="https://io.italia.it/assets/img/io-it-logo-blue.svg" alt="Logo" />
-            <span style={{ backgroundColor: '#0073e6', color: 'white', borderRadius: 5, fontSize: 9, padding: '4px 6px', margin: '6px 0 0 2px' }}>
-              BETA
-            </span>
           </Logo>
           {!isMobile && (
             <>
               <Nav>
                 {menuItems.map((menuItem: MenuItem, index) => (
                   <li key={index}>
-                    <a href="#" className="menuPrimaryItem" onClick={(e) => handleClick(e, menuItem.primary)}>{menuItem.primary}</a>
-                    <Dropdown className={dropdownOpen === menuItem.primary ? 'open' : ''}>
-                      {menuItem.secondary.map((submenu, subIndex) => (
-                        <div key={subIndex}>
-                          {submenu.title && <DropdownTitle>{submenu.title}</DropdownTitle>}
-                          {submenu.items.map((item, itemIndex) => (
-                            <a key={itemIndex} href="#" className="menuSecondaryItem">{item}</a>
-                          ))}
-                        </div>
-                      ))}
-                    </Dropdown>
+                    <a
+                      href="#"
+                      className={`menuPrimaryItem ${dropdownOpen === menuItem.primary ? 'active' : ''}`}
+                      onClick={(e) => handleClick(e, menuItem.primary)}
+                    >
+                      {menuItem.primary}
+                    </a>
                   </li>
                 ))}
               </Nav>
@@ -247,10 +246,26 @@ const MegaHeader = (props: MegaHeaderProps) => {
           </IconButton>
         </Content>
       </Container>
+      {!isMobile && (
+        <Box id="desktopMenu" sx={{ position: 'absolute', top: '56px', width: '100%', zIndex: 999 }}>
+          {menuItems.map((menuItem: MenuItem, index) => (
+            <Dropdown key={index} className={dropdownOpen === menuItem.primary ? 'open' : ''}>
+              {dropdownOpen === menuItem.primary && menuItem.secondary.map((submenu, subIndex) => (
+                <div key={subIndex}>
+                  {submenu.title && <DropdownTitle>{submenu.title}</DropdownTitle>}
+                  {submenu.items.map((item, itemIndex) => (
+                    <a key={itemIndex} href="#" className="menuSecondaryItem">{item}</a>
+                  ))}
+                </div>
+              ))}
+            </Dropdown>
+          ))}
+        </Box>
+      )}
       <MobileMenu id="mobileMenu" className={mobileMenuOpen ? 'open' : ''}>
         {menuItems.map((menuItem: MenuItem, index) => (
           <React.Fragment key={index}>
-            <Box className="mobileMenuPrimaryItem" onClick={(e) => handleClick(e as any, `mobile${menuItem.primary}`)}> {/* Type casting to any */}
+            <Box className="mobileMenuPrimaryItem" onClick={(e) => handleClick(e as any, `mobile${menuItem.primary}`)}>
               {menuItem.primary}
               <KeyboardArrowDownIcon style={{ transform: dropdownOpen === `mobile${menuItem.primary}` ? 'rotate(180deg)' : 'rotate(0deg)' }} />
             </Box>
