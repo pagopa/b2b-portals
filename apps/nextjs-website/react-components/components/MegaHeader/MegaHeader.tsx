@@ -157,7 +157,7 @@ const DropdownTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const ButtonStyled = styled(Button)({
-  backgroundColor: '#0073e6',
+  backgroundColor: '#0B3EE3',
   color: 'white',
   padding: '10px 20px',
   borderRadius: 5,
@@ -222,7 +222,7 @@ const MobileMenu = styled(Box)({
     marginLeft: 5,
     color: '#0B3EE3',
     verticalAlign: 'middle',
-    fontSize: '18px',
+    fontSize: '16px',
   },
   '& .dropdownMobile': {
     display: 'none',
@@ -322,8 +322,8 @@ const MegaHeader = (props: MegaHeaderProps) => {
               <ButtonStyled href="#">Entra in IO</ButtonStyled>
             </>
           )}
-          <IconButton className="hamburger" onClick={handleMobileMenuToggle} sx={{ display: { md: 'none' }, color: '#0073e6' }}>
-            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          <IconButton className="hamburger" onClick={handleMobileMenuToggle} sx={{ display: { md: 'none' }, color: '#0B3EE3' }}>
+            {mobileMenuOpen ? <CloseIcon style={{ color: '#0B3EE3' }} /> : <MenuIcon style={{ color: '#0B3EE3' }} />}
           </IconButton>
         </Content>
       </Container>
@@ -360,7 +360,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
             >
               {menuItem.primary}
               <KeyboardArrowDownIcon
-                style={{ transform: dropdownOpen === `mobile${menuItem.primary}` ? 'rotate(180deg)' : 'rotate(0deg)', color: '#0073e6' }}
+                style={{ transform: dropdownOpen === `mobile${menuItem.primary}` ? 'rotate(180deg)' : 'rotate(0deg)', color: '#0B3EE3' }}
               />
             </Box>
             <Box className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''}`}>
