@@ -54,7 +54,7 @@ const Hero = (props: HeroProps) => {
       <Grid
         item
         lg={size === 'small' ? 12 : 4}
-        sx={{ minHeight: { lg: minHeight }, width: '100%'}}
+        sx={{ minHeight: { lg: minHeight }, width: '100%' }}
       >
         <HeroTextContent {...props} />
       </Grid>
@@ -64,8 +64,8 @@ const Hero = (props: HeroProps) => {
           lg={6}
           mb={{ xs: 4, lg: 0 }}
           sx={{ width: '100%', display: 'flex' }}
-          justifyContent={inverse ? "start" : "end"}
-          alignItems="center"
+          justifyContent={inverse ? 'start' : 'end'}
+          alignItems='center'
         >
           {isJSX(image) ? (
             image
@@ -80,7 +80,7 @@ const Hero = (props: HeroProps) => {
                 width: '80%',
                 height: '80%',
                 maxHeight: minHeight,
-                userSelect: 'none'
+                userSelect: 'none',
               }}
             />
           )}

@@ -13,6 +13,7 @@ import { FeatureProps } from './Feature/Feature.types';
 import { IFrameProps } from './IFrame/IFrame.types';
 import { FormProps } from './Form/Form.types';
 import { PreFooterProps } from './PreFooter/PreFooter';
+import { HeroCounterProps } from './HeroCounter/HeroCounter.types';
 
 export type {
   HeroProps,
@@ -30,4 +31,5 @@ export type {
   IFrameProps,
   FormProps,
   PreFooterProps,
+  HeroCounterProps,
 };
