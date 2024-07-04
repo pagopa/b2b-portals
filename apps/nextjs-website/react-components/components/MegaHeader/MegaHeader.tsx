@@ -3,6 +3,7 @@ import { AppBar, Toolbar, IconButton, Typography, Button, Box, useMediaQuery } f
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { styled, useTheme } from '@mui/material/styles';
 import { MenuItem, SocialMediaLink } from '@react-components/types/MegaHeader/MegaHeader.types';
 import { defaultMenuItems } from '../../../stories/MegaHeader/megaheaderCommon';
@@ -72,6 +73,26 @@ const Nav = styled('ul')({
     fontSize: 14,
     fontWeight: 400,
     color: '#555C70',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  '& .menuSecondaryItem:hover': {
+    fontWeight: 600,
+  },
+  '& .menuSecondaryItem:hover .arrowIcon': {
+    display: 'inline-block',
+  },
+  '& .menuSecondaryItem.active': {
+    fontWeight: 600,
+  },
+  '& .menuSecondaryItem.active .arrowIcon': {
+    display: 'none',
+  },
+  '& .arrowIcon': {
+    display: 'none',
+    marginLeft: 5,
+    color: '#0B3EE3',
+    verticalAlign: 'middle',
   },
 });
 
@@ -82,7 +103,7 @@ const Dropdown = styled(Box)({
   left: 0,
   backgroundColor: '#fff',
   boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
-  padding: 24,
+  padding: '50px 70px',
   borderRadius: 6,
   '&.open': {
     display: 'flex',
@@ -91,31 +112,52 @@ const Dropdown = styled(Box)({
     width: '100%',
   },
   '& .dropdownSection': {
-    marginRight: 40,
+    marginRight: 56,
   },
   '& a': {
-    display: 'block',
     padding: '10px 20px',
     textDecoration: 'none',
     fontSize: 14,
-    fontWeight: 700,
+    fontWeight: 400,
     color: '#555C70',
+    display: 'flex',
+    alignItems: 'center',
   },
   '& a:hover': {
-    backgroundColor: '#f1f1f1',
+    fontWeight: 600,
+    color: '#555C70',
+  },
+  '& a:hover .arrowIcon': {
+    display: 'inline-block',
+  },
+  '& a.active': {
+    fontWeight: 600,
+  },
+  '& a.active .arrowIcon': {
+    display: 'none',
+  },
+  '& .arrowIcon': {
+    display: 'none',
+    marginLeft: 5,
+    color: '#0B3EE3',
+    verticalAlign: 'middle',
+    fontSize: '18px',
   },
 });
 
-const DropdownTitle = styled(Typography)({
+const DropdownTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   fontSize: 14,
   color: 'black',
   padding: '10px 20px',
   cursor: 'default',
-});
+  [theme.breakpoints.down('md')]: {
+    padding: '10px 30px',
+  },
+}));
 
 const ButtonStyled = styled(Button)({
-  backgroundColor: '#0073e6',
+  backgroundColor: '#0B3EE3',
   color: 'white',
   padding: '10px 20px',
   borderRadius: 5,
@@ -147,7 +189,7 @@ const MobileMenu = styled(Box)({
   flexDirection: 'column',
   alignItems: 'flex-start',
   overflowY: 'auto',
-  paddingTop: '80px',
+  paddingTop: '100px',
   '&.open': {
     display: 'flex',
   },
@@ -155,12 +197,32 @@ const MobileMenu = styled(Box)({
     color: 'white',
   },
   '& a': {
-    padding: '10px 20px',
-    fontSize: 14, 
-    color: '#555C70', 
+    padding: '10px 30px',
+    fontSize: 14,
+    color: '#555C70',
     textDecoration: 'none',
-    display: 'block',
-    fontWeight: 400, 
+    display: 'flex',
+    alignItems: 'center',
+    fontWeight: 400,
+  },
+  '& a:hover': {
+    fontWeight: 600,
+  },
+  '& a:hover .arrowIcon': {
+    display: 'inline-block',
+  },
+  '& a.active': {
+    fontWeight: 600,
+  },
+  '& a.active .arrowIcon': {
+    display: 'none',
+  },
+  '& .arrowIcon': {
+    display: 'none',
+    marginLeft: 5,
+    color: '#0B3EE3',
+    verticalAlign: 'middle',
+    fontSize: '16px',
   },
   '& .dropdownMobile': {
     display: 'none',
@@ -171,26 +233,32 @@ const MobileMenu = styled(Box)({
     flexDirection: 'column',
     textAlign: 'left',
     width: '100%',
-    borderBottom: 'none', 
+    borderBottom: 'none',
   },
   '& .mobileMenuPrimaryItem': {
     fontSize: 18,
-    fontWeight: 400, 
+    fontWeight: 400,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     textAlign: 'left',
     width: '100%',
     justifyContent: 'space-between',
-    padding: '10px 20px',
+    padding: '10px 30px',
     cursor: 'pointer',
+    '&.active': {
+      fontWeight: 600, 
+    },
   },
   '& .mobileMenuSecondaryItem': {
-    fontSize: 14, 
-    fontWeight: 400, 
-    color: '#555C70', 
+    fontSize: 14,
+    fontWeight: 400,
+    color: '#555C70',
     paddingLeft: '30px',
     display: 'block',
+  },
+  '& .mobileMenuButton': {
+    margin: '30px',
   },
 });
 
@@ -203,10 +271,12 @@ const MegaHeader = (props: MegaHeaderProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
+  const [activeItem, setActiveItem] = useState<string | null>(null);
 
-  const handleClick = (event: MouseEvent<HTMLAnchorElement>, menu: string) => {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement | HTMLDivElement>, menu: string) => {
     event.preventDefault();
     setDropdownOpen(prev => (prev === menu ? null : menu));
+    setActiveItem(menu);
   };
 
   const handleMobileMenuToggle = () => {
@@ -249,11 +319,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   </li>
                 ))}
               </Nav>
-              <ButtonStyled href="#">Gestisci accesso</ButtonStyled>
+              <ButtonStyled href="#">Entra in IO</ButtonStyled>
             </>
           )}
-          <IconButton className="hamburger" onClick={handleMobileMenuToggle} sx={{ display: { md: 'none' }, color: '#0073e6' }}>
-            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          <IconButton className="hamburger" onClick={handleMobileMenuToggle} sx={{ display: { md: 'none' }, color: '#0B3EE3' }}>
+            {mobileMenuOpen ? <CloseIcon style={{ color: '#0B3EE3' }} /> : <MenuIcon style={{ color: '#0B3EE3' }} />}
           </IconButton>
         </Content>
       </Container>
@@ -265,7 +335,15 @@ const MegaHeader = (props: MegaHeaderProps) => {
                 <div key={subIndex} className="dropdownSection">
                   {submenu.title && <DropdownTitle>{submenu.title}</DropdownTitle>}
                   {submenu.items.map((item, itemIndex) => (
-                    <a key={itemIndex} href="#" className="menuSecondaryItem">{item}</a>
+                    <a
+                      key={itemIndex}
+                      href="#"
+                      className={`menuSecondaryItem ${activeItem === item ? 'active' : ''}`}
+                      onClick={() => setActiveItem(item)}
+                    >
+                      {item}
+                      <ArrowForwardIcon className="arrowIcon" />
+                    </a>
                   ))}
                 </div>
               ))}
@@ -276,23 +354,36 @@ const MegaHeader = (props: MegaHeaderProps) => {
       <MobileMenu id="mobileMenu" className={mobileMenuOpen ? 'open' : ''}>
         {menuItems.map((menuItem: MenuItem, index) => (
           <React.Fragment key={index}>
-            <Box className="mobileMenuPrimaryItem" onClick={(e) => handleClick(e as any, `mobile${menuItem.primary}`)}>
+            <Box
+              className={`mobileMenuPrimaryItem ${dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''}`}
+              onClick={(e) => handleClick(e as any, `mobile${menuItem.primary}`)}
+            >
               {menuItem.primary}
-              <KeyboardArrowDownIcon style={{ transform: dropdownOpen === `mobile${menuItem.primary}` ? 'rotate(180deg)' : 'rotate(0deg)', color: '#0073e6' }} />
+              <KeyboardArrowDownIcon
+                style={{ transform: dropdownOpen === `mobile${menuItem.primary}` ? 'rotate(180deg)' : 'rotate(0deg)', color: '#0B3EE3' }}
+              />
             </Box>
             <Box className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''}`}>
               {menuItem.secondary.map((submenu, subIndex) => (
                 <div key={subIndex}>
                   {submenu.title && <DropdownTitle>{submenu.title}</DropdownTitle>}
                   {submenu.items.map((item, itemIndex) => (
-                    <a key={itemIndex} href="#" className="mobileMenuSecondaryItem">{item}</a>
+                    <a
+                      key={itemIndex}
+                      href="#"
+                      className={`mobileMenuSecondaryItem ${activeItem === item ? 'active' : ''}`}
+                      onClick={() => setActiveItem(item)}
+                    >
+                      {item}
+                      <ArrowForwardIcon className="arrowIcon" />
+                    </a>
                   ))}
                 </div>
               ))}
             </Box>
           </React.Fragment>
         ))}
-        <ButtonStyled href="#">Gestisci accesso</ButtonStyled>
+        <ButtonStyled className="mobileMenuButton" href="#">Entra in IO</ButtonStyled>
       </MobileMenu>
     </>
   );
