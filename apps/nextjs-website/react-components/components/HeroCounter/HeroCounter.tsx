@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Typography, Link } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroCounterProps } from '@react-components/types/HeroCounter/HeroCounter.types';
 import { BackgroundColor, TextColor } from '../common/Common.helpers';
@@ -11,7 +10,7 @@ const HeroCounter = (props: HeroCounterProps) => {
   const {
     background,
     theme = 'dark',
-    counterNumber = 0,
+    counterNumber,
     counterText,
     title,
     subtitle,
@@ -22,9 +21,7 @@ const HeroCounter = (props: HeroCounterProps) => {
   const backgroundColor = BackgroundColor(theme);
   const textColor = TextColor(theme);
 
-  const BackgroundImage = isJSX(background) ? (
-    background
-  ) : (
+  const BackgroundImage = (
     <Box
       role='presentation'
       sx={{
@@ -63,22 +60,35 @@ const HeroCounter = (props: HeroCounterProps) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'flex-start'
+          alignItems: 'flex-start',
         }}
       >
-        <Typography variant='h1' color={textColor} mb={2} sx={{ fontSize: '3.5rem!important' }}>
+        <Typography
+          variant='h1'
+          color={textColor}
+          mb={2}
+          sx={{ fontSize: '3.5rem!important' }}
+        >
           {title}
         </Typography>
-        <Typography variant='body1' color={textColor} mb={2} sx={{ fontSize: '1rem' }}>
-          {subtitle}
-        </Typography>
+        {subtitle && (
+          <Typography
+            variant='body1'
+            color={textColor}
+            mb={2}
+            sx={{ fontSize: '1rem' }}
+          >
+            {subtitle}
+          </Typography>
+        )}
         {linkText && linkUrl && (
           <Link
             href={linkUrl}
             sx={{
               display: 'flex',
               alignItems: 'center',
-              color: theme === 'dark' ? textColor : palette.custom.primaryColorDark,
+              color:
+                theme === 'dark' ? textColor : palette.custom.primaryColorDark,
               mt: 2,
               textDecoration: 'none',
               fontWeight: 'bold',
@@ -107,17 +117,35 @@ const HeroCounter = (props: HeroCounterProps) => {
           flexDirection: 'column',
           alignItems: { lg: 'flex-end', xs: 'flex-start' },
           justifyContent: 'center',
-          textAlign: { lg: 'right', xs: 'left' }
+          textAlign: { lg: 'right', xs: 'left' },
         }}
       >
         <Typography
-          color={theme === 'light' ? palette.custom.primaryColorDark : textColor}
-          sx={{ fontSize: '8rem', display: 'flex', flexDirection: 'column', alignItems: 'start', lineHeight: 1.1 }}
+          color={
+            theme === 'light' ? palette.custom.primaryColorDark : textColor
+          }
+          sx={{
+            fontSize: '8rem',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'start',
+            lineHeight: 1.1,
+          }}
         >
           {counterNumber}
-          <Typography variant='body1' color={textColor} sx={{ fontSize: '1.125rem', fontWeight: 600, padding: '0px 10px' }}>
-            {counterText}
-          </Typography>
+          {counterText && (
+            <Typography
+              variant='body1'
+              color={textColor}
+              sx={{
+                fontSize: '1.125rem',
+                fontWeight: 600,
+                padding: '0px 10px',
+              }}
+            >
+              {counterText}
+            </Typography>
+          )}
         </Typography>
       </Box>
     </ContainerRC>
