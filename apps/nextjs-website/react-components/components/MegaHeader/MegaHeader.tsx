@@ -35,6 +35,7 @@ const Content = styled(Toolbar)({
 const Logo = styled('div')({
   display: 'flex',
   alignItems: 'center',
+  marginRight: 20,
   '& img': {
     height: 34,
     marginRight: 4,
@@ -46,6 +47,7 @@ const Nav = styled('ul')({
   listStyleType: 'none',
   padding: 0,
   position: 'relative',
+  flex: 1,
   '& li': {
     marginRight: 20,
     position: 'relative',
@@ -67,9 +69,9 @@ const Nav = styled('ul')({
     },
   },
   '& .menuSecondaryItem': {
-    fontSize: 16,
-    fontWeight: 300,
-    color: '#0073e6',
+    fontSize: 14,
+    fontWeight: 400,
+    color: '#555C70',
   },
 });
 
@@ -83,14 +85,21 @@ const Dropdown = styled(Box)({
   padding: 24,
   borderRadius: 6,
   '&.open': {
-    display: 'block',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     width: '100%',
+  },
+  '& .dropdownSection': {
+    marginRight: 40,
   },
   '& a': {
     display: 'block',
     padding: '10px 20px',
     textDecoration: 'none',
-    color: '#0073e6',
+    fontSize: 14,
+    fontWeight: 700,
+    color: '#555C70',
   },
   '& a:hover': {
     backgroundColor: '#f1f1f1',
@@ -98,7 +107,8 @@ const Dropdown = styled(Box)({
 });
 
 const DropdownTitle = styled(Typography)({
-  fontWeight: 'bold',
+  fontWeight: 700,
+  fontSize: 14,
   color: 'black',
   padding: '10px 20px',
   cursor: 'default',
@@ -146,10 +156,11 @@ const MobileMenu = styled(Box)({
   },
   '& a': {
     padding: '10px 20px',
-    fontSize: 18,
-    color: '#0073e6',
+    fontSize: 14, 
+    color: '#555C70', 
     textDecoration: 'none',
     display: 'block',
+    fontWeight: 400, 
   },
   '& .dropdownMobile': {
     display: 'none',
@@ -160,11 +171,11 @@ const MobileMenu = styled(Box)({
     flexDirection: 'column',
     textAlign: 'left',
     width: '100%',
-    borderBottom: '1px solid #ddd',
+    borderBottom: 'none', 
   },
   '& .mobileMenuPrimaryItem': {
     fontSize: 18,
-    fontWeight: 600,
+    fontWeight: 400, 
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -175,9 +186,9 @@ const MobileMenu = styled(Box)({
     cursor: 'pointer',
   },
   '& .mobileMenuSecondaryItem': {
-    fontSize: 16,
-    fontWeight: 300,
-    color: '#0073e6',
+    fontSize: 14, 
+    fontWeight: 400, 
+    color: '#555C70', 
     paddingLeft: '30px',
     display: 'block',
   },
@@ -251,7 +262,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
           {menuItems.map((menuItem: MenuItem, index) => (
             <Dropdown key={index} className={dropdownOpen === menuItem.primary ? 'open' : ''}>
               {dropdownOpen === menuItem.primary && menuItem.secondary.map((submenu, subIndex) => (
-                <div key={subIndex}>
+                <div key={subIndex} className="dropdownSection">
                   {submenu.title && <DropdownTitle>{submenu.title}</DropdownTitle>}
                   {submenu.items.map((item, itemIndex) => (
                     <a key={itemIndex} href="#" className="menuSecondaryItem">{item}</a>
@@ -267,7 +278,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
           <React.Fragment key={index}>
             <Box className="mobileMenuPrimaryItem" onClick={(e) => handleClick(e as any, `mobile${menuItem.primary}`)}>
               {menuItem.primary}
-              <KeyboardArrowDownIcon style={{ transform: dropdownOpen === `mobile${menuItem.primary}` ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+              <KeyboardArrowDownIcon style={{ transform: dropdownOpen === `mobile${menuItem.primary}` ? 'rotate(180deg)' : 'rotate(0deg)', color: '#0073e6' }} />
             </Box>
             <Box className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''}`}>
               {menuItem.secondary.map((submenu, subIndex) => (
