@@ -12,6 +12,8 @@ import Header from './Header/Header';
 import Feature from './Feature/Feature';
 import IFrame from './IFrame/IFrame';
 import Form from './Form/Form';
+import PreFooter from './PreFooter/PreFooter';
+import HeroCounter from './HeroCounter/HeroCounter';
 import MegaHeader from './MegaHeader/MegaHeader';
 
 export {
@@ -29,5 +31,7 @@ export {
   Feature,
   IFrame,
   Form,
+  PreFooter,
+  HeroCounter,
   MegaHeader,
 };

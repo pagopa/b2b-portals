@@ -158,16 +158,45 @@ const IFrameSectionCodec = t.strict({
   src: t.string,
 });
 
+const FormCategoriesCodec = t.array(
+  t.strict({
+    key: t.string,
+    label: t.string,
+    additionalLabel: t.union([t.string, t.undefined]),
+  })
+);
+
 const FormSectionCodec = t.strict({
   __component: t.literal('sections.form'),
   title: t.string,
   subtitle: t.string,
-  privacyText: t.string,
-  privacyLink: t.string,
-  privacyLinkText: t.string,
+  privacyLinkRecaptchaPolicy: t.string,
+  privacyLinkTextRecaptchaPolicy: t.string,
+  privacyLinkRecaptchaTerms: t.string,
+  privacyLinkTextRecaptchaTerms: t.string,
+  formCategories: FormCategoriesCodec,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
   submitHandler: t.Function,
+});
+
+const PreFooterSectionCodec = t.strict({
+  __component: t.literal('sections.pre-footer'),
+  title: t.string,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  storeButtons: t.union([StoreButtonsCodec, t.null]),
+  background: t.union([ImageDataCodec, t.null]),
+});
+
+const HeroCounterSectionCodec = t.strict({
+  __component: t.literal('sections.hero-counter'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
+  background: t.union([ImageDataCodec, t.null]),
+  counterNumber: t.number,
+  counterText: t.string,
 });
 
 const MegaHeaderSectionCodec = t.strict({
@@ -202,6 +231,8 @@ export const PageSectionCodec = t.union([
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
   FormSectionCodec,
+  PreFooterSectionCodec,
+  HeroCounterSectionCodec,
   MegaHeaderSectionCodec,
 ]);
 
@@ -217,4 +248,6 @@ export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
+export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
+export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
 export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
