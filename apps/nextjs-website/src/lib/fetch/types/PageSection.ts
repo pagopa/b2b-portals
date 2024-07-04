@@ -194,11 +194,6 @@ const HeroCounterSectionCodec = t.strict({
   subtitle: t.union([t.string, t.null]),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   inverse: t.boolean,
-  size: t.keyof({
-    small: null,
-    medium: null,
-    big: null,
-  }),
   sectionID: t.union([t.string, t.null]),
   background: t.union([ImageDataCodec, t.null]),
   counterNumber: t.number,
