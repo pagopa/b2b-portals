@@ -133,19 +133,17 @@ const HeroCounter = (props: HeroCounterProps) => {
           }}
         >
           {counterNumber}
-          {counterText && (
-            <Typography
-              variant='body1'
-              color={textColor}
-              sx={{
-                fontSize: '1.125rem',
-                fontWeight: 600,
-                padding: '0px 10px',
-              }}
-            >
-              {counterText}
-            </Typography>
-          )}
+          <Typography
+            variant='body1'
+            color={textColor}
+            sx={{
+              fontSize: '1.125rem',
+              fontWeight: 600,
+              padding: '0px 10px',
+            }}
+          >
+            {counterText}
+          </Typography>
         </Typography>
       </Box>
     </ContainerRC>
