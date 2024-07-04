@@ -5,30 +5,12 @@ import { FormSection } from '@/lib/fetch/types/PageSection';
 import { FormData } from '@react-components/types/Form/Form.types';
 
 const makeFormProps = ({
-  title,
-  subtitle,
-  privacyLinkRecaptchaPolicy,
-  privacyLinkTextRecaptchaPolicy,
-  privacyLinkRecaptchaTerms,
-  privacyLinkTextRecaptchaTerms,
   formCategories,
-  theme,
-  ctaButtons,
   ...rest
 }: FormSection): FormProps => ({
-  title,
-  subtitle,
-  privacyLinkRecaptchaPolicy,
-  privacyLinkTextRecaptchaPolicy,
-  privacyLinkRecaptchaTerms,
-  privacyLinkTextRecaptchaTerms,
   formCategories: formCategories.map(({ label, additionalLabel }) => ({
     label,
     additionalLabel: additionalLabel ?? '',
-  })),
-  theme,
-  ctaButtons: ctaButtons.map(({ ...ctaBtn }) => ({
-    ...ctaBtn,
   })),
   ...rest,
 });

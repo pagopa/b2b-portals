@@ -26,7 +26,7 @@ export interface FormProps extends CommonProps {
 export interface FormData {
   firstName?: string;
   lastName?: string;
-  email: string;
+  email?: string;
   organization?: string;
 }
 
