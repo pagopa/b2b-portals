@@ -68,7 +68,7 @@ export const Nav = styled('ul')({
     fontWeight: 600,
   },
   '& .menuSecondaryItem:hover .arrowIcon': {
-    display: 'inline-block',
+    visibility: 'visible',
   },
   '& .menuSecondaryItem.active': {
     fontWeight: 600,
@@ -77,7 +77,7 @@ export const Nav = styled('ul')({
     display: 'none',
   },
   '& .arrowIcon': {
-    display: 'none',
+    visibility: 'hidden',
     marginLeft: 5,
     color: '#0B3EE3',
     verticalAlign: 'middle',
@@ -110,13 +110,14 @@ export const Dropdown = styled(Box)({
     color: '#555C70',
     display: 'flex',
     alignItems: 'center',
+    whiteSpace: 'nowrap',  
   },
   '& a:hover': {
     fontWeight: 600,
     color: '#555C70',
   },
   '& a:hover .arrowIcon': {
-    display: 'inline-block',
+    visibility: 'visible',
   },
   '& a.active': {
     fontWeight: 600,
@@ -125,7 +126,7 @@ export const Dropdown = styled(Box)({
     display: 'none',
   },
   '& .arrowIcon': {
-    display: 'none',
+    visibility: 'hidden',
     marginLeft: 5,
     color: '#0B3EE3',
     verticalAlign: 'middle',
@@ -197,7 +198,7 @@ export const MobileMenu = styled(Box)({
     fontWeight: 600,
   },
   '& a:hover .arrowIcon': {
-    display: 'inline-block',
+    visibility: 'visible',
   },
   '& a.active': {
     fontWeight: 600,
@@ -206,7 +207,7 @@ export const MobileMenu = styled(Box)({
     display: 'none',
   },
   '& .arrowIcon': {
-    display: 'none',
+    visibility: 'hidden',
     marginLeft: 5,
     color: '#0B3EE3',
     verticalAlign: 'middle',

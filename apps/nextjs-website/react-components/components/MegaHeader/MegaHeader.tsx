@@ -123,7 +123,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                       )}
                       <div style={{ display: 'flex' }}>
                         {Array.from(
-                          { length: Math.ceil(submenu.items.length / 6) },
+                          { length: Math.ceil(submenu.items.length / 7) },
                           (_, colIndex) => (
                             <div
                               key={colIndex}
@@ -131,7 +131,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                               style={{ flex: 1 }}
                             >
                               {submenu.items
-                                .slice(colIndex * 6, (colIndex + 1) * 6)
+                                .slice(colIndex * 7, (colIndex + 1) * 7)
                                 .map((item, itemIndex) => (
                                   <a
                                     key={itemIndex}
