@@ -52,7 +52,7 @@ const HeroCounter = (props: HeroCounterProps) => {
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', lg: 'row' },
-        alignItems: { lg: 'center', xs: 'flex-start' },
+        alignItems: 'flex-start',
         justifyContent: 'space-between',
         py: 4,
       }}
@@ -63,7 +63,7 @@ const HeroCounter = (props: HeroCounterProps) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'flex-start',
+          alignItems: 'flex-start'
         }}
       >
         <Typography variant='h1' color={textColor} mb={2} sx={{ fontSize: '3.5rem!important' }}>
@@ -107,7 +107,7 @@ const HeroCounter = (props: HeroCounterProps) => {
           flexDirection: 'column',
           alignItems: { lg: 'flex-end', xs: 'flex-start' },
           justifyContent: 'center',
-          textAlign: { lg: 'right', xs: 'left' },
+          textAlign: { lg: 'right', xs: 'left' }
         }}
       >
         <Typography
