@@ -5,14 +5,6 @@ import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
 import { HowToStepMUIIconCodec } from './icons/HowToStepIcon';
 import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
 import { CardsItemMUIIconCodec } from './icons/CardsItemIcon';
-import { isValidElement, ReactElement } from 'react';
-
-const ReactElementCodec = new t.Type<ReactElement>(
-  'ReactElement',
-  (u): u is ReactElement => isValidElement(u),
-  (u, c) => (isValidElement(u) ? t.success(u) : t.failure(u, c)),
-  t.identity
-);
 
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
@@ -193,7 +185,6 @@ const MegaHeaderSectionCodec = t.strict({
   ),
   socialMediaLinks: t.array(
     t.strict({
-      icon: ReactElementCodec,
       href: t.string,
     })
   ),

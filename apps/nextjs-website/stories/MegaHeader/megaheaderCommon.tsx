@@ -1,32 +1,37 @@
-import { Twitter, Instagram, Facebook, LinkedIn, YouTube } from '@mui/icons-material';
-import { MenuItem, SocialMediaLink } from '@react-components/types/MegaHeader/MegaHeader.types';
+import { MenuItem } from '@react-components/types/MegaHeader/MegaHeader.types';
 
 export const defaultMenuItems: MenuItem[] = [
   {
-    primary: 'Il Progetto',
+    primary: 'Scopri IO',
     secondary: [
-      { title: '', items: ['per i Cittadini', 'per le Pubbliche Amministrazioni', 'per gli Sviluppatori', 'per i Giornalisti', 'IO in numeri'] },
+      { title: 'COSA PUOI FARE CON IO', items: ['Gestire scadenze e pagamenti', 'Ricevere comunicazioni', 'Leggere le notifiche digitali', 'Firmare digitalmente', 'Aggiungere i tuoi documenti', 'Aderire a iniziative di welfare', '[CGN]'] },
     ],
   },
   {
-    primary: 'Servizi su IO',
+    primary: 'I Servizi',
     secondary: [
-      { title: 'IN EVIDENZA', items: ['Certificazione Verde COVID-19', 'Carta Giovani Nazionale'] },
-      { title: 'TUTTI I SERVIZI', items: ['Enti Nazionali', 'Enti Locali'] },
+      { title: 'SCOPRI I SERVIZI SU IO', items: ['Casa e utenze', 'Educazione e formazione', 'Salute', 'Redditi, patrimoni e fisco', 'Servizi anagrafici e civici', 'Mobilità e trasporti', 'Suolo, spazi e beni pubblici', 'Attività produttive e commercio', 'Servizi elettorali', 'Benessere sociale', 'Ambiente e animali', 'Giustizia e legge', 'Vita lavorativa', 'Lavori edilizi, catasto e urbanistica', 'Cultura, tempo libero e sport', 'Viaggi e turismo', 'Sicurezza e Protezione Civile'] },
     ],
   },
   {
-    primary: 'FAQ',
+    primary: 'Gli Enti',
     secondary: [
-      { title: '', items: ['Generali', 'Bonus Vacanze', 'Carta Giovani Nazionale', 'Cashback', 'Certificazione Verde COVID-19'] },
+      { title: 'ESPLORA NAZIONALI', items: ['ACI', 'Agenzia delle Entrate', 'INPS', 'E-Distribuzione', 'Ministero dell\'Interno', 'Altri enti nazionali'] },
+      { title: 'ESPLORA LOCALI', items: ['Comuni', 'Regioni', 'Province', 'Istruzione', 'Sanità', 'Altri enti locali'] },
     ],
   },
-];
-
-export const defaultSocialMediaLinks: SocialMediaLink[] = [
-  { icon: <Twitter sx={{ color: '#0066cc' }} />, href: '#' },
-  { icon: <Instagram sx={{ color: '#0066cc' }} />, href: '#' },
-  { icon: <Facebook sx={{ color: '#0066cc' }} />, href: '#' },
-  { icon: <LinkedIn sx={{ color: '#0066cc' }} />, href: '#' },
-  { icon: <YouTube sx={{ color: '#0066cc' }} />, href: '#' },
+  {
+    primary: 'A proposito di IO',
+    secondary: [
+      { title: 'PER SAPERNE DI PIÙ SUL PROGETTO IO', items: ['Vision', 'IO in numeri', 'Blog', 'Casi studio'] },
+    ],
+  },
+  {
+    primary: 'Aiuto e risorse',
+    secondary: [
+      { title: 'LEGGI LE DOMANDE FREQUENTI', items: ['Chi può usare l’app IO?', 'Come accedere in IO?', 'Posso uscire da IO?', 'Tutte le domande frequenti'] },
+      { title: 'CONSULTA LE RISORSE TECNICHE', items: ['Sviluppatori', 'Partner commerciali', 'Partner tecnologici', 'Comunicati e Media'] },
+      { title: 'ADERISCI A IO', items: ['Perchè aderire a IO', 'Come integrare i servizi', 'Entra in contatto con noi'] },
+    ],
+  },
 ];
