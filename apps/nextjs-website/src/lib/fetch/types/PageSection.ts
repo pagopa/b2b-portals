@@ -212,11 +212,9 @@ const MegaHeaderSectionCodec = t.strict({
       ),
     })
   ),
-  socialMediaLinks: t.array(
-    t.strict({
-      href: t.string,
-    })
-  ),
+  logoSrc: t.string,
+  logoAlt: t.string,
+  buttonHref: t.string,
 });
 
 export const PageSectionCodec = t.union([

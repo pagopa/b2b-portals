@@ -7,7 +7,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useTheme } from '@mui/material/styles';
 import {
   MegaHeaderProps,
-  MenuItem,
+  MegaMenuItem,
 } from '@react-components/types/MegaHeader/MegaHeader.types';
 import {
   ButtonStyled,
@@ -64,15 +64,12 @@ const MegaHeader = (props: MegaHeaderProps) => {
       <Container position='static'>
         <Content>
           <Logo>
-            <img
-              src={logoSrc}
-              alt={logoAlt}
-            />
+            <img src={logoSrc} alt={logoAlt} />
           </Logo>
           {!isMobile && (
             <>
               <Nav>
-                {menuItems.map((menuItem: MenuItem, index) => (
+                {menuItems.map((menuItem: MegaMenuItem, index) => (
                   <li key={index}>
                     <a
                       href='/'
@@ -108,7 +105,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
           id='desktopMenu'
           sx={{ position: 'absolute', top: '56px', width: '100%', zIndex: 999 }}
         >
-          {menuItems.map((menuItem: MenuItem, index) => (
+          {menuItems.map((menuItem: MegaMenuItem, index) => (
             <Dropdown
               key={index}
               className={dropdownOpen === menuItem.primary ? 'open' : ''}
@@ -154,7 +151,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
         </Box>
       )}
       <MobileMenu id='mobileMenu' className={mobileMenuOpen ? 'open' : ''}>
-        {menuItems.map((menuItem: MenuItem, index) => (
+        {menuItems.map((menuItem: MegaMenuItem, index) => (
           <React.Fragment key={index}>
             <Box
               className={`mobileMenuPrimaryItem ${dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''}`}
