@@ -22,7 +22,6 @@ const PageSection = (props: PageSectionData) => {
       return <Editorial {...props} />;
     case 'sections.accordion':
       return <Accordion {...props} />;
-
     case 'sections.feature':
       return <Feature {...props} />;
     case 'sections.how-to':
