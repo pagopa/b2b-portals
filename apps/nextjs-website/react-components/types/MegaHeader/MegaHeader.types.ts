@@ -3,11 +3,9 @@ export interface MenuItem {
   secondary: { title: string; items: string[] }[];
 }
 
-export interface SocialMediaLink {
-  href: string;
-}
-
 export interface MegaHeaderProps {
-  menuItems: MenuItem[];
-  socialMediaLinks: SocialMediaLink[];
+  menuItems?: MenuItem[];
+  logoSrc: string;
+  logoAlt: string;
+  buttonHref: string;
 }

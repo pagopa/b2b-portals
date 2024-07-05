@@ -6,10 +6,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useTheme } from '@mui/material/styles';
 import {
+  MegaHeaderProps,
   MenuItem,
-  SocialMediaLink,
 } from '@react-components/types/MegaHeader/MegaHeader.types';
-import { defaultMenuItems } from '../../../stories/MegaHeader/megaheaderCommon';
 import {
   ButtonStyled,
   Container,
@@ -21,13 +20,11 @@ import {
   Nav,
 } from './MegaHeader.Helpers';
 
-type MegaHeaderProps = {
-  menuItems?: MenuItem[];
-  socialMediaLinks?: SocialMediaLink[];
-};
-
 const MegaHeader = (props: MegaHeaderProps) => {
-  const { menuItems = defaultMenuItems } = props;
+  const { logoSrc, logoAlt, buttonHref } = props;
+  const menuItems = props.menuItems || [];
+
+  const { palette } = useTheme();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -68,8 +65,8 @@ const MegaHeader = (props: MegaHeaderProps) => {
         <Content>
           <Logo>
             <img
-              src='https://io.italia.it/assets/img/io-it-logo-blue.svg'
-              alt='Logo'
+              src={logoSrc}
+              alt={logoAlt}
             />
           </Logo>
           {!isMobile && (
@@ -78,7 +75,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                 {menuItems.map((menuItem: MenuItem, index) => (
                   <li key={index}>
                     <a
-                      href='#'
+                      href='/'
                       className={`menuPrimaryItem ${dropdownOpen === menuItem.primary ? 'active' : ''}`}
                       onClick={(e) => handleClick(e, menuItem.primary)}
                     >
@@ -87,18 +84,21 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   </li>
                 ))}
               </Nav>
-              <ButtonStyled href='#'>Entra in IO</ButtonStyled>
+              <ButtonStyled href={buttonHref}>Entra in IO</ButtonStyled>
             </>
           )}
           <IconButton
             className='hamburger'
             onClick={handleMobileMenuToggle}
-            sx={{ display: { md: 'none' }, color: '#0B3EE3' }}
+            sx={{
+              display: { md: 'none' },
+              color: palette.custom.primaryColorDark,
+            }}
           >
             {mobileMenuOpen ? (
-              <CloseIcon style={{ color: '#0B3EE3' }} />
+              <CloseIcon style={{ color: palette.custom.primaryColorDark }} />
             ) : (
-              <MenuIcon style={{ color: '#0B3EE3' }} />
+              <MenuIcon style={{ color: palette.custom.primaryColorDark }} />
             )}
           </IconButton>
         </Content>
@@ -116,7 +116,6 @@ const MegaHeader = (props: MegaHeaderProps) => {
               {dropdownOpen === menuItem.primary &&
                 menuItem.secondary.map((submenu, subIndex) => (
                   <div key={subIndex} className='dropdownSection'>
-                    {/* Wrap elements in a parent div with flex-direction: column */}
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                       {submenu.title && (
                         <DropdownTitle>{submenu.title}</DropdownTitle>
@@ -170,7 +169,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                     dropdownOpen === `mobile${menuItem.primary}`
                       ? 'rotate(180deg)'
                       : 'rotate(0deg)',
-                  color: '#0B3EE3',
+                  color: palette.custom.primaryColorDark,
                 }}
               />
             </Box>
@@ -198,7 +197,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
             </Box>
           </React.Fragment>
         ))}
-        <ButtonStyled className='mobileMenuButton' href='#'>
+        <ButtonStyled className='mobileMenuButton' href={buttonHref}>
           Entra in IO
         </ButtonStyled>
       </MobileMenu>
