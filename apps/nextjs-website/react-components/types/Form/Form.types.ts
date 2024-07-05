@@ -1,4 +1,4 @@
-import { CommonProps, CtaButtonProps } from "../common/Common.types";
+import { CommonProps, CtaButtonProps } from '../common/Common.types';
 
 export interface FormProps extends CommonProps {
   readonly title: string;
@@ -14,8 +14,8 @@ export interface FormProps extends CommonProps {
   readonly showLastName?: boolean;
   readonly showEmail?: boolean;
   readonly showOrganization?: boolean;
-  readonly checkboxTitle?: string;
-  readonly showCheckboxInfo?: boolean;
+  readonly categoriesTitle?: string;
+  readonly showMandatoryInfo?: boolean;
   readonly showPrivacyDisclaimer?: boolean;
   readonly privacyDisclaimerText?: string;
   readonly formCategories: {
