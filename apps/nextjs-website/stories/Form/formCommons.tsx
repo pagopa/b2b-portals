@@ -27,8 +27,8 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
     { label: 'Sviluppatore' },
     { label: 'Giornalista' },
   ],
-  checkboxTitle: 'Vorrei ricevere news sul progetto IO in qualità di*:',
-  showCheckboxInfo: true,
+  categoriesTitle: 'Vorrei ricevere news sul progetto IO in qualità di*:',
+  showMandatoryInfo: true,
   showPrivacyDisclaimer: true,
   privacyDisclaimerText:
     'Inserendo il tuo indirizzo email stai accettando la nostra informativa sul trattamento dei dati personali per la newsletter.',
@@ -40,18 +40,8 @@ export const FormTemplate: StoryFn<FormProps> = (args) => (
 
 export const defaultPropsDark = {
   ...generateFormProps('dark'),
-  showCitizen: true,
-  showPublicEmployee: true,
-  showTechPartner: true,
-  showDeveloper: true,
-  showJournalist: true,
 };
 
 export const defaultPropsLight = {
   ...generateFormProps('light'),
-  showCitizen: true,
-  showPublicEmployee: true,
-  showTechPartner: true,
-  showDeveloper: true,
-  showJournalist: true,
 };

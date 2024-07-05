@@ -33,8 +33,8 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
     showEmail = true,
     showOrganization = true,
     formCategories,
-    checkboxTitle,
-    showCheckboxInfo = true,
+    categoriesTitle,
+    showMandatoryInfo = true,
     showPrivacyDisclaimer = true,
   } = props;
 
@@ -249,7 +249,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
       >
         {formFields.map(renderField)}
       </Grid>
-      {checkboxTitle && (
+      {categoriesTitle && (
         <Typography
           variant='h6'
           gutterBottom
@@ -262,7 +262,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
             fontWeight: '700',
           }}
         >
-          {checkboxTitle}
+          {categoriesTitle}
         </Typography>
       )}
       {updatedFormCategories.length > 0 && (
@@ -274,7 +274,7 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
           handleRadioChange={handleRadioChange}
         />
       )}
-      {showCheckboxInfo && (
+      {showMandatoryInfo && (
         <Typography
           variant='body2'
           sx={{
