@@ -14,6 +14,7 @@ import IFrame from './IFrame/IFrame';
 import Form from './Form/Form';
 import PreFooter from './PreFooter/PreFooter';
 import HeroCounter from './HeroCounter/HeroCounter';
+import MegaHeader from './MegaHeader/MegaHeader';
 
 export {
   Hero,
@@ -32,4 +33,5 @@ export {
   Form,
   PreFooter,
   HeroCounter,
+  MegaHeader,
 };

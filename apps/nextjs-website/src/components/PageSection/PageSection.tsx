@@ -10,6 +10,7 @@ import Cards from '../Cards';
 import OneTrustSection from '../OneTrust';
 import IFrameSection from '../IFrame';
 import Form from '../Form';
+import MegaHeader from '../MegaHeader';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
@@ -37,6 +38,8 @@ const PageSection = (props: PageSectionData) => {
       return <IFrameSection {...props} />;
     case 'sections.form':
       return <Form {...props} />;
+    case 'sections.mega-header':
+      return <MegaHeader {...props} />;
     default:
       return null;
   }

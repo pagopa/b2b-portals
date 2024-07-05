@@ -14,6 +14,7 @@ import { IFrameProps } from './IFrame/IFrame.types';
 import { FormProps } from './Form/Form.types';
 import { PreFooterProps } from './PreFooter/PreFooter';
 import { HeroCounterProps } from './HeroCounter/HeroCounter.types';
+import { MegaHeaderProps } from './MegaHeader/MegaHeader.types';
 
 export type {
   HeroProps,
@@ -32,4 +33,5 @@ export type {
   FormProps,
   PreFooterProps,
   HeroCounterProps,
+  MegaHeaderProps,
 };
