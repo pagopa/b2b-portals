@@ -1,6 +1,5 @@
-import React from 'react';
-import MegaHeader from '@react-components/components/MegaHeader/MegaHeader';
 import { StoryFn, Meta } from '@storybook/react';
+import { MegaHeader } from '@react-components/components';
 import { MegaHeaderProps } from '@react-components/types';
 import { MegaMenuItem } from '@react-components/types/MegaHeader/MegaHeader.types';
 
@@ -57,7 +56,7 @@ const defaultProps: MegaHeaderProps = {
   buttonHref: '/'
 };
 
-export const HeaderFullWithLogo: StoryFn<typeof MegaHeader> = MegaHeaderTemplate.bind({});
-HeaderFullWithLogo.args = {
+export const MegaHeaderFullWithLogo: StoryFn<typeof MegaHeader> = MegaHeaderTemplate.bind({});
+MegaHeaderFullWithLogo.args = {
   ...defaultProps,
 };
