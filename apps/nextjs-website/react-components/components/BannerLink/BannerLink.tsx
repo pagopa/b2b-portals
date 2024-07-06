@@ -5,6 +5,7 @@ import { Content as BannerLinkContent } from './Content';
 import { isJSX } from '../../types/common/Common.types';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
+import MailOutlineIcon from '@mui/icons-material/MailOutline'; // Import the specific icon from MUI icons
 
 const styles = {
   main: {
@@ -15,13 +16,14 @@ const styles = {
 };
 
 const BannerLink = (props: BannerLinkProps) => {
-  const { theme, body, title, ctaButtons, decoration = <></> } = props;
+  const { theme, normalText, boldText, link, title, ctaButtons, decoration = <></>, icon } = props;
   const backgroundColor = BackgroundColor(theme);
 
   return (
     <Box bgcolor={backgroundColor} component='section'>
       <Container>
         <Stack gap={2} sx={styles.main}>
+          {icon && <MailOutlineIcon style={{ fontSize: 60 }} />} {/* Render the icon */}
           {decoration ? (
             isJSX(decoration) ? (
               decoration
@@ -29,7 +31,7 @@ const BannerLink = (props: BannerLinkProps) => {
               <img {...decoration} />
             )
           ) : null}
-          <BannerLinkContent {...{ body, title, theme }} />
+          <BannerLinkContent {...{ normalText, boldText, link, title, theme }} />
           {ctaButtons?.length &&
             CtaButtons({
               ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({

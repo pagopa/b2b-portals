@@ -1,20 +1,26 @@
 import { StoryFn } from '@storybook/react';
 import { BannerLink } from '@react-components/components';
 import { BannerLinkProps } from '@react-components/types';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';  // Import the specific icon
 
 // Define a "Template" function that sets how args map to rendering
 export const BannerLinkTemplate: StoryFn<BannerLinkProps> = (args) => <BannerLink {...args} />;
 
 // Function to generate default props with a given theme
 const generateDefaultProps = (theme: 'light' | 'dark'): Partial<BannerLinkProps> => ({
-  title: 'Banner Link Title',
+  title: 'Scrivici',  // Updated title
   theme,
+  normalText: 'Richiedi assistenza come ente mittente via email scrivendo a',
+  boldText: 'enti-send@assistenza.pagopa.it',
+  link: 'mailto:enti-send@assistenza.pagopa.it',
   ctaButtons: [
     {
-      text: 'Click Me',
+      text: 'Scrivici',
       variant: 'contained',
+      href: 'mailto:enti-send@assistenza.pagopa.it',  // Add the mailto link
     },
   ],
+  icon: <MailOutlineIcon style={{ fontSize: 60 }} />,  // Add the icon
 });
 
 // Define the default props with light theme

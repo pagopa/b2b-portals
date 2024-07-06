@@ -114,12 +114,17 @@ const HowToSectionCodec = t.strict({
 const BannerLinkSectionCodec = t.strict({
   __component: t.literal('sections.banner-link'),
   title: t.string,
-  body: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
+  normalText: t.string,  // Add this line
+  boldText: t.string,  // Add this line
+  link: t.string,  // Add this line
   ctaButtons: t.array(CTAButtonSimpleCodec),
   decoration: t.union([ImageDataCodec, t.null]),
   sectionID: t.union([t.string, t.null]),
+  icon: t.union([FeatureItemMUIIconCodec, t.null]),  // Add icon field
 });
+
+
 
 const StripeLinkSectionCodec = t.strict({
   __component: t.literal('sections.stripe-link'),

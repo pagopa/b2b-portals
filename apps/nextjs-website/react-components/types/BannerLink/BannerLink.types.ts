@@ -10,9 +10,13 @@ export interface BannerLinkProps
     BannerLinkContentProps {
   ctaButtons?: CtaButtonProps[];
   decoration?: ImgProps | Generic;
+  icon?: React.ReactNode;
 }
 
 export interface BannerLinkContentProps extends CommonProps {
   title: string;
-  body: string | JSX.Element;
+  normalText: string;
+  boldText: string;
+  link: string;
+  icon?: React.ReactNode;  // Add this line
 }

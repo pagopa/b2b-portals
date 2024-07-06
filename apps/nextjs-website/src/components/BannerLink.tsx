@@ -1,17 +1,21 @@
-'use client';
 import MarkdownRenderer from './MarkdownRenderer';
 import { BannerLink as BannerLinkRC } from '@react-components/components';
 import { BannerLinkProps } from '@react-components/types';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
-import Icon from '@/components/Icon';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';  // Import the specific icon
 
 const makeBannerLinkProps = ({
-  body,
+  normalText,
+  boldText,
+  link,
   decoration,
   ctaButtons,
+  icon,
   ...rest
 }: BannerLinkSection): BannerLinkProps => ({
-  body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
+  normalText,
+  boldText,
+  link,
   ...(decoration && {
     decoration: {
       src: decoration.url,
@@ -21,11 +25,11 @@ const makeBannerLinkProps = ({
     },
   }),
   ...(ctaButtons.length > 0 && {
-    ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
+    ctaButtons: ctaButtons.map((ctaBtn) => ({
       ...ctaBtn,
-      ...(icon && { startIcon: Icon(icon) }),
     })),
   }),
+  icon: <MailOutlineIcon style={{ fontSize: 60 }} />,  // Directly use the specific icon here
   ...rest,
 });
 

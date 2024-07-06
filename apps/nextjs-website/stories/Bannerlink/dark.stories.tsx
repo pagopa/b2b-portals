@@ -9,15 +9,12 @@ const meta: Meta<typeof BannerLink> = {
 };
 export default meta;
 
-export const BannerLinkFull: StoryFn<typeof BannerLink> =
-  BannerLinkTemplate.bind({});
+export const BannerLinkFull: StoryFn<typeof BannerLink> = BannerLinkTemplate.bind({});
 BannerLinkFull.args = {
   ...defaultPropsDark,
-  body: 'This is a description for the banner link.',
 };
 
-export const BannerLinkOnlyTitle: StoryFn<typeof BannerLink> =
-  BannerLinkTemplate.bind({});
+export const BannerLinkOnlyTitle: StoryFn<typeof BannerLink> = BannerLinkTemplate.bind({});
 BannerLinkOnlyTitle.args = {
   ...defaultPropsDark,
 };
