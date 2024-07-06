@@ -18,5 +18,5 @@ export interface BannerLinkContentProps extends CommonProps {
   normalText: string;
   boldText: string;
   link: string;
-  icon?: React.ReactNode;  // Add this line
+  icon?: React.ReactNode;
 }

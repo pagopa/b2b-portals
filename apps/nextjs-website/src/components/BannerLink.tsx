@@ -1,8 +1,7 @@
-import MarkdownRenderer from './MarkdownRenderer';
 import { BannerLink as BannerLinkRC } from '@react-components/components';
 import { BannerLinkProps } from '@react-components/types';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';  // Import the specific icon
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 const makeBannerLinkProps = ({
   normalText,
@@ -29,7 +28,7 @@ const makeBannerLinkProps = ({
       ...ctaBtn,
     })),
   }),
-  icon: <MailOutlineIcon style={{ fontSize: 60 }} />,  // Directly use the specific icon here
+  icon: <MailOutlineIcon style={{ fontSize: 60 }} />,
   ...rest,
 });
 

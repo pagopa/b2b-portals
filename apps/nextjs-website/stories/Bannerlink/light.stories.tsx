@@ -13,8 +13,3 @@ export const BannerLinkFull: StoryFn<typeof BannerLink> = BannerLinkTemplate.bin
 BannerLinkFull.args = {
   ...defaultPropsLight,
 };
-
-export const BannerLinkOnlyTitle: StoryFn<typeof BannerLink> = BannerLinkTemplate.bind({});
-BannerLinkOnlyTitle.args = {
-  ...defaultPropsLight,
-};

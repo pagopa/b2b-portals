@@ -9,8 +9,8 @@ export const Content = ({ title, normalText, boldText, link, theme, icon }: Bann
   const textColor = TextColor(theme);
 
   return (
-    <Stack textAlign='center' gap={spacing(2)} alignItems='center'>  {/* Add alignItems to center the icon */}
-      {icon && icon}  {/* Render the icon if provided */}
+    <Stack textAlign='center' gap={spacing(2)} alignItems='center'>
+      {icon && icon}
       <Title variant='h4' textColor={textColor} title={title} />
       <Body variant='body2' textColor={textColor} body={
         <>

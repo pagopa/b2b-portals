@@ -5,7 +5,7 @@ import { Content as BannerLinkContent } from './Content';
 import { isJSX } from '../../types/common/Common.types';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
-import MailOutlineIcon from '@mui/icons-material/MailOutline'; // Import the specific icon from MUI icons
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 const styles = {
   main: {
@@ -23,7 +23,7 @@ const BannerLink = (props: BannerLinkProps) => {
     <Box bgcolor={backgroundColor} component='section'>
       <Container>
         <Stack gap={2} sx={styles.main}>
-          {icon && <MailOutlineIcon style={{ fontSize: 60 }} />} {/* Render the icon */}
+          {icon && <MailOutlineIcon style={{ fontSize: 60 }} />}
           {decoration ? (
             isJSX(decoration) ? (
               decoration
