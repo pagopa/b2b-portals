@@ -130,9 +130,6 @@ const BannerLinkSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
-
-
-
 const StripeLinkSectionCodec = t.strict({
   __component: t.literal('sections.stripe-link'),
   theme: t.union([t.literal('light'), t.literal('dark')]),

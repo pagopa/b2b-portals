@@ -6,6 +6,7 @@ import { isJSX } from '../../types/common/Common.types';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
 import React from 'react';
+import { useTheme } from '@mui/material/styles';
 
 const styles = {
   main: {
@@ -24,7 +25,9 @@ const BannerLink = (props: BannerLinkProps) => {
   const { theme, sections } = props;
   const backgroundColor = BackgroundColor(theme);
 
-  const iconColor = theme === 'dark' ? '#FFFFFF' : '#0057B7';
+  const { palette } = useTheme();
+
+  const iconColor = theme === 'dark' ? palette.primary.contrastText : palette.primary.dark;
 
   return (
     <Box bgcolor={backgroundColor} component='section'>
