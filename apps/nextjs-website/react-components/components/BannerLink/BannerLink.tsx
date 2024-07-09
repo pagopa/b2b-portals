@@ -1,4 +1,4 @@
-import { Box, Container, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { CtaButtons } from '../common/Common';
 import { BackgroundColor } from '../common/Common.helpers';
 import { Content as BannerLinkContent } from './Content';
@@ -13,11 +13,19 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: { md: '64px 24px', xs: '32px 24px' },
+    width: '100%',
   },
   twoColumns: {
     display: 'flex',
     flexDirection: { md: 'row', xs: 'column' },
     justifyContent: 'space-between',
+    width: '100%',
+  },
+  section: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
   }
 };
 
@@ -28,35 +36,47 @@ const BannerLink = (props: BannerLinkProps) => {
   const { palette } = useTheme();
 
   const iconColor = theme === 'dark' ? palette.primary.contrastText : palette.primary.dark;
+  const lightBackgrounds = ['#F5F5F5', '#FAFAFA'];
+  const darkBackgrounds = ['#0B3EE3', '#1043e8'];
 
   return (
-    <Box bgcolor={backgroundColor} component='section'>
-      <Container>
-        <Stack gap={2} sx={sections.length > 1 ? styles.twoColumns : styles.main}>
-          {sections.map((section, index) => (
-            <Stack key={index} gap={2} sx={styles.main}>
-              {section.icon && React.isValidElement(section.icon) && React.cloneElement(section.icon as React.ReactElement<any>, { style: { fontSize: 60, color: iconColor } })}
-              {section.decoration ? (
-                isJSX(section.decoration) ? (
-                  section.decoration
-                ) : (
-                  <img {...section.decoration} />
-                )
-              ) : null}
-              <BannerLinkContent {...section} theme={theme} />
-              {section.ctaButtons?.length &&
-                CtaButtons({
-                  ctaButtons: section.ctaButtons.map((button: CtaButtonProps) => ({
-                    ...button,
-                    sx: { width: 'auto' },
-                    variant: 'outlined'
-                  })),
-                  theme,
-                })}
-            </Stack>
-          ))}
-        </Stack>
-      </Container>
+    <Box bgcolor={backgroundColor} component='section' sx={{ width: '100%', padding: 0, margin: 0 }}>
+      <Stack gap={2} sx={sections.length > 1 ? styles.twoColumns : styles.main}>
+        {sections.map((section, index) => (
+          <Stack
+            key={index}
+            gap={2}
+            sx={{
+              ...styles.main,
+              backgroundColor: theme === 'light' ? lightBackgrounds[index % 2] : darkBackgrounds[index % 2],
+              padding: { md: '64px 24px', xs: '32px 24px' },
+              width: '100%',
+              flex: 1,
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            {section.icon && React.isValidElement(section.icon) && React.cloneElement(section.icon as React.ReactElement<any>, { style: { fontSize: 60, color: iconColor } })}
+            {section.decoration ? (
+              isJSX(section.decoration) ? (
+                section.decoration
+              ) : (
+                <img {...section.decoration} />
+              )
+            ) : null}
+            <BannerLinkContent {...section} theme={theme} />
+            {section.ctaButtons?.length &&
+              CtaButtons({
+                ctaButtons: section.ctaButtons.map((button: CtaButtonProps) => ({
+                  ...button,
+                  sx: { width: 'auto' },
+                  variant: 'outlined'
+                })),
+                theme,
+              })}
+          </Stack>
+        ))}
+      </Stack>
     </Box>
   );
 };
