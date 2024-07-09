@@ -10,8 +10,9 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<BannerLinkProps>
   sections: [
     {
       title: 'Scrivici',
-      normalText: 'Richiedi assistenza via email scrivendo a destinatari-send@assistenza.pagopa.it: includi informazioni utili come il codice univoco della notifica (IUN).',
-      boldText: 'Scrivici',
+      normalText: 'Richiedi assistenza via email scrivendo a',
+      boldText: 'destinatari-send@assistenza.pagopa.it',
+      extraNormalText: ': includi informazioni utili come il codice univoco della notifica (IUN).',
       link: 'mailto:destinatari-send@assistenza.pagopa.it',
       icon: <MailIcon style={{ fontSize: 60 }} />,
       ctaButtons: [
@@ -33,8 +34,9 @@ const generateTwoColumnProps = (theme: 'light' | 'dark'): Partial<BannerLinkProp
   sections: [
     {
       title: 'Scrivici',
-      normalText: 'Richiedi assistenza via email scrivendo a destinatari-send@assistenza.pagopa.it: includi informazioni utili come il codice univoco della notifica (IUN).',
-      boldText: 'Scrivici',
+      normalText: 'Richiedi assistenza via email scrivendo a',
+      boldText: 'destinatari-send@assistenza.pagopa.it',
+      extraNormalText: ': includi informazioni utili come il codice univoco della notifica (IUN).',
       link: 'mailto:destinatari-send@assistenza.pagopa.it',
       icon: <MailIcon style={{ fontSize: 60 }} />,
       ctaButtons: [
@@ -47,8 +49,9 @@ const generateTwoColumnProps = (theme: 'light' | 'dark'): Partial<BannerLinkProp
     },
     {
       title: 'Chiamaci',
-      normalText: 'Il contact center di PagoPA S.p.A. è a tua disposizione al numero 06.4520.2323 per assistenza dedicata dal lunedì al venerdì dalle 08:00 alle 20:00 e il sabato dalle 08:00 alle 14:00.',
-      boldText: 'Chiamaci',
+      normalText: 'Il contact center di PagoPA S.p.A. è a tua disposizione al numero',
+      boldText: '06.4520.2323',
+      extraNormalText: ' per assistenza dedicata dal lunedì al venerdì dalle 08:00 alle 20:00 e il sabato dalle 08:00 alle 14:00.',
       link: 'tel:0645202323',
       icon: <PhoneIcon style={{ fontSize: 60 }} />,
       ctaButtons: [

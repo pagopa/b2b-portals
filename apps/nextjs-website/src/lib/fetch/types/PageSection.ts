@@ -120,6 +120,7 @@ const BannerLinkSectionCodec = t.strict({
       title: t.string,
       normalText: t.string,
       boldText: t.string,
+      extraNormalText: t.union([t.string, t.null]),
       link: t.string,
       ctaButtons: t.array(CTAButtonSimpleCodec),
       decoration: t.union([ImageDataCodec, t.null]),
@@ -128,6 +129,7 @@ const BannerLinkSectionCodec = t.strict({
   ),
   sectionID: t.union([t.string, t.null]),
 });
+
 
 
 

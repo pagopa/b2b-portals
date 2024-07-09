@@ -4,7 +4,7 @@ import { BannerLinkSectionProps } from '../../types/BannerLink/BannerLink.types'
 import { Title, Body } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 
-export const Content = ({ title, normalText, boldText, link, theme }: BannerLinkSectionProps & { theme: 'light' | 'dark' }) => {
+export const Content = ({ title, normalText, boldText, extraNormalText, link, theme }: BannerLinkSectionProps & { theme: 'light' | 'dark' }) => {
   const { spacing } = useTheme();
   const textColor = theme === 'dark' ? '#FFFFFF' : TextColor(theme);
 
@@ -17,6 +17,7 @@ export const Content = ({ title, normalText, boldText, link, theme }: BannerLink
           <a href={link} style={{ fontWeight: 'bold', textDecoration: 'none', color: textColor }}>
             {boldText}
           </a>
+          {extraNormalText && <span style={{ color: textColor }}> {extraNormalText}</span>}
         </>
       } />
     </Stack>

@@ -9,6 +9,7 @@ export interface BannerLinkSectionProps {
   title: string;
   normalText: string;
   boldText: string;
+  extraNormalText?: string;
   link: string;
   icon?: React.ReactNode;
   decoration?: ImgProps | Generic;
