@@ -2,33 +2,22 @@ import { BannerLink as BannerLinkRC } from '@react-components/components';
 import { BannerLinkProps } from '@react-components/types';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
 import MailIcon from '@mui/icons-material/Mail';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 const makeBannerLinkProps = ({
-  normalText,
-  boldText,
-  link,
-  decoration,
-  ctaButtons,
-  icon,
+  sections,
   ...rest
 }: BannerLinkSection): BannerLinkProps => ({
-  normalText,
-  boldText,
-  link,
-  ...(decoration && {
-    decoration: {
-      src: decoration.url,
-      alt: decoration.alternativeText || undefined,
+  sections: sections.map((section: any) => ({
+    ...section,
+    decoration: section.decoration ? {
+      src: section.decoration.url,
+      alt: section.decoration.alternativeText || undefined,
       width: '60px',
       height: '60px',
-    },
-  }),
-  ...(ctaButtons.length > 0 && {
-    ctaButtons: ctaButtons.map((ctaBtn) => ({
-      ...ctaBtn,
-    })),
-  }),
-  icon: <MailIcon style={{ fontSize: 60 }} />,
+    } : undefined,
+    icon: section.title === 'Scrivici' ? <MailIcon style={{ fontSize: 60 }} /> : <PhoneIcon style={{ fontSize: 60 }} />,
+  })),
   ...rest,
 });
 

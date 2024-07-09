@@ -115,13 +115,18 @@ const BannerLinkSectionCodec = t.strict({
   __component: t.literal('sections.banner-link'),
   title: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  normalText: t.string,
-  boldText: t.string,
-  link: t.string,
-  ctaButtons: t.array(CTAButtonSimpleCodec),
-  decoration: t.union([ImageDataCodec, t.null]),
+  sections: t.array(
+    t.strict({
+      title: t.string,
+      normalText: t.string,
+      boldText: t.string,
+      link: t.string,
+      ctaButtons: t.array(CTAButtonSimpleCodec),
+      decoration: t.union([ImageDataCodec, t.null]),
+      icon: t.union([FeatureItemMUIIconCodec, t.null]),
+    })
+  ),
   sectionID: t.union([t.string, t.null]),
-  icon: t.union([FeatureItemMUIIconCodec, t.null]),
 });
 
 

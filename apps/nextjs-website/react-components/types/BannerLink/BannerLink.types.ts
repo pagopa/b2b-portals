@@ -5,18 +5,16 @@ type ImgProps = React.DetailedHTMLProps<
   HTMLImageElement
 >;
 
-export interface BannerLinkProps
-  extends CommonProps,
-    BannerLinkContentProps {
-  ctaButtons?: CtaButtonProps[];
-  decoration?: ImgProps | Generic;
-  icon?: React.ReactNode;
-}
-
-export interface BannerLinkContentProps extends CommonProps {
+export interface BannerLinkSectionProps {
   title: string;
   normalText: string;
   boldText: string;
   link: string;
   icon?: React.ReactNode;
+  decoration?: ImgProps | Generic;
+  ctaButtons?: CtaButtonProps[];
+}
+
+export interface BannerLinkProps extends CommonProps {
+  sections: BannerLinkSectionProps[];
 }

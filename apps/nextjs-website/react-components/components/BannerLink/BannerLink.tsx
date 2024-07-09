@@ -5,7 +5,6 @@ import { Content as BannerLinkContent } from './Content';
 import { isJSX } from '../../types/common/Common.types';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
-import MailIcon from '@mui/icons-material/Mail';
 
 const styles = {
   main: {
@@ -13,35 +12,43 @@ const styles = {
     justifyContent: 'center',
     padding: { md: '64px 24px', xs: '32px 24px' },
   },
+  twoColumns: {
+    display: 'flex',
+    flexDirection: { md: 'row', xs: 'column' },
+    justifyContent: 'space-between',
+  }
 };
 
 const BannerLink = (props: BannerLinkProps) => {
-  const { theme, normalText, boldText, link, title, ctaButtons, decoration = <></>, icon } = props;
+  const { theme, sections } = props;
   const backgroundColor = BackgroundColor(theme);
-  const iconColor = theme === 'dark' ? '#FFFFFF' : '#0057B7';
 
   return (
     <Box bgcolor={backgroundColor} component='section'>
       <Container>
-        <Stack gap={2} sx={styles.main}>
-          {icon && <MailIcon style={{ fontSize: 60, color: iconColor }} />}
-          {decoration ? (
-            isJSX(decoration) ? (
-              decoration
-            ) : (
-              <img {...decoration} />
-            )
-          ) : null}
-          <BannerLinkContent {...{ normalText, boldText, link, title, theme }} />
-          {ctaButtons?.length &&
-            CtaButtons({
-              ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
-                ...button,
-                sx: { width: 'auto' },
-                variant: 'outlined'
-              })),
-              theme,
-            })}
+        <Stack gap={2} sx={sections.length > 1 ? styles.twoColumns : styles.main}>
+          {sections.map((section, index) => (
+            <Stack key={index} gap={2} sx={styles.main}>
+              {section.icon}
+              {section.decoration ? (
+                isJSX(section.decoration) ? (
+                  section.decoration
+                ) : (
+                  <img {...section.decoration} />
+                )
+              ) : null}
+              <BannerLinkContent {...section} theme={theme} />
+              {section.ctaButtons?.length &&
+                CtaButtons({
+                  ctaButtons: section.ctaButtons.map((button: CtaButtonProps) => ({
+                    ...button,
+                    sx: { width: 'auto' },
+                    variant: 'outlined'
+                  })),
+                  theme,
+                })}
+            </Stack>
+          ))}
         </Stack>
       </Container>
     </Box>
