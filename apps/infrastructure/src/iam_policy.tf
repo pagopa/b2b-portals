@@ -84,9 +84,7 @@ data "aws_iam_policy_document" "ecs_task_role_s3" {
       "s3:PutObject",
       "s3:PutObjectAcl"
     ]
-    resources = concat(
-      [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn]
-    )
+    resources = [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn]
   }
 }
 
@@ -125,9 +123,7 @@ data "aws_iam_policy_document" "ecs_task_execution" {
     actions = [
       "s3:GetBucketLocation"
     ]
-    resources = concat(
-      [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn]
-    )
+    resources = [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn]
   }
 }
 
@@ -231,11 +227,9 @@ resource "aws_iam_policy" "upload_image" {
           "s3:ListBucket",
           "s3:PutObject"
         ]
-        Effect = "Allow"
-        Resource = concat(
-          [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : "${bucket.arn}/*"]
-        )
-      },
+        Effect   = "Allow"
+        Resource = [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : "${bucket.arn}/*"]
+      }
     ]
   })
 }
