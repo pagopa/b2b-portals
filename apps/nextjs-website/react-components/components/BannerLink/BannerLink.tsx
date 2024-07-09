@@ -18,12 +18,13 @@ const styles = {
 const BannerLink = (props: BannerLinkProps) => {
   const { theme, normalText, boldText, link, title, ctaButtons, decoration = <></>, icon } = props;
   const backgroundColor = BackgroundColor(theme);
+  const iconColor = theme === 'dark' ? '#FFFFFF' : '#000000';
 
   return (
     <Box bgcolor={backgroundColor} component='section'>
       <Container>
         <Stack gap={2} sx={styles.main}>
-          {icon && <MailOutlineIcon style={{ fontSize: 60 }} />}
+          {icon && <MailOutlineIcon style={{ fontSize: 60, color: iconColor }} />}
           {decoration ? (
             isJSX(decoration) ? (
               decoration
@@ -37,6 +38,7 @@ const BannerLink = (props: BannerLinkProps) => {
               ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
                 ...button,
                 sx: { width: 'auto' },
+                variant: 'outlined'
               })),
               theme,
             })}
