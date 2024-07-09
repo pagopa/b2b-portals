@@ -92,7 +92,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         "properties" : {
           "metrics" : [
             [{ "expression" : "ANOMALY_DETECTION_BAND(m1, 2)", "label" : "BandAnomalyDetection", "id" : "e1" }],
-            ["AWS/ECS", "CPUUtilization", "ServiceName", aws_ecs_service.cms_ecs_service.name, "ClusterName", aws_ecs_cluster.cms_ecs_cluster.name, { "id" : "m1" }]
+            ["AWS/ECS", "CPUUtilization", "ServiceName", aws_ecs_service.cms_multitenant_ecs_service[each.key].name, "ClusterName", aws_ecs_cluster.cms_ecs_cluster.name, { "id" : "m1" }]
           ],
           "view" : "timeSeries",
           "stacked" : false,
@@ -111,7 +111,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         "properties" : {
           "metrics" : [
             [{ "expression" : "ANOMALY_DETECTION_BAND(m1, 2)", "label" : "BandAnomalyDetection", "id" : "e1" }],
-            ["AWS/ECS", "MemoryUtilization", "ServiceName", aws_ecs_service.cms_ecs_service.name, "ClusterName", aws_ecs_cluster.cms_ecs_cluster.name, { "id" : "m1" }]
+            ["AWS/ECS", "MemoryUtilization", "ServiceName", aws_ecs_service.cms_multitenant_ecs_service[each.key].name, "ClusterName", aws_ecs_cluster.cms_ecs_cluster.name, { "id" : "m1" }]
           ],
           "view" : "timeSeries",
           "stacked" : false,
