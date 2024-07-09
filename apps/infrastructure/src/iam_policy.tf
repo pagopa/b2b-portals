@@ -29,21 +29,6 @@ data "aws_iam_policy_document" "deploy_github" {
   }
 }
 
-data "aws_iam_policy_document" "cms_iam_policy" {
-  statement {
-    actions = ["s3:GetObject", "s3:ListBucket"]
-    resources = [
-      aws_s3_bucket.cms_medialibrary_bucket.arn,
-      "${aws_s3_bucket.cms_medialibrary_bucket.arn}/*"
-    ]
-
-    principals {
-      type        = "AWS"
-      identifiers = [aws_cloudfront_origin_access_identity.main.iam_arn]
-    }
-  }
-}
-
 data "aws_iam_policy_document" "cms_multitenant_iam_policy" {
   for_each = {
     for key, config in var.websites_configs :
@@ -100,7 +85,6 @@ data "aws_iam_policy_document" "ecs_task_role_s3" {
       "s3:PutObjectAcl"
     ]
     resources = concat(
-      [aws_s3_bucket.cms_medialibrary_bucket.arn],
       [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn]
     )
   }
@@ -142,7 +126,6 @@ data "aws_iam_policy_document" "ecs_task_execution" {
       "s3:GetBucketLocation"
     ]
     resources = concat(
-      [aws_s3_bucket.cms_medialibrary_bucket.arn],
       [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn]
     )
   }
@@ -250,7 +233,6 @@ resource "aws_iam_policy" "upload_image" {
         ]
         Effect = "Allow"
         Resource = concat(
-          ["${aws_s3_bucket.cms_medialibrary_bucket.arn}/*"],
           [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : "${bucket.arn}/*"]
         )
       },
