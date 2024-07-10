@@ -107,7 +107,7 @@ export const HeroTextContent = ({
           </Stack>
         </Stack>
       )}
-      {Array.isArray(ctaButtons) && ctaButtons.length > 0 ? (
+      {ctaButtons && ctaButtons.length > 0 ? (
         <Stack
           direction={isSmallScreen ? 'column' : 'row'}
           justifyContent='left'

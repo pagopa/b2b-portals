@@ -17,7 +17,7 @@ export interface StoreButtonsProps {
 export interface HeroTextProps extends CommonProps {
   readonly title: string;
   readonly subtitle?: string | Generic;
-  readonly ctaButtons?: ReadonlyArray<CtaButtonProps | Generic>;  
+  readonly ctaButtons?: ReadonlyArray<CtaButtonProps>;  
   readonly storeButtons?: StoreButtonsProps;
   readonly size?: 'medium' | 'big' | 'small';
 }
