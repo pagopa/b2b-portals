@@ -54,6 +54,10 @@ const pageDataResponse: PageData = {
             data: null,
           },
           ctaButtons: [],
+          storeButtons: {
+            hrefGoogle: 'https://play.google.com',
+            hrefApple: 'https://apple.com',
+          },
           inverse: false,
           sectionID: null,
           size: 'small',

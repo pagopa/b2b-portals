@@ -10,6 +10,7 @@ const makeHeroProps = ({
   image,
   background,
   ctaButtons,
+  storeButtons,
   ...rest
 }: HeroSection): HeroProps => ({
   ...rest,
@@ -25,6 +26,12 @@ const makeHeroProps = ({
         ...(icon && { startIcon: Icon(icon) }),
       })),
     }),
+  ...(storeButtons && {
+    storeButtons: {
+      ...(storeButtons.hrefGoogle && { hrefGoogle: storeButtons.hrefGoogle }),
+      ...(storeButtons.hrefApple && { hrefApple: storeButtons.hrefApple }),
+    },
+  }),
 });
 
 const Hero = (props: HeroSection) => <HeroRC {...makeHeroProps(props)} />;

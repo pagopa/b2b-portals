@@ -9,9 +9,15 @@ export interface HeroProps extends CommonProps, HeroTextProps {
   readonly useHoverlay?: boolean;
 }
 
+export interface StoreButtonsProps {
+  readonly hrefGoogle?: string;
+  readonly hrefApple?: string;
+}
+
 export interface HeroTextProps extends CommonProps {
   readonly title: string;
   readonly subtitle?: string | Generic;
-  readonly ctaButtons?: ReadonlyArray<CtaButtonProps | Generic>;
+  readonly ctaButtons?: ReadonlyArray<CtaButtonProps>;  
+  readonly storeButtons?: StoreButtonsProps;
   readonly size?: 'medium' | 'big' | 'small';
 }
