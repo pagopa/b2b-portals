@@ -214,6 +214,21 @@ const MegaHeaderSectionCodec = t.strict({
   buttonHref: t.string,
 });
 
+const VideoSectionCodec = t.strict({
+  __component: t.literal('sections.video'),
+  title: t.string,
+  subtitle: t.string,
+  src: ImageDataCodec,
+  autoplay: t.boolean,
+  loop: t.boolean,
+  full: t.boolean,
+  reversed: t.boolean,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  fallback: t.string,
+  playButtonLabel: t.string,
+  sectionID: t.union([t.string, t.null]),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -229,6 +244,7 @@ export const PageSectionCodec = t.union([
   PreFooterSectionCodec,
   HeroCounterSectionCodec,
   MegaHeaderSectionCodec,
+  VideoSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -246,3 +262,4 @@ export type FormSection = t.TypeOf<typeof FormSectionCodec>;
 export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
 export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
 export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
+export type VideoSection = t.TypeOf<typeof VideoSectionCodec>;
