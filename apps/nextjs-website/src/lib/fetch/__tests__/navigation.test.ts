@@ -129,6 +129,7 @@ describe('getNavigation', () => {
               image: null,
               background: null,
               ctaButtons: [],
+              storeButtons: null,
               inverse: false,
               sectionID: null,
               size: 'small',
