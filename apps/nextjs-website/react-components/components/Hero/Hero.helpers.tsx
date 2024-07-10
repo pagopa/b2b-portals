@@ -54,9 +54,11 @@ export const HeroTextContent = ({
           textAlign={size === 'small' ? 'center' : 'left'}
         />
       </Stack>
-      {(storeButtons?.hrefGoogle || storeButtons?.hrefApple) && (
+      {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
         <Stack direction='column' spacing={1}>
-          <Typography color={textColor} fontWeight={700}>Scarica l'app</Typography>
+          <Typography color={textColor} fontWeight={700}>
+            Scarica l'app
+          </Typography>
           <Stack
             justifyContent='left'
             alignItems='baseline'
@@ -106,8 +108,7 @@ export const HeroTextContent = ({
             )}
           </Stack>
         </Stack>
-      )}
-      {ctaButtons && ctaButtons.length > 0 ? (
+      ) : ctaButtons && ctaButtons.length > 0 ? (
         <Stack
           direction={isSmallScreen ? 'column' : 'row'}
           justifyContent='left'
