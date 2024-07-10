@@ -2,7 +2,12 @@
 module "ecs_cpu_alarm" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=0b4aa2b9aa19060205965a938de89a7bf0ff477b" # v5.1.0
 
-  alarm_name        = "Strapi | CMS | ECS CPU Utilization"
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  }
+
+  alarm_name        = "${each.key} | CMS | ECS CPU Utilization"
   actions_enabled   = true
   alarm_description = "This alarm monitors the percentage of ECS CPU Utilization"
   metric_name       = "CPUUtilization"
@@ -17,7 +22,7 @@ module "ecs_cpu_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    ServiceName = aws_ecs_service.cms_ecs_service.name
+    ServiceName = aws_ecs_service.cms_multitenant_ecs_service[each.key].name
     ClusterName = aws_ecs_cluster.cms_ecs_cluster.name
   }
 }
@@ -25,7 +30,12 @@ module "ecs_cpu_alarm" {
 module "ecs_memory_alarm" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=0b4aa2b9aa19060205965a938de89a7bf0ff477b" # v5.1.0
 
-  alarm_name        = "Strapi | CMS | ECS Memory Utilization"
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  }
+
+  alarm_name        = "${each.key} | CMS | ECS Memory Utilization"
   actions_enabled   = true
   alarm_description = "This alarm monitors the percentage of ECS Memory Utilization"
   metric_name       = "MemoryUtilization"
@@ -40,7 +50,7 @@ module "ecs_memory_alarm" {
   treat_missing_data  = "notBreaching" # No data in the period is considered as good.
 
   dimensions = {
-    ServiceName = aws_ecs_service.cms_ecs_service.name
+    ServiceName = aws_ecs_service.cms_multitenant_ecs_service[each.key].name
     ClusterName = aws_ecs_cluster.cms_ecs_cluster.name
   }
 }
