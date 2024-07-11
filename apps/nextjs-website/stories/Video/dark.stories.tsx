@@ -34,7 +34,7 @@ export const Default = VideoTemplate.bind({});
 Default.args = {
   title: 'Sample Video Title',
   subtitle: 'Sample Video Subtitle',
-  src: 'path/to/your/video.mp4',
+  src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
   autoplay: false,
   loop: false,
   full: false,
