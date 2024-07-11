@@ -9,6 +9,7 @@ import {
   VideoProps,
   VideoTextProps,
 } from '@react-components/types/Video/Video.types';
+import { BackgroundColor, TextColor } from '../common/Common.helpers';
 
 const Video = (props: VideoProps) => {
   const {
@@ -26,6 +27,9 @@ const Video = (props: VideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
   const [error, setError] = useState(false);
+
+  const textColor = TextColor(theme);
+  const backgroundColor = BackgroundColor(theme);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -45,7 +49,10 @@ const Video = (props: VideoProps) => {
   };
 
   // Determine the type based on the structure of src
-  const type = typeof src === 'string' ? src.split('.').pop() ?? 'mp4' : src?.mime.split('/').pop() ?? 'mp4';
+  const type =
+    typeof src === 'string'
+      ? src.split('.').pop() ?? 'mp4'
+      : src?.mime.split('/').pop() ?? 'mp4';
 
   const render = () => {
     if (error) {
@@ -92,7 +99,7 @@ const Video = (props: VideoProps) => {
       py={7}
       alignItems='center'
       direction={reverse ? 'row-reverse' : 'row'}
-      background={theme === 'dark' ? 'primary.dark' : 'white'}
+      background={backgroundColor}
     >
       <Grid item xs={12} md={full ? 12 : 6}>
         {render()}
@@ -108,8 +115,7 @@ const Video = (props: VideoProps) => {
                 fontWeight: 700,
                 fontSize: '16px',
                 textDecoration: 'none',
-                color:
-                  theme === 'dark' ? 'primary.contrastText' : 'primary.dark',
+                color: textColor,
               }}
             >
               {playButtonLabel}
@@ -122,16 +128,21 @@ const Video = (props: VideoProps) => {
 };
 
 const VideoText = ({ title, subtitle, theme = 'dark' }: VideoTextProps) => {
-  const color = theme === 'dark' ? 'primary.contrastText' : 'text.primary';
+  const textColor = TextColor(theme);
   return (
     <>
       {title && (
-        <Typography variant='h5' mb={4} color={color}>
+        <Typography variant='h5' mb={4} color={textColor}>
           {title}
         </Typography>
       )}
       {subtitle && (
-        <Typography paragraph sx={{ fontSize: '16px' }} mb={3} color={color}>
+        <Typography
+          paragraph
+          sx={{ fontSize: '16px' }}
+          mb={3}
+          color={textColor}
+        >
           {subtitle}
         </Typography>
       )}
