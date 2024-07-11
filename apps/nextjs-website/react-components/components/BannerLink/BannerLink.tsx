@@ -12,7 +12,6 @@ const styles = {
   main: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: { md: '64px 24px', xs: '32px 24px' },
     width: '100%',
   },
   twoColumns: {
@@ -36,12 +35,12 @@ const BannerLink = (props: BannerLinkProps) => {
   const { palette } = useTheme();
 
   const iconColor = theme === 'dark' ? palette.primary.contrastText : palette.primary.dark;
-  const lightBackgrounds = ['#F5F5F5', '#FAFAFA'];
+  const lightBackgrounds = [ palette.grey[100], palette.grey[50]];
   const darkBackgrounds = ['#0B3EE3', '#1043e8'];
 
   return (
     <Box bgcolor={backgroundColor} component='section' sx={{ width: '100%', padding: 0, margin: 0 }}>
-      <Stack gap={2} sx={sections.length > 1 ? styles.twoColumns : styles.main}>
+      <Stack sx={sections.length > 1 ? styles.twoColumns : styles.main}>
         {sections.map((section, index) => (
           <Stack
             key={index}
