@@ -18,8 +18,8 @@ const makeEditorialProps = ({
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: (
     <Image
-      src={image.url}
-      alt={image.alternativeText ?? ''}
+      src={image.data.attributes.url}
+      alt={image.data.attributes.alternativeText ?? ''}
       // Needed by Image, will be overwritten
       width={0}
       height={0}
