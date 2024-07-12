@@ -14,10 +14,16 @@ export interface StoreButtonsProps {
   readonly hrefApple?: string;
 }
 
+export interface ChipProps {
+  readonly label: string;
+  readonly targetId: string;
+}
+
 export interface HeroTextProps extends CommonProps {
   readonly title: string;
   readonly subtitle?: string | Generic;
   readonly ctaButtons?: ReadonlyArray<CtaButtonProps>;  
   readonly storeButtons?: StoreButtonsProps;
   readonly size?: 'medium' | 'big' | 'small';
+  readonly chips?: ReadonlyArray<ChipProps>;
 }

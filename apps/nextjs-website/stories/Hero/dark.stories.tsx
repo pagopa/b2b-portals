@@ -148,3 +148,20 @@ DarkHeroSmallNoSubtitle.args = {
   size: 'small',
   inverse: true,
 };
+
+export const DarkHeroSmallNoButtonsWithChips: StoryFn<typeof Hero> = HeroTemplate.bind({});
+DarkHeroSmallNoButtonsWithChips.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'small',
+  inverse: false,
+  chips: [
+    { label: 'Notifiche', targetId: 'notifiche' },
+    { label: 'SEND', targetId: 'send' },
+    { label: 'Recapiti', targetId: 'recapiti' },
+    { label: 'Documenti e comunicazioni', targetId: 'documenti-e-comunicazioni' },
+    { label: 'Ricezione di una notifica', targetId: 'ricezione-di-una-notifica' },
+    { label: 'Perfezionamento', targetId: 'perfezionamento' },
+    { label: 'Annullamento', targetId: 'annullamento' },
+    { label: 'Accessibilità', targetId: 'accessibilita' },
+  ],
+};
