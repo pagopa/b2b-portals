@@ -7,7 +7,6 @@ import {
   useTheme,
   useMediaQuery,
   Theme,
-  IconButton,
   Chip,
   StackProps,
 } from '@mui/material';
@@ -15,8 +14,19 @@ import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { ArrowDropDown } from '@mui/icons-material';
-import { HeaderProps, MenuDropdownProp, DropdownItem, HeaderTitleProps, NavigationProps, DialogBubbleProps } from '@react-components/types/Header/Header.types';
-import { BackgroundColor, TextAlternativeColor, TextColor } from '@react-components/components/common/Common.helpers';
+import {
+  HeaderProps,
+  MenuDropdownProp,
+  DropdownItem,
+  HeaderTitleProps,
+  NavigationProps,
+  DialogBubbleProps,
+} from '@react-components/types/Header/Header.types';
+import {
+  BackgroundColor,
+  TextAlternativeColor,
+  TextColor,
+} from '@react-components/components/common/Common.helpers';
 import { CtaButtons } from '../common/Common';
 import { useState, useEffect } from 'react';
 
@@ -31,7 +41,10 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
       borderBottomStyle: 'solid',
       width: '100%',
       borderBottomWidth: 3,
-      borderBottomColor: { md: active ? textColor : 'transparent', xs: 'transparent' },
+      borderBottomColor: {
+        md: active ? textColor : 'transparent',
+        xs: 'transparent',
+      },
       backgroundColor: { xs: 'white', md: 'transparent' },
     },
     link: {
@@ -44,10 +57,7 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
   };
 };
 
-const DialogBubble = ({
-  children,
-  ...stackProps
-}: DialogBubbleProps) => {
+const DialogBubble = ({ children, ...stackProps }: DialogBubbleProps) => {
   const muiTheme = useTheme();
   const styles = {
     bubbleContainer: {
@@ -65,12 +75,12 @@ const DialogBubble = ({
 
   return (
     <Stack
-      sx={{ 
-        ...styles.bubbleContainer, 
-        bgcolor: 'common.white', 
-        boxShadow: { xs: 'custom.boxShadow', md: 'custom.otMenuMobile' } 
+      sx={{
+        ...styles.bubbleContainer,
+        bgcolor: 'common.white',
+        boxShadow: { xs: 'custom.boxShadow', md: 'custom.otMenuMobile' },
       }}
-      aria-haspopup="true"
+      aria-haspopup='true'
     >
       <Stack sx={styles.bubble} {...stackProps}>
         {children}
@@ -79,24 +89,32 @@ const DialogBubble = ({
   );
 };
 
-const HamburgerMenu = ({ open, onOpen, onClose }: { open: boolean, onOpen: () => void, onClose: () => void }) =>
+const HamburgerMenu = ({
+  open,
+  onOpen,
+  onClose,
+}: {
+  open: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}) =>
   open ? (
     <CloseIcon
-      color="primary"
-      cursor="pointer"
+      color='primary'
+      cursor='pointer'
       onClick={onClose}
-      aria-label="chiudi"
-      aria-haspopup="true"
-      aria-expanded="true"
+      aria-label='chiudi'
+      aria-haspopup='true'
+      aria-expanded='true'
     />
   ) : (
     <MenuIcon
-      color="primary"
-      cursor="pointer"
+      color='primary'
+      cursor='pointer'
       onClick={onOpen}
-      aria-label="apri"
-      aria-haspopup="true"
-      aria-expanded="false"
+      aria-label='apri'
+      aria-haspopup='true'
+      aria-expanded='false'
     />
   );
 
@@ -137,20 +155,20 @@ const MenuDropdown = (props: MenuDropdownProp) => {
   const dropdownVisible = menuHover || dropdownHover;
 
   const menuEventsHandlers = md
-  ? {
-      onClick: clickOnMenu,
-      onMouseLeave: leavesMenu,
-    }
-  : {
-      onClick: toggleMenu,
-    };
+    ? {
+        onClick: clickOnMenu,
+        onMouseLeave: leavesMenu,
+      }
+    : {
+        onClick: toggleMenu,
+      };
 
   const DropdownParent = ({
     children,
     ...props
   }: React.PropsWithChildren<Omit<StackProps, 'ref'>>) => (
     <Box
-      component="div"
+      component='div'
       {...props}
       onMouseEnter={hoverOnDropdown}
       onMouseLeave={leavesDropdown}
@@ -174,29 +192,53 @@ const MenuDropdown = (props: MenuDropdownProp) => {
 
   return (
     <Stack sx={styles.menu}>
-      <Box sx={{ 
-        width: '100%', 
-        minWidth:'max-content', 
-        height:'100%', 
-        gap: { xs: 1, md: 1.5 }, 
-        display:'flex', 
-        flexDirection:'row', 
-        justifyContent: { xs: 'left', md: 'center' },
-        alignItems: { xs: 'center', md: 'flex-end' },
-        paddingLeft: { xs: 2, md: 0 },
-      }}>
-        <Link sx={{ justifyContent: { xs: 'left', md: 'center' }, alignContent: { xs: 'left', md: 'center' }, padding: 0 }} style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none' }} {...button}>
-          <Typography variant="sidenav" color="inherit" sx={{ display:'flex', textDecoration: 'none', fontSize: '1em', padding: 0 }}>
+      <Box
+        sx={{
+          width: '100%',
+          minWidth: 'max-content',
+          height: '100%',
+          gap: { xs: 1, md: 1.5 },
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: { xs: 'left', md: 'center' },
+          alignItems: { xs: 'center', md: 'flex-end' },
+          paddingLeft: { xs: 2, md: 0 },
+        }}
+      >
+        <Link
+          sx={{
+            justifyContent: { xs: 'left', md: 'center' },
+            alignContent: { xs: 'left', md: 'center' },
+            padding: 0,
+          }}
+          style={{
+            color: active
+              ? muiTheme.palette.primary.dark
+              : muiTheme.palette.text.secondary,
+            textDecoration: 'none',
+          }}
+          {...button}
+        >
+          <Typography
+            variant='sidenav'
+            color='inherit'
+            sx={{
+              display: 'flex',
+              textDecoration: 'none',
+              fontSize: '1em',
+              padding: 0,
+            }}
+          >
             {label}
           </Typography>
         </Link>
         {hasLinks && (
           <ArrowDropDown
-            color="inherit"
-            fontSize="small"
+            color='inherit'
+            fontSize='small'
             sx={{
               ...(!md && dropdownVisible && styles.arrowAnimate),
-              height:'100%',
+              height: '100%',
               cursor: 'pointer',
             }}
             {...menuEventsHandlers}
@@ -209,11 +251,19 @@ const MenuDropdown = (props: MenuDropdownProp) => {
             <Dropdown gap={1}>
               {items?.map((item: DropdownItem, index) => (
                 <Link
-                  variant="body1"
-                  underline="none"
+                  variant='body1'
+                  underline='none'
                   key={item.key ?? index}
                   sx={styles.link}
-                  style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none', fontSize: '1em', fontWeight: 600, padding: 0 }}
+                  style={{
+                    color: active
+                      ? muiTheme.palette.primary.dark
+                      : muiTheme.palette.text.secondary,
+                    textDecoration: 'none',
+                    fontSize: '1em',
+                    fontWeight: 600,
+                    padding: 0,
+                  }}
                   {...item}
                 >
                   {item.label}
@@ -231,12 +281,21 @@ const Navigation = ({ menu, theme }: NavigationProps) => (
   <Stack
     gap={{ md: 4, xs: 0 }}
     direction={{ md: 'row', xs: 'column' }}
-    component="nav"
-    aria-label="main"
-    sx={{ width: { xs: '100%', md: 'auto' }, height: { xs: 'auto', md: '100%' }, alignItems: 'flex-end' }}
+    component='nav'
+    aria-label='main'
+    sx={{
+      width: { xs: '100%', md: 'auto' },
+      height: { xs: 'auto', md: '100%' },
+      alignItems: 'flex-end',
+    }}
   >
     {menu.map((menu, index) => (
-      <MenuDropdown key={index} {...menu} theme={theme} sx={{ py: { xs: 1, sm: 0 }, alignItems: 'flex-end' }} />
+      <MenuDropdown
+        key={index}
+        {...menu}
+        theme={theme}
+        sx={{ py: { xs: 1, sm: 0 }, alignItems: 'flex-end' }}
+      />
     ))}
   </Stack>
 );
@@ -252,15 +311,21 @@ const HeaderTitle = ({
   const label = 'beta';
 
   return (
-    <Stack direction="row" alignItems="center" gap={1} paddingX={0} paddingY={0}>
+    <Stack
+      direction='row'
+      alignItems='center'
+      gap={1}
+      paddingX={0}
+      paddingY={0}
+    >
       {logo && (
-        <Link  
-          alignItems="center" 
-          sx={{ 
+        <Link
+          alignItems='center'
+          sx={{
             display: 'flex',
             justifyContent: 'center',
-            padding: 0
-          }} 
+            padding: 0,
+          }}
           href={logo.href}
         >
           <img src={logo.src} alt={logo.alt} style={{ height: 70 }} />
@@ -271,10 +336,10 @@ const HeaderTitle = ({
           color={textColor}
           fontSize={{ xs: spacing(3), sm: spacing(3.5) }}
           noWrap
-          variant="h5"
+          variant='h5'
         >
           {productHref ? (
-            <Link href={productHref} underline="none" color="text.primary">
+            <Link href={productHref} underline='none' color='text.primary'>
               <b>{productName}</b>
             </Link>
           ) : (
@@ -285,9 +350,9 @@ const HeaderTitle = ({
       {beta && (
         <Chip
           label={label}
-          color="primary"
+          color='primary'
           sx={{ height: 20, width: 45 }}
-          size="small"
+          size='small'
         />
       )}
     </Stack>
@@ -343,15 +408,12 @@ const Header = ({
       role='banner'
       sx={{ height: { xs: 'auto', md: 'auto' } }}
     >
-      <Stack
-        direction='column'
-        gap={{ xs: 0, md: 0 }}
-        sx={{ width: '100%' }}
-      >
+      <Stack direction='column' gap={{ xs: 0, md: 0 }} sx={{ width: '100%' }}>
         <Stack
           direction='row'
-          justifyContent="space-between"
-          alignItems="center"
+          justifyContent='space-between'
+          alignItems='center'
+          sx={{ padding: '16px 24px' }}
         >
           <HeaderTitle
             theme={theme}
@@ -360,33 +422,58 @@ const Header = ({
             {...(logo ? { logo } : {})}
           />
           <Stack
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
+            direction='row'
+            justifyContent='flex-end'
+            alignItems='center'
             gap={2}
             sx={{
               display: { xs: 'flex', md: 'flex' },
             }}
           >
-            <Link href="/help" underline="none" sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+            <Link
+              href='#serve-aiuto'
+              underline='none'
+              sx={{
+                color: 'primary.main',
+                fontWeight: 'bold',
+                fontSize: '14px',
+              }}
+            >
               Serve aiuto?
             </Link>
-            <IconButton sx={{ bgcolor: 'primary.main' }}>
-              <ChatBubbleOutlineIcon style={{ color: 'white' }} />
-            </IconButton>
+            <Box
+              component='a'
+              href='#serve-aiuto'
+              sx={{
+                bgcolor: 'primary.main',
+                width: 48,
+                height: 48,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '50%',
+                textDecoration: 'none',
+                '&:hover': {
+                  bgcolor: 'primary.main',
+                },
+              }}
+            >
+              <ChatBubbleOutlineIcon style={{ color: 'white', fontSize: 18 }} />
+            </Box>
           </Stack>
         </Stack>
 
         <Divider />
 
         <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
+          direction='row'
+          justifyContent='space-between'
+          alignItems='center'
           sx={{
             flex: 1,
             width: '100%',
             display: { xs: 'none', md: 'flex' },
+            padding: { xs: '8px 24px', md: '8px 24px' },
           }}
         >
           <Navigation {...{ menu, theme }} />
@@ -396,39 +483,40 @@ const Header = ({
         </Stack>
 
         <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
+          direction='row'
+          justifyContent='space-between'
+          alignItems='center'
           sx={{
             display: { xs: 'flex', md: 'none' },
             width: '100%',
-            paddingLeft: 2,
+            padding: '8px 24px',
           }}
         >
-          <HamburgerMenu
-            onOpen={openHeader}
-            onClose={closeHeader}
-            open={menuOpen}
-          />
-          <Typography variant="body1" color="text.secondary">
-            Menu
-          </Typography>
+          <Stack direction='row' alignItems='center' gap={1}>
+            <HamburgerMenu
+              onOpen={openHeader}
+              onClose={closeHeader}
+              open={menuOpen}
+            />
+            <Typography variant='body1' color='text.secondary'>
+              Menu
+            </Typography>
+          </Stack>
           <Box>
             <HeaderCtas />
           </Box>
         </Stack>
 
         <Stack
-          direction="column"
+          direction='column'
           sx={{
             display: { xs: menuOpen ? 'flex' : 'none', md: 'none' },
             width: '100%',
             alignItems: 'flex-start',
-            paddingLeft: 2,
+            padding: '8px 24px',
           }}
         >
           <Navigation {...{ menu, theme }} />
-          <HeaderCtas />
         </Stack>
       </Stack>
     </Box>

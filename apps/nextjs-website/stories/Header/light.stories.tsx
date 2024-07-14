@@ -14,7 +14,7 @@ const defaultProps: HeaderProps = {
   theme: 'light',
   product: {
     name: 'Product Name',
-    href: '/',
+    href: '#product-name',
   },
   menu: [
     {
@@ -24,11 +24,11 @@ const defaultProps: HeaderProps = {
       items: [
         {
           label: 'Dropdown Item 1',
-          href: '/',
+          href: '#item-1',
         },
         {
           label: 'Dropdown Item 2',
-          href: '/',
+          href: '#item-2',
         },
       ],
     },
@@ -38,7 +38,7 @@ const defaultProps: HeaderProps = {
       items: [
         {
           label: 'Dropdown Item 3',
-          href: '/',
+          href: '#item-3',
         },
       ],
     },
@@ -51,12 +51,12 @@ HeaderFullWithLogo.args = {
   logo: {
     src: 'https://notifichedigitali.pagopa.it/static/images/logo.svg',
     alt: 'Logo',
-    href: 'https://logo.com',
+    href: '#',
   },
   ctaButtons: [
     {
       text: 'CTA Button 1',
-      href: '/',
+      href: '#cta-1',
     },
   ],
 };
@@ -68,7 +68,7 @@ HeaderFullWithoutLogoBeta.args = {
   ctaButtons: [
     {
       text: 'CTA Button 1',
-      href: '/',
+      href: '#cta-1-beta',
     },
   ],
 };
