@@ -12,6 +12,7 @@ import IFrameSection from '../IFrame';
 import Form from '../Form';
 import MegaHeader from '../MegaHeader';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
+import EditorialSwitch from '../EditorialSwitch';
 
 const PageSection = (props: PageSectionData) => {
   // eslint-disable-next-line no-underscore-dangle
@@ -40,6 +41,8 @@ const PageSection = (props: PageSectionData) => {
       return <Form {...props} />;
     case 'sections.mega-header':
       return <MegaHeader {...props} />;
+    case 'sections.editorial-switch':
+      return <EditorialSwitch {...props} />;
     default:
       return null;
   }
