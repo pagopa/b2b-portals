@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AvatarProps, LinkProps, StackProps } from "@mui/material";
+import { LinkProps, StackProps } from "@mui/material";
 import { CommonProps, CtaButtonProps } from "../common/Common.types";
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
@@ -29,7 +29,6 @@ export interface HeaderTitleProps extends CommonProps {
     name: string;
     href?: string;
   };
-  avatar?: AvatarProps;
   beta?: boolean;
   logo?: {
     src: string;

@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react';
 import {
-  Avatar,
   Box,
-  Chip,
   Link,
   Stack,
   Typography,
+  Divider,
   useTheme,
   useMediaQuery,
   Theme,
+  IconButton,
+  Chip,
   StackProps,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { ArrowDropDown } from '@mui/icons-material';
 import { HeaderProps, MenuDropdownProp, DropdownItem, HeaderTitleProps, NavigationProps, DialogBubbleProps } from '@react-components/types/Header/Header.types';
 import { BackgroundColor, TextAlternativeColor, TextColor } from '@react-components/components/common/Common.helpers';
 import { CtaButtons } from '../common/Common';
+import { useState, useEffect } from 'react';
 
 const TIMEOUT_LENGTH = 100;
 
@@ -180,11 +182,11 @@ const MenuDropdown = (props: MenuDropdownProp) => {
         display:'flex', 
         flexDirection:'row', 
         justifyContent: { xs: 'left', md: 'center' },
-        alignItems: { xs: 'center', md: 'center' },
+        alignItems: { xs: 'center', md: 'flex-end' },
         paddingLeft: { xs: 2, md: 0 },
       }}>
-        <Link sx={{ justifyContent: { xs: 'left', md: 'center' }, alignContent: { xs: 'left', md: 'center' }}} style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none' }} {...button}>
-          <Typography variant="sidenav" color="inherit" sx={{ display:'flex', textDecoration: 'none', fontSize: '1em' }}>
+        <Link sx={{ justifyContent: { xs: 'left', md: 'center' }, alignContent: { xs: 'left', md: 'center' }, padding: 0 }} style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none' }} {...button}>
+          <Typography variant="sidenav" color="inherit" sx={{ display:'flex', textDecoration: 'none', fontSize: '1em', padding: 0 }}>
             {label}
           </Typography>
         </Link>
@@ -211,7 +213,7 @@ const MenuDropdown = (props: MenuDropdownProp) => {
                   underline="none"
                   key={item.key ?? index}
                   sx={styles.link}
-                  style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none', fontSize: '1em', fontWeight: 600 }}
+                  style={{ color: active ? muiTheme.palette.primary.dark : muiTheme.palette.text.secondary, textDecoration: 'none', fontSize: '1em', fontWeight: 600, padding: 0 }}
                   {...item}
                 >
                   {item.label}
@@ -231,16 +233,15 @@ const Navigation = ({ menu, theme }: NavigationProps) => (
     direction={{ md: 'row', xs: 'column' }}
     component="nav"
     aria-label="main"
-    sx={{ width: { xs: '100%', md: 'auto' }, height: { xs: 'auto', md: '100%' } }}
+    sx={{ width: { xs: '100%', md: 'auto' }, height: { xs: 'auto', md: '100%' }, alignItems: 'flex-end' }}
   >
     {menu.map((menu, index) => (
-      <MenuDropdown key={index} {...menu} theme={theme} sx={{ py: { xs: 1, sm: 0 } }} />
+      <MenuDropdown key={index} {...menu} theme={theme} sx={{ py: { xs: 1, sm: 0 }, alignItems: 'flex-end' }} />
     ))}
   </Stack>
 );
 
 const HeaderTitle = ({
-  avatar,
   beta,
   product: { name: productName, href: productHref },
   theme,
@@ -251,22 +252,21 @@ const HeaderTitle = ({
   const label = 'beta';
 
   return (
-    <Stack direction="row" alignItems="center" gap={1} paddingX={3} paddingY={2}>
+    <Stack direction="row" alignItems="center" gap={1} paddingX={0} paddingY={0}>
       {logo && (
         <Link  
           alignItems="center" 
           sx={{ 
             display: 'flex',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            padding: 0
           }} 
           href={logo.href}
         >
-          <img src={logo.src} alt={logo.alt} style={{ height:70 }}/>
+          <img src={logo.src} alt={logo.alt} style={{ height: 70 }} />
         </Link>
       )}
       {!logo && (
-      <>
-        {avatar && <Avatar {...avatar} />}
         <Typography
           color={textColor}
           fontSize={{ xs: spacing(3), sm: spacing(3.5) }}
@@ -281,7 +281,6 @@ const HeaderTitle = ({
             <b>{productName}</b>
           )}
         </Typography>
-      </>
       )}
       {beta && (
         <Chip
@@ -300,7 +299,6 @@ const Header = ({
   theme,
   menu,
   ctaButtons,
-  avatar,
   beta,
   logo,
 }: HeaderProps) => {
@@ -343,66 +341,94 @@ const Header = ({
       bgcolor={backgroundColor}
       component='header'
       role='banner'
-      sx={{ height: { xs: 'auto', md: 130 } }}
+      sx={{ height: { xs: 'auto', md: 'auto' } }}
     >
       <Stack
-        direction={{ md: 'row' }}
-        paddingY={{ xs: 1, sm: 3, md: 0 }}
-        gap={{ xs: 2, md: 2 }}
-        sx={{ height:'100%' }}
+        direction='column'
+        gap={{ xs: 0, md: 0 }}
+        sx={{ width: '100%' }}
       >
         <Stack
-          sx={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
+          direction='row'
+          justifyContent="space-between"
+          alignItems="center"
         >
           <HeaderTitle
             theme={theme}
             product={product}
             {...(beta ? { beta } : {})}
-            {...(avatar ? { avatar } : {})}
             {...(logo ? { logo } : {})}
           />
-
           <Stack
-            sx={{ 
-              display: { md: 'none' },
-              marginRight: { xs: 4, md: 0 },
-            }}
-            direction='row'
-            alignItems='center'
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
             gap={2}
+            sx={{
+              display: { xs: 'flex', md: 'flex' },
+            }}
           >
-            <Box sx={{ display: { xs: 'none', sm: 'block', md: 'none' }, backgroundColor:'red' }}>
-              <HeaderCtas />
-            </Box>
-
-            <HamburgerMenu
-              onOpen={openHeader}
-              onClose={closeHeader}
-              open={menuOpen}
-            />
+            <Link href="/help" underline="none" sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+              Serve aiuto?
+            </Link>
+            <IconButton sx={{ bgcolor: 'primary.main' }}>
+              <ChatBubbleOutlineIcon style={{ color: 'white' }} />
+            </IconButton>
           </Stack>
         </Stack>
 
+        <Divider />
+
         <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
           sx={{
-            justifyContent: 'space-between',
-            height: '100%',
+            flex: 1,
             width: '100%',
-            flexDirection: { xs: 'column', md: 'row' },
-            alignItems: { md: 'center', xs: 'flex-start' },
-            gap: { xs: 2 },
-            display: { xs: menuOpen ? 'flex' : 'none', md: 'flex' }
+            display: { xs: 'none', md: 'flex' },
           }}
         >
           <Navigation {...{ menu, theme }} />
-
-          <Box sx={{ display: { sm: 'none', md: 'block' } }}>
+          <Box>
             <HeaderCtas />
           </Box>
+        </Stack>
+
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{
+            display: { xs: 'flex', md: 'none' },
+            width: '100%',
+            paddingLeft: 2,
+          }}
+        >
+          <HamburgerMenu
+            onOpen={openHeader}
+            onClose={closeHeader}
+            open={menuOpen}
+          />
+          <Typography variant="body1" color="text.secondary">
+            Menu
+          </Typography>
+          <Box>
+            <HeaderCtas />
+          </Box>
+        </Stack>
+
+        <Stack
+          direction="column"
+          sx={{
+            display: { xs: menuOpen ? 'flex' : 'none', md: 'none' },
+            width: '100%',
+            alignItems: 'flex-start',
+            paddingLeft: 2,
+          }}
+        >
+          <Navigation {...{ menu, theme }} />
+          <HeaderCtas />
         </Stack>
       </Stack>
     </Box>

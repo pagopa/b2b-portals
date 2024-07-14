@@ -1,19 +1,15 @@
-// Import the necessary modules
 import { StoryFn, Meta } from '@storybook/react';
 import { Header } from '@react-components/components';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 
-// Define the default export with metadata about your component
 const meta: Meta<typeof Header> = {
   title: 'Components/Header/Light',
   component: Header,
 };
 export default meta;
 
-// Define a "Template" function that sets how args map to rendering
 const HeaderTemplate: StoryFn<HeaderProps> = (args) => <Header {...args} />;
 
-// Define the default props
 const defaultProps: HeaderProps = {
   theme: 'light',
   product: {
@@ -69,10 +65,6 @@ export const HeaderFullWithoutLogoBeta: StoryFn<typeof Header> = HeaderTemplate.
 HeaderFullWithoutLogoBeta.args = {
   ...defaultProps,
   beta: true,
-  avatar: {
-    src: 'https://avatar.com/avatar.png',
-    alt: 'Avatar',
-  },
   ctaButtons: [
     {
       text: 'CTA Button 1',
