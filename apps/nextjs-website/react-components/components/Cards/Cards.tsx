@@ -94,8 +94,9 @@ const Cards = ({
           gap: '20px',
           flexWrap: isCenter ? 'wrap' : 'nowrap',
           justifyContent: isCenter ? 'center' : 'flex-start',
-          '@media screen and (max-width: 600px)': {
-            display: 'grid',
+          '@media (max-width: 600px)': {
+            flexDirection: 'column',
+            alignItems: 'center',
           },
         }}
       >
@@ -108,7 +109,10 @@ const Cards = ({
                   flex: '1 1 auto',
                   maxWidth: 'calc(33.333% - 20px)',
                   minWidth: '300px',
-                  marginBottom: '20px',
+                  '@media (max-width: 600px)': {
+                    maxWidth: '100%',
+                    minWidth: 'auto',
+                  },
                 }}
               >
                 <Item
