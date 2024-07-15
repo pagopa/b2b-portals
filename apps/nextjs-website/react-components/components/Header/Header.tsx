@@ -7,6 +7,9 @@ import {
   useTheme,
   Theme,
   Chip,
+  List,
+  ListItem,
+  ListItemText,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -43,13 +46,13 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
         xs: 'transparent',
       },
       backgroundColor: { xs: 'white', md: 'transparent' },
-      height: '100%', // Ensure menu occupies full height
+      height: '100%', 
     },
     link: {
       textIndent: { xs: spacing(2), md: 0 },
       display: 'flex',
       alignItems: 'center',
-      height: '100%', // Ensure link takes full height for proper alignment
+      height: '100%', 
       padding: '0 8px',
     },
     arrowAnimate: {
@@ -63,7 +66,7 @@ const DialogBubble = ({ children, ...stackProps }: DialogBubbleProps) => {
   const styles = {
     bubbleContainer: {
       position: 'absolute',
-      marginTop: muiTheme.spacing(4),
+      marginTop: muiTheme.spacing(8),
       padding: muiTheme.spacing(2),
       direction: 'ltr',
       textAlign: { xs: 'right', md: 'left' },
@@ -117,7 +120,7 @@ const HamburgerMenu = ({
   );
 
 const MenuDropdown = (props: MenuDropdownProp) => {
-  const { label, active, theme, items, isOpen, onClick, ...button } = props;
+  const { label, active, theme, items, isOpen, onClick, isMobile, ...button } = props;
   const muiTheme = useTheme();
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
@@ -132,7 +135,7 @@ const MenuDropdown = (props: MenuDropdownProp) => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: { xs: 'left', md: 'center' },
-          alignItems: 'center', // Ensure items are centered vertically
+          alignItems: 'center', 
         }}
       >
         <Link
@@ -173,45 +176,55 @@ const MenuDropdown = (props: MenuDropdownProp) => {
         </Link>
       </Box>
       {hasLinks && isOpen && (
-        <DialogBubble>
-          <Stack gap={1}>
+        isMobile ? (
+          <List component="div" disablePadding>
             {items?.map((item: DropdownItem, index) => (
-              <Link
-                variant='body1'
-                underline='none'
-                key={item.key ?? index}
-                sx={styles.link}
-                style={{
-                  color: active
-                    ? muiTheme.palette.primary.dark
-                    : muiTheme.palette.text.secondary,
-                  textDecoration: 'none',
-                  fontSize: '1em',
-                  fontWeight: 600,
-                  padding: 0,
-                }}
-                {...item}
-              >
-                {item.label}
-              </Link>
+              <ListItem button key={item.key ?? index} sx={{ pl: 4 }}>
+                <ListItemText primary={item.label} />
+              </ListItem>
             ))}
-          </Stack>
-        </DialogBubble>
+          </List>
+        ) : (
+          <DialogBubble>
+            <Stack gap={1}>
+              {items?.map((item: DropdownItem, index) => (
+                <Link
+                  variant='body1'
+                  underline='none'
+                  key={item.key ?? index}
+                  sx={styles.link}
+                  style={{
+                    color: active
+                      ? muiTheme.palette.primary.dark
+                      : muiTheme.palette.text.secondary,
+                    textDecoration: 'none',
+                    fontSize: '1em',
+                    fontWeight: 600,
+                    padding: 0,
+                  }}
+                  {...item}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </Stack>
+          </DialogBubble>
+        )
       )}
     </Stack>
   );
 };
 
-const Navigation = ({ menu, theme }: NavigationProps) => (
+const Navigation = ({ menu, theme, isMobile }: NavigationProps & { isMobile: boolean }) => (
   <Stack
     gap={{ md: 4, xs: 0 }}
     direction={{ md: 'row', xs: 'column' }}
     component='nav'
     aria-label='main'
-    className='desktop-menu' // Add class for desktop menu
+    className='desktop-menu' 
     sx={{
       width: { xs: '100%', md: 'auto' },
-      height: '100%', // Ensure navigation occupies full height
+      height: '100%', 
       alignItems: 'flex-end',
     }}
   >
@@ -220,30 +233,7 @@ const Navigation = ({ menu, theme }: NavigationProps) => (
         key={index}
         {...menu}
         theme={theme}
-        sx={{ py: { xs: 1, sm: 0 }, alignItems: 'flex-end' }}
-      />
-    ))}
-  </Stack>
-);
-
-const MobileNavigation = ({ menu, theme }: NavigationProps) => (
-  <Stack
-    gap={{ md: 4, xs: 0 }}
-    direction={{ md: 'row', xs: 'column' }}
-    component='nav'
-    aria-label='main'
-    className='mobile-menu' // Add class for mobile menu
-    sx={{
-      width: { xs: '100%', md: 'auto' },
-      height: '100%', // Ensure navigation occupies full height
-      alignItems: 'flex-end',
-    }}
-  >
-    {menu.map((menu, index) => (
-      <MenuDropdown
-        key={index}
-        {...menu}
-        theme={theme}
+        isMobile={isMobile}
         sx={{ py: { xs: 1, sm: 0 }, alignItems: 'flex-end' }}
       />
     ))}
@@ -367,7 +357,7 @@ const Header = ({
           direction='row'
           justifyContent='space-between'
           alignItems='center'
-          sx={{ padding: '16px 24px' }} // Add padding around logo and CTA
+          sx={{ padding: '16px 24px' }} 
         >
           <HeaderTitle
             theme={theme}
@@ -395,7 +385,7 @@ const Header = ({
                 height: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                padding: '0 8px', // Added padding to individual items
+                padding: '0 8px', 
               }}
             >
               Serve aiuto?
@@ -430,8 +420,8 @@ const Header = ({
             justifyContent='space-between'
             alignItems='center'
             sx={{
-              height: '64px', // Set fixed height for the navigation area
-              padding: '0px 24px', // Add padding to the second row
+              height: '64px', 
+              padding: '0px 24px', 
             }}
           >
             <Navigation
@@ -444,6 +434,7 @@ const Header = ({
                   ),
               }))}
               theme={theme}
+              isMobile={false}
             />
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
               <HeaderCtas />
@@ -488,7 +479,7 @@ const Header = ({
               padding: '8px 24px',
             }}
           >
-            <MobileNavigation
+            <Navigation
               menu={menu.map((menu, index) => ({
                 ...menu,
                 isOpen: openDropdownIndex === index,
@@ -498,6 +489,7 @@ const Header = ({
                   ),
               }))}
               theme={theme}
+              isMobile={true}
             />
           </Stack>
         )}
