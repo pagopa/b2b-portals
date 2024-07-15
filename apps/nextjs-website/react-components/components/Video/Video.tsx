@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Grid, Link, Stack, Typography } from '@mui/material';
-import ContainerRC from '../common/ContainerRC';
+import { Typography } from '@mui/material';
 import {
   isJSX,
   useIsVisible,
@@ -9,7 +8,8 @@ import {
   VideoProps,
   VideoTextProps,
 } from '@react-components/types/Video/Video.types';
-import { BackgroundColor, TextColor } from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const Video = (props: VideoProps) => {
   const {
@@ -19,17 +19,15 @@ const Video = (props: VideoProps) => {
     autoplay = false,
     loop = false,
     full = false,
-    reverse = false,
     theme = 'dark',
     fallback = 'Ops! Qualcosa è andato storto... Riprova in un secondo momento.',
-    playButtonLabel = 'Guarda il video',
+    playButtonLabel = 'Riproduci Video',
   } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
   const [error, setError] = useState(false);
 
   const textColor = TextColor(theme);
-  const backgroundColor = BackgroundColor(theme);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -54,7 +52,7 @@ const Video = (props: VideoProps) => {
       ? src.split('.').pop() ?? 'mp4'
       : src?.mime.split('/').pop() ?? 'mp4';
 
-  const render = () => {
+  const renderVideo = () => {
     if (error) {
       return isJSX(fallback) ? (
         fallback
@@ -66,64 +64,79 @@ const Video = (props: VideoProps) => {
     }
     return (
       <video
-        onContextMenu={(e) => {
-          e.preventDefault();
-        }}
-        controlsList='nodownload'
+        onContextMenu={(e) => e.preventDefault()}
         playsInline
         ref={videoRef}
-        controls
         muted
         loop={loop}
+        autoPlay={autoplay}
         style={{
-          aspectRatio: 1.777,
-          borderRadius: '25px',
           overflow: 'hidden',
           width: '100%',
+          height: '100%', // Ensure video covers the container
         }}
       >
         <source
           src={typeof src === 'object' ? src.url : src}
           type={`video/${type}`}
-          onError={() => {
-            setError(true);
-          }}
+          onError={() => setError(true)}
         />
       </video>
     );
   };
 
   return (
-    <ContainerRC
-      spacing={{ xs: 3, md: 16 }}
-      py={7}
-      alignItems='center'
-      direction={reverse ? 'row-reverse' : 'row'}
-      background={backgroundColor}
+    <div
+      style={{ maxHeight: '600px', position: 'relative', overflow: 'hidden' }}
     >
-      <Grid item xs={12} md={full ? 12 : 6}>
-        {render()}
-      </Grid>
       {!full && (
-        <Grid item md={6}>
-          <VideoText title={title} subtitle={subtitle} theme={theme} />
-          <Stack direction='row' alignItems='center'>
-            <Link
-              component='button'
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            padding: '20px',
+            background: 'rgba(0, 0, 0, 0.60)', // Adjusted for full cover and darker for better readability
+            color: textColor,
+          }}
+        >
+          <div style={{ marginLeft: '6em', zIndex: 50 }}>
+            <VideoText title={title} subtitle={subtitle} theme={theme} />
+            <div
               onClick={play}
-              sx={{
-                fontWeight: 700,
-                fontSize: '16px',
-                textDecoration: 'none',
-                color: textColor,
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                width: 'fit-content',
+                gap: '0.5em',
+                alignItems: 'center',
               }}
             >
-              {playButtonLabel}
-            </Link>
-          </Stack>
-        </Grid>
+              <p
+                style={{
+                  display: 'flex',
+                  fontWeight: 700,
+                  fontSize: '24px',
+                  textDecoration: 'none',
+                  color: textColor,
+                  cursor: 'pointer',
+                  alignSelf: 'flex-start',
+                }}
+              >
+                {playButtonLabel}
+              </p>
+              <PlayArrowIcon sx={{ height: '2em', cursor:'pointer' }} />
+            </div>
+          </div>
+        </div>
       )}
-    </ContainerRC>
+      {renderVideo()}
+    </div>
   );
 };
 

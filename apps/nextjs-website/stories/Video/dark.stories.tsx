@@ -16,9 +16,6 @@ const meta: Meta<typeof Video> = {
     full: {
       control: 'boolean',
     },
-    reverse: {
-      control: 'boolean',
-    },
     theme: {
       control: { type: 'select', options: ['dark', 'light'] },
     },
@@ -38,7 +35,6 @@ Default.args = {
   autoplay: false,
   loop: false,
   full: false,
-  reverse: false,
   theme: 'dark',
   fallback: 'Ops! Something went wrong... Please try again later.',
   playButtonLabel: 'Watch the video',
