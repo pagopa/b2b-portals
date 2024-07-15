@@ -46,13 +46,13 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
         xs: 'transparent',
       },
       backgroundColor: { xs: 'white', md: 'transparent' },
-      height: '100%', 
+      height: '100%',
     },
     link: {
       textIndent: { xs: spacing(2), md: 0 },
       display: 'flex',
       alignItems: 'center',
-      height: '100%', 
+      height: '100%',
       padding: '0 8px',
     },
     arrowAnimate: {
@@ -98,10 +98,12 @@ const HamburgerMenu = ({
   open: boolean;
   onOpen: () => void;
   onClose: () => void;
-}) =>
-  open ? (
+}) => {
+  const muiTheme = useTheme();
+
+  return open ? (
     <CloseIcon
-      color='primary'
+      sx={{ color: muiTheme.palette.text.secondary }}
       cursor='pointer'
       onClick={onClose}
       aria-label='chiudi'
@@ -110,7 +112,7 @@ const HamburgerMenu = ({
     />
   ) : (
     <MenuIcon
-      color='primary'
+      sx={{ color: muiTheme.palette.text.secondary }}
       cursor='pointer'
       onClick={onOpen}
       aria-label='apri'
@@ -118,6 +120,7 @@ const HamburgerMenu = ({
       aria-expanded='false'
     />
   );
+};
 
 const MenuDropdown = (props: MenuDropdownProp) => {
   const { label, active, theme, items, isOpen, onClick, isMobile, ...button } = props;
@@ -135,14 +138,14 @@ const MenuDropdown = (props: MenuDropdownProp) => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: { xs: 'left', md: 'center' },
-          alignItems: 'center', 
+          alignItems: 'center',
         }}
       >
         <Link
           sx={styles.link}
           style={{
             color: active
-              ? muiTheme.palette.primary.dark
+              ? muiTheme.palette.primary.main
               : muiTheme.palette.text.secondary,
             textDecoration: 'none',
           }}
@@ -180,7 +183,7 @@ const MenuDropdown = (props: MenuDropdownProp) => {
           <List component="div" disablePadding>
             {items?.map((item: DropdownItem, index) => (
               <ListItem button key={item.key ?? index} sx={{ pl: 4 }}>
-                <ListItemText primary={item.label} />
+                <ListItemText primary={item.label} primaryTypographyProps={{ style: { color: muiTheme.palette.text.secondary } }} />
               </ListItem>
             ))}
           </List>
@@ -194,9 +197,7 @@ const MenuDropdown = (props: MenuDropdownProp) => {
                   key={item.key ?? index}
                   sx={styles.link}
                   style={{
-                    color: active
-                      ? muiTheme.palette.primary.dark
-                      : muiTheme.palette.text.secondary,
+                    color: muiTheme.palette.text.secondary,
                     textDecoration: 'none',
                     fontSize: '1em',
                     fontWeight: 600,
@@ -221,10 +222,10 @@ const Navigation = ({ menu, theme, isMobile }: NavigationProps & { isMobile: boo
     direction={{ md: 'row', xs: 'column' }}
     component='nav'
     aria-label='main'
-    className='desktop-menu' 
+    className='desktop-menu'
     sx={{
       width: { xs: '100%', md: 'auto' },
-      height: '100%', 
+      height: '100%',
       alignItems: 'flex-end',
     }}
   >
@@ -357,7 +358,7 @@ const Header = ({
           direction='row'
           justifyContent='space-between'
           alignItems='center'
-          sx={{ padding: '16px 24px' }} 
+          sx={{ padding: '16px 24px' }}
         >
           <HeaderTitle
             theme={theme}
@@ -385,7 +386,7 @@ const Header = ({
                 height: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                padding: '0 8px', 
+                padding: '0 8px',
               }}
             >
               Serve aiuto?
@@ -420,8 +421,8 @@ const Header = ({
             justifyContent='space-between'
             alignItems='center'
             sx={{
-              height: '64px', 
-              padding: '0px 24px', 
+              height: '64px',
+              padding: '0px 24px',
             }}
           >
             <Navigation
@@ -459,7 +460,7 @@ const Header = ({
                 onClose={closeHeader}
                 open={menuOpen}
               />
-              <Typography variant='body1' color='text.secondary'>
+              <Typography variant='body1' color='text.secondary' sx={{ fontWeight: 600 }}>
                 Menu
               </Typography>
             </Stack>
