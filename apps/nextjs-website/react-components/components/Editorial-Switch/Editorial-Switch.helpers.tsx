@@ -65,6 +65,7 @@ const SplitButton = ({
   theme: string;
 }) => {
   const muiTheme = useTheme();
+  const { palette } = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [open, setOpen] = React.useState(false);
 
@@ -97,10 +98,10 @@ const SplitButton = ({
             onButtonClick(selectedButton);
           }}
           sx={{
-            backgroundColor: theme === 'light' ? 'rgba(0, 115, 230, 0.1)' : 'transparent',
+            backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
             color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
             '&:hover': {
-              backgroundColor: theme === 'light' ? 'rgba(0, 115, 230, 0.1)' : 'transparent',
+              backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
             },
           }}
         >
@@ -112,10 +113,10 @@ const SplitButton = ({
           aria-haspopup='menu'
           onClick={handleButtonClick}
           sx={{
-            backgroundColor: theme === 'light' ? 'rgba(0, 115, 230, 0.1)' : 'transparent',
+            backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
             color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
             '&:hover': {
-              backgroundColor: theme === 'light' ? 'rgba(0, 115, 230, 0.1)' : 'transparent',
+              backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
             },
           }}
         >
@@ -147,7 +148,7 @@ const SplitButton = ({
               handleMenuItemClick(button);
             }}
             sx={{
-              backgroundColor: button.id === selectedButton.id ? 'rgba(0, 115, 230, 0.1)' : 'transparent',
+              backgroundColor: button.id === selectedButton.id ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
               color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
             }}
           >
@@ -166,6 +167,7 @@ export const ButtonSwitchRowBlock = ({
   selectedButton,
 }: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
+  const { palette } = useTheme();
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
@@ -176,10 +178,10 @@ export const ButtonSwitchRowBlock = ({
           text: button.text,
           sx: {
             width: { md: 'auto', xs: '100%' },
-            backgroundColor: button.id === selectedButton.id ? 'rgba(0, 115, 230, 0.1)' : 'transparent',
+            backgroundColor: button.id === selectedButton.id ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
             color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
             '&:hover': {
-              backgroundColor: 'rgba(0, 115, 230, 0.1)',
+              backgroundColor: palette.custom.editorialSwitchButtonsBackgroundLightBlue,
             },
           },
           variant: 'outlined',

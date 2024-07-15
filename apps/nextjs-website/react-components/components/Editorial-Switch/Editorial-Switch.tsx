@@ -113,13 +113,13 @@ const EditorialSwitch = ({
                 key={section.button.id}
                 onClick={() => handleButtonClick(section.button)}
                 sx={{
-                  backgroundColor: section.button.id === selectedSection.button.id ? (theme === 'light' ? 'rgba(0, 115, 230, 0.1)' : palette.background.paper) : 'transparent',
+                  backgroundColor: section.button.id === selectedSection.button.id ? (theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : palette.background.paper) : 'transparent',
                   color: section.button.id === selectedSection.button.id ? (theme === 'light' ? palette.primary.main : palette.custom.primaryColorDark) : (theme === 'light' ? palette.primary.main : palette.primary.contrastText),
                   borderColor: theme === 'light' ? palette.primary.main : palette.background.paper,
                   '&:hover': {
-                    backgroundColor: section.button.id ? (theme === 'light' ? 'rgba(0, 115, 230, 0.1)' : palette.background.paper) : 'rgba(255, 255, 255, 0.1)',
+                    backgroundColor: section.button.id ? (theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : palette.background.paper) : palette.custom.editorialSwitchButtonsBackgroundWhite,
                     color: theme === 'light' ? palette.primary.main : palette.custom.primaryColorDark,
-                    borderColor: section.button.id ? ( theme === 'light' ? palette.primary.main : palette.background.paper ) : 'rgba(255, 255, 255, 0.1)',
+                    borderColor: section.button.id ? ( theme === 'light' ? palette.primary.main : palette.background.paper ) : palette.custom.editorialSwitchButtonsBackgroundWhite,
                   },
                 }}
                 disableRipple
