@@ -12,6 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { ArrowDropDown } from '@mui/icons-material';
+import { useMediaQuery, useTheme as useMuiTheme } from '@mui/material';
 import {
   HeaderProps,
   MenuDropdownProp,
@@ -42,9 +43,14 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
         xs: 'transparent',
       },
       backgroundColor: { xs: 'white', md: 'transparent' },
+      height: '100%', // Ensure menu occupies full height
     },
     link: {
       textIndent: { xs: spacing(2), md: 0 },
+      display: 'flex',
+      alignItems: 'center',
+      height: '100%', // Ensure link takes full height for proper alignment
+      padding: '0 8px',
     },
     arrowAnimate: {
       transition: 'transform 0.2s',
@@ -123,20 +129,14 @@ const MenuDropdown = (props: MenuDropdownProp) => {
           width: '100%',
           minWidth: 'max-content',
           height: '100%',
-          gap: { xs: 1, md: 1.5 },
           display: 'flex',
           flexDirection: 'row',
           justifyContent: { xs: 'left', md: 'center' },
-          alignItems: { xs: 'center', md: 'flex-end' },
-          paddingLeft: { xs: 2, md: 0 },
+          alignItems: 'center', // Ensure items are centered vertically
         }}
       >
         <Link
-          sx={{
-            justifyContent: { xs: 'left', md: 'center' },
-            alignContent: { xs: 'left', md: 'center' },
-            padding: 0,
-          }}
+          sx={styles.link}
           style={{
             color: active
               ? muiTheme.palette.primary.dark
@@ -208,9 +208,34 @@ const Navigation = ({ menu, theme }: NavigationProps) => (
     direction={{ md: 'row', xs: 'column' }}
     component='nav'
     aria-label='main'
+    className='desktop-menu' // Add class for desktop menu
     sx={{
       width: { xs: '100%', md: 'auto' },
-      height: { xs: 'auto', md: '100%' },
+      height: '100%', // Ensure navigation occupies full height
+      alignItems: 'flex-end',
+    }}
+  >
+    {menu.map((menu, index) => (
+      <MenuDropdown
+        key={index}
+        {...menu}
+        theme={theme}
+        sx={{ py: { xs: 1, sm: 0 }, alignItems: 'flex-end' }}
+      />
+    ))}
+  </Stack>
+);
+
+const MobileNavigation = ({ menu, theme }: NavigationProps) => (
+  <Stack
+    gap={{ md: 4, xs: 0 }}
+    direction={{ md: 'row', xs: 'column' }}
+    component='nav'
+    aria-label='main'
+    className='mobile-menu' // Add class for mobile menu
+    sx={{
+      width: { xs: '100%', md: 'auto' },
+      height: '100%', // Ensure navigation occupies full height
       alignItems: 'flex-end',
     }}
   >
@@ -297,6 +322,8 @@ const Header = ({
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
     null
   );
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
 
   const openHeader = () => {
     setMenuOpen(true);
@@ -340,7 +367,7 @@ const Header = ({
           direction='row'
           justifyContent='space-between'
           alignItems='center'
-          sx={{ padding: '16px 24px' }}
+          sx={{ padding: '16px 24px' }} // Add padding around logo and CTA
         >
           <HeaderTitle
             theme={theme}
@@ -355,6 +382,7 @@ const Header = ({
             gap={2}
             sx={{
               display: { xs: 'flex', md: 'flex' },
+              height: '100%',
             }}
           >
             <Link
@@ -364,6 +392,10 @@ const Header = ({
                 color: 'primary.main',
                 fontWeight: 'bold',
                 fontSize: '14px',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0 8px', // Added padding to individual items
               }}
             >
               Serve aiuto?
@@ -392,79 +424,83 @@ const Header = ({
 
         <Divider />
 
-        <Stack
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'
-          sx={{
-            flex: 1,
-            width: '100%',
-            display: { xs: 'none', md: 'flex' },
-            padding: { xs: '8px 24px', md: '8px 24px' },
-          }}
-        >
-          <Navigation
-            menu={menu.map((menu, index) => ({
-              ...menu,
-              isOpen: openDropdownIndex === index,
-              onClick: () =>
-                setOpenDropdownIndex(
-                  openDropdownIndex === index ? null : index
-                ),
-            }))}
-            theme={theme}
-          />
-          <Box>
-            <HeaderCtas />
-          </Box>
-        </Stack>
-
-        <Stack
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'
-          sx={{
-            display: { xs: 'flex', md: 'none' },
-            width: '100%',
-            padding: '8px 24px',
-          }}
-        >
-          <Stack direction='row' alignItems='center' gap={1}>
-            <HamburgerMenu
-              onOpen={openHeader}
-              onClose={closeHeader}
-              open={menuOpen}
+        {!isMobile && (
+          <Stack
+            direction='row'
+            justifyContent='space-between'
+            alignItems='center'
+            sx={{
+              height: '64px', // Set fixed height for the navigation area
+              padding: '0px 24px', // Add padding to the second row
+            }}
+          >
+            <Navigation
+              menu={menu.map((menu, index) => ({
+                ...menu,
+                isOpen: openDropdownIndex === index,
+                onClick: () =>
+                  setOpenDropdownIndex(
+                    openDropdownIndex === index ? null : index
+                  ),
+              }))}
+              theme={theme}
             />
-            <Typography variant='body1' color='text.secondary'>
-              Menu
-            </Typography>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              <HeaderCtas />
+            </Box>
           </Stack>
-          <Box>
-            <HeaderCtas />
-          </Box>
-        </Stack>
+        )}
 
-        <Stack
-          direction='column'
-          sx={{
-            display: { xs: menuOpen ? 'flex' : 'none', md: 'none' },
-            width: '100%',
-            alignItems: 'flex-start',
-            padding: '8px 24px',
-          }}
-        >
-          <Navigation
-            menu={menu.map((menu, index) => ({
-              ...menu,
-              isOpen: openDropdownIndex === index,
-              onClick: () =>
-                setOpenDropdownIndex(
-                  openDropdownIndex === index ? null : index
-                ),
-            }))}
-            theme={theme}
-          />
-        </Stack>
+        {isMobile && (
+          <Stack
+            direction='row'
+            justifyContent='space-between'
+            alignItems='center'
+            sx={{
+              display: { xs: 'flex', md: 'none' },
+              width: '100%',
+              padding: '8px 24px',
+            }}
+          >
+            <Stack direction='row' alignItems='center' gap={1}>
+              <HamburgerMenu
+                onOpen={openHeader}
+                onClose={closeHeader}
+                open={menuOpen}
+              />
+              <Typography variant='body1' color='text.secondary'>
+                Menu
+              </Typography>
+            </Stack>
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+              <HeaderCtas />
+            </Box>
+          </Stack>
+        )}
+
+        {isMobile && menuOpen && (
+          <Stack
+            direction='column'
+            sx={{
+              display: { xs: 'flex', md: 'none' },
+              width: '100%',
+              alignItems: 'flex-start',
+              padding: '8px 24px',
+            }}
+          >
+            <MobileNavigation
+              menu={menu.map((menu, index) => ({
+                ...menu,
+                isOpen: openDropdownIndex === index,
+                onClick: () =>
+                  setOpenDropdownIndex(
+                    openDropdownIndex === index ? null : index
+                  ),
+              }))}
+              theme={theme}
+            />
+          </Stack>
+        )}
       </Stack>
     </Box>
   );
