@@ -36,7 +36,7 @@ const BannerLink = (props: BannerLinkProps) => {
 
   const iconColor = theme === 'dark' ? palette.primary.contrastText : palette.primary.dark;
   const lightBackgrounds = [ palette.grey[100], palette.grey[50]];
-  const darkBackgrounds = ['#0B3EE3', '#1043e8'];
+  const darkBackgrounds = [ palette.custom.bannerLinkDarkBlue, palette.custom.bannerLinkLightBlue ];
 
   return (
     <Box bgcolor={backgroundColor} component='section' sx={{ width: '100%', padding: 0, margin: 0 }}>
