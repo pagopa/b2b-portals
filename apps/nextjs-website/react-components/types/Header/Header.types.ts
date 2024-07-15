@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { LinkProps, StackProps } from "@mui/material";
 import { CommonProps, CtaButtonProps } from "../common/Common.types";
 
@@ -18,6 +17,8 @@ export interface MenuDropdownProp
   label: string;
   active?: boolean;
   items?: DropdownItem[];
+  isOpen?: boolean;
+  onClick?: () => void;
 }
 
 export interface NavigationProps extends CommonProps {
@@ -38,5 +39,5 @@ export interface HeaderTitleProps extends CommonProps {
 }
 
 export interface DialogBubbleProps extends StackProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }

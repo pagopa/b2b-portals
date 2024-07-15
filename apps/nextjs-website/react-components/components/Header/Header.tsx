@@ -5,10 +5,8 @@ import {
   Typography,
   Divider,
   useTheme,
-  useMediaQuery,
   Theme,
   Chip,
-  StackProps,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -30,8 +28,6 @@ import {
 import { CtaButtons } from '../common/Common';
 import { useState, useEffect } from 'react';
 
-const TIMEOUT_LENGTH = 100;
-
 const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
   const textColor = TextAlternativeColor(theme);
 
@@ -52,7 +48,6 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
     },
     arrowAnimate: {
       transition: 'transform 0.2s',
-      transform: { xs: 'rotate(-180deg)', md: '' },
     },
   };
 };
@@ -61,16 +56,14 @@ const DialogBubble = ({ children, ...stackProps }: DialogBubbleProps) => {
   const muiTheme = useTheme();
   const styles = {
     bubbleContainer: {
-      transform: 'rotate(180deg)',
       position: 'absolute',
-      marginTop: { xs: '0px', md: '-30px' },
+      marginTop: muiTheme.spacing(4),
       padding: muiTheme.spacing(2),
-      direction: 'rtl',
+      direction: 'ltr',
       textAlign: { xs: 'right', md: 'left' },
       borderRadius: '4px',
       zIndex: 1,
     },
-    bubble: { transform: 'rotate(180deg)' },
   };
 
   return (
@@ -81,10 +74,9 @@ const DialogBubble = ({ children, ...stackProps }: DialogBubbleProps) => {
         boxShadow: { xs: 'custom.boxShadow', md: 'custom.otMenuMobile' },
       }}
       aria-haspopup='true'
+      {...stackProps}
     >
-      <Stack sx={styles.bubble} {...stackProps}>
-        {children}
-      </Stack>
+      {children}
     </Stack>
   );
 };
@@ -119,76 +111,10 @@ const HamburgerMenu = ({
   );
 
 const MenuDropdown = (props: MenuDropdownProp) => {
-  const { label, active, theme, items, ...button } = props;
-  const [menuHover, setMenuHover] = useState(false);
-  const [dropdownHover, setDropdownHover] = useState(false);
-
-  const clickOnMenu = () => {
-    setMenuHover(true);
-  };
-
-  const leavesMenu = () => {
-    setTimeout(() => {
-      setMenuHover(false);
-    }, TIMEOUT_LENGTH);
-  };
-
-  const hoverOnDropdown = () => {
-    setDropdownHover(true);
-  };
-
-  const leavesDropdown = () => {
-    setTimeout(() => {
-      setDropdownHover(false);
-    }, TIMEOUT_LENGTH);
-  };
-
-  const toggleMenu = () => {
-    setMenuHover((status) => !status);
-  };
-
-  const hasLinks = items?.length;
+  const { label, active, theme, items, isOpen, onClick, ...button } = props;
   const muiTheme = useTheme();
-  const md = useMediaQuery(muiTheme.breakpoints.up('md'));
   const styles = useStyles(props, muiTheme);
-
-  const dropdownVisible = menuHover || dropdownHover;
-
-  const menuEventsHandlers = md
-    ? {
-        onClick: clickOnMenu,
-        onMouseLeave: leavesMenu,
-      }
-    : {
-        onClick: toggleMenu,
-      };
-
-  const DropdownParent = ({
-    children,
-    ...props
-  }: React.PropsWithChildren<Omit<StackProps, 'ref'>>) => (
-    <Box
-      component='div'
-      {...props}
-      onMouseEnter={hoverOnDropdown}
-      onMouseLeave={leavesDropdown}
-    >
-      {children}
-    </Box>
-  );
-
-  const Dropdown = ({
-    children,
-    ...stackProps
-  }: React.PropsWithChildren<StackProps>) => (
-    <DialogBubble
-      {...stackProps}
-      onMouseEnter={hoverOnDropdown}
-      onMouseLeave={leavesDropdown}
-    >
-      {children}
-    </DialogBubble>
-  );
+  const hasLinks = items?.length;
 
   return (
     <Stack sx={styles.menu}>
@@ -218,6 +144,7 @@ const MenuDropdown = (props: MenuDropdownProp) => {
             textDecoration: 'none',
           }}
           {...button}
+          onClick={onClick}
         >
           <Typography
             variant='sidenav'
@@ -230,48 +157,46 @@ const MenuDropdown = (props: MenuDropdownProp) => {
             }}
           >
             {label}
+            {hasLinks && (
+              <ArrowDropDown
+                color='inherit'
+                fontSize='small'
+                sx={{
+                  transition: 'transform 0.2s',
+                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  marginLeft: '4px',
+                  cursor: 'pointer',
+                }}
+              />
+            )}
           </Typography>
         </Link>
-        {hasLinks && (
-          <ArrowDropDown
-            color='inherit'
-            fontSize='small'
-            sx={{
-              ...(!md && dropdownVisible && styles.arrowAnimate),
-              height: '100%',
-              cursor: 'pointer',
-            }}
-            {...menuEventsHandlers}
-          />
-        )}
       </Box>
-      {hasLinks && dropdownVisible && (
-        <DropdownParent>
-          {hasLinks && dropdownVisible && (
-            <Dropdown gap={1}>
-              {items?.map((item: DropdownItem, index) => (
-                <Link
-                  variant='body1'
-                  underline='none'
-                  key={item.key ?? index}
-                  sx={styles.link}
-                  style={{
-                    color: active
-                      ? muiTheme.palette.primary.dark
-                      : muiTheme.palette.text.secondary,
-                    textDecoration: 'none',
-                    fontSize: '1em',
-                    fontWeight: 600,
-                    padding: 0,
-                  }}
-                  {...item}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </Dropdown>
-          )}
-        </DropdownParent>
+      {hasLinks && isOpen && (
+        <DialogBubble>
+          <Stack gap={1}>
+            {items?.map((item: DropdownItem, index) => (
+              <Link
+                variant='body1'
+                underline='none'
+                key={item.key ?? index}
+                sx={styles.link}
+                style={{
+                  color: active
+                    ? muiTheme.palette.primary.dark
+                    : muiTheme.palette.text.secondary,
+                  textDecoration: 'none',
+                  fontSize: '1em',
+                  fontWeight: 600,
+                  padding: 0,
+                }}
+                {...item}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </Stack>
+        </DialogBubble>
       )}
     </Stack>
   );
@@ -368,8 +293,10 @@ const Header = ({
   logo,
 }: HeaderProps) => {
   const backgroundColor = BackgroundColor(theme);
-
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
+    null
+  );
 
   const openHeader = () => {
     setMenuOpen(true);
@@ -476,7 +403,17 @@ const Header = ({
             padding: { xs: '8px 24px', md: '8px 24px' },
           }}
         >
-          <Navigation {...{ menu, theme }} />
+          <Navigation
+            menu={menu.map((menu, index) => ({
+              ...menu,
+              isOpen: openDropdownIndex === index,
+              onClick: () =>
+                setOpenDropdownIndex(
+                  openDropdownIndex === index ? null : index
+                ),
+            }))}
+            theme={theme}
+          />
           <Box>
             <HeaderCtas />
           </Box>
@@ -516,7 +453,17 @@ const Header = ({
             padding: '8px 24px',
           }}
         >
-          <Navigation {...{ menu, theme }} />
+          <Navigation
+            menu={menu.map((menu, index) => ({
+              ...menu,
+              isOpen: openDropdownIndex === index,
+              onClick: () =>
+                setOpenDropdownIndex(
+                  openDropdownIndex === index ? null : index
+                ),
+            }))}
+            theme={theme}
+          />
         </Stack>
       </Stack>
     </Box>
