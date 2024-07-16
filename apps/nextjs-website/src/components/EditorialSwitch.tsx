@@ -9,28 +9,17 @@ const makeEditorialSwitchProps = ({
   toptitle,
   topsubtitle,
   sections,
-  reversed = false,
-  width = 'standard',
-  theme,
-  pattern = 'none',
   ...rest
 }: EditorialSwitchSection): EditorialSwitchProps => ({
   toptitle,
-  topsubtitle: topsubtitle || '',
+  ...(topsubtitle && { subtitle: MarkdownRenderer({ markdown: topsubtitle }) }),
   sections: sections.map(({ button, content }) => ({
     button,
     content: {
       ...content,
-      body: MarkdownRenderer({
-        markdown: content.body,
-        variant: 'body2',
-      }) as unknown as JSX.Element,
+      body: MarkdownRenderer({ markdown: content.body, variant: 'body2' }),
     },
   })),
-  reversed,
-  width,
-  theme,
-  pattern,
   ...rest,
 });
 

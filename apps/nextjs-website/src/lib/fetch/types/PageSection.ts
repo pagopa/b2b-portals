@@ -248,13 +248,7 @@ const EditorialSwitchSectionCodec = t.strict({
       }),
     })
   ),
-  reversed: t.union([t.boolean, t.undefined]),
-  pattern: t.union([
-    t.literal('dots'),
-    t.literal('solid'),
-    t.literal('none'),
-    t.undefined,
-  ]),
+  reversed: t.boolean,
 });
 
 export const PageSectionCodec = t.union([

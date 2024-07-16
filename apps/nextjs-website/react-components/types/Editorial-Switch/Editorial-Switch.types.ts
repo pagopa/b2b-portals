@@ -40,6 +40,6 @@ export interface EditorialSwitchProps {
   reversed?: boolean;
   width?: 'wide' | 'standard' | 'center';
   toptitle: string;
-  topsubtitle?: string | null; 
+  topsubtitle?: string;
   pattern?: 'dots' | 'solid' | 'none';
 }
