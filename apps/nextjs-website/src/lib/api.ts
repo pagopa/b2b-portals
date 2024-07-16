@@ -5,8 +5,7 @@ import { AppEnv, Config, makeAppEnv } from '../AppEnv';
 import { getNavigation, PageData } from './fetch/navigation';
 import { PreHeaderData, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
-import { getHeader } from './fetch/header';
-import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
+import { getHeader, HeaderData } from './fetch/header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
@@ -44,11 +43,11 @@ export const getPreHeaderProps = async (): Promise<
   return attributes;
 };
 
-export const getHeaderProps = async (): Promise<HeaderWithNavigation> => {
+export const getHeaderProps = async (): Promise<
+  HeaderData['data']['attributes']
+> => {
   const header = await getHeader(appEnv);
-  // Currently implementing a navigation-less header
-  // TODO: Implement header with menu (both Header and MegaHeader)
-  return makeHeaderWithNavigation({ data: [] }, header);
+  return header.data.attributes;
 };
 
 export const getFooterProps = async (): Promise<

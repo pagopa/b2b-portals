@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { getHeader } from '../header';
+import { getHeader, HeaderData } from '../header';
 import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
@@ -20,7 +20,7 @@ const makeTestAppEnv = () => {
 };
 
 // response example
-const headerResponse = {
+const headerResponse: HeaderData = {
   data: {
     attributes: {
       productName: 'Test',
@@ -37,6 +37,12 @@ const headerResponse = {
       logo: {
         data: null,
       },
+      menu: [
+        {
+          __component: 'menu.menu',
+          links: [],
+        },
+      ],
     },
   },
 };
@@ -53,7 +59,7 @@ describe('getHeader', () => {
     await getHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons,logo`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/header?populate=ctaButtons,logo,menu.links.page,menu.links.sublinks.page,menu.links.sublinkGroups.sublinks.page`,
       {
         method: 'GET',
         headers: {
