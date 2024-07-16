@@ -22,12 +22,12 @@ const PreHeaderCodec = t.strict({
 });
 
 // Types
-export type PreHeader = t.TypeOf<typeof PreHeaderCodec>;
+export type PreHeaderData = t.TypeOf<typeof PreHeaderCodec>;
 
 export const getPreHeader = ({
   config,
   fetchFun,
-}: AppEnv): Promise<PreHeader> =>
+}: AppEnv): Promise<PreHeaderData> =>
   extractFromResponse(
     fetchFun(
       `${

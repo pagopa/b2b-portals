@@ -57,12 +57,15 @@ const SplitButton = ({
   buttons,
   selectedButton,
   onButtonClick,
+  theme,
 }: {
   buttons: { id: string; text: string }[];
   selectedButton: { id: string; text: string };
   onButtonClick: (button: { id: string; text: string }) => void;
   theme: string;
 }) => {
+  const muiTheme = useTheme();
+  const { palette } = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [open, setOpen] = React.useState(false);
 
@@ -94,14 +97,28 @@ const SplitButton = ({
           onClick={() => {
             onButtonClick(selectedButton);
           }}
+          sx={{
+            backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
+            color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+            '&:hover': {
+              backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
+            },
+          }}
         >
-          {selectedButton.text}{' '}
+          {selectedButton.text}
         </Button>
         <Button
           aria-controls={open ? 'split-button-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
           aria-haspopup='menu'
           onClick={handleButtonClick}
+          sx={{
+            backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
+            color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+            '&:hover': {
+              backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
+            },
+          }}
         >
           <ArrowDropDown />
         </Button>
@@ -130,8 +147,12 @@ const SplitButton = ({
             onClick={() => {
               handleMenuItemClick(button);
             }}
+            sx={{
+              backgroundColor: button.id === selectedButton.id ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
+              color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+            }}
           >
-            {button.text} {/* Use the text property of the button object */}
+            {button.text}
           </MenuItem>
         ))}
       </Menu>
@@ -146,6 +167,7 @@ export const ButtonSwitchRowBlock = ({
   selectedButton,
 }: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
+  const { palette } = useTheme();
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
@@ -154,7 +176,14 @@ export const ButtonSwitchRowBlock = ({
       {CtaButtons({
         ctaButtons: buttons.map((button) => ({
           text: button.text,
-          sx: { width: { md: 'auto', xs: '100%' } },
+          sx: {
+            width: { md: 'auto', xs: '100%' },
+            backgroundColor: button.id === selectedButton.id ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
+            color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+            '&:hover': {
+              backgroundColor: palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+            },
+          },
           variant: 'outlined',
           onClick: () => onButtonClick(button),
         })),

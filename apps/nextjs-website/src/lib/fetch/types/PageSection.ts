@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
-import { ImageDataCodec } from './StrapiImage';
+import { StrapiImageRequiredSchema, StrapiImageSchema } from './StrapiImage';
 import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
 import { HowToStepMUIIconCodec } from './icons/HowToStepIcon';
 import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
@@ -19,8 +19,8 @@ const HeroSectionCodec = t.strict({
     big: null,
   }),
   sectionID: t.union([t.string, t.null]),
-  image: t.union([ImageDataCodec, t.null]),
-  background: t.union([ImageDataCodec, t.null]),
+  image: StrapiImageSchema,
+  background: StrapiImageSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
 });
@@ -43,7 +43,7 @@ const EditorialSectionCodec = t.strict({
   }),
   reversed: t.boolean,
   sectionID: t.union([t.string, t.null]),
-  image: ImageDataCodec,
+  image: StrapiImageRequiredSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
 });
@@ -124,6 +124,8 @@ const BannerLinkSectionCodec = t.strict({
       icon: t.union([FeatureItemMUIIconCodec, t.null]),
     })
   ),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
+  decoration: StrapiImageSchema,
   sectionID: t.union([t.string, t.null]),
 });
 
@@ -191,7 +193,7 @@ const PreFooterSectionCodec = t.strict({
   title: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
-  background: t.union([ImageDataCodec, t.null]),
+  background: StrapiImageSchema,
 });
 
 const HeroCounterSectionCodec = t.strict({
@@ -200,7 +202,7 @@ const HeroCounterSectionCodec = t.strict({
   subtitle: t.union([t.string, t.null]),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   sectionID: t.union([t.string, t.null]),
-  background: t.union([ImageDataCodec, t.null]),
+  background: StrapiImageSchema,
   counterNumber: t.number,
   counterText: t.string,
 });
@@ -223,6 +225,43 @@ const MegaHeaderSectionCodec = t.strict({
   buttonHref: t.string,
 });
 
+const EditorialSwitchSectionCodec = t.strict({
+  __component: t.literal('sections.editorial-switch'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  toptitle: t.string,
+  topsubtitle: t.union([t.string, t.null]),
+  width: t.union([
+    t.literal('wide'),
+    t.literal('standard'),
+    t.literal('center'),
+  ]),
+  sections: t.array(
+    t.strict({
+      button: t.strict({
+        id: t.string,
+        text: t.string,
+      }),
+      content: t.strict({
+        id: t.string,
+        eyelet: t.string,
+        body: t.string,
+        title: t.string,
+        pattern: t.keyof({
+          none: null,
+          dots: null,
+          solid: null,
+        }),
+        image: t.strict({
+          src: t.string,
+          alt: t.string,
+        }),
+        ctaButtons: t.union([t.array(CTAButtonSimpleCodec), t.undefined]),
+      }),
+    })
+  ),
+  reversed: t.boolean,
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -238,6 +277,7 @@ export const PageSectionCodec = t.union([
   PreFooterSectionCodec,
   HeroCounterSectionCodec,
   MegaHeaderSectionCodec,
+  EditorialSwitchSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -255,3 +295,6 @@ export type FormSection = t.TypeOf<typeof FormSectionCodec>;
 export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
 export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
 export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
+export type EditorialSwitchSection = t.TypeOf<
+  typeof EditorialSwitchSectionCodec
+>;
