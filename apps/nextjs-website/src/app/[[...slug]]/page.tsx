@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { Page } from '@/lib/pages';
 import {
   getAllPages,
   getPageProps,
@@ -8,9 +7,15 @@ import {
 } from '@/lib/api';
 import PageSection from '@/components/PageSection/PageSection';
 
+type PageParams = {
+  params: { slug?: string[] };
+};
+
 // Statically generate routes at build time instead of on-demand at request time.
 // more: https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params
-export const generateStaticParams = async (): Promise<Page[]> =>
+export const generateStaticParams = async (): Promise<
+  Array<PageParams['params']>
+> =>
   // prevents the error during types generation:
   // .next/types/app/[...slug]/page.ts(37,98): error TS2344: Type '{ __tag__:
   // "generateStaticParams"; __return_type__: Promise<readonly Page[]>; }' does
@@ -18,15 +23,19 @@ export const generateStaticParams = async (): Promise<Page[]> =>
   // __return_type__: any[] | Promise<any[]>; }'.
 
   // No need to prerender static routes when in Preview Mode
-  isPreviewMode() ? [] : [...(await getAllPages())];
+  isPreviewMode()
+    ? []
+    : [...(await getAllPages()).map((page) => ({ slug: [page.slug] }))];
 
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
   const { slug } = params;
-  // slug is undefined for homepage (apparently due to generateStaticParams)
-  // so we need to convert it back to [] (which is what getAllPages returns and what getPageProps expects)
-  const pageProps = await getPageProps(slug ?? []);
+  // Check if slug is undefined, which happens for the homepage due to generateStaticParams' internal logic
+  // If it is, set the slug back to ''
+  const slugString = slug === undefined ? '' : slug[0];
+
+  const pageProps = await getPageProps(slugString);
   if (pageProps === undefined) {
     return {};
   }
@@ -56,20 +65,18 @@ export async function generateMetadata({
   };
 }
 
-type PageParams = {
-  params: { slug?: string[] };
-};
-
-const WebPage = async ({ params }: PageParams) => {
+const Page = async ({ params }: PageParams) => {
   // Prevent any page other than /preview from showing when in Preview Mode
   if (isPreviewMode()) {
     return null;
   }
 
   const { slug } = params;
-  // slug is undefined for homepage (apparently due to generateStaticParams)
-  // so we need to convert it back to [] (which is what getAllPages returns and what getPageProps expects)
-  const pageProps = await getPageProps(slug ?? []);
+  // Check if slug is undefined, which happens for the homepage due to generateStaticParams' internal logic
+  // If it is, set the slug back to ''
+  const slugString = slug === undefined ? '' : slug[0];
+
+  const pageProps = await getPageProps(slugString);
   if (pageProps === undefined) {
     return null;
   }
@@ -79,4 +86,4 @@ const WebPage = async ({ params }: PageParams) => {
   return <div>{sections.map(PageSection)}</div>;
 };
 
-export default WebPage;
+export default Page;
