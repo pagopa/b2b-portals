@@ -1,6 +1,4 @@
-import {
-  EditorialCtaProps,
-} from '../Editorial/Editorial.types';
+import { EditorialCtaProps } from '../Editorial/Editorial.types';
 
 export interface TitleSubtitleBlockProps {
   toptitle: string;
@@ -18,7 +16,7 @@ export interface ButtonSwitchRowBlockProps {
 export interface ContentItem {
   id: string;
   eyelet: string;
-  body: string;
+  body: string | JSX.Element;
   title: string;
   ctaButtons?: EditorialCtaProps['ctaButtons'];
   pattern: 'dots' | 'solid' | 'none';
@@ -27,23 +25,13 @@ export interface ContentItem {
     alt: string;
   };
 }
+
 export interface Section {
   button: {
     id: string;
     text: string;
   };
-  content: {
-    id: string;
-    eyelet: string;
-    body: string;
-    title: string;
-    ctaButtons?: { text: string }[];
-    pattern: 'dots' | 'solid' | 'none';
-    image: {
-      src: string;
-      alt: string;
-    };
-  };
+  content: ContentItem;
 }
 
 export interface EditorialSwitchProps {
