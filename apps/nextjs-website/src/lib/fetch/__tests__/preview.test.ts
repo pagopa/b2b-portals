@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import {
-  PageData,
+  PreviewPageData,
   PageIDs,
   fetchAllPageIDs,
   fetchPageFromID,
@@ -41,7 +41,7 @@ const pageIDsResponse: PageIDs = {
   ],
 };
 
-const pageDataResponse: PageData = {
+const pageDataResponse: PreviewPageData = {
   data: {
     attributes: {
       sections: [
@@ -82,7 +82,7 @@ describe('fetchAllPageIDs', () => {
     await fetchAllPageIDs(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?publicationState=preview`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?publicationState=preview&pagination[pageSize]=100`,
       {
         method: 'GET',
         headers: {

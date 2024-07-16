@@ -12,10 +12,10 @@ const makeBannerLinkProps = ({
   ...rest
 }: BannerLinkSection): BannerLinkProps => ({
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
-  ...(decoration && {
+  ...(decoration.data && {
     decoration: {
-      src: decoration.url,
-      alt: decoration.alternativeText || undefined,
+      src: decoration.data.attributes.url,
+      alt: decoration.data.attributes.alternativeText || undefined,
       width: '60px',
       height: '60px',
     },

@@ -11,7 +11,7 @@ const makeHeroCounterProps = ({
 }: HeroCounterSection): HeroCounterProps => ({
   ...rest,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
-  ...(background && { background: background.url }),
+  ...(background.data && { background: background.data.attributes.url }),
 });
 
 const HeroCounter = (props: HeroCounterSection) => (
