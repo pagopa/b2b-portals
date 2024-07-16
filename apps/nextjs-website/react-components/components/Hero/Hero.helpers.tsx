@@ -1,7 +1,12 @@
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { HeroTextProps } from '../../types/Hero/Hero.types';
 import { CtaButtons, Subtitle, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
+import { useTheme, useMediaQuery } from '@mui/material';
+import Button from '@mui/material/Button';
+import appleBadgeBase64 from '../Editorial/BadgeImages/appleBadgeBase64';
+import googleBadgeBase64 from '../Editorial/BadgeImages/googleBadgeBase64';
+import Image from 'next/image';
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
   size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
@@ -17,10 +22,13 @@ export const HeroTextContent = ({
   title,
   subtitle,
   ctaButtons,
+  storeButtons,
   theme,
   size,
 }: HeroTextProps) => {
   const textColor = TextColor(theme);
+  const muiTheme = useTheme();
+  const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
   return (
     <Stack
@@ -46,11 +54,65 @@ export const HeroTextContent = ({
           textAlign={size === 'small' ? 'center' : 'left'}
         />
       </Stack>
-      {ctaButtons?.length ? (
+      {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
+        <Stack direction='column' spacing={1}>
+          <Typography color={textColor} fontWeight={700}>
+            Scarica l'app
+          </Typography>
+          <Stack
+            justifyContent='left'
+            alignItems='baseline'
+            spacing={2}
+            direction={isSmallScreen ? 'column' : 'row'}
+          >
+            {storeButtons.hrefGoogle && (
+              <Button
+                sx={{
+                  padding: '0px',
+                  marginLeft: '0px',
+                  '@media screen and (min-width: 420px)': {
+                    marginLeft: '16px',
+                  },
+                  justifyContent: 'start',
+                }}
+                key='google'
+                href={storeButtons.hrefGoogle}
+              >
+                <Image
+                  src={googleBadgeBase64}
+                  alt='Download on Google Play'
+                  height={0}
+                  width={0}
+                  style={{ height: '3em', width: 'auto' }}
+                />
+              </Button>
+            )}
+            {storeButtons.hrefApple && (
+              <Button
+                sx={{
+                  padding: '0px',
+                  margin: '0px',
+                  justifyContent: 'start',
+                }}
+                key='apple'
+                href={storeButtons.hrefApple}
+              >
+                <Image
+                  src={appleBadgeBase64}
+                  alt='Download on App store'
+                  height={0}
+                  width={0}
+                  style={{ height: '3em', width: 'auto' }}
+                />
+              </Button>
+            )}
+          </Stack>
+        </Stack>
+      ) : ctaButtons && ctaButtons.length > 0 ? (
         <Stack
-          direction={{ xs: 'column', md: 'row' }}
+          direction={isSmallScreen ? 'column' : 'row'}
+          justifyContent='left'
           spacing={2}
-          mb={{ xs: 8, lg: 0 }}
         >
           {CtaButtons({
             ctaButtons: ctaButtons.map((button) => ({

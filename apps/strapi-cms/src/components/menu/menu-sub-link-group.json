@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_menu_menu_sub_link_groups",
+  "info": {
+    "displayName": "Menu SubLink Group"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "sublinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.menu-sub-link",
+      "required": true
+    }
+  }
+}

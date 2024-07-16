@@ -34,6 +34,15 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "menu": {
+      "type": "dynamiczone",
+      "components": [
+        "menu.menu",
+        "menu.mega-menu"
+      ],
+      "required": true,
+      "max": 1
     }
   }
 }
