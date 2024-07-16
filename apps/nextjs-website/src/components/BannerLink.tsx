@@ -8,10 +8,12 @@ const makeBannerLinkProps = ({
 }: BannerLinkSection): BannerLinkProps => ({
   sections: sections.map((section: any) => ({
     ...section,
-    decoration: section.decoration ? {
-      src: section.decoration.url,
-      alt: section.decoration.alternativeText || undefined,
-    } : undefined,
+    decoration: section.decoration
+      ? {
+          src: section.decoration.url,
+          alt: section.decoration.alternativeText || undefined,
+        }
+      : undefined,
     icon: section.title,
   })),
   ...rest,
