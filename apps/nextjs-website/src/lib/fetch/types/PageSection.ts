@@ -5,6 +5,7 @@ import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
 import { HowToStepMUIIconCodec } from './icons/HowToStepIcon';
 import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
 import { CardsItemMUIIconCodec } from './icons/CardsItemIcon';
+import { StoreButtonsCodec } from './StoreButtons';
 
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
@@ -21,11 +22,7 @@ const HeroSectionCodec = t.strict({
   image: t.union([ImageDataCodec, t.null]),
   background: t.union([ImageDataCodec, t.null]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
-});
-
-const StoreButtonsCodec = t.strict({
-  hrefGoogle: t.union([t.string, t.null]),
-  hrefApple: t.union([t.string, t.null]),
+  storeButtons: t.union([StoreButtonsCodec, t.null]),
 });
 
 const EditorialSectionCodec = t.strict({

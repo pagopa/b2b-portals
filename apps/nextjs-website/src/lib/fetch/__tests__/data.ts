@@ -22,6 +22,10 @@ export const homepageNavItem: Navigation[0] = {
         image: null,
         background: null,
         ctaButtons: [],
+        storeButtons: {
+          hrefGoogle: 'https://play.google.com',
+          hrefApple: 'https://apple.com',
+        },
         inverse: false,
         sectionID: null,
         size: 'small',
@@ -96,6 +100,10 @@ export const childNavItem: Navigation[0] = {
         image: null,
         background: null,
         ctaButtons: [],
+        storeButtons: {
+          hrefGoogle: 'https://play.google.com',
+          hrefApple: 'https://apple.com',
+        },
         inverse: false,
         sectionID: null,
         size: 'small',

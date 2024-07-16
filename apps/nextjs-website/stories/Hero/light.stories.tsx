@@ -21,6 +21,17 @@ LightHeroBig.args = {
   inverse: false,
 };
 
+export const LightHeroBigStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
+LightHeroBigStoreButtons.args = {
+  ...defaultsLightWithoutButtons,
+  size: 'big',
+  inverse: false,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
+};
+
 export const LightHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
 LightHeroBigNoButtons.args = {
   ...defaultsLightWithoutButtons,
@@ -33,6 +44,18 @@ LightHeroBigInverted.args = {
   ...defaultsLightWithButtons,
   size: 'big',
   inverse: true,
+};
+
+export const LightHeroBigInvertedStoreButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+LightHeroBigInvertedStoreButtons.args = {
+  ...defaultsLightWithoutButtons,
+  size: 'big',
+  inverse: true,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
 };
 
 export const LightHeroBigInvertedNoButtons: StoryFn<typeof Hero> =
@@ -48,6 +71,19 @@ LightHeroMedium.args = {
   ...defaultsLightWithButtons,
   size: 'medium',
   inverse: false,
+};
+
+export const LightHeroMediumStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
+LightHeroMediumStoreButtons.args = {
+  ...defaultsLightWithoutButtons,
+  size: 'medium',
+  inverse: false,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
 };
 
 export const LightHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
@@ -66,6 +102,18 @@ LightHeroMediumInverted.args = {
   ...defaultsLightWithButtons,
   size: 'medium',
   inverse: true,
+};
+
+export const LightHeroMediumInvertedStoreButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+LightHeroMediumInvertedStoreButtons.args = {
+  ...defaultsLightWithoutButtons,
+  size: 'medium',
+  inverse: true,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
 };
 
 export const LightHeroMediumInvertedNoButtons: StoryFn<typeof Hero> =

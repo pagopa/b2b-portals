@@ -21,6 +21,17 @@ DarkHeroBig.args = {
   inverse: false,
 };
 
+export const DarkHeroBigStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
+DarkHeroBigStoreButtons.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'big',
+  inverse: false,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
+};
+
 export const DarkHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroBigNoButtons.args = {
   ...defaultsDarkWithoutButtons,
@@ -33,6 +44,18 @@ DarkHeroBigInverted.args = {
   ...defaultsDarkWithButtons,
   size: 'big',
   inverse: true,
+};
+
+export const DarkHeroBigInvertedStoreButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+DarkHeroBigInvertedStoreButtons.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'big',
+  inverse: true,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
 };
 
 export const DarkHeroBigInvertedNoButtons: StoryFn<typeof Hero> =
@@ -48,6 +71,19 @@ DarkHeroMedium.args = {
   ...defaultsDarkWithButtons,
   size: 'medium',
   inverse: false,
+};
+
+export const DarkHeroMediumStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
+DarkHeroMediumStoreButtons.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'medium',
+  inverse: false,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
 };
 
 export const DarkHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
@@ -66,6 +102,18 @@ DarkHeroMediumInverted.args = {
   ...defaultsDarkWithButtons,
   size: 'medium',
   inverse: true,
+};
+
+export const DarkHeroMediumInvertedStoreButtons: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+DarkHeroMediumInvertedStoreButtons.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'medium',
+  inverse: true,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
 };
 
 export const DarkHeroMediumInvertedNoButtons: StoryFn<typeof Hero> =

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_menu_mega_menu_links",
+  "info": {
+    "displayName": "MegaMenu Link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "sublinkGroups": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.menu-sub-link-group",
+      "required": true,
+      "max": 3
+    }
+  }
+}
