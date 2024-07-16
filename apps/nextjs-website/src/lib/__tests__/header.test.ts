@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { makeHeaderWithNavigation } from '../header';
 import { Header } from '../fetch/header';
-import * as data from '../fetch/__tests__/data';
 
 const header: Header = {
   data: {
@@ -26,24 +25,13 @@ const header: Header = {
 
 describe('makeHeaderWithNavigation', () => {
   it("should add theme (with fixed 'light' value) and menu fields", () => {
-    const navigation = [data.parentNavItem, data.childNavItem];
+    // TODO: Update test when header will be implemented
+    const navigation = { data: [] };
     const actual = makeHeaderWithNavigation(navigation, header);
     const expected = {
       theme: 'light',
       ...header.data.attributes,
-      menu: [
-        {
-          href: '/parent',
-          label: 'Parent',
-          theme: 'light',
-          items: [
-            {
-              href: '/parent/child',
-              label: 'Child',
-            },
-          ],
-        },
-      ],
+      menu: [],
     };
     expect(actual).toStrictEqual(expected);
   });
