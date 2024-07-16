@@ -120,7 +120,7 @@ const BannerLinkSectionCodec = t.strict({
       extraNormalText: t.union([t.string, t.null]),
       link: t.string,
       ctaButtons: t.array(CTAButtonSimpleCodec),
-      decoration: t.union([ImageDataCodec, t.type({ src: t.string, alt: t.union([t.string, t.undefined]) }), t.null]),
+      decoration: StrapiImageSchema,
       icon: t.union([FeatureItemMUIIconCodec, t.null]),
     })
   ),
