@@ -4,7 +4,6 @@ import { BackgroundColor } from '../common/Common.helpers';
 import { Content as BannerLinkContent } from './Content';
 import { isJSX } from '../../types/common/Common.types';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
-import { CtaButtonProps } from '../../types/common/Common.types';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 
@@ -55,7 +54,7 @@ const BannerLink = (props: BannerLinkProps) => {
               justifyContent: 'center',
             }}
           >
-            {section.icon && React.isValidElement(section.icon) && React.cloneElement(section.icon as React.ReactElement<any>, { style: { fontSize: 60, color: iconColor } })}
+            {section.icon && React.isValidElement(section.icon) && React.cloneElement(section.icon as React.ReactElement, { style: { fontSize: 60, color: iconColor } })}
             {section.decoration ? (
               isJSX(section.decoration) ? (
                 section.decoration
@@ -66,7 +65,7 @@ const BannerLink = (props: BannerLinkProps) => {
             <BannerLinkContent {...section} theme={theme} />
             {section.ctaButtons?.length &&
               CtaButtons({
-                ctaButtons: section.ctaButtons.map((button: CtaButtonProps) => ({
+                ctaButtons: section.ctaButtons.map((button) => ({
                   ...button,
                   sx: { width: 'auto' },
                   variant: 'outlined'
