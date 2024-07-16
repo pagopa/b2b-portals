@@ -219,7 +219,11 @@ const EditorialSwitchSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   toptitle: t.string,
   topsubtitle: t.union([t.string, t.null]),
-  width: t.union([t.literal('wide'), t.literal('standard'), t.literal('center')]),
+  width: t.union([
+    t.literal('wide'),
+    t.literal('standard'),
+    t.literal('center'),
+  ]),
   sections: t.array(
     t.strict({
       button: t.strict({
@@ -245,7 +249,12 @@ const EditorialSwitchSectionCodec = t.strict({
     })
   ),
   reversed: t.union([t.boolean, t.undefined]),
-  pattern: t.union([t.literal('dots'), t.literal('solid'), t.literal('none'), t.undefined]),
+  pattern: t.union([
+    t.literal('dots'),
+    t.literal('solid'),
+    t.literal('none'),
+    t.undefined,
+  ]),
 });
 
 export const PageSectionCodec = t.union([
@@ -281,4 +290,6 @@ export type FormSection = t.TypeOf<typeof FormSectionCodec>;
 export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
 export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
 export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
-export type EditorialSwitchSection = t.TypeOf<typeof EditorialSwitchSectionCodec>;
+export type EditorialSwitchSection = t.TypeOf<
+  typeof EditorialSwitchSectionCodec
+>;

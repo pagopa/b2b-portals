@@ -11,8 +11,8 @@ import OneTrustSection from '../OneTrust';
 import IFrameSection from '../IFrame';
 import Form from '../Form';
 import MegaHeader from '../MegaHeader';
-import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 import EditorialSwitch from '../EditorialSwitch';
+import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
   // eslint-disable-next-line no-underscore-dangle

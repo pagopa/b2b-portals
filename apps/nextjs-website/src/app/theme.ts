@@ -51,8 +51,8 @@ export const theme = createTheme(MUIItaliaTheme, {
       darkLinkColor: '#1A73E8',
       grayLinkColor: '#F4F5F8',
       black50: '#00000050',
-      editorialSwitchButtonsBackgroundLightBlue : '#0073e61a',
-      editorialSwitchButtonsBackgroundWhite : '#ffffff1a',
+      editorialSwitchButtonsBackgroundLightBlue: '#0073e61a',
+      editorialSwitchButtonsBackgroundWhite: '#ffffff1a',
     },
   },
 });

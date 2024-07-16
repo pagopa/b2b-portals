@@ -21,7 +21,10 @@ const makeEditorialSwitchProps = ({
     button,
     content: {
       ...content,
-      body: MarkdownRenderer({ markdown: content.body, variant: 'body2' }) as unknown as JSX.Element,
+      body: MarkdownRenderer({
+        markdown: content.body,
+        variant: 'body2',
+      }) as unknown as JSX.Element,
     },
   })),
   reversed,
