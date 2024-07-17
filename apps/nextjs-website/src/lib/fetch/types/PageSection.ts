@@ -1,7 +1,6 @@
 import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
 import {
-  ImageDataCodec,
   StrapiImageRequiredSchema,
   StrapiImageSchema,
 } from './StrapiImage';
@@ -259,7 +258,7 @@ const VideoSectionCodec = t.strict({
   __component: t.literal('sections.video'),
   title: t.string,
   subtitle: t.string,
-  src: ImageDataCodec,
+  src: StrapiImageRequiredSchema,
   autoplay: t.boolean,
   loop: t.boolean,
   full: t.boolean,

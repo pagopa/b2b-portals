@@ -14,7 +14,11 @@ const makeVideoProps = ({
   ...rest,
   title,
   subtitle,
-  src,
+  ...(src.data && {
+    src: {
+      src: src.data.attributes.url,
+    },
+  }),
   fallback,
   playButtonLabel,
 });
