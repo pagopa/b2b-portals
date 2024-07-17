@@ -10,7 +10,11 @@ const makeBannerLinkProps = ({
     ({ extraNormalText, icon, decoration, ctaButtons, ...requiredFields }) => ({
       ...requiredFields,
       ...(extraNormalText && { extraNormalText }),
-      ...(icon && { icon }),
+      ...(icon && {
+        icon: {
+          icon,
+        },
+      }),
       ...(ctaButtons && { ctaButtons }),
       ...(decoration.data && {
         decoration: {
