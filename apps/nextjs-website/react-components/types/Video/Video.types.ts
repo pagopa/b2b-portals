@@ -1,14 +1,14 @@
 import { CommonProps, Generic } from '../common/Common.types';
 
-export interface VideoProps extends CommonProps {
+export interface VideoImageProps extends CommonProps {
   /** Video url */
-  src?: string | {
-    alternativeText: string | null;
-    url: string;
-    width: number;
-    height: number;
-    mime: string;
-  };
+  src?:
+    | string
+    | {
+        alternativeText: string | null;
+        url: string;
+        mime: string;
+      };
   /** Video starts automatically as soon is visible */
   autoplay?: boolean;
   loop?: boolean;
@@ -25,6 +25,15 @@ export interface VideoProps extends CommonProps {
   fallback?: string | Generic;
   /** Play button text */
   playButtonLabel?: string;
+  isCentered: boolean;
+  showVideo?: boolean;
+  imagealt?: string;
+  imagesrc?: string;
+}
+
+export interface ImageProps extends CommonProps {
+  imagealt?: string;
+  imagesrc?: string;
 }
 
 export interface VideoTextProps extends CommonProps {

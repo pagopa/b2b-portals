@@ -1,9 +1,6 @@
 import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
-import {
-  StrapiImageRequiredSchema,
-  StrapiImageSchema,
-} from './StrapiImage';
+import { StrapiImageRequiredSchema, StrapiImageSchema } from './StrapiImage';
 import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
 import { HowToStepMUIIconCodec } from './icons/HowToStepIcon';
 import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
@@ -267,6 +264,7 @@ const VideoSectionCodec = t.strict({
   fallback: t.string,
   playButtonLabel: t.string,
   sectionID: t.union([t.string, t.null]),
+  isCentered: t.boolean,
 });
 
 export const PageSectionCodec = t.union([

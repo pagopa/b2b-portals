@@ -1,6 +1,6 @@
 'use client';
 import { Video as VideoRC } from '@react-components/components';
-import { VideoProps } from '@react-components/types';
+import { VideoImageProps } from '@react-components/types';
 import { VideoSection } from '@/lib/fetch/types/PageSection';
 
 const makeVideoProps = ({
@@ -9,18 +9,22 @@ const makeVideoProps = ({
   src,
   fallback,
   playButtonLabel,
+  isCentered,
   ...rest
-}: VideoSection): VideoProps => ({
+}: VideoSection): VideoImageProps => ({
   ...rest,
   title,
   subtitle,
   ...(src.data && {
     src: {
-      src: src.data.attributes.url,
+      url: src.data.attributes.url,
+      alternativeText: src.data.attributes.alternativeText || null,
+      mime: src.data.attributes.mime,
     },
   }),
   fallback,
   playButtonLabel,
+  isCentered,
 });
 
 const Video = (props: VideoSection) => <VideoRC {...makeVideoProps(props)} />;
