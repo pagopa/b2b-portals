@@ -1,18 +1,22 @@
-import { CommonProps, CtaButtonProps, Generic } from "../common/Common.types";
+import { EIconProps } from '@react-components/components/common/EIcon';
+import { CommonProps, CtaButtonProps } from '../common/Common.types';
 
-type ImgProps = React.DetailedHTMLProps<
+export type ImgProps = React.DetailedHTMLProps<
   React.ImgHTMLAttributes<HTMLImageElement>,
   HTMLImageElement
 >;
 
-export interface BannerLinkProps
-  extends CommonProps,
-    BannerLinkContentProps {
+export interface BannerLinkSectionProps {
+  title: string;
+  normalText: string;
+  boldText: string;
+  link: string;
+  extraNormalText?: string;
+  icon?: EIconProps;
+  decoration?: ImgProps;
   ctaButtons?: CtaButtonProps[];
-  decoration?: ImgProps | Generic;
 }
 
-export interface BannerLinkContentProps extends CommonProps {
-  title: string;
-  body: string | JSX.Element;
+export interface BannerLinkProps extends CommonProps {
+  sections: BannerLinkSectionProps[];
 }
