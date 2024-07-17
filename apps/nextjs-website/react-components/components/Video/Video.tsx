@@ -5,23 +5,26 @@ import {
   useIsVisible,
 } from '@react-components/types/common/Common.types';
 import {
+  VideoCaptionProps,
   VideoProps,
   VideoTextProps,
 } from '@react-components/types/Video/Video.types';
 import { TextColor } from '../common/Common.helpers';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { useTheme } from '@mui/material/styles';
 
 const Video = (props: VideoProps) => {
   const {
     title,
     subtitle,
+    caption,
     src,
     autoplay = false,
     loop = false,
     full = false,
-    theme = 'dark',
-    fallback = 'Ops! Qualcosa è andato storto... Riprova in un secondo momento.',
-    playButtonLabel = 'Riproduci Video',
+    theme,
+    fallback,
+    playButtonLabel,
   } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
@@ -86,58 +89,68 @@ const Video = (props: VideoProps) => {
   };
 
   return (
-    <div
-      style={{ maxHeight: '600px', position: 'relative', overflow: 'hidden' }}
-    >
-      {!full && (
+      <>
         <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            padding: '20px',
-            background: 'rgba(0, 0, 0, 0.60)', // Adjusted for full cover and darker for better readability
-            color: textColor,
-          }}
+          style={{ maxHeight: '600px', position: 'relative', overflow: 'hidden' }}
         >
-          <div style={{ marginLeft: '6em', zIndex: 50 }}>
-            <VideoText title={title} subtitle={subtitle} theme={theme} />
+          {!full && (
             <div
-              onClick={play}
               style={{
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
                 display: 'flex',
-                flexDirection: 'row',
-                width: 'fit-content',
-                gap: '0.5em',
-                alignItems: 'center',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                padding: '20px',
+                background: 'rgba(0, 0, 0, 0.60)',
+                color: textColor,
+                alignItems: !title && !subtitle ? 'center' : undefined,
               }}
             >
-              <p
+              <div
                 style={{
-                  display: 'flex',
-                  fontWeight: 700,
-                  fontSize: '24px',
-                  textDecoration: 'none',
-                  color: textColor,
-                  cursor: 'pointer',
-                  alignSelf: 'flex-start',
+                  marginLeft: title || subtitle ? '6em' : '0',
+                  zIndex: 50,
                 }}
               >
-                {playButtonLabel}
-              </p>
-              <PlayArrowIcon sx={{ height: '2em', cursor:'pointer' }} />
+                <VideoText title={title} subtitle={subtitle} theme={theme} />
+                <div
+                  onClick={play}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: 'fit-content',
+                    gap: '0.5em',
+                    alignItems: 'center',
+                    justifyContent: !title && !subtitle ? 'center' : undefined,
+                  }}
+                >
+                  <p
+                    style={{
+                      display: 'flex',
+                      fontWeight: 700,
+                      fontSize: '24px',
+                      textDecoration: 'none',
+                      color: textColor,
+                      cursor: 'pointer',
+                      alignSelf: 'flex-start',
+                    }}
+                  >
+                    {playButtonLabel}
+                  </p>
+                  <PlayArrowIcon sx={{ height: '2em', cursor: 'pointer' }} />
+                </div>
+              </div>
             </div>
-          </div>
+          )}
+          {renderVideo()}
         </div>
-      )}
-      {renderVideo()}
-    </div>
-  );
+        {caption && <VideoCaption caption={caption} theme={theme} toBeCentered={!title && !subtitle} />}
+      </>
+    );
 };
 
 const VideoText = ({ title, subtitle, theme = 'dark' }: VideoTextProps) => {
@@ -160,6 +173,24 @@ const VideoText = ({ title, subtitle, theme = 'dark' }: VideoTextProps) => {
         </Typography>
       )}
     </>
+  );
+};
+
+const VideoCaption = ({ caption, toBeCentered }: VideoCaptionProps) => {
+  const { palette } = useTheme();
+  return (
+    <div style={{ height: '116px', marginLeft: toBeCentered ? '0' : '7em', marginRight: toBeCentered ? '0' : '7em', marginTop: '1em', textAlign: toBeCentered ? 'center' : 'left' }}>
+      {caption && (
+        <Typography
+          paragraph
+          sx={{ fontSize: '16px', fontWeight: 600 }}
+          mb={3}
+          color={palette.text.primary}
+        >
+          {caption}
+        </Typography>
+      )}
+    </div>
   );
 };
 

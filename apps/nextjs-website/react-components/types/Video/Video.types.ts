@@ -14,6 +14,7 @@ export interface VideoProps extends CommonProps {
   loop?: boolean;
   title?: string;
   subtitle?: string;
+  caption?: string;
   /** When true the full layout is used. Default: false */
   full?: boolean;
   /** when the full layout is not used, this props change the layout alignment.
@@ -29,4 +30,9 @@ export interface VideoProps extends CommonProps {
 export interface VideoTextProps extends CommonProps {
   title?: string | undefined;
   subtitle?: string | undefined;
+}
+
+export interface VideoCaptionProps extends CommonProps {
+  caption?: string | undefined;
+  toBeCentered: boolean;
 }
