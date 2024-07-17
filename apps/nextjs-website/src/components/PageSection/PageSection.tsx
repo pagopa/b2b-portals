@@ -11,6 +11,7 @@ import OneTrustSection from '../OneTrust';
 import IFrameSection from '../IFrame';
 import Form from '../Form';
 import MegaHeader from '../MegaHeader';
+import EditorialSwitch from '../EditorialSwitch';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
@@ -40,6 +41,8 @@ const PageSection = (props: PageSectionData) => {
       return <Form {...props} />;
     case 'sections.mega-header':
       return <MegaHeader {...props} />;
+    case 'sections.editorial-switch':
+      return <EditorialSwitch {...props} />;
     default:
       return null;
   }
