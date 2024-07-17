@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-Implement Video from EC to B2BP
+Implement Video-Image from EC to B2BP
