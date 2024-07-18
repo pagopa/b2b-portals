@@ -1,3 +1,4 @@
+'use client';
 import { BannerLink as BannerLinkRC } from '@react-components/components';
 import { BannerLinkProps } from '@react-components/types/BannerLink/BannerLink.types';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
