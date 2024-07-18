@@ -1,32 +1,30 @@
-'use client';
-import MarkdownRenderer from './MarkdownRenderer';
 import { BannerLink as BannerLinkRC } from '@react-components/components';
-import { BannerLinkProps } from '@react-components/types';
+import { BannerLinkProps } from '@react-components/types/BannerLink/BannerLink.types';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
-import Icon from '@/components/Icon';
 
 const makeBannerLinkProps = ({
-  body,
-  decoration,
-  ctaButtons,
-  ...rest
+  sections,
+  theme,
 }: BannerLinkSection): BannerLinkProps => ({
-  body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
-  ...(decoration.data && {
-    decoration: {
-      src: decoration.data.attributes.url,
-      alt: decoration.data.attributes.alternativeText || undefined,
-      width: '60px',
-      height: '60px',
-    },
-  }),
-  ...(ctaButtons.length > 0 && {
-    ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
-      ...ctaBtn,
-      ...(icon && { startIcon: Icon(icon) }),
-    })),
-  }),
-  ...rest,
+  sections: sections.map(
+    ({ extraNormalText, icon, decoration, ctaButtons, ...requiredFields }) => ({
+      ...requiredFields,
+      ...(extraNormalText && { extraNormalText }),
+      ...(icon && {
+        icon: {
+          icon,
+        },
+      }),
+      ...(ctaButtons && { ctaButtons }),
+      ...(decoration.data && {
+        decoration: {
+          src: decoration.data.attributes.url,
+          alt: decoration.data.attributes.alternativeText ?? '',
+        },
+      }),
+    })
+  ),
+  theme,
 });
 
 const BannerLink = (props: BannerLinkSection) => (

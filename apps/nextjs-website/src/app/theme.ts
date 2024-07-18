@@ -15,6 +15,8 @@ declare module '@mui/material/styles' {
       readonly black50: string;
       readonly editorialSwitchButtonsBackgroundLightBlue: string;
       readonly editorialSwitchButtonsBackgroundWhite: string;
+      readonly bannerLinkLightBlue: string;
+      readonly bannerLinkDarkBlue: string;
     };
   }
   interface PaletteOptions {
@@ -29,6 +31,8 @@ declare module '@mui/material/styles' {
       readonly black50?: string;
       readonly editorialSwitchButtonsBackgroundLightBlue?: string;
       readonly editorialSwitchButtonsBackgroundWhite?: string;
+      readonly bannerLinkLightBlue?: string;
+      readonly bannerLinkDarkBlue?: string;
     };
   }
 }
@@ -53,6 +57,8 @@ export const theme = createTheme(MUIItaliaTheme, {
       black50: '#00000050',
       editorialSwitchButtonsBackgroundLightBlue: '#0073e61a',
       editorialSwitchButtonsBackgroundWhite: '#ffffff1a',
+      bannerLinkLightBlue: '#1043e8',
+      bannerLinkDarkBlue: '#0B3EE3',
     },
   },
 });
