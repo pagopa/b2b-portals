@@ -1,11 +1,10 @@
-import { CommonProps, Generic } from '../common/Common.types';
+import { CommonProps } from '../common/Common.types';
 
 export interface VideoImageProps extends CommonProps {
   /** Video url */
   src?:
     | string
     | {
-        alternativeText: string | null;
         url: string;
         mime: string;
       };
@@ -22,7 +21,7 @@ export interface VideoImageProps extends CommonProps {
    */
   reverse?: boolean;
   /** String or a custome element to be shown when something goes wrong */
-  fallback?: string | Generic;
+  fallback?: string;
   /** Play button text */
   playButtonLabel?: string;
   isCentered: boolean;

@@ -15,7 +15,7 @@ import Form from './Form/Form';
 import PreFooter from './PreFooter/PreFooter';
 import HeroCounter from './HeroCounter/HeroCounter';
 import MegaHeader from './MegaHeader/MegaHeader';
-import Video from './Video/Video';
+import VideoImage from './VideoImage/VideoImage';
 
 export {
   Hero,
@@ -35,5 +35,5 @@ export {
   PreFooter,
   HeroCounter,
   MegaHeader,
-  Video,
+  VideoImage,
 };

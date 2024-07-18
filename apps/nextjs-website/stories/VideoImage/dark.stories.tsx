@@ -1,17 +1,17 @@
 import { StoryFn, Meta } from '@storybook/react';
-import { Video } from '@react-components/components';
-import { VideoImageProps } from '@react-components/types/Video/Video.types';
-import { defaultsDark } from './videoCommons';
+import { VideoImage } from '@react-components/components';
+import { defaultsDark } from './videoImageCommons';
+import { VideoImageProps } from '@react-components/types';
 
 // Define metadata for the Storybook
-const meta: Meta<typeof Video> = {
+const meta: Meta<typeof VideoImage> = {
   title: 'Components/Video-Image/Dark',
-  component: Video,
+  component: VideoImage,
 };
 export default meta;
 
 // Template function to render the Video component
-const VideoTemplate: StoryFn<VideoImageProps> = (args) => <Video {...args} />;
+const VideoTemplate: StoryFn<VideoImageProps> = (args) => <VideoImage {...args} />;
 
 export const VideoFull = VideoTemplate.bind({});
 VideoFull.args = {

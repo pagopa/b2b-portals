@@ -262,7 +262,7 @@ const EditorialSwitchSectionCodec = t.strict({
   reversed: t.boolean,
 });
 
-const VideoSectionCodec = t.strict({
+const VideoImageSectionCodec = t.strict({
   __component: t.literal('sections.video'),
   title: t.string,
   subtitle: t.string,
@@ -294,7 +294,7 @@ export const PageSectionCodec = t.union([
   HeroCounterSectionCodec,
   MegaHeaderSectionCodec,
   EditorialSwitchSectionCodec,
-  VideoSectionCodec,
+  VideoImageSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -315,4 +315,4 @@ export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
 export type EditorialSwitchSection = t.TypeOf<
   typeof EditorialSwitchSectionCodec
 >;
-export type VideoSection = t.TypeOf<typeof VideoSectionCodec>;
+export type VideoImageSection = t.TypeOf<typeof VideoImageSectionCodec>;

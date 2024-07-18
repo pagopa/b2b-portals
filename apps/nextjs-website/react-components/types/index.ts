@@ -15,7 +15,7 @@ import { FormProps } from './Form/Form.types';
 import { PreFooterProps } from './PreFooter/PreFooter';
 import { HeroCounterProps } from './HeroCounter/HeroCounter.types';
 import { MegaHeaderProps } from './MegaHeader/MegaHeader.types';
-import { VideoImageProps } from './Video/Video.types';
+import { VideoImageProps } from './VideoImage/VideoImage.types';
 
 export type {
   HeroProps,
