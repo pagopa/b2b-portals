@@ -16,6 +16,7 @@ const VideoImage = (props: VideoImageProps) => {
     subtitle,
     caption,
     src,
+    alt,
     autoplay = false,
     loop = false,
     full = false,
@@ -23,13 +24,11 @@ const VideoImage = (props: VideoImageProps) => {
     fallback,
     playButtonLabel,
     isCentered = false,
-    showVideo = true,
-    imagealt,
-    imagesrc,
   } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
   const [error, setError] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const textColor = TextColor(theme);
 
@@ -45,7 +44,22 @@ const VideoImage = (props: VideoImageProps) => {
     try {
       e?.preventDefault();
       videoRef.current?.play();
+      setIsPlaying(true);
     } catch (error) {}
+  };
+
+  const handleVideoEnd = () => {
+    setIsPlaying(false);
+  };
+
+  const isImage = (src: string) => {
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
+    return imageExtensions.some((extension) => src.endsWith(extension));
+  };
+
+  const isVideo = (src: string) => {
+    const videoExtensions = ['.mp4', '.webm', '.ogg'];
+    return videoExtensions.some((extension) => src.endsWith(extension));
   };
 
   return (
@@ -53,7 +67,7 @@ const VideoImage = (props: VideoImageProps) => {
       <div
         style={{ maxHeight: '600px', position: 'relative', overflow: 'hidden' }}
       >
-        {!full && (
+        {!full && !isPlaying && (
           <div
             style={{
               position: 'absolute',
@@ -65,7 +79,15 @@ const VideoImage = (props: VideoImageProps) => {
               flexDirection: 'column',
               justifyContent: 'center',
               padding: '20px',
-              background: `rgba(0, 0, 0, ${showVideo ? '0.60' : '0.20'})`,
+              background: `rgba(0, 0, 0, ${
+                typeof src === 'string'
+                  ? isImage(src)
+                    ? '0.20'
+                    : '0.60'
+                  : isImage(src.url)
+                    ? '0.20'
+                    : '0.60'
+              })`,
               alignItems: isCentered ? 'center' : 'left',
             }}
           >
@@ -76,57 +98,113 @@ const VideoImage = (props: VideoImageProps) => {
               }}
             >
               <VideoText title={title} subtitle={subtitle} theme={theme} />
-              {showVideo && (
-                <div
-                  onClick={play}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    width: 'fit-content',
-                    gap: '0.5em',
-                    alignItems: 'center',
-                    justifyContent: isCentered ? 'center' : 'left',
-                    color: textColor,
-                  }}
-                >
-                  <p
-                    style={{
-                      display: 'flex',
-                      fontWeight: 700,
-                      fontSize: '24px',
-                      textDecoration: 'none',
-                      color: textColor,
-                      cursor: 'pointer',
-                      alignSelf: 'flex-start',
-                    }}
-                  >
-                    {playButtonLabel}
-                  </p>
-                  <PlayArrowIcon
-                    sx={{ height: '2em', cursor: 'pointer', color: textColor }}
-                  />
-                </div>
-              )}
+              {typeof src === 'string'
+                ? !isImage(src) &&
+                  isVideo(src) && (
+                    <div
+                      onClick={play}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: 'fit-content',
+                        gap: '0.5em',
+                        alignItems: 'center',
+                        justifyContent: isCentered ? 'center' : 'left',
+                        color: textColor,
+                      }}
+                    >
+                      <p
+                        style={{
+                          display: 'flex',
+                          fontWeight: 700,
+                          fontSize: '24px',
+                          textDecoration: 'none',
+                          color: textColor,
+                          cursor: 'pointer',
+                          alignSelf: 'flex-start',
+                        }}
+                      >
+                        {playButtonLabel}
+                      </p>
+                      <PlayArrowIcon
+                        sx={{
+                          height: '2em',
+                          cursor: 'pointer',
+                          color: textColor,
+                        }}
+                      />
+                    </div>
+                  )
+                : !isImage(src.url) &&
+                  isVideo(src.url) && (
+                    <div
+                      onClick={play}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: 'fit-content',
+                        gap: '0.5em',
+                        alignItems: 'center',
+                        justifyContent: isCentered ? 'center' : 'left',
+                        color: textColor,
+                      }}
+                    >
+                      <p
+                        style={{
+                          display: 'flex',
+                          fontWeight: 700,
+                          fontSize: '24px',
+                          textDecoration: 'none',
+                          color: textColor,
+                          cursor: 'pointer',
+                          alignSelf: 'flex-start',
+                        }}
+                      >
+                        {playButtonLabel}
+                      </p>
+                      <PlayArrowIcon
+                        sx={{
+                          height: '2em',
+                          cursor: 'pointer',
+                          color: textColor,
+                        }}
+                      />
+                    </div>
+                  )}
             </div>
           </div>
         )}
-        {showVideo
-          ? renderVideo({
-              videoRef,
-              error,
-              setError,
-              src,
-              loop,
-              autoplay,
-              fallback,
-            })
-          : imagealt &&
-            imagesrc &&
-            renderImage({
-              imagealt: imagealt,
-              imagesrc: imagesrc,
-              theme: theme,
-            })}
+        {typeof src === 'string'
+          ? isImage(src)
+            ? renderImage({
+                src,
+                alt,
+              })
+            : renderVideo({
+                videoRef,
+                error,
+                setError,
+                src,
+                loop,
+                autoplay,
+                fallback,
+                onVideoEnd: handleVideoEnd,
+              })
+          : isImage(src.url)
+            ? renderImage({
+                src: src.url,
+                alt,
+              })
+            : renderVideo({
+                videoRef,
+                error,
+                setError,
+                src: src.url,
+                loop,
+                autoplay,
+                fallback,
+                onVideoEnd: handleVideoEnd,
+              })}
       </div>
       {caption && (
         <VideoCaption

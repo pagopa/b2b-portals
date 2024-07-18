@@ -2,23 +2,15 @@ import { Typography } from '@mui/material';
 import { isJSX } from '@react-components/types/common/Common.types';
 import {
   VideoCaptionProps,
-  ImageProps,
   VideoTextProps,
-  VideoImageProps,
+  RenderVideoProps,
+  ImageSrc,
+  ImageSrcObject,
+  ImageProps,
 } from '@react-components/types/VideoImage/VideoImage.types';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
-
-interface RenderVideoProps {
-  videoRef: React.RefObject<HTMLVideoElement>;
-  error: boolean;
-  setError: React.Dispatch<React.SetStateAction<boolean>>;
-  src: VideoImageProps['src'];
-  loop: boolean;
-  autoplay: boolean;
-  fallback: React.ReactNode;
-}
 
 export const renderVideo = ({
   videoRef,
@@ -28,6 +20,7 @@ export const renderVideo = ({
   loop,
   autoplay,
   fallback,
+  onVideoEnd,
 }: RenderVideoProps) => {
   // Determine the type based on the structure of src
   const type =
@@ -52,6 +45,7 @@ export const renderVideo = ({
       muted
       loop={loop}
       autoPlay={autoplay}
+      onEnded={onVideoEnd}
       style={{
         overflow: 'hidden',
         width: '100%',
@@ -67,15 +61,23 @@ export const renderVideo = ({
   );
 };
 
-export const renderImage = ({ imagealt, imagesrc }: ImageProps) => {
-  if (!imagealt || !imagesrc) {
+// Type guard function to check if src is an object
+function isImageSrcObject(src: ImageSrc): src is ImageSrcObject {
+  return typeof src === 'object' && src !== null && 'url' in src;
+}
+
+// Refactored renderImage function
+export const renderImage = ({ alt = 'image alt', src }: ImageProps) => {
+  let imageUrl = isImageSrcObject(src) ? src.url : src;
+
+  if (!imageUrl) {
     return null;
   }
 
   return (
     <Image
-      alt={imagealt}
-      src={imagesrc}
+      alt={alt}
+      src={imageUrl}
       width={0}
       height={0}
       style={{

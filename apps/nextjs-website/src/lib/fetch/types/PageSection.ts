@@ -267,6 +267,7 @@ const VideoImageSectionCodec = t.strict({
   title: t.string,
   subtitle: t.string,
   src: StrapiImageRequiredSchema,
+  alt: t.string,
   autoplay: t.boolean,
   loop: t.boolean,
   full: t.boolean,

@@ -51,31 +51,28 @@ VideoFullNoTitleNoSubtitleWithCaption.args = {
 export const ImageNoTitleNoCaption = VideoTemplate.bind({});
 ImageNoTitleNoCaption.args = {
   ...defaultsDark,
-  imagesrc:
+  src:
     'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
-  imagealt: 'Sample Image Alt',
-  showVideo: false,
+  alt: 'Sample Image Alt',
 };
 
 export const ImageNoTextWithCaptionCentered = VideoTemplate.bind({});
 ImageNoTextWithCaptionCentered.args = {
   ...defaultsDark,
-  imagesrc:
+  src:
     'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
-  imagealt: 'Sample Image Alt',
+  alt: 'Sample Image Alt',
   caption: 'Sample Video Caption',
-  showVideo: false,
   isCentered: true,
 };
 
 export const ImageNoTextWithCaptionLeft = VideoTemplate.bind({});
 ImageNoTextWithCaptionLeft.args = {
   ...defaultsDark,
-  imagesrc:
+  src:
     'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
-  imagealt: 'Sample Image Alt',
+  alt: 'Sample Image Alt',
   caption: 'Sample Video Caption',
-  showVideo: false,
 };
 
 export const ImageFull = VideoTemplate.bind({});
@@ -83,9 +80,8 @@ ImageFull.args = {
   ...defaultsDark,
   title: 'Sample Image Title',
   subtitle: 'Sample Image Subtitle',
-  imagesrc:
+  src:
     'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
-  imagealt: 'Sample Image Alt',
+  alt: 'Sample Image Alt',
   caption: 'Sample Video Caption',
-  showVideo: false,
 };
