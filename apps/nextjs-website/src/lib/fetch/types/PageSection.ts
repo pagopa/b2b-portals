@@ -262,6 +262,22 @@ const EditorialSwitchSectionCodec = t.strict({
   reversed: t.boolean,
 });
 
+const VideoImageSectionCodec = t.strict({
+  __component: t.literal('sections.video-image'),
+  title: t.string,
+  subtitle: t.string,
+  src: StrapiImageRequiredSchema,
+  autoplay: t.boolean,
+  loop: t.boolean,
+  full: t.boolean,
+  reversed: t.boolean,
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  fallback: t.string,
+  playButtonLabel: t.string,
+  sectionID: t.union([t.string, t.null]),
+  isCentered: t.boolean,
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -278,6 +294,7 @@ export const PageSectionCodec = t.union([
   HeroCounterSectionCodec,
   MegaHeaderSectionCodec,
   EditorialSwitchSectionCodec,
+  VideoImageSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -298,3 +315,4 @@ export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
 export type EditorialSwitchSection = t.TypeOf<
   typeof EditorialSwitchSectionCodec
 >;
+export type VideoImageSection = t.TypeOf<typeof VideoImageSectionCodec>;

@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 
-const ImageDataCodec = t.strict({
+export const ImageDataCodec = t.strict({
   alternativeText: t.union([t.string, t.null]),
   url: t.string,
   width: t.number,
