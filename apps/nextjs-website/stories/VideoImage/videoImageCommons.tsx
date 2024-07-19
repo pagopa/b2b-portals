@@ -3,9 +3,9 @@ import { VideoImage } from '@react-components/components';
 import { VideoImageProps } from '@react-components/types';
 
 // Define a "Template" function that sets how args map to rendering
-export const VideoTemplate: StoryFn<VideoImageProps> = (args) => <VideoImage {...args} />;
+export const VideoImageTemplate: StoryFn<VideoImageProps> = (args) => <VideoImage {...args} />;
 
-const createVideoDefaults = (theme: 'dark' | 'light') => ({
+const createVideoImageDefaults = (theme: 'dark' | 'light') => ({
   src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
   autoplay: false,
   loop: false,
@@ -16,5 +16,5 @@ const createVideoDefaults = (theme: 'dark' | 'light') => ({
 });
 
 // Usage example
-export const defaultsDark = createVideoDefaults('dark');
-export const defaultsLight = createVideoDefaults('light');
+export const defaultsDark = createVideoImageDefaults('dark');
+export const defaultsLight = createVideoImageDefaults('light');
