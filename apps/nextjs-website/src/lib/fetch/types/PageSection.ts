@@ -263,11 +263,10 @@ const EditorialSwitchSectionCodec = t.strict({
 });
 
 const VideoImageSectionCodec = t.strict({
-  __component: t.literal('sections.video'),
+  __component: t.literal('sections.video-image'),
   title: t.string,
   subtitle: t.string,
   src: StrapiImageRequiredSchema,
-  alt: t.string,
   autoplay: t.boolean,
   loop: t.boolean,
   full: t.boolean,
