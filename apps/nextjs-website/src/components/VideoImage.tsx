@@ -5,7 +5,6 @@ import { VideoImageSection } from '@/lib/fetch/types/PageSection';
 
 const makeVideoImageProps = ({
   src,
-  alt,
   ...rest
 }: VideoImageSection): VideoImageProps => ({
   ...rest,
@@ -15,8 +14,9 @@ const makeVideoImageProps = ({
       mime: src.data.attributes.mime,
     },
   }),
-  alt,
+  alt: src.data?.attributes.alternativeText ?? '',
 });
+
 const VideoImage = (props: VideoImageSection) => (
   <VideoImageRC {...makeVideoImageProps(props)} />
 );
