@@ -42,13 +42,15 @@ const Cards = ({
         }}
         component={'div'}
       >
-        <Title
-          variant='h2'
-          textColor={'inherit'}
-          title={text.title}
-          textAlign={isCenter ? 'center' : 'left'}
-          marginBottom={5}
-        />
+        {text.title && (
+          <Title
+            variant='h2'
+            textColor={'inherit'}
+            title={text.title}
+            textAlign={isCenter ? 'center' : 'left'}
+            marginBottom={5}
+          />
+        )}
         {text.subtitle && (
           <Subtitle
             variant='h6'
@@ -78,7 +80,7 @@ const Cards = ({
               CtaButtons({
                 ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
                   ...button,
-                  sx: { width: { md: isCenter ? '100%' : 'auto', xs: '100%' } },
+                  sx: { width: 'auto' },
                 })),
                 theme,
               })}
@@ -88,27 +90,38 @@ const Cards = ({
       <Box
         sx={{
           display: 'flex',
-          width: { xs: '100%', sm: '100%', md: '60%' },
+          width: isCenter ? '100%' : { xs: '100%', sm: '100%', md: '60%' },
           gap: '20px',
           flexWrap: isCenter ? 'wrap' : 'nowrap',
           justifyContent: isCenter ? 'center' : 'flex-start',
-          '@media screen and (max-width: 600px)': {
-            display: 'grid',
+          '@media (max-width: 600px)': {
+            flexDirection: 'column',
+            alignItems: 'center',
           },
         }}
       >
         <>
           {isCenter ? (
-            <CardsItemContainer masonry={true} center={isCenter}>
-              {items.map((item, i) => (
+            items.map((item, i) => (
+              <Box
+                key={`${item.title}-${i}`}
+                sx={{
+                  flex: '1 1 auto',
+                  maxWidth: 'calc(33.333% - 20px)',
+                  minWidth: '300px',
+                  '@media (max-width: 600px)': {
+                    maxWidth: '100%',
+                    minWidth: 'auto',
+                  },
+                }}
+              >
                 <Item
-                  key={`${item.title}-${i}`}
                   {...item}
                   textAlign='left'
                   masonry={true}
                 />
-              ))}
-            </CardsItemContainer>
+              </Box>
+            ))
           ) : (
             <>
               <CardsItemContainer masonry={true}>
