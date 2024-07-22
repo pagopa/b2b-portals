@@ -34,7 +34,7 @@ jobs:
     continue-on-error: false
     strategy:
       matrix:
-        environment: [ 'send','appio','demo','firma','pdnd' ]
+        environment: [ 'send','appio','demo','firma' ]
     environment: ${{ matrix.environment }}
 
     concurrency:
