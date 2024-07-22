@@ -122,6 +122,15 @@ variable "websites_configs" {
       cdn_use_custom_certificate = false
       cdn_use_alias              = false
       cdn_indexing_enable        = false
+    },
+    "interop" = {
+      origin_path                = "/interop"
+      url_tenant                 = "interop.b2bportals.pagopa.it"
+      create_certificate         = false
+      create_distribution        = true
+      cdn_use_custom_certificate = false
+      cdn_use_alias              = false
+      cdn_indexing_enable        = false
     }
   }
 }
