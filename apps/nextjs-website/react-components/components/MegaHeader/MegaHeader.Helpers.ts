@@ -10,7 +10,7 @@ export const Container = styled(AppBar)({
   top: 0,
   width: '100%',
   zIndex: 1000,
-  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  boxShadow: '0 4px 16px 0 rgba(14, 15, 19, 0.06)',
 });
 
 export const Content = styled(Toolbar)({
@@ -53,6 +53,7 @@ export const Nav = styled('ul')({
     '&:hover, &.active': {
       color: '#0B3EE3',
       fontWeight: 600,
+      letterSpacing: '-0.0090em',
       backgroundColor: '#F4F4F4',
       borderRadius: 6,
     },
@@ -93,9 +94,7 @@ export const Dropdown = styled(Box)({
   top: '100%',
   left: 0,
   backgroundColor: '#fff',
-  boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
   padding: '50px 70px',
-  borderRadius: 6,
   '&.open': {
     display: 'flex',
     flexDirection: 'row',
