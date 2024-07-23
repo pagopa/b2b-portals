@@ -110,23 +110,16 @@ const HowToSectionCodec = t.strict({
 
 const BannerLinkSectionCodec = t.strict({
   __component: t.literal('sections.banner-link'),
-  title: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   sections: t.array(
     t.strict({
       title: t.string,
-      normalText: t.string,
-      boldText: t.string,
-      extraNormalText: t.union([t.string, t.null]),
-      link: t.string,
+      body: t.string,
       ctaButtons: t.array(CTAButtonSimpleCodec),
       decoration: StrapiImageSchema,
       icon: t.union([FeatureItemMUIIconCodec, t.null]),
     })
   ),
-  ctaButtons: t.array(CTAButtonSimpleCodec),
-  decoration: StrapiImageSchema,
-  sectionID: t.union([t.string, t.null]),
 });
 
 const StripeLinkSectionCodec = t.strict({

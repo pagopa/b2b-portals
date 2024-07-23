@@ -6,10 +6,6 @@
   },
   "options": {},
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
     "theme": {
       "type": "enumeration",
       "enum": [
@@ -19,27 +15,16 @@
       "default": "light",
       "required": true
     },
-    "decoration": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "ctaButtons": {
-      "type": "component",
-      "repeatable": true,
-      "component": "components.cta-button-simple",
-      "max": 2
-    },
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$"
     },
-    "body": {
-      "type": "richtext",
-      "required": true
+    "sections": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.banner-link-section",
+      "required": true,
+      "min": 1
     }
   }
 }
