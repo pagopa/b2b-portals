@@ -12,7 +12,7 @@ on:
           - appio
           - demo
           - firma
-          - pdnd
+          - interop
 
   # Allows external webhook trigger
   repository_dispatch:
@@ -33,7 +33,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     strategy:
       matrix:
-        environment: [ 'send','appio','demo','firma','pdnd' ] # add new tenant after creating the relevant environment vars/secrets github
+        environment: [ 'send','appio','demo','firma','interop' ] # add new tenant after creating the relevant environment vars/secrets github
 
     environment: ${{ matrix.environment }}
 
@@ -60,8 +60,8 @@ jobs:
           demo_strapi_api_base_url: ${{ vars.DEMO_STRAPI_URL }}
           firma_strapi_api_token: ${{ secrets.FIRMA_STRAPI_TOKEN }}
           firma_strapi_api_base_url: ${{ vars.FIRMA_STRAPI_URL }}
-          pdnd_strapi_api_token: ${{ secrets.PDND_STRAPI_TOKEN }}
-          pdnd_strapi_api_base_url: ${{ vars.PDND_STRAPI_URL }}
+          interop_strapi_api_token: ${{ secrets.INTEROP_STRAPI_TOKEN }}
+          interop_strapi_api_base_url: ${{ vars.INTEROP_STRAPI_URL }}
           cdn_path: ${{ vars.CDN_PATH }}
 
   manual_deploy:
@@ -93,6 +93,6 @@ jobs:
           demo_strapi_api_base_url: ${{ vars.DEMO_STRAPI_URL }}
           firma_strapi_api_token: ${{ secrets.FIRMA_STRAPI_TOKEN }}
           firma_strapi_api_base_url: ${{ vars.FIRMA_STRAPI_URL }}
-          pdnd_strapi_api_token: ${{ secrets.PDND_STRAPI_TOKEN }}
-          pdnd_strapi_api_base_url: ${{ vars.PDND_STRAPI_URL }}
+          interop_strapi_api_token: ${{ secrets.INTEROP_STRAPI_TOKEN }}
+          interop_strapi_api_base_url: ${{ vars.INTEROP_STRAPI_URL }}
           cdn_path: ${{ vars.CDN_PATH }}
