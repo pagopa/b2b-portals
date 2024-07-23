@@ -30,10 +30,10 @@ export const extractTenantStrapiApiData = (
         baseUrl: strapiData.FIRMA_STRAPI_API_BASE_URL,
         token: strapiData.FIRMA_STRAPI_API_TOKEN,
       };
-    case 'pdnd':
+    case 'interop':
       return {
-        baseUrl: strapiData.PDND_STRAPI_API_BASE_URL,
-        token: strapiData.PDND_STRAPI_API_TOKEN,
+        baseUrl: strapiData.INTEROP_STRAPI_API_BASE_URL,
+        token: strapiData.INTEROP_STRAPI_API_TOKEN,
       };
   }
 };
