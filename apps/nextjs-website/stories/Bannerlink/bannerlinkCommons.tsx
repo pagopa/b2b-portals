@@ -10,10 +10,7 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<BannerLinkProps>
   sections: [
     {
       title: 'Scrivici',
-      normalText: 'Richiedi assistenza via email scrivendo a',
-      boldText: 'destinatari-send@assistenza.pagopa.it',
-      extraNormalText: ': includi informazioni utili come il codice univoco della notifica (IUN).',
-      link: 'mailto:destinatari-send@assistenza.pagopa.it',
+      body: <p>Richiedi assistenza via email scrivendo a <a href='#'>destinatari-send@assistenza.pagopa.it</a>: includi informazioni utili come il codice univoco della notifica (IUN)</p>,
       icon: <MailIcon style={{ fontSize: 60 }} />,
       ctaButtons: [
         {
@@ -34,10 +31,7 @@ const generateTwoColumnProps = (theme: 'light' | 'dark'): Partial<BannerLinkProp
   sections: [
     {
       title: 'Scrivici',
-      normalText: 'Richiedi assistenza via email scrivendo a',
-      boldText: 'destinatari-send@assistenza.pagopa.it',
-      extraNormalText: ': includi informazioni utili come il codice univoco della notifica (IUN).',
-      link: 'mailto:destinatari-send@assistenza.pagopa.it',
+      body: <p>Richiedi assistenza via email scrivendo a <a href='#'>destinatari-send@assistenza.pagopa.it</a>: includi informazioni utili come il codice univoco della notifica (IUN)</p>,
       icon: <MailIcon style={{ fontSize: 60 }} />,
       ctaButtons: [
         {
@@ -49,10 +43,7 @@ const generateTwoColumnProps = (theme: 'light' | 'dark'): Partial<BannerLinkProp
     },
     {
       title: 'Chiamaci',
-      normalText: 'Il contact center di PagoPA S.p.A. è a tua disposizione al numero',
-      boldText: '06.4520.2323',
-      extraNormalText: ' per assistenza dedicata dal lunedì al venerdì dalle 08:00 alle 20:00 e il sabato dalle 08:00 alle 14:00.',
-      link: 'tel:0645202323',
+      body: <p>Il contact center di PagoPA S.p.A. è a tua disposizione al numero <a href='#'>06.4520.2323</a> per assistenza dedicata dal lunedì al venerdì dalle 08:00 alle 20:00 e il sabato dalle 08:00 alle 14:00.</p>,
       icon: <PhoneIcon style={{ fontSize: 60 }} />,
       ctaButtons: [
         {

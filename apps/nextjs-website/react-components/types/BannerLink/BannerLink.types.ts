@@ -8,10 +8,7 @@ export type ImgProps = React.DetailedHTMLProps<
 
 export interface BannerLinkSectionProps {
   title: string;
-  normalText: string;
-  boldText: string;
-  link: string;
-  extraNormalText?: string;
+  body: JSX.Element;
   icon?: EIconProps;
   decoration?: ImgProps;
   ctaButtons?: CtaButtonProps[];

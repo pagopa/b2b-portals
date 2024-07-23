@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_components_banner_link_sections",
+  "info": {
+    "displayName": "BannerLink Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "richtext",
+      "required": true
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "HubOutlined",
+        "AutoFixHighOutlined",
+        "MarkunreadMailboxOutlined",
+        "CheckCircleOutlined",
+        "SavingsOutlined",
+        "HourglassEmptyRounded",
+        "EnergySavingsLeafOutlined",
+        "CloudOutlined"
+      ]
+    },
+    "decoration": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button-simple"
+    }
+  }
+}
