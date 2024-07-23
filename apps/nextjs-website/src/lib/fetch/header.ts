@@ -79,6 +79,7 @@ export const HeaderDataCodec = t.strict({
   }),
 });
 
+export type HeaderSublink = t.TypeOf<typeof HeaderSublinkCodec>;
 export type HeaderData = t.TypeOf<typeof HeaderDataCodec>;
 export type HeaderWithMenuData = t.TypeOf<typeof HeaderWithMenuDataCodec>;
 export type HeaderWithMegaMenuData = t.TypeOf<
