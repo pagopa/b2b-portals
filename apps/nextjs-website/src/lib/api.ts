@@ -9,6 +9,7 @@ import { getHeader, HeaderData } from './fetch/header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
+import { removeHomepageSlugFromMenu } from './header';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -46,8 +47,10 @@ export const getPreHeaderProps = async (): Promise<
 export const getHeaderProps = async (): Promise<
   HeaderData['data']['attributes']
 > => {
-  const header = await getHeader(appEnv);
-  return header.data.attributes;
+  const {
+    data: { attributes },
+  } = await getHeader(appEnv);
+  return removeHomepageSlugFromMenu(attributes);
 };
 
 export const getFooterProps = async (): Promise<
