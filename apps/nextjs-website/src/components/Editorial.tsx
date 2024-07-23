@@ -10,6 +10,7 @@ const makeEditorialProps = ({
   eyelet,
   body,
   image,
+  mobileImage,
   ctaButtons,
   storeButtons,
   ...rest
@@ -20,7 +21,14 @@ const makeEditorialProps = ({
     <Image
       src={image.data.attributes.url}
       alt={image.data.attributes.alternativeText ?? ''}
-      // Needed by Image, will be overwritten
+      width={0}
+      height={0}
+    />
+  ),
+  mobileImage: (
+    <Image
+      src={mobileImage.data.attributes.url} // Ensure mobileImage is correctly used here
+      alt={mobileImage.data.attributes.alternativeText ?? ''}
       width={0}
       height={0}
     />
