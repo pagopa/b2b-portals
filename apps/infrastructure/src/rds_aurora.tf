@@ -28,4 +28,6 @@ resource "aws_rds_cluster_instance" "cms_database_instance" {
   engine_version             = aws_rds_cluster.cms_database_cluster.engine_version
   auto_minor_version_upgrade = true
   db_subnet_group_name       = aws_db_subnet_group.cms_db_subnet.name
+  ca_cert_identifier         = "rds-ca-rsa2048-g1"
+  apply_immediately          = true
 }
