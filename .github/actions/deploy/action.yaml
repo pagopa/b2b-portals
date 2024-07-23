@@ -42,10 +42,10 @@ inputs:
   firma_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
-  pdnd_strapi_api_token:
+  interop_strapi_api_token:
     description: 'The Token to communicate with Strapi'
     required: false
-  pdnd_strapi_api_base_url:
+  interop_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
   cdn_path:
@@ -80,8 +80,8 @@ runs:
         DEMO_STRAPI_API_BASE_URL: ${{ inputs.demo_strapi_api_base_url }}
         FIRMA_STRAPI_API_TOKEN: ${{ inputs.firma_strapi_api_token }}
         FIRMA_STRAPI_API_BASE_URL: ${{ inputs.firma_strapi_api_base_url }}
-        PDND_STRAPI_API_TOKEN: ${{ inputs.pdnd_strapi_api_token }}
-        PDND_STRAPI_API_BASE_URL: ${{ inputs.pdnd_strapi_api_base_url }}
+        INTEROP_STRAPI_API_TOKEN: ${{ inputs.interop_strapi_api_token }}
+        INTEROP_STRAPI_API_BASE_URL: ${{ inputs.interop_strapi_api_base_url }}
         CDN_PATH: ${{ inputs.cdn_path }}
       shell: bash
       run: npm run build -w nextjs-website

@@ -1,4 +1,5 @@
 'use client';
+import MarkdownRenderer from './MarkdownRenderer';
 import { BannerLink as BannerLinkRC } from '@react-components/components';
 import { BannerLinkProps } from '@react-components/types/BannerLink/BannerLink.types';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
@@ -8,9 +9,9 @@ const makeBannerLinkProps = ({
   theme,
 }: BannerLinkSection): BannerLinkProps => ({
   sections: sections.map(
-    ({ extraNormalText, icon, decoration, ctaButtons, ...requiredFields }) => ({
+    ({ body, icon, decoration, ctaButtons, ...requiredFields }) => ({
       ...requiredFields,
-      ...(extraNormalText && { extraNormalText }),
+      body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
       ...(icon && {
         icon: {
           icon,
