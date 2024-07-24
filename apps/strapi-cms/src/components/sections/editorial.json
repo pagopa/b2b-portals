@@ -75,6 +75,14 @@
       "type": "component",
       "repeatable": false,
       "component": "components.store-buttons"
+    },
+    "mobileImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }
