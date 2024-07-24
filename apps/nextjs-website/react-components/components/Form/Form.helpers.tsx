@@ -88,7 +88,7 @@ export const FormCategories = ({
           </Grid>
           <Grid item sx={{ textAlign: 'right' }}>
             <FormControlLabel
-              value={key}
+              value={key} // TODO: This value should not be auto-generated, it should probably be inserted by the user depending on what the newsletter service requires
               control={
                 <Radio
                   sx={{

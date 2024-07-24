@@ -5,13 +5,21 @@ import { FormSection } from '@/lib/fetch/types/PageSection';
 import { FormData } from '@react-components/types/Form/Form.types';
 
 const makeFormProps = ({
-  formCategories,
+  subtitle,
+  categories,
+  recaptchaPolicyLink,
+  recaptchaTermsLink,
   ...rest
 }: FormSection): FormProps => ({
-  formCategories: formCategories.map(({ label, additionalLabel }) => ({
+  formCategories: categories.map(({ label, additionalLabel }) => ({
     label,
-    additionalLabel: additionalLabel ?? '',
+    ...( additionalLabel && { additionalLabel }),
   })),
+  ...(subtitle && { subtitle }),
+  privacyLinkRecaptchaPolicy: recaptchaPolicyLink.href,
+  privacyLinkTextRecaptchaPolicy: recaptchaPolicyLink.label,
+  privacyLinkRecaptchaTerms: recaptchaTermsLink.href,
+  privacyLinkTextRecaptchaTerms: recaptchaTermsLink.label,
   ...rest,
 });
 

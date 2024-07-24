@@ -160,26 +160,22 @@ const IFrameSectionCodec = t.strict({
   src: t.string,
 });
 
-const FormCategoriesCodec = t.array(
-  t.strict({
-    key: t.string,
-    label: t.string,
-    additionalLabel: t.union([t.string, t.undefined]),
-  })
-);
+const FormCategoryCodec = t.strict({
+  // TODO: Add a "value" field depending on what the newsletter service requires
+  label: t.string,
+  additionalLabel: t.union([t.string, t.null]),
+});
 
 const FormSectionCodec = t.strict({
   __component: t.literal('sections.form'),
   title: t.string,
   subtitle: t.string,
-  privacyLinkRecaptchaPolicy: t.string,
-  privacyLinkTextRecaptchaPolicy: t.string,
-  privacyLinkRecaptchaTerms: t.string,
-  privacyLinkTextRecaptchaTerms: t.string,
-  formCategories: FormCategoriesCodec,
+  categories: t.array(FormCategoryCodec),
+  recaptchaPolicyLink: LinkCodec,
+  recaptchaTermsLink: LinkCodec,
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  ctaButtons: t.array(CTAButtonSimpleCodec),
-  submitHandler: t.Function,
+  buttonText: t.string,
+  submitURL: t.string,
 });
 
 const PreFooterSectionCodec = t.strict({
