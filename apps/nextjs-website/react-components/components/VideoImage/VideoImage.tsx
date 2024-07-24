@@ -23,12 +23,14 @@ const VideoImage = (props: VideoImageProps) => {
     theme,
     fallback,
     playButtonLabel,
+    pausedplayButtonLabel,
     isCentered = false,
   } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
   const [error, setError] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   const textColor = TextColor(theme);
 
@@ -45,11 +47,20 @@ const VideoImage = (props: VideoImageProps) => {
       e?.preventDefault();
       videoRef.current?.play();
       setIsPlaying(true);
+      setIsPaused(false);
     } catch (error) {}
   };
 
   const handleVideoEnd = () => {
     setIsPlaying(false);
+  };
+
+  const stop = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    setIsPlaying(false);
+    setIsPaused(true);
   };
 
   const isImage = (src: string) => {
@@ -97,7 +108,9 @@ const VideoImage = (props: VideoImageProps) => {
                 zIndex: 50,
               }}
             >
-              <VideoText title={title} subtitle={subtitle} theme={theme} />
+              {!isPaused && (
+                <VideoText title={title} subtitle={subtitle} theme={theme} />
+              )}
               {typeof src === 'string'
                 ? !isImage(src) &&
                   isVideo(src) && (
@@ -124,7 +137,7 @@ const VideoImage = (props: VideoImageProps) => {
                           alignSelf: 'flex-start',
                         }}
                       >
-                        {playButtonLabel}
+                        {isPaused ? pausedplayButtonLabel : playButtonLabel}
                       </p>
                       <PlayArrowIcon
                         sx={{
@@ -160,7 +173,7 @@ const VideoImage = (props: VideoImageProps) => {
                           alignSelf: 'flex-start',
                         }}
                       >
-                        {playButtonLabel}
+                        {isPaused ? pausedplayButtonLabel : playButtonLabel}
                       </p>
                       <PlayArrowIcon
                         sx={{
@@ -189,6 +202,8 @@ const VideoImage = (props: VideoImageProps) => {
                 autoplay,
                 fallback,
                 onVideoEnd: handleVideoEnd,
+                onStop: stop,
+                onClick: stop,
               })
           : isImage(src.url)
             ? renderImage({
@@ -204,6 +219,8 @@ const VideoImage = (props: VideoImageProps) => {
                 autoplay,
                 fallback,
                 onVideoEnd: handleVideoEnd,
+                onStop: stop,
+                onClick: stop,
               })}
       </div>
       {caption && (

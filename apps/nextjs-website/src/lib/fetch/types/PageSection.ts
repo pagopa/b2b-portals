@@ -272,6 +272,7 @@ const VideoImageSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   fallback: t.string,
   playButtonLabel: t.string,
+  pausedplayButtonLabel: t.string,
   sectionID: t.union([t.string, t.null]),
   isCentered: t.boolean,
 });

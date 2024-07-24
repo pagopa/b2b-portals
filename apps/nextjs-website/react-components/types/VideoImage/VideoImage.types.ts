@@ -12,6 +12,7 @@ export interface VideoImageProps extends CommonProps {
   reverse?: boolean;
   fallback?: string;
   playButtonLabel?: string;
+  pausedplayButtonLabel?: string;
   isCentered: boolean;
 }
 
@@ -34,6 +35,8 @@ export interface RenderVideoProps {
   autoplay: boolean;  
   onVideoEnd: () => void;
   fallback: React.ReactNode;
+  onStop?: () => void;
+  onClick?: () => void;
 }
 
 // Define TypeScript types for ImageProps
