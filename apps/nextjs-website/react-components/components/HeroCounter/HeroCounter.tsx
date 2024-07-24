@@ -67,7 +67,7 @@ const HeroCounter = (props: HeroCounterProps) => {
           variant='h1'
           color={textColor}
           mb={2}
-          sx={{ fontSize: '3.5rem!important' }}
+          sx={{ fontSize: { xs: '2.25rem!important', md: '3.5rem!important' }}}
         >
           {title}
         </Typography>
@@ -125,10 +125,10 @@ const HeroCounter = (props: HeroCounterProps) => {
             theme === 'light' ? palette.custom.primaryColorDark : textColor
           }
           sx={{
-            fontSize: '8rem',
+            fontSize: { xs: '5.625rem', md: '8rem' },
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'start',
+            alignItems: 'center',
             lineHeight: 1.1,
           }}
         >
