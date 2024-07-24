@@ -19,6 +19,8 @@ export interface EditorialContentProps extends CommonProps {
 
 export interface EditorialImageProps extends CommonProps {
   readonly image: ReactElement;
+  readonly mobileImage: ReactElement;
+  readonly breakpoint?: number;
   readonly pattern?: 'dots' | 'solid' | 'none';
 }
 

@@ -32,6 +32,10 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<EditorialSwitchP
           src: 'https://notifichedigitali.pagopa.it/static/images/pa-infoblock-2.png',
           alt: 'Placeholder',
         },
+        mobileImage: {
+          src: 'https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png',
+          alt: 'Placeholder',
+        },
         ctaButtons: generateCtaButtons(2),
       },
     },
@@ -45,6 +49,10 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<EditorialSwitchP
         pattern: 'none',
         image: {
           src: 'https://notifichedigitali.pagopa.it/static/images/pa-infoblock-3.png',
+          alt: 'Placeholder',
+        },
+        mobileImage: {
+          src: 'https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png',
           alt: 'Placeholder',
         },
         ctaButtons: generateCtaButtons(1),

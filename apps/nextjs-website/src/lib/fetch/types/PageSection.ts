@@ -44,6 +44,7 @@ const EditorialSectionCodec = t.strict({
   reversed: t.boolean,
   sectionID: t.union([t.string, t.null]),
   image: StrapiImageRequiredSchema,
+  mobileImage: StrapiImageRequiredSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
 });
@@ -245,6 +246,10 @@ const EditorialSwitchSectionCodec = t.strict({
           solid: null,
         }),
         image: t.strict({
+          src: t.string,
+          alt: t.string,
+        }),
+        mobileImage: t.strict({
           src: t.string,
           alt: t.string,
         }),

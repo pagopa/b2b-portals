@@ -161,6 +161,12 @@ const EditorialSwitch = ({
                   alt={selectedSection.content.image.alt}
                 />
               }
+              mobileImage={
+                <img
+                  src={selectedSection.content.mobileImage.src}
+                  alt={selectedSection.content.mobileImage.alt}
+                />
+              }
               theme={theme}
             />
           </Grid>

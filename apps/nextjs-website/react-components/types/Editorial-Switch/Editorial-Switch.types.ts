@@ -24,6 +24,10 @@ export interface ContentItem {
     src: string;
     alt: string;
   };
+  mobileImage: {
+    src: string;
+    alt: string;
+  };
 }
 
 export interface Section {
