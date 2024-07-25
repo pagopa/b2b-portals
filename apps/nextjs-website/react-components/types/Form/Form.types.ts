@@ -1,43 +1,43 @@
 import { CommonProps } from '../common/Common.types';
 
-export interface FormProps extends CommonProps {
+interface FormFields {
+  readonly showName: boolean;
+  readonly showSurname: boolean;
+  readonly showOrganization: boolean;
+}
+
+interface FormCategories {
+  readonly categoriesTitle?: string;
+  readonly categories: {
+    categoryID: string,
+    label: string;
+    additionalInfo?: string;
+  }[];
+}
+
+export interface FormProps extends CommonProps, FormFields, FormCategories {
   readonly title: string;
   readonly subtitle?: string;
-  readonly privacyLinkRecaptchaPolicy: string;
-  readonly privacyLinkTextRecaptchaPolicy: string;
-  readonly privacyLinkRecaptchaTerms: string;
-  readonly privacyLinkTextRecaptchaTerms: string;
-  readonly theme: 'light' | 'dark';
-  readonly formCategories: {
-    label: string;
-    additionalLabel?: string;
-  }[];
-  readonly buttonText: string;
-  readonly submitURL: string;
+  readonly clientID: 'io' | 'pagopa';
+  readonly listID: string;
+  readonly recaptchaSiteKey: string;
 }
 
 export interface FormData {
-  firstName?: string;
-  lastName?: string;
+  name?: string;
+  surname?: string;
   email?: string;
   organization?: string;
 }
 
-export interface OptionRowProps {
-  label: string;
-  checked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  name: string;
-  additionalText?: string;
-  color: string;
-}
-
 export interface FormCategoryProps {
-  formCategories: {
-    key: string;
+  categories: {
+    categoryID: string,
     label: string;
-    additionalLabel?: string;
+    additionalInfo?: string;
   }[];
+  selectedCategory: string;
   textColor: string;
   borderColor: string;
+  handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

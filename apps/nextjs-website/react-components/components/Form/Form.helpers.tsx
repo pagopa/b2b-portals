@@ -1,6 +1,4 @@
 import {
-  Checkbox,
-  Divider,
   Grid,
   FormControlLabel,
   Radio,
@@ -9,64 +7,19 @@ import {
 } from '@mui/material';
 import {
   FormCategoryProps,
-  OptionRowProps,
 } from '@react-components/types/Form/Form.types';
 
-export const OptionRow: React.FC<OptionRowProps> = ({
-  label,
-  checked,
-  onChange,
-  name,
-  additionalText,
-  color,
-}) => (
-  <Grid container alignItems='center' justifyContent='space-between'>
-    <Grid item xs={additionalText ? 10 : true}>
-      <Typography variant='body1' fontWeight='bold' sx={{ color }}>
-        {label}
-      </Typography>
-      {additionalText && (
-        <Typography variant='body2' sx={{ color }}>
-          {additionalText}
-        </Typography>
-      )}
-    </Grid>
-    <Grid
-      item
-      xs={additionalText ? 2 : false}
-      sx={{ display: 'flex', justifyContent: 'flex-end' }}
-    >
-      <Checkbox
-        checked={checked}
-        onChange={onChange}
-        name={name}
-        sx={{
-          color: color,
-          '&.Mui-checked': {
-            color: color,
-          },
-        }}
-      />
-    </Grid>
-    <Divider sx={{ width: '100%' }} />
-  </Grid>
-);
-
 export const FormCategories = ({
-  formCategories,
+  categories,
   textColor,
   borderColor,
-  selectedOption,
+  selectedCategory,
   handleRadioChange,
-}: FormCategoryProps & {
-  selectedOption: string;
-  handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}) => {
+}: FormCategoryProps) => {
   return (
-    <RadioGroup value={selectedOption} onChange={handleRadioChange}>
-      {formCategories.map(({ key, label, additionalLabel }) => (
+    <RadioGroup value={selectedCategory} onChange={handleRadioChange}>
+      {categories.map(({ categoryID, label, additionalInfo }) => (
         <Grid
-          key={key}
           container
           alignItems='center'
           justifyContent='space-between'
@@ -80,15 +33,15 @@ export const FormCategories = ({
             >
               {label}
             </Typography>
-            {additionalLabel && (
+            {additionalInfo && (
               <Typography variant='body2' sx={{ color: textColor }}>
-                {additionalLabel}
+                {additionalInfo}
               </Typography>
             )}
           </Grid>
           <Grid item sx={{ textAlign: 'right' }}>
             <FormControlLabel
-              value={key} // TODO: This value should not be auto-generated, it should probably be inserted by the user depending on what the newsletter service requires
+              value={categoryID}
               control={
                 <Radio
                   sx={{
