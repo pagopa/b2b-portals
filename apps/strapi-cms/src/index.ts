@@ -9,6 +9,7 @@ interface IServiceError {
 }
 
 const UpdateStaticContentPluginName = 'update-static-content';
+const githubAcceptHeader = 'application/vnd.github+json';
 
 export default {
   register: async ({ strapi }: { readonly strapi: Strapi }): Promise<void> => {
@@ -34,7 +35,7 @@ export default {
       // If we are unable to connect to the DB, the build will fail later anyway as it should
     }
 
-    // Override Update Static Content plugin functionality
+    // Override Update Static Content plugin functionality - Pass tenant input to Github workflow
     strapi
       .plugin(UpdateStaticContentPluginName)
       .service('githubActions').trigger = async (): Promise<
@@ -68,7 +69,7 @@ export default {
           },
           {
             headers: {
-              Accept: 'application/vnd.github+json',
+              Accept: githubAcceptHeader,
               Authorization: `token ${githubToken}`,
             },
           }
@@ -79,6 +80,77 @@ export default {
           status: err.response.status,
           statusText: err.response.statusText,
         };
+      }
+    };
+
+    // Override Update Static Content plugin functionality - Filter Github workflows shown based on tenant
+    strapi
+      .plugin(UpdateStaticContentPluginName)
+      .service('githubActions').history = async (): Promise<{
+      readonly data: {
+        readonly workflow_runs: ReadonlyArray<object>;
+      };
+    }> => {
+      try {
+        const owner = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('owner');
+        const repo = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('repo');
+        const workflowId = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('workflowId');
+        const branch = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('branch');
+        const githubToken = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('githubToken');
+        const environment = strapi
+          .plugin(UpdateStaticContentPluginName)
+          .config('environment');
+
+        const workflows = await axios.get(
+          `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowId}/runs?per_page=50&page=1&branch=${branch}`,
+          {
+            headers: {
+              Accept: githubAcceptHeader,
+              Authorization: `token ${githubToken}`,
+            },
+          }
+        );
+
+        // The following is an array of bools that maps whether or not each workflow belongs to the current tenant
+        const tenantRanWorkflow: ReadonlyArray<boolean> = await Promise.all(
+          workflows.data.workflow_runs.map(
+            async (workflow: { readonly jobs_url: string }) => {
+              const jobs = await axios.get(workflow.jobs_url, {
+                headers: {
+                  Accept: githubAcceptHeader,
+                  Authorization: `token ${githubToken}`,
+                },
+              });
+
+              return (
+                jobs.data.jobs.find((job: { readonly name: string }) =>
+                  job.name.includes(environment)
+                ) !== undefined
+              );
+            }
+          )
+        );
+
+        return {
+          data: {
+            workflow_runs: workflows.data.workflow_runs.filter(
+              (_: object, index: number) => tenantRanWorkflow[index]
+            ),
+          },
+        };
+      } catch {
+        // On error, show no workflows
+        return { data: { workflow_runs: [] } };
       }
     };
   },

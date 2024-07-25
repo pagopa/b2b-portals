@@ -10,6 +10,7 @@ const makeEditorialProps = ({
   eyelet,
   body,
   image,
+  mobileImage,
   ctaButtons,
   storeButtons,
   ...rest
@@ -18,9 +19,16 @@ const makeEditorialProps = ({
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: (
     <Image
-      src={image.url}
-      alt={image.alternativeText ?? ''}
-      // Needed by Image, will be overwritten
+      src={image.data.attributes.url}
+      alt={image.data.attributes.alternativeText ?? ''}
+      width={0}
+      height={0}
+    />
+  ),
+  mobileImage: (
+    <Image
+      src={mobileImage.data.attributes.url} // Ensure mobileImage is correctly used here
+      alt={mobileImage.data.attributes.alternativeText ?? ''}
       width={0}
       height={0}
     />

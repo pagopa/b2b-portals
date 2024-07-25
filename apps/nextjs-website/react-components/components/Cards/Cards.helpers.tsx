@@ -17,6 +17,7 @@ export const CardsItemContainer = ({
         flexFlow: center ? 'row wrap' : 'column wrap',
         gap: '20px',
         alignItems: center ? 'center' : 'flex-start',
+        justifyContent: center ? 'center' : 'flex-start',
         width: { xs: '100%', sm: '50%' },
       }}
     >

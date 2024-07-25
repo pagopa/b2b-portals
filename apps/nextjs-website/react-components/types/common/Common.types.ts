@@ -25,3 +25,22 @@ export interface CtaButtonProps extends Partial<ButtonProps> {
   variant?: 'contained' | 'outlined' | 'text';
   readonly disableRipple?: boolean;
 }
+
+export function useIsVisible(ref: React.RefObject<Element>) {
+  const [isIntersecting, setIntersecting] = React.useState(false);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry) {
+        setIntersecting(entry.isIntersecting);
+      }
+    });
+
+    if (ref.current) observer.observe(ref.current);
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref]);
+
+  return isIntersecting;
+}

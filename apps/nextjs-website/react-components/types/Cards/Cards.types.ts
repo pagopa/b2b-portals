@@ -4,7 +4,7 @@ import { CommonProps, CtaButtonProps, Generic } from '../common/Common.types';
 export interface CardsProps extends CommonProps {
   items: CardsItemProps[];
   text: {
-    title: string;
+    title?: string;
     subtitle?: string;
     body?: string | Generic;
   };

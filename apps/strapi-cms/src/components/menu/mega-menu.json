@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_menu_mega_menus",
+  "info": {
+    "displayName": "MegaMenu"
+  },
+  "options": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.mega-menu-link",
+      "required": true
+    }
+  }
+}

@@ -1,47 +1,87 @@
-import { Header } from './fetch/header';
-import { Navigation } from './fetch/navigation';
-import {
-  MenuDropdownProp,
-  NavigationProps,
-} from '@react-components/types/Header/Header.types';
+/* eslint-disable no-underscore-dangle */
+import { HeaderData, HeaderSublink } from './fetch/header';
 
-export type HeaderWithNavigation = Header['data']['attributes'] &
-  NavigationProps;
+// The functions below doesn't technically "remove" the slug altogether
+// It replaces it with "/" because if we passed "" to the Header,
+// the links wouldn't go to the home page, but to the currently open page
 
-const makeMenuItemFromNavItem = (
-  item: Navigation[0],
-  navigation: Navigation,
-  theme: 'light' | 'dark'
-): MenuDropdownProp => {
-  const { title, related } = item;
-  const itemsArray = navigation
-    .filter((child) => child.parent?.id === item.id && child.menuAttached)
-    .map((child) => ({
-      href: `/${item.related.slug}/${child.related.slug}`,
-      label: child.title,
-    }));
-
-  return {
-    theme,
-    label: title,
-    href: `/${related.slug}`,
-    ...(itemsArray.length > 0 && { items: itemsArray }),
-  };
-};
-
-const makeMenuFromNavigation = (
-  navigation: Navigation,
-  theme: 'light' | 'dark'
-): ReadonlyArray<MenuDropdownProp> =>
-  navigation
-    .filter((item) => !item.parent && item.menuAttached)
-    .map((item) => makeMenuItemFromNavItem(item, navigation, theme));
-
-export const makeHeaderWithNavigation = (
-  navigation: Navigation,
-  header: Header
-): HeaderWithNavigation => ({
-  theme: 'light',
-  ...header.data.attributes,
-  menu: Array.from(makeMenuFromNavigation(navigation, 'light')),
+const removeHomepageSlugFromSublink = ({
+  page,
+  ...sublink
+}: HeaderSublink): HeaderSublink => ({
+  ...sublink,
+  page: {
+    data: {
+      attributes: {
+        slug:
+          page.data.attributes.slug === 'homepage'
+            ? '/'
+            : page.data.attributes.slug,
+      },
+    },
+  },
 });
+
+export const removeHomepageSlugFromMenu = (
+  header: HeaderData['data']['attributes']
+): HeaderData['data']['attributes'] => {
+  const menu = header.menu[0];
+
+  // If menu is empty, return header as-is (an error may be thrown later if appropriate)
+  if (menu === undefined) {
+    return header;
+  }
+
+  switch (menu.__component) {
+    case 'menu.menu':
+      return {
+        beta: header.beta,
+        ctaButtons: header.ctaButtons,
+        logo: header.logo,
+        productName: header.productName,
+        menu: [
+          {
+            __component: menu.__component,
+            links: menu.links.map(({ page, sublinks, ...link }) => ({
+              ...link,
+              page: {
+                data: page.data
+                  ? {
+                      attributes: {
+                        slug:
+                          page.data.attributes.slug === 'homepage'
+                            ? '/'
+                            : page.data.attributes.slug,
+                      },
+                    }
+                  : null,
+              },
+              sublinks: sublinks.map(removeHomepageSlugFromSublink),
+            })),
+          },
+        ],
+      };
+
+    case 'menu.mega-menu':
+      return {
+        beta: header.beta,
+        ctaButtons: header.ctaButtons,
+        logo: header.logo,
+        productName: header.productName,
+        menu: [
+          {
+            __component: menu.__component,
+            links: menu.links.map(({ sublinkGroups, ...link }) => ({
+              ...link,
+              sublinkGroups: sublinkGroups.map(
+                ({ sublinks, ...sublinkGroup }) => ({
+                  ...sublinkGroup,
+                  sublinks: sublinks.map(removeHomepageSlugFromSublink),
+                })
+              ),
+            })),
+          },
+        ],
+      };
+  }
+};

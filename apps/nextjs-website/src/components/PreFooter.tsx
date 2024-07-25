@@ -8,7 +8,7 @@ const makePreFooterProps = ({
   background,
   ...rest
 }: PreFooterSection): PreFooterProps => ({
-  ...(background && { background: background.url }),
+  ...(background.data && { background: background.data.attributes.url }),
   ...(storeButtons && {
     storeButtons: {
       ...(storeButtons.hrefGoogle && { hrefGoogle: storeButtons.hrefGoogle }),

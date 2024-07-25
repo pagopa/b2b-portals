@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { getNavigation } from '../navigation';
+import { getNavigation, Navigation } from '../navigation';
 import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
@@ -10,6 +10,10 @@ const makeTestAppEnv = () => {
     SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
     APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
     APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
+    FIRMA_STRAPI_API_BASE_URL: 'firmaStrapiToken',
+    FIRMA_STRAPI_API_TOKEN: 'firmaStrapiApiBaseUrl',
+    INTEROP_STRAPI_API_BASE_URL: 'interopStrapiToken',
+    INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
@@ -20,74 +24,47 @@ const makeTestAppEnv = () => {
 };
 
 // response example
-const navigationResponse = [
-  {
-    order: 1,
-    id: 1,
-    title: 'Homepage',
-    type: 'INTERNAL',
-    externalPath: null,
-    uiRouterKey: 'homepage-1',
-    menuAttached: true,
-    collapsed: false,
-    createdAt: '2023-11-10T10:07:12.091Z',
-    updatedAt: '2023-11-10T14:49:58.088Z',
-    audience: [],
-    parent: null,
-    related: {
-      id: 2,
-      name: 'Homepage',
-      slug: 'homepage',
-      createdAt: '2023-11-10T10:03:53.094Z',
-      updatedAt: '2023-11-10T10:03:53.094Z',
-      publishedAt: null,
-      __contentType: 'api::page.page',
-      navigationItemId: 1,
-      createdBy: {},
-      updatedBy: {},
-      seo: {
-        id: 1,
-        metaTitle: 'SEND - Test SEO',
-        metaDescription:
-          'Demo demo demo demo demo demo demo demo demo demo demo demo',
-        keywords: 'keyword1\nkeyword2\nkeyword3',
-        canonicalURL: 'https://dsf3knok9k0v5.cloudfront.net/seo-test-canonical',
-        ogTitle: 'Titling for the og',
-        ogDescription: 'Description for the og',
-      },
-      sections: [
-        {
-          __component: 'sections.hero',
-          image: null,
-          background: null,
-          ctaButtons: [],
-          storeButtons: null,
-          inverse: false,
-          sectionID: null,
-          size: 'small',
-          subtitle: 'subtitle',
-          theme: 'light',
-          title: 'light',
+const navigationResponse = {
+  data: [
+    {
+      id: 1,
+      attributes: {
+        slug: 'homepage',
+        seo: {
+          metaTitle: 'title',
+          metaDescription: 'description',
+          keywords: null,
+          canonicalURL: null,
+          ogTitle: null,
+          ogDescription: null,
         },
-      ],
+        sections: [
+          {
+            __component: 'sections.stripe-link',
+            theme: 'dark',
+            subtitle: 'subtitle',
+            icon: null,
+            buttonText: null,
+          },
+        ],
+      },
     },
-    items: null,
-  },
-];
+  ],
+};
 
 describe('getNavigation', () => {
-  it('should call /api/navigation/render type FLAT based on tenant', async () => {
+  it('should call /api/pages based on tenant', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
     const { config } = appEnv;
 
     fetchMock.mockResolvedValueOnce({
-      json: () => Promise.resolve([]),
+      json: () => Promise.resolve({ data: [] }),
     } as unknown as Response);
 
     await getNavigation(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/navigation/render/main-navigation?type=FLAT&populate[seo][populate][0]=metaTitle&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items.links&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration&populate[sections][populate][8]=storeButtons`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?pagination[pageSize]=100&populate[seo][populate][0]=metaTitle&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items.links&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration&populate[sections][populate][8]=storeButtons&populate[sections][populate][9]=sections.decoration&populate[sections][populate][10]=sections.ctaButtons&populate[sections][populate][11]=mobileImage`,
       {
         method: 'GET',
         headers: {
@@ -104,43 +81,33 @@ describe('getNavigation', () => {
     } as unknown as Response);
 
     const actual = getNavigation(appEnv);
-    const expected = [
-      {
-        id: 1,
-        order: 1,
-        parent: null,
-        menuAttached: true,
-        title: 'Homepage',
-        related: {
-          slug: 'homepage',
-          seo: {
-            metaTitle: 'SEND - Test SEO',
-            metaDescription:
-              'Demo demo demo demo demo demo demo demo demo demo demo demo',
-            keywords: 'keyword1\nkeyword2\nkeyword3',
-            canonicalURL:
-              'https://dsf3knok9k0v5.cloudfront.net/seo-test-canonical',
-            ogTitle: 'Titling for the og',
-            ogDescription: 'Description for the og',
-          },
-          sections: [
-            {
-              __component: 'sections.hero',
-              image: null,
-              background: null,
-              ctaButtons: [],
-              storeButtons: null,
-              inverse: false,
-              sectionID: null,
-              size: 'small',
-              subtitle: 'subtitle',
-              theme: 'light',
-              title: 'light',
+    const expected: Navigation = {
+      data: [
+        {
+          id: 1,
+          attributes: {
+            slug: 'homepage',
+            seo: {
+              metaTitle: 'title',
+              metaDescription: 'description',
+              keywords: null,
+              canonicalURL: null,
+              ogTitle: null,
+              ogDescription: null,
             },
-          ],
+            sections: [
+              {
+                __component: 'sections.stripe-link',
+                theme: 'dark',
+                subtitle: 'subtitle',
+                icon: null,
+                buttonText: null,
+              },
+            ],
+          },
         },
-      },
-    ];
+      ],
+    };
 
     expect(await actual).toStrictEqual(expected);
   });

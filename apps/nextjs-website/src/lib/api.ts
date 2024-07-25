@@ -2,15 +2,14 @@
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
 import { AppEnv, Config, makeAppEnv } from '../AppEnv';
-import { Page, makePageListFromNavigation } from './pages';
-import { getNavigation } from './fetch/navigation';
-import { PreHeader, getPreHeader } from './fetch/preHeader';
+import { getNavigation, PageData } from './fetch/navigation';
+import { PreHeaderData, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
-import { getHeader } from './fetch/header';
-import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
+import { getHeader, HeaderData } from './fetch/header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
+import { removeHomepageSlugFromMenu } from './header';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -22,14 +21,22 @@ const appEnv = pipe(
 );
 
 // Return all the pages
-export const getAllPages = async (): Promise<ReadonlyArray<Page>> => {
+export const getAllPages = async (): Promise<ReadonlyArray<PageData>> => {
   const navigation = await getNavigation(appEnv);
-  return makePageListFromNavigation(navigation);
+  return navigation.data.map((item) =>
+    item.attributes.slug !== 'homepage'
+      ? item.attributes
+      : {
+          slug: '',
+          seo: item.attributes.seo,
+          sections: item.attributes.sections,
+        }
+  );
 };
 
 // Return PreHeaderProps
 export const getPreHeaderProps = async (): Promise<
-  PreHeader['data']['attributes']
+  PreHeaderData['data']['attributes']
 > => {
   const {
     data: { attributes },
@@ -37,10 +44,13 @@ export const getPreHeaderProps = async (): Promise<
   return attributes;
 };
 
-export const getHeaderProps = async (): Promise<HeaderWithNavigation> => {
-  const header = await getHeader(appEnv);
-  const navigation = await getNavigation(appEnv);
-  return makeHeaderWithNavigation(navigation, header);
+export const getHeaderProps = async (): Promise<
+  HeaderData['data']['attributes']
+> => {
+  const {
+    data: { attributes },
+  } = await getHeader(appEnv);
+  return removeHomepageSlugFromMenu(attributes);
 };
 
 export const getFooterProps = async (): Promise<
@@ -54,8 +64,12 @@ export const getFooterProps = async (): Promise<
 
 // Return PageProps given the page path
 export const getPageProps = async (
-  slug: ReadonlyArray<string>
-): Promise<Page | undefined> => {
+  slug: string | undefined
+): Promise<PageData | undefined> => {
+  if (slug === undefined) {
+    return undefined;
+  }
+
   const allPages = await getAllPages();
   return allPages.find((page) => slug.toString() === page.slug.toString());
 };
@@ -98,32 +112,7 @@ export const getPageSectionsFromID = async (
     data: { attributes },
   } = await fetchPageFromID({ ...appEnvWithRequestedTenant, pageID });
 
-  return attributes.sections.map((section) => {
-    // eslint-disable-next-line no-underscore-dangle
-    switch (section.__component) {
-      case 'sections.hero':
-        return {
-          ...section,
-          image: section.image.data?.attributes ?? null,
-          background: section.background.data?.attributes ?? null,
-        };
-
-      case 'sections.editorial':
-        return {
-          ...section,
-          image: section.image.data.attributes,
-        };
-
-      case 'sections.banner-link':
-        return {
-          ...section,
-          decoration: section.decoration.data?.attributes ?? null,
-        };
-
-      default:
-        return section;
-    }
-  });
+  return attributes.sections;
 };
 
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
