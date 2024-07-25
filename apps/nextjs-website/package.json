@@ -20,6 +20,7 @@
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.14.14",
     "@pagopa/mui-italia": "^1.0.1",
+    "@types/react-google-recaptcha": "^2.1.9",
     "fp-ts": "^2.16.1",
     "html-react-parser": "^5.0.11",
     "io-ts": "^2.2.20",
@@ -27,6 +28,7 @@
     "next": "14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^3.1.0",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1"
   },

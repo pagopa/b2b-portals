@@ -4,38 +4,25 @@ import Form from '@react-components/components/Form/Form';
 
 const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   title: 'Resta aggiornato, iscriviti alla newsletter!',
-  subtitle: '',
-  privacyLinkRecaptchaPolicy: 'https://policies.google.com/privacy',
-  privacyLinkTextRecaptchaPolicy: 'Privacy Policy',
-  privacyLinkRecaptchaTerms: 'https://policies.google.com/terms',
-  privacyLinkTextRecaptchaTerms: 'Termini di servizio',
   theme,
-  backgroundImage: '#',
-  ctaButtons: [
-    {
-      text: 'Iscriviti',
-    },
-  ],
-  showFirstName: true,
-  showLastName: true,
-  showEmail: true,
+  showName: true,
+  showSurname: true,
   showOrganization: true,
-  formCategories: [
-    { label: 'Cittadino' },
-    { label: 'Dipendente/ Consulente di un ente pubblico' },
-    { label: 'Partner tecnologico di un ente pubblico', additionalLabel: '(presso  società in-house, software house, ecc.)' },
-    { label: 'Sviluppatore' },
-    { label: 'Giornalista' },
+  categories: [
+    { label: 'Cittadino', categoryID: '1' },
+    { label: 'Dipendente/ Consulente di un ente pubblico', categoryID: '2' },
+    { label: 'Partner tecnologico di un ente pubblico', categoryID: '3' , additionalInfo: '(presso  società in-house, software house, ecc.)' },
+    { label: 'Sviluppatore', categoryID: '4' },
+    { label: 'Giornalista', categoryID: '5' },
   ],
   categoriesTitle: 'Vorrei ricevere news sul progetto IO in qualità di*:',
-  showMandatoryInfo: true,
-  showPrivacyDisclaimer: true,
-  privacyDisclaimerText:
-    'Inserendo il tuo indirizzo email stai accettando la nostra informativa sul trattamento dei dati personali per la newsletter.',
+  clientID: 'io',
+  listID: 'listID',
+  recaptchaSiteKey: 'sitekey'
 });
 
 export const FormTemplate: StoryFn<FormProps> = (args) => (
-  <Form {...args} onSubmit={() => alert('Form submitted')} />
+  <Form {...args} />
 );
 
 export const defaultPropsDark = {

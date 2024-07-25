@@ -1,0 +1,65 @@
+{
+  "collectionName": "components_sections_forms",
+  "info": {
+    "displayName": "Form",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "showName": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "showSurname": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "showOrganization": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "categoriesTitle": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.form-category"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "listID": {
+      "type": "string",
+      "required": true
+    },
+    "clientID": {
+      "type": "enumeration",
+      "enum": [
+        "io",
+        "pagopa"
+      ],
+      "required": true
+    },
+    "recaptchaSiteKey": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

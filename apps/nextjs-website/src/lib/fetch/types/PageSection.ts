@@ -160,26 +160,28 @@ const IFrameSectionCodec = t.strict({
   src: t.string,
 });
 
-const FormCategoriesCodec = t.array(
-  t.strict({
-    key: t.string,
-    label: t.string,
-    additionalLabel: t.union([t.string, t.undefined]),
-  })
-);
+const FormCategoryCodec = t.strict({
+  categoryID: t.string,
+  label: t.string,
+  additionalInfo: t.union([t.string, t.null]),
+});
 
 const FormSectionCodec = t.strict({
   __component: t.literal('sections.form'),
   title: t.string,
-  subtitle: t.string,
-  privacyLinkRecaptchaPolicy: t.string,
-  privacyLinkTextRecaptchaPolicy: t.string,
-  privacyLinkRecaptchaTerms: t.string,
-  privacyLinkTextRecaptchaTerms: t.string,
-  formCategories: FormCategoriesCodec,
+  subtitle: t.union([t.string, t.null]),
+  showName: t.boolean,
+  showSurname: t.boolean,
+  showOrganization: t.boolean,
+  categoriesTitle: t.union([t.string, t.null]),
+  categories: t.array(FormCategoryCodec),
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  ctaButtons: t.array(CTAButtonSimpleCodec),
-  submitHandler: t.Function,
+  recaptchaSiteKey: t.string,
+  listID: t.string,
+  clientID: t.keyof({
+    io: null,
+    pagopa: null,
+  }),
 });
 
 const PreFooterSectionCodec = t.strict({
