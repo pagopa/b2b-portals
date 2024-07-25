@@ -35,7 +35,8 @@
         "sections.cards",
         "sections.stripe-link",
         "sections.one-trust",
-        "sections.i-frame"
+        "sections.i-frame",
+        "sections.form"
       ],
       "required": true,
       "min": 1
