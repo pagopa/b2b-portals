@@ -16,6 +16,7 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
     { label: 'Giornalista', categoryID: '5' },
   ],
   categoriesTitle: 'Vorrei ricevere news sul progetto IO in qualità di*:',
+  defaultCategoryID: '61',
   clientID: 'io',
   listID: 'listID',
   recaptchaSiteKey: 'sitekey'

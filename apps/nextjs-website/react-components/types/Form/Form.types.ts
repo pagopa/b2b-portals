@@ -8,6 +8,7 @@ interface FormFields {
 
 interface FormCategories {
   readonly categoriesTitle?: string;
+  readonly defaultCategoryID: string;
   readonly categories: {
     categoryID: string,
     label: string;
