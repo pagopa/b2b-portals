@@ -36,6 +36,7 @@ const Form = ({
   subtitle,
   theme,
   categoriesTitle,
+  defaultCategoryID,
   categories,
   clientID,
   listID,
@@ -130,7 +131,7 @@ const Form = ({
           method: 'POST',
           body: JSON.stringify({
             recaptchaToken,
-            groups: [formData.category],
+            groups: (categories.length > 0 && formData.category !== '') ? [formData.category] : [defaultCategoryID],
             email: formData.email,
             ...(showName && { name: formData.name }),
             ...(showSurname && { surname: formData.surname }),

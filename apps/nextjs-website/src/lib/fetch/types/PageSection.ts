@@ -174,6 +174,7 @@ const FormSectionCodec = t.strict({
   showSurname: t.boolean,
   showOrganization: t.boolean,
   categoriesTitle: t.union([t.string, t.null]),
+  defaultCategoryID: t.string,
   categories: t.array(FormCategoryCodec),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   recaptchaSiteKey: t.string,
