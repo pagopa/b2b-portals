@@ -1,15 +1,15 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Link, Stack, Typography, Divider } from '@mui/material';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { useMediaQuery, useTheme as useMuiTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { BackgroundColor } from '@react-components/components/common/Common.helpers';
 import { CtaButtons } from '../common/Common';
-import { useState, useEffect } from 'react';
-import DesktopDrawer from './components/Header.DesktopDrawer.helpers';
 import { HeaderTitle } from './components/Header.HeaderTitle.helpers';
 import { Navigation } from './components/Header.Navigation.helpers';
 import { HamburgerMenu } from './components/Header.HamburgerMenu.helpers';
+import DesktopDrawer from './components/Header.DesktopDrawer.helpers';
 
 const Header = ({
   product,

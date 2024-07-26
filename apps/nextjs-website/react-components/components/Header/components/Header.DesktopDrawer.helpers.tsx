@@ -1,14 +1,29 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import ActionAreaCard from './Header.Card.helpers';
+import { Divider } from '@mui/material';
+import PeopleIcon from '@mui/icons-material/People';
+import BusinessIcon from '@mui/icons-material/Business';
+
+const cardData = [
+  {
+    title: 'Lizard',
+    subtitle:
+      'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
+    stackIcon: PeopleIcon,
+    buttonText: 'Learn More',
+    href: '/',
+  },
+  {
+    title: 'Lizard',
+    subtitle:
+      'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
+    stackIcon: BusinessIcon,
+    buttonText: 'Learn More',
+    href: '/',
+  },
+];
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -25,36 +40,33 @@ export default function DesktopDrawer({
 }: DesktopDrawerProps) {
   const list = (anchor: Anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{
+        width:
+          anchor === 'top' || anchor === 'bottom'
+            ? 'auto'
+            : 250 || anchor === 'right'
+              ? 'auto'
+              : 450,
+        padding: 2,
+      }}
       role='presentation'
       onClick={() => onClose(anchor)}
       onKeyDown={() => onClose(anchor)}
     >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+      <Divider sx={{ marginBottom: 2 }} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+        {cardData.map((card, index) => (
+          <ActionAreaCard
+            key={index}
+            title={card.title}
+            subtitle={card.subtitle}
+            buttonText={card.buttonText}
+            href={card.href}
+            stackIcon={card.stackIcon}
+            theme={'light'}
+          />
         ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      </div>
     </Box>
   );
 
