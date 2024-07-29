@@ -1,49 +1,24 @@
-import { EditorialCtaProps } from '../Editorial/Editorial.types';
+import { EditorialProps } from '../Editorial/Editorial.types';
 
-export interface TitleSubtitleBlockProps {
-  toptitle: string;
-  topsubtitle?: string;
+export interface EditorialSwitchBaseProps {
+  title: string;
+  subtitle?: string;
   theme: 'dark' | 'light';
+}
+
+export interface EditorialSwitchSection {
+  id: number;
+  buttonText: string;
+  content: EditorialProps;
+}
+
+export interface EditorialSwitchProps extends EditorialSwitchBaseProps {
+  sections: EditorialSwitchSection[];
 }
 
 export interface ButtonSwitchRowBlockProps {
-  buttons: { id: string; text: string }[];
-  onButtonClick: (button: { id: string; text: string }) => void;
-  selectedButton: { id: string; text: string };
+  buttons: { id: number; text: string }[];
+  onButtonClick: (sectionID: number) => void;
+  selectedButton: { id: number; text: string };
   theme: 'dark' | 'light';
-}
-
-export interface ContentItem {
-  id: string;
-  eyelet: string;
-  body: string | JSX.Element;
-  title: string;
-  ctaButtons?: EditorialCtaProps['ctaButtons'];
-  pattern: 'dots' | 'solid' | 'none';
-  image: {
-    src: string;
-    alt: string;
-  };
-  mobileImage: {
-    src: string;
-    alt: string;
-  };
-}
-
-export interface Section {
-  button: {
-    id: string;
-    text: string;
-  };
-  content: ContentItem;
-}
-
-export interface EditorialSwitchProps {
-  sections: Section[];
-  theme: 'light' | 'dark';
-  reversed?: boolean;
-  width?: 'wide' | 'standard' | 'center';
-  toptitle: string;
-  topsubtitle?: string;
-  pattern?: 'dots' | 'solid' | 'none';
 }

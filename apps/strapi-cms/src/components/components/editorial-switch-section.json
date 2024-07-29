@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_components_editorial_switch_sections",
+  "info": {
+    "displayName": "EditorialSwitch Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "buttonText": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.editorial",
+      "required": true
+    }
+  }
+}
