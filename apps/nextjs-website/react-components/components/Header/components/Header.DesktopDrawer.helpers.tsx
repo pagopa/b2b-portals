@@ -3,19 +3,11 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import ActionAreaCard from './Header.Card.helpers';
 import { Button, Divider, Stack, Typography } from '@mui/material';
-import { EIconProps } from '@react-components/components/common/EIcon';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
-
-export interface CardData {
-  readonly title: string;
-  readonly subtitle: string;
-  readonly stackIcon: EIconProps;
-  readonly buttonText: string;
-  readonly href: string;
-}
+import { CardData } from '@react-components/types/Header/Header.types';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorRight': {

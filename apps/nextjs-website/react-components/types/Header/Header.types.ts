@@ -1,6 +1,14 @@
 import { LinkProps, StackProps } from "@mui/material";
 import { CommonProps, CtaButtonProps } from "../common/Common.types";
-import { CardData } from "@react-components/components/Header/components/Header.DesktopDrawer.helpers";
+import { EIconProps } from "@react-components/components/common/EIcon";
+
+export interface CardData {
+  readonly title: string;
+  readonly subtitle: string;
+  readonly stackIcon: EIconProps;
+  readonly buttonText: string;
+  readonly href: string;
+}
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
   ctaButtons?: CtaButtonProps[];
