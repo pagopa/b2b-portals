@@ -10,6 +10,7 @@ import { HeaderTitle } from './components/Header.HeaderTitle.helpers';
 import { Navigation } from './components/Header.Navigation.helpers';
 import { HamburgerMenu } from './components/Header.HamburgerMenu.helpers';
 import DesktopDrawer from './components/Header.DesktopDrawer.helpers';
+import MobileDrawer from './components/Header.MobileDrawer.helpers';
 
 const Header = ({
   product,
@@ -27,9 +28,7 @@ const Header = ({
 }: HeaderProps) => {
   const backgroundColor = BackgroundColor(theme);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
-    null
-  );
+  const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
   const muiTheme = useMuiTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
 
@@ -41,7 +40,7 @@ const Header = ({
     setMenuOpen(false);
   };
 
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleOpenDrawer = () => setIsDrawerOpen(true);
   const handleCloseDrawer = () => setIsDrawerOpen(false);
@@ -138,9 +137,9 @@ const Header = ({
             </Box>
           </Stack>
         </Stack>
-  
+
         <Divider />
-  
+
         {!isMobile && (
           <Stack
             direction='row'
@@ -156,9 +155,7 @@ const Header = ({
                 ...menu,
                 isOpen: openDropdownIndex === index,
                 onClick: () =>
-                  setOpenDropdownIndex(
-                    openDropdownIndex === index ? null : index
-                  ),
+                  setOpenDropdownIndex(openDropdownIndex === index ? null : index),
               }))}
               theme={theme}
               isMobile={false}
@@ -180,7 +177,7 @@ const Header = ({
             </Box>
           </Stack>
         )}
-  
+
         {isMobile && (
           <Stack
             direction='row'
@@ -193,16 +190,8 @@ const Header = ({
             }}
           >
             <Stack direction='row' alignItems='center' gap={1}>
-              <HamburgerMenu
-                onOpen={openHeader}
-                onClose={closeHeader}
-                open={menuOpen}
-              />
-              <Typography
-                variant='body1'
-                color='text.secondary'
-                sx={{ fontWeight: 600 }}
-              >
+              <HamburgerMenu onOpen={openHeader} onClose={closeHeader} open={menuOpen} />
+              <Typography variant='body1' color='text.secondary' sx={{ fontWeight: 600 }}>
                 Menu
               </Typography>
             </Stack>
@@ -211,32 +200,17 @@ const Header = ({
             </Box>
           </Stack>
         )}
-  
-        {isMobile && menuOpen && (
-          <Stack
-            direction='column'
-            sx={{
-              display: { xs: 'flex', md: 'none' },
-              width: '100%',
-              alignItems: 'flex-start',
-              padding: '8px 24px',
-            }}
-          >
-            <Navigation
-              menu={menu.map((menu, index) => ({
-                ...menu,
-                isOpen: openDropdownIndex === index,
-                onClick: () =>
-                  setOpenDropdownIndex(
-                    openDropdownIndex === index ? null : index
-                  ),
-              }))}
-              theme={theme}
-              isMobile={true}
-            />
-          </Stack>
+
+        {isMobile && (
+          <MobileDrawer
+            isOpen={menuOpen}
+            onClose={closeHeader}
+            anchor='left'
+            menu={menu}
+            theme={'light'}
+          />
         )}
-  
+
         {isMobile && (
           <DesktopDrawer
             isOpen={isDrawerOpen}
@@ -254,7 +228,6 @@ const Header = ({
       </Stack>
     </Box>
   );
-  
 };
 
 export default Header;

@@ -57,3 +57,6 @@ export interface HeaderTitleProps extends CommonProps {
 export interface DialogBubbleProps extends StackProps {
   children: React.ReactNode;
 }
+
+// Define MenuItem type
+export type MenuItem = MenuDropdownProp;
