@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   ButtonSwitchRowBlockProps,
-  TitleSubtitleBlockProps,
+  EditorialSwitchBaseProps,
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
 import { CtaButtons, Subtitle, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
@@ -17,10 +17,10 @@ import {
 import { ArrowDropDown } from '@mui/icons-material';
 
 export const TitleSubtitleBlock = ({
-  toptitle,
-  topsubtitle,
+  title,
+  subtitle,
   theme,
-}: TitleSubtitleBlockProps) => {
+}: EditorialSwitchBaseProps) => {
   const textColor = TextColor(theme);
 
   return (
@@ -37,7 +37,7 @@ export const TitleSubtitleBlock = ({
       <Title
         variant='h4'
         textColor={textColor}
-        title={toptitle}
+        title={title}
         textAlign='left'
         marginTop={3}
         marginBottom={3}
@@ -45,7 +45,7 @@ export const TitleSubtitleBlock = ({
       <Subtitle
         variant='body2'
         textColor={textColor}
-        subtitle={topsubtitle}
+        subtitle={subtitle}
         textAlign='center'
         marginBottom={4}
       />
@@ -59,9 +59,9 @@ const SplitButton = ({
   onButtonClick,
   theme,
 }: {
-  buttons: { id: string; text: string }[];
-  selectedButton: { id: string; text: string };
-  onButtonClick: (button: { id: string; text: string }) => void;
+  buttons: { id: number; text: string }[];
+  selectedButton: { id: number; text: string };
+  onButtonClick: (sectionID: number) => void;
   theme: string;
 }) => {
   const muiTheme = useTheme();
@@ -74,8 +74,8 @@ const SplitButton = ({
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleMenuItemClick = (button: { id: string; text: string }) => {
-    onButtonClick(button);
+  const handleMenuItemClick = (button: { id: number; text: string }) => {
+    onButtonClick(button.id);
     setOpen(false);
   };
 
@@ -95,7 +95,7 @@ const SplitButton = ({
       >
         <Button
           onClick={() => {
-            onButtonClick(selectedButton);
+            onButtonClick(selectedButton.id);
           }}
           sx={{
             backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
@@ -185,7 +185,7 @@ export const ButtonSwitchRowBlock = ({
             },
           },
           variant: 'outlined',
-          onClick: () => onButtonClick(button),
+          onClick: () => onButtonClick(button.id),
         })),
         theme,
       })}

@@ -25,8 +25,7 @@ const HeroSectionCodec = t.strict({
   storeButtons: t.union([StoreButtonsCodec, t.null]),
 });
 
-const EditorialSectionCodec = t.strict({
-  __component: t.literal('sections.editorial'),
+const EditorialContentCodec = t.strict({
   title: t.string,
   eyelet: t.union([t.string, t.null]),
   body: t.string,
@@ -48,6 +47,13 @@ const EditorialSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
 });
+
+const EditorialSectionCodec = t.intersection([
+  t.strict({
+    __component: t.literal('sections.editorial'),
+  }),
+  EditorialContentCodec,
+]);
 
 const AccordionSectionCodec = t.strict({
   __component: t.literal('sections.accordion'),
@@ -225,42 +231,15 @@ const MegaHeaderSectionCodec = t.strict({
 const EditorialSwitchSectionCodec = t.strict({
   __component: t.literal('sections.editorial-switch'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  toptitle: t.string,
-  topsubtitle: t.union([t.string, t.null]),
-  width: t.union([
-    t.literal('wide'),
-    t.literal('standard'),
-    t.literal('center'),
-  ]),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
   sections: t.array(
     t.strict({
-      button: t.strict({
-        id: t.string,
-        text: t.string,
-      }),
-      content: t.strict({
-        id: t.string,
-        eyelet: t.string,
-        body: t.string,
-        title: t.string,
-        pattern: t.keyof({
-          none: null,
-          dots: null,
-          solid: null,
-        }),
-        image: t.strict({
-          src: t.string,
-          alt: t.string,
-        }),
-        mobileImage: t.strict({
-          src: t.string,
-          alt: t.string,
-        }),
-        ctaButtons: t.union([t.array(CTAButtonSimpleCodec), t.undefined]),
-      }),
+      id: t.number,
+      buttonText: t.string,
+      content: EditorialContentCodec,
     })
   ),
-  reversed: t.boolean,
 });
 
 const VideoImageSectionCodec = t.strict({

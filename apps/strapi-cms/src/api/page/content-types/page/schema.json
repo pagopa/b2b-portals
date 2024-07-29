@@ -36,7 +36,8 @@
         "sections.stripe-link",
         "sections.one-trust",
         "sections.i-frame",
-        "sections.form"
+        "sections.form",
+        "sections.editorial-switch"
       ],
       "required": true,
       "min": 1

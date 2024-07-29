@@ -6,7 +6,7 @@ import { EditorialProps } from '@react-components/types';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 
-const makeEditorialProps = ({
+export const makeEditorialProps = ({
   eyelet,
   body,
   image,
