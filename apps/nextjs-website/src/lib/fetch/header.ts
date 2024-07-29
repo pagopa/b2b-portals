@@ -2,6 +2,7 @@ import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
 import { CTAButtonSimpleCodec } from './types/CTAButton';
 import { StrapiImageSchema } from './types/StrapiImage';
+import { HeaderMUIIconCodec } from './types/icons/HeaderIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
@@ -57,12 +58,26 @@ const MegaMenuCodec = t.array(
   })
 );
 
+const CardData = t.type({
+  title: t.string,
+  subtitle: t.string,
+  stackIcon: HeaderMUIIconCodec,
+  buttonText: t.string,
+  href: t.string,
+});
+
 const HeaderWithMenuDataCodec = t.strict({
   logo: StrapiImageSchema,
   productName: t.string,
   beta: t.boolean,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   menu: MenuCodec,
+  drawerMenuTitle: t.string,
+  ctaTitle: t.string,
+  ctaButtonText: t.string,
+  ctaHref: t.string,
+  ctaBodyText: t.string,
+  drawerCardsData: t.array(CardData),
 });
 
 const HeaderWithMegaMenuDataCodec = t.strict({

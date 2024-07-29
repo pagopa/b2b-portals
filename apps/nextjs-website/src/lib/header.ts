@@ -60,6 +60,21 @@ export const removeHomepageSlugFromMenu = (
             })),
           },
         ],
+        drawerMenuTitle: 'text',
+        ctaTitle: 'text',
+        ctaButtonText: 'text',
+        ctaHref: 'text',
+        ctaBodyText: 'text',
+        drawerCardsData: [
+          {
+            title: 'Cittadini',
+            subtitle:
+              'Accedi come persona fisica, libero professionista o ditta individuale',
+            stackIcon: 'People',
+            buttonText: 'Accedi',
+            href: '/',
+          },
+        ],
       };
 
     case 'menu.mega-menu':

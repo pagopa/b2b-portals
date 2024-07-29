@@ -1,8 +1,15 @@
 import { LinkProps, StackProps } from "@mui/material";
 import { CommonProps, CtaButtonProps } from "../common/Common.types";
+import { CardData } from "@react-components/components/Header/components/Header.DesktopDrawer.helpers";
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
   ctaButtons?: CtaButtonProps[];
+  drawerMenuTitle: string;
+  ctaTitle: string;
+  ctaButtonText: string;
+  ctaHref: string;
+  ctaBodyText: string;
+  drawerCardsData: CardData[];
 }
 
 interface DropdownLink extends LinkProps {

@@ -18,6 +18,12 @@ const Header = ({
   ctaButtons,
   beta,
   logo,
+  drawerMenuTitle,
+  ctaTitle,
+  ctaButtonText,
+  ctaHref,
+  ctaBodyText,
+  drawerCardsData,
 }: HeaderProps) => {
   const backgroundColor = BackgroundColor(theme);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -163,6 +169,13 @@ const Header = ({
                 isOpen={isDrawerOpen}
                 onClose={handleCloseDrawer}
                 anchor='right'
+                drawerMenuTitle={drawerMenuTitle}
+                drawerCardsData={drawerCardsData}
+                theme={'light'}
+                ctaTitle={ctaTitle}
+                ctaButtonText={ctaButtonText}
+                ctaHref={ctaHref}
+                ctaBodyText={ctaBodyText}
               />
             </Box>
           </Stack>

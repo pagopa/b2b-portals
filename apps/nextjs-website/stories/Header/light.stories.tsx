@@ -43,6 +43,28 @@ const defaultProps: HeaderProps = {
       ],
     },
   ],
+  drawerMenuTitle: 'Accedi a SEND',
+  ctaTitle: 'Sei un Ente?',
+  ctaButtonText: 'Accedi',
+  ctaHref: '/',
+  ctaBodyText: 'Il tuo ente non ha ancora aderito? Scopri come aderire',
+  drawerCardsData: [
+    {
+      title: 'Cittadini',
+      subtitle:
+        'Accedi come persona fisica, libero professionista o ditta individuale',
+      stackIcon: { icon: 'People' },
+      buttonText: 'Accedi',
+      href: '/',
+    },
+    {
+      title: 'Imprese',
+      subtitle: 'Accedi come persona giuridica',
+      stackIcon: { icon: 'Business' },
+      buttonText: 'Accedi',
+      href: '/',
+    },
+  ],
 };
 
 export const HeaderFullWithLogo: StoryFn<typeof Header> = HeaderTemplate.bind({});
@@ -57,18 +79,6 @@ HeaderFullWithLogo.args = {
     {
       text: 'CTA Button 1',
       href: '#cta-1',
-    },
-  ],
-};
-
-export const HeaderFullWithoutLogoBeta: StoryFn<typeof Header> = HeaderTemplate.bind({});
-HeaderFullWithoutLogoBeta.args = {
-  ...defaultProps,
-  beta: true,
-  ctaButtons: [
-    {
-      text: 'CTA Button 1',
-      href: '#cta-1-beta',
     },
   ],
 };

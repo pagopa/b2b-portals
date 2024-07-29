@@ -47,6 +47,21 @@ const headerResponse: HeaderData = {
           links: [],
         },
       ],
+      drawerMenuTitle: 'text',
+      ctaTitle: 'text',
+      ctaButtonText: 'text',
+      ctaHref: 'text',
+      ctaBodyText: 'text',
+      drawerCardsData: [
+        {
+          title: 'Cittadini',
+          subtitle:
+            'Accedi come persona fisica, libero professionista o ditta individuale',
+          stackIcon: 'People',
+          buttonText: 'Accedi',
+          href: '/',
+        },
+      ],
     },
   },
 };
