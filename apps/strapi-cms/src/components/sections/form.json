@@ -60,6 +60,10 @@
     "recaptchaSiteKey": {
       "type": "string",
       "required": true
+    },
+    "defaultCategoryID": {
+      "type": "string",
+      "required": true
     }
   }
 }
