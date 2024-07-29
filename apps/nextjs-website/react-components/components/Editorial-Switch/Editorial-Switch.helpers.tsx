@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   ButtonSwitchRowBlockProps,
-  TitleSubtitleBlockProps,
+  EditorialSwitchBaseProps,
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
 import { CtaButtons, Subtitle, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
@@ -17,10 +17,10 @@ import {
 import { ArrowDropDown } from '@mui/icons-material';
 
 export const TitleSubtitleBlock = ({
-  toptitle,
-  topsubtitle,
+  title,
+  subtitle,
   theme,
-}: TitleSubtitleBlockProps) => {
+}: EditorialSwitchBaseProps) => {
   const textColor = TextColor(theme);
 
   return (
@@ -37,7 +37,7 @@ export const TitleSubtitleBlock = ({
       <Title
         variant='h4'
         textColor={textColor}
-        title={toptitle}
+        title={title}
         textAlign='left'
         marginTop={3}
         marginBottom={3}
@@ -45,7 +45,7 @@ export const TitleSubtitleBlock = ({
       <Subtitle
         variant='body2'
         textColor={textColor}
-        subtitle={topsubtitle}
+        subtitle={subtitle}
         textAlign='center'
         marginBottom={4}
       />
@@ -58,12 +58,7 @@ const SplitButton = ({
   selectedButton,
   onButtonClick,
   theme,
-}: {
-  buttons: { id: string; text: string }[];
-  selectedButton: { id: string; text: string };
-  onButtonClick: (button: { id: string; text: string }) => void;
-  theme: string;
-}) => {
+}: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
   const { palette } = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -74,8 +69,8 @@ const SplitButton = ({
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleMenuItemClick = (button: { id: string; text: string }) => {
-    onButtonClick(button);
+  const handleMenuItemClick = (button: { id: number; text: string }) => {
+    onButtonClick(button.id);
     setOpen(false);
   };
 
@@ -95,13 +90,20 @@ const SplitButton = ({
       >
         <Button
           onClick={() => {
-            onButtonClick(selectedButton);
+            onButtonClick(selectedButton.id);
           }}
           sx={{
-            backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
-            color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+            backgroundColor:
+              theme === 'light'
+                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                : 'transparent',
+            color:
+              theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
             '&:hover': {
-              backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
+              backgroundColor:
+                theme === 'light'
+                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                  : 'transparent',
             },
           }}
         >
@@ -113,10 +115,17 @@ const SplitButton = ({
           aria-haspopup='menu'
           onClick={handleButtonClick}
           sx={{
-            backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
-            color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+            backgroundColor:
+              theme === 'light'
+                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                : 'transparent',
+            color:
+              theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
             '&:hover': {
-              backgroundColor: theme === 'light' ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
+              backgroundColor:
+                theme === 'light'
+                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                  : 'transparent',
             },
           }}
         >
@@ -148,8 +157,12 @@ const SplitButton = ({
               handleMenuItemClick(button);
             }}
             sx={{
-              backgroundColor: button.id === selectedButton.id ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
-              color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+              backgroundColor:
+                button.id === selectedButton.id
+                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                  : 'transparent',
+              color:
+                theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
             }}
           >
             {button.text}
@@ -172,20 +185,29 @@ export const ButtonSwitchRowBlock = ({
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
   return isLarge ? (
-    <Stack direction={isSmallScreen ? 'column' : 'row'} justifyContent='left' spacing={2}>
+    <Stack
+      direction={isSmallScreen ? 'column' : 'row'}
+      justifyContent='left'
+      spacing={2}
+    >
       {CtaButtons({
         ctaButtons: buttons.map((button) => ({
           text: button.text,
           sx: {
             width: { md: 'auto', xs: '100%' },
-            backgroundColor: button.id === selectedButton.id ? palette.custom.editorialSwitchButtonsBackgroundLightBlue : 'transparent',
-            color: theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+            backgroundColor:
+              button.id === selectedButton.id
+                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                : 'transparent',
+            color:
+              theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
             '&:hover': {
-              backgroundColor: palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+              backgroundColor:
+                palette.custom.editorialSwitchButtonsBackgroundLightBlue,
             },
           },
           variant: 'outlined',
-          onClick: () => onButtonClick(button),
+          onClick: () => onButtonClick(button.id),
         })),
         theme,
       })}
