@@ -138,9 +138,9 @@ const Header = ({
             </Box>
           </Stack>
         </Stack>
-
+  
         <Divider />
-
+  
         {!isMobile && (
           <Stack
             direction='row'
@@ -180,7 +180,7 @@ const Header = ({
             </Box>
           </Stack>
         )}
-
+  
         {isMobile && (
           <Stack
             direction='row'
@@ -211,7 +211,7 @@ const Header = ({
             </Box>
           </Stack>
         )}
-
+  
         {isMobile && menuOpen && (
           <Stack
             direction='column'
@@ -236,9 +236,25 @@ const Header = ({
             />
           </Stack>
         )}
+  
+        {isMobile && (
+          <DesktopDrawer
+            isOpen={isDrawerOpen}
+            onClose={handleCloseDrawer}
+            anchor='right'
+            drawerMenuTitle={drawerMenuTitle}
+            drawerCardsData={drawerCardsData}
+            theme={'light'}
+            ctaTitle={ctaTitle}
+            ctaButtonText={ctaButtonText}
+            ctaHref={ctaHref}
+            ctaBodyText={ctaBodyText}
+          />
+        )}
       </Stack>
     </Box>
   );
+  
 };
 
 export default Header;

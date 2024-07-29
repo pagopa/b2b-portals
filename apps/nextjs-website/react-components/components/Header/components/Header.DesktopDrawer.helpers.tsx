@@ -12,7 +12,7 @@ import { CardData } from '@react-components/types/Header/Header.types';
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorRight': {
     backgroundColor: '#f2f2f2',
-    width: '25%',
+    width: { xs: '100%', md: '25%' },
   },
 };
 
@@ -51,12 +51,6 @@ export default function DesktopDrawer({
   const list = (anchor: Anchor) => (
     <Box
       sx={{
-        width:
-          anchor === 'top' || anchor === 'bottom'
-            ? 'auto'
-            : 250 || anchor === 'right'
-              ? 'auto'
-              : 450,
         padding: 2,
         backgroundColor: 'white',
         justifyContent: 'center',
