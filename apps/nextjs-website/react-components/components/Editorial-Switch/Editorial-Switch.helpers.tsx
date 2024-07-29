@@ -35,18 +35,18 @@ export const TitleSubtitleBlock = ({
       }}
     >
       <Title
-        variant="h4"
+        variant='h4'
         textColor={textColor}
         title={title}
-        textAlign="left"
+        textAlign='left'
         marginTop={3}
         marginBottom={3}
       />
       <Subtitle
-        variant="body2"
+        variant='body2'
         textColor={textColor}
         subtitle={subtitle}
-        textAlign="center"
+        textAlign='center'
         marginBottom={4}
       />
     </div>
@@ -83,9 +83,9 @@ const SplitButton = ({
   return (
     <React.Fragment>
       <ButtonGroup
-        variant="outlined"
+        variant='outlined'
         ref={anchorRef}
-        aria-label="Split button"
+        aria-label='Split button'
         sx={{ display: 'flex', justifyContent: 'center' }}
       >
         <Button
@@ -112,7 +112,7 @@ const SplitButton = ({
         <Button
           aria-controls={open ? 'split-button-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="menu"
+          aria-haspopup='menu'
           onClick={handleButtonClick}
           sx={{
             backgroundColor:
@@ -133,7 +133,7 @@ const SplitButton = ({
         </Button>
       </ButtonGroup>
       <Menu
-        id="split-button-menu"
+        id='split-button-menu'
         anchorEl={anchorEl}
         open={open}
         onClose={closeMenu}
@@ -187,7 +187,7 @@ export const ButtonSwitchRowBlock = ({
   return isLarge ? (
     <Stack
       direction={isSmallScreen ? 'column' : 'row'}
-      justifyContent="left"
+      justifyContent='left'
       spacing={2}
     >
       {CtaButtons({
