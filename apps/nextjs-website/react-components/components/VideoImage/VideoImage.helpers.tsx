@@ -34,9 +34,6 @@ export const renderVideo = ({
 
   // Define styles for mobile and non-mobile devices
   const mobileStyle = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
     overflow: 'hidden',
     width: '100vw',
     height: '100vh',
