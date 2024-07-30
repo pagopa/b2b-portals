@@ -29,6 +29,27 @@ export const renderVideo = ({
       ? src.split('.').pop() ?? 'mp4'
       : src?.mime.split('/').pop() ?? 'mp4';
 
+  // Check if the device is likely a mobile device based on the window width
+  const isMobileDevice = window.innerWidth <= 768; // Adjust the value as needed
+
+  // Define styles for mobile and non-mobile devices
+  const mobileStyle = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    overflow: 'hidden',
+    width: '100vw',
+    height: '100vh',
+    objectFit: 'cover',
+    objectPosition: 'center',
+  };
+
+  const nonMobileStyle = {
+    overflow: 'hidden',
+    width: '100%',
+    height: '100%',
+  };
+
   if (error) {
     return isJSX(fallback) ? (
       fallback
@@ -48,11 +69,7 @@ export const renderVideo = ({
       autoPlay={autoplay}
       onEnded={onVideoEnd}
       onClick={onClick}
-      style={{
-        overflow: 'hidden',
-        width: '100%',
-        height: '100%',
-      }}
+      style={isMobileDevice ? mobileStyle : nonMobileStyle}
     >
       <source
         src={typeof src === 'object' ? src.url : src}
