@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import { Stack, List, ListItem, ListItemText, IconButton, Typography } from '@mui/material';
+import { Stack, List, ListItem, ListItemText, IconButton, Typography, Link } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import { MenuItem } from '@react-components/types/Header/Header.types';
@@ -29,7 +29,6 @@ export default function MobileDrawer({
   onClose,
   anchor,
   menu,
-  theme,
 }: MobileDrawerProps) {
   const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null);
 
@@ -37,7 +36,7 @@ export default function MobileDrawer({
     setOpenMenuIndex(openMenuIndex === index ? null : index);
   };
 
-  const list = (anchor: Anchor) => (
+  const list = () => (
     <Box
       sx={{
         padding: 2,
@@ -68,8 +67,6 @@ export default function MobileDrawer({
             return (
               <React.Fragment key={index}>
                 <ListItem
-                  button
-                  onClick={() => toggleMenu(index)}
                   sx={{
                     '&:hover': {
                       backgroundColor: 'transparent',
@@ -77,28 +74,46 @@ export default function MobileDrawer({
                     '&:focus': {
                       backgroundColor: 'transparent',
                     },
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontWeight: 600,
+                    color: '#5c6f82',
                   }}
                 >
-                  <ListItemText
-                    primary={
-                      <Typography
-                        style={{
-                          color: isSelected ? '#0b79d0' : '#5c6f82',
-                          fontWeight: isSelected ? 600 : 'normal',
-                        }}
-                      >
-                        {item.label}
-                      </Typography>
-                    }
-                  />
-                  {item.items && (
-                    <ArrowDropDown
+                  <Link
+                    href={item.href ? item.href : `#${item.label}`}
+                    underline="none"
+                    sx={{
+                      color: '#5c6f82',
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontWeight: 600,
+                      flexGrow: 1,
+                    }}
+                  >
+                    <Typography
                       style={{
-                        transition: 'transform 0.3s',
-                        transform: isSelected ? 'rotate(180deg)' : 'rotate(0deg)',
-                        color: isSelected ? '#0b79d0' : '#5c6f82',
+                        fontWeight: 600,
+                        color: '#5c6f82',
                       }}
-                    />
+                    >
+                      {item.label}
+                    </Typography>
+                  </Link>
+                  {item.items && (
+                    <Box
+                      onClick={() => toggleMenu(index)}
+                      sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                    >
+                      <ArrowDropDown
+                        style={{
+                          transition: 'transform 0.3s',
+                          transform: isSelected ? 'rotate(180deg)' : 'rotate(0deg)',
+                          color: '#5c6f82',
+                        }}
+                      />
+                    </Box>
                   )}
                 </ListItem>
                 {isSelected && item.items && (
@@ -115,9 +130,24 @@ export default function MobileDrawer({
                           '&:focus': {
                             backgroundColor: 'transparent',
                           },
+                          fontWeight: 600,
+                          color: '#5c6f82',
                         }}
+                        component={Link}
+                        href={subItem.href ? subItem.href : `#${subItem.label}`}
                       >
-                        <ListItemText primary={<Typography style={{ color: '#5c6f82' }}>{subItem.label}</Typography>} />
+                        <ListItemText
+                          primary={
+                            <Typography
+                              style={{
+                                color: '#5c6f82',
+                                fontWeight: 600,
+                              }}
+                            >
+                              {subItem.label}
+                            </Typography>
+                          }
+                        />
                       </ListItem>
                     ))}
                   </List>
@@ -137,7 +167,7 @@ export default function MobileDrawer({
       onClose={onClose}
       sx={drawerStyles}
     >
-      {list(anchor)}
+      {list()}
     </Drawer>
   );
 }

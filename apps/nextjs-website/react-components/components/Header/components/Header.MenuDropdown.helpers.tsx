@@ -1,20 +1,7 @@
 import React from 'react';
-import {
-  Box,
-  Link,
-  Stack,
-  Typography,
-  useTheme,
-  Theme,
-  List,
-  ListItem,
-  ListItemText,
-} from '@mui/material';
+import { Box, Link, Stack, Typography, useTheme, Theme } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
-import {
-  MenuDropdownProp,
-  DropdownItem,
-} from '@react-components/types/Header/Header.types';
+import { MenuDropdownProp, DropdownItem } from '@react-components/types/Header/Header.types';
 import { DialogBubble } from './Header.DialogBubble.helpers';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 
@@ -40,6 +27,7 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
       alignItems: 'center',
       height: '100%',
       padding: '0 8px',
+      cursor: 'pointer',
     },
     arrowAnimate: {
       transition: 'transform 0.2s',
@@ -48,11 +36,24 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
 };
 
 export const MenuDropdown = (props: MenuDropdownProp) => {
-  const { label, active, theme, items, isOpen, onClick, isMobile, ...button } =
-    props;
+  const { label, active, theme, items, isOpen, onClick, isMobile, ...button } = props;
   const muiTheme = useTheme();
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
+
+  const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.stopPropagation();
+    if (button.href) {
+      window.location.href = button.href;
+    }
+  };
+
+  const handleArrowClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return (
     <Stack sx={styles.menu}>
@@ -70,13 +71,11 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
         <Link
           sx={styles.link}
           style={{
-            color: active
-              ? muiTheme.palette.primary.main
-              : muiTheme.palette.text.secondary,
+            color: active ? muiTheme.palette.primary.main : muiTheme.palette.text.secondary,
             textDecoration: 'none',
           }}
-          {...button}
-          onClick={onClick}
+          href={button.href ? button.href : `#${label}`}
+          onClick={handleLinkClick}
         >
           <Typography
             variant='sidenav'
@@ -89,60 +88,51 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             }}
           >
             {label}
-            {hasLinks && (
-              <ArrowDropDown
-                color='inherit'
-                fontSize='small'
-                sx={{
-                  transition: 'transform 0.2s',
-                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                  marginLeft: '4px',
-                  cursor: 'pointer',
-                }}
-              />
-            )}
           </Typography>
         </Link>
+        {hasLinks && (
+          <Box
+            onClick={handleArrowClick}
+            sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+          >
+            <ArrowDropDown
+              color='inherit'
+              fontSize='small'
+              sx={{
+                transition: 'transform 0.2s',
+                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                color: active ? muiTheme.palette.primary.main : muiTheme.palette.text.secondary,
+              }}
+            />
+          </Box>
+        )}
       </Box>
-      {hasLinks &&
-        isOpen &&
-        (isMobile ? (
-          <List component='div' disablePadding>
+      {hasLinks && isOpen && (
+        <DialogBubble>
+          <Stack gap={1}>
             {items?.map((item: DropdownItem, index) => (
-              <ListItem button key={item.key ?? index} sx={{ pl: 4 }}>
-                <ListItemText
-                  primary={item.label}
-                  primaryTypographyProps={{
-                    style: { color: muiTheme.palette.text.secondary },
-                  }}
-                />
-              </ListItem>
+              <Link
+                variant='body1'
+                underline='none'
+                key={item.key ?? index}
+                sx={styles.link}
+                style={{
+                  color: muiTheme.palette.text.secondary,
+                  textDecoration: 'none',
+                  fontSize: '1em',
+                  fontWeight: 600,
+                  padding: 0,
+                }}
+                href={item.href}
+              >
+                {item.label}
+              </Link>
             ))}
-          </List>
-        ) : (
-          <DialogBubble>
-            <Stack gap={1}>
-              {items?.map((item: DropdownItem, index) => (
-                <Link
-                  variant='body1'
-                  underline='none'
-                  key={item.key ?? index}
-                  sx={styles.link}
-                  style={{
-                    color: muiTheme.palette.text.secondary,
-                    textDecoration: 'none',
-                    fontSize: '1em',
-                    fontWeight: 600,
-                    padding: 0,
-                  }}
-                  {...item}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </Stack>
-          </DialogBubble>
-        ))}
+          </Stack>
+        </DialogBubble>
+      )}
     </Stack>
   );
 };
+
+
