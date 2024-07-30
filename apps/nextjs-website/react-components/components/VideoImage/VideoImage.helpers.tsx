@@ -20,6 +20,7 @@ export const renderVideo = ({
   loop,
   autoplay,
   fallback,
+  onClick,
   onVideoEnd,
 }: RenderVideoProps) => {
   // Determine the type based on the structure of src
@@ -46,6 +47,7 @@ export const renderVideo = ({
       loop={loop}
       autoPlay={autoplay}
       onEnded={onVideoEnd}
+      onClick={onClick}
       style={{
         overflow: 'hidden',
         width: '100%',

@@ -13,6 +13,7 @@ const createVideoImageDefaults = (theme: 'dark' | 'light') => ({
   theme,
   fallback: 'Ops! Something went wrong... Please try again later.',
   playButtonLabel: 'Watch the video',
+  pausedplayButtonLabel: 'Resume video',
 });
 
 // Usage example
