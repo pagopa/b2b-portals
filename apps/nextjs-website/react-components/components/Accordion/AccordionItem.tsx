@@ -13,14 +13,13 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   content,
   theme,
 }) => {
-  const controlsId = React.useId() + '-controls';
-  const headerId = React.useId() + '-header';
   const textColor = TextColor(theme);
 
   return (
     <MUIAccordion
       disableGutters
       // Removes MUI accordion's top border
+      id={header.toLowerCase().replace(/\s+/g, '-')} // ID generato
       sx={{
         '&:before': {
           display: 'none',
@@ -29,8 +28,8 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls={controlsId}
-        id={headerId}
+        aria-controls={`${header}-content`}
+        id={`${header}-header`}
       >
         <Typography sx={{ my: 1.2 }} fontWeight={600}>
           {header}
