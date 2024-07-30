@@ -18,6 +18,7 @@ const styles = {
 const Editorial = (props: EditorialProps) => {
   const {
     image,
+    mobileImage,
     eyelet,
     title,
     body,
@@ -64,7 +65,7 @@ const Editorial = (props: EditorialProps) => {
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
         <Grid item xs={12} md={5}>
-          <EditorialImage {...{ pattern, image, theme }} />
+          <EditorialImage {...{ pattern, image, theme, mobileImage }} />
         </Grid>
 
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
@@ -113,7 +114,7 @@ const Editorial = (props: EditorialProps) => {
         </Stack>
       </Grid>
       <Grid item md={columns[width]}>
-        <EditorialImage {...{ pattern, image, theme }} />
+        <EditorialImage {...{ pattern, image, theme, mobileImage }} />
       </Grid>
     </ContainerRC>
   );

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_components_menu_sub_links",
+  "info": {
+    "displayName": "Menu SubLink",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "page": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    }
+  }
+}

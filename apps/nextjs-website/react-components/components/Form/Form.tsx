@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import RECAPTCHA from 'react-google-recaptcha';
 import {
   Box,
   Grid,
@@ -8,7 +9,7 @@ import {
   FormControl,
   Button,
 } from '@mui/material';
-import { FormData, FormProps } from '@react-components/types/Form/Form.types';
+import { FormProps } from '@react-components/types/Form/Form.types';
 import {
   TextColor,
   BackgroundColorAlternative,
@@ -17,176 +18,232 @@ import {
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { FormCategories } from './Form.helpers';
 
-const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
-  const {
-    title,
-    subtitle,
-    privacyLinkRecaptchaPolicy,
-    privacyLinkTextRecaptchaPolicy,
-    privacyLinkRecaptchaTerms,
-    privacyLinkTextRecaptchaTerms,
-    theme,
-    backgroundImage,
-    ctaButtons,
-    showFirstName = true,
-    showLastName = true,
-    showEmail = true,
-    showOrganization = true,
-    formCategories,
-    categoriesTitle,
-    showMandatoryInfo = true,
-    showPrivacyDisclaimer = true,
-  } = props;
+interface ValidationErrors {
+  name: string | null;
+  surname: string | null;
+  email: string | null;
+  organization: string | null;
+}
 
+interface InputFieldData {
+  name: 'name' | 'surname' | 'email' | 'organization';
+  placeholder: string;
+  show: boolean;
+}
+
+const Form = ({
+  title,
+  subtitle,
+  theme,
+  categoriesTitle,
+  defaultCategoryID,
+  categories,
+  clientID,
+  listID,
+  showName,
+  showSurname,
+  showOrganization,
+  recaptchaSiteKey,
+}: FormProps) => {
   const backgroundColor = BackgroundColorAlternative(theme);
   const textColor = TextColor(theme);
   const graylinkColor = GrayLinkColor(theme);
   const borderColor = theme === 'light' ? graylinkColor : 'white';
+  const recaptchaRef = useRef<RECAPTCHA>(null);
+
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({
+    name: null,
+    surname: null,
+    email: null,
+    organization: null,
+  });
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
+    surname: '',
     email: '',
     organization: '',
-    selectedOption: '',
+    category: '',
   });
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, selectedOption: event.target.value }); // Update formData with selectedOption
+    setFormData({ ...formData, category: event.target.value });
   };
 
-  const handleButtonClick = () => {
-    props.onSubmit(formData);
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const updatedFormCategories = formCategories.map((category, index) => ({
-    ...category,
-    key: `category-${index}`,
-  }));
+    // Validate inputs
+    const inputErrors = {
+      name:
+        showName && !validateRequired(formData.name)
+          ? 'Campo obbligatorio'
+          : null,
+      surname:
+        showSurname && !validateRequired(formData.surname)
+          ? 'Campo obbligatorio'
+          : null,
+      organization:
+        showOrganization && !validateRequired(formData.organization)
+          ? 'Campo obbligatorio'
+          : null,
+      email: !validateRequired(formData.email)
+        ? 'Campo obbligatorio'
+        : !validateEmail(formData.email)
+          ? 'Email non valida'
+          : null,
+    };
+
+    setValidationErrors(inputErrors);
+
+    if (
+      inputErrors.name ||
+      inputErrors.surname ||
+      inputErrors.organization ||
+      inputErrors.email
+    ) {
+      alert('Si prega di compilare tutti i campi richiesti');
+      return;
+    }
+
+    // Validate category
+    if (categories.length > 0 && formData.category === '') {
+      alert('Si prega di selezionare una delle categorie dalla lista');
+      return;
+    }
+
+    try {
+      if (recaptchaRef.current === null) {
+        throw new Error();
+      }
+
+      const recaptchaToken = await recaptchaRef.current.executeAsync();
+
+      if (!recaptchaToken) {
+        alert('Si prega di completare ReCaptcha per continuare');
+        return;
+      }
+
+      const res = await fetch(
+        `https://news-p-weu-core-app-fn.azurewebsites.net/api/v1/newsletters/${clientID}/lists/${listID}/recipients`,
+        {
+          mode: 'cors',
+          method: 'POST',
+          body: JSON.stringify({
+            recaptchaToken,
+            groups: (categories.length > 0 && formData.category !== '') ? [formData.category] : [defaultCategoryID],
+            email: formData.email,
+            ...(showName && { name: formData.name }),
+            ...(showSurname && { surname: formData.surname }),
+            ...(showOrganization && { organization: formData.organization }),
+          }),
+        }
+      );
+
+      const { email } = await res.json();
+
+      if (res.status === 200 && email === formData.email) {
+        setFormData({
+          name: '',
+          surname: '',
+          email: '',
+          organization: '',
+          category: '',
+        });
+
+        alert(
+          'Grazie! Abbiamo preso in carica la tua richiesta. Controlla la tua casella email per continuare.'
+        );
+        return;
+      }
+
+      throw new Error();
+    } catch {
+      alert(
+        'Qualcosa è andato storto, non siamo riusciti a ricevere la tua richiesta. Riprova più tardi'
+      );
+    } finally {
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+    }
+  };
 
   const validateRequired = (value: string) => value.trim() !== '';
   const validateEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const handleInputChange = (event: {
+  const handleInputChange = ({
+    target: { name, value },
+  }: {
     target: { name: string; value: string };
-  }) => {
-    const { name, value } = event.target;
-    let isValid = true;
-    let errorMessage = '';
+  }): void => {
+    setFormData({ ...formData, [name]: value });
 
-    if (name === 'email') {
-      isValid = validateEmail(value);
-      errorMessage = 'Invalid email address';
-    } else {
-      isValid = validateRequired(value);
-      errorMessage = 'This field is required';
+    // All inputs are required so check that first
+    if (!validateRequired(value)) {
+      setValidationErrors({
+        ...validationErrors,
+        [name]: 'Campo obbligatorio',
+      });
+      return;
     }
 
-    if (isValid) {
-      setFormData({ ...formData, [name]: value });
-      setValidationErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
-    } else {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: errorMessage,
-      }));
+    // If input is email, loosely verify its validity
+    if (name === 'email' && !validateEmail(value)) {
+      setValidationErrors({ ...validationErrors, [name]: 'Email non valida' });
+      return;
     }
+
+    setValidationErrors({ ...validationErrors, [name]: null });
   };
 
-  interface ValidationErrors {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    organization?: string;
-  }
-
-  const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
-    {}
-  );
-
-  const formFields = [
+  const inputFields: InputFieldData[] = [
     {
-      name: 'firstName',
-      placeholder: 'Nome',
-      showCondition: showFirstName,
-      validationErrorKey: 'firstName',
+      name: 'name',
+      placeholder: 'Nome*',
+      show: showName,
     },
     {
-      name: 'lastName',
-      placeholder: 'Cognome',
-      showCondition: showLastName,
-      validationErrorKey: 'lastName',
+      name: 'surname',
+      placeholder: 'Cognome*',
+      show: showSurname,
     },
     {
       name: 'email',
-      placeholder: 'Indirizzo e-mail',
-      showCondition: showEmail,
-      validationErrorKey: 'email',
+      placeholder: 'Indirizzo e-mail*',
+      show: true,
     },
     {
       name: 'organization',
-      placeholder: 'Nome ente',
-      showCondition: showOrganization,
-      validationErrorKey: 'organization',
+      placeholder: 'Nome ente*',
+      show: showOrganization,
     },
   ];
 
-  interface RenderFieldParams {
-    name: string;
-    placeholder: string;
-    showCondition: boolean;
-    validationErrorKey: string;
-  }
-
-  function isValidKey(key: any): key is keyof ValidationErrors {
-    return (
-      key === 'firstName' ||
-      key === 'lastName' ||
-      key === 'email' ||
-      key === 'organization'
-    );
-  }
-
-  const renderField = ({
-    name,
-    placeholder,
-    showCondition,
-    validationErrorKey,
-  }: RenderFieldParams) => {
-    if (!showCondition) return null;
-
-    const isError =
-      isValidKey(validationErrorKey) && !!validationErrors[validationErrorKey];
-    const fieldValue = isValidKey(name) ? formData[name] : '';
-    return (
-      <Grid
-        item
-        xs={12}
-        sm={name === 'firstName' || name === 'lastName' ? 6 : 12}
-      >
-        <FormControl fullWidth error={isError}>
+  const InputField = ({ name, placeholder, show }: InputFieldData) => {
+    return show ? (
+      <Grid item xs={12} sm={name === 'name' || name === 'surname' ? 6 : 12}>
+        <FormControl fullWidth error={validationErrors[name] !== null}>
           <OutlinedInput
             placeholder={placeholder}
             name={name}
-            value={fieldValue}
+            value={formData[name]}
             onChange={handleInputChange}
             sx={{ backgroundColor: 'white', color: 'black' }}
           />
-          {isError && (
+          {validationErrors[name] !== null && (
             <Typography
               id={`${name}-error-text`}
-              variant='caption'
+              variant="caption"
               sx={{ color: 'error.main' }}
             >
-              {isValidKey(validationErrorKey)
-                ? validationErrors[validationErrorKey]
-                : ''}
+              {validationErrors[name]}
             </Typography>
           )}
         </FormControl>
       </Grid>
-    );
+    ) : null;
   };
 
   return (
@@ -201,57 +258,37 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
         boxShadow: 3,
         color: textColor,
         position: 'relative',
-        '::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          backgroundImage: `url(${backgroundImage ?? ''})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          zIndex: 1,
-          opacity: 1,
-        },
-        '::after': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: 2,
-        },
       }}
     >
       <MailOutlineIcon
         sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }}
       />
       <Typography
-        variant='h4'
+        variant="h4"
         gutterBottom
         sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
       >
         {title}
       </Typography>
-      <Typography
-        variant='body1'
-        gutterBottom
-        sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor }}
-      >
-        {subtitle}
-      </Typography>
+      {subtitle && (
+        <Typography
+          variant="body1"
+          gutterBottom
+          sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor }}
+        >
+          {subtitle}
+        </Typography>
+      )}
       <Grid
         container
         spacing={2}
         sx={{ mb: 2, position: 'relative', zIndex: 3 }}
       >
-        {formFields.map(renderField)}
+        {inputFields.map(InputField)}
       </Grid>
-      {categoriesTitle && (
+      {categoriesTitle && categories.length > 0 && (
         <Typography
-          variant='h6'
+          variant="h6"
           gutterBottom
           sx={{
             position: 'relative',
@@ -265,77 +302,78 @@ const Form = (props: FormProps & { onSubmit: (data: FormData) => void }) => {
           {categoriesTitle}
         </Typography>
       )}
-      {updatedFormCategories.length > 0 && (
+      {categories.length > 0 && (
         <FormCategories
-          formCategories={updatedFormCategories}
+          categories={categories}
           textColor={textColor}
           borderColor={borderColor}
-          selectedOption={formData.selectedOption}
+          selectedCategory={formData.category}
           handleRadioChange={handleRadioChange}
         />
       )}
-      {showMandatoryInfo && (
-        <Typography
-          variant='body2'
-          sx={{
-            mb: 2,
-            position: 'relative',
-            zIndex: 3,
-            color: textColor,
-            textAlign: 'start',
-          }}
-        >
-          *Campo obbligatorio
-        </Typography>
-      )}
-      {ctaButtons && ctaButtons.length > 0 && (
-        <Button
-          variant='contained'
-          sx={{ width: { md: 'auto', xs: '100%' }, zIndex: 4 }}
-          onClick={handleButtonClick}
-          color={theme === 'dark' ? 'negative' : 'primary'}
-        >
-          {ctaButtons[0]?.text}
-        </Button>
-      )}
-      {showPrivacyDisclaimer && (
-        <Typography
-          variant='body2'
-          fontWeight='bold'
-          sx={{ mt: 2, position: 'relative', zIndex: 3, color: textColor }}
-        >
-          Inserendo il tuo indirizzo email stai accettando la nostra informativa
-          sul trattamento dei dati personali per la newsletter.
-        </Typography>
-      )}
       <Typography
-        variant='body2'
+        variant="body2"
+        sx={{
+          mb: 2,
+          position: 'relative',
+          zIndex: 3,
+          color: textColor,
+          textAlign: 'start',
+        }}
+      >
+        *Campo obbligatorio
+      </Typography>
+      <Button
+        variant="contained"
+        sx={{ width: { md: 'auto', xs: '100%' }, zIndex: 4 }}
+        onClick={handleSubmit}
+        color={theme === 'dark' ? 'negative' : 'primary'}
+      >
+        Iscriviti
+      </Button>
+      <Typography
+        variant="body2"
+        fontWeight="bold"
+        sx={{ mt: 2, position: 'relative', zIndex: 3, color: textColor }}
+      >
+        Inserendo il tuo indirizzo email stai accettando la nostra informativa
+        sul trattamento dei dati personali per la newsletter.
+      </Typography>
+      <Typography
+        variant="body2"
         sx={{ mt: 2, position: 'relative', zIndex: 3, color: graylinkColor }}
       >
         Form protetto tramite reCAPTCHA e Google{' '}
         <Link
-          href={privacyLinkRecaptchaPolicy}
+          href="https://policies.google.com/privacy"
           sx={{
             color: graylinkColor,
             textDecorationColor: graylinkColor,
             textDecoration: 'underline',
           }}
         >
-          {privacyLinkTextRecaptchaPolicy}
+          {' '}
+          Privacy Policy{' '}
         </Link>{' '}
         e{' '}
         <Link
-          href={privacyLinkRecaptchaTerms}
+          href="https://policies.google.com/terms"
           sx={{
             color: graylinkColor,
             textDecorationColor: graylinkColor,
             textDecoration: 'underline',
           }}
         >
-          {privacyLinkTextRecaptchaTerms}
+          Termini di servizio
         </Link>{' '}
         applicati.
       </Typography>
+
+      <RECAPTCHA
+        size="invisible"
+        ref={recaptchaRef}
+        sitekey={recaptchaSiteKey}
+      />
     </Box>
   );
 };

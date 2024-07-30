@@ -21,6 +21,7 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<EditorialProps> 
   body: 'Editorial Body',
   width: 'standard',
   image: <img src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png' alt="placeholder" />,
+  mobileImage: <img src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png' alt="placeholder" />,
 });
 
 // Define the default props

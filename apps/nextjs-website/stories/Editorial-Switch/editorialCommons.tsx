@@ -16,38 +16,31 @@ export const generateCtaButtons = (count: number): CtaButtonProps[] =>
 // Function to generate default props
 const generateDefaultProps = (theme: 'light' | 'dark'): Partial<EditorialSwitchProps> => ({
   theme,
-  toptitle: 'Top Title',
-  topsubtitle: 'Top Subtitle',
-  width: 'wide',
+  title: 'Top Title',
+  subtitle: 'Top Subtitle',
   sections: [
     {
-      button: { id: '1', text: 'Button 1' },
+      id: 1,
+      buttonText: 'Button 1' ,
       content: {
-        id: '1',
-        eyelet: 'Eyelet Content 1',
-        body: 'Body Content 1',
-        title: 'Title Content 1',
-        pattern: 'dots',
-        image: {
-          src: 'https://notifichedigitali.pagopa.it/static/images/pa-infoblock-2.png',
-          alt: 'Placeholder',
-        },
-        ctaButtons: generateCtaButtons(2),
+        theme: 'light',
+        title: 'Editorial 1',
+        body: 'Light Editorial',
+        width: 'standard',
+        image: <img src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png' alt="placeholder" />,
+        mobileImage: <img src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png' alt="placeholder" />
       },
     },
     {
-      button: { id: '2', text: 'Button 2' },
+      id: 2,
+      buttonText: 'Button 2' ,
       content: {
-        id: '2',
-        eyelet: 'Eyelet Content 2',
-        body: 'Body Content 2',
-        title: 'Title Content 2',
-        pattern: 'none',
-        image: {
-          src: 'https://notifichedigitali.pagopa.it/static/images/pa-infoblock-3.png',
-          alt: 'Placeholder',
-        },
-        ctaButtons: generateCtaButtons(1),
+        theme: 'dark',
+        title: 'Editorial 2',
+        body: 'Dark Editorial',
+        width: 'standard',
+        image: <img src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png' alt="placeholder" />,
+        mobileImage: <img src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png' alt="placeholder" />
       },
     },
   ],
