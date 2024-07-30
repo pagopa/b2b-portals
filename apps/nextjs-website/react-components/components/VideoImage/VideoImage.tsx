@@ -56,7 +56,7 @@ const VideoImage = (props: VideoImageProps) => {
     setVideoState('stopped');
   };
 
-  const stop = () => {
+  const pause = () => {
     if (videoRef.current) {
       videoRef.current.pause();
       setVideoState('paused');
@@ -202,7 +202,7 @@ const VideoImage = (props: VideoImageProps) => {
                 autoplay,
                 fallback,
                 onVideoEnd: handleVideoEnd,
-                onStop: stop,
+                onPause: pause,
                 onClick: stop,
               })
           : isImage(src.url)
@@ -219,7 +219,7 @@ const VideoImage = (props: VideoImageProps) => {
                 autoplay,
                 fallback,
                 onVideoEnd: handleVideoEnd,
-                onStop: stop,
+                onPause: pause,
                 onClick: stop,
               })}
       </div>
