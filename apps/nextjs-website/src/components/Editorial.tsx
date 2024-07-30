@@ -6,7 +6,7 @@ import { EditorialProps } from '@react-components/types';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 
-const makeEditorialProps = ({
+export const makeEditorialProps = ({
   eyelet,
   body,
   image,
@@ -19,7 +19,7 @@ const makeEditorialProps = ({
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: (
     <Image
-      src={`http://localhost:1337${image.data.attributes.url}`}
+      src={image.data.attributes.url}
       alt={image.data.attributes.alternativeText ?? ''}
       width={0}
       height={0}
@@ -27,7 +27,7 @@ const makeEditorialProps = ({
   ),
   mobileImage: (
     <Image
-      src={`http://localhost:1337${mobileImage.data.attributes.url}`} // Ensure mobileImage is correctly used here
+      src={mobileImage.data.attributes.url} // Ensure mobileImage is correctly used here
       alt={mobileImage.data.attributes.alternativeText ?? ''}
       width={0}
       height={0}
