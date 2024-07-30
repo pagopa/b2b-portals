@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_components_form_categories",
+  "info": {
+    "displayName": "Form Category",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "categoryID": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "additionalInfo": {
+      "type": "string"
+    }
+  }
+}
