@@ -133,10 +133,11 @@ export const HeroChips = ({
   chips,
   theme,
 }: {
-  chips: ReadonlyArray<{ label: string, targetId: string }>,
+  chips: ReadonlyArray<{ label: string }>,
   theme: string,
 }) => {
-  const handleChipClick = (targetId: string) => {
+  const handleChipClick = (label: string) => {
+    const targetId = label.toLowerCase().replace(/\s+/g, '-');
     const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -167,7 +168,7 @@ export const HeroChips = ({
           <Chip
             key={index}
             label={chip.label}
-            onClick={() => handleChipClick(chip.targetId)}
+            onClick={() => handleChipClick(chip.label)}
             sx={{
               backgroundColor: theme === 'dark' ? '#0039CB' : '#FFFFFF',
               color: theme === 'dark' ? '#ffffff' : '#000000',
