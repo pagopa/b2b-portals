@@ -7,6 +7,7 @@ import { TextAlternativeColor } from '@react-components/components/common/Common
 
 const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
   const textColor = TextAlternativeColor(theme);
+  const muiTheme = useTheme();
 
   return {
     menu: {
@@ -15,11 +16,13 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
       width: '100%',
       borderBottomWidth: 3,
       borderBottomColor: {
-        md: active ? textColor : 'transparent',
+        md: active ? muiTheme.palette.primary.main : 'transparent',
         xs: 'transparent',
       },
-      backgroundColor: { xs: 'white', md: 'transparent' },
+      backgroundColor: active ? '#0073E614' : 'transparent',
       height: '100%',
+      display: 'flex',
+      alignItems: 'center',
     },
     link: {
       textIndent: { xs: spacing(2), md: 0 },
@@ -28,12 +31,17 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
       height: '100%',
       padding: '0 8px',
       cursor: 'pointer',
+      textDecoration: 'none',
     },
     arrowAnimate: {
       transition: 'transform 0.2s',
     },
+    dropdownMenu: {
+      backgroundColor: 'transparent',
+    }
   };
 };
+
 
 export const MenuDropdown = (props: MenuDropdownProp) => {
   const { label, active, theme, items, isOpen, onClick, isMobile, ...button } = props;
