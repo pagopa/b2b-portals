@@ -16,12 +16,12 @@ const makeHeroProps = ({
   ...rest,
   useHoverlay: false,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
-  ...(image.data && { image: image.data.attributes.url }),
+  ...(image.data && { image: `http://localhost:1337${image.data.attributes.url}` }),
   ...(image.data &&
     image.data.attributes.alternativeText && {
       altText: image.data.attributes.alternativeText,
     }),
-  ...(background.data && { background: background.data.attributes.url }),
+  ...(background.data && { background: `http://localhost:1337${background.data.attributes.url}` }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
@@ -40,3 +40,4 @@ const makeHeroProps = ({
 const Hero = (props: HeroSection) => <HeroRC {...makeHeroProps(props)} />;
 
 export default Hero;
+
