@@ -23,12 +23,13 @@ const VideoImage = (props: VideoImageProps) => {
     theme,
     fallback,
     playButtonLabel,
+    pausedplayButtonLabel,
     isCentered = false,
   } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
   const [error, setError] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [videoState, setVideoState] = useState<'playing' | 'paused' | 'stopped'>('stopped');
 
   const textColor = TextColor(theme);
 
@@ -41,15 +42,25 @@ const VideoImage = (props: VideoImageProps) => {
   }, [isVisible]);
 
   const play = (e?: React.MouseEvent) => {
-    try {
-      e?.preventDefault();
-      videoRef.current?.play();
-      setIsPlaying(true);
-    } catch (error) {}
+    e?.preventDefault();
+    if (videoRef.current) {
+      videoRef.current.play().then(() => {
+        setVideoState('playing');
+      }).catch(() => {
+        // Handle play error
+      });
+    }
   };
 
   const handleVideoEnd = () => {
-    setIsPlaying(false);
+    setVideoState('stopped');
+  };
+
+  const pause = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setVideoState('paused');
+    }
   };
 
   const isImage = (src: string) => {
@@ -67,7 +78,7 @@ const VideoImage = (props: VideoImageProps) => {
       <div
         style={{ maxHeight: '600px', position: 'relative', overflow: 'hidden' }}
       >
-        {!full && !isPlaying && (
+        {!full && videoState !== 'playing' && (
           <div
             style={{
               position: 'absolute',
@@ -97,7 +108,9 @@ const VideoImage = (props: VideoImageProps) => {
                 zIndex: 50,
               }}
             >
-              <VideoText title={title} subtitle={subtitle} theme={theme} />
+              {videoState === 'stopped' && (
+                <VideoText title={title} subtitle={subtitle} theme={theme} />
+              )}
               {typeof src === 'string'
                 ? !isImage(src) &&
                   isVideo(src) && (
@@ -124,7 +137,7 @@ const VideoImage = (props: VideoImageProps) => {
                           alignSelf: 'flex-start',
                         }}
                       >
-                        {playButtonLabel}
+                        {videoState === 'paused' ? pausedplayButtonLabel : playButtonLabel}
                       </p>
                       <PlayArrowIcon
                         sx={{
@@ -160,7 +173,7 @@ const VideoImage = (props: VideoImageProps) => {
                           alignSelf: 'flex-start',
                         }}
                       >
-                        {playButtonLabel}
+                        {videoState === 'paused' ? pausedplayButtonLabel : playButtonLabel}
                       </p>
                       <PlayArrowIcon
                         sx={{
@@ -189,6 +202,7 @@ const VideoImage = (props: VideoImageProps) => {
                 autoplay,
                 fallback,
                 onVideoEnd: handleVideoEnd,
+                onClick: pause,
               })
           : isImage(src.url)
             ? renderImage({
@@ -204,6 +218,7 @@ const VideoImage = (props: VideoImageProps) => {
                 autoplay,
                 fallback,
                 onVideoEnd: handleVideoEnd,
+                onClick: pause,
               })}
       </div>
       {caption && (
