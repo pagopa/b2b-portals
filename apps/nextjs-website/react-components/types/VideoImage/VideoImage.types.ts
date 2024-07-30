@@ -35,7 +35,6 @@ export interface RenderVideoProps {
   autoplay: boolean;  
   onVideoEnd: () => void;
   fallback: React.ReactNode;
-  onPause?: () => void;
   onClick?: () => void;
 }
 

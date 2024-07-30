@@ -202,8 +202,7 @@ const VideoImage = (props: VideoImageProps) => {
                 autoplay,
                 fallback,
                 onVideoEnd: handleVideoEnd,
-                onPause: pause,
-                onClick: stop,
+                onClick: pause,
               })
           : isImage(src.url)
             ? renderImage({
@@ -219,8 +218,7 @@ const VideoImage = (props: VideoImageProps) => {
                 autoplay,
                 fallback,
                 onVideoEnd: handleVideoEnd,
-                onPause: pause,
-                onClick: stop,
+                onClick: pause,
               })}
       </div>
       {caption && (
