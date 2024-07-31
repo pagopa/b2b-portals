@@ -27,8 +27,8 @@ export const Image = ({ image, mobileImage, pattern = 'none', breakpoint = 834 }
 
   const desktopStyle = {
     ...image.props.style,
-    objectFit: 'contain', 
-    objectPosition: 'center', 
+    objectFit: 'contain',
+    objectPosition: 'center',
     height: 'auto',
     width: '100%',
     maxHeight: 490,
