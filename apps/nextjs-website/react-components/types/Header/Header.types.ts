@@ -35,6 +35,7 @@ export interface MenuDropdownProp
   isOpen?: boolean;
   onClick?: () => void;
   isMobile?: boolean;
+  onDropdownClick?: () => void;
 }
 
 export interface NavigationProps extends CommonProps {

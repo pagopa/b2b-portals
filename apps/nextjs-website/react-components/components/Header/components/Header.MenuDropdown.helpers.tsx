@@ -42,9 +42,8 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
   };
 };
 
-
 export const MenuDropdown = (props: MenuDropdownProp) => {
-  const { label, active, theme, items, isOpen, onClick, isMobile, ...button } = props;
+  const { label, active, theme, items, isOpen, onClick, onDropdownClick, isMobile, ...button } = props;
   const muiTheme = useTheme();
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
@@ -54,13 +53,12 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
     if (button.href) {
       window.location.href = button.href;
     }
+    if (onClick) onClick();
   };
 
   const handleArrowClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
-    if (onClick) {
-      onClick();
-    }
+    if (onDropdownClick) onDropdownClick();
   };
 
   return (
@@ -142,5 +140,3 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
     </Stack>
   );
 };
-
-

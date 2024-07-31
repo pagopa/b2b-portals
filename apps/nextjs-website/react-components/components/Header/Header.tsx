@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Link, Stack, Typography, Divider } from '@mui/material';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { useMediaQuery, useTheme as useMuiTheme } from '@mui/material';
@@ -29,6 +28,7 @@ const Header = ({
   const backgroundColor = BackgroundColor(theme);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
+  const [selectedMenuIndex, setSelectedMenuIndex] = useState<number | null>(0);
   const muiTheme = useMuiTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
 
@@ -45,13 +45,18 @@ const Header = ({
   const handleOpenDrawer = () => setIsDrawerOpen(true);
   const handleCloseDrawer = () => setIsDrawerOpen(false);
 
-  useEffect(() => {
-    window.addEventListener('resize', closeHeader);
+  const handleMenuClick = (index: number, href?: string) => {
+    setSelectedMenuIndex(index);
+    if (href) {
+      window.location.href = href;
+    }
+  };
 
-    return () => {
-      window.removeEventListener('resize', closeHeader);
-    };
-  }, []);
+  const handleDropdownToggle = (index: number) => {
+    setOpenDropdownIndex(openDropdownIndex === index ? null : index);
+  };
+
+  useEffect(() => {}, []);
 
   interface HeaderCtasProps {
     onOpenDrawer: () => void;
@@ -59,7 +64,7 @@ const Header = ({
 
   const HeaderCtas: React.FC<HeaderCtasProps> = ({ onOpenDrawer }) => {
     return ctaButtons && ctaButtons.length > 0 ? (
-      <Stack direction='row' onClick={onOpenDrawer}>
+      <Stack direction="row" onClick={onOpenDrawer}>
         {CtaButtons({
           ctaButtons: ctaButtons.map((CtaButton) => ({
             ...CtaButton,
@@ -74,15 +79,15 @@ const Header = ({
   return (
     <Box
       bgcolor={backgroundColor}
-      component='header'
-      role='banner'
+      component="header"
+      role="banner"
       sx={{ height: { xs: 'auto', md: 'auto' } }}
     >
-      <Stack direction='column' gap={{ xs: 0, md: 0 }} sx={{ width: '100%' }}>
+      <Stack direction="column" gap={{ xs: 0, md: 0 }} sx={{ width: '100%' }}>
         <Stack
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
           sx={{ padding: '16px 24px' }}
         >
           <HeaderTitle
@@ -92,9 +97,9 @@ const Header = ({
             {...(logo ? { logo } : {})}
           />
           <Stack
-            direction='row'
-            justifyContent='flex-end'
-            alignItems='center'
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
             gap={2}
             sx={{
               display: { xs: 'flex', md: 'flex' },
@@ -102,8 +107,8 @@ const Header = ({
             }}
           >
             <Link
-              href='#serve-aiuto'
-              underline='none'
+              href="#serve-aiuto"
+              underline="none"
               sx={{
                 color: 'primary.main',
                 fontWeight: 'bold',
@@ -117,8 +122,8 @@ const Header = ({
               Serve aiuto?
             </Link>
             <Box
-              component='a'
-              href='#serve-aiuto'
+              component="a"
+              href="#serve-aiuto"
               sx={{
                 bgcolor: 'primary.main',
                 width: 48,
@@ -142,9 +147,9 @@ const Header = ({
 
         {!isMobile && (
           <Stack
-            direction='row'
-            justifyContent='space-between'
-            alignItems='center'
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
             sx={{
               height: '64px',
               padding: '0px 24px',
@@ -154,8 +159,9 @@ const Header = ({
               menu={menu.map((menu, index) => ({
                 ...menu,
                 isOpen: openDropdownIndex === index,
-                onClick: () =>
-                  setOpenDropdownIndex(openDropdownIndex === index ? null : index),
+                onClick: () => handleMenuClick(index, menu.href),
+                onDropdownClick: () => handleDropdownToggle(index),
+                active: selectedMenuIndex === index,
               }))}
               theme={theme}
               isMobile={false}
@@ -165,7 +171,7 @@ const Header = ({
               <DesktopDrawer
                 isOpen={isDrawerOpen}
                 onClose={handleCloseDrawer}
-                anchor='right'
+                anchor="right"
                 drawerMenuTitle={drawerMenuTitle}
                 drawerCardsData={drawerCardsData}
                 theme={'light'}
@@ -180,18 +186,18 @@ const Header = ({
 
         {isMobile && (
           <Stack
-            direction='row'
-            justifyContent='space-between'
-            alignItems='center'
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
             sx={{
               display: { xs: 'flex', md: 'none' },
               width: '100%',
               padding: '8px 24px',
             }}
           >
-            <Stack direction='row' alignItems='center' gap={1}>
+            <Stack direction="row" alignItems="center" gap={1}>
               <HamburgerMenu onOpen={openHeader} onClose={closeHeader} open={menuOpen} />
-              <Typography variant='body1' color='text.secondary' sx={{ fontWeight: 600 }}>
+              <Typography variant="body1" color="text.secondary" sx={{ fontWeight: 600 }}>
                 Menu
               </Typography>
             </Stack>
@@ -205,7 +211,7 @@ const Header = ({
           <MobileDrawer
             isOpen={menuOpen}
             onClose={closeHeader}
-            anchor='left'
+            anchor="left"
             menu={menu}
             theme={'light'}
           />
@@ -215,7 +221,7 @@ const Header = ({
           <DesktopDrawer
             isOpen={isDrawerOpen}
             onClose={handleCloseDrawer}
-            anchor='right'
+            anchor="right"
             drawerMenuTitle={drawerMenuTitle}
             drawerCardsData={drawerCardsData}
             theme={'light'}
