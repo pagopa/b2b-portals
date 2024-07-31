@@ -60,6 +60,21 @@ export const removeHomepageSlugFromMenu = (
             })),
           },
         ],
+        // TODO: fill in the rest of the fields with correct values
+        drawerMenuTitle: '',
+        ctaTitle: '',
+        ctaButtonText: '',
+        ctaHref: '',
+        ctaBodyText: '',
+        drawerCardsData: [
+          {
+            title: '',
+            subtitle: '',
+            stackIcon: 'People',
+            buttonText: '',
+            href: '',
+          },
+        ],
       };
 
     case 'menu.mega-menu':

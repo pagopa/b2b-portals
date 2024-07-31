@@ -61,6 +61,14 @@ const makeHeaderProps = (
     : [],
   theme: 'light',
   beta,
+
+  // TODO: add logic for B2BP
+  drawerMenuTitle: '',
+  ctaTitle: '',
+  ctaButtonText: '',
+  ctaHref: '',
+  ctaBodyText: '',
+  drawerCardsData: [],
 });
 
 const makeMegaHeaderProps = ({

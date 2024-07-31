@@ -1,9 +1,24 @@
-import { ReactNode } from "react";
-import { AvatarProps, LinkProps, StackProps } from "@mui/material";
+import { LinkProps, StackProps } from "@mui/material";
 import { CommonProps, CtaButtonProps } from "../common/Common.types";
+import { EIconProps } from "@react-components/components/common/EIcon";
+
+export interface CardData {
+  readonly title: string;
+  readonly subtitle: string;
+  readonly stackIcon: EIconProps;
+  readonly buttonText: string;
+  readonly href: string;
+}
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
   ctaButtons?: CtaButtonProps[];
+  drawerMenuTitle: string;
+  ctaTitle: string;
+  ctaButtonText: string;
+  ctaHref: string;
+  ctaBodyText: string;
+  drawerCardsData: CardData[];
+  needHelpHref?: string;
 }
 
 interface DropdownLink extends LinkProps {
@@ -18,6 +33,10 @@ export interface MenuDropdownProp
   label: string;
   active?: boolean;
   items?: DropdownItem[];
+  isOpen?: boolean;
+  onClick?: () => void;
+  isMobile?: boolean;
+  onDropdownClick?: () => void;
 }
 
 export interface NavigationProps extends CommonProps {
@@ -29,7 +48,6 @@ export interface HeaderTitleProps extends CommonProps {
     name: string;
     href?: string;
   };
-  avatar?: AvatarProps;
   beta?: boolean;
   logo?: {
     src: string;
@@ -39,5 +57,11 @@ export interface HeaderTitleProps extends CommonProps {
 }
 
 export interface DialogBubbleProps extends StackProps {
-  children: ReactNode;
+  children: React.ReactNode;
+}
+
+export interface HeaderCtasProps {
+  onOpenDrawer: () => void;
+  ctaButtons?: CtaButtonProps[] | undefined;
+  theme: 'dark' | 'light';
 }
