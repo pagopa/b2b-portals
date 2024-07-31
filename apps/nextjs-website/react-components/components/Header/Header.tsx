@@ -4,12 +4,12 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { BackgroundColor } from '@react-components/components/common/Common.helpers';
-import { HeaderTitle } from './Helpers/Header.HeaderTitle.helpers';
-import { Navigation } from './Helpers/Header.Navigation.helpers';
-import { HamburgerMenu } from './Helpers/Header.HamburgerMenu.helpers';
-import DesktopDrawer from './Helpers/Header.DesktopDrawer.helpers';
-import MobileDrawer from './Helpers/Header.MobileDrawer.helpers';
-import { HeaderCtas } from './Helpers/Header.Ctas.helpers';
+import { HeaderTitle } from './helper/Header.HeaderTitle.helpers';
+import { Navigation } from './helper/Header.Navigation.helpers';
+import { HamburgerMenu } from './helper/Header.HamburgerMenu.helpers';
+import DesktopDrawer from './helper/Header.DesktopDrawer.helpers';
+import MobileDrawer from './helper/Header.MobileDrawer.helpers';
+import { HeaderCtas } from './helper/Header.Ctas.helpers';
 import { usePathname } from 'next/navigation';
 
 const Header = ({
