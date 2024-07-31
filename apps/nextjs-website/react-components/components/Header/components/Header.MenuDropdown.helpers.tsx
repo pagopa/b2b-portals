@@ -1,28 +1,41 @@
 import React from 'react';
 import { Box, Link, Stack, Typography, useTheme, Theme } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
-import { MenuDropdownProp, DropdownItem } from '@react-components/types/Header/Header.types';
+import {
+  MenuDropdownProp,
+  DropdownItem,
+} from '@react-components/types/Header/Header.types';
 import { DialogBubble } from './Header.DialogBubble.helpers';
-import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 
-const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
-  const textColor = TextAlternativeColor(theme);
+const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
   const muiTheme = useTheme();
 
   return {
     menu: {
-      borderColor: textColor,
-      borderBottomStyle: 'solid',
       width: '100%',
-      borderBottomWidth: 3,
-      borderBottomColor: {
-        md: active ? muiTheme.palette.primary.main : 'transparent',
-        xs: 'transparent',
-      },
       backgroundColor: active ? '#0073E614' : 'transparent',
       height: '100%',
       display: 'flex',
       alignItems: 'center',
+    },
+    menuItem: {
+      width: '100%',
+      minWidth: 'max-content',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: { xs: 'left', md: 'center' },
+      alignItems: 'center',
+      position: 'relative',
+      '::after': {
+        content: '""',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        width: active ? '100%' : '0%',
+        borderBottom: `3px solid ${muiTheme.palette.primary.main}`,
+        transition: 'width 0.5s ease, left 0.5s ease',
+      },
     },
     link: {
       textIndent: { xs: spacing(2), md: 0 },
@@ -38,12 +51,22 @@ const useStyles = ({ theme, active }: MenuDropdownProp, { spacing }: Theme) => {
     },
     dropdownMenu: {
       backgroundColor: 'transparent',
-    }
+    },
   };
 };
 
 export const MenuDropdown = (props: MenuDropdownProp) => {
-  const { label, active, theme, items, isOpen, onClick, onDropdownClick, isMobile, ...button } = props;
+  const {
+    label,
+    active,
+    theme,
+    items,
+    isOpen,
+    onClick,
+    onDropdownClick,
+    isMobile,
+    ...button
+  } = props;
   const muiTheme = useTheme();
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
@@ -56,28 +79,22 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
     if (onClick) onClick();
   };
 
-  const handleArrowClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleArrowClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     event.stopPropagation();
     if (onDropdownClick) onDropdownClick();
   };
 
   return (
     <Stack sx={styles.menu}>
-      <Box
-        sx={{
-          width: '100%',
-          minWidth: 'max-content',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: { xs: 'left', md: 'center' },
-          alignItems: 'center',
-        }}
-      >
+      <Box sx={styles.menuItem}>
         <Link
           sx={styles.link}
           style={{
-            color: active ? muiTheme.palette.primary.main : muiTheme.palette.text.secondary,
+            color: active
+              ? muiTheme.palette.primary.main
+              : muiTheme.palette.text.secondary,
             textDecoration: 'none',
           }}
           href={button.href ? button.href : `#${label}`}
@@ -107,7 +124,9 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
               sx={{
                 transition: 'transform 0.2s',
                 transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                color: active ? muiTheme.palette.primary.main : muiTheme.palette.text.secondary,
+                color: active
+                  ? muiTheme.palette.primary.main
+                  : muiTheme.palette.text.secondary,
               }}
             />
           </Box>
