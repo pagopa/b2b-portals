@@ -18,6 +18,7 @@ export interface HeaderProps extends HeaderTitleProps, NavigationProps {
   ctaHref: string;
   ctaBodyText: string;
   drawerCardsData: CardData[];
+  needHelpHref?: string;
 }
 
 interface DropdownLink extends LinkProps {
@@ -58,9 +59,6 @@ export interface HeaderTitleProps extends CommonProps {
 export interface DialogBubbleProps extends StackProps {
   children: React.ReactNode;
 }
-
-// Define MenuItem type
-export type MenuItem = MenuDropdownProp;
 
 export interface HeaderCtasProps {
   onOpenDrawer: () => void;

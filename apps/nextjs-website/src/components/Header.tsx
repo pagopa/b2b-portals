@@ -62,7 +62,7 @@ const makeHeaderProps = (
   theme: 'light',
   beta,
 
-  // add logic for B2BP
+  // TODO: add logic for B2BP
   drawerMenuTitle: '',
   ctaTitle: '',
   ctaButtonText: '',

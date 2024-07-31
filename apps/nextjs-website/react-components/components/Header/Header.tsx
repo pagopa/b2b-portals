@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, Link, Stack, Typography, Divider } from '@mui/material';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { BackgroundColor } from '@react-components/components/common/Common.helpers';
-import { HeaderTitle } from './components/Header.HeaderTitle.helpers';
-import { Navigation } from './components/Header.Navigation.helpers';
-import { HamburgerMenu } from './components/Header.HamburgerMenu.helpers';
-import DesktopDrawer from './components/Header.DesktopDrawer.helpers';
-import MobileDrawer from './components/Header.MobileDrawer.helpers';
-import { HeaderCtas } from './components/Header.Ctas.helpers';
+import { HeaderTitle } from './Helpers/Header.HeaderTitle.helpers';
+import { Navigation } from './Helpers/Header.Navigation.helpers';
+import { HamburgerMenu } from './Helpers/Header.HamburgerMenu.helpers';
+import DesktopDrawer from './Helpers/Header.DesktopDrawer.helpers';
+import MobileDrawer from './Helpers/Header.MobileDrawer.helpers';
+import { HeaderCtas } from './Helpers/Header.Ctas.helpers';
+import { usePathname } from 'next/navigation';
 
 const Header = ({
   product,
@@ -24,6 +25,7 @@ const Header = ({
   ctaHref,
   ctaBodyText,
   drawerCardsData,
+  needHelpHref,
 }: HeaderProps) => {
   const muiTheme = useTheme();
   const backgroundColor = BackgroundColor(theme);
@@ -31,9 +33,9 @@ const Header = ({
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
     null
   );
-  const [selectedMenuIndex, setSelectedMenuIndex] = useState<number | null>(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
+  const pathname = usePathname();
 
   const openHeader = () => {
     setMenuOpen(true);
@@ -47,7 +49,6 @@ const Header = ({
   const handleCloseDrawer = () => setIsDrawerOpen(false);
 
   const handleMenuClick = (index: number, href?: string) => {
-    setSelectedMenuIndex(index);
     if (href) {
       window.location.href = href;
       setIsDrawerOpen(false);
@@ -58,8 +59,6 @@ const Header = ({
   const handleDropdownToggle = (index: number) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
   };
-
-  useEffect(() => {}, []);
 
   return (
     <Box
@@ -82,7 +81,7 @@ const Header = ({
             {...(logo ? { logo } : {})}
           />
           <Link
-            href='#serve-aiuto'
+            href={needHelpHref}
             underline='none'
             display='flex'
             flexDirection='row'
@@ -136,7 +135,7 @@ const Header = ({
                 isOpen: openDropdownIndex === index,
                 onClick: () => handleMenuClick(index, menu.href),
                 onDropdownClick: () => handleDropdownToggle(index),
-                active: selectedMenuIndex === index,
+                active: pathname === menu.href,
               }))}
               theme={theme}
               isMobile={false}

@@ -60,19 +60,18 @@ export const removeHomepageSlugFromMenu = (
             })),
           },
         ],
-        drawerMenuTitle: 'text',
-        ctaTitle: 'text',
-        ctaButtonText: 'text',
-        ctaHref: 'text',
-        ctaBodyText: 'text',
+        drawerMenuTitle: '',
+        ctaTitle: '',
+        ctaButtonText: '',
+        ctaHref: '',
+        ctaBodyText: '',
         drawerCardsData: [
           {
-            title: 'Cittadini',
-            subtitle:
-              'Accedi come persona fisica, libero professionista o ditta individuale',
+            title: '',
+            subtitle: '',
             stackIcon: 'People',
-            buttonText: 'Accedi',
-            href: '/',
+            buttonText: '',
+            href: '',
           },
         ],
       };

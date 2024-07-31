@@ -4,7 +4,7 @@ import Drawer from '@mui/material/Drawer';
 import { Stack, List, ListItem, ListItemText, IconButton, Typography, Link } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
-import { MenuItem } from '@react-components/types/Header/Header.types';
+import { MenuDropdownProp } from '@react-components/types/Header/Header.types';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorLeft': {
@@ -20,7 +20,7 @@ interface MobileDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   anchor: Anchor;
-  menu: MenuItem[];
+  menu: MenuDropdownProp[];
   theme: 'dark' | 'light';
 }
 
