@@ -1,8 +1,13 @@
 import { EditorialProps } from '../Editorial/Editorial.types';
 
+export interface SubtitleLink {
+  text: string;
+  link?: string;
+}
+
 export interface EditorialSwitchBaseProps {
   title: string;
-  subtitle?: string;
+  subtitle?: SubtitleLink[];
   theme: 'dark' | 'light';
 }
 

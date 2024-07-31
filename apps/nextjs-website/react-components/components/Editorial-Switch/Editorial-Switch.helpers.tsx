@@ -3,7 +3,7 @@ import {
   ButtonSwitchRowBlockProps,
   EditorialSwitchBaseProps,
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
-import { CtaButtons, Subtitle, Title } from '../common/Common';
+import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import {
   Button,
@@ -38,17 +38,33 @@ export const TitleSubtitleBlock = ({
         variant='h4'
         textColor={textColor}
         title={title}
-        textAlign='left'
         marginTop={3}
         marginBottom={3}
       />
-      <Subtitle
-        variant='body2'
-        textColor={textColor}
-        subtitle={subtitle}
-        textAlign='center'
-        marginBottom={4}
-      />
+      {subtitle && (
+        <div
+          style={{
+            marginBottom: '0.5rem',
+            marginTop: '0.5rem',
+            color: textColor,
+          }}
+        >
+          {subtitle.map((item, index) => (
+            <React.Fragment key={index}>
+              {item.link ? (
+                <a
+                  href={item.link}
+                  style={{ color: textColor, textDecoration: 'underline' }}
+                >
+                  {item.text}
+                </a>
+              ) : (
+                item.text
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -187,7 +203,6 @@ export const ButtonSwitchRowBlock = ({
   return isLarge ? (
     <Stack
       direction={isSmallScreen ? 'column' : 'row'}
-      justifyContent='left'
       spacing={2}
     >
       {CtaButtons({

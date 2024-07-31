@@ -10,7 +10,9 @@ const makeEditorialSwitchProps = ({
   sections,
   ...rest
 }: EditorialSwitchSection): EditorialSwitchProps => ({
-  ...(subtitle && { subtitle }),
+  subtitle: Array.isArray(subtitle)
+    ? subtitle.map(text => (typeof text === 'string' ? { text } : text))
+    : subtitle ? [{ text: subtitle }] : [],
   sections: sections.map(({ content, ...section }) => ({
     ...section,
     content: makeEditorialProps({
