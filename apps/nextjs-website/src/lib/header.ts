@@ -90,6 +90,7 @@ export const removeHomepageSlugFromMenu = (
               sublinkGroups: sublinkGroups.map(
                 ({ sublinks, ...sublinkGroup }) => ({
                   ...sublinkGroup,
+                  // TODO:
                   sublinks: sublinks.map(removeHomepageSlugFromSublink),
                 })
               ),
