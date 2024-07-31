@@ -60,6 +60,7 @@ export const removeHomepageSlugFromMenu = (
             })),
           },
         ],
+        // TODO: fill in the rest of the fields with correct values
         drawerMenuTitle: '',
         ctaTitle: '',
         ctaButtonText: '',
@@ -90,7 +91,6 @@ export const removeHomepageSlugFromMenu = (
               sublinkGroups: sublinkGroups.map(
                 ({ sublinks, ...sublinkGroup }) => ({
                   ...sublinkGroup,
-                  // TODO:
                   sublinks: sublinks.map(removeHomepageSlugFromSublink),
                 })
               ),
