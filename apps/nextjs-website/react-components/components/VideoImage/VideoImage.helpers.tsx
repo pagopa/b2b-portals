@@ -29,8 +29,7 @@ export const renderVideo = ({
       ? src.split('.').pop() ?? 'mp4'
       : src?.mime.split('/').pop() ?? 'mp4';
 
-  // Check if the device is likely a mobile device based on the window width
-  const isMobileDevice = window.innerWidth <= 768; // Adjust the value as needed
+  const isMobileDevice = window.innerWidth <= 768;
 
   // Define styles for mobile and non-mobile devices
   const mobileStyle = {
@@ -90,19 +89,30 @@ export const renderImage = ({ alt = 'image alt', src }: ImageProps) => {
     return null;
   }
 
+  const isMobileDevice = window.innerWidth <= 768;
+
+  // Define styles for mobile and non-mobile devices
+  const mobileStyle = {
+    overflow: 'hidden',
+    width: '100vw',
+    height: '100vh',
+    objectFit: 'cover',
+    objectPosition: 'center',
+  };
+
+  const nonMobileStyle = {
+    overflow: 'hidden',
+    width: '100%',
+    height: '100%',
+  };
+
   return (
     <Image
       alt={alt}
       src={imageUrl}
       width={0}
       height={0}
-      style={{
-        objectFit: 'contain',
-        width: '100%',
-        height: '100%',
-        userSelect: 'none',
-        overflow: 'hidden',
-      }}
+      style={isMobileDevice ? mobileStyle : nonMobileStyle}
     />
   );
 };

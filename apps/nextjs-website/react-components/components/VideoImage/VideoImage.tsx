@@ -29,15 +29,19 @@ const VideoImage = (props: VideoImageProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
   const [error, setError] = useState(false);
-  const [videoState, setVideoState] = useState<'playing' | 'paused' | 'stopped'>('stopped');
-  const [isMobile, setIsMobile] = useState(false);
+  const [videoState, setVideoState] = useState<
+    'playing' | 'paused' | 'stopped'
+  >('stopped');
+  const [isMobileDevice, setIsMobileDevice] = useState(window.innerWidth <= 768);
 
   const textColor = TextColor(theme);
 
   useEffect(() => {
-    // Check if the device is likely a mobile device based on the window width
-    const isMobileDevice = window.innerWidth <= 768; // Adjust the value as needed
-    setIsMobile(isMobileDevice);
+    const handleResize = () => {
+      setIsMobileDevice(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
@@ -51,11 +55,14 @@ const VideoImage = (props: VideoImageProps) => {
   const play = (e?: React.MouseEvent) => {
     e?.preventDefault();
     if (videoRef.current) {
-      videoRef.current.play().then(() => {
-        setVideoState('playing');
-      }).catch(() => {
-        // Handle play error
-      });
+      videoRef.current
+        .play()
+        .then(() => {
+          setVideoState('playing');
+        })
+        .catch(() => {
+          // Handle play error
+        });
     }
   };
 
@@ -84,7 +91,7 @@ const VideoImage = (props: VideoImageProps) => {
     <>
       <div
         style={{
-          maxHeight: isMobile ? '100vh' : '600px',
+          maxHeight: isMobileDevice ? '100vh' : '600px',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -148,7 +155,9 @@ const VideoImage = (props: VideoImageProps) => {
                           alignSelf: 'flex-start',
                         }}
                       >
-                        {videoState === 'paused' ? pausedplayButtonLabel : playButtonLabel}
+                        {videoState === 'paused'
+                          ? pausedplayButtonLabel
+                          : playButtonLabel}
                       </p>
                       <PlayArrowIcon
                         sx={{
@@ -184,7 +193,9 @@ const VideoImage = (props: VideoImageProps) => {
                           alignSelf: 'flex-start',
                         }}
                       >
-                        {videoState === 'paused' ? pausedplayButtonLabel : playButtonLabel}
+                        {videoState === 'paused'
+                          ? pausedplayButtonLabel
+                          : playButtonLabel}
                       </p>
                       <PlayArrowIcon
                         sx={{
