@@ -4,12 +4,12 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { BackgroundColor } from '@react-components/components/common/Common.helpers';
-import { HeaderTitle } from './helper/Header.HeaderTitle.helpers';
-import { Navigation } from './helper/Header.Navigation.helpers';
-import { HamburgerMenu } from './helper/Header.HamburgerMenu.helpers';
-import DesktopDrawer from './helper/Header.DesktopDrawer.helpers';
-import MobileDrawer from './helper/Header.MobileDrawer.helpers';
-import { HeaderCtas } from './helper/Header.Ctas.helpers';
+import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
+import { Navigation } from './helpers/Header.Navigation.helpers';
+import { HamburgerMenu } from './helpers/Header.HamburgerMenu.helpers';
+import DesktopDrawer from './helpers/Header.DesktopDrawer.helpers';
+import MobileDrawer from './helpers/Header.MobileDrawer.helpers';
+import { HeaderCtas } from './helpers/Header.Ctas.helpers';
 import { usePathname } from 'next/navigation';
 
 const Header = ({
@@ -97,7 +97,6 @@ const Header = ({
           >
             Serve aiuto?
             <Box
-              component='a'
               sx={{
                 bgcolor: 'primary.main',
                 width: 48,
