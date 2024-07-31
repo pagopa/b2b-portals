@@ -20,7 +20,7 @@ type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 interface DesktopDrawerProps {
   isOpen: boolean;
-  onClose: (anchor: Anchor) => void;
+  onClose: () => void;
   anchor: Anchor;
   drawerMenuTitle: string;
   drawerCardsData: CardData[];
@@ -43,13 +43,16 @@ export default function DesktopDrawer({
   ctaHref,
   ctaBodyText,
 }: DesktopDrawerProps) {
-  const handleButtonClick = () => {
-    window.location.href = ctaHref;
-  };
   const textColorAlternative = TextAlternativeColor(theme);
 
-  const list = (anchor: Anchor) => (
-    <Box
+  return (
+    <Drawer
+      anchor={anchor}
+      open={isOpen}
+      onClose={onClose}
+      sx={drawerStyles}
+    >
+      <Box
       sx={{
         padding: 2,
         backgroundColor: 'white',
@@ -57,14 +60,13 @@ export default function DesktopDrawer({
         alignItems: 'center',
       }}
       role='presentation'
-      onClick={() => onClose(anchor)}
-      onKeyDown={() => onClose(anchor)}
+      onClick={onClose}
     >
       <Stack direction='row' justifyContent='space-between' alignItems='center'>
         <p style={{ fontWeight: '600', fontSize: '1.5em' }}>
           {drawerMenuTitle}
         </p>
-        <IconButton onClick={() => onClose(anchor)}>
+        <IconButton onClick={onClose}>
           <CloseIcon />
         </IconButton>
       </Stack>
@@ -91,16 +93,6 @@ export default function DesktopDrawer({
         ))}
       </div>
     </Box>
-  );
-
-  return (
-    <Drawer
-      anchor={anchor}
-      open={isOpen}
-      onClose={() => onClose(anchor)}
-      sx={drawerStyles}
-    >
-      {list(anchor)}
       <div style={{ width: '100%', padding: '1em' }}>
         <div
           style={{
@@ -128,7 +120,7 @@ export default function DesktopDrawer({
             </Typography>
             <Button
               size='small'
-              onClick={handleButtonClick}
+              href={ctaHref}
               endIcon={<ArrowForwardIcon />}
               sx={{
                 '& .MuiButtonBase-root': { color: textColorAlternative },

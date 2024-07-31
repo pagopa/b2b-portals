@@ -58,7 +58,7 @@ const MegaMenuCodec = t.array(
   })
 );
 
-const CardData = t.type({
+const CardData = t.strict({
   title: t.string,
   subtitle: t.string,
   stackIcon: HeaderMUIIconCodec,

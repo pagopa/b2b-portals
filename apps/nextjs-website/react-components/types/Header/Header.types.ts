@@ -61,3 +61,9 @@ export interface DialogBubbleProps extends StackProps {
 
 // Define MenuItem type
 export type MenuItem = MenuDropdownProp;
+
+export interface HeaderCtasProps {
+  onOpenDrawer: () => void;
+  ctaButtons?: CtaButtonProps[] | undefined;
+  theme: 'dark' | 'light';
+}

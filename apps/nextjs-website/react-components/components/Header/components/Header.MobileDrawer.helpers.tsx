@@ -36,8 +36,14 @@ export default function MobileDrawer({
     setOpenMenuIndex(openMenuIndex === index ? null : index);
   };
 
-  const list = () => (
-    <Box
+  return (
+    <Drawer
+      anchor={anchor}
+      open={isOpen}
+      onClose={onClose}
+      sx={drawerStyles}
+    >
+      <Box
       sx={{
         padding: 2,
         backgroundColor: 'white',
@@ -158,16 +164,6 @@ export default function MobileDrawer({
         </List>
       </div>
     </Box>
-  );
-
-  return (
-    <Drawer
-      anchor={anchor}
-      open={isOpen}
-      onClose={onClose}
-      sx={drawerStyles}
-    >
-      {list()}
     </Drawer>
   );
 }

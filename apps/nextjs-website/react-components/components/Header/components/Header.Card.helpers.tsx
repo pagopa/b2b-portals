@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -24,9 +23,6 @@ export default function ActionAreaCard({
   href,
   theme,
 }: ActionAreaCardProps) {
-  const handleButtonClick = () => {
-    window.location.href = href;
-  };
   const textColorAlternative = TextAlternativeColor(theme);
 
   return (
@@ -67,7 +63,7 @@ export default function ActionAreaCard({
       <CardActions>
         <Button
           size='small'
-          onClick={handleButtonClick}
+          href={href}
           endIcon={<ArrowForwardIcon />}
           sx={{
             '& .MuiButtonBase-root': { color: textColorAlternative },
