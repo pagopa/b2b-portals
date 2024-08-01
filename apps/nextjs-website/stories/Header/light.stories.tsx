@@ -12,6 +12,7 @@ const HeaderTemplate: StoryFn<HeaderProps> = (args) => <Header {...args} />;
 
 const defaultProps: HeaderProps = {
   theme: 'light',
+  beta: false,
   product: {
     name: 'Product Name',
     href: '#product-name',
@@ -43,28 +44,6 @@ const defaultProps: HeaderProps = {
       ],
     },
   ],
-  drawerMenuTitle: 'Accedi a SEND',
-  ctaTitle: 'Sei un Ente?',
-  ctaButtonText: 'Accedi',
-  ctaHref: '/',
-  ctaBodyText: 'Il tuo ente non ha ancora aderito? Scopri come aderire',
-  drawerCardsData: [
-    {
-      title: 'Cittadini',
-      subtitle:
-        'Accedi come persona fisica, libero professionista o ditta individuale',
-      stackIcon: { icon: 'People' },
-      buttonText: 'Accedi',
-      href: '/',
-    },
-    {
-      title: 'Imprese',
-      subtitle: 'Accedi come persona giuridica',
-      stackIcon: { icon: 'Business' },
-      buttonText: 'Accedi',
-      href: '/',
-    },
-  ],
 };
 
 export const HeaderFullWithLogo: StoryFn<typeof Header> = HeaderTemplate.bind({});
@@ -75,10 +54,32 @@ HeaderFullWithLogo.args = {
     alt: 'Logo',
     href: '#',
   },
-  ctaButtons: [
-    {
-      text: 'CTA Button 1',
-      href: '#cta-1',
+  beta: true,
+  supportLink: '/assistenza',
+  drawer: {
+    buttonText: 'Accedi',
+    title: 'Accedi a SEND',
+    ctaCard: {
+      title: 'Sei un Ente?',
+      subtitle: 'Il tuo ente non ha ancora aderito? Scopri come aderire',
+      buttonText: 'Accedi',
+      href: '#',
     },
-  ],
+    linkCards: [
+      {
+        title: 'Cittadini',
+        subtitle: 'Accedi come persona fisica, libero professionista o ditta individuale',
+        buttonText: 'Accedi',
+        href: '#',
+        stackIcon: 'People'
+      },
+      {
+        title: 'Imprese',
+        subtitle: 'Accedi come persona giuridica',
+        buttonText: 'Accedi',
+        href: '#',
+        stackIcon: 'Business'
+      },
+    ]
+  }
 };

@@ -5,18 +5,19 @@ import { HeaderCtasProps } from '@react-components/types/Header/Header.types';
 
 export const HeaderCtas: React.FC<HeaderCtasProps> = ({
   onOpenDrawer,
-  ctaButtons,
+  buttonText,
   theme,
-}) => {
-  return ctaButtons && ctaButtons.length > 0 ? (
-    <Stack direction='row' onClick={onOpenDrawer}>
-      {CtaButtons({
-        ctaButtons: ctaButtons.map((CtaButton) => ({
-          ...CtaButton,
+}) => (
+  <Stack direction='row'>
+    <CtaButtons
+      ctaButtons={[
+        {
+          text: buttonText,
+          onClick: onOpenDrawer,
           sx: { width: { md: 'auto', xs: '100%' } },
-        })),
-        theme,
-      })}
-    </Stack>
-  ) : null;
-};
+        },
+      ]}
+      theme={theme}
+    />
+  </Stack>
+);

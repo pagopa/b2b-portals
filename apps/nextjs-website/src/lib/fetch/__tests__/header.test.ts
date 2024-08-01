@@ -27,39 +27,42 @@ const makeTestAppEnv = () => {
 const headerResponse: HeaderData = {
   data: {
     attributes: {
-      productName: 'Test',
-      beta: false,
-      ctaButtons: [
+      header: [
         {
-          text: 'test',
-          href: '/',
-          variant: 'contained',
-          icon: null,
-          size: 'medium',
-        },
-      ],
-      logo: {
-        data: null,
-      },
-      menu: [
-        {
-          __component: 'menu.menu',
-          links: [],
-        },
-      ],
-      drawerMenuTitle: 'text',
-      ctaTitle: 'text',
-      ctaButtonText: 'text',
-      ctaHref: 'text',
-      ctaBodyText: 'text',
-      drawerCardsData: [
-        {
-          title: 'Cittadini',
-          subtitle:
-            'Accedi come persona fisica, libero professionista o ditta individuale',
-          stackIcon: 'People',
-          buttonText: 'Accedi',
-          href: '/',
+          __component: 'headers.standard-header',
+          beta: true,
+          drawer: {
+            buttonText: 'Accedi',
+            title: 'Accedi o Iscriviti',
+            ctaCard: {
+              buttonText: 'Accedi',
+              href: '#',
+              title: 'Titolo',
+              subtitle: 'Sottotitolo',
+            },
+            linkCards: [
+              {
+                buttonText: 'Accedi',
+                href: '#',
+                title: 'Cittadini',
+                subtitle: 'Sottotitolo Cittadini',
+                stackIcon: 'People',
+              },
+              {
+                buttonText: 'Accedi',
+                href: '#',
+                title: 'Imprese',
+                subtitle: 'Sottotitolo Imprese',
+                stackIcon: 'Business',
+              },
+            ],
+          },
+          menu: {
+            links: [],
+          },
+          logo: { data: null },
+          productName: 'SEND',
+          supportLink: '/assistenza',
         },
       ],
     },
@@ -78,7 +81,7 @@ describe('getHeader', () => {
     await getHeader(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/header?populate=ctaButtons,logo,menu.links.page,menu.links.sublinks.page,menu.links.sublinkGroups.sublinks.page`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/header?populate=header.logo,header.ctaButton,header.menu.links.page,header.menu.links.sublinks.page,header.menu.links.sublinkGroups.sublinks.page,header.drawer.ctaCard,header.drawer.linkCards`,
       {
         method: 'GET',
         headers: {

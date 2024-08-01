@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_headers_standard_headers",
+  "info": {
+    "displayName": "Standard Header"
+  },
+  "options": {},
+  "attributes": {
+    "logo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "productName": {
+      "type": "string",
+      "required": true
+    },
+    "beta": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "supportLink": {
+      "type": "string",
+      "required": false
+    },
+    "menu": {
+      "type": "component",
+      "repeatable": false,
+      "component": "menu.menu",
+      "required": true
+    },
+    "drawer": {
+      "type": "component",
+      "repeatable": false,
+      "component": "headers.header-drawer",
+      "required": false
+    }
+  }
+}

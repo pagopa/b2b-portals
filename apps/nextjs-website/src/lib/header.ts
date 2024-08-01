@@ -23,80 +23,46 @@ const removeHomepageSlugFromSublink = ({
 });
 
 export const removeHomepageSlugFromMenu = (
-  header: HeaderData['data']['attributes']
-): HeaderData['data']['attributes'] => {
-  const menu = header.menu[0];
-
-  // If menu is empty, return header as-is (an error may be thrown later if appropriate)
-  if (menu === undefined) {
-    return header;
-  }
-
-  switch (menu.__component) {
-    case 'menu.menu':
+  header: HeaderData['data']['attributes']['header'][0]
+): HeaderData['data']['attributes']['header'][0] => {
+  switch (header.__component) {
+    case 'headers.standard-header':
       return {
-        beta: header.beta,
-        ctaButtons: header.ctaButtons,
-        logo: header.logo,
-        productName: header.productName,
-        menu: [
-          {
-            __component: menu.__component,
-            links: menu.links.map(({ page, sublinks, ...link }) => ({
-              ...link,
-              page: {
-                data: page.data
-                  ? {
-                      attributes: {
-                        slug:
-                          page.data.attributes.slug === 'homepage'
-                            ? '/'
-                            : page.data.attributes.slug,
-                      },
-                    }
-                  : null,
-              },
-              sublinks: sublinks.map(removeHomepageSlugFromSublink),
-            })),
-          },
-        ],
-        // TODO: fill in the rest of the fields with correct values
-        drawerMenuTitle: '',
-        ctaTitle: '',
-        ctaButtonText: '',
-        ctaHref: '',
-        ctaBodyText: '',
-        drawerCardsData: [
-          {
-            title: '',
-            subtitle: '',
-            stackIcon: 'People',
-            buttonText: '',
-            href: '',
-          },
-        ],
+        ...header,
+        menu: {
+          links: header.menu.links.map(({ page, sublinks, ...link }) => ({
+            ...link,
+            page: {
+              data: page.data
+                ? {
+                    attributes: {
+                      slug:
+                        page.data.attributes.slug === 'homepage'
+                          ? '/'
+                          : page.data.attributes.slug,
+                    },
+                  }
+                : null,
+            },
+            sublinks: sublinks.map(removeHomepageSlugFromSublink),
+          })),
+        },
       };
 
-    case 'menu.mega-menu':
+    case 'headers.mega-header':
       return {
-        beta: header.beta,
-        ctaButtons: header.ctaButtons,
-        logo: header.logo,
-        productName: header.productName,
-        menu: [
-          {
-            __component: menu.__component,
-            links: menu.links.map(({ sublinkGroups, ...link }) => ({
-              ...link,
-              sublinkGroups: sublinkGroups.map(
-                ({ sublinks, ...sublinkGroup }) => ({
-                  ...sublinkGroup,
-                  sublinks: sublinks.map(removeHomepageSlugFromSublink),
-                })
-              ),
-            })),
-          },
-        ],
+        ...header,
+        menu: {
+          links: header.menu.links.map(({ sublinkGroups, ...link }) => ({
+            ...link,
+            sublinkGroups: sublinkGroups.map(
+              ({ sublinks, ...sublinkGroup }) => ({
+                ...sublinkGroup,
+                sublinks: sublinks.map(removeHomepageSlugFromSublink),
+              })
+            ),
+          })),
+        },
       };
   }
 };

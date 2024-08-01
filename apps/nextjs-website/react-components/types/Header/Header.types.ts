@@ -1,6 +1,7 @@
 import { LinkProps, StackProps } from "@mui/material";
-import { CommonProps, CtaButtonProps } from "../common/Common.types";
+import { CommonProps } from "../common/Common.types";
 import { EIconProps } from "@react-components/components/common/EIcon";
+import { HeaderSideDrawer } from "@/lib/fetch/header";
 
 export interface CardData {
   readonly title: string;
@@ -11,14 +12,8 @@ export interface CardData {
 }
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
-  ctaButtons?: CtaButtonProps[];
-  drawerMenuTitle: string;
-  ctaTitle: string;
-  ctaButtonText: string;
-  ctaHref: string;
-  ctaBodyText: string;
-  drawerCardsData: CardData[];
-  needHelpHref?: string;
+  drawer?: HeaderSideDrawer;
+  supportLink?: string;
 }
 
 interface DropdownLink extends LinkProps {
@@ -48,7 +43,7 @@ export interface HeaderTitleProps extends CommonProps {
     name: string;
     href?: string;
   };
-  beta?: boolean;
+  beta: boolean;
   logo?: {
     src: string;
     alt: string;
@@ -62,6 +57,6 @@ export interface DialogBubbleProps extends StackProps {
 
 export interface HeaderCtasProps {
   onOpenDrawer: () => void;
-  ctaButtons?: CtaButtonProps[] | undefined;
+  buttonText: string;
   theme: 'dark' | 'light';
 }
