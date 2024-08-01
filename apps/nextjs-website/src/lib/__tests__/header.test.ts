@@ -289,6 +289,7 @@ const parsedMegaHeader: HeaderData = {
 describe('removeHomepageSlugFromMenu', () => {
   it('should replace the "homepage" slug with "/" in all levels of the standard menu', () => {
     const actual = removeHomepageSlugFromMenu(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       standardHeader.data.attributes.header[0]!
     );
     expect(actual).toStrictEqual(
@@ -297,6 +298,7 @@ describe('removeHomepageSlugFromMenu', () => {
   });
   it('should replace the "homepage" slug with "/" in all levels of the mega menu', () => {
     const actual = removeHomepageSlugFromMenu(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       megaHeader.data.attributes.header[0]!
     );
     expect(actual).toStrictEqual(parsedMegaHeader.data.attributes.header[0]);

@@ -57,15 +57,15 @@ const Header = ({
   return (
     <Box
       bgcolor={backgroundColor}
-      component="header"
-      role="banner"
+      component='header'
+      role='banner'
       sx={{ height: { xs: 'auto', md: 'auto' } }}
     >
-      <Stack direction="column" gap={{ xs: 0, md: 0 }} sx={{ width: '100%' }}>
+      <Stack direction='column' gap={{ xs: 0, md: 0 }} sx={{ width: '100%' }}>
         <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
+          direction='row'
+          justifyContent='space-between'
+          alignItems='center'
           sx={{ padding: '16px 24px' }}
         >
           <HeaderTitle
@@ -77,10 +77,10 @@ const Header = ({
           {supportLink && (
             <Link
               href={supportLink}
-              underline="none"
-              display="flex"
-              flexDirection="row"
-              justifyContent="flex-end"
+              underline='none'
+              display='flex'
+              flexDirection='row'
+              justifyContent='flex-end'
               sx={{
                 color: 'primary.main',
                 fontWeight: 'bold',
@@ -118,9 +118,9 @@ const Header = ({
 
         {!isMobile && (
           <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
+            direction='row'
+            justifyContent='space-between'
+            alignItems='center'
             sx={{
               height: '64px',
               padding: '0px 24px',
@@ -144,15 +144,6 @@ const Header = ({
                   theme={theme}
                   buttonText={drawer.buttonText}
                 />
-                {/* <DesktopDrawer
-                  isOpen={isDrawerOpen}
-                  onClose={handleCloseDrawer}
-                  anchor="right"
-                  theme="light"
-                  drawerMenuTitle={drawer.title}
-                  ctaCard={drawer.ctaCard}
-                  linkCards={drawer.linkCards}
-                /> */}
               </Box>
             )}
           </Stack>
@@ -160,24 +151,24 @@ const Header = ({
 
         {isMobile && (
           <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
+            direction='row'
+            justifyContent='space-between'
+            alignItems='center'
             sx={{
               display: { xs: 'flex', md: 'none' },
               width: '100%',
               padding: '8px 24px',
             }}
           >
-            <Stack direction="row" alignItems="center" gap={1}>
+            <Stack direction='row' alignItems='center' gap={1}>
               <HamburgerMenu
                 onOpen={openHeader}
                 onClose={closeHeader}
                 open={menuOpen}
               />
               <Typography
-                variant="body1"
-                color="text.secondary"
+                variant='body1'
+                color='text.secondary'
                 sx={{ fontWeight: 600 }}
               >
                 Menu
@@ -199,7 +190,7 @@ const Header = ({
           <MobileDrawer
             isOpen={menuOpen}
             onClose={closeHeader}
-            anchor="left"
+            anchor='left'
             menu={menu}
             theme={'light'}
           />
@@ -209,8 +200,8 @@ const Header = ({
           <DesktopDrawer
             isOpen={isDrawerOpen}
             onClose={handleCloseDrawer}
-            anchor="right"
-            theme="light"
+            anchor='right'
+            theme='light'
             drawerMenuTitle={drawer.title}
             ctaCard={drawer.ctaCard}
             linkCards={drawer.linkCards}

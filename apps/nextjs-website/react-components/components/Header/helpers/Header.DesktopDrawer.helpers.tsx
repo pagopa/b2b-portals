@@ -51,13 +51,13 @@ export default function DesktopDrawer({
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        role="presentation"
+        role='presentation'
         onClick={onClose}
       >
         <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
+          direction='row'
+          justifyContent='space-between'
+          alignItems='center'
         >
           <p style={{ fontWeight: '600', fontSize: '1.5em' }}>
             {drawerMenuTitle}
@@ -108,14 +108,14 @@ export default function DesktopDrawer({
           >
             <Typography
               gutterBottom
-              variant="body1"
-              component="div"
+              variant='body1'
+              component='div'
               style={{ fontWeight: '600' }}
             >
               {ctaCard.title}
             </Typography>
             <Button
-              size="small"
+              size='small'
               href={ctaCard.href}
               endIcon={<ArrowForwardIcon />}
               sx={{
@@ -130,7 +130,7 @@ export default function DesktopDrawer({
             </Button>
           </div>
           <Divider sx={{ marginBottom: 2, marginTop: 2 }} />
-          <Typography gutterBottom variant="body2" component="div">
+          <Typography gutterBottom variant='body2' component='div'>
             {ctaCard.subtitle}
           </Typography>
         </div>
