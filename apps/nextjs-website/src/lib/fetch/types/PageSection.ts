@@ -243,7 +243,14 @@ const EditorialSwitchSectionCodec = t.strict({
 });
 
 const VideoCodec = t.strict({
-  src: StrapiImageSchema,
+  src: t.strict({
+    data: t.union([
+      t.strict({
+        attributes: t.strict({ url: t.string }),
+      }),
+      t.null,
+    ]),
+  }),
   srcURL: t.union([t.string, t.null]),
   autoplay: t.boolean,
   loop: t.boolean,
