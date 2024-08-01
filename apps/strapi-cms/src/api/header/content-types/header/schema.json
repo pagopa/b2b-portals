@@ -12,38 +12,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "productName": {
-      "type": "string",
-      "required": true
-    },
-    "beta": {
-      "type": "boolean",
-      "default": false,
-      "required": true
-    },
-    "ctaButtons": {
-      "type": "component",
-      "repeatable": true,
-      "component": "components.cta-button-simple",
-      "max": 2
-    },
-    "logo": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "menu": {
+    "header": {
       "type": "dynamiczone",
       "components": [
-        "menu.menu",
-        "menu.mega-menu"
+        "headers.standard-header",
+        "headers.mega-header"
       ],
       "required": true,
-      "max": 1,
-      "min": 1
+      "min": 1,
+      "max": 1
     }
   }
 }

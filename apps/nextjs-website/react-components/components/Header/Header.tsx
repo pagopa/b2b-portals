@@ -16,16 +16,10 @@ const Header = ({
   product,
   theme,
   menu,
-  ctaButtons,
   beta,
   logo,
-  drawerMenuTitle,
-  ctaTitle,
-  ctaButtonText,
-  ctaHref,
-  ctaBodyText,
-  drawerCardsData,
-  needHelpHref,
+  drawer,
+  supportLink,
 }: HeaderProps) => {
   const muiTheme = useTheme();
   const backgroundColor = BackgroundColor(theme);
@@ -77,43 +71,47 @@ const Header = ({
           <HeaderTitle
             theme={theme}
             product={product}
-            {...(beta ? { beta } : {})}
+            beta={beta}
             {...(logo ? { logo } : {})}
           />
-          <Link
-            href={needHelpHref}
-            underline='none'
-            display='flex'
-            flexDirection='row'
-            justifyContent='flex-end'
-            sx={{
-              color: 'primary.main',
-              fontWeight: 'bold',
-              fontSize: '14px',
-              height: '100%',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
-            Serve aiuto?
-            <Box
+          {supportLink && (
+            <Link
+              href={supportLink}
+              underline='none'
+              display='flex'
+              flexDirection='row'
+              justifyContent='flex-end'
               sx={{
-                bgcolor: 'primary.main',
-                width: 48,
-                height: 48,
-                display: 'flex',
+                color: 'primary.main',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                height: '100%',
                 alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '50%',
-                textDecoration: 'none',
-                '&:hover': {
-                  bgcolor: 'primary.main',
-                },
+                gap: '1rem',
               }}
             >
-              <ChatBubbleOutlineIcon style={{ color: 'white', fontSize: 18 }} />
-            </Box>
-          </Link>
+              Serve aiuto?
+              <Box
+                sx={{
+                  bgcolor: 'primary.main',
+                  width: 48,
+                  height: 48,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%',
+                  textDecoration: 'none',
+                  '&:hover': {
+                    bgcolor: 'primary.main',
+                  },
+                }}
+              >
+                <ChatBubbleOutlineIcon
+                  style={{ color: 'white', fontSize: 18 }}
+                />
+              </Box>
+            </Link>
+          )}
         </Stack>
 
         <Divider />
@@ -134,30 +132,20 @@ const Header = ({
                 isOpen: openDropdownIndex === index,
                 onClick: () => handleMenuClick(index, menu.href),
                 onDropdownClick: () => handleDropdownToggle(index),
-                active: pathname === menu.href,
+                active: pathname === menu.href || pathname === '/' + menu.href,
               }))}
               theme={theme}
               isMobile={false}
             />
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-              <HeaderCtas
-                onOpenDrawer={handleOpenDrawer}
-                theme={theme}
-                ctaButtons={ctaButtons}
-              />
-              <DesktopDrawer
-                isOpen={isDrawerOpen}
-                onClose={handleCloseDrawer}
-                anchor='right'
-                drawerMenuTitle={drawerMenuTitle}
-                drawerCardsData={drawerCardsData}
-                theme={'light'}
-                ctaTitle={ctaTitle}
-                ctaButtonText={ctaButtonText}
-                ctaHref={ctaHref}
-                ctaBodyText={ctaBodyText}
-              />
-            </Box>
+            {drawer && (
+              <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                <HeaderCtas
+                  onOpenDrawer={handleOpenDrawer}
+                  theme={theme}
+                  buttonText={drawer.buttonText}
+                />
+              </Box>
+            )}
           </Stack>
         )}
 
@@ -186,13 +174,15 @@ const Header = ({
                 Menu
               </Typography>
             </Stack>
-            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-              <HeaderCtas
-                onOpenDrawer={handleOpenDrawer}
-                theme={theme}
-                ctaButtons={ctaButtons}
-              />
-            </Box>
+            {drawer && (
+              <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                <HeaderCtas
+                  onOpenDrawer={handleOpenDrawer}
+                  theme={theme}
+                  buttonText={drawer.buttonText}
+                />
+              </Box>
+            )}
           </Stack>
         )}
 
@@ -206,18 +196,15 @@ const Header = ({
           />
         )}
 
-        {!isMobile && (
+        {!isMobile && drawer && (
           <DesktopDrawer
             isOpen={isDrawerOpen}
             onClose={handleCloseDrawer}
             anchor='right'
-            drawerMenuTitle={drawerMenuTitle}
-            drawerCardsData={drawerCardsData}
-            theme={'light'}
-            ctaTitle={ctaTitle}
-            ctaButtonText={ctaButtonText}
-            ctaHref={ctaHref}
-            ctaBodyText={ctaBodyText}
+            theme='light'
+            drawerMenuTitle={drawer.title}
+            ctaCard={drawer.ctaCard}
+            linkCards={drawer.linkCards}
           />
         )}
       </Stack>

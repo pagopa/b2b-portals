@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_headers_header_drawers",
+  "info": {
+    "displayName": "Header Drawer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "buttonText": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "ctaCard": {
+      "type": "component",
+      "repeatable": false,
+      "component": "headers.header-drawer-cta-card",
+      "required": true
+    },
+    "linkCards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "headers.header-drawer-link-card",
+      "required": true,
+      "min": 1
+    }
+  }
+}

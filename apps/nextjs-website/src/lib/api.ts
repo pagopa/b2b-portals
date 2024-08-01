@@ -45,12 +45,21 @@ export const getPreHeaderProps = async (): Promise<
 };
 
 export const getHeaderProps = async (): Promise<
-  HeaderData['data']['attributes']
+  HeaderData['data']['attributes']['header'][0]
 > => {
   const {
-    data: { attributes },
+    data: {
+      attributes: { header },
+    },
   } = await getHeader(appEnv);
-  return removeHomepageSlugFromMenu(attributes);
+
+  if (header[0] === undefined) {
+    // Disable lint for this case because we want the build to fail if user managed to not input a menu
+    // eslint-disable-next-line
+    throw new Error();
+  }
+
+  return removeHomepageSlugFromMenu(header[0]);
 };
 
 export const getFooterProps = async (): Promise<

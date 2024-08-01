@@ -7,7 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
-import { CardData } from '@react-components/types/Header/Header.types';
+import {
+  HeaderSideDrawerCtaCard,
+  HeaderSideDrawerLinkCard,
+} from '@/lib/fetch/header';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorRight': {
@@ -23,76 +26,69 @@ interface DesktopDrawerProps {
   onClose: () => void;
   anchor: Anchor;
   drawerMenuTitle: string;
-  drawerCardsData: CardData[];
   theme: 'dark' | 'light';
-  ctaTitle: string;
-  ctaButtonText: string;
-  ctaHref: string;
-  ctaBodyText: string;
+  linkCards: HeaderSideDrawerLinkCard[];
+  ctaCard: HeaderSideDrawerCtaCard;
 }
 
 export default function DesktopDrawer({
   isOpen,
   onClose,
   anchor,
-  drawerMenuTitle,
-  drawerCardsData,
   theme,
-  ctaTitle,
-  ctaButtonText,
-  ctaHref,
-  ctaBodyText,
+  drawerMenuTitle,
+  linkCards,
+  ctaCard,
 }: DesktopDrawerProps) {
   const textColorAlternative = TextAlternativeColor(theme);
 
   return (
-    <Drawer
-      anchor={anchor}
-      open={isOpen}
-      onClose={onClose}
-      sx={drawerStyles}
-    >
+    <Drawer anchor={anchor} open={isOpen} onClose={onClose} sx={drawerStyles}>
       <Box
-      sx={{
-        padding: 2,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      role='presentation'
-      onClick={onClose}
-    >
-      <Stack direction='row' justifyContent='space-between' alignItems='center'>
-        <p style={{ fontWeight: '600', fontSize: '1.5em' }}>
-          {drawerMenuTitle}
-        </p>
-        <IconButton onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      </Stack>
-      <Divider sx={{ marginBottom: 2 }} />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          width: '100%',
-          gap: '1em',
-          backgroundColor: '#fff',
+        sx={{
+          padding: 2,
+          backgroundColor: 'white',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
+        role='presentation'
+        onClick={onClose}
       >
-        {drawerCardsData.map((card, index) => (
-          <ActionAreaCard
-            key={index}
-            title={card.title}
-            subtitle={card.subtitle}
-            buttonText={card.buttonText}
-            href={card.href}
-            stackIcon={card.stackIcon}
-            theme={'light'}
-          />
-        ))}
-      </div>
-    </Box>
+        <Stack
+          direction='row'
+          justifyContent='space-between'
+          alignItems='center'
+        >
+          <p style={{ fontWeight: '600', fontSize: '1.5em' }}>
+            {drawerMenuTitle}
+          </p>
+          <IconButton onClick={onClose}>
+            <CloseIcon />
+          </IconButton>
+        </Stack>
+        <Divider sx={{ marginBottom: 2 }} />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            gap: '1em',
+            backgroundColor: '#fff',
+          }}
+        >
+          {linkCards.map((card, index) => (
+            <ActionAreaCard
+              key={index}
+              title={card.title}
+              subtitle={card.subtitle}
+              buttonText={card.buttonText}
+              href={card.href}
+              stackIcon={{ icon: card.stackIcon }}
+              theme={'light'}
+            />
+          ))}
+        </div>
+      </Box>
       <div style={{ width: '100%', padding: '1em' }}>
         <div
           style={{
@@ -116,11 +112,11 @@ export default function DesktopDrawer({
               component='div'
               style={{ fontWeight: '600' }}
             >
-              {ctaTitle}
+              {ctaCard.title}
             </Typography>
             <Button
               size='small'
-              href={ctaHref}
+              href={ctaCard.href}
               endIcon={<ArrowForwardIcon />}
               sx={{
                 '& .MuiButtonBase-root': { color: textColorAlternative },
@@ -130,12 +126,12 @@ export default function DesktopDrawer({
                 padding: 0,
               }}
             >
-              {ctaButtonText}
+              {ctaCard.buttonText}
             </Button>
           </div>
           <Divider sx={{ marginBottom: 2, marginTop: 2 }} />
           <Typography gutterBottom variant='body2' component='div'>
-            {ctaBodyText}
+            {ctaCard.subtitle}
           </Typography>
         </div>
       </div>

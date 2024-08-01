@@ -6,7 +6,7 @@ export const Container = styled(AppBar)({
   justifyContent: 'center',
   padding: '10px 0',
   backgroundColor: '#ffffff',
-  position: 'fixed',
+  position: 'sticky',
   top: 0,
   width: '100%',
   zIndex: 1000,

@@ -1,7 +1,10 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
 import { CTAButtonSimpleCodec } from './types/CTAButton';
-import { StrapiImageSchema } from './types/StrapiImage';
+import {
+  StrapiImageRequiredSchema,
+  StrapiImageSchema,
+} from './types/StrapiImage';
 import { HeaderMUIIconCodec } from './types/icons/HeaderIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
@@ -31,34 +34,28 @@ const HeaderSublinkGroupCodec = t.strict({
   sublinks: t.array(HeaderSublinkCodec),
 });
 
-const MenuCodec = t.array(
-  t.strict({
-    __component: t.literal('menu.menu'),
-    links: t.array(
-      t.strict({
-        label: t.string,
-        alignRight: t.boolean,
-        page: HeaderPageCodec,
-        sectionID: t.union([t.string, t.null]),
-        sublinks: t.array(HeaderSublinkCodec),
-      })
-    ),
-  })
-);
+const MenuCodec = t.strict({
+  links: t.array(
+    t.strict({
+      label: t.string,
+      alignRight: t.boolean,
+      page: HeaderPageCodec,
+      sectionID: t.union([t.string, t.null]),
+      sublinks: t.array(HeaderSublinkCodec),
+    })
+  ),
+});
 
-const MegaMenuCodec = t.array(
-  t.strict({
-    __component: t.literal('menu.mega-menu'),
-    links: t.array(
-      t.strict({
-        label: t.string,
-        sublinkGroups: t.array(HeaderSublinkGroupCodec),
-      })
-    ),
-  })
-);
+const MegaMenuCodec = t.strict({
+  links: t.array(
+    t.strict({
+      label: t.string,
+      sublinkGroups: t.array(HeaderSublinkGroupCodec),
+    })
+  ),
+});
 
-const CardData = t.strict({
+const DrawerLinkCardCodec = t.strict({
   title: t.string,
   subtitle: t.string,
   stackIcon: HeaderMUIIconCodec,
@@ -66,47 +63,59 @@ const CardData = t.strict({
   href: t.string,
 });
 
-const HeaderWithMenuDataCodec = t.strict({
-  logo: StrapiImageSchema,
-  productName: t.string,
-  beta: t.boolean,
-  ctaButtons: t.array(CTAButtonSimpleCodec),
-  menu: MenuCodec,
-  drawerMenuTitle: t.string,
-  ctaTitle: t.string,
-  ctaButtonText: t.string,
-  ctaHref: t.string,
-  ctaBodyText: t.string,
-  drawerCardsData: t.array(CardData),
+const DrawerCtaCardCodec = t.strict({
+  title: t.string,
+  subtitle: t.string,
+  buttonText: t.string,
+  href: t.string,
 });
 
-const HeaderWithMegaMenuDataCodec = t.strict({
+const SideDrawerCodec = t.strict({
+  buttonText: t.string,
+  title: t.string,
+  ctaCard: DrawerCtaCardCodec,
+  linkCards: t.array(DrawerLinkCardCodec),
+});
+
+const StandardHeaderCodec = t.strict({
+  __component: t.literal('headers.standard-header'),
   logo: StrapiImageSchema,
   productName: t.string,
   beta: t.boolean,
-  ctaButtons: t.array(CTAButtonSimpleCodec),
+  supportLink: t.union([t.string, t.null]),
+  menu: MenuCodec,
+  drawer: t.union([SideDrawerCodec, t.null]),
+});
+
+const MegaHeaderCodec = t.strict({
+  __component: t.literal('headers.mega-header'),
+  logo: StrapiImageRequiredSchema,
+  ctaButton: t.union([CTAButtonSimpleCodec, t.null]),
   menu: MegaMenuCodec,
 });
 
 export const HeaderDataCodec = t.strict({
   data: t.strict({
-    attributes: t.union([HeaderWithMenuDataCodec, HeaderWithMegaMenuDataCodec]),
+    attributes: t.strict({
+      header: t.array(t.union([StandardHeaderCodec, MegaHeaderCodec])),
+    }),
   }),
 });
 
 export type HeaderSublink = t.TypeOf<typeof HeaderSublinkCodec>;
+export type HeaderSideDrawer = t.TypeOf<typeof SideDrawerCodec>;
+export type HeaderSideDrawerCtaCard = t.TypeOf<typeof DrawerCtaCardCodec>;
+export type HeaderSideDrawerLinkCard = t.TypeOf<typeof DrawerLinkCardCodec>;
 export type HeaderData = t.TypeOf<typeof HeaderDataCodec>;
-export type HeaderWithMenuData = t.TypeOf<typeof HeaderWithMenuDataCodec>;
-export type HeaderWithMegaMenuData = t.TypeOf<
-  typeof HeaderWithMegaMenuDataCodec
->;
+export type StandardHeaderData = t.TypeOf<typeof StandardHeaderCodec>;
+export type MegaHeaderData = t.TypeOf<typeof MegaHeaderCodec>;
 
 export const getHeader = ({ config, fetchFun }: AppEnv): Promise<HeaderData> =>
   extractFromResponse(
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/header?populate=ctaButtons,logo,menu.links.page,menu.links.sublinks.page,menu.links.sublinkGroups.sublinks.page`,
+      }/api/header?populate=header.logo,header.ctaButton,header.menu.links.page,header.menu.links.sublinks.page,header.menu.links.sublinkGroups.sublinks.page,header.drawer.ctaCard,header.drawer.linkCards`,
       {
         method: 'GET',
         headers: {

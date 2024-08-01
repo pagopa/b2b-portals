@@ -2,6 +2,7 @@ import { StoryFn, Meta } from '@storybook/react';
 import { MegaHeader } from '@react-components/components';
 import { MegaHeaderProps } from '@react-components/types';
 import { MegaMenuItem } from '@react-components/types/MegaHeader/MegaHeader.types';
+import Icon from '@/components/Icon';
 
 const defaultMenuItems: MegaMenuItem[] = [
   {
@@ -53,10 +54,13 @@ const defaultProps: MegaHeaderProps = {
   menuItems: defaultMenuItems,
   logoSrc: 'https://io.italia.it/assets/img/io-it-logo-blue.svg',
   logoAlt: 'logo',
-  buttonHref: '/'
 };
 
 export const MegaHeaderFullWithLogo: StoryFn<typeof MegaHeader> = MegaHeaderTemplate.bind({});
 MegaHeaderFullWithLogo.args = {
   ...defaultProps,
+  ctaButton: {
+    text: 'Assistenza',
+    startIcon: Icon('HelpOutlineOutlined'),
+  }
 };

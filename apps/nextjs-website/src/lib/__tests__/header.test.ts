@@ -2,239 +2,284 @@ import { describe, it, expect } from 'vitest';
 import { removeHomepageSlugFromMenu } from '../header';
 import { HeaderData } from '../fetch/header';
 
-const noMenuHeader: HeaderData = {
+const standardHeader: HeaderData = {
   data: {
     attributes: {
-      beta: true,
-      ctaButtons: [],
-      logo: {
-        data: null,
-      },
-      productName: 'Demo',
-      menu: [],
-    },
-  },
-};
-
-const standardMenuHeader: HeaderData = {
-  data: {
-    attributes: {
-      beta: true,
-      ctaButtons: [],
-      logo: {
-        data: null,
-      },
-      productName: 'Demo',
-      menu: [
+      header: [
         {
-          __component: 'menu.menu',
-          links: [
-            {
-              alignRight: false,
-              label: 'label',
-              sectionID: null,
-              page: {
-                data: {
-                  attributes: {
-                    slug: 'homepage',
+          __component: 'headers.standard-header',
+          beta: true,
+          logo: {
+            data: null,
+          },
+          productName: 'Demo',
+          supportLink: '/assistenza',
+          menu: {
+            links: [
+              {
+                alignRight: false,
+                label: 'label',
+                sectionID: null,
+                page: {
+                  data: {
+                    attributes: {
+                      slug: 'homepage',
+                    },
                   },
                 },
+                sublinks: [
+                  {
+                    label: 'label',
+                    sectionID: null,
+                    page: { data: { attributes: { slug: 'otherpage1' } } },
+                  },
+                ],
               },
-              sublinks: [
-                {
-                  label: 'label',
-                  sectionID: null,
-                  page: { data: { attributes: { slug: 'otherpage1' } } },
-                },
-              ],
-            },
-            {
-              alignRight: false,
-              label: 'label',
-              sectionID: null,
-              page: {
-                data: {
-                  attributes: {
-                    slug: 'otherpage2',
+              {
+                alignRight: false,
+                label: 'label',
+                sectionID: null,
+                page: {
+                  data: {
+                    attributes: {
+                      slug: 'otherpage2',
+                    },
                   },
                 },
-              },
-              sublinks: [
-                {
-                  label: 'label',
-                  sectionID: null,
-                  page: { data: { attributes: { slug: 'homepage' } } },
-                },
-              ],
-            },
-          ],
-        },
-      ],
-      drawerMenuTitle: '',
-      ctaTitle: '',
-      ctaButtonText: '',
-      ctaHref: '',
-      ctaBodyText: '',
-      drawerCardsData: [
-        {
-          title: '',
-          subtitle: '',
-          stackIcon: 'People',
-          buttonText: '',
-          href: '',
-        },
-      ],
-    },
-  },
-};
-
-const parsedStandardMenuHeader: HeaderData = {
-  data: {
-    attributes: {
-      beta: true,
-      ctaButtons: [],
-      logo: {
-        data: null,
-      },
-      productName: 'Demo',
-      menu: [
-        {
-          // eslint-disable-next-line no-underscore-dangle
-          __component: 'menu.menu',
-          links: [
-            {
-              alignRight: false,
-              label: 'label',
-              sectionID: null,
-              page: {
-                data: {
-                  attributes: {
-                    slug: '/',
+                sublinks: [
+                  {
+                    label: 'label',
+                    sectionID: null,
+                    page: { data: { attributes: { slug: 'homepage' } } },
                   },
-                },
+                ],
               },
-              sublinks: [
-                {
-                  label: 'label',
-                  sectionID: null,
-                  page: { data: { attributes: { slug: 'otherpage1' } } },
-                },
-              ],
+            ],
+          },
+          drawer: {
+            buttonText: 'Accedi',
+            title: 'Accedi o Iscriviti',
+            ctaCard: {
+              buttonText: 'Accedi',
+              href: '#',
+              title: 'Titolo',
+              subtitle: 'Sottotitolo',
             },
-            {
-              alignRight: false,
-              label: 'label',
-              sectionID: null,
-              page: {
-                data: {
-                  attributes: {
-                    slug: 'otherpage2',
-                  },
-                },
+            linkCards: [
+              {
+                buttonText: 'Accedi',
+                href: '#',
+                title: 'Cittadini',
+                subtitle: 'Sottotitolo Cittadini',
+                stackIcon: 'People',
               },
-              sublinks: [
-                {
-                  label: 'label',
-                  sectionID: null,
-                  page: { data: { attributes: { slug: '/' } } },
-                },
-              ],
-            },
-          ],
-        },
-      ],
-      drawerMenuTitle: '',
-      ctaTitle: '',
-      ctaButtonText: '',
-      ctaHref: '',
-      ctaBodyText: '',
-      drawerCardsData: [
-        {
-          title: '',
-          subtitle: '',
-          stackIcon: 'People',
-          buttonText: '',
-          href: '',
+              {
+                buttonText: 'Accedi',
+                href: '#',
+                title: 'Imprese',
+                subtitle: 'Sottotitolo Imprese',
+                stackIcon: 'Business',
+              },
+            ],
+          },
         },
       ],
     },
   },
 };
 
-const megaMenuHeader: HeaderData = {
+const parsedStandardHeader: HeaderData = {
   data: {
     attributes: {
-      beta: true,
-      ctaButtons: [],
-      logo: {
-        data: null,
-      },
-      productName: 'Demo',
-      menu: [
+      header: [
         {
-          __component: 'menu.mega-menu',
-          links: [
-            {
-              label: 'label',
-              sublinkGroups: [
-                {
-                  title: 'group1',
-                  sublinks: [
-                    {
-                      label: 'sublink1',
-                      sectionID: null,
-                      page: { data: { attributes: { slug: 'homepage' } } },
+          __component: 'headers.standard-header',
+          beta: true,
+          logo: {
+            data: null,
+          },
+          productName: 'Demo',
+          supportLink: '/assistenza',
+          menu: {
+            links: [
+              {
+                alignRight: false,
+                label: 'label',
+                sectionID: null,
+                page: {
+                  data: {
+                    attributes: {
+                      slug: '/',
                     },
-                    {
-                      label: 'sublink1',
-                      sectionID: null,
-                      page: { data: { attributes: { slug: 'not-homepage' } } },
-                    },
-                  ],
+                  },
                 },
-              ],
+                sublinks: [
+                  {
+                    label: 'label',
+                    sectionID: null,
+                    page: { data: { attributes: { slug: 'otherpage1' } } },
+                  },
+                ],
+              },
+              {
+                alignRight: false,
+                label: 'label',
+                sectionID: null,
+                page: {
+                  data: {
+                    attributes: {
+                      slug: 'otherpage2',
+                    },
+                  },
+                },
+                sublinks: [
+                  {
+                    label: 'label',
+                    sectionID: null,
+                    page: { data: { attributes: { slug: '/' } } },
+                  },
+                ],
+              },
+            ],
+          },
+          drawer: {
+            buttonText: 'Accedi',
+            title: 'Accedi o Iscriviti',
+            ctaCard: {
+              buttonText: 'Accedi',
+              href: '#',
+              title: 'Titolo',
+              subtitle: 'Sottotitolo',
             },
-          ],
+            linkCards: [
+              {
+                buttonText: 'Accedi',
+                href: '#',
+                title: 'Cittadini',
+                subtitle: 'Sottotitolo Cittadini',
+                stackIcon: 'People',
+              },
+              {
+                buttonText: 'Accedi',
+                href: '#',
+                title: 'Imprese',
+                subtitle: 'Sottotitolo Imprese',
+                stackIcon: 'Business',
+              },
+            ],
+          },
         },
       ],
     },
   },
 };
 
-const parsedMegaMenuHeader: HeaderData = {
+const megaHeader: HeaderData = {
   data: {
     attributes: {
-      beta: true,
-      ctaButtons: [],
-      logo: {
-        data: null,
-      },
-      productName: 'Demo',
-      menu: [
+      header: [
         {
-          __component: 'menu.mega-menu',
-          links: [
-            {
-              label: 'label',
-              sublinkGroups: [
-                {
-                  title: 'group1',
-                  sublinks: [
-                    {
-                      label: 'sublink1',
-                      sectionID: null,
-                      page: { data: { attributes: { slug: '/' } } },
-                    },
-                    {
-                      label: 'sublink1',
-                      sectionID: null,
-                      page: { data: { attributes: { slug: 'not-homepage' } } },
-                    },
-                  ],
-                },
-              ],
+          __component: 'headers.mega-header',
+          logo: {
+            data: {
+              attributes: {
+                height: 300,
+                width: 300,
+                mime: 'jpg',
+                url: 'imgSrc',
+                alternativeText: 'altText',
+              },
             },
-          ],
+          },
+          ctaButton: {
+            href: '#',
+            icon: null,
+            size: 'medium',
+            text: 'CTA',
+            variant: 'contained',
+          },
+          menu: {
+            links: [
+              {
+                label: 'label',
+                sublinkGroups: [
+                  {
+                    title: 'group1',
+                    sublinks: [
+                      {
+                        label: 'sublink1',
+                        sectionID: null,
+                        page: { data: { attributes: { slug: 'homepage' } } },
+                      },
+                      {
+                        label: 'sublink1',
+                        sectionID: null,
+                        page: {
+                          data: { attributes: { slug: 'not-homepage' } },
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    },
+  },
+};
+
+const parsedMegaHeader: HeaderData = {
+  data: {
+    attributes: {
+      header: [
+        {
+          __component: 'headers.mega-header',
+          logo: {
+            data: {
+              attributes: {
+                height: 300,
+                width: 300,
+                mime: 'jpg',
+                url: 'imgSrc',
+                alternativeText: 'altText',
+              },
+            },
+          },
+          ctaButton: {
+            href: '#',
+            icon: null,
+            size: 'medium',
+            text: 'CTA',
+            variant: 'contained',
+          },
+          menu: {
+            links: [
+              {
+                label: 'label',
+                sublinkGroups: [
+                  {
+                    title: 'group1',
+                    sublinks: [
+                      {
+                        label: 'sublink1',
+                        sectionID: null,
+                        page: { data: { attributes: { slug: '/' } } },
+                      },
+                      {
+                        label: 'sublink1',
+                        sectionID: null,
+                        page: {
+                          data: { attributes: { slug: 'not-homepage' } },
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
         },
       ],
     },
@@ -242,18 +287,20 @@ const parsedMegaMenuHeader: HeaderData = {
 };
 
 describe('removeHomepageSlugFromMenu', () => {
-  it('should do nothing if the menu is empty', () => {
-    const actual = removeHomepageSlugFromMenu(noMenuHeader.data.attributes);
-    expect(actual).toStrictEqual(noMenuHeader.data.attributes);
-  });
   it('should replace the "homepage" slug with "/" in all levels of the standard menu', () => {
     const actual = removeHomepageSlugFromMenu(
-      standardMenuHeader.data.attributes
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      standardHeader.data.attributes.header[0]!
     );
-    expect(actual).toStrictEqual(parsedStandardMenuHeader.data.attributes);
+    expect(actual).toStrictEqual(
+      parsedStandardHeader.data.attributes.header[0]
+    );
   });
-  it('should replace the "homepage" slug with "/" in all levels of the megaMenu', () => {
-    const actual = removeHomepageSlugFromMenu(megaMenuHeader.data.attributes);
-    expect(actual).toStrictEqual(parsedMegaMenuHeader.data.attributes);
+  it('should replace the "homepage" slug with "/" in all levels of the mega menu', () => {
+    const actual = removeHomepageSlugFromMenu(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      megaHeader.data.attributes.header[0]!
+    );
+    expect(actual).toStrictEqual(parsedMegaHeader.data.attributes.header[0]);
   });
 });
