@@ -37,7 +37,8 @@
         "sections.one-trust",
         "sections.i-frame",
         "sections.form",
-        "sections.editorial-switch"
+        "sections.editorial-switch",
+        "sections.video-image"
       ],
       "required": true,
       "min": 1
