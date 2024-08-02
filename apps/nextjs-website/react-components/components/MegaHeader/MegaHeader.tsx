@@ -218,7 +218,6 @@ const MegaHeader = (props: MegaHeaderProps) => {
         ))}
         {ctaButton && <CtaButtons ctaButtons={[{
           ...ctaButton,
-          className: 'ButtonStyled',
           sx: {
             backgroundColor: '#0B3EE3',
             color: 'white',
