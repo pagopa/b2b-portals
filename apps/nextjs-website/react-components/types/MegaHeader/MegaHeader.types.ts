@@ -1,8 +1,14 @@
-import { CtaButtonProps } from "../common/Common.types";
+import { CtaButtonProps } from '../common/Common.types';
 
 export interface MegaMenuItem {
   primary: string;
-  secondary: { title: string; items: string[] }[];
+  secondary: {
+    title: string;
+    items: {
+      label: string;
+      href: string;
+    }[];
+  }[];
 }
 
 export interface MegaHeaderProps {
@@ -10,5 +16,4 @@ export interface MegaHeaderProps {
   logoSrc: string;
   logoAlt: string;
   ctaButton?: CtaButtonProps;
-  href?: string;
 }

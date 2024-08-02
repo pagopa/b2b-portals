@@ -210,25 +210,6 @@ const HeroCounterSectionCodec = t.strict({
   counterText: t.string,
 });
 
-const MegaHeaderSectionCodec = t.strict({
-  __component: t.literal('sections.mega-header'),
-  menuItems: t.array(
-    t.strict({
-      primary: t.string,
-      secondary: t.array(
-        t.strict({
-          title: t.string,
-          items: t.array(t.string),
-          href: t.union([t.string, t.null]),
-        })
-      ),
-    })
-  ),
-  logoSrc: t.string,
-  logoAlt: t.string,
-  buttonHref: t.string,
-});
-
 const EditorialSwitchSectionCodec = t.strict({
   __component: t.literal('sections.editorial-switch'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
@@ -287,7 +268,6 @@ export const PageSectionCodec = t.union([
   FormSectionCodec,
   PreFooterSectionCodec,
   HeroCounterSectionCodec,
-  MegaHeaderSectionCodec,
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
 ]);
@@ -306,7 +286,6 @@ export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
 export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
 export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
-export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
 export type EditorialSwitchSection = t.TypeOf<
   typeof EditorialSwitchSectionCodec
 >;

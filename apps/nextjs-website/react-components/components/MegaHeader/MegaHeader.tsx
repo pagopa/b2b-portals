@@ -21,7 +21,7 @@ import {
 import { CtaButtons } from '../common/Common';
 
 const MegaHeader = (props: MegaHeaderProps) => {
-  const { logoSrc, logoAlt, ctaButton, href } = props;
+  const { logoSrc, logoAlt, ctaButton } = props;
   const menuItems = props.menuItems || [];
 
   const { palette } = useTheme();
@@ -153,11 +153,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                 .map((item, itemIndex) => (
                                   <a
                                     key={itemIndex}
-                                    href={href}
-                                    className={`menuSecondaryItem ${activeItem === item ? 'active' : ''}`}
-                                    onClick={() => setActiveItem(item)}
+                                    href={item.href}
+                                    className={`menuSecondaryItem ${activeItem === item.label ? 'active' : ''}`}
+                                    onClick={() => setActiveItem(item.label)}
                                   >
-                                    {item}
+                                    {item.label}
                                     <ArrowForwardIcon className='arrowIcon' />
                                   </a>
                                 ))}
@@ -203,11 +203,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   {submenu.items.map((item, itemIndex) => (
                     <a
                       key={itemIndex}
-                      href={href}
-                      className={`mobileMenuSecondaryItem ${activeItem === item ? 'active' : ''}`}
-                      onClick={() => setActiveItem(item)}
+                      href={item.href}
+                      className={`mobileMenuSecondaryItem ${activeItem === item.label ? 'active' : ''}`}
+                      onClick={() => setActiveItem(item.label)}
                     >
-                      {item}
+                      {item.label}
                       <ArrowForwardIcon className='arrowIcon' />
                     </a>
                   ))}
