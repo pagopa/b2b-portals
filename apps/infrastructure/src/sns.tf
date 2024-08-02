@@ -1,6 +1,6 @@
 # SNS
 resource "aws_sns_topic" "alerts" {
-  name = "$b2bportals-${var.environment}-alerts"
+  name = "b2bportals-${var.environment}-alerts"
 }
 
 resource "aws_sns_topic_policy" "alerts" {
