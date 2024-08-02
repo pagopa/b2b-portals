@@ -59,9 +59,14 @@ export default function DesktopDrawer({
           justifyContent='space-between'
           alignItems='center'
         >
-          <p style={{ fontWeight: '600', fontSize: '1.5em' }}>
+          <Typography
+            gutterBottom
+            variant='body1'
+            component='div'
+            style={{ fontWeight: '600', fontSize: '1.5em' }}
+          >
             {drawerMenuTitle}
-          </p>
+          </Typography>
           <IconButton onClick={onClose}>
             <CloseIcon />
           </IconButton>
@@ -89,7 +94,7 @@ export default function DesktopDrawer({
           ))}
         </div>
       </Box>
-      <div style={{ width: '100%', padding: '1em' }}>
+      <div style={{ padding: '1em' }}>
         <div
           style={{
             backgroundColor: 'white',
