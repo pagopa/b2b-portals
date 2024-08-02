@@ -10,4 +10,5 @@ export interface MegaHeaderProps {
   logoSrc: string;
   logoAlt: string;
   ctaButton?: CtaButtonProps;
+  href?: string;
 }

@@ -219,6 +219,7 @@ const MegaHeaderSectionCodec = t.strict({
         t.strict({
           title: t.string,
           items: t.array(t.string),
+          href: t.union([t.string, t.null]),
         })
       ),
     })

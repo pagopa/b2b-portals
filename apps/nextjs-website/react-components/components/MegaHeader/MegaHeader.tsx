@@ -21,7 +21,7 @@ import {
 import { CtaButtons } from '../common/Common';
 
 const MegaHeader = (props: MegaHeaderProps) => {
-  const { logoSrc, logoAlt, ctaButton } = props;
+  const { logoSrc, logoAlt, ctaButton, href } = props;
   const menuItems = props.menuItems || [];
 
   const { palette } = useTheme();
@@ -153,7 +153,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                 .map((item, itemIndex) => (
                                   <a
                                     key={itemIndex}
-                                    href='#'
+                                    href={href}
                                     className={`menuSecondaryItem ${activeItem === item ? 'active' : ''}`}
                                     onClick={() => setActiveItem(item)}
                                   >
@@ -203,7 +203,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   {submenu.items.map((item, itemIndex) => (
                     <a
                       key={itemIndex}
-                      href='#'
+                      href={href}
                       className={`mobileMenuSecondaryItem ${activeItem === item ? 'active' : ''}`}
                       onClick={() => setActiveItem(item)}
                     >
