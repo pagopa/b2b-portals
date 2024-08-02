@@ -73,8 +73,10 @@ const makeMegaHeaderProps = ({
     primary: link.label,
     secondary: link.sublinkGroups.map((sublinkGroup) => ({
       title: sublinkGroup.title,
-      // TODO: Update the line below to pass label and (page slug + section) as href when href will be implemented into MegaHeader
-      items: sublinkGroup.sublinks.map((sublink) => sublink.label),
+      items: sublinkGroup.sublinks.map((sublink) => ({
+        label: sublink.label,
+        href: sublink.page.data.attributes.slug,
+      })),
     })),
   })),
 });

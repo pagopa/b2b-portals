@@ -87,7 +87,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   backgroundColor: '#0B3EE3',
                   color: 'white',
                   padding: '10px 20px',
-                  borderRadius: 5,
+                  borderRadius: 2,
                   textDecoration: 'none',
                   whiteSpace: 'nowrap',
                   '&:hover': {
@@ -153,11 +153,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                 .map((item, itemIndex) => (
                                   <a
                                     key={itemIndex}
-                                    href='#'
-                                    className={`menuSecondaryItem ${activeItem === item ? 'active' : ''}`}
-                                    onClick={() => setActiveItem(item)}
+                                    href={item.href}
+                                    className={`menuSecondaryItem ${activeItem === item.label ? 'active' : ''}`}
+                                    onClick={() => setActiveItem(item.label)}
                                   >
-                                    {item}
+                                    {item.label}
                                     <ArrowForwardIcon className='arrowIcon' />
                                   </a>
                                 ))}
@@ -203,11 +203,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   {submenu.items.map((item, itemIndex) => (
                     <a
                       key={itemIndex}
-                      href='#'
-                      className={`mobileMenuSecondaryItem ${activeItem === item ? 'active' : ''}`}
-                      onClick={() => setActiveItem(item)}
+                      href={item.href}
+                      className={`mobileMenuSecondaryItem ${activeItem === item.label ? 'active' : ''}`}
+                      onClick={() => setActiveItem(item.label)}
                     >
-                      {item}
+                      {item.label}
                       <ArrowForwardIcon className='arrowIcon' />
                     </a>
                   ))}
@@ -218,14 +218,14 @@ const MegaHeader = (props: MegaHeaderProps) => {
         ))}
         {ctaButton && <CtaButtons ctaButtons={[{
           ...ctaButton,
-          className: 'mobileMenuButton',
           sx: {
             backgroundColor: '#0B3EE3',
             color: 'white',
             padding: '10px 20px',
-            borderRadius: 5,
+            borderRadius: 2,
             textDecoration: 'none',
             whiteSpace: 'nowrap',
+            margin: '30px',
             '&:hover': {
               backgroundColor: '#005bb5',
             },
