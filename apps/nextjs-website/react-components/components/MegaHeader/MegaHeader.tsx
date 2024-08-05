@@ -10,7 +10,6 @@ import {
   MegaMenuItem,
 } from '@react-components/types/MegaHeader/MegaHeader.types';
 import {
-  ButtonStyled,
   Container,
   Content,
   Dropdown,
@@ -19,9 +18,10 @@ import {
   MobileMenu,
   Nav,
 } from './MegaHeader.Helpers';
+import { CtaButtons } from '../common/Common';
 
 const MegaHeader = (props: MegaHeaderProps) => {
-  const { logoSrc, logoAlt, buttonHref } = props;
+  const { logoSrc, logoAlt, ctaButton } = props;
   const menuItems = props.menuItems || [];
 
   const { palette } = useTheme();
@@ -81,7 +81,29 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   </li>
                 ))}
               </Nav>
-              <ButtonStyled href={buttonHref}>Entra in IO</ButtonStyled>
+              {ctaButton && <CtaButtons ctaButtons={[{
+                ...ctaButton,
+                sx: {
+                  backgroundColor: '#0B3EE3',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: 2,
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                  '&:hover': {
+                    backgroundColor: '#005bb5',
+                  },
+                  '&:focus': {
+                    backgroundColor: '#005bb5',
+                  },
+                  '&:active': {
+                    backgroundColor: '#004999',
+                  },
+                  '&:visited': {
+                    color: 'white',
+                  },
+                }
+              }]} />}
             </>
           )}
           <IconButton
@@ -131,11 +153,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                 .map((item, itemIndex) => (
                                   <a
                                     key={itemIndex}
-                                    href='#'
-                                    className={`menuSecondaryItem ${activeItem === item ? 'active' : ''}`}
-                                    onClick={() => setActiveItem(item)}
+                                    href={item.href}
+                                    className={`menuSecondaryItem ${activeItem === item.label ? 'active' : ''}`}
+                                    onClick={() => setActiveItem(item.label)}
                                   >
-                                    {item}
+                                    {item.label}
                                     <ArrowForwardIcon className='arrowIcon' />
                                   </a>
                                 ))}
@@ -181,11 +203,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   {submenu.items.map((item, itemIndex) => (
                     <a
                       key={itemIndex}
-                      href='#'
-                      className={`mobileMenuSecondaryItem ${activeItem === item ? 'active' : ''}`}
-                      onClick={() => setActiveItem(item)}
+                      href={item.href}
+                      className={`mobileMenuSecondaryItem ${activeItem === item.label ? 'active' : ''}`}
+                      onClick={() => setActiveItem(item.label)}
                     >
-                      {item}
+                      {item.label}
                       <ArrowForwardIcon className='arrowIcon' />
                     </a>
                   ))}
@@ -194,9 +216,30 @@ const MegaHeader = (props: MegaHeaderProps) => {
             </Box>
           </React.Fragment>
         ))}
-        <ButtonStyled className='mobileMenuButton' href={buttonHref}>
-          Entra in IO
-        </ButtonStyled>
+        {ctaButton && <CtaButtons ctaButtons={[{
+          ...ctaButton,
+          sx: {
+            backgroundColor: '#0B3EE3',
+            color: 'white',
+            padding: '10px 20px',
+            borderRadius: 2,
+            textDecoration: 'none',
+            whiteSpace: 'nowrap',
+            margin: '30px',
+            '&:hover': {
+              backgroundColor: '#005bb5',
+            },
+            '&:focus': {
+              backgroundColor: '#005bb5',
+            },
+            '&:active': {
+              backgroundColor: '#004999',
+            },
+            '&:visited': {
+              color: 'white',
+            },
+          }
+        }]} />}
       </MobileMenu>
     </>
   );

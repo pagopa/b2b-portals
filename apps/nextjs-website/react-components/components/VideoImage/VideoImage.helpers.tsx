@@ -1,12 +1,9 @@
 import { Typography } from '@mui/material';
-import { isJSX } from '@react-components/types/common/Common.types';
 import {
   VideoCaptionProps,
   VideoTextProps,
   RenderVideoProps,
-  ImageSrc,
-  ImageSrcObject,
-  ImageProps,
+  RenderImageProps,
 } from '@react-components/types/VideoImage/VideoImage.types';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
@@ -22,15 +19,8 @@ export const renderVideo = ({
   fallback,
   onClick,
   onVideoEnd,
+  isMobileDevice
 }: RenderVideoProps) => {
-  // Determine the type based on the structure of src
-  const type =
-    typeof src === 'string'
-      ? src.split('.').pop() ?? 'mp4'
-      : src?.mime.split('/').pop() ?? 'mp4';
-
-  const isMobileDevice = window.innerWidth <= 768;
-
   // Define styles for mobile and non-mobile devices
   const mobileStyle = {
     overflow: 'hidden',
@@ -47,9 +37,7 @@ export const renderVideo = ({
   };
 
   if (error) {
-    return isJSX(fallback) ? (
-      fallback
-    ) : (
+    return (
       <Typography variant='h6' color='background.paper' textAlign='center'>
         {fallback}
       </Typography>
@@ -68,29 +56,15 @@ export const renderVideo = ({
       style={isMobileDevice ? mobileStyle : nonMobileStyle}
     >
       <source
-        src={typeof src === 'object' ? src.url : src}
-        type={`video/${type}`}
+        src={src}
         onError={() => setError(true)}
       />
     </video>
   );
 };
 
-// Type guard function to check if src is an object
-function isImageSrcObject(src: ImageSrc): src is ImageSrcObject {
-  return typeof src === 'object' && src !== null && 'url' in src;
-}
-
 // Refactored renderImage function
-export const renderImage = ({ alt = 'image alt', src }: ImageProps) => {
-  let imageUrl = isImageSrcObject(src) ? src.url : src;
-
-  if (!imageUrl) {
-    return null;
-  }
-
-  const isMobileDevice = window.innerWidth <= 768;
-
+export const renderImage = ({ src, alt, isMobileDevice }: RenderImageProps) => {
   // Define styles for mobile and non-mobile devices
   const mobileStyle = {
     overflow: 'hidden',
@@ -109,7 +83,7 @@ export const renderImage = ({ alt = 'image alt', src }: ImageProps) => {
   return (
     <Image
       alt={alt}
-      src={imageUrl}
+      src={src}
       width={0}
       height={0}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}
@@ -144,16 +118,16 @@ export const VideoText = ({
   );
 };
 
-export const VideoCaption = ({ caption, toBeCentered }: VideoCaptionProps) => {
+export const VideoCaption = ({ caption, isCentered }: VideoCaptionProps) => {
   const { palette } = useTheme();
   return (
     <div
       style={{
         height: '116px',
-        marginLeft: toBeCentered ? '0' : '7em',
-        marginRight: toBeCentered ? '0' : '7em',
+        marginLeft: isCentered ? '0' : '7em',
+        marginRight: isCentered ? '0' : '7em',
         marginTop: '1em',
-        textAlign: toBeCentered ? 'center' : 'left',
+        textAlign: isCentered ? 'center' : 'left',
       }}
     >
       {caption && (

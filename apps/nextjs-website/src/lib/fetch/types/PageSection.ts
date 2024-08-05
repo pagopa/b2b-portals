@@ -210,24 +210,6 @@ const HeroCounterSectionCodec = t.strict({
   counterText: t.string,
 });
 
-const MegaHeaderSectionCodec = t.strict({
-  __component: t.literal('sections.mega-header'),
-  menuItems: t.array(
-    t.strict({
-      primary: t.string,
-      secondary: t.array(
-        t.strict({
-          title: t.string,
-          items: t.array(t.string),
-        })
-      ),
-    })
-  ),
-  logoSrc: t.string,
-  logoAlt: t.string,
-  buttonHref: t.string,
-});
-
 const EditorialSwitchSectionCodec = t.strict({
   __component: t.literal('sections.editorial-switch'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
@@ -242,21 +224,34 @@ const EditorialSwitchSectionCodec = t.strict({
   ),
 });
 
-const VideoImageSectionCodec = t.strict({
-  __component: t.literal('sections.video-image'),
-  title: t.string,
-  subtitle: t.string,
-  src: StrapiImageRequiredSchema,
+const VideoCodec = t.strict({
+  src: t.strict({
+    data: t.union([
+      t.strict({
+        attributes: t.strict({ url: t.string }),
+      }),
+      t.null,
+    ]),
+  }),
+  srcURL: t.union([t.string, t.null]),
   autoplay: t.boolean,
   loop: t.boolean,
-  full: t.boolean,
-  reversed: t.boolean,
-  theme: t.union([t.literal('light'), t.literal('dark')]),
+  showControls: t.boolean,
   fallback: t.string,
   playButtonLabel: t.string,
-  pausedplayButtonLabel: t.string,
+  pausedPlayButtonLabel: t.string,
+});
+
+const VideoImageSectionCodec = t.strict({
+  __component: t.literal('sections.video-image'),
   sectionID: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  title: t.union([t.string, t.null]),
+  subtitle: t.union([t.string, t.null]),
+  caption: t.union([t.string, t.null]),
   isCentered: t.boolean,
+  image: StrapiImageSchema,
+  video: t.union([VideoCodec, t.null]),
 });
 
 export const PageSectionCodec = t.union([
@@ -273,7 +268,6 @@ export const PageSectionCodec = t.union([
   FormSectionCodec,
   PreFooterSectionCodec,
   HeroCounterSectionCodec,
-  MegaHeaderSectionCodec,
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
 ]);
@@ -292,7 +286,6 @@ export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
 export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
 export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
-export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
 export type EditorialSwitchSection = t.TypeOf<
   typeof EditorialSwitchSectionCodec
 >;

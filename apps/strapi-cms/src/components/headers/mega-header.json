@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_headers_mega_headers",
+  "info": {
+    "displayName": "Mega Header"
+  },
+  "options": {},
+  "attributes": {
+    "logo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "ctaButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.cta-button-simple"
+    },
+    "menu": {
+      "type": "component",
+      "repeatable": false,
+      "component": "menu.mega-menu",
+      "required": true
+    }
+  }
+}
