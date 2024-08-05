@@ -1,5 +1,5 @@
 import { Stack, Typography, Chip } from '@mui/material';
-import { HeroTextProps } from '../../types/Hero/Hero.types';
+import { ChipProps, HeroTextProps } from '../../types/Hero/Hero.types';
 import { CtaButtons, Subtitle, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme, useMediaQuery } from '@mui/material';
@@ -54,7 +54,7 @@ export const HeroTextContent = ({
           subtitle={subtitle}
           textAlign={size === 'small' ? 'center' : 'left'}
         />
-        {chips && <HeroChips chips={chips} theme={theme} />}
+        {chips.length > 0 && <HeroChips chips={chips} theme={theme} />}
       </Stack>
       {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
         <Stack direction='column' spacing={1}>
@@ -133,12 +133,11 @@ export const HeroChips = ({
   chips,
   theme,
 }: {
-  chips: ReadonlyArray<{ label: string }>,
-  theme: string,
+  chips: ReadonlyArray<ChipProps>;
+  theme: 'light' | 'dark';
 }) => {
-  const handleChipClick = (label: string) => {
-    const targetId = label.toLowerCase().replace(/\s+/g, '-');
-    const element = document.getElementById(targetId);
+  const handleChipClick = (targetID: string) => {
+    const element = document.getElementById(targetID);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -146,7 +145,7 @@ export const HeroChips = ({
 
   return (
     <Stack
-      direction="row"
+      direction='row'
       spacing={1}
       mt={2}
       sx={{
@@ -155,7 +154,7 @@ export const HeroChips = ({
       }}
     >
       <Stack
-        direction="row"
+        direction='row'
         spacing={1}
         sx={{
           maxWidth: '600px',
@@ -168,7 +167,7 @@ export const HeroChips = ({
           <Chip
             key={index}
             label={chip.label}
-            onClick={() => handleChipClick(chip.label)}
+            onClick={() => handleChipClick(chip.targetID)}
             sx={{
               backgroundColor: theme === 'dark' ? '#0039CB' : '#FFFFFF',
               color: theme === 'dark' ? '#ffffff' : '#000000',
