@@ -10,8 +10,8 @@ import Cards from '../Cards';
 import OneTrustSection from '../OneTrust';
 import IFrameSection from '../IFrame';
 import Form from '../Form';
-import MegaHeader from '../MegaHeader';
 import EditorialSwitch from '../EditorialSwitch';
+import VideoImage from '../VideoImage';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
@@ -39,10 +39,10 @@ const PageSection = (props: PageSectionData) => {
       return <IFrameSection {...props} />;
     case 'sections.form':
       return <Form {...props} />;
-    case 'sections.mega-header':
-      return <MegaHeader {...props} />;
     case 'sections.editorial-switch':
       return <EditorialSwitch {...props} />;
+    case 'sections.video-image':
+      return <VideoImage {...props} />;
     default:
       return null;
   }

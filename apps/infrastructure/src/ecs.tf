@@ -2,21 +2,6 @@ resource "aws_ecs_cluster" "cms_ecs_cluster" {
   name = "cms-ecs-cluster"
 }
 
-data "template_file" "nextjs_app" {
-  template = file("./task-definitions/nextjs_app.json.tpl")
-
-  vars = {
-    image            = aws_ecr_repository.nextjs_image_repository.repository_url
-    fargate_cpu      = var.nextjs_app_cpu
-    fargate_memory   = var.nextjs_app_memory
-    aws_region       = var.aws_region
-    container_port   = var.nextjs_app_port
-    strapi_api_token = aws_ssm_parameter.strapi_api_token.arn
-    strapi_api_url   = "https://${keys(var.dns_domain_name)[0]}"
-    preview_token    = aws_ssm_parameter.preview_token.arn
-  }
-}
-
 resource "aws_ecs_task_definition" "nextjs_task_def" {
   family                   = "nextjs-task-def"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
@@ -25,7 +10,16 @@ resource "aws_ecs_task_definition" "nextjs_task_def" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.nextjs_app_cpu
   memory                   = var.nextjs_app_memory
-  container_definitions    = data.template_file.nextjs_app.rendered
+  container_definitions = templatefile("./task-definitions/nextjs_app.json.tpl", {
+    image            = aws_ecr_repository.nextjs_image_repository.repository_url
+    fargate_cpu      = var.nextjs_app_cpu
+    fargate_memory   = var.nextjs_app_memory
+    aws_region       = var.aws_region
+    container_port   = var.nextjs_app_port
+    strapi_api_token = aws_ssm_parameter.strapi_api_token.arn
+    strapi_api_url   = "https://${keys(var.dns_domain_name)[0]}"
+    preview_token    = aws_ssm_parameter.preview_token.arn
+  })
 }
 
 resource "aws_ecs_service" "nextjs_ecs_service" {
@@ -54,14 +48,19 @@ resource "aws_ecs_service" "nextjs_ecs_service" {
   }
 }
 
-data "template_file" "cms_multitenant_app" {
+resource "aws_ecs_task_definition" "cms_multitenant_task_def" {
   for_each = {
     for key, config in var.websites_configs :
     key => config
   }
-  template = file("./task-definitions/cms_app.json.tpl")
-
-  vars = {
+  family                   = "cms-task-def-${each.key}"
+  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn            = aws_iam_role.task_role.arn
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = var.cms_app_cpu
+  memory                   = var.cms_app_memory
+  container_definitions = templatefile("./task-definitions/cms_app.json.tpl", {
     image                = aws_ecr_repository.strapi_image_repository.repository_url
     fargate_cpu          = var.cms_app_cpu
     fargate_memory       = var.cms_app_memory
@@ -92,22 +91,7 @@ data "template_file" "cms_multitenant_app" {
     preview_url          = "https://preview.${keys(var.dns_domain_name)[0]}/preview"
     environment          = "${each.key}"
     db_schema            = "${each.key}"
-  }
-}
-
-resource "aws_ecs_task_definition" "cms_multitenant_task_def" {
-  for_each = {
-    for key, config in var.websites_configs :
-    key => config
-  }
-  family                   = "cms-task-def-${each.key}"
-  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
-  task_role_arn            = aws_iam_role.task_role.arn
-  network_mode             = "awsvpc"
-  requires_compatibilities = ["FARGATE"]
-  cpu                      = var.cms_app_cpu
-  memory                   = var.cms_app_memory
-  container_definitions    = data.template_file.cms_multitenant_app[each.key].rendered
+  })
 }
 
 resource "aws_ecs_service" "cms_multitenant_ecs_service" {

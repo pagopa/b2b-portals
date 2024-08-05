@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const Container = styled(AppBar)({
@@ -6,7 +6,7 @@ export const Container = styled(AppBar)({
   justifyContent: 'center',
   padding: '10px 0',
   backgroundColor: '#ffffff',
-  position: 'fixed',
+  position: 'sticky',
   top: 0,
   width: '100%',
   zIndex: 1000,
@@ -144,27 +144,6 @@ export const DropdownTitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export const ButtonStyled = styled(Button)({
-  backgroundColor: '#0B3EE3',
-  color: 'white',
-  padding: '10px 20px',
-  borderRadius: 5,
-  textDecoration: 'none',
-  whiteSpace: 'nowrap',
-  '&:hover': {
-    backgroundColor: '#005bb5',
-  },
-  '&:focus': {
-    backgroundColor: '#005bb5',
-  },
-  '&:active': {
-    backgroundColor: '#004999',
-  },
-  '&:visited': {
-    color: 'white',
-  },
-});
-
 export const MobileMenu = styled(Box)({
   display: 'none',
   position: 'fixed',
@@ -242,13 +221,10 @@ export const MobileMenu = styled(Box)({
     },
   },
   '& .mobileMenuSecondaryItem': {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 400,
     color: '#555C70',
     paddingLeft: '30px',
     display: 'block',
-  },
-  '& .mobileMenuButton': {
-    margin: '30px',
   },
 });
