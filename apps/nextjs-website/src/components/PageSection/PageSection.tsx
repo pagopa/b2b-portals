@@ -12,6 +12,7 @@ import IFrameSection from '../IFrame';
 import Form from '../Form';
 import EditorialSwitch from '../EditorialSwitch';
 import VideoImage from '../VideoImage';
+import HeroChips from '../HeroChips';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
@@ -43,6 +44,8 @@ const PageSection = (props: PageSectionData) => {
       return <EditorialSwitch {...props} />;
     case 'sections.video-image':
       return <VideoImage {...props} />;
+    case 'sections.hero-chips':
+      return <HeroChips {...props} />;
     default:
       return null;
   }

@@ -254,6 +254,22 @@ const VideoImageSectionCodec = t.strict({
   video: t.union([VideoCodec, t.null]),
 });
 
+const ChipPropsCodec = t.strict({
+  label: t.string,
+  targetID: t.string,
+});
+
+const HeroChipsSectionCodec = t.strict({
+  __component: t.literal('sections.hero-chips'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
+  background: StrapiImageSchema,
+  chips: t.array(ChipPropsCodec),
+  centerText: t.boolean,
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -270,6 +286,7 @@ export const PageSectionCodec = t.union([
   HeroCounterSectionCodec,
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
+  HeroChipsSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -290,3 +307,4 @@ export type EditorialSwitchSection = t.TypeOf<
   typeof EditorialSwitchSectionCodec
 >;
 export type VideoImageSection = t.TypeOf<typeof VideoImageSectionCodec>;
+export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
