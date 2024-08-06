@@ -38,7 +38,6 @@ const makeHeroProps = ({
 
   // TODO: Implement chips
   chips: [],
-  onChipsUsed: () => new Error('Function not implemented.'),
 });
 
 const Hero = (props: HeroSection) => <HeroRC {...makeHeroProps(props)} />;
