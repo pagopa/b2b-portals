@@ -1,6 +1,7 @@
 import { StoryFn } from '@storybook/react';
 import { HeroCounter } from "@react-components/components";
 import { HeroCounterProps } from "@react-components/types";
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 // Define a "Template" function that sets how args map to rendering
 export const HeroCounterTemplate: StoryFn<HeroCounterProps> = (args) => <HeroCounter {...args} />;
@@ -15,7 +16,7 @@ const createHeroCounterProps = (
   let props: Partial<HeroCounterProps> = {
     theme,
     title,
-    subtitle: withSubtitle ? subtitle : '',
+    ...(withSubtitle && { subtitle: MarkdownRenderer({markdown: subtitle})}),
     background: theme === 'dark' ? 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png' : '',
   };
 
