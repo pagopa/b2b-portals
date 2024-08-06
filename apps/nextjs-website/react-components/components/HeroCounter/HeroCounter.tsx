@@ -1,23 +1,20 @@
 import React from 'react';
-import { Box, Typography, Link } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContainerRC from '../common/ContainerRC';
 import { HeroCounterProps } from '@react-components/types/HeroCounter/HeroCounter.types';
 import { BackgroundColor, TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
+import { Subtitle } from '../common/Common';
 
-const HeroCounter = (props: HeroCounterProps) => {
-  const {
-    background,
-    theme = 'dark',
-    counterNumber,
-    counterText,
-    title,
-    subtitle,
-    linkText,
-    linkUrl,
-  } = props;
-
+const HeroCounter = ({
+  theme,
+  title,
+  subtitle,
+  link,
+  counter,
+  background,
+}: HeroCounterProps) => {
   const backgroundColor = BackgroundColor(theme);
   const textColor = TextColor(theme);
 
@@ -72,18 +69,17 @@ const HeroCounter = (props: HeroCounterProps) => {
           {title}
         </Typography>
         {subtitle && (
-          <Typography
-            variant='body1'
-            color={textColor}
-            mb={2}
-            sx={{ fontSize: '1rem' }}
-          >
-            {subtitle}
-          </Typography>
+          <Subtitle
+          subtitle={subtitle}
+          textColor={textColor}
+          variant='body2'
+          textAlign='left'
+          />
         )}
-        {linkText && linkUrl && (
-          <Link
-            href={linkUrl}
+        {link && (
+          <Typography
+            component='a'
+            href={link.href}
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -95,7 +91,7 @@ const HeroCounter = (props: HeroCounterProps) => {
               fontSize: '1rem',
             }}
           >
-            {linkText}
+            {link.label}
             <ArrowForwardIcon
               sx={{
                 display: 'inline-block',
@@ -107,7 +103,7 @@ const HeroCounter = (props: HeroCounterProps) => {
                 },
               }}
             />
-          </Link>
+          </Typography>
         )}
       </Box>
       <Box
@@ -121,6 +117,7 @@ const HeroCounter = (props: HeroCounterProps) => {
         }}
       >
         <Typography
+          component='div'
           color={
             theme === 'light' ? palette.custom.primaryColorDark : textColor
           }
@@ -132,7 +129,7 @@ const HeroCounter = (props: HeroCounterProps) => {
             lineHeight: 1.1,
           }}
         >
-          {counterNumber}
+          {counter.number}
           <Typography
             variant='body1'
             color={textColor}
@@ -142,7 +139,7 @@ const HeroCounter = (props: HeroCounterProps) => {
               padding: '0px 10px',
             }}
           >
-            {counterText}
+            {counter.text}
           </Typography>
         </Typography>
       </Box>

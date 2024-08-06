@@ -199,6 +199,11 @@ const PreFooterSectionCodec = t.strict({
   background: StrapiImageSchema,
 });
 
+const CounterCodec = t.strict({
+  number: t.number,
+  text: t.string,
+});
+
 const HeroCounterSectionCodec = t.strict({
   __component: t.literal('sections.hero-counter'),
   title: t.string,
@@ -206,8 +211,8 @@ const HeroCounterSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   sectionID: t.union([t.string, t.null]),
   background: StrapiImageSchema,
-  counterNumber: t.number,
-  counterText: t.string,
+  counter: CounterCodec,
+  link: LinkCodec,
 });
 
 const EditorialSwitchSectionCodec = t.strict({
