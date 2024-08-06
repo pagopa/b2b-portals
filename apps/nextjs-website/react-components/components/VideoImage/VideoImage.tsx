@@ -34,13 +34,13 @@ const VideoImage = ({
   const [mediaState, setMediaState] = useState<
     'play' | 'pause' | 'stop' | 'image'
   >(video ? 'stop' : 'image');
-  const [isMobileDevice, setIsMobileDevice] = useState(
-    window.innerWidth <= 768
-  );
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
 
   const textColor = TextColor(theme);
 
   useEffect(() => {
+    setIsMobileDevice(window.innerWidth <= 768);
+
     const handleResize = () => {
       setIsMobileDevice(window.innerWidth <= 768);
     };
