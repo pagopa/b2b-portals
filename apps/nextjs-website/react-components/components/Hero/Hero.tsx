@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import Image from 'next/image';
 import { isJSX } from '../../types/common/Common.types';
@@ -17,6 +17,7 @@ const Hero = (props: HeroProps) => {
     image,
     altText = '',
   } = props;
+  const [chipsUsed, setChipsUsed] = useState(false);
 
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
@@ -56,9 +57,9 @@ const Hero = (props: HeroProps) => {
         lg={size === 'small' ? 12 : 4}
         sx={{ minHeight: { lg: minHeight }, width: '100%' }}
       >
-        <HeroTextContent {...props} />
+        <HeroTextContent {...props} onChipsUsed={setChipsUsed} />
       </Grid>
-      {(size === 'medium' || size === 'big') && image && (
+      {(size === 'medium' || size === 'big') && image && !chipsUsed && (
         <Grid
           item
           lg={6}

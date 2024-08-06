@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import appleBadgeBase64 from '../Editorial/BadgeImages/appleBadgeBase64';
 import googleBadgeBase64 from '../Editorial/BadgeImages/googleBadgeBase64';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
   size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
@@ -18,6 +19,60 @@ export const getOverlay = (useHoverlay: boolean, theme: string) =>
       : 'linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), '
     : '';
 
+export const HeroChips = ({
+  chips,
+  theme,
+}: {
+  chips: ReadonlyArray<ChipProps>;
+  theme: 'light' | 'dark';
+}) => {
+  const handleChipClick = (targetID: string) => {
+    const element = document.getElementById(targetID);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <Stack
+      direction='row'
+      spacing={1}
+      mt={2}
+      sx={{
+        width: '100%',
+        justifyContent: 'center',
+      }}
+    >
+      <Stack
+        direction='row'
+        spacing={1}
+        sx={{
+          maxWidth: '600px',
+          flexWrap: 'wrap',
+          rowGap: '8px',
+          justifyContent: 'center',
+        }}
+      >
+        {chips.map((chip, index) => (
+          <Chip
+            key={index}
+            label={chip.label}
+            onClick={() => handleChipClick(chip.targetID)}
+            sx={{
+              backgroundColor: theme === 'dark' ? '#0039CB' : '#FFFFFF',
+              color: theme === 'dark' ? '#ffffff' : '#000000',
+              '&:hover': {
+                backgroundColor: theme === 'dark' ? '#0049EB' : '#F5F5F5',
+              },
+              border: theme === 'light' ? '1px solid #D0D0D0' : 'none',
+            }}
+          />
+        ))}
+      </Stack>
+    </Stack>
+  );
+};
+
 export const HeroTextContent = ({
   title,
   subtitle,
@@ -26,10 +81,15 @@ export const HeroTextContent = ({
   chips,
   theme,
   size,
+  onChipsUsed,
 }: HeroTextProps) => {
   const textColor = TextColor(theme);
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
+
+  useEffect(() => {
+    onChipsUsed(chips.length > 0);
+  }, [chips.length, onChipsUsed]);
 
   return (
     <Stack
@@ -125,60 +185,6 @@ export const HeroTextContent = ({
           })}
         </Stack>
       ) : null}
-    </Stack>
-  );
-};
-
-export const HeroChips = ({
-  chips,
-  theme,
-}: {
-  chips: ReadonlyArray<ChipProps>;
-  theme: 'light' | 'dark';
-}) => {
-  const handleChipClick = (targetID: string) => {
-    const element = document.getElementById(targetID);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <Stack
-      direction='row'
-      spacing={1}
-      mt={2}
-      sx={{
-        width: '100%',
-        justifyContent: 'center',
-      }}
-    >
-      <Stack
-        direction='row'
-        spacing={1}
-        sx={{
-          maxWidth: '600px',
-          flexWrap: 'wrap',
-          rowGap: '8px',
-          justifyContent: 'center',
-        }}
-      >
-        {chips.map((chip, index) => (
-          <Chip
-            key={index}
-            label={chip.label}
-            onClick={() => handleChipClick(chip.targetID)}
-            sx={{
-              backgroundColor: theme === 'dark' ? '#0039CB' : '#FFFFFF',
-              color: theme === 'dark' ? '#ffffff' : '#000000',
-              '&:hover': {
-                backgroundColor: theme === 'dark' ? '#0049EB' : '#F5F5F5',
-              },
-              border: theme === 'light' ? '1px solid #D0D0D0' : 'none',
-            }}
-          />
-        ))}
-      </Stack>
     </Stack>
   );
 };

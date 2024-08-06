@@ -26,4 +26,5 @@ export interface HeroTextProps extends CommonProps {
   readonly storeButtons?: StoreButtonsProps;
   readonly size?: 'medium' | 'big' | 'small';
   readonly chips: ReadonlyArray<ChipProps>;
+  onChipsUsed: (used: boolean) => void;
 }
