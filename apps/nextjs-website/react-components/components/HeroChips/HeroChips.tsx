@@ -6,8 +6,13 @@ import { HeroChipsProps } from '@react-components/types/HeroChips/HeroChips.type
 import { ChipsBlock } from './HeroChips.helpers';
 
 const HeroChips = (props: HeroChipsProps) => {
-  const { background, theme = 'dark', title, subtitle, chips, 
-    centerText= false,
+  const {
+    background,
+    theme = 'dark',
+    title,
+    subtitle,
+    chips,
+    centerText,
   } = props;
 
   const backgroundColor = BackgroundColor(theme);
