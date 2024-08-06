@@ -8,12 +8,6 @@ export const ChipsBlock = ({
   chips: ReadonlyArray<ChipProps>;
   theme: 'light' | 'dark';
 }) => {
-  const handleChipClick = (targetID: string) => {
-    const element = document.getElementById(targetID);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <Stack
@@ -37,9 +31,10 @@ export const ChipsBlock = ({
       >
         {chips.map((chip, index) => (
           <Chip
+            component='a'
             key={index}
             label={chip.label}
-            onClick={() => handleChipClick(chip.targetID)}
+            href={`#${chip.targetID}`}
             sx={{
               backgroundColor: theme === 'dark' ? '#0039CB' : '#FFFFFF',
               color: theme === 'dark' ? '#ffffff' : '#000000',

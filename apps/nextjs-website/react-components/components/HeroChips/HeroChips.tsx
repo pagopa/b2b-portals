@@ -7,8 +7,7 @@ import { ChipsBlock } from './HeroChips.helpers';
 
 const HeroChips = (props: HeroChipsProps) => {
   const { background, theme = 'dark', title, subtitle, chips, 
-    isTitleCentered= false,
-    isSubtitleCentered= false
+    centerText= false,
   } = props;
 
   const backgroundColor = BackgroundColor(theme);
@@ -40,7 +39,7 @@ const HeroChips = (props: HeroChipsProps) => {
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', lg: 'row' },
-        alignItems: isTitleCentered ? 'center' : 'flex-start',
+        alignItems: centerText ? 'center' : 'flex-start',
         justifyContent: 'space-between',
         py: 4,
       }}
@@ -51,7 +50,7 @@ const HeroChips = (props: HeroChipsProps) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: isTitleCentered ? 'center' : 'flex-start',
+          alignItems: centerText ? 'center' : 'flex-start',
         }}
       >
         <Typography
@@ -68,7 +67,7 @@ const HeroChips = (props: HeroChipsProps) => {
             color={textColor}
             mb={2}
             sx={{ fontSize: '1rem' }}
-            textAlign={isSubtitleCentered ? 'center' : 'left'}
+            textAlign={centerText ? 'center' : 'left'}
           >
             {subtitle}
           </Typography>

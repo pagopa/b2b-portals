@@ -4,8 +4,7 @@ export interface HeroChipsProps extends CommonProps {
   readonly background?: string | Generic;
   readonly title: string;
   readonly subtitle?: string | Generic;
-  readonly isTitleCentered?: boolean;
-  readonly isSubtitleCentered?: boolean;
+  readonly centerText?: boolean;
   readonly chips: ReadonlyArray<ChipProps>;
 }
 

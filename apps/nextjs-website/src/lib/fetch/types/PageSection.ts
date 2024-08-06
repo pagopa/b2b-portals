@@ -267,8 +267,7 @@ const HeroChipsSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   background: StrapiImageSchema,
   chips: t.array(ChipPropsCodec),
-  isTitleCentered: t.boolean,
-  isSubtitleCentered: t.boolean,
+  centerText: t.boolean,
 });
 
 export const PageSectionCodec = t.union([

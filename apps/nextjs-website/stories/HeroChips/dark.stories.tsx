@@ -19,23 +19,15 @@ DarkHeroChipsWithSubtitleNoCentered.args = {
   subtitle: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`
 };
 
-export const DarkHeroChipsNoSubtitleOnlyTitleCentered: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
-DarkHeroChipsNoSubtitleOnlyTitleCentered.args = {
+export const DarkHeroChipsNoSubtitleCentered: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
+DarkHeroChipsNoSubtitleCentered.args = {
   ...defaultsDark,
-  isTitleCentered: true,
+  centerText: true,
 };
 
-export const DarkHeroChipsWithSubtitleOnlyTitleCentered: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
-DarkHeroChipsWithSubtitleOnlyTitleCentered.args = {
+export const DarkHeroChipsWithSubtitleCentered: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
+DarkHeroChipsWithSubtitleCentered.args = {
   ...defaultsDark,
   subtitle: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`,
-  isTitleCentered: true,
-};
-
-export const DarkHeroChipsWithSubtitleFullCentered: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
-DarkHeroChipsWithSubtitleFullCentered.args = {
-  ...defaultsDark,
-  subtitle: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`,
-  isTitleCentered: true,
-  isSubtitleCentered: true,
+  centerText: true,
 };
