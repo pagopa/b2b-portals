@@ -17,8 +17,6 @@ const createHeroCounterProps = (
     title,
     subtitle: withSubtitle ? subtitle : '',
     background: theme === 'dark' ? 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png' : '',
-    linkText: 'Sto cercando un Ente nazionale',
-    linkUrl: '#',
   };
 
   return props;
