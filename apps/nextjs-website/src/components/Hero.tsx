@@ -35,9 +35,6 @@ const makeHeroProps = ({
       ...(storeButtons.hrefApple && { hrefApple: storeButtons.hrefApple }),
     },
   }),
-
-  // TODO: Implement chips
-  chips: [],
 });
 
 const Hero = (props: HeroSection) => <HeroRC {...makeHeroProps(props)} />;

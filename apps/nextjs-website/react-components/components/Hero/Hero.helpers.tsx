@@ -1,5 +1,5 @@
-import { Stack, Typography, Chip } from '@mui/material';
-import { ChipProps, HeroTextProps } from '../../types/Hero/Hero.types';
+import { Stack, Typography } from '@mui/material';
+import { HeroTextProps } from '../../types/Hero/Hero.types';
 import { CtaButtons, Subtitle, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme, useMediaQuery } from '@mui/material';
@@ -23,7 +23,6 @@ export const HeroTextContent = ({
   subtitle,
   ctaButtons,
   storeButtons,
-  chips,
   theme,
   size,
 }: HeroTextProps) => {
@@ -54,7 +53,6 @@ export const HeroTextContent = ({
           subtitle={subtitle}
           textAlign={size === 'small' ? 'center' : 'left'}
         />
-        {chips.length > 0 && <HeroChips chips={chips} theme={theme} />}
       </Stack>
       {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
         <Stack direction='column' spacing={1}>
@@ -125,60 +123,6 @@ export const HeroTextContent = ({
           })}
         </Stack>
       ) : null}
-    </Stack>
-  );
-};
-
-export const HeroChips = ({
-  chips,
-  theme,
-}: {
-  chips: ReadonlyArray<ChipProps>;
-  theme: 'light' | 'dark';
-}) => {
-  const handleChipClick = (targetID: string) => {
-    const element = document.getElementById(targetID);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <Stack
-      direction='row'
-      spacing={1}
-      mt={2}
-      sx={{
-        width: '100%',
-        justifyContent: 'center',
-      }}
-    >
-      <Stack
-        direction='row'
-        spacing={1}
-        sx={{
-          maxWidth: '600px',
-          flexWrap: 'wrap',
-          rowGap: '8px',
-          justifyContent: 'center',
-        }}
-      >
-        {chips.map((chip, index) => (
-          <Chip
-            key={index}
-            label={chip.label}
-            onClick={() => handleChipClick(chip.targetID)}
-            sx={{
-              backgroundColor: theme === 'dark' ? '#0039CB' : '#FFFFFF',
-              color: theme === 'dark' ? '#ffffff' : '#000000',
-              '&:hover': {
-                backgroundColor: theme === 'dark' ? '#0049EB' : '#F5F5F5',
-              },
-              border: theme === 'light' ? '1px solid #D0D0D0' : 'none',
-            }}
-          />
-        ))}
-      </Stack>
     </Stack>
   );
 };

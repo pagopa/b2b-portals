@@ -148,20 +148,3 @@ LightHeroSmallNoSubtitle.args = {
   size: 'small',
   inverse: true,
 };
-
-export const LightHeroSmallNoButtonsWithChips: StoryFn<typeof Hero> = HeroTemplate.bind({});
-LightHeroSmallNoButtonsWithChips.args = {
-  ...defaultsLightWithoutButtons,
-  size: 'small',
-  inverse: false,
-  chips: [
-    { label: 'Notifiche', targetID: 'notifiche' },
-    { label: 'SEND', targetID: 'send' },
-    { label: 'Recapiti', targetID: 'recapiti' },
-    { label: 'Documenti e comunicazioni', targetID: 'documenti-e-comunicazioni' },
-    { label: 'Ricezione di una notifica', targetID: 'ricezione-di-una-notifica' },
-    { label: 'Perfezionamento', targetID: 'perfezionamento' },
-    { label: 'Annullamento', targetID: 'annullamento' },
-    { label: 'Accessibilità', targetID: 'accessibilita' },
-  ],
-};
