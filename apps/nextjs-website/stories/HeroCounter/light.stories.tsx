@@ -23,3 +23,14 @@ LightHeroCounter.args = {
   linkText: 'Sto cercando un Ente nazionale',
   linkUrl: '#',
 };
+
+export const LightHeroCounterNoLink: StoryFn<typeof HeroCounter> = HeroCounterTemplate.bind(
+  {}
+);
+LightHeroCounterNoLink.args = {
+  ...defaultsLightWithoutButtons,
+  counterNumber: 124,
+  counterText: 'Enti disponibili',
+  title: 'Enti locali',
+  subtitle: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`,
+};
