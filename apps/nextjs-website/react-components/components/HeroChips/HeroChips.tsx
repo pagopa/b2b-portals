@@ -63,6 +63,7 @@ const HeroChips = (props: HeroChipsProps) => {
           color={textColor}
           mb={2}
           sx={{ fontSize: { xs: '2.25rem!important', md: '3.5rem!important' } }}
+          textAlign={centerText ? 'center' : 'left'}
         >
           {title}
         </Typography>
