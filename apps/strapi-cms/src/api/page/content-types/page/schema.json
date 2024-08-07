@@ -38,7 +38,8 @@
         "sections.i-frame",
         "sections.form",
         "sections.editorial-switch",
-        "sections.video-image"
+        "sections.video-image",
+        "sections.hero-counter"
       ],
       "required": true,
       "min": 1

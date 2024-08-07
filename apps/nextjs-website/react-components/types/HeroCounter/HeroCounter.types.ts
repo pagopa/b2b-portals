@@ -2,13 +2,17 @@ import { type CommonProps } from '../common/Common.types';
 
 export interface HeroCounterProps extends CommonProps, HeroCounterTextProps {
   readonly background?: string;
-  readonly counterNumber: number;
-  readonly counterText: string;
+  readonly counter: {
+    readonly number: number;
+    readonly text: string;
+  };
 }
 
 export interface HeroCounterTextProps extends CommonProps {
   readonly title: string;
-  readonly subtitle?: string | JSX.Element;
-  readonly linkText?: string;
-  readonly linkUrl?: string;
+  readonly subtitle?: JSX.Element;
+  readonly link?: {
+    readonly label: string;
+    readonly href: string;
+  }
 }

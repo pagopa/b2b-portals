@@ -11,6 +11,7 @@ import OneTrustSection from '../OneTrust';
 import IFrameSection from '../IFrame';
 import Form from '../Form';
 import EditorialSwitch from '../EditorialSwitch';
+import HeroCounter from '../HeroCounter';
 import VideoImage from '../VideoImage';
 import HeroChips from '../HeroChips';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
@@ -42,6 +43,8 @@ const PageSection = (props: PageSectionData) => {
       return <Form {...props} />;
     case 'sections.editorial-switch':
       return <EditorialSwitch {...props} />;
+    case 'sections.hero-counter':
+      return <HeroCounter {...props} />;
     case 'sections.video-image':
       return <VideoImage {...props} />;
     case 'sections.hero-chips':
