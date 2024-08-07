@@ -16,7 +16,7 @@ const drawerStyles = {
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-interface MobileDrawerProps {
+interface MobileNavProps {
   isOpen: boolean;
   onClose: () => void;
   anchor: Anchor;
@@ -24,12 +24,12 @@ interface MobileDrawerProps {
   theme: 'dark' | 'light';
 }
 
-export default function MobileDrawer({
+export default function MobileNav({
   isOpen,
   onClose,
   anchor,
   menu,
-}: MobileDrawerProps) {
+}: MobileNavProps) {
   const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null);
 
   const toggleMenu = (index: number) => {
