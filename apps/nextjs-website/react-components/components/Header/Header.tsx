@@ -7,8 +7,8 @@ import { BackgroundColor } from '@react-components/components/common/Common.help
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
 import { Navigation } from './helpers/Header.Navigation.helpers';
 import { HamburgerMenu } from './helpers/Header.HamburgerMenu.helpers';
-import DesktopDrawer from './helpers/Header.DesktopDrawer.helpers';
-import MobileDrawer from './helpers/Header.MobileDrawer.helpers';
+import SideDrawer from './helpers/Header.SideDrawer.helpers';
+import MobileNav from './helpers/Header.MobileNav.helpers';
 import { HeaderCtas } from './helpers/Header.Ctas.helpers';
 import { usePathname } from 'next/navigation';
 
@@ -156,8 +156,7 @@ const Header = ({
             alignItems='center'
             sx={{
               display: { xs: 'flex', md: 'none' },
-              width: '100%',
-              padding: '8px 24px',
+              padding: '0.5rem 1.5rem',
             }}
           >
             <Stack direction='row' alignItems='center' gap={1}>
@@ -187,7 +186,7 @@ const Header = ({
         )}
 
         {isMobile && (
-          <MobileDrawer
+          <MobileNav
             isOpen={menuOpen}
             onClose={closeHeader}
             anchor='left'
@@ -196,8 +195,8 @@ const Header = ({
           />
         )}
 
-        {!isMobile && drawer && (
-          <DesktopDrawer
+        {drawer && (
+          <SideDrawer
             isOpen={isDrawerOpen}
             onClose={handleCloseDrawer}
             anchor='right'

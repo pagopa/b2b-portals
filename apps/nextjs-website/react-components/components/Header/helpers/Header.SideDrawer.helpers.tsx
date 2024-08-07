@@ -21,7 +21,7 @@ const drawerStyles = {
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-interface DesktopDrawerProps {
+interface SideDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   anchor: Anchor;
@@ -31,7 +31,7 @@ interface DesktopDrawerProps {
   ctaCard: HeaderSideDrawerCtaCard;
 }
 
-export default function DesktopDrawer({
+export default function SideDrawer({
   isOpen,
   onClose,
   anchor,
@@ -39,7 +39,7 @@ export default function DesktopDrawer({
   drawerMenuTitle,
   linkCards,
   ctaCard,
-}: DesktopDrawerProps) {
+}: SideDrawerProps) {
   const textColorAlternative = TextAlternativeColor(theme);
 
   return (
