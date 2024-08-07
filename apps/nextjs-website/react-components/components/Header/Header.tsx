@@ -156,7 +156,6 @@ const Header = ({
             alignItems='center'
             sx={{
               display: { xs: 'flex', md: 'none' },
-              width: '100%',
               padding: '0.5rem 1.5rem',
             }}
           >
@@ -196,7 +195,7 @@ const Header = ({
           />
         )}
 
-        {!isMobile && drawer && (
+        {drawer && (
           <DesktopDrawer
             isOpen={isDrawerOpen}
             onClose={handleCloseDrawer}
