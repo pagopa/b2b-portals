@@ -20,4 +20,8 @@ export interface HeroTextProps extends CommonProps {
   readonly ctaButtons?: ReadonlyArray<CtaButtonProps>;
   readonly storeButtons?: StoreButtonsProps;
   readonly size?: 'medium' | 'big' | 'small';
+  readonly link?: {
+    readonly label: string;
+    readonly href: string;
+  }
 }

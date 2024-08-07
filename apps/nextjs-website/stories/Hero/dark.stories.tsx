@@ -32,6 +32,21 @@ DarkHeroBigStoreButtons.args = {
   },
 };
 
+export const DarkHeroBigStoreButtonsWithLink: StoryFn<typeof Hero> = HeroTemplate.bind({});
+DarkHeroBigStoreButtonsWithLink.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'big',
+  inverse: false,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
+  link: {
+    label: 'Learn more',
+    href: '/',
+  },
+};
+
 export const DarkHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
 DarkHeroBigNoButtons.args = {
   ...defaultsDarkWithoutButtons,
@@ -55,6 +70,22 @@ DarkHeroBigInvertedStoreButtons.args = {
   storeButtons: {
     hrefGoogle: 'https://play.google.com',
     hrefApple: 'https://apple.com',
+  },
+};
+
+export const DarkHeroBigInvertedStoreButtonsWithLink: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+  DarkHeroBigInvertedStoreButtonsWithLink.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'big',
+  inverse: true,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
+  link: {
+    label: 'Learn more',
+    href: '/',
   },
 };
 
@@ -86,6 +117,23 @@ DarkHeroMediumStoreButtons.args = {
   },
 };
 
+export const DarkHeroMediumStoreButtonsWithLink: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
+DarkHeroMediumStoreButtonsWithLink.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'medium',
+  inverse: false,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
+  link: {
+    label: 'Learn more',
+    href: '/',
+  },
+};
+
 export const DarkHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
   {}
 );
@@ -102,6 +150,22 @@ DarkHeroMediumInverted.args = {
   ...defaultsDarkWithButtons,
   size: 'medium',
   inverse: true,
+};
+
+export const DarkHeroMediumInvertedStoreButtonsWithLink: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+  DarkHeroMediumInvertedStoreButtonsWithLink.args = {
+  ...defaultsDarkWithoutButtons,
+  size: 'medium',
+  inverse: true,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
+  link: {
+    label: 'Learn more',
+    href: '/',
+  },
 };
 
 export const DarkHeroMediumInvertedStoreButtons: StoryFn<typeof Hero> =
