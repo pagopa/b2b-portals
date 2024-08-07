@@ -157,7 +157,7 @@ const Header = ({
             sx={{
               display: { xs: 'flex', md: 'none' },
               width: '100%',
-              padding: '8px 24px',
+              padding: '0.5rem 1.5rem',
             }}
           >
             <Stack direction='row' alignItems='center' gap={1}>
