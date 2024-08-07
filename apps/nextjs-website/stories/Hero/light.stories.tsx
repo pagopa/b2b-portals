@@ -32,6 +32,21 @@ LightHeroBigStoreButtons.args = {
   },
 };
 
+export const LightHeroBigStoreButtonsWithLink: StoryFn<typeof Hero> = HeroTemplate.bind({});
+LightHeroBigStoreButtonsWithLink.args = {
+  ...defaultsLightWithoutButtons,
+  size: 'big',
+  inverse: false,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
+  link: {
+    label: 'Learn more',
+    href: '/',
+  },
+};
+
 export const LightHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
 LightHeroBigNoButtons.args = {
   ...defaultsLightWithoutButtons,
@@ -58,6 +73,22 @@ LightHeroBigInvertedStoreButtons.args = {
   },
 };
 
+export const LightHeroBigInvertedStoreButtonsWithLink: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+  LightHeroBigInvertedStoreButtonsWithLink.args = {
+  ...defaultsLightWithoutButtons,
+  size: 'big',
+  inverse: true,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
+  link: {
+    label: 'Learn more',
+    href: '/',
+  },
+};
+
 export const LightHeroBigInvertedNoButtons: StoryFn<typeof Hero> =
   HeroTemplate.bind({});
 LightHeroBigInvertedNoButtons.args = {
@@ -73,16 +104,20 @@ LightHeroMedium.args = {
   inverse: false,
 };
 
-export const LightHeroMediumStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
+export const LightHeroMediumStoreButtonsWithLink: StoryFn<typeof Hero> = HeroTemplate.bind(
   {}
 );
-LightHeroMediumStoreButtons.args = {
+LightHeroMediumStoreButtonsWithLink.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
   inverse: false,
   storeButtons: {
     hrefGoogle: 'https://play.google.com',
     hrefApple: 'https://apple.com',
+  },
+  link: {
+    label: 'Learn more',
+    href: '/',
   },
 };
 
@@ -113,6 +148,22 @@ LightHeroMediumInvertedStoreButtons.args = {
   storeButtons: {
     hrefGoogle: 'https://play.google.com',
     hrefApple: 'https://apple.com',
+  },
+};
+
+export const LightHeroMediumInvertedStoreButtonsWithLink: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
+  LightHeroMediumInvertedStoreButtonsWithLink.args = {
+  ...defaultsLightWithoutButtons,
+  size: 'medium',
+  inverse: true,
+  storeButtons: {
+    hrefGoogle: 'https://play.google.com',
+    hrefApple: 'https://apple.com',
+  },
+  link: {
+    label: 'Learn more',
+    href: '/',
   },
 };
 

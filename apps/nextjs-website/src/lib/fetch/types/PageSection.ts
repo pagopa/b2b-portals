@@ -7,6 +7,11 @@ import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
 import { CardsItemMUIIconCodec } from './icons/CardsItemIcon';
 import { StoreButtonsCodec } from './StoreButtons';
 
+const LinkCodec = t.strict({
+  label: t.string,
+  href: t.string,
+});
+
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
   title: t.string,
@@ -23,6 +28,7 @@ const HeroSectionCodec = t.strict({
   background: StrapiImageSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
+  link: t.union([LinkCodec, t.null]),
 });
 
 const EditorialContentCodec = t.strict({
@@ -87,11 +93,6 @@ const FeatureSectionCodec = t.strict({
   showCarouselMobile: t.boolean,
   sectionID: t.union([t.string, t.null]),
   items: t.array(FeatureItemCodec),
-});
-
-const LinkCodec = t.strict({
-  label: t.string,
-  href: t.string,
 });
 
 const StepCodec = t.strict({

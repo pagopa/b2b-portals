@@ -68,6 +68,10 @@ const pageDataResponse: PreviewPageData = {
           subtitle: 'subtitle',
           theme: 'light',
           title: 'light',
+          link: {
+            href: '/',
+            label: 'example',
+          },
         },
       ],
     },
