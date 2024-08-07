@@ -212,7 +212,7 @@ const HeroCounterSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   background: StrapiImageSchema,
   counter: CounterCodec,
-  link: LinkCodec,
+  link: t.union([LinkCodec, t.null]),
 });
 
 const EditorialSwitchSectionCodec = t.strict({
