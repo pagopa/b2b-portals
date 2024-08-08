@@ -1,5 +1,41 @@
 # strapi-cms
 
+## 0.3.0
+
+### Minor Changes
+
+- da99f38: Duplicated Single Types for SEND and AppIO tenants
+- 4082c97: Updated Header Menu Implementation
+- 2aa32a4: Migrate Strapi to new separated-tenants architecture
+- 00928c7: Add Iframe to Strapi CMS
+- 72d9447: Refactor Header structure
+- 6b5aa74: Make Update Static Content Plugin Multi-Tenant
+
+### Patch Changes
+
+- fde0fd7: Add EditorialSwitch section
+- 867e79b: Add Form section
+- c678af8: Make Page's slug field not unique
+- e7ab09f: Add Preview Mode
+- 136cfe8: Add tertiary link to Hero section
+- 9094255: Move @types/koa depedency from devDependencies to standard dependecies
+- bebf543: Add HeroCounter section
+- 545232b: Update view configuration for Editorial Switch
+- 5abfa9b: Remove unique constraint from Form Category fields
+- 3aac78d: Add Matomo Analytics
+- 757e909: Switched from strapi.config.get to strapi.plugin.config to fetch Update Static Content plugin configuration
+- 7a7cc4c: Update Strapi view configuration for new Header
+- 7f2bfcf: Add VideoImage section
+- 1b20d8e: Re-enabled Preview Button inside Strapi
+- 271a06b: Added mobileImage field to Editorial component
+- 7a1db57: Filter workflows shown in Strapi deploy plugin by tenant
+- e9511dd: Add Demo Tenant
+- b8e47d5: Update viewconfig for new BannerLink
+- 3107d81: Add storeButtons to Hero section
+- 611a2c5: Updated security middleware configuration
+- 85476e8: Update BannerLink to reflect changes made NextJS-side
+- bb5adf2: Add defaultCategoryID field to Form
+
 ## 0.2.0
 
 ### Minor Changes
