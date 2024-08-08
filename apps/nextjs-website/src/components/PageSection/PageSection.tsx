@@ -14,7 +14,9 @@ import EditorialSwitch from '../EditorialSwitch';
 import HeroCounter from '../HeroCounter';
 import VideoImage from '../VideoImage';
 import HeroChips from '../HeroChips';
+import PageSwitch from '../PageSwitch';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
+
 
 const PageSection = (props: PageSectionData) => {
   // eslint-disable-next-line no-underscore-dangle
@@ -49,6 +51,8 @@ const PageSection = (props: PageSectionData) => {
       return <VideoImage {...props} />;
     case 'sections.hero-chips':
       return <HeroChips {...props} />;
+    case 'sections.page-switch':
+      return <PageSwitch {...props} />;
     default:
       return null;
   }

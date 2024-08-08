@@ -276,6 +276,40 @@ const HeroChipsSectionCodec = t.strict({
   centerText: t.boolean,
 });
 
+const SubtitleItemCodec = t.strict({
+  text: t.string,
+  link: t.union([t.string, t.null]),
+});
+
+const PageSwitchContentCodec = t.union([
+  t.strict({
+    type: t.literal('Editorial'),
+    props: EditorialContentCodec,
+  }),
+  t.strict({
+    type: t.literal('Cards'),
+    props: CardsSectionCodec,
+  }),
+  t.strict({
+    type: t.literal('BannerLink'),
+    props: BannerLinkSectionCodec,
+  }),
+]);
+
+const PageSwitchSectionCodec = t.strict({
+  __component: t.literal('sections.page-switch'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  title: t.string,
+  subtitle: t.union([t.array(SubtitleItemCodec), t.null]),
+  sections: t.array(
+    t.strict({
+      id: t.number,
+      buttonText: t.string,
+      content: PageSwitchContentCodec,
+    })
+  ),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -293,6 +327,7 @@ export const PageSectionCodec = t.union([
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
   HeroChipsSectionCodec,
+  PageSwitchSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -314,3 +349,4 @@ export type EditorialSwitchSection = t.TypeOf<
 >;
 export type VideoImageSection = t.TypeOf<typeof VideoImageSectionCodec>;
 export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
+export type PageSwitchSection = t.TypeOf<typeof PageSwitchSectionCodec>;

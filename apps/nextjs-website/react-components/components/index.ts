@@ -17,6 +17,7 @@ import HeroCounter from './HeroCounter/HeroCounter';
 import MegaHeader from './MegaHeader/MegaHeader';
 import VideoImage from './VideoImage/VideoImage';
 import HeroChips from './HeroChips/HeroChips';
+import PageSwitch from './Page-Switch/Page-Switch';
 
 export {
   Hero,
@@ -38,4 +39,5 @@ export {
   MegaHeader,
   VideoImage,
   HeroChips,
+  PageSwitch,
 };
