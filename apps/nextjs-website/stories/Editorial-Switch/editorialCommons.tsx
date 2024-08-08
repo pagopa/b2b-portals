@@ -17,11 +17,7 @@ export const generateCtaButtons = (count: number): CtaButtonProps[] =>
 const generateDefaultProps = (theme: 'light' | 'dark'): Partial<EditorialSwitchProps> => ({
   theme,
   title: 'Top Title',
-  subtitle: [
-    { text: 'first text ' },
-    { text: 'link', link: '/' },
-    { text: ' second text' },
-  ],
+  body: 'This is the body text.',
   sections: [
     {
       id: 1,

@@ -6,13 +6,11 @@ import { EditorialSwitchProps } from '@react-components/types';
 import { EditorialSwitchSection } from '@/lib/fetch/types/PageSection';
 
 const makeEditorialSwitchProps = ({
-  subtitle,
+  body,
   sections,
   ...rest
 }: EditorialSwitchSection): EditorialSwitchProps => ({
-  subtitle: Array.isArray(subtitle)
-    ? subtitle.map(text => (typeof text === 'string' ? { text } : text))
-    : subtitle ? [{ text: subtitle }] : [],
+  body: body || '',
   sections: sections.map(({ content, ...section }) => ({
     ...section,
     content: makeEditorialProps({

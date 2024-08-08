@@ -14,7 +14,6 @@ import {
   useMediaQuery,
   useTheme,
   Theme,
-  styled,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 
@@ -44,27 +43,9 @@ const customStyles = (theme: Theme) => {
   };
 };
 
-const CustomLink = styled('a')(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontWeight: '700',
-  textDecorationColor: theme.palette.primary.main,
-  '&:hover': {
-    color: theme.palette.primary.main,
-  },
-}));
-
-const DarkCustomLink = styled('a')(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  fontWeight: '700',
-  textDecorationColor: theme.palette.primary.contrastText,
-  '&:hover': {
-    color: theme.palette.primary.contrastText,
-  },
-}));
-
-export const TitleSubtitleBlock = ({
+export const TitleBodyBlock = ({
   title,
-  subtitle,
+  body,
   theme,
 }: EditorialSwitchBaseProps) => {
   const textColor = TextColor(theme);
@@ -89,7 +70,7 @@ export const TitleSubtitleBlock = ({
         marginTop={3}
         marginBottom={3}
       />
-      {subtitle && (
+      {body && (
         <div
           style={{
             marginBottom: '0.5rem',
@@ -97,23 +78,7 @@ export const TitleSubtitleBlock = ({
             color: textColor,
           }}
         >
-          {subtitle.map((item, index) => (
-            <React.Fragment key={index}>
-              {item.link ? (
-                theme === 'light' ? (
-                  <CustomLink href={item.link}>
-                    {item.text}
-                  </CustomLink>
-                ) : (
-                  <DarkCustomLink href={item.link}>
-                    {item.text}
-                  </DarkCustomLink>
-                )
-              ) : (
-                item.text
-              )}
-            </React.Fragment>
-          ))}
+          {body}
         </div>
       )}
     </div>
