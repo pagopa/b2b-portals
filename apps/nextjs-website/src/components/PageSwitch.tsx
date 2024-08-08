@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageSwitch as PageSwitchRC } from '@react-components/components';
-import { PageSwitchProps, PageSwitchSection as SectionType } from '@react-components/types';
+import { PageSwitchProps, PageSwitchSection as SectionType, PageSwitchContent } from '@react-components/types';
 import { makeEditorialProps } from './Editorial';
 import { makeCardsProps } from './Cards';
 import { makeBannerLinkProps } from './BannerLink';
@@ -11,9 +11,9 @@ const makePageSwitchProps = ({
   ...rest
 }: SectionType): PageSwitchProps => ({
   ...(subtitle && { subtitle }),
-  sections: sections.map(({ contents, ...section }) => ({
+  sections: sections.map(({ contents, ...section }: { contents: PageSwitchContent[], buttonText: string, id: number }) => ({
     ...section,
-    contents: contents.map((content) => ({
+    contents: contents.map((content: PageSwitchContent) => ({
       ...content,
       props: (() => {
         switch (content.type) {
