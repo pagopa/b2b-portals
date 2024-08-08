@@ -16,7 +16,7 @@ export interface PageSwitchBaseProps {
 export interface PageSwitchSection {
   id: number;
   buttonText: string;
-  content: PageSwitchContent;
+  contents: PageSwitchContent[];
 }
 
 export type PageSwitchContent = 

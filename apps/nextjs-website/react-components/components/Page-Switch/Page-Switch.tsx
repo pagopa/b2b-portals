@@ -10,22 +10,25 @@ import {
 import {
   PageSwitchProps,
   PageSwitchSection,
+  PageSwitchContent,
 } from '../../types/Page-Switch/Page-Switch.types';
 import Editorial from '../Editorial/Editorial';
 import Cards from '../Cards/Cards';
 import BannerLink from '../BannerLink/BannerLink';
 
-const renderContent = (content: PageSwitchSection['content']) => {
-  switch (content.type) {
-    case 'Editorial':
-      return <Editorial {...content.props} />;
-    case 'Cards':
-      return <Cards {...content.props} />;
-    case 'BannerLink':
-      return <BannerLink {...content.props} />;
-    default:
-      return null;
-  }
+const renderContent = (contents: PageSwitchContent[]) => {
+  return contents.map((content, index) => {
+    switch (content.type) {
+      case 'Editorial':
+        return <Editorial key={index} {...content.props} />;
+      case 'Cards':
+        return <Cards key={index} {...content.props} />;
+      case 'BannerLink':
+        return <BannerLink key={index} {...content.props} />;
+      default:
+        return null;
+    }
+  });
 };
 
 const PageSwitch = ({
@@ -150,7 +153,7 @@ const PageSwitch = ({
           </ButtonGroup>
         )}
       </ContainerRC>
-      {renderContent(currentSection.content)}
+      {renderContent(currentSection.contents)}
     </Box>
   );
 };

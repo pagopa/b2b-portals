@@ -305,7 +305,7 @@ const PageSwitchSectionCodec = t.strict({
     t.strict({
       id: t.number,
       buttonText: t.string,
-      content: PageSwitchContentCodec,
+      contents: t.array(PageSwitchContentCodec),
     })
   ),
 });
