@@ -2,7 +2,7 @@ import { EditorialProps } from '../Editorial/Editorial.types';
 
 export interface EditorialSwitchBaseProps {
   title: string;
-  body?: string;
+  body?: string | JSX.Element | null;
   theme: 'dark' | 'light';
 }
 
