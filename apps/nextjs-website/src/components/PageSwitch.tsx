@@ -1,15 +1,17 @@
 import React from 'react';
 import { PageSwitch as PageSwitchRC } from '@react-components/components';
-import { PageSwitchProps, PageSwitchSection as SectionType, PageSwitchContent } from '@react-components/types';
+import { PageSwitchProps } from '@react-components/types';
 import { makeEditorialProps } from './Editorial';
 import { makeCardsProps } from './Cards';
 import { makeBannerLinkProps } from './BannerLink';
+import { PageSwitchSection } from '@/lib/fetch/types/PageSection';
+import { PageSwitchContent } from '@react-components/types/Page-Switch/Page-Switch.types';
 
 const makePageSwitchProps = ({
   subtitle,
   sections,
   ...rest
-}: SectionType): PageSwitchProps => ({
+}: PageSwitchSection): PageSwitchProps => ({
   ...(subtitle && { subtitle }),
   sections: sections.map(({ contents, ...section }: { contents: PageSwitchContent[], buttonText: string, id: number }) => ({
     ...section,
@@ -32,7 +34,7 @@ const makePageSwitchProps = ({
   ...rest,
 });
 
-const PageSwitch = (props: SectionType) => (
+const PageSwitch = (props: PageSwitchSection) => (
   <PageSwitchRC {...makePageSwitchProps(props)} />
 );
 
