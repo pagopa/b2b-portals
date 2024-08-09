@@ -110,37 +110,6 @@ export const HeroTextContent = ({
               </Button>
             )}
           </Stack>
-          {link && (
-            <Typography
-              component='a'
-              href={link.href}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                color:
-                  theme === 'dark'
-                    ? textColor
-                    : palette.custom.primaryColorDark,
-                mt: 2,
-                textDecoration: 'none',
-                fontWeight: 'bold',
-                fontSize: '1rem',
-              }}
-            >
-              {link.label}
-              <ArrowForwardIcon
-                sx={{
-                  display: 'inline-block',
-                  ml: 1,
-                  fontSize: '1rem',
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateX(2px)',
-                  },
-                }}
-              />
-            </Typography>
-          )}
         </Stack>
       ) : ctaButtons && ctaButtons.length > 0 ? (
         <Stack
@@ -157,6 +126,38 @@ export const HeroTextContent = ({
           })}
         </Stack>
       ) : null}
+
+      {link && (
+        <Typography
+          component='a'
+          href={link.href}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            color:
+              theme === 'dark'
+                ? textColor
+                : palette.custom.primaryColorDark,
+            mt: 2,
+            textDecoration: 'none',
+            fontWeight: 'bold',
+            fontSize: '1rem',
+          }}
+        >
+          {link.label}
+          <ArrowForwardIcon
+            sx={{
+              display: 'inline-block',
+              ml: 1,
+              fontSize: '1rem',
+              transition: 'transform 0.2s',
+              '&:hover': {
+                transform: 'translateX(2px)',
+              },
+            }}
+          />
+        </Typography>
+      )}
     </Stack>
   );
 };
