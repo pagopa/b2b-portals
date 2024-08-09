@@ -1,6 +1,6 @@
 import React from 'react';
 import * as MuiIcons from '@mui/icons-material';
-import { Stack, Box } from '@mui/material';
+import { Stack, Box, useTheme, Theme } from '@mui/material';
 import { EIcon } from '../common/EIcon';
 import { Generic } from '../../types/common/Common.types';
 import { HowToStepProps } from '../../types/HowTo/HowTo.types';
@@ -18,6 +18,32 @@ function isIconProp(icon: IconProp | undefined): icon is IconProp {
   );
 }
 
+const customStyles = (theme: Theme) => {
+  const { palette } = theme;
+  return {
+    dark: {
+      'a': {
+        color: `${palette.primary.contrastText} !important`,
+        fontWeight: '700 !important',
+        textDecorationColor: `${palette.primary.contrastText} !important`,
+        '&:hover': {
+          color: `${palette.primary.contrastText} !important`,
+        },
+      },
+    },
+    light: {
+      'a': {
+        color: `${palette.primary.main} !important`,
+        fontWeight: '700 !important',
+        textDecorationColor: `${palette.primary.main} !important`,
+        '&:hover': {
+          color: `${palette.primary.main} !important`,
+        },
+      },
+    },
+  };
+};
+
 export const HowToStep = ({
   index,
   stepIcon,
@@ -26,6 +52,7 @@ export const HowToStep = ({
   theme,
   isLastStep,
 }: HowToStepProps) => {
+  const muiTheme = useTheme();
   const isDarkTheme = theme === 'dark';
   const stepNum = index + 1;
   const customHowToColour = isDarkTheme ? 'white' : 'primary';
@@ -36,7 +63,7 @@ export const HowToStep = ({
     <Stack
       spacing={1}
       component='article'
-      sx={{ maxWidth: '15em', minWidth: 'auto' }}
+      sx={{ maxWidth: '15em', minWidth: 'auto', ...customStyles(muiTheme)[theme] }}
     >
       {/** Step with icon */}
       {stepIcon && (
