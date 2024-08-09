@@ -68,6 +68,11 @@
       "type": "component",
       "repeatable": false,
       "component": "components.store-buttons"
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link"
     }
   }
 }

@@ -6,14 +6,18 @@ import { MegaHeader as MegaHeaderRC } from '@react-components/components';
 import { HeaderProps, MegaHeaderProps } from '@react-components/types';
 import {
   HeaderData,
-  HeaderWithMegaMenuData,
-  HeaderWithMenuData,
+  StandardHeaderData,
+  MegaHeaderData,
 } from '@/lib/fetch/header';
 
 const makeHeaderProps = (
-  { ctaButtons, productName, menu, logo, beta }: HeaderWithMenuData,
+  { productName, menu, logo, beta, supportLink, drawer }: StandardHeaderData,
   pathname: string
 ): HeaderProps => ({
+  beta,
+  ...(drawer && { drawer }),
+  theme: 'light',
+  ...(supportLink && { supportLink }),
   ...(logo.data && {
     logo: {
       src: logo.data.attributes.url,
@@ -25,86 +29,68 @@ const makeHeaderProps = (
     name: productName,
     href: '/',
   },
-  ...(ctaButtons &&
-    ctaButtons.length > 0 && {
-      ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
-        ...ctaBtn,
-        ...(icon && { startIcon: Icon(icon) }),
+  // Add active link logic
+  menu: menu.links.map((link) => ({
+    theme: 'light',
+    label: link.label,
+    href: link.page.data?.attributes.slug,
+    ...(link.sublinks.length > 0 && {
+      items: link.sublinks.map((sublink) => ({
+        label: sublink.label,
+        href:
+          sublink.page.data.attributes.slug +
+          (sublink.sectionID ? `#${sublink.sectionID}` : ''),
       })),
     }),
-  // Add active link logic
-  menu: menu[0]
-    ? menu[0].links.map((link) => ({
-        theme: 'light',
-        label: link.label,
-        href: link.page.data?.attributes.slug,
-        ...(link.sublinks.length > 0 && {
-          items: link.sublinks.map((sublink) => ({
-            label: sublink.label,
-            href:
-              sublink.page.data.attributes.slug +
-              (sublink.sectionID ? `#${sublink.sectionID}` : ''),
-          })),
-        }),
-        ...(link.page.data && {
-          active: pathname === link.page.data.attributes.slug,
-        }),
-        ...(link.page.data && {
-          sx: {
-            color:
-              pathname === link.page.data.attributes.slug
-                ? 'primary.main'
-                : 'text.secondary',
-          },
-        }),
-      }))
-    : [],
-  theme: 'light',
-  beta,
+    ...(link.page.data && {
+      active: pathname === link.page.data.attributes.slug,
+    }),
+    ...(link.page.data && {
+      sx: {
+        color:
+          pathname === link.page.data.attributes.slug
+            ? 'primary.main'
+            : 'text.secondary',
+      },
+    }),
+  })),
 });
 
 const makeMegaHeaderProps = ({
   logo,
-  ctaButtons,
+  ctaButton,
   menu,
-}: HeaderWithMegaMenuData): MegaHeaderProps => ({
-  logoSrc: logo.data?.attributes.url ?? '',
-  logoAlt: logo.data?.attributes.alternativeText ?? '',
-  buttonHref: ctaButtons[0]?.href ?? '',
-  ...(menu[0] && {
-    menuItems: menu[0].links.map((link) => ({
-      primary: link.label,
-      secondary: link.sublinkGroups.map((sublinkGroup) => ({
-        title: sublinkGroup.title,
-        // TODO: Update the line below to pass label and (page slug + section) as href when href will be implemented into MegaHeader
-        items: sublinkGroup.sublinks.map((sublink) => sublink.label),
+}: MegaHeaderData): MegaHeaderProps => ({
+  ...(ctaButton && {
+    ctaButton: {
+      ...ctaButton,
+      ...(ctaButton.icon && { startIcon: Icon(ctaButton.icon) }),
+    },
+  }),
+  logoSrc: logo.data.attributes.url,
+  logoAlt: logo.data.attributes.alternativeText ?? '',
+  menuItems: menu.links.map((link) => ({
+    primary: link.label,
+    secondary: link.sublinkGroups.map((sublinkGroup) => ({
+      title: sublinkGroup.title,
+      items: sublinkGroup.sublinks.map((sublink) => ({
+        label: sublink.label,
+        href: sublink.page.data.attributes.slug,
       })),
     })),
-  }),
+  })),
 });
 
-const Header = (props: HeaderData['data']['attributes']) => {
+const Header = (props: HeaderData['data']['attributes']['header'][0]) => {
   const pathname = usePathname();
   // eslint-disable-next-line
-  const menuType = props.menu[0]?.__component;
-
-  if (menuType === undefined) {
-    // Disable lint for this case because we want the build to fail if user managed to not input a menu
-    // eslint-disable-next-line
-    throw new Error('An header menu is required to build successfully');
-  }
+  const menuType = props.__component;
 
   switch (menuType) {
-    case 'menu.menu':
-      return (
-        <HeaderRC {...makeHeaderProps(props as HeaderWithMenuData, pathname)} />
-      );
-    case 'menu.mega-menu':
-      return (
-        <MegaHeaderRC
-          {...makeMegaHeaderProps(props as HeaderWithMegaMenuData)}
-        />
-      );
+    case 'headers.standard-header':
+      return <HeaderRC {...makeHeaderProps(props, pathname)} />;
+    case 'headers.mega-header':
+      return <MegaHeaderRC {...makeMegaHeaderProps(props)} />;
   }
 };
 

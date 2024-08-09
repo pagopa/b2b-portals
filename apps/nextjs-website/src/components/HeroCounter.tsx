@@ -7,11 +7,13 @@ import { HeroCounterSection } from '@/lib/fetch/types/PageSection';
 const makeHeroCounterProps = ({
   subtitle,
   background,
+  link,
   ...rest
 }: HeroCounterSection): HeroCounterProps => ({
   ...rest,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
   ...(background.data && { background: background.data.attributes.url }),
+  ...(link && { link }),
 });
 
 const HeroCounter = (props: HeroCounterSection) => (

@@ -16,6 +16,7 @@ import { PreFooterProps } from './PreFooter/PreFooter';
 import { HeroCounterProps } from './HeroCounter/HeroCounter.types';
 import { MegaHeaderProps } from './MegaHeader/MegaHeader.types';
 import { VideoImageProps } from './VideoImage/VideoImage.types';
+import { HeroChipsProps } from './HeroChips/HeroChips.types';
 
 export type {
   HeroProps,
@@ -36,4 +37,5 @@ export type {
   HeroCounterProps,
   MegaHeaderProps,
   VideoImageProps,
+  HeroChipsProps,
 };

@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_headers_header_drawer_link_cards",
+  "info": {
+    "displayName": "Header Drawer Link Card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string",
+      "required": true
+    },
+    "buttonText": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "stackIcon": {
+      "type": "enumeration",
+      "enum": [
+        "Business",
+        "People"
+      ],
+      "required": true
+    }
+  }
+}

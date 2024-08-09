@@ -38,7 +38,7 @@ export default async function RootLayout({
     return (
       <ThemeProvider theme={theme}>
         <html lang='it'>
-          <body style={{ margin: 0 }}>
+          <body style={{ margin: 0, scrollBehavior: 'smooth' }}>
             {children}
             <Script
               src='/scripts/otnotice-1.0.min.js'

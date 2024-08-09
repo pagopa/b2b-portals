@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import appleBadgeBase64 from '../Editorial/BadgeImages/appleBadgeBase64';
 import googleBadgeBase64 from '../Editorial/BadgeImages/googleBadgeBase64';
 import Image from 'next/image';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
   size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
@@ -25,10 +26,12 @@ export const HeroTextContent = ({
   storeButtons,
   theme,
   size,
+  link,
 }: HeroTextProps) => {
   const textColor = TextColor(theme);
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
+  const { palette } = useTheme();
 
   return (
     <Stack
@@ -55,7 +58,7 @@ export const HeroTextContent = ({
         />
       </Stack>
       {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
-        <Stack direction='column' spacing={1}>
+        <Stack direction='column' spacing={2}>
           <Typography color={textColor} fontWeight={700}>
             Scarica l'app
           </Typography>
@@ -123,6 +126,38 @@ export const HeroTextContent = ({
           })}
         </Stack>
       ) : null}
+
+      {link && (
+        <Typography
+          component='a'
+          href={link.href}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            color:
+              theme === 'dark'
+                ? textColor
+                : palette.custom.primaryColorDark,
+            mt: 2,
+            textDecoration: 'none',
+            fontWeight: 'bold',
+            fontSize: '1rem',
+          }}
+        >
+          {link.label}
+          <ArrowForwardIcon
+            sx={{
+              display: 'inline-block',
+              ml: 1,
+              fontSize: '1rem',
+              transition: 'transform 0.2s',
+              '&:hover': {
+                transform: 'translateX(2px)',
+              },
+            }}
+          />
+        </Typography>
+      )}
     </Stack>
   );
 };

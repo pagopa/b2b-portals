@@ -1,52 +1,47 @@
 import { CommonProps } from '../common/Common.types';
 
-export interface VideoImageProps extends CommonProps {
-  src: string | { url: string; mime: string };
-  alt: string;
-  autoplay?: boolean;
-  loop?: boolean;
-  title?: string;
-  subtitle?: string;
-  caption?: string;
-  full?: boolean;
-  reverse?: boolean;
-  fallback?: string;
-  playButtonLabel?: string;
-  pausedplayButtonLabel?: string;
-  isCentered: boolean;
+export interface VideoImageProps extends VideoTextProps, VideoCaptionProps {
+  sectionID?: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
+  video?: {
+    src: string;
+    autoplay: boolean;
+    loop: boolean;
+    showControls: boolean;
+    fallback: string;
+    playButtonLabel: string;
+    pausedPlayButtonLabel: string;
+  };
 }
 
 export interface VideoTextProps extends CommonProps {
-  title?: string | undefined;
-  subtitle?: string | undefined;
+  title?: string;
+  subtitle?: string;
 }
 
 export interface VideoCaptionProps extends CommonProps {
-  caption?: string | undefined;
-  toBeCentered: boolean;
+  caption?: string;
+  isCentered: boolean;
 }
 
 export interface RenderVideoProps {
   videoRef: React.RefObject<HTMLVideoElement>;
   error: boolean;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
-  src: VideoImageProps['src'];
+  src: string;
   loop: boolean;
-  autoplay: boolean;  
+  autoplay: boolean;
+  fallback: string;
   onVideoEnd: () => void;
-  fallback: React.ReactNode;
   onClick?: () => void;
+  isMobileDevice: boolean;
 }
 
-// Define TypeScript types for ImageProps
-export interface ImageSrcObject {
-  url: string;
-  mime: string;
-}
-
-export type ImageSrc = string | ImageSrcObject;
-
-export interface ImageProps {
+export interface RenderImageProps {
+  src: string;
   alt: string;
-  src: ImageSrc;
+  isMobileDevice: boolean;
 }

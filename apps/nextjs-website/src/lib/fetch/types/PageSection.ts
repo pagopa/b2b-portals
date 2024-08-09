@@ -7,6 +7,11 @@ import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
 import { CardsItemMUIIconCodec } from './icons/CardsItemIcon';
 import { StoreButtonsCodec } from './StoreButtons';
 
+const LinkCodec = t.strict({
+  label: t.string,
+  href: t.string,
+});
+
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
   title: t.string,
@@ -23,6 +28,7 @@ const HeroSectionCodec = t.strict({
   background: StrapiImageSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
+  link: t.union([LinkCodec, t.null]),
 });
 
 const EditorialContentCodec = t.strict({
@@ -87,11 +93,6 @@ const FeatureSectionCodec = t.strict({
   showCarouselMobile: t.boolean,
   sectionID: t.union([t.string, t.null]),
   items: t.array(FeatureItemCodec),
-});
-
-const LinkCodec = t.strict({
-  label: t.string,
-  href: t.string,
 });
 
 const StepCodec = t.strict({
@@ -199,6 +200,11 @@ const PreFooterSectionCodec = t.strict({
   background: StrapiImageSchema,
 });
 
+const CounterCodec = t.strict({
+  number: t.number,
+  text: t.string,
+});
+
 const HeroCounterSectionCodec = t.strict({
   __component: t.literal('sections.hero-counter'),
   title: t.string,
@@ -206,26 +212,8 @@ const HeroCounterSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   sectionID: t.union([t.string, t.null]),
   background: StrapiImageSchema,
-  counterNumber: t.number,
-  counterText: t.string,
-});
-
-const MegaHeaderSectionCodec = t.strict({
-  __component: t.literal('sections.mega-header'),
-  menuItems: t.array(
-    t.strict({
-      primary: t.string,
-      secondary: t.array(
-        t.strict({
-          title: t.string,
-          items: t.array(t.string),
-        })
-      ),
-    })
-  ),
-  logoSrc: t.string,
-  logoAlt: t.string,
-  buttonHref: t.string,
+  counter: CounterCodec,
+  link: t.union([LinkCodec, t.null]),
 });
 
 const EditorialSwitchSectionCodec = t.strict({
@@ -242,21 +230,50 @@ const EditorialSwitchSectionCodec = t.strict({
   ),
 });
 
-const VideoImageSectionCodec = t.strict({
-  __component: t.literal('sections.video-image'),
-  title: t.string,
-  subtitle: t.string,
-  src: StrapiImageRequiredSchema,
+const VideoCodec = t.strict({
+  src: t.strict({
+    data: t.union([
+      t.strict({
+        attributes: t.strict({ url: t.string }),
+      }),
+      t.null,
+    ]),
+  }),
+  srcURL: t.union([t.string, t.null]),
   autoplay: t.boolean,
   loop: t.boolean,
-  full: t.boolean,
-  reversed: t.boolean,
-  theme: t.union([t.literal('light'), t.literal('dark')]),
+  showControls: t.boolean,
   fallback: t.string,
   playButtonLabel: t.string,
-  pausedplayButtonLabel: t.string,
+  pausedPlayButtonLabel: t.string,
+});
+
+const VideoImageSectionCodec = t.strict({
+  __component: t.literal('sections.video-image'),
   sectionID: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  title: t.union([t.string, t.null]),
+  subtitle: t.union([t.string, t.null]),
+  caption: t.union([t.string, t.null]),
   isCentered: t.boolean,
+  image: StrapiImageSchema,
+  video: t.union([VideoCodec, t.null]),
+});
+
+const ChipPropsCodec = t.strict({
+  label: t.string,
+  targetID: t.string,
+});
+
+const HeroChipsSectionCodec = t.strict({
+  __component: t.literal('sections.hero-chips'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
+  background: StrapiImageSchema,
+  chips: t.array(ChipPropsCodec),
+  centerText: t.boolean,
 });
 
 export const PageSectionCodec = t.union([
@@ -273,9 +290,9 @@ export const PageSectionCodec = t.union([
   FormSectionCodec,
   PreFooterSectionCodec,
   HeroCounterSectionCodec,
-  MegaHeaderSectionCodec,
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
+  HeroChipsSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -292,8 +309,8 @@ export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
 export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
 export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
-export type MegaHeaderSection = t.TypeOf<typeof MegaHeaderSectionCodec>;
 export type EditorialSwitchSection = t.TypeOf<
   typeof EditorialSwitchSectionCodec
 >;
 export type VideoImageSection = t.TypeOf<typeof VideoImageSectionCodec>;
+export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;

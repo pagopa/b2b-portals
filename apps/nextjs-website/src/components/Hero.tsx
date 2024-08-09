@@ -11,6 +11,7 @@ const makeHeroProps = ({
   background,
   ctaButtons,
   storeButtons,
+  link,
   ...rest
 }: HeroSection): HeroProps => ({
   ...rest,
@@ -35,6 +36,7 @@ const makeHeroProps = ({
       ...(storeButtons.hrefApple && { hrefApple: storeButtons.hrefApple }),
     },
   }),
+  ...(link && { link }),
 });
 
 const Hero = (props: HeroSection) => <HeroRC {...makeHeroProps(props)} />;

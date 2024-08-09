@@ -1,0 +1,48 @@
+{
+  "collectionName": "components_components_video_image_video_data",
+  "info": {
+    "displayName": "VideoImage_VideoData",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "src": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "srcURL": {
+      "type": "string"
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "loop": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "showControls": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "fallback": {
+      "type": "string",
+      "required": true
+    },
+    "playButtonLabel": {
+      "type": "string",
+      "required": true
+    },
+    "pausedPlayButtonLabel": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

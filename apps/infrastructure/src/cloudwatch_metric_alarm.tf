@@ -9,6 +9,7 @@ module "ecs_cpu_alarm" {
 
   alarm_name        = "${each.key} | CMS | ECS CPU Utilization"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm monitors the percentage of ECS CPU Utilization"
   metric_name       = "CPUUtilization"
   namespace         = "AWS/ECS"
@@ -37,6 +38,7 @@ module "ecs_memory_alarm" {
 
   alarm_name        = "${each.key} | CMS | ECS Memory Utilization"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm monitors the percentage of ECS Memory Utilization"
   metric_name       = "MemoryUtilization"
   namespace         = "AWS/ECS"
@@ -61,6 +63,7 @@ module "rds_cpu_alarm" {
 
   alarm_name        = "Strapi | CMS | RDS CPU Utilization"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm monitors the percentage of RDS CPU Utilization"
   metric_name       = "CPUUtilization"
   namespace         = "AWS/RDS"
@@ -83,6 +86,7 @@ module "rds_acu_alarm" {
 
   alarm_name        = "Strapi | CMS | RDS ACU Utilization"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm monitors the percentage of RDS ACU Utilization"
   metric_name       = "ACUUtilization"
   namespace         = "AWS/RDS"
@@ -106,6 +110,7 @@ module "alb_error_5xx_alarm" {
 
   alarm_name        = "Strapi | CMS | ALB Error 5XX"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm monitors the percentage of 5xx error responses from ALB"
   metric_name       = "HTTPCode_ELB_5XX_Count"
   namespace         = "AWS/ApplicationELB"
@@ -128,6 +133,7 @@ module "alb_error_4xx_alarm" {
 
   alarm_name        = "Strapi | CMS | ALB Error 4XX"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm monitors the percentage of 4xx error responses from ALB"
   metric_name       = "HTTPCode_ELB_4XX_Count"
   namespace         = "AWS/ApplicationELB"
@@ -157,6 +163,7 @@ module "cloudfront_5xx_error_rate_alarm" {
 
   alarm_name        = "${each.key} | Website | CloudFront 5xxErrorRate"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm monitors the percentage of 5xx error responses from origin server"
   metric_name       = "5xxErrorRate"
   namespace         = "AWS/CloudFront"
@@ -186,6 +193,7 @@ module "cloudfront_origin_latency_alarm" {
 
   alarm_name        = "${each.key} | Website | CloudFront Origin Latency"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm is used to detect problems with the origin server taking too long to respond"
   metric_name       = "OriginLatency"
   namespace         = "AWS/CloudFront"
@@ -215,6 +223,7 @@ module "cloudfront_function_validation_errors_alarm" {
 
   alarm_name        = "${each.key} | Website | CloudFront Function | FunctionValidationErrors"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm is used to detect validation errors from CloudFront functions"
   metric_name       = "FunctionValidationErrors"
   namespace         = "AWS/CloudFront"
@@ -245,6 +254,7 @@ module "cloudfront_function_execution_errors_alarm" {
 
   alarm_name        = "${each.key} | Website | CloudFront Function | Execution Errors"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm is used to detect execution errors from CloudFront functions"
   metric_name       = "FunctionExecutionErrors"
   namespace         = "AWS/CloudFront"
@@ -275,6 +285,7 @@ module "cloudfront_function_throttled_alarm" {
 
   alarm_name        = "${each.key} | Website | CloudFront Function | Throttle"
   actions_enabled   = true
+  alarm_actions     = [aws_sns_topic.alerts.arn]
   alarm_description = "This alarm can detect when the CloudFront function is taking too long to respond"
   metric_name       = "FunctionThrottles"
   namespace         = "AWS/CloudFront"

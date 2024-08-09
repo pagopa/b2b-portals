@@ -16,6 +16,7 @@ import PreFooter from './PreFooter/PreFooter';
 import HeroCounter from './HeroCounter/HeroCounter';
 import MegaHeader from './MegaHeader/MegaHeader';
 import VideoImage from './VideoImage/VideoImage';
+import HeroChips from './HeroChips/HeroChips';
 
 export {
   Hero,
@@ -36,4 +37,5 @@ export {
   HeroCounter,
   MegaHeader,
   VideoImage,
+  HeroChips,
 };

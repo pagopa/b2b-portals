@@ -1,3 +1,6 @@
+// Disable rule below since we'll be determining whether image or video exist based on mediaState
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import { useEffect, useRef, useState } from 'react';
 import { useIsVisible } from '@react-components/types/common/Common.types';
 import { VideoImageProps } from '@react-components/types';
@@ -10,33 +13,34 @@ import {
   VideoText,
 } from './VideoImage.helpers';
 
-const VideoImage = (props: VideoImageProps) => {
-  const {
-    title,
-    subtitle,
-    caption,
-    src,
-    alt,
-    autoplay = false,
-    loop = false,
-    full = false,
-    theme,
-    fallback,
-    playButtonLabel,
-    pausedplayButtonLabel,
-    isCentered = false,
-  } = props;
+const VideoImage = ({
+  title,
+  subtitle,
+  caption,
+  isCentered,
+  theme,
+  image,
+  video,
+}: VideoImageProps) => {
+  if (!image && !video) {
+    // Disable lint for this case because we want the build to fail if user input nothing
+    // eslint-disable-next-line
+    throw new Error();
+  }
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
   const [error, setError] = useState(false);
-  const [videoState, setVideoState] = useState<
-    'playing' | 'paused' | 'stopped'
-  >('stopped');
-  const [isMobileDevice, setIsMobileDevice] = useState(window.innerWidth <= 768);
+  const [mediaState, setMediaState] = useState<
+    'play' | 'pause' | 'stop' | 'image'
+  >(video ? 'stop' : 'image');
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
 
   const textColor = TextColor(theme);
 
   useEffect(() => {
+    setIsMobileDevice(window.innerWidth <= 768);
+
     const handleResize = () => {
       setIsMobileDevice(window.innerWidth <= 768);
     };
@@ -45,20 +49,25 @@ const VideoImage = (props: VideoImageProps) => {
   }, []);
 
   useEffect(() => {
+    if (mediaState === 'image') return;
     if (!isVisible) return;
+
     const startVideoWhenVisible = async () => {
-      if (autoplay && isVisible) play();
+      if (video?.autoplay && isVisible) play();
     };
     startVideoWhenVisible().catch();
   }, [isVisible]);
 
   const play = (e?: React.MouseEvent) => {
     e?.preventDefault();
+
+    if (mediaState === 'image') return;
+
     if (videoRef.current) {
       videoRef.current
         .play()
         .then(() => {
-          setVideoState('playing');
+          setMediaState('play');
         })
         .catch(() => {
           // Handle play error
@@ -67,24 +76,14 @@ const VideoImage = (props: VideoImageProps) => {
   };
 
   const handleVideoEnd = () => {
-    setVideoState('stopped');
+    setMediaState('stop');
   };
 
   const pause = () => {
     if (videoRef.current) {
       videoRef.current.pause();
-      setVideoState('paused');
+      setMediaState('pause');
     }
-  };
-
-  const isImage = (src: string) => {
-    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
-    return imageExtensions.some((extension) => src.endsWith(extension));
-  };
-
-  const isVideo = (src: string) => {
-    const videoExtensions = ['.mp4', '.webm', '.ogg'];
-    return videoExtensions.some((extension) => src.endsWith(extension));
   };
 
   return (
@@ -96,159 +95,96 @@ const VideoImage = (props: VideoImageProps) => {
           overflow: 'hidden',
         }}
       >
-        {!full && videoState !== 'playing' && (
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              padding: '20px',
-              background: `rgba(0, 0, 0, ${
-                typeof src === 'string'
-                  ? isImage(src)
-                    ? '0.20'
-                    : '0.60'
-                  : isImage(src.url)
-                    ? '0.20'
-                    : '0.60'
-              })`,
-              alignItems: isCentered ? 'center' : 'left',
-            }}
-          >
+        {video?.showControls &&
+          (mediaState === 'stop' || mediaState === 'pause') && (
             <div
               style={{
-                marginLeft: title || subtitle ? '6em' : '0',
-                zIndex: 50,
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                padding: '20px',
+                background: 'rgba(0, 0, 0, 0.60)',
+                alignItems: isCentered ? 'center' : 'left',
               }}
             >
-              {videoState === 'stopped' && (
-                <VideoText title={title} subtitle={subtitle} theme={theme} />
-              )}
-              {typeof src === 'string'
-                ? !isImage(src) &&
-                  isVideo(src) && (
-                    <div
-                      onClick={play}
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        width: 'fit-content',
-                        gap: '0.5em',
-                        alignItems: 'center',
-                        justifyContent: isCentered ? 'center' : 'left',
-                        color: textColor,
-                      }}
-                    >
-                      <p
-                        style={{
-                          display: 'flex',
-                          fontWeight: 700,
-                          fontSize: '24px',
-                          textDecoration: 'none',
-                          color: textColor,
-                          cursor: 'pointer',
-                          alignSelf: 'flex-start',
-                        }}
-                      >
-                        {videoState === 'paused'
-                          ? pausedplayButtonLabel
-                          : playButtonLabel}
-                      </p>
-                      <PlayArrowIcon
-                        sx={{
-                          height: '2em',
-                          cursor: 'pointer',
-                          color: textColor,
-                        }}
-                      />
-                    </div>
-                  )
-                : !isImage(src.url) &&
-                  isVideo(src.url) && (
-                    <div
-                      onClick={play}
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        width: 'fit-content',
-                        gap: '0.5em',
-                        alignItems: 'center',
-                        justifyContent: isCentered ? 'center' : 'left',
-                        color: textColor,
-                      }}
-                    >
-                      <p
-                        style={{
-                          display: 'flex',
-                          fontWeight: 700,
-                          fontSize: '24px',
-                          textDecoration: 'none',
-                          color: textColor,
-                          cursor: 'pointer',
-                          alignSelf: 'flex-start',
-                        }}
-                      >
-                        {videoState === 'paused'
-                          ? pausedplayButtonLabel
-                          : playButtonLabel}
-                      </p>
-                      <PlayArrowIcon
-                        sx={{
-                          height: '2em',
-                          cursor: 'pointer',
-                          color: textColor,
-                        }}
-                      />
-                    </div>
-                  )}
+              <div
+                style={{
+                  marginLeft: title || subtitle ? '6em' : '0',
+                  zIndex: 50,
+                }}
+              >
+                {mediaState === 'stop' && (title || subtitle) && (
+                  <VideoText
+                    theme={theme}
+                    {...(title && { title })}
+                    {...(subtitle && { subtitle })}
+                  />
+                )}
+                <div
+                  onClick={play}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: 'fit-content',
+                    gap: '0.5em',
+                    alignItems: 'center',
+                    justifyContent: isCentered ? 'center' : 'left',
+                    color: textColor,
+                  }}
+                >
+                  <p
+                    style={{
+                      display: 'flex',
+                      fontWeight: 700,
+                      fontSize: '24px',
+                      textDecoration: 'none',
+                      color: textColor,
+                      cursor: 'pointer',
+                      alignSelf: 'flex-start',
+                    }}
+                  >
+                    {mediaState === 'pause'
+                      ? video.pausedPlayButtonLabel
+                      : video.playButtonLabel}
+                  </p>
+                  <PlayArrowIcon
+                    sx={{
+                      height: '2em',
+                      cursor: 'pointer',
+                      color: textColor,
+                    }}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        )}
-        {typeof src === 'string'
-          ? isImage(src)
-            ? renderImage({
-                src,
-                alt,
-              })
-            : renderVideo({
-                videoRef,
-                error,
-                setError,
-                src,
-                loop,
-                autoplay,
-                fallback,
-                onVideoEnd: handleVideoEnd,
-                onClick: pause,
-              })
-          : isImage(src.url)
-            ? renderImage({
-                src: src.url,
-                alt,
-              })
-            : renderVideo({
-                videoRef,
-                error,
-                setError,
-                src: src.url,
-                loop,
-                autoplay,
-                fallback,
-                onVideoEnd: handleVideoEnd,
-                onClick: pause,
-              })}
+          )}
+
+        {mediaState === 'image'
+          ? renderImage({
+              src: image!.src,
+              alt: image!.alt,
+              isMobileDevice,
+            })
+          : renderVideo({
+              videoRef,
+              error,
+              setError,
+              src: video!.src,
+              loop: video!.loop,
+              autoplay: video!.autoplay,
+              fallback: video!.fallback,
+              onVideoEnd: handleVideoEnd,
+              onClick: pause,
+              isMobileDevice,
+            })}
       </div>
       {caption && (
-        <VideoCaption
-          caption={caption}
-          theme={theme}
-          toBeCentered={isCentered}
-        />
+        <VideoCaption caption={caption} theme={theme} isCentered={isCentered} />
       )}
     </>
   );
