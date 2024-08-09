@@ -5,7 +5,7 @@ import { Cards as CardsRC } from '@react-components/components';
 import { CardsProps } from '@react-components/types';
 import { CardsSection } from '@/lib/fetch/types/PageSection';
 
-const makeCardsProps = ({
+export const makeCardsProps = ({
   items,
   title,
   subtitle,
