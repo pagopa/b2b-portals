@@ -1,16 +1,21 @@
 'use client';
 import React from 'react';
 import { makeEditorialProps } from './Editorial';
+import MarkdownRenderer from './MarkdownRenderer';
 import { EditorialSwitch as EditorialSwitchRC } from '@react-components/components';
 import { EditorialSwitchProps } from '@react-components/types';
 import { EditorialSwitchSection } from '@/lib/fetch/types/PageSection';
 
 const makeEditorialSwitchProps = ({
-  subtitle,
+  body,
   sections,
   ...rest
 }: EditorialSwitchSection): EditorialSwitchProps => ({
-  ...(subtitle && { subtitle }),
+  body: body
+    ? typeof body === 'string'
+      ? MarkdownRenderer({ markdown: body, variant: 'body2' })
+      : body
+    : null,
   sections: sections.map(({ content, ...section }) => ({
     ...section,
     content: makeEditorialProps({

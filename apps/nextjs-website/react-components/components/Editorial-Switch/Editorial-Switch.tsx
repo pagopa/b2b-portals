@@ -5,7 +5,7 @@ import ContainerRC from '../common/ContainerRC';
 import { BackgroundColor } from '../common/Common.helpers';
 import {
   ButtonSwitchRowBlock,
-  TitleSubtitleBlock,
+  TitleBodyBlock,
 } from './Editorial-Switch.helpers';
 import {
   EditorialSwitchProps,
@@ -17,7 +17,7 @@ const EditorialSwitch = ({
   sections,
   theme,
   title,
-  subtitle,
+  body,
 }: EditorialSwitchProps) => {
   if (sections[0] === undefined) {
     return null;
@@ -63,9 +63,9 @@ const EditorialSwitch = ({
         sx={{ display: 'grid', justifyContent: 'center', alignItems: 'center' }}
         background={backgroundColor}
       >
-        <TitleSubtitleBlock
+        <TitleBodyBlock
           title={title}
-          {...(subtitle && { subtitle })}
+          {...(body && { body })}
           theme={theme}
         />
         {isMobile ? (
