@@ -17,18 +17,19 @@
       "type": "text",
       "required": false
     },
-    "icon": {
-      "type": "enumeration",
-      "enum": [
-        "AccessAlarm"
-      ]
-    },
     "links": {
       "type": "component",
       "repeatable": true,
       "component": "components.link",
       "required": false,
       "max": 2
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

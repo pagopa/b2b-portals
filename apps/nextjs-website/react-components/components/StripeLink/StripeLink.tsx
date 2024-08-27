@@ -1,6 +1,5 @@
 import { Grid, Stack, Button, Box } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import { EIcon } from '../common/EIcon';
 import { StripeLinkProps } from '../../types/StripeLink/StripeLink.types';
 import { Subtitle } from '../common/Common';
 import {
@@ -10,8 +9,9 @@ import {
   TextColor,
 } from '../common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Image from 'next/image';
 
-const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
+const StripeLink = ({ iconURL, subtitle, theme, buttonText }: StripeLinkProps) => {
   const textAlternativeColor = TextAlternativeColor(theme);
   const textColorWhiteOnly = TextColor('dark');
   const backgroundColor = BackgroundColor(theme);
@@ -36,19 +36,10 @@ const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
               justifyContent: 'start',
               width: 'auto',
               alignItems: 'center',
+              gap:'.5rem'
             }}
           >
-            <EIcon
-              {...icon}
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-
-                color: textColorWhiteOnly,
-                mr: 1,
-              }}
-            />
+            {iconURL && <Image src={iconURL} alt='' height={28} width={28} />}
             <Subtitle
               variant='body2'
               textColor={textColorWhiteOnly}
