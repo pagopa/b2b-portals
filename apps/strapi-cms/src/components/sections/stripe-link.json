@@ -28,6 +28,10 @@
     "subtitle": {
       "type": "richtext",
       "required": true
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
     }
   }
 }

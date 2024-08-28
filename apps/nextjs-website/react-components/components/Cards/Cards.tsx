@@ -14,6 +14,7 @@ const Cards = ({
   text,
   ctaButtons,
   textPosition = 'left',
+  sectionID,
 }: CardsProps) => {
   const backgroundColor = BackgroundColor(theme);
   const textColor = TextColor(theme);
@@ -34,6 +35,7 @@ const Cards = ({
         alignItems: isCenter ? 'center' : 'flex-start',
         textAlign: isCenter ? 'center' : 'left',
       }}
+      {...(sectionID && { sectionID })}
     >
       <Typography
         color={textColor}

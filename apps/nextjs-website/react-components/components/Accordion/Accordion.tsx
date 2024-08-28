@@ -15,6 +15,7 @@ const Accordion = (props: AccordionProps) => {
     accordionItems,
     theme,
     layout = 'left',
+    sectionID,
   } = props;
 
   const textColor = TextColor(theme);
@@ -32,6 +33,7 @@ const Accordion = (props: AccordionProps) => {
       sx={{ py: { xs: 4, md: 10 } }}
       bgcolor={backgroundColor}
       component='section'
+      {...(sectionID && { id: sectionID })}
     >
       <Container>
         <Grid item xs={12}>
