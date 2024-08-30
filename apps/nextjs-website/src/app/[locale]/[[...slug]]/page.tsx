@@ -8,34 +8,51 @@ import {
 import PageSection from '@/components/PageSection/PageSection';
 
 type PageParams = {
-  params: { slug?: string[] };
+  params: { locale: 'it' | 'en'; slug?: string[] };
 };
 
 // Statically generate routes at build time instead of on-demand at request time.
 // more: https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params
 export const generateStaticParams = async (): Promise<
   Array<PageParams['params']>
-> =>
+> => {
   // prevents the error during types generation:
   // .next/types/app/[...slug]/page.ts(37,98): error TS2344: Type '{ __tag__:
   // "generateStaticParams"; __return_type__: Promise<readonly Page[]>; }' does
   // not satisfy the constraint '{ __tag__: "generateStaticParams";
   // __return_type__: any[] | Promise<any[]>; }'.
 
-  // No need to prerender static routes when in Preview Mode
-  isPreviewMode()
-    ? []
-    : [...(await getAllPages()).map((page) => ({ slug: [page.slug] }))];
+  if (isPreviewMode()) {
+    return [];
+  }
+
+  // Get locales
+  const general = await getSiteWideSEO();
+  const pages_it: Array<PageParams['params']> = general.locales.it
+    ? (await getAllPages('it')).map((page) => ({
+        locale: 'it',
+        slug: [page.slug],
+      }))
+    : [];
+  const pages_en: Array<PageParams['params']> = general.locales.en
+    ? (await getAllPages('en')).map((page) => ({
+        locale: 'en',
+        slug: [page.slug],
+      }))
+    : [];
+
+  return [...pages_it, ...pages_en];
+};
 
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const { slug } = params;
+  const { locale, slug } = params;
   // Check if slug is undefined, which happens for the homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to ''
   const slugString = slug === undefined ? '' : slug[0];
 
-  const pageProps = await getPageProps(slugString);
+  const pageProps = await getPageProps(locale, slugString);
   if (pageProps === undefined) {
     return {};
   }
@@ -71,12 +88,12 @@ const Page = async ({ params }: PageParams) => {
     return null;
   }
 
-  const { slug } = params;
+  const { locale, slug } = params;
   // Check if slug is undefined, which happens for the homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to ''
   const slugString = slug === undefined ? '' : slug[0];
 
-  const pageProps = await getPageProps(slugString);
+  const pageProps = await getPageProps(locale, slugString);
   if (pageProps === undefined) {
     return null;
   }

@@ -9,7 +9,7 @@ import { getHeader, HeaderData } from './fetch/header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
-import { removeHomepageSlugFromMenu } from './header';
+import { addLocaleToAllLinks, removeHomepageSlugFromMenu } from './header';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -21,8 +21,10 @@ const appEnv = pipe(
 );
 
 // Return all the pages
-export const getAllPages = async (): Promise<ReadonlyArray<PageData>> => {
-  const navigation = await getNavigation(appEnv);
+export const getAllPages = async (
+  locale: 'it' | 'en'
+): Promise<ReadonlyArray<PageData>> => {
+  const navigation = await getNavigation({ ...appEnv, locale });
   return navigation.data.map((item) =>
     item.attributes.slug !== 'homepage'
       ? item.attributes
@@ -35,23 +37,23 @@ export const getAllPages = async (): Promise<ReadonlyArray<PageData>> => {
 };
 
 // Return PreHeaderProps
-export const getPreHeaderProps = async (): Promise<
-  PreHeaderData['data']['attributes']
-> => {
+export const getPreHeaderProps = async (
+  locale: 'it' | 'en'
+): Promise<PreHeaderData['data']['attributes']> => {
   const {
     data: { attributes },
-  } = await getPreHeader(appEnv);
+  } = await getPreHeader({ ...appEnv, locale });
   return attributes;
 };
 
-export const getHeaderProps = async (): Promise<
-  HeaderData['data']['attributes']['header'][0]
-> => {
+export const getHeaderProps = async (
+  locale: 'it' | 'en'
+): Promise<HeaderData['data']['attributes']['header'][0]> => {
   const {
     data: {
       attributes: { header },
     },
-  } = await getHeader(appEnv);
+  } = await getHeader({ ...appEnv, locale });
 
   if (header[0] === undefined) {
     // Disable lint for this case because we want the build to fail if user managed to not input a menu
@@ -59,27 +61,28 @@ export const getHeaderProps = async (): Promise<
     throw new Error();
   }
 
-  return removeHomepageSlugFromMenu(header[0]);
+  return addLocaleToAllLinks(removeHomepageSlugFromMenu(header[0]), locale);
 };
 
-export const getFooterProps = async (): Promise<
-  FooterData['data']['attributes']
-> => {
+export const getFooterProps = async (
+  locale: 'it' | 'en'
+): Promise<FooterData['data']['attributes']> => {
   const {
     data: { attributes },
-  } = await getFooter(appEnv);
+  } = await getFooter({ ...appEnv, locale });
   return attributes;
 };
 
 // Return PageProps given the page path
 export const getPageProps = async (
+  locale: 'it' | 'en',
   slug: string | undefined
 ): Promise<PageData | undefined> => {
   if (slug === undefined) {
     return undefined;
   }
 
-  const allPages = await getAllPages();
+  const allPages = await getAllPages(locale);
   return allPages.find((page) => slug.toString() === page.slug.toString());
 };
 

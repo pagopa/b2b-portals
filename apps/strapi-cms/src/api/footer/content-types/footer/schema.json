@@ -10,45 +10,84 @@
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "legalInfo": {
       "type": "richtext",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "showFundedByNextGenerationEULogo": {
       "type": "boolean",
       "default": false,
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "companyLink": {
       "type": "component",
       "repeatable": false,
       "component": "components.company-link",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "links_aboutUs": {
       "type": "component",
       "repeatable": false,
       "component": "components.footer-link-group",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "links_services": {
       "type": "component",
       "repeatable": false,
       "component": "components.footer-link-group",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "links_resources": {
       "type": "component",
       "repeatable": false,
       "component": "components.footer-link-group",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "links_followUs": {
       "type": "component",
       "repeatable": false,
-      "component": "components.footer-link-group-with-social"
+      "component": "components.footer-link-group-with-social",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

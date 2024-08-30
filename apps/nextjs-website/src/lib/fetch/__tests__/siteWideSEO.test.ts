@@ -65,6 +65,10 @@ const siteWideSEOResponse = {
         shortName: 'SEND-PagoPA',
       },
       matomoID: '12',
+      locales: {
+        it: true,
+        en: true,
+      },
     },
   },
 };
@@ -81,7 +85,7 @@ describe('fetchSiteWideSEO', () => {
     await fetchSiteWideSEO(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest,locales`,
       {
         method: 'GET',
         headers: {
