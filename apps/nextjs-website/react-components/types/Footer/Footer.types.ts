@@ -51,13 +51,13 @@ export interface FooterColumnProps {
 }
 
 interface Language {
-  id: string | number;
+  id: 'it' | 'en';
   value: string;
+  href: string;
 }
 
 export interface LangSwitchProps {
   languages: Language[];
-  onLanguageChanged: (lang: Language) => void;
   activeLanguage: Language;
 }
 

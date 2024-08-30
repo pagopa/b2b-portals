@@ -65,7 +65,14 @@ const siteWideSEOResponse = {
         shortName: 'SEND-PagoPA',
       },
       matomoID: '12',
+<<<<<<< HEAD
       themeVariant: 'SEND',
+=======
+      locales: {
+        it: true,
+        en: true,
+      },
+>>>>>>> 8307b07 (First Implementation of i18n)
     },
   },
 };
@@ -82,7 +89,7 @@ describe('fetchSiteWideSEO', () => {
     await fetchSiteWideSEO(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest,locales`,
       {
         method: 'GET',
         headers: {

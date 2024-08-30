@@ -45,6 +45,7 @@
     "matomoID": {
       "type": "string"
     },
+<<<<<<< HEAD
     "themeVariant": {
       "type": "enumeration",
       "enum": [
@@ -52,6 +53,13 @@
         "SEND"
       ],
       "default": "SEND",
+=======
+    "locales": {
+      "displayName": "Locales",
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.locales",
+>>>>>>> 8307b07 (First Implementation of i18n)
       "required": true
     }
   }
