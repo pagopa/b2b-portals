@@ -3,7 +3,7 @@ import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
 import { AppEnv, Config, makeAppEnv } from '../AppEnv';
 import { getNavigation, PageData } from './fetch/navigation';
-import { PreHeaderData, getPreHeader } from './fetch/preHeader';
+import { PreHeaderAttributes, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
 import { getHeader, HeaderData } from './fetch/header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
@@ -35,14 +35,11 @@ export const getAllPages = async (): Promise<ReadonlyArray<PageData>> => {
 };
 
 // Return PreHeaderProps
-export const getPreHeaderProps = async (): Promise<
-  PreHeaderData['data']['attributes']
-> => {
-  const {
-    data: { attributes },
-  } = await getPreHeader(appEnv);
-  return attributes;
-};
+export const getPreHeaderProps =
+  async (): Promise<PreHeaderAttributes | null> => {
+    const { data } = await getPreHeader(appEnv);
+    return data?.attributes ?? null;
+  };
 
 export const getHeaderProps = async (): Promise<
   HeaderData['data']['attributes']['header'][0]
