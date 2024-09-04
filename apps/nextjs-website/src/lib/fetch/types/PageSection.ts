@@ -276,6 +276,15 @@ const HeroChipsSectionCodec = t.strict({
   centerText: t.boolean,
 });
 
+const RowTextSectionCodec = t.strict({
+  __component: t.literal('sections.row-text'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  layout: t.union([t.literal('left'), t.literal('center'), t.literal('right')]),
+  sectionID: t.union([t.string, t.null]),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -293,6 +302,7 @@ export const PageSectionCodec = t.union([
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
   HeroChipsSectionCodec,
+  RowTextSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -314,3 +324,4 @@ export type EditorialSwitchSection = t.TypeOf<
 >;
 export type VideoImageSection = t.TypeOf<typeof VideoImageSectionCodec>;
 export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
+export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
