@@ -21,13 +21,13 @@ const Subtitle = ({ item, theme }: FeatureStackItemProps) => {
         >
           <Link
             color='inherit'
-            href={item.link.url}
+            href={item.link.href}
             underline='none'
             sx={{
               fontWeight: 'bold',
             }}
           >
-            {item.link.text}
+            {item.link.label}
           </Link>
 
           <ArrowForwardIcon color='inherit'></ArrowForwardIcon>

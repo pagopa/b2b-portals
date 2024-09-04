@@ -1,8 +1,7 @@
-import { EIconProps } from "../../components/common/EIcon";
 import { SectionProps } from "../common/Common.types";
 
 export interface StripeLinkProps extends SectionProps {
   subtitle: JSX.Element;
-  icon?: EIconProps;
+  iconURL?: string;
   buttonText?: string;
 }

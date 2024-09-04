@@ -1,8 +1,7 @@
-import { EIconProps } from "../../components/common/EIcon";
 import { SectionProps } from "../common/Common.types";
 
 export interface Step {
-  readonly stepIcon?: EIconProps;
+  readonly iconURL?: string;
   readonly title: string;
   readonly description: string | JSX.Element;
 }
