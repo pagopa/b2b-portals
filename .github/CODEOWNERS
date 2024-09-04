@@ -1,10 +1,10 @@
 * @pagopa/b2bportals-maintain
 
 # Website
-apps/nextjs-website/ @pagopa/b2bportals-maintain @simosalsi @Meolocious
+apps/nextjs-website/ @pagopa/b2bportals-maintain @simosalsi @salvatorediocaro
 
 # CMS
-apps/strapi-cms/ @pagopa/b2bportals-maintain @simosalsi @Meolocious
+apps/strapi-cms/ @pagopa/b2bportals-maintain @simosalsi @salvatorediocaro
 
 # Lint rules
 **/.eslintrc.json @pagopa/b2bportals-maintain
@@ -16,5 +16,5 @@ apps/strapi-cms/ @pagopa/b2bportals-maintain @simosalsi @Meolocious
 .changeset/*
 
 # Required to merge Push next releases PR
-package-lock.json @pagopa/b2bportals-maintain @simosalsi @Meolocious @maurodandrea
-**/CHANGELOG.md @pagopa/b2bportals-maintain @simosalsi @Meolocious @maurodandrea
+package-lock.json @pagopa/b2bportals-maintain @simosalsi @salvatorediocaro @maurodandrea
+**/CHANGELOG.md @pagopa/b2bportals-maintain @simosalsi @salvatorediocaro @maurodandrea
