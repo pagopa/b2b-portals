@@ -11,10 +11,8 @@ const makeStripeLinkProps = ({
   ...rest
 }: StripeLinkSection): StripeLinkProps => ({
   subtitle: MarkdownRenderer({ markdown: subtitle, variant: 'body2' }),
-  ...(icon && {
-    icon: {
-      icon,
-    },
+  ...(icon.data && {
+    iconURL: icon.data.attributes.url,
   }),
   ...(buttonText && { buttonText }),
   ...rest,

@@ -1,13 +1,12 @@
-import { EIconProps } from "../../components/common/EIcon";
 import { Theme } from "../common/Common.types";
 
 export interface FeatureItem {
-  readonly stackIcon?: EIconProps;
+  readonly iconURL: string;
   readonly title: string;
   readonly subtitle: string;
   readonly link?: {
-    readonly text: string;
-    readonly url: string;
+    readonly label: string;
+    readonly href: string;
   };
 }
 
