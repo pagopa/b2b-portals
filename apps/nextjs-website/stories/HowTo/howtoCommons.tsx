@@ -11,7 +11,7 @@ const generateSteps = (count: number, theme: 'dark' | 'light', withIcons: boolea
   Array.from({ length: count }, (_, i) => ({
     title: `Step ${i + 1}`,
     description: `This is step ${i + 1}`,
-    ...(withIcons ? { stepIcon: { icon: 'MarkEmailReadOutlined' } } : {}),
+    ...(withIcons && { iconURL: theme === 'dark' ? 'https://d2mk0pc4ejgxx6.cloudfront.net/dark_icon_dee9ab4f99.svg' : 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg' }),
     index: i,
     theme,
     isLastStep: i === count - 1,

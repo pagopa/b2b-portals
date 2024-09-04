@@ -43,7 +43,9 @@ const navigationResponse = {
             __component: 'sections.stripe-link',
             theme: 'dark',
             subtitle: 'subtitle',
-            icon: null,
+            icon: {
+              data: null,
+            },
             buttonText: null,
           },
         ],
@@ -108,7 +110,9 @@ describe('getNavigation', () => {
                 __component: 'sections.stripe-link',
                 theme: 'dark',
                 subtitle: 'subtitle',
-                icon: null,
+                icon: {
+                  data: null,
+                },
                 buttonText: null,
               },
             ],

@@ -1,26 +1,15 @@
 import React from 'react';
-import * as MuiIcons from '@mui/icons-material';
 import { Stack, Box } from '@mui/material';
-import { EIcon } from '../common/EIcon';
-import { Generic } from '../../types/common/Common.types';
 import { HowToStepProps } from '../../types/HowTo/HowTo.types';
 import { ArrowIcon } from './HowTo.helpers';
 import { TextColor, TextAlternativeColor } from '../common/Common.helpers';
 import { Title, Body } from '../common/Common';
 import { HowToStepNum } from './HowTo.helpers';
-
-type IconProp = keyof typeof MuiIcons | Generic;
-
-function isIconProp(icon: IconProp | undefined): icon is IconProp {
-  return (
-    icon !== undefined &&
-    (typeof icon === 'string' || React.isValidElement(icon))
-  );
-}
+import Image from 'next/image';
 
 export const HowToStep = ({
   index,
-  stepIcon,
+  iconURL,
   title,
   description,
   theme,
@@ -39,7 +28,7 @@ export const HowToStep = ({
       sx={{ maxWidth: '15em', minWidth: 'auto' }}
     >
       {/** Step with icon */}
-      {stepIcon && (
+      {iconURL && (
         <Stack spacing={1.2}>
           <Stack spacing={1.2}>
             <HowToStepNum variant='overline' color={color2} stepNum={stepNum} />
@@ -49,14 +38,12 @@ export const HowToStep = ({
               direction='row'
               color={isDarkTheme ? 'white' : undefined}
             >
-              {stepIcon && isIconProp(stepIcon.icon) && (
-                <EIcon
-                  {...stepIcon}
-                  icon={stepIcon.icon}
-                  color={color2}
-                  sx={{ width: '64px', height: '64px' }}
-                />
-              )}
+              <Image
+                src={iconURL}
+                alt=''
+                height={64}
+                width={64}
+              />
               {!isLastStep && (
                 <Box
                   sx={{
@@ -85,7 +72,7 @@ export const HowToStep = ({
       )}
 
       {/** Step without icon */}
-      {!stepIcon && (
+      {!iconURL && (
         <Stack spacing={1.2}>
           <HowToStepNum
             variant='h6'

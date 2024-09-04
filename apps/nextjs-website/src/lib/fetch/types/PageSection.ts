@@ -2,14 +2,16 @@ import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
 import { StrapiImageRequiredSchema, StrapiImageSchema } from './StrapiImage';
 import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
-import { HowToStepMUIIconCodec } from './icons/HowToStepIcon';
-import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
-import { CardsItemMUIIconCodec } from './icons/CardsItemIcon';
 import { StoreButtonsCodec } from './StoreButtons';
 
 const LinkCodec = t.strict({
   label: t.string,
   href: t.string,
+});
+
+const ThemedIconCodec = t.strict({
+  light: StrapiImageRequiredSchema,
+  dark: StrapiImageRequiredSchema,
 });
 
 const HeroSectionCodec = t.strict({
@@ -79,11 +81,10 @@ const AccordionSectionCodec = t.strict({
 
 const FeatureItemCodec = t.strict({
   id: t.number,
-  icon: FeatureItemMUIIconCodec,
+  themedIcon: ThemedIconCodec,
   title: t.string,
   subtitle: t.string,
-  linkText: t.union([t.string, t.null]),
-  linkURL: t.union([t.string, t.null]),
+  link: t.union([LinkCodec, t.null]),
 });
 
 const FeatureSectionCodec = t.strict({
@@ -98,7 +99,7 @@ const FeatureSectionCodec = t.strict({
 const StepCodec = t.strict({
   title: t.string,
   description: t.string,
-  icon: t.union([HowToStepMUIIconCodec, t.null]),
+  themedIcon: t.union([ThemedIconCodec, t.null]),
 });
 
 const HowToSectionCodec = t.strict({
@@ -134,7 +135,7 @@ const StripeLinkSectionCodec = t.strict({
   __component: t.literal('sections.stripe-link'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   subtitle: t.string,
-  icon: t.union([StripeLinkMUIIconCodec, t.null]),
+  icon: StrapiImageSchema,
   buttonText: t.union([t.string, t.null]),
 });
 
@@ -143,7 +144,7 @@ const CardsItemCodec = t.strict({
   title: t.string,
   text: t.union([t.string, t.null]),
   links: t.array(LinkCodec),
-  icon: t.union([CardsItemMUIIconCodec, t.null]),
+  icon: StrapiImageSchema,
 });
 
 const CardsSectionCodec = t.strict({

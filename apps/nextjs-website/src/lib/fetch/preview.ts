@@ -53,7 +53,6 @@ export const fetchPageFromID = ({
       `${
         extractTenantStrapiApiData(config).baseUrl
       }/api/pages/${pageID}?publicationState=preview
-      &populate[seo][populate][0]=metaTitle
       &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon
       &populate[sections][populate][1]=items.links,items.link,items.icon,items.themedIcon.light,items.themedIcon.dark
       &populate[sections][populate][2]=sections.decoration,sections.ctaButtons
