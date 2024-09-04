@@ -73,7 +73,8 @@ describe('getNavigation', () => {
       &populate[sections][populate][2]=sections.decoration,sections.ctaButtons
       &populate[sections][populate][3]=sections.content.image,sections.content.mobileImage,sections.content.ctaButtons,sections.content.storeButtons
       &populate[sections][populate][4]=video.src
-      &populate[sections][populate][5]=steps.themedIcon.light,steps.themedIcon.dark`,
+      &populate[sections][populate][5]=steps.themedIcon.light,steps.themedIcon.dark
+      &populate[sections][populate][6]=cards.image,cards.link`,
       {
         method: 'GET',
         headers: {

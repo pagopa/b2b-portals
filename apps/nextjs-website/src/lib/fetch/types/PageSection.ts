@@ -277,6 +277,21 @@ const HeroChipsSectionCodec = t.strict({
   centerText: t.boolean,
 });
 
+const ServiceCardCodec = t.strict({
+  title: t.string,
+  link: LinkCodec,
+  image: StrapiImageSchema,
+  description: t.union([t.string, t.null]),
+});
+
+const ServiceCarouselSectionCodec = t.strict({
+  __component: t.literal('sections.service-carousel'),
+  title: t.string,
+  description: t.union([t.string, t.null]),
+  eyelet: t.union([t.string, t.null]),
+  cards: t.array(ServiceCardCodec),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -294,6 +309,7 @@ export const PageSectionCodec = t.union([
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
   HeroChipsSectionCodec,
+  ServiceCarouselSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -315,3 +331,6 @@ export type EditorialSwitchSection = t.TypeOf<
 >;
 export type VideoImageSection = t.TypeOf<typeof VideoImageSectionCodec>;
 export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
+export type ServiceCarouselSection = t.TypeOf<
+  typeof ServiceCarouselSectionCodec
+>;
