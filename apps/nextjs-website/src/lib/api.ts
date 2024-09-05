@@ -39,11 +39,9 @@ export const getAllPages = async (
 // Return PreHeaderProps
 export const getPreHeaderProps = async (
   locale: 'it' | 'en'
-): Promise<PreHeaderData['data']['attributes']> => {
-  const {
-    data: { attributes },
-  } = await getPreHeader({ ...appEnv, locale });
-  return attributes;
+): Promise<PreHeaderAttributes | null> => {
+  const { data } = await getPreHeader({ ...appEnv, locale });
+  return data?.attributes ?? null;
 };
 
 export const getHeaderProps = async (
