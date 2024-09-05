@@ -11,7 +11,7 @@ import {
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
 
-const StripeLink = ({ icon, subtitle, theme, buttonText, sectionID }: StripeLinkProps) => {
+const StripeLink = ({ iconURL, subtitle, theme, buttonText, sectionID }: StripeLinkProps) => {
   const textAlternativeColor = TextAlternativeColor(theme);
   const textColorWhiteOnly = TextColor('dark');
   const backgroundColor = BackgroundColor(theme);
