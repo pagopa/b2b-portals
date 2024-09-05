@@ -120,7 +120,7 @@ describe('getPreHeader', () => {
       json: () => Promise.resolve(emptyPreHeaderResponse),
     } as unknown as Response);
 
-    const actual = getPreHeader(appEnv);
+    const actual = getPreHeader({ ...appEnv, locale: 'it' });
 
     // Use preHeaderResponse directly as the expected value
     expect(await actual).toStrictEqual({ data: null });

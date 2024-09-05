@@ -40,7 +40,7 @@ export async function generateStaticParams() {
     (locale) => general.locales[locale as 'it' | 'en']
   );
 
-  return locales.map((locale) => ({ locale }));
+  return locales.map((locale) => ({ locale: locale === 'it' ? '' : locale }));
 }
 
 export default async function RootLayout({
@@ -77,7 +77,7 @@ export default async function RootLayout({
     <ThemeProvider theme={theme}>
       <html lang='it'>
         <body style={{ margin: 0 }}>
-          <PreHeader {...preHeaderProps} />
+          {preHeaderProps && <PreHeader {...preHeaderProps} />}
           <Header {...headerProps} />
           {children}
           <Footer
