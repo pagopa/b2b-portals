@@ -110,8 +110,15 @@ export const getAllPageIDs = async (
     },
     fetchFun: appEnv.fetchFun,
   };
-  const { data } = await fetchAllPageIDs(appEnvWithRequestedTenant);
-  return data;
+  const pageIDs_it = await fetchAllPageIDs({
+    ...appEnvWithRequestedTenant,
+    locale: 'it',
+  });
+  const pageIDs_en = await fetchAllPageIDs({
+    ...appEnvWithRequestedTenant,
+    locale: 'en',
+  });
+  return [...pageIDs_it.data, ...pageIDs_en.data];
 };
 
 export const getPageSectionsFromID = async (
