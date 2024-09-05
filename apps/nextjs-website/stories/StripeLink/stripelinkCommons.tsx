@@ -8,7 +8,7 @@ export const StripeLinkTemplate: StoryFn<StripeLinkProps> = (args) => <StripeLin
 // Function to generate default props
 const generateDefaultProps = (theme: 'dark' | 'light'): Partial<StripeLinkProps> => ({
   theme,
-  subtitle: 'StripeLink Subtitle',
+  subtitle: <p>StripeLink Subtitle</p>,
 });
 
 // Define the default props

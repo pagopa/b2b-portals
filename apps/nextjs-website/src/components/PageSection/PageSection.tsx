@@ -14,6 +14,7 @@ import EditorialSwitch from '../EditorialSwitch';
 import HeroCounter from '../HeroCounter';
 import VideoImage from '../VideoImage';
 import HeroChips from '../HeroChips';
+import ServiceCarousel from '../ServiceCarousel';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
@@ -49,6 +50,8 @@ const PageSection = (props: PageSectionData) => {
       return <VideoImage {...props} />;
     case 'sections.hero-chips':
       return <HeroChips {...props} />;
+    case 'sections.service-carousel':
+      return <ServiceCarousel {...props} />;
     default:
       return null;
   }
