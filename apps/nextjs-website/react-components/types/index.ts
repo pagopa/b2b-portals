@@ -18,6 +18,7 @@ import { MegaHeaderProps } from './MegaHeader/MegaHeader.types';
 import { VideoImageProps } from './VideoImage/VideoImage.types';
 import { HeroChipsProps } from './HeroChips/HeroChips.types';
 import { ServiceCarouselProps } from './ServiceCarousel/ServiceCarousel.types';
+import { PressReleaseProps } from './PressRelease/PressRelease.types';
 
 export type {
   HeroProps,
@@ -40,4 +41,5 @@ export type {
   VideoImageProps,
   HeroChipsProps,
   ServiceCarouselProps,
+  PressReleaseProps,
 };

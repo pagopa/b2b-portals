@@ -18,6 +18,7 @@ import MegaHeader from './MegaHeader/MegaHeader';
 import VideoImage from './VideoImage/VideoImage';
 import HeroChips from './HeroChips/HeroChips';
 import ServiceCarousel from './ServiceCarousel/ServiceCarousel';
+import PressRelease from './PressRelease/PressRelease';
 
 export {
   Hero,
@@ -40,4 +41,5 @@ export {
   VideoImage,
   HeroChips,
   ServiceCarousel,
+  PressRelease,
 };
