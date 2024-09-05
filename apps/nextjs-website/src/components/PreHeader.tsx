@@ -1,7 +1,7 @@
 'use client';
 import { PreHeader as PreHeaderRC } from '@react-components/components';
 import { PreHeaderProps } from '@react-components/types';
-import { PreHeaderData } from '@/lib/fetch/preHeader';
+import { PreHeaderAttributes } from '@/lib/fetch/preHeader';
 import Icon from '@/components/Icon';
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
 
@@ -9,7 +9,7 @@ import { CtaButtonProps } from '@react-components/types/common/Common.types';
 // Styling 'naked' variant for PreHeader using 'text' variant as a base
 // (since editorial-components does not accept 'naked' variant)
 const makeCtas = (
-  ctaButtons: PreHeaderData['data']['attributes']['leftCtas']
+  ctaButtons: PreHeaderAttributes['leftCtas']
 ): CtaButtonProps[] =>
   ctaButtons.map((ctaBtn) => ({
     ...ctaBtn,
@@ -19,14 +19,12 @@ const makeCtas = (
     ...(ctaBtn.icon && { startIcon: Icon(ctaBtn.icon) }),
   }));
 
-const makePreHeaderProps = (
-  props: PreHeaderData['data']['attributes']
-): PreHeaderProps => ({
+const makePreHeaderProps = (props: PreHeaderAttributes): PreHeaderProps => ({
   leftCtas: makeCtas(props.leftCtas),
   rightCtas: makeCtas(props.rightCtas),
 });
 
-const PreHeader = (preHeaderData: PreHeaderData['data']['attributes']) => (
+const PreHeader = (preHeaderData: PreHeaderAttributes) => (
   <PreHeaderRC {...makePreHeaderProps(preHeaderData)} />
 );
 
