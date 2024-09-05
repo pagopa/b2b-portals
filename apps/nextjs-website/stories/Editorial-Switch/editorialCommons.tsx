@@ -23,6 +23,7 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<EditorialSwitchP
       id: 1,
       buttonText: 'Button 1' ,
       content: {
+        sectionID: null,
         theme: 'light',
         title: 'Editorial 1',
         body: 'Light Editorial',
@@ -35,6 +36,7 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<EditorialSwitchP
       id: 2,
       buttonText: 'Button 2' ,
       content: {
+        sectionID: null,
         theme: 'dark',
         title: 'Editorial 2',
         body: 'Dark Editorial',

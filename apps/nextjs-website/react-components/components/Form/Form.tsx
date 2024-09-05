@@ -44,6 +44,7 @@ const Form = ({
   showSurname,
   showOrganization,
   recaptchaSiteKey,
+  sectionID,
 }: FormProps) => {
   const backgroundColor = BackgroundColorAlternative(theme);
   const textColor = TextColor(theme);
@@ -259,6 +260,8 @@ const Form = ({
         color: textColor,
         position: 'relative',
       }}
+      component='section'
+      {...sectionID && { id: sectionID }}
     >
       <MailOutlineIcon
         sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }}

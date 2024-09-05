@@ -1,4 +1,4 @@
-import { Theme } from "../common/Common.types";
+import { SectionProps, Theme } from "../common/Common.types";
 
 export interface FeatureItem {
   readonly iconURL: string;
@@ -15,10 +15,9 @@ export interface FeatureStackItemProps {
   readonly theme: 'dark' | 'light';
 }
 
-export interface FeatureProps {
+export interface FeatureProps extends SectionProps {
   readonly title: string;
   readonly items: ReadonlyArray<FeatureItem>;
-  readonly theme: 'dark' | 'light';
   readonly showCarouselMobile?: boolean;
   readonly background?: string;
 }

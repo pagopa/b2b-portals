@@ -15,6 +15,7 @@ interface ContainerProps {
   spacing?: GridProps['spacing'];
   sx?: GridProps['sx'];
   size?: 'lg' | 'xl';
+  sectionID?: string;
 }
 
 const ContainerRC = (props: ContainerProps) => {
@@ -28,12 +29,14 @@ const ContainerRC = (props: ContainerProps) => {
     spacing = 0,
     sx = {},
     size = 'lg',
+    sectionID,
   } = props;
   const backgroundIsJSX = isJSX(background);
 
   return (
     <Box
       component='section'
+      id={sectionID}
       sx={{ px: { xs: 4 }, position: 'relative', overflow: 'hidden' }}
       py={py}
       px={px}

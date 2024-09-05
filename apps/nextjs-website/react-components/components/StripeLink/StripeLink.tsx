@@ -11,7 +11,7 @@ import {
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
 
-const StripeLink = ({ iconURL, subtitle, theme, buttonText }: StripeLinkProps) => {
+const StripeLink = ({ iconURL, subtitle, theme, buttonText, sectionID }: StripeLinkProps) => {
   const textAlternativeColor = TextAlternativeColor(theme);
   const textColorWhiteOnly = TextColor('dark');
   const backgroundColor = BackgroundColor(theme);
@@ -22,6 +22,7 @@ const StripeLink = ({ iconURL, subtitle, theme, buttonText }: StripeLinkProps) =
       background={extraBackgroundColor}
       py={2}
       sx={{ justifyContent: { xs: 'start', md: 'start' } }}
+      {...sectionID && { sectionID }}
     >
       <Grid item>
         <Stack

@@ -1,5 +1,5 @@
 import { LinkProps, StackProps } from "@mui/material";
-import { CommonProps } from "../common/Common.types";
+import { Theme } from "../common/Common.types";
 import { EIconProps } from "@react-components/components/common/EIcon";
 import { HeaderSideDrawer } from "@/lib/fetch/header";
 
@@ -22,9 +22,7 @@ interface DropdownLink extends LinkProps {
 
 export type DropdownItem = DropdownLink;
 
-export interface MenuDropdownProp
-  extends Partial<Omit<LinkProps, 'children'>>,
-    CommonProps {
+export interface MenuDropdownProp extends Partial<Omit<LinkProps, 'children'>> {
   label: string;
   active?: boolean;
   items?: DropdownItem[];
@@ -32,13 +30,16 @@ export interface MenuDropdownProp
   onClick?: () => void;
   isMobile?: boolean;
   onDropdownClick?: () => void;
+  theme: Theme;
 }
 
-export interface NavigationProps extends CommonProps {
+export interface NavigationProps {
   menu: MenuDropdownProp[];
+  theme: Theme;
 }
 
-export interface HeaderTitleProps extends CommonProps {
+export interface HeaderTitleProps {
+  theme: Theme;
   product: {
     name: string;
     href?: string;
