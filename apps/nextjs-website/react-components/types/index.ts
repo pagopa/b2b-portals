@@ -17,6 +17,7 @@ import { HeroCounterProps } from './HeroCounter/HeroCounter.types';
 import { MegaHeaderProps } from './MegaHeader/MegaHeader.types';
 import { VideoImageProps } from './VideoImage/VideoImage.types';
 import { HeroChipsProps } from './HeroChips/HeroChips.types';
+import { ServiceCarouselProps } from './ServiceCarousel/ServiceCarousel.types';
 import { RowTextProps } from './RowText/RowText.types';
 
 export type {
@@ -39,5 +40,6 @@ export type {
   MegaHeaderProps,
   VideoImageProps,
   HeroChipsProps,
+  ServiceCarouselProps,
   RowTextProps,
 };

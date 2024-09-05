@@ -61,7 +61,7 @@ export default async function RootLayout({
     <ThemeProvider theme={theme}>
       <html lang='it'>
         <body style={{ margin: 0 }}>
-          <PreHeader {...preHeaderProps} />
+          {preHeaderProps && <PreHeader {...preHeaderProps} />}
           <Header {...headerProps} />
           {children}
           <Footer {...footerProps} />

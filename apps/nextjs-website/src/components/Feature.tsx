@@ -8,13 +8,13 @@ const makeFeatureProps = ({
   ...rest
 }: FeatureSection): FeatureProps => ({
   items: items.map((item) => ({
-    stackIcon: { icon: item.icon },
     title: item.title,
     subtitle: item.subtitle,
-    ...(item.linkText &&
-      item.linkURL && {
-        link: { text: item.linkText, url: item.linkURL },
-      }),
+    iconURL: (rest.theme === 'dark'
+      ? item.themedIcon.dark
+      : item.themedIcon.light
+    ).data.attributes.url,
+    ...(item.link && { link: item.link }),
   })),
   ...rest,
 });

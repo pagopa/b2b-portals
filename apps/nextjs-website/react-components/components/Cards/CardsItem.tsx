@@ -1,13 +1,13 @@
 import { Card, CardContent, Typography, Stack, Link, Box } from '@mui/material';
-import { EIcon } from '../common/EIcon';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { CardsItemProps } from '../../types/Cards/Cards.types';
 import { Title, Body } from '../common/Common';
+import Image from 'next/image';
 
 const CardsItem = ({
   title,
   text,
-  cardIcon,
+  iconURL,
   links,
   textAlign,
   label,
@@ -27,7 +27,7 @@ const CardsItem = ({
       <CardContent>
         <Stack px={4} justifyContent='flex-start' alignItems='flex-start' fontFamily='"Titillium Web",sans-serif'>
           <Box mb={2} color='primary.dark'>
-            {cardIcon?.icon && <EIcon icon={cardIcon.icon} fontSize='large' />}
+            {iconURL && <Image src={iconURL} alt='' height={40} width={40} />}
           </Box>
           {label && (
             <Typography
@@ -73,7 +73,7 @@ const CardsItem = ({
                     fontSize={14}
                     fontWeight={600}
                   >
-                    {link.text}
+                    {link.label}
                   </Link>
                   <ArrowRightAltIcon sx={{ color: 'inherit', fontSize: 18, marginLeft: 1 }} />
                 </Stack>

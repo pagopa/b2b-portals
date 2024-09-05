@@ -17,6 +17,7 @@ import HeroCounter from './HeroCounter/HeroCounter';
 import MegaHeader from './MegaHeader/MegaHeader';
 import VideoImage from './VideoImage/VideoImage';
 import HeroChips from './HeroChips/HeroChips';
+import ServiceCarousel from './ServiceCarousel/ServiceCarousel';
 import RowText from './RowText/RowText';
 
 export {
@@ -39,5 +40,6 @@ export {
   MegaHeader,
   VideoImage,
   HeroChips,
+  ServiceCarousel,
   RowText,
 };

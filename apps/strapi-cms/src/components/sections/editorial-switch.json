@@ -20,7 +20,7 @@
       "required": true
     },
     "subtitle": {
-      "type": "string"
+      "type": "richtext"
     },
     "sections": {
       "type": "component",

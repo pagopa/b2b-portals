@@ -19,6 +19,7 @@ const HowTo = (props: HowToProps) => {
     link,
     rowMaxSteps = 4,
     stepsAlignment = 'center',
+    sectionID,
   } = props;
   const textColor = TextColor(theme);
   const backgroundColor = BackgroundColorAlternative(theme);
@@ -30,7 +31,7 @@ const HowTo = (props: HowToProps) => {
   const stepsRows = groupStepsByRows(steps, rowMaxSteps);
 
   return (
-    <ContainerRC background={backgroundColor} py={{ xs: 6, md: 8 }}>
+    <ContainerRC background={backgroundColor} py={{ xs: 6, md: 8 }} {...sectionID && { sectionID }}>
       <Grid item xs={12}>
         {/** Section title */}
         <Title

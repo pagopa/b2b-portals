@@ -1,4 +1,4 @@
-import { CommonProps } from '../common/Common.types';
+import { SectionProps } from '../common/Common.types';
 
 interface FormFields {
   readonly showName: boolean;
@@ -16,7 +16,7 @@ interface FormCategories {
   }[];
 }
 
-export interface FormProps extends CommonProps, FormFields, FormCategories {
+export interface FormProps extends SectionProps, FormFields, FormCategories {
   readonly title: string;
   readonly subtitle?: string;
   readonly clientID: 'io' | 'pagopa';
