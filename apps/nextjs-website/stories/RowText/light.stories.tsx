@@ -19,9 +19,3 @@ RowTextLightCenterLayout.args = {
   ...defaultPropsLight,
   layout: 'center',
 };
-
-export const RowTextLightRightLayout: StoryFn<typeof RowText> = RowTextTemplate.bind({});
-RowTextLightRightLayout.args = {
-  ...defaultPropsLight,
-  layout: 'right',
-};

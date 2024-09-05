@@ -4,13 +4,14 @@ import { RowTextProps } from '../../types/RowText/RowText.types';
 import { TextColor, BackgroundColor } from '../common/Common.helpers';
 
 const RowText = (props: RowTextProps) => {
-  const { title, subtitle, body, layout = 'left', theme = 'light' } = props;
-  const textColor = TextColor(theme);
-  const backgroundColor = BackgroundColor(theme);
+  const { title, subtitle, body, layout, sectionID } = props;
+  const textColor = TextColor('light');
+  const backgroundColor = BackgroundColor('light');
 
   return (
     <Box
       component="section"
+      {...(sectionID && { id: sectionID })}
       sx={{
         width: '100%',
         bgcolor: backgroundColor,
@@ -25,7 +26,7 @@ const RowText = (props: RowTextProps) => {
           mx: 'auto', 
           textAlign: layout, 
           ml: { xs: 'auto', md: layout === 'left' ? 16 : 'auto' }, 
-          mr: { xs: 'auto', md: layout === 'right' ? 16 : 'auto' }, 
+          mr: { xs: 'auto' }, 
         }}
       >
         <Typography

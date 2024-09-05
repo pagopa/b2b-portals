@@ -10,15 +10,6 @@ export const defaultPropsLight: Partial<RowTextProps> = {
   title: 'Lorem ipsum dolor sit amet',
   subtitle: 'Consectetur adipiscing elit',
   body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  layout: 'left',
-  theme: 'light',
+  layout: 'center',
 };
 
-// Define the default props with dark theme
-export const defaultPropsDark: Partial<RowTextProps> = {
-  title: 'Lorem ipsum dolor sit amet',
-  subtitle: 'Consectetur adipiscing elit',
-  body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  layout: 'left',
-  theme: 'dark',
-};

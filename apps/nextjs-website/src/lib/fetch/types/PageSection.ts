@@ -281,7 +281,7 @@ const RowTextSectionCodec = t.strict({
   title: t.string,
   subtitle: t.union([t.string, t.null]),
   body: t.union([t.string, t.null]),
-  layout: t.union([t.literal('left'), t.literal('center'), t.literal('right')]),
+  layout: t.union([t.literal('left'), t.literal('center')]),
   sectionID: t.union([t.string, t.null]),
 });
 
