@@ -16,6 +16,7 @@ const Feature = ({
   theme,
   showCarouselMobile,
   background,
+  sectionID,
 }: FeatureProps) => {
   const [activeStep, setActiveStep] = useState(0);
   const muiTheme = useTheme();
@@ -32,6 +33,7 @@ const Feature = ({
     <ContainerRC
       background={background ?? backgroundColorAlernative}
       py={{ xs: 4, sm: 4, md: 8 }}
+      {...sectionID && { sectionID }}
     >
       <Grid item xs={12}>
         <Title variant='h4' textColor={textColor} title={title} />

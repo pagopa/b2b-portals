@@ -1,8 +1,7 @@
-import { Generic } from "../common/Common.types";
+import { SectionProps } from "../common/Common.types";
 
-export interface StripeLinkProps {
-  theme: 'dark' | 'light';
-  subtitle: Generic | string;
+export interface StripeLinkProps extends SectionProps {
+  subtitle: JSX.Element;
   iconURL?: string;
   buttonText?: string;
 }

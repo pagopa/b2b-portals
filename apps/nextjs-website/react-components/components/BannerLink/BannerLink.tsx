@@ -27,7 +27,7 @@ const styles = {
   },
 };
 
-const BannerLink = ({ theme, sections }: BannerLinkProps) => {
+const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
   const { palette } = useTheme();
   const backgroundColor = BackgroundColor(theme);
 
@@ -43,6 +43,7 @@ const BannerLink = ({ theme, sections }: BannerLinkProps) => {
     <Box
       bgcolor={backgroundColor}
       component='section'
+      {...(sectionID && { id: sectionID })}
       sx={{ width: '100%', padding: 0, margin: 0 }}
     >
       <Stack sx={sections.length > 1 ? styles.twoColumns : styles.main}>

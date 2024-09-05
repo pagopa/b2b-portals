@@ -120,6 +120,7 @@ const HowToSectionCodec = t.strict({
 const BannerLinkSectionCodec = t.strict({
   __component: t.literal('sections.banner-link'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
   sections: t.array(
     t.strict({
       title: t.string,
@@ -137,6 +138,7 @@ const StripeLinkSectionCodec = t.strict({
   subtitle: t.string,
   icon: StrapiImageSchema,
   buttonText: t.union([t.string, t.null]),
+  sectionID: t.union([t.string, t.null]),
 });
 
 const CardsItemCodec = t.strict({
@@ -191,6 +193,7 @@ const FormSectionCodec = t.strict({
     io: null,
     pagopa: null,
   }),
+  sectionID: t.union([t.string, t.null]),
 });
 
 const PreFooterSectionCodec = t.strict({
@@ -199,6 +202,7 @@ const PreFooterSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
   background: StrapiImageSchema,
+  sectionID: t.union([t.string, t.null]),
 });
 
 const CounterCodec = t.strict({

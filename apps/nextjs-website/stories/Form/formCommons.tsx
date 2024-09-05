@@ -5,6 +5,7 @@ import Form from '@react-components/components/Form/Form';
 const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   title: 'Resta aggiornato, iscriviti alla newsletter!',
   theme,
+  sectionID: null,
   showName: true,
   showSurname: true,
   showOrganization: true,

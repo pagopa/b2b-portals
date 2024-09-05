@@ -1,7 +1,6 @@
-import { CommonProps } from '../common/Common.types';
+import { SectionProps, Theme } from '../common/Common.types';
 
-export interface VideoImageProps extends VideoTextProps, VideoCaptionProps {
-  sectionID?: string;
+export interface VideoImageProps extends SectionProps, VideoTextProps, VideoCaptionProps {
   image?: {
     src: string;
     alt: string;
@@ -17,14 +16,15 @@ export interface VideoImageProps extends VideoTextProps, VideoCaptionProps {
   };
 }
 
-export interface VideoTextProps extends CommonProps {
-  title?: string;
-  subtitle?: string;
+export interface VideoTextProps {
+  readonly title?: string;
+  readonly subtitle?: string;
+  readonly theme: Theme;
 }
 
-export interface VideoCaptionProps extends CommonProps {
-  caption?: string;
-  isCentered: boolean;
+export interface VideoCaptionProps {
+  readonly caption?: string;
+  readonly isCentered: boolean;
 }
 
 export interface RenderVideoProps {

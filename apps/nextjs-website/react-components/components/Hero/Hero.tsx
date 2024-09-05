@@ -16,6 +16,7 @@ const Hero = (props: HeroProps) => {
     useHoverlay = true,
     image,
     altText = '',
+    sectionID,
   } = props;
 
   const minHeight = getMinHeight(size);
@@ -47,6 +48,7 @@ const Hero = (props: HeroProps) => {
       size='xl'
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
+      {...sectionID && { sectionID }}
     >
       {(size === 'medium' || size === 'big') && (
         <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />

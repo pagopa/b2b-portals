@@ -28,6 +28,10 @@
       ],
       "type": "media",
       "multiple": false
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
     }
   }
 }
