@@ -21,7 +21,7 @@
       "type": "string",
       "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "sections": {
       "type": "dynamiczone",
@@ -39,7 +39,8 @@
         "sections.form",
         "sections.editorial-switch",
         "sections.video-image",
-        "sections.hero-counter"
+        "sections.hero-counter",
+        "sections.service-carousel"
       ],
       "required": true,
       "min": 1

@@ -1,7 +1,6 @@
-import { EIconProps } from '../../components/common/EIcon';
-import { CommonProps, CtaButtonProps, Generic } from '../common/Common.types';
+import { SectionProps, CtaButtonProps, Generic } from '../common/Common.types';
 
-export interface CardsProps extends CommonProps {
+export interface CardsProps extends SectionProps {
   items: CardsItemProps[];
   text: {
     title?: string;
@@ -14,13 +13,13 @@ export interface CardsProps extends CommonProps {
 
 export interface CardsItemProps {
   textAlign?: 'center' | 'left';
-  cardIcon?: EIconProps;
+  iconURL?: string;
   label?: string;
   title: string;
   text?: string;
   links?: Array<{
     href: string;
-    text: string;
+    label: string;
     title?: string;
   }>;
   masonry?: boolean;

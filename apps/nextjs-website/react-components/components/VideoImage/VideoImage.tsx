@@ -21,6 +21,7 @@ const VideoImage = ({
   theme,
   image,
   video,
+  sectionID,
 }: VideoImageProps) => {
   if (!image && !video) {
     // Disable lint for this case because we want the build to fail if user input nothing
@@ -88,12 +89,13 @@ const VideoImage = ({
 
   return (
     <>
-      <div
+      <section
         style={{
           maxHeight: isMobileDevice ? '100vh' : '600px',
           position: 'relative',
           overflow: 'hidden',
         }}
+        {...sectionID && { id: sectionID }}
       >
         {video?.showControls &&
           (mediaState === 'stop' || mediaState === 'pause') && (
@@ -182,9 +184,9 @@ const VideoImage = ({
               onClick: pause,
               isMobileDevice,
             })}
-      </div>
+      </section>
       {caption && (
-        <VideoCaption caption={caption} theme={theme} isCentered={isCentered} />
+        <VideoCaption caption={caption} isCentered={isCentered} />
       )}
     </>
   );

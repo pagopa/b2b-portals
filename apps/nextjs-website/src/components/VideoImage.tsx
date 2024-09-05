@@ -4,7 +4,6 @@ import { VideoImageProps } from '@react-components/types';
 import { VideoImageSection } from '@/lib/fetch/types/PageSection';
 
 const makeVideoImageProps = ({
-  sectionID,
   title,
   subtitle,
   caption,
@@ -13,7 +12,6 @@ const makeVideoImageProps = ({
   ...rest
 }: VideoImageSection): VideoImageProps => ({
   ...rest,
-  ...(sectionID && { sectionID }),
   ...(title && { title }),
   ...(subtitle && { subtitle }),
   ...(caption && { caption }),

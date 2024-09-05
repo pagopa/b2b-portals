@@ -14,6 +14,7 @@ const HeroCounter = ({
   link,
   counter,
   background,
+  sectionID,
 }: HeroCounterProps) => {
   const backgroundColor = BackgroundColor(theme);
   const textColor = TextColor(theme);
@@ -50,6 +51,7 @@ const HeroCounter = ({
         justifyContent: 'space-between',
         py: 4,
       }}
+      {...sectionID && { sectionID }}
     >
       <Box
         sx={{

@@ -14,18 +14,11 @@
       "type": "richtext",
       "required": true
     },
-    "icon": {
-      "type": "enumeration",
-      "enum": [
-        "UploadFileOutlined",
-        "CachedRounded",
-        "ForwardToInboxOutlined",
-        "MarkEmailReadOutlined",
-        "NotificationsActiveOutlined",
-        "GradingOutlined",
-        "AccountBalanceWalletOutlined",
-        "GroupAddOutlined"
-      ]
+    "themedIcon": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.themed-icon",
+      "required": false
     }
   }
 }
