@@ -38,7 +38,7 @@ export const TitleSubtitleBlock = ({
         variant='h4'
         textColor={textColor}
         title={title}
-        textAlign='left'
+        textAlign='center'
         marginTop={3}
         marginBottom={3}
       />

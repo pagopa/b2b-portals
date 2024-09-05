@@ -53,7 +53,8 @@
         "sections.form",
         "sections.editorial-switch",
         "sections.video-image",
-        "sections.hero-counter"
+        "sections.hero-counter",
+        "sections.service-carousel"
       ],
       "required": true,
       "min": 1,

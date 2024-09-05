@@ -13,10 +13,11 @@ const makeHowToProps = ({
   steps: steps.map((step) => ({
     title: step.title,
     description: MarkdownRenderer({ markdown: step.description }),
-    ...(step.icon && {
-      stepIcon: {
-        icon: step.icon,
-      },
+    ...(step.themedIcon && {
+      iconURL: (rest.theme === 'dark'
+        ? step.themedIcon.dark
+        : step.themedIcon.light
+      ).data.attributes.url,
     }),
   })),
   ...rest,

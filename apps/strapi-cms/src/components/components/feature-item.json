@@ -14,25 +14,17 @@
       "type": "string",
       "required": true
     },
-    "linkText": {
-      "type": "string"
-    },
-    "linkURL": {
-      "type": "string"
-    },
-    "icon": {
-      "type": "enumeration",
-      "enum": [
-        "HubOutlined",
-        "AutoFixHighOutlined",
-        "MarkunreadMailboxOutlined",
-        "CheckCircleOutlined",
-        "SavingsOutlined",
-        "HourglassEmptyRounded",
-        "EnergySavingsLeafOutlined",
-        "CloudOutlined"
-      ],
+    "themedIcon": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.themed-icon",
       "required": true
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link",
+      "required": false
     }
   }
 }

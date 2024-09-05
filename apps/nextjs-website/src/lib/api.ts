@@ -3,7 +3,7 @@ import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
 import { AppEnv, Config, makeAppEnv } from '../AppEnv';
 import { getNavigation, PageData } from './fetch/navigation';
-import { PreHeaderData, getPreHeader } from './fetch/preHeader';
+import { PreHeaderAttributes, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
 import { getHeader, HeaderData } from './fetch/header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
