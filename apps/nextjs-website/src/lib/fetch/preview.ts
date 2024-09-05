@@ -26,12 +26,13 @@ export type PreviewPageData = t.TypeOf<typeof PreviewPageDataCodec>;
 export const fetchAllPageIDs = ({
   config,
   fetchFun,
-}: AppEnv): Promise<PageIDs> =>
+  locale,
+}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<PageIDs> =>
   extractFromResponse(
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pages?publicationState=preview&pagination[pageSize]=100`,
+      }/api/pages?publicationState=preview&pagination[pageSize]=100&locale=${locale}`,
       {
         method: 'GET',
         headers: {
