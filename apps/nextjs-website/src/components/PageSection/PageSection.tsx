@@ -15,6 +15,7 @@ import HeroCounter from '../HeroCounter';
 import VideoImage from '../VideoImage';
 import HeroChips from '../HeroChips';
 import ServiceCarousel from '../ServiceCarousel';
+import RowText from '../RowText';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
@@ -52,6 +53,8 @@ const PageSection = (props: PageSectionData) => {
       return <HeroChips {...props} />;
     case 'sections.service-carousel':
       return <ServiceCarousel {...props} />;
+    case 'sections.row-text':
+      return <RowText {...props} />;
     default:
       return null;
   }
