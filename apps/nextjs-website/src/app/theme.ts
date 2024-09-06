@@ -20,6 +20,9 @@ declare module '@mui/material/styles' {
       readonly blueIO: {
         readonly 500: string;
       };
+      readonly lightGreen: string;
+      readonly purple: string;
+      readonly lightPurple: string;
     };
   }
   // interface PaletteOptions {
@@ -65,6 +68,9 @@ export const theme = createTheme(MUIItaliaTheme, {
       blueIO: {
         500: '#0B3EE3',
       },
+      lightGreen: '#EFFBFF',
+      purple: '#5517E3',
+      lightPurple: '#DDD1F9',
     },
   },
 });

@@ -296,6 +296,17 @@ const ServiceCarouselSectionCodec = t.strict({
   cards: t.array(ServiceCardCodec),
 });
 
+const HighlightBoxSectionCodec = t.strict({
+  __component: t.literal('sections.highlight-box'),
+  eyelet: t.union([t.string, t.null]),
+  title: t.string,
+  body: t.string,
+  buttonText: t.union([t.string, t.null]),
+  buttonHref: t.union([t.string, t.null]),
+  imageUrl: StrapiImageRequiredSchema,
+  sectionID: t.union([t.string, t.null]),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -314,6 +325,7 @@ export const PageSectionCodec = t.union([
   VideoImageSectionCodec,
   HeroChipsSectionCodec,
   ServiceCarouselSectionCodec,
+  HighlightBoxSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -338,3 +350,4 @@ export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
 export type ServiceCarouselSection = t.TypeOf<
   typeof ServiceCarouselSectionCodec
 >;
+export type HighlightBoxSection = t.TypeOf<typeof HighlightBoxSectionCodec>;
