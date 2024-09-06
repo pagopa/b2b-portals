@@ -56,13 +56,13 @@ const Stats = ({ eyelet, title, body, stats, sectionID }: StatsProps) => {
       overflow='hidden'
       sx={{
         px: { xs: 4, md: 16 },
+        backgroundColor: 'background.paper'
       }}
     >
       <Stack
         direction={{ xs: 'column', lg: 'row' }}
         gap={2}
-        mb={4}
-        alignItems='start'
+        alignItems='center'
       >
         <Box flex={1} textAlign='left' sx={{ mb: 4 }}>
           {eyelet && (
