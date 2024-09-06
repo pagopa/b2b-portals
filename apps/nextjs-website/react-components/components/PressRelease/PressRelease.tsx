@@ -1,23 +1,38 @@
 import React from 'react';
 import { Box, Typography, Container, Stack, Link } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { PressReleaseProps } from '@react-components/types/PressRelease/PressRelease.types';
+
 import {
   TextColor,
   ExtraTextColor,
   BackgroundColor,
 } from '../common/Common.helpers';
 
-const PressRelease = (props: PressReleaseProps) => {
-  const { eyelet, title, subtitle, body, ctaText, ctaHref, theme } = props;
-
-  const textColor = TextColor(theme);
-  const eyeletColor = ExtraTextColor(theme);
-  const backgroundColor = BackgroundColor(theme);
+const PressRelease = ({
+  eyelet,
+  title,
+  subtitle,
+  body,
+  ctaText,
+  ctaHref,
+  sectionID,
+}: {
+  eyelet: string;
+  title: string;
+  subtitle?: string;
+  body: string;
+  ctaText: string;
+  ctaHref: string;
+  sectionID: string;
+}) => {
+  const textColor = TextColor('light');
+  const eyeletColor = ExtraTextColor('light');
+  const backgroundColor = BackgroundColor('light');
 
   return (
     <Box
       component='section'
+      {...(sectionID && { id: sectionID })}
       sx={{
         width: '100%',
         bgcolor: backgroundColor,
@@ -67,7 +82,7 @@ const PressRelease = (props: PressReleaseProps) => {
                 display: 'flex',
                 alignItems: 'center',
                 fontWeight: 'bold',
-                color: theme === 'light' ? 'primary.main' : 'background.paper',
+                color: 'primary.main',
                 fontSize: '16px',
                 '&:hover': {
                   textDecoration: 'underline',

@@ -304,7 +304,7 @@ const PressReleaseSectionCodec = t.strict({
   body: t.string,
   ctaText: t.union([t.string, t.null]),
   ctaHref: t.union([t.string, t.null]),
-  theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
 });
 
 export const PageSectionCodec = t.union([

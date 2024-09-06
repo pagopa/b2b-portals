@@ -1,30 +1,28 @@
 'use client';
 import { PressReleaseSection } from '@/lib/fetch/types/PageSection';
-import { PressRelease } from '@react-components/components';
-import { PressReleaseProps } from '@react-components/types/PressRelease/PressRelease.types';
+import { PressRelease as PressReleaseRC } from '@react-components/components';
+import { PressReleaseProps } from '@react-components/types';
 
-export const makePressReleaseProps = ({
+const makePressReleaseProps = ({
   eyelet,
   title,
   subtitle,
   body,
   ctaText,
   ctaHref,
-  theme,
-  ...rest
+  sectionID,
 }: PressReleaseSection): PressReleaseProps => ({
-  eyelet,
   title,
-  subtitle,
+  eyelet: eyelet || '',
+  subtitle: subtitle || '',
   body,
-  ctaText,
-  ctaHref,
-  theme,
-  ...rest,
+  ctaText: ctaText || '',
+  ctaHref: ctaHref || '',
+  sectionID: sectionID || '',
 });
 
-const PressReleaseComponent = (props: PressReleaseSection) => (
-  <PressRelease {...makePressReleaseProps(props)} />
+const PressRelease = (props: PressReleaseSection) => (
+  <PressReleaseRC {...makePressReleaseProps(props)} />
 );
 
-export default PressReleaseComponent;
+export default PressRelease;
