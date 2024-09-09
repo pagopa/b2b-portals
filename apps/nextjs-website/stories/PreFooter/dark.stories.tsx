@@ -9,21 +9,15 @@ const meta: Meta<typeof PreFooter> = {
 };
 export default meta;
 
-export const PreFooterFull: StoryFn<typeof PreFooter> = PreFooterTemplate.bind(
+export const PreFooterStoreButtons: StoryFn<typeof PreFooter> = PreFooterTemplate.bind(
   {}
 );
-PreFooterFull.args = {
+PreFooterStoreButtons.args = {
   ...defaultPropsDark,
   storeButtons: {
     hrefGoogle: 'https://play.google.com',
     hrefApple: 'https://apple.com',
   },
-};
-
-export const PreFooterOnlyTitle: StoryFn<typeof PreFooter> =
-  PreFooterTemplate.bind({});
-PreFooterOnlyTitle.args = {
-  ...defaultPropsDark,
 };
 
 export const PreFooterStandardButtons: StoryFn<typeof PreFooter> =
@@ -43,4 +37,10 @@ PreFooterStandardButtons.args = {
       variant: 'contained',
     },
   ],
+};
+
+export const PreFooterOnlyTitle: StoryFn<typeof PreFooter> =
+  PreFooterTemplate.bind({});
+PreFooterOnlyTitle.args = {
+  ...defaultPropsDark,
 };
