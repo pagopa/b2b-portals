@@ -14,7 +14,7 @@ const makeHowToProps = ({
     title: step.title,
     description: MarkdownRenderer({ markdown: step.description }),
     ...(step.icon.data && {
-      iconURL: 'http://127.0.0.1:1337' + step.icon.data.attributes.url,
+      iconURL: step.icon.data.attributes.url,
     }),
   })),
   ...rest,

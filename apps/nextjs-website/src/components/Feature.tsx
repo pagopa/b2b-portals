@@ -10,7 +10,7 @@ const makeFeatureProps = ({
   items: items.map((item) => ({
     title: item.title,
     subtitle: item.subtitle,
-    iconURL: 'http://127.0.0.1:1337' + item.icon.data.attributes.url,
+    iconURL: item.icon.data.attributes.url,
     ...(item.link && { link: item.link }),
   })),
   ...rest,
