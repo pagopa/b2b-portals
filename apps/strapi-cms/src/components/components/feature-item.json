@@ -14,17 +14,19 @@
       "type": "string",
       "required": true
     },
-    "themedIcon": {
-      "type": "component",
-      "repeatable": false,
-      "component": "components.themed-icon",
-      "required": true
-    },
     "link": {
       "type": "component",
       "repeatable": false,
       "component": "components.link",
       "required": false
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }
