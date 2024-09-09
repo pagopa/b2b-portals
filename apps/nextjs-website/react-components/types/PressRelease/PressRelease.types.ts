@@ -1,8 +1,8 @@
 export interface PressReleaseProps {
   title: string;
-  body: string;
+  body: JSX.Element;
   eyelet: string;
-  subtitle?: string;
+  subtitle?: JSX.Element;
   ctaText: string;
   ctaHref: string;
   sectionID: string;

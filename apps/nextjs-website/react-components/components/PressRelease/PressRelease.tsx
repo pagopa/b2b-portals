@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, Typography, Container, Stack, Link } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Container,
+  Stack,
+  Link,
+  useTheme,
+} from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import {
@@ -19,8 +26,8 @@ const PressRelease = ({
 }: {
   eyelet: string;
   title: string;
-  subtitle?: string;
-  body: string;
+  subtitle?: JSX.Element;
+  body: JSX.Element;
   ctaText: string;
   ctaHref: string;
   sectionID: string;
@@ -28,6 +35,7 @@ const PressRelease = ({
   const textColor = TextColor('light');
   const eyeletColor = ExtraTextColor('light');
   const backgroundColor = BackgroundColor('light');
+  const { palette } = useTheme();
 
   return (
     <Box
@@ -44,7 +52,11 @@ const PressRelease = ({
         {eyelet && (
           <Typography
             variant='overline'
-            sx={{ color: eyeletColor, fontSize: { xs: '16px', md: '16px' } }}
+            sx={{
+              color: eyeletColor,
+              fontSize: { xs: '16px', md: '16px' },
+              fontWeight: 400,
+            }}
           >
             {eyelet}
           </Typography>
@@ -60,7 +72,8 @@ const PressRelease = ({
             variant='h6'
             sx={{
               fontSize: { xs: '18px', md: '18px' },
-              color: textColor,
+              fontWeight: 400,
+              color: palette.custom.black,
               mt: 2,
             }}
           >
@@ -69,7 +82,19 @@ const PressRelease = ({
         )}
         <Typography
           variant='body1'
-          sx={{ fontSize: { xs: '16px', md: '16px' }, color: textColor, mt: 2 }}
+          sx={{
+            fontSize: { xs: '16px', md: '16px' },
+            color: textColor,
+            mt: 2,
+            '& a': {
+              color: textColor,
+              textDecoration: 'underline',
+              '&:hover': {
+                color: textColor,
+                textDecoration: 'underline',
+              },
+            },
+          }}
         >
           {body}
         </Typography>
@@ -82,14 +107,16 @@ const PressRelease = ({
                 display: 'flex',
                 alignItems: 'center',
                 fontWeight: 'bold',
-                color: 'primary.main',
+                color: palette.custom.primaryColorDark,
                 fontSize: '16px',
                 '&:hover': {
                   textDecoration: 'underline',
                 },
               }}
             >
-              <ArrowBackIcon sx={{ mr: 1 }} />
+              <ArrowBackIcon
+                sx={{ mr: 1, color: palette.custom.primaryColorDark }}
+              />
               {ctaText}
             </Link>
           </Stack>
