@@ -10,10 +10,7 @@ const makeFeatureProps = ({
   items: items.map((item) => ({
     title: item.title,
     subtitle: item.subtitle,
-    iconURL: (rest.theme === 'dark'
-      ? item.themedIcon.dark
-      : item.themedIcon.light
-    ).data.attributes.url,
+    iconURL: item.icon.data.attributes.url,
     ...(item.link && { link: item.link }),
   })),
   ...rest,
