@@ -4,12 +4,12 @@ import { ServiceCarousel as ServiceCarouselRC } from '@react-components/componen
 import { ServiceCarouselProps } from '@react-components/types';
 
 const makeServiceCarouselProps = ({
-  title,
   eyelet,
   description,
   cards,
+  ...rest
 }: ServiceCarouselSection): ServiceCarouselProps => ({
-  title,
+  ...rest,
   ...(eyelet && { eyelet }),
   ...(description && { description }),
   cards: cards.map((card) => ({
