@@ -16,6 +16,7 @@ const ServiceCarousel = ({
   eyelet,
   description,
   cards,
+  sectionID,
 }: ServiceCarouselProps) => {
   let sliderRef = useRef<Slider>();
   const { palette } = useTheme();
@@ -25,6 +26,8 @@ const ServiceCarousel = ({
       py={{ xs: 3, sm: 3, md: 6 }}
       ml={{ xs: 3, sm: 3, md: 17.75 }}
       overflow='hidden'
+      component='section'
+      {...(sectionID && { id: sectionID })}
     >
       {/* Text Content */}
       <Stack

@@ -289,6 +289,7 @@ const ServiceCarouselSectionCodec = t.strict({
   description: t.union([t.string, t.null]),
   eyelet: t.union([t.string, t.null]),
   cards: t.array(ServiceCardCodec),
+  sectionID: t.union([t.string, t.null]),
 });
 
 const RowTextSectionCodec = t.strict({
