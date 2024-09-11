@@ -1,9 +1,11 @@
 export interface PressReleaseProps {
   title: string;
   body: JSX.Element;
-  eyelet: string;
+  eyelet?: string;
   subtitle?: JSX.Element;
-  ctaText: string;
-  ctaHref: string;
-  sectionID: string;
+  link: {
+    label: string;
+    href: string;
+  };
+  sectionID: string | null;
 }

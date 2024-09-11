@@ -302,8 +302,7 @@ const PressReleaseSectionCodec = t.strict({
   title: t.string,
   subtitle: t.union([t.string, t.null]),
   body: t.string,
-  ctaText: t.union([t.string, t.null]),
-  ctaHref: t.union([t.string, t.null]),
+  link: LinkCodec,
   sectionID: t.union([t.string, t.null]),
 });
 

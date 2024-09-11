@@ -6,20 +6,14 @@ import { PressReleaseProps } from '@react-components/types';
 
 const makePressReleaseProps = ({
   eyelet,
-  title,
   subtitle,
   body,
-  ctaText,
-  ctaHref,
-  sectionID,
+  ...rest
 }: PressReleaseSection): PressReleaseProps => ({
-  title,
-  eyelet: eyelet || '',
+  ...(eyelet && { eyelet }),
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
   body: MarkdownRenderer({ markdown: body }),
-  ctaText: ctaText || '',
-  ctaHref: ctaHref || '',
-  sectionID: sectionID || '',
+  ...rest,
 });
 
 const PressRelease = (props: PressReleaseSection) => (

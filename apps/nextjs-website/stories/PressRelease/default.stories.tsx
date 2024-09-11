@@ -59,8 +59,10 @@ PressReleaseFull.args = {
     </div>
   ),
   eyelet: '31 GENNAIO 2024',
-  ctaText: 'Torna ai comunicati stampa',
-  ctaHref: '#',
+  link: {
+    label: 'Torna ai comunicati stampa',
+    href: '#',
+  },
 };
 
 export const PressReleaseWithoutSubtitle: StoryFn<typeof PressRelease> =
@@ -101,6 +103,8 @@ PressReleaseWithoutSubtitle.args = {
     </div>
   ),
   eyelet: '31 GENNAIO 2024',
-  ctaText: 'Torna ai comunicati stampa',
-  ctaHref: '#',
+  link: {
+    label: 'Torna ai comunicati stampa',
+    href: '#',
+  },
 };

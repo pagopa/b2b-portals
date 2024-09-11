@@ -14,24 +14,16 @@ import {
   ExtraTextColor,
   BackgroundColor,
 } from '../common/Common.helpers';
+import { PressReleaseProps } from '@react-components/types';
 
 const PressRelease = ({
   eyelet,
   title,
   subtitle,
   body,
-  ctaText,
-  ctaHref,
+  link,
   sectionID,
-}: {
-  eyelet: string;
-  title: string;
-  subtitle?: JSX.Element;
-  body: JSX.Element;
-  ctaText: string;
-  ctaHref: string;
-  sectionID: string;
-}) => {
+}: PressReleaseProps) => {
   const textColor = TextColor('light');
   const eyeletColor = ExtraTextColor('light');
   const backgroundColor = BackgroundColor('light');
@@ -39,7 +31,7 @@ const PressRelease = ({
 
   return (
     <Box
-      component='section'
+      component='div'
       {...(sectionID && { id: sectionID })}
       sx={{
         width: '100%',
@@ -98,10 +90,10 @@ const PressRelease = ({
         >
           {body}
         </Typography>
-        {ctaText && ctaHref && (
+        {link && (
           <Stack direction='row' spacing={1} alignItems='center' mt={4}>
             <Link
-              href={ctaHref}
+              href={link.href}
               underline='none'
               sx={{
                 display: 'flex',
@@ -117,7 +109,7 @@ const PressRelease = ({
               <ArrowBackIcon
                 sx={{ mr: 1, color: palette.custom.primaryColorDark }}
               />
-              {ctaText}
+              {link.label}
             </Link>
           </Stack>
         )}
