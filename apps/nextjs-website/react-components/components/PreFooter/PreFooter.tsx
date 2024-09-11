@@ -12,15 +12,17 @@ import ContainerRC from '../common/ContainerRC';
 import { CtaButtons } from '../common/Common';
 
 const styles = {
-  main: (isSmallScreen: boolean) => ({
+  main: (isSmallScreen: boolean, layout: 'left' | 'center') => ({
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: isSmallScreen ? 'column' : 'row',
+    alignItems: layout === 'center' ? 'center' : 'center',
+    justifyContent: layout === 'center' ? 'center' : 'flex-start',
+    flexDirection: layout === 'center' || isSmallScreen ? 'column' : 'row',
+    textAlign: layout === 'center' ? 'center' : 'left',
     padding: { md: '64px 24px', xs: '32px 24px' },
     position: 'relative',
     zIndex: 1,
   }),
+
   backgroundImage: (isSmallScreen: boolean, theme: 'light' | 'dark') => ({
     backgroundColor: theme === 'dark' ? '#031344' : BackgroundColor(theme),
     backgroundSize: isSmallScreen ? 'cover' : '30%',
@@ -37,8 +39,15 @@ const styles = {
 };
 
 const PreFooter = (props: PreFooterProps) => {
-  const { theme, title, storeButtons, background, sectionID, ctaButtons } =
-    props;
+  const {
+    theme,
+    title,
+    storeButtons,
+    background,
+    sectionID,
+    ctaButtons,
+    layout = 'left',
+  } = props;
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
@@ -75,14 +84,15 @@ const PreFooter = (props: PreFooterProps) => {
           background={!background ? backgroundColor : 'transparent'}
           sx={styles.container}
         >
-          <Box sx={styles.main(isSmallScreen)}>
+          <Box sx={styles.main(isSmallScreen, layout)}>
             <Typography
               variant='h6'
               color={theme === 'dark' ? 'white' : 'black'}
-              mb={isSmallScreen ? 2 : 'unset'}
+              mb={isSmallScreen || layout === 'center' ? 2 : 'unset'}
               sx={{
                 fontSize: { xs: '18px', md: '24px' },
-                marginRight: { md: '16px' },
+                marginRight:
+                  layout === 'left' && !isSmallScreen ? '16px' : 'unset',
               }}
             >
               {title}
@@ -93,14 +103,19 @@ const PreFooter = (props: PreFooterProps) => {
                 justifyContent='center'
                 alignItems='center'
                 spacing={2}
-                direction={isSmallScreen ? 'column' : 'row'}
-                sx={{ marginLeft: isSmallScreen ? 0 : 2 }}
+                direction={
+                  isSmallScreen || layout === 'center' ? 'column' : 'row'
+                }
+                sx={{
+                  marginLeft: isSmallScreen || layout === 'center' ? 0 : 2,
+                }}
               >
                 {storeButtons.hrefGoogle && (
                   <Button
                     sx={{
                       padding: '0px',
-                      marginLeft: isSmallScreen ? '0px' : '16px',
+                      marginLeft:
+                        isSmallScreen || layout === 'center' ? '0px' : '16px',
                       justifyContent: 'start',
                     }}
                     key='google'
@@ -119,7 +134,8 @@ const PreFooter = (props: PreFooterProps) => {
                   <Button
                     sx={{
                       padding: '0px',
-                      marginLeft: isSmallScreen ? '0px' : '16px',
+                      marginLeft:
+                        isSmallScreen || layout === 'center' ? '0px' : '16px',
                       justifyContent: 'start',
                     }}
                     key='apple'
@@ -127,7 +143,7 @@ const PreFooter = (props: PreFooterProps) => {
                   >
                     <Image
                       src={appleBadgeBase64}
-                      alt='Download on App store'
+                      alt='Download on App Store'
                       height={0}
                       width={0}
                       style={{ height: '3em', width: 'auto' }}
@@ -141,7 +157,9 @@ const PreFooter = (props: PreFooterProps) => {
                 alignItems='center'
                 spacing={2}
                 direction={isSmallScreen ? 'column' : 'row'}
-                sx={{ marginLeft: isSmallScreen ? 0 : 2 }}
+                sx={{
+                  marginLeft: isSmallScreen || layout === 'center' ? 0 : 2,
+                }}
               >
                 {CtaButtons({ ctaButtons: ctaButtons ?? [], theme })}
               </Stack>

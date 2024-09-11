@@ -10,6 +10,7 @@ export interface PreFooterProps extends SectionProps, PreFooterContentProps {
   readonly storeButtons?: StoreButtonsProps;
   readonly background?: string;
   readonly ctaButtons?: CtaButtonProps[];
+  readonly layout?: 'left' | 'center';
 }
 
 export interface PreFooterContentProps {

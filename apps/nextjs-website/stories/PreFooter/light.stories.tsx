@@ -43,3 +43,10 @@ PreFooterOnlyTitle.args = {
   ...defaultPropsLight,
   ctaButtons: [],
 };
+
+export const PreFooterCenterButtons: StoryFn<typeof PreFooter> =
+  PreFooterTemplate.bind({});
+PreFooterCenterButtons.args = {
+  ...defaultPropsLight,
+  layout: 'center',
+};
