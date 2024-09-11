@@ -6,18 +6,12 @@ import { HighlightBoxProps } from '../../types/HighlightBox/HighlightBox.types';
 const HighlightBox = ({
   title,
   body,
-  imageUrl,
+  imageURL,
   eyelet,
-  buttonText,
-  buttonHref,
+  link,
   sectionID,
 }: HighlightBoxProps) => {
   const theme = useTheme();
-
-  const imageSrc =
-    typeof imageUrl === 'string'
-      ? imageUrl
-      : imageUrl?.data?.attributes?.url || '';
 
   return (
     <ContainerRC
@@ -26,7 +20,7 @@ const HighlightBox = ({
         justifyContent: { xs: 'start', md: 'start' },
         borderRadius: '24px',
         padding: '48px',
-        backgroundColor: theme.palette.custom.lightGreen,
+        backgroundColor: theme.palette.custom.highLightBoxLightGreenBackground,
       }}
       {...(sectionID && { sectionID })}
     >
@@ -38,8 +32,9 @@ const HighlightBox = ({
                 variant='subtitle2'
                 color='textSecondary'
                 sx={{
-                  backgroundColor: theme.palette.custom.lightPurple,
-                  color: theme.palette.custom.purple,
+                  backgroundColor:
+                    theme.palette.custom.highLightBoxLightPurpleBackground,
+                  color: theme.palette.custom.highLightBoxPurpleText,
                   borderRadius: '100px',
                   display: 'inline-block',
                   px: 2,
@@ -65,10 +60,10 @@ const HighlightBox = ({
               {body}
             </Typography>
 
-            {buttonText && (
+            {link?.label && (
               <Button
                 variant='contained'
-                href={buttonHref || '#'}
+                href={link.href || '#'}
                 size='small'
                 sx={{
                   width: 'fit-content',
@@ -80,24 +75,21 @@ const HighlightBox = ({
                   fontWeight: 700,
                 }}
               >
-                {buttonText}
+                {link.label}
               </Button>
             )}
           </Stack>
         </Grid>
-
         <Grid item xs={12} md={6} sx={{ display: { xs: 'none', md: 'block' } }}>
-          {imageSrc && (
-            <Box sx={{ width: '100%' }}>
-              <Image
-                src={imageSrc}
-                alt='Highlight'
-                layout='responsive'
-                width={300}
-                height={200}
-              />
-            </Box>
-          )}
+          <Box sx={{ width: '100%' }}>
+            <Image
+              src={imageURL}
+              alt='Highlight'
+              layout='responsive'
+              width={300}
+              height={200}
+            />
+          </Box>
         </Grid>
       </Grid>
     </ContainerRC>

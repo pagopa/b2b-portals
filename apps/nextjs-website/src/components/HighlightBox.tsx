@@ -4,21 +4,15 @@ import { HighlightBox as HighlightBoxRC } from '@react-components/components';
 import { HighlightBoxSection } from '@/lib/fetch/types/PageSection';
 
 const makeHighlightBoxProps = ({
+  image,
   eyelet,
-  title,
-  body,
-  buttonText,
-  buttonHref,
-  imageUrl,
-  sectionID,
+  link,
+  ...rest
 }: HighlightBoxSection): HighlightBoxProps => ({
-  eyelet,
-  title,
-  body,
-  buttonText,
-  buttonHref,
-  imageUrl: imageUrl?.data?.attributes?.url || '',
-  sectionID,
+  imageURL: image.data.attributes.url,
+  ...(eyelet && { eyelet }),
+  ...(link && { link }),
+  ...rest,
 });
 
 const HighlightBoxComponent = (props: HighlightBoxSection) => (

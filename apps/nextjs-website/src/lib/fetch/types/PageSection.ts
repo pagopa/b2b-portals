@@ -301,9 +301,8 @@ const HighlightBoxSectionCodec = t.strict({
   eyelet: t.union([t.string, t.null]),
   title: t.string,
   body: t.string,
-  buttonText: t.union([t.string, t.null]),
-  buttonHref: t.union([t.string, t.null]),
-  imageUrl: StrapiImageRequiredSchema,
+  link: t.union([LinkCodec, t.null]),
+  image: StrapiImageRequiredSchema,
   sectionID: t.union([t.string, t.null]),
 });
 

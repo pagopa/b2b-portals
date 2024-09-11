@@ -1,9 +1,11 @@
 export interface HighlightBoxProps {
   title: string;
   body: string;
-  imageUrl: string | { data: { attributes: { url: string } } };
+  imageURL: string;
   eyelet?: string | null;
-  buttonText?: string | null;
-  buttonHref?: string | null;
+  link?: {
+    label: string;
+    href: string;
+  };
   sectionID: string | null;
 }
