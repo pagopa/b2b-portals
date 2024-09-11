@@ -4,21 +4,19 @@ import { Stats as StatsRC } from '@react-components/components';
 import { StatsProps } from '@react-components/types';
 
 const makeStatsProps = ({
-  title,
   eyelet,
   body,
-  stats,
-  sectionID,
+  items,
+  ...rest
 }: StatsSection): StatsProps => ({
-  title,
   ...(eyelet && { eyelet }),
   ...(body && { body }),
-  stats: stats.map((stat) => ({
-    title: stat.title,
-    ...(stat.description && { description: stat.description }),
-    ...(stat.icon?.data && { iconURL: stat.icon.data.attributes.url }),
+  items: items.map((item) => ({
+    title: item.title,
+    ...(item.description && { description: item.description }),
+    ...(item.icon.data && { iconURL: item.icon.data.attributes.url }),
   })),
-  sectionID,
+  ...rest,
 });
 
 const Stats = (props: StatsSection) => <StatsRC {...makeStatsProps(props)} />;

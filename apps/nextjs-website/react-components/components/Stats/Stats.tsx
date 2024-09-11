@@ -1,62 +1,20 @@
 import React from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
-import Image from 'next/image';
-import {
-  StatsItemProps,
-  StatsProps,
-} from '@react-components/types/Stats/Stats.types';
+import { StatsProps } from '@react-components/types/Stats/Stats.types';
+import { StatsItem } from './Stats.helpers';
 
-const StatsItem = ({ title, description, iconURL }: StatsItemProps) => {
-  const { palette } = useTheme();
-
-  return (
-    <Stack
-      spacing={1}
-      alignItems='flex-start'
-      textAlign='left'
-      sx={{
-        flex: 1,
-      }}
-    >
-      {iconURL && (
-        <Box height={36} width={36} position='relative'>
-          <Image src={iconURL} alt={title} fill={true} />
-        </Box>
-      )}
-      <Typography
-        fontSize={{ xs: 28, md: 32 }}
-        fontWeight='bold'
-        color={palette.custom.primaryColorDark}
-        mb={0}
-      >
-        {title}
-      </Typography>
-      {description && (
-        <Typography
-          fontSize={14}
-          fontWeight='bold'
-          color={palette.custom.primaryColorDark}
-          sx={{ marginTop: '0px!important' }}
-        >
-          {description}
-        </Typography>
-      )}
-    </Stack>
-  );
-};
-
-const Stats = ({ eyelet, title, body, stats, sectionID }: StatsProps) => {
+const Stats = ({ eyelet, title, body, items, sectionID }: StatsProps) => {
   const { palette } = useTheme();
 
   return (
     <Box
-      component='section'
+      component='div'
       {...(sectionID && { id: sectionID })}
       py={{ xs: 3, sm: 3, md: 6 }}
       overflow='hidden'
       sx={{
         px: { xs: 4, md: 16 },
-        backgroundColor: 'background.paper'
+        backgroundColor: 'background.paper',
       }}
     >
       <Stack
@@ -99,8 +57,8 @@ const Stats = ({ eyelet, title, body, stats, sectionID }: StatsProps) => {
           justifyContent='center'
           flex={1}
         >
-          {stats.slice(0, 3).map((stat, index) => (
-            <StatsItem key={index} {...stat} />
+          {items.map((item, index) => (
+            <StatsItem key={index} {...item} />
           ))}
         </Stack>
       </Stack>

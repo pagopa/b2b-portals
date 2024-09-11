@@ -301,11 +301,11 @@ const StatsSectionCodec = t.strict({
   title: t.string,
   eyelet: t.union([t.string, t.null]),
   body: t.union([t.string, t.null]),
-  stats: t.array(
+  items: t.array(
     t.strict({
       title: t.string,
       description: t.union([t.string, t.null]),
-      icon: t.union([StrapiImageSchema, t.null]),
+      icon: StrapiImageSchema,
     })
   ),
   sectionID: t.union([t.string, t.null]),
