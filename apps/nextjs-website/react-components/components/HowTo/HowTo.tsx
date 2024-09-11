@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Link, Stack } from '@mui/material';
+import { Box, Grid, Link, Stack, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContainerRC from '../common/ContainerRC';
 import { groupStepsByRows } from './HowTo.helpers';
@@ -31,7 +31,11 @@ const HowTo = (props: HowToProps) => {
   const stepsRows = groupStepsByRows(steps, rowMaxSteps);
 
   return (
-    <ContainerRC background={backgroundColor} py={{ xs: 6, md: 8 }} {...sectionID && { sectionID }}>
+    <ContainerRC
+      background={backgroundColor}
+      py={{ xs: 6, md: 8 }}
+      {...(sectionID && { sectionID })}
+    >
       <Grid item xs={12}>
         {/** Section title */}
         <Title
@@ -86,26 +90,34 @@ const HowTo = (props: HowToProps) => {
 
         {/** Link */}
         {link && (
-          <Link
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              mt: 6,
-              alignSelf: 'flex-start',
-            }}
-            href={link.href}
-            target={link.target}
-            color={textColor}
-            underline='none'
-            fontWeight={600}
+          <Typography
+            component='span'
+            variant='body1'
+            color={theme === 'light' ? 'text.primary' : 'background.paper'}
+            fontSize={'18px'}
+            display={'contents'}
           >
-            {link.label}
-            <ArrowForwardIcon
-              sx={{ ml: 1, mt: 0.5 }}
-              fontSize='small'
-              aria-hidden='true'
-            />
-          </Link>
+            <Link
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                mt: 6,
+                alignSelf: 'flex-start',
+              }}
+              href={link.href}
+              target={link.target}
+              color={textColor}
+              underline='none'
+              fontWeight={600}
+            >
+              {link.label}
+              <ArrowForwardIcon
+                sx={{ ml: 1 }}
+                fontSize='small'
+                aria-hidden='true'
+              />
+            </Link>
+          </Typography>
         )}
       </Grid>
     </ContainerRC>
