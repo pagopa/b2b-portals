@@ -46,11 +46,12 @@ const Cards = ({
       >
         {text.title && (
           <Title
-            variant='h2'
+            variant='h4'
             textColor={'inherit'}
             title={text.title}
             textAlign={isCenter ? 'center' : 'left'}
             marginBottom={5}
+            
           />
         )}
         {text.subtitle && (

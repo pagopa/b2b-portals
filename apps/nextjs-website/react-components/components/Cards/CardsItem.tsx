@@ -41,7 +41,7 @@ const CardsItem = ({
             </Typography>
           )}
           <Title
-            variant='h5'
+            variant='h6'
             textColor={'inherit'}
             title={title}
             marginBottom={1}
@@ -67,7 +67,6 @@ const CardsItem = ({
                   <Link
                     color='primary.main'
                     underline='none'
-                    textTransform='capitalize'
                     href={link.href}
                     title={link.title}
                     fontSize={14}
