@@ -17,7 +17,6 @@ const generateDefaultProps = (
     theme === 'dark'
       ? 'https://assets.innovazione.gov.it/1610704590-io.png'
       : '',
-  useStoreButtons: true,
   ctaButtons: [
     {
       text: 'Learn More',

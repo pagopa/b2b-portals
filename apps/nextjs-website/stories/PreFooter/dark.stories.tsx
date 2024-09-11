@@ -9,9 +9,8 @@ const meta: Meta<typeof PreFooter> = {
 };
 export default meta;
 
-export const PreFooterStoreButtons: StoryFn<typeof PreFooter> = PreFooterTemplate.bind(
-  {}
-);
+export const PreFooterStoreButtons: StoryFn<typeof PreFooter> =
+  PreFooterTemplate.bind({});
 PreFooterStoreButtons.args = {
   ...defaultPropsDark,
   storeButtons: {
@@ -24,7 +23,6 @@ export const PreFooterStandardButtons: StoryFn<typeof PreFooter> =
   PreFooterTemplate.bind({});
 PreFooterStandardButtons.args = {
   ...defaultPropsDark,
-  useStoreButtons: false,
   ctaButtons: [
     {
       text: 'Learn More',
@@ -43,4 +41,5 @@ export const PreFooterOnlyTitle: StoryFn<typeof PreFooter> =
   PreFooterTemplate.bind({});
 PreFooterOnlyTitle.args = {
   ...defaultPropsDark,
+  ctaButtons: [],
 };

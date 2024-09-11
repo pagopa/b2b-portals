@@ -37,15 +37,8 @@ const styles = {
 };
 
 const PreFooter = (props: PreFooterProps) => {
-  const {
-    theme,
-    title,
-    storeButtons,
-    background,
-    sectionID,
-    useStoreButtons,
-    ctaButtons,
-  } = props;
+  const { theme, title, storeButtons, background, sectionID, ctaButtons } =
+    props;
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
@@ -87,61 +80,15 @@ const PreFooter = (props: PreFooterProps) => {
               variant='h6'
               color={theme === 'dark' ? 'white' : 'black'}
               mb={isSmallScreen ? 2 : 'unset'}
-              sx={{ fontSize: { xs: '18px', md: '24px' } }}
+              sx={{
+                fontSize: { xs: '18px', md: '24px' },
+                marginRight: { md: '16px' },
+              }}
             >
               {title}
             </Typography>
 
-            {useStoreButtons ? (
-              storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
-                <Stack
-                  justifyContent='center'
-                  alignItems='center'
-                  spacing={2}
-                  direction={isSmallScreen ? 'column' : 'row'}
-                  sx={{ marginLeft: isSmallScreen ? 0 : 2 }}
-                >
-                  {storeButtons.hrefGoogle && (
-                    <Button
-                      sx={{
-                        padding: '0px',
-                        marginLeft: isSmallScreen ? '0px' : '16px',
-                        justifyContent: 'start',
-                      }}
-                      key='google'
-                      href={storeButtons.hrefGoogle}
-                    >
-                      <Image
-                        src={googleBadgeBase64}
-                        alt='Download on Google Play'
-                        height={0}
-                        width={0}
-                        style={{ height: '3em', width: 'auto' }}
-                      />
-                    </Button>
-                  )}
-                  {storeButtons.hrefApple && (
-                    <Button
-                      sx={{
-                        padding: '0px',
-                        marginLeft: isSmallScreen ? '0px' : '16px',
-                        justifyContent: 'start',
-                      }}
-                      key='apple'
-                      href={storeButtons.hrefApple}
-                    >
-                      <Image
-                        src={appleBadgeBase64}
-                        alt='Download on App store'
-                        height={0}
-                        width={0}
-                        style={{ height: '3em', width: 'auto' }}
-                      />
-                    </Button>
-                  )}
-                </Stack>
-              ) : null
-            ) : (
+            {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
               <Stack
                 justifyContent='center'
                 alignItems='center'
@@ -149,9 +96,56 @@ const PreFooter = (props: PreFooterProps) => {
                 direction={isSmallScreen ? 'column' : 'row'}
                 sx={{ marginLeft: isSmallScreen ? 0 : 2 }}
               >
-                {CtaButtons({ ctaButtons: ctaButtons ?? [], theme })}{' '}
+                {storeButtons.hrefGoogle && (
+                  <Button
+                    sx={{
+                      padding: '0px',
+                      marginLeft: isSmallScreen ? '0px' : '16px',
+                      justifyContent: 'start',
+                    }}
+                    key='google'
+                    href={storeButtons.hrefGoogle}
+                  >
+                    <Image
+                      src={googleBadgeBase64}
+                      alt='Download on Google Play'
+                      height={0}
+                      width={0}
+                      style={{ height: '3em', width: 'auto' }}
+                    />
+                  </Button>
+                )}
+                {storeButtons.hrefApple && (
+                  <Button
+                    sx={{
+                      padding: '0px',
+                      marginLeft: isSmallScreen ? '0px' : '16px',
+                      justifyContent: 'start',
+                    }}
+                    key='apple'
+                    href={storeButtons.hrefApple}
+                  >
+                    <Image
+                      src={appleBadgeBase64}
+                      alt='Download on App store'
+                      height={0}
+                      width={0}
+                      style={{ height: '3em', width: 'auto' }}
+                    />
+                  </Button>
+                )}
               </Stack>
-            )}
+            ) : ctaButtons ? (
+              <Stack
+                justifyContent='center'
+                alignItems='center'
+                spacing={2}
+                direction={isSmallScreen ? 'column' : 'row'}
+                sx={{ marginLeft: isSmallScreen ? 0 : 2 }}
+              >
+                {CtaButtons({ ctaButtons: ctaButtons ?? [], theme })}
+              </Stack>
+            ) : null}
           </Box>
         </ContainerRC>
       </Box>
