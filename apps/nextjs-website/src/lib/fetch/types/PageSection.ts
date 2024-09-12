@@ -9,11 +9,6 @@ const LinkCodec = t.strict({
   href: t.string,
 });
 
-const ThemedIconCodec = t.strict({
-  light: StrapiImageRequiredSchema,
-  dark: StrapiImageRequiredSchema,
-});
-
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
   title: t.string,
@@ -81,7 +76,7 @@ const AccordionSectionCodec = t.strict({
 
 const FeatureItemCodec = t.strict({
   id: t.number,
-  themedIcon: ThemedIconCodec,
+  icon: StrapiImageRequiredSchema,
   title: t.string,
   subtitle: t.string,
   link: t.union([LinkCodec, t.null]),
@@ -99,7 +94,7 @@ const FeatureSectionCodec = t.strict({
 const StepCodec = t.strict({
   title: t.string,
   description: t.string,
-  themedIcon: t.union([ThemedIconCodec, t.null]),
+  icon: StrapiImageSchema,
 });
 
 const HowToSectionCodec = t.strict({
@@ -294,6 +289,16 @@ const ServiceCarouselSectionCodec = t.strict({
   description: t.union([t.string, t.null]),
   eyelet: t.union([t.string, t.null]),
   cards: t.array(ServiceCardCodec),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const RowTextSectionCodec = t.strict({
+  __component: t.literal('sections.row-text'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  layout: t.union([t.literal('left'), t.literal('center')]),
+  sectionID: t.union([t.string, t.null]),
 });
 
 const TextSectionSectionCodec = t.strict({
@@ -324,6 +329,7 @@ export const PageSectionCodec = t.union([
   VideoImageSectionCodec,
   HeroChipsSectionCodec,
   ServiceCarouselSectionCodec,
+  RowTextSectionCodec,
   TextSectionSectionCodec,
 ]);
 
@@ -349,4 +355,5 @@ export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
 export type ServiceCarouselSection = t.TypeOf<
   typeof ServiceCarouselSectionCodec
 >;
+export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
 export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;

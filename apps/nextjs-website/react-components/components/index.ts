@@ -18,6 +18,7 @@ import MegaHeader from './MegaHeader/MegaHeader';
 import VideoImage from './VideoImage/VideoImage';
 import HeroChips from './HeroChips/HeroChips';
 import ServiceCarousel from './ServiceCarousel/ServiceCarousel';
+import RowText from './RowText/RowText';
 import TextSection from './TextSection/TextSection';
 
 export {
@@ -41,5 +42,6 @@ export {
   VideoImage,
   HeroChips,
   ServiceCarousel,
+  RowText,
   TextSection,
 };
