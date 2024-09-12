@@ -9,11 +9,6 @@ const LinkCodec = t.strict({
   href: t.string,
 });
 
-const ThemedIconCodec = t.strict({
-  light: StrapiImageRequiredSchema,
-  dark: StrapiImageRequiredSchema,
-});
-
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
   title: t.string,
@@ -81,7 +76,7 @@ const AccordionSectionCodec = t.strict({
 
 const FeatureItemCodec = t.strict({
   id: t.number,
-  themedIcon: ThemedIconCodec,
+  icon: StrapiImageRequiredSchema,
   title: t.string,
   subtitle: t.string,
   link: t.union([LinkCodec, t.null]),
@@ -99,7 +94,7 @@ const FeatureSectionCodec = t.strict({
 const StepCodec = t.strict({
   title: t.string,
   description: t.string,
-  themedIcon: t.union([ThemedIconCodec, t.null]),
+  icon: StrapiImageSchema,
 });
 
 const HowToSectionCodec = t.strict({
@@ -295,6 +290,7 @@ const ServiceCarouselSectionCodec = t.strict({
   description: t.union([t.string, t.null]),
   eyelet: t.union([t.string, t.null]),
   cards: t.array(ServiceCardCodec),
+  sectionID: t.union([t.string, t.null]),
 });
 
 const RowTextSectionCodec = t.strict({
@@ -303,6 +299,16 @@ const RowTextSectionCodec = t.strict({
   subtitle: t.union([t.string, t.null]),
   body: t.union([t.string, t.null]),
   layout: t.union([t.literal('left'), t.literal('center')]),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const TextSectionSectionCodec = t.strict({
+  __component: t.literal('sections.text-section'),
+  eyelet: t.union([t.string, t.null]),
+  title: t.union([t.string, t.null]),
+  subtitle: t.union([t.string, t.null]),
+  body: t.string,
+  link: t.union([LinkCodec, t.null]),
   sectionID: t.union([t.string, t.null]),
 });
 
@@ -325,6 +331,7 @@ export const PageSectionCodec = t.union([
   HeroChipsSectionCodec,
   ServiceCarouselSectionCodec,
   RowTextSectionCodec,
+  TextSectionSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -350,3 +357,4 @@ export type ServiceCarouselSection = t.TypeOf<
   typeof ServiceCarouselSectionCodec
 >;
 export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
+export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;

@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_sections_service_carousels",
+  "collectionName": "components_sections_row_texts",
   "info": {
-    "displayName": "Service Carousel",
+    "displayName": "RowText",
     "description": ""
   },
   "options": {},
@@ -10,18 +10,20 @@
       "type": "string",
       "required": true
     },
-    "description": {
+    "subtitle": {
       "type": "text"
     },
-    "eyelet": {
-      "type": "string"
+    "body": {
+      "type": "text"
     },
-    "cards": {
-      "type": "component",
-      "repeatable": true,
-      "component": "components.service-card",
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "center"
+      ],
       "required": true,
-      "min": 1
+      "default": "left"
     },
     "sectionID": {
       "type": "string",

@@ -40,7 +40,8 @@
         "sections.editorial-switch",
         "sections.video-image",
         "sections.hero-counter",
-        "sections.service-carousel"
+        "sections.service-carousel",
+        "sections.row-text"
       ],
       "required": true,
       "min": 1
