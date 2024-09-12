@@ -14,16 +14,16 @@ import {
   ExtraTextColor,
   BackgroundColor,
 } from '../common/Common.helpers';
-import { PressReleaseProps } from '@react-components/types';
+import { TextPageProps } from '@react-components/types';
 
-const PressRelease = ({
+const TextPage = ({
   eyelet,
   title,
   subtitle,
   body,
   link,
   sectionID,
-}: PressReleaseProps) => {
+}: TextPageProps) => {
   const textColor = TextColor('light');
   const eyeletColor = ExtraTextColor('light');
   const backgroundColor = BackgroundColor('light');
@@ -31,7 +31,7 @@ const PressRelease = ({
 
   return (
     <Box
-      component='div'
+      component='section'
       {...(sectionID && { id: sectionID })}
       sx={{
         width: '100%',
@@ -44,6 +44,7 @@ const PressRelease = ({
         {eyelet && (
           <Typography
             variant='overline'
+            component='div'
             sx={{
               color: eyeletColor,
               fontSize: { xs: '16px', md: '16px' },
@@ -53,15 +54,23 @@ const PressRelease = ({
             {eyelet}
           </Typography>
         )}
-        <Typography
-          variant='h1'
-          sx={{ fontSize: { xs: '32px', md: '50px' }, color: textColor, mt: 2 }}
-        >
-          {title}
-        </Typography>
+        {title && (
+          <Typography
+            variant='h1'
+            component='div'
+            sx={{
+              fontSize: { xs: '32px', md: '50px' },
+              color: textColor,
+              mt: 2,
+            }}
+          >
+            {title}
+          </Typography>
+        )}
         {subtitle && (
           <Typography
             variant='h6'
+            component='div'
             sx={{
               fontSize: { xs: '18px', md: '18px' },
               fontWeight: 400,
@@ -72,24 +81,27 @@ const PressRelease = ({
             {subtitle}
           </Typography>
         )}
-        <Typography
-          variant='body1'
-          sx={{
-            fontSize: { xs: '16px', md: '16px' },
-            color: textColor,
-            mt: 2,
-            '& a': {
+        {body && (
+          <Typography
+            variant='body1'
+            component='div'
+            sx={{
+              fontSize: { xs: '16px', md: '16px' },
               color: textColor,
-              textDecoration: 'underline',
-              '&:hover': {
+              mt: 2,
+              '& a': {
                 color: textColor,
                 textDecoration: 'underline',
+                '&:hover': {
+                  color: textColor,
+                  textDecoration: 'underline',
+                },
               },
-            },
-          }}
-        >
-          {body}
-        </Typography>
+            }}
+          >
+            {body}
+          </Typography>
+        )}
         {link && (
           <Stack direction='row' spacing={1} alignItems='center' mt={4}>
             <Link
@@ -118,4 +130,4 @@ const PressRelease = ({
   );
 };
 
-export default PressRelease;
+export default TextPage;

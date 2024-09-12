@@ -296,13 +296,13 @@ const ServiceCarouselSectionCodec = t.strict({
   cards: t.array(ServiceCardCodec),
 });
 
-const PressReleaseSectionCodec = t.strict({
-  __component: t.literal('sections.press-release'),
+const TextPageSectionCodec = t.strict({
+  __component: t.literal('sections.text-page'),
   eyelet: t.union([t.string, t.null]),
-  title: t.string,
+  title: t.union([t.string, t.null]),
   subtitle: t.union([t.string, t.null]),
-  body: t.string,
-  link: LinkCodec,
+  body: t.union([t.string, t.null]),
+  link: t.union([LinkCodec, t.null]),
   sectionID: t.union([t.string, t.null]),
 });
 
@@ -324,7 +324,7 @@ export const PageSectionCodec = t.union([
   VideoImageSectionCodec,
   HeroChipsSectionCodec,
   ServiceCarouselSectionCodec,
-  PressReleaseSectionCodec,
+  TextPageSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -349,4 +349,4 @@ export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
 export type ServiceCarouselSection = t.TypeOf<
   typeof ServiceCarouselSectionCodec
 >;
-export type PressReleaseSection = t.TypeOf<typeof PressReleaseSectionCodec>;
+export type TextPageSection = t.TypeOf<typeof TextPageSectionCodec>;

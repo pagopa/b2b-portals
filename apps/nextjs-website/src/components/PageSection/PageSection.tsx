@@ -15,7 +15,7 @@ import HeroCounter from '../HeroCounter';
 import VideoImage from '../VideoImage';
 import HeroChips from '../HeroChips';
 import ServiceCarousel from '../ServiceCarousel';
-import PressRelease from '../PressRelease';
+import TextPage from '../TextPage';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 
 const PageSection = (props: PageSectionData) => {
@@ -53,8 +53,8 @@ const PageSection = (props: PageSectionData) => {
       return <HeroChips {...props} />;
     case 'sections.service-carousel':
       return <ServiceCarousel {...props} />;
-    case 'sections.press-release':
-      return <PressRelease {...props} />;
+    case 'sections.text-page':
+      return <TextPage {...props} />;
     default:
       return null;
   }
