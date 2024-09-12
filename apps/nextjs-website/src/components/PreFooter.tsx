@@ -6,6 +6,7 @@ import { PreFooterProps } from '@react-components/types';
 const makePreFooterProps = ({
   storeButtons,
   background,
+  ctaButtons,
   ...rest
 }: PreFooterSection): PreFooterProps => ({
   ...(background.data && { background: background.data.attributes.url }),
@@ -15,6 +16,7 @@ const makePreFooterProps = ({
       ...(storeButtons.hrefApple && { hrefApple: storeButtons.hrefApple }),
     },
   }),
+  ...(ctaButtons.length > 0 && { ctaButtons }),
   ...rest,
 });
 

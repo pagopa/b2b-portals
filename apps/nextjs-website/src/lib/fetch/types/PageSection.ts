@@ -198,6 +198,7 @@ const PreFooterSectionCodec = t.strict({
   storeButtons: t.union([StoreButtonsCodec, t.null]),
   background: StrapiImageSchema,
   sectionID: t.union([t.string, t.null]),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
 });
 
 const CounterCodec = t.strict({
