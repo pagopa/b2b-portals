@@ -301,6 +301,16 @@ const RowTextSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const TextSectionSectionCodec = t.strict({
+  __component: t.literal('sections.text-section'),
+  eyelet: t.union([t.string, t.null]),
+  title: t.union([t.string, t.null]),
+  subtitle: t.union([t.string, t.null]),
+  body: t.string,
+  link: t.union([LinkCodec, t.null]),
+  sectionID: t.union([t.string, t.null]),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -320,6 +330,7 @@ export const PageSectionCodec = t.union([
   HeroChipsSectionCodec,
   ServiceCarouselSectionCodec,
   RowTextSectionCodec,
+  TextSectionSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -345,3 +356,4 @@ export type ServiceCarouselSection = t.TypeOf<
   typeof ServiceCarouselSectionCodec
 >;
 export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
+export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
