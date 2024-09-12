@@ -92,9 +92,6 @@ const HowTo = (props: HowToProps) => {
         {link && (
           <Typography
             component='span'
-            variant='body1'
-            color={theme === 'light' ? 'text.primary' : 'background.paper'}
-            fontSize={'18px'}
             display={'contents'}
           >
             <Link
