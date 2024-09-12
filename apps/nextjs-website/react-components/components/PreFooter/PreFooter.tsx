@@ -98,7 +98,7 @@ const PreFooter = (props: PreFooterProps) => {
               {title}
             </Typography>
 
-            {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
+            {storeButtons ? (
               <Stack
                 justifyContent='center'
                 alignItems='center'
