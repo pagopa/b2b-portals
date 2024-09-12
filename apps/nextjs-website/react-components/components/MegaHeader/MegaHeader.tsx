@@ -1,5 +1,5 @@
 import React, { useState, useEffect, MouseEvent } from 'react';
-import { IconButton, Box, useMediaQuery } from '@mui/material';
+import { IconButton, Box, useMediaQuery, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -70,7 +70,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
             <>
               <Nav>
                 {menuItems.map((menuItem: MegaMenuItem, index) => (
-                  <li key={index}>
+                  <Typography component='li' key={index}>
                     <a
                       href='/'
                       className={`menuPrimaryItem ${dropdownOpen === menuItem.primary ? 'active' : ''}`}
@@ -78,7 +78,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                     >
                       {menuItem.primary}
                     </a>
-                  </li>
+                  </Typography>
                 ))}
               </Nav>
               {ctaButton && <CtaButtons ctaButtons={[{
@@ -143,7 +143,8 @@ const MegaHeader = (props: MegaHeaderProps) => {
                         {Array.from(
                           { length: Math.ceil(submenu.items.length / 7) },
                           (_, colIndex) => (
-                            <div
+                            <Typography
+                              component='div'
                               key={colIndex}
                               className='column'
                               style={{ flex: 1 }}
@@ -161,7 +162,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                     <ArrowForwardIcon className='arrowIcon' />
                                   </a>
                                 ))}
-                            </div>
+                            </Typography>
                           )
                         )}
                       </div>
