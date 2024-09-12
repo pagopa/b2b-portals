@@ -60,10 +60,10 @@ const HighlightBox = ({
               {body}
             </Typography>
 
-            {link?.label && (
+            {link && (
               <Button
                 variant='contained'
-                href={link.href || '#'}
+                href={link.href}
                 size='small'
                 sx={{
                   width: 'fit-content',

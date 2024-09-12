@@ -2,7 +2,7 @@ export interface HighlightBoxProps {
   title: string;
   body: string;
   imageURL: string;
-  eyelet?: string | null;
+  eyelet?: string;
   link?: {
     label: string;
     href: string;
