@@ -18,7 +18,7 @@ import MegaHeader from './MegaHeader/MegaHeader';
 import VideoImage from './VideoImage/VideoImage';
 import HeroChips from './HeroChips/HeroChips';
 import ServiceCarousel from './ServiceCarousel/ServiceCarousel';
-import TextPage from './TextPage/TextPage';
+import TextSection from './TextSection/TextSection';
 
 export {
   Hero,
@@ -41,5 +41,5 @@ export {
   VideoImage,
   HeroChips,
   ServiceCarousel,
-  TextPage,
+  TextSection,
 };

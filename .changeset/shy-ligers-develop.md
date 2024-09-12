@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-Add PressRelease component
+Add TextSection component

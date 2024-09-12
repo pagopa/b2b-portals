@@ -14,16 +14,16 @@ import {
   ExtraTextColor,
   BackgroundColor,
 } from '../common/Common.helpers';
-import { TextPageProps } from '@react-components/types';
+import { TextSectionProps } from '@react-components/types';
 
-const TextPage = ({
+const TextSection = ({
   eyelet,
   title,
   subtitle,
   body,
   link,
   sectionID,
-}: TextPageProps) => {
+}: TextSectionProps) => {
   const textColor = TextColor('light');
   const eyeletColor = ExtraTextColor('light');
   const backgroundColor = BackgroundColor('light');
@@ -81,48 +81,48 @@ const TextPage = ({
             {subtitle}
           </Typography>
         )}
-        {body && (
-          <Typography
-            variant='body1'
-            component='div'
-            sx={{
-              fontSize: { xs: '16px', md: '16px' },
+        <Typography
+          variant='body1'
+          component='div'
+          sx={{
+            fontSize: { xs: '16px', md: '16px' },
+            color: textColor,
+            mt: 2,
+            '& a': {
               color: textColor,
-              mt: 2,
-              '& a': {
+              textDecoration: 'underline',
+              '&:hover': {
                 color: textColor,
                 textDecoration: 'underline',
-                '&:hover': {
-                  color: textColor,
-                  textDecoration: 'underline',
-                },
               },
-            }}
-          >
-            {body}
-          </Typography>
-        )}
+            },
+          }}
+        >
+          {body}
+        </Typography>
         {link && (
           <Stack direction='row' spacing={1} alignItems='center' mt={4}>
-            <Link
-              href={link.href}
-              underline='none'
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                fontWeight: 'bold',
-                color: palette.custom.primaryColorDark,
-                fontSize: '16px',
-                '&:hover': {
-                  textDecoration: 'underline',
-                },
-              }}
-            >
-              <ArrowBackIcon
-                sx={{ mr: 1, color: palette.custom.primaryColorDark }}
-              />
-              {link.label}
-            </Link>
+            <Typography component='div'>
+              <Link
+                href={link.href}
+                underline='none'
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontWeight: 'bold',
+                  color: palette.custom.primaryColorDark,
+                  fontSize: '16px',
+                  '&:hover': {
+                    textDecoration: 'underline',
+                  },
+                }}
+              >
+                <ArrowBackIcon
+                  sx={{ mr: 1, color: palette.custom.primaryColorDark }}
+                />
+                {link.label}
+              </Link>
+            </Typography>
           </Stack>
         )}
       </Container>
@@ -130,4 +130,4 @@ const TextPage = ({
   );
 };
 
-export default TextPage;
+export default TextSection;
