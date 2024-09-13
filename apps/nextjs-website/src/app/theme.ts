@@ -20,6 +20,9 @@ declare module '@mui/material/styles' {
       readonly blueIO: {
         readonly 500: string;
       };
+      readonly highLightBoxLightGreenBackground: string;
+      readonly highLightBoxPurpleText: string;
+      readonly highLightBoxLightPurpleBackground: string;
       readonly black: string;
     };
   }
@@ -66,6 +69,9 @@ export const theme = createTheme(MUIItaliaTheme, {
       blueIO: {
         500: '#0B3EE3',
       },
+      highLightBoxLightGreenBackground: '#EFFBFF',
+      highLightBoxPurpleText: '#5517E3',
+      highLightBoxLightPurpleBackground: '#DDD1F9',
       black: '#000000',
     },
   },

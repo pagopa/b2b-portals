@@ -15,11 +15,12 @@ import HeroCounter from '../HeroCounter';
 import VideoImage from '../VideoImage';
 import HeroChips from '../HeroChips';
 import ServiceCarousel from '../ServiceCarousel';
+import HighlightBox from '../HighlightBox';
 import Stats from '../Stats';
 import RowText from '../RowText';
 import TextSection from '../TextSection';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
-
+// eslint-disable-next-line complexity
 const PageSection = (props: PageSectionData) => {
   // eslint-disable-next-line no-underscore-dangle
   switch (props.__component) {
@@ -55,6 +56,8 @@ const PageSection = (props: PageSectionData) => {
       return <HeroChips {...props} />;
     case 'sections.service-carousel':
       return <ServiceCarousel {...props} />;
+    case 'sections.highlight-box':
+      return <HighlightBox {...props} />;
     case 'sections.stats':
       return <Stats {...props} />;
     case 'sections.row-text':
