@@ -19,6 +19,9 @@ import { VideoImageProps } from './VideoImage/VideoImage.types';
 import { HeroChipsProps } from './HeroChips/HeroChips.types';
 import { ServiceCarouselProps } from './ServiceCarousel/ServiceCarousel.types';
 import { HighlightBoxProps } from './HighlightBox/HighlightBox.types';
+import { StatsProps } from './Stats/Stats.types';
+import { RowTextProps } from './RowText/RowText.types';
+import { TextSectionProps } from './TextSection/TextSection.types';
 
 export type {
   HeroProps,
@@ -42,4 +45,7 @@ export type {
   HeroChipsProps,
   ServiceCarouselProps,
   HighlightBoxProps,
+  StatsProps,
+  RowTextProps,
+  TextSectionProps,
 };

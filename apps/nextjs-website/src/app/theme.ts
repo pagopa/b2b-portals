@@ -23,6 +23,7 @@ declare module '@mui/material/styles' {
       readonly highLightBoxLightGreenBackground: string;
       readonly highLightBoxPurpleText: string;
       readonly highLightBoxLightPurpleBackground: string;
+      readonly black: string;
     };
   }
   // interface PaletteOptions {
@@ -71,6 +72,7 @@ export const theme = createTheme(MUIItaliaTheme, {
       highLightBoxLightGreenBackground: '#EFFBFF',
       highLightBoxPurpleText: '#5517E3',
       highLightBoxLightPurpleBackground: '#DDD1F9',
+      black: '#000000',
     },
   },
 });

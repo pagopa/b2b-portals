@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_sections_row_texts",
+  "info": {
+    "displayName": "RowText",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "body": {
+      "type": "text"
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "center"
+      ],
+      "required": true,
+      "default": "left"
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    }
+  }
+}
