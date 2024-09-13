@@ -312,6 +312,21 @@ const TextSectionSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const StatsSectionCodec = t.strict({
+  __component: t.literal('sections.stats'),
+  title: t.string,
+  eyelet: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  items: t.array(
+    t.strict({
+      title: t.string,
+      description: t.union([t.string, t.null]),
+      icon: StrapiImageSchema,
+    })
+  ),
+  sectionID: t.union([t.string, t.null]),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -330,6 +345,7 @@ export const PageSectionCodec = t.union([
   VideoImageSectionCodec,
   HeroChipsSectionCodec,
   ServiceCarouselSectionCodec,
+  StatsSectionCodec,
   RowTextSectionCodec,
   TextSectionSectionCodec,
 ]);
@@ -356,5 +372,6 @@ export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
 export type ServiceCarouselSection = t.TypeOf<
   typeof ServiceCarouselSectionCodec
 >;
+export type StatsSection = t.TypeOf<typeof StatsSectionCodec>;
 export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
 export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
