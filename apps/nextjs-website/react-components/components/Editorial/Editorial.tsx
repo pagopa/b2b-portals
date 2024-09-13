@@ -35,6 +35,7 @@ const Editorial = (props: EditorialProps) => {
   const backgroundColor = BackgroundColor(theme);
 
   if (width === 'standard') {
+    // If 'width' is 'standard' use this layout
     return (
       <ContainerRC
         size='xl'
@@ -82,6 +83,7 @@ const Editorial = (props: EditorialProps) => {
     );
   }
 
+  // Otherwise use original layout
   const columns = {
     wide: 6,
     center: 4,
