@@ -35,7 +35,6 @@ const Editorial = (props: EditorialProps) => {
   const backgroundColor = BackgroundColor(theme);
 
   if (width === 'standard') {
-    // If 'width' is 'standard' use this layout
     return (
       <ContainerRC
         size='xl'
@@ -47,6 +46,12 @@ const Editorial = (props: EditorialProps) => {
         {...(sectionID && { sectionID })}
       >
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
+
+        {isMobile && (
+          <Grid item xs={12} sx={{ mb: isMobile ? 4 : 0 }}>
+            <EditorialImage {...{ pattern, image, theme, mobileImage }} />
+          </Grid>
+        )}
 
         <Grid item xs={12} md={4}>
           <Stack gap={4}>
@@ -66,25 +71,24 @@ const Editorial = (props: EditorialProps) => {
 
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
-        <Grid item xs={12} md={5}>
-          <EditorialImage {...{ pattern, image, theme, mobileImage }} />
-        </Grid>
+        {!isMobile && (
+          <Grid item xs={12} md={5}>
+            <EditorialImage {...{ pattern, image, theme, mobileImage }} />
+          </Grid>
+        )}
 
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
       </ContainerRC>
     );
   }
 
-  // Otherwise use original layout
   const columns = {
     wide: 6,
     center: 4,
   };
 
   const containerDirection = isMobile
-    ? reversed
-      ? 'column-reverse'
-      : 'column'
+    ? 'column'
     : reversed
       ? 'row-reverse'
       : 'row';
@@ -100,6 +104,12 @@ const Editorial = (props: EditorialProps) => {
       py={8}
       spacing={2}
     >
+      {isMobile && (
+        <Grid item xs={12} sx={{ mb: 4 }}>
+          <EditorialImage {...{ pattern, image, theme, mobileImage }} />
+        </Grid>
+      )}
+
       <Grid item md={columns[width]} sx={gridItemStyles}>
         <Stack gap={4}>
           <EditorialContent
@@ -115,9 +125,12 @@ const Editorial = (props: EditorialProps) => {
           />
         </Stack>
       </Grid>
-      <Grid item md={columns[width]}>
-        <EditorialImage {...{ pattern, image, theme, mobileImage }} />
-      </Grid>
+
+      {!isMobile && (
+        <Grid item md={columns[width]}>
+          <EditorialImage {...{ pattern, image, theme, mobileImage }} />
+        </Grid>
+      )}
     </ContainerRC>
   );
 };
