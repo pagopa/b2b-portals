@@ -22,6 +22,10 @@
       "component": "components.service-card",
       "required": true,
       "min": 1
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
     }
   }
 }

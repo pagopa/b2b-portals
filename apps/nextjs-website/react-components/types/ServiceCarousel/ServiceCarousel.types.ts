@@ -1,3 +1,5 @@
+import { SectionProps } from "../common/Common.types";
+
 export interface ServiceCardProps {
   readonly title: string;
   readonly link: {
@@ -8,7 +10,7 @@ export interface ServiceCardProps {
   readonly imageURL?: string;
 }
 
-export interface ServiceCarouselProps {
+export interface ServiceCarouselProps extends Omit<SectionProps, 'theme'> {
   readonly title: string;
   readonly eyelet?: string;
   readonly description?: string;

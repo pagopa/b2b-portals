@@ -9,9 +9,9 @@ const meta: Meta<typeof PreFooter> = {
 };
 export default meta;
 
-export const PreFooterFull: StoryFn<typeof PreFooter> =
+export const PreFooterStoreButtons: StoryFn<typeof PreFooter> =
   PreFooterTemplate.bind({});
-PreFooterFull.args = {
+PreFooterStoreButtons.args = {
   ...defaultPropsLight,
   storeButtons: {
     hrefGoogle: 'https://play.google.com',
@@ -19,8 +19,34 @@ PreFooterFull.args = {
   },
 };
 
+export const PreFooterStandardButtons: StoryFn<typeof PreFooter> =
+  PreFooterTemplate.bind({});
+PreFooterStandardButtons.args = {
+  ...defaultPropsLight,
+  ctaButtons: [
+    {
+      text: 'Learn More',
+      href: '#',
+      variant: 'contained',
+    },
+    {
+      text: 'Get Started',
+      href: '#',
+      variant: 'contained',
+    },
+  ],
+};
+
 export const PreFooterOnlyTitle: StoryFn<typeof PreFooter> =
   PreFooterTemplate.bind({});
 PreFooterOnlyTitle.args = {
   ...defaultPropsLight,
+  ctaButtons: [],
+};
+
+export const PreFooterCenterButtons: StoryFn<typeof PreFooter> =
+  PreFooterTemplate.bind({});
+PreFooterCenterButtons.args = {
+  ...defaultPropsLight,
+  layout: 'center',
 };
