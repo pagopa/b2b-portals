@@ -6,7 +6,7 @@ export const Container = styled(AppBar)({
   justifyContent: 'center',
   padding: '10px 0',
   backgroundColor: '#ffffff',
-  position: 'sticky',
+  position: 'fixed',
   top: 0,
   width: '100%',
   zIndex: 1000,
@@ -90,11 +90,12 @@ export const Nav = styled('ul')({
 
 export const Dropdown = styled(Box)({
   display: 'none',
-  position: 'absolute',
-  top: '100%',
+  position: 'fixed',
+  top: '28px',
   left: 0,
   backgroundColor: '#fff',
   padding: '50px 70px',
+  marginTop: '28px',
   '&.open': {
     display: 'flex',
     flexDirection: 'row',

@@ -81,29 +81,35 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   </Typography>
                 ))}
               </Nav>
-              {ctaButton && <CtaButtons ctaButtons={[{
-                ...ctaButton,
-                sx: {
-                  backgroundColor: '#0B3EE3',
-                  color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: 2,
-                  textDecoration: 'none',
-                  whiteSpace: 'nowrap',
-                  '&:hover': {
-                    backgroundColor: '#005bb5',
-                  },
-                  '&:focus': {
-                    backgroundColor: '#005bb5',
-                  },
-                  '&:active': {
-                    backgroundColor: '#004999',
-                  },
-                  '&:visited': {
-                    color: 'white',
-                  },
-                }
-              }]} />}
+              {ctaButton && (
+                <CtaButtons
+                  ctaButtons={[
+                    {
+                      ...ctaButton,
+                      sx: {
+                        backgroundColor: '#0B3EE3',
+                        color: 'white',
+                        padding: '10px 20px',
+                        borderRadius: 2,
+                        textDecoration: 'none',
+                        whiteSpace: 'nowrap',
+                        '&:hover': {
+                          backgroundColor: '#005bb5',
+                        },
+                        '&:focus': {
+                          backgroundColor: '#005bb5',
+                        },
+                        '&:active': {
+                          backgroundColor: '#004999',
+                        },
+                        '&:visited': {
+                          color: 'white',
+                        },
+                      },
+                    },
+                  ]}
+                />
+              )}
             </>
           )}
           <IconButton
@@ -125,7 +131,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
       {!isMobile && (
         <Box
           id='desktopMenu'
-          sx={{ position: 'absolute', top: '56px', width: '100%', zIndex: 999 }}
+          sx={{ position: 'fixed', top: '56px', width: '100%', zIndex: 999 }}
         >
           {menuItems.map((menuItem: MegaMenuItem, index) => (
             <Dropdown
@@ -217,30 +223,36 @@ const MegaHeader = (props: MegaHeaderProps) => {
             </Box>
           </React.Fragment>
         ))}
-        {ctaButton && <CtaButtons ctaButtons={[{
-          ...ctaButton,
-          sx: {
-            backgroundColor: '#0B3EE3',
-            color: 'white',
-            padding: '10px 20px',
-            borderRadius: 2,
-            textDecoration: 'none',
-            whiteSpace: 'nowrap',
-            margin: '30px',
-            '&:hover': {
-              backgroundColor: '#005bb5',
-            },
-            '&:focus': {
-              backgroundColor: '#005bb5',
-            },
-            '&:active': {
-              backgroundColor: '#004999',
-            },
-            '&:visited': {
-              color: 'white',
-            },
-          }
-        }]} />}
+        {ctaButton && (
+          <CtaButtons
+            ctaButtons={[
+              {
+                ...ctaButton,
+                sx: {
+                  backgroundColor: '#0B3EE3',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: 2,
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                  margin: '30px',
+                  '&:hover': {
+                    backgroundColor: '#005bb5',
+                  },
+                  '&:focus': {
+                    backgroundColor: '#005bb5',
+                  },
+                  '&:active': {
+                    backgroundColor: '#004999',
+                  },
+                  '&:visited': {
+                    color: 'white',
+                  },
+                },
+              },
+            ]}
+          />
+        )}
       </MobileMenu>
     </>
   );
