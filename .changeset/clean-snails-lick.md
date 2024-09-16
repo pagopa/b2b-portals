@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-megaheader - fix absolute positioning and scrolling
+Fix MegaHeader Menu positioning and mobile styling
