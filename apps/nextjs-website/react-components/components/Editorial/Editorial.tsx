@@ -1,17 +1,17 @@
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import ContainerRC from "../common/ContainerRC";
-import { EditorialProps } from "../../types/Editorial/Editorial.types";
-import { useIsMobile } from "./Editorial.helpers";
-import { BackgroundColor } from "../common/Common.helpers";
-import { Content as EditorialContent } from "./Content";
-import { Ctas as EditorialCtas } from "./Ctas";
-import { Image as EditorialImage } from "./Image";
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import ContainerRC from '../common/ContainerRC';
+import { EditorialProps } from '../../types/Editorial/Editorial.types';
+import { useIsMobile } from './Editorial.helpers';
+import { BackgroundColor } from '../common/Common.helpers';
+import { Content as EditorialContent } from './Content';
+import { Ctas as EditorialCtas } from './Ctas';
+import { Image as EditorialImage } from './Image';
 
 const styles = {
   half: {
-    display: "grid",
-    justifyContent: "center",
+    display: 'grid',
+    justifyContent: 'center',
   },
 };
 
@@ -25,8 +25,8 @@ const Editorial = (props: EditorialProps) => {
     theme,
     ctaButtons,
     storeButtons,
-    pattern = "none",
-    width = "standard",
+    pattern = 'none',
+    width = 'standard',
     reversed = false,
     sectionID,
   } = props;
@@ -34,21 +34,21 @@ const Editorial = (props: EditorialProps) => {
   const isMobile = useIsMobile();
   const backgroundColor = BackgroundColor(theme);
 
-  if (width === "standard") {
+  if (width === 'standard') {
     // If 'width' is 'standard' use this layout
     return (
       <ContainerRC
-        size="xl"
-        alignItems="center"
+        size='xl'
+        alignItems='center'
         background={backgroundColor}
         direction={
-          isMobile ? "column-reverse" : reversed ? "row-reverse" : "row"
+          isMobile ? 'column-reverse' : reversed ? 'row-reverse' : 'row'
         }
         py={8}
         spacing={2}
         {...(sectionID && { sectionID })}
       >
-        <Grid item md={1} sx={{ display: { xs: "none", md: "block" } }} />
+        <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
         <Grid item xs={12} md={4}>
           <Stack gap={4}>
@@ -66,13 +66,13 @@ const Editorial = (props: EditorialProps) => {
           </Stack>
         </Grid>
 
-        <Grid item md={1} sx={{ display: { xs: "none", md: "block" } }} />
+        <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
         <Grid item xs={12} md={5}>
           <EditorialImage {...{ pattern, image, theme, mobileImage }} />
         </Grid>
 
-        <Grid item md={1} sx={{ display: { xs: "none", md: "block" } }} />
+        <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
       </ContainerRC>
     );
   }
@@ -84,17 +84,17 @@ const Editorial = (props: EditorialProps) => {
   };
 
   const containerDirection = isMobile
-    ? "column-reverse"
+    ? 'column-reverse'
     : reversed
-      ? "row-reverse"
-      : "row";
+      ? 'row-reverse'
+      : 'row';
 
   const gridItemStyles = { ...styles.half };
 
   return (
     <ContainerRC
-      size="xl"
-      alignItems="center"
+      size='xl'
+      alignItems='center'
       background={backgroundColor}
       direction={containerDirection}
       py={8}
