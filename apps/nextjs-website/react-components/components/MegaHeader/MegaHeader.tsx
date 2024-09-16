@@ -1,5 +1,11 @@
 import React, { useState, useEffect, MouseEvent } from 'react';
-import { IconButton, Box, useMediaQuery, Typography } from '@mui/material';
+import {
+  IconButton,
+  Box,
+  useMediaQuery,
+  Typography,
+  Stack,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -61,7 +67,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
 
   return (
     <>
-      <Container position='static'>
+      <Container>
         <Content>
           <Logo>
             <img src={logoSrc} alt={logoAlt} />
@@ -70,9 +76,9 @@ const MegaHeader = (props: MegaHeaderProps) => {
             <>
               <Nav>
                 {menuItems.map((menuItem: MegaMenuItem, index) => (
-                  <Typography component='li' key={index}>
+                  <Typography component="li" key={index}>
                     <a
-                      href='/'
+                      href="/"
                       className={`menuPrimaryItem ${dropdownOpen === menuItem.primary ? 'active' : ''}`}
                       onClick={(e) => handleClick(e, menuItem.primary)}
                     >
@@ -113,7 +119,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
             </>
           )}
           <IconButton
-            className='hamburger'
+            className="hamburger"
             onClick={handleMobileMenuToggle}
             sx={{
               display: { md: 'none' },
@@ -127,20 +133,16 @@ const MegaHeader = (props: MegaHeaderProps) => {
             )}
           </IconButton>
         </Content>
-      </Container>
-      {!isMobile && (
-        <Box
-          id='desktopMenu'
-          sx={{ position: 'fixed', top: '56px', width: '100%', zIndex: 999 }}
-        >
-          {menuItems.map((menuItem: MegaMenuItem, index) => (
+
+        {!isMobile &&
+          menuItems.map((menuItem: MegaMenuItem, index) => (
             <Dropdown
               key={index}
               className={dropdownOpen === menuItem.primary ? 'open' : ''}
             >
               {dropdownOpen === menuItem.primary &&
                 menuItem.secondary.map((submenu, subIndex) => (
-                  <div key={subIndex} className='dropdownSection'>
+                  <div key={subIndex} className="dropdownSection">
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                       {submenu.title && (
                         <DropdownTitle>{submenu.title}</DropdownTitle>
@@ -150,9 +152,9 @@ const MegaHeader = (props: MegaHeaderProps) => {
                           { length: Math.ceil(submenu.items.length / 7) },
                           (_, colIndex) => (
                             <Typography
-                              component='div'
+                              component="div"
                               key={colIndex}
-                              className='column'
+                              className="column"
                               style={{ flex: 1 }}
                             >
                               {submenu.items
@@ -165,7 +167,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                     onClick={() => setActiveItem(item.label)}
                                   >
                                     {item.label}
-                                    <ArrowForwardIcon className='arrowIcon' />
+                                    <ArrowForwardIcon className="arrowIcon" />
                                   </a>
                                 ))}
                             </Typography>
@@ -177,83 +179,93 @@ const MegaHeader = (props: MegaHeaderProps) => {
                 ))}
             </Dropdown>
           ))}
-        </Box>
-      )}
-      <MobileMenu id='mobileMenu' className={mobileMenuOpen ? 'open' : ''}>
-        {menuItems.map((menuItem: MegaMenuItem, index) => (
-          <React.Fragment key={index}>
-            <Box
-              className={`mobileMenuPrimaryItem ${dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''}`}
-              onClick={(e) =>
-                handleClick(e as any, `mobile${menuItem.primary}`)
-              }
-            >
-              {menuItem.primary}
-              <KeyboardArrowDownIcon
-                style={{
-                  transform:
-                    dropdownOpen === `mobile${menuItem.primary}`
-                      ? 'rotate(180deg)'
-                      : 'rotate(0deg)',
-                  color: palette.custom.primaryColorDark,
-                }}
-              />
-            </Box>
-            <Box
-              className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''}`}
-            >
-              {menuItem.secondary.map((submenu, subIndex) => (
-                <div key={subIndex}>
-                  {submenu.title && (
-                    <DropdownTitle>{submenu.title}</DropdownTitle>
-                  )}
-                  {submenu.items.map((item, itemIndex) => (
-                    <a
-                      key={itemIndex}
-                      href={item.href}
-                      className={`mobileMenuSecondaryItem ${activeItem === item.label ? 'active' : ''}`}
-                      onClick={() => setActiveItem(item.label)}
-                    >
-                      {item.label}
-                      <ArrowForwardIcon className='arrowIcon' />
-                    </a>
-                  ))}
-                </div>
-              ))}
-            </Box>
-          </React.Fragment>
-        ))}
-        {ctaButton && (
-          <CtaButtons
-            ctaButtons={[
-              {
-                ...ctaButton,
-                sx: {
-                  backgroundColor: '#0B3EE3',
-                  color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: 2,
-                  textDecoration: 'none',
-                  whiteSpace: 'nowrap',
-                  margin: '30px',
-                  '&:hover': {
-                    backgroundColor: '#005bb5',
-                  },
-                  '&:focus': {
-                    backgroundColor: '#005bb5',
-                  },
-                  '&:active': {
-                    backgroundColor: '#004999',
-                  },
-                  '&:visited': {
+
+        <MobileMenu
+          paddingTop={2}
+          id="mobileMenu"
+          className={mobileMenuOpen ? 'open' : ''}
+        >
+          {menuItems.map((menuItem: MegaMenuItem, index) => (
+            <React.Fragment key={index}>
+              <Stack
+                width="calc(100% - 60px)"
+                direction="row"
+                justifyContent="space-between"
+                padding="10px 30px"
+                className={`mobileMenuPrimaryItem ${dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''}`}
+                onClick={(e) =>
+                  handleClick(e as any, `mobile${menuItem.primary}`)
+                }
+              >
+                <Typography>{menuItem.primary}</Typography>
+                <KeyboardArrowDownIcon
+                  style={{
+                    transform:
+                      dropdownOpen === `mobile${menuItem.primary}`
+                        ? 'rotate(180deg)'
+                        : 'rotate(0deg)',
+                    color: palette.custom.primaryColorDark,
+                  }}
+                />
+              </Stack>
+              <Box
+                className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''}`}
+              >
+                {menuItem.secondary.map((submenu, subIndex) => (
+                  <div key={subIndex}>
+                    {submenu.title && (
+                      <DropdownTitle>{submenu.title}</DropdownTitle>
+                    )}
+                    {submenu.items.map((item, itemIndex) => (
+                      <a
+                        key={itemIndex}
+                        href={item.href}
+                        className={`mobileMenuSecondaryItem ${activeItem === item.label ? 'active' : ''}`}
+                        onClick={() => setActiveItem(item.label)}
+                      >
+                        <Typography variant="body2" fontSize={14}>
+                          {item.label}
+                        </Typography>
+                        <ArrowForwardIcon className="arrowIcon" />
+                      </a>
+                    ))}
+                  </div>
+                ))}
+              </Box>
+            </React.Fragment>
+          ))}
+          {ctaButton && (
+            <CtaButtons
+              ctaButtons={[
+                {
+                  ...ctaButton,
+                  sx: {
+                    backgroundColor: '#0B3EE3',
                     color: 'white',
+                    padding: '10px 20px',
+                    borderRadius: 2,
+                    textDecoration: 'none',
+                    whiteSpace: 'nowrap',
+                    margin: '30px',
+                    '&:hover': {
+                      backgroundColor: '#005bb5',
+                    },
+                    '&:focus': {
+                      backgroundColor: '#005bb5',
+                    },
+                    '&:active': {
+                      backgroundColor: '#004999',
+                    },
+                    '&:visited': {
+                      color: 'white',
+                    },
                   },
                 },
-              },
-            ]}
-          />
-        )}
-      </MobileMenu>
+              ]}
+            />
+          )}
+        </MobileMenu>
+      </Container>
     </>
   );
 };

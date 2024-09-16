@@ -6,7 +6,7 @@ export const Container = styled(AppBar)({
   justifyContent: 'center',
   padding: '10px 0',
   backgroundColor: '#ffffff',
-  position: 'fixed',
+  position: 'sticky',
   top: 0,
   width: '100%',
   zIndex: 1000,
@@ -90,17 +90,17 @@ export const Nav = styled('ul')({
 
 export const Dropdown = styled(Box)({
   display: 'none',
-  position: 'fixed',
-  top: '28px',
+  position: 'absolute',
+  top: '100%',
   left: 0,
   backgroundColor: '#fff',
   padding: '50px 70px',
-  marginTop: '28px',
+  boxShadow: 'inset 0 4px 16px 0 rgba(14, 15, 19, 0.06)',
   '&.open': {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: '100%',
+    width: 'calc(100% - 140px)',
   },
   '& .dropdownSection': {
     marginRight: 56,
@@ -136,7 +136,7 @@ export const Dropdown = styled(Box)({
 
 export const DropdownTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
-  fontSize: 14,
+  fontSize: 12,
   color: 'black',
   padding: '10px 20px',
   cursor: 'default',
@@ -147,17 +147,17 @@ export const DropdownTitle = styled(Typography)(({ theme }) => ({
 
 export const MobileMenu = styled(Box)({
   display: 'none',
-  position: 'fixed',
-  top: 0,
+  position: 'absolute',
+  top: '100%',
   left: 0,
   width: '100%',
-  height: '100%',
+  height: 'calc(100vh - 76px)', // Take stickty header into account
   backgroundColor: '#ffffff',
   zIndex: 999,
   flexDirection: 'column',
   alignItems: 'flex-start',
   overflowY: 'auto',
-  paddingTop: '100px',
+  boxShadow: 'inset 0 4px 16px 0 rgba(14, 15, 19, 0.06)',
   '&.open': {
     display: 'flex',
   },
@@ -203,7 +203,7 @@ export const MobileMenu = styled(Box)({
     display: 'flex',
     flexDirection: 'column',
     textAlign: 'left',
-    width: '100%',
+    width: 'calc(100%',
     borderBottom: 'none',
   },
   '& .mobileMenuPrimaryItem': {
