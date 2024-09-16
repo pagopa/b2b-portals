@@ -41,7 +41,8 @@
         "sections.video-image",
         "sections.hero-counter",
         "sections.service-carousel",
-        "sections.row-text"
+        "sections.row-text",
+        "sections.highlight-box"
       ],
       "required": true,
       "min": 1
