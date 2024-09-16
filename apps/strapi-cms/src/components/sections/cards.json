@@ -41,6 +41,16 @@
       "repeatable": true,
       "component": "components.cta-button-simple",
       "max": 2
+    },
+    "textPosition": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left",
+      "required": true
     }
   }
 }

@@ -152,6 +152,11 @@ const CardsSectionCodec = t.strict({
   body: t.union([t.string, t.null]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
   items: t.array(CardsItemCodec),
+  textPosition: t.keyof({
+    left: null,
+    center: null,
+    right: null,
+  }),
   sectionID: t.union([t.string, t.null]),
 });
 
