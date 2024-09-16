@@ -76,9 +76,9 @@ const MegaHeader = (props: MegaHeaderProps) => {
             <>
               <Nav>
                 {menuItems.map((menuItem: MegaMenuItem, index) => (
-                  <Typography component="li" key={index}>
+                  <Typography component='li' key={index}>
                     <a
-                      href="/"
+                      href='/'
                       className={`menuPrimaryItem ${dropdownOpen === menuItem.primary ? 'active' : ''}`}
                       onClick={(e) => handleClick(e, menuItem.primary)}
                     >
@@ -119,7 +119,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
             </>
           )}
           <IconButton
-            className="hamburger"
+            className='hamburger'
             onClick={handleMobileMenuToggle}
             sx={{
               display: { md: 'none' },
@@ -142,7 +142,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
             >
               {dropdownOpen === menuItem.primary &&
                 menuItem.secondary.map((submenu, subIndex) => (
-                  <div key={subIndex} className="dropdownSection">
+                  <div key={subIndex} className='dropdownSection'>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                       {submenu.title && (
                         <DropdownTitle>{submenu.title}</DropdownTitle>
@@ -152,9 +152,9 @@ const MegaHeader = (props: MegaHeaderProps) => {
                           { length: Math.ceil(submenu.items.length / 7) },
                           (_, colIndex) => (
                             <Typography
-                              component="div"
+                              component='div'
                               key={colIndex}
-                              className="column"
+                              className='column'
                               style={{ flex: 1 }}
                             >
                               {submenu.items
@@ -167,7 +167,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                     onClick={() => setActiveItem(item.label)}
                                   >
                                     {item.label}
-                                    <ArrowForwardIcon className="arrowIcon" />
+                                    <ArrowForwardIcon className='arrowIcon' />
                                   </a>
                                 ))}
                             </Typography>
@@ -182,7 +182,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
 
         <MobileMenu
           paddingTop={2}
-          id="mobileMenu"
+          id='mobileMenu'
           className={mobileMenuOpen ? 'open' : ''}
         >
           {menuItems.map((menuItem: MegaMenuItem, index) => (
@@ -219,10 +219,10 @@ const MegaHeader = (props: MegaHeaderProps) => {
                         className={`mobileMenuSecondaryItem ${activeItem === item.label ? 'active' : ''}`}
                         onClick={() => setActiveItem(item.label)}
                       >
-                        <Typography variant="body2" fontSize={14}>
+                        <Typography variant='body2' fontSize={14}>
                           {item.label}
                         </Typography>
-                        <ArrowForwardIcon className="arrowIcon" />
+                        <ArrowForwardIcon className='arrowIcon' />
                       </a>
                     ))}
                   </div>

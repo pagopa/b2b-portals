@@ -213,7 +213,7 @@ export const MobileMenu = styled(Box)({
     flexDirection: 'row',
     alignItems: 'center',
     textAlign: 'left',
-    width: 'calc(100% - 60px)',
+    width: 'calc(100% - 60px)', // Take padding into account
     justifyContent: 'space-between',
     padding: '10px 30px',
     cursor: 'pointer',
