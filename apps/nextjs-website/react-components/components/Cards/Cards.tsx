@@ -13,7 +13,7 @@ const Cards = ({
   theme,
   text,
   ctaButtons,
-  textPosition = 'left',
+  textPosition,
   sectionID,
 }: CardsProps) => {
   const backgroundColor = BackgroundColor(theme);
