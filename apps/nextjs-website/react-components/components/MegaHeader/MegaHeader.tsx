@@ -188,10 +188,6 @@ const MegaHeader = (props: MegaHeaderProps) => {
           {menuItems.map((menuItem: MegaMenuItem, index) => (
             <React.Fragment key={index}>
               <Stack
-                width="calc(100% - 60px)"
-                direction="row"
-                justifyContent="space-between"
-                padding="10px 30px"
                 className={`mobileMenuPrimaryItem ${dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''}`}
                 onClick={(e) =>
                   handleClick(e as any, `mobile${menuItem.primary}`)

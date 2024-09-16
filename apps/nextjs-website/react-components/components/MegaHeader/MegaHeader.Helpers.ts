@@ -100,7 +100,7 @@ export const Dropdown = styled(Box)({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: 'calc(100% - 140px)',
+    width: 'calc(100% - 140px)', // Take padding into account
   },
   '& .dropdownSection': {
     marginRight: 56,
@@ -203,7 +203,7 @@ export const MobileMenu = styled(Box)({
     display: 'flex',
     flexDirection: 'column',
     textAlign: 'left',
-    width: 'calc(100%',
+    width: '100%',
     borderBottom: 'none',
   },
   '& .mobileMenuPrimaryItem': {
@@ -213,7 +213,7 @@ export const MobileMenu = styled(Box)({
     flexDirection: 'row',
     alignItems: 'center',
     textAlign: 'left',
-    width: '100%',
+    width: 'calc(100% - 60px)',
     justifyContent: 'space-between',
     padding: '10px 30px',
     cursor: 'pointer',
