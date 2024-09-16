@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_sections_stats",
+  "info": {
+    "displayName": "Stats",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "eyelet": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.stats-item",
+      "min": 1,
+      "max": 3,
+      "required": true
+    }
+  }
+}

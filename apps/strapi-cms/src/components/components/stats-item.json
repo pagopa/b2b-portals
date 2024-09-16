@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_components_stats_items",
+  "info": {
+    "displayName": "Stats Item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

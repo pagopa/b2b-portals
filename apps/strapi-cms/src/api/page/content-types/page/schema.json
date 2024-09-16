@@ -42,7 +42,8 @@
         "sections.hero-counter",
         "sections.service-carousel",
         "sections.row-text",
-        "sections.highlight-box"
+        "sections.highlight-box",
+        "sections.stats"
       ],
       "required": true,
       "min": 1
