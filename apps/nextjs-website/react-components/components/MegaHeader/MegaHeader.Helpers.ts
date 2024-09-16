@@ -151,7 +151,7 @@ export const MobileMenu = styled(Box)({
   top: '100%',
   left: 0,
   width: '100%',
-  height: 'calc(100vh - 76px)', // Take stickty header into account
+  height: 'calc(100vh - 76px)', // Take sticky header into account
   backgroundColor: '#ffffff',
   zIndex: 999,
   flexDirection: 'column',

@@ -1,11 +1,5 @@
 import React, { useState, useEffect, MouseEvent } from 'react';
-import {
-  IconButton,
-  Box,
-  useMediaQuery,
-  Typography,
-  Stack,
-} from '@mui/material';
+import { IconButton, useMediaQuery, Typography, Stack } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -204,7 +198,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   }}
                 />
               </Stack>
-              <Box
+              <Stack
                 className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''}`}
               >
                 {menuItem.secondary.map((submenu, subIndex) => (
@@ -227,7 +221,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                     ))}
                   </div>
                 ))}
-              </Box>
+              </Stack>
             </React.Fragment>
           ))}
           {ctaButton && (
