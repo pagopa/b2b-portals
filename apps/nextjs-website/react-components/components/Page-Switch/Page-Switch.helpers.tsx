@@ -13,43 +13,39 @@ import {
   Stack,
   useMediaQuery,
   useTheme,
-  Theme,
+  GlobalStyles,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
-
-const customStyles = (theme: Theme) => {
-  const { palette } = theme;
-  return {
-    dark: {
-      a: {
-        color: `${palette.primary.contrastText} !important`,
-        fontWeight: '700 !important',
-        textDecorationColor: `${palette.primary.contrastText} !important`,
-        '&:hover': {
-          color: `${palette.primary.contrastText} !important`,
-        },
-      },
-    },
-    light: {
-      a: {
-        color: `${palette.primary.main} !important`,
-        fontWeight: '700 !important',
-        textDecorationColor: `${palette.primary.main} !important`,
-        '&:hover': {
-          color: `${palette.primary.main} !important`,
-        },
-      },
-    },
-  };
-};
 
 export const TitleSubtitleBlock = ({
   title,
   subtitle,
   theme,
 }: PageSwitchBaseProps) => {
-  const textColor = TextColor(theme);
   const muiTheme = useTheme();
+  const globalStyles = (
+    <GlobalStyles
+      styles={{
+        a: {
+          color:
+            theme === 'light'
+              ? muiTheme.palette.primary.main
+              : muiTheme.palette.primary.contrastText,
+          textDecorationColor:
+            theme === 'light'
+              ? muiTheme.palette.primary.main
+              : muiTheme.palette.primary.contrastText,
+          fontWeight: '700',
+          '&:hover': {
+            color:
+              theme === 'light'
+                ? muiTheme.palette.primary.main
+                : muiTheme.palette.primary.contrastText,
+          },
+        },
+      }}
+    />
+  );
 
   return (
     <div
@@ -60,19 +56,19 @@ export const TitleSubtitleBlock = ({
         gap: '1rem',
         marginTop: '1rem',
         marginBottom: '1rem',
-        ...customStyles(muiTheme)[theme],
       }}
     >
+      {globalStyles}
       <Title
         variant='h4'
-        textColor={textColor}
+        textColor={TextColor(theme)}
         title={title}
         marginTop={3}
         marginBottom={3}
       />
       <Subtitle
         variant='body2'
-        textColor={textColor}
+        textColor={TextColor(theme)}
         subtitle={subtitle}
         textAlign='center'
         marginBottom={4}
