@@ -5,7 +5,6 @@ import { makeBannerLinkProps } from './BannerLink';
 import { PageSwitch as PageSwitchRC } from '@react-components/components';
 import { PageSwitchProps } from '@react-components/types';
 import { PageSwitchSection } from '@/lib/fetch/types/PageSection';
-import { PageSwitchContent } from '@react-components/types/Page-Switch/Page-Switch.types';
 
 const makePageSwitchProps = ({
   subtitle,
@@ -13,33 +12,30 @@ const makePageSwitchProps = ({
   ...rest
 }: PageSwitchSection): PageSwitchProps => ({
   ...(subtitle && { subtitle }),
-  sections: sections.map(
-    ({
-      contents,
-      ...section
-    }: {
-      contents: PageSwitchContent[];
-      buttonText: string;
-      id: number;
-    }) => ({
-      ...section,
-      contents: contents.map((content: PageSwitchContent) => ({
-        ...content,
-        props: (() => {
-          switch (content.type) {
-            case 'Editorial':
-              return makeEditorialProps(content.props);
-            case 'Cards':
-              return makeCardsProps(content.props);
-            case 'BannerLink':
-              return makeBannerLinkProps(content.props);
-            default:
-              return content.props;
-          }
-        })(),
-      })),
-    })
-  ),
+  sections: sections.map((section) => ({
+    id: section.id,
+    buttonText: section.buttonText,
+    contents: section.contents.map((props) => {
+      // eslint-disable-next-line no-underscore-dangle
+      switch (props.__component) {
+        case 'sections.editorial':
+          return {
+            type: 'Editorial',
+            props: makeEditorialProps(props),
+          };
+        case 'sections.cards':
+          return {
+            type: 'Cards',
+            props: makeCardsProps(props),
+          };
+        case 'sections.banner-link':
+          return {
+            type: 'BannerLink',
+            props: makeBannerLinkProps(props),
+          };
+      }
+    }),
+  })),
   ...rest,
 });
 

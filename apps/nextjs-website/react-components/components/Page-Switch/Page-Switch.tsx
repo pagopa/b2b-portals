@@ -31,12 +31,7 @@ const renderContent = (contents: PageSwitchContent[]) => {
   });
 };
 
-const PageSwitch = ({
-  sections,
-  theme,
-  title,
-  subtitle,
-}: PageSwitchProps) => {
+const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
   if (sections[0] === undefined) {
     return null;
   }

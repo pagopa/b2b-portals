@@ -282,18 +282,9 @@ const SubtitleItemCodec = t.strict({
 });
 
 const PageSwitchContentCodec = t.union([
-  t.strict({
-    type: t.literal('Editorial'),
-    props: EditorialContentCodec,
-  }),
-  t.strict({
-    type: t.literal('Cards'),
-    props: CardsSectionCodec,
-  }),
-  t.strict({
-    type: t.literal('BannerLink'),
-    props: BannerLinkSectionCodec,
-  }),
+  EditorialSectionCodec,
+  CardsSectionCodec,
+  BannerLinkSectionCodec,
 ]);
 
 const PageSwitchSectionCodec = t.strict({

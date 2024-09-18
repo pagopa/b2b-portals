@@ -19,10 +19,10 @@ export interface PageSwitchSection {
   contents: PageSwitchContent[];
 }
 
-export type PageSwitchContent = 
-  | { type: 'Editorial', props: EditorialProps }
-  | { type: 'Cards', props: CardsProps }
-  | { type: 'BannerLink', props: BannerLinkProps };
+export type PageSwitchContent =
+  | { type: 'Editorial'; props: EditorialProps }
+  | { type: 'Cards'; props: CardsProps }
+  | { type: 'BannerLink'; props: BannerLinkProps };
 
 export interface PageSwitchProps extends PageSwitchBaseProps {
   sections: PageSwitchSection[];
