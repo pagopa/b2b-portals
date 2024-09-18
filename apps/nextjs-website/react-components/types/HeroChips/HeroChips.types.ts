@@ -1,6 +1,6 @@
-import { CommonProps, Generic } from "../common/Common.types";
+import { SectionProps, Generic } from "../common/Common.types";
 
-export interface HeroChipsProps extends CommonProps {
+export interface HeroChipsProps extends SectionProps {
   readonly background?: string | Generic;
   readonly title: string;
   readonly subtitle?: string | Generic;

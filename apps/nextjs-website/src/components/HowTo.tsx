@@ -13,10 +13,8 @@ const makeHowToProps = ({
   steps: steps.map((step) => ({
     title: step.title,
     description: MarkdownRenderer({ markdown: step.description }),
-    ...(step.icon && {
-      stepIcon: {
-        icon: step.icon,
-      },
+    ...(step.icon.data && {
+      iconURL: step.icon.data.attributes.url,
     }),
   })),
   ...rest,

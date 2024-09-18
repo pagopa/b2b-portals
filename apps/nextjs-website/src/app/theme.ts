@@ -17,24 +17,31 @@ declare module '@mui/material/styles' {
       readonly editorialSwitchButtonsBackgroundWhite: string;
       readonly bannerLinkLightBlue: string;
       readonly bannerLinkDarkBlue: string;
+      readonly blueIO: {
+        readonly 500: string;
+      };
+      readonly highLightBoxLightGreenBackground: string;
+      readonly highLightBoxPurpleText: string;
+      readonly highLightBoxLightPurpleBackground: string;
+      readonly black: string;
     };
   }
-  interface PaletteOptions {
-    readonly custom?: {
-      readonly backgroundColorDark?: string;
-      readonly backgroundColorLightGrey?: string;
-      readonly divider?: string;
-      readonly primaryColorDark?: string;
-      readonly backgroundColorDefault?: string;
-      readonly darkLinkColor?: string;
-      readonly grayLinkColor?: string;
-      readonly black50?: string;
-      readonly editorialSwitchButtonsBackgroundLightBlue?: string;
-      readonly editorialSwitchButtonsBackgroundWhite?: string;
-      readonly bannerLinkLightBlue?: string;
-      readonly bannerLinkDarkBlue?: string;
-    };
-  }
+  // interface PaletteOptions {
+  //   readonly custom?: {
+  //     readonly backgroundColorDark?: string;
+  //     readonly backgroundColorLightGrey?: string;
+  //     readonly divider?: string;
+  //     readonly primaryColorDark?: string;
+  //     readonly backgroundColorDefault?: string;
+  //     readonly darkLinkColor?: string;
+  //     readonly grayLinkColor?: string;
+  //     readonly black50?: string;
+  //     readonly editorialSwitchButtonsBackgroundLightBlue?: string;
+  //     readonly editorialSwitchButtonsBackgroundWhite?: string;
+  //     readonly bannerLinkLightBlue?: string;
+  //     readonly bannerLinkDarkBlue?: string;
+  //   };
+  // }
 }
 
 export const theme = createTheme(MUIItaliaTheme, {
@@ -59,6 +66,13 @@ export const theme = createTheme(MUIItaliaTheme, {
       editorialSwitchButtonsBackgroundWhite: '#ffffff1a',
       bannerLinkLightBlue: '#1043e8',
       bannerLinkDarkBlue: '#0B3EE3',
+      blueIO: {
+        500: '#0B3EE3',
+      },
+      highLightBoxLightGreenBackground: '#EFFBFF',
+      highLightBoxPurpleText: '#5517E3',
+      highLightBoxLightPurpleBackground: '#DDD1F9',
+      black: '#000000',
     },
   },
 });

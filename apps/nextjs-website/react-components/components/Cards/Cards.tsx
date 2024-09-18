@@ -13,7 +13,8 @@ const Cards = ({
   theme,
   text,
   ctaButtons,
-  textPosition = 'left',
+  textPosition,
+  sectionID,
 }: CardsProps) => {
   const backgroundColor = BackgroundColor(theme);
   const textColor = TextColor(theme);
@@ -34,6 +35,7 @@ const Cards = ({
         alignItems: isCenter ? 'center' : 'flex-start',
         textAlign: isCenter ? 'center' : 'left',
       }}
+      {...(sectionID && { sectionID })}
     >
       <Typography
         color={textColor}
@@ -44,11 +46,12 @@ const Cards = ({
       >
         {text.title && (
           <Title
-            variant='h2'
+            variant='h4'
             textColor={'inherit'}
             title={text.title}
             textAlign={isCenter ? 'center' : 'left'}
             marginBottom={5}
+            
           />
         )}
         {text.subtitle && (

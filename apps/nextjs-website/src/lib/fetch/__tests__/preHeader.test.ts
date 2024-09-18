@@ -51,6 +51,10 @@ const preHeaderResponse = {
   },
 };
 
+const emptyPreHeaderResponse = {
+  data: null,
+};
+
 const preHeaderResponseAfterCodec = {
   data: {
     attributes: {
@@ -107,5 +111,18 @@ describe('getPreHeader', () => {
 
     // Use preHeaderResponse directly as the expected value
     expect(await actual).toStrictEqual(preHeaderResponseAfterCodec);
+  });
+
+  it('should allow for preHeader data to be null', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(emptyPreHeaderResponse),
+    } as unknown as Response);
+
+    const actual = getPreHeader(appEnv);
+
+    // Use preHeaderResponse directly as the expected value
+    expect(await actual).toStrictEqual({ data: null });
   });
 });

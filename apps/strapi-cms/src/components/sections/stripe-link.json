@@ -18,16 +18,20 @@
     "buttonText": {
       "type": "string"
     },
-    "icon": {
-      "type": "enumeration",
-      "enum": [
-        "Code",
-        "SpeakerNotes"
-      ]
-    },
     "subtitle": {
       "type": "richtext",
       "required": true
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
     }
   }
 }

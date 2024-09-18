@@ -37,7 +37,12 @@ export const HeroTextContent = ({
     <Stack
       justifyContent={size === 'small' ? 'center' : { md: 'center' }}
       alignItems={size === 'small' ? 'center' : 'inherit'}
-      sx={{ minHeight: 'inherit' }}
+      sx={{
+        minHeight: 'inherit',
+        padding: size === 'small' ? '60px 0' : '0',
+        maxWidth: size === 'small' ? '60%' : '100%',
+        margin: size === 'small' ? '0 auto' : '0',
+      }}
       mt={{ xs: 9, lg: 0 }}
       component='section'
       spacing={2}
@@ -135,9 +140,7 @@ export const HeroTextContent = ({
             display: 'flex',
             alignItems: 'center',
             color:
-              theme === 'dark'
-                ? textColor
-                : palette.custom.primaryColorDark,
+              theme === 'dark' ? textColor : palette.custom.primaryColorDark,
             mt: 2,
             textDecoration: 'none',
             fontWeight: 'bold',

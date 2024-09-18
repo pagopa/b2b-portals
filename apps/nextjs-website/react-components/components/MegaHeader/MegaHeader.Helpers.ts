@@ -95,11 +95,12 @@ export const Dropdown = styled(Box)({
   left: 0,
   backgroundColor: '#fff',
   padding: '50px 70px',
+  boxShadow: 'inset 0 4px 16px 0 rgba(14, 15, 19, 0.06)',
   '&.open': {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: '100%',
+    width: 'calc(100% - 140px)', // Take padding into account
   },
   '& .dropdownSection': {
     marginRight: 56,
@@ -135,7 +136,7 @@ export const Dropdown = styled(Box)({
 
 export const DropdownTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
-  fontSize: 14,
+  fontSize: 12,
   color: 'black',
   padding: '10px 20px',
   cursor: 'default',
@@ -146,17 +147,17 @@ export const DropdownTitle = styled(Typography)(({ theme }) => ({
 
 export const MobileMenu = styled(Box)({
   display: 'none',
-  position: 'fixed',
-  top: 0,
+  position: 'absolute',
+  top: '100%',
   left: 0,
   width: '100%',
-  height: '100%',
+  height: 'calc(100vh - 76px)', // Take sticky header into account
   backgroundColor: '#ffffff',
   zIndex: 999,
   flexDirection: 'column',
   alignItems: 'flex-start',
   overflowY: 'auto',
-  paddingTop: '100px',
+  boxShadow: 'inset 0 4px 16px 0 rgba(14, 15, 19, 0.06)',
   '&.open': {
     display: 'flex',
   },
@@ -212,7 +213,7 @@ export const MobileMenu = styled(Box)({
     flexDirection: 'row',
     alignItems: 'center',
     textAlign: 'left',
-    width: '100%',
+    width: 'calc(100% - 60px)', // Take padding into account
     justifyContent: 'space-between',
     padding: '10px 30px',
     cursor: 'pointer',

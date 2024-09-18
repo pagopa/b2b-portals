@@ -9,8 +9,9 @@ export type Theme = Readonly<'dark' | 'light'>;
  */
 export type Generic = JSX.Element;
 
-export interface CommonProps {
+export interface SectionProps {
   readonly theme: Theme;
+  readonly sectionID: string | null;
 }
 
 /**

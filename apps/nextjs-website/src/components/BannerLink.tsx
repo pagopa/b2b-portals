@@ -6,7 +6,7 @@ import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
 
 export const makeBannerLinkProps = ({
   sections,
-  theme,
+  ...rest
 }: BannerLinkSection): BannerLinkProps => ({
   sections: sections.map(
     ({ body, icon, decoration, ctaButtons, ...requiredFields }) => ({
@@ -26,7 +26,7 @@ export const makeBannerLinkProps = ({
       }),
     })
   ),
-  theme,
+  ...rest,
 });
 
 const BannerLink = (props: BannerLinkSection) => (

@@ -17,6 +17,11 @@ import { HeroCounterProps } from './HeroCounter/HeroCounter.types';
 import { MegaHeaderProps } from './MegaHeader/MegaHeader.types';
 import { VideoImageProps } from './VideoImage/VideoImage.types';
 import { HeroChipsProps } from './HeroChips/HeroChips.types';
+import { ServiceCarouselProps } from './ServiceCarousel/ServiceCarousel.types';
+import { HighlightBoxProps } from './HighlightBox/HighlightBox.types';
+import { StatsProps } from './Stats/Stats.types';
+import { RowTextProps } from './RowText/RowText.types';
+import { TextSectionProps } from './TextSection/TextSection.types';
 import { PageSwitchProps } from './Page-Switch/Page-Switch.types';
 
 export type {
@@ -39,5 +44,10 @@ export type {
   MegaHeaderProps,
   VideoImageProps,
   HeroChipsProps,
+  ServiceCarouselProps,
+  HighlightBoxProps,
+  StatsProps,
+  RowTextProps,
+  TextSectionProps,
   PageSwitchProps,
 };

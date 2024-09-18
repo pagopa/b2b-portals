@@ -22,14 +22,12 @@ export const makeCardsProps = ({
   },
   items: items.map(({ icon, label, text, title, links }) => ({
     title,
-    ...(icon && {
-      cardIcon: { icon },
+    ...(icon.data && {
+      iconURL: icon.data.attributes.url,
     }),
     ...(label && { label }),
     ...(text && { text }),
-    ...(links.length > 0 && {
-      links: links.map((link) => ({ href: link.href, text: link.label })),
-    }),
+    ...(links.length > 0 && { links }),
   })),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {

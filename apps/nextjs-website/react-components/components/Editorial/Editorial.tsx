@@ -28,6 +28,7 @@ const Editorial = (props: EditorialProps) => {
     pattern = 'none',
     width = 'standard',
     reversed = false,
+    sectionID,
   } = props;
 
   const isMobile = useIsMobile();
@@ -40,9 +41,12 @@ const Editorial = (props: EditorialProps) => {
         size='xl'
         alignItems='center'
         background={backgroundColor}
-        direction={isMobile ? 'column' : reversed ? 'row-reverse' : 'row'}
+        direction={
+          isMobile ? 'column-reverse' : reversed ? 'row-reverse' : 'row'
+        }
         py={8}
         spacing={2}
+        {...(sectionID && { sectionID })}
       >
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
@@ -80,9 +84,7 @@ const Editorial = (props: EditorialProps) => {
   };
 
   const containerDirection = isMobile
-    ? reversed
-      ? 'column-reverse'
-      : 'column'
+    ? 'column-reverse'
     : reversed
       ? 'row-reverse'
       : 'row';

@@ -2,9 +2,6 @@ import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
 import { StrapiImageRequiredSchema, StrapiImageSchema } from './StrapiImage';
 import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
-import { HowToStepMUIIconCodec } from './icons/HowToStepIcon';
-import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
-import { CardsItemMUIIconCodec } from './icons/CardsItemIcon';
 import { StoreButtonsCodec } from './StoreButtons';
 
 const LinkCodec = t.strict({
@@ -79,11 +76,10 @@ const AccordionSectionCodec = t.strict({
 
 const FeatureItemCodec = t.strict({
   id: t.number,
-  icon: FeatureItemMUIIconCodec,
+  icon: StrapiImageRequiredSchema,
   title: t.string,
   subtitle: t.string,
-  linkText: t.union([t.string, t.null]),
-  linkURL: t.union([t.string, t.null]),
+  link: t.union([LinkCodec, t.null]),
 });
 
 const FeatureSectionCodec = t.strict({
@@ -98,7 +94,7 @@ const FeatureSectionCodec = t.strict({
 const StepCodec = t.strict({
   title: t.string,
   description: t.string,
-  icon: t.union([HowToStepMUIIconCodec, t.null]),
+  icon: StrapiImageSchema,
 });
 
 const HowToSectionCodec = t.strict({
@@ -119,6 +115,7 @@ const HowToSectionCodec = t.strict({
 const BannerLinkSectionCodec = t.strict({
   __component: t.literal('sections.banner-link'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
   sections: t.array(
     t.strict({
       title: t.string,
@@ -134,8 +131,9 @@ const StripeLinkSectionCodec = t.strict({
   __component: t.literal('sections.stripe-link'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   subtitle: t.string,
-  icon: t.union([StripeLinkMUIIconCodec, t.null]),
+  icon: StrapiImageSchema,
   buttonText: t.union([t.string, t.null]),
+  sectionID: t.union([t.string, t.null]),
 });
 
 const CardsItemCodec = t.strict({
@@ -143,7 +141,7 @@ const CardsItemCodec = t.strict({
   title: t.string,
   text: t.union([t.string, t.null]),
   links: t.array(LinkCodec),
-  icon: t.union([CardsItemMUIIconCodec, t.null]),
+  icon: StrapiImageSchema,
 });
 
 const CardsSectionCodec = t.strict({
@@ -154,6 +152,11 @@ const CardsSectionCodec = t.strict({
   body: t.union([t.string, t.null]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
   items: t.array(CardsItemCodec),
+  textPosition: t.keyof({
+    left: null,
+    center: null,
+    right: null,
+  }),
   sectionID: t.union([t.string, t.null]),
 });
 
@@ -190,6 +193,7 @@ const FormSectionCodec = t.strict({
     io: null,
     pagopa: null,
   }),
+  sectionID: t.union([t.string, t.null]),
 });
 
 const PreFooterSectionCodec = t.strict({
@@ -198,6 +202,8 @@ const PreFooterSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
   background: StrapiImageSchema,
+  sectionID: t.union([t.string, t.null]),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
 });
 
 const CounterCodec = t.strict({
@@ -276,6 +282,66 @@ const HeroChipsSectionCodec = t.strict({
   centerText: t.boolean,
 });
 
+const ServiceCardCodec = t.strict({
+  title: t.string,
+  link: LinkCodec,
+  image: StrapiImageSchema,
+  description: t.union([t.string, t.null]),
+});
+
+const ServiceCarouselSectionCodec = t.strict({
+  __component: t.literal('sections.service-carousel'),
+  title: t.string,
+  description: t.union([t.string, t.null]),
+  eyelet: t.union([t.string, t.null]),
+  cards: t.array(ServiceCardCodec),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const RowTextSectionCodec = t.strict({
+  __component: t.literal('sections.row-text'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  layout: t.union([t.literal('left'), t.literal('center')]),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const TextSectionSectionCodec = t.strict({
+  __component: t.literal('sections.text-section'),
+  eyelet: t.union([t.string, t.null]),
+  title: t.union([t.string, t.null]),
+  subtitle: t.union([t.string, t.null]),
+  body: t.string,
+  link: t.union([LinkCodec, t.null]),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const StatsSectionCodec = t.strict({
+  __component: t.literal('sections.stats'),
+  title: t.string,
+  eyelet: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  items: t.array(
+    t.strict({
+      title: t.string,
+      description: t.union([t.string, t.null]),
+      icon: StrapiImageSchema,
+    })
+  ),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const HighlightBoxSectionCodec = t.strict({
+  __component: t.literal('sections.highlight-box'),
+  eyelet: t.union([t.string, t.null]),
+  title: t.string,
+  body: t.string,
+  link: t.union([LinkCodec, t.null]),
+  image: StrapiImageRequiredSchema,
+  sectionID: t.union([t.string, t.null]),
+});
+
 const PageSwitchContentCodec = t.union([
   EditorialSectionCodec,
   CardsSectionCodec,
@@ -313,6 +379,11 @@ export const PageSectionCodec = t.union([
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
   HeroChipsSectionCodec,
+  ServiceCarouselSectionCodec,
+  HighlightBoxSectionCodec,
+  StatsSectionCodec,
+  RowTextSectionCodec,
+  TextSectionSectionCodec,
   PageSwitchSectionCodec,
 ]);
 
@@ -335,4 +406,11 @@ export type EditorialSwitchSection = t.TypeOf<
 >;
 export type VideoImageSection = t.TypeOf<typeof VideoImageSectionCodec>;
 export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
+export type ServiceCarouselSection = t.TypeOf<
+  typeof ServiceCarouselSectionCodec
+>;
+export type HighlightBoxSection = t.TypeOf<typeof HighlightBoxSectionCodec>;
+export type StatsSection = t.TypeOf<typeof StatsSectionCodec>;
+export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
+export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
 export type PageSwitchSection = t.TypeOf<typeof PageSwitchSectionCodec>;

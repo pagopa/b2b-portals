@@ -1,4 +1,4 @@
-import { Link } from '@mui/material';
+import { Link, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Body } from '../common/Common';
@@ -11,7 +11,7 @@ const Subtitle = ({ item, theme }: FeatureStackItemProps) => {
   return (
     <Stack spacing={3} justifyContent='center' alignItems='center'>
       <Body textColor={textColor} body={item.subtitle} />
-      {(item.link !== undefined) && (
+      {item.link !== undefined && (
         <Stack
           spacing={1}
           justifyContent='center'
@@ -19,16 +19,20 @@ const Subtitle = ({ item, theme }: FeatureStackItemProps) => {
           direction={'row'}
           color={theme === 'light' ? 'primary' : 'background.paper'}
         >
-          <Link
-            color='inherit'
-            href={item.link.url}
-            underline='none'
-            sx={{
-              fontWeight: 'bold',
-            }}
+          <Typography
+            component='span'
+            variant='body1'
+            color={theme === 'light' ? 'text.primary' : 'background.paper'}
           >
-            {item.link.text}
-          </Link>
+            <Link
+              color='inherit'
+              href={item.link.href}
+              underline='none'
+              sx={{ fontWeight: 'bold' }}
+            >
+              {item.link.label}
+            </Link>
+          </Typography>
 
           <ArrowForwardIcon color='inherit'></ArrowForwardIcon>
         </Stack>
