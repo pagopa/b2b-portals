@@ -59,7 +59,7 @@ export const TitleSubtitleBlock = ({
     : undefined;
 
   return (
-    <div
+    <Stack
       style={{
         display: 'grid',
         alignItems: 'center',
@@ -85,7 +85,7 @@ export const TitleSubtitleBlock = ({
           marginBottom={4}
         />
       )}
-    </div>
+    </Stack>
   );
 };
 
