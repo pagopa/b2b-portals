@@ -2,6 +2,7 @@ import React from 'react';
 import { makeEditorialProps } from './Editorial';
 import { makeCardsProps } from './Cards';
 import { makeBannerLinkProps } from './BannerLink';
+import MarkdownRenderer from './MarkdownRenderer';
 import { PageSwitch as PageSwitchRC } from '@react-components/components';
 import { PageSwitchProps } from '@react-components/types';
 import { PageSwitchSection } from '@/lib/fetch/types/PageSection';
@@ -11,7 +12,7 @@ const makePageSwitchProps = ({
   sections,
   ...rest
 }: PageSwitchSection): PageSwitchProps => ({
-  ...(subtitle && { subtitle }),
+  ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
   sections: sections.map((section) => ({
     id: section.id,
     buttonText: section.buttonText,

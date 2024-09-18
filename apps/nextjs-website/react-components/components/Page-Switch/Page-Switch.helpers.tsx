@@ -3,7 +3,7 @@ import {
   ButtonSwitchRowBlockProps,
   PageSwitchBaseProps,
 } from '../../types/Page-Switch/Page-Switch.types';
-import { CtaButtons, Title } from '../common/Common';
+import { CtaButtons, Subtitle, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import {
   Button,
@@ -14,7 +14,6 @@ import {
   useMediaQuery,
   useTheme,
   Theme,
-  styled,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 
@@ -22,7 +21,7 @@ const customStyles = (theme: Theme) => {
   const { palette } = theme;
   return {
     dark: {
-      'a': {
+      a: {
         color: `${palette.primary.contrastText} !important`,
         fontWeight: '700 !important',
         textDecorationColor: `${palette.primary.contrastText} !important`,
@@ -32,7 +31,7 @@ const customStyles = (theme: Theme) => {
       },
     },
     light: {
-      'a': {
+      a: {
         color: `${palette.primary.main} !important`,
         fontWeight: '700 !important',
         textDecorationColor: `${palette.primary.main} !important`,
@@ -40,27 +39,9 @@ const customStyles = (theme: Theme) => {
           color: `${palette.primary.main} !important`,
         },
       },
-    },  
+    },
   };
 };
-
-const CustomLink = styled('a')(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontWeight: '700',
-  textDecorationColor: theme.palette.primary.main,
-  '&:hover': {
-    color: theme.palette.primary.main,
-  },
-}));
-
-const DarkCustomLink = styled('a')(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  fontWeight: '700',
-  textDecorationColor: theme.palette.primary.contrastText,
-  '&:hover': {
-    color: theme.palette.primary.contrastText,
-  },
-}));
 
 export const TitleSubtitleBlock = ({
   title,
@@ -89,33 +70,13 @@ export const TitleSubtitleBlock = ({
         marginTop={3}
         marginBottom={3}
       />
-      {subtitle && (
-        <div
-          style={{
-            marginBottom: '0.5rem',
-            marginTop: '0.5rem',
-            color: textColor,
-          }}
-        >
-          {subtitle.map((item, index) => (
-            <React.Fragment key={index}>
-              {item.link ? (
-                theme === 'light' ? (
-                  <CustomLink href={item.link}>
-                    {item.text}
-                  </CustomLink>
-                ) : (
-                  <DarkCustomLink href={item.link}>
-                    {item.text}
-                  </DarkCustomLink>
-                )
-              ) : (
-                item.text
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      )}
+      <Subtitle
+        variant='body2'
+        textColor={textColor}
+        subtitle={subtitle}
+        textAlign='center'
+        marginBottom={4}
+      />
     </div>
   );
 };
@@ -162,13 +123,19 @@ const SplitButton = ({
           sx={{
             backgroundColor: 'transparent',
             color:
-              theme === 'light' ? muiTheme.palette.primary.main : muiTheme.palette.primary.contrastText,
+              theme === 'light'
+                ? muiTheme.palette.primary.main
+                : muiTheme.palette.primary.contrastText,
             borderColor:
-              theme === 'light' ? muiTheme.palette.primary.main : muiTheme.palette.primary.contrastText,
+              theme === 'light'
+                ? muiTheme.palette.primary.main
+                : muiTheme.palette.primary.contrastText,
             '&:hover': {
               backgroundColor: 'transparent',
               color:
-                theme === 'light' ? muiTheme.palette.primary.main : muiTheme.palette.primary.contrastText,
+                theme === 'light'
+                  ? muiTheme.palette.primary.main
+                  : muiTheme.palette.primary.contrastText,
             },
           }}
         >
@@ -182,13 +149,19 @@ const SplitButton = ({
           sx={{
             backgroundColor: 'transparent',
             color:
-              theme === 'light' ? muiTheme.palette.primary.main : muiTheme.palette.primary.contrastText,
+              theme === 'light'
+                ? muiTheme.palette.primary.main
+                : muiTheme.palette.primary.contrastText,
             borderColor:
-              theme === 'light' ? muiTheme.palette.primary.main : muiTheme.palette.primary.contrastText,
+              theme === 'light'
+                ? muiTheme.palette.primary.main
+                : muiTheme.palette.primary.contrastText,
             '&:hover': {
               backgroundColor: 'transparent',
               color:
-                theme === 'light' ? muiTheme.palette.primary.main : muiTheme.palette.primary.contrastText,
+                theme === 'light'
+                  ? muiTheme.palette.primary.main
+                  : muiTheme.palette.primary.contrastText,
             },
           }}
         >
@@ -213,9 +186,10 @@ const SplitButton = ({
         }}
         PaperProps={{
           sx: {
-            bgcolor: theme === 'light' ? 'background.paper' : 'background.default',
+            bgcolor:
+              theme === 'light' ? 'background.paper' : 'background.default',
             color: theme === 'light' ? 'text.primary' : 'text.secondary',
-          }
+          },
         }}
       >
         {buttons.map((button) => (
@@ -228,18 +202,28 @@ const SplitButton = ({
             sx={{
               backgroundColor: 'transparent',
               color:
-                theme === 'light' ? muiTheme.palette.primary.main : muiTheme.palette.primary.contrastText,
+                theme === 'light'
+                  ? muiTheme.palette.primary.main
+                  : muiTheme.palette.primary.contrastText,
               '&:hover': {
                 backgroundColor: 'transparent',
                 color: muiTheme.palette.primary.main,
               },
               '&.Mui-selected': {
-                backgroundColor: palette.custom.editorialSwitchButtonsBackgroundLightBlue,
-                color: theme === 'dark' ? muiTheme.palette.primary.main : muiTheme.palette.primary.main,
+                backgroundColor:
+                  palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+                color:
+                  theme === 'dark'
+                    ? muiTheme.palette.primary.main
+                    : muiTheme.palette.primary.main,
               },
               '&.Mui-selected:hover': {
-                backgroundColor: palette.custom.editorialSwitchButtonsBackgroundLightBlue,
-                color: theme === 'dark' ? muiTheme.palette.primary.main : muiTheme.palette.primary.main,
+                backgroundColor:
+                  palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+                color:
+                  theme === 'dark'
+                    ? muiTheme.palette.primary.main
+                    : muiTheme.palette.primary.main,
               },
               '&:not(.Mui-selected)': {
                 color: muiTheme.palette.primary.main,
@@ -266,10 +250,7 @@ export const ButtonSwitchRowBlock = ({
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
   return isLarge ? (
-    <Stack
-      direction={isSmallScreen ? 'column' : 'row'}
-      spacing={2}
-    >
+    <Stack direction={isSmallScreen ? 'column' : 'row'} spacing={2}>
       {CtaButtons({
         ctaButtons: buttons.map((button) => ({
           text: button.text,
@@ -280,14 +261,18 @@ export const ButtonSwitchRowBlock = ({
                 ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                 : 'transparent',
             color:
-              theme === 'light' ? muiTheme.palette.primary.main : muiTheme.palette.primary.contrastText,
+              theme === 'light'
+                ? muiTheme.palette.primary.main
+                : muiTheme.palette.primary.contrastText,
             '&:hover': {
               backgroundColor:
                 button.id === selectedButton.id
                   ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                   : 'transparent',
               color:
-                theme === 'light' ? muiTheme.palette.primary.main : muiTheme.palette.primary.contrastText,
+                theme === 'light'
+                  ? muiTheme.palette.primary.main
+                  : muiTheme.palette.primary.contrastText,
             },
           },
           variant: 'outlined',

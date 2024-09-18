@@ -2,14 +2,9 @@ import { EditorialProps } from '../Editorial/Editorial.types';
 import { CardsProps } from '../Cards/Cards.types';
 import { BannerLinkProps } from '../BannerLink/BannerLink.types';
 
-export interface SubtitleItem {
-  text: string;
-  link?: string | null;
-}
-
 export interface PageSwitchBaseProps {
   title: string;
-  subtitle?: SubtitleItem[];
+  subtitle?: JSX.Element;
   theme: 'dark' | 'light';
 }
 

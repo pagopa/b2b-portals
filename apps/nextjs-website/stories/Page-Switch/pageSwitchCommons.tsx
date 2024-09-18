@@ -7,10 +7,16 @@ export const PageSwitchTemplate: StoryFn<PageSwitchProps> = (args) => (
   <PageSwitch {...args} />
 );
 
-const generateDefaultProps = (theme: 'light' | 'dark'): Partial<PageSwitchProps> => ({
+const generateDefaultProps = (
+  theme: 'light' | 'dark'
+): Partial<PageSwitchProps> => ({
   theme,
   title: 'Top Title',
-  subtitle: [{ text: 'Top Subtitle', link: null }],
+  subtitle: (
+    <p>
+      Top subtitle with <a href='/'>link</a>
+    </p>
+  ),
   sections: [
     {
       id: 1,
@@ -23,8 +29,18 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<PageSwitchProps>
             title: 'Editorial 1',
             body: 'Light Editorial',
             width: 'standard',
-            image: <img src="https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png" alt="placeholder" />,
-            mobileImage: <img src="https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png" alt="placeholder" />,
+            image: (
+              <img
+                src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png'
+                alt='placeholder'
+              />
+            ),
+            mobileImage: (
+              <img
+                src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png'
+                alt='placeholder'
+              />
+            ),
           },
         },
         {
@@ -60,7 +76,7 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<PageSwitchProps>
                 body: (
                   <p>
                     Richiedi assistenza via email scrivendo a{' '}
-                    <a href="mailto:destinatari-send@assistenza.pagopa.it">
+                    <a href='mailto:destinatari-send@assistenza.pagopa.it'>
                       destinatari-send@assistenza.pagopa.it
                     </a>
                   </p>
@@ -90,8 +106,18 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<PageSwitchProps>
             title: 'Editorial 2',
             body: 'Dark Editorial',
             width: 'standard',
-            image: <img src="https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png" alt="placeholder" />,
-            mobileImage: <img src="https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png" alt="placeholder" />,
+            image: (
+              <img
+                src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png'
+                alt='placeholder'
+              />
+            ),
+            mobileImage: (
+              <img
+                src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png'
+                alt='placeholder'
+              />
+            ),
           },
         },
         {
@@ -127,7 +153,7 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<PageSwitchProps>
                 body: (
                   <p>
                     Richiedi assistenza via email scrivendo a{' '}
-                    <a href="mailto:destinatari-send@assistenza.pagopa.it">
+                    <a href='mailto:destinatari-send@assistenza.pagopa.it'>
                       destinatari-send@assistenza.pagopa.it
                     </a>
                   </p>
@@ -157,8 +183,18 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<PageSwitchProps>
             title: 'Editorial 3',
             body: 'Light Editorial 3',
             width: 'standard',
-            image: <img src="https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png" alt="placeholder" />,
-            mobileImage: <img src="https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png" alt="placeholder" />,
+            image: (
+              <img
+                src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png'
+                alt='placeholder'
+              />
+            ),
+            mobileImage: (
+              <img
+                src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png'
+                alt='placeholder'
+              />
+            ),
           },
         },
         {
@@ -194,7 +230,7 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<PageSwitchProps>
                 body: (
                   <p>
                     Richiedi assistenza via email scrivendo a{' '}
-                    <a href="mailto:destinatari-send@assistenza.pagopa.it">
+                    <a href='mailto:destinatari-send@assistenza.pagopa.it'>
                       destinatari-send@assistenza.pagopa.it
                     </a>
                   </p>

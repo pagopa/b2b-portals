@@ -276,11 +276,6 @@ const HeroChipsSectionCodec = t.strict({
   centerText: t.boolean,
 });
 
-const SubtitleItemCodec = t.strict({
-  text: t.string,
-  link: t.union([t.string, t.null]),
-});
-
 const PageSwitchContentCodec = t.union([
   EditorialSectionCodec,
   CardsSectionCodec,
@@ -291,7 +286,7 @@ const PageSwitchSectionCodec = t.strict({
   __component: t.literal('sections.page-switch'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   title: t.string,
-  subtitle: t.union([t.array(SubtitleItemCodec), t.null]),
+  subtitle: t.union([t.string, t.null]),
   sections: t.array(
     t.strict({
       id: t.number,
