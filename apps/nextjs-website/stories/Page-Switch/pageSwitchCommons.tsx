@@ -41,6 +41,7 @@ const generateDefaultProps = (
                 alt='placeholder'
               />
             ),
+            sectionID: '',
           },
         },
         {
@@ -51,12 +52,14 @@ const generateDefaultProps = (
               {
                 title: 'Card 1',
                 text: 'This is card 1',
-                cardIcon: { icon: 'AccessAlarm' },
+                iconURL:
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
               },
               {
                 title: 'Card 2',
                 text: 'This is card 2',
-                cardIcon: { icon: 'AccessAlarm' },
+                iconURL:
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
               },
             ],
             text: {
@@ -64,6 +67,8 @@ const generateDefaultProps = (
               subtitle: 'Cards subtitle',
               body: 'Cards Body',
             },
+            sectionID: '',
+            textPosition: 'left',
           },
         },
         {
@@ -91,6 +96,7 @@ const generateDefaultProps = (
                 ],
               },
             ],
+            sectionID: '',
           },
         },
       ],
@@ -118,6 +124,7 @@ const generateDefaultProps = (
                 alt='placeholder'
               />
             ),
+            sectionID: '',
           },
         },
         {
@@ -128,12 +135,14 @@ const generateDefaultProps = (
               {
                 title: 'Card 3',
                 text: 'This is card 3',
-                cardIcon: { icon: 'AccessAlarm' },
+                iconURL:
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
               },
               {
                 title: 'Card 4',
                 text: 'This is card 4',
-                cardIcon: { icon: 'AccessAlarm' },
+                iconURL:
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
               },
             ],
             text: {
@@ -141,6 +150,8 @@ const generateDefaultProps = (
               subtitle: 'Cards subtitle 2',
               body: 'Cards Body 2',
             },
+            sectionID: '',
+            textPosition: 'left',
           },
         },
         {
@@ -168,6 +179,7 @@ const generateDefaultProps = (
                 ],
               },
             ],
+            sectionID: '',
           },
         },
       ],
@@ -195,6 +207,7 @@ const generateDefaultProps = (
                 alt='placeholder'
               />
             ),
+            sectionID: '',
           },
         },
         {
@@ -205,12 +218,14 @@ const generateDefaultProps = (
               {
                 title: 'Card 5',
                 text: 'This is card 5',
-                cardIcon: { icon: 'AccessAlarm' },
+                iconURL:
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
               },
               {
                 title: 'Card 6',
                 text: 'This is card 6',
-                cardIcon: { icon: 'AccessAlarm' },
+                iconURL:
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
               },
             ],
             text: {
@@ -218,6 +233,8 @@ const generateDefaultProps = (
               subtitle: 'Cards subtitle 3',
               body: 'Cards Body 3',
             },
+            sectionID: '',
+            textPosition: 'left',
           },
         },
         {
@@ -245,6 +262,7 @@ const generateDefaultProps = (
                 ],
               },
             ],
+            sectionID: '',
           },
         },
       ],
