@@ -13,7 +13,6 @@ import {
   Stack,
   useMediaQuery,
   useTheme,
-  GlobalStyles,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 
@@ -23,29 +22,41 @@ export const TitleSubtitleBlock = ({
   theme,
 }: PageSwitchBaseProps) => {
   const muiTheme = useTheme();
-  const globalStyles = (
-    <GlobalStyles
-      styles={{
-        a: {
-          color:
-            theme === 'light'
-              ? muiTheme.palette.primary.main
-              : muiTheme.palette.primary.contrastText,
-          textDecorationColor:
-            theme === 'light'
-              ? muiTheme.palette.primary.main
-              : muiTheme.palette.primary.contrastText,
-          fontWeight: '700',
-          '&:hover': {
-            color:
-              theme === 'light'
-                ? muiTheme.palette.primary.main
-                : muiTheme.palette.primary.contrastText,
-          },
+
+  const linkStyles = {
+    color:
+      theme === 'light'
+        ? muiTheme.palette.primary.main
+        : muiTheme.palette.primary.contrastText,
+    textDecorationColor:
+      theme === 'light'
+        ? muiTheme.palette.primary.main
+        : muiTheme.palette.primary.contrastText,
+    fontWeight: '700',
+    '&:hover': {
+      color:
+        theme === 'light'
+          ? muiTheme.palette.primary.main
+          : muiTheme.palette.primary.contrastText,
+    },
+  };
+
+  const styledSubtitle = subtitle
+    ? React.cloneElement(subtitle, {
+        style: {
+          textAlign: 'center',
         },
-      }}
-    />
-  );
+        children: React.Children.map(subtitle.props.children, (child) => {
+          if (typeof child === 'string') return child;
+          if (child?.type === 'a') {
+            return React.cloneElement(child, {
+              style: linkStyles,
+            });
+          }
+          return child;
+        }),
+      })
+    : undefined;
 
   return (
     <div
@@ -58,7 +69,6 @@ export const TitleSubtitleBlock = ({
         marginBottom: '1rem',
       }}
     >
-      {globalStyles}
       <Title
         variant='h4'
         textColor={TextColor(theme)}
@@ -66,13 +76,15 @@ export const TitleSubtitleBlock = ({
         marginTop={3}
         marginBottom={3}
       />
-      <Subtitle
-        variant='body2'
-        textColor={TextColor(theme)}
-        subtitle={subtitle}
-        textAlign='center'
-        marginBottom={4}
-      />
+      {subtitle && (
+        <Subtitle
+          variant='body2'
+          textColor={TextColor(theme)}
+          subtitle={styledSubtitle || subtitle}
+          textAlign='center'
+          marginBottom={4}
+        />
+      )}
     </div>
   );
 };
