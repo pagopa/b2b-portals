@@ -342,6 +342,26 @@ const HighlightBoxSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const PageSwitchContentCodec = t.union([
+  EditorialSectionCodec,
+  CardsSectionCodec,
+  BannerLinkSectionCodec,
+]);
+
+const PageSwitchSectionCodec = t.strict({
+  __component: t.literal('sections.page-switch'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  sections: t.array(
+    t.strict({
+      id: t.number,
+      buttonText: t.string,
+      contents: t.array(PageSwitchContentCodec),
+    })
+  ),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -364,6 +384,7 @@ export const PageSectionCodec = t.union([
   StatsSectionCodec,
   RowTextSectionCodec,
   TextSectionSectionCodec,
+  PageSwitchSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -392,3 +413,4 @@ export type HighlightBoxSection = t.TypeOf<typeof HighlightBoxSectionCodec>;
 export type StatsSection = t.TypeOf<typeof StatsSectionCodec>;
 export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
 export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
+export type PageSwitchSection = t.TypeOf<typeof PageSwitchSectionCodec>;
