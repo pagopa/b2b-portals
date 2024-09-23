@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { makeEditorialProps } from './Editorial';
 import { makeCardsProps } from './Cards';
