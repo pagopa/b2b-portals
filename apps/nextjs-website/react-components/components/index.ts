@@ -22,6 +22,7 @@ import HighlightBox from './HighlightBox/HighlightBox';
 import Stats from './Stats/Stats';
 import RowText from './RowText/RowText';
 import TextSection from './TextSection/TextSection';
+import PageSwitch from './Page-Switch/Page-Switch';
 
 export {
   Hero,
@@ -48,4 +49,5 @@ export {
   Stats,
   RowText,
   TextSection,
+  PageSwitch,
 };
