@@ -34,6 +34,8 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
     palette.custom.bannerLinkDarkBlue,
     palette.custom.bannerLinkLightBlue,
   ];
+  const textColor =
+    theme === 'dark' ? palette.primary.contrastText : TextColor(theme);
 
   return (
     <Box
@@ -44,9 +46,6 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
     >
       <Stack sx={sections.length > 1 ? styles.twoColumns : styles.main}>
         {sections.map((section, index) => {
-          const textColor =
-            theme === 'dark' ? palette.primary.contrastText : TextColor(theme);
-
           return (
             <Stack
               key={index}
@@ -75,38 +74,34 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
                   />
                 )}
 
-                {section.title && (
-                  <Typography
-                    variant='h4'
-                    sx={{
-                      color: textColor,
-                      mt: 2,
-                      textAlign: 'center',
-                    }}
-                  >
-                    {section.title}
-                  </Typography>
-                )}
+                <Typography
+                  variant='h4'
+                  sx={{
+                    color: textColor,
+                    mt: 2,
+                    textAlign: 'center',
+                  }}
+                >
+                  {section.title}
+                </Typography>
 
-                {section.body && (
-                  <Typography
-                    variant='body2'
-                    sx={{
+                <Typography
+                  variant='body2'
+                  sx={{
+                    color: textColor,
+                    textAlign: 'center',
+                    '& a': {
                       color: textColor,
-                      textAlign: 'center',
-                      '& a': {
+                      textDecoration: 'underline',
+                      '&:hover': {
                         color: textColor,
                         textDecoration: 'underline',
-                        '&:hover': {
-                          color: textColor,
-                          textDecoration: 'underline',
-                        },
                       },
-                    }}
-                  >
-                    {section.body}
-                  </Typography>
-                )}
+                    },
+                  }}
+                >
+                  {section.body}
+                </Typography>
               </Stack>
 
               {section.ctaButtons &&
