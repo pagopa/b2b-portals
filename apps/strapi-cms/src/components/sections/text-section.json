@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_sections_text_sections",
+  "info": {
+    "displayName": "TextSection"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "eyelet": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "richtext"
+    },
+    "body": {
+      "type": "richtext",
+      "required": true
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link"
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    }
+  }
+}
