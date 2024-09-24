@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_sections_framed_videos",
+  "info": {
+    "displayName": "FramedVideo",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "videoURL": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.framed-video-text"
+    }
+  }
+}

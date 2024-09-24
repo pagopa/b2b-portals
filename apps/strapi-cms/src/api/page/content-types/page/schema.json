@@ -43,7 +43,8 @@
         "sections.service-carousel",
         "sections.row-text",
         "sections.highlight-box",
-        "sections.stats"
+        "sections.stats",
+        "sections.framed-video"
       ],
       "required": true,
       "min": 1
