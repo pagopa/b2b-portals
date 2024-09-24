@@ -30,7 +30,7 @@ const Cards = ({
         display: 'flex',
         flexDirection: isCenter ? 'column' : { md: flexDirection },
         width: '100%',
-        gap: { md: isCenter ? '40px' : '60px' },
+        gap: { md: isCenter ? '0px' : '60px' },
         justifyContent: 'center',
         alignItems: isCenter ? 'center' : 'flex-start',
         textAlign: isCenter ? 'center' : 'left',
@@ -45,38 +45,46 @@ const Cards = ({
         component={'div'}
       >
         {text.title && (
-          <Title
-            variant='h4'
-            textColor={'inherit'}
-            title={text.title}
-            textAlign={isCenter ? 'center' : 'left'}
-            marginBottom={5}
-            
-          />
+          <Typography mb={3} component='div' color={'inherit'}>
+            <Title
+              variant='h4'
+              textColor={'inherit'}
+              title={text.title}
+              textAlign={isCenter ? 'center' : 'left'}
+              marginBottom={0}
+            />
+          </Typography>
         )}
+
         {text.subtitle && (
-          <Subtitle
-            variant='h6'
-            textColor={'inherit'}
-            subtitle={text.subtitle}
-            textAlign={isCenter ? 'center' : 'left'}
-            marginBottom={5}
-          />
+          <Typography mb={3} component='div' color={'inherit'}>
+            <Subtitle
+              variant='h6'
+              textColor={'inherit'}
+              subtitle={text.subtitle}
+              textAlign={isCenter ? 'center' : 'left'}
+              marginBottom={0}
+            />
+          </Typography>
         )}
+
         {text.body && (
-          <Body
-            variant='body1'
-            textColor={'inherit'}
-            body={text.body}
-            marginBottom={5}
-            textAlign={isCenter ? 'center' : 'left'}
-          />
+          <Typography mb={3} component='div' color={'inherit'}>
+            <Body
+              variant='body1'
+              textColor={'inherit'}
+              body={text.body}
+              textAlign={isCenter ? 'center' : 'left'}
+              marginBottom={0}
+            />
+          </Typography>
         )}
+
         {ctaButtons?.length ? (
           <Stack
             direction={{ xs: 'column', md: isCenter ? 'column' : 'row' }}
             spacing={2}
-            mb={{ xs: 8, lg: 0 }}
+            mb={4}
             alignItems={isCenter ? 'center' : 'flex-start'}
           >
             {ctaButtons?.length &&
@@ -118,11 +126,7 @@ const Cards = ({
                   },
                 }}
               >
-                <Item
-                  {...item}
-                  textAlign='left'
-                  masonry={true}
-                />
+                <Item {...item} textAlign='left' masonry={true} />
               </Box>
             ))
           ) : (
