@@ -44,6 +44,7 @@
         "sections.row-text",
         "sections.highlight-box",
         "sections.stats",
+        "sections.text-section",
         "sections.framed-video"
       ],
       "required": true,
