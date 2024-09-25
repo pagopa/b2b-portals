@@ -1,11 +1,10 @@
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { CtaButtons } from '../common/Common';
-import { BackgroundColor } from '../common/Common.helpers';
-import { Content as BannerLinkContent } from './Content';
+import { BackgroundColor, TextColor } from '../common/Common.helpers';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { EIcon } from '../common/EIcon';
+import Image from 'next/image';
 
 const styles = {
   main: {
@@ -30,14 +29,13 @@ const styles = {
 const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
   const { palette } = useTheme();
   const backgroundColor = BackgroundColor(theme);
-
-  const iconColor =
-    theme === 'dark' ? palette.primary.contrastText : palette.primary.dark;
   const lightBackgrounds = [palette.grey[100], palette.grey[50]];
   const darkBackgrounds = [
     palette.custom.bannerLinkDarkBlue,
     palette.custom.bannerLinkLightBlue,
   ];
+  const textColor =
+    theme === 'dark' ? palette.primary.contrastText : TextColor(theme);
 
   return (
     <Box
@@ -47,48 +45,78 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
       sx={{ width: '100%', padding: 0, margin: 0 }}
     >
       <Stack sx={sections.length > 1 ? styles.twoColumns : styles.main}>
-        {sections.map((section, index) => (
-          <Stack
-            key={index}
-            gap={2}
-            sx={{
-              ...styles.main,
-              backgroundColor:
-                theme === 'light'
-                  ? lightBackgrounds[index % 2]
-                  : darkBackgrounds[index % 2],
-              padding: { md: '64px 24px', xs: '32px 24px' },
-              width: '100%',
-              flex: 1,
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <EIcon
-              {...section.icon}
+        {sections.map((section, index) => {
+          return (
+            <Stack
+              key={index}
+              gap={2}
               sx={{
+                ...styles.main,
+                backgroundColor:
+                  theme === 'light'
+                    ? lightBackgrounds[index % 2]
+                    : darkBackgrounds[index % 2],
+                padding: { md: '64px 24px', xs: '32px 24px' },
+                width: '100%',
+                flex: 1,
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center',
-
-                color: iconColor,
-                mr: 1,
               }}
-            />
-            {section.decoration && <img {...section.decoration} />}
-            <BannerLinkContent {...section} theme={theme} />
-            {section.ctaButtons &&
-              section.ctaButtons.length > 0 &&
-              CtaButtons({
-                ctaButtons: section.ctaButtons.map((button) => ({
-                  ...button,
-                  sx: { width: 'auto' },
-                  variant: 'outlined',
-                })),
-                theme,
-              })}
-          </Stack>
-        ))}
+            >
+              <Stack textAlign='center' alignItems='center'>
+                {section.iconURL && (
+                  <Image
+                    src={section.iconURL}
+                    alt={section.title}
+                    width={60}
+                    height={60}
+                    style={{ display: 'block', margin: '0 auto' }}
+                  />
+                )}
+
+                <Typography
+                  variant='h4'
+                  sx={{
+                    color: textColor,
+                    mt: 2,
+                    textAlign: 'center',
+                  }}
+                >
+                  {section.title}
+                </Typography>
+
+                <Typography
+                  variant='body2'
+                  sx={{
+                    color: textColor,
+                    textAlign: 'center',
+                    '& a': {
+                      color: textColor,
+                      textDecoration: 'underline',
+                      '&:hover': {
+                        color: textColor,
+                        textDecoration: 'underline',
+                      },
+                    },
+                  }}
+                >
+                  {section.body}
+                </Typography>
+              </Stack>
+
+              {section.ctaButtons &&
+                section.ctaButtons.length > 0 &&
+                CtaButtons({
+                  ctaButtons: section.ctaButtons.map((button) => ({
+                    ...button,
+                    sx: { width: 'auto' },
+                    variant: 'outlined',
+                  })),
+                  theme,
+                })}
+            </Stack>
+          );
+        })}
       </Stack>
     </Box>
   );

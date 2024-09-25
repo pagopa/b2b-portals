@@ -8,24 +8,14 @@ export const makeBannerLinkProps = ({
   sections,
   ...rest
 }: BannerLinkSection): BannerLinkProps => ({
-  sections: sections.map(
-    ({ body, icon, decoration, ctaButtons, ...requiredFields }) => ({
-      ...requiredFields,
-      body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
-      ...(icon && {
-        icon: {
-          icon,
-        },
-      }),
-      ...(ctaButtons && { ctaButtons }),
-      ...(decoration.data && {
-        decoration: {
-          src: decoration.data.attributes.url,
-          alt: decoration.data.attributes.alternativeText ?? '',
-        },
-      }),
-    })
-  ),
+  sections: sections.map(({ body, icon, ctaButtons, ...requiredFields }) => ({
+    ...requiredFields,
+    body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
+    ...(icon.data && {
+      iconURL: icon.data.attributes.url,
+    }),
+    ...(ctaButtons && { ctaButtons }),
+  })),
   ...rest,
 });
 
