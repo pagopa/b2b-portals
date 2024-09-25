@@ -362,6 +362,25 @@ const PageSwitchSectionCodec = t.strict({
   ),
 });
 
+const FramedVideoSectionCodec = t.strict({
+  __component: t.literal('sections.framed-video'),
+  sectionID: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  videoURL: t.string,
+  text: t.union([
+    t.strict({
+      title: t.string,
+      body: t.string,
+      textPosition: t.union([t.literal('left'), t.literal('right')]),
+      link: t.strict({
+        href: t.string,
+        label: t.string,
+      }),
+    }),
+    t.null,
+  ]),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -385,6 +404,7 @@ export const PageSectionCodec = t.union([
   RowTextSectionCodec,
   TextSectionSectionCodec,
   PageSwitchSectionCodec,
+  FramedVideoSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -414,3 +434,4 @@ export type StatsSection = t.TypeOf<typeof StatsSectionCodec>;
 export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
 export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
 export type PageSwitchSection = t.TypeOf<typeof PageSwitchSectionCodec>;
+export type FramedVideoSection = t.TypeOf<typeof FramedVideoSectionCodec>;
