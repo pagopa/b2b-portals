@@ -13,7 +13,7 @@ const createFramedVideoDefaults = (
   theme,
   sectionID: null,
   video: {
-    src: '',
+    srcURL: '',
     autoplay: false,
     loop: false,
     showControls: true,
@@ -23,6 +23,5 @@ const createFramedVideoDefaults = (
   },
 });
 
-// Usage example
 export const defaultsDark = createFramedVideoDefaults('dark');
 export const defaultsLight = createFramedVideoDefaults('light');

@@ -14,7 +14,8 @@ export const VideoWithTextLeft: StoryFn<typeof FramedVideo> =
 VideoWithTextLeft.args = {
   ...defaultsDark,
   video: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    srcURL:
+      'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
     autoplay: false,
     fallback: 'Video failed to load',
     loop: false,
@@ -40,7 +41,8 @@ export const VideoWithTextRight: StoryFn<typeof FramedVideo> =
 VideoWithTextRight.args = {
   ...defaultsDark,
   video: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    srcURL:
+      'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
     autoplay: false,
     fallback: 'Video failed to load',
     loop: false,
@@ -66,7 +68,8 @@ export const VideoFullScreen: StoryFn<typeof FramedVideo> =
 VideoFullScreen.args = {
   ...defaultsDark,
   video: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    srcURL:
+      'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
     autoplay: false,
     fallback: 'Video failed to load',
     loop: false,
@@ -74,5 +77,13 @@ VideoFullScreen.args = {
     playButtonLabel: 'Play Video',
     pausedPlayButtonLabel: 'Resume Video',
   },
+  text: null,
+};
+
+export const NoVideo: StoryFn<typeof FramedVideo> = FramedVideoTemplate.bind(
+  {}
+);
+NoVideo.args = {
+  ...defaultsDark,
   text: null,
 };

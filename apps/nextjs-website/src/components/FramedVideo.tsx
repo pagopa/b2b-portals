@@ -4,21 +4,26 @@ import { FramedVideoSection } from '@/lib/fetch/types/PageSection';
 
 const makeFramedVideoProps = ({
   videoURL,
+  video,
   text,
   sectionID,
   theme,
 }: FramedVideoSection): FramedVideoProps => ({
   sectionID,
   theme,
-  video: {
-    src: videoURL,
-    autoplay: false,
-    loop: false,
-    showControls: true,
-    fallback: 'Video failed to load',
-    playButtonLabel: 'Play Video',
-    pausedPlayButtonLabel: 'Resume Video',
-  },
+  videoURL: videoURL ?? '',
+  video: video
+    ? {
+        srcURL: video.srcURL ?? '',
+        autoplay: video.autoplay,
+        loop: video.loop,
+        showControls: video.showControls,
+        fallback: video.fallback,
+        playButtonLabel: video.playButtonLabel,
+        pausedPlayButtonLabel: video.pausedPlayButtonLabel,
+      }
+    : undefined,
+
   ...(text && { text }),
 });
 

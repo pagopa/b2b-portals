@@ -3,11 +3,13 @@ import { FramedVideoProps } from '@react-components/types';
 import { renderVideo, renderTextSection } from './FramedVideo.helpers';
 import { BackgroundColorAlternative } from '../common/Common.helpers';
 
-const FramedVideo = ({ video, sectionID, text, theme }: FramedVideoProps) => {
-  if (!video) {
-    throw new Error('Video is required');
-  }
-
+const FramedVideo = ({
+  video,
+  videoURL,
+  sectionID,
+  text,
+  theme,
+}: FramedVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [error, setError] = useState(false);
   const [isMobileDevice, setIsMobileDevice] = useState(false);
@@ -28,6 +30,29 @@ const FramedVideo = ({ video, sectionID, text, theme }: FramedVideoProps) => {
     : layout === 'left'
       ? 'row'
       : 'row-reverse';
+
+  const videoSrc = videoURL || (video && video.srcURL);
+
+  if (!videoSrc) {
+    return (
+      <section
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '600px',
+          backgroundColor: BackgroundColorAlternative(theme),
+          padding: '2em',
+          textAlign: 'center',
+        }}
+        {...(sectionID && { id: sectionID })}
+      >
+        <p style={{ color: 'red' }}>
+          Componente FramedVideo: Inserire almeno uno tra Video e URL Video.
+        </p>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -51,17 +76,18 @@ const FramedVideo = ({ video, sectionID, text, theme }: FramedVideoProps) => {
           theme,
         })}
 
-      {renderVideo({
-        videoRef,
-        error,
-        setError,
-        src: video.src,
-        loop: video.loop,
-        autoplay: video.autoplay,
-        fallback: video.fallback,
-        onVideoEnd: () => {},
-        isMobileDevice,
-      })}
+      {videoSrc &&
+        renderVideo({
+          videoRef,
+          error,
+          setError,
+          src: videoSrc,
+          loop: video?.loop || false,
+          autoplay: video?.autoplay || false,
+          fallback: video?.fallback || 'Video failed to load',
+          onVideoEnd: () => {},
+          isMobileDevice,
+        })}
     </section>
   );
 };
