@@ -1,7 +1,6 @@
 import { StoryFn } from '@storybook/react';
 import { PageSwitch } from '@react-components/components';
 import { PageSwitchProps } from '@react-components/types';
-import MailIcon from '@mui/icons-material/Mail';
 
 export const PageSwitchTemplate: StoryFn<PageSwitchProps> = (args) => (
   <PageSwitch {...args} />
@@ -86,7 +85,7 @@ const generateDefaultProps = (
                     </a>
                   </p>
                 ),
-                icon: <MailIcon style={{ fontSize: 60 }} />,
+                iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
                 ctaButtons: [
                   {
                     text: 'Scrivici',
@@ -169,7 +168,7 @@ const generateDefaultProps = (
                     </a>
                   </p>
                 ),
-                icon: <MailIcon style={{ fontSize: 60 }} />,
+                iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
                 ctaButtons: [
                   {
                     text: 'Contattaci',
@@ -252,7 +251,7 @@ const generateDefaultProps = (
                     </a>
                   </p>
                 ),
-                icon: <MailIcon style={{ fontSize: 60 }} />,
+                iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
                 ctaButtons: [
                   {
                     text: 'Aiuto',

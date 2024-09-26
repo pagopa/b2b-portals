@@ -1,7 +1,6 @@
 import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
 import { StrapiImageRequiredSchema, StrapiImageSchema } from './StrapiImage';
-import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
 import { StoreButtonsCodec } from './StoreButtons';
 
 const LinkCodec = t.strict({
@@ -121,8 +120,7 @@ const BannerLinkSectionCodec = t.strict({
       title: t.string,
       body: t.string,
       ctaButtons: t.array(CTAButtonSimpleCodec),
-      decoration: StrapiImageSchema,
-      icon: t.union([FeatureItemMUIIconCodec, t.null]),
+      icon: StrapiImageSchema,
     })
   ),
 });
