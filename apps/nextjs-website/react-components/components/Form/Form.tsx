@@ -123,9 +123,7 @@ const Form = ({
         throw new Error();
       }
 
-      // const recaptchaToken = await recaptchaRef.current.executeAsync();
-      // Temporarily bypassing ReCaptcha for testing
-      const recaptchaToken = 'test-token'; // For testing
+      const recaptchaToken = await recaptchaRef.current.executeAsync();
 
       if (!recaptchaToken) {
         alert('Si prega di completare ReCaptcha per continuare');
