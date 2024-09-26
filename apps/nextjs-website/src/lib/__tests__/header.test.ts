@@ -304,3 +304,5 @@ describe('removeHomepageSlugFromMenu', () => {
     expect(actual).toStrictEqual(parsedMegaHeader.data.attributes.header[0]);
   });
 });
+
+// TODO: Add tests for addLocaleToAllLinks

@@ -78,10 +78,10 @@ describe('getHeader', () => {
       json: () => Promise.resolve(headerResponse),
     } as unknown as Response);
 
-    await getHeader(appEnv);
+    await getHeader({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/header?populate=header.logo,header.ctaButton,header.menu.links.page,header.menu.links.sublinks.page,header.menu.links.sublinkGroups.sublinks.page,header.drawer.ctaCard,header.drawer.linkCards`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/header?locale=it&populate=header.logo,header.ctaButton,header.menu.links.page,header.menu.links.sublinks.page,header.menu.links.sublinkGroups.sublinks.page,header.drawer.ctaCard,header.drawer.linkCards`,
       {
         method: 'GET',
         headers: {
@@ -98,7 +98,7 @@ describe('getHeader', () => {
       json: () => Promise.resolve(headerResponse),
     } as unknown as Response);
 
-    const actual = getHeader(appEnv);
+    const actual = getHeader({ ...appEnv, locale: 'it' });
 
     expect(await actual).toStrictEqual(headerResponse);
   });

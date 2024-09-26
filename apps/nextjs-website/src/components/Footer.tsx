@@ -1,4 +1,5 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import MarkdownRenderer from './MarkdownRenderer';
 import Icon from './Icon';
 import { Footer as FooterRC } from '@react-components/components';
@@ -11,8 +12,15 @@ const makeFooterProps = ({
   links_services,
   links_resources,
   links_followUs,
+  locales,
+  activeLocale,
+  slug,
   ...rest
-}: FooterData['data']['attributes']): FooterProps => ({
+}: FooterData['data']['attributes'] & {
+  locales: Array<'it' | 'en'>;
+  activeLocale: 'it' | 'en';
+  slug: string;
+}): FooterProps => ({
   legalInfo: MarkdownRenderer({
     markdown: legalInfo,
     variant: 'caption',
@@ -57,21 +65,26 @@ const makeFooterProps = ({
       ),
     },
   },
-  languages: [
-    {
-      id: 'it',
-      value: 'Italiano',
-    },
-  ],
+  languages: locales.map((locale) => ({
+    id: locale,
+    value: locale === 'en' ? 'English' : 'Italiano',
+    href: '/' + locale + slug,
+  })),
   activeLanguage: {
-    id: 'it',
-    value: 'Italiano',
+    id: activeLocale,
+    value: activeLocale === 'en' ? 'English' : 'Italiano',
+    href: '',
   },
-  onLanguageChanged: () => true,
   ...rest,
 });
 
-const Footer = (props: FooterData['data']['attributes']) => (
-  <FooterRC {...makeFooterProps(props)} />
-);
+const Footer = (
+  props: FooterData['data']['attributes'] & { locales: Array<'it' | 'en'> }
+) => {
+  const pathname = usePathname();
+  const activeLocale = pathname.slice(1, 3) as 'it' | 'en';
+  const slug = pathname.slice(3);
+
+  return <FooterRC {...makeFooterProps({ ...props, activeLocale, slug })} />;
+};
 export default Footer;

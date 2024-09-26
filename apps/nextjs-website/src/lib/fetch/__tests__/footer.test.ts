@@ -109,10 +109,10 @@ describe('getFooter', () => {
       json: () => Promise.resolve(footerResponse),
     } as unknown as Response);
 
-    await getFooter(appEnv);
+    await getFooter({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/footer/?locale=it&populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
       {
         method: 'GET',
         headers: {
@@ -129,7 +129,7 @@ describe('getFooter', () => {
       json: () => Promise.resolve(footerResponse),
     } as unknown as Response);
 
-    const actual = getFooter(appEnv);
+    const actual = getFooter({ ...appEnv, locale: 'it' });
 
     expect(await actual).toStrictEqual(footerResponse);
   });

@@ -76,15 +76,17 @@ Default.args = {
     {
       id: 'it',
       value: 'Italiano',
+      href: '/it',
     },
     {
       id: 'en',
       value: 'English',
+      href: '/en',
     },
   ],
-  onLanguageChanged: (lang) => console.log(`Language changed to ${lang.value}`),
   activeLanguage: {
     id: 'en',
     value: 'English',
+    href: '',
   },
 };

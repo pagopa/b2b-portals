@@ -50,12 +50,16 @@ const FooterDataCodec = t.strict({
 // Types
 export type FooterData = t.TypeOf<typeof FooterDataCodec>;
 
-export const getFooter = ({ config, fetchFun }: AppEnv): Promise<FooterData> =>
+export const getFooter = ({
+  config,
+  fetchFun,
+  locale,
+}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<FooterData> =>
   extractFromResponse(
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/footer/?populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
+      }/api/footer/?locale=${locale}&populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
       {
         method: 'GET',
         headers: {

@@ -10,21 +10,35 @@
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "leftCtas": {
       "type": "component",
       "repeatable": true,
       "component": "components.pre-header-button",
       "required": true,
-      "min": 1
+      "min": 1,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "rightCtas": {
       "type": "component",
       "repeatable": true,
       "component": "components.pre-header-button",
       "required": true,
-      "min": 1
+      "min": 1,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

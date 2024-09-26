@@ -1,16 +1,12 @@
 import { useRef, useState } from 'react';
-import { Menu, MenuItem, Stack, Button } from '@mui/material';
+import { Menu, MenuItem, Stack, Button, Link } from '@mui/material';
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
 } from '@mui/icons-material';
 import { LangSwitchProps } from '../../../types/Footer/Footer.types';
 
-export function LangSwitch({
-  languages,
-  onLanguageChanged,
-  activeLanguage,
-}: LangSwitchProps) {
+export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -21,11 +17,11 @@ export function LangSwitch({
 
   return (
     <Stack
-      display='flex'
-      flexDirection='column'
-      aria-label='cambia la lingua'
+      display="flex"
+      flexDirection="column"
+      aria-label="cambia la lingua"
       alignItems={{ xs: 'center', sm: 'flex-start' }}
-      width='100%'
+      width="100%"
     >
       <Button
         sx={{
@@ -41,19 +37,19 @@ export function LangSwitch({
           },
           justifyContent: 'flex-start',
         }}
-        variant='text'
-        size='small'
+        variant="text"
+        size="small"
         disableRipple
-        aria-label='lingua'
-        aria-haspopup='true'
+        aria-label="lingua"
+        aria-haspopup="true"
         aria-expanded={menuOpen}
         onClick={toggleMenu}
         ref={anchorEl}
         endIcon={
           menuOpen ? (
-            <KeyboardArrowDownRounded fontSize='small' />
+            <KeyboardArrowDownRounded fontSize="small" />
           ) : (
-            <KeyboardArrowUpRounded fontSize='small' />
+            <KeyboardArrowUpRounded fontSize="small" />
           )
         }
       >
@@ -70,14 +66,11 @@ export function LangSwitch({
           MenuListProps={{ 'aria-labelledby': 'lang-menu-button' }}
         >
           {languages.map((language) => (
-            <MenuItem
-              aria-label={language.value}
-              key={language.id}
-              onClick={() => {
-                onLanguageChanged(language);
-              }}
-            >
-              {language.value}
+            <MenuItem aria-label={language.value} key={language.id}>
+              {/* Currently linking to the other locale's homepage since we have
+              no certainty that each page's slug is the same in both languages
+              or that the same pages exist at all in each language */}
+              <Link href={'/' + language.id}>{language.value}</Link>
             </MenuItem>
           ))}
         </Menu>

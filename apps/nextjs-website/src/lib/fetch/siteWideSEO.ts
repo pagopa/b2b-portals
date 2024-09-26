@@ -15,6 +15,10 @@ const SiteWideSEOCodec = t.strict({
         shortName: t.string,
       }),
       matomoID: t.union([t.string, t.null]),
+      locales: t.strict({
+        it: t.boolean,
+        en: t.boolean,
+      }),
     }),
   }),
 });
@@ -29,7 +33,7 @@ export const fetchSiteWideSEO = ({
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      }/api/general?populate=metaImage,favicon,appleTouchIcon,manifest,locales`,
       {
         method: 'GET',
         headers: {
