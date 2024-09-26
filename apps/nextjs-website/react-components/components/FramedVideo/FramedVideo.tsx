@@ -4,7 +4,6 @@ import { renderVideo, renderTextSection } from './FramedVideo.helpers';
 import { BackgroundColorAlternative } from '../common/Common.helpers';
 
 const FramedVideo = ({
-  video,
   videoURL,
   sectionID,
   text,
@@ -31,9 +30,7 @@ const FramedVideo = ({
       ? 'row'
       : 'row-reverse';
 
-  const videoSrc = videoURL || (video && video.srcURL);
-
-  if (!videoSrc) {
+  if (!videoURL) {
     return (
       <section
         style={{
@@ -76,18 +73,17 @@ const FramedVideo = ({
           theme,
         })}
 
-      {videoSrc &&
-        renderVideo({
-          videoRef,
-          error,
-          setError,
-          src: videoSrc,
-          loop: video?.loop || false,
-          autoplay: video?.autoplay || false,
-          fallback: video?.fallback || 'Video failed to load',
-          onVideoEnd: () => {},
-          isMobileDevice,
-        })}
+      {renderVideo({
+        videoRef,
+        error,
+        setError,
+        src: videoURL,
+        loop: false,
+        autoplay: false,
+        fallback: 'Video failed to load',
+        onVideoEnd: () => {},
+        isMobileDevice,
+      })}
     </section>
   );
 };

@@ -13,16 +13,8 @@ export const VideoWithTextLeft: StoryFn<typeof FramedVideo> =
   FramedVideoTemplate.bind({});
 VideoWithTextLeft.args = {
   ...defaultsDark,
-  video: {
-    srcURL:
-      'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
-    autoplay: false,
-    fallback: 'Video failed to load',
-    loop: false,
-    showControls: true,
-    playButtonLabel: 'Play Video',
-    pausedPlayButtonLabel: 'Resume Video',
-  },
+  videoURL:
+    'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
   text: {
     title: 'Aenean commodo ligula eget dolor',
     body: `Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
@@ -40,16 +32,8 @@ export const VideoWithTextRight: StoryFn<typeof FramedVideo> =
   FramedVideoTemplate.bind({});
 VideoWithTextRight.args = {
   ...defaultsDark,
-  video: {
-    srcURL:
-      'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
-    autoplay: false,
-    fallback: 'Video failed to load',
-    loop: false,
-    showControls: true,
-    playButtonLabel: 'Play Video',
-    pausedPlayButtonLabel: 'Resume Video',
-  },
+  videoURL:
+    'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
   text: {
     title: 'Aenean commodo ligula eget dolor',
     body: `Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
@@ -67,17 +51,8 @@ export const VideoFullScreen: StoryFn<typeof FramedVideo> =
   FramedVideoTemplate.bind({});
 VideoFullScreen.args = {
   ...defaultsDark,
-  video: {
-    srcURL:
-      'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
-    autoplay: false,
-    fallback: 'Video failed to load',
-    loop: false,
-    showControls: true,
-    playButtonLabel: 'Play Video',
-    pausedPlayButtonLabel: 'Resume Video',
-  },
-  text: null,
+  videoURL:
+    'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
 };
 
 export const NoVideo: StoryFn<typeof FramedVideo> = FramedVideoTemplate.bind(
@@ -85,5 +60,4 @@ export const NoVideo: StoryFn<typeof FramedVideo> = FramedVideoTemplate.bind(
 );
 NoVideo.args = {
   ...defaultsDark,
-  text: null,
 };

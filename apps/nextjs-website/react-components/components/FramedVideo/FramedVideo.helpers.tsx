@@ -77,16 +77,14 @@ export const renderTextSection = ({
         backgroundColor,
       }}
     >
-      {title && (
-        <Typography variant='h4' color={textColor} mb={2}>
-          {title}
-        </Typography>
-      )}
-      {body && (
-        <Typography variant='body1' color={textColor} mb={4}>
-          {body}
-        </Typography>
-      )}
+      <Typography variant='h4' color={textColor} mb={2}>
+        {title}
+      </Typography>
+
+      <Typography variant='body1' color={textColor} mb={4}>
+        {body}
+      </Typography>
+
       {link && (
         <Link
           href={link.href}

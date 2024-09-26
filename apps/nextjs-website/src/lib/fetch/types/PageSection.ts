@@ -365,7 +365,14 @@ const FramedVideoSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   videoURL: t.union([t.string, t.null]),
-  video: t.union([VideoCodec, t.null]),
+  video: t.strict({
+    data: t.union([
+      t.strict({
+        attributes: t.strict({ url: t.string }),
+      }),
+      t.null,
+    ]),
+  }),
   text: t.union([
     t.strict({
       title: t.string,

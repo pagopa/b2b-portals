@@ -11,19 +11,8 @@ const makeFramedVideoProps = ({
 }: FramedVideoSection): FramedVideoProps => ({
   sectionID,
   theme,
-  videoURL: videoURL ?? '',
-  video: video
-    ? {
-        srcURL: video.srcURL ?? '',
-        autoplay: video.autoplay,
-        loop: video.loop,
-        showControls: video.showControls,
-        fallback: video.fallback,
-        playButtonLabel: video.playButtonLabel,
-        pausedPlayButtonLabel: video.pausedPlayButtonLabel,
-      }
-    : undefined,
-
+  ...(videoURL && { videoURL }),
+  ...(video.data && { videoURL: video.data.attributes.url }),
   ...(text && { text }),
 });
 

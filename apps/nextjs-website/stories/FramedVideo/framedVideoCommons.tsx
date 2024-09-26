@@ -12,15 +12,6 @@ const createFramedVideoDefaults = (
 ): FramedVideoProps => ({
   theme,
   sectionID: null,
-  video: {
-    srcURL: '',
-    autoplay: false,
-    loop: false,
-    showControls: true,
-    fallback: 'Video failed to load',
-    playButtonLabel: 'Play Video',
-    pausedPlayButtonLabel: 'Resume Video',
-  },
 });
 
 export const defaultsDark = createFramedVideoDefaults('dark');

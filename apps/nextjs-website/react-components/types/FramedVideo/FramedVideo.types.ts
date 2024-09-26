@@ -1,19 +1,8 @@
 import { SectionProps } from '../common/Common.types';
 
 export interface FramedVideoProps extends SectionProps {
-  theme: 'light' | 'dark';
-  videoURL?: string | null;
-  video?:
-    | {
-        srcURL: string | null;
-        autoplay: boolean;
-        loop: boolean;
-        showControls: boolean;
-        fallback: string;
-        playButtonLabel: string;
-        pausedPlayButtonLabel: string;
-      }
-    | undefined;
+  videoURL?: string;
+
   text?: {
     title: string;
     body: string;
@@ -22,7 +11,7 @@ export interface FramedVideoProps extends SectionProps {
       label: string;
     };
     textPosition: 'left' | 'right';
-  } | null;
+  };
 }
 
 export interface RenderVideoProps {
