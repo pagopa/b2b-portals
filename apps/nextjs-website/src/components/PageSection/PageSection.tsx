@@ -20,6 +20,7 @@ import Stats from '../Stats';
 import RowText from '../RowText';
 import TextSection from '../TextSection';
 import PageSwitch from '../PageSwitch';
+import FramedVideo from '../FramedVideo';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 // eslint-disable-next-line complexity
 const PageSection = (props: PageSectionData) => {
@@ -67,6 +68,8 @@ const PageSection = (props: PageSectionData) => {
       return <TextSection {...props} />;
     case 'sections.page-switch':
       return <PageSwitch {...props} />;
+    case 'sections.framed-video':
+      return <FramedVideo {...props} />;
     default:
       return null;
   }
