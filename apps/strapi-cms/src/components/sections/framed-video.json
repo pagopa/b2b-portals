@@ -12,12 +12,29 @@
     },
     "videoURL": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "text": {
       "type": "component",
       "repeatable": false,
       "component": "components.framed-video-text"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
     }
   }
 }
