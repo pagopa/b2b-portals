@@ -85,18 +85,16 @@ export const renderTextSection = ({
         {body}
       </Typography>
 
-      {link && (
-        <Link
-          href={link.href}
-          style={{
-            color: textColor,
-            textDecoration: 'none',
-            marginBottom: '32px',
-          }}
-        >
-          {link.label}
-        </Link>
-      )}
+      <Link
+        href={link.href}
+        style={{
+          color: textColor,
+          textDecoration: 'none',
+          marginBottom: '32px',
+        }}
+      >
+        {link.label}
+      </Link>
     </Stack>
   );
 };
