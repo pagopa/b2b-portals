@@ -29,7 +29,7 @@ export const renderVideo = ({
 
   if (error) {
     return (
-      <Typography variant="h6" color="background.paper" textAlign="center">
+      <Typography variant='h6' color='background.paper' textAlign='center'>
         {fallback}
       </Typography>
     );
@@ -76,11 +76,11 @@ export const renderTextSection = ({
         backgroundColor,
       }}
     >
-      <Typography variant="h4" color={textColor} mb={2}>
+      <Typography variant='h4' color={textColor} mb={2}>
         {title}
       </Typography>
 
-      <Typography variant="body1" color={textColor} mb={4}>
+      <Typography variant='body1' color={textColor} mb={4}>
         {body}
       </Typography>
 
