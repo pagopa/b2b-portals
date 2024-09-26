@@ -48,5 +48,12 @@ export default ({ env }: any) => ({
         }
       ]
     }
+  },
+  localazy: {
+    enabled: true,
+    config: {
+      populateDefaultDepth: 5,
+      populateMaxDepth: 10,
+    }
   }
 });

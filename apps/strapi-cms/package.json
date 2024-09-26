@@ -23,6 +23,7 @@
     "typescript": "5.2.2"
   },
   "dependencies": {
+    "@localazy/strapi-plugin": "^0.2.10",
     "@strapi/plugin-i18n": "4.13.7",
     "@strapi/plugin-seo": "^1.9.8",
     "@strapi/plugin-users-permissions": "4.24.2",
