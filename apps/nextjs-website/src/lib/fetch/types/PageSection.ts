@@ -192,7 +192,7 @@ const FormSectionCodec = t.strict({
     pagopa: null,
   }),
   sectionID: t.union([t.string, t.null]),
-  notes: t.string,
+  notes: t.union([t.string, t.null]),
 });
 
 const PreFooterSectionCodec = t.strict({

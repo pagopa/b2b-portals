@@ -22,7 +22,7 @@ export interface FormProps extends SectionProps, FormFields, FormCategories {
   readonly clientID: 'io' | 'pagopa';
   readonly listID: string;
   readonly recaptchaSiteKey: string;
-  readonly notes: JSX.Element;
+  readonly notes?: JSX.Element;
 }
 
 export interface FormData {

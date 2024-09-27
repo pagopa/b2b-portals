@@ -17,7 +17,7 @@ const makeFormProps = ({
   })),
   ...(subtitle && { subtitle }),
   ...(categoriesTitle && { categoriesTitle }),
-  notes: MarkdownRenderer({ markdown: notes }),
+  ...(notes && { notes: MarkdownRenderer({ markdown: notes }) }),
   ...rest,
 });
 

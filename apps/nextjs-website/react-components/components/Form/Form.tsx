@@ -337,25 +337,28 @@ const Form = ({
       >
         Iscriviti
       </Button>
-      <Typography
-        variant='body2'
-        sx={{
-          mt: 2,
-          position: 'relative',
-          zIndex: 3,
-          color: graylinkColor,
-          '& a': {
+      {notes && (
+        <Typography
+          component='div'
+          variant='body2'
+          sx={{
+            mt: 2,
+            position: 'relative',
+            zIndex: 3,
             color: graylinkColor,
-            textDecoration: 'underline',
-            '&:hover': {
+            '& a': {
               color: graylinkColor,
               textDecoration: 'underline',
+              '&:hover': {
+                color: graylinkColor,
+                textDecoration: 'underline',
+              },
             },
-          },
-        }}
-      >
-        {notes}
-      </Typography>
+          }}
+        >
+          {notes}
+        </Typography>
+      )}
 
       <RECAPTCHA
         size='invisible'
