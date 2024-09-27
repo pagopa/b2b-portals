@@ -43,7 +43,8 @@ export const getNavigation = ({
       &populate[sections][populate][3]=sections.content.image,sections.content.mobileImage,sections.content.ctaButtons,sections.content.storeButtons
       &populate[sections][populate][4]=video.src
       &populate[sections][populate][5]=steps.icon
-      &populate[sections][populate][6]=cards.image,cards.link`,
+      &populate[sections][populate][6]=cards.image,cards.link
+      &populate[sections][populate][7]=text.link`,
       {
         method: 'GET',
         headers: {

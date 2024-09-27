@@ -1,6 +1,6 @@
 import { Link, Stack, Typography } from '@mui/material';
 import { RenderVideoProps } from '@react-components/types/FramedVideo/FramedVideo.types';
-import { TextColor } from '../common/Common.helpers';
+import { TextAlternativeColor, TextColor } from '../common/Common.helpers';
 import { BackgroundColorAlternative } from '../common/Common.helpers';
 
 export const renderVideo = ({
@@ -17,8 +17,7 @@ export const renderVideo = ({
 }: RenderVideoProps) => {
   const mobileStyle = {
     overflow: 'hidden',
-    width: '100vw',
-    height: '100vh',
+    width: '80vw',
     objectFit: 'cover',
     objectPosition: 'center',
   };
@@ -26,7 +25,6 @@ export const renderVideo = ({
   const nonMobileStyle = {
     overflow: 'hidden',
     width: '100%',
-    height: '100%',
   };
 
   if (error) {
@@ -67,6 +65,7 @@ export const renderTextSection = ({
   theme: 'light' | 'dark';
 }) => {
   const textColor = TextColor(theme);
+  const linkTextColor = TextAlternativeColor(theme);
   const backgroundColor = BackgroundColorAlternative(theme);
 
   return (
@@ -85,16 +84,18 @@ export const renderTextSection = ({
         {body}
       </Typography>
 
-      <Link
-        href={link.href}
-        style={{
-          color: textColor,
-          textDecoration: 'none',
-          marginBottom: '32px',
-        }}
-      >
-        {link.label}
-      </Link>
+      <Typography fontSize={16} fontWeight={700}>
+        <Link
+          href={link.href}
+          style={{
+            color: linkTextColor,
+            textDecoration: 'none',
+            marginBottom: '32px',
+          }}
+        >
+          {link.label}
+        </Link>
+      </Typography>
     </Stack>
   );
 };

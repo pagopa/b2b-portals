@@ -1,3 +1,4 @@
+'use client';
 import { FramedVideo as FramedVideoRC } from '@react-components/components';
 import { FramedVideoProps } from '@react-components/types';
 import { FramedVideoSection } from '@/lib/fetch/types/PageSection';
