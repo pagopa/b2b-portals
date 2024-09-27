@@ -15,24 +15,12 @@
       "required": true
     },
     "icon": {
-      "type": "enumeration",
-      "enum": [
-        "HubOutlined",
-        "AutoFixHighOutlined",
-        "MarkunreadMailboxOutlined",
-        "CheckCircleOutlined",
-        "SavingsOutlined",
-        "HourglassEmptyRounded",
-        "EnergySavingsLeafOutlined",
-        "CloudOutlined"
-      ]
-    },
-    "decoration": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "ctaButtons": {
       "type": "component",
