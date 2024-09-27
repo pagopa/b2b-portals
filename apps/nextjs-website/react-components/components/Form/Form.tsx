@@ -5,7 +5,6 @@ import {
   Grid,
   OutlinedInput,
   Typography,
-  Link,
   FormControl,
   Button,
 } from '@mui/material';
@@ -45,6 +44,7 @@ const Form = ({
   showOrganization,
   recaptchaSiteKey,
   sectionID,
+  notes,
 }: FormProps) => {
   const backgroundColor = BackgroundColorAlternative(theme);
   const textColor = TextColor(theme);
@@ -132,7 +132,10 @@ const Form = ({
           method: 'POST',
           body: JSON.stringify({
             recaptchaToken,
-            groups: (categories.length > 0 && formData.category !== '') ? [formData.category] : [defaultCategoryID],
+            groups:
+              categories.length > 0 && formData.category !== ''
+                ? [formData.category]
+                : [defaultCategoryID],
             email: formData.email,
             ...(showName && { name: formData.name }),
             ...(showSurname && { surname: formData.surname }),
@@ -236,7 +239,7 @@ const Form = ({
           {validationErrors[name] !== null && (
             <Typography
               id={`${name}-error-text`}
-              variant="caption"
+              variant='caption'
               sx={{ color: 'error.main' }}
             >
               {validationErrors[name]}
@@ -261,13 +264,13 @@ const Form = ({
         position: 'relative',
       }}
       component='section'
-      {...sectionID && { id: sectionID }}
+      {...(sectionID && { id: sectionID })}
     >
       <MailOutlineIcon
         sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }}
       />
       <Typography
-        variant="h4"
+        variant='h4'
         gutterBottom
         sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
       >
@@ -275,7 +278,7 @@ const Form = ({
       </Typography>
       {subtitle && (
         <Typography
-          variant="body1"
+          variant='body1'
           gutterBottom
           sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor }}
         >
@@ -291,7 +294,7 @@ const Form = ({
       </Grid>
       {categoriesTitle && categories.length > 0 && (
         <Typography
-          variant="h6"
+          variant='h6'
           gutterBottom
           sx={{
             position: 'relative',
@@ -315,7 +318,7 @@ const Form = ({
         />
       )}
       <Typography
-        variant="body2"
+        variant='body2'
         sx={{
           mb: 2,
           position: 'relative',
@@ -327,7 +330,7 @@ const Form = ({
         *Campo obbligatorio
       </Typography>
       <Button
-        variant="contained"
+        variant='contained'
         sx={{ width: { md: 'auto', xs: '100%' }, zIndex: 4 }}
         onClick={handleSubmit}
         color={theme === 'dark' ? 'negative' : 'primary'}
@@ -335,45 +338,27 @@ const Form = ({
         Iscriviti
       </Button>
       <Typography
-        variant="body2"
-        fontWeight="bold"
-        sx={{ mt: 2, position: 'relative', zIndex: 3, color: textColor }}
-      >
-        Inserendo il tuo indirizzo email stai accettando la nostra informativa
-        sul trattamento dei dati personali per la newsletter.
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={{ mt: 2, position: 'relative', zIndex: 3, color: graylinkColor }}
-      >
-        Form protetto tramite reCAPTCHA e Google{' '}
-        <Link
-          href="https://policies.google.com/privacy"
-          sx={{
+        variant='body2'
+        sx={{
+          mt: 2,
+          position: 'relative',
+          zIndex: 3,
+          color: graylinkColor,
+          '& a': {
             color: graylinkColor,
-            textDecorationColor: graylinkColor,
             textDecoration: 'underline',
-          }}
-        >
-          {' '}
-          Privacy Policy{' '}
-        </Link>{' '}
-        e{' '}
-        <Link
-          href="https://policies.google.com/terms"
-          sx={{
-            color: graylinkColor,
-            textDecorationColor: graylinkColor,
-            textDecoration: 'underline',
-          }}
-        >
-          Termini di servizio
-        </Link>{' '}
-        applicati.
+            '&:hover': {
+              color: graylinkColor,
+              textDecoration: 'underline',
+            },
+          },
+        }}
+      >
+        {notes}
       </Typography>
 
       <RECAPTCHA
-        size="invisible"
+        size='invisible'
         ref={recaptchaRef}
         sitekey={recaptchaSiteKey}
       />
