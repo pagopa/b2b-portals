@@ -7,6 +7,7 @@ const makeFormProps = ({
   subtitle,
   categories,
   categoriesTitle,
+  buttonLabel,
   ...rest
 }: FormSection): FormProps => ({
   categories: categories.map(({ additionalInfo, ...category }) => ({
@@ -15,6 +16,7 @@ const makeFormProps = ({
   })),
   ...(subtitle && { subtitle }),
   ...(categoriesTitle && { categoriesTitle }),
+  buttonLabel,
   ...rest,
 });
 

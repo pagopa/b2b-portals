@@ -12,7 +12,11 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   categories: [
     { label: 'Cittadino', categoryID: '1' },
     { label: 'Dipendente/ Consulente di un ente pubblico', categoryID: '2' },
-    { label: 'Partner tecnologico di un ente pubblico', categoryID: '3' , additionalInfo: '(presso  società in-house, software house, ecc.)' },
+    {
+      label: 'Partner tecnologico di un ente pubblico',
+      categoryID: '3',
+      additionalInfo: '(presso  società in-house, software house, ecc.)',
+    },
     { label: 'Sviluppatore', categoryID: '4' },
     { label: 'Giornalista', categoryID: '5' },
   ],
@@ -20,12 +24,11 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   defaultCategoryID: '61',
   clientID: 'io',
   listID: 'listID',
-  recaptchaSiteKey: 'sitekey'
+  recaptchaSiteKey: 'sitekey',
+  buttonLabel: 'Iscriviti',
 });
 
-export const FormTemplate: StoryFn<FormProps> = (args) => (
-  <Form {...args} />
-);
+export const FormTemplate: StoryFn<FormProps> = (args) => <Form {...args} />;
 
 export const defaultPropsDark = {
   ...generateFormProps('dark'),

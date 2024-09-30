@@ -11,11 +11,7 @@ import {
   Alert,
 } from '@mui/material';
 import { FormProps } from '@react-components/types/Form/Form.types';
-import {
-  TextColor,
-  BackgroundColorAlternative,
-  GrayLinkColor,
-} from '../common/Common.helpers';
+import { TextColor, GrayLinkColor } from '../common/Common.helpers';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { FormCategories } from './Form.helpers';
 
@@ -46,8 +42,8 @@ const Form = ({
   showOrganization,
   recaptchaSiteKey,
   sectionID,
+  buttonLabel,
 }: FormProps) => {
-  const backgroundColor = BackgroundColorAlternative(theme);
   const textColor = TextColor(theme);
   const graylinkColor = GrayLinkColor(theme);
   const borderColor = theme === 'light' ? graylinkColor : 'white';
@@ -257,7 +253,6 @@ const Form = ({
         mx: 'auto',
         p: 4,
         textAlign: 'center',
-        backgroundColor,
         borderRadius: 2,
         boxShadow: 3,
         color: textColor,
@@ -335,7 +330,7 @@ const Form = ({
         onClick={handleSubmit}
         color={theme === 'dark' ? 'negative' : 'primary'}
       >
-        Iscriviti
+        {buttonLabel}
       </Button>
       {submissionStatus === 'success' && (
         <Alert
