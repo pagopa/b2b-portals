@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_components_framed_video_texts",
+  "info": {
+    "displayName": "FramedVideo Text",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "text",
+      "required": true
+    },
+    "textPosition": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "right"
+      ],
+      "default": "left",
+      "required": true
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link",
+      "required": true
+    }
+  }
+}

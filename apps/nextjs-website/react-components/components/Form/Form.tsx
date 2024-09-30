@@ -7,6 +7,7 @@ import {
   Typography,
   FormControl,
   Button,
+  Alert,
 } from '@mui/material';
 import { FormProps } from '@react-components/types/Form/Form.types';
 import {
@@ -66,6 +67,10 @@ const Form = ({
     organization: '',
     category: '',
   });
+
+  const [submissionStatus, setSubmissionStatus] = useState<
+    'success' | 'failure' | null
+  >(null);
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, category: event.target.value });
@@ -154,18 +159,13 @@ const Form = ({
           organization: '',
           category: '',
         });
-
-        alert(
-          'Grazie! Abbiamo preso in carica la tua richiesta. Controlla la tua casella email per continuare.'
-        );
+        setSubmissionStatus('success');
         return;
       }
 
       throw new Error();
-    } catch {
-      alert(
-        'Qualcosa è andato storto, non siamo riusciti a ricevere la tua richiesta. Riprova più tardi'
-      );
+    } catch (error) {
+      setSubmissionStatus('failure');
     } finally {
       if (recaptchaRef.current) {
         recaptchaRef.current.reset();
@@ -337,6 +337,45 @@ const Form = ({
       >
         Iscriviti
       </Button>
+      {submissionStatus === 'success' && (
+        <Alert
+          severity='success'
+          sx={{
+            maxWidth: 'fit-content',
+            margin: '16px auto 0px auto',
+            padding: '8px 16px',
+            border: 'none',
+            backgroundColor: '#e1f4e1',
+            textAlign: 'center',
+            fontWeight: 'bold',
+            '& .MuiAlert-icon': {
+              display: 'none',
+            },
+          }}
+        >
+          Grazie! La tua richiesta è stata registrata
+        </Alert>
+      )}
+      {submissionStatus === 'failure' && (
+        <Alert
+          severity='error'
+          sx={{
+            maxWidth: 'fit-content',
+            margin: '16px auto 0px auto',
+            padding: '8px 16px',
+            border: 'none',
+            backgroundColor: '#ffd9d9',
+            textAlign: 'center',
+            fontWeight: 'bold',
+            '& .MuiAlert-icon': {
+              display: 'none',
+            },
+          }}
+        >
+          Purtroppo in questo momento non è possibile registrare la tua
+          richiesta
+        </Alert>
+      )}
       {notes && (
         <Typography
           component='div'
