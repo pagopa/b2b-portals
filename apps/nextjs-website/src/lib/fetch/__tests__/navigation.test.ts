@@ -46,7 +46,10 @@ const navigationResponse = {
             icon: {
               data: null,
             },
-            buttonText: null,
+            link: {
+              label: 'link',
+              href: '/',
+            },
             sectionID: null,
           },
         ],
@@ -115,7 +118,10 @@ describe('getNavigation', () => {
                 icon: {
                   data: null,
                 },
-                buttonText: null,
+                link: {
+                  label: 'link',
+                  href: '/',
+                },
                 sectionID: null,
               },
             ],

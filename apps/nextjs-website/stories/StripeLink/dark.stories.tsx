@@ -9,26 +9,23 @@ const meta: Meta<typeof StripeLink> = {
 };
 export default meta;
 
-export const DarkStripeLinkFull: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
+export const DarkStripeLinkFull: StoryFn<typeof StripeLink> =
+  StripeLinkTemplate.bind({});
 DarkStripeLinkFull.args = {
   ...defaultPropsDark,
   iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/dark_icon_dee9ab4f99.svg',
-  buttonText: 'Click Me',
+  link: {
+    label: 'link',
+    href: '#',
+  },
 };
 
-export const DarkStripeLinkNoIcon: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
+export const DarkStripeLinkNoIcon: StoryFn<typeof StripeLink> =
+  StripeLinkTemplate.bind({});
 DarkStripeLinkNoIcon.args = {
   ...defaultPropsDark,
-  buttonText: 'Click Me',
-};
-
-export const DarkStripeLinkNoButton: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
-DarkStripeLinkNoButton.args = {
-  ...defaultPropsDark,
-  iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/dark_icon_dee9ab4f99.svg',
-};
-
-export const DarkStripeLinkNoIconNoButton: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
-DarkStripeLinkNoIconNoButton.args = {
-  ...defaultPropsDark,
+  link: {
+    label: 'link',
+    href: '#',
+  },
 };
