@@ -30,10 +30,9 @@
       "type": "enumeration",
       "enum": [
         "left",
-        "center",
-        "right"
+        "center"
       ],
-      "default": "left",
+      "default": "center",
       "required": true
     },
     "accordionItems": {
@@ -47,6 +46,16 @@
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$",
       "unique": false
+    },
+    "textAlignment": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ],
+      "required": true,
+      "default": "center"
     }
   }
 }
