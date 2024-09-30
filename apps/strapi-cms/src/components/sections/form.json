@@ -68,6 +68,11 @@
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "buttonLabel": {
+      "type": "string",
+      "required": true,
+      "default": "Iscriviti"
     }
   }
 }
