@@ -9,101 +9,63 @@ const meta: Meta<typeof Accordion> = {
 };
 export default meta;
 
-export const AccordionLightLeftLayoutFull: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionLightLeftLayoutFull.args = {
-  ...defaultPropsLight,
-  subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
-  layout: 'left',
-};
-
-export const AccordionLightCenterLayoutFull: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionLightCenterLayoutFull.args = {
-  ...defaultPropsLight,
-  subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
-  layout: 'center',
-};
-
-export const AccordionLightRightLayoutFull: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionLightRightLayoutFull.args = {
-  ...defaultPropsLight,
-  subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
-  layout: 'right',
-};
-
-export const AccordionLightLeftLayoutOnlyTitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionLightLeftLayoutOnlyTitle.args = {
-  ...defaultPropsLight,
-  layout: 'left',
-};
-
-export const AccordionLightCenterLayoutOnlyTitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionLightCenterLayoutOnlyTitle.args = {
-  ...defaultPropsLight,
-  layout: 'center',
-};
-
-export const AccordionLightRightLayoutOnlyTitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionLightRightLayoutOnlyTitle.args = {
-  ...defaultPropsLight,
-  layout: 'right',
-};
-
-export const AccordionLightLeftLayoutWithSubtitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionLightLeftLayoutWithSubtitle.args = {
-  ...defaultPropsLight,
-  subtitle: 'Accordion Subtitle',
-  layout: 'left',
-};
-
-export const AccordionLightCenterLayoutWithSubtitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionLightCenterLayoutWithSubtitle.args = {
-  ...defaultPropsLight,
-  subtitle: 'Accordion Subtitle',
-  layout: 'center',
-};
-
-export const AccordionLightRightLayoutWithSubtitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionLightRightLayoutWithSubtitle.args = {
-  ...defaultPropsLight,
-  subtitle: 'Accordion Subtitle',
-  layout: 'right',
-};
-
-export const AccordionLightLeftLayoutWithDescription: StoryFn<
+export const AccordionLightCenterLayoutLeftTextAlignment: StoryFn<
   typeof Accordion
 > = AccordionTemplate.bind({});
-AccordionLightLeftLayoutWithDescription.args = {
+AccordionLightCenterLayoutLeftTextAlignment.args = {
   ...defaultPropsLight,
+  subtitle: 'Accordion Subtitle',
+  description: 'This is a description for the accordion.',
+  textAlignment: 'left',
+};
+
+export const AccordionLightCenterLayoutCenterTextAlignment: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
+AccordionLightCenterLayoutCenterTextAlignment.args = {
+  ...defaultPropsLight,
+  subtitle: 'Accordion Subtitle',
+  description: 'This is a description for the accordion.',
+};
+
+export const AccordionLightCenterLayoutRightTextAlignment: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
+AccordionLightCenterLayoutRightTextAlignment.args = {
+  ...defaultPropsLight,
+  subtitle: 'Accordion Subtitle',
+  description: 'This is a description for the accordion.',
+  textAlignment: 'right',
+};
+
+export const AccordionLightLeftLayoutLeftTextAlignment: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
+AccordionLightLeftLayoutLeftTextAlignment.args = {
+  ...defaultPropsLight,
+  subtitle: 'Accordion Subtitle',
+  description: 'This is a description for the accordion.',
+  layout: 'left',
+  textAlignment: 'left',
+};
+
+export const AccordionLightLeftLayoutCenterTextAlignment: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
+AccordionLightLeftLayoutCenterTextAlignment.args = {
+  ...defaultPropsLight,
+  subtitle: 'Accordion Subtitle',
   description: 'This is a description for the accordion.',
   layout: 'left',
 };
 
-export const AccordionLightCenterLayoutWithDescription: StoryFn<
+export const AccordionLightLeftLayoutRightTextAlignment: StoryFn<
   typeof Accordion
 > = AccordionTemplate.bind({});
-AccordionLightCenterLayoutWithDescription.args = {
+AccordionLightLeftLayoutRightTextAlignment.args = {
   ...defaultPropsLight,
+  subtitle: 'Accordion Subtitle',
   description: 'This is a description for the accordion.',
-  layout: 'center',
-};
-
-export const AccordionLightRightLayoutWithDescription: StoryFn<
-  typeof Accordion
-> = AccordionTemplate.bind({});
-AccordionLightRightLayoutWithDescription.args = {
-  ...defaultPropsLight,
-  description: 'This is a description for the accordion.',
-  layout: 'right',
+  layout: 'left',
+  textAlignment: 'right',
 };
