@@ -23,6 +23,7 @@ import Stats from './Stats/Stats';
 import RowText from './RowText/RowText';
 import TextSection from './TextSection/TextSection';
 import PageSwitch from './Page-Switch/Page-Switch';
+import FramedVideo from './FramedVideo/FramedVideo';
 
 export {
   Hero,
@@ -50,4 +51,5 @@ export {
   RowText,
   TextSection,
   PageSwitch,
+  FramedVideo,
 };
