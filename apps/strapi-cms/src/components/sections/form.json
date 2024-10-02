@@ -72,6 +72,11 @@
     "notes": {
       "type": "richtext",
       "required": false
+    },
+    "buttonLabel": {
+      "type": "string",
+      "required": true,
+      "default": "Iscriviti"
     }
   }
 }
