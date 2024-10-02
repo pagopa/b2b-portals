@@ -1,7 +1,6 @@
 import { Link, Stack, Typography } from '@mui/material';
 import { RenderVideoProps } from '@react-components/types/FramedVideo/FramedVideo.types';
 import { TextAlternativeColor, TextColor } from '../common/Common.helpers';
-import { BackgroundColorAlternative } from '../common/Common.helpers';
 
 export const renderVideo = ({
   videoRef,
@@ -15,16 +14,21 @@ export const renderVideo = ({
   onVideoEnd,
   isMobileDevice,
 }: RenderVideoProps) => {
-  const mobileStyle = {
+  const mobileStyle: React.CSSProperties = {
     overflow: 'hidden',
     width: '80vw',
     objectFit: 'cover',
     objectPosition: 'center',
+    borderRadius: '25px',
   };
 
-  const nonMobileStyle = {
+  const nonMobileStyle: React.CSSProperties = {
     overflow: 'hidden',
     width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center',
+    borderRadius: '25px',
   };
 
   if (error) {
@@ -66,14 +70,12 @@ export const renderTextSection = ({
 }) => {
   const textColor = TextColor(theme);
   const linkTextColor = TextAlternativeColor(theme);
-  const backgroundColor = BackgroundColorAlternative(theme);
 
   return (
     <Stack
       style={{
         textAlign: 'left',
         padding: '1.5em',
-        backgroundColor,
       }}
     >
       <Typography variant='h4' color={textColor} mb={2}>
