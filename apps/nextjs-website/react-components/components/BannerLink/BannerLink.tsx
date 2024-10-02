@@ -56,14 +56,17 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
                   theme === 'light'
                     ? lightBackgrounds[index % 2]
                     : darkBackgrounds[index % 2],
-                padding: { md: '64px 24px', xs: '32px 24px' },
                 width: '100%',
                 flex: 1,
                 display: 'flex',
                 justifyContent: 'center',
               }}
             >
-              <Stack textAlign='center' alignItems='center'>
+              <Stack
+                textAlign='center'
+                alignItems='center'
+                sx={{ margin: { md: '64px 24px', xs: '32px 24px' } }}
+              >
                 {section.iconURL && (
                   <Image
                     src={section.iconURL}
@@ -89,7 +92,6 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
                   component='div'
                   variant='body2'
                   sx={{
-                    color: textColor,
                     textAlign: 'center',
                     '& a': {
                       color: textColor,
@@ -99,22 +101,24 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
                         textDecoration: 'underline',
                       },
                     },
+                    '& p': {
+                      color: textColor,
+                    },
                   }}
                 >
                   {section.body}
                 </Typography>
+                {section.ctaButtons &&
+                  section.ctaButtons.length > 0 &&
+                  CtaButtons({
+                    ctaButtons: section.ctaButtons.map((button) => ({
+                      ...button,
+                      sx: { width: 'auto', marginTop: '16px' },
+                      variant: 'outlined',
+                    })),
+                    theme,
+                  })}
               </Stack>
-
-              {section.ctaButtons &&
-                section.ctaButtons.length > 0 &&
-                CtaButtons({
-                  ctaButtons: section.ctaButtons.map((button) => ({
-                    ...button,
-                    sx: { width: 'auto' },
-                    variant: 'outlined',
-                  })),
-                  theme,
-                })}
             </Stack>
           );
         })}
