@@ -10,7 +10,7 @@ interface FormCategories {
   readonly categoriesTitle?: string;
   readonly defaultCategoryID: string;
   readonly categories: {
-    categoryID: string,
+    categoryID: string;
     label: string;
     additionalInfo?: string;
   }[];
@@ -22,6 +22,7 @@ export interface FormProps extends SectionProps, FormFields, FormCategories {
   readonly clientID: 'io' | 'pagopa';
   readonly listID: string;
   readonly recaptchaSiteKey: string;
+  readonly notes?: JSX.Element;
 }
 
 export interface FormData {
@@ -33,7 +34,7 @@ export interface FormData {
 
 export interface FormCategoryProps {
   categories: {
-    categoryID: string,
+    categoryID: string;
     label: string;
     additionalInfo?: string;
   }[];
