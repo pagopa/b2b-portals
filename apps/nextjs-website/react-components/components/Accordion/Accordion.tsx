@@ -14,19 +14,13 @@ const Accordion = (props: AccordionProps) => {
     description,
     accordionItems,
     theme,
-    layout = 'left',
+    layout,
+    textAlignment,
     sectionID,
   } = props;
 
   const textColor = TextColor(theme);
   const backgroundColor = BackgroundColorAlternative(theme);
-  const isCenterLayout = layout === 'center';
-  const isRightLayout = layout === 'right';
-  const textAlignment = isCenterLayout
-    ? 'center'
-    : isRightLayout
-    ? 'right'
-    : 'left';
 
   return (
     <Box
@@ -36,42 +30,34 @@ const Accordion = (props: AccordionProps) => {
       {...(sectionID && { id: sectionID })}
     >
       <Container>
-        <Grid item xs={12}>
-          <Stack px={{ xs: 1, md: 0 }} spacing={{ xs: 2, md: 5 }}>
-            {/** Title */}
-
-            <Title
-              variant='h4'
-              textColor={textColor}
-              title={title}
-              textAlign={textAlignment}
-            />
-
-            {/** Subtitle */}
-
-            {subtitle && (
-              <Subtitle
-                variant='h6'
+        <Grid container spacing={4} alignItems='flex-start'>
+          <Grid item xs={12} md={layout === 'center' ? 12 : 4}>
+            <Stack px={{ xs: 1, md: 0 }} spacing={{ xs: 2, md: 4 }}>
+              <Title
+                variant='h4'
                 textColor={textColor}
-                subtitle={subtitle}
-                textAlign={textAlignment}
+                title={title}
+                textAlign={layout === 'center' ? textAlignment : 'left'}
               />
-            )}
-
-            {/** Description */}
-            {description && (
-              <Body
-                variant='body2'
-                textColor={textColor}
-                body={description}
-                textAlign={textAlignment}
-              />
-            )}
-          </Stack>
-        </Grid>
-        <Grid container>
-          <Grid item xs={12} mt={5} sx={{ order: layout === 'right' ? -1 : 1 }}>
-            {/** Accordions */}
+              {subtitle && (
+                <Subtitle
+                  variant='h6'
+                  textColor={textColor}
+                  subtitle={subtitle}
+                  textAlign={layout === 'center' ? textAlignment : 'left'}
+                />
+              )}
+              {description && (
+                <Body
+                  variant='body2'
+                  textColor={textColor}
+                  body={description}
+                  textAlign={layout === 'center' ? textAlignment : 'left'}
+                />
+              )}
+            </Stack>
+          </Grid>
+          <Grid item xs={12} md={layout === 'center' ? 12 : 8}>
             <Stack spacing={2}>
               {accordionItems.map((accordionItem, i) => (
                 <AccordionItem key={i} {...accordionItem} />

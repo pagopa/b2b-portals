@@ -1,4 +1,4 @@
-import { SectionProps } from "../common/Common.types";
+import { SectionProps } from '../common/Common.types';
 
 export interface AccordionItemProps {
   header: string;
@@ -11,5 +11,6 @@ export interface AccordionProps extends SectionProps {
   subtitle?: string;
   description?: string | JSX.Element;
   accordionItems: AccordionItemProps[];
-  layout?: 'left' | 'center' | 'right';
+  layout: 'left' | 'center';
+  textAlignment: 'left' | 'center' | 'right';
 }
