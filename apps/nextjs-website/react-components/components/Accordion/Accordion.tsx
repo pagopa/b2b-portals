@@ -14,8 +14,8 @@ const Accordion = (props: AccordionProps) => {
     description,
     accordionItems,
     theme,
-    layout = 'center',
-    textAlignment = layout === 'center' ? 'center' : 'left',
+    layout,
+    textAlignment,
     sectionID,
   } = props;
 
@@ -37,14 +37,14 @@ const Accordion = (props: AccordionProps) => {
                 variant='h4'
                 textColor={textColor}
                 title={title}
-                textAlign={textAlignment}
+                textAlign={layout === 'center' ? textAlignment : 'left'}
               />
               {subtitle && (
                 <Subtitle
                   variant='h6'
                   textColor={textColor}
                   subtitle={subtitle}
-                  textAlign={textAlignment}
+                  textAlign={layout === 'center' ? textAlignment : 'left'}
                 />
               )}
               {description && (
@@ -52,7 +52,7 @@ const Accordion = (props: AccordionProps) => {
                   variant='body2'
                   textColor={textColor}
                   body={description}
-                  textAlign={textAlignment}
+                  textAlign={layout === 'center' ? textAlignment : 'left'}
                 />
               )}
             </Stack>
