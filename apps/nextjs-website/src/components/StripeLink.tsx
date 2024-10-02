@@ -7,14 +7,14 @@ import { StripeLinkSection } from '@/lib/fetch/types/PageSection';
 const makeStripeLinkProps = ({
   subtitle,
   icon,
-  buttonText,
+  link,
   ...rest
 }: StripeLinkSection): StripeLinkProps => ({
   subtitle: MarkdownRenderer({ markdown: subtitle, variant: 'body2' }),
   ...(icon.data && {
     iconURL: icon.data.attributes.url,
   }),
-  ...(buttonText && { buttonText }),
+  link,
   ...rest,
 });
 
