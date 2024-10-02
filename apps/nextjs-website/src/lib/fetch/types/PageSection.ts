@@ -135,8 +135,8 @@ const StripeLinkSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   subtitle: t.string,
   icon: StrapiImageSchema,
-  buttonText: t.union([t.string, t.null]),
   sectionID: t.union([t.string, t.null]),
+  link: LinkCodec,
 });
 
 const CardsItemCodec = t.strict({
@@ -197,6 +197,8 @@ const FormSectionCodec = t.strict({
     pagopa: null,
   }),
   sectionID: t.union([t.string, t.null]),
+  buttonLabel: t.string,
+  notes: t.union([t.string, t.null]),
 });
 
 const PreFooterSectionCodec = t.strict({

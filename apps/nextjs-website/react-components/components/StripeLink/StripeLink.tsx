@@ -11,7 +11,13 @@ import {
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
 
-const StripeLink = ({ iconURL, subtitle, theme, buttonText, sectionID }: StripeLinkProps) => {
+const StripeLink = ({
+  iconURL,
+  subtitle,
+  theme,
+  link,
+  sectionID,
+}: StripeLinkProps) => {
   const textAlternativeColor = TextAlternativeColor(theme);
   const textColorWhiteOnly = TextColor('dark');
   const backgroundColor = BackgroundColor(theme);
@@ -22,7 +28,7 @@ const StripeLink = ({ iconURL, subtitle, theme, buttonText, sectionID }: StripeL
       background={extraBackgroundColor}
       py={2}
       sx={{ justifyContent: { xs: 'start', md: 'start' } }}
-      {...sectionID && { sectionID }}
+      {...(sectionID && { sectionID })}
     >
       <Grid item>
         <Stack
@@ -37,7 +43,7 @@ const StripeLink = ({ iconURL, subtitle, theme, buttonText, sectionID }: StripeL
               justifyContent: 'start',
               width: 'auto',
               alignItems: 'center',
-              gap:'.5rem'
+              gap: '.5rem',
             }}
           >
             {iconURL && <Image src={iconURL} alt='' height={28} width={28} />}
@@ -49,20 +55,19 @@ const StripeLink = ({ iconURL, subtitle, theme, buttonText, sectionID }: StripeL
             />
           </Box>
 
-          {buttonText && (
-            <Button
-              variant='contained'
-              size='small'
-              sx={{
-                backgroundColor: backgroundColor,
-                color: textAlternativeColor,
-                ':hover': { backgroundColor: backgroundColor },
-              }}
-              endIcon={<ArrowForwardIcon color='inherit'></ArrowForwardIcon>}
-            >
-              {buttonText}
-            </Button>
-          )}
+          <Button
+            variant='contained'
+            size='small'
+            sx={{
+              backgroundColor: backgroundColor,
+              color: textAlternativeColor,
+              ':hover': { backgroundColor: backgroundColor },
+            }}
+            endIcon={<ArrowForwardIcon color='inherit'></ArrowForwardIcon>}
+            href={link.href}
+          >
+            {link.label}
+          </Button>
         </Stack>
       </Grid>
     </ContainerRC>
