@@ -5,7 +5,6 @@ import {
   Grid,
   OutlinedInput,
   Typography,
-  Link,
   FormControl,
   Button,
   Alert,
@@ -46,6 +45,7 @@ const Form = ({
   showOrganization,
   recaptchaSiteKey,
   sectionID,
+  notes,
 }: FormProps) => {
   const backgroundColor = BackgroundColorAlternative(theme);
   const textColor = TextColor(theme);
@@ -376,43 +376,28 @@ const Form = ({
           richiesta
         </Alert>
       )}
-      <Typography
-        variant='body2'
-        fontWeight='bold'
-        sx={{ mt: 2, position: 'relative', zIndex: 3, color: textColor }}
-      >
-        Inserendo il tuo indirizzo email stai accettando la nostra informativa
-        sul trattamento dei dati personali per la newsletter.
-      </Typography>
-      <Typography
-        variant='body2'
-        sx={{ mt: 2, position: 'relative', zIndex: 3, color: graylinkColor }}
-      >
-        Form protetto tramite reCAPTCHA e Google{' '}
-        <Link
-          href='https://policies.google.com/privacy'
+      {notes && (
+        <Typography
+          component='div'
+          variant='body2'
           sx={{
+            mt: 2,
+            position: 'relative',
+            zIndex: 3,
             color: graylinkColor,
-            textDecorationColor: graylinkColor,
-            textDecoration: 'underline',
+            '& a': {
+              color: graylinkColor,
+              textDecoration: 'underline',
+              '&:hover': {
+                color: graylinkColor,
+                textDecoration: 'underline',
+              },
+            },
           }}
         >
-          {' '}
-          Privacy Policy{' '}
-        </Link>{' '}
-        e{' '}
-        <Link
-          href='https://policies.google.com/terms'
-          sx={{
-            color: graylinkColor,
-            textDecorationColor: graylinkColor,
-            textDecoration: 'underline',
-          }}
-        >
-          Termini di servizio
-        </Link>{' '}
-        applicati.
-      </Typography>
+          {notes}
+        </Typography>
+      )}
 
       <RECAPTCHA
         size='invisible'
