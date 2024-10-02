@@ -71,7 +71,7 @@
     },
     "notes": {
       "type": "richtext",
-      "required": true
+      "required": false
     }
   }
 }
