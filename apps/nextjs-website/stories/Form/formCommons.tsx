@@ -26,6 +26,14 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   listID: 'listID',
   recaptchaSiteKey: 'sitekey',
   buttonLabel: 'Iscriviti',
+  notes: (
+    <p>
+      Form protetto tramite reCAPTCHA e Google{' '}
+      <a href='https://policies.google.com/privacy'>Privacy Policy</a> e{' '}
+      <a href='https://policies.google.com/terms'>Termini di servizio</a>{' '}
+      applicati.
+    </p>
+  ),
 });
 
 export const FormTemplate: StoryFn<FormProps> = (args) => <Form {...args} />;
