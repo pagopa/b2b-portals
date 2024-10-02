@@ -8,6 +8,7 @@ const makeFormProps = ({
   subtitle,
   categories,
   categoriesTitle,
+  buttonLabel,
   notes,
   ...rest
 }: FormSection): FormProps => ({
@@ -17,6 +18,7 @@ const makeFormProps = ({
   })),
   ...(subtitle && { subtitle }),
   ...(categoriesTitle && { categoriesTitle }),
+  buttonLabel,
   ...(notes && { notes: MarkdownRenderer({ markdown: notes }) }),
   ...rest,
 });

@@ -25,6 +25,7 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
   clientID: 'io',
   listID: 'listID',
   recaptchaSiteKey: 'sitekey',
+  buttonLabel: 'Iscriviti',
   notes: (
     <p>
       Form protetto tramite reCAPTCHA e Google{' '}

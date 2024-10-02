@@ -192,6 +192,7 @@ const FormSectionCodec = t.strict({
     pagopa: null,
   }),
   sectionID: t.union([t.string, t.null]),
+  buttonLabel: t.string,
   notes: t.union([t.string, t.null]),
 });
 
