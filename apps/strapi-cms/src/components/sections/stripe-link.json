@@ -15,23 +15,27 @@
       "default": "light",
       "required": true
     },
-    "buttonText": {
-      "type": "string"
-    },
     "subtitle": {
       "type": "richtext",
       "required": true
     },
     "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link",
+      "required": true
     }
   }
 }
