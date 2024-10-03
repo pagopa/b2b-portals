@@ -72,7 +72,6 @@ const FramedVideo = ({
         flexDirection: flexDirection,
         justifyContent: justifyContent,
         alignItems: 'center',
-        height: isMobileDevice ? 'auto' : '600px',
         backgroundColor: backgroundColor,
         padding: isMobileDevice ? '2em' : '4em 8em',
         gap: '2em',
