@@ -65,7 +65,7 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
               <Stack
                 textAlign='center'
                 alignItems='center'
-                sx={{ margin: { md: '64px 24px', xs: '32px 24px' } }}
+                margin={{ md: '64px 24px', xs: '32px 24px' }}
               >
                 {section.iconURL && (
                   <Image
