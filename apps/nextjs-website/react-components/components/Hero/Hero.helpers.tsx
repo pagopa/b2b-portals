@@ -41,9 +41,9 @@ export const HeroTextContent = ({
         minHeight: 'inherit',
         padding: size === 'small' ? '60px 0' : '0',
         maxWidth: size === 'small' ? '60%' : '100%',
-        margin: size === 'small' ? '0 auto' : '0',
+        margin: size === 'small' ? '0 auto' : { xs: '2em 0', md: '3em 0' },
+        marginTop: size === 'small' ? '0' : '4em',
       }}
-      mt={{ xs: 9, lg: 0 }}
       component='section'
       spacing={2}
     >

@@ -48,7 +48,7 @@ const Hero = (props: HeroProps) => {
       size='xl'
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
-      {...sectionID && { sectionID }}
+      {...(sectionID && { sectionID })}
     >
       {(size === 'medium' || size === 'big') && (
         <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
@@ -65,8 +65,11 @@ const Hero = (props: HeroProps) => {
           item
           lg={6}
           mb={{ xs: 4, lg: 0 }}
-          sx={{ width: '100%', display: 'flex' }}
-          justifyContent={inverse ? 'start' : 'end'}
+          sx={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: { xs: 'center', lg: inverse ? 'start' : 'end' },
+          }}
           alignItems='center'
         >
           {isJSX(image) ? (
