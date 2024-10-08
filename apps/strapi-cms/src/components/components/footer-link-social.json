@@ -13,7 +13,8 @@
         "LinkedIn",
         "Facebook",
         "Twitter",
-        "Medium"
+        "Medium",
+        "YouTube"
       ],
       "required": true
     },
