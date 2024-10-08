@@ -83,7 +83,19 @@ const Page = async ({ params }: PageParams) => {
 
   const sections = pageProps.sections;
 
-  return <div>{sections.map(PageSection)}</div>;
+  return (
+    <main>
+      {pageProps.seo.structuredData && (
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(pageProps.seo.structuredData),
+          }}
+        />
+      )}
+      {sections.map(PageSection)}
+    </main>
+  );
 };
 
 export default Page;
