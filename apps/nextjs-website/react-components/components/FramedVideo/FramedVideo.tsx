@@ -9,6 +9,8 @@ const FramedVideo = ({
   sectionID,
   text,
   theme,
+  loop,
+  autoplay,
 }: FramedVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [error, setError] = useState(false);
@@ -100,8 +102,8 @@ const FramedVideo = ({
           error,
           setError,
           src: videoURL,
-          loop: false,
-          autoplay: false,
+          loop,
+          autoplay,
           fallback: 'Video failed to load',
           onVideoEnd: () => {},
           isMobileDevice,

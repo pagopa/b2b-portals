@@ -12,6 +12,8 @@ const createFramedVideoDefaults = (
 ): FramedVideoProps => ({
   theme,
   sectionID: null,
+  autoplay: false,
+  loop: false,
 });
 
 export const defaultsDark = createFramedVideoDefaults('dark');
