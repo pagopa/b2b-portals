@@ -43,6 +43,7 @@ const Form = ({
   sectionID,
   buttonLabel,
   notes,
+  background,
 }: FormProps) => {
   const textColor = TextColor(theme);
   const graylinkColor = GrayLinkColor(theme);
@@ -249,156 +250,170 @@ const Form = ({
   return (
     <Box
       sx={{
-        maxWidth: 900,
-        mx: 'auto',
-        p: 4,
-        textAlign: 'center',
-        borderRadius: 2,
-        boxShadow: 3,
-        color: textColor,
+        width: '100vw',
         position: 'relative',
+        left: '50%',
+        right: '50%',
+        marginLeft: '-50vw',
+        marginRight: '-50vw',
+        backgroundImage: background ? `url(${background})` : undefined,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
-      component='section'
-      {...(sectionID && { id: sectionID })}
     >
-      <MailOutlineIcon
-        sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }}
-      />
-      <Typography
-        variant='h4'
-        gutterBottom
-        sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
-      >
-        {title}
-      </Typography>
-      {subtitle && (
-        <Typography
-          variant='body1'
-          gutterBottom
-          sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor }}
-        >
-          {subtitle}
-        </Typography>
-      )}
-      <Grid
-        container
-        spacing={2}
-        sx={{ mb: 2, position: 'relative', zIndex: 3 }}
-      >
-        {inputFields.map(InputField)}
-      </Grid>
-      {categoriesTitle && categories.length > 0 && (
-        <Typography
-          variant='h6'
-          gutterBottom
-          sx={{
-            position: 'relative',
-            zIndex: 3,
-            mb: 2,
-            mt: 4,
-            color: textColor,
-            fontWeight: '700',
-          }}
-        >
-          {categoriesTitle}
-        </Typography>
-      )}
-      {categories.length > 0 && (
-        <FormCategories
-          categories={categories}
-          textColor={textColor}
-          borderColor={borderColor}
-          selectedCategory={formData.category}
-          handleRadioChange={handleRadioChange}
-        />
-      )}
-      <Typography
-        variant='body2'
+      <Box
         sx={{
-          mb: 2,
-          position: 'relative',
-          zIndex: 3,
+          maxWidth: 900,
+          mx: 'auto',
+          p: 4,
+          textAlign: 'center',
+          borderRadius: 2,
+          boxShadow: 3,
           color: textColor,
-          textAlign: 'start',
+          position: 'relative',
         }}
+        component='section'
+        {...(sectionID && { id: sectionID })}
       >
-        *Campo obbligatorio
-      </Typography>
-      <Button
-        variant='contained'
-        sx={{ width: { md: 'auto', xs: '100%' }, zIndex: 4 }}
-        onClick={handleSubmit}
-        color={theme === 'dark' ? 'negative' : 'primary'}
-      >
-        {buttonLabel}
-      </Button>
-      {submissionStatus === 'success' && (
-        <Alert
-          severity='success'
-          sx={{
-            maxWidth: 'fit-content',
-            margin: '16px auto 0px auto',
-            padding: '8px 16px',
-            border: 'none',
-            backgroundColor: '#e1f4e1',
-            textAlign: 'center',
-            fontWeight: 'bold',
-            '& .MuiAlert-icon': {
-              display: 'none',
-            },
-          }}
-        >
-          Grazie! La tua richiesta è stata registrata
-        </Alert>
-      )}
-      {submissionStatus === 'failure' && (
-        <Alert
-          severity='error'
-          sx={{
-            maxWidth: 'fit-content',
-            margin: '16px auto 0px auto',
-            padding: '8px 16px',
-            border: 'none',
-            backgroundColor: '#ffd9d9',
-            textAlign: 'center',
-            fontWeight: 'bold',
-            '& .MuiAlert-icon': {
-              display: 'none',
-            },
-          }}
-        >
-          Purtroppo in questo momento non è possibile registrare la tua
-          richiesta
-        </Alert>
-      )}
-      {notes && (
+        <MailOutlineIcon
+          sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }}
+        />
         <Typography
-          component='div'
+          variant='h4'
+          gutterBottom
+          sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
+        >
+          {title}
+        </Typography>
+        {subtitle && (
+          <Typography
+            variant='body1'
+            gutterBottom
+            sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor }}
+          >
+            {subtitle}
+          </Typography>
+        )}
+        <Grid
+          container
+          spacing={2}
+          sx={{ mb: 2, position: 'relative', zIndex: 3 }}
+        >
+          {inputFields.map(InputField)}
+        </Grid>
+        {categoriesTitle && categories.length > 0 && (
+          <Typography
+            variant='h6'
+            gutterBottom
+            sx={{
+              position: 'relative',
+              zIndex: 3,
+              mb: 2,
+              mt: 4,
+              color: textColor,
+              fontWeight: '700',
+            }}
+          >
+            {categoriesTitle}
+          </Typography>
+        )}
+        {categories.length > 0 && (
+          <FormCategories
+            categories={categories}
+            textColor={textColor}
+            borderColor={borderColor}
+            selectedCategory={formData.category}
+            handleRadioChange={handleRadioChange}
+          />
+        )}
+        <Typography
           variant='body2'
           sx={{
-            mt: 2,
+            mb: 2,
             position: 'relative',
             zIndex: 3,
-            color: graylinkColor,
-            '& a': {
-              color: graylinkColor,
-              textDecoration: 'underline',
-              '&:hover': {
-                color: graylinkColor,
-                textDecoration: 'underline',
-              },
-            },
+            color: textColor,
+            textAlign: 'start',
           }}
         >
-          {notes}
+          *Campo obbligatorio
         </Typography>
-      )}
+        <Button
+          variant='contained'
+          sx={{ width: { md: 'auto', xs: '100%' }, zIndex: 4 }}
+          onClick={handleSubmit}
+          color={theme === 'dark' ? 'negative' : 'primary'}
+        >
+          {buttonLabel}
+        </Button>
+        {submissionStatus === 'success' && (
+          <Alert
+            severity='success'
+            sx={{
+              maxWidth: 'fit-content',
+              margin: '16px auto 0px auto',
+              padding: '8px 16px',
+              border: 'none',
+              backgroundColor: '#e1f4e1',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              '& .MuiAlert-icon': {
+                display: 'none',
+              },
+            }}
+          >
+            Grazie! La tua richiesta è stata registrata
+          </Alert>
+        )}
+        {submissionStatus === 'failure' && (
+          <Alert
+            severity='error'
+            sx={{
+              maxWidth: 'fit-content',
+              margin: '16px auto 0px auto',
+              padding: '8px 16px',
+              border: 'none',
+              backgroundColor: '#ffd9d9',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              '& .MuiAlert-icon': {
+                display: 'none',
+              },
+            }}
+          >
+            Purtroppo in questo momento non è possibile registrare la tua
+            richiesta
+          </Alert>
+        )}
+        {notes && (
+          <Typography
+            component='div'
+            variant='body2'
+            sx={{
+              mt: 2,
+              position: 'relative',
+              zIndex: 3,
+              color: graylinkColor,
+              '& a': {
+                color: graylinkColor,
+                textDecoration: 'underline',
+                '&:hover': {
+                  color: graylinkColor,
+                  textDecoration: 'underline',
+                },
+              },
+            }}
+          >
+            {notes}
+          </Typography>
+        )}
 
-      <RECAPTCHA
-        size='invisible'
-        ref={recaptchaRef}
-        sitekey={recaptchaSiteKey}
-      />
+        <RECAPTCHA
+          size='invisible'
+          ref={recaptchaRef}
+          sitekey={recaptchaSiteKey}
+        />
+      </Box>
     </Box>
   );
 };

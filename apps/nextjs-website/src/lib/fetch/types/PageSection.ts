@@ -199,6 +199,7 @@ const FormSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   buttonLabel: t.string,
   notes: t.union([t.string, t.null]),
+  background: StrapiImageSchema,
 });
 
 const PreFooterSectionCodec = t.strict({
