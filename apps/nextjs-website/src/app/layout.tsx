@@ -10,7 +10,9 @@ import {
   getFooterProps,
   getSiteWideSEO,
   isPreviewMode,
+  getPreFooterProps,
 } from '@/lib/api';
+import PreFooter from '@/components/PreFooter';
 
 const MatomoScript = (id: string): string => `
 var _paq = (window._paq = window._paq || []);
@@ -55,6 +57,7 @@ export default async function RootLayout({
   const preHeaderProps = await getPreHeaderProps();
   const headerProps = await getHeaderProps();
   const footerProps = await getFooterProps();
+  const preFooterProps = await getPreFooterProps();
   const { matomoID } = await getSiteWideSEO();
 
   return (
@@ -64,6 +67,7 @@ export default async function RootLayout({
           {preHeaderProps && <PreHeader {...preHeaderProps} />}
           <Header {...headerProps} />
           {children}
+          {preFooterProps && <PreFooter {...preFooterProps} />}
           <Footer {...footerProps} />
           <Script
             src='/scripts/otnotice-1.0.min.js'

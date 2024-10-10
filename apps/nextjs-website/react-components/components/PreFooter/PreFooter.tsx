@@ -40,13 +40,12 @@ const styles = {
 
 const PreFooter = (props: PreFooterProps) => {
   const {
-    theme,
     title,
+    theme,
+    layout,
     storeButtons,
     background,
-    sectionID,
     ctaButtons,
-    layout = 'left',
   } = props;
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
@@ -62,7 +61,6 @@ const PreFooter = (props: PreFooterProps) => {
     <Box
       component='section'
       sx={styles.backgroundImage(isSmallScreen, theme)}
-      {...(sectionID && { id: sectionID })}
     >
       <Box sx={{ position: 'relative', overflow: 'hidden' }}>
         <Box

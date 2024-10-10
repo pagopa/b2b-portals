@@ -1,0 +1,62 @@
+{
+  "kind": "singleType",
+  "collectionName": "pre_footers",
+  "info": {
+    "singularName": "pre-footer",
+    "pluralName": "pre-footers",
+    "displayName": "PreFooter",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "required": true,
+      "default": "light"
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "center"
+      ],
+      "required": true,
+      "default": "left"
+    },
+    "background": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "ctaButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.cta-button-simple",
+      "required": false
+    },
+    "storeButtons": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.store-buttons"
+    },
+    "exclude": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::page.page"
+    }
+  }
+}
