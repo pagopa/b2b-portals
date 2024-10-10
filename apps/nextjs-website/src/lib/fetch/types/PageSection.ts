@@ -2,6 +2,7 @@ import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
 import { StrapiImageRequiredSchema, StrapiImageSchema } from './StrapiImage';
 import { StoreButtonsCodec } from './StoreButtons';
+import { ThemeCodec } from './Theme';
 
 const LinkCodec = t.strict({
   label: t.string,
@@ -370,7 +371,7 @@ const PageSwitchSectionCodec = t.strict({
 const FramedVideoSectionCodec = t.strict({
   __component: t.literal('sections.framed-video'),
   sectionID: t.union([t.string, t.null]),
-  theme: t.union([t.literal('light'), t.literal('dark')]),
+  theme: ThemeCodec,
   videoURL: t.union([t.string, t.null]),
   video: t.strict({
     data: t.union([
@@ -380,6 +381,8 @@ const FramedVideoSectionCodec = t.strict({
       t.null,
     ]),
   }),
+  loop: t.boolean,
+  autoplay: t.boolean,
   text: t.union([
     t.strict({
       title: t.string,
