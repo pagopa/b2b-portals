@@ -2,7 +2,8 @@ import { SectionProps } from '../common/Common.types';
 
 export interface FramedVideoProps extends SectionProps {
   videoURL?: string;
-
+  loop: boolean;
+  autoplay: boolean;
   text?: {
     title: string;
     body: string;

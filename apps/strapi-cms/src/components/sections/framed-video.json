@@ -35,6 +35,16 @@
       "allowedTypes": [
         "videos"
       ]
+    },
+    "loop": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }
