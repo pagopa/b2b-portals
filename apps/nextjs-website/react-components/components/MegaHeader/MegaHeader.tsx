@@ -59,8 +59,26 @@ const MegaHeader = (props: MegaHeaderProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   return (
-    <Container>
+    <Container
+      style={{
+        boxShadow: dropdownOpen
+          ? 'none'
+          : '0 4px 16px 0 rgba(14, 15, 19, 0.06)',
+      }}
+    >
       <Content>
         <Logo>
           <img src={logoSrc} alt={logoAlt} />
@@ -92,6 +110,9 @@ const MegaHeader = (props: MegaHeaderProps) => {
                       borderRadius: 2,
                       textDecoration: 'none',
                       whiteSpace: 'nowrap',
+                      fontSize: '16px!important',
+                      fontWeight: '700!important',
+                      letterSpacing: '0.3px',
                       '&:hover': {
                         backgroundColor: '#005bb5',
                       },
@@ -236,6 +257,9 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   textDecoration: 'none',
                   whiteSpace: 'nowrap',
                   margin: '30px',
+                  fontSize: '16px!important',
+                  fontWeight: '700!important',
+                  letterSpacing: '0.3px',
                   '&:hover': {
                     backgroundColor: '#005bb5',
                   },
