@@ -51,6 +51,7 @@ export const Image = ({ image, mobileImage, pattern = 'none', breakpoint = 834 }
         ...patterns[pattern],
         '& > img': {
           display: 'block',
+          borderRadius: '16px',
         },
         '& > img:last-of-type': {
           display: 'none',
