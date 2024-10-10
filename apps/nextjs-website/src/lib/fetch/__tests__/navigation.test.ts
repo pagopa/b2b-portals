@@ -37,6 +37,7 @@ const navigationResponse = {
           canonicalURL: null,
           ogTitle: null,
           ogDescription: null,
+          structuredData: null,
         },
         sections: [
           {
@@ -109,6 +110,7 @@ describe('getNavigation', () => {
               canonicalURL: null,
               ogTitle: null,
               ogDescription: null,
+              structuredData: null,
             },
             sections: [
               {

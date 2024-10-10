@@ -7,14 +7,12 @@ const makeFramedVideoProps = ({
   videoURL,
   video,
   text,
-  sectionID,
-  theme,
+  ...rest
 }: FramedVideoSection): FramedVideoProps => ({
-  sectionID,
-  theme,
   ...(videoURL && { videoURL }),
   ...(video.data && { videoURL: video.data.attributes.url }),
   ...(text && { text }),
+  ...rest,
 });
 
 const FramedVideo = (props: FramedVideoSection) => (
