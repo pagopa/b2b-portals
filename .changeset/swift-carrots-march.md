@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-change card title font weight
+change Service Carousel card title font weight

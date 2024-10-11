@@ -64,7 +64,7 @@ export const ServiceCard = (card: ServiceCardProps) => {
         width={{ xs: 216, sm: 264, md: 264 }} // 216 has been found by testing: a higher number breaks react-slick and makes the last slide wrap under the first one
         alignSelf={'stretch'}
       >
-        <Typography variant='h6' sx={{ fontWeight: '700' }}>
+        <Typography variant='h6' fontWeight={700}>
           {card.title}
         </Typography>
         {card.description && (
