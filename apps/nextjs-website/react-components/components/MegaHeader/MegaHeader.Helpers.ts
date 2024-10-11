@@ -95,12 +95,12 @@ export const Dropdown = styled(Box)({
   left: 0,
   backgroundColor: '#fff',
   padding: '50px 70px',
-  boxShadow: 'inset 0 4px 16px 0 rgba(14, 15, 19, 0.06)',
   '&.open': {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     width: 'calc(100% - 140px)', // Take padding into account
+    boxShadow: '0 16px 16px 0px rgba(14, 15, 19, 0.06)',
   },
   '& .dropdownSection': {
     marginRight: 56,
@@ -136,11 +136,14 @@ export const Dropdown = styled(Box)({
 
 export const DropdownTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
-  fontSize: 12,
+  fontSize: 14,
+  letterSpacing: 1,
+  textTransform: 'uppercase',
   color: 'black',
   padding: '10px 20px',
   cursor: 'default',
   [theme.breakpoints.down('md')]: {
+    fontSize: 12,
     padding: '10px 30px',
   },
 }));
@@ -226,6 +229,7 @@ export const MobileMenu = styled(Box)({
     fontWeight: 400,
     color: '#555C70',
     paddingLeft: '30px',
-    display: 'block',
+    display: 'flex', 
+    alignItems: 'center', 
   },
 });
