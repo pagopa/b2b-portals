@@ -7,6 +7,7 @@ const makePreFooterProps = ({
   storeButtons,
   background,
   ctaButtons,
+  exclude,
   ...rest
 }: PreFooterAttributes): PreFooterProps => ({
   ...(background.data && { background: background.data.attributes.url }),
@@ -17,6 +18,9 @@ const makePreFooterProps = ({
     },
   }),
   ...(ctaButtons.length > 0 && { ctaButtons }),
+  ...(exclude.data.length > 0 && {
+    excludeSlugs: exclude.data.map((obj) => obj.attributes.slug),
+  }),
   ...rest,
 });
 

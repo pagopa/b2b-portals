@@ -7,7 +7,11 @@ import { StrapiImageSchema } from './types/StrapiImage';
 import { CTAButtonSimpleCodec } from './types/CTAButton';
 import { AppEnv } from '@/AppEnv';
 
-// TODO: Add tests for PreFooter
+const PageRelationCodec = t.strict({
+  attributes: t.strict({
+    slug: t.string,
+  }),
+});
 
 const PreFooterAttributesCodec = t.strict({
   title: t.string,
@@ -19,7 +23,9 @@ const PreFooterAttributesCodec = t.strict({
   background: StrapiImageSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
-  // TODO: Implement "exclude" field
+  exclude: t.strict({
+    data: t.array(PageRelationCodec),
+  }),
 });
 
 const PreFooterDataCodec = t.strict({
@@ -42,7 +48,7 @@ export const getPreFooter = ({
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pre-footer/?populate=background,ctaButtons,storeButtons`,
+      }/api/pre-footer/?populate=background,ctaButtons,storeButtons,exclude`,
       {
         method: 'GET',
         headers: {
