@@ -110,14 +110,20 @@ VideoFullNoTitleNoSubtitleWithCaption.args = {
   },
 };
 
-export const ImageNoTitleNoCaption: StoryFn<typeof VideoImage> =
-  VideoImageTemplate.bind({});
-ImageNoTitleNoCaption.args = {
+export const ImageFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
+  {}
+);
+ImageFull.args = {
   ...defaultsDark,
+  title: 'Sample Image Title',
+  subtitle: 'Sample Image Subtitle',
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
   },
+  caption: 'Sample Video Caption',
+  imageTitle: 'Sample Image Title',
+  imageSubtitle: 'Sample Image Subtitle',
 };
 
 export const ImageNoTextWithCaptionCentered: StoryFn<typeof VideoImage> =
@@ -143,10 +149,9 @@ ImageNoTextWithCaptionLeft.args = {
   caption: 'Sample Video Caption',
 };
 
-export const ImageFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
-  {}
-);
-ImageFull.args = {
+export const ImageNoCaptionWithTextCenter: StoryFn<typeof VideoImage> =
+  VideoImageTemplate.bind({});
+ImageNoCaptionWithTextCenter.args = {
   ...defaultsDark,
   title: 'Sample Image Title',
   subtitle: 'Sample Image Subtitle',
@@ -154,5 +159,31 @@ ImageFull.args = {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
   },
-  caption: 'Sample Video Caption',
+  isCentered: true,
+  imageTitle: 'Sample Image Title',
+  imageSubtitle: 'Sample Image Subtitle',
+};
+
+export const ImageNoCaptionWithTextLeft: StoryFn<typeof VideoImage> =
+  VideoImageTemplate.bind({});
+ImageNoCaptionWithTextLeft.args = {
+  ...defaultsDark,
+  title: 'Sample Image Title',
+  subtitle: 'Sample Image Subtitle',
+  image: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+    alt: 'Sample Image Alt',
+  },
+  imageTitle: 'Sample Image Title',
+  imageSubtitle: 'Sample Image Subtitle',
+};
+
+export const ImageNoTitleNoCaption: StoryFn<typeof VideoImage> =
+  VideoImageTemplate.bind({});
+ImageNoTitleNoCaption.args = {
+  ...defaultsDark,
+  image: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+    alt: 'Sample Image Alt',
+  },
 };

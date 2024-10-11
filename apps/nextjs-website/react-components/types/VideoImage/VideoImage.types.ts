@@ -1,6 +1,9 @@
 import { SectionProps, Theme } from '../common/Common.types';
 
-export interface VideoImageProps extends SectionProps, VideoTextProps, VideoCaptionProps {
+export interface VideoImageProps
+  extends SectionProps,
+    VideoTextProps,
+    VideoCaptionProps {
   image?: {
     src: string;
     alt: string;
@@ -14,6 +17,8 @@ export interface VideoImageProps extends SectionProps, VideoTextProps, VideoCapt
     playButtonLabel: string;
     pausedPlayButtonLabel: string;
   };
+  imageTitle?: string;
+  imageSubtitle?: string;
 }
 
 export interface VideoTextProps {

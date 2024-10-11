@@ -19,9 +19,8 @@ export const renderVideo = ({
   fallback,
   onClick,
   onVideoEnd,
-  isMobileDevice
+  isMobileDevice,
 }: RenderVideoProps) => {
-  // Define styles for mobile and non-mobile devices
   const mobileStyle = {
     overflow: 'hidden',
     width: '100vw',
@@ -55,17 +54,12 @@ export const renderVideo = ({
       onClick={onClick}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}
     >
-      <source
-        src={src}
-        onError={() => setError(true)}
-      />
+      <source src={src} onError={() => setError(true)} />
     </video>
   );
 };
 
-// Refactored renderImage function
 export const renderImage = ({ src, alt, isMobileDevice }: RenderImageProps) => {
-  // Define styles for mobile and non-mobile devices
   const mobileStyle = {
     overflow: 'hidden',
     width: '100vw',
@@ -112,6 +106,37 @@ export const VideoText = ({
           color={textColor}
         >
           {subtitle}
+        </Typography>
+      )}
+    </>
+  );
+};
+
+export const ImageText = ({
+  imageTitle,
+  imageSubtitle,
+  theme = 'dark',
+}: {
+  imageTitle?: string;
+  imageSubtitle?: string;
+  theme: 'dark' | 'light';
+}) => {
+  const textColor = TextColor(theme);
+  return (
+    <>
+      {imageTitle && (
+        <Typography variant='h5' mb={4} color={textColor}>
+          {imageTitle}
+        </Typography>
+      )}
+      {imageSubtitle && (
+        <Typography
+          paragraph
+          sx={{ fontSize: '16px' }}
+          mb={3}
+          color={textColor}
+        >
+          {imageSubtitle}
         </Typography>
       )}
     </>

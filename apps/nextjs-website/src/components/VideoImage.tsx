@@ -9,13 +9,16 @@ const makeVideoImageProps = ({
   caption,
   image,
   video,
+  imageTitle,
+  imageSubtitle,
   ...rest
 }: VideoImageSection): VideoImageProps => ({
   ...rest,
   ...(title && { title }),
   ...(subtitle && { subtitle }),
   ...(caption && { caption }),
-  // If user uploaded a video, use it
+  ...(imageTitle && { imageTitle }),
+  ...(imageSubtitle && { imageSubtitle }),
   ...(video &&
     video.src.data && {
       video: {
@@ -28,21 +31,6 @@ const makeVideoImageProps = ({
         pausedPlayButtonLabel: video.pausedPlayButtonLabel,
       },
     }),
-  // If user did not upload a video, check if they input a URL
-  ...(video &&
-    !video.src.data &&
-    video.srcURL && {
-      video: {
-        src: video.srcURL,
-        autoplay: video.autoplay,
-        loop: video.loop,
-        showControls: video.showControls,
-        fallback: video.fallback,
-        playButtonLabel: video.playButtonLabel,
-        pausedPlayButtonLabel: video.pausedPlayButtonLabel,
-      },
-    }),
-  // If user did not input any video source, check if they uploaded an image
   ...((!video || (!video.srcURL && !video.src.data)) &&
     image.data && {
       image: {

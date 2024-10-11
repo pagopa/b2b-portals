@@ -1,6 +1,3 @@
-// Disable rule below since we'll be determining whether image or video exist based on mediaState
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import { useEffect, useRef, useState } from 'react';
 import { useIsVisible } from '@react-components/types/common/Common.types';
 import { VideoImageProps } from '@react-components/types';
@@ -11,6 +8,7 @@ import {
   renderVideo,
   VideoCaption,
   VideoText,
+  ImageText,
 } from './VideoImage.helpers';
 
 const VideoImage = ({
@@ -22,10 +20,10 @@ const VideoImage = ({
   image,
   video,
   sectionID,
+  imageTitle,
+  imageSubtitle,
 }: VideoImageProps) => {
   if (!image && !video) {
-    // Disable lint for this case because we want the build to fail if user input nothing
-    // eslint-disable-next-line
     throw new Error();
   }
 
@@ -41,7 +39,6 @@ const VideoImage = ({
 
   useEffect(() => {
     setIsMobileDevice(window.innerWidth <= 768);
-
     const handleResize = () => {
       setIsMobileDevice(window.innerWidth <= 768);
     };
@@ -52,7 +49,6 @@ const VideoImage = ({
   useEffect(() => {
     if (mediaState === 'image') return;
     if (!isVisible) return;
-
     const startVideoWhenVisible = async () => {
       if (video?.autoplay && isVisible) play();
     };
@@ -61,18 +57,14 @@ const VideoImage = ({
 
   const play = (e?: React.MouseEvent) => {
     e?.preventDefault();
-
     if (mediaState === 'image') return;
-
     if (videoRef.current) {
       videoRef.current
         .play()
         .then(() => {
           setMediaState('play');
         })
-        .catch(() => {
-          // Handle play error
-        });
+        .catch(() => {});
     }
   };
 
@@ -95,7 +87,7 @@ const VideoImage = ({
           position: 'relative',
           overflow: 'hidden',
         }}
-        {...sectionID && { id: sectionID }}
+        {...(sectionID && { id: sectionID })}
       >
         {video?.showControls &&
           (mediaState === 'stop' || mediaState === 'pause') && (
@@ -165,29 +157,54 @@ const VideoImage = ({
               </div>
             </div>
           )}
-
-        {mediaState === 'image'
-          ? renderImage({
+        {mediaState === 'image' ? (
+          <>
+            {renderImage({
               src: image!.src,
               alt: image!.alt,
               isMobileDevice,
-            })
-          : renderVideo({
-              videoRef,
-              error,
-              setError,
-              src: video!.src,
-              loop: video!.loop,
-              autoplay: video!.autoplay,
-              fallback: video!.fallback,
-              onVideoEnd: handleVideoEnd,
-              onClick: pause,
-              isMobileDevice,
             })}
+            {(imageTitle || imageSubtitle) && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: isCentered ? 'center' : 'left',
+                  zIndex: 50,
+                  padding: '20px',
+                  marginLeft: isCentered ? '0' : '6em',
+                }}
+              >
+                <ImageText
+                  theme={theme}
+                  imageTitle={imageTitle ?? ''}
+                  imageSubtitle={imageSubtitle ?? ''}
+                />
+              </div>
+            )}
+          </>
+        ) : (
+          renderVideo({
+            videoRef,
+            error,
+            setError,
+            src: video!.src,
+            loop: video!.loop,
+            autoplay: video!.autoplay,
+            fallback: video!.fallback,
+            onVideoEnd: handleVideoEnd,
+            onClick: pause,
+            isMobileDevice,
+          })
+        )}
       </section>
-      {caption && (
-        <VideoCaption caption={caption} isCentered={isCentered} />
-      )}
+      {caption && <VideoCaption caption={caption} isCentered={isCentered} />}
     </>
   );
 };
