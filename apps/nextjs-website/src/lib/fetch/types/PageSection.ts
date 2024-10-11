@@ -202,16 +202,6 @@ const FormSectionCodec = t.strict({
   notes: t.union([t.string, t.null]),
 });
 
-const PreFooterSectionCodec = t.strict({
-  __component: t.literal('sections.pre-footer'),
-  title: t.string,
-  theme: t.union([t.literal('light'), t.literal('dark')]),
-  storeButtons: t.union([StoreButtonsCodec, t.null]),
-  background: StrapiImageSchema,
-  sectionID: t.union([t.string, t.null]),
-  ctaButtons: t.array(CTAButtonSimpleCodec),
-});
-
 const CounterCodec = t.strict({
   number: t.number,
   text: t.string,
@@ -411,7 +401,6 @@ export const PageSectionCodec = t.union([
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
   FormSectionCodec,
-  PreFooterSectionCodec,
   HeroCounterSectionCodec,
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
@@ -437,7 +426,6 @@ export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
-export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
 export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
 export type EditorialSwitchSection = t.TypeOf<
   typeof EditorialSwitchSectionCodec
