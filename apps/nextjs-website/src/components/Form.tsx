@@ -10,6 +10,7 @@ const makeFormProps = ({
   categoriesTitle,
   buttonLabel,
   notes,
+  background,
   ...rest
 }: FormSection): FormProps => ({
   categories: categories.map(({ additionalInfo, ...category }) => ({
@@ -20,6 +21,7 @@ const makeFormProps = ({
   ...(categoriesTitle && { categoriesTitle }),
   buttonLabel,
   ...(notes && { notes: MarkdownRenderer({ markdown: notes }) }),
+  ...(background.data && { background: background.data.attributes.url }),
   ...rest,
 });
 
