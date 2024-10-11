@@ -10,6 +10,7 @@ import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
 import { removeHomepageSlugFromMenu } from './header';
+import { getPreFooter, PreFooterAttributes } from './fetch/preFooter';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -67,6 +68,12 @@ export const getFooterProps = async (): Promise<
   } = await getFooter(appEnv);
   return attributes;
 };
+
+export const getPreFooterProps =
+  async (): Promise<PreFooterAttributes | null> => {
+    const { data } = await getPreFooter(appEnv);
+    return data?.attributes ?? null;
+  };
 
 // Return PageProps given the page path
 export const getPageProps = async (
