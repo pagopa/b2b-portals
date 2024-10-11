@@ -77,6 +77,13 @@
       "type": "string",
       "required": true,
       "default": "Iscriviti"
+    },
+    "background": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
