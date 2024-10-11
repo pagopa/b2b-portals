@@ -175,10 +175,11 @@ const VideoImage = ({
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
-                  alignItems: isCentered ? 'center' : 'left',
+                  alignItems: isCentered ? 'center' : 'flex-start',
                   zIndex: 50,
                   padding: '20px',
                   marginLeft: isCentered ? '0' : '6em',
+                  textAlign: isCentered ? 'center' : 'left',
                 }}
               >
                 <ImageText
