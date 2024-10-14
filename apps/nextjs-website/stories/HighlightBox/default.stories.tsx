@@ -29,21 +29,19 @@ HighlightBoxFull.args = {
   sectionID: 'highlight-box-1',
 };
 
-export const HighlightBoxWithoutButton: StoryFn<typeof HighlightBox> = Template.bind({});
+export const HighlightBoxWithoutButton: StoryFn<typeof HighlightBox> =
+  Template.bind({});
 HighlightBoxWithoutButton.args = {
   title: 'Sta arrivando IT Wallet!',
   body: 'Se hai tra 18 e 35 anni compiuti puoi richiedere su IO la Carta Giovani Nazionale, istituita dal Dipartimento per le Politiche Giovanili e il Servizio Civile Universale. La carta dà diritto a sconti e agevolazioni per l’accesso ad attività culturali, sportive e ricreative, anche con finalità formative.',
   imageURL:
     'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
   eyelet: 'In arrivo su IO',
-  link: {
-    label: '',
-    href: '',
-  },
   sectionID: 'highlight-box-2',
 };
 
-export const HighlightBoxWithoutEyelet: StoryFn<typeof HighlightBox> = Template.bind({});
+export const HighlightBoxWithoutEyelet: StoryFn<typeof HighlightBox> =
+  Template.bind({});
 HighlightBoxWithoutEyelet.args = {
   title: 'Sta arrivando IT Wallet!',
   body: 'Se hai tra 18 e 35 anni compiuti puoi richiedere su IO la Carta Giovani Nazionale, istituita dal Dipartimento per le Politiche Giovanili e il Servizio Civile Universale. La carta dà diritto a sconti e agevolazioni per l’accesso ad attività culturali, sportive e ricreative, anche con finalità formative.',

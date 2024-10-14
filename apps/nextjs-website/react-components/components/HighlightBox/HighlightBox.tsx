@@ -60,7 +60,7 @@ const HighlightBox = ({
               {body}
             </Typography>
 
-            {link && (
+            {link?.label && link?.href && (
               <Button
                 variant='contained'
                 href={link.href}
