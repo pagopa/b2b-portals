@@ -1,11 +1,4 @@
-import {
-  Box,
-  Link,
-  Stack,
-  styled,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { Box, Link, Stack, styled, Typography, useTheme } from '@mui/material';
 import { ServiceCardProps } from '../../types/ServiceCarousel/ServiceCarousel.types';
 import Image from 'next/image';
 import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
@@ -63,36 +56,38 @@ export const ServiceCard = (card: ServiceCardProps) => {
       bgcolor={palette.grey[50]}
       borderRadius={4}
       // Styles for mobile image
-      position="relative"
-      overflow="hidden"
+      position='relative'
+      overflow='hidden'
     >
       <Stack
         gap={1}
         width={{ xs: 216, sm: 264, md: 264 }} // 216 has been found by testing: a higher number breaks react-slick and makes the last slide wrap under the first one
         alignSelf={'stretch'}
       >
-        <Typography variant="h6">{card.title}</Typography>
+        <Typography variant='h6' fontWeight={700}>
+          {card.title}
+        </Typography>
         {card.description && (
-          <Typography variant="body2">{card.description}</Typography>
+          <Typography variant='body2'>{card.description}</Typography>
         )}
         <Typography
-          mt="auto"
+          mt='auto'
           color={palette.custom.blueIO[500]}
           fontWeight={700}
         >
           <Link
             href={card.link.href}
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
+            display='flex'
+            flexDirection='row'
+            alignItems='center'
             gap={1}
-            width="fit-content"
-            color="inherit"
-            underline="hover"
+            width='fit-content'
+            color='inherit'
+            underline='hover'
             fontSize={16}
           >
             {card.link.label}
-            <ArrowForward color="inherit" sx={{ fontSize: 18 }} />
+            <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
           </Link>
         </Typography>
       </Stack>
@@ -105,7 +100,7 @@ export const ServiceCard = (card: ServiceCardProps) => {
           bottom={14}
           right={-12}
         >
-          <Image src={card.imageURL} alt="" fill={true} />
+          <Image src={card.imageURL} alt='' fill={true} />
         </Box>
       )}
     </Stack>
