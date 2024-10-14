@@ -159,36 +159,57 @@ const VideoImage = ({
           )}
         {mediaState === 'image' ? (
           <>
-            {renderImage({
-              src: image!.src,
-              alt: image!.alt,
-              isMobileDevice,
-            })}
-            {(imageTitle || imageSubtitle) && (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: isCentered ? 'center' : 'flex-start',
-                  zIndex: 50,
-                  padding: '20px',
-                  marginLeft: isCentered ? '0' : '6em',
-                  textAlign: isCentered ? 'center' : 'left',
-                }}
-              >
-                <ImageText
-                  theme={theme}
-                  imageTitle={imageTitle ?? ''}
-                  imageSubtitle={imageSubtitle ?? ''}
-                />
-              </div>
-            )}
+            <div
+              style={{ position: 'relative', width: '100%', height: '600px' }}
+            >
+              {renderImage({
+                src: image!.src,
+                alt: image!.alt,
+                isMobileDevice,
+              })}
+
+              {(imageTitle || imageSubtitle) && (
+                <>
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: 'rgba(0, 0, 0, 0.25)',
+                      zIndex: 10,
+                    }}
+                  />
+
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: isCentered ? 'center' : 'flex-start',
+                      zIndex: 20,
+                      padding: '20px',
+                      marginLeft: isCentered ? '0' : '6em',
+                      textAlign: isCentered ? 'center' : 'left',
+                    }}
+                  >
+                    <ImageText
+                      theme={theme}
+                      imageTitle={imageTitle ?? ''}
+                      imageSubtitle={imageSubtitle ?? ''}
+                    />
+                  </div>
+                </>
+              )}
+            </div>
           </>
         ) : (
           renderVideo({
