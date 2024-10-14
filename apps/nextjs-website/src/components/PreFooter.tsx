@@ -1,5 +1,5 @@
 'use client';
-import { PreFooterSection } from '@/lib/fetch/types/PageSection';
+import { PreFooterAttributes } from '@/lib/fetch/preFooter';
 import { PreFooter as PreFooterRC } from '@react-components/components';
 import { PreFooterProps } from '@react-components/types';
 
@@ -7,8 +7,9 @@ const makePreFooterProps = ({
   storeButtons,
   background,
   ctaButtons,
+  exclude,
   ...rest
-}: PreFooterSection): PreFooterProps => ({
+}: PreFooterAttributes): PreFooterProps => ({
   ...(background.data && { background: background.data.attributes.url }),
   ...(storeButtons && {
     storeButtons: {
@@ -17,10 +18,13 @@ const makePreFooterProps = ({
     },
   }),
   ...(ctaButtons.length > 0 && { ctaButtons }),
+  ...(exclude.data.length > 0 && {
+    excludeSlugs: exclude.data.map((obj) => obj.attributes.slug),
+  }),
   ...rest,
 });
 
-const PreFooter = (props: PreFooterSection) => (
+const PreFooter = (props: PreFooterAttributes) => (
   <PreFooterRC {...makePreFooterProps(props)} />
 );
 
