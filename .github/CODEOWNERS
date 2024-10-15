@@ -5,6 +5,7 @@ apps/nextjs-website/ @pagopa/b2bportals-maintain @simosalsi @salvatorediocaro
 
 # CMS
 apps/strapi-cms/ @pagopa/b2bportals-maintain @simosalsi @salvatorediocaro
+apps/strapi-v5-cms/ @pagopa/b2bportals-maintain @simosalsi @salvatorediocaro
 
 # Lint rules
 **/.eslintrc.json @pagopa/b2bportals-maintain
