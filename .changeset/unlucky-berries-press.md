@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-add title and subtitle to image
+VideoImage: Show title and subtitle when displaying image
