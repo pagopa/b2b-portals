@@ -5,6 +5,7 @@ import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
+import { CtaButtonProps } from '@react-components/types/common/Common.types';
 
 const styles = {
   main: {
@@ -111,11 +112,25 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
                 {section.ctaButtons &&
                   section.ctaButtons.length > 0 &&
                   CtaButtons({
-                    ctaButtons: section.ctaButtons.map((button) => ({
-                      ...button,
-                      sx: { width: 'auto', marginTop: '16px' },
-                      variant: 'outlined',
-                    })),
+                    ctaButtons: section.ctaButtons.map(
+                      (button: CtaButtonProps) => ({
+                        ...button,
+                        sx: {
+                          width: 'auto',
+                          marginTop: '16px',
+                          ...(button.variant === 'contained' && {
+                            backgroundColor:
+                              theme === 'dark'
+                                ? palette.custom.white
+                                : palette.custom.blueIO[500],
+                            color:
+                              theme === 'dark'
+                                ? palette.custom.blueIO[500]
+                                : palette.custom.white,
+                          }),
+                        },
+                      })
+                    ),
                     theme,
                   })}
               </Stack>

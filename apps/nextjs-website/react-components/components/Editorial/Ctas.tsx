@@ -6,15 +6,16 @@ import googleBadgeBase64 from './BadgeImages/googleBadgeBase64';
 import { EditorialCtaProps } from '../../types/Editorial/Editorial.types';
 import { CtaButtons } from '../common/Common';
 import { useTheme, useMediaQuery } from '@mui/material';
+import { CtaButtonProps } from '@react-components/types/common/Common.types';
 
 export const Ctas = ({
   ctaButtons,
   storeButtons,
   theme,
 }: EditorialCtaProps) => {
-
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
+  const { palette } = useTheme();
 
   if (storeButtons?.hrefGoogle || storeButtons?.hrefApple) {
     return (
@@ -76,9 +77,24 @@ export const Ctas = ({
         spacing={2}
       >
         {CtaButtons({
-          ctaButtons: ctaButtons.map((button) => ({
+          ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
             ...button,
-            sx: { width: { md: 'auto', xs: '100%' } },
+            sx: {
+              width: {
+                md: 'auto',
+                xs: '100%',
+                ...(button.variant === 'contained' && {
+                  backgroundColor:
+                    theme === 'dark'
+                      ? palette.custom.white
+                      : palette.custom.blueIO[500],
+                  color:
+                    theme === 'dark'
+                      ? palette.custom.blueIO[500]
+                      : palette.custom.white,
+                }),
+              },
+            },
           })),
           theme,
         })}

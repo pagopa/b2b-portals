@@ -8,6 +8,7 @@ import appleBadgeBase64 from '../Editorial/BadgeImages/appleBadgeBase64';
 import googleBadgeBase64 from '../Editorial/BadgeImages/googleBadgeBase64';
 import Image from 'next/image';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { CtaButtonProps } from '@react-components/types/common/Common.types';
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
   size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
@@ -123,9 +124,24 @@ export const HeroTextContent = ({
           spacing={2}
         >
           {CtaButtons({
-            ctaButtons: ctaButtons.map((button) => ({
+            ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
               ...button,
-              sx: { width: { md: 'auto', xs: '100%' } },
+              sx: {
+                width: {
+                  md: 'auto',
+                  xs: '100%',
+                  ...(button.variant === 'contained' && {
+                    backgroundColor:
+                      theme === 'dark'
+                        ? palette.custom.white
+                        : palette.custom.blueIO[500],
+                    color:
+                      theme === 'dark'
+                        ? palette.custom.blueIO[500]
+                        : palette.custom.white,
+                  }),
+                },
+              },
             })),
             theme,
           })}
