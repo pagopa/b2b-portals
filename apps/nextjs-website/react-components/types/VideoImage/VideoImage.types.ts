@@ -17,10 +17,7 @@ export interface VideoImageProps
     playButtonLabel: string;
     pausedPlayButtonLabel: string;
   };
-  imageTitle?: string;
-  imageSubtitle?: string;
 }
-
 export interface VideoTextProps {
   readonly title?: string;
   readonly subtitle?: string;

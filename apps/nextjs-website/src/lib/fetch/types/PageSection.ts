@@ -259,8 +259,6 @@ const VideoImageSectionCodec = t.strict({
   subtitle: t.union([t.string, t.null]),
   caption: t.union([t.string, t.null]),
   isCentered: t.boolean,
-  imageTitle: t.union([t.string, t.null]),
-  imageSubtitle: t.union([t.string, t.null]),
   image: StrapiImageSchema,
   video: t.union([VideoCodec, t.null]),
 });

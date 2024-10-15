@@ -113,30 +113,30 @@ export const VideoText = ({
 };
 
 export const ImageText = ({
-  imageTitle,
-  imageSubtitle,
+  title,
+  subtitle,
   theme = 'dark',
 }: {
-  imageTitle?: string;
-  imageSubtitle?: string;
+  title?: string;
+  subtitle?: string;
   theme: 'dark' | 'light';
 }) => {
   const textColor = TextColor(theme);
   return (
     <>
-      {imageTitle && (
+      {title && (
         <Typography variant='h5' mb={4} color={textColor}>
-          {imageTitle}
+          {title}
         </Typography>
       )}
-      {imageSubtitle && (
+      {subtitle && (
         <Typography
           paragraph
           sx={{ fontSize: '16px' }}
           mb={3}
           color={textColor}
         >
-          {imageSubtitle}
+          {subtitle}
         </Typography>
       )}
     </>

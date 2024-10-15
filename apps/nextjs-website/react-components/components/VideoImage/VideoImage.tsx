@@ -20,8 +20,6 @@ const VideoImage = ({
   image,
   video,
   sectionID,
-  imageTitle,
-  imageSubtitle,
 }: VideoImageProps) => {
   if (!image && !video) {
     throw new Error();
@@ -30,9 +28,7 @@ const VideoImage = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
   const [error, setError] = useState(false);
-  const [mediaState, setMediaState] = useState<
-    'play' | 'pause' | 'stop' | 'image'
-  >(video ? 'stop' : 'image');
+  const [mediaState, setMediaState] = useState<'play' | 'pause' | 'stop' | 'image'>(video ? 'stop' : 'image');
   const [isMobileDevice, setIsMobileDevice] = useState(false);
 
   const textColor = TextColor(theme);
@@ -168,7 +164,7 @@ const VideoImage = ({
                 isMobileDevice,
               })}
 
-              {(imageTitle || imageSubtitle) && (
+              {(title || subtitle) && (
                 <>
                   <div
                     style={{
@@ -203,8 +199,8 @@ const VideoImage = ({
                   >
                     <ImageText
                       theme={theme}
-                      imageTitle={imageTitle ?? ''}
-                      imageSubtitle={imageSubtitle ?? ''}
+                      title={title ?? ''}
+                      subtitle={subtitle ?? ''}
                     />
                   </div>
                 </>
@@ -232,3 +228,4 @@ const VideoImage = ({
 };
 
 export default VideoImage;
+

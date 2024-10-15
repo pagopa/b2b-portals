@@ -9,16 +9,12 @@ const makeVideoImageProps = ({
   caption,
   image,
   video,
-  imageTitle,
-  imageSubtitle,
   ...rest
 }: VideoImageSection): VideoImageProps => ({
   ...rest,
   ...(title && { title }),
   ...(subtitle && { subtitle }),
   ...(caption && { caption }),
-  ...(imageTitle && { imageTitle }),
-  ...(imageSubtitle && { imageSubtitle }),
   ...(video &&
     video.src.data && {
       video: {

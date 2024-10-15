@@ -9,9 +9,7 @@ const meta: Meta<typeof VideoImage> = {
 };
 export default meta;
 
-export const VideoFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
-  {}
-);
+export const VideoFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind({});
 VideoFull.args = {
   ...defaultsDark,
   title: 'Sample Video Title',
@@ -93,8 +91,9 @@ VideoFullNoSubtitleWithCaption.args = {
   },
 };
 
-export const VideoFullNoTitleNoSubtitleWithCaption: StoryFn<typeof VideoImage> =
-  VideoImageTemplate.bind({});
+export const VideoFullNoTitleNoSubtitleWithCaption: StoryFn<
+  typeof VideoImage
+> = VideoImageTemplate.bind({});
 VideoFullNoTitleNoSubtitleWithCaption.args = {
   ...defaultsDark,
   caption: 'Sample Video Caption',
@@ -110,9 +109,7 @@ VideoFullNoTitleNoSubtitleWithCaption.args = {
   },
 };
 
-export const ImageFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
-  {}
-);
+export const ImageFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind({});
 ImageFull.args = {
   ...defaultsDark,
   title: 'Sample Image Title',
@@ -122,8 +119,6 @@ ImageFull.args = {
     alt: 'Sample Image Alt',
   },
   caption: 'Sample Video Caption',
-  imageTitle: 'Sample Image Title',
-  imageSubtitle: 'Sample Image Subtitle',
 };
 
 export const ImageNoTextWithCaptionCentered: StoryFn<typeof VideoImage> =
@@ -160,8 +155,6 @@ ImageNoCaptionWithTextCenter.args = {
     alt: 'Sample Image Alt',
   },
   isCentered: true,
-  imageTitle: 'Sample Image Title',
-  imageSubtitle: 'Sample Image Subtitle',
 };
 
 export const ImageNoCaptionWithTextLeft: StoryFn<typeof VideoImage> =
@@ -174,8 +167,6 @@ ImageNoCaptionWithTextLeft.args = {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
   },
-  imageTitle: 'Sample Image Title',
-  imageSubtitle: 'Sample Image Subtitle',
 };
 
 export const ImageNoTitleNoCaption: StoryFn<typeof VideoImage> =
