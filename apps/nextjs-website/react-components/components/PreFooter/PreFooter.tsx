@@ -164,7 +164,26 @@ const PreFooter = (props: PreFooterProps) => {
                   marginLeft: isSmallScreen || layout === 'center' ? 0 : 2,
                 }}
               >
-                {CtaButtons({ ctaButtons: ctaButtons ?? [], theme })}
+                {CtaButtons({
+                  ctaButtons: ctaButtons.map((button) => ({
+                    ...button,
+                    sx: {
+                      width: 'auto',
+                      marginTop: '16px',
+                      ...(button.variant === 'contained' && {
+                        backgroundColor:
+                          theme === 'dark'
+                            ? muiTheme.palette.custom.white
+                            : muiTheme.palette.custom.blueIO[500],
+                        color:
+                          theme === 'dark'
+                            ? muiTheme.palette.custom.blueIO[500]
+                            : muiTheme.palette.custom.white,
+                      }),
+                    },
+                  })),
+                  theme,
+                })}
               </Stack>
             ) : null}
           </Box>

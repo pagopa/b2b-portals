@@ -8,6 +8,7 @@ import {
   FormControl,
   Button,
   Alert,
+  useTheme,
 } from '@mui/material';
 import { FormProps } from '@react-components/types/Form/Form.types';
 import { TextColor, GrayLinkColor } from '../common/Common.helpers';
@@ -49,6 +50,7 @@ const Form = ({
   const graylinkColor = GrayLinkColor(theme);
   const borderColor = theme === 'light' ? graylinkColor : 'white';
   const recaptchaRef = useRef<RECAPTCHA>(null);
+  const { palette } = useTheme();
 
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({
     name: null,
@@ -336,12 +338,29 @@ const Form = ({
         </Typography>
         <Button
           variant='contained'
-          sx={{ width: { md: 'auto', xs: '100%' }, zIndex: 4 }}
+          sx={{
+            width: { md: 'auto', xs: '100%' },
+            zIndex: 4,
+            backgroundColor:
+              theme === 'dark'
+                ? palette.custom.white
+                : palette.custom.blueIO[500],
+            color:
+              theme === 'dark'
+                ? palette.custom.blueIO[500]
+                : palette.custom.white,
+            '&:hover': {
+              backgroundColor:
+                theme === 'dark'
+                  ? palette.custom.white
+                  : palette.custom.blueIO[500],
+            },
+          }}
           onClick={handleSubmit}
-          color={theme === 'dark' ? 'negative' : 'primary'}
         >
           {buttonLabel}
         </Button>
+
         {submissionStatus === 'success' && (
           <Alert
             severity='success'
