@@ -260,6 +260,7 @@ const VideoImageSectionCodec = t.strict({
   caption: t.union([t.string, t.null]),
   isCentered: t.boolean,
   image: StrapiImageSchema,
+  mobileImage: StrapiImageSchema,
   video: t.union([VideoCodec, t.null]),
 });
 

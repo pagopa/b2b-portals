@@ -8,6 +8,10 @@ export interface VideoImageProps
     src: string;
     alt: string;
   };
+  mobileImage?: {
+    src: string;
+    alt: string;
+  };
   video?: {
     src: string;
     autoplay: boolean;
@@ -18,6 +22,7 @@ export interface VideoImageProps
     pausedPlayButtonLabel: string;
   };
 }
+
 export interface VideoTextProps {
   readonly title?: string;
   readonly subtitle?: string;
@@ -45,5 +50,7 @@ export interface RenderVideoProps {
 export interface RenderImageProps {
   src: string;
   alt: string;
+  mobileSrc: string;
+  mobileAlt: string;
   isMobileDevice: boolean;
 }

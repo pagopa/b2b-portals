@@ -18,6 +18,7 @@ const VideoImage = ({
   isCentered,
   theme,
   image,
+  mobileImage,
   video,
   sectionID,
 }: VideoImageProps) => {
@@ -28,7 +29,9 @@ const VideoImage = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVisible = useIsVisible(videoRef);
   const [error, setError] = useState(false);
-  const [mediaState, setMediaState] = useState<'play' | 'pause' | 'stop' | 'image'>(video ? 'stop' : 'image');
+  const [mediaState, setMediaState] = useState<
+    'play' | 'pause' | 'stop' | 'image'
+  >(video ? 'stop' : 'image');
   const [isMobileDevice, setIsMobileDevice] = useState(false);
 
   const textColor = TextColor(theme);
@@ -161,6 +164,8 @@ const VideoImage = ({
               {renderImage({
                 src: image!.src,
                 alt: image!.alt,
+                mobileSrc: mobileImage!.src,
+                mobileAlt: mobileImage!.alt,
                 isMobileDevice,
               })}
 
@@ -228,4 +233,3 @@ const VideoImage = ({
 };
 
 export default VideoImage;
-

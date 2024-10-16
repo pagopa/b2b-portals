@@ -8,6 +8,7 @@ const makeVideoImageProps = ({
   subtitle,
   caption,
   image,
+  mobileImage,
   video,
   ...rest
 }: VideoImageSection): VideoImageProps => ({
@@ -32,6 +33,13 @@ const makeVideoImageProps = ({
       image: {
         src: image.data.attributes.url,
         alt: image.data.attributes.alternativeText ?? '',
+      },
+      mobileImage: {
+        src: mobileImage?.data?.attributes?.url ?? image.data.attributes.url,
+        alt:
+          mobileImage?.data?.attributes?.alternativeText ??
+          image.data.attributes.alternativeText ??
+          '',
       },
     }),
 });

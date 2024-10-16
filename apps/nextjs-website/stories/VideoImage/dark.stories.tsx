@@ -9,7 +9,9 @@ const meta: Meta<typeof VideoImage> = {
 };
 export default meta;
 
-export const VideoFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind({});
+export const VideoFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
+  {}
+);
 VideoFull.args = {
   ...defaultsDark,
   title: 'Sample Video Title',
@@ -91,9 +93,8 @@ VideoFullNoSubtitleWithCaption.args = {
   },
 };
 
-export const VideoFullNoTitleNoSubtitleWithCaption: StoryFn<
-  typeof VideoImage
-> = VideoImageTemplate.bind({});
+export const VideoFullNoTitleNoSubtitleWithCaption: StoryFn<typeof VideoImage> =
+  VideoImageTemplate.bind({});
 VideoFullNoTitleNoSubtitleWithCaption.args = {
   ...defaultsDark,
   caption: 'Sample Video Caption',
@@ -109,7 +110,9 @@ VideoFullNoTitleNoSubtitleWithCaption.args = {
   },
 };
 
-export const ImageFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind({});
+export const ImageFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
+  {}
+);
 ImageFull.args = {
   ...defaultsDark,
   title: 'Sample Image Title',
@@ -117,6 +120,10 @@ ImageFull.args = {
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
+  },
+  mobileImage: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    alt: 'Sample Mobile Image Alt',
   },
   caption: 'Sample Video Caption',
 };
@@ -129,6 +136,10 @@ ImageNoTextWithCaptionCentered.args = {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
   },
+  mobileImage: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    alt: 'Sample Mobile Image Alt',
+  },
   caption: 'Sample Video Caption',
   isCentered: true,
 };
@@ -140,6 +151,10 @@ ImageNoTextWithCaptionLeft.args = {
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
+  },
+  mobileImage: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    alt: 'Sample Mobile Image Alt',
   },
   caption: 'Sample Video Caption',
 };
@@ -154,6 +169,10 @@ ImageNoCaptionWithTextCenter.args = {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
   },
+  mobileImage: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    alt: 'Sample Mobile Image Alt',
+  },
   isCentered: true,
 };
 
@@ -167,6 +186,10 @@ ImageNoCaptionWithTextLeft.args = {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
   },
+  mobileImage: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    alt: 'Sample Mobile Image Alt',
+  },
 };
 
 export const ImageNoTitleNoCaption: StoryFn<typeof VideoImage> =
@@ -176,5 +199,9 @@ ImageNoTitleNoCaption.args = {
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
+  },
+  mobileImage: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    alt: 'Sample Mobile Image Alt',
   },
 };

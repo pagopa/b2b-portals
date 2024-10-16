@@ -59,7 +59,13 @@ export const renderVideo = ({
   );
 };
 
-export const renderImage = ({ src, alt, isMobileDevice }: RenderImageProps) => {
+export const renderImage = ({
+  src,
+  alt,
+  mobileSrc,
+  mobileAlt,
+  isMobileDevice,
+}: RenderImageProps) => {
   const mobileStyle = {
     overflow: 'hidden',
     width: '100vw',
@@ -74,10 +80,13 @@ export const renderImage = ({ src, alt, isMobileDevice }: RenderImageProps) => {
     height: '100%',
   };
 
+  const imageSrc = isMobileDevice && mobileSrc ? mobileSrc : src;
+  const imageAlt = isMobileDevice && mobileAlt ? mobileAlt : alt;
+
   return (
     <Image
-      alt={alt}
-      src={src}
+      alt={imageAlt}
+      src={imageSrc}
       width={0}
       height={0}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}
