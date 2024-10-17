@@ -19,9 +19,8 @@ export const renderVideo = ({
   fallback,
   onClick,
   onVideoEnd,
-  isMobileDevice
+  isMobileDevice,
 }: RenderVideoProps) => {
-  // Define styles for mobile and non-mobile devices
   const mobileStyle = {
     overflow: 'hidden',
     width: '100vw',
@@ -55,17 +54,18 @@ export const renderVideo = ({
       onClick={onClick}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}
     >
-      <source
-        src={src}
-        onError={() => setError(true)}
-      />
+      <source src={src} onError={() => setError(true)} />
     </video>
   );
 };
 
-// Refactored renderImage function
-export const renderImage = ({ src, alt, isMobileDevice }: RenderImageProps) => {
-  // Define styles for mobile and non-mobile devices
+export const renderImage = ({
+  src,
+  alt,
+  mobileSrc,
+  mobileAlt,
+  isMobileDevice,
+}: RenderImageProps) => {
   const mobileStyle = {
     overflow: 'hidden',
     width: '100vw',
@@ -80,10 +80,13 @@ export const renderImage = ({ src, alt, isMobileDevice }: RenderImageProps) => {
     height: '100%',
   };
 
+  const imageSrc = isMobileDevice && mobileSrc ? mobileSrc : src;
+  const imageAlt = isMobileDevice && mobileAlt ? mobileAlt : alt;
+
   return (
     <Image
-      alt={alt}
-      src={src}
+      alt={imageAlt}
+      src={imageSrc}
       width={0}
       height={0}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}
@@ -96,6 +99,37 @@ export const VideoText = ({
   subtitle,
   theme = 'dark',
 }: VideoTextProps) => {
+  const textColor = TextColor(theme);
+  return (
+    <>
+      {title && (
+        <Typography variant='h5' mb={4} color={textColor}>
+          {title}
+        </Typography>
+      )}
+      {subtitle && (
+        <Typography
+          paragraph
+          sx={{ fontSize: '16px' }}
+          mb={3}
+          color={textColor}
+        >
+          {subtitle}
+        </Typography>
+      )}
+    </>
+  );
+};
+
+export const ImageText = ({
+  title,
+  subtitle,
+  theme = 'dark',
+}: {
+  title?: string;
+  subtitle?: string;
+  theme: 'dark' | 'light';
+}) => {
   const textColor = TextColor(theme);
   return (
     <>
