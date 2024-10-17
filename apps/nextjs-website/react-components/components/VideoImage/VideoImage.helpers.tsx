@@ -162,6 +162,37 @@ export const ImageText = ({
   );
 };
 
+export const ImageText = ({
+  title,
+  subtitle,
+  theme = 'dark',
+}: {
+  title?: string;
+  subtitle?: string;
+  theme: 'dark' | 'light';
+}) => {
+  const textColor = TextColor(theme);
+  return (
+    <>
+      {title && (
+        <Typography variant='h5' mb={4} color={textColor}>
+          {title}
+        </Typography>
+      )}
+      {subtitle && (
+        <Typography
+          paragraph
+          sx={{ fontSize: '16px' }}
+          mb={3}
+          color={textColor}
+        >
+          {subtitle}
+        </Typography>
+      )}
+    </>
+  );
+};
+
 export const VideoCaption = ({ caption, isCentered }: VideoCaptionProps) => {
   const { palette } = useTheme();
   return (
