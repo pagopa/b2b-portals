@@ -9,6 +9,14 @@ import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
 
+interface NextImageProps {
+  overflow: 'hidden',
+  width: string,
+  height: string,
+  objectFit: 'cover',
+  objectPosition: 'center',
+}
+
 export const renderVideo = ({
   videoRef,
   error,
@@ -37,7 +45,7 @@ export const renderVideo = ({
 
   if (error) {
     return (
-      <Typography variant='h6' color='background.paper' textAlign='center'>
+      <Typography variant="h6" color="background.paper" textAlign="center">
         {fallback}
       </Typography>
     );
@@ -66,7 +74,7 @@ export const renderImage = ({
   mobileAlt,
   isMobileDevice,
 }: RenderImageProps) => {
-  const mobileStyle = {
+  const mobileStyle: NextImageProps = {
     overflow: 'hidden',
     width: '100vw',
     height: '100vh',
@@ -74,10 +82,12 @@ export const renderImage = ({
     objectPosition: 'center',
   };
 
-  const nonMobileStyle = {
+  const nonMobileStyle: NextImageProps = {
     overflow: 'hidden',
     width: '100%',
     height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center',
   };
 
   const imageSrc = isMobileDevice && mobileSrc ? mobileSrc : src;
@@ -103,7 +113,38 @@ export const VideoText = ({
   return (
     <>
       {title && (
-        <Typography variant='h5' mb={4} color={textColor}>
+        <Typography variant="h5" mb={4} color={textColor}>
+          {title}
+        </Typography>
+      )}
+      {subtitle && (
+        <Typography
+          paragraph
+          sx={{ fontSize: '16px' }}
+          mb={3}
+          color={textColor}
+        >
+          {subtitle}
+        </Typography>
+      )}
+    </>
+  );
+};
+
+export const ImageText = ({
+  title,
+  subtitle,
+  theme = 'dark',
+}: {
+  title?: string;
+  subtitle?: string;
+  theme: 'dark' | 'light';
+}) => {
+  const textColor = TextColor(theme);
+  return (
+    <>
+      {title && (
+        <Typography variant="h5" mb={4} color={textColor}>
           {title}
         </Typography>
       )}
