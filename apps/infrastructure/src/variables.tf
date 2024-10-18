@@ -108,7 +108,7 @@ variable "websites_configs" {
     "firma" = {
       origin_path                = "/firma"
       url_tenant                 = "firma.b2bportals.pagopa.it"
-      create_certificate         = false
+      create_certificate         = true
       create_distribution        = true
       cdn_use_custom_certificate = false
       cdn_use_alias              = false
