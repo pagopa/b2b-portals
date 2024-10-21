@@ -110,7 +110,7 @@ variable "websites_configs" {
       url_tenant                 = "firma.io.italia.it"
       create_certificate         = true
       create_distribution        = true
-      cdn_use_custom_certificate = false
+      cdn_use_custom_certificate = true
       cdn_use_alias              = false
       cdn_indexing_enable        = false
     },
