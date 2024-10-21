@@ -17,7 +17,11 @@ const Hero = (props: HeroProps) => {
     image,
     altText = '',
     sectionID,
+    themeVariant,
   } = props;
+
+  // TODO: Substitute this console.log with themeVariant use logic
+  console.log(themeVariant);
 
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);

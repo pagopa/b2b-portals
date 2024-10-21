@@ -5,6 +5,7 @@ import { Editorial as EditorialRC } from '@react-components/components';
 import { EditorialProps } from '@react-components/types';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 export const makeEditorialProps = ({
   eyelet,
@@ -14,7 +15,7 @@ export const makeEditorialProps = ({
   ctaButtons,
   storeButtons,
   ...rest
-}: EditorialSection): EditorialProps => ({
+}: EditorialSection & { themeVariant: ThemeVariant }): EditorialProps => ({
   ...(eyelet && { eyelet }),
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: (
@@ -49,8 +50,8 @@ export const makeEditorialProps = ({
   ...rest,
 });
 
-const Editorial = (props: EditorialSection) => (
-  <EditorialRC {...makeEditorialProps(props)} />
-);
+const Editorial = (
+  props: EditorialSection & { themeVariant: ThemeVariant }
+) => <EditorialRC {...makeEditorialProps(props)} />;
 
 export default Editorial;

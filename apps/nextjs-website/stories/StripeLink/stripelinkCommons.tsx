@@ -4,7 +4,7 @@ import { StripeLinkProps } from '@react-components/types';
 
 // Define a 'Template' function that sets how args map to rendering
 export const StripeLinkTemplate: StoryFn<StripeLinkProps> = (args) => (
-  <StripeLink {...args} />
+  <StripeLink {...args} themeVariant='SEND' />
 );
 
 // Function to generate default props

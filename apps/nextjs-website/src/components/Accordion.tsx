@@ -4,6 +4,7 @@ import MarkdownRenderer from './MarkdownRenderer';
 import { Accordion as AccordionRC } from '@react-components/components';
 import { AccordionProps } from '@react-components/types';
 import { AccordionSection } from '@/lib/fetch/types/PageSection';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 const makeAccordionProps = ({
   subtitle,
@@ -11,7 +12,7 @@ const makeAccordionProps = ({
   accordionItems,
   textAlignment,
   ...rest
-}: AccordionSection): AccordionProps => ({
+}: AccordionSection & { themeVariant: ThemeVariant }): AccordionProps => ({
   ...(subtitle && { subtitle }),
   ...(description && {
     description: MarkdownRenderer({ markdown: description, variant: 'body2' }),
@@ -25,8 +26,8 @@ const makeAccordionProps = ({
   ...rest,
 });
 
-const Accordion = (props: AccordionSection) => (
-  <AccordionRC {...makeAccordionProps(props)} />
-);
+const Accordion = (
+  props: AccordionSection & { themeVariant: ThemeVariant }
+) => <AccordionRC {...makeAccordionProps(props)} />;
 
 export default Accordion;

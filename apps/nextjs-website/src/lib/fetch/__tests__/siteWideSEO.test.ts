@@ -65,6 +65,7 @@ const siteWideSEOResponse = {
         shortName: 'SEND-PagoPA',
       },
       matomoID: '12',
+      themeVariant: 'SEND',
     },
   },
 };

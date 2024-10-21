@@ -7,12 +7,14 @@ import MarkdownRenderer from './MarkdownRenderer';
 import { PageSwitch as PageSwitchRC } from '@react-components/components';
 import { PageSwitchProps } from '@react-components/types';
 import { PageSwitchSection } from '@/lib/fetch/types/PageSection';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 const makePageSwitchProps = ({
   subtitle,
   sections,
+  themeVariant,
   ...rest
-}: PageSwitchSection): PageSwitchProps => ({
+}: PageSwitchSection & { themeVariant: ThemeVariant }): PageSwitchProps => ({
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
   sections: sections.map((section) => ({
     id: section.id,
@@ -23,17 +25,17 @@ const makePageSwitchProps = ({
         case 'sections.editorial':
           return {
             type: 'Editorial',
-            props: makeEditorialProps(props),
+            props: makeEditorialProps({ ...props, themeVariant }),
           };
         case 'sections.cards':
           return {
             type: 'Cards',
-            props: makeCardsProps(props),
+            props: makeCardsProps({ ...props, themeVariant }),
           };
         case 'sections.banner-link':
           return {
             type: 'BannerLink',
-            props: makeBannerLinkProps(props),
+            props: makeBannerLinkProps({ ...props, themeVariant }),
           };
       }
     }),
@@ -41,8 +43,8 @@ const makePageSwitchProps = ({
   ...rest,
 });
 
-const PageSwitch = (props: PageSwitchSection) => (
-  <PageSwitchRC {...makePageSwitchProps(props)} />
-);
+const PageSwitch = (
+  props: PageSwitchSection & { themeVariant: ThemeVariant }
+) => <PageSwitchRC {...makePageSwitchProps(props)} />;
 
 export default PageSwitch;

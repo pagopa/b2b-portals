@@ -14,6 +14,7 @@ const createFramedVideoDefaults = (
   sectionID: null,
   autoplay: false,
   loop: false,
+  themeVariant: 'SEND'
 });
 
 export const defaultsDark = createFramedVideoDefaults('dark');

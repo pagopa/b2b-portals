@@ -29,7 +29,8 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<EditorialSwitchP
         body: 'Light Editorial',
         width: 'standard',
         image: <img src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png' alt="placeholder" />,
-        mobileImage: <img src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png' alt="placeholder" />
+        mobileImage: <img src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png' alt="placeholder" />,
+        themeVariant: 'SEND'
       },
     },
     {
@@ -42,7 +43,8 @@ const generateDefaultProps = (theme: 'light' | 'dark'): Partial<EditorialSwitchP
         body: 'Dark Editorial',
         width: 'standard',
         image: <img src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png' alt="placeholder" />,
-        mobileImage: <img src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png' alt="placeholder" />
+        mobileImage: <img src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png' alt="placeholder" />,
+        themeVariant: 'SEND'
       },
     },
   ],

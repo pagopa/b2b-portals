@@ -3,6 +3,7 @@ import MarkdownRenderer from './MarkdownRenderer';
 import { Form as FormRC } from '@react-components/components';
 import { FormProps } from '@react-components/types';
 import { FormSection } from '@/lib/fetch/types/PageSection';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 const makeFormProps = ({
   subtitle,
@@ -12,7 +13,7 @@ const makeFormProps = ({
   notes,
   background,
   ...rest
-}: FormSection): FormProps => ({
+}: FormSection & { themeVariant: ThemeVariant }): FormProps => ({
   categories: categories.map(({ additionalInfo, ...category }) => ({
     ...(additionalInfo && { additionalInfo }),
     ...category,
@@ -25,6 +26,8 @@ const makeFormProps = ({
   ...rest,
 });
 
-const Form = (props: FormSection) => <FormRC {...makeFormProps(props)} />;
+const Form = (props: FormSection & { themeVariant: ThemeVariant }) => (
+  <FormRC {...makeFormProps(props)} />
+);
 
 export default Form;
