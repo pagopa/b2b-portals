@@ -65,14 +65,11 @@ const siteWideSEOResponse = {
         shortName: 'SEND-PagoPA',
       },
       matomoID: '12',
-<<<<<<< HEAD
       themeVariant: 'SEND',
-=======
       locales: {
         it: true,
         en: true,
       },
->>>>>>> 8307b07 (First Implementation of i18n)
     },
   },
 };
