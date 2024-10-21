@@ -33,12 +33,13 @@ export type PreHeaderAttributes = t.TypeOf<typeof PreHeaderAttributesCodec>;
 export const getPreHeader = ({
   config,
   fetchFun,
-}: AppEnv): Promise<PreHeaderData> =>
+  locale,
+}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<PreHeaderData> =>
   extractFromResponse(
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pre-header/?populate=leftCtas,rightCtas`,
+      }/api/pre-header/?locale=${locale}&populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {

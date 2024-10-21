@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
 import Script from 'next/script';
-import { theme } from './theme';
+import { theme } from '../theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -13,6 +13,11 @@ import {
   getPreFooterProps,
 } from '@/lib/api';
 import PreFooter from '@/components/PreFooter';
+
+type LayoutProps = {
+  children: React.ReactNode;
+  params: { locale: 'it' | 'en' };
+};
 
 const MatomoScript = (id: string): string => `
 var _paq = (window._paq = window._paq || []);
@@ -31,11 +36,19 @@ _paq.push(["enableLinkTracking"]);
   s.parentNode.insertBefore(g, s);
 })();`;
 
-export default async function RootLayout({
+export async function generateStaticParams() {
+  const general = await getSiteWideSEO();
+  const locales = Object.keys(general.locales).filter(
+    (locale) => general.locales[locale as 'it' | 'en']
+  );
+
+  return locales.map((locale) => ({ locale: locale === 'it' ? '' : locale }));
+}
+
+export default async function Layout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  params: { locale },
+}: LayoutProps) {
   if (isPreviewMode()) {
     return (
       <ThemeProvider theme={theme}>
@@ -54,21 +67,27 @@ export default async function RootLayout({
     );
   }
 
-  const preHeaderProps = await getPreHeaderProps();
-  const headerProps = await getHeaderProps();
-  const footerProps = await getFooterProps();
-  const preFooterProps = await getPreFooterProps();
-  const { matomoID } = await getSiteWideSEO();
+  const preHeaderProps = await getPreHeaderProps(locale);
+  const headerProps = await getHeaderProps(locale);
+  const footerProps = await getFooterProps(locale);
+  const preFooterProps = await getPreFooterProps(locale);
+  const { matomoID, locales } = await getSiteWideSEO();
+  const localesArray = Object.keys(locales).filter(
+    (locale) => locales[locale as 'it' | 'en']
+  );
 
   return (
     <ThemeProvider theme={theme}>
-      <html lang='it'>
+      <html lang={locale}>
         <body style={{ margin: 0 }}>
           {preHeaderProps && <PreHeader {...preHeaderProps} />}
           <Header {...headerProps} />
           {children}
           {preFooterProps && <PreFooter {...preFooterProps} />}
-          <Footer {...footerProps} />
+          <Footer
+            {...footerProps}
+            locales={localesArray as Array<'it' | 'en'>}
+          />
           <Script
             src='/scripts/otnotice-1.0.min.js'
             type='text/javascript'

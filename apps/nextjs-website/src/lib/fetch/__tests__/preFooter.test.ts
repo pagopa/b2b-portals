@@ -119,10 +119,10 @@ describe('getPreFooter', () => {
       json: () => Promise.resolve(preFooterResponse),
     } as unknown as Response);
 
-    await getPreFooter(appEnv);
+    await getPreFooter({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-footer/?populate=background,ctaButtons,storeButtons,exclude`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-footer/?locale=it&populate=background,ctaButtons,storeButtons,exclude`,
       {
         method: 'GET',
         headers: {
@@ -139,7 +139,7 @@ describe('getPreFooter', () => {
       json: () => Promise.resolve(preFooterResponse),
     } as unknown as Response);
 
-    const actual = getPreFooter(appEnv);
+    const actual = getPreFooter({ ...appEnv, locale: 'it' });
 
     // Use preFooterResponse directly as the expected value
     expect(await actual).toStrictEqual(preFooterResponseAfterCodec);
@@ -152,7 +152,7 @@ describe('getPreFooter', () => {
       json: () => Promise.resolve(emptyPreFooterResponse),
     } as unknown as Response);
 
-    const actual = getPreFooter(appEnv);
+    const actual = getPreFooter({ ...appEnv, locale: 'it' });
 
     // Use preFooterResponse directly as the expected value
     expect(await actual).toStrictEqual({ data: null });

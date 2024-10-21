@@ -68,10 +68,10 @@ describe('getNavigation', () => {
       json: () => Promise.resolve({ data: [] }),
     } as unknown as Response);
 
-    await getNavigation(appEnv);
+    await getNavigation({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?pagination[pageSize]=100
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?locale=it&pagination[pageSize]=100
       &populate[seo][populate][0]=metaTitle
       &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon
       &populate[sections][populate][1]=items.links,items.link,items.icon
@@ -96,7 +96,7 @@ describe('getNavigation', () => {
       json: () => Promise.resolve(navigationResponse),
     } as unknown as Response);
 
-    const actual = getNavigation(appEnv);
+    const actual = getNavigation({ ...appEnv, locale: 'it' });
     const expected: Navigation = {
       data: [
         {

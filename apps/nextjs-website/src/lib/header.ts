@@ -66,3 +66,71 @@ export const removeHomepageSlugFromMenu = (
       };
   }
 };
+
+const addLocaleToSublink = ({
+  locale,
+  page,
+  ...sublink
+}: HeaderSublink & { readonly locale: 'it' | 'en' }): HeaderSublink => ({
+  ...sublink,
+  page: {
+    data: {
+      attributes: {
+        slug:
+          page.data.attributes.slug === '/'
+            ? '/' + locale
+            : '/' + locale + '/' + page.data.attributes.slug,
+      },
+    },
+  },
+});
+
+export const addLocaleToAllLinks = (
+  header: HeaderData['data']['attributes']['header'][0],
+  locale: 'it' | 'en'
+): HeaderData['data']['attributes']['header'][0] => {
+  switch (header.__component) {
+    case 'headers.standard-header':
+      return {
+        ...header,
+        menu: {
+          links: header.menu.links.map(({ page, sublinks, ...link }) => ({
+            ...link,
+            page: {
+              data: page.data
+                ? {
+                    attributes: {
+                      slug:
+                        page.data.attributes.slug === '/'
+                          ? '/' + locale
+                          : '/' + locale + '/' + page.data.attributes.slug,
+                    },
+                  }
+                : null,
+            },
+            sublinks: sublinks.map((sublink) =>
+              addLocaleToSublink({ locale, ...sublink })
+            ),
+          })),
+        },
+      };
+
+    case 'headers.mega-header':
+      return {
+        ...header,
+        menu: {
+          links: header.menu.links.map(({ sublinkGroups, ...link }) => ({
+            ...link,
+            sublinkGroups: sublinkGroups.map(
+              ({ sublinks, ...sublinkGroup }) => ({
+                ...sublinkGroup,
+                sublinks: sublinks.map((sublink) =>
+                  addLocaleToSublink({ locale, ...sublink })
+                ),
+              })
+            ),
+          })),
+        },
+      };
+  }
+};
