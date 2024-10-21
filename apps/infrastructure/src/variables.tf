@@ -111,7 +111,7 @@ variable "websites_configs" {
       create_certificate         = true
       create_distribution        = true
       cdn_use_custom_certificate = true
-      cdn_use_alias              = false
+      cdn_use_alias              = true
       cdn_indexing_enable        = false
     },
     "interop" = {
