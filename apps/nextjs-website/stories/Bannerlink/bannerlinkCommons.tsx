@@ -3,7 +3,7 @@ import { BannerLink } from '@react-components/components';
 import { BannerLinkProps } from '@react-components/types';
 
 export const BannerLinkTemplate: StoryFn<BannerLinkProps> = (args) => (
-  <BannerLink {...args} />
+  <BannerLink {...args} themeVariant='SEND' />
 );
 
 const generateDefaultProps = (

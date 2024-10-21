@@ -4,7 +4,7 @@ import { FeatureProps } from '@react-components/types';
 import { FeatureItem } from '@react-components/types/Feature/Feature.types';
 
 // Define a "Template" function that sets how args map to rendering
-export const FeatureTemplate: StoryFn<FeatureProps> = (args) => <Feature {...args} />;
+export const FeatureTemplate: StoryFn<FeatureProps> = (args) => <Feature {...args} themeVariant='SEND' />;
 
 // Function to generate items
 const generateItems = (count: number, withLinks: boolean, theme: 'dark' | 'light'): FeatureItem[] =>

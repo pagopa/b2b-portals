@@ -4,7 +4,7 @@ import { HowToProps } from '@react-components/types';
 import { HowToStepProps } from '@react-components/types/HowTo/HowTo.types';
 
 // Define a "Template" function that sets how args map to rendering
-export const HowToTemplate: StoryFn<HowToProps> = (args) => <HowTo {...args} />;
+export const HowToTemplate: StoryFn<HowToProps> = (args) => <HowTo {...args} themeVariant='SEND' />;
 
 // Function to generate steps
 const generateSteps = (count: number, theme: 'dark' | 'light', withIcons: boolean): HowToStepProps[] =>

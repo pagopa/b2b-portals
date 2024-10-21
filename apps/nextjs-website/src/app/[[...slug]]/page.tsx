@@ -82,6 +82,7 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const sections = pageProps.sections;
+  const { themeVariant } = await getSiteWideSEO();
 
   return (
     <main>
@@ -93,7 +94,7 @@ const Page = async ({ params }: PageParams) => {
           }}
         />
       )}
-      {sections.map(PageSection)}
+      {sections.map((section) => PageSection({ ...section, themeVariant }))}
     </main>
   );
 };

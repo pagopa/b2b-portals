@@ -3,7 +3,7 @@ import { HeroChips } from "@react-components/components";
 import { HeroChipsProps } from "@react-components/types";
 
 // Define a "Template" function that sets how args map to rendering
-export const HeroChipsTemplate: StoryFn<HeroChipsProps> = (args) => <HeroChips {...args} />;
+export const HeroChipsTemplate: StoryFn<HeroChipsProps> = (args) => <HeroChips {...args} themeVariant='SEND' />;
 
 const title = 'Enti locali';
 const subtitle = `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`;

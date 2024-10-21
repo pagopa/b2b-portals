@@ -4,6 +4,7 @@ import Icon from './Icon';
 import { Cards as CardsRC } from '@react-components/components';
 import { CardsProps } from '@react-components/types';
 import { CardsSection } from '@/lib/fetch/types/PageSection';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 export const makeCardsProps = ({
   items,
@@ -12,7 +13,7 @@ export const makeCardsProps = ({
   body,
   ctaButtons,
   ...rest
-}: CardsSection): CardsProps => ({
+}: CardsSection & { themeVariant: ThemeVariant }): CardsProps => ({
   text: {
     title,
     ...(subtitle && { subtitle }),
@@ -39,6 +40,8 @@ export const makeCardsProps = ({
   ...rest,
 });
 
-const Cards = (props: CardsSection) => <CardsRC {...makeCardsProps(props)} />;
+const Cards = (props: CardsSection & { themeVariant: ThemeVariant }) => (
+  <CardsRC {...makeCardsProps(props)} />
+);
 
 export default Cards;

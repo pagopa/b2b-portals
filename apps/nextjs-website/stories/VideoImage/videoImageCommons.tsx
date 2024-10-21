@@ -9,6 +9,7 @@ const createVideoImageDefaults = (theme: 'dark' | 'light'): VideoImageProps => (
   theme,
   isCentered: false,
   sectionID: null,
+  themeVariant: 'SEND',
 });
 
 // Usage example

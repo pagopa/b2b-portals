@@ -4,8 +4,23 @@ import {
   getAllPageIDs,
   getPageSectionsFromID,
   getPreviewToken,
+  getSiteWideSEO,
   isPreviewMode,
 } from '@/lib/api';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+
+// Fetch themeVariant from General
+// Default to 'SEND' if General isn't present
+const GetThemeVariantForPreview = async (): Promise<ThemeVariant> => {
+  // Disable eslint because making the preview work when General has not been filled by the CMS user is more important
+  // eslint-disable-next-line functional/no-try-statements
+  try {
+    const { themeVariant } = await getSiteWideSEO();
+    return themeVariant;
+  } catch {
+    return 'SEND';
+  }
+};
 
 const PreviewPage = async ({
   searchParams,
@@ -39,8 +54,13 @@ const PreviewPage = async ({
   }
 
   const sections = await getPageSectionsFromID(tenant, pageID);
+  const themeVariant = await GetThemeVariantForPreview();
 
-  return <div>{sections.map(PageSection)}</div>;
+  return (
+    <div>
+      {sections.map((section) => PageSection({ ...section, themeVariant }))}
+    </div>
+  );
 };
 
 export default PreviewPage;

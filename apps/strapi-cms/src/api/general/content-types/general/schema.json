@@ -44,6 +44,15 @@
     },
     "matomoID": {
       "type": "string"
+    },
+    "themeVariant": {
+      "type": "enumeration",
+      "enum": [
+        "IO",
+        "SEND"
+      ],
+      "default": "SEND",
+      "required": true
     }
   }
 }

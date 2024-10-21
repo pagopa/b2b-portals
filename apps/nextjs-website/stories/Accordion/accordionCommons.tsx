@@ -5,7 +5,7 @@ import { AccordionItemProps } from '@react-components/types/Accordion/Accordion.
 
 // Define a 'Template' function that sets how args map to rendering
 export const AccordionTemplate: StoryFn<AccordionProps> = (args) => (
-  <Accordion {...args} />
+  <Accordion {...args} themeVariant='SEND' />
 );
 
 // Function to generate accordion items with a given theme

@@ -22,8 +22,11 @@ import TextSection from '../TextSection';
 import PageSwitch from '../PageSwitch';
 import FramedVideo from '../FramedVideo';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 // eslint-disable-next-line complexity
-const PageSection = (props: PageSectionData) => {
+const PageSection = (
+  props: PageSectionData & { themeVariant: ThemeVariant }
+) => {
   // eslint-disable-next-line no-underscore-dangle
   switch (props.__component) {
     case 'sections.hero':

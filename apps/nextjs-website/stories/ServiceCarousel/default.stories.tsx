@@ -11,7 +11,7 @@ export default meta;
 
 // Define a "Template" function that sets how args map to rendering
 const ServiceCarouselTemplate: StoryFn<ServiceCarouselProps> = (args) => (
-  <ServiceCarousel {...args} />
+  <ServiceCarousel {...args} themeVariant='SEND' />
 );
 
 export const ServiceCarouselFull: StoryFn<typeof ServiceCarousel> =

@@ -41,6 +41,7 @@ const generateDefaultProps = (
               />
             ),
             sectionID: '',
+            themeVariant: 'SEND',
           },
         },
         {
@@ -68,6 +69,7 @@ const generateDefaultProps = (
             },
             sectionID: '',
             textPosition: 'left',
+            themeVariant: 'SEND',
           },
         },
         {
@@ -96,6 +98,7 @@ const generateDefaultProps = (
               },
             ],
             sectionID: '',
+            themeVariant: 'SEND',
           },
         },
       ],
@@ -124,6 +127,7 @@ const generateDefaultProps = (
               />
             ),
             sectionID: '',
+            themeVariant: 'SEND',
           },
         },
         {
@@ -151,6 +155,7 @@ const generateDefaultProps = (
             },
             sectionID: '',
             textPosition: 'left',
+            themeVariant: 'SEND',
           },
         },
         {
@@ -179,6 +184,7 @@ const generateDefaultProps = (
               },
             ],
             sectionID: '',
+            themeVariant: 'SEND',
           },
         },
       ],
@@ -207,6 +213,7 @@ const generateDefaultProps = (
               />
             ),
             sectionID: '',
+            themeVariant: 'SEND',
           },
         },
         {
@@ -234,6 +241,7 @@ const generateDefaultProps = (
             },
             sectionID: '',
             textPosition: 'left',
+            themeVariant: 'SEND',
           },
         },
         {
@@ -262,6 +270,7 @@ const generateDefaultProps = (
               },
             ],
             sectionID: '',
+            themeVariant: 'SEND',
           },
         },
       ],

@@ -28,7 +28,7 @@ export const generateItemsWithLinks = (count: number): CardsItemProps[] =>
 );
 
 // Define a "Template" function that sets how args map to rendering
-export const CardsTemplate: StoryFn<CardsProps> = (args) => <Cards {...args} />;
+export const CardsTemplate: StoryFn<CardsProps> = (args) => <Cards {...args} themeVariant='SEND' />;
 
 // Function to generate default props
 const generateDefaultProps = (

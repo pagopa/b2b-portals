@@ -4,7 +4,7 @@ import { EditorialProps } from '@react-components/types/Editorial/Editorial.type
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
 
 // Define a "Template" function that sets how args map to rendering
-export const EditorialTemplate: StoryFn<EditorialProps> = (args) => <Editorial {...args} />;
+export const EditorialTemplate: StoryFn<EditorialProps> = (args) => <Editorial {...args} themeVariant='SEND' />;
 
 // Function to generate CTA buttons
 export const generateCtaButtons = (count: number): CtaButtonProps[] =>
