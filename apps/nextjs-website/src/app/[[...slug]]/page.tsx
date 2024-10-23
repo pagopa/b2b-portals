@@ -8,7 +8,7 @@ import {
 import PageSection from '@/components/PageSection/PageSection';
 
 type PageParams = {
-  params: { locale: 'it' | 'en'; slug?: string[] };
+  params: { slug?: string[] };
 };
 
 // Statically generate routes at build time instead of on-demand at request time.
@@ -27,17 +27,21 @@ export const generateStaticParams = async (): Promise<
   }
 
   // Get locales
-  const general = await getSiteWideSEO();
-  const pages_it: Array<PageParams['params']> = general.locales.it
+  const { locales } = await getSiteWideSEO();
+
+  // Set default locale as /it, unless /en is the only active locale
+  const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
+
+  const pages_it: Array<PageParams['params']> = locales.it
     ? (await getAllPages('it')).map((page) => ({
-        locale: 'it',
-        slug: [page.slug],
+        // Prepend locale as the first level slug (unless it's the default locale)
+        slug: defaultLocale === 'it' ? [page.slug] : ['it', page.slug],
       }))
     : [];
-  const pages_en: Array<PageParams['params']> = general.locales.en
+  const pages_en: Array<PageParams['params']> = locales.en
     ? (await getAllPages('en')).map((page) => ({
-        locale: 'en',
-        slug: [page.slug],
+        // Prepend locale as the first level slug (unless it's the default locale)
+        slug: defaultLocale === 'en' ? [page.slug] : ['en', page.slug],
       }))
     : [];
 
@@ -47,10 +51,26 @@ export const generateStaticParams = async (): Promise<
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const { locale, slug } = params;
-  // Check if slug is undefined, which happens for the homepage due to generateStaticParams' internal logic
-  // If it is, set the slug back to ''
-  const slugString = slug === undefined ? '' : slug[0];
+  const { slug } = params;
+  const { locales, ...siteWideSEO } = await getSiteWideSEO();
+  const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
+
+  // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
+  // If it is, set the slug back to '' and locale to the default locale
+
+  // The slug will be found in slug[0] for the default locale and slug[1] for all others
+  const slugString =
+    slug === undefined
+      ? ''
+      : (slug[0] === 'it' || slug[0] === 'en' ? slug[1] : slug[0]) ?? '';
+
+  // The locale will NOT be found for the default locale and will be in slug[0] for all others
+  const locale =
+    slug === undefined
+      ? defaultLocale
+      : slug[0] === 'it' || slug[0] === 'en'
+      ? slug[0]
+      : defaultLocale;
 
   const pageProps = await getPageProps(locale, slugString);
   if (pageProps === undefined) {
@@ -58,8 +78,6 @@ export async function generateMetadata({
   }
 
   const seo = pageProps.seo;
-  const siteWideSEO = await getSiteWideSEO();
-
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
@@ -88,10 +106,26 @@ const Page = async ({ params }: PageParams) => {
     return null;
   }
 
-  const { locale, slug } = params;
-  // Check if slug is undefined, which happens for the homepage due to generateStaticParams' internal logic
-  // If it is, set the slug back to ''
-  const slugString = slug === undefined ? '' : slug[0];
+  const { slug } = params;
+  const { locales, themeVariant } = await getSiteWideSEO();
+  const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
+
+  // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
+  // If it is, set the slug back to '' and locale to the default locale
+
+  // The slug will be found in slug[0] for the default locale and slug[1] for all others
+  const slugString =
+    slug === undefined
+      ? ''
+      : (slug[0] === 'it' || slug[0] === 'en' ? slug[1] : slug[0]) ?? '';
+
+  // The locale will NOT be found for the default locale and will be in slug[0] for all others
+  const locale =
+    slug === undefined
+      ? defaultLocale
+      : slug[0] === 'it' || slug[0] === 'en'
+      ? slug[0]
+      : defaultLocale;
 
   const pageProps = await getPageProps(locale, slugString);
   if (pageProps === undefined) {
@@ -99,8 +133,6 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const sections = pageProps.sections;
-  const { themeVariant } = await getSiteWideSEO();
-
   return (
     <main>
       {pageProps.seo.structuredData && (
