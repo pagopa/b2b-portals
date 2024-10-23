@@ -9,7 +9,7 @@ import { getHeader, HeaderData } from './fetch/header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
-import { addLocaleToAllLinks, removeHomepageSlugFromMenu } from './header';
+import { formatHeaderLinks } from './header';
 import { getPreFooter, PreFooterAttributes } from './fetch/preFooter';
 
 // create AppEnv given process env
@@ -46,7 +46,8 @@ export const getPreHeaderProps = async (
 };
 
 export const getHeaderProps = async (
-  locale: 'it' | 'en'
+  locale: 'it' | 'en',
+  defaultLocale: 'it' | 'en'
 ): Promise<HeaderData['data']['attributes']['header'][0]> => {
   const {
     data: {
@@ -60,7 +61,7 @@ export const getHeaderProps = async (
     throw new Error();
   }
 
-  return addLocaleToAllLinks(removeHomepageSlugFromMenu(header[0]), locale);
+  return formatHeaderLinks(header[0], locale, defaultLocale);
 };
 
 export const getFooterProps = async (

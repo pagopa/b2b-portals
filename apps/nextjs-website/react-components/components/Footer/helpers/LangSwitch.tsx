@@ -70,7 +70,7 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
               {/* Currently linking to the other locale's homepage since we have
               no certainty that each page's slug is the same in both languages
               or that the same pages exist at all in each language */}
-              <Link href={'/' + language.id}>{language.value}</Link>
+              <Link href={language.href}>{language.value}</Link>
             </MenuItem>
           ))}
         </Menu>

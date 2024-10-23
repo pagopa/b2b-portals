@@ -13,13 +13,13 @@ const makeFooterProps = ({
   links_resources,
   links_followUs,
   locales,
+  defaultLocale,
   activeLocale,
-  slug,
   ...rest
 }: FooterData['data']['attributes'] & {
   locales: Array<'it' | 'en'>;
+  defaultLocale: 'it' | 'en';
   activeLocale: 'it' | 'en';
-  slug: string;
 }): FooterProps => ({
   legalInfo: MarkdownRenderer({
     markdown: legalInfo,
@@ -68,7 +68,7 @@ const makeFooterProps = ({
   languages: locales.map((locale) => ({
     id: locale,
     value: locale === 'en' ? 'English' : 'Italiano',
-    href: '/' + locale + slug,
+    href: defaultLocale === locale ? '/' : `/${locale}`,
   })),
   activeLanguage: {
     id: activeLocale,
@@ -79,12 +79,14 @@ const makeFooterProps = ({
 });
 
 const Footer = (
-  props: FooterData['data']['attributes'] & { locales: Array<'it' | 'en'> }
+  props: FooterData['data']['attributes'] & {
+    locales: Array<'it' | 'en'>;
+    defaultLocale: 'it' | 'en';
+  }
 ) => {
   const pathname = usePathname();
   const activeLocale = pathname.slice(1, 3) as 'it' | 'en';
-  const slug = pathname.slice(3);
 
-  return <FooterRC {...makeFooterProps({ ...props, activeLocale, slug })} />;
+  return <FooterRC {...makeFooterProps({ ...props, activeLocale })} />;
 };
 export default Footer;

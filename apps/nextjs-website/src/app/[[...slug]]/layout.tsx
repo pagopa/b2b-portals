@@ -37,7 +37,9 @@ _paq.push(["enableLinkTracking"]);
   s.parentNode.insertBefore(g, s);
 })();`;
 
-// Same params as Page, we're later going to only extract the locale since the specific page doesn't matter
+// Same params as Page, we're later going to only extract the locale since the specific page's slug doesn't matter
+// We cannot extract the locale directly inside generateStaticParams
+// because, since the folder is called [[...slug]], NextJS will only populate params called slug
 export const generateStaticParams = async (): Promise<
   Array<LayoutProps['params']>
 > => {
@@ -109,7 +111,7 @@ export default async function Layout({
       : defaultLocale;
 
   const preHeaderProps = await getPreHeaderProps(locale);
-  const headerProps = await getHeaderProps(locale);
+  const headerProps = await getHeaderProps(locale, defaultLocale);
   const footerProps = await getFooterProps(locale);
   const preFooterProps = await getPreFooterProps(locale);
   const localesArray = Object.keys(locales).filter(
@@ -127,6 +129,7 @@ export default async function Layout({
           <Footer
             {...footerProps}
             locales={localesArray as Array<'it' | 'en'>}
+            defaultLocale={defaultLocale}
           />
           <Script
             src='/scripts/otnotice-1.0.min.js'
