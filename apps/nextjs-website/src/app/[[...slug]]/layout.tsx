@@ -80,21 +80,7 @@ export default async function Layout({
   params: { slug },
 }: LayoutProps) {
   if (isPreviewMode()) {
-    return (
-      <ThemeProvider theme={theme}>
-        <html lang='it'>
-          <body style={{ margin: 0, scrollBehavior: 'smooth' }}>
-            {children}
-            <Script
-              src='/scripts/otnotice-1.0.min.js'
-              type='text/javascript'
-              id='otprivacy-notice-script'
-              strategy='beforeInteractive'
-            />
-          </body>
-        </html>
-      </ThemeProvider>
-    );
+    return null;
   }
 
   const { locales, matomoID } = await getSiteWideSEO();
