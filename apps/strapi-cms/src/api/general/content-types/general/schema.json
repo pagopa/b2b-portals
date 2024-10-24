@@ -53,6 +53,12 @@
       ],
       "default": "SEND",
       "required": true
+    },
+    "locales": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.locales",
+      "required": true
     }
   }
 }

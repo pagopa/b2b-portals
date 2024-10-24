@@ -87,10 +87,10 @@ describe('fetchAllPageIDs', () => {
       json: () => Promise.resolve(pageIDsResponse),
     } as unknown as Response);
 
-    await fetchAllPageIDs(appEnv);
+    await fetchAllPageIDs({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?publicationState=preview&pagination[pageSize]=100`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?locale=it&publicationState=preview&pagination[pageSize]=100`,
       {
         method: 'GET',
         headers: {
@@ -108,7 +108,7 @@ describe('fetchAllPageIDs', () => {
       json: () => Promise.resolve(pageIDsResponse),
     } as unknown as Response);
 
-    const actual = fetchAllPageIDs(appEnv);
+    const actual = fetchAllPageIDs({ ...appEnv, locale: 'it' });
 
     expect(await actual).toStrictEqual(pageIDsResponse);
   });

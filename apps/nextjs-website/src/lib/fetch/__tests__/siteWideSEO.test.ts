@@ -66,6 +66,10 @@ const siteWideSEOResponse = {
       },
       matomoID: '12',
       themeVariant: 'SEND',
+      locales: {
+        it: true,
+        en: false,
+      },
     },
   },
 };
@@ -82,7 +86,7 @@ describe('fetchSiteWideSEO', () => {
     await fetchSiteWideSEO(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest,locales`,
       {
         method: 'GET',
         headers: {

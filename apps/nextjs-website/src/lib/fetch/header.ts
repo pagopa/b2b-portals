@@ -110,12 +110,16 @@ export type HeaderData = t.TypeOf<typeof HeaderDataCodec>;
 export type StandardHeaderData = t.TypeOf<typeof StandardHeaderCodec>;
 export type MegaHeaderData = t.TypeOf<typeof MegaHeaderCodec>;
 
-export const getHeader = ({ config, fetchFun }: AppEnv): Promise<HeaderData> =>
+export const getHeader = ({
+  config,
+  fetchFun,
+  locale,
+}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<HeaderData> =>
   extractFromResponse(
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/header?populate=header.logo,header.ctaButton,header.menu.links.page,header.menu.links.sublinks.page,header.menu.links.sublinkGroups.sublinks.page,header.drawer.ctaCard,header.drawer.linkCards`,
+      }/api/header?locale=${locale}&populate=header.logo,header.ctaButton,header.menu.links.page,header.menu.links.sublinks.page,header.menu.links.sublinkGroups.sublinks.page,header.drawer.ctaCard,header.drawer.linkCards`,
       {
         method: 'GET',
         headers: {

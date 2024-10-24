@@ -10,11 +10,20 @@
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "theme": {
       "type": "enumeration",
@@ -23,7 +32,12 @@
         "dark"
       ],
       "required": true,
-      "default": "light"
+      "default": "light",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "layout": {
       "type": "enumeration",
@@ -32,7 +46,12 @@
         "center"
       ],
       "required": true,
-      "default": "left"
+      "default": "left",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "background": {
       "type": "media",
@@ -40,18 +59,33 @@
       "required": false,
       "allowedTypes": [
         "images"
-      ]
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "ctaButtons": {
       "type": "component",
       "repeatable": true,
       "component": "components.cta-button-simple",
-      "required": false
+      "required": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "storeButtons": {
       "type": "component",
       "repeatable": false,
-      "component": "components.store-buttons"
+      "component": "components.store-buttons",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "exclude": {
       "type": "relation",

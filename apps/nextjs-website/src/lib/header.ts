@@ -1,29 +1,43 @@
 /* eslint-disable no-underscore-dangle */
 import { HeaderData, HeaderSublink } from './fetch/header';
 
-// The functions below doesn't technically "remove" the slug altogether
-// It replaces it with "/" because if we passed "" to the Header,
-// the links wouldn't go to the home page, but to the currently open page
+const formatSlug = (
+  slug: string,
+  locale: 'it' | 'en',
+  defaultLocale: 'it' | 'en'
+): string => {
+  const localeString = locale === defaultLocale ? '' : `/${locale}`;
+  const slugString = slug === 'homepage' ? '/' : `/${slug}`;
 
-const removeHomepageSlugFromSublink = ({
+  return localeString + slugString;
+};
+
+const formatSublink = ({
+  locale,
+  defaultLocale,
   page,
   ...sublink
-}: HeaderSublink): HeaderSublink => ({
+}: HeaderSublink & {
+  readonly locale: 'it' | 'en';
+  readonly defaultLocale: 'it' | 'en';
+}): HeaderSublink => ({
   ...sublink,
   page: {
     data: {
       attributes: {
-        slug:
-          page.data.attributes.slug === 'homepage'
-            ? '/'
-            : page.data.attributes.slug,
+        slug: formatSlug(page.data.attributes.slug, locale, defaultLocale),
       },
     },
   },
 });
 
-export const removeHomepageSlugFromMenu = (
-  header: HeaderData['data']['attributes']['header'][0]
+// This function does 2 things to all links and sublinks:
+// 1. Substitutes the 'homepage' slug with '/'
+// 2. Prepends the locale, unless it's the default one
+export const formatHeaderLinks = (
+  header: HeaderData['data']['attributes']['header'][0],
+  locale: 'it' | 'en',
+  defaultLocale: 'it' | 'en'
 ): HeaderData['data']['attributes']['header'][0] => {
   switch (header.__component) {
     case 'headers.standard-header':
@@ -36,19 +50,21 @@ export const removeHomepageSlugFromMenu = (
               data: page.data
                 ? {
                     attributes: {
-                      slug:
-                        page.data.attributes.slug === 'homepage'
-                          ? '/'
-                          : page.data.attributes.slug,
+                      slug: formatSlug(
+                        page.data.attributes.slug,
+                        locale,
+                        defaultLocale
+                      ),
                     },
                   }
                 : null,
             },
-            sublinks: sublinks.map(removeHomepageSlugFromSublink),
+            sublinks: sublinks.map((sublink) =>
+              formatSublink({ locale, defaultLocale, ...sublink })
+            ),
           })),
         },
       };
-
     case 'headers.mega-header':
       return {
         ...header,
@@ -58,7 +74,9 @@ export const removeHomepageSlugFromMenu = (
             sublinkGroups: sublinkGroups.map(
               ({ sublinks, ...sublinkGroup }) => ({
                 ...sublinkGroup,
-                sublinks: sublinks.map(removeHomepageSlugFromSublink),
+                sublinks: sublinks.map((sublink) =>
+                  formatSublink({ locale, defaultLocale, ...sublink })
+                ),
               })
             ),
           })),
