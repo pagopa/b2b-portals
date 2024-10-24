@@ -33,7 +33,6 @@
     "axios": "^1.6.8",
     "better-sqlite3": "8.6.0",
     "pg": "^8.11.3",
-    "strapi-plugin-copy-locales": "^1.0.1",
     "strapi-plugin-preview-button": "^2.2.2",
     "strapi-plugin-update-static-content": "^1.0.8"
   },
