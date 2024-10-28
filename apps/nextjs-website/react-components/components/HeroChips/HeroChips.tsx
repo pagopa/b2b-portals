@@ -17,6 +17,7 @@ const HeroChips = (props: HeroChipsProps) => {
   } = props;
 
   const backgroundColor = BackgroundColor(theme);
+
   const textColor = TextColor(theme);
 
   const BackgroundImage = (
@@ -49,7 +50,7 @@ const HeroChips = (props: HeroChipsProps) => {
         justifyContent: 'space-between',
         py: 4,
       }}
-      {...sectionID && { sectionID }}
+      {...(sectionID && { sectionID })}
     >
       <Box
         sx={{

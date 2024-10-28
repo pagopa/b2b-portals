@@ -31,7 +31,13 @@ const renderContent = (contents: PageSwitchContent[]) => {
   });
 };
 
-const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
+const PageSwitch = ({
+  sections,
+  theme,
+  themeVariant,
+  title,
+  subtitle,
+}: PageSwitchProps) => {
   if (sections[0] === undefined) {
     return null;
   }
@@ -78,6 +84,7 @@ const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
       >
         <TitleSubtitleBlock
           title={title}
+          themeVariant={themeVariant}
           {...(subtitle && { subtitle })}
           theme={theme}
         />
@@ -93,11 +100,12 @@ const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
             }}
             onButtonClick={handleButtonClick}
             theme={theme}
+            themeVariant={themeVariant}
           />
         ) : (
           <ButtonGroup
-            variant="outlined"
-            aria-label="buttonGroup"
+            variant='outlined'
+            aria-label='buttonGroup'
             sx={{ margin: '16px 0' }}
           >
             {sections.map((section) => (
@@ -115,14 +123,22 @@ const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
                   color:
                     section.id === currentSection.id
                       ? theme === 'light'
-                        ? palette.primary.main
-                        : palette.custom.primaryColorDark
+                        ? themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
+                        : themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
                       : theme === 'light'
-                        ? palette.primary.main
+                        ? themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
                         : palette.primary.contrastText,
                   borderColor:
                     theme === 'light'
-                      ? palette.primary.main
+                      ? themeVariant === 'SEND'
+                        ? palette.primary.main
+                        : palette.custom.primaryColorDark
                       : palette.background.paper,
                   '&:hover': {
                     backgroundColor:
@@ -132,11 +148,17 @@ const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
                         : palette.background.paper,
                     color:
                       theme === 'light'
-                        ? palette.primary.main
-                        : palette.custom.primaryColorDark,
+                        ? themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
+                        : themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark,
                     borderColor:
                       theme === 'light'
-                        ? palette.primary.main
+                        ? themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
                         : palette.background.paper,
                   },
                 }}

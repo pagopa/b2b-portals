@@ -53,3 +53,10 @@ export const GrayLinkColor = (theme: 'dark' | 'light') => {
     ? palette.custom.grayLinkColor
     : palette.custom.black50;
 };
+
+export const IoBackgroundColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.ioBackgroundColorDark
+    : palette.custom.ioBackgroundColorLight;
+};

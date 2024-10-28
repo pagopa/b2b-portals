@@ -1,23 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { FramedVideoProps } from '@react-components/types';
 import { renderVideo, renderTextSection } from './FramedVideo.helpers';
-import { BackgroundColorAlternative } from '../common/Common.helpers';
-import { useTheme } from '@mui/material/styles';
+import { IoBackgroundColor } from '../common/Common.helpers';
 
 const FramedVideo = ({
   videoURL,
   sectionID,
   text,
   theme,
+  themeVariant,
   loop,
   autoplay,
 }: FramedVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [error, setError] = useState(false);
   const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
-
-  const { palette } = useTheme();
-  const darkBackgroundColor = palette.primary.dark;
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,8 +40,7 @@ const FramedVideo = ({
       : 'space-between'
     : 'center';
 
-  const backgroundColor =
-    theme === 'dark' ? darkBackgroundColor : BackgroundColorAlternative(theme);
+  const backgroundColor = IoBackgroundColor(theme);
 
   if (!videoURL) {
     return (
@@ -88,6 +84,7 @@ const FramedVideo = ({
             body: text.body,
             link: text.link,
             theme,
+            themeVariant,
           })}
         </div>
       )}

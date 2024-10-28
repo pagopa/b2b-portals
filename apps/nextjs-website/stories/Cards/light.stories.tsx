@@ -75,8 +75,9 @@ LightCardsOnlyTitleWithLinksCenter.args = {
   textPosition: 'center',
 };
 
-export const LightCardsNoLinksLeft: StoryFn<typeof Cards> =
-  CardsTemplate.bind({});
+export const LightCardsNoLinksLeft: StoryFn<typeof Cards> = CardsTemplate.bind(
+  {}
+);
 LightCardsNoLinksLeft.args = {
   ...defaultPropsLightFour,
   text: {
@@ -85,8 +86,9 @@ LightCardsNoLinksLeft.args = {
   textPosition: 'left',
 };
 
-export const LightCardsNoLinksRight: StoryFn<typeof Cards> =
-  CardsTemplate.bind({});
+export const LightCardsNoLinksRight: StoryFn<typeof Cards> = CardsTemplate.bind(
+  {}
+);
 LightCardsNoLinksRight.args = {
   ...defaultPropsLightFour,
   text: {
@@ -221,6 +223,10 @@ LightCardsWithTextandButtonNoLinksLeft.args = {
       text: 'Click Me',
       variant: 'contained',
     },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
+    },
   ],
   textPosition: 'left',
 };
@@ -238,6 +244,10 @@ LightCardsWithTextandButtonNoLinksRight.args = {
     {
       text: 'Click Me',
       variant: 'contained',
+    },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
     },
   ],
   textPosition: 'right',
@@ -257,6 +267,10 @@ LightCardsWithTextandButtonNoLinksCenter.args = {
       text: 'Click Me',
       variant: 'contained',
     },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
+    },
   ],
   textPosition: 'center',
 };
@@ -274,6 +288,10 @@ LightCardsWithTextandButtonWithLinksLeft.args = {
     {
       text: 'Click Me',
       variant: 'contained',
+    },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
     },
   ],
   textPosition: 'left',
@@ -293,6 +311,10 @@ LightCardsWithTextandButtonWithLinksRight.args = {
       text: 'Click Me',
       variant: 'contained',
     },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
+    },
   ],
   textPosition: 'right',
 };
@@ -310,6 +332,10 @@ LightCardsWithTextandButtonWithLinksCenter.args = {
     {
       text: 'Click Me',
       variant: 'contained',
+    },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
     },
   ],
   textPosition: 'center',

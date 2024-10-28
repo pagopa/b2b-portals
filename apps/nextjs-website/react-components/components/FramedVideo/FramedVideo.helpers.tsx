@@ -1,6 +1,6 @@
-import { Link, Stack, Typography } from '@mui/material';
+import { Link, Stack, Typography, useTheme } from '@mui/material';
 import { RenderVideoProps } from '@react-components/types/FramedVideo/FramedVideo.types';
-import { TextAlternativeColor, TextColor } from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 
 export const renderVideo = ({
   videoRef,
@@ -62,14 +62,23 @@ export const renderTextSection = ({
   body,
   link,
   theme,
+  themeVariant,
 }: {
   title: string;
   body: string;
   link: { href: string; label: string };
   theme: 'light' | 'dark';
+  themeVariant: 'SEND' | 'IO';
 }) => {
   const textColor = TextColor(theme);
-  const linkTextColor = TextAlternativeColor(theme);
+  const { palette } = useTheme();
+
+  const linkTextColor =
+    theme === 'light'
+      ? themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.blueIO[500]
+      : palette.custom.white;
 
   return (
     <Stack
@@ -86,7 +95,7 @@ export const renderTextSection = ({
         {body}
       </Typography>
 
-      <Typography fontSize={16} fontWeight={700}>
+      <Typography fontSize={16} fontWeight={700} color={linkTextColor}>
         <Link
           href={link.href}
           style={{

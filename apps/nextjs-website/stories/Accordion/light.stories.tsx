@@ -15,7 +15,11 @@ export const AccordionLightCenterLayoutLeftTextAlignment: StoryFn<
 AccordionLightCenterLayoutLeftTextAlignment.args = {
   ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
   textAlignment: 'left',
 };
 
@@ -25,7 +29,11 @@ export const AccordionLightCenterLayoutCenterTextAlignment: StoryFn<
 AccordionLightCenterLayoutCenterTextAlignment.args = {
   ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
 };
 
 export const AccordionLightCenterLayoutRightTextAlignment: StoryFn<
@@ -34,7 +42,11 @@ export const AccordionLightCenterLayoutRightTextAlignment: StoryFn<
 AccordionLightCenterLayoutRightTextAlignment.args = {
   ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
   textAlignment: 'right',
 };
 
@@ -44,7 +56,11 @@ export const AccordionLightLeftLayoutLeftTextAlignment: StoryFn<
 AccordionLightLeftLayoutLeftTextAlignment.args = {
   ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
   layout: 'left',
   textAlignment: 'left',
 };
@@ -55,7 +71,11 @@ export const AccordionLightLeftLayoutCenterTextAlignment: StoryFn<
 AccordionLightLeftLayoutCenterTextAlignment.args = {
   ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
   layout: 'left',
 };
 
@@ -65,7 +85,11 @@ export const AccordionLightLeftLayoutRightTextAlignment: StoryFn<
 AccordionLightLeftLayoutRightTextAlignment.args = {
   ...defaultPropsLight,
   subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
   layout: 'left',
   textAlignment: 'right',
 };

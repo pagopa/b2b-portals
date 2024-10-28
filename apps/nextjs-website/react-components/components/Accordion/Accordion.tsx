@@ -1,6 +1,13 @@
-import { Box, Container, Grid, Stack } from '@mui/material';
+import {
+  Box,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import { AccordionItem } from './AccordionItem';
-import { Title, Subtitle, Body } from '../common/Common';
+import { Title, Subtitle } from '../common/Common';
 import { AccordionProps } from '../../types/Accordion/Accordion.types';
 import {
   BackgroundColorAlternative,
@@ -14,6 +21,7 @@ const Accordion = (props: AccordionProps) => {
     description,
     accordionItems,
     theme,
+    themeVariant,
     layout,
     textAlignment,
     sectionID,
@@ -21,6 +29,14 @@ const Accordion = (props: AccordionProps) => {
 
   const textColor = TextColor(theme);
   const backgroundColor = BackgroundColorAlternative(theme);
+  const { palette } = useTheme();
+
+  const linkColor =
+    theme === 'dark'
+      ? palette.custom.white
+      : themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <Box
@@ -48,19 +64,38 @@ const Accordion = (props: AccordionProps) => {
                 />
               )}
               {description && (
-                <Body
+                <Typography
+                  component='div'
                   variant='body2'
-                  textColor={textColor}
-                  body={description}
                   textAlign={layout === 'center' ? textAlignment : 'left'}
-                />
+                  sx={{
+                    fontSize: '18px',
+                    '& a': {
+                      color: linkColor,
+                      textDecoration: 'underline',
+                      '&:hover': {
+                        color: linkColor,
+                      },
+                    },
+                    '& p': {
+                      marginBottom: '0px',
+                      color: textColor,
+                    },
+                  }}
+                >
+                  {description}
+                </Typography>
               )}
             </Stack>
           </Grid>
           <Grid item xs={12} md={layout === 'center' ? 12 : 8}>
             <Stack spacing={2}>
               {accordionItems.map((accordionItem, i) => (
-                <AccordionItem key={i} {...accordionItem} />
+                <AccordionItem
+                  key={i}
+                  {...accordionItem}
+                  themeVariant={themeVariant}
+                />
               ))}
             </Stack>
           </Grid>

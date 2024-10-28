@@ -16,6 +16,7 @@ import Editorial from '../Editorial/Editorial';
 const EditorialSwitch = ({
   sections,
   theme,
+  themeVariant,
   title,
   subtitle,
 }: EditorialSwitchProps) => {
@@ -67,6 +68,7 @@ const EditorialSwitch = ({
           title={title}
           {...(subtitle && { subtitle })}
           theme={theme}
+          themeVariant={themeVariant}
         />
         {isMobile ? (
           <ButtonSwitchRowBlock
@@ -80,11 +82,12 @@ const EditorialSwitch = ({
             }}
             onButtonClick={handleButtonClick}
             theme={theme}
+            themeVariant={themeVariant}
           />
         ) : (
           <ButtonGroup
-            variant="outlined"
-            aria-label="buttonGroup"
+            variant='outlined'
+            aria-label='buttonGroup'
             sx={{ margin: '16px 0' }}
           >
             {sections.map((section) => (
@@ -102,14 +105,22 @@ const EditorialSwitch = ({
                   color:
                     section.id === currentSection.id
                       ? theme === 'light'
-                        ? palette.primary.main
-                        : palette.custom.primaryColorDark
+                        ? themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
+                        : themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
                       : theme === 'light'
-                        ? palette.primary.main
+                        ? themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
                         : palette.primary.contrastText,
                   borderColor:
                     theme === 'light'
-                      ? palette.primary.main
+                      ? themeVariant === 'SEND'
+                        ? palette.primary.main
+                        : palette.custom.primaryColorDark
                       : palette.background.paper,
                   '&:hover': {
                     backgroundColor:
@@ -119,11 +130,17 @@ const EditorialSwitch = ({
                         : palette.background.paper,
                     color:
                       theme === 'light'
-                        ? palette.primary.main
-                        : palette.custom.primaryColorDark,
+                        ? themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
+                        : themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark,
                     borderColor:
                       theme === 'light'
-                        ? palette.primary.main
+                        ? themeVariant === 'SEND'
+                          ? palette.primary.main
+                          : palette.custom.primaryColorDark
                         : palette.background.paper,
                   },
                 }}

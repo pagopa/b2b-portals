@@ -32,6 +32,7 @@ const Form = ({
   title,
   subtitle,
   theme,
+  themeVariant,
   categoriesTitle,
   defaultCategoryID,
   categories,
@@ -344,16 +345,22 @@ const Form = ({
             backgroundColor:
               theme === 'dark'
                 ? palette.custom.white
-                : palette.custom.blueIO[500],
+                : themeVariant === 'SEND'
+                  ? palette.primary.main
+                  : palette.custom.blueIO[500],
             color:
               theme === 'dark'
-                ? palette.custom.blueIO[500]
+                ? themeVariant === 'SEND'
+                  ? palette.primary.main
+                  : palette.custom.blueIO[500]
                 : palette.custom.white,
             '&:hover': {
               backgroundColor:
                 theme === 'dark'
                   ? palette.custom.white
-                  : palette.custom.blueIO[500],
+                  : themeVariant === 'SEND'
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500],
             },
           }}
           onClick={handleSubmit}

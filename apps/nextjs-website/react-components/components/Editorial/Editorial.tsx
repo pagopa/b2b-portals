@@ -23,6 +23,7 @@ const Editorial = (props: EditorialProps) => {
     title,
     body,
     theme,
+    themeVariant,
     ctaButtons,
     storeButtons,
     pattern = 'none',
@@ -54,12 +55,14 @@ const Editorial = (props: EditorialProps) => {
           <Stack gap={4}>
             <EditorialContent
               theme={theme}
+              themeVariant={themeVariant}
               title={title}
               body={body}
               {...(eyelet && { eyelet })}
             />
             <EditorialCtas
               theme={theme}
+              themeVariant={themeVariant}
               {...(ctaButtons && { ctaButtons })}
               {...(storeButtons && { storeButtons })}
             />
@@ -104,12 +107,14 @@ const Editorial = (props: EditorialProps) => {
         <Stack gap={4}>
           <EditorialContent
             theme={theme}
+            themeVariant={themeVariant}
             title={title}
             body={body}
             {...(eyelet && { eyelet })}
           />
           <EditorialCtas
             theme={theme}
+            themeVariant={themeVariant}
             {...(ctaButtons && { ctaButtons })}
             {...(storeButtons && { storeButtons })}
           />

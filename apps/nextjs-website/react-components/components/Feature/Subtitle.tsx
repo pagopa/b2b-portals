@@ -4,9 +4,18 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Body } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { FeatureStackItemProps } from '../../types/Feature/Feature.types';
+import { useTheme } from '@mui/material/styles';
 
-const Subtitle = ({ item, theme }: FeatureStackItemProps) => {
+const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
+  const muiTheme = useTheme();
   const textColor = TextColor(theme);
+
+  const linkColor =
+    theme === 'light'
+      ? themeVariant === 'SEND'
+        ? muiTheme.palette.primary.main
+        : muiTheme.palette.custom.blueIO[500]
+      : muiTheme.palette.common.white;
 
   return (
     <Stack spacing={3} justifyContent='center' alignItems='center'>
@@ -17,15 +26,14 @@ const Subtitle = ({ item, theme }: FeatureStackItemProps) => {
           justifyContent='center'
           alignItems='center'
           direction={'row'}
-          color={theme === 'light' ? 'primary' : 'background.paper'}
         >
           <Typography
             component='span'
             variant='body1'
-            color={theme === 'light' ? 'text.primary' : 'background.paper'}
+            color={theme === 'light' ? 'text.primary' : linkColor}
           >
             <Link
-              color='inherit'
+              color={linkColor}
               href={item.link.href}
               underline='none'
               sx={{ fontWeight: 'bold' }}
@@ -34,7 +42,11 @@ const Subtitle = ({ item, theme }: FeatureStackItemProps) => {
             </Link>
           </Typography>
 
-          <ArrowForwardIcon color='inherit'></ArrowForwardIcon>
+          <ArrowForwardIcon
+            sx={{
+              color: linkColor,
+            }}
+          />
         </Stack>
       )}
     </Stack>

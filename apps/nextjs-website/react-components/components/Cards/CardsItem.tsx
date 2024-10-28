@@ -3,6 +3,7 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { CardsItemProps } from '../../types/Cards/Cards.types';
 import { Title, Body } from '../common/Common';
 import Image from 'next/image';
+import { useTheme } from '@mui/material/styles';
 
 const CardsItem = ({
   title,
@@ -12,7 +13,12 @@ const CardsItem = ({
   textAlign,
   label,
   masonry,
-}: CardsItemProps) => {
+  themeVariant,
+}: CardsItemProps & { themeVariant: 'IO' | 'SEND' }) => {
+  const { palette } = useTheme();
+  const linkColor =
+    themeVariant === 'SEND' ? palette.primary.main : palette.custom.blueIO[500];
+
   return (
     <Card
       elevation={16}
@@ -75,11 +81,11 @@ const CardsItem = ({
                   mt={2}
                   direction='row'
                   alignItems='center'
-                  color='primary.main'
+                  color={linkColor}
                   justifyContent='flex-start'
                 >
                   <Link
-                    color='primary.main'
+                    color={linkColor}
                     underline='none'
                     href={link.href}
                     title={link.title}
@@ -89,7 +95,7 @@ const CardsItem = ({
                     {link.label}
                   </Link>
                   <ArrowRightAltIcon
-                    sx={{ color: 'inherit', fontSize: 18, marginLeft: 1 }}
+                    sx={{ color: linkColor, fontSize: 18, marginLeft: 1 }}
                   />
                 </Stack>
               ))

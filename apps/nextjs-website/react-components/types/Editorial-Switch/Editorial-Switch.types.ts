@@ -1,9 +1,11 @@
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 import { EditorialProps } from '../Editorial/Editorial.types';
 
 export interface EditorialSwitchBaseProps {
   title: string;
   subtitle?: JSX.Element;
   theme: 'dark' | 'light';
+  themeVariant: ThemeVariant;
 }
 
 export interface EditorialSwitchSection {
@@ -14,6 +16,7 @@ export interface EditorialSwitchSection {
 
 export interface EditorialSwitchProps extends EditorialSwitchBaseProps {
   sections: EditorialSwitchSection[];
+  themeVariant: ThemeVariant;
 }
 
 export interface ButtonSwitchRowBlockProps {

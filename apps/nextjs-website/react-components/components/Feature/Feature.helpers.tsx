@@ -8,9 +8,10 @@ import { FeatureCarouselProps } from '../../types/Feature/Feature.types';
 
 const FeatureCarousel = ({
   items,
-  activeStep, 
+  activeStep,
   handleStepChange,
   theme,
+  themeVariant,
   themeComponentDirection,
 }: FeatureCarouselProps) => {
   const slickSettings = {
@@ -29,7 +30,11 @@ const FeatureCarousel = ({
       <Slider {...slickSettings}>
         {items.map((item, index) => (
           <div key={index}>
-            <FeatureStackItem theme={theme} item={item} />
+            <FeatureStackItem
+              theme={theme}
+              item={item}
+              themeVariant={themeVariant}
+            />
           </div>
         ))}
       </Slider>

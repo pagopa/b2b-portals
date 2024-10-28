@@ -170,16 +170,6 @@ const PreFooter = (props: PreFooterProps) => {
                     sx: {
                       width: 'auto',
                       marginTop: '16px',
-                      ...(button.variant === 'contained' && {
-                        backgroundColor:
-                          theme === 'dark'
-                            ? muiTheme.palette.custom.white
-                            : muiTheme.palette.custom.blueIO[500],
-                        color:
-                          theme === 'dark'
-                            ? muiTheme.palette.custom.blueIO[500]
-                            : muiTheme.palette.custom.white,
-                      }),
                     },
                   })),
                   theme,

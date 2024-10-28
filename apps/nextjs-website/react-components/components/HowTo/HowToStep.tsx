@@ -1,34 +1,11 @@
 import React from 'react';
-import { Stack, Box, useTheme, Theme } from '@mui/material';
+import { Stack, Box, useTheme, Typography } from '@mui/material';
 import { HowToStepProps } from '../../types/HowTo/HowTo.types';
 import { ArrowIcon } from './HowTo.helpers';
 import { TextColor, TextAlternativeColor } from '../common/Common.helpers';
-import { Title, Body } from '../common/Common';
+import { Title } from '../common/Common';
 import { HowToStepNum } from './HowTo.helpers';
 import Image from 'next/image';
-
-const customStyles = ({ palette }: Theme, theme: 'light' | 'dark') =>
-  theme === 'dark'
-    ? {
-        a: {
-          color: `${palette.primary.contrastText} !important`,
-          fontWeight: '700 !important',
-          textDecorationColor: `${palette.primary.contrastText} !important`,
-          '&:hover': {
-            color: `${palette.primary.contrastText} !important`,
-          },
-        },
-      }
-    : {
-        a: {
-          color: `${palette.primary.main} !important`,
-          fontWeight: '700 !important',
-          textDecorationColor: `${palette.primary.main} !important`,
-          '&:hover': {
-            color: `${palette.primary.main} !important`,
-          },
-        },
-      };
 
 export const HowToStep = ({
   index,
@@ -36,14 +13,21 @@ export const HowToStep = ({
   title,
   description,
   theme,
+  themeVariant,
   isLastStep,
-}: HowToStepProps) => {
-  const muiTheme = useTheme();
+}: HowToStepProps & { themeVariant: 'SEND' | 'IO' }) => {
   const isDarkTheme = theme === 'dark';
   const stepNum = index + 1;
-  const customHowToColour = isDarkTheme ? 'white' : 'primary';
   const color2 = TextAlternativeColor(theme);
-  const color3 = TextColor(theme);
+  const textColor = TextColor(theme);
+  const { palette } = useTheme();
+
+  const linkColor =
+    theme === 'dark'
+      ? palette.custom.white
+      : themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <Stack
@@ -52,7 +36,6 @@ export const HowToStep = ({
       sx={{
         maxWidth: '15em',
         minWidth: 'auto',
-        ...customStyles(muiTheme, theme),
       }}
     >
       {/** Step with icon */}
@@ -66,12 +49,7 @@ export const HowToStep = ({
               direction='row'
               color={isDarkTheme ? 'white' : undefined}
             >
-              <Image
-                src={iconURL}
-                alt=''
-                height={64}
-                width={64}
-              />
+              <Image src={iconURL} alt='' height={64} width={64} />
               {!isLastStep && (
                 <Box
                   sx={{
@@ -89,13 +67,33 @@ export const HowToStep = ({
           <Title
             variant='h6'
             component='p'
-            textColor={color3}
+            textColor={textColor}
             title={title}
             textAlign='left'
           />
 
           {/** Step description */}
-          <Body textColor={color3} body={description} />
+          <Typography
+            component='div'
+            variant='body2'
+            sx={{
+              fontSize: '18px',
+              '& a': {
+                fontWeight: 700,
+                color: linkColor,
+                textDecoration: 'underline',
+                '&:hover': {
+                  color: linkColor,
+                },
+              },
+              '& p': {
+                marginBottom: '0px',
+                color: textColor,
+              },
+            }}
+          >
+            {description}
+          </Typography>
         </Stack>
       )}
 
@@ -105,7 +103,7 @@ export const HowToStep = ({
           <HowToStepNum
             variant='h6'
             component='p'
-            color={customHowToColour}
+            color={color2}
             stepNum={stepNum}
             marginBottom={12}
           />
@@ -127,12 +125,32 @@ export const HowToStep = ({
           <Title
             variant='h6'
             component='p'
-            textColor={color3}
+            textColor={textColor}
             title={title}
             textAlign='left'
           />
 
-          <Body textColor={color3} body={description} />
+          <Typography
+            component='div'
+            variant='body2'
+            color={textColor}
+            sx={{
+              fontSize: '18px',
+              '& a': {
+                fontWeight: 700,
+                color: linkColor,
+                textDecoration: 'underline',
+                '&:hover': {
+                  color: linkColor,
+                },
+              },
+              '& p': {
+                marginBottom: '0px',
+              },
+            }}
+          >
+            {description}
+          </Typography>
         </Stack>
       )}
     </Stack>

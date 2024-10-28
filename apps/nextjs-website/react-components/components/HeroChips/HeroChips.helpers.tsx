@@ -8,7 +8,6 @@ export const ChipsBlock = ({
   chips: ReadonlyArray<ChipProps>;
   theme: 'light' | 'dark';
 }) => {
-
   return (
     <Stack
       direction='row'
@@ -36,10 +35,10 @@ export const ChipsBlock = ({
             label={chip.label}
             href={`#${chip.targetID}`}
             sx={{
-              backgroundColor: theme === 'dark' ? '#0039CB' : '#FFFFFF',
+              backgroundColor: '#ebebf52e',
               color: theme === 'dark' ? '#ffffff' : '#000000',
               '&:hover': {
-                backgroundColor: theme === 'dark' ? '#0049EB' : '#F5F5F5',
+                backgroundColor: '#ebebf54d',
               },
               border: theme === 'light' ? '1px solid #D0D0D0' : 'none',
             }}

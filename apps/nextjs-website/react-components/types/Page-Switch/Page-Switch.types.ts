@@ -1,11 +1,13 @@
 import { EditorialProps } from '../Editorial/Editorial.types';
 import { CardsProps } from '../Cards/Cards.types';
 import { BannerLinkProps } from '../BannerLink/BannerLink.types';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 export interface PageSwitchBaseProps {
   title: string;
   subtitle?: JSX.Element;
   theme: 'dark' | 'light';
+  themeVariant: ThemeVariant;
 }
 
 export interface PageSwitchSection {
@@ -21,6 +23,7 @@ export type PageSwitchContent =
 
 export interface PageSwitchProps extends PageSwitchBaseProps {
   sections: PageSwitchSection[];
+  themeVariant: ThemeVariant;
 }
 
 export interface ButtonSwitchRowBlockProps {
@@ -28,4 +31,5 @@ export interface ButtonSwitchRowBlockProps {
   onButtonClick: (sectionID: number) => void;
   selectedButton: { id: number; text: string };
   theme: 'dark' | 'light';
+  themeVariant?: ThemeVariant;
 }
