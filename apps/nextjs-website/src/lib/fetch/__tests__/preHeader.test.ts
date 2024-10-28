@@ -87,10 +87,10 @@ describe('getPreHeader', () => {
       json: () => Promise.resolve(preHeaderResponse),
     } as unknown as Response);
 
-    await getPreHeader(appEnv);
+    await getPreHeader({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas,rightCtas`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-header/?locale=it&populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {
@@ -107,7 +107,7 @@ describe('getPreHeader', () => {
       json: () => Promise.resolve(preHeaderResponse),
     } as unknown as Response);
 
-    const actual = getPreHeader(appEnv);
+    const actual = getPreHeader({ ...appEnv, locale: 'it' });
 
     // Use preHeaderResponse directly as the expected value
     expect(await actual).toStrictEqual(preHeaderResponseAfterCodec);
@@ -120,7 +120,7 @@ describe('getPreHeader', () => {
       json: () => Promise.resolve(emptyPreHeaderResponse),
     } as unknown as Response);
 
-    const actual = getPreHeader(appEnv);
+    const actual = getPreHeader({ ...appEnv, locale: 'it' });
 
     // Use preHeaderResponse directly as the expected value
     expect(await actual).toStrictEqual({ data: null });

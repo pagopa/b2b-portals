@@ -1,7 +1,8 @@
 {
   "collectionName": "components_components_cta_button_simples",
   "info": {
-    "displayName": "CTAButton_Simple"
+    "displayName": "CTAButton",
+    "description": ""
   },
   "options": {},
   "attributes": {

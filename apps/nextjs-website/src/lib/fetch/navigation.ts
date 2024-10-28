@@ -28,14 +28,15 @@ export type PageData = t.TypeOf<typeof PageDataCodec>;
 export const getNavigation = ({
   config,
   fetchFun,
-}: AppEnv): Promise<Navigation> =>
+  locale,
+}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<Navigation> =>
   extractFromResponse(
     fetchFun(
       // All query parameters in the following URL indicate specific fields that would not otherwise be automatically returned by Strapi
       // The pagination[pageSize] parameter has been set to 100 to realistically not have the need to fetch multiple pages
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pages?pagination[pageSize]=100
+      }/api/pages?locale=${locale}&pagination[pageSize]=100
       &populate[seo][populate][0]=metaTitle
       &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon
       &populate[sections][populate][1]=items.links,items.link,items.icon

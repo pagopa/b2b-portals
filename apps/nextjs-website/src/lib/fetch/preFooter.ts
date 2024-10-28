@@ -43,12 +43,13 @@ export type PreFooterAttributes = t.TypeOf<typeof PreFooterAttributesCodec>;
 export const getPreFooter = ({
   config,
   fetchFun,
-}: AppEnv): Promise<PreFooterData> =>
+  locale,
+}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<PreFooterData> =>
   extractFromResponse(
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pre-footer/?populate=background,ctaButtons,storeButtons,exclude`,
+      }/api/pre-footer/?locale=${locale}&populate=background,ctaButtons,storeButtons,exclude`,
       {
         method: 'GET',
         headers: {
