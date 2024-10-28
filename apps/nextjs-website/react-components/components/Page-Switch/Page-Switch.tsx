@@ -34,7 +34,7 @@ const renderContent = (contents: PageSwitchContent[]) => {
 const PageSwitch = ({
   sections,
   theme,
-  themeVariant,
+  themeVariant = 'SEND',
   title,
   subtitle,
 }: PageSwitchProps) => {

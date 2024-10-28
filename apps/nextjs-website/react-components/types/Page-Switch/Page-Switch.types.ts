@@ -7,7 +7,7 @@ export interface PageSwitchBaseProps {
   title: string;
   subtitle?: JSX.Element;
   theme: 'dark' | 'light';
-  themeVariant: ThemeVariant;
+  themeVariant?: ThemeVariant;
 }
 
 export interface PageSwitchSection {
@@ -23,7 +23,7 @@ export type PageSwitchContent =
 
 export interface PageSwitchProps extends PageSwitchBaseProps {
   sections: PageSwitchSection[];
-  themeVariant: ThemeVariant;
+  themeVariant?: 'SEND' | 'IO';
 }
 
 export interface ButtonSwitchRowBlockProps {

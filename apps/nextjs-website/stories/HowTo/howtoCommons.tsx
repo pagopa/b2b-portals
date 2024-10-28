@@ -28,6 +28,7 @@ const generateSteps = (
     index: i,
     theme,
     isLastStep: i === count - 1,
+    themeVariant: 'SEND',
   }));
 
 // Function to generate default props
