@@ -38,6 +38,7 @@ export const Content = ({
       <Typography
         component='div'
         variant='body2'
+        color= {textColor}
         sx={{
           fontSize: '18px',
           '& a': {
