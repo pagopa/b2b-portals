@@ -10,7 +10,8 @@ import { AccordionItem } from './AccordionItem';
 import { Title, Subtitle } from '../common/Common';
 import { AccordionProps } from '../../types/Accordion/Accordion.types';
 import {
-  BackgroundColorAlternative,
+  SendBackgroundColorAlternativeGrey,
+  IoBackgroundColorAlternativeGrey,
   TextColor,
 } from '../common/Common.helpers';
 
@@ -28,7 +29,12 @@ const Accordion = (props: AccordionProps) => {
   } = props;
 
   const textColor = TextColor(theme);
-  const backgroundColor = BackgroundColorAlternative(theme);
+
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColorAlternativeGrey(theme)
+      : IoBackgroundColorAlternativeGrey(theme);
+
   const { palette } = useTheme();
 
   const linkColor =

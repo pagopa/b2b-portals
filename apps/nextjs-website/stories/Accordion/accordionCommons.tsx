@@ -20,6 +20,7 @@ const generateAccordionItems = (
       </p>
     ),
     theme,
+    themeVariant: 'SEND',
   },
   {
     header: 'Accordion Item 2',
@@ -29,6 +30,7 @@ const generateAccordionItems = (
       </p>
     ),
     theme,
+    themeVariant: 'SEND',
   },
 ];
 

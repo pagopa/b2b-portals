@@ -6,7 +6,11 @@ import { CtaButtonProps } from '../../types/common/Common.types';
 import { CtaButtons } from '../common/Common';
 import { Title, Subtitle } from '../common/Common';
 import { CardsItemContainer } from './Cards.helpers';
-import { BackgroundColor, TextColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+  TextColor,
+} from '../common/Common.helpers';
 
 const Cards = ({
   items,
@@ -17,7 +21,11 @@ const Cards = ({
   textPosition,
   sectionID,
 }: CardsProps) => {
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
+
   const textColor = TextColor(theme);
   const flexDirection = textPosition === 'right' ? 'row-reverse' : 'row';
   const isCenter = textPosition === 'center';

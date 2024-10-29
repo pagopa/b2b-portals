@@ -1,6 +1,10 @@
 import { Box, Stack, Typography, useMediaQuery } from '@mui/material';
 import { CtaButtons } from '../common/Common';
-import { BackgroundColor, TextColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+  TextColor,
+} from '../common/Common.helpers';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
@@ -35,19 +39,28 @@ const BannerLink = ({
 }: BannerLinkProps) => {
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('md'));
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
+
   const lightBackgrounds = [
     muiTheme.palette.grey[100],
     muiTheme.palette.grey[50],
   ];
-  const darkBackgrounds = [
-    muiTheme.palette.custom.bannerLinkDarkBlue,
-    muiTheme.palette.custom.bannerLinkLightBlue,
+  const darkBackgroundsIo = [
+    muiTheme.palette.custom.bannerLinkDarkBlueIO,
+    muiTheme.palette.custom.bannerLinkLightBlueIO,
   ];
+  const darkBackgroundsSend = [
+    muiTheme.palette.custom.bannerLinkDarkBlueSend,
+    muiTheme.palette.custom.bannerLinkLightBlueSend,
+  ];
+
   const textColor =
     theme === 'dark' ? muiTheme.palette.primary.contrastText : TextColor(theme);
 
-    const { palette } = useTheme();
+  const { palette } = useTheme();
 
   const linkColor =
     theme === 'dark'
@@ -74,7 +87,9 @@ const BannerLink = ({
                 backgroundColor:
                   theme === 'light'
                     ? lightBackgrounds[index % 2]
-                    : darkBackgrounds[index % 2],
+                    : themeVariant === 'SEND'
+                      ? darkBackgroundsSend[index % 2]
+                      : darkBackgroundsIo[index % 2],
                 width: '100%',
                 flex: 1,
                 display: 'flex',

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FramedVideoProps } from '@react-components/types';
 import { renderVideo, renderTextSection } from './FramedVideo.helpers';
-import { IoBackgroundColor } from '../common/Common.helpers';
+import { IoBackgroundColorAlternativeBlue } from '../common/Common.helpers';
 
 const FramedVideo = ({
   videoURL,
@@ -40,7 +40,7 @@ const FramedVideo = ({
       : 'space-between'
     : 'center';
 
-  const backgroundColor = IoBackgroundColor(theme);
+  const backgroundColor = IoBackgroundColorAlternativeBlue(theme);
 
   if (!videoURL) {
     return (

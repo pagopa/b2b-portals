@@ -3,7 +3,8 @@ import { Grid, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import {
   TextColor,
-  BackgroundColorAlternative,
+  SendBackgroundColorAlternativeGrey,
+  IoBackgroundColorAlternativeGrey,
 } from '../common/Common.helpers';
 import { Title } from '../common/Common';
 import { FeatureProps } from '../../types/Feature/Feature.types';
@@ -28,7 +29,11 @@ const Feature = ({
   };
 
   const textColor = TextColor(theme);
-  const backgroundColorAlernative = BackgroundColorAlternative(theme);
+
+  const backgroundColorAlernative =
+    themeVariant === 'SEND'
+      ? SendBackgroundColorAlternativeGrey(theme)
+      : IoBackgroundColorAlternativeGrey(theme);
 
   return (
     <ContainerRC

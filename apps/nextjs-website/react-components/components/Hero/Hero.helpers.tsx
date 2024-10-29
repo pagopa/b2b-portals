@@ -71,6 +71,7 @@ export const HeroTextContent = ({
           textAlign={size === 'small' ? 'center' : 'left'}
           sx={{
             fontSize: '18px',
+            color: textColor,
             '& a': {
               color: linkColor,
               textDecoration: 'underline',

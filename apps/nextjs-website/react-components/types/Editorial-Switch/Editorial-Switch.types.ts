@@ -16,7 +16,6 @@ export interface EditorialSwitchSection {
 
 export interface EditorialSwitchProps extends EditorialSwitchBaseProps {
   sections: EditorialSwitchSection[];
-  themeVariant: ThemeVariant;
 }
 
 export interface ButtonSwitchRowBlockProps {
@@ -24,4 +23,5 @@ export interface ButtonSwitchRowBlockProps {
   onButtonClick: (sectionID: number) => void;
   selectedButton: { id: number; text: string };
   theme: 'dark' | 'light';
+  themeVariant: ThemeVariant;
 }

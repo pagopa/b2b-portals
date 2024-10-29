@@ -83,7 +83,7 @@ const SplitButton = ({
   onButtonClick,
   theme,
   themeVariant,
-}: ButtonSwitchRowBlockProps & { themeVariant: 'SEND' | 'IO' }) => {
+}: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
   const { palette } = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

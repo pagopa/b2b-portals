@@ -23,7 +23,6 @@ export type PageSwitchContent =
 
 export interface PageSwitchProps extends PageSwitchBaseProps {
   sections: PageSwitchSection[];
-  themeVariant?: 'SEND' | 'IO';
 }
 
 export interface ButtonSwitchRowBlockProps {
@@ -31,5 +30,5 @@ export interface ButtonSwitchRowBlockProps {
   onButtonClick: (sectionID: number) => void;
   selectedButton: { id: number; text: string };
   theme: 'dark' | 'light';
-  themeVariant?: ThemeVariant;
+  themeVariant: ThemeVariant;
 }

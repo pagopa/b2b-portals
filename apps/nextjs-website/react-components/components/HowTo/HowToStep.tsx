@@ -15,7 +15,7 @@ export const HowToStep = ({
   theme,
   themeVariant,
   isLastStep,
-}: HowToStepProps & { themeVariant: 'SEND' | 'IO' }) => {
+}: HowToStepProps) => {
   const isDarkTheme = theme === 'dark';
   const stepNum = index + 1;
   const color2 = TextAlternativeColor(theme);

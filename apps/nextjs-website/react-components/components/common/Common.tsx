@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Button, Typography, TypographyProps } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
 
@@ -29,7 +29,7 @@ export const CtaButtons = ({
       : isCtaButtonProps(button) && (
           <Button
             key={`${button.text}-${i}`}
-          color={theme === 'dark' ? 'negative' : 'primary'}
+            color={theme === 'dark' ? 'negative' : 'primary'}
             variant={button.variant || 'contained'}
             disableRipple={disableRipple}
             style={{
@@ -51,7 +51,7 @@ export const CtaButtons = ({
               ...(button.variant === 'outlined' && {
                 borderColor:
                   theme === 'dark'
-                    ? palette.custom.mattWhiteBorder
+                    ? palette.custom.matteWhiteBorder
                     : themeVariant === 'SEND'
                       ? palette.primary.main
                       : palette.custom.blueIO[500],
@@ -283,4 +283,61 @@ export const Body = ({
   return typeof body === 'string'
     ? StringBody(body, textColor, textAlign, variant, marginBottom)
     : ElementBody(body, textColor, textAlign, variant, marginBottom);
+};
+
+export const getButtonStyles = (
+  theme: 'light' | 'dark',
+  themeVariant: 'SEND' | 'IO',
+  sectionId: number,
+  currentSectionId: number,
+  palette: Theme['palette']
+) => {
+  const isSelected = sectionId === currentSectionId;
+
+  return {
+    backgroundColor: isSelected
+      ? theme === 'light'
+        ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+        : palette.background.paper
+      : 'transparent',
+    color: isSelected
+      ? theme === 'light'
+        ? themeVariant === 'SEND'
+          ? palette.primary.main
+          : palette.custom.primaryColorDark
+        : themeVariant === 'SEND'
+          ? palette.primary.main
+          : palette.custom.primaryColorDark
+      : theme === 'light'
+        ? themeVariant === 'SEND'
+          ? palette.primary.main
+          : palette.custom.primaryColorDark
+        : palette.primary.contrastText,
+    borderColor:
+      theme === 'light'
+        ? themeVariant === 'SEND'
+          ? palette.primary.main
+          : palette.custom.primaryColorDark
+        : palette.background.paper,
+    '&:hover': {
+      backgroundColor:
+        theme === 'light'
+          ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+          : palette.background.paper,
+      color:
+        theme === 'light'
+          ? themeVariant === 'SEND'
+            ? palette.primary.main
+            : palette.custom.primaryColorDark
+          : themeVariant === 'SEND'
+            ? palette.primary.main
+            : palette.custom.primaryColorDark,
+      borderColor:
+        theme === 'light'
+          ? themeVariant === 'SEND'
+            ? palette.primary.main
+            : palette.custom.primaryColorDark
+          : palette.background.paper,
+    },
+  };
 };

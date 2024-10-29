@@ -3,7 +3,11 @@ import { Box, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContainerRC from '../common/ContainerRC';
 import { HeroCounterProps } from '@react-components/types/HeroCounter/HeroCounter.types';
-import { BackgroundColor, TextColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+  TextColor,
+} from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
 
 const HeroCounter = ({
@@ -16,7 +20,10 @@ const HeroCounter = ({
   background,
   sectionID,
 }: HeroCounterProps) => {
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
 
   const textColor = TextColor(theme);
   const { palette } = useTheme();

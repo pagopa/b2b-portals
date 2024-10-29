@@ -7,9 +7,11 @@ import { Typography } from '@mui/material';
 import { AccordionItemProps } from '../../types/Accordion/Accordion.types';
 import { useTheme } from '@mui/material/styles';
 
-export const AccordionItem: React.FC<
-  AccordionItemProps & { themeVariant: 'IO' | 'SEND' }
-> = ({ header, content, themeVariant }) => {
+export const AccordionItem: React.FC<AccordionItemProps> = ({
+  header,
+  content,
+  themeVariant,
+}) => {
   const controlsId = React.useId() + '-controls';
   const headerId = React.useId() + '-header';
   const { palette } = useTheme();
@@ -42,7 +44,6 @@ export const AccordionItem: React.FC<
         <Typography
           component='div'
           variant='body2'
-          color={'text.primary'}
           sx={{
             '& a': {
               color: linkColor,

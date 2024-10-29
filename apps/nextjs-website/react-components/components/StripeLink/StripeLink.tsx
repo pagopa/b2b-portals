@@ -1,7 +1,11 @@
 import { Grid, Stack, Button, Box, useTheme, Typography } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import { StripeLinkProps } from '../../types/StripeLink/StripeLink.types';
-import { ExtraBackgroundColor, TextColor } from '../common/Common.helpers';
+import {
+  SendExtraBackgroundColor,
+  IoExtraBackgroundColor,
+  TextColor,
+} from '../common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
 
@@ -14,7 +18,12 @@ const StripeLink = ({
   sectionID,
 }: StripeLinkProps) => {
   const textColorWhiteOnly = TextColor('dark');
-  const extraBackgroundColor = ExtraBackgroundColor(theme);
+
+  const extraBackgroundColor =
+    themeVariant === 'SEND'
+      ? SendExtraBackgroundColor(theme)
+      : IoExtraBackgroundColor(theme);
+
   const { palette } = useTheme();
   return (
     <ContainerRC

@@ -21,6 +21,20 @@ export const ExtraBackgroundColor = (theme: 'dark' | 'light') => {
     : palette.custom.primaryColorDark;
 };
 
+export const SendExtraBackgroundColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.text.primary
+    : palette.custom.backgroundColorDarkAlternative;
+};
+
+export const IoExtraBackgroundColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.text.primary
+    : palette.custom.backgroundColorDark;
+};
+
 export const TextColor = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
   return theme === 'dark' ? palette.primary.contrastText : palette.text.primary;
@@ -57,6 +71,34 @@ export const GrayLinkColor = (theme: 'dark' | 'light') => {
 export const IoBackgroundColor = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
   return theme === 'dark'
-    ? palette.custom.ioBackgroundColorDark
-    : palette.custom.ioBackgroundColorLight;
+    ? palette.custom.backgroundColorDark
+    : palette.custom.backgroundColorLight;
+};
+
+export const IoBackgroundColorAlternativeBlue = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.backgroundColorDarkAlternative
+    : palette.custom.backgroundColorLight;
+};
+
+export const IoBackgroundColorAlternativeGrey = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.backgroundColorDark
+    : palette.custom.backgroundColorLightGrey;
+};
+
+export const SendBackgroundColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.backgroundColorDarkAlternative
+    : palette.custom.backgroundColorLight;
+};
+
+export const SendBackgroundColorAlternativeGrey = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.backgroundColorDarkAlternative
+    : palette.custom.backgroundColorLightGrey;
 };
