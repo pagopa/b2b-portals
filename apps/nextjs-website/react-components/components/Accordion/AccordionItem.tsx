@@ -5,14 +5,21 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Typography } from '@mui/material';
 import { AccordionItemProps } from '../../types/Accordion/Accordion.types';
-import { Body } from '../common/Common';
+import { useTheme } from '@mui/material/styles';
 
 export const AccordionItem: React.FC<AccordionItemProps> = ({
   header,
   content,
+  themeVariant,
 }) => {
   const controlsId = React.useId() + '-controls';
   const headerId = React.useId() + '-header';
+  const { palette } = useTheme();
+
+  const linkColor =
+    themeVariant === 'SEND'
+      ? palette.primary.main
+      : palette.custom.primaryColorDark;
 
   return (
     <MUIAccordion
@@ -34,7 +41,21 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Body variant='body2' body={content} textColor={'text.primary'} />
+        <Typography
+          component='div'
+          variant='body2'
+          sx={{
+            '& a': {
+              color: linkColor,
+              textDecoration: 'underline',
+              '&:hover': {
+                color: linkColor,
+              },
+            },
+          }}
+        >
+          {content}
+        </Typography>
       </AccordionDetails>
     </MUIAccordion>
   );

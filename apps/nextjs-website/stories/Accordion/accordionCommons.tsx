@@ -5,7 +5,7 @@ import { AccordionItemProps } from '@react-components/types/Accordion/Accordion.
 
 // Define a 'Template' function that sets how args map to rendering
 export const AccordionTemplate: StoryFn<AccordionProps> = (args) => (
-  <Accordion {...args} themeVariant='SEND' />
+  <Accordion {...args} />
 );
 
 // Function to generate accordion items with a given theme
@@ -14,13 +14,23 @@ const generateAccordionItems = (
 ): AccordionItemProps[] => [
   {
     header: 'Accordion Item 1',
-    content: 'This is the content for accordion item 1.',
+    content: (
+      <p>
+        Accordion content with <a href='/'>link</a> 1
+      </p>
+    ),
     theme,
+    themeVariant: 'SEND',
   },
   {
     header: 'Accordion Item 2',
-    content: 'This is the content for accordion item 2.',
+    content: (
+      <p>
+        Accordion content with <a href='/'>link</a> 2
+      </p>
+    ),
     theme,
+    themeVariant: 'SEND',
   },
 ];
 
@@ -31,6 +41,7 @@ export const defaultPropsLight: Partial<AccordionProps> = {
   theme: 'light',
   layout: 'center',
   textAlignment: 'center',
+  themeVariant: 'SEND',
 };
 
 // Define the default props with dark theme
@@ -40,4 +51,5 @@ export const defaultPropsDark: Partial<AccordionProps> = {
   theme: 'dark',
   layout: 'center',
   textAlignment: 'center',
+  themeVariant: 'SEND',
 };

@@ -3,7 +3,7 @@ import { BannerLink } from '@react-components/components';
 import { BannerLinkProps } from '@react-components/types';
 
 export const BannerLinkTemplate: StoryFn<BannerLinkProps> = (args) => (
-  <BannerLink {...args} themeVariant='SEND' />
+  <BannerLink {...args} />
 );
 
 const generateDefaultProps = (
@@ -27,10 +27,16 @@ const generateDefaultProps = (
           variant: 'contained',
           href: 'mailto:destinatari-send@assistenza.pagopa.it',
         },
+        {
+          text: 'Scrivici',
+          variant: 'outlined',
+          href: 'mailto:destinatari-send@assistenza.pagopa.it',
+        },
       ],
     },
   ],
   theme,
+  themeVariant: 'SEND',
 });
 
 export const defaultPropsLight = generateDefaultProps('light');
@@ -57,6 +63,11 @@ const generateTwoColumnProps = (
           variant: 'contained',
           href: 'mailto:destinatari-send@assistenza.pagopa.it',
         },
+        {
+          text: 'Scrivici',
+          variant: 'outlined',
+          href: 'mailto:destinatari-send@assistenza.pagopa.it',
+        },
       ],
     },
     {
@@ -76,10 +87,16 @@ const generateTwoColumnProps = (
           variant: 'contained',
           href: 'tel:0645202323',
         },
+        {
+          text: 'Chiamaci',
+          variant: 'outlined',
+          href: 'tel:0645202323',
+        },
       ],
     },
   ],
   theme,
+  themeVariant: 'SEND',
 });
 
 export const defaultPropsTwoColumnsLight = generateTwoColumnProps('light');

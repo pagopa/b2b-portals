@@ -1,4 +1,5 @@
-import { SectionProps } from "../common/Common.types";
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SectionProps } from '../common/Common.types';
 
 export interface Step {
   readonly iconURL?: string;
@@ -9,6 +10,7 @@ export interface Step {
 export interface HowToStepProps extends Step {
   readonly index: number;
   readonly theme: 'light' | 'dark';
+  readonly themeVariant: ThemeVariant;
   readonly isLastStep: boolean;
 }
 

@@ -1,6 +1,10 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, useMediaQuery } from '@mui/material';
 import { CtaButtons } from '../common/Common';
-import { BackgroundColor, TextColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+  TextColor,
+} from '../common/Common.helpers';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
@@ -27,16 +31,43 @@ const styles = {
   },
 };
 
-const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
-  const { palette } = useTheme();
-  const backgroundColor = BackgroundColor(theme);
-  const lightBackgrounds = [palette.grey[100], palette.grey[50]];
-  const darkBackgrounds = [
-    palette.custom.bannerLinkDarkBlue,
-    palette.custom.bannerLinkLightBlue,
+const BannerLink = ({
+  theme,
+  sections,
+  sectionID,
+  themeVariant,
+}: BannerLinkProps) => {
+  const muiTheme = useTheme();
+  const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('md'));
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
+
+  const lightBackgrounds = [
+    muiTheme.palette.grey[100],
+    muiTheme.palette.grey[50],
   ];
+  const darkBackgroundsIo = [
+    muiTheme.palette.custom.bannerLinkDarkBlueIO,
+    muiTheme.palette.custom.bannerLinkLightBlueIO,
+  ];
+  const darkBackgroundsSend = [
+    muiTheme.palette.custom.bannerLinkDarkBlueSend,
+    muiTheme.palette.custom.bannerLinkLightBlueSend,
+  ];
+
   const textColor =
-    theme === 'dark' ? palette.primary.contrastText : TextColor(theme);
+    theme === 'dark' ? muiTheme.palette.primary.contrastText : TextColor(theme);
+
+  const { palette } = useTheme();
+
+  const linkColor =
+    theme === 'dark'
+      ? palette.custom.white
+      : themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <Box
@@ -56,7 +87,9 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
                 backgroundColor:
                   theme === 'light'
                     ? lightBackgrounds[index % 2]
-                    : darkBackgrounds[index % 2],
+                    : themeVariant === 'SEND'
+                      ? darkBackgroundsSend[index % 2]
+                      : darkBackgroundsIo[index % 2],
                 width: '100%',
                 flex: 1,
                 display: 'flex',
@@ -95,10 +128,11 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
                   sx={{
                     textAlign: 'center',
                     '& a': {
-                      color: textColor,
+                      color: linkColor,
                       textDecoration: 'underline',
+                      fontWeight: 'bold',
                       '&:hover': {
-                        color: textColor,
+                        color: linkColor,
                         textDecoration: 'underline',
                       },
                     },
@@ -109,30 +143,27 @@ const BannerLink = ({ theme, sections, sectionID }: BannerLinkProps) => {
                 >
                   {section.body}
                 </Typography>
-                {section.ctaButtons &&
-                  section.ctaButtons.length > 0 &&
-                  CtaButtons({
-                    ctaButtons: section.ctaButtons.map(
-                      (button: CtaButtonProps) => ({
-                        ...button,
-                        sx: {
-                          width: 'auto',
-                          marginTop: '16px',
-                          ...(button.variant === 'contained' && {
-                            backgroundColor:
-                              theme === 'dark'
-                                ? palette.custom.white
-                                : palette.custom.blueIO[500],
-                            color:
-                              theme === 'dark'
-                                ? palette.custom.blueIO[500]
-                                : palette.custom.white,
-                          }),
-                        },
-                      })
-                    ),
-                    theme,
-                  })}
+
+                {section.ctaButtons && section.ctaButtons.length > 0 && (
+                  <Stack
+                    direction={isSmallScreen ? 'column' : 'row'}
+                    spacing={2}
+                    sx={{ mt: 2 }}
+                  >
+                    {CtaButtons({
+                      ctaButtons: section.ctaButtons.map(
+                        (button: CtaButtonProps) => ({
+                          ...button,
+                          sx: {
+                            width: 'auto',
+                          },
+                        })
+                      ),
+                      theme,
+                      themeVariant,
+                    })}
+                  </Stack>
+                )}
               </Stack>
             </Stack>
           );

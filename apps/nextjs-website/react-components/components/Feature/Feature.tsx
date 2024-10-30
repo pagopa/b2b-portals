@@ -3,7 +3,8 @@ import { Grid, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import {
   TextColor,
-  BackgroundColorAlternative,
+  SendBackgroundColorAlternativeGrey,
+  IoBackgroundColorAlternativeGrey,
 } from '../common/Common.helpers';
 import { Title } from '../common/Common';
 import { FeatureProps } from '../../types/Feature/Feature.types';
@@ -14,6 +15,7 @@ const Feature = ({
   title,
   items,
   theme,
+  themeVariant,
   showCarouselMobile,
   background,
   sectionID,
@@ -27,13 +29,17 @@ const Feature = ({
   };
 
   const textColor = TextColor(theme);
-  const backgroundColorAlernative = BackgroundColorAlternative(theme);
+
+  const backgroundColorAlernative =
+    themeVariant === 'SEND'
+      ? SendBackgroundColorAlternativeGrey(theme)
+      : IoBackgroundColorAlternativeGrey(theme);
 
   return (
     <ContainerRC
       background={background ?? backgroundColorAlernative}
       py={{ xs: 4, sm: 4, md: 8 }}
-      {...sectionID && { sectionID }}
+      {...(sectionID && { sectionID })}
     >
       <Grid item xs={12}>
         <Title variant='h4' textColor={textColor} title={title} />
@@ -47,7 +53,11 @@ const Feature = ({
               display={showCarouselMobile ? { xs: 'none', md: 'block' } : {}}
               key={index}
             >
-              <FeatureStackItem theme={theme} item={item} />
+              <FeatureStackItem
+                theme={theme}
+                item={item}
+                themeVariant={themeVariant}
+              />
             </Grid>
           ))}
           {showCarouselMobile && (
@@ -56,6 +66,7 @@ const Feature = ({
               activeStep={activeStep}
               handleStepChange={handleStepChange}
               theme={theme}
+              themeVariant={themeVariant}
               themeComponentDirection={
                 muiTheme.direction === 'rtl' ? 'rtl' : 'ltr'
               }

@@ -4,7 +4,10 @@ import Image from 'next/image';
 import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroProps } from '../../types/Hero/Hero.types';
-import { BackgroundColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+} from '../common/Common.helpers';
 import { HeroTextContent, getMinHeight, getOverlay } from './Hero.helpers';
 
 const Hero = (props: HeroProps) => {
@@ -13,19 +16,19 @@ const Hero = (props: HeroProps) => {
     inverse = false,
     background,
     theme = 'dark',
+    themeVariant,
     useHoverlay = true,
     image,
     altText = '',
     sectionID,
-    themeVariant,
   } = props;
-
-  // TODO: Substitute this console.log with themeVariant use logic
-  console.log(themeVariant);
 
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
 
   const BackgroundImage = isJSX(background) ? (
     background

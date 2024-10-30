@@ -21,6 +21,7 @@ const makeAccordionProps = ({
     header,
     content: MarkdownRenderer({ markdown: content, variant: 'body2' }),
     theme: rest.theme,
+    themeVariant: rest.themeVariant,
   })),
   textAlignment,
   ...rest,

@@ -1,9 +1,9 @@
 import { StoryFn } from '@storybook/react';
-import { Hero } from "@react-components/components";
-import { HeroProps } from "@react-components/types";
+import { Hero } from '@react-components/components';
+import { HeroProps } from '@react-components/types';
 
-// Define a "Template" function that sets how args map to rendering
-export const HeroTemplate: StoryFn<HeroProps> = (args) => <Hero {...args} themeVariant='SEND' />;
+// Define a 'Template' function that sets how args map to rendering
+export const HeroTemplate: StoryFn<HeroProps> = (args) => <Hero {...args} />;
 
 const title = 'Lorem ipsum dolor sit amet, consectetur';
 const subtitle = `Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
@@ -23,26 +23,62 @@ const ctaButtons: HeroProps['ctaButtons'] = [
 
 const createHeroProps = (
   theme: 'dark' | 'light',
+  themeVariant: 'IO' | 'SEND',
   withButtons: boolean,
   withSubtitle: boolean
 ): Partial<HeroProps> => {
   let props: Partial<HeroProps> = {
     theme,
+    themeVariant,
     useHoverlay: false,
     title,
     subtitle: withSubtitle ? subtitle : '',
     ctaButtons: withButtons ? ctaButtons : [],
     altText: 'Alt text for image',
-    image: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-    background: theme === 'dark' ? 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png' : '',
+    image:
+      'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
+    background:
+      theme === 'dark'
+        ? 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png'
+        : '',
   };
 
   return props;
 };
 
-export const defaultsDarkWithButtons = createHeroProps('dark', true, true);
-export const defaultsDarkWithoutButtons = createHeroProps('dark', false, true);
-export const defaultsDarkWithoutButtonsNoSubtitle = createHeroProps('dark', false, false);
-export const defaultsLightWithButtons = createHeroProps('light', true, true);
-export const defaultsLightWithoutButtons = createHeroProps('light', false, true);
-export const defaultsLightWithoutButtonsNoSubtitle = createHeroProps('light', false, false);
+export const defaultsDarkWithButtons = createHeroProps(
+  'dark',
+  'SEND',
+  true,
+  true
+);
+export const defaultsDarkWithoutButtons = createHeroProps(
+  'dark',
+  'SEND',
+  false,
+  true
+);
+export const defaultsDarkWithoutButtonsNoSubtitle = createHeroProps(
+  'dark',
+  'SEND',
+  false,
+  false
+);
+export const defaultsLightWithButtons = createHeroProps(
+  'light',
+  'SEND',
+  true,
+  true
+);
+export const defaultsLightWithoutButtons = createHeroProps(
+  'light',
+  'SEND',
+  false,
+  true
+);
+export const defaultsLightWithoutButtonsNoSubtitle = createHeroProps(
+  'light',
+  'SEND',
+  false,
+  false
+);

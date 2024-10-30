@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, Grid, Link, Stack, Typography } from '@mui/material';
+import { Box, Grid, Link, Stack, Typography, useTheme } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContainerRC from '../common/ContainerRC';
 import { groupStepsByRows } from './HowTo.helpers';
 import {
   TextColor,
-  BackgroundColorAlternative,
+  SendBackgroundColorAlternativeGrey,
+  IoBackgroundColorAlternativeGrey,
 } from '../common/Common.helpers';
 import { HowToProps } from '../../types/HowTo/HowTo.types';
 import { HowToStep } from './HowToStep';
@@ -16,19 +17,31 @@ const HowTo = (props: HowToProps) => {
     title,
     steps,
     theme,
+    themeVariant,
     link,
     rowMaxSteps = 4,
     stepsAlignment = 'center',
     sectionID,
   } = props;
   const textColor = TextColor(theme);
-  const backgroundColor = BackgroundColorAlternative(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColorAlternativeGrey(theme)
+      : IoBackgroundColorAlternativeGrey(theme);
+  const { palette } = useTheme();
 
   const alignment = { center: 'center', left: 'start', right: 'end' }[
     stepsAlignment
   ];
 
   const stepsRows = groupStepsByRows(steps, rowMaxSteps);
+
+  const linkColor =
+    theme === 'light'
+      ? themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.blueIO[500]
+      : palette.custom.white;
 
   return (
     <ContainerRC
@@ -80,6 +93,7 @@ const HowTo = (props: HowToProps) => {
                 <HowToStep
                   index={i * rowMaxSteps + j}
                   theme={theme}
+                  themeVariant={themeVariant}
                   isLastStep={i * rowMaxSteps + j === steps.length - 1}
                   {...step}
                 />
@@ -90,10 +104,7 @@ const HowTo = (props: HowToProps) => {
 
         {/** Link */}
         {link && (
-          <Typography
-            component='span'
-            display={'contents'}
-          >
+          <Typography component='span' display={'contents'}>
             <Link
               sx={{
                 display: 'flex',
@@ -103,7 +114,7 @@ const HowTo = (props: HowToProps) => {
               }}
               href={link.href}
               target={link.target}
-              color={textColor}
+              color={linkColor}
               underline='none'
               fontWeight={600}
             >

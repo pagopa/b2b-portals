@@ -1,7 +1,11 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import { BackgroundColor, TextColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+  TextColor,
+} from '../common/Common.helpers';
 import { HeroChipsProps } from '@react-components/types/HeroChips/HeroChips.types';
 import { ChipsBlock } from './HeroChips.helpers';
 
@@ -9,6 +13,7 @@ const HeroChips = (props: HeroChipsProps) => {
   const {
     background,
     theme = 'dark',
+    themeVariant,
     title,
     subtitle,
     chips,
@@ -16,7 +21,11 @@ const HeroChips = (props: HeroChipsProps) => {
     sectionID,
   } = props;
 
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
+
   const textColor = TextColor(theme);
 
   const BackgroundImage = (
@@ -49,7 +58,7 @@ const HeroChips = (props: HeroChipsProps) => {
         justifyContent: 'space-between',
         py: 4,
       }}
-      {...sectionID && { sectionID }}
+      {...(sectionID && { sectionID })}
     >
       <Box
         sx={{

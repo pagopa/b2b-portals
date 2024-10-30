@@ -12,10 +12,10 @@ export const Ctas = ({
   ctaButtons,
   storeButtons,
   theme,
+  themeVariant,
 }: EditorialCtaProps) => {
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
-  const { palette } = useTheme();
 
   if (storeButtons?.hrefGoogle || storeButtons?.hrefApple) {
     return (
@@ -83,20 +83,11 @@ export const Ctas = ({
               width: {
                 md: 'auto',
                 xs: '100%',
-                ...(button.variant === 'contained' && {
-                  backgroundColor:
-                    theme === 'dark'
-                      ? palette.custom.white
-                      : palette.custom.blueIO[500],
-                  color:
-                    theme === 'dark'
-                      ? palette.custom.blueIO[500]
-                      : palette.custom.white,
-                }),
               },
             },
           })),
           theme,
+          themeVariant,
         })}
       </Stack>
     );

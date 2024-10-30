@@ -9,8 +9,7 @@ export const generateItems = (count: number): CardsItemProps[] =>
     title: `Card ${i + 1}`,
     text: `This is card ${i + 1}`,
     iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
-  })
-);
+  }));
 
 // Function to generate items
 export const generateItemsWithLinks = (count: number): CardsItemProps[] =>
@@ -24,11 +23,10 @@ export const generateItemsWithLinks = (count: number): CardsItemProps[] =>
         href: '#',
       },
     ],
-  })
-);
+  }));
 
-// Define a "Template" function that sets how args map to rendering
-export const CardsTemplate: StoryFn<CardsProps> = (args) => <Cards {...args} themeVariant='SEND' />;
+// Define a 'Template' function that sets how args map to rendering
+export const CardsTemplate: StoryFn<CardsProps> = (args) => <Cards {...args} />;
 
 // Function to generate default props
 const generateDefaultProps = (
@@ -37,15 +35,34 @@ const generateDefaultProps = (
   withLinks: boolean = false
 ): Partial<CardsProps> => ({
   theme,
-  items: withLinks ? generateItemsWithLinks(itemCount) : generateItems(itemCount),
+  items: withLinks
+    ? generateItemsWithLinks(itemCount)
+    : generateItems(itemCount),
+  themeVariant: 'SEND',
 });
 
 // Define the default props
 export const defaultPropsDarkThree = generateDefaultProps('dark', 3);
-export const defaultPropsDarkThreeWithLinks = generateDefaultProps('dark', 3, true);
+export const defaultPropsDarkThreeWithLinks = generateDefaultProps(
+  'dark',
+  3,
+  true
+);
 export const defaultPropsDarkFour = generateDefaultProps('dark', 4);
-export const defaultPropsDarkFourWithLinks = generateDefaultProps('dark', 4, true);
+export const defaultPropsDarkFourWithLinks = generateDefaultProps(
+  'dark',
+  4,
+  true
+);
 export const defaultPropsLightThree = generateDefaultProps('light', 3);
-export const defaultPropsLightThreeWithLinks = generateDefaultProps('light', 3, true);
+export const defaultPropsLightThreeWithLinks = generateDefaultProps(
+  'light',
+  3,
+  true
+);
 export const defaultPropsLightFour = generateDefaultProps('light', 4);
-export const defaultPropsLightFourWithLinks = generateDefaultProps('light', 4, true);
+export const defaultPropsLightFourWithLinks = generateDefaultProps(
+  'light',
+  4,
+  true
+);

@@ -1,5 +1,10 @@
 import { ReactElement } from 'react';
-import { CtaButtonProps, Theme, type SectionProps } from '../common/Common.types';
+import {
+  CtaButtonProps,
+  Theme,
+  type SectionProps,
+} from '../common/Common.types';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 export interface EditorialProps
   extends SectionProps,
@@ -16,6 +21,7 @@ export interface EditorialContentProps {
   readonly eyelet?: string;
   readonly body: string | JSX.Element;
   readonly theme: Theme;
+  readonly themeVariant: ThemeVariant;
 }
 
 export interface EditorialImageProps {
@@ -37,4 +43,5 @@ export interface EditorialCtaProps {
   readonly ctaButtons?: ReadonlyArray<CtaButtonProps>;
   readonly storeButtons?: StoreButtonsProps;
   readonly theme: Theme;
+  readonly themeVariant: ThemeVariant;
 }

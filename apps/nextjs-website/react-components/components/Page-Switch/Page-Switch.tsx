@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Box, ButtonGroup, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ContainerRC from '../common/ContainerRC';
-import { BackgroundColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+} from '../common/Common.helpers';
 import {
   ButtonSwitchRowBlock,
   TitleSubtitleBlock,
@@ -15,6 +18,7 @@ import {
 import Editorial from '../Editorial/Editorial';
 import Cards from '../Cards/Cards';
 import BannerLink from '../BannerLink/BannerLink';
+import { getButtonStyles } from '../common/Common';
 
 const renderContent = (contents: PageSwitchContent[]) => {
   return contents.map((content, index) => {
@@ -31,7 +35,13 @@ const renderContent = (contents: PageSwitchContent[]) => {
   });
 };
 
-const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
+const PageSwitch = ({
+  sections,
+  theme,
+  themeVariant = 'SEND',
+  title,
+  subtitle,
+}: PageSwitchProps) => {
   if (sections[0] === undefined) {
     return null;
   }
@@ -67,8 +77,10 @@ const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
   }, []);
 
   const { palette } = useTheme();
-
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
 
   return (
     <Box>
@@ -78,6 +90,7 @@ const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
       >
         <TitleSubtitleBlock
           title={title}
+          themeVariant={themeVariant}
           {...(subtitle && { subtitle })}
           theme={theme}
         />
@@ -93,53 +106,25 @@ const PageSwitch = ({ sections, theme, title, subtitle }: PageSwitchProps) => {
             }}
             onButtonClick={handleButtonClick}
             theme={theme}
+            themeVariant={themeVariant}
           />
         ) : (
           <ButtonGroup
-            variant="outlined"
-            aria-label="buttonGroup"
+            variant='outlined'
+            aria-label='buttonGroup'
             sx={{ margin: '16px 0' }}
           >
             {sections.map((section) => (
               <Button
                 key={section.id}
                 onClick={() => handleButtonClick(section.id)}
-                sx={{
-                  backgroundColor:
-                    section.id === currentSection.id
-                      ? theme === 'light'
-                        ? palette.custom
-                            .editorialSwitchButtonsBackgroundLightBlue
-                        : palette.background.paper
-                      : 'transparent',
-                  color:
-                    section.id === currentSection.id
-                      ? theme === 'light'
-                        ? palette.primary.main
-                        : palette.custom.primaryColorDark
-                      : theme === 'light'
-                        ? palette.primary.main
-                        : palette.primary.contrastText,
-                  borderColor:
-                    theme === 'light'
-                      ? palette.primary.main
-                      : palette.background.paper,
-                  '&:hover': {
-                    backgroundColor:
-                      theme === 'light'
-                        ? palette.custom
-                            .editorialSwitchButtonsBackgroundLightBlue
-                        : palette.background.paper,
-                    color:
-                      theme === 'light'
-                        ? palette.primary.main
-                        : palette.custom.primaryColorDark,
-                    borderColor:
-                      theme === 'light'
-                        ? palette.primary.main
-                        : palette.background.paper,
-                  },
-                }}
+                sx={getButtonStyles(
+                  theme,
+                  themeVariant,
+                  section.id,
+                  currentSection.id,
+                  palette
+                )}
                 disableRipple
               >
                 {section.buttonText}

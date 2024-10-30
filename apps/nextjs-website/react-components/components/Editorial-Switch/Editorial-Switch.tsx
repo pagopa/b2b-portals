@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Box, ButtonGroup, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ContainerRC from '../common/ContainerRC';
-import { BackgroundColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+} from '../common/Common.helpers';
 import {
   ButtonSwitchRowBlock,
   TitleSubtitleBlock,
@@ -12,10 +15,12 @@ import {
   EditorialSwitchSection,
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
 import Editorial from '../Editorial/Editorial';
+import { getButtonStyles } from '../common/Common';
 
 const EditorialSwitch = ({
   sections,
   theme,
+  themeVariant,
   title,
   subtitle,
 }: EditorialSwitchProps) => {
@@ -54,8 +59,10 @@ const EditorialSwitch = ({
   }, []);
 
   const { palette } = useTheme();
-
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
 
   return (
     <Box>
@@ -67,6 +74,7 @@ const EditorialSwitch = ({
           title={title}
           {...(subtitle && { subtitle })}
           theme={theme}
+          themeVariant={themeVariant}
         />
         {isMobile ? (
           <ButtonSwitchRowBlock
@@ -80,53 +88,25 @@ const EditorialSwitch = ({
             }}
             onButtonClick={handleButtonClick}
             theme={theme}
+            themeVariant={themeVariant}
           />
         ) : (
           <ButtonGroup
-            variant="outlined"
-            aria-label="buttonGroup"
+            variant='outlined'
+            aria-label='buttonGroup'
             sx={{ margin: '16px 0' }}
           >
             {sections.map((section) => (
               <Button
                 key={section.id}
                 onClick={() => handleButtonClick(section.id)}
-                sx={{
-                  backgroundColor:
-                    section.id === currentSection.id
-                      ? theme === 'light'
-                        ? palette.custom
-                            .editorialSwitchButtonsBackgroundLightBlue
-                        : palette.background.paper
-                      : 'transparent',
-                  color:
-                    section.id === currentSection.id
-                      ? theme === 'light'
-                        ? palette.primary.main
-                        : palette.custom.primaryColorDark
-                      : theme === 'light'
-                        ? palette.primary.main
-                        : palette.primary.contrastText,
-                  borderColor:
-                    theme === 'light'
-                      ? palette.primary.main
-                      : palette.background.paper,
-                  '&:hover': {
-                    backgroundColor:
-                      theme === 'light'
-                        ? palette.custom
-                            .editorialSwitchButtonsBackgroundLightBlue
-                        : palette.background.paper,
-                    color:
-                      theme === 'light'
-                        ? palette.primary.main
-                        : palette.custom.primaryColorDark,
-                    borderColor:
-                      theme === 'light'
-                        ? palette.primary.main
-                        : palette.background.paper,
-                  },
-                }}
+                sx={getButtonStyles(
+                  theme,
+                  themeVariant,
+                  section.id,
+                  currentSection.id,
+                  palette
+                )}
                 disableRipple
               >
                 {section.buttonText}
