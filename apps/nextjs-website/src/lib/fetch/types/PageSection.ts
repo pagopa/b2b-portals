@@ -300,7 +300,7 @@ const RowTextSectionCodec = t.strict({
   __component: t.literal('sections.row-text'),
   title: t.string,
   subtitle: t.union([t.string, t.null]),
-  body: t.union([t.string, t.null]),
+  body: t.string,
   layout: t.union([t.literal('left'), t.literal('center')]),
   sectionID: t.union([t.string, t.null]),
 });

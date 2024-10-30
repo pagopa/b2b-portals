@@ -1,7 +1,7 @@
 export interface RowTextProps {
-    title: string; 
-    subtitle?: string; 
-    body?: string; 
-    layout: 'left' | 'center'; 
+    title: string;
+    subtitle?: string;
+    body?: JSX.Element;
+    layout: 'left' | 'center';
     sectionID: string | null;
-}
+  }
