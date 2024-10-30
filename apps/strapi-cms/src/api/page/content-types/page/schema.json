@@ -59,7 +59,8 @@
         "sections.highlight-box",
         "sections.stats",
         "sections.text-section",
-        "sections.framed-video"
+        "sections.framed-video",
+        "sections.page-switch"
       ],
       "required": true,
       "min": 1,

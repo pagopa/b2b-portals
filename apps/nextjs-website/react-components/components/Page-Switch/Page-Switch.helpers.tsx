@@ -65,6 +65,7 @@ export const TitleSubtitleBlock = ({
           },
           '& p': {
             marginBottom: '4px',
+            color: textColor,
           },
         }}
       >

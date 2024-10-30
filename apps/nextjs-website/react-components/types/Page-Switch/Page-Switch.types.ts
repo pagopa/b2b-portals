@@ -7,13 +7,13 @@ export interface PageSwitchBaseProps {
   title: string;
   subtitle?: JSX.Element;
   theme: 'dark' | 'light';
-  themeVariant?: ThemeVariant;
+  themeVariant: ThemeVariant;
 }
 
-export interface PageSwitchSection {
+export interface PageSwitchPage {
   id: number;
   buttonText: string;
-  contents: PageSwitchContent[];
+  sections: PageSwitchContent[];
 }
 
 export type PageSwitchContent =
@@ -21,8 +21,10 @@ export type PageSwitchContent =
   | { type: 'Cards'; props: CardsProps }
   | { type: 'BannerLink'; props: BannerLinkProps };
 
+// export type PageSwitchContent = EditorialProps | CardsProps | BannerLinkProps;
+
 export interface PageSwitchProps extends PageSwitchBaseProps {
-  sections: PageSwitchSection[];
+  pages: PageSwitchPage[];
 }
 
 export interface ButtonSwitchRowBlockProps {

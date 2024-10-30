@@ -61,7 +61,11 @@ export const fetchPageFromID = ({
       &populate[sections][populate][4]=video.src
       &populate[sections][populate][5]=steps.icon
       &populate[sections][populate][6]=cards.image,cards.link
-      &populate[sections][populate][7]=text.link`,
+      &populate[sections][populate][7]=text.link
+      &populate[sections][populate][8]=pages.sections.ctaButtons,pages.sections.image,pages.sections.mobileImage,pages.sections.storeButtons
+      &populate[sections][populate][9]=pages.sections.items.links,pages.sections.items.icon
+      &populate[sections][populate][10]=pages.sections.sections.ctaButtons,pages.sections.sections.icon
+      `,
       {
         method: 'GET',
         headers: {
