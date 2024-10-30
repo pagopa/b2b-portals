@@ -21,8 +21,6 @@ export type PageSwitchContent =
   | { type: 'Cards'; props: CardsProps }
   | { type: 'BannerLink'; props: BannerLinkProps };
 
-// export type PageSwitchContent = EditorialProps | CardsProps | BannerLinkProps;
-
 export interface PageSwitchProps extends PageSwitchBaseProps {
   pages: PageSwitchPage[];
 }
