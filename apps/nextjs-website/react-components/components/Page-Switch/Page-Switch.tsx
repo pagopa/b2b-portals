@@ -12,8 +12,8 @@ import {
 } from './Page-Switch.helpers';
 import {
   PageSwitchProps,
-  PageSwitchSection,
   PageSwitchContent,
+  PageSwitchPage,
 } from '../../types/Page-Switch/Page-Switch.types';
 import Editorial from '../Editorial/Editorial';
 import Cards from '../Cards/Cards';
@@ -36,24 +36,24 @@ const renderContent = (contents: PageSwitchContent[]) => {
 };
 
 const PageSwitch = ({
-  sections,
+  pages,
   theme,
-  themeVariant = 'SEND',
+  themeVariant,
   title,
   subtitle,
 }: PageSwitchProps) => {
-  if (sections[0] === undefined) {
+  if (pages[0] === undefined) {
     return null;
   }
 
-  const [currentSection, setCurrentSection] = useState<PageSwitchSection>(
-    sections[0]
+  const [currentPage, setCurrentPage] = useState<PageSwitchPage>(
+    pages[0]
   );
 
-  const handleButtonClick = (sectionID: number) => {
-    const section = sections.find((s) => s.id === sectionID);
-    if (section !== undefined) {
-      setCurrentSection(section);
+  const handleButtonClick = (pageID: number) => {
+    const page = pages.find((page) => page.id === pageID);
+    if (page !== undefined) {
+      setCurrentPage(page);
     }
   };
 
@@ -96,13 +96,13 @@ const PageSwitch = ({
         />
         {isMobile ? (
           <ButtonSwitchRowBlock
-            buttons={sections.map((s) => ({
+            buttons={pages.map((s) => ({
               id: s.id,
               text: s.buttonText,
             }))}
             selectedButton={{
-              id: currentSection.id,
-              text: currentSection.buttonText,
+              id: currentPage.id,
+              text: currentPage.buttonText,
             }}
             onButtonClick={handleButtonClick}
             theme={theme}
@@ -112,28 +112,28 @@ const PageSwitch = ({
           <ButtonGroup
             variant='outlined'
             aria-label='buttonGroup'
-            sx={{ margin: '16px 0' }}
+            sx={{ margin: '16px auto' }}
           >
-            {sections.map((section) => (
+            {pages.map((page) => (
               <Button
-                key={section.id}
-                onClick={() => handleButtonClick(section.id)}
+                key={page.id}
+                onClick={() => handleButtonClick(page.id)}
                 sx={getButtonStyles(
                   theme,
                   themeVariant,
-                  section.id,
-                  currentSection.id,
+                  page.id,
+                  currentPage.id,
                   palette
                 )}
                 disableRipple
               >
-                {section.buttonText}
+                {page.buttonText}
               </Button>
             ))}
           </ButtonGroup>
         )}
       </ContainerRC>
-      {renderContent(currentSection.contents)}
+      {renderContent(currentPage.sections)}
     </Box>
   );
 };

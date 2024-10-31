@@ -17,11 +17,11 @@ const PageSwitchTemplate: StoryFn<PageSwitchProps> = (args) => (
 export const Default: StoryFn<typeof PageSwitch> = PageSwitchTemplate.bind({});
 Default.args = {
   ...defaultPropsLight,
-  sections: [
+  pages: [
     {
       id: 1,
       buttonText: 'Button 1',
-      contents: [
+      sections: [
         {
           type: 'Editorial',
           props: {
@@ -108,7 +108,7 @@ Default.args = {
     {
       id: 2,
       buttonText: 'Button 2',
-      contents: [
+      sections: [
         {
           type: 'Editorial',
           props: {
@@ -190,7 +190,7 @@ Default.args = {
     {
       id: 3,
       buttonText: 'Button 3',
-      contents: [
+      sections: [
         {
           type: 'Editorial',
           props: {
