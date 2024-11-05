@@ -5,6 +5,7 @@ import {
   SendBackgroundColor,
   IoBackgroundColor,
   TextColor,
+  LinkColor,
 } from '../common/Common.helpers';
 import { HeroChipsProps } from '@react-components/types/HeroChips/HeroChips.types';
 import { ChipsBlock } from './HeroChips.helpers';
@@ -17,7 +18,6 @@ const HeroChips = (props: HeroChipsProps) => {
     title,
     subtitle,
     chips,
-    centerText,
     sectionID,
   } = props;
 
@@ -27,6 +27,7 @@ const HeroChips = (props: HeroChipsProps) => {
       : IoBackgroundColor(theme);
 
   const textColor = TextColor(theme);
+  const linkColor = LinkColor(theme);
 
   const BackgroundImage = (
     <Box
@@ -54,7 +55,7 @@ const HeroChips = (props: HeroChipsProps) => {
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', lg: 'row' },
-        alignItems: centerText ? 'center' : 'flex-start',
+        alignItems: 'center',
         justifyContent: 'space-between',
         py: 4,
       }}
@@ -66,7 +67,7 @@ const HeroChips = (props: HeroChipsProps) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: centerText ? 'center' : 'flex-start',
+          alignItems: 'center',
         }}
       >
         <Typography
@@ -74,17 +75,22 @@ const HeroChips = (props: HeroChipsProps) => {
           color={textColor}
           mb={2}
           sx={{ fontSize: { xs: '2.25rem!important', md: '3.5rem!important' } }}
-          textAlign={centerText ? 'center' : 'left'}
+          textAlign='center'
         >
           {title}
         </Typography>
         {subtitle && (
           <Typography
+            component='div'
             variant='body1'
             color={textColor}
             mb={2}
-            sx={{ fontSize: '1rem' }}
-            textAlign={centerText ? 'center' : 'left'}
+            sx={{ fontSize: '1rem', '& p': {
+              color: textColor
+            }, '& a': {
+              color: linkColor
+            } }}
+            textAlign='center'
           >
             {subtitle}
           </Typography>

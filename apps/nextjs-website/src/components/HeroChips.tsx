@@ -13,8 +13,6 @@ const makeHeroChipsProps = ({
   ...rest,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
   ...(background.data && { background: background.data.attributes.url }),
-
-  // TODO: implement chips
 });
 
 const HeroChips = (

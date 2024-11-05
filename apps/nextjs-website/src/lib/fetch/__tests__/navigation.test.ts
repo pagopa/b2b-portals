@@ -73,7 +73,7 @@ describe('getNavigation', () => {
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?locale=it&pagination[pageSize]=100
       &populate[seo][populate][0]=metaTitle
-      &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon
+      &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon,chips
       &populate[sections][populate][1]=items.links,items.link,items.icon
       &populate[sections][populate][2]=sections.icon,sections.ctaButtons
       &populate[sections][populate][3]=sections.content.image,sections.content.mobileImage,sections.content.ctaButtons,sections.content.storeButtons

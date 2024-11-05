@@ -41,6 +41,7 @@ export const ChipsBlock = ({
                 backgroundColor: '#ebebf54d',
               },
               border: theme === 'light' ? '1px solid #D0D0D0' : 'none',
+              cursor: 'pointer'
             }}
           />
         ))}
