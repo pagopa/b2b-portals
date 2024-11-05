@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_components_chips",
+  "info": {
+    "displayName": "Chip"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "targetID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$",
+      "required": true
+    }
+  }
+}

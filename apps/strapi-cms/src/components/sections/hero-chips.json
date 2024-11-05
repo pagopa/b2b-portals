@@ -1,0 +1,45 @@
+{
+  "collectionName": "components_sections_hero_chips",
+  "info": {
+    "displayName": "HeroChips",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "richtext"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "required": true,
+      "default": "light"
+    },
+    "background": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "chips": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.chip",
+      "required": true,
+      "min": 1
+    }
+  }
+}

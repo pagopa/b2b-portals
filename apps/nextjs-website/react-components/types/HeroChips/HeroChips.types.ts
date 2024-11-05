@@ -4,7 +4,6 @@ export interface HeroChipsProps extends SectionProps {
   readonly background?: string | Generic;
   readonly title: string;
   readonly subtitle?: string | Generic;
-  readonly centerText: boolean;
   readonly chips: ReadonlyArray<ChipProps>;
 }
 
