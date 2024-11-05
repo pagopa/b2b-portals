@@ -277,7 +277,6 @@ const HeroChipsSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   background: StrapiImageSchema,
   chips: t.array(ChipPropsCodec),
-  centerText: t.boolean,
 });
 
 const ServiceCardCodec = t.strict({

@@ -8,26 +8,13 @@ const meta: Meta<typeof HeroChips> = {
 };
 export default meta;
 
-export const DarkHeroChipsNoSubtitleNoCentered: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
-DarkHeroChipsNoSubtitleNoCentered.args = {
+export const DarkHeroChipsNoSubtitle: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
+DarkHeroChipsNoSubtitle.args = {
   ...defaultsDark,
 };
 
-export const DarkHeroChipsWithSubtitleNoCentered: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
-DarkHeroChipsWithSubtitleNoCentered.args = {
+export const DarkHeroChipsWithSubtitle: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
+DarkHeroChipsWithSubtitle.args = {
   ...defaultsDark,
   subtitle: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`
-};
-
-export const DarkHeroChipsNoSubtitleCentered: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
-DarkHeroChipsNoSubtitleCentered.args = {
-  ...defaultsDark,
-  centerText: true,
-};
-
-export const DarkHeroChipsWithSubtitleCentered: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
-DarkHeroChipsWithSubtitleCentered.args = {
-  ...defaultsDark,
-  subtitle: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`,
-  centerText: true,
 };
