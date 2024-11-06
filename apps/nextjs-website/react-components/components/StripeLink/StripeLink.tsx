@@ -1,27 +1,36 @@
-import { Grid, Stack, Button, Box } from '@mui/material';
+import { Grid, Stack, Button, Box, useTheme, Typography } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import { EIcon } from '../common/EIcon';
 import { StripeLinkProps } from '../../types/StripeLink/StripeLink.types';
-import { Subtitle } from '../common/Common';
 import {
-  BackgroundColor,
-  ExtraBackgroundColor,
-  TextAlternativeColor,
+  SendExtraBackgroundColor,
+  IoExtraBackgroundColor,
   TextColor,
 } from '../common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Image from 'next/image';
 
-const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
-  const textAlternativeColor = TextAlternativeColor(theme);
+const StripeLink = ({
+  iconURL,
+  subtitle,
+  theme,
+  themeVariant,
+  link,
+  sectionID,
+}: StripeLinkProps) => {
   const textColorWhiteOnly = TextColor('dark');
-  const backgroundColor = BackgroundColor(theme);
-  const extraBackgroundColor = ExtraBackgroundColor(theme);
 
+  const extraBackgroundColor =
+    themeVariant === 'SEND'
+      ? SendExtraBackgroundColor(theme)
+      : IoExtraBackgroundColor(theme);
+
+  const { palette } = useTheme();
   return (
     <ContainerRC
       background={extraBackgroundColor}
       py={2}
       sx={{ justifyContent: { xs: 'start', md: 'start' } }}
+      {...(sectionID && { sectionID })}
     >
       <Grid item>
         <Stack
@@ -36,41 +45,65 @@ const StripeLink = ({ icon, subtitle, theme, buttonText }: StripeLinkProps) => {
               justifyContent: 'start',
               width: 'auto',
               alignItems: 'center',
+              gap: '.5rem',
             }}
           >
-            <EIcon
-              {...icon}
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+            {iconURL && <Image src={iconURL} alt='' height={28} width={28} />}
 
-                color: textColorWhiteOnly,
-                mr: 1,
-              }}
-            />
-            <Subtitle
+            <Typography
+              component='div'
               variant='body2'
-              textColor={textColorWhiteOnly}
-              subtitle={subtitle}
-              textAlign='left'
-            />
+              color={textColorWhiteOnly}
+              sx={{
+                fontSize: '18px',
+                textAlign: 'left',
+                '& a': {
+                  fontWeight: 700,
+                  color: textColorWhiteOnly,
+                  textDecoration: 'underline',
+                  '&:hover': {
+                    color: textColorWhiteOnly,
+                  },
+                },
+                '& p': {
+                  color: textColorWhiteOnly,
+                },
+              }}
+            >
+              {subtitle}
+            </Typography>
           </Box>
 
-          {buttonText && (
-            <Button
-              variant='contained'
-              size='small'
-              sx={{
-                backgroundColor: backgroundColor,
-                color: textAlternativeColor,
-                ':hover': { backgroundColor: backgroundColor },
-              }}
-              endIcon={<ArrowForwardIcon color='inherit'></ArrowForwardIcon>}
-            >
-              {buttonText}
-            </Button>
-          )}
+          <Button
+            variant='contained'
+            size='small'
+            sx={{
+              backgroundColor:
+                theme === 'light'
+                  ? palette.custom.white
+                  : themeVariant === 'SEND'
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500],
+              color:
+                theme === 'light'
+                  ? themeVariant === 'SEND'
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500]
+                  : palette.custom.white,
+              '&:hover': {
+                backgroundColor:
+                  theme === 'light'
+                    ? palette.custom.white
+                    : themeVariant === 'SEND'
+                      ? palette.primary.main
+                      : palette.custom.blueIO[500],
+              },
+            }}
+            endIcon={<ArrowForwardIcon color='inherit'></ArrowForwardIcon>}
+            href={link.href}
+          >
+            {link.label}
+          </Button>
         </Stack>
       </Grid>
     </ContainerRC>

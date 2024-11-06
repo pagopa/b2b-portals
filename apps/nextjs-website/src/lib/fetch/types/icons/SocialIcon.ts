@@ -6,4 +6,5 @@ export const SocialIconCodec = t.keyof({
   Facebook: null,
   Twitter: null,
   Medium: null,
+  YouTube: null,
 });

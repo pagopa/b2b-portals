@@ -4,6 +4,11 @@ import { StrapiImageRequiredSchema } from './types/StrapiImage';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
+export const ThemeVariantCodec = t.keyof({
+  IO: null,
+  SEND: null,
+});
+
 const SiteWideSEOCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
@@ -15,11 +20,17 @@ const SiteWideSEOCodec = t.strict({
         shortName: t.string,
       }),
       matomoID: t.union([t.string, t.null]),
+      themeVariant: ThemeVariantCodec,
+      locales: t.strict({
+        it: t.boolean,
+        en: t.boolean,
+      }),
     }),
   }),
 });
 
 export type SiteWideSEO = t.TypeOf<typeof SiteWideSEOCodec>;
+export type ThemeVariant = t.TypeOf<typeof ThemeVariantCodec>;
 
 export const fetchSiteWideSEO = ({
   config,
@@ -29,7 +40,7 @@ export const fetchSiteWideSEO = ({
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      }/api/general?populate=metaImage,favicon,appleTouchIcon,manifest,locales`,
       {
         method: 'GET',
         headers: {

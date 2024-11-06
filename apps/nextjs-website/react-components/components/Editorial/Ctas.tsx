@@ -6,13 +6,14 @@ import googleBadgeBase64 from './BadgeImages/googleBadgeBase64';
 import { EditorialCtaProps } from '../../types/Editorial/Editorial.types';
 import { CtaButtons } from '../common/Common';
 import { useTheme, useMediaQuery } from '@mui/material';
+import { CtaButtonProps } from '@react-components/types/common/Common.types';
 
 export const Ctas = ({
   ctaButtons,
   storeButtons,
   theme,
+  themeVariant,
 }: EditorialCtaProps) => {
-
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
@@ -76,11 +77,17 @@ export const Ctas = ({
         spacing={2}
       >
         {CtaButtons({
-          ctaButtons: ctaButtons.map((button) => ({
+          ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
             ...button,
-            sx: { width: { md: 'auto', xs: '100%' } },
+            sx: {
+              width: {
+                md: 'auto',
+                xs: '100%',
+              },
+            },
           })),
           theme,
+          themeVariant,
         })}
       </Stack>
     );

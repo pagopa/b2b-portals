@@ -10,18 +10,32 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "name": {
       "type": "string",
       "required": true,
-      "private": true
+      "private": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "slug": {
       "type": "string",
       "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
       "required": true,
-      "unique": true
+      "unique": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "sections": {
       "type": "dynamiczone",
@@ -35,16 +49,38 @@
         "sections.cards",
         "sections.stripe-link",
         "sections.one-trust",
-        "sections.i-frame"
+        "sections.i-frame",
+        "sections.form",
+        "sections.editorial-switch",
+        "sections.video-image",
+        "sections.hero-counter",
+        "sections.service-carousel",
+        "sections.row-text",
+        "sections.highlight-box",
+        "sections.stats",
+        "sections.text-section",
+        "sections.framed-video",
+        "sections.page-switch",
+        "sections.hero-chips"
       ],
       "required": true,
-      "min": 1
+      "min": 1,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "seo": {
       "type": "component",
       "repeatable": false,
       "component": "shared.seo",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

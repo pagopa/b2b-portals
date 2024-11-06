@@ -9,30 +9,23 @@ const meta: Meta<typeof StripeLink> = {
 };
 export default meta;
 
-export const DarkStripeLinkFull: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
+export const DarkStripeLinkFull: StoryFn<typeof StripeLink> =
+  StripeLinkTemplate.bind({});
 DarkStripeLinkFull.args = {
   ...defaultPropsDark,
-  icon: {
-    icon: 'MarkEmailReadOutlined',
+  iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/dark_icon_dee9ab4f99.svg',
+  link: {
+    label: 'link',
+    href: '#',
   },
-  buttonText: 'Click Me',
 };
 
-export const DarkStripeLinkNoIcon: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
+export const DarkStripeLinkNoIcon: StoryFn<typeof StripeLink> =
+  StripeLinkTemplate.bind({});
 DarkStripeLinkNoIcon.args = {
   ...defaultPropsDark,
-  buttonText: 'Click Me',
-};
-
-export const DarkStripeLinkNoButton: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
-DarkStripeLinkNoButton.args = {
-  ...defaultPropsDark,
-  icon: {
-    icon: 'MarkEmailReadOutlined',
+  link: {
+    label: 'link',
+    href: '#',
   },
-};
-
-export const DarkStripeLinkNoIconNoButton: StoryFn<typeof StripeLink> = StripeLinkTemplate.bind({});
-DarkStripeLinkNoIconNoButton.args = {
-  ...defaultPropsDark,
 };

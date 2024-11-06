@@ -1,25 +1,25 @@
-import { EIconProps } from "../../components/common/EIcon";
-import { Theme } from "../common/Common.types";
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SectionProps, Theme } from '../common/Common.types';
 
 export interface FeatureItem {
-  readonly stackIcon?: EIconProps;
+  readonly iconURL: string;
   readonly title: string;
   readonly subtitle: string;
   readonly link?: {
-    readonly text: string;
-    readonly url: string;
+    readonly label: string;
+    readonly href: string;
   };
 }
 
 export interface FeatureStackItemProps {
   readonly item: FeatureItem;
   readonly theme: 'dark' | 'light';
+  readonly themeVariant: ThemeVariant;
 }
 
-export interface FeatureProps {
+export interface FeatureProps extends SectionProps {
   readonly title: string;
   readonly items: ReadonlyArray<FeatureItem>;
-  readonly theme: 'dark' | 'light';
   readonly showCarouselMobile?: boolean;
   readonly background?: string;
 }
@@ -37,4 +37,5 @@ export interface FeatureCarouselProps {
   handleStepChange: (step: number) => void;
   theme: Theme;
   themeComponentDirection: 'rtl' | 'ltr';
+  readonly themeVariant: ThemeVariant;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   ButtonSwitchRowBlockProps,
-  TitleSubtitleBlockProps,
+  EditorialSwitchBaseProps,
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
-import { CtaButtons, Subtitle, Title } from '../common/Common';
+import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import {
   Button,
@@ -11,17 +11,27 @@ import {
   Menu,
   MenuItem,
   Stack,
+  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 
 export const TitleSubtitleBlock = ({
-  toptitle,
-  topsubtitle,
+  title,
+  subtitle,
   theme,
-}: TitleSubtitleBlockProps) => {
+  themeVariant,
+}: EditorialSwitchBaseProps) => {
   const textColor = TextColor(theme);
+  const { palette } = useTheme();
+
+  const linkColor =
+    theme === 'dark'
+      ? palette.custom.white
+      : themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <div
@@ -37,18 +47,32 @@ export const TitleSubtitleBlock = ({
       <Title
         variant='h4'
         textColor={textColor}
-        title={toptitle}
-        textAlign='left'
+        title={title}
+        textAlign='center'
         marginTop={3}
         marginBottom={3}
       />
-      <Subtitle
+      <Typography
+        component='div'
         variant='body2'
-        textColor={textColor}
-        subtitle={topsubtitle}
-        textAlign='center'
-        marginBottom={4}
-      />
+        sx={{
+          fontSize: '18px',
+          '& a': {
+            fontWeight: 700,
+            color: linkColor,
+            textDecoration: 'underline',
+            '&:hover': {
+              color: linkColor,
+            },
+          },
+          '& p': {
+            marginBottom: '4px',
+            color: textColor,
+          },
+        }}
+      >
+        {subtitle}
+      </Typography>
     </div>
   );
 };
@@ -57,12 +81,11 @@ const SplitButton = ({
   buttons,
   selectedButton,
   onButtonClick,
-}: {
-  buttons: { id: string; text: string }[];
-  selectedButton: { id: string; text: string };
-  onButtonClick: (button: { id: string; text: string }) => void;
-  theme: string;
-}) => {
+  theme,
+  themeVariant,
+}: ButtonSwitchRowBlockProps) => {
+  const muiTheme = useTheme();
+  const { palette } = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [open, setOpen] = React.useState(false);
 
@@ -71,8 +94,8 @@ const SplitButton = ({
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleMenuItemClick = (button: { id: string; text: string }) => {
-    onButtonClick(button);
+  const handleMenuItemClick = (button: { id: number; text: string }) => {
+    onButtonClick(button.id);
     setOpen(false);
   };
 
@@ -82,28 +105,76 @@ const SplitButton = ({
 
   const anchorRef = React.useRef<HTMLDivElement>(null);
 
+  const borderColor =
+    theme === 'light'
+      ? themeVariant === 'SEND'
+        ? muiTheme.palette.primary.main
+        : palette.custom.primaryColorDark
+      : palette.primary.contrastText;
+
+  const textColor =
+    theme === 'light'
+      ? themeVariant === 'SEND'
+        ? muiTheme.palette.primary.main
+        : palette.custom.primaryColorDark
+      : muiTheme.palette.primary.contrastText;
+
   return (
     <React.Fragment>
       <ButtonGroup
         variant='outlined'
         ref={anchorRef}
         aria-label='Split button'
-        sx={{ display: 'flex', justifyContent: 'center' }}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          borderColor: borderColor,
+        }}
       >
         <Button
           onClick={() => {
-            onButtonClick(selectedButton);
+            onButtonClick(selectedButton.id);
+          }}
+          sx={{
+            backgroundColor:
+              theme === 'light'
+                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                : 'transparent',
+            color: textColor,
+            borderColor: borderColor,
+            '&:hover': {
+              backgroundColor:
+                theme === 'light'
+                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                  : 'transparent',
+              borderColor: borderColor,
+            },
           }}
         >
-          {selectedButton.text}{' '}
+          {selectedButton.text}
         </Button>
         <Button
           aria-controls={open ? 'split-button-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
           aria-haspopup='menu'
           onClick={handleButtonClick}
+          sx={{
+            backgroundColor:
+              theme === 'light'
+                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                : 'transparent',
+            color: textColor,
+            borderColor: borderColor,
+            '&:hover': {
+              backgroundColor:
+                theme === 'light'
+                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                  : 'transparent',
+              borderColor: borderColor,
+            },
+          }}
         >
-          <ArrowDropDown />
+          <ArrowDropDown sx={{ color: borderColor }} />
         </Button>
       </ButtonGroup>
       <Menu
@@ -130,8 +201,23 @@ const SplitButton = ({
             onClick={() => {
               handleMenuItemClick(button);
             }}
+            sx={{
+              backgroundColor:
+                button.id === selectedButton.id
+                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                  : 'transparent',
+              color: muiTheme.palette.primary.main,
+              '&.Mui-selected': {
+                backgroundColor: 'rgba(224, 242, 255, 0.7)',
+                color: muiTheme.palette.primary.main,
+              },
+              '&:hover': {
+                backgroundColor: 'rgba(224, 242, 255, 0.7)',
+                color: muiTheme.palette.primary.main,
+              },
+            }}
           >
-            {button.text} {/* Use the text property of the button object */}
+            {button.text}
           </MenuItem>
         ))}
       </Menu>
@@ -143,20 +229,42 @@ export const ButtonSwitchRowBlock = ({
   buttons,
   onButtonClick,
   theme,
+  themeVariant,
   selectedButton,
-}: ButtonSwitchRowBlockProps) => {
+}: ButtonSwitchRowBlockProps & { themeVariant: 'SEND' | 'IO' }) => {
   const muiTheme = useTheme();
+  const { palette } = useTheme();
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
   return isLarge ? (
-    <Stack direction={isSmallScreen ? 'column' : 'row'} justifyContent='left' spacing={2}>
+    <Stack
+      direction={isSmallScreen ? 'column' : 'row'}
+      justifyContent='left'
+      spacing={2}
+    >
       {CtaButtons({
         ctaButtons: buttons.map((button) => ({
           text: button.text,
-          sx: { width: { md: 'auto', xs: '100%' } },
+          sx: {
+            width: { md: 'auto', xs: '100%' },
+            backgroundColor:
+              button.id === selectedButton.id
+                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                : 'transparent',
+            color:
+              theme === 'light'
+                ? themeVariant === 'SEND'
+                  ? muiTheme.palette.primary.main
+                  : palette.custom.primaryColorDark
+                : muiTheme.palette.primary.contrastText,
+            '&:hover': {
+              backgroundColor:
+                palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+            },
+          },
           variant: 'outlined',
-          onClick: () => onButtonClick(button),
+          onClick: () => onButtonClick(button.id),
         })),
         theme,
       })}
@@ -167,6 +275,7 @@ export const ButtonSwitchRowBlock = ({
       selectedButton={selectedButton}
       onButtonClick={onButtonClick}
       theme={theme}
+      themeVariant={themeVariant}
     />
   );
 };

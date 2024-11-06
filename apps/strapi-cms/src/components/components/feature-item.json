@@ -14,24 +14,18 @@
       "type": "string",
       "required": true
     },
-    "linkText": {
-      "type": "string"
-    },
-    "linkURL": {
-      "type": "string"
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link",
+      "required": false
     },
     "icon": {
-      "type": "enumeration",
-      "enum": [
-        "HubOutlined",
-        "AutoFixHighOutlined",
-        "MarkunreadMailboxOutlined",
-        "CheckCircleOutlined",
-        "SavingsOutlined",
-        "HourglassEmptyRounded",
-        "EnergySavingsLeafOutlined",
-        "CloudOutlined"
+      "allowedTypes": [
+        "images"
       ],
+      "type": "media",
+      "multiple": false,
       "required": true
     }
   }

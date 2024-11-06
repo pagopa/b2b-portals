@@ -1,5 +1,6 @@
 import React from 'react';
 import { type ButtonProps } from '@mui/material';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 export type Theme = Readonly<'dark' | 'light'>;
 
@@ -9,8 +10,10 @@ export type Theme = Readonly<'dark' | 'light'>;
  */
 export type Generic = JSX.Element;
 
-export interface CommonProps {
+export interface SectionProps {
+  readonly sectionID: string | null;
   readonly theme: Theme;
+  readonly themeVariant: ThemeVariant;
 }
 
 /**
@@ -24,4 +27,23 @@ export interface CtaButtonProps extends Partial<ButtonProps> {
   readonly text: string;
   variant?: 'contained' | 'outlined' | 'text';
   readonly disableRipple?: boolean;
+}
+
+export function useIsVisible(ref: React.RefObject<Element>) {
+  const [isIntersecting, setIntersecting] = React.useState(false);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry) {
+        setIntersecting(entry.isIntersecting);
+      }
+    });
+
+    if (ref.current) observer.observe(ref.current);
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref]);
+
+  return isIntersecting;
 }

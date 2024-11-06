@@ -3,21 +3,31 @@ import MarkdownRenderer from './MarkdownRenderer';
 import { Form as FormRC } from '@react-components/components';
 import { FormProps } from '@react-components/types';
 import { FormSection } from '@/lib/fetch/types/PageSection';
-import { FormData } from '@react-components/types/Form/Form.types';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
-const makeFormProps = ({ privacyText, ...rest }: FormSection): FormProps => ({
+const makeFormProps = ({
+  subtitle,
+  categories,
+  categoriesTitle,
+  buttonLabel,
+  notes,
+  background,
+  ...rest
+}: FormSection & { themeVariant: ThemeVariant }): FormProps => ({
+  categories: categories.map(({ additionalInfo, ...category }) => ({
+    ...(additionalInfo && { additionalInfo }),
+    ...category,
+  })),
+  ...(subtitle && { subtitle }),
+  ...(categoriesTitle && { categoriesTitle }),
+  buttonLabel,
+  ...(notes && { notes: MarkdownRenderer({ markdown: notes }) }),
+  ...(background.data && { background: background.data.attributes.url }),
   ...rest,
-  privacyText: MarkdownRenderer({ markdown: privacyText, variant: 'body2' }),
 });
 
-const Form = (props: FormSection) => {
-  // added for lint purposes, should be managed in another way when strapi is ready
-  const handleSubmit = (data: FormData) => {
-    alert(data);
-    return true;
-  };
-
-  return <FormRC {...makeFormProps(props)} onSubmit={handleSubmit} />;
-};
+const Form = (props: FormSection & { themeVariant: ThemeVariant }) => (
+  <FormRC {...makeFormProps(props)} />
+);
 
 export default Form;

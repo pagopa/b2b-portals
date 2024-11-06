@@ -1,36 +1,27 @@
 'use client';
 import MarkdownRenderer from './MarkdownRenderer';
 import { BannerLink as BannerLinkRC } from '@react-components/components';
-import { BannerLinkProps } from '@react-components/types';
+import { BannerLinkProps } from '@react-components/types/BannerLink/BannerLink.types';
 import { BannerLinkSection } from '@/lib/fetch/types/PageSection';
-import Icon from '@/components/Icon';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
-const makeBannerLinkProps = ({
-  body,
-  decoration,
-  ctaButtons,
+export const makeBannerLinkProps = ({
+  sections,
   ...rest
-}: BannerLinkSection): BannerLinkProps => ({
-  body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
-  ...(decoration && {
-    decoration: {
-      src: decoration.url,
-      alt: decoration.alternativeText || undefined,
-      width: '60px',
-      height: '60px',
-    },
-  }),
-  ...(ctaButtons.length > 0 && {
-    ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
-      ...ctaBtn,
-      ...(icon && { startIcon: Icon(icon) }),
-    })),
-  }),
+}: BannerLinkSection & { themeVariant: ThemeVariant }): BannerLinkProps => ({
+  sections: sections.map(({ body, icon, ctaButtons, ...requiredFields }) => ({
+    ...requiredFields,
+    body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
+    ...(icon.data && {
+      iconURL: icon.data.attributes.url,
+    }),
+    ...(ctaButtons && { ctaButtons }),
+  })),
   ...rest,
 });
 
-const BannerLink = (props: BannerLinkSection) => (
-  <BannerLinkRC {...makeBannerLinkProps(props)} />
-);
+const BannerLink = (
+  props: BannerLinkSection & { themeVariant: ThemeVariant }
+) => <BannerLinkRC {...makeBannerLinkProps(props)} />;
 
 export default BannerLink;

@@ -1,33 +1,51 @@
 import { Card, CardContent, Typography, Stack, Link, Box } from '@mui/material';
-import { EIcon } from '../common/EIcon';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { CardsItemProps } from '../../types/Cards/Cards.types';
 import { Title, Body } from '../common/Common';
+import Image from 'next/image';
+import { useTheme } from '@mui/material/styles';
 
 const CardsItem = ({
   title,
   text,
-  cardIcon,
+  iconURL,
   links,
   textAlign,
   label,
   masonry,
-}: CardsItemProps) => {
+  themeVariant,
+}: CardsItemProps & { themeVariant: 'IO' | 'SEND' }) => {
+  const { palette } = useTheme();
+  const linkColor =
+    themeVariant === 'SEND' ? palette.primary.main : palette.custom.blueIO[500];
+
   return (
     <Card
       elevation={16}
       sx={{
         display: 'flex',
-        minHeight: '100px',
+        minHeight: '200px',
         width: '100%',
         flex: { md: masonry ? '0 0 auto' : '1 1 0' },
         borderRadius: '16px',
       }}
     >
-      <CardContent>
-        <Stack px={4} justifyContent='flex-start' alignItems='flex-start' fontFamily='"Titillium Web",sans-serif'>
+      <CardContent
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          minHeight: '200px',
+        }}
+      >
+        <Stack
+          px={4}
+          justifyContent='flex-start'
+          alignItems='flex-start'
+          fontFamily='"Titillium Web",sans-serif'
+        >
           <Box mb={2} color='primary.dark'>
-            {cardIcon?.icon && <EIcon icon={cardIcon.icon} fontSize='large' />}
+            {iconURL && <Image src={iconURL} alt='' height={40} width={40} />}
           </Box>
           {label && (
             <Typography
@@ -40,13 +58,15 @@ const CardsItem = ({
               {label}
             </Typography>
           )}
-          <Title
-            variant='h5'
-            textColor={'inherit'}
-            title={title}
-            marginBottom={1}
-            textAlign='left'
-          />
+          <Typography mb={2} component='div'>
+            <Title
+              variant='h6'
+              textColor={'inherit'}
+              title={title}
+              marginBottom={1}
+              textAlign='left'
+            />
+          </Typography>
           <Body
             variant='body2'
             textColor={'inherit'}
@@ -61,21 +81,22 @@ const CardsItem = ({
                   mt={2}
                   direction='row'
                   alignItems='center'
-                  color='primary.main'
+                  color={linkColor}
                   justifyContent='flex-start'
                 >
                   <Link
-                    color='primary.main'
+                    color={linkColor}
                     underline='none'
-                    textTransform='capitalize'
                     href={link.href}
                     title={link.title}
                     fontSize={14}
                     fontWeight={600}
                   >
-                    {link.text}
+                    {link.label}
                   </Link>
-                  <ArrowRightAltIcon sx={{ color: 'inherit', fontSize: 18, marginLeft: 1 }} />
+                  <ArrowRightAltIcon
+                    sx={{ color: linkColor, fontSize: 18, marginLeft: 1 }}
+                  />
                 </Stack>
               ))
             : null}

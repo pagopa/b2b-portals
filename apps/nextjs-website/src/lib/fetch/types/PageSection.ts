@@ -1,10 +1,13 @@
 import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
-import { ImageDataCodec } from './StrapiImage';
-import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
-import { HowToStepMUIIconCodec } from './icons/HowToStepIcon';
-import { StripeLinkMUIIconCodec } from './icons/StripeLinkIcon';
-import { CardsItemMUIIconCodec } from './icons/CardsItemIcon';
+import { StrapiImageRequiredSchema, StrapiImageSchema } from './StrapiImage';
+import { StoreButtonsCodec } from './StoreButtons';
+import { ThemeCodec } from './Theme';
+
+const LinkCodec = t.strict({
+  label: t.string,
+  href: t.string,
+});
 
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
@@ -18,18 +21,14 @@ const HeroSectionCodec = t.strict({
     big: null,
   }),
   sectionID: t.union([t.string, t.null]),
-  image: t.union([ImageDataCodec, t.null]),
-  background: t.union([ImageDataCodec, t.null]),
+  image: StrapiImageSchema,
+  background: StrapiImageSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
+  storeButtons: t.union([StoreButtonsCodec, t.null]),
+  link: t.union([LinkCodec, t.null]),
 });
 
-const StoreButtonsCodec = t.strict({
-  hrefGoogle: t.union([t.string, t.null]),
-  hrefApple: t.union([t.string, t.null]),
-});
-
-const EditorialSectionCodec = t.strict({
-  __component: t.literal('sections.editorial'),
+const EditorialContentCodec = t.strict({
   title: t.string,
   eyelet: t.union([t.string, t.null]),
   body: t.string,
@@ -46,10 +45,18 @@ const EditorialSectionCodec = t.strict({
   }),
   reversed: t.boolean,
   sectionID: t.union([t.string, t.null]),
-  image: ImageDataCodec,
+  image: StrapiImageRequiredSchema,
+  mobileImage: StrapiImageRequiredSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
 });
+
+const EditorialSectionCodec = t.intersection([
+  t.strict({
+    __component: t.literal('sections.editorial'),
+  }),
+  EditorialContentCodec,
+]);
 
 const AccordionSectionCodec = t.strict({
   __component: t.literal('sections.accordion'),
@@ -63,17 +70,21 @@ const AccordionSectionCodec = t.strict({
     })
   ),
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  layout: t.union([t.literal('left'), t.literal('center'), t.literal('right')]),
+  layout: t.union([t.literal('left'), t.literal('center')]),
+  textAlignment: t.union([
+    t.literal('left'),
+    t.literal('center'),
+    t.literal('right'),
+  ]),
   sectionID: t.union([t.string, t.null]),
 });
 
 const FeatureItemCodec = t.strict({
   id: t.number,
-  icon: FeatureItemMUIIconCodec,
+  icon: StrapiImageRequiredSchema,
   title: t.string,
   subtitle: t.string,
-  linkText: t.union([t.string, t.null]),
-  linkURL: t.union([t.string, t.null]),
+  link: t.union([LinkCodec, t.null]),
 });
 
 const FeatureSectionCodec = t.strict({
@@ -85,15 +96,10 @@ const FeatureSectionCodec = t.strict({
   items: t.array(FeatureItemCodec),
 });
 
-const LinkCodec = t.strict({
-  label: t.string,
-  href: t.string,
-});
-
 const StepCodec = t.strict({
   title: t.string,
   description: t.string,
-  icon: t.union([HowToStepMUIIconCodec, t.null]),
+  icon: StrapiImageSchema,
 });
 
 const HowToSectionCodec = t.strict({
@@ -113,20 +119,25 @@ const HowToSectionCodec = t.strict({
 
 const BannerLinkSectionCodec = t.strict({
   __component: t.literal('sections.banner-link'),
-  title: t.string,
-  body: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  ctaButtons: t.array(CTAButtonSimpleCodec),
-  decoration: t.union([ImageDataCodec, t.null]),
   sectionID: t.union([t.string, t.null]),
+  sections: t.array(
+    t.strict({
+      title: t.string,
+      body: t.string,
+      ctaButtons: t.array(CTAButtonSimpleCodec),
+      icon: StrapiImageSchema,
+    })
+  ),
 });
 
 const StripeLinkSectionCodec = t.strict({
   __component: t.literal('sections.stripe-link'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   subtitle: t.string,
-  icon: t.union([StripeLinkMUIIconCodec, t.null]),
-  buttonText: t.union([t.string, t.null]),
+  icon: StrapiImageSchema,
+  sectionID: t.union([t.string, t.null]),
+  link: LinkCodec,
 });
 
 const CardsItemCodec = t.strict({
@@ -134,7 +145,7 @@ const CardsItemCodec = t.strict({
   title: t.string,
   text: t.union([t.string, t.null]),
   links: t.array(LinkCodec),
-  icon: t.union([CardsItemMUIIconCodec, t.null]),
+  icon: StrapiImageSchema,
 });
 
 const CardsSectionCodec = t.strict({
@@ -145,6 +156,11 @@ const CardsSectionCodec = t.strict({
   body: t.union([t.string, t.null]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
   items: t.array(CardsItemCodec),
+  textPosition: t.keyof({
+    left: null,
+    center: null,
+    right: null,
+  }),
   sectionID: t.union([t.string, t.null]),
 });
 
@@ -158,16 +174,222 @@ const IFrameSectionCodec = t.strict({
   src: t.string,
 });
 
+const FormCategoryCodec = t.strict({
+  categoryID: t.string,
+  label: t.string,
+  additionalInfo: t.union([t.string, t.null]),
+});
+
 const FormSectionCodec = t.strict({
   __component: t.literal('sections.form'),
   title: t.string,
-  subtitle: t.string,
-  privacyText: t.string,
-  privacyLink: t.string,
-  privacyLinkText: t.string,
+  subtitle: t.union([t.string, t.null]),
+  showName: t.boolean,
+  showSurname: t.boolean,
+  showOrganization: t.boolean,
+  categoriesTitle: t.union([t.string, t.null]),
+  defaultCategoryID: t.string,
+  categories: t.array(FormCategoryCodec),
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  ctaButtons: t.array(CTAButtonSimpleCodec),
-  submitHandler: t.Function,
+  recaptchaSiteKey: t.string,
+  listID: t.string,
+  clientID: t.keyof({
+    io: null,
+    pagopa: null,
+  }),
+  sectionID: t.union([t.string, t.null]),
+  buttonLabel: t.string,
+  notes: t.union([t.string, t.null]),
+  background: StrapiImageSchema,
+});
+
+const CounterCodec = t.strict({
+  number: t.number,
+  text: t.string,
+});
+
+const HeroCounterSectionCodec = t.strict({
+  __component: t.literal('sections.hero-counter'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
+  background: StrapiImageSchema,
+  counter: CounterCodec,
+  link: t.union([LinkCodec, t.null]),
+});
+
+const EditorialSwitchSectionCodec = t.strict({
+  __component: t.literal('sections.editorial-switch'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  sections: t.array(
+    t.strict({
+      id: t.number,
+      buttonText: t.string,
+      content: EditorialContentCodec,
+    })
+  ),
+});
+
+const VideoCodec = t.strict({
+  src: t.strict({
+    data: t.union([
+      t.strict({
+        attributes: t.strict({ url: t.string }),
+      }),
+      t.null,
+    ]),
+  }),
+  srcURL: t.union([t.string, t.null]),
+  autoplay: t.boolean,
+  loop: t.boolean,
+  showControls: t.boolean,
+  fallback: t.string,
+  playButtonLabel: t.string,
+  pausedPlayButtonLabel: t.string,
+});
+
+const VideoImageSectionCodec = t.strict({
+  __component: t.literal('sections.video-image'),
+  sectionID: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  title: t.union([t.string, t.null]),
+  subtitle: t.union([t.string, t.null]),
+  caption: t.union([t.string, t.null]),
+  isCentered: t.boolean,
+  image: StrapiImageSchema,
+  mobileImage: StrapiImageSchema,
+  video: t.union([VideoCodec, t.null]),
+});
+
+const ChipPropsCodec = t.strict({
+  label: t.string,
+  targetID: t.string,
+});
+
+const HeroChipsSectionCodec = t.strict({
+  __component: t.literal('sections.hero-chips'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
+  background: StrapiImageSchema,
+  chips: t.array(ChipPropsCodec),
+});
+
+const ServiceCardCodec = t.strict({
+  title: t.string,
+  link: LinkCodec,
+  image: StrapiImageSchema,
+  description: t.union([t.string, t.null]),
+});
+
+const ServiceCarouselSectionCodec = t.strict({
+  __component: t.literal('sections.service-carousel'),
+  title: t.string,
+  description: t.union([t.string, t.null]),
+  eyelet: t.union([t.string, t.null]),
+  cards: t.array(ServiceCardCodec),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const RowTextSectionCodec = t.strict({
+  __component: t.literal('sections.row-text'),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  layout: t.union([t.literal('left'), t.literal('center')]),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const TextSectionSectionCodec = t.strict({
+  __component: t.literal('sections.text-section'),
+  eyelet: t.union([t.string, t.null]),
+  title: t.union([t.string, t.null]),
+  subtitle: t.union([t.string, t.null]),
+  body: t.string,
+  link: t.union([LinkCodec, t.null]),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const StatsSectionCodec = t.strict({
+  __component: t.literal('sections.stats'),
+  title: t.string,
+  eyelet: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  items: t.array(
+    t.strict({
+      title: t.string,
+      description: t.union([t.string, t.null]),
+      icon: StrapiImageSchema,
+    })
+  ),
+  sectionID: t.union([t.string, t.null]),
+});
+
+const HighlightBoxSectionCodec = t.strict({
+  __component: t.literal('sections.highlight-box'),
+  eyelet: t.union([t.string, t.null]),
+  title: t.string,
+  body: t.string,
+  link: t.union([LinkCodec, t.null]),
+  image: StrapiImageRequiredSchema,
+  sectionID: t.union([t.string, t.null]),
+});
+
+const PageSwitchPageCodec = t.strict({
+  id: t.number,
+  attributes: t.strict({
+    buttonText: t.string,
+    sections: t.array(
+      t.union([
+        EditorialSectionCodec,
+        CardsSectionCodec,
+        BannerLinkSectionCodec,
+      ])
+    ),
+  }),
+});
+
+const PageSwitchSectionCodec = t.strict({
+  __component: t.literal('sections.page-switch'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  pages: t.strict({
+    data: t.array(PageSwitchPageCodec),
+  }),
+});
+
+const FramedVideoSectionCodec = t.strict({
+  __component: t.literal('sections.framed-video'),
+  sectionID: t.union([t.string, t.null]),
+  theme: ThemeCodec,
+  videoURL: t.union([t.string, t.null]),
+  video: t.strict({
+    data: t.union([
+      t.strict({
+        attributes: t.strict({ url: t.string }),
+      }),
+      t.null,
+    ]),
+  }),
+  loop: t.boolean,
+  autoplay: t.boolean,
+  text: t.union([
+    t.strict({
+      title: t.string,
+      body: t.string,
+      textPosition: t.union([t.literal('left'), t.literal('right')]),
+      link: t.strict({
+        href: t.string,
+        label: t.string,
+      }),
+    }),
+    t.null,
+  ]),
 });
 
 export const PageSectionCodec = t.union([
@@ -182,6 +404,17 @@ export const PageSectionCodec = t.union([
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
   FormSectionCodec,
+  HeroCounterSectionCodec,
+  EditorialSwitchSectionCodec,
+  VideoImageSectionCodec,
+  HeroChipsSectionCodec,
+  ServiceCarouselSectionCodec,
+  HighlightBoxSectionCodec,
+  StatsSectionCodec,
+  RowTextSectionCodec,
+  TextSectionSectionCodec,
+  PageSwitchSectionCodec,
+  FramedVideoSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -196,3 +429,18 @@ export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
+export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
+export type EditorialSwitchSection = t.TypeOf<
+  typeof EditorialSwitchSectionCodec
+>;
+export type VideoImageSection = t.TypeOf<typeof VideoImageSectionCodec>;
+export type HeroChipsSection = t.TypeOf<typeof HeroChipsSectionCodec>;
+export type ServiceCarouselSection = t.TypeOf<
+  typeof ServiceCarouselSectionCodec
+>;
+export type HighlightBoxSection = t.TypeOf<typeof HighlightBoxSectionCodec>;
+export type StatsSection = t.TypeOf<typeof StatsSectionCodec>;
+export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
+export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
+export type PageSwitchSection = t.TypeOf<typeof PageSwitchSectionCodec>;
+export type FramedVideoSection = t.TypeOf<typeof FramedVideoSectionCodec>;

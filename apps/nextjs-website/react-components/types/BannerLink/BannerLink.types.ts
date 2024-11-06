@@ -1,18 +1,12 @@
-import { CommonProps, CtaButtonProps, Generic } from "../common/Common.types";
+import { SectionProps, CtaButtonProps } from '../common/Common.types';
 
-type ImgProps = React.DetailedHTMLProps<
-  React.ImgHTMLAttributes<HTMLImageElement>,
-  HTMLImageElement
->;
-
-export interface BannerLinkProps
-  extends CommonProps,
-    BannerLinkContentProps {
+export interface BannerLinkSectionProps {
+  title: string;
+  body: JSX.Element;
+  iconURL?: string;
   ctaButtons?: CtaButtonProps[];
-  decoration?: ImgProps | Generic;
 }
 
-export interface BannerLinkContentProps extends CommonProps {
-  title: string;
-  body: string | JSX.Element;
+export interface BannerLinkProps extends SectionProps {
+  sections: BannerLinkSectionProps[];
 }

@@ -15,18 +15,26 @@
       "default": "light",
       "required": true
     },
-    "buttonText": {
-      "type": "string"
-    },
-    "icon": {
-      "type": "enumeration",
-      "enum": [
-        "Code",
-        "SpeakerNotes"
-      ]
-    },
     "subtitle": {
       "type": "richtext",
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link",
       "required": true
     }
   }

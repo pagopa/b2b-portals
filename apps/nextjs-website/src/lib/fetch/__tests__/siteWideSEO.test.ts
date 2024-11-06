@@ -10,6 +10,10 @@ const makeTestAppEnv = () => {
     SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
     APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
     APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
+    FIRMA_STRAPI_API_BASE_URL: 'firmaStrapiToken',
+    FIRMA_STRAPI_API_TOKEN: 'firmaStrapiApiBaseUrl',
+    INTEROP_STRAPI_API_BASE_URL: 'interopStrapiToken',
+    INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
@@ -61,6 +65,11 @@ const siteWideSEOResponse = {
         shortName: 'SEND-PagoPA',
       },
       matomoID: '12',
+      themeVariant: 'SEND',
+      locales: {
+        it: true,
+        en: false,
+      },
     },
   },
 };
@@ -77,7 +86,7 @@ describe('fetchSiteWideSEO', () => {
     await fetchSiteWideSEO(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest,locales`,
       {
         method: 'GET',
         headers: {

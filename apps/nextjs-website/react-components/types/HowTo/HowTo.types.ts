@@ -1,7 +1,8 @@
-import { EIconProps } from "../../components/common/EIcon";
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SectionProps } from '../common/Common.types';
 
 export interface Step {
-  readonly stepIcon?: EIconProps;
+  readonly iconURL?: string;
   readonly title: string;
   readonly description: string | JSX.Element;
 }
@@ -9,13 +10,13 @@ export interface Step {
 export interface HowToStepProps extends Step {
   readonly index: number;
   readonly theme: 'light' | 'dark';
+  readonly themeVariant: ThemeVariant;
   readonly isLastStep: boolean;
 }
 
-export interface HowToProps {
+export interface HowToProps extends SectionProps {
   readonly title: string;
   readonly steps: ReadonlyArray<Step>;
-  readonly theme: 'light' | 'dark';
   readonly link?: {
     readonly href: string;
     readonly label: string;

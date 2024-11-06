@@ -3,7 +3,10 @@ import Stack from '@mui/material/Stack';
 import ContainerRC from '../common/ContainerRC';
 import { EditorialProps } from '../../types/Editorial/Editorial.types';
 import { useIsMobile } from './Editorial.helpers';
-import { BackgroundColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+} from '../common/Common.helpers';
 import { Content as EditorialContent } from './Content';
 import { Ctas as EditorialCtas } from './Ctas';
 import { Image as EditorialImage } from './Image';
@@ -18,19 +21,25 @@ const styles = {
 const Editorial = (props: EditorialProps) => {
   const {
     image,
+    mobileImage,
     eyelet,
     title,
     body,
     theme,
+    themeVariant,
     ctaButtons,
     storeButtons,
     pattern = 'none',
     width = 'standard',
     reversed = false,
+    sectionID,
   } = props;
 
   const isMobile = useIsMobile();
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
 
   if (width === 'standard') {
     // If 'width' is 'standard' use this layout
@@ -39,9 +48,12 @@ const Editorial = (props: EditorialProps) => {
         size='xl'
         alignItems='center'
         background={backgroundColor}
-        direction={isMobile ? 'column' : reversed ? 'row-reverse' : 'row'}
+        direction={
+          isMobile ? 'column-reverse' : reversed ? 'row-reverse' : 'row'
+        }
         py={8}
         spacing={2}
+        {...(sectionID && { sectionID })}
       >
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
@@ -49,12 +61,14 @@ const Editorial = (props: EditorialProps) => {
           <Stack gap={4}>
             <EditorialContent
               theme={theme}
+              themeVariant={themeVariant}
               title={title}
               body={body}
               {...(eyelet && { eyelet })}
             />
             <EditorialCtas
               theme={theme}
+              themeVariant={themeVariant}
               {...(ctaButtons && { ctaButtons })}
               {...(storeButtons && { storeButtons })}
             />
@@ -64,7 +78,7 @@ const Editorial = (props: EditorialProps) => {
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 
         <Grid item xs={12} md={5}>
-          <EditorialImage {...{ pattern, image, theme }} />
+          <EditorialImage {...{ pattern, image, theme, mobileImage }} />
         </Grid>
 
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
@@ -79,9 +93,7 @@ const Editorial = (props: EditorialProps) => {
   };
 
   const containerDirection = isMobile
-    ? reversed
-      ? 'column-reverse'
-      : 'column'
+    ? 'column-reverse'
     : reversed
       ? 'row-reverse'
       : 'row';
@@ -101,19 +113,21 @@ const Editorial = (props: EditorialProps) => {
         <Stack gap={4}>
           <EditorialContent
             theme={theme}
+            themeVariant={themeVariant}
             title={title}
             body={body}
             {...(eyelet && { eyelet })}
           />
           <EditorialCtas
             theme={theme}
+            themeVariant={themeVariant}
             {...(ctaButtons && { ctaButtons })}
             {...(storeButtons && { storeButtons })}
           />
         </Stack>
       </Grid>
       <Grid item md={columns[width]}>
-        <EditorialImage {...{ pattern, image, theme }} />
+        <EditorialImage {...{ pattern, image, theme, mobileImage }} />
       </Grid>
     </ContainerRC>
   );

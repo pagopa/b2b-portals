@@ -5,22 +5,31 @@ import { Editorial as EditorialRC } from '@react-components/components';
 import { EditorialProps } from '@react-components/types';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
-const makeEditorialProps = ({
+export const makeEditorialProps = ({
   eyelet,
   body,
   image,
+  mobileImage,
   ctaButtons,
   storeButtons,
   ...rest
-}: EditorialSection): EditorialProps => ({
+}: EditorialSection & { themeVariant: ThemeVariant }): EditorialProps => ({
   ...(eyelet && { eyelet }),
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: (
     <Image
-      src={image.url}
-      alt={image.alternativeText ?? ''}
-      // Needed by Image, will be overwritten
+      src={image.data.attributes.url}
+      alt={image.data.attributes.alternativeText ?? ''}
+      width={0}
+      height={0}
+    />
+  ),
+  mobileImage: (
+    <Image
+      src={mobileImage.data.attributes.url} // Ensure mobileImage is correctly used here
+      alt={mobileImage.data.attributes.alternativeText ?? ''}
       width={0}
       height={0}
     />
@@ -41,8 +50,8 @@ const makeEditorialProps = ({
   ...rest,
 });
 
-const Editorial = (props: EditorialSection) => (
-  <EditorialRC {...makeEditorialProps(props)} />
-);
+const Editorial = (
+  props: EditorialSection & { themeVariant: ThemeVariant }
+) => <EditorialRC {...makeEditorialProps(props)} />;
 
 export default Editorial;

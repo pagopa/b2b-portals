@@ -12,6 +12,18 @@ import Header from './Header/Header';
 import Feature from './Feature/Feature';
 import IFrame from './IFrame/IFrame';
 import Form from './Form/Form';
+import PreFooter from './PreFooter/PreFooter';
+import HeroCounter from './HeroCounter/HeroCounter';
+import MegaHeader from './MegaHeader/MegaHeader';
+import VideoImage from './VideoImage/VideoImage';
+import HeroChips from './HeroChips/HeroChips';
+import ServiceCarousel from './ServiceCarousel/ServiceCarousel';
+import HighlightBox from './HighlightBox/HighlightBox';
+import Stats from './Stats/Stats';
+import RowText from './RowText/RowText';
+import TextSection from './TextSection/TextSection';
+import PageSwitch from './Page-Switch/Page-Switch';
+import FramedVideo from './FramedVideo/FramedVideo';
 
 export {
   Hero,
@@ -28,4 +40,16 @@ export {
   Feature,
   IFrame,
   Form,
+  PreFooter,
+  HeroCounter,
+  MegaHeader,
+  VideoImage,
+  HeroChips,
+  ServiceCarousel,
+  HighlightBox,
+  Stats,
+  RowText,
+  TextSection,
+  PageSwitch,
+  FramedVideo,
 };

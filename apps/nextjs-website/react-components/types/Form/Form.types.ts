@@ -1,19 +1,47 @@
-import { CtaButtonProps, type CommonProps } from '../common/Common.types';
+import { SectionProps } from '../common/Common.types';
 
-export interface FormProps extends CommonProps {
+interface FormFields {
+  readonly showName: boolean;
+  readonly showSurname: boolean;
+  readonly showOrganization: boolean;
+}
+
+interface FormCategories {
+  readonly categoriesTitle?: string;
+  readonly defaultCategoryID: string;
+  readonly categories: {
+    categoryID: string;
+    label: string;
+    additionalInfo?: string;
+  }[];
+}
+
+export interface FormProps extends SectionProps, FormFields, FormCategories {
   readonly title: string;
-  readonly subtitle: string;
-  readonly privacyText: string | JSX.Element;
-  readonly privacyLink: string;
-  readonly privacyLinkText: string;
-  readonly theme: 'light' | 'dark';
-  readonly backgroundImage?: string;
-  readonly ctaButtons: ReadonlyArray<CtaButtonProps>;
+  readonly subtitle?: string;
+  readonly clientID: 'io' | 'pagopa';
+  readonly listID: string;
+  readonly recaptchaSiteKey: string;
+  readonly buttonLabel: string;
+  readonly notes?: JSX.Element;
+  readonly background?: string;
 }
 
 export interface FormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  organization: string;
-};
+  name?: string;
+  surname?: string;
+  email?: string;
+  organization?: string;
+}
+
+export interface FormCategoryProps {
+  categories: {
+    categoryID: string;
+    label: string;
+    additionalInfo?: string;
+  }[];
+  selectedCategory: string;
+  textColor: string;
+  borderColor: string;
+  handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}

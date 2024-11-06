@@ -1,47 +1,86 @@
-import { Header } from './fetch/header';
-import { Navigation } from './fetch/navigation';
-import {
-  MenuDropdownProp,
-  NavigationProps,
-} from '@react-components/types/Header/Header.types';
+/* eslint-disable no-underscore-dangle */
+import { HeaderData, HeaderSublink } from './fetch/header';
 
-export type HeaderWithNavigation = Header['data']['attributes'] &
-  NavigationProps;
+const formatSlug = (
+  slug: string,
+  locale: 'it' | 'en',
+  defaultLocale: 'it' | 'en'
+): string => {
+  const localeString = locale === defaultLocale ? '' : `/${locale}`;
+  const slugString = slug === 'homepage' ? '/' : `/${slug}`;
 
-const makeMenuItemFromNavItem = (
-  item: Navigation[0],
-  navigation: Navigation,
-  theme: 'light' | 'dark'
-): MenuDropdownProp => {
-  const { title, related } = item;
-  const itemsArray = navigation
-    .filter((child) => child.parent?.id === item.id && child.menuAttached)
-    .map((child) => ({
-      href: `/${item.related.slug}/${child.related.slug}`,
-      label: child.title,
-    }));
-
-  return {
-    theme,
-    label: title,
-    href: `/${related.slug}`,
-    ...(itemsArray.length > 0 && { items: itemsArray }),
-  };
+  return localeString + slugString;
 };
 
-const makeMenuFromNavigation = (
-  navigation: Navigation,
-  theme: 'light' | 'dark'
-): ReadonlyArray<MenuDropdownProp> =>
-  navigation
-    .filter((item) => !item.parent && item.menuAttached)
-    .map((item) => makeMenuItemFromNavItem(item, navigation, theme));
-
-export const makeHeaderWithNavigation = (
-  navigation: Navigation,
-  header: Header
-): HeaderWithNavigation => ({
-  theme: 'light',
-  ...header.data.attributes,
-  menu: Array.from(makeMenuFromNavigation(navigation, 'light')),
+const formatSublink = ({
+  locale,
+  defaultLocale,
+  page,
+  ...sublink
+}: HeaderSublink & {
+  readonly locale: 'it' | 'en';
+  readonly defaultLocale: 'it' | 'en';
+}): HeaderSublink => ({
+  ...sublink,
+  page: {
+    data: {
+      attributes: {
+        slug: formatSlug(page.data.attributes.slug, locale, defaultLocale),
+      },
+    },
+  },
 });
+
+// This function does 2 things to all links and sublinks:
+// 1. Substitutes the 'homepage' slug with '/'
+// 2. Prepends the locale, unless it's the default one
+export const formatHeaderLinks = (
+  header: HeaderData['data']['attributes']['header'][0],
+  locale: 'it' | 'en',
+  defaultLocale: 'it' | 'en'
+): HeaderData['data']['attributes']['header'][0] => {
+  switch (header.__component) {
+    case 'headers.standard-header':
+      return {
+        ...header,
+        menu: {
+          links: header.menu.links.map(({ page, sublinks, ...link }) => ({
+            ...link,
+            page: {
+              data: page.data
+                ? {
+                    attributes: {
+                      slug: formatSlug(
+                        page.data.attributes.slug,
+                        locale,
+                        defaultLocale
+                      ),
+                    },
+                  }
+                : null,
+            },
+            sublinks: sublinks.map((sublink) =>
+              formatSublink({ locale, defaultLocale, ...sublink })
+            ),
+          })),
+        },
+      };
+    case 'headers.mega-header':
+      return {
+        ...header,
+        menu: {
+          links: header.menu.links.map(({ sublinkGroups, ...link }) => ({
+            ...link,
+            sublinkGroups: sublinkGroups.map(
+              ({ sublinks, ...sublinkGroup }) => ({
+                ...sublinkGroup,
+                sublinks: sublinks.map((sublink) =>
+                  formatSublink({ locale, defaultLocale, ...sublink })
+                ),
+              })
+            ),
+          })),
+        },
+      };
+  }
+};

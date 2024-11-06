@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { getHeader } from '../header';
+import { getHeader, HeaderData } from '../header';
 import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
@@ -10,6 +10,10 @@ const makeTestAppEnv = () => {
     SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
     APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
     APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
+    FIRMA_STRAPI_API_BASE_URL: 'firmaStrapiToken',
+    FIRMA_STRAPI_API_TOKEN: 'firmaStrapiApiBaseUrl',
+    INTEROP_STRAPI_API_BASE_URL: 'interopStrapiToken',
+    INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
@@ -20,23 +24,47 @@ const makeTestAppEnv = () => {
 };
 
 // response example
-const headerResponse = {
+const headerResponse: HeaderData = {
   data: {
     attributes: {
-      productName: 'Test',
-      beta: false,
-      ctaButtons: [
+      header: [
         {
-          text: 'test',
-          href: '/',
-          variant: 'contained',
-          icon: null,
-          size: 'medium',
+          __component: 'headers.standard-header',
+          beta: true,
+          drawer: {
+            buttonText: 'Accedi',
+            title: 'Accedi o Iscriviti',
+            ctaCard: {
+              buttonText: 'Accedi',
+              href: '#',
+              title: 'Titolo',
+              subtitle: 'Sottotitolo',
+            },
+            linkCards: [
+              {
+                buttonText: 'Accedi',
+                href: '#',
+                title: 'Cittadini',
+                subtitle: 'Sottotitolo Cittadini',
+                stackIcon: 'People',
+              },
+              {
+                buttonText: 'Accedi',
+                href: '#',
+                title: 'Imprese',
+                subtitle: 'Sottotitolo Imprese',
+                stackIcon: 'Business',
+              },
+            ],
+          },
+          menu: {
+            links: [],
+          },
+          logo: { data: null },
+          productName: 'SEND',
+          supportLink: '/assistenza',
         },
       ],
-      logo: {
-        data: null,
-      },
     },
   },
 };
@@ -50,10 +78,10 @@ describe('getHeader', () => {
       json: () => Promise.resolve(headerResponse),
     } as unknown as Response);
 
-    await getHeader(appEnv);
+    await getHeader({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/header/?populate=ctaButtons,logo`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/header?locale=it&populate=header.logo,header.ctaButton,header.menu.links.page,header.menu.links.sublinks.page,header.menu.links.sublinkGroups.sublinks.page,header.drawer.ctaCard,header.drawer.linkCards`,
       {
         method: 'GET',
         headers: {
@@ -70,7 +98,7 @@ describe('getHeader', () => {
       json: () => Promise.resolve(headerResponse),
     } as unknown as Response);
 
-    const actual = getHeader(appEnv);
+    const actual = getHeader({ ...appEnv, locale: 'it' });
 
     expect(await actual).toStrictEqual(headerResponse);
   });

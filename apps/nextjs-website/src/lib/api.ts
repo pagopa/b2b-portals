@@ -2,15 +2,15 @@
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
 import { AppEnv, Config, makeAppEnv } from '../AppEnv';
-import { Page, makePageListFromNavigation } from './pages';
-import { getNavigation } from './fetch/navigation';
-import { PreHeader, getPreHeader } from './fetch/preHeader';
+import { getNavigation, PageData } from './fetch/navigation';
+import { PreHeaderAttributes, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
-import { getHeader } from './fetch/header';
-import { HeaderWithNavigation, makeHeaderWithNavigation } from './header';
+import { getHeader, HeaderData } from './fetch/header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
+import { formatHeaderLinks } from './header';
+import { getPreFooter, PreFooterAttributes } from './fetch/preFooter';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -22,41 +22,74 @@ const appEnv = pipe(
 );
 
 // Return all the pages
-export const getAllPages = async (): Promise<ReadonlyArray<Page>> => {
-  const navigation = await getNavigation(appEnv);
-  return makePageListFromNavigation(navigation);
+export const getAllPages = async (
+  locale: 'it' | 'en'
+): Promise<ReadonlyArray<PageData>> => {
+  const navigation = await getNavigation({ ...appEnv, locale });
+  return navigation.data.map((item) =>
+    item.attributes.slug !== 'homepage'
+      ? item.attributes
+      : {
+          slug: '',
+          seo: item.attributes.seo,
+          sections: item.attributes.sections,
+        }
+  );
 };
 
 // Return PreHeaderProps
-export const getPreHeaderProps = async (): Promise<
-  PreHeader['data']['attributes']
-> => {
+export const getPreHeaderProps = async (
+  locale: 'it' | 'en'
+): Promise<PreHeaderAttributes | null> => {
+  const { data } = await getPreHeader({ ...appEnv, locale });
+  return data?.attributes ?? null;
+};
+
+export const getHeaderProps = async (
+  locale: 'it' | 'en',
+  defaultLocale: 'it' | 'en'
+): Promise<HeaderData['data']['attributes']['header'][0]> => {
+  const {
+    data: {
+      attributes: { header },
+    },
+  } = await getHeader({ ...appEnv, locale });
+
+  if (header[0] === undefined) {
+    // Disable lint for this case because we want the build to fail if user managed to not input a menu
+    // eslint-disable-next-line
+    throw new Error();
+  }
+
+  return formatHeaderLinks(header[0], locale, defaultLocale);
+};
+
+export const getFooterProps = async (
+  locale: 'it' | 'en'
+): Promise<FooterData['data']['attributes']> => {
   const {
     data: { attributes },
-  } = await getPreHeader(appEnv);
+  } = await getFooter({ ...appEnv, locale });
   return attributes;
 };
 
-export const getHeaderProps = async (): Promise<HeaderWithNavigation> => {
-  const header = await getHeader(appEnv);
-  const navigation = await getNavigation(appEnv);
-  return makeHeaderWithNavigation(navigation, header);
-};
-
-export const getFooterProps = async (): Promise<
-  FooterData['data']['attributes']
-> => {
-  const {
-    data: { attributes },
-  } = await getFooter(appEnv);
-  return attributes;
+export const getPreFooterProps = async (
+  locale: 'it' | 'en'
+): Promise<PreFooterAttributes | null> => {
+  const { data } = await getPreFooter({ ...appEnv, locale });
+  return data?.attributes ?? null;
 };
 
 // Return PageProps given the page path
 export const getPageProps = async (
-  slug: ReadonlyArray<string>
-): Promise<Page | undefined> => {
-  const allPages = await getAllPages();
+  locale: 'it' | 'en',
+  slug: string | undefined
+): Promise<PageData | undefined> => {
+  if (slug === undefined) {
+    return undefined;
+  }
+
+  const allPages = await getAllPages(locale);
   return allPages.find((page) => slug.toString() === page.slug.toString());
 };
 
@@ -79,8 +112,15 @@ export const getAllPageIDs = async (
     },
     fetchFun: appEnv.fetchFun,
   };
-  const { data } = await fetchAllPageIDs(appEnvWithRequestedTenant);
-  return data;
+  const pageIDs_it = await fetchAllPageIDs({
+    ...appEnvWithRequestedTenant,
+    locale: 'it',
+  });
+  const pageIDs_en = await fetchAllPageIDs({
+    ...appEnvWithRequestedTenant,
+    locale: 'en',
+  });
+  return [...pageIDs_it.data, ...pageIDs_en.data];
 };
 
 export const getPageSectionsFromID = async (
@@ -98,32 +138,7 @@ export const getPageSectionsFromID = async (
     data: { attributes },
   } = await fetchPageFromID({ ...appEnvWithRequestedTenant, pageID });
 
-  return attributes.sections.map((section) => {
-    // eslint-disable-next-line no-underscore-dangle
-    switch (section.__component) {
-      case 'sections.hero':
-        return {
-          ...section,
-          image: section.image.data?.attributes ?? null,
-          background: section.background.data?.attributes ?? null,
-        };
-
-      case 'sections.editorial':
-        return {
-          ...section,
-          image: section.image.data.attributes,
-        };
-
-      case 'sections.banner-link':
-        return {
-          ...section,
-          decoration: section.decoration.data?.attributes ?? null,
-        };
-
-      default:
-        return section;
-    }
-  });
+  return attributes.sections;
 };
 
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';

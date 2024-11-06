@@ -17,20 +17,6 @@ export default ({ env }: any) => ({
       },
     },
   },
-  navigation: {
-    enabled: true,
-    config: {
-      contentTypes: ['api::page.page'],
-      contentTypesNameFields: {
-          'api::page.page': ['name']
-      },
-      pathDefaultFields: {
-          'api::page.page': ['slug']
-      },
-      allowedLevels: 2,
-      cascadeMenuAttached: false
-    }
-  },
   'update-static-content': {
     enabled: true,
     config: {
@@ -43,7 +29,7 @@ export default ({ env }: any) => ({
     },
   },
   'preview-button': {
-    enabled: false,
+    enabled: true,
     config: {
       contentTypes: [
         {
@@ -53,6 +39,7 @@ export default ({ env }: any) => ({
             query: {
               pageID: '{id}',
               secret: env('PREVIEW_TOKEN'),
+              tenant: env('ENVIRONMENT'),
             },
             openTarget: '_blank',
             copy: false,
@@ -61,5 +48,5 @@ export default ({ env }: any) => ({
         }
       ]
     }
-  }
+  },
 });

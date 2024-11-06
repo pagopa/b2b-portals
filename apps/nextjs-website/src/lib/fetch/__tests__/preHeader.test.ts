@@ -10,6 +10,10 @@ const makeTestAppEnv = () => {
     SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
     APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
     APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
+    FIRMA_STRAPI_API_BASE_URL: 'firmaStrapiToken',
+    FIRMA_STRAPI_API_TOKEN: 'firmaStrapiApiBaseUrl',
+    INTEROP_STRAPI_API_BASE_URL: 'interopStrapiToken',
+    INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
@@ -47,6 +51,10 @@ const preHeaderResponse = {
   },
 };
 
+const emptyPreHeaderResponse = {
+  data: null,
+};
+
 const preHeaderResponseAfterCodec = {
   data: {
     attributes: {
@@ -79,10 +87,10 @@ describe('getPreHeader', () => {
       json: () => Promise.resolve(preHeaderResponse),
     } as unknown as Response);
 
-    await getPreHeader(appEnv);
+    await getPreHeader({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-header/?populate=leftCtas,rightCtas`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-header/?locale=it&populate=leftCtas,rightCtas`,
       {
         method: 'GET',
         headers: {
@@ -99,9 +107,22 @@ describe('getPreHeader', () => {
       json: () => Promise.resolve(preHeaderResponse),
     } as unknown as Response);
 
-    const actual = getPreHeader(appEnv);
+    const actual = getPreHeader({ ...appEnv, locale: 'it' });
 
     // Use preHeaderResponse directly as the expected value
     expect(await actual).toStrictEqual(preHeaderResponseAfterCodec);
+  });
+
+  it('should allow for preHeader data to be null', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(emptyPreHeaderResponse),
+    } as unknown as Response);
+
+    const actual = getPreHeader({ ...appEnv, locale: 'it' });
+
+    // Use preHeaderResponse directly as the expected value
+    expect(await actual).toStrictEqual({ data: null });
   });
 });

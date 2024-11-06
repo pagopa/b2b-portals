@@ -1,11 +1,15 @@
 import { Box, Stack } from '@mui/material';
 import { FeatureStackItemProps } from '../../types/Feature/Feature.types';
-import { EIcon } from '../common/EIcon';
 import { Title } from '../common/Common';
 import { TextColor, TextAlternativeColor } from '../common/Common.helpers';
 import Subtitle from './Subtitle';
+import Image from 'next/image';
 
-export const FeatureStackItem = ({ item, theme }: FeatureStackItemProps) => {
+export const FeatureStackItem = ({
+  item,
+  theme,
+  themeVariant,
+}: FeatureStackItemProps) => {
   const textColor = TextColor(theme);
   const textColorAlternative = TextAlternativeColor(theme);
 
@@ -32,7 +36,7 @@ export const FeatureStackItem = ({ item, theme }: FeatureStackItemProps) => {
         }}
         color={textColorAlternative}
       >
-        <EIcon {...item?.stackIcon} />
+        <Image src={item.iconURL} alt='' height={64} width={64} />
       </Box>
       <Stack spacing={1} textAlign='center'>
         <Title
@@ -41,7 +45,7 @@ export const FeatureStackItem = ({ item, theme }: FeatureStackItemProps) => {
           textColor={textColor}
           title={item.title}
         />
-        <Subtitle theme={theme} item={item} />
+        <Subtitle theme={theme} item={item} themeVariant={themeVariant} />
       </Stack>
     </Stack>
   );

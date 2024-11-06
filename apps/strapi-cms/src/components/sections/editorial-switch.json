@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_sections_editorial_switches",
+  "info": {
+    "displayName": "EditorialSwitch",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "required": true,
+      "default": "light"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "richtext"
+    },
+    "sections": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.editorial-switch-section",
+      "required": true,
+      "min": 2
+    }
+  }
+}

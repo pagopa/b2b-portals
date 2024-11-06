@@ -1,0 +1,62 @@
+{
+  "collectionName": "components_sections_video_images",
+  "info": {
+    "displayName": "VideoImage",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "subtitle": {
+      "type": "text",
+      "required": false
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "isCentered": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$",
+      "unique": false
+    },
+    "caption": {
+      "type": "string"
+    },
+    "video": {
+      "displayName": "VideoImage_VideoData",
+      "type": "component",
+      "repeatable": false,
+      "component": "components.video-image-video-data"
+    },
+    "mobileImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

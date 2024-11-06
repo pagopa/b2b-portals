@@ -11,6 +11,8 @@ on:
           - send
           - appio
           - demo
+          - firma
+          - interop
 
   # Allows external webhook trigger
   repository_dispatch:
@@ -31,7 +33,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     strategy:
       matrix:
-        environment: [ 'send','appio','demo' ] # add new tenant after creating the relevant environment vars/secrets github
+        environment: [ 'send','appio','demo','firma','interop' ] # add new tenant after creating the relevant environment vars/secrets github
 
     environment: ${{ matrix.environment }}
 
@@ -50,8 +52,16 @@ jobs:
           iam_role: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
           bucket: ${{ vars.S3_BUCKET_NAME }}
           cloudfront_distribution_id: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
-          strapi_api_token: ${{ secrets.STRAPI_TOKEN }}
-          strapi_api_base_url: ${{ vars.STRAPI_URL }}
+          send_strapi_api_token: ${{ secrets.SEND_STRAPI_TOKEN }}
+          send_strapi_api_base_url: ${{ vars.SEND_STRAPI_URL }}
+          appio_strapi_api_token: ${{ secrets.APPIO_STRAPI_TOKEN }}
+          appio_strapi_api_base_url: ${{ vars.APPIO_STRAPI_URL }}
+          demo_strapi_api_token: ${{ secrets.DEMO_STRAPI_TOKEN }}
+          demo_strapi_api_base_url: ${{ vars.DEMO_STRAPI_URL }}
+          firma_strapi_api_token: ${{ secrets.FIRMA_STRAPI_TOKEN }}
+          firma_strapi_api_base_url: ${{ vars.FIRMA_STRAPI_URL }}
+          interop_strapi_api_token: ${{ secrets.INTEROP_STRAPI_TOKEN }}
+          interop_strapi_api_base_url: ${{ vars.INTEROP_STRAPI_URL }}
           cdn_path: ${{ vars.CDN_PATH }}
 
   manual_deploy:
@@ -75,6 +85,14 @@ jobs:
           iam_role: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
           bucket: ${{ vars.S3_BUCKET_NAME }}
           cloudfront_distribution_id: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
-          strapi_api_token: ${{ secrets.STRAPI_TOKEN }}
-          strapi_api_base_url: ${{ vars.STRAPI_URL }}
+          send_strapi_api_token: ${{ secrets.SEND_STRAPI_TOKEN }}
+          send_strapi_api_base_url: ${{ vars.SEND_STRAPI_URL }}
+          appio_strapi_api_token: ${{ secrets.APPIO_STRAPI_TOKEN }}
+          appio_strapi_api_base_url: ${{ vars.APPIO_STRAPI_URL }}
+          demo_strapi_api_token: ${{ secrets.DEMO_STRAPI_TOKEN }}
+          demo_strapi_api_base_url: ${{ vars.DEMO_STRAPI_URL }}
+          firma_strapi_api_token: ${{ secrets.FIRMA_STRAPI_TOKEN }}
+          firma_strapi_api_base_url: ${{ vars.FIRMA_STRAPI_URL }}
+          interop_strapi_api_token: ${{ secrets.INTEROP_STRAPI_TOKEN }}
+          interop_strapi_api_base_url: ${{ vars.INTEROP_STRAPI_URL }}
           cdn_path: ${{ vars.CDN_PATH }}

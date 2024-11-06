@@ -2,23 +2,102 @@ import { StoryFn } from '@storybook/react';
 import { BannerLink } from '@react-components/components';
 import { BannerLinkProps } from '@react-components/types';
 
-// Define a "Template" function that sets how args map to rendering
-export const BannerLinkTemplate: StoryFn<BannerLinkProps> = (args) => <BannerLink {...args} />;
+export const BannerLinkTemplate: StoryFn<BannerLinkProps> = (args) => (
+  <BannerLink {...args} />
+);
 
-// Function to generate default props with a given theme
-const generateDefaultProps = (theme: 'light' | 'dark'): Partial<BannerLinkProps> => ({
-  title: 'Banner Link Title',
-  theme,
-  ctaButtons: [
+const generateDefaultProps = (
+  theme: 'light' | 'dark'
+): Partial<BannerLinkProps> => ({
+  sections: [
     {
-      text: 'Click Me',
-      variant: 'contained',
+      title: 'Scrivici',
+      body: (
+        <p>
+          Richiedi assistenza via email scrivendo a{' '}
+          <a href='#'>destinatari-send@assistenza.pagopa.it</a>: includi
+          informazioni utili come il codice univoco della notifica (IUN)
+        </p>
+      ),
+      iconURL:
+        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+      ctaButtons: [
+        {
+          text: 'Scrivici',
+          variant: 'contained',
+          href: 'mailto:destinatari-send@assistenza.pagopa.it',
+        },
+        {
+          text: 'Scrivici',
+          variant: 'outlined',
+          href: 'mailto:destinatari-send@assistenza.pagopa.it',
+        },
+      ],
     },
   ],
+  theme,
+  themeVariant: 'SEND',
 });
 
-// Define the default props with light theme
 export const defaultPropsLight = generateDefaultProps('light');
-
-// Define the default props with dark theme
 export const defaultPropsDark = generateDefaultProps('dark');
+
+const generateTwoColumnProps = (
+  theme: 'light' | 'dark'
+): Partial<BannerLinkProps> => ({
+  sections: [
+    {
+      title: 'Scrivici',
+      body: (
+        <p>
+          Richiedi assistenza via email scrivendo a{' '}
+          <a href='#'>destinatari-send@assistenza.pagopa.it</a>: includi
+          informazioni utili come il codice univoco della notifica (IUN)
+        </p>
+      ),
+      iconURL:
+        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+      ctaButtons: [
+        {
+          text: 'Scrivici',
+          variant: 'contained',
+          href: 'mailto:destinatari-send@assistenza.pagopa.it',
+        },
+        {
+          text: 'Scrivici',
+          variant: 'outlined',
+          href: 'mailto:destinatari-send@assistenza.pagopa.it',
+        },
+      ],
+    },
+    {
+      title: 'Chiamaci',
+      body: (
+        <p>
+          Il contact center di PagoPA S.p.A. è a tua disposizione al numero{' '}
+          <a href='#'>06.4520.2323</a> per assistenza dedicata dal lunedì al
+          venerdì dalle 08:00 alle 20:00 e il sabato dalle 08:00 alle 14:00.
+        </p>
+      ),
+      iconURL:
+        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+      ctaButtons: [
+        {
+          text: 'Chiamaci',
+          variant: 'contained',
+          href: 'tel:0645202323',
+        },
+        {
+          text: 'Chiamaci',
+          variant: 'outlined',
+          href: 'tel:0645202323',
+        },
+      ],
+    },
+  ],
+  theme,
+  themeVariant: 'SEND',
+});
+
+export const defaultPropsTwoColumnsLight = generateTwoColumnProps('light');
+export const defaultPropsTwoColumnsDark = generateTwoColumnProps('dark');

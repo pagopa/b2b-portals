@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import {
-  PageData,
+  PreviewPageData,
   PageIDs,
   fetchAllPageIDs,
   fetchPageFromID,
@@ -15,6 +15,10 @@ const makeTestAppEnv = () => {
     SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
     APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
     APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
+    FIRMA_STRAPI_API_BASE_URL: 'firmaStrapiToken',
+    FIRMA_STRAPI_API_TOKEN: 'firmaStrapiApiBaseUrl',
+    INTEROP_STRAPI_API_BASE_URL: 'interopStrapiToken',
+    INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
@@ -41,7 +45,7 @@ const pageIDsResponse: PageIDs = {
   ],
 };
 
-const pageDataResponse: PageData = {
+const pageDataResponse: PreviewPageData = {
   data: {
     attributes: {
       sections: [
@@ -54,12 +58,20 @@ const pageDataResponse: PageData = {
             data: null,
           },
           ctaButtons: [],
+          storeButtons: {
+            hrefGoogle: 'https://play.google.com',
+            hrefApple: 'https://apple.com',
+          },
           inverse: false,
           sectionID: null,
           size: 'small',
           subtitle: 'subtitle',
           theme: 'light',
           title: 'light',
+          link: {
+            href: '/',
+            label: 'example',
+          },
         },
       ],
     },
@@ -75,10 +87,10 @@ describe('fetchAllPageIDs', () => {
       json: () => Promise.resolve(pageIDsResponse),
     } as unknown as Response);
 
-    await fetchAllPageIDs(appEnv);
+    await fetchAllPageIDs({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?publicationState=preview`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?locale=it&publicationState=preview&pagination[pageSize]=100`,
       {
         method: 'GET',
         headers: {
@@ -96,7 +108,7 @@ describe('fetchAllPageIDs', () => {
       json: () => Promise.resolve(pageIDsResponse),
     } as unknown as Response);
 
-    const actual = fetchAllPageIDs(appEnv);
+    const actual = fetchAllPageIDs({ ...appEnv, locale: 'it' });
 
     expect(await actual).toStrictEqual(pageIDsResponse);
   });
@@ -117,7 +129,19 @@ describe('fetchPageFromID', () => {
     });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages/${pageIDExample}?publicationState=preview&populate[sections][populate][0]=ctaButtons&populate[sections][populate][1]=image&populate[sections][populate][2]=background&populate[sections][populate][3]=items.links&populate[sections][populate][4]=link&populate[sections][populate][5]=steps&populate[sections][populate][6]=accordionItems&populate[sections][populate][7]=decoration&populate[sections][populate][8]=storeButtons`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages/${pageIDExample}?publicationState=preview
+      &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon,chips
+      &populate[sections][populate][1]=items.links,items.link,items.icon
+      &populate[sections][populate][2]=sections.icon,sections.ctaButtons
+      &populate[sections][populate][3]=sections.content.image,sections.content.mobileImage,sections.content.ctaButtons,sections.content.storeButtons
+      &populate[sections][populate][4]=video.src
+      &populate[sections][populate][5]=steps.icon
+      &populate[sections][populate][6]=cards.image,cards.link
+      &populate[sections][populate][7]=text.link
+      &populate[sections][populate][8]=pages.sections.ctaButtons,pages.sections.image,pages.sections.mobileImage,pages.sections.storeButtons
+      &populate[sections][populate][9]=pages.sections.items.links,pages.sections.items.icon
+      &populate[sections][populate][10]=pages.sections.sections.ctaButtons,pages.sections.sections.icon
+      `,
       {
         method: 'GET',
         headers: {

@@ -10,30 +10,26 @@
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
-    "productName": {
-      "type": "string",
-      "required": true
-    },
-    "beta": {
-      "type": "boolean",
-      "default": false,
-      "required": true
-    },
-    "ctaButtons": {
-      "type": "component",
-      "repeatable": true,
-      "component": "components.cta-button-simple",
-      "max": 2
-    },
-    "logo": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+    "header": {
+      "type": "dynamiczone",
+      "components": [
+        "headers.standard-header",
+        "headers.mega-header"
+      ],
+      "required": true,
+      "min": 1,
+      "max": 1,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

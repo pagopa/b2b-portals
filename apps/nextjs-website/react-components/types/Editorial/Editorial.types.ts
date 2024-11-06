@@ -1,8 +1,13 @@
 import { ReactElement } from 'react';
-import { CtaButtonProps, type CommonProps } from '../common/Common.types';
+import {
+  CtaButtonProps,
+  Theme,
+  type SectionProps,
+} from '../common/Common.types';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 export interface EditorialProps
-  extends CommonProps,
+  extends SectionProps,
     EditorialContentProps,
     EditorialCtaProps,
     EditorialImageProps {
@@ -11,15 +16,20 @@ export interface EditorialProps
   readonly storeButtons?: StoreButtonsProps;
 }
 
-export interface EditorialContentProps extends CommonProps {
+export interface EditorialContentProps {
   readonly title: string;
   readonly eyelet?: string;
   readonly body: string | JSX.Element;
+  readonly theme: Theme;
+  readonly themeVariant: ThemeVariant;
 }
 
-export interface EditorialImageProps extends CommonProps {
+export interface EditorialImageProps {
   readonly image: ReactElement;
+  readonly mobileImage: ReactElement;
+  readonly breakpoint?: number;
   readonly pattern?: 'dots' | 'solid' | 'none';
+  readonly theme: Theme;
 }
 
 export type CtaEditorialButton = CtaButtonProps | JSX.Element;
@@ -29,7 +39,9 @@ export interface StoreButtonsProps {
   readonly hrefApple?: string;
 }
 
-export interface EditorialCtaProps extends CommonProps {
+export interface EditorialCtaProps {
   readonly ctaButtons?: ReadonlyArray<CtaButtonProps>;
   readonly storeButtons?: StoreButtonsProps;
+  readonly theme: Theme;
+  readonly themeVariant: ThemeVariant;
 }

@@ -63,6 +63,16 @@
       "repeatable": true,
       "component": "components.cta-button-simple",
       "max": 2
+    },
+    "storeButtons": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.store-buttons"
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link"
     }
   }
 }

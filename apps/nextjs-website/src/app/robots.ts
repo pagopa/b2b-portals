@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      disallow: '/', // Disallow: '/preview' --> Needed until /preview page is removed from rendering in SSG
+      disallow: '/preview', // Needed until /preview page is removed from rendering in SSG
     },
   };
 }
