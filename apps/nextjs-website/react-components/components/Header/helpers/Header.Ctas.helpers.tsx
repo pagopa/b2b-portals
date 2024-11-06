@@ -14,6 +14,7 @@ export const HeaderCtas: React.FC<HeaderCtasProps> = ({
         {
           text: buttonText,
           onClick: onOpenDrawer,
+          sx: { minWidth: 'max-content', marginLeft: '32px' },
         },
       ]}
       theme={theme}
