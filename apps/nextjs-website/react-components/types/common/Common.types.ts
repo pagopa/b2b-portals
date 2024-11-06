@@ -1,5 +1,6 @@
 import React from 'react';
 import { type ButtonProps } from '@mui/material';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 export type Theme = Readonly<'dark' | 'light'>;
 
@@ -10,8 +11,9 @@ export type Theme = Readonly<'dark' | 'light'>;
 export type Generic = JSX.Element;
 
 export interface SectionProps {
-  readonly theme: Theme;
   readonly sectionID: string | null;
+  readonly theme: Theme;
+  readonly themeVariant: ThemeVariant;
 }
 
 /**

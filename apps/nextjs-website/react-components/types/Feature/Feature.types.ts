@@ -1,4 +1,5 @@
-import { SectionProps, Theme } from "../common/Common.types";
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SectionProps, Theme } from '../common/Common.types';
 
 export interface FeatureItem {
   readonly iconURL: string;
@@ -13,6 +14,7 @@ export interface FeatureItem {
 export interface FeatureStackItemProps {
   readonly item: FeatureItem;
   readonly theme: 'dark' | 'light';
+  readonly themeVariant: ThemeVariant;
 }
 
 export interface FeatureProps extends SectionProps {
@@ -35,4 +37,5 @@ export interface FeatureCarouselProps {
   handleStepChange: (step: number) => void;
   theme: Theme;
   themeComponentDirection: 'rtl' | 'ltr';
+  readonly themeVariant: ThemeVariant;
 }

@@ -75,8 +75,9 @@ DarkCardsOnlyTitleWithLinksCenter.args = {
   textPosition: 'center',
 };
 
-export const DarkCardsNoLinksLeft: StoryFn<typeof Cards> =
-  CardsTemplate.bind({});
+export const DarkCardsNoLinksLeft: StoryFn<typeof Cards> = CardsTemplate.bind(
+  {}
+);
 DarkCardsNoLinksLeft.args = {
   ...defaultPropsDarkFour,
   text: {
@@ -85,8 +86,9 @@ DarkCardsNoLinksLeft.args = {
   textPosition: 'left',
 };
 
-export const DarkCardsNoLinksRight: StoryFn<typeof Cards> =
-  CardsTemplate.bind({});
+export const DarkCardsNoLinksRight: StoryFn<typeof Cards> = CardsTemplate.bind(
+  {}
+);
 DarkCardsNoLinksRight.args = {
   ...defaultPropsDarkFour,
   text: {
@@ -95,8 +97,9 @@ DarkCardsNoLinksRight.args = {
   textPosition: 'right',
 };
 
-export const DarkCardsNoLinksCenter: StoryFn<typeof Cards> =
-  CardsTemplate.bind({});
+export const DarkCardsNoLinksCenter: StoryFn<typeof Cards> = CardsTemplate.bind(
+  {}
+);
 DarkCardsNoLinksCenter.args = {
   ...defaultPropsDarkFour,
   text: {
@@ -105,8 +108,9 @@ DarkCardsNoLinksCenter.args = {
   textPosition: 'center',
 };
 
-export const DarkCardsWithLinksLeft: StoryFn<typeof Cards> =
-  CardsTemplate.bind({});
+export const DarkCardsWithLinksLeft: StoryFn<typeof Cards> = CardsTemplate.bind(
+  {}
+);
 DarkCardsWithLinksLeft.args = {
   ...defaultPropsDarkFourWithLinks,
   text: {
@@ -221,6 +225,10 @@ DarkCardsWithTextandButtonNoLinksLeft.args = {
       text: 'Click Me',
       variant: 'contained',
     },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
+    },
   ],
   textPosition: 'left',
 };
@@ -238,6 +246,10 @@ DarkCardsWithTextandButtonNoLinksRight.args = {
     {
       text: 'Click Me',
       variant: 'contained',
+    },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
     },
   ],
   textPosition: 'right',
@@ -257,6 +269,10 @@ DarkCardsWithTextandButtonNoLinksCenter.args = {
       text: 'Click Me',
       variant: 'contained',
     },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
+    },
   ],
   textPosition: 'center',
 };
@@ -274,6 +290,10 @@ DarkCardsWithTextandButtonWithLinksLeft.args = {
     {
       text: 'Click Me',
       variant: 'contained',
+    },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
     },
   ],
   textPosition: 'left',
@@ -293,6 +313,10 @@ DarkCardsWithTextandButtonWithLinksRight.args = {
       text: 'Click Me',
       variant: 'contained',
     },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
+    },
   ],
   textPosition: 'right',
 };
@@ -310,6 +334,10 @@ DarkCardsWithTextandButtonWithLinksCenter.args = {
     {
       text: 'Click Me',
       variant: 'contained',
+    },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
     },
   ],
   textPosition: 'center',

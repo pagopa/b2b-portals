@@ -3,7 +3,7 @@ import {
   ButtonSwitchRowBlockProps,
   EditorialSwitchBaseProps,
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
-import { CtaButtons, Subtitle, Title } from '../common/Common';
+import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import {
   Button,
@@ -11,6 +11,7 @@ import {
   Menu,
   MenuItem,
   Stack,
+  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -20,8 +21,17 @@ export const TitleSubtitleBlock = ({
   title,
   subtitle,
   theme,
+  themeVariant,
 }: EditorialSwitchBaseProps) => {
   const textColor = TextColor(theme);
+  const { palette } = useTheme();
+
+  const linkColor =
+    theme === 'dark'
+      ? palette.custom.white
+      : themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <div
@@ -42,13 +52,27 @@ export const TitleSubtitleBlock = ({
         marginTop={3}
         marginBottom={3}
       />
-      <Subtitle
+      <Typography
+        component='div'
         variant='body2'
-        textColor={textColor}
-        subtitle={subtitle}
-        textAlign='center'
-        marginBottom={4}
-      />
+        sx={{
+          fontSize: '18px',
+          '& a': {
+            fontWeight: 700,
+            color: linkColor,
+            textDecoration: 'underline',
+            '&:hover': {
+              color: linkColor,
+            },
+          },
+          '& p': {
+            marginBottom: '4px',
+            color: textColor,
+          },
+        }}
+      >
+        {subtitle}
+      </Typography>
     </div>
   );
 };
@@ -58,6 +82,7 @@ const SplitButton = ({
   selectedButton,
   onButtonClick,
   theme,
+  themeVariant,
 }: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
   const { palette } = useTheme();
@@ -80,13 +105,31 @@ const SplitButton = ({
 
   const anchorRef = React.useRef<HTMLDivElement>(null);
 
+  const borderColor =
+    theme === 'light'
+      ? themeVariant === 'SEND'
+        ? muiTheme.palette.primary.main
+        : palette.custom.primaryColorDark
+      : palette.primary.contrastText;
+
+  const textColor =
+    theme === 'light'
+      ? themeVariant === 'SEND'
+        ? muiTheme.palette.primary.main
+        : palette.custom.primaryColorDark
+      : muiTheme.palette.primary.contrastText;
+
   return (
     <React.Fragment>
       <ButtonGroup
         variant='outlined'
         ref={anchorRef}
         aria-label='Split button'
-        sx={{ display: 'flex', justifyContent: 'center' }}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          borderColor: borderColor,
+        }}
       >
         <Button
           onClick={() => {
@@ -97,13 +140,14 @@ const SplitButton = ({
               theme === 'light'
                 ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                 : 'transparent',
-            color:
-              theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+            color: textColor,
+            borderColor: borderColor,
             '&:hover': {
               backgroundColor:
                 theme === 'light'
                   ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                   : 'transparent',
+              borderColor: borderColor,
             },
           }}
         >
@@ -119,17 +163,18 @@ const SplitButton = ({
               theme === 'light'
                 ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                 : 'transparent',
-            color:
-              theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+            color: textColor,
+            borderColor: borderColor,
             '&:hover': {
               backgroundColor:
                 theme === 'light'
                   ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                   : 'transparent',
+              borderColor: borderColor,
             },
           }}
         >
-          <ArrowDropDown />
+          <ArrowDropDown sx={{ color: borderColor }} />
         </Button>
       </ButtonGroup>
       <Menu
@@ -161,8 +206,15 @@ const SplitButton = ({
                 button.id === selectedButton.id
                   ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                   : 'transparent',
-              color:
-                theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+              color: muiTheme.palette.primary.main,
+              '&.Mui-selected': {
+                backgroundColor: 'rgba(224, 242, 255, 0.7)',
+                color: muiTheme.palette.primary.main,
+              },
+              '&:hover': {
+                backgroundColor: 'rgba(224, 242, 255, 0.7)',
+                color: muiTheme.palette.primary.main,
+              },
             }}
           >
             {button.text}
@@ -177,8 +229,9 @@ export const ButtonSwitchRowBlock = ({
   buttons,
   onButtonClick,
   theme,
+  themeVariant,
   selectedButton,
-}: ButtonSwitchRowBlockProps) => {
+}: ButtonSwitchRowBlockProps & { themeVariant: 'SEND' | 'IO' }) => {
   const muiTheme = useTheme();
   const { palette } = useTheme();
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
@@ -200,7 +253,11 @@ export const ButtonSwitchRowBlock = ({
                 ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                 : 'transparent',
             color:
-              theme === 'light' ? muiTheme.palette.primary.main : 'inherit',
+              theme === 'light'
+                ? themeVariant === 'SEND'
+                  ? muiTheme.palette.primary.main
+                  : palette.custom.primaryColorDark
+                : muiTheme.palette.primary.contrastText,
             '&:hover': {
               backgroundColor:
                 palette.custom.editorialSwitchButtonsBackgroundLightBlue,
@@ -218,6 +275,7 @@ export const ButtonSwitchRowBlock = ({
       selectedButton={selectedButton}
       onButtonClick={onButtonClick}
       theme={theme}
+      themeVariant={themeVariant}
     />
   );
 };

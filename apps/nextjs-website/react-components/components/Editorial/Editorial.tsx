@@ -3,7 +3,10 @@ import Stack from '@mui/material/Stack';
 import ContainerRC from '../common/ContainerRC';
 import { EditorialProps } from '../../types/Editorial/Editorial.types';
 import { useIsMobile } from './Editorial.helpers';
-import { BackgroundColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+} from '../common/Common.helpers';
 import { Content as EditorialContent } from './Content';
 import { Ctas as EditorialCtas } from './Ctas';
 import { Image as EditorialImage } from './Image';
@@ -23,6 +26,7 @@ const Editorial = (props: EditorialProps) => {
     title,
     body,
     theme,
+    themeVariant,
     ctaButtons,
     storeButtons,
     pattern = 'none',
@@ -32,7 +36,10 @@ const Editorial = (props: EditorialProps) => {
   } = props;
 
   const isMobile = useIsMobile();
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
 
   if (width === 'standard') {
     // If 'width' is 'standard' use this layout
@@ -54,12 +61,14 @@ const Editorial = (props: EditorialProps) => {
           <Stack gap={4}>
             <EditorialContent
               theme={theme}
+              themeVariant={themeVariant}
               title={title}
               body={body}
               {...(eyelet && { eyelet })}
             />
             <EditorialCtas
               theme={theme}
+              themeVariant={themeVariant}
               {...(ctaButtons && { ctaButtons })}
               {...(storeButtons && { storeButtons })}
             />
@@ -104,12 +113,14 @@ const Editorial = (props: EditorialProps) => {
         <Stack gap={4}>
           <EditorialContent
             theme={theme}
+            themeVariant={themeVariant}
             title={title}
             body={body}
             {...(eyelet && { eyelet })}
           />
           <EditorialCtas
             theme={theme}
+            themeVariant={themeVariant}
             {...(ctaButtons && { ctaButtons })}
             {...(storeButtons && { storeButtons })}
           />

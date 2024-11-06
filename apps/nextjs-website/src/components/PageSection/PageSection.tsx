@@ -19,9 +19,14 @@ import HighlightBox from '../HighlightBox';
 import Stats from '../Stats';
 import RowText from '../RowText';
 import TextSection from '../TextSection';
+import PageSwitch from '../PageSwitch';
+import FramedVideo from '../FramedVideo';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 // eslint-disable-next-line complexity
-const PageSection = (props: PageSectionData) => {
+const PageSection = (
+  props: PageSectionData & { themeVariant: ThemeVariant }
+) => {
   // eslint-disable-next-line no-underscore-dangle
   switch (props.__component) {
     case 'sections.hero':
@@ -64,6 +69,10 @@ const PageSection = (props: PageSectionData) => {
       return <RowText {...props} />;
     case 'sections.text-section':
       return <TextSection {...props} />;
+    case 'sections.page-switch':
+      return <PageSwitch {...props} />;
+    case 'sections.framed-video':
+      return <FramedVideo {...props} />;
     default:
       return null;
   }

@@ -68,6 +68,22 @@
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "notes": {
+      "type": "richtext",
+      "required": false
+    },
+    "buttonLabel": {
+      "type": "string",
+      "required": true,
+      "default": "Iscriviti"
+    },
+    "background": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

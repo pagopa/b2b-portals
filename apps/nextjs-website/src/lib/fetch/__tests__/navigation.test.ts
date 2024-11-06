@@ -37,6 +37,7 @@ const navigationResponse = {
           canonicalURL: null,
           ogTitle: null,
           ogDescription: null,
+          structuredData: null,
         },
         sections: [
           {
@@ -46,7 +47,10 @@ const navigationResponse = {
             icon: {
               data: null,
             },
-            buttonText: null,
+            link: {
+              label: 'link',
+              href: '/',
+            },
             sectionID: null,
           },
         ],
@@ -64,18 +68,23 @@ describe('getNavigation', () => {
       json: () => Promise.resolve({ data: [] }),
     } as unknown as Response);
 
-    await getNavigation(appEnv);
+    await getNavigation({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?pagination[pageSize]=100
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?locale=it&pagination[pageSize]=100
       &populate[seo][populate][0]=metaTitle
-      &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon
+      &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon,chips
       &populate[sections][populate][1]=items.links,items.link,items.icon
-      &populate[sections][populate][2]=sections.decoration,sections.ctaButtons
+      &populate[sections][populate][2]=sections.icon,sections.ctaButtons
       &populate[sections][populate][3]=sections.content.image,sections.content.mobileImage,sections.content.ctaButtons,sections.content.storeButtons
       &populate[sections][populate][4]=video.src
       &populate[sections][populate][5]=steps.icon
-      &populate[sections][populate][6]=cards.image,cards.link`,
+      &populate[sections][populate][6]=cards.image,cards.link
+      &populate[sections][populate][7]=text.link
+      &populate[sections][populate][8]=pages.sections.ctaButtons,pages.sections.image,pages.sections.mobileImage,pages.sections.storeButtons
+      &populate[sections][populate][9]=pages.sections.items.links,pages.sections.items.icon
+      &populate[sections][populate][10]=pages.sections.sections.ctaButtons,pages.sections.sections.icon
+      `,
       {
         method: 'GET',
         headers: {
@@ -91,7 +100,7 @@ describe('getNavigation', () => {
       json: () => Promise.resolve(navigationResponse),
     } as unknown as Response);
 
-    const actual = getNavigation(appEnv);
+    const actual = getNavigation({ ...appEnv, locale: 'it' });
     const expected: Navigation = {
       data: [
         {
@@ -105,6 +114,7 @@ describe('getNavigation', () => {
               canonicalURL: null,
               ogTitle: null,
               ogDescription: null,
+              structuredData: null,
             },
             sections: [
               {
@@ -114,7 +124,10 @@ describe('getNavigation', () => {
                 icon: {
                   data: null,
                 },
-                buttonText: null,
+                link: {
+                  label: 'link',
+                  href: '/',
+                },
                 sectionID: null,
               },
             ],

@@ -13,9 +13,6 @@
     "subtitle": {
       "type": "text"
     },
-    "body": {
-      "type": "text"
-    },
     "layout": {
       "type": "enumeration",
       "enum": [
@@ -28,6 +25,9 @@
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "body": {
+      "type": "richtext"
     }
   }
 }

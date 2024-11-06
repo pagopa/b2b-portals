@@ -22,6 +22,8 @@ import { HighlightBoxProps } from './HighlightBox/HighlightBox.types';
 import { StatsProps } from './Stats/Stats.types';
 import { RowTextProps } from './RowText/RowText.types';
 import { TextSectionProps } from './TextSection/TextSection.types';
+import { PageSwitchProps } from './Page-Switch/Page-Switch.types';
+import { FramedVideoProps } from './FramedVideo/FramedVideo.types';
 
 export type {
   HeroProps,
@@ -48,4 +50,6 @@ export type {
   StatsProps,
   RowTextProps,
   TextSectionProps,
+  PageSwitchProps,
+  FramedVideoProps,
 };

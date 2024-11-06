@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { HeroTextProps } from '../../types/Hero/Hero.types';
-import { CtaButtons, Subtitle, Title } from '../common/Common';
+import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme, useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -8,6 +8,7 @@ import appleBadgeBase64 from '../Editorial/BadgeImages/appleBadgeBase64';
 import googleBadgeBase64 from '../Editorial/BadgeImages/googleBadgeBase64';
 import Image from 'next/image';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { CtaButtonProps } from '@react-components/types/common/Common.types';
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
   size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
@@ -27,11 +28,19 @@ export const HeroTextContent = ({
   theme,
   size,
   link,
+  themeVariant,
 }: HeroTextProps) => {
   const textColor = TextColor(theme);
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
   const { palette } = useTheme();
+
+  const linkColor =
+    theme === 'light'
+      ? themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.blueIO[500]
+      : palette.custom.white;
 
   return (
     <Stack
@@ -41,9 +50,9 @@ export const HeroTextContent = ({
         minHeight: 'inherit',
         padding: size === 'small' ? '60px 0' : '0',
         maxWidth: size === 'small' ? '60%' : '100%',
-        margin: size === 'small' ? '0 auto' : '0',
+        margin: size === 'small' ? '0 auto' : { xs: '2em 0', md: '3em 0' },
+        marginTop: size === 'small' ? '0' : '4em',
       }}
-      mt={{ xs: 9, lg: 0 }}
       component='section'
       spacing={2}
     >
@@ -55,12 +64,28 @@ export const HeroTextContent = ({
           textAlign={size === 'small' ? 'center' : 'left'}
           marginBottom={size === 'small' ? 0 : 2}
         />
-        <Subtitle
+
+        <Typography
+          component='div'
           variant='body1'
-          textColor={textColor}
-          subtitle={subtitle}
           textAlign={size === 'small' ? 'center' : 'left'}
-        />
+          sx={{
+            fontSize: '18px',
+            color: textColor,
+            '& a': {
+              color: linkColor,
+              textDecoration: 'underline',
+              '&:hover': {
+                color: linkColor,
+              },
+            },
+            '& p': {
+              color: textColor,
+            },
+          }}
+        >
+          {subtitle}
+        </Typography>
       </Stack>
       {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
         <Stack direction='column' spacing={2}>
@@ -123,11 +148,17 @@ export const HeroTextContent = ({
           spacing={2}
         >
           {CtaButtons({
-            ctaButtons: ctaButtons.map((button) => ({
+            ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
               ...button,
-              sx: { width: { md: 'auto', xs: '100%' } },
+              sx: {
+                width: {
+                  md: 'auto',
+                  xs: '100%',
+                },
+              },
             })),
             theme,
+            themeVariant,
           })}
         </Stack>
       ) : null}
@@ -139,8 +170,7 @@ export const HeroTextContent = ({
           sx={{
             display: 'flex',
             alignItems: 'center',
-            color:
-              theme === 'dark' ? textColor : palette.custom.primaryColorDark,
+            color: linkColor,
             mt: 2,
             textDecoration: 'none',
             fontWeight: 'bold',
@@ -153,6 +183,7 @@ export const HeroTextContent = ({
               display: 'inline-block',
               ml: 1,
               fontSize: '1rem',
+              color: linkColor,
               transition: 'transform 0.2s',
               '&:hover': {
                 transform: 'translateX(2px)',

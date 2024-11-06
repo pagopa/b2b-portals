@@ -32,7 +32,10 @@
     },
     "ogDescription": {
       "type": "string",
-      "maxLength": 65
+      "maxLength": 160
+    },
+    "structuredData": {
+      "type": "json"
     }
   }
 }

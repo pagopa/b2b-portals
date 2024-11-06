@@ -1,3 +1,4 @@
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 import { type SectionProps, type Generic, Theme } from '../common/Common.types';
 import { CtaButtonProps } from '../common/Common.types';
 
@@ -25,4 +26,5 @@ export interface HeroTextProps {
     readonly href: string;
   };
   readonly theme: Theme;
+  readonly themeVariant: ThemeVariant;
 }

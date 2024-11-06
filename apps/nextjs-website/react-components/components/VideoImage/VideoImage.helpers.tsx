@@ -9,6 +9,14 @@ import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
 
+interface NextImageProps {
+  overflow: 'hidden',
+  width: string,
+  height: string,
+  objectFit: 'cover',
+  objectPosition: 'center',
+}
+
 export const renderVideo = ({
   videoRef,
   error,
@@ -19,9 +27,8 @@ export const renderVideo = ({
   fallback,
   onClick,
   onVideoEnd,
-  isMobileDevice
+  isMobileDevice,
 }: RenderVideoProps) => {
-  // Define styles for mobile and non-mobile devices
   const mobileStyle = {
     overflow: 'hidden',
     width: '100vw',
@@ -38,7 +45,7 @@ export const renderVideo = ({
 
   if (error) {
     return (
-      <Typography variant='h6' color='background.paper' textAlign='center'>
+      <Typography variant="h6" color="background.paper" textAlign="center">
         {fallback}
       </Typography>
     );
@@ -55,18 +62,19 @@ export const renderVideo = ({
       onClick={onClick}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}
     >
-      <source
-        src={src}
-        onError={() => setError(true)}
-      />
+      <source src={src} onError={() => setError(true)} />
     </video>
   );
 };
 
-// Refactored renderImage function
-export const renderImage = ({ src, alt, isMobileDevice }: RenderImageProps) => {
-  // Define styles for mobile and non-mobile devices
-  const mobileStyle = {
+export const renderImage = ({
+  src,
+  alt,
+  mobileSrc,
+  mobileAlt,
+  isMobileDevice,
+}: RenderImageProps) => {
+  const mobileStyle: NextImageProps = {
     overflow: 'hidden',
     width: '100vw',
     height: '100vh',
@@ -74,16 +82,21 @@ export const renderImage = ({ src, alt, isMobileDevice }: RenderImageProps) => {
     objectPosition: 'center',
   };
 
-  const nonMobileStyle = {
+  const nonMobileStyle: NextImageProps = {
     overflow: 'hidden',
     width: '100%',
     height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center',
   };
+
+  const imageSrc = isMobileDevice && mobileSrc ? mobileSrc : src;
+  const imageAlt = isMobileDevice && mobileAlt ? mobileAlt : alt;
 
   return (
     <Image
-      alt={alt}
-      src={src}
+      alt={imageAlt}
+      src={imageSrc}
       width={0}
       height={0}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}
@@ -96,6 +109,37 @@ export const VideoText = ({
   subtitle,
   theme = 'dark',
 }: VideoTextProps) => {
+  const textColor = TextColor(theme);
+  return (
+    <>
+      {title && (
+        <Typography variant="h5" mb={4} color={textColor}>
+          {title}
+        </Typography>
+      )}
+      {subtitle && (
+        <Typography
+          paragraph
+          sx={{ fontSize: '16px' }}
+          mb={3}
+          color={textColor}
+        >
+          {subtitle}
+        </Typography>
+      )}
+    </>
+  );
+};
+
+export const ImageText = ({
+  title,
+  subtitle,
+  theme = 'dark',
+}: {
+  title?: string;
+  subtitle?: string;
+  theme: 'dark' | 'light';
+}) => {
   const textColor = TextColor(theme);
   return (
     <>

@@ -11,7 +11,7 @@ export default meta;
 
 // Define a 'Template' function that sets how args map to rendering
 const StatsTemplate: StoryFn<StatsProps> = (args) => {
-  return <Stats {...args} />;
+  return <Stats {...args} themeVariant='SEND' />;
 };
 
 export const StatsFull: StoryFn<typeof Stats> = StatsTemplate.bind({});

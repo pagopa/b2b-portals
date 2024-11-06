@@ -10,6 +10,7 @@ import googleBadgeDarkBase64 from './BadgeImages/googleBadgeDarkBase64';
 import appleBadgeDarkBase64 from './BadgeImages/appleBadgeDarkBase64';
 import ContainerRC from '../common/ContainerRC';
 import { CtaButtons } from '../common/Common';
+import { usePathname } from 'next/navigation';
 
 const styles = {
   main: (isSmallScreen: boolean, layout: 'left' | 'center') => ({
@@ -40,14 +41,20 @@ const styles = {
 
 const PreFooter = (props: PreFooterProps) => {
   const {
-    theme,
     title,
+    theme,
+    layout,
     storeButtons,
     background,
-    sectionID,
     ctaButtons,
-    layout = 'left',
+    excludeSlugs,
   } = props;
+  const pathname = usePathname();
+  // Compare excluded slugs with current page slug (removing initial '/')
+  if (excludeSlugs && excludeSlugs.includes(pathname.slice(1))) {
+    return null;
+  }
+
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
@@ -59,11 +66,7 @@ const PreFooter = (props: PreFooterProps) => {
   const backgroundColor = BackgroundColor(theme);
 
   return (
-    <Box
-      component='section'
-      sx={styles.backgroundImage(isSmallScreen, theme)}
-      {...(sectionID && { id: sectionID })}
-    >
+    <Box component='section' sx={styles.backgroundImage(isSmallScreen, theme)}>
       <Box sx={{ position: 'relative', overflow: 'hidden' }}>
         <Box
           role='presentation'
@@ -161,7 +164,16 @@ const PreFooter = (props: PreFooterProps) => {
                   marginLeft: isSmallScreen || layout === 'center' ? 0 : 2,
                 }}
               >
-                {CtaButtons({ ctaButtons: ctaButtons ?? [], theme })}
+                {CtaButtons({
+                  ctaButtons: ctaButtons.map((button) => ({
+                    ...button,
+                    sx: {
+                      width: 'auto',
+                      marginTop: '16px',
+                    },
+                  })),
+                  theme,
+                })}
               </Stack>
             ) : null}
           </Box>

@@ -1,7 +1,14 @@
 import { SectionProps, Theme } from '../common/Common.types';
 
-export interface VideoImageProps extends SectionProps, VideoTextProps, VideoCaptionProps {
+export interface VideoImageProps
+  extends SectionProps,
+    VideoTextProps,
+    VideoCaptionProps {
   image?: {
+    src: string;
+    alt: string;
+  };
+  mobileImage?: {
     src: string;
     alt: string;
   };
@@ -43,5 +50,7 @@ export interface RenderVideoProps {
 export interface RenderImageProps {
   src: string;
   alt: string;
+  mobileSrc: string;
+  mobileAlt: string;
   isMobileDevice: boolean;
 }

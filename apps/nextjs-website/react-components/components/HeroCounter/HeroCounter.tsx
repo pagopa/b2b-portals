@@ -3,12 +3,16 @@ import { Box, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContainerRC from '../common/ContainerRC';
 import { HeroCounterProps } from '@react-components/types/HeroCounter/HeroCounter.types';
-import { BackgroundColor, TextColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+  TextColor,
+} from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
-import { Subtitle } from '../common/Common';
 
 const HeroCounter = ({
   theme,
+  themeVariant,
   title,
   subtitle,
   link,
@@ -16,8 +20,20 @@ const HeroCounter = ({
   background,
   sectionID,
 }: HeroCounterProps) => {
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
+
   const textColor = TextColor(theme);
+  const { palette } = useTheme();
+
+  const linkColor =
+    theme === 'light'
+      ? themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.blueIO[500]
+      : palette.custom.white;
 
   const BackgroundImage = (
     <Box
@@ -37,8 +53,6 @@ const HeroCounter = ({
     />
   );
 
-  const { palette } = useTheme();
-
   return (
     <ContainerRC
       size='xl'
@@ -51,7 +65,7 @@ const HeroCounter = ({
         justifyContent: 'space-between',
         py: 4,
       }}
-      {...sectionID && { sectionID }}
+      {...(sectionID && { sectionID })}
     >
       <Box
         sx={{
@@ -66,17 +80,32 @@ const HeroCounter = ({
           variant='h1'
           color={textColor}
           mb={2}
-          sx={{ fontSize: { xs: '2.25rem!important', md: '3.5rem!important' }}}
+          sx={{ fontSize: { xs: '2.25rem!important', md: '3.5rem!important' } }}
         >
           {title}
         </Typography>
         {subtitle && (
-          <Subtitle
-          subtitle={subtitle}
-          textColor={textColor}
-          variant='body2'
-          textAlign='left'
-          />
+          <Typography
+            component='div'
+            variant='body2'
+            sx={{
+              textAlign: 'left',
+
+              '& a': {
+                color: linkColor,
+                textDecoration: 'underline',
+                '&:hover': {
+                  color: linkColor,
+                },
+              },
+              '& p': {
+                color: textColor,
+                fontSize: '16px',
+              },
+            }}
+          >
+            {subtitle}
+          </Typography>
         )}
         {link && (
           <Typography
@@ -85,8 +114,7 @@ const HeroCounter = ({
             sx={{
               display: 'flex',
               alignItems: 'center',
-              color:
-                theme === 'dark' ? textColor : palette.custom.primaryColorDark,
+              color: linkColor,
               mt: 2,
               textDecoration: 'none',
               fontWeight: 'bold',

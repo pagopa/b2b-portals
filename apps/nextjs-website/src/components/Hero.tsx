@@ -4,6 +4,7 @@ import { Hero as HeroRC } from '@react-components/components';
 import { HeroProps } from '@react-components/types';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 const makeHeroProps = ({
   subtitle,
@@ -13,7 +14,7 @@ const makeHeroProps = ({
   storeButtons,
   link,
   ...rest
-}: HeroSection): HeroProps => ({
+}: HeroSection & { themeVariant: ThemeVariant }): HeroProps => ({
   ...rest,
   useHoverlay: false,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
@@ -39,6 +40,8 @@ const makeHeroProps = ({
   ...(link && { link }),
 });
 
-const Hero = (props: HeroSection) => <HeroRC {...makeHeroProps(props)} />;
+const Hero = (props: HeroSection & { themeVariant: ThemeVariant }) => (
+  <HeroRC {...makeHeroProps(props)} />
+);
 
 export default Hero;

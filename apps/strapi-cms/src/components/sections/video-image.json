@@ -8,11 +8,11 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "subtitle": {
       "type": "text",
-      "required": true
+      "required": false
     },
     "image": {
       "type": "media",
@@ -49,6 +49,14 @@
       "type": "component",
       "repeatable": false,
       "component": "components.video-image-video-data"
+    },
+    "mobileImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

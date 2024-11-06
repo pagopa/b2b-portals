@@ -5,16 +5,13 @@ import {
   Grid,
   OutlinedInput,
   Typography,
-  Link,
   FormControl,
   Button,
+  Alert,
+  useTheme,
 } from '@mui/material';
 import { FormProps } from '@react-components/types/Form/Form.types';
-import {
-  TextColor,
-  BackgroundColorAlternative,
-  GrayLinkColor,
-} from '../common/Common.helpers';
+import { TextColor, GrayLinkColor } from '../common/Common.helpers';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { FormCategories } from './Form.helpers';
 
@@ -35,6 +32,7 @@ const Form = ({
   title,
   subtitle,
   theme,
+  themeVariant,
   categoriesTitle,
   defaultCategoryID,
   categories,
@@ -45,12 +43,15 @@ const Form = ({
   showOrganization,
   recaptchaSiteKey,
   sectionID,
+  buttonLabel,
+  notes,
+  background,
 }: FormProps) => {
-  const backgroundColor = BackgroundColorAlternative(theme);
   const textColor = TextColor(theme);
   const graylinkColor = GrayLinkColor(theme);
   const borderColor = theme === 'light' ? graylinkColor : 'white';
   const recaptchaRef = useRef<RECAPTCHA>(null);
+  const { palette } = useTheme();
 
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({
     name: null,
@@ -66,6 +67,10 @@ const Form = ({
     organization: '',
     category: '',
   });
+
+  const [submissionStatus, setSubmissionStatus] = useState<
+    'success' | 'failure' | null
+  >(null);
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, category: event.target.value });
@@ -132,7 +137,10 @@ const Form = ({
           method: 'POST',
           body: JSON.stringify({
             recaptchaToken,
-            groups: (categories.length > 0 && formData.category !== '') ? [formData.category] : [defaultCategoryID],
+            groups:
+              categories.length > 0 && formData.category !== ''
+                ? [formData.category]
+                : [defaultCategoryID],
             email: formData.email,
             ...(showName && { name: formData.name }),
             ...(showSurname && { surname: formData.surname }),
@@ -151,18 +159,13 @@ const Form = ({
           organization: '',
           category: '',
         });
-
-        alert(
-          'Grazie! Abbiamo preso in carica la tua richiesta. Controlla la tua casella email per continuare.'
-        );
+        setSubmissionStatus('success');
         return;
       }
 
       throw new Error();
-    } catch {
-      alert(
-        'Qualcosa è andato storto, non siamo riusciti a ricevere la tua richiesta. Riprova più tardi'
-      );
+    } catch (error) {
+      setSubmissionStatus('failure');
     } finally {
       if (recaptchaRef.current) {
         recaptchaRef.current.reset();
@@ -236,7 +239,7 @@ const Form = ({
           {validationErrors[name] !== null && (
             <Typography
               id={`${name}-error-text`}
-              variant="caption"
+              variant='caption'
               sx={{ color: 'error.main' }}
             >
               {validationErrors[name]}
@@ -250,133 +253,189 @@ const Form = ({
   return (
     <Box
       sx={{
-        maxWidth: 900,
-        mx: 'auto',
-        p: 4,
-        textAlign: 'center',
-        backgroundColor,
-        borderRadius: 2,
-        boxShadow: 3,
-        color: textColor,
+        width: '100vw',
         position: 'relative',
+        backgroundImage: background ? `url(${background})` : undefined,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
-      component='section'
-      {...sectionID && { id: sectionID }}
     >
-      <MailOutlineIcon
-        sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }}
-      />
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
+      <Box
+        sx={{
+          maxWidth: 900,
+          mx: 'auto',
+          p: 4,
+          textAlign: 'center',
+          borderRadius: 2,
+          boxShadow: 3,
+          color: textColor,
+          position: 'relative',
+        }}
+        component='section'
+        {...(sectionID && { id: sectionID })}
       >
-        {title}
-      </Typography>
-      {subtitle && (
+        <MailOutlineIcon
+          sx={{ fontSize: 50, mb: 2, color: textColor, zIndex: 3 }}
+        />
         <Typography
-          variant="body1"
+          variant='h4'
           gutterBottom
-          sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor }}
+          sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
         >
-          {subtitle}
+          {title}
         </Typography>
-      )}
-      <Grid
-        container
-        spacing={2}
-        sx={{ mb: 2, position: 'relative', zIndex: 3 }}
-      >
-        {inputFields.map(InputField)}
-      </Grid>
-      {categoriesTitle && categories.length > 0 && (
+        {subtitle && (
+          <Typography
+            variant='body1'
+            gutterBottom
+            sx={{ position: 'relative', zIndex: 3, mb: 4, color: textColor }}
+          >
+            {subtitle}
+          </Typography>
+        )}
+        <Grid
+          container
+          spacing={2}
+          sx={{ mb: 2, position: 'relative', zIndex: 3 }}
+        >
+          {inputFields.map(InputField)}
+        </Grid>
+        {categoriesTitle && categories.length > 0 && (
+          <Typography
+            variant='h6'
+            gutterBottom
+            sx={{
+              position: 'relative',
+              zIndex: 3,
+              mb: 2,
+              mt: 4,
+              color: textColor,
+              fontWeight: '700',
+            }}
+          >
+            {categoriesTitle}
+          </Typography>
+        )}
+        {categories.length > 0 && (
+          <FormCategories
+            categories={categories}
+            textColor={textColor}
+            borderColor={borderColor}
+            selectedCategory={formData.category}
+            handleRadioChange={handleRadioChange}
+          />
+        )}
         <Typography
-          variant="h6"
-          gutterBottom
+          variant='body2'
           sx={{
+            mb: 2,
             position: 'relative',
             zIndex: 3,
-            mb: 2,
-            mt: 4,
             color: textColor,
-            fontWeight: '700',
+            textAlign: 'start',
           }}
         >
-          {categoriesTitle}
+          *Campo obbligatorio
         </Typography>
-      )}
-      {categories.length > 0 && (
-        <FormCategories
-          categories={categories}
-          textColor={textColor}
-          borderColor={borderColor}
-          selectedCategory={formData.category}
-          handleRadioChange={handleRadioChange}
-        />
-      )}
-      <Typography
-        variant="body2"
-        sx={{
-          mb: 2,
-          position: 'relative',
-          zIndex: 3,
-          color: textColor,
-          textAlign: 'start',
-        }}
-      >
-        *Campo obbligatorio
-      </Typography>
-      <Button
-        variant="contained"
-        sx={{ width: { md: 'auto', xs: '100%' }, zIndex: 4 }}
-        onClick={handleSubmit}
-        color={theme === 'dark' ? 'negative' : 'primary'}
-      >
-        Iscriviti
-      </Button>
-      <Typography
-        variant="body2"
-        fontWeight="bold"
-        sx={{ mt: 2, position: 'relative', zIndex: 3, color: textColor }}
-      >
-        Inserendo il tuo indirizzo email stai accettando la nostra informativa
-        sul trattamento dei dati personali per la newsletter.
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={{ mt: 2, position: 'relative', zIndex: 3, color: graylinkColor }}
-      >
-        Form protetto tramite reCAPTCHA e Google{' '}
-        <Link
-          href="https://policies.google.com/privacy"
+        <Button
+          variant='contained'
           sx={{
-            color: graylinkColor,
-            textDecorationColor: graylinkColor,
-            textDecoration: 'underline',
+            width: { md: 'auto', xs: '100%' },
+            zIndex: 4,
+            backgroundColor:
+              theme === 'dark'
+                ? palette.custom.white
+                : themeVariant === 'SEND'
+                  ? palette.primary.main
+                  : palette.custom.blueIO[500],
+            color:
+              theme === 'dark'
+                ? themeVariant === 'SEND'
+                  ? palette.primary.main
+                  : palette.custom.blueIO[500]
+                : palette.custom.white,
+            '&:hover': {
+              backgroundColor:
+                theme === 'dark'
+                  ? palette.custom.white
+                  : themeVariant === 'SEND'
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500],
+            },
           }}
+          onClick={handleSubmit}
         >
-          {' '}
-          Privacy Policy{' '}
-        </Link>{' '}
-        e{' '}
-        <Link
-          href="https://policies.google.com/terms"
-          sx={{
-            color: graylinkColor,
-            textDecorationColor: graylinkColor,
-            textDecoration: 'underline',
-          }}
-        >
-          Termini di servizio
-        </Link>{' '}
-        applicati.
-      </Typography>
+          {buttonLabel}
+        </Button>
 
-      <RECAPTCHA
-        size="invisible"
-        ref={recaptchaRef}
-        sitekey={recaptchaSiteKey}
-      />
+        {submissionStatus === 'success' && (
+          <Alert
+            severity='success'
+            sx={{
+              maxWidth: 'fit-content',
+              margin: '16px auto 0px auto',
+              padding: '8px 16px',
+              border: 'none',
+              backgroundColor: '#e1f4e1',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              '& .MuiAlert-icon': {
+                display: 'none',
+              },
+            }}
+          >
+            Grazie! La tua richiesta è stata registrata
+          </Alert>
+        )}
+        {submissionStatus === 'failure' && (
+          <Alert
+            severity='error'
+            sx={{
+              maxWidth: 'fit-content',
+              margin: '16px auto 0px auto',
+              padding: '8px 16px',
+              border: 'none',
+              backgroundColor: '#ffd9d9',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              '& .MuiAlert-icon': {
+                display: 'none',
+              },
+            }}
+          >
+            Purtroppo in questo momento non è possibile registrare la tua
+            richiesta
+          </Alert>
+        )}
+        {notes && (
+          <Typography
+            component='div'
+            variant='body2'
+            sx={{
+              mt: 2,
+              position: 'relative',
+              zIndex: 3,
+              color: graylinkColor,
+              '& a': {
+                color: graylinkColor,
+                textDecoration: 'underline',
+                '&:hover': {
+                  color: graylinkColor,
+                  textDecoration: 'underline',
+                },
+              },
+            }}
+          >
+            {notes}
+          </Typography>
+        )}
+
+        <RECAPTCHA
+          size='invisible'
+          ref={recaptchaRef}
+          sitekey={recaptchaSiteKey}
+        />
+      </Box>
     </Box>
   );
 };

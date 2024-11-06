@@ -1,0 +1,50 @@
+{
+  "collectionName": "components_sections_framed_videos",
+  "info": {
+    "displayName": "FramedVideo",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "videoURL": {
+      "type": "string",
+      "required": false
+    },
+    "text": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.framed-video-text"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "loop": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

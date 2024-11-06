@@ -1,8 +1,8 @@
 import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
 import { StrapiImageRequiredSchema, StrapiImageSchema } from './StrapiImage';
-import { FeatureItemMUIIconCodec } from './icons/FeatureItemIcon';
 import { StoreButtonsCodec } from './StoreButtons';
+import { ThemeCodec } from './Theme';
 
 const LinkCodec = t.strict({
   label: t.string,
@@ -70,7 +70,12 @@ const AccordionSectionCodec = t.strict({
     })
   ),
   theme: t.union([t.literal('light'), t.literal('dark')]),
-  layout: t.union([t.literal('left'), t.literal('center'), t.literal('right')]),
+  layout: t.union([t.literal('left'), t.literal('center')]),
+  textAlignment: t.union([
+    t.literal('left'),
+    t.literal('center'),
+    t.literal('right'),
+  ]),
   sectionID: t.union([t.string, t.null]),
 });
 
@@ -121,8 +126,7 @@ const BannerLinkSectionCodec = t.strict({
       title: t.string,
       body: t.string,
       ctaButtons: t.array(CTAButtonSimpleCodec),
-      decoration: StrapiImageSchema,
-      icon: t.union([FeatureItemMUIIconCodec, t.null]),
+      icon: StrapiImageSchema,
     })
   ),
 });
@@ -132,8 +136,8 @@ const StripeLinkSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   subtitle: t.string,
   icon: StrapiImageSchema,
-  buttonText: t.union([t.string, t.null]),
   sectionID: t.union([t.string, t.null]),
+  link: LinkCodec,
 });
 
 const CardsItemCodec = t.strict({
@@ -194,16 +198,9 @@ const FormSectionCodec = t.strict({
     pagopa: null,
   }),
   sectionID: t.union([t.string, t.null]),
-});
-
-const PreFooterSectionCodec = t.strict({
-  __component: t.literal('sections.pre-footer'),
-  title: t.string,
-  theme: t.union([t.literal('light'), t.literal('dark')]),
-  storeButtons: t.union([StoreButtonsCodec, t.null]),
+  buttonLabel: t.string,
+  notes: t.union([t.string, t.null]),
   background: StrapiImageSchema,
-  sectionID: t.union([t.string, t.null]),
-  ctaButtons: t.array(CTAButtonSimpleCodec),
 });
 
 const CounterCodec = t.strict({
@@ -263,6 +260,7 @@ const VideoImageSectionCodec = t.strict({
   caption: t.union([t.string, t.null]),
   isCentered: t.boolean,
   image: StrapiImageSchema,
+  mobileImage: StrapiImageSchema,
   video: t.union([VideoCodec, t.null]),
 });
 
@@ -279,7 +277,6 @@ const HeroChipsSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   background: StrapiImageSchema,
   chips: t.array(ChipPropsCodec),
-  centerText: t.boolean,
 });
 
 const ServiceCardCodec = t.strict({
@@ -342,6 +339,59 @@ const HighlightBoxSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const PageSwitchPageCodec = t.strict({
+  id: t.number,
+  attributes: t.strict({
+    buttonText: t.string,
+    sections: t.array(
+      t.union([
+        EditorialSectionCodec,
+        CardsSectionCodec,
+        BannerLinkSectionCodec,
+      ])
+    ),
+  }),
+});
+
+const PageSwitchSectionCodec = t.strict({
+  __component: t.literal('sections.page-switch'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  pages: t.strict({
+    data: t.array(PageSwitchPageCodec),
+  }),
+});
+
+const FramedVideoSectionCodec = t.strict({
+  __component: t.literal('sections.framed-video'),
+  sectionID: t.union([t.string, t.null]),
+  theme: ThemeCodec,
+  videoURL: t.union([t.string, t.null]),
+  video: t.strict({
+    data: t.union([
+      t.strict({
+        attributes: t.strict({ url: t.string }),
+      }),
+      t.null,
+    ]),
+  }),
+  loop: t.boolean,
+  autoplay: t.boolean,
+  text: t.union([
+    t.strict({
+      title: t.string,
+      body: t.string,
+      textPosition: t.union([t.literal('left'), t.literal('right')]),
+      link: t.strict({
+        href: t.string,
+        label: t.string,
+      }),
+    }),
+    t.null,
+  ]),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -354,7 +404,6 @@ export const PageSectionCodec = t.union([
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
   FormSectionCodec,
-  PreFooterSectionCodec,
   HeroCounterSectionCodec,
   EditorialSwitchSectionCodec,
   VideoImageSectionCodec,
@@ -364,6 +413,8 @@ export const PageSectionCodec = t.union([
   StatsSectionCodec,
   RowTextSectionCodec,
   TextSectionSectionCodec,
+  PageSwitchSectionCodec,
+  FramedVideoSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -378,7 +429,6 @@ export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;
-export type PreFooterSection = t.TypeOf<typeof PreFooterSectionCodec>;
 export type HeroCounterSection = t.TypeOf<typeof HeroCounterSectionCodec>;
 export type EditorialSwitchSection = t.TypeOf<
   typeof EditorialSwitchSectionCodec
@@ -392,3 +442,5 @@ export type HighlightBoxSection = t.TypeOf<typeof HighlightBoxSectionCodec>;
 export type StatsSection = t.TypeOf<typeof StatsSectionCodec>;
 export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
 export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
+export type PageSwitchSection = t.TypeOf<typeof PageSwitchSectionCodec>;
+export type FramedVideoSection = t.TypeOf<typeof FramedVideoSectionCodec>;

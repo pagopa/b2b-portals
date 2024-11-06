@@ -9,100 +9,87 @@ const meta: Meta<typeof Accordion> = {
 };
 export default meta;
 
-export const AccordionDarkLeftLayoutFull: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkLeftLayoutFull.args = {
-  ...defaultPropsDark,
-  subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
-  layout: 'left',
-};
-
-export const AccordionDarkCenterLayoutFull: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkCenterLayoutFull.args = {
-  ...defaultPropsDark,
-  subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
-  layout: 'center',
-};
-
-export const AccordionDarkRightLayoutFull: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkRightLayoutFull.args = {
-  ...defaultPropsDark,
-  subtitle: 'Accordion Subtitle',
-  description: 'This is a description for the accordion.',
-  layout: 'right',
-};
-
-export const AccordionDarkLeftLayoutOnlyTitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkLeftLayoutOnlyTitle.args = {
-  ...defaultPropsDark,
-  layout: 'left',
-};
-
-export const AccordionDarkCenterLayoutOnlyTitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkCenterLayoutOnlyTitle.args = {
-  ...defaultPropsDark,
-  layout: 'center',
-};
-
-export const AccordionDarkRightLayoutOnlyTitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkRightLayoutOnlyTitle.args = {
-  ...defaultPropsDark,
-  layout: 'right',
-};
-
-export const AccordionDarkLeftLayoutWithSubtitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkLeftLayoutWithSubtitle.args = {
-  ...defaultPropsDark,
-  subtitle: 'Accordion Subtitle',
-  layout: 'left',
-};
-
-export const AccordionDarkCenterLayoutWithSubtitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkCenterLayoutWithSubtitle.args = {
-  ...defaultPropsDark,
-  subtitle: 'Accordion Subtitle',
-  layout: 'center',
-};
-
-export const AccordionDarkRightLayoutWithSubtitle: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkRightLayoutWithSubtitle.args = {
-  ...defaultPropsDark,
-  subtitle: 'Accordion Subtitle',
-  layout: 'right',
-};
-
-export const AccordionDarkLeftLayoutWithDescription: StoryFn<typeof Accordion> =
-  AccordionTemplate.bind({});
-AccordionDarkLeftLayoutWithDescription.args = {
-  ...defaultPropsDark,
-  description: 'This is a description for the accordion.',
-  layout: 'left',
-};
-
-export const AccordionDarkCenterLayoutWithDescription: StoryFn<
+export const AccordionDarkCenterLayoutLeftTextAlignment: StoryFn<
   typeof Accordion
 > = AccordionTemplate.bind({});
-AccordionDarkCenterLayoutWithDescription.args = {
+AccordionDarkCenterLayoutLeftTextAlignment.args = {
   ...defaultPropsDark,
-  description: 'This is a description for the accordion.',
-  layout: 'center',
+  subtitle: 'Accordion Subtitle',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
+  textAlignment: 'left',
 };
 
-export const AccordionDarkRightLayoutWithDescription: StoryFn<
+export const AccordionDarkCenterLayoutCenterTextAlignment: StoryFn<
   typeof Accordion
 > = AccordionTemplate.bind({});
-AccordionDarkRightLayoutWithDescription.args = {
+AccordionDarkCenterLayoutCenterTextAlignment.args = {
   ...defaultPropsDark,
-  description: 'This is a description for the accordion.',
-  layout: 'right',
+  subtitle: 'Accordion Subtitle',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
+};
+
+export const AccordionDarkCenterLayoutRightTextAlignment: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
+AccordionDarkCenterLayoutRightTextAlignment.args = {
+  ...defaultPropsDark,
+  subtitle: 'Accordion Subtitle',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
+  textAlignment: 'right',
+};
+
+export const AccordionDarkLeftLayoutLeftTextAlignment: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
+AccordionDarkLeftLayoutLeftTextAlignment.args = {
+  ...defaultPropsDark,
+  subtitle: 'Accordion Subtitle',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
+  layout: 'left',
+  textAlignment: 'left',
+};
+
+export const AccordionDarkLeftLayoutCenterTextAlignment: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
+AccordionDarkLeftLayoutCenterTextAlignment.args = {
+  ...defaultPropsDark,
+  subtitle: 'Accordion Subtitle',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
+  layout: 'left',
+};
+
+export const AccordionDarkLeftLayoutRightTextAlignment: StoryFn<
+  typeof Accordion
+> = AccordionTemplate.bind({});
+AccordionDarkLeftLayoutRightTextAlignment.args = {
+  ...defaultPropsDark,
+  subtitle: 'Accordion Subtitle',
+  description: (
+    <p>
+      This is a description for the accordion with <a href='/'>link</a>
+    </p>
+  ),
+  layout: 'left',
+  textAlignment: 'right',
 };

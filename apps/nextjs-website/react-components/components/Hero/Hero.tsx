@@ -4,7 +4,10 @@ import Image from 'next/image';
 import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroProps } from '../../types/Hero/Hero.types';
-import { BackgroundColor } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+} from '../common/Common.helpers';
 import { HeroTextContent, getMinHeight, getOverlay } from './Hero.helpers';
 
 const Hero = (props: HeroProps) => {
@@ -13,6 +16,7 @@ const Hero = (props: HeroProps) => {
     inverse = false,
     background,
     theme = 'dark',
+    themeVariant,
     useHoverlay = true,
     image,
     altText = '',
@@ -21,7 +25,10 @@ const Hero = (props: HeroProps) => {
 
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor =
+    themeVariant === 'SEND'
+      ? SendBackgroundColor(theme)
+      : IoBackgroundColor(theme);
 
   const BackgroundImage = isJSX(background) ? (
     background
@@ -48,7 +55,7 @@ const Hero = (props: HeroProps) => {
       size='xl'
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
-      {...sectionID && { sectionID }}
+      {...(sectionID && { sectionID })}
     >
       {(size === 'medium' || size === 'big') && (
         <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
@@ -65,8 +72,11 @@ const Hero = (props: HeroProps) => {
           item
           lg={6}
           mb={{ xs: 4, lg: 0 }}
-          sx={{ width: '100%', display: 'flex' }}
-          justifyContent={inverse ? 'start' : 'end'}
+          sx={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: { xs: 'center', lg: inverse ? 'start' : 'end' },
+          }}
           alignItems='center'
         >
           {isJSX(image) ? (

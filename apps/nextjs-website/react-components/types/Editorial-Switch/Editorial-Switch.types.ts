@@ -1,9 +1,11 @@
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 import { EditorialProps } from '../Editorial/Editorial.types';
 
 export interface EditorialSwitchBaseProps {
   title: string;
   subtitle?: JSX.Element;
   theme: 'dark' | 'light';
+  themeVariant: ThemeVariant;
 }
 
 export interface EditorialSwitchSection {
@@ -21,4 +23,5 @@ export interface ButtonSwitchRowBlockProps {
   onButtonClick: (sectionID: number) => void;
   selectedButton: { id: number; text: string };
   theme: 'dark' | 'light';
+  themeVariant: ThemeVariant;
 }

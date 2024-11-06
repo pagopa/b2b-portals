@@ -2,13 +2,22 @@ import { StoryFn } from '@storybook/react';
 import { StripeLink } from '@react-components/components';
 import { StripeLinkProps } from '@react-components/types';
 
-// Define a "Template" function that sets how args map to rendering
-export const StripeLinkTemplate: StoryFn<StripeLinkProps> = (args) => <StripeLink {...args} />;
+// Define a 'Template' function that sets how args map to rendering
+export const StripeLinkTemplate: StoryFn<StripeLinkProps> = (args) => (
+  <StripeLink {...args} />
+);
 
 // Function to generate default props
-const generateDefaultProps = (theme: 'dark' | 'light'): Partial<StripeLinkProps> => ({
+const generateDefaultProps = (
+  theme: 'dark' | 'light'
+): Partial<StripeLinkProps> => ({
   theme,
-  subtitle: <p>StripeLink Subtitle</p>,
+  themeVariant: 'SEND',
+  subtitle: (
+    <p>
+      StripeLink Subtitle with <a href='/'>link</a>
+    </p>
+  ),
 });
 
 // Define the default props
