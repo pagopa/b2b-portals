@@ -180,11 +180,10 @@ const VideoImage = ({
                       right: 0,
                       width: '100%',
                       height: '100%',
-                      backgroundColor: 'rgba(0, 0, 0, 0.25)',
+                      backgroundColor: 'rgba(0, 0, 0, 0.40)',
                       zIndex: 10,
                     }}
                   />
-
                   <div
                     style={{
                       position: 'absolute',
