@@ -7,25 +7,28 @@ import {
 } from '@react-components/types/Header/Header.types';
 import { DialogBubble } from './Header.DialogBubble.helpers';
 
-const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
+const useStyles = (
+  { active, alignRight }: MenuDropdownProp,
+  { spacing }: Theme
+) => {
   const muiTheme = useTheme();
 
   return {
     menu: {
       width: '100%',
-      backgroundColor: active ? '#0073E614' : 'transparent',
       height: '100%',
       display: 'flex',
       alignItems: 'center',
+      backgroundColor: active ? '#0073E614' : 'transparent',
+      ...(alignRight && { marginLeft: 'auto' }),
     },
     menuItem: {
-      width: '100%',
-      minWidth: 'max-content',
       height: '100%',
+      minWidth: 'max-content',
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: { xs: 'left', md: 'center' },
       alignItems: 'center',
+      justifyContent: { xs: 'left', md: 'center' },
       position: 'relative',
       '::after': {
         content: '""',
@@ -65,26 +68,12 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
     onClick,
     onDropdownClick,
     isMobile,
+    alignRight,
     ...button
   } = props;
   const muiTheme = useTheme();
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
-
-  const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.stopPropagation();
-    if (button.href) {
-      window.location.href = button.href;
-    }
-    if (onClick) onClick();
-  };
-
-  const handleArrowClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    event.stopPropagation();
-    if (onDropdownClick) onDropdownClick();
-  };
 
   return (
     <Stack sx={styles.menu}>
@@ -98,7 +87,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             textDecoration: 'none',
           }}
           href={button.href ? button.href : `#${label}`}
-          onClick={handleLinkClick}
+          onClick={onClick}
         >
           <Typography
             variant='sidenav'
@@ -115,7 +104,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
         </Link>
         {hasLinks && (
           <Box
-            onClick={handleArrowClick}
+            onClick={onDropdownClick}
             sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
           >
             <ArrowDropDown

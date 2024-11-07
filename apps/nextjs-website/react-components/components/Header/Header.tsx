@@ -88,6 +88,7 @@ const Header = ({
                 height: '100%',
                 alignItems: 'center',
                 gap: '1rem',
+                fontFamily: '"Titillium Web",sans-serif',
               }}
             >
               Serve aiuto?

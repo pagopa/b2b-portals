@@ -7,27 +7,43 @@ export const Navigation = ({
   menu,
   theme,
   isMobile,
-}: NavigationProps & { isMobile: boolean }) => (
-  <Stack
-    gap={{ md: 4, xs: 0 }}
-    direction={{ md: 'row', xs: 'column' }}
-    component='nav'
-    aria-label='main'
-    className='desktop-menu'
-    sx={{
-      width: { xs: '100%', md: 'auto' },
-      height: '100%',
-      alignItems: 'flex-end',
-    }}
-  >
-    {menu.map((menu, index) => (
-      <MenuDropdown
-        key={index}
-        {...menu}
-        theme={theme}
-        isMobile={isMobile}
-        sx={{ py: { xs: 1, sm: 0 }, alignItems: 'flex-end' }}
-      />
-    ))}
-  </Stack>
-);
+}: NavigationProps & { isMobile: boolean }) => {
+  const leftItems = menu.filter((item) => !item.alignRight);
+  const rightItems = menu.filter((item) => item.alignRight);
+
+  return (
+    <Stack
+      direction='row'
+      component='nav'
+      aria-label='main'
+      className='desktop-menu'
+      sx={{
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Stack direction='row' gap={4} alignItems='center' height='100%'>
+        {leftItems.map((menu, index) => (
+          <MenuDropdown
+            key={index}
+            {...menu}
+            theme={theme}
+            isMobile={isMobile}
+          />
+        ))}
+      </Stack>
+      <Stack direction='row' gap={4} alignItems='center' height='100%'>
+        {rightItems.map((menu, index) => (
+          <MenuDropdown
+            key={index}
+            {...menu}
+            theme={theme}
+            isMobile={isMobile}
+          />
+        ))}
+      </Stack>
+    </Stack>
+  );
+};

@@ -34,6 +34,7 @@ const makeHeaderProps = (
     theme: 'light',
     label: link.label,
     href: link.page.data?.attributes.slug,
+    alignRight: link.alignRight,
     ...(link.sublinks.length > 0 && {
       items: link.sublinks.map((sublink) => ({
         label: sublink.label,
