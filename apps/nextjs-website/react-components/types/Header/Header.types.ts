@@ -1,7 +1,7 @@
-import { LinkProps, StackProps } from "@mui/material";
-import { Theme } from "../common/Common.types";
-import { EIconProps } from "@react-components/components/common/EIcon";
-import { HeaderSideDrawer } from "@/lib/fetch/header";
+import { LinkProps, StackProps } from '@mui/material';
+import { Theme } from '../common/Common.types';
+import { EIconProps } from '@react-components/components/common/EIcon';
+import { HeaderSideDrawer } from '@/lib/fetch/header';
 
 export interface CardData {
   readonly title: string;
@@ -31,6 +31,7 @@ export interface MenuDropdownProp extends Partial<Omit<LinkProps, 'children'>> {
   isMobile?: boolean;
   onDropdownClick?: () => void;
   theme: Theme;
+  alignRight?: boolean;
 }
 
 export interface NavigationProps {
