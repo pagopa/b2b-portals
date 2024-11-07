@@ -10,11 +10,11 @@ import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
 
 interface NextImageProps {
-  overflow: 'hidden',
-  width: string,
-  height: string,
-  objectFit: 'cover',
-  objectPosition: 'center',
+  overflow: 'hidden';
+  width: string;
+  height: string;
+  objectFit: 'cover';
+  objectPosition: 'center';
 }
 
 export const renderVideo = ({
@@ -45,7 +45,7 @@ export const renderVideo = ({
 
   if (error) {
     return (
-      <Typography variant="h6" color="background.paper" textAlign="center">
+      <Typography variant='h6' color='background.paper' textAlign='center'>
         {fallback}
       </Typography>
     );
@@ -113,7 +113,7 @@ export const VideoText = ({
   return (
     <>
       {title && (
-        <Typography variant="h5" mb={4} color={textColor}>
+        <Typography variant='h5' mb={4} color={textColor}>
           {title}
         </Typography>
       )}
@@ -134,26 +134,30 @@ export const VideoText = ({
 export const ImageText = ({
   title,
   subtitle,
-  theme = 'dark',
 }: {
   title?: string;
   subtitle?: string;
   theme: 'dark' | 'light';
 }) => {
-  const textColor = TextColor(theme);
+  const { palette } = useTheme();
   return (
     <>
       {title && (
-        <Typography variant='h5' mb={4} color={textColor}>
+        <Typography
+          variant='h5'
+          mb={4}
+          color={palette.custom.white}
+          sx={{ maxWidth: '500px' }}
+        >
           {title}
         </Typography>
       )}
       {subtitle && (
         <Typography
           paragraph
-          sx={{ fontSize: '16px' }}
+          sx={{ fontSize: '16px', maxWidth: '500px' }}
           mb={3}
-          color={textColor}
+          color={palette.custom.white}
         >
           {subtitle}
         </Typography>
