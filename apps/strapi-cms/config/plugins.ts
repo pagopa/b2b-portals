@@ -49,4 +49,13 @@ export default ({ env }: any) => ({
       ]
     }
   },
+  'copy-locales': {
+    enabled: true,
+    config: {
+      contentTypes: [
+        'api::page.page',
+        'api::page-switch-page.page-switch-page'
+      ]
+    }
+  }
 });
