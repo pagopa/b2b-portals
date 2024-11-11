@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import Image from 'next/image';
 import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroProps } from '../../types/Hero/Hero.types';
@@ -19,7 +18,6 @@ const Hero = (props: HeroProps) => {
     themeVariant,
     useHoverlay = true,
     image,
-    altText = '',
     sectionID,
   } = props;
 
@@ -82,9 +80,10 @@ const Hero = (props: HeroProps) => {
           {isJSX(image) ? (
             image
           ) : (
-            <Image
-              alt={altText}
-              src={image}
+            <img
+              alt={image.alt}
+              src={image.src}
+              srcSet={image.srcSet}
               width={0}
               height={0}
               style={{

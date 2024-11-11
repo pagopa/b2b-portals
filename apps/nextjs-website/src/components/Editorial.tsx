@@ -1,11 +1,11 @@
 'use client';
-import Image from 'next/image';
 import MarkdownRenderer from './MarkdownRenderer';
 import { Editorial as EditorialRC } from '@react-components/components';
 import { EditorialProps } from '@react-components/types';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { makeSrcSetFromStrapiImageData } from '@/lib/image';
 
 export const makeEditorialProps = ({
   eyelet,
@@ -19,16 +19,18 @@ export const makeEditorialProps = ({
   ...(eyelet && { eyelet }),
   body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
   image: (
-    <Image
+    <img
       src={image.data.attributes.url}
+      srcSet={makeSrcSetFromStrapiImageData(image.data)}
       alt={image.data.attributes.alternativeText ?? ''}
       width={0}
       height={0}
     />
   ),
   mobileImage: (
-    <Image
-      src={mobileImage.data.attributes.url} // Ensure mobileImage is correctly used here
+    <img
+      src={mobileImage.data.attributes.url}
+      srcSet={makeSrcSetFromStrapiImageData(mobileImage.data)}
       alt={mobileImage.data.attributes.alternativeText ?? ''}
       width={0}
       height={0}

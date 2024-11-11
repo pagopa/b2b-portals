@@ -5,6 +5,7 @@ import { HeroProps } from '@react-components/types';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { makeSrcSetFromStrapiImageData } from '@/lib/image';
 
 const makeHeroProps = ({
   subtitle,
@@ -18,11 +19,15 @@ const makeHeroProps = ({
   ...rest,
   useHoverlay: false,
   ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
-  ...(image.data && { image: image.data.attributes.url }),
-  ...(image.data &&
-    image.data.attributes.alternativeText && {
-      altText: image.data.attributes.alternativeText,
-    }),
+  ...(image.data && {
+    image: {
+      src: image.data.attributes.url,
+      srcSet: makeSrcSetFromStrapiImageData(image.data),
+      ...(image.data.attributes.alternativeText && {
+        alt: image.data.attributes.alternativeText,
+      }),
+    },
+  }),
   ...(background.data && { background: background.data.attributes.url }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {

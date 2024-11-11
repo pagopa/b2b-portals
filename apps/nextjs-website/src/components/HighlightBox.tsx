@@ -2,6 +2,7 @@
 import { HighlightBoxProps } from '@react-components/types';
 import { HighlightBox as HighlightBoxRC } from '@react-components/components';
 import { HighlightBoxSection } from '@/lib/fetch/types/PageSection';
+import { makeSrcSetFromStrapiImageData } from '@/lib/image';
 
 const makeHighlightBoxProps = ({
   image,
@@ -9,7 +10,10 @@ const makeHighlightBoxProps = ({
   link,
   ...rest
 }: HighlightBoxSection): HighlightBoxProps => ({
-  imageURL: image.data.attributes.url,
+  image: {
+    src: image.data.attributes.url,
+    srcSet: makeSrcSetFromStrapiImageData(image.data),
+  },
   ...(eyelet && { eyelet }),
   ...(link && { link }),
   ...rest,
