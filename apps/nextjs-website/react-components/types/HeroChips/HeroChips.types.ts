@@ -1,7 +1,10 @@
 import { SectionProps, Generic } from "../common/Common.types";
 
 export interface HeroChipsProps extends SectionProps {
-  readonly background?: string | Generic;
+  readonly background?: {
+    src: string;
+    srcSet: string;
+  };
   readonly title: string;
   readonly subtitle?: string | Generic;
   readonly chips: ReadonlyArray<ChipProps>;

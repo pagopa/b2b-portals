@@ -21,10 +21,12 @@ const createHeroCounterProps = (
     themeVariant,
     title,
     ...(withSubtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
-    background:
-      theme === 'dark'
-        ? 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png'
-        : '',
+    ...(theme === 'dark' && {
+      background: {
+        src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+        srcSet: '',
+      }
+    }),
   };
 
   return props;

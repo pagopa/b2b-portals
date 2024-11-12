@@ -4,6 +4,7 @@ import { Form as FormRC } from '@react-components/components';
 import { FormProps } from '@react-components/types';
 import { FormSection } from '@/lib/fetch/types/PageSection';
 import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { makeSrcSetFromStrapiImageData } from '@/lib/image';
 
 const makeFormProps = ({
   subtitle,
@@ -22,7 +23,12 @@ const makeFormProps = ({
   ...(categoriesTitle && { categoriesTitle }),
   buttonLabel,
   ...(notes && { notes: MarkdownRenderer({ markdown: notes }) }),
-  ...(background.data && { background: background.data.attributes.url }),
+  ...(background.data && {
+    background: {
+      src: background.data.attributes.url,
+      srcSet: makeSrcSetFromStrapiImageData(background.data),
+    },
+  }),
   ...rest,
 });
 

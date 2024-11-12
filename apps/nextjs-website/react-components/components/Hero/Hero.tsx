@@ -32,25 +32,35 @@ const Hero = (props: HeroProps) => {
     background
   ) : (
     <Box
-      role='presentation'
+      role="presentation"
       sx={{
-        px: { xs: 4 },
         position: 'absolute',
         inset: 0,
         zIndex: -10,
         height: '100%',
         width: '100%',
-        objectFit: 'cover',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundImage: `${overlay}url(${background ?? ''})`,
+        background: overlay,
       }}
-    />
+    >
+      {background &&
+        <img
+          src={background.src}
+          srcSet={background.srcSet}
+          width={0}
+          height={0}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      }
+    </Box>
   );
 
   return (
     <ContainerRC
-      size='xl'
+      size="xl"
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
       {...(sectionID && { sectionID })}
@@ -75,7 +85,7 @@ const Hero = (props: HeroProps) => {
             display: 'flex',
             justifyContent: { xs: 'center', lg: inverse ? 'start' : 'end' },
           }}
-          alignItems='center'
+          alignItems="center"
         >
           {isJSX(image) ? (
             image

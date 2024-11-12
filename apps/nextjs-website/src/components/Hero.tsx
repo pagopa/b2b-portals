@@ -28,7 +28,12 @@ const makeHeroProps = ({
       }),
     },
   }),
-  ...(background.data && { background: background.data.attributes.url }),
+  ...(background.data && {
+    background: {
+      src: background.data.attributes.url,
+      srcSet: makeSrcSetFromStrapiImageData(background.data),
+    },
+  }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({

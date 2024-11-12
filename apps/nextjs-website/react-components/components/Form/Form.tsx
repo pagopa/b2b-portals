@@ -255,11 +255,24 @@ const Form = ({
       sx={{
         width: '100vw',
         position: 'relative',
-        backgroundImage: background ? `url(${background})` : undefined,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
       }}
     >
+      {background &&
+        <img
+          src={background.src}
+          srcSet={background.srcSet}
+          width={0}
+          height={0}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            pointerEvents: 'none',
+            zIndex: -10,
+          }}
+        />
+      }
       <Box
         sx={{
           maxWidth: 900,

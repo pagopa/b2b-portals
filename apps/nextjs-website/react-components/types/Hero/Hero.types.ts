@@ -9,7 +9,10 @@ export interface HeroProps extends SectionProps, HeroTextProps {
     alt?: string;
   };
   readonly inverse?: boolean;
-  readonly background?: string | Generic;
+  readonly background?: Generic | {
+    src: string;
+    srcSet: string;
+  };
   readonly useHoverlay?: boolean;
 }
 
