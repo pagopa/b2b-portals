@@ -12,7 +12,7 @@ const makeRowTextProps = ({
   subtitle,
   body,
   ...rest
-}: RowTextSection & Omit<SiteWidePageData, 'themeVariant'>): RowTextProps => ({
+}: RowTextSection & SiteWidePageData): RowTextProps => ({
   ...(subtitle && { subtitle }),
   ...(body && {
     body: MarkdownRenderer({
@@ -25,8 +25,8 @@ const makeRowTextProps = ({
   ...rest,
 });
 
-const RowText = (
-  props: RowTextSection & Omit<SiteWidePageData, 'themeVariant'>
-) => <RowTextRC {...makeRowTextProps(props)} />;
+const RowText = (props: RowTextSection & SiteWidePageData) => (
+  <RowTextRC {...makeRowTextProps(props)} />
+);
 
 export default RowText;

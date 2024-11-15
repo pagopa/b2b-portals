@@ -5,6 +5,7 @@ import { HeroProps } from '@react-components/types';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeHeroProps = ({
   locale,
@@ -30,9 +31,10 @@ const makeHeroProps = ({
   ...(background.data && { background: background.data.attributes.url }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
-      ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
+      ctaButtons: ctaButtons.map(({ icon, href, ...ctaBtn }) => ({
         ...ctaBtn,
         ...(icon && { startIcon: Icon(icon) }),
+        href: LocalizeURL({ URL: href, locale, defaultLocale }),
       })),
     }),
   ...(storeButtons && {
@@ -41,7 +43,12 @@ const makeHeroProps = ({
       ...(storeButtons.hrefApple && { hrefApple: storeButtons.hrefApple }),
     },
   }),
-  ...(link && { link }),
+  ...(link && {
+    link: {
+      label: link.label,
+      href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+    },
+  }),
 });
 
 const Hero = (props: HeroSection & SiteWidePageData) => (

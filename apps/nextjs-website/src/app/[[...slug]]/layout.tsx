@@ -83,7 +83,7 @@ export default async function Layout({
     return null;
   }
 
-  const { locales, matomoID } = await getSiteWideSEO();
+  const { locales, matomoID, themeVariant } = await getSiteWideSEO();
   const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
@@ -108,10 +108,24 @@ export default async function Layout({
     <ThemeProvider theme={theme}>
       <html lang={locale}>
         <body style={{ margin: 0 }}>
-          {preHeaderProps && <PreHeader {...preHeaderProps} />}
+          {preHeaderProps && (
+            <PreHeader
+              {...preHeaderProps}
+              themeVariant={themeVariant}
+              locale={locale}
+              defaultLocale={defaultLocale}
+            />
+          )}
           <Header {...headerProps} />
           {children}
-          {preFooterProps && <PreFooter {...preFooterProps} />}
+          {preFooterProps && (
+            <PreFooter
+              {...preFooterProps}
+              themeVariant={themeVariant}
+              locale={locale}
+              defaultLocale={defaultLocale}
+            />
+          )}
           <Footer
             {...footerProps}
             locales={localesArray as Array<'it' | 'en'>}

@@ -4,6 +4,7 @@ import { StripeLink as StripeLinkRC } from '@react-components/components';
 import { StripeLinkProps } from '@react-components/types';
 import { StripeLinkSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeStripeLinkProps = ({
   locale,
@@ -22,7 +23,10 @@ const makeStripeLinkProps = ({
   ...(icon.data && {
     iconURL: icon.data.attributes.url,
   }),
-  link,
+  link: {
+    label: link.label,
+    href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+  },
   ...rest,
 });
 

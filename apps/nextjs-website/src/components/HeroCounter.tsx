@@ -4,6 +4,7 @@ import { HeroCounter as HeroCounterRC } from '@react-components/components';
 import { HeroCounterProps } from '@react-components/types';
 import { HeroCounterSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeHeroCounterProps = ({
   locale,
@@ -18,7 +19,12 @@ const makeHeroCounterProps = ({
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
   }),
   ...(background.data && { background: background.data.attributes.url }),
-  ...(link && { link }),
+  ...(link && {
+    link: {
+      label: link.label,
+      href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+    },
+  }),
 });
 
 const HeroCounter = (props: HeroCounterSection & SiteWidePageData) => (

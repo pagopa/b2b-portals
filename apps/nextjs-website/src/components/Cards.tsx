@@ -5,6 +5,7 @@ import { Cards as CardsRC } from '@react-components/components';
 import { CardsProps } from '@react-components/types';
 import { CardsSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 export const makeCardsProps = ({
   locale,
@@ -35,13 +36,19 @@ export const makeCardsProps = ({
     }),
     ...(label && { label }),
     ...(text && { text }),
-    ...(links.length > 0 && { links }),
+    ...(links.length > 0 && {
+      links: links.map((link) => ({
+        label: link.label,
+        href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+      })),
+    }),
   })),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
-      ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
+      ctaButtons: ctaButtons.map(({ icon, href, ...ctaBtn }) => ({
         ...ctaBtn,
         ...(icon && { startIcon: Icon(icon) }),
+        href: LocalizeURL({ URL: href, locale, defaultLocale }),
       })),
     }),
   ...rest,

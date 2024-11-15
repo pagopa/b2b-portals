@@ -6,6 +6,7 @@ import { EditorialProps } from '@react-components/types';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 export const makeEditorialProps = ({
   locale,
@@ -43,9 +44,10 @@ export const makeEditorialProps = ({
   ),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
-      ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
+      ctaButtons: ctaButtons.map(({ icon, href, ...ctaBtn }) => ({
         ...ctaBtn,
         ...(icon && { startIcon: Icon(icon) }),
+        href: LocalizeURL({ URL: href, locale, defaultLocale }),
       })),
     }),
   ...(storeButtons && {

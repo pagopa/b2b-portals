@@ -4,6 +4,7 @@ import { HowTo as HowToRC } from '@react-components/components';
 import { HowToProps } from '@react-components/types';
 import { HowToSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeHowToProps = ({
   locale,
@@ -12,7 +13,12 @@ const makeHowToProps = ({
   steps,
   ...rest
 }: HowToSection & SiteWidePageData): HowToProps => ({
-  ...(link && { link }),
+  ...(link && {
+    link: {
+      label: link.label,
+      href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+    },
+  }),
   steps: steps.map((step) => ({
     title: step.title,
     description: MarkdownRenderer({

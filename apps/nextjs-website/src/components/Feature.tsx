@@ -3,8 +3,11 @@ import { Feature as FeatureRC } from '@react-components/components';
 import { FeatureProps } from '@react-components/types';
 import { FeatureSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeFeatureProps = ({
+  locale,
+  defaultLocale,
   items,
   ...rest
 }: FeatureSection & SiteWidePageData): FeatureProps => ({
@@ -12,7 +15,12 @@ const makeFeatureProps = ({
     title: item.title,
     subtitle: item.subtitle,
     iconURL: item.icon.data.attributes.url,
-    ...(item.link && { link: item.link }),
+    ...(item.link && {
+      link: {
+        label: item.link.label,
+        href: LocalizeURL({ URL: item.link.href, locale, defaultLocale }),
+      },
+    }),
   })),
   ...rest,
 });

@@ -8,16 +8,10 @@ export interface FooterProps extends LangSwitchProps {
   showFundedByNextGenerationEULogo?: boolean;
 }
 
-type LinkType = 'internal' | 'external';
-
 interface FooterLinksType {
   label: string;
-  /** the url to witch the user will be redirect */
   href?: string;
   ariaLabel: string;
-  linkType: LinkType;
-  /** if defined it will override the href behavior */
-  onClick?: () => void;
 }
 
 interface PreLoginFooterSingleSectionType {
