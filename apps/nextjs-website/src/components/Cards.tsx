@@ -4,21 +4,28 @@ import Icon from './Icon';
 import { Cards as CardsRC } from '@react-components/components';
 import { CardsProps } from '@react-components/types';
 import { CardsSection } from '@/lib/fetch/types/PageSection';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 
 export const makeCardsProps = ({
+  locale,
+  defaultLocale,
   items,
   title,
   subtitle,
   body,
   ctaButtons,
   ...rest
-}: CardsSection & { themeVariant: ThemeVariant }): CardsProps => ({
+}: CardsSection & SiteWidePageData): CardsProps => ({
   text: {
     title,
     ...(subtitle && { subtitle }),
     ...(body && {
-      body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
+      body: MarkdownRenderer({
+        markdown: body,
+        locale,
+        defaultLocale,
+        variant: 'body2',
+      }),
     }),
   },
   items: items.map(({ icon, label, text, title, links }) => ({
@@ -40,7 +47,7 @@ export const makeCardsProps = ({
   ...rest,
 });
 
-const Cards = (props: CardsSection & { themeVariant: ThemeVariant }) => (
+const Cards = (props: CardsSection & SiteWidePageData) => (
   <CardsRC {...makeCardsProps(props)} />
 );
 

@@ -1,5 +1,5 @@
 'use client';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { ServiceCarouselSection } from '@/lib/fetch/types/PageSection';
 import { ServiceCarousel as ServiceCarouselRC } from '@react-components/components';
 import { ServiceCarouselProps } from '@react-components/types';
@@ -9,9 +9,7 @@ const makeServiceCarouselProps = ({
   description,
   cards,
   ...rest
-}: ServiceCarouselSection & {
-  themeVariant: ThemeVariant;
-}): ServiceCarouselProps => ({
+}: ServiceCarouselSection & SiteWidePageData): ServiceCarouselProps => ({
   ...rest,
   ...(eyelet && { eyelet }),
   ...(description && { description }),
@@ -23,8 +21,8 @@ const makeServiceCarouselProps = ({
   })),
 });
 
-const ServiceCarousel = (
-  props: ServiceCarouselSection & { themeVariant: ThemeVariant }
-) => <ServiceCarouselRC {...makeServiceCarouselProps(props)} />;
+const ServiceCarousel = (props: ServiceCarouselSection & SiteWidePageData) => (
+  <ServiceCarouselRC {...makeServiceCarouselProps(props)} />
+);
 
 export default ServiceCarousel;

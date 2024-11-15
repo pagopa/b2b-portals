@@ -1,27 +1,33 @@
 'use client';
 import MarkdownRenderer from './MarkdownRenderer';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { TextSectionSection } from '@/lib/fetch/types/PageSection';
 import { TextSection as TextSectionRC } from '@react-components/components';
 import { TextSectionProps } from '@react-components/types';
 
 const makeTextSectionProps = ({
+  locale,
+  defaultLocale,
   eyelet,
   subtitle,
   body,
   title,
   link,
   ...rest
-}: TextSectionSection): TextSectionProps => ({
+}: TextSectionSection &
+  Omit<SiteWidePageData, 'themeVariant'>): TextSectionProps => ({
   ...(eyelet && { eyelet }),
-  ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
-  body: MarkdownRenderer({ markdown: body }),
+  ...(subtitle && {
+    subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
+  }),
+  body: MarkdownRenderer({ markdown: body, locale, defaultLocale }),
   ...(title && { title }),
   ...(link && { link }),
   ...rest,
 });
 
-const TextSection = (props: TextSectionSection) => (
-  <TextSectionRC {...makeTextSectionProps(props)} />
-);
+const TextSection = (
+  props: TextSectionSection & Omit<SiteWidePageData, 'themeVariant'>
+) => <TextSectionRC {...makeTextSectionProps(props)} />;
 
 export default TextSection;

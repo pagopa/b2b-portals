@@ -23,6 +23,8 @@ const makeFooterProps = ({
 }): FooterProps => ({
   legalInfo: MarkdownRenderer({
     markdown: legalInfo,
+    locale: activeLocale,
+    defaultLocale,
     variant: 'caption',
   }),
   links: {

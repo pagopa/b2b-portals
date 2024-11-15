@@ -4,9 +4,11 @@ import { Hero as HeroRC } from '@react-components/components';
 import { HeroProps } from '@react-components/types';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 
 const makeHeroProps = ({
+  locale,
+  defaultLocale,
   subtitle,
   image,
   background,
@@ -14,10 +16,12 @@ const makeHeroProps = ({
   storeButtons,
   link,
   ...rest
-}: HeroSection & { themeVariant: ThemeVariant }): HeroProps => ({
+}: HeroSection & SiteWidePageData): HeroProps => ({
   ...rest,
   useHoverlay: false,
-  ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
+  ...(subtitle && {
+    subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
+  }),
   ...(image.data && { image: image.data.attributes.url }),
   ...(image.data &&
     image.data.attributes.alternativeText && {
@@ -40,7 +44,7 @@ const makeHeroProps = ({
   ...(link && { link }),
 });
 
-const Hero = (props: HeroSection & { themeVariant: ThemeVariant }) => (
+const Hero = (props: HeroSection & SiteWidePageData) => (
   <HeroRC {...makeHeroProps(props)} />
 );
 

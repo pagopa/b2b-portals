@@ -2,12 +2,12 @@
 import { Feature as FeatureRC } from '@react-components/components';
 import { FeatureProps } from '@react-components/types';
 import { FeatureSection } from '@/lib/fetch/types/PageSection';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 
 const makeFeatureProps = ({
   items,
   ...rest
-}: FeatureSection & { themeVariant: ThemeVariant }): FeatureProps => ({
+}: FeatureSection & SiteWidePageData): FeatureProps => ({
   items: items.map((item) => ({
     title: item.title,
     subtitle: item.subtitle,
@@ -17,7 +17,7 @@ const makeFeatureProps = ({
   ...rest,
 });
 
-const Feature = (props: FeatureSection & { themeVariant: ThemeVariant }) => (
+const Feature = (props: FeatureSection & SiteWidePageData) => (
   <FeatureRC {...makeFeatureProps(props)} />
 );
 
