@@ -41,7 +41,6 @@ const isValidInternalLink = (URL: string): boolean => {
   return URL[0] === '/';
 };
 
-// TODO: Add tests
 export const LocalizeURL = ({
   URL,
   locale,
@@ -58,7 +57,6 @@ export const LocalizeURL = ({
   return `/${locale}${URL}`;
 };
 
-// TODO: Add tests
 export const LocalizeMarkdownLinks = ({
   markdown,
   locale,
