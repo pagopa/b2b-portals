@@ -1,5 +1,5 @@
 'use client';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { StatsSection } from '@/lib/fetch/types/PageSection';
 import { Stats as StatsRC } from '@react-components/components';
 import { StatsProps } from '@react-components/types';
@@ -9,7 +9,7 @@ const makeStatsProps = ({
   body,
   items,
   ...rest
-}: StatsSection & { themeVariant: ThemeVariant }): StatsProps => ({
+}: StatsSection & SiteWidePageData): StatsProps => ({
   ...(eyelet && { eyelet }),
   ...(body && { body }),
   items: items.map((item) => ({
@@ -20,7 +20,7 @@ const makeStatsProps = ({
   ...rest,
 });
 
-const Stats = (props: StatsSection & { themeVariant: ThemeVariant }) => (
+const Stats = (props: StatsSection & SiteWidePageData) => (
   <StatsRC {...makeStatsProps(props)} />
 );
 

@@ -2,7 +2,7 @@
 import { VideoImage as VideoImageRC } from '@react-components/components';
 import { VideoImageProps } from '@react-components/types';
 import { VideoImageSection } from '@/lib/fetch/types/PageSection';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { makeSrcSetFromStrapiImageData } from '@/lib/image';
 
 const makeVideoImageProps = ({
@@ -13,7 +13,7 @@ const makeVideoImageProps = ({
   mobileImage,
   video,
   ...rest
-}: VideoImageSection & { themeVariant: ThemeVariant }): VideoImageProps => ({
+}: VideoImageSection & SiteWidePageData): VideoImageProps => ({
   ...rest,
   ...(title && { title }),
   ...(subtitle && { subtitle }),
@@ -48,8 +48,8 @@ const makeVideoImageProps = ({
     }),
 });
 
-const VideoImage = (
-  props: VideoImageSection & { themeVariant: ThemeVariant }
-) => <VideoImageRC {...makeVideoImageProps(props)} />;
+const VideoImage = (props: VideoImageSection & SiteWidePageData) => (
+  <VideoImageRC {...makeVideoImageProps(props)} />
+);
 
 export default VideoImage;
