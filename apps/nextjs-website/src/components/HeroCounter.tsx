@@ -3,22 +3,32 @@ import MarkdownRenderer from './MarkdownRenderer';
 import { HeroCounter as HeroCounterRC } from '@react-components/components';
 import { HeroCounterProps } from '@react-components/types';
 import { HeroCounterSection } from '@/lib/fetch/types/PageSection';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeHeroCounterProps = ({
+  locale,
+  defaultLocale,
   subtitle,
   background,
   link,
   ...rest
-}: HeroCounterSection & { themeVariant: ThemeVariant }): HeroCounterProps => ({
+}: HeroCounterSection & SiteWidePageData): HeroCounterProps => ({
   ...rest,
-  ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
+  ...(subtitle && {
+    subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
+  }),
   ...(background.data && { background: background.data.attributes.url }),
-  ...(link && { link }),
+  ...(link && {
+    link: {
+      label: link.label,
+      href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+    },
+  }),
 });
 
-const HeroCounter = (
-  props: HeroCounterSection & { themeVariant: ThemeVariant }
-) => <HeroCounterRC {...makeHeroCounterProps(props)} />;
+const HeroCounter = (props: HeroCounterSection & SiteWidePageData) => (
+  <HeroCounterRC {...makeHeroCounterProps(props)} />
+);
 
 export default HeroCounter;

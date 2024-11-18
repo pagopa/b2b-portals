@@ -7,12 +7,12 @@ import MarkdownRenderer from './MarkdownRenderer';
 import { PageSwitch as PageSwitchRC } from '@react-components/components';
 import { PageSwitchProps } from '@react-components/types';
 import { PageSwitchSection } from '@/lib/fetch/types/PageSection';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PageSwitchContent } from '@react-components/types/Page-Switch/Page-Switch.types';
 
 const makePageSwitchPageSections = (
   sections: PageSwitchSection['pages']['data'][0]['attributes']['sections'],
-  themeVariant: ThemeVariant
+  siteWidePageData: SiteWidePageData
 ): PageSwitchContent[] =>
   sections.map((section) => {
     // eslint-disable-next-line no-underscore-dangle
@@ -20,41 +20,44 @@ const makePageSwitchPageSections = (
       case 'sections.editorial':
         return {
           type: 'Editorial',
-          props: makeEditorialProps({ ...section, themeVariant }),
+          props: makeEditorialProps({ ...section, ...siteWidePageData }),
         };
       case 'sections.cards':
         return {
           type: 'Cards',
-          props: makeCardsProps({ ...section, themeVariant }),
+          props: makeCardsProps({ ...section, ...siteWidePageData }),
         };
       case 'sections.banner-link':
         return {
           type: 'BannerLink',
-          props: makeBannerLinkProps({ ...section, themeVariant }),
+          props: makeBannerLinkProps({ ...section, ...siteWidePageData }),
         };
     }
   });
 
 const makePageSwitchProps = ({
+  locale,
+  defaultLocale,
   subtitle,
   pages,
   ...rest
-}: PageSwitchSection & { themeVariant: ThemeVariant }): PageSwitchProps => ({
-  ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
+}: PageSwitchSection & SiteWidePageData): PageSwitchProps => ({
+  ...(subtitle && {
+    subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
+  }),
   pages: pages.data.map((page) => ({
     id: page.id,
     buttonText: page.attributes.buttonText,
-    sections: makePageSwitchPageSections(
-      page.attributes.sections,
-      rest.themeVariant
-    ),
+    sections: makePageSwitchPageSections(page.attributes.sections, {
+      themeVariant: rest.themeVariant,
+      locale,
+      defaultLocale,
+    }),
   })),
   ...rest,
 });
 
-const PageSwitch = (
-  props: PageSwitchSection & { themeVariant: ThemeVariant }
-) => {
+const PageSwitch = (props: PageSwitchSection & SiteWidePageData) => {
   // No pages (or a single page) for PageSwitch have been input, notify of the problem in preview
   if (props.pages.data.length < 2) {
     return (

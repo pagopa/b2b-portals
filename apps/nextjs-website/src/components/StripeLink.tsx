@@ -3,24 +3,35 @@ import MarkdownRenderer from './MarkdownRenderer';
 import { StripeLink as StripeLinkRC } from '@react-components/components';
 import { StripeLinkProps } from '@react-components/types';
 import { StripeLinkSection } from '@/lib/fetch/types/PageSection';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeStripeLinkProps = ({
+  locale,
+  defaultLocale,
   subtitle,
   icon,
   link,
   ...rest
-}: StripeLinkSection & { themeVariant: ThemeVariant }): StripeLinkProps => ({
-  subtitle: MarkdownRenderer({ markdown: subtitle, variant: 'body2' }),
+}: StripeLinkSection & SiteWidePageData): StripeLinkProps => ({
+  subtitle: MarkdownRenderer({
+    markdown: subtitle,
+    locale,
+    defaultLocale,
+    variant: 'body2',
+  }),
   ...(icon.data && {
     iconURL: icon.data.attributes.url,
   }),
-  link,
+  link: {
+    label: link.label,
+    href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+  },
   ...rest,
 });
 
-const StripeLink = (
-  props: StripeLinkSection & { themeVariant: ThemeVariant }
-) => <StripeLinkRC {...makeStripeLinkProps(props)} />;
+const StripeLink = (props: StripeLinkSection & SiteWidePageData) => (
+  <StripeLinkRC {...makeStripeLinkProps(props)} />
+);
 
 export default StripeLink;

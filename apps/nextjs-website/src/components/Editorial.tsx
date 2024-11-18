@@ -5,9 +5,12 @@ import { Editorial as EditorialRC } from '@react-components/components';
 import { EditorialProps } from '@react-components/types';
 import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 export const makeEditorialProps = ({
+  locale,
+  defaultLocale,
   eyelet,
   body,
   image,
@@ -15,9 +18,14 @@ export const makeEditorialProps = ({
   ctaButtons,
   storeButtons,
   ...rest
-}: EditorialSection & { themeVariant: ThemeVariant }): EditorialProps => ({
+}: EditorialSection & SiteWidePageData): EditorialProps => ({
   ...(eyelet && { eyelet }),
-  body: MarkdownRenderer({ markdown: body, variant: 'body2' }),
+  body: MarkdownRenderer({
+    markdown: body,
+    locale,
+    defaultLocale,
+    variant: 'body2',
+  }),
   image: (
     <Image
       src={image.data.attributes.url}
@@ -36,9 +44,10 @@ export const makeEditorialProps = ({
   ),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
-      ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
+      ctaButtons: ctaButtons.map(({ icon, href, ...ctaBtn }) => ({
         ...ctaBtn,
         ...(icon && { startIcon: Icon(icon) }),
+        href: LocalizeURL({ URL: href, locale, defaultLocale }),
       })),
     }),
   ...(storeButtons && {
@@ -50,8 +59,8 @@ export const makeEditorialProps = ({
   ...rest,
 });
 
-const Editorial = (
-  props: EditorialSection & { themeVariant: ThemeVariant }
-) => <EditorialRC {...makeEditorialProps(props)} />;
+const Editorial = (props: EditorialSection & SiteWidePageData) => (
+  <EditorialRC {...makeEditorialProps(props)} />
+);
 
 export default Editorial;

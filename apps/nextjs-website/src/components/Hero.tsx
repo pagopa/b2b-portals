@@ -4,9 +4,12 @@ import { Hero as HeroRC } from '@react-components/components';
 import { HeroProps } from '@react-components/types';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeHeroProps = ({
+  locale,
+  defaultLocale,
   subtitle,
   image,
   background,
@@ -14,10 +17,12 @@ const makeHeroProps = ({
   storeButtons,
   link,
   ...rest
-}: HeroSection & { themeVariant: ThemeVariant }): HeroProps => ({
+}: HeroSection & SiteWidePageData): HeroProps => ({
   ...rest,
   useHoverlay: false,
-  ...(subtitle && { subtitle: MarkdownRenderer({ markdown: subtitle }) }),
+  ...(subtitle && {
+    subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
+  }),
   ...(image.data && { image: image.data.attributes.url }),
   ...(image.data &&
     image.data.attributes.alternativeText && {
@@ -26,9 +31,10 @@ const makeHeroProps = ({
   ...(background.data && { background: background.data.attributes.url }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
-      ctaButtons: ctaButtons.map(({ icon, ...ctaBtn }) => ({
+      ctaButtons: ctaButtons.map(({ icon, href, ...ctaBtn }) => ({
         ...ctaBtn,
         ...(icon && { startIcon: Icon(icon) }),
+        href: LocalizeURL({ URL: href, locale, defaultLocale }),
       })),
     }),
   ...(storeButtons && {
@@ -37,10 +43,15 @@ const makeHeroProps = ({
       ...(storeButtons.hrefApple && { hrefApple: storeButtons.hrefApple }),
     },
   }),
-  ...(link && { link }),
+  ...(link && {
+    link: {
+      label: link.label,
+      href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+    },
+  }),
 });
 
-const Hero = (props: HeroSection & { themeVariant: ThemeVariant }) => (
+const Hero = (props: HeroSection & SiteWidePageData) => (
   <HeroRC {...makeHeroProps(props)} />
 );
 

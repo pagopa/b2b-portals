@@ -1,15 +1,19 @@
 'use client';
 import { PreFooterAttributes } from '@/lib/fetch/preFooter';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PreFooter as PreFooterRC } from '@react-components/components';
+import { LocalizeURL } from '@/lib/linkLocalization';
 import { PreFooterProps } from '@react-components/types';
 
 const makePreFooterProps = ({
+  locale,
+  defaultLocale,
   storeButtons,
   background,
   ctaButtons,
   exclude,
   ...rest
-}: PreFooterAttributes): PreFooterProps => ({
+}: PreFooterAttributes & SiteWidePageData): PreFooterProps => ({
   ...(background.data && { background: background.data.attributes.url }),
   ...(storeButtons && {
     storeButtons: {
@@ -17,14 +21,19 @@ const makePreFooterProps = ({
       ...(storeButtons.hrefApple && { hrefApple: storeButtons.hrefApple }),
     },
   }),
-  ...(ctaButtons.length > 0 && { ctaButtons }),
+  ...(ctaButtons.length > 0 && {
+    ctaButtons: ctaButtons.map(({ href, ...ctaButton }) => ({
+      ...ctaButton,
+      href: LocalizeURL({ URL: href, locale, defaultLocale }),
+    })),
+  }),
   ...(exclude.data.length > 0 && {
     excludeSlugs: exclude.data.map((obj) => obj.attributes.slug),
   }),
   ...rest,
 });
 
-const PreFooter = (props: PreFooterAttributes) => (
+const PreFooter = (props: PreFooterAttributes & SiteWidePageData) => (
   <PreFooterRC {...makePreFooterProps(props)} />
 );
 
