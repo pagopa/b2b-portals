@@ -7,7 +7,6 @@ import {
 } from '@react-components/types/VideoImage/VideoImage.types';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
-import Image from 'next/image';
 
 interface NextImageProps {
   overflow: 'hidden';
@@ -70,8 +69,10 @@ export const renderVideo = ({
 export const renderImage = ({
   src,
   alt,
+  srcSet,
   mobileSrc,
   mobileAlt,
+  mobileSrcSet,
   isMobileDevice,
 }: RenderImageProps) => {
   const mobileStyle: NextImageProps = {
@@ -90,13 +91,15 @@ export const renderImage = ({
     objectPosition: 'center',
   };
 
-  const imageSrc = isMobileDevice && mobileSrc ? mobileSrc : src;
-  const imageAlt = isMobileDevice && mobileAlt ? mobileAlt : alt;
+  const imageSrc = isMobileDevice ? mobileSrc : src;
+  const imageAlt = isMobileDevice ? mobileAlt : alt;
+  const imageSrcSet = isMobileDevice ? mobileSrcSet : srcSet;
 
   return (
-    <Image
-      alt={imageAlt}
+    <img
       src={imageSrc}
+      alt={imageAlt}
+      srcSet={imageSrcSet}
       width={0}
       height={0}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}

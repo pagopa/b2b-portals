@@ -5,6 +5,7 @@ import { HeroProps } from '@react-components/types';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { makeSrcSetFromStrapiImageData } from '@/lib/image';
 import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeHeroProps = ({
@@ -23,12 +24,21 @@ const makeHeroProps = ({
   ...(subtitle && {
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
   }),
-  ...(image.data && { image: image.data.attributes.url }),
-  ...(image.data &&
-    image.data.attributes.alternativeText && {
-      altText: image.data.attributes.alternativeText,
-    }),
-  ...(background.data && { background: background.data.attributes.url }),
+  ...(image.data && {
+    image: {
+      src: image.data.attributes.url,
+      srcSet: makeSrcSetFromStrapiImageData(image.data),
+      ...(image.data.attributes.alternativeText && {
+        alt: image.data.attributes.alternativeText,
+      }),
+    },
+  }),
+  ...(background.data && {
+    background: {
+      src: background.data.attributes.url,
+      srcSet: makeSrcSetFromStrapiImageData(background.data),
+    },
+  }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(({ icon, href, ...ctaBtn }) => ({

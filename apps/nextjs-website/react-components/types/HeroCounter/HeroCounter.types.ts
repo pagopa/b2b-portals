@@ -1,7 +1,10 @@
 import { Theme, type SectionProps } from '../common/Common.types';
 
 export interface HeroCounterProps extends SectionProps, HeroCounterTextProps {
-  readonly background?: string;
+  readonly background?: {
+    src: string;
+    srcSet: string;
+  };
   readonly counter: {
     readonly number: number;
     readonly text: string;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import Image from 'next/image';
 import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroProps } from '../../types/Hero/Hero.types';
@@ -19,7 +18,6 @@ const Hero = (props: HeroProps) => {
     themeVariant,
     useHoverlay = true,
     image,
-    altText = '',
     sectionID,
   } = props;
 
@@ -34,25 +32,35 @@ const Hero = (props: HeroProps) => {
     background
   ) : (
     <Box
-      role='presentation'
+      role="presentation"
       sx={{
-        px: { xs: 4 },
         position: 'absolute',
         inset: 0,
         zIndex: -10,
         height: '100%',
         width: '100%',
-        objectFit: 'cover',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundImage: `${overlay}url(${background ?? ''})`,
+        background: overlay,
       }}
-    />
+    >
+      {background &&
+        <img
+          src={background.src}
+          srcSet={background.srcSet}
+          width={0}
+          height={0}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      }
+    </Box>
   );
 
   return (
     <ContainerRC
-      size='xl'
+      size="xl"
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
       {...(sectionID && { sectionID })}
@@ -77,14 +85,15 @@ const Hero = (props: HeroProps) => {
             display: 'flex',
             justifyContent: { xs: 'center', lg: inverse ? 'start' : 'end' },
           }}
-          alignItems='center'
+          alignItems="center"
         >
           {isJSX(image) ? (
             image
           ) : (
-            <Image
-              alt={altText}
-              src={image}
+            <img
+              alt={image.alt}
+              src={image.src}
+              srcSet={image.srcSet}
               width={0}
               height={0}
               style={{

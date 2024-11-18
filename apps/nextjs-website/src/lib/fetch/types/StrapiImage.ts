@@ -1,11 +1,20 @@
 import * as t from 'io-ts';
 
+export const ResponsiveImageDataCodec = t.strict({
+  url: t.string,
+});
+
 export const ImageDataCodec = t.strict({
   alternativeText: t.union([t.string, t.null]),
   url: t.string,
   width: t.number,
   height: t.number,
   mime: t.string,
+  formats: t.partial({
+    small: ResponsiveImageDataCodec,
+    medium: ResponsiveImageDataCodec,
+    large: ResponsiveImageDataCodec,
+  }),
 });
 
 export const StrapiImageSchema = t.strict({
@@ -23,4 +32,4 @@ export const StrapiImageRequiredSchema = t.strict({
   }),
 });
 
-export type Image = t.TypeOf<typeof StrapiImageSchema>;
+export type StrapiImage = t.TypeOf<typeof StrapiImageRequiredSchema>;

@@ -3,6 +3,7 @@ import { VideoImage as VideoImageRC } from '@react-components/components';
 import { VideoImageProps } from '@react-components/types';
 import { VideoImageSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { makeSrcSetFromStrapiImageData } from '@/lib/image';
 
 const makeVideoImageProps = ({
   title,
@@ -34,6 +35,7 @@ const makeVideoImageProps = ({
       image: {
         src: image.data.attributes.url,
         alt: image.data.attributes.alternativeText ?? '',
+        srcSet: makeSrcSetFromStrapiImageData(image.data),
       },
       mobileImage: {
         src: mobileImage?.data?.attributes?.url ?? image.data.attributes.url,
@@ -41,6 +43,7 @@ const makeVideoImageProps = ({
           mobileImage?.data?.attributes?.alternativeText ??
           image.data.attributes.alternativeText ??
           '',
+        srcSet: makeSrcSetFromStrapiImageData(mobileImage.data ?? image.data),
       },
     }),
 });

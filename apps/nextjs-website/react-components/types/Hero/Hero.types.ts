@@ -3,10 +3,16 @@ import { type SectionProps, type Generic, Theme } from '../common/Common.types';
 import { CtaButtonProps } from '../common/Common.types';
 
 export interface HeroProps extends SectionProps, HeroTextProps {
-  readonly image?: string | Generic;
-  readonly altText?: string;
+  readonly image?: JSX.Element | {
+    src: string;
+    srcSet: string;
+    alt?: string;
+  };
   readonly inverse?: boolean;
-  readonly background?: string | Generic;
+  readonly background?: Generic | {
+    src: string;
+    srcSet: string;
+  };
   readonly useHoverlay?: boolean;
 }
 

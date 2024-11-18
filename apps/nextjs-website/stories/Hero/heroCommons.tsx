@@ -34,13 +34,17 @@ const createHeroProps = (
     title,
     subtitle: withSubtitle ? subtitle : '',
     ctaButtons: withButtons ? ctaButtons : [],
-    altText: 'Alt text for image',
-    image:
-      'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
-    background:
-      theme === 'dark'
-        ? 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png'
-        : '',
+    image:{
+      src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-foreground.png',
+      srcSet: '',
+      alt: 'Alt text for image',
+    },
+    ...(theme === 'dark' && {
+      background: {
+        src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+        srcSet: '',
+      }
+    }),
   };
 
   return props;

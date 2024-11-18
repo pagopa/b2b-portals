@@ -31,20 +31,29 @@ const HeroChips = (props: HeroChipsProps) => {
 
   const BackgroundImage = (
     <Box
-      role='presentation'
+      role="presentation"
       sx={{
-        px: 4,
         position: 'absolute',
         inset: 0,
         zIndex: -10,
         height: '100%',
         width: '100%',
-        objectFit: 'cover',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundImage: `url(${background ?? ''})`,
       }}
-    />
+    >
+      {background &&
+        <img
+          src={background.src}
+          srcSet={background.srcSet}
+          width={0}
+          height={0}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      }
+    </Box>
   );
 
   return (

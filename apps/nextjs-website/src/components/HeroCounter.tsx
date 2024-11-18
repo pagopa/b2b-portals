@@ -4,6 +4,7 @@ import { HeroCounter as HeroCounterRC } from '@react-components/components';
 import { HeroCounterProps } from '@react-components/types';
 import { HeroCounterSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { makeSrcSetFromStrapiImageData } from '@/lib/image';
 import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeHeroCounterProps = ({
@@ -18,7 +19,12 @@ const makeHeroCounterProps = ({
   ...(subtitle && {
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
   }),
-  ...(background.data && { background: background.data.attributes.url }),
+  ...(background.data && {
+    background: {
+      src: background.data.attributes.url,
+      srcSet: makeSrcSetFromStrapiImageData(background.data),
+    },
+  }),
   ...(link && {
     link: {
       label: link.label,
