@@ -8,9 +8,17 @@ export const ChipsBlock = ({
   chips: ReadonlyArray<ChipProps>;
   theme: 'light' | 'dark';
 }) => {
+  const SmoothScrollToTarget = (targetID: string) => {
+    const targetSection = document.getElementById(targetID);
+
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <Stack
-      direction='row'
+      direction="row"
       spacing={1}
       mt={2}
       sx={{
@@ -19,7 +27,7 @@ export const ChipsBlock = ({
       }}
     >
       <Stack
-        direction='row'
+        direction="row"
         spacing={1}
         sx={{
           maxWidth: '600px',
@@ -30,10 +38,9 @@ export const ChipsBlock = ({
       >
         {chips.map((chip, index) => (
           <Chip
-            component='a'
             key={index}
             label={chip.label}
-            href={`#${chip.targetID}`}
+            onClick={() => SmoothScrollToTarget(chip.targetID)}
             sx={{
               backgroundColor: '#ebebf52e',
               color: theme === 'dark' ? '#ffffff' : '#000000',
@@ -41,7 +48,7 @@ export const ChipsBlock = ({
                 backgroundColor: '#ebebf54d',
               },
               border: theme === 'light' ? '1px solid #D0D0D0' : 'none',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
           />
         ))}
