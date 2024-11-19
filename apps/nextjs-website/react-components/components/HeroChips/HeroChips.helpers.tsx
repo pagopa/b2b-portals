@@ -18,7 +18,7 @@ export const ChipsBlock = ({
 
   return (
     <Stack
-      direction="row"
+      direction='row'
       spacing={1}
       mt={2}
       sx={{
@@ -27,7 +27,7 @@ export const ChipsBlock = ({
       }}
     >
       <Stack
-        direction="row"
+        direction='row'
         spacing={1}
         sx={{
           maxWidth: '600px',
