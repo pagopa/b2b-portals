@@ -164,8 +164,10 @@ const VideoImage = ({
               {renderImage({
                 src: image!.src,
                 alt: image!.alt,
+                srcSet: image!.srcSet,
                 mobileSrc: mobileImage!.src,
                 mobileAlt: mobileImage!.alt,
+                mobileSrcSet: mobileImage!.srcSet,
                 isMobileDevice,
               })}
 

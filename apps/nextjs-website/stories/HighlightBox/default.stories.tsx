@@ -19,8 +19,10 @@ export const HighlightBoxFull: StoryFn<typeof HighlightBox> = Template.bind({});
 HighlightBoxFull.args = {
   title: 'Sta arrivando IT Wallet!',
   body: 'Se hai tra 18 e 35 anni compiuti puoi richiedere su IO la Carta Giovani Nazionale, istituita dal Dipartimento per le Politiche Giovanili e il Servizio Civile Universale. La carta dà diritto a sconti e agevolazioni per l’accesso ad attività culturali, sportive e ricreative, anche con finalità formative.',
-  imageURL:
-    'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
+  image: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
+    srcSet: '',
+  },
   eyelet: 'In arrivo su IO',
   link: {
     label: 'Scopri di più',
@@ -34,8 +36,10 @@ export const HighlightBoxWithoutButton: StoryFn<typeof HighlightBox> =
 HighlightBoxWithoutButton.args = {
   title: 'Sta arrivando IT Wallet!',
   body: 'Se hai tra 18 e 35 anni compiuti puoi richiedere su IO la Carta Giovani Nazionale, istituita dal Dipartimento per le Politiche Giovanili e il Servizio Civile Universale. La carta dà diritto a sconti e agevolazioni per l’accesso ad attività culturali, sportive e ricreative, anche con finalità formative.',
-  imageURL:
-    'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
+  image: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
+    srcSet: '',
+  },
   eyelet: 'In arrivo su IO',
   sectionID: 'highlight-box-2',
 };
@@ -45,8 +49,10 @@ export const HighlightBoxWithoutEyelet: StoryFn<typeof HighlightBox> =
 HighlightBoxWithoutEyelet.args = {
   title: 'Sta arrivando IT Wallet!',
   body: 'Se hai tra 18 e 35 anni compiuti puoi richiedere su IO la Carta Giovani Nazionale, istituita dal Dipartimento per le Politiche Giovanili e il Servizio Civile Universale. La carta dà diritto a sconti e agevolazioni per l’accesso ad attività culturali, sportive e ricreative, anche con finalità formative.',
-  imageURL:
-    'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
+  image: {
+    src: 'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
+    srcSet: '',
+  },
   eyelet: '',
   link: {
     label: 'Scopri di più',

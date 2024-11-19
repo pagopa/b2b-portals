@@ -51,6 +51,7 @@ const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
         mime: 'jpg',
         url: 'imgSrc',
         alternativeText: 'altText',
+        formats: {},
       },
     },
   },

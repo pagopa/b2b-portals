@@ -50,13 +50,12 @@ export const FooterColumn = ({
       textAlign={{ xs: 'center', sm: 'left' }}
       sx={{ padding: 0, listStyle: 'none' }}
     >
-      {data.links.map(({ href = hrefNoOp, label, ariaLabel, onClick }, i) => (
+      {data.links.map(({ href = hrefNoOp, label, ariaLabel }, i) => (
         <li key={i}>
           <Link
             aria-label={ariaLabel}
             component='a'
             href={href}
-            onClick={onClick}
             underline='none'
             color='text.primary'
             sx={{ display: 'inline-block', py: 0.5 }}
