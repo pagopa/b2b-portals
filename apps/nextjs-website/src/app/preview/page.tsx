@@ -58,7 +58,14 @@ const PreviewPage = async ({
 
   return (
     <div>
-      {sections.map((section) => PageSection({ ...section, themeVariant }))}
+      {sections.map((section) =>
+        PageSection({
+          ...section,
+          themeVariant,
+          locale: 'it', // Doesn't matter in preview
+          defaultLocale: 'it', // Doesn't matter in preview
+        })
+      )}
     </div>
   );
 };

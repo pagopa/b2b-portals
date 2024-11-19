@@ -1,12 +1,11 @@
 import { Grid, Stack, Button, Box, Typography, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import Image from 'next/image';
 import { HighlightBoxProps } from '../../types/HighlightBox/HighlightBox.types';
 
 const HighlightBox = ({
   title,
   body,
-  imageURL,
+  image,
   eyelet,
   link,
   sectionID,
@@ -82,12 +81,16 @@ const HighlightBox = ({
         </Grid>
         <Grid item xs={12} md={6} sx={{ display: { xs: 'none', md: 'block' } }}>
           <Box sx={{ width: '100%' }}>
-            <Image
-              src={imageURL}
-              alt='Highlight'
-              layout='responsive'
+            <img
+              src={image.src}
+              srcSet={image.srcSet}
+              alt={'Highlight'}
               width={300}
               height={200}
+              style={{
+                height: 'auto',
+                width: '100%',
+              }}
             />
           </Box>
         </Grid>

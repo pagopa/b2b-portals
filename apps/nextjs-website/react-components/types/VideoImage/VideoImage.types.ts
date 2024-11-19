@@ -7,10 +7,12 @@ export interface VideoImageProps
   image?: {
     src: string;
     alt: string;
+    srcSet: string;
   };
   mobileImage?: {
     src: string;
     alt: string;
+    srcSet: string;
   };
   video?: {
     src: string;
@@ -50,7 +52,9 @@ export interface RenderVideoProps {
 export interface RenderImageProps {
   src: string;
   alt: string;
+  srcSet: string;
   mobileSrc: string;
   mobileAlt: string;
+  mobileSrcSet: string;
   isMobileDevice: boolean;
 }

@@ -32,6 +32,12 @@ const SiteWideSEOCodec = t.strict({
 export type SiteWideSEO = t.TypeOf<typeof SiteWideSEOCodec>;
 export type ThemeVariant = t.TypeOf<typeof ThemeVariantCodec>;
 
+export interface SiteWidePageData {
+  readonly themeVariant: ThemeVariant;
+  readonly locale: 'it' | 'en';
+  readonly defaultLocale: 'it' | 'en';
+}
+
 export const fetchSiteWideSEO = ({
   config,
   fetchFun,

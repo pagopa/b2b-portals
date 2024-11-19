@@ -143,7 +143,9 @@ const Page = async ({ params }: PageParams) => {
           }}
         />
       )}
-      {sections.map((section) => PageSection({ ...section, themeVariant }))}
+      {sections.map((section) =>
+        PageSection({ ...section, themeVariant, locale, defaultLocale })
+      )}
     </main>
   );
 };

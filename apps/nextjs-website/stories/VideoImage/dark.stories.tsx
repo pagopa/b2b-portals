@@ -120,10 +120,12 @@ ImageFull.args = {
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
+    srcSet: '',
   },
   mobileImage: {
     src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
     alt: 'Sample Mobile Image Alt',
+    srcSet: '',
   },
   caption: 'Sample Video Caption',
 };
@@ -135,10 +137,12 @@ ImageNoTextWithCaptionCentered.args = {
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
+    srcSet: '',
   },
   mobileImage: {
     src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
     alt: 'Sample Mobile Image Alt',
+    srcSet: '',
   },
   caption: 'Sample Video Caption',
   isCentered: true,
@@ -151,10 +155,12 @@ ImageNoTextWithCaptionLeft.args = {
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
+    srcSet: '',
   },
   mobileImage: {
     src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
     alt: 'Sample Mobile Image Alt',
+    srcSet: '',
   },
   caption: 'Sample Video Caption',
 };
@@ -168,10 +174,12 @@ ImageNoCaptionWithTextCenter.args = {
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
+    srcSet: '',
   },
   mobileImage: {
     src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
     alt: 'Sample Mobile Image Alt',
+    srcSet: '',
   },
   isCentered: true,
 };
@@ -185,10 +193,12 @@ ImageNoCaptionWithTextLeft.args = {
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
+    srcSet: '',
   },
   mobileImage: {
     src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
     alt: 'Sample Mobile Image Alt',
+    srcSet: '',
   },
 };
 
@@ -199,9 +209,11 @@ ImageNoTitleNoCaption.args = {
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
+    srcSet: '',
   },
   mobileImage: {
     src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
     alt: 'Sample Mobile Image Alt',
+    srcSet: '',
   },
 };

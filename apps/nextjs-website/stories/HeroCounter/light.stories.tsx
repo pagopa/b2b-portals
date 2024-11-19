@@ -22,7 +22,7 @@ LightHeroCounter.args = {
     text: 'Enti disponibili'
   },
   title: 'Enti locali',
-  subtitle: MarkdownRenderer({ markdown: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`}),
+  subtitle: MarkdownRenderer({ markdown: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`, locale: 'it', defaultLocale: 'it' }),
   link: {
     label: 'Sto cercando un Ente nazionale',
     href: '#'
@@ -39,5 +39,5 @@ LightHeroCounterNoLink.args = {
     text: 'Enti disponibili'
   },
   title: 'Enti locali',
-  subtitle: MarkdownRenderer({ markdown: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`}),
+  subtitle: MarkdownRenderer({ markdown: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`, locale: 'it', defaultLocale: 'it' }),
 };

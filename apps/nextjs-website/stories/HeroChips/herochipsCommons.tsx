@@ -20,10 +20,12 @@ const createHeroChipsProps = (
     themeVariant,
     title,
     subtitle: withSubtitle ? subtitle : '',
-    background:
-      theme === 'dark'
-        ? 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png'
-        : '',
+    ...(theme === 'dark' && {
+      background: {
+        src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+        srcSet: '',
+      }
+    }),
     chips: [
       { label: 'Notifiche', targetID: 'notifiche' },
       { label: 'SEND', targetID: 'send' },
