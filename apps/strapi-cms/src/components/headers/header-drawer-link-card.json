@@ -1,15 +1,12 @@
 {
   "collectionName": "components_headers_header_drawer_link_cards",
   "info": {
-    "displayName": "Header Drawer Link Card"
+    "displayName": "Header Drawer Link Card",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
-      "type": "string",
-      "required": true
-    },
-    "subtitle": {
       "type": "string",
       "required": true
     },
@@ -27,6 +24,10 @@
         "Business",
         "People"
       ],
+      "required": true
+    },
+    "subtitle": {
+      "type": "richtext",
       "required": true
     }
   }

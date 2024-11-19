@@ -1,15 +1,12 @@
 {
   "collectionName": "components_headers_header_drawer_cta_cards",
   "info": {
-    "displayName": "Header Drawer Cta Card"
+    "displayName": "Header Drawer Cta Card",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
-      "type": "string",
-      "required": true
-    },
-    "subtitle": {
       "type": "string",
       "required": true
     },
@@ -19,6 +16,10 @@
     },
     "href": {
       "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "richtext",
       "required": true
     }
   }
