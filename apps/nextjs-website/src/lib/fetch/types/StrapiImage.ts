@@ -10,11 +10,14 @@ export const ImageDataCodec = t.strict({
   width: t.number,
   height: t.number,
   mime: t.string,
-  formats: t.partial({
-    small: ResponsiveImageDataCodec,
-    medium: ResponsiveImageDataCodec,
-    large: ResponsiveImageDataCodec,
-  }),
+  formats: t.union([
+    t.partial({
+      small: ResponsiveImageDataCodec,
+      medium: ResponsiveImageDataCodec,
+      large: ResponsiveImageDataCodec,
+    }),
+    t.null,
+  ]),
 });
 
 export const StrapiImageSchema = t.strict({
