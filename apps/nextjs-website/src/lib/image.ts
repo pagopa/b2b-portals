@@ -13,9 +13,9 @@ large: 1000px width
 export const makeSrcSetFromStrapiImageData = ({
   attributes,
 }: StrapiImage['data']): string => {
-  const small = attributes.formats.small?.url;
-  const medium = attributes.formats.medium?.url;
-  const large = attributes.formats.large?.url;
+  const small = attributes.formats?.small?.url;
+  const medium = attributes.formats?.medium?.url;
+  const large = attributes.formats?.large?.url;
   const original = attributes.url;
   const originalWidth = attributes.width;
 
