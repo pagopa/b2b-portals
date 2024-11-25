@@ -24,6 +24,8 @@ const makeHeaderProps = (
         subtitle: MarkdownRenderer({
           markdown: card.subtitle,
           variant: 'body2',
+          locale: 'en',
+          defaultLocale: 'en',
         }),
       })),
       ctaCard: {
@@ -31,6 +33,8 @@ const makeHeaderProps = (
         subtitle: MarkdownRenderer({
           markdown: drawer.ctaCard.subtitle,
           variant: 'body2',
+          locale: 'en',
+          defaultLocale: 'en',
         }),
       },
     },
