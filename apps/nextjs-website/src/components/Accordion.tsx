@@ -24,7 +24,8 @@ const makeAccordionProps = ({
       variant: 'body2',
     }),
   }),
-  accordionItems: accordionItems.map(({ header, content }) => ({
+  accordionItems: accordionItems.map(({ itemID, header, content }) => ({
+    ...(itemID && { itemID }),
     header,
     content: MarkdownRenderer({
       markdown: content,

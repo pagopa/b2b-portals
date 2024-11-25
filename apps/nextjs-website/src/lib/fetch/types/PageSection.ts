@@ -65,6 +65,7 @@ const AccordionSectionCodec = t.strict({
   description: t.union([t.string, t.null]),
   accordionItems: t.array(
     t.strict({
+      itemID: t.union([t.string, t.null]),
       header: t.string,
       content: t.string,
     })

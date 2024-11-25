@@ -2,6 +2,7 @@ import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 import { SectionProps } from '../common/Common.types';
 
 export interface AccordionItemProps {
+  itemID?: string;
   header: string;
   content: string | JSX.Element;
   theme: 'light' | 'dark';
