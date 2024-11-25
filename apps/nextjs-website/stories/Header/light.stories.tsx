@@ -74,15 +74,19 @@ HeaderFullWithLogo.args = {
     linkCards: [
       {
         title: 'Cittadini',
-        subtitle:
-          'Accedi come persona fisica, libero professionista o ditta individuale.',
+        subtitle: (
+          <p>
+            Accedi come persona fisica, libero professionista o ditta
+            individuale.
+          </p>
+        ),
         buttonText: 'Accedi',
         href: '#',
         stackIcon: 'People',
       },
       {
         title: 'Imprese',
-        subtitle: `Accedi come persona giuridica`,
+        subtitle: <p>Accedi come persona giuridica</p>,
         buttonText: 'Accedi',
         href: '#',
         stackIcon: 'Business',

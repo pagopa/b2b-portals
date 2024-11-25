@@ -1,7 +1,25 @@
 import { LinkProps, StackProps } from '@mui/material';
 import { Theme } from '../common/Common.types';
 import { EIconProps } from '@react-components/components/common/EIcon';
-import { HeaderSideDrawer } from '@/lib/fetch/header';
+
+export interface HeaderSideDrawerCtaCardProps {
+  readonly title: string;
+  readonly subtitle: JSX.Element;
+  readonly buttonText: string;
+  readonly href: string;
+}
+
+export interface HeaderSideDrawerLinkCardProps
+  extends HeaderSideDrawerCtaCardProps {
+  readonly stackIcon: 'Business' | 'People';
+}
+
+interface HeaderSideDrawerProps {
+  readonly buttonText: string;
+  readonly title: string;
+  readonly ctaCard: HeaderSideDrawerCtaCardProps;
+  readonly linkCards: HeaderSideDrawerLinkCardProps[];
+}
 
 export interface CardData {
   readonly title: string;
@@ -12,7 +30,7 @@ export interface CardData {
 }
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
-  drawer?: HeaderSideDrawer;
+  drawer?: HeaderSideDrawerProps;
   supportLink?: string;
 }
 
