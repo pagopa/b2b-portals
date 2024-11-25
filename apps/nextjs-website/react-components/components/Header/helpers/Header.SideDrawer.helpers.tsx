@@ -85,7 +85,15 @@ export default function SideDrawer({
             <ActionAreaCard
               key={index}
               title={card.title}
-              subtitle={card.subtitle}
+              subtitle={
+                <Typography
+                  component='div'
+                  variant='body2'
+                  color='text.secondary'
+                >
+                  {card.subtitle}
+                </Typography>
+              }
               buttonText={card.buttonText}
               href={card.href}
               stackIcon={{ icon: card.stackIcon }}

@@ -5,7 +5,7 @@ import { HeaderSideDrawer } from '@/lib/fetch/header';
 
 export interface CardData {
   readonly title: string;
-  readonly subtitle: string;
+  readonly subtitle: string | JSX.Element;
   readonly stackIcon: EIconProps;
   readonly buttonText: string;
   readonly href: string;

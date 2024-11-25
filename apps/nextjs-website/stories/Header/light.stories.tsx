@@ -46,7 +46,9 @@ const defaultProps: HeaderProps = {
   ],
 };
 
-export const HeaderFullWithLogo: StoryFn<typeof Header> = HeaderTemplate.bind({});
+export const HeaderFullWithLogo: StoryFn<typeof Header> = HeaderTemplate.bind(
+  {}
+);
 HeaderFullWithLogo.args = {
   ...defaultProps,
   logo: {
@@ -61,25 +63,30 @@ HeaderFullWithLogo.args = {
     title: 'Accedi a SEND',
     ctaCard: {
       title: 'Sei un Ente?',
-      subtitle: 'Il tuo ente non ha ancora aderito? Scopri come aderire',
-      buttonText: 'Accedi',
+      subtitle: (
+        <p>
+          Il tuo ente non ha ancora aderito? <a href='/'>Scopri come aderire</a>
+        </p>
+      ),
+      buttonText: 'Scopri di più',
       href: '#',
     },
     linkCards: [
       {
         title: 'Cittadini',
-        subtitle: 'Accedi come persona fisica, libero professionista o ditta individuale',
+        subtitle:
+          'Accedi come persona fisica, libero professionista o ditta individuale.',
         buttonText: 'Accedi',
         href: '#',
-        stackIcon: 'People'
+        stackIcon: 'People',
       },
       {
         title: 'Imprese',
-        subtitle: 'Accedi come persona giuridica',
+        subtitle: `Accedi come persona giuridica`,
         buttonText: 'Accedi',
         href: '#',
-        stackIcon: 'Business'
+        stackIcon: 'Business',
       },
-    ]
-  }
+    ],
+  },
 };

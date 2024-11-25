@@ -1,14 +1,14 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions, Button, Box } from '@mui/material';
+import { CardActions, Button, Box } from '@mui/material';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { EIcon, EIconProps } from '@react-components/components/common/EIcon';
 
 interface ActionAreaCardProps {
   title: string;
-  subtitle: string;
+  subtitle: string | JSX.Element;
   stackIcon: EIconProps;
   buttonText: string;
   href: string;
@@ -33,7 +33,7 @@ export default function ActionAreaCard({
         borderRadius: '15px',
       }}
     >
-      <CardActionArea>
+      <div>
         <CardContent
           sx={{
             padding: '1.5rem',
@@ -55,11 +55,11 @@ export default function ActionAreaCard({
           <Typography gutterBottom variant='h5' component='div'>
             {title}
           </Typography>
-          <Typography variant='body2' color='text.secondary'>
+          <Typography variant='body2' color='text.secondary' component='div'>
             {subtitle}
           </Typography>
         </CardContent>
-      </CardActionArea>
+      </div>
       <CardActions>
         <Button
           size='small'
