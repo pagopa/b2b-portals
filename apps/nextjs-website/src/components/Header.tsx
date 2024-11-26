@@ -1,6 +1,7 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import Icon from './Icon';
+import MarkdownRenderer from './MarkdownRenderer';
 import { Header as HeaderRC } from '@react-components/components';
 import { MegaHeader as MegaHeaderRC } from '@react-components/components';
 import { HeaderProps, MegaHeaderProps } from '@react-components/types';
@@ -15,7 +16,29 @@ const makeHeaderProps = (
   pathname: string
 ): HeaderProps => ({
   beta,
-  ...(drawer && { drawer }),
+  ...(drawer && {
+    drawer: {
+      ...drawer,
+      linkCards: drawer.linkCards.map((card) => ({
+        ...card,
+        subtitle: MarkdownRenderer({
+          markdown: card.subtitle,
+          variant: 'body2',
+          locale: 'en',
+          defaultLocale: 'en',
+        }),
+      })),
+      ctaCard: {
+        ...drawer.ctaCard,
+        subtitle: MarkdownRenderer({
+          markdown: drawer.ctaCard.subtitle,
+          variant: 'body2',
+          locale: 'en',
+          defaultLocale: 'en',
+        }),
+      },
+    },
+  }),
   theme: 'light',
   ...(supportLink && { supportLink }),
   ...(logo.data && {

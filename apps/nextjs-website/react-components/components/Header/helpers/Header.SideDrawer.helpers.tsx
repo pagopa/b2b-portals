@@ -8,9 +8,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 import {
-  HeaderSideDrawerCtaCard,
-  HeaderSideDrawerLinkCard,
-} from '@/lib/fetch/header';
+  HeaderSideDrawerCtaCardProps,
+  HeaderSideDrawerLinkCardProps,
+} from '@react-components/types/Header/Header.types';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorRight': {
@@ -27,8 +27,8 @@ interface SideDrawerProps {
   anchor: Anchor;
   drawerMenuTitle: string;
   theme: 'dark' | 'light';
-  linkCards: HeaderSideDrawerLinkCard[];
-  ctaCard: HeaderSideDrawerCtaCard;
+  linkCards: HeaderSideDrawerLinkCardProps[];
+  ctaCard: HeaderSideDrawerCtaCardProps;
 }
 
 export default function SideDrawer({
@@ -85,7 +85,15 @@ export default function SideDrawer({
             <ActionAreaCard
               key={index}
               title={card.title}
-              subtitle={card.subtitle}
+              subtitle={
+                <Typography
+                  component='div'
+                  variant='body2'
+                  color='text.secondary'
+                >
+                  {card.subtitle}
+                </Typography>
+              }
               buttonText={card.buttonText}
               href={card.href}
               stackIcon={{ icon: card.stackIcon }}
