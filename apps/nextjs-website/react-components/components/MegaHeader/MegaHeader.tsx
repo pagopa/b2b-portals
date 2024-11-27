@@ -1,4 +1,4 @@
-import React, { useState, useEffect, MouseEvent } from 'react';
+import React, { useState, useEffect, MouseEvent, useRef } from 'react';
 import { IconButton, useMediaQuery, Typography, Stack } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -31,6 +31,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [activeItem, setActiveItem] = useState<string | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (
     event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,
@@ -60,6 +61,24 @@ const MegaHeader = (props: MegaHeaderProps) => {
   }, []);
 
   useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      if (
+        !isMobile &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(null);
+        setActiveItem(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMobile]);
+
+  useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
       document.body.style.touchAction = 'none';
@@ -76,6 +95,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
 
   return (
     <Container
+      ref={menuRef}
       style={{
         boxShadow: dropdownOpen
           ? 'none'
