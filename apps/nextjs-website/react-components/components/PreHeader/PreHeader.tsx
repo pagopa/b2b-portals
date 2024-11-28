@@ -16,6 +16,8 @@ const PreHeader = ({ leftCtas, rightCtas }: PreHeaderProps) => (
     paddingX={3}
     justifyContent='space-between'
     flexWrap='wrap'
+    position='relative'
+    zIndex='1000'
     sx={{ borderBottom: `1px solid ${colorMap.dividerColor}` }}
   >
     {leftCtas && leftCtas.length > 0 && (
