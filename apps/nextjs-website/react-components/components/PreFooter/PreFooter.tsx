@@ -1,6 +1,5 @@
 import { Box, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import Image from 'next/image';
 import { BackgroundColor } from '../common/Common.helpers';
 import { PreFooterProps } from '@react-components/types/PreFooter/PreFooter';
 import { useTheme, useMediaQuery } from '@mui/material';
@@ -106,30 +105,28 @@ const PreFooter = (props: PreFooterProps) => {
                 justifyContent='center'
                 alignItems='center'
                 spacing={2}
-                direction={
-                  isSmallScreen || layout === 'center' ? 'column' : 'row'
-                }
+                direction={isSmallScreen ? 'column' : 'row'}
                 sx={{
-                  marginLeft: isSmallScreen || layout === 'center' ? 0 : 2,
+                  marginLeft: 0,
+                  '@media (max-width:600px)': {
+                    flexDirection: 'column',
+                  },
                 }}
               >
                 {storeButtons.hrefGoogle && (
                   <Button
                     sx={{
                       padding: '0px',
-                      marginLeft:
-                        isSmallScreen || layout === 'center' ? '0px' : '16px',
                       justifyContent: 'start',
+                      display: 'flex',
                     }}
                     key='google'
                     href={storeButtons.hrefGoogle}
                   >
-                    <Image
+                    <img
                       src={googleBadgeBase64}
                       alt='Download on Google Play'
-                      height={0}
-                      width={0}
-                      style={{ height: '3em', width: 'auto' }}
+                      style={{ height: '3em', width: 'auto', display: 'block' }}
                     />
                   </Button>
                 )}
@@ -137,19 +134,16 @@ const PreFooter = (props: PreFooterProps) => {
                   <Button
                     sx={{
                       padding: '0px',
-                      marginLeft:
-                        isSmallScreen || layout === 'center' ? '0px' : '16px',
                       justifyContent: 'start',
+                      display: 'flex',
                     }}
                     key='apple'
                     href={storeButtons.hrefApple}
                   >
-                    <Image
+                    <img
                       src={appleBadgeBase64}
                       alt='Download on App Store'
-                      height={0}
-                      width={0}
-                      style={{ height: '3em', width: 'auto' }}
+                      style={{ height: '3em', width: 'auto', display: 'block' }}
                     />
                   </Button>
                 )}
