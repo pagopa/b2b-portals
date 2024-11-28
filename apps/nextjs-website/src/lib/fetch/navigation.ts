@@ -5,7 +5,6 @@ import { PageSEOCodec } from './types/SEO';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
-// Codec
 const NavigationCodec = t.strict({
   data: t.readonlyArray(
     t.strict({
@@ -19,7 +18,6 @@ const NavigationCodec = t.strict({
   ),
 });
 
-// Types
 export type Navigation = t.TypeOf<typeof NavigationCodec>;
 
 export const getNavigation = ({

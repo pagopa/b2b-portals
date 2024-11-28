@@ -58,7 +58,7 @@ export async function generateMetadata({
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to '' and locale to the default locale
 
-  // The slug will be found in slug[0] for the default locale and the last item of slug for all others
+  // Remove locale from slug (if present) and convert to string
   const slugString =
     slug === undefined
       ? ''
@@ -115,7 +115,7 @@ const Page = async ({ params }: PageParams) => {
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to '' and locale to the default locale
 
-  // The slug will be found in slug[0] for the default locale and the last item of slug for all others
+  // Remove locale from slug (if present) and convert to string
   const slugString =
     slug === undefined
       ? ''
