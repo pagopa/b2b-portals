@@ -65,27 +65,25 @@ const PressRelease = (props: PressReleaseProps) => {
             {subtitle}
           </Typography>
         )}
-        {body && (
-          <Typography
-            component="div"
-            variant="body1"
-            sx={{
-              fontSize: { xs: '14px', md: '16px' },
-              mt: 1,
-              color: textColor,
-              '& a': {
+        <Typography
+          component="div"
+          variant="body1"
+          sx={{
+            fontSize: { xs: '14px', md: '16px' },
+            mt: 1,
+            color: textColor,
+            '& a': {
+              color: palette.primary.main,
+              textDecoration: 'underline',
+              '&:hover': {
                 color: palette.primary.main,
                 textDecoration: 'underline',
-                '&:hover': {
-                  color: palette.primary.main,
-                  textDecoration: 'underline',
-                },
               },
-            }}
-          >
-            {body}
-          </Typography>
-        )}
+            },
+          }}
+        >
+          {body}
+        </Typography>
       </Container>
     </Box>
   );
