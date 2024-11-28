@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_sections_press_releases",
+  "info": {
+    "displayName": "PressRelease",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "body": {
+      "type": "richtext",
+      "required": true
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    }
+  }
+}

@@ -21,6 +21,7 @@ import RowText from '../RowText';
 import TextSection from '../TextSection';
 import PageSwitch from '../PageSwitch';
 import FramedVideo from '../FramedVideo';
+import PressRelease from '../PressRelease';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 
@@ -72,6 +73,8 @@ const PageSection = (props: PageSectionData & SiteWidePageData) => {
       return <PageSwitch {...props} />;
     case 'sections.framed-video':
       return <FramedVideo {...props} />;
+    case 'sections.press-release':
+      return <PressRelease {...props} />;
     default:
       return null;
   }

@@ -2,7 +2,8 @@
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
 import { AppEnv, Config, makeAppEnv } from '../AppEnv';
-import { getNavigation, PageData } from './fetch/navigation';
+import { getNavigation } from './fetch/navigation';
+import { navigationToPageDataArray, PageData } from './navigation';
 import { PreHeaderAttributes, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
 import { getHeader, HeaderData } from './fetch/header';
@@ -11,6 +12,8 @@ import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
 import { formatHeaderLinks } from './header';
 import { getPreFooter, PreFooterAttributes } from './fetch/preFooter';
+import { getPressReleases } from './fetch/pressRelease';
+import { pressReleaseToPageDataArray } from './pressRelease';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -26,15 +29,12 @@ export const getAllPages = async (
   locale: 'it' | 'en'
 ): Promise<ReadonlyArray<PageData>> => {
   const navigation = await getNavigation({ ...appEnv, locale });
-  return navigation.data.map((item) =>
-    item.attributes.slug !== 'homepage'
-      ? item.attributes
-      : {
-          slug: '',
-          seo: item.attributes.seo,
-          sections: item.attributes.sections,
-        }
-  );
+  const pressReleases = await getPressReleases({ ...appEnv, locale });
+
+  return [
+    ...navigationToPageDataArray(navigation),
+    ...pressReleaseToPageDataArray(pressReleases),
+  ];
 };
 
 // Return PreHeaderProps
@@ -83,14 +83,14 @@ export const getPreFooterProps = async (
 // Return PageProps given the page path
 export const getPageProps = async (
   locale: 'it' | 'en',
-  slug: string | undefined
+  slugString: string | undefined
 ): Promise<PageData | undefined> => {
-  if (slug === undefined) {
+  if (slugString === undefined) {
     return undefined;
   }
 
   const allPages = await getAllPages(locale);
-  return allPages.find((page) => slug.toString() === page.slug.toString());
+  return allPages.find((page) => slugString === page.slug.toString());
 };
 
 export const getSiteWideSEO = async (): Promise<

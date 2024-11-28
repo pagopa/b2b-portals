@@ -62,13 +62,13 @@ export const generateStaticParams = async (): Promise<
   const pages_it: Array<LayoutProps['params']> = locales.it
     ? (await getAllPages('it')).map((page) => ({
         // Prepend locale as the first level slug (unless it's the default locale)
-        slug: defaultLocale === 'it' ? [page.slug] : ['it', page.slug],
+        slug: defaultLocale === 'it' ? [...page.slug] : ['it', ...page.slug],
       }))
     : [];
   const pages_en: Array<LayoutProps['params']> = locales.en
     ? (await getAllPages('en')).map((page) => ({
         // Prepend locale as the first level slug (unless it's the default locale)
-        slug: defaultLocale === 'en' ? [page.slug] : ['en', page.slug],
+        slug: defaultLocale === 'en' ? [...page.slug] : ['en', ...page.slug],
       }))
     : [];
 

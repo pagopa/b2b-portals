@@ -35,13 +35,13 @@ export const generateStaticParams = async (): Promise<
   const pages_it: Array<PageParams['params']> = locales.it
     ? (await getAllPages('it')).map((page) => ({
         // Prepend locale as the first level slug (unless it's the default locale)
-        slug: defaultLocale === 'it' ? [page.slug] : ['it', page.slug],
+        slug: defaultLocale === 'it' ? [...page.slug] : ['it', ...page.slug],
       }))
     : [];
   const pages_en: Array<PageParams['params']> = locales.en
     ? (await getAllPages('en')).map((page) => ({
         // Prepend locale as the first level slug (unless it's the default locale)
-        slug: defaultLocale === 'en' ? [page.slug] : ['en', page.slug],
+        slug: defaultLocale === 'en' ? [...page.slug] : ['en', ...page.slug],
       }))
     : [];
 
@@ -58,11 +58,13 @@ export async function generateMetadata({
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to '' and locale to the default locale
 
-  // The slug will be found in slug[0] for the default locale and slug[1] for all others
+  // The slug will be found in slug[0] for the default locale and the last item of slug for all others
   const slugString =
     slug === undefined
       ? ''
-      : (slug[0] === 'it' || slug[0] === 'en' ? slug[1] : slug[0]) ?? '';
+      : slug[0] === 'it' || slug[0] === 'en'
+      ? slug.slice(1).toString()
+      : slug.toString();
 
   // The locale will NOT be found for the default locale and will be in slug[0] for all others
   const locale =
@@ -113,11 +115,13 @@ const Page = async ({ params }: PageParams) => {
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to '' and locale to the default locale
 
-  // The slug will be found in slug[0] for the default locale and slug[1] for all others
+  // The slug will be found in slug[0] for the default locale and the last item of slug for all others
   const slugString =
     slug === undefined
       ? ''
-      : (slug[0] === 'it' || slug[0] === 'en' ? slug[1] : slug[0]) ?? '';
+      : slug[0] === 'it' || slug[0] === 'en'
+      ? slug.slice(1).toString()
+      : slug.toString();
 
   // The locale will NOT be found for the default locale and will be in slug[0] for all others
   const locale =

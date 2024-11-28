@@ -6,24 +6,21 @@ import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
 // Codec
-const PageDataCodec = t.strict({
-  slug: t.string,
-  seo: PageSEOCodec,
-  sections: t.array(PageSectionCodec),
-});
-
-const PageCodec = t.strict({
-  id: t.number,
-  attributes: PageDataCodec,
-});
-
 const NavigationCodec = t.strict({
-  data: t.readonlyArray(PageCodec),
+  data: t.readonlyArray(
+    t.strict({
+      id: t.number,
+      attributes: t.strict({
+        slug: t.string,
+        seo: PageSEOCodec,
+        sections: t.array(PageSectionCodec),
+      }),
+    })
+  ),
 });
 
 // Types
 export type Navigation = t.TypeOf<typeof NavigationCodec>;
-export type PageData = t.TypeOf<typeof PageDataCodec>;
 
 export const getNavigation = ({
   config,
