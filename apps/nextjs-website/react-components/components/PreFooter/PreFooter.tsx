@@ -106,12 +106,7 @@ const PreFooter = (props: PreFooterProps) => {
                 alignItems='center'
                 spacing={2}
                 direction={isSmallScreen ? 'column' : 'row'}
-                sx={{
-                  marginLeft: 0,
-                  '@media (max-width:600px)': {
-                    flexDirection: 'column',
-                  },
-                }}
+                marginLeft={0}
               >
                 {storeButtons.hrefGoogle && (
                   <Button
