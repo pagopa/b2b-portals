@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import {
   getAllPages,
   getPageProps,
+  getPressReleasePages,
   getSiteWideSEO,
   isPreviewMode,
 } from '@/lib/api';
@@ -137,6 +138,7 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const sections = pageProps.sections;
+  const pressReleasePages = await getPressReleasePages(locale);
   return (
     <main>
       {pageProps.seo.structuredData && (
@@ -148,7 +150,13 @@ const Page = async ({ params }: PageParams) => {
         />
       )}
       {sections.map((section) =>
-        PageSection({ ...section, themeVariant, locale, defaultLocale })
+        PageSection({
+          ...section,
+          themeVariant,
+          locale,
+          defaultLocale,
+          pressReleasePages,
+        })
       )}
     </main>
   );

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_sections_press_release_lists",
+  "info": {
+    "displayName": "PressReleaseList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    }
+  }
+}

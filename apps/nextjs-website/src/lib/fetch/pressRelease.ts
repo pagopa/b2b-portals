@@ -20,6 +20,7 @@ const PressReleasesCodec = t.strict({
   ),
 });
 
+export type PressReleasePage = t.TypeOf<typeof PressReleasePageCodec>;
 export type PressReleases = t.TypeOf<typeof PressReleasesCodec>;
 
 export const getPressReleases = ({

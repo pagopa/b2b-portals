@@ -25,6 +25,7 @@ import { TextSectionProps } from './TextSection/TextSection.types';
 import { PageSwitchProps } from './Page-Switch/Page-Switch.types';
 import { FramedVideoProps } from './FramedVideo/FramedVideo.types';
 import { PressReleaseProps } from './PressRelease/PressRelease.types';
+import { PressReleaseListProps } from './PressReleaseList/PressReleaseList.types';
 
 export type {
   HeroProps,
@@ -54,4 +55,5 @@ export type {
   PageSwitchProps,
   FramedVideoProps,
   PressReleaseProps,
+  PressReleaseListProps,
 };
