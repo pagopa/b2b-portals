@@ -11,9 +11,9 @@ const PressReleaseList = ({
   themeVariant,
 }: PressReleaseListProps) => (
     <ContainerRC {...sectionID && { sectionID }} direction='column'>
-      <Typography variant="h4" maxWidth='100%'>{title}</Typography>
+      <Typography variant='h4' maxWidth='100%'>{title}</Typography>
 
-      <Stack direction="row" flexWrap="wrap" my={4} rowGap={6} columnGap={7} maxWidth='100%'>
+      <Stack direction='row' flexWrap='wrap' my={4} rowGap={6} columnGap={7} maxWidth='100%'>
         {pressReleases.map((pressRelease) => (
           <PressReleasePreview {...pressRelease} themeVariant={themeVariant} />
         ))}

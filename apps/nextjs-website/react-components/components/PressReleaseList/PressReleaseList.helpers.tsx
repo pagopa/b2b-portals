@@ -17,24 +17,24 @@ export const PressReleasePreview = ({
 
   return (
     <Stack gap={2} width={330}>
-      <Typography variant="overline">{date}</Typography>
-      <Typography variant="h6" fontWeight={700}>
+      <Typography variant='overline'>{date}</Typography>
+      <Typography variant='h6' fontWeight={700}>
         {title}
       </Typography>
       <Typography
-        variant="body2"
+        variant='body2'
         fontWeight={700}
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="flex-start"
+        display='flex'
+        flexDirection='row'
+        alignItems='center'
+        justifyContent='flex-start'
         gap={1}
         color={linkColor}
       >
-        <Link href={link.href} color="inherit" sx={{ textDecoration: 'none' }}>
+        <Link href={link.href} color='inherit' sx={{ textDecoration: 'none' }}>
           {link.label}
         </Link>
-        <ArrowRightAlt color="inherit" />
+        <ArrowRightAlt color='inherit' />
       </Typography>
     </Stack>
   );
