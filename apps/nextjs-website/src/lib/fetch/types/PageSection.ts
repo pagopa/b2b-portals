@@ -393,6 +393,21 @@ const FramedVideoSectionCodec = t.strict({
   ]),
 });
 
+export const PressReleaseSectionContentCodec = t.strict({
+  date: t.string,
+  title: t.string,
+  subtitle: t.union([t.string, t.null]),
+  body: t.string,
+  sectionID: t.union([t.string, t.null]),
+});
+
+const PressReleaseSectionCodec = t.intersection([
+  t.strict({
+    __component: t.literal('sections.press-release'),
+  }),
+  PressReleaseSectionContentCodec,
+]);
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -416,6 +431,7 @@ export const PageSectionCodec = t.union([
   TextSectionSectionCodec,
   PageSwitchSectionCodec,
   FramedVideoSectionCodec,
+  PressReleaseSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -445,3 +461,4 @@ export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
 export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
 export type PageSwitchSection = t.TypeOf<typeof PageSwitchSectionCodec>;
 export type FramedVideoSection = t.TypeOf<typeof FramedVideoSectionCodec>;
+export type PressReleaseSection = t.TypeOf<typeof PressReleaseSectionCodec>;
