@@ -22,11 +22,16 @@ import TextSection from '../TextSection';
 import PageSwitch from '../PageSwitch';
 import FramedVideo from '../FramedVideo';
 import PressRelease from '../PressRelease';
+import PressReleaseList from '../PressReleaseList';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { PressReleasePage } from '@/lib/fetch/pressRelease';
 
 // eslint-disable-next-line complexity
-const PageSection = (props: PageSectionData & SiteWidePageData) => {
+const PageSection = (
+  props: PageSectionData &
+    SiteWidePageData & { pressReleasePages: ReadonlyArray<PressReleasePage> }
+) => {
   // eslint-disable-next-line no-underscore-dangle
   switch (props.__component) {
     case 'sections.hero':
@@ -75,6 +80,8 @@ const PageSection = (props: PageSectionData & SiteWidePageData) => {
       return <FramedVideo {...props} />;
     case 'sections.press-release':
       return <PressRelease {...props} />;
+    case 'sections.press-release-list':
+      return <PressReleaseList {...props} />;
     default:
       return null;
   }
