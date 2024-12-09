@@ -23,16 +23,11 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       ? palette.primary.main
       : palette.custom.primaryColorDark;
 
-  const updateURL = (id: string | undefined, isExpanded: boolean) => {
-    if (!id) return;
-
+  const appendItemIDToURLHash = () => {
+    if (!itemID) return;
     const url = new URL(window.location.href);
-    if (isExpanded) {
-      url.hash = id;
-    } else {
-      url.hash = '';
-    }
-    window.history.replaceState({}, '', url.toString());
+    url.hash = itemID;
+    window.history.replaceState(null, '', url.toString());
   };
 
   useLayoutEffect(() => {
@@ -46,17 +41,18 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     }
   }, []);
 
-  const handleToggle = () => {
-    const newExpanded = !expanded;
-    setExpanded(newExpanded);
-    updateURL(itemID, newExpanded);
+  const handleChange = () => {
+    if (!expanded) {
+      appendItemIDToURLHash();
+    }
+    setExpanded(!expanded);
   };
 
   return (
     <MUIAccordion
       disableGutters
       expanded={expanded}
-      onChange={handleToggle}
+      onChange={handleChange}
       id={itemID}
       sx={{
         '&:before': {
