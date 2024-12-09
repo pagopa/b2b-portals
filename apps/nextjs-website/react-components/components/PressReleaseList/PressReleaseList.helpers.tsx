@@ -17,7 +17,7 @@ export const PressReleasePreview = ({
 
   return (
     <Stack gap={2} width={330}>
-      <Typography variant='overline'>{date}</Typography>
+      <Typography variant='overline' color='text.secondary'>{date}</Typography>
       <Typography variant='h6' fontWeight={700}>
         {title}
       </Typography>
