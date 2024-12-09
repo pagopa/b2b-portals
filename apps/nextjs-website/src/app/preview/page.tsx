@@ -3,6 +3,7 @@ import PageSection from '@/components/PageSection/PageSection';
 import {
   getAllPageIDs,
   getPageSectionsFromID,
+  getPressReleasePages,
   getPreviewToken,
   getSiteWideSEO,
   isPreviewMode,
@@ -55,6 +56,7 @@ const PreviewPage = async ({
 
   const sections = await getPageSectionsFromID(tenant, pageID);
   const themeVariant = await GetThemeVariantForPreview();
+  const pressReleasePages = await getPressReleasePages('it'); // TODO: Define which locale the page we are previewing is from and insert it here
 
   return (
     <div>
@@ -64,6 +66,7 @@ const PreviewPage = async ({
           themeVariant,
           locale: 'it', // Doesn't matter in preview
           defaultLocale: 'it', // Doesn't matter in preview
+          pressReleasePages,
         })
       )}
     </div>

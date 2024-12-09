@@ -408,6 +408,12 @@ const PressReleaseSectionCodec = t.intersection([
   PressReleaseSectionContentCodec,
 ]);
 
+const PressReleaseListSectionCodec = t.strict({
+  __component: t.literal('sections.press-release-list'),
+  title: t.string,
+  sectionID: t.union([t.string, t.null]),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -432,6 +438,7 @@ export const PageSectionCodec = t.union([
   PageSwitchSectionCodec,
   FramedVideoSectionCodec,
   PressReleaseSectionCodec,
+  PressReleaseListSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -462,3 +469,6 @@ export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
 export type PageSwitchSection = t.TypeOf<typeof PageSwitchSectionCodec>;
 export type FramedVideoSection = t.TypeOf<typeof FramedVideoSectionCodec>;
 export type PressReleaseSection = t.TypeOf<typeof PressReleaseSectionCodec>;
+export type PressReleaseListSection = t.TypeOf<
+  typeof PressReleaseListSectionCodec
+>;

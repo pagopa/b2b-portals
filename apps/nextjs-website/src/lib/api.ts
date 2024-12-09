@@ -12,7 +12,7 @@ import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
 import { PageSection } from './fetch/types/PageSection';
 import { formatHeaderLinks } from './header';
 import { getPreFooter, PreFooterAttributes } from './fetch/preFooter';
-import { getPressReleases } from './fetch/pressRelease';
+import { getPressReleases, PressReleasePage } from './fetch/pressRelease';
 import { pressReleaseToPageDataArray } from './pressRelease';
 
 // create AppEnv given process env
@@ -35,6 +35,14 @@ export const getAllPages = async (
     ...navigationToPageDataArray(navigation),
     ...pressReleaseToPageDataArray(pressReleases),
   ];
+};
+
+export const getPressReleasePages = async (
+  locale: 'it' | 'en'
+): Promise<ReadonlyArray<PressReleasePage>> => {
+  const { data } = await getPressReleases({ ...appEnv, locale });
+
+  return data.map((PressReleaseData) => PressReleaseData.attributes);
 };
 
 // Return PreHeaderProps

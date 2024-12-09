@@ -25,6 +25,7 @@ import TextSection from './TextSection/TextSection';
 import PageSwitch from './Page-Switch/Page-Switch';
 import FramedVideo from './FramedVideo/FramedVideo';
 import PressRelease from './PressRelease/PressRelease';
+import PressReleaseList from './PressReleaseList/PressReleaseList';
 
 export {
   Hero,
@@ -54,4 +55,5 @@ export {
   PageSwitch,
   FramedVideo,
   PressRelease,
+  PressReleaseList,
 };
