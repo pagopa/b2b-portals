@@ -48,6 +48,7 @@ const pageIDsResponse: PageIDs = {
 const pageDataResponse: PreviewPageData = {
   data: {
     attributes: {
+      locale: 'it',
       sections: [
         {
           __component: 'sections.hero',
