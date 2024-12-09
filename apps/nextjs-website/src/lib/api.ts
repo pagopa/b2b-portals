@@ -8,8 +8,12 @@ import { PreHeaderAttributes, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
 import { getHeader, HeaderData } from './fetch/header';
 import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
-import { PageIDs, fetchAllPageIDs, fetchPageFromID } from './fetch/preview';
-import { PageSection } from './fetch/types/PageSection';
+import {
+  PageIDs,
+  PreviewPageData,
+  fetchAllPageIDs,
+  fetchPageFromID,
+} from './fetch/preview';
 import { formatHeaderLinks } from './header';
 import { getPreFooter, PreFooterAttributes } from './fetch/preFooter';
 import { getPressReleases, PressReleasePage } from './fetch/pressRelease';
@@ -131,10 +135,10 @@ export const getAllPageIDs = async (
   return [...pageIDs_it.data, ...pageIDs_en.data];
 };
 
-export const getPageSectionsFromID = async (
+export const getPageDataFromID = async (
   tenant: Config['ENVIRONMENT'],
   pageID: number
-): Promise<ReadonlyArray<PageSection>> => {
+): Promise<PreviewPageData['data']['attributes']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
       ...appEnv.config,
@@ -146,7 +150,7 @@ export const getPageSectionsFromID = async (
     data: { attributes },
   } = await fetchPageFromID({ ...appEnvWithRequestedTenant, pageID });
 
-  return attributes.sections;
+  return attributes;
 };
 
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';

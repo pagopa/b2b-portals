@@ -2,7 +2,7 @@ import { Config } from '@/AppEnv';
 import PageSection from '@/components/PageSection/PageSection';
 import {
   getAllPageIDs,
-  getPageSectionsFromID,
+  getPageDataFromID,
   getPressReleasePages,
   getPreviewToken,
   getSiteWideSEO,
@@ -54,9 +54,9 @@ const PreviewPage = async ({
     return <div>404: Missing page</div>;
   }
 
-  const sections = await getPageSectionsFromID(tenant, pageID);
+  const { sections, locale } = await getPageDataFromID(tenant, pageID);
   const themeVariant = await GetThemeVariantForPreview();
-  const pressReleasePages = await getPressReleasePages('it'); // TODO: Define which locale the page we are previewing is from and insert it here
+  const pressReleasePages = await getPressReleasePages(locale);
 
   return (
     <div>
@@ -64,8 +64,8 @@ const PreviewPage = async ({
         PageSection({
           ...section,
           themeVariant,
-          locale: 'it', // Doesn't matter in preview
-          defaultLocale: 'it', // Doesn't matter in preview
+          locale,
+          defaultLocale: locale, // Doesn't matter in preview
           pressReleasePages,
         })
       )}

@@ -15,6 +15,7 @@ const PageIDsCodec = t.strict({
 const PreviewPageDataCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
+      locale: t.union([t.literal('it'), t.literal('en')]),
       sections: t.array(PageSectionCodec),
     }),
   }),
