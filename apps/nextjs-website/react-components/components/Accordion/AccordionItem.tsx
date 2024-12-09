@@ -23,6 +23,18 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       ? palette.primary.main
       : palette.custom.primaryColorDark;
 
+  const updateURL = (id: string | undefined, isExpanded: boolean) => {
+    if (!id) return;
+
+    const url = new URL(window.location.href);
+    if (isExpanded) {
+      url.hash = id;
+    } else {
+      url.hash = '';
+    }
+    window.history.replaceState({}, '', url.toString());
+  };
+
   useLayoutEffect(() => {
     if (itemID && window.location.hash === `#${itemID}`) {
       const targetItem = document.getElementById(itemID);
@@ -32,14 +44,19 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
-  }, [])
+  }, []);
+
+  const handleToggle = () => {
+    const newExpanded = !expanded;
+    setExpanded(newExpanded);
+    updateURL(itemID, newExpanded);
+  };
 
   return (
     <MUIAccordion
       disableGutters
-      // Removes MUI accordion's top border
       expanded={expanded}
-      onChange={() => setExpanded(!expanded)}
+      onChange={handleToggle}
       id={itemID}
       sx={{
         '&:before': {
