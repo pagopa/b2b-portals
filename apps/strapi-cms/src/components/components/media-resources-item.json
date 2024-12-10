@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_components_media_resources_items",
+  "info": {
+    "displayName": "MediaResourcesItem"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "resource": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "thumbnail": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "default": "PNG AD ALTA RISOLUZIONE"
+    }
+  }
+}

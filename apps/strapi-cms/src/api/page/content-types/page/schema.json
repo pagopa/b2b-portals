@@ -62,7 +62,8 @@
         "sections.framed-video",
         "sections.page-switch",
         "sections.hero-chips",
-        "sections.press-release-list"
+        "sections.press-release-list",
+        "sections.media-resources"
       ],
       "required": true,
       "min": 1,
