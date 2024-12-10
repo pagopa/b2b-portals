@@ -4,6 +4,9 @@ import {
   PageIDs,
   fetchAllPageIDs,
   fetchPageFromID,
+  fetchAllPressReleaseIDs,
+  fetchPressReleaseFromID,
+  PreviewPressReleaseData,
 } from '../preview';
 import { Config } from '@/AppEnv';
 
@@ -79,6 +82,21 @@ const pageDataResponse: PreviewPageData = {
   },
 };
 
+const pressReleaseDataResponse: PreviewPressReleaseData = {
+  data: {
+    attributes: {
+      locale: 'it',
+      pressRelease: {
+        sectionID: null,
+        title: 'Press Release Title',
+        subtitle: null,
+        body: 'Press Release Body',
+        date: '2024-10-12',
+      },
+    },
+  },
+};
+
 describe('fetchAllPageIDs', () => {
   it('should call /api/pages including unpublished content', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
@@ -115,6 +133,42 @@ describe('fetchAllPageIDs', () => {
   });
 });
 
+describe('fetchAllPressReleaseIDs', () => {
+  it('should call /api/press-releases including unpublished content', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+    const { config } = appEnv;
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(pageIDsResponse),
+    } as unknown as Response);
+
+    await fetchAllPressReleaseIDs({ ...appEnv, locale: 'it' });
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases?locale=it&publicationState=preview&pagination[pageSize]=100`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+        },
+        cache: 'no-cache',
+      }
+    );
+  });
+
+  it('should parse pageIDs without error', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(pageIDsResponse),
+    } as unknown as Response);
+
+    const actual = fetchAllPressReleaseIDs({ ...appEnv, locale: 'it' });
+
+    expect(await actual).toStrictEqual(pageIDsResponse);
+  });
+});
+
 describe('fetchPageFromID', () => {
   it('should call /api/pages/[pageID] including unpublished content', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
@@ -131,18 +185,18 @@ describe('fetchPageFromID', () => {
 
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/pages/${pageIDExample}?publicationState=preview
-      &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon,chips
-      &populate[sections][populate][1]=items.links,items.link,items.icon
-      &populate[sections][populate][2]=sections.icon,sections.ctaButtons
-      &populate[sections][populate][3]=sections.content.image,sections.content.mobileImage,sections.content.ctaButtons,sections.content.storeButtons
-      &populate[sections][populate][4]=video.src
-      &populate[sections][populate][5]=steps.icon
-      &populate[sections][populate][6]=cards.image,cards.link
-      &populate[sections][populate][7]=text.link
-      &populate[sections][populate][8]=pages.sections.ctaButtons,pages.sections.image,pages.sections.mobileImage,pages.sections.storeButtons
-      &populate[sections][populate][9]=pages.sections.items.links,pages.sections.items.icon
-      &populate[sections][populate][10]=pages.sections.sections.ctaButtons,pages.sections.sections.icon
-      `,
+        &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon,chips
+        &populate[sections][populate][1]=items.links,items.link,items.icon
+        &populate[sections][populate][2]=sections.icon,sections.ctaButtons
+        &populate[sections][populate][3]=sections.content.image,sections.content.mobileImage,sections.content.ctaButtons,sections.content.storeButtons
+        &populate[sections][populate][4]=video.src
+        &populate[sections][populate][5]=steps.icon
+        &populate[sections][populate][6]=cards.image,cards.link
+        &populate[sections][populate][7]=text.link
+        &populate[sections][populate][8]=pages.sections.ctaButtons,pages.sections.image,pages.sections.mobileImage,pages.sections.storeButtons
+        &populate[sections][populate][9]=pages.sections.items.links,pages.sections.items.icon
+        &populate[sections][populate][10]=pages.sections.sections.ctaButtons,pages.sections.sections.icon
+        `,
       {
         method: 'GET',
         headers: {
@@ -166,5 +220,47 @@ describe('fetchPageFromID', () => {
     });
 
     expect(await actual).toStrictEqual(pageDataResponse);
+  });
+});
+
+describe('fetchPressReleaseFromID', () => {
+  it('should call /api/press-releases/[pageID] including unpublished content', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+    const { config } = appEnv;
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(pressReleaseDataResponse),
+    } as unknown as Response);
+
+    await fetchPressReleaseFromID({
+      ...appEnv,
+      pressReleaseID: pageIDExample,
+    });
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases/${pageIDExample}?publicationState=preview&populate[pressRelease]=*`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+        },
+        cache: 'no-cache',
+      }
+    );
+  });
+
+  it('should parse pageData without error', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(pressReleaseDataResponse),
+    } as unknown as Response);
+
+    const actual = fetchPressReleaseFromID({
+      ...appEnv,
+      pressReleaseID: pageIDExample,
+    });
+
+    expect(await actual).toStrictEqual(pressReleaseDataResponse);
   });
 });
