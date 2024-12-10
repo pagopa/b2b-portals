@@ -37,6 +37,22 @@ export default ({ env }: any) => ({
           draft: {
             url: env('PREVIEW_URL'),
             query: {
+              type: 'page',
+              pageID: '{id}',
+              secret: env('PREVIEW_TOKEN'),
+              tenant: env('ENVIRONMENT'),
+            },
+            openTarget: '_blank',
+            copy: false,
+            alwaysVisible: true,
+          },
+        },
+        {
+          uid: 'api::press-release.press-release',
+          draft: {
+            url: env('PREVIEW_URL'),
+            query: {
+              type: 'press-release',
               pageID: '{id}',
               secret: env('PREVIEW_TOKEN'),
               tenant: env('ENVIRONMENT'),
