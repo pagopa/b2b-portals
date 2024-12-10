@@ -2,7 +2,9 @@ import { Config } from '@/AppEnv';
 import PageSection from '@/components/PageSection/PageSection';
 import {
   getAllPageIDs,
+  getAllPressReleaseIDs,
   getPageDataFromID,
+  getPressReleaseDataFromID,
   getPressReleasePages,
   getPreviewToken,
   getSiteWideSEO,
@@ -27,6 +29,7 @@ const PreviewPage = async ({
   searchParams,
 }: {
   searchParams: {
+    type: 'page' | 'press-release' | undefined;
     secret: string | undefined;
     pageID: string | undefined;
     tenant: Config['ENVIRONMENT'] | undefined;
@@ -36,6 +39,7 @@ const PreviewPage = async ({
     return null;
   }
 
+  const type = searchParams.type;
   const secret = searchParams.secret;
   const pageID = Number(searchParams.pageID);
   const tenant = searchParams.tenant;
@@ -49,12 +53,16 @@ const PreviewPage = async ({
     return <div>404: Missing parameters</div>;
   }
 
-  const pageIDs = await getAllPageIDs(tenant);
+  const pageIDs = await (type === 'press-release'
+    ? getAllPressReleaseIDs(tenant)
+    : getAllPageIDs(tenant));
   if (!pageIDs.map((obj) => obj.id).includes(pageID)) {
     return <div>404: Missing page</div>;
   }
 
-  const { sections, locale } = await getPageDataFromID(tenant, pageID);
+  const { sections, locale } = await (type === 'press-release'
+    ? getPressReleaseDataFromID(tenant, pageID)
+    : getPageDataFromID(tenant, pageID));
   const themeVariant = await GetThemeVariantForPreview();
   const pressReleasePages = await getPressReleasePages(locale);
 
