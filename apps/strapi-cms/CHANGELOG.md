@@ -1,5 +1,80 @@
 # strapi-cms
 
+## 0.3.0
+
+### Minor Changes
+
+- da99f38: Duplicated Single Types for SEND and AppIO tenants
+- 4082c97: Updated Header Menu Implementation
+- 2aa32a4: Migrate Strapi to new separated-tenants architecture
+- eece8ca: Add PressRelease CollectionType and Section
+- b2676a2: Implement PageSwitch in Strapi
+- 00928c7: Add Iframe to Strapi CMS
+- 72d9447: Refactor Header structure
+- 6b5aa74: Make Update Static Content Plugin Multi-Tenant
+- b87f77c: Implement i18n
+- 70daaae: Substitute MUI Icons in Feature, HowTo, Cards and StripeLink sections with a simple image upload
+
+### Patch Changes
+
+- a5e549b: Add background to Form
+- fde0fd7: Add EditorialSwitch section
+- 6b5ff32: Add RowText Section
+- 8817d67: Make VideoImage text optional
+- 867e79b: Add Form section
+- 6a154a7: RowText: Turned body field into Rich Text
+- 95b01e0: Increase MegaHeader sublink groups limit to 4
+- b5aa21e: Remove Copy Locales plugin to solve prod peer dependency issues
+- d637a94: Add SectionID to ServiceCarousel Section
+- 247d673: Add structuredData to page SEO
+- c678af8: Make Page's slug field not unique
+- 6ecf347: Add anchor (ID) to accordion item
+- 10426a3: Add Service Carousel Section
+- e7ab09f: Add Preview Mode
+- f6d37d6: Add Notes field to Form
+- 3e6c075: Add Stats Section
+- 624d315: Make Header Drawer Link Card's and CTA Card's subtitle Rich Text
+- 5b213dd: Implement Section ID for all sections
+- 136cfe8: Add tertiary link to Hero section
+- 0d8742f: Add Strapi Plugin Copy Locales
+- e577c38: Add mobileImage to VideoImage
+- 9094255: Move @types/koa depedency from devDependencies to standard dependecies
+- bebf543: Add HeroCounter section
+- 8c47e43: Add FramedVideo Section
+- 2f97e7c: Sub Stripelink buttonText with full link
+- 34dbf07: Add buttonLabel to Form
+- 545232b: Update view configuration for Editorial Switch
+- 5abfa9b: Remove unique constraint from Form Category fields
+- 3aac78d: Add Matomo Analytics
+- 7b215c3: Add HighlightBox Section
+- 4bb9d27: Bannerlink: Remove decoration and make icon an image
+- 757e909: Switched from strapi.config.get to strapi.plugin.config to fetch Update Static Content plugin configuration
+- 7a7cc4c: Update Strapi view configuration for new Header
+- 2b2fb05: Convert Editorial Switch subtitle to Rich Text
+- c8318dc: Add PressReleaseList Section
+- 52c4de2: Remove useless components. Configure view.
+- 5e923d1: Accordion: Add option to have text beside questions
+- 7f2bfcf: Add VideoImage section
+- 1b20d8e: Re-enabled Preview Button inside Strapi
+- 271a06b: Added mobileImage field to Editorial component
+- accea4d: Activate Preview Button for PressRelease Collection Type
+- 46f5e9f: Implement themeVariant (IO/SEND)
+- 3605762: Substitute Themed Icon for simple Icon
+- 7a1db57: Filter workflows shown in Strapi deploy plugin by tenant
+- eb97792: Add loop and autoplay to FramedVideo
+- e9511dd: Add Demo Tenant
+- 118f5bd: Add YouTube as a valid icon for Footer Social Links
+- 439b2b7: Extend og:description to 160 characters
+- b8e47d5: Update viewconfig for new BannerLink
+- 3107d81: Add storeButtons to Hero section
+- 611a2c5: Updated security middleware configuration
+- d830a91: Add TextSection Section
+- 85476e8: Update BannerLink to reflect changes made NextJS-side
+- bb5adf2: Add defaultCategoryID field to Form
+- f0224e4: Implement HeroChips in Strapi
+- a0ca674: Remove slug "unique"ness to allow cloning pages
+- 0585529: Add textPosition to Strapi Cards
+
 ## 0.2.0
 
 ### Minor Changes
