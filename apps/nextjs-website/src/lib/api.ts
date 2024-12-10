@@ -12,12 +12,17 @@ import {
   PageIDs,
   PreviewPageData,
   fetchAllPageIDs,
+  fetchAllPressReleaseIDs,
   fetchPageFromID,
+  fetchPressReleaseFromID,
 } from './fetch/preview';
 import { formatHeaderLinks } from './header';
 import { getPreFooter, PreFooterAttributes } from './fetch/preFooter';
 import { getPressReleases, PressReleasePage } from './fetch/pressRelease';
-import { pressReleaseToPageDataArray } from './pressRelease';
+import {
+  pressReleaseToPageDataArray,
+  previewPressReleaseToPreviewPageData,
+} from './pressRelease';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -135,6 +140,27 @@ export const getAllPageIDs = async (
   return [...pageIDs_it.data, ...pageIDs_en.data];
 };
 
+export const getAllPressReleaseIDs = async (
+  tenant: Config['ENVIRONMENT']
+): Promise<PageIDs['data']> => {
+  const appEnvWithRequestedTenant: AppEnv = {
+    config: {
+      ...appEnv.config,
+      ENVIRONMENT: tenant,
+    },
+    fetchFun: appEnv.fetchFun,
+  };
+  const pressReleaseIDs_it = await fetchAllPressReleaseIDs({
+    ...appEnvWithRequestedTenant,
+    locale: 'it',
+  });
+  const pressReleaseIDs_en = await fetchAllPressReleaseIDs({
+    ...appEnvWithRequestedTenant,
+    locale: 'en',
+  });
+  return [...pressReleaseIDs_it.data, ...pressReleaseIDs_en.data];
+};
+
 export const getPageDataFromID = async (
   tenant: Config['ENVIRONMENT'],
   pageID: number
@@ -151,6 +177,25 @@ export const getPageDataFromID = async (
   } = await fetchPageFromID({ ...appEnvWithRequestedTenant, pageID });
 
   return attributes;
+};
+
+export const getPressReleaseDataFromID = async (
+  tenant: Config['ENVIRONMENT'],
+  pressReleaseID: number
+): Promise<PreviewPageData['data']['attributes']> => {
+  const appEnvWithRequestedTenant: AppEnv = {
+    config: {
+      ...appEnv.config,
+      ENVIRONMENT: tenant,
+    },
+    fetchFun: appEnv.fetchFun,
+  };
+  const pressRelease = await fetchPressReleaseFromID({
+    ...appEnvWithRequestedTenant,
+    pressReleaseID,
+  });
+
+  return previewPressReleaseToPreviewPageData(pressRelease).data.attributes;
 };
 
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';

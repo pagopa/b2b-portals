@@ -1,4 +1,5 @@
 import { PressReleases } from './fetch/pressRelease';
+import { PreviewPageData, PreviewPressReleaseData } from './fetch/preview';
 import { PageData } from './navigation';
 
 export const pressReleaseToPageDataArray = (
@@ -14,3 +15,19 @@ export const pressReleaseToPageDataArray = (
       },
     ],
   }));
+
+export const previewPressReleaseToPreviewPageData = (
+  pressRelease: PreviewPressReleaseData
+): PreviewPageData => ({
+  data: {
+    attributes: {
+      locale: pressRelease.data.attributes.locale,
+      sections: [
+        {
+          __component: 'sections.press-release',
+          ...pressRelease.data.attributes.pressRelease,
+        },
+      ],
+    },
+  },
+});
