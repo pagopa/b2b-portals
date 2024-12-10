@@ -23,11 +23,14 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       ? palette.primary.main
       : palette.custom.primaryColorDark;
 
-  const appendItemIDToURLHash = () => {
-    if (!itemID) return;
+  const appendItemIDToURLHash = (addHash: boolean) => {
     const url = new URL(window.location.href);
-    url.hash = itemID;
-    window.history.replaceState(null, '', url.toString());
+    if (addHash && itemID) {
+      url.hash = itemID;
+    } else {
+      url.hash = '';
+    }
+    window.history.replaceState({}, '', url.toString());
   };
 
   useLayoutEffect(() => {
@@ -42,10 +45,9 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   }, []);
 
   const handleChange = () => {
-    if (!expanded) {
-      appendItemIDToURLHash();
-    }
-    setExpanded(!expanded);
+    const newExpanded = !expanded;
+    setExpanded(newExpanded);
+    appendItemIDToURLHash(newExpanded);
   };
 
   return (
