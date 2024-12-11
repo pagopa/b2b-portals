@@ -8,9 +8,12 @@ const meta: Meta<typeof PressReleaseList> = {
 };
 export default meta;
 
-const Template: StoryFn<PressReleaseListProps> = (args) => <PressReleaseList {...args} />;
+const Template: StoryFn<PressReleaseListProps> = (args) => (
+  <PressReleaseList {...args} />
+);
 
-export const DefaultPressReleaseList = Template.bind({});
+export const DefaultPressReleaseList: StoryFn<typeof PressReleaseList> =
+  Template.bind({});
 DefaultPressReleaseList.args = {
   title: 'Comunicati stampa',
   sectionID: 'press-release-list',
@@ -94,8 +97,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '17 GIUGNO 2021',
-      title:
-        'La Certificazione verde COVID-19 anche sull’app IO',
+      title: 'La Certificazione verde COVID-19 anche sull’app IO',
       link: {
         label: 'Leggi',
         href: '#',
@@ -114,8 +116,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '17 GIUGNO 2021',
-      title:
-        'IO: arriva l’app per i cittadini progettata con i cittadini',
+      title: 'IO: arriva l’app per i cittadini progettata con i cittadini',
       link: {
         label: 'Leggi',
         href: '#',
@@ -134,8 +135,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '10 MARZO 2022',
-      title:
-        'IO app, più di 5 mila PA hanno integrato i loro primi servizi',
+      title: 'IO app, più di 5 mila PA hanno integrato i loro primi servizi',
       link: {
         label: 'Leggi',
         href: '#',
