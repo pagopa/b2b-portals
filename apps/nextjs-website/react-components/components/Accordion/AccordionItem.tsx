@@ -25,9 +25,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 
   const appendItemIDToURLHash = () => {
     if (!itemID) return;
-    const url = new URL(window.location.href);
-    url.hash = itemID;
-    window.history.replaceState(null, '', url.toString());
+    window.location.hash = itemID;
   };
 
   useLayoutEffect(() => {
@@ -42,10 +40,10 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   }, []);
 
   const handleChange = () => {
+    setExpanded(!expanded);
     if (!expanded) {
       appendItemIDToURLHash();
     }
-    setExpanded(!expanded);
   };
 
   return (
