@@ -112,7 +112,9 @@ const MegaHeader = (props: MegaHeaderProps) => {
       >
         <Content>
           <Logo>
-            <img src={logoSrc} alt={logoAlt} />
+            <a href='/'>
+              <img src={logoSrc} alt={logoAlt} />
+            </a>
           </Logo>
           {!isMobile && (
             <>
