@@ -9,5 +9,5 @@ export interface MediaResourcesItem {
 
 export interface MediaResourcesProps extends SectionProps {
   items: MediaResourcesItem[];
-  title?: string;
+  title: string;
 }

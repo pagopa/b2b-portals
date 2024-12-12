@@ -416,20 +416,8 @@ const PressReleaseListSectionCodec = t.strict({
 
 const MediaResourcesItemCodec = t.strict({
   title: t.string,
-  thumbnail: t.strict({
-    data: t.strict({
-      attributes: t.strict({
-        url: t.string,
-      }),
-    }),
-  }),
-  resource: t.strict({
-    data: t.strict({
-      attributes: t.strict({
-        url: t.string,
-      }),
-    }),
-  }),
+  thumbnailURL: t.string,
+  resourceURL: t.string,
   label: t.string,
 });
 
@@ -437,7 +425,7 @@ const MediaResourcesSectionCodec = t.strict({
   __component: t.literal('sections.media-resources'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   sectionID: t.union([t.string, t.null]),
-  title: t.union([t.string, t.null]),
+  title: t.string,
   items: t.array(MediaResourcesItemCodec),
 });
 
