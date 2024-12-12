@@ -1,18 +1,18 @@
-import { Box, Typography, Grid, Link, useTheme } from '@mui/material';
+import { Box, Typography, Grid, useTheme } from '@mui/material';
 import { MediaResourcesProps } from '@react-components/types';
-import Image from 'next/image';
 import {
   SendBackgroundColor,
   IoBackgroundColor,
   TextColor,
 } from '../common/Common.helpers';
+import { FileDownloadOutlined } from '@mui/icons-material';
 
 const MediaResources = ({
   items,
   sectionID,
   theme,
   themeVariant,
-  sectionTitle,
+  title,
 }: MediaResourcesProps) => {
   const muiTheme = useTheme();
 
@@ -33,7 +33,7 @@ const MediaResources = ({
   return (
     <Box
       component='section'
-      id={sectionID || undefined}
+      {...(sectionID && { id: sectionID })}
       sx={{
         backgroundColor: backgroundColor,
         color: textColor,
@@ -41,40 +41,37 @@ const MediaResources = ({
         px: 3,
       }}
     >
-      {sectionTitle && (
+      {title && (
         <Typography
           variant='h4'
           mb={4}
           textAlign='left'
           sx={{ color: textColor }}
         >
-          {sectionTitle}
+          {title}
         </Typography>
       )}
       <Grid container spacing={4} alignItems='flex-start'>
         {items.map((item, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Box sx={{ textAlign: 'left' }}>
-              <Image
-                src={item.thumbnail.data.attributes.url}
+              <img
+                src={item.thumbnailURL}
                 alt={item.title}
-                width={200}
-                height={200}
-                style={{ borderRadius: '8px', marginBottom: '16px' }}
+                width={330}
+                style={{
+                  borderRadius: '8px',
+                  marginBottom: '16px',
+                  maxWidth: '90vw',
+                  height: 'auto',
+                }}
               />
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                <Image
-                  src={item.icon.data.attributes.url}
-                  alt='Download Icon'
-                  width={16}
-                  height={16}
-                  style={{ marginRight: '8px' }}
-                />
-                <Link
-                  href={item.resource.data.attributes.url}
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography
+                  component='a'
+                  href={item.resourceURL}
                   download
                   target='_blank'
-                  underline='hover'
                   sx={{
                     fontSize: '14px',
                     color: linkColor,
@@ -84,12 +81,20 @@ const MediaResources = ({
                       color: linkColor,
                       textDecoration: 'underline',
                     },
+                    display: 'inline-flex',
+                    alignItems: 'center',
                   }}
                 >
+                  <FileDownloadOutlined sx={{ mr: 1 }} />
                   {item.label}
-                </Link>
+                </Typography>
               </Box>
-              <Typography variant='h6' mt={3} sx={{ color: textColor }}>
+              <Typography
+                variant='h6'
+                fontWeight={700}
+                mt={3}
+                sx={{ color: textColor }}
+              >
                 {item.title}
               </Typography>
             </Box>
