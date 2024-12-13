@@ -1,6 +1,10 @@
 import * as t from 'io-ts';
 import { CTAButtonSimpleCodec } from './CTAButton';
-import { StrapiImageRequiredSchema, StrapiImageSchema } from './StrapiImage';
+import {
+  StrapiGenericMediaRequiredSchema,
+  StrapiImageRequiredSchema,
+  StrapiImageSchema,
+} from './StrapiImage';
 import { StoreButtonsCodec } from './StoreButtons';
 import { ThemeCodec } from './Theme';
 
@@ -416,8 +420,8 @@ const PressReleaseListSectionCodec = t.strict({
 
 const MediaResourcesItemCodec = t.strict({
   title: t.string,
-  thumbnailURL: t.string,
-  resourceURL: t.string,
+  thumbnail: StrapiImageRequiredSchema,
+  resource: StrapiGenericMediaRequiredSchema,
   label: t.string,
 });
 
@@ -425,7 +429,7 @@ const MediaResourcesSectionCodec = t.strict({
   __component: t.literal('sections.media-resources'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   sectionID: t.union([t.string, t.null]),
-  title: t.string,
+  title: t.union([t.string, t.null]),
   items: t.array(MediaResourcesItemCodec),
 });
 

@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_sections_media_resources",
+  "info": {
+    "displayName": "MediaResources",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light",
+      "required": true
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.media-resources-item",
+      "required": true,
+      "min": 1
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

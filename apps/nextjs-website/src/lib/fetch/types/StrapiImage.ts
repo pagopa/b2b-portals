@@ -20,6 +20,22 @@ export const ImageDataCodec = t.strict({
   ]),
 });
 
+export const GenericMediaDataCodec = t.strict({
+  alternativeText: t.union([t.string, t.null]),
+  url: t.string,
+  width: t.union([t.number, t.null]),
+  height: t.union([t.number, t.null]),
+  mime: t.string,
+  formats: t.union([
+    t.partial({
+      small: ResponsiveImageDataCodec,
+      medium: ResponsiveImageDataCodec,
+      large: ResponsiveImageDataCodec,
+    }),
+    t.null,
+  ]),
+});
+
 export const StrapiImageSchema = t.strict({
   data: t.union([
     t.strict({
@@ -32,6 +48,12 @@ export const StrapiImageSchema = t.strict({
 export const StrapiImageRequiredSchema = t.strict({
   data: t.strict({
     attributes: ImageDataCodec,
+  }),
+});
+
+export const StrapiGenericMediaRequiredSchema = t.strict({
+  data: t.strict({
+    attributes: GenericMediaDataCodec,
   }),
 });
 
