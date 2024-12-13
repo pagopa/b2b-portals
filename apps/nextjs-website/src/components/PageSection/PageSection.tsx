@@ -23,6 +23,7 @@ import PageSwitch from '../PageSwitch';
 import FramedVideo from '../FramedVideo';
 import PressRelease from '../PressRelease';
 import PressReleaseList from '../PressReleaseList';
+import MediaResources from '../MediaResources';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleasePage } from '@/lib/fetch/pressRelease';
@@ -82,6 +83,8 @@ const PageSection = (
       return <PressRelease {...props} />;
     case 'sections.press-release-list':
       return <PressReleaseList {...props} />;
+    case 'sections.media-resources':
+      return <MediaResources {...props} />;
     default:
       return null;
   }

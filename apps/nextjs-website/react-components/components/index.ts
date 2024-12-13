@@ -26,6 +26,7 @@ import PageSwitch from './Page-Switch/Page-Switch';
 import FramedVideo from './FramedVideo/FramedVideo';
 import PressRelease from './PressRelease/PressRelease';
 import PressReleaseList from './PressReleaseList/PressReleaseList';
+import MediaResources from './MediaResources/MediaResources';
 
 export {
   Hero,
@@ -56,4 +57,5 @@ export {
   FramedVideo,
   PressRelease,
   PressReleaseList,
+  MediaResources,
 };

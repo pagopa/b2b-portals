@@ -26,6 +26,7 @@ import { PageSwitchProps } from './Page-Switch/Page-Switch.types';
 import { FramedVideoProps } from './FramedVideo/FramedVideo.types';
 import { PressReleaseProps } from './PressRelease/PressRelease.types';
 import { PressReleaseListProps } from './PressReleaseList/PressReleaseList.types';
+import { MediaResourcesProps } from './MediaResources/MediaResources.types';
 
 export type {
   HeroProps,
@@ -56,4 +57,5 @@ export type {
   FramedVideoProps,
   PressReleaseProps,
   PressReleaseListProps,
+  MediaResourcesProps,
 };

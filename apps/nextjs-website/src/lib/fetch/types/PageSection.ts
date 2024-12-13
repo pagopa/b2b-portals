@@ -414,6 +414,21 @@ const PressReleaseListSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const MediaResourcesItemCodec = t.strict({
+  title: t.string,
+  thumbnailURL: t.string,
+  resourceURL: t.string,
+  label: t.string,
+});
+
+const MediaResourcesSectionCodec = t.strict({
+  __component: t.literal('sections.media-resources'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
+  title: t.string,
+  items: t.array(MediaResourcesItemCodec),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -439,6 +454,7 @@ export const PageSectionCodec = t.union([
   FramedVideoSectionCodec,
   PressReleaseSectionCodec,
   PressReleaseListSectionCodec,
+  MediaResourcesSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -472,3 +488,4 @@ export type PressReleaseSection = t.TypeOf<typeof PressReleaseSectionCodec>;
 export type PressReleaseListSection = t.TypeOf<
   typeof PressReleaseListSectionCodec
 >;
+export type MediaResourcesSection = t.TypeOf<typeof MediaResourcesSectionCodec>;
