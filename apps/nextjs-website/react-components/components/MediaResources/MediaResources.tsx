@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, useTheme } from '@mui/material';
+import { Box, Typography, useTheme, Stack } from '@mui/material';
 import { MediaResourcesProps } from '@react-components/types';
 import {
   SendBackgroundColor,
@@ -32,63 +32,73 @@ const MediaResources = ({
 
   return (
     <Box
-      component='section'
-      {...(sectionID && { id: sectionID })}
       sx={{
         backgroundColor: backgroundColor,
-        color: textColor,
-        py: 6,
-        px: 3,
       }}
     >
-      {title && (
-        <Typography
-          variant='h4'
-          mb={4}
-          textAlign='left'
-          sx={{ color: textColor }}
+      <Box
+        component='section'
+        {...(sectionID && { id: sectionID })}
+        sx={{
+          color: textColor,
+          py: 10,
+        }}
+        width={1140}
+        maxWidth='90vw'
+        marginX='auto'
+      >
+        {title && (
+          <Typography
+            variant='h4'
+            mb={4}
+            textAlign='left'
+            color='inherit'
+          >
+            {title}
+          </Typography>
+        )}
+        <Stack
+          direction='row'
+          flexWrap='wrap'
+          rowGap={14}
+          columnGap={9}
         >
-          {title}
-        </Typography>
-      )}
-      <Grid container spacing={4} alignItems='flex-start'>
-        {items.map((item, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Box sx={{ textAlign: 'left' }}>
+          {items.map((item, index) => (
+            <Stack
+              key={index}
+              component='a'
+              href={item.resourceURL}
+              download
+              target='_blank'
+              width={330}
+              maxWidth='90vw'
+              sx={{
+                textDecoration: 'none',
+              }}
+            >
               <img
                 src={item.thumbnailURL}
                 alt={item.title}
                 width={330}
+                height={192}
                 style={{
-                  borderRadius: '8px',
                   marginBottom: '16px',
                   maxWidth: '90vw',
-                  height: 'auto',
+                  maxHeight: '52.36vw', // Maintains same ratio (330/192 = 90/52.36)
+                  objectFit: 'cover',
                 }}
               />
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography
-                  component='a'
-                  href={item.resourceURL}
-                  download
-                  target='_blank'
-                  sx={{
-                    fontSize: '14px',
-                    color: linkColor,
-                    fontWeight: 'bold',
-                    textDecoration: 'none',
-                    '&:hover': {
-                      color: linkColor,
-                      textDecoration: 'underline',
-                    },
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <FileDownloadOutlined sx={{ mr: 1 }} />
+              <Stack
+                direction='row'
+                alignItems='center'
+                spacing={1}
+                color={linkColor}
+              >
+                <FileDownloadOutlined />
+                <Typography color='inherit' fontSize={14} fontWeight={600}>
                   {item.label}
                 </Typography>
-              </Box>
+              </Stack>
               <Typography
                 variant='h6'
                 fontWeight={700}
@@ -97,10 +107,10 @@ const MediaResources = ({
               >
                 {item.title}
               </Typography>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
+            </Stack>
+          ))}
+        </Stack>
+      </Box>
     </Box>
   );
 };

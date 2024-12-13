@@ -25,6 +25,9 @@
       "component": "components.media-resources-item",
       "required": true,
       "min": 1
+    },
+    "title": {
+      "type": "string"
     }
   }
 }

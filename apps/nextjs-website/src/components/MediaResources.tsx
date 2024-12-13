@@ -1,9 +1,25 @@
 'use client';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { MediaResourcesSection } from '@/lib/fetch/types/PageSection';
 import { MediaResources as MediaResourcesRC } from '@react-components/components';
 import { MediaResourcesProps } from '@react-components/types';
 
-const MediaResources = (props: MediaResourcesProps) => (
-  <MediaResourcesRC {...props} />
+const makeMediaResourcesProps = ({
+  title,
+  items,
+  ...rest
+}: MediaResourcesSection & SiteWidePageData): MediaResourcesProps => ({
+  ...(title && { title }),
+  items: items.map(({ resource, thumbnail, ...item }) => ({
+    resourceURL: resource.data.attributes.url,
+    thumbnailURL: thumbnail.data.attributes.url,
+    ...item,
+  })),
+  ...rest,
+});
+
+const MediaResources = (props: MediaResourcesSection & SiteWidePageData) => (
+  <MediaResourcesRC {...makeMediaResourcesProps(props)} />
 );
 
 export default MediaResources;
