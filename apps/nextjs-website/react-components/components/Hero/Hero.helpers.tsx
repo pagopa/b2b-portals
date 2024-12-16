@@ -50,8 +50,8 @@ export const HeroTextContent = ({
         minHeight: 'inherit',
         padding: size === 'small' ? '60px 0' : '0',
         maxWidth: size === 'small' ? '60%' : '100%',
-        margin: size === 'small' ? '0 auto' : { xs: '2em 0', md: '3em 0' },
-        marginTop: size === 'small' ? '0' : '4em',
+        marginTop: size === 'small' ? '0' : { xs: '3em', lg: '0' },
+        ...(size === 'small' && { margin: '0 auto' }),
       }}
       component='section'
       spacing={2}
