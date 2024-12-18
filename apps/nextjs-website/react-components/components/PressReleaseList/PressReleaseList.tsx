@@ -10,15 +10,28 @@ const PressReleaseList = ({
   pressReleases,
   themeVariant,
 }: PressReleaseListProps) => (
-    <ContainerRC {...sectionID && { sectionID }} direction='column'>
-      <Typography variant='h4' maxWidth='100%'>{title}</Typography>
+  <ContainerRC
+    {...(sectionID && { sectionID })}
+    direction='column'
+    sx={{ marginY: { xs: 8, md: 12 } }}
+  >
+    <Typography variant='h4' maxWidth='100%'>
+      {title}
+    </Typography>
 
-      <Stack direction='row' flexWrap='wrap' my={4} rowGap={6} columnGap={7} maxWidth='100%'>
-        {pressReleases.map((pressRelease) => (
-          <PressReleasePreview {...pressRelease} themeVariant={themeVariant} />
-        ))}
-      </Stack>
-    </ContainerRC>
-  );
+    <Stack
+      direction='row'
+      flexWrap='wrap'
+      my={4}
+      rowGap={6}
+      columnGap={7}
+      maxWidth='100%'
+    >
+      {pressReleases.map((pressRelease) => (
+        <PressReleasePreview {...pressRelease} themeVariant={themeVariant} />
+      ))}
+    </Stack>
+  </ContainerRC>
+);
 
 export default PressReleaseList;
