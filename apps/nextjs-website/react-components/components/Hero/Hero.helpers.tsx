@@ -110,6 +110,7 @@ export const HeroTextContent = ({
                 }}
                 key='google'
                 href={storeButtons.hrefGoogle}
+                target='_blank'
               >
                 <Image
                   src={googleBadgeBase64}
@@ -129,6 +130,7 @@ export const HeroTextContent = ({
                 }}
                 key='apple'
                 href={storeButtons.hrefApple}
+                target='_blank'
               >
                 <Image
                   src={appleBadgeBase64}
