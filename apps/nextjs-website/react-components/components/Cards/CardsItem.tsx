@@ -91,6 +91,7 @@ const CardsItem = ({
                     title={link.title}
                     fontSize={14}
                     fontWeight={600}
+                    {...(link.href.startsWith('https') && { target: '_blank' })}
                   >
                     {link.label}
                   </Link>
