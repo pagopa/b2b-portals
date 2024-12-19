@@ -79,7 +79,6 @@ const Hero = (props: HeroProps) => {
         <Grid
           item
           lg={6}
-          mb={{ xs: 4, lg: 0 }}
           sx={{
             width: '100%',
             display: 'flex',
