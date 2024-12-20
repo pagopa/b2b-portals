@@ -253,11 +253,11 @@ const Form = ({
   return (
     <Box
       sx={{
-        width: '100vw',
+        width: '100%',
         position: 'relative',
       }}
     >
-      {background &&
+      {background && (
         <img
           src={background.src}
           srcSet={background.srcSet}
@@ -272,7 +272,7 @@ const Form = ({
             zIndex: -10,
           }}
         />
-      }
+      )}
       <Box
         sx={{
           maxWidth: 900,
