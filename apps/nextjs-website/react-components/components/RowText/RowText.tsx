@@ -18,7 +18,6 @@ const RowText = (props: RowTextProps) => {
         bgcolor: backgroundColor,
         color: textColor,
         py: 10,
-        px: 2,
       }}
     >
       <Container
@@ -26,7 +25,7 @@ const RowText = (props: RowTextProps) => {
           width: { xs: '100%', md: '60%' },
           mx: 'auto',
           textAlign: layout,
-          ml: { xs: 'auto', md: layout === 'left' ? 16 : 'auto' },
+          ml: { xs: 'auto', md: layout === 'left' ? 32 : 'auto' },
           mr: { xs: 'auto' },
         }}
       >
