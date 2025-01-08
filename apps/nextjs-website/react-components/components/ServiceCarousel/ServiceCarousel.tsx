@@ -76,7 +76,7 @@ const ServiceCarousel = ({
         <Slider
           speed={500}
           variableWidth={true}
-          infinite={false}
+          infinite={true}
           arrows={false}
           dots={true}
           swipeToSlide={true}
