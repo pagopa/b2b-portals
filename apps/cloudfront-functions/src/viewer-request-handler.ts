@@ -20,7 +20,7 @@ const handler = (
         request.uri = request.uri.replace(/\/$/, '');
       }
       // Always add .html if there's no file extension, including special cases
-      if (!/\.[a-zA-Z]+$/.test(request.uri)) {
+      if (!/\.[0-9a-zA-Z]+$/.test(request.uri)) {
         request.uri += '.html';
       }
     }
