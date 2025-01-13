@@ -11,16 +11,18 @@ const handler = (
   if (event.context.eventType === 'viewer-request') {
     // do the rewrite
     const { request } = event;
-    const uri = request.uri;
-    const uriEndsWithSlash = uri.endsWith('/');
-
-    if (uriEndsWithSlash) {
-      request.uri = uri.replace(/\/$/, '');
-    }
+    const uriEndsWithSlash = request.uri.endsWith('/');
+    const isHomepage = request.uri === '/';
 
     // Add the .html extension if missing
-    if (!/\.[0-9a-zA-Z]+$/.test(uri)) {
-      request.uri += '.html';
+    if (!isHomepage) {
+      if (uriEndsWithSlash) {
+        request.uri = request.uri.replace(/\/$/, '');
+      }
+      // Always add .html if there's no file extension, including special cases
+      if (!/\.[0-9a-zA-Z]+$/.test(request.uri)) {
+        request.uri += '.html';
+      }
     }
 
     return request;
