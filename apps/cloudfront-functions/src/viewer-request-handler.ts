@@ -24,11 +24,10 @@ const handler = (
         request.uri += '.html';
       }
     }
-    
+
     return request;
   } else {
     // do nothing
     return event.request;
   }
 };
-
