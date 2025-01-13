@@ -12,9 +12,14 @@ const handler = (
     // do the rewrite
     const { request } = event;
     const uri = request.uri;
+    const uriEndsWithSlash = uri.endsWith('/');
+
+    if (uriEndsWithSlash) {
+      request.uri = uri.replace(/\/$/, '');
+    }
 
     // Add the .html extension if missing
-    if (!uri.endsWith('/') && !/\.[0-9a-zA-Z]+$/.test(uri)) {
+    if (!/\.[0-9a-zA-Z]+$/.test(uri)) {
       request.uri += '.html';
     }
 
