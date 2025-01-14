@@ -169,7 +169,7 @@ export const ImageText = ({
   themeVariant,
 }: {
   title?: string;
-  subtitle?: string | JSX.Element;
+  subtitle?: JSX.Element;
   theme: 'dark' | 'light';
   themeVariant: 'SEND' | 'IO';
 }) => {

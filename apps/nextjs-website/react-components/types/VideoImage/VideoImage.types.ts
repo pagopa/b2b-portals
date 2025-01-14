@@ -28,7 +28,7 @@ export interface VideoImageProps
 
 export interface VideoTextProps {
   readonly title?: string;
-  readonly subtitle?: string | JSX.Element;
+  readonly subtitle?: JSX.Element;
   readonly theme: Theme;
   readonly themeVariant: ThemeVariant;
 }

@@ -209,7 +209,7 @@ const VideoImage = ({
                       theme={theme}
                       themeVariant={themeVariant}
                       title={title ?? ''}
-                      subtitle={subtitle ?? ''}
+                      {...(subtitle && { subtitle })} 
                     />
                   </div>
                 </>
