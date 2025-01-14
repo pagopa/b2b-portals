@@ -1,4 +1,5 @@
 'use client';
+import MarkdownRenderer from './MarkdownRenderer';
 import { VideoImage as VideoImageRC } from '@react-components/components';
 import { VideoImageProps } from '@react-components/types';
 import { VideoImageSection } from '@/lib/fetch/types/PageSection';
@@ -6,6 +7,8 @@ import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { makeSrcSetFromStrapiImageData } from '@/lib/image';
 
 const makeVideoImageProps = ({
+  locale,
+  defaultLocale,
   title,
   subtitle,
   caption,
@@ -16,7 +19,9 @@ const makeVideoImageProps = ({
 }: VideoImageSection & SiteWidePageData): VideoImageProps => ({
   ...rest,
   ...(title && { title }),
-  ...(subtitle && { subtitle }),
+  ...(subtitle && {
+    subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
+  }),
   ...(caption && { caption }),
   ...(video &&
     video.src.data && {

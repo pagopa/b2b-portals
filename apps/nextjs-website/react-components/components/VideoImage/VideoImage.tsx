@@ -17,6 +17,7 @@ const VideoImage = ({
   caption,
   isCentered,
   theme,
+  themeVariant,
   image,
   mobileImage,
   video,
@@ -114,6 +115,7 @@ const VideoImage = ({
                 {mediaState === 'stop' && (title || subtitle) && (
                   <VideoText
                     theme={theme}
+                    themeVariant={themeVariant}
                     {...(title && { title })}
                     {...(subtitle && { subtitle })}
                   />
@@ -205,6 +207,7 @@ const VideoImage = ({
                   >
                     <ImageText
                       theme={theme}
+                      themeVariant={themeVariant}
                       title={title ?? ''}
                       subtitle={subtitle ?? ''}
                     />

@@ -15,7 +15,11 @@ export const VideoFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
 VideoFull.args = {
   ...defaultsDark,
   title: 'Sample Video Title',
-  subtitle: 'Sample Video Subtitle',
+  subtitle: (
+    <p>
+      Sample Video Subtitle with <a href='/'>link</a>
+    </p>
+  ),
   video: {
     src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
     autoplay: false,
@@ -63,7 +67,11 @@ export const VideoFullWithCaption: StoryFn<typeof VideoImage> =
 VideoFullWithCaption.args = {
   ...defaultsDark,
   title: 'Sample Video Title',
-  subtitle: 'Sample Video Subtitle',
+  subtitle: (
+    <p>
+      Sample Video Subtitle with <a href='/'>link</a>
+    </p>
+  ),
   caption: 'Sample Video Caption',
   video: {
     src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
@@ -116,7 +124,11 @@ export const ImageFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
 ImageFull.args = {
   ...defaultsDark,
   title: 'Sample Image Title',
-  subtitle: 'Sample Image Subtitle',
+  subtitle: (
+    <p>
+      Sample Image Subtitle with <a href='/'>link</a>
+    </p>
+  ),
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
@@ -170,7 +182,11 @@ export const ImageNoCaptionWithTextCenter: StoryFn<typeof VideoImage> =
 ImageNoCaptionWithTextCenter.args = {
   ...defaultsDark,
   title: 'Sample Image Title',
-  subtitle: 'Sample Image Subtitle',
+  subtitle: (
+    <p>
+      Sample Image Subtitle with <a href='/'>link</a>
+    </p>
+  ),
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',
@@ -189,7 +205,11 @@ export const ImageNoCaptionWithTextLeft: StoryFn<typeof VideoImage> =
 ImageNoCaptionWithTextLeft.args = {
   ...defaultsDark,
   title: 'Sample Image Title',
-  subtitle: 'Sample Image Subtitle',
+  subtitle: (
+    <p>
+      Sample Image Subtitle with <a href='/'>link</a>
+    </p>
+  ),
   image: {
     src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
     alt: 'Sample Image Alt',

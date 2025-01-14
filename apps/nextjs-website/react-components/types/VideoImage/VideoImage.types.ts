@@ -1,3 +1,4 @@
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 import { SectionProps, Theme } from '../common/Common.types';
 
 export interface VideoImageProps
@@ -27,8 +28,9 @@ export interface VideoImageProps
 
 export interface VideoTextProps {
   readonly title?: string;
-  readonly subtitle?: string;
+  readonly subtitle?: string | JSX.Element;
   readonly theme: Theme;
+  readonly themeVariant: ThemeVariant;
 }
 
 export interface VideoCaptionProps {

@@ -44,7 +44,12 @@ export const renderVideo = ({
 
   if (error) {
     return (
-      <Typography variant='h6' color='background.paper' textAlign='center'>
+      <Typography
+        component='div'
+        variant='h6'
+        color='background.paper'
+        textAlign='center'
+      >
         {fallback}
       </Typography>
     );
@@ -111,21 +116,44 @@ export const VideoText = ({
   title,
   subtitle,
   theme = 'dark',
+  themeVariant,
 }: VideoTextProps) => {
   const textColor = TextColor(theme);
+  const { palette } = useTheme();
+  const linkColor =
+    theme === 'dark'
+      ? palette.custom.white
+      : themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
+
   return (
     <>
       {title && (
-        <Typography variant='h5' mb={4} color={textColor}>
+        <Typography component='div' variant='h5' mb={4} color={textColor}>
           {title}
         </Typography>
       )}
       {subtitle && (
         <Typography
+          component='div'
           paragraph
-          sx={{ fontSize: '16px' }}
+          sx={{
+            fontSize: '16px',
+            '& a': {
+              color: linkColor,
+              textDecoration: 'underline',
+              fontWeight: 'bold',
+              '&:hover': {
+                color: linkColor,
+                textDecoration: 'underline',
+              },
+            },
+            '& p': {
+              color: textColor,
+            },
+          }}
           mb={3}
-          color={textColor}
         >
           {subtitle}
         </Typography>
@@ -137,19 +165,31 @@ export const VideoText = ({
 export const ImageText = ({
   title,
   subtitle,
+  theme = 'dark',
+  themeVariant,
 }: {
   title?: string;
-  subtitle?: string;
+  subtitle?: string | JSX.Element;
   theme: 'dark' | 'light';
+  themeVariant: 'SEND' | 'IO';
 }) => {
   const { palette } = useTheme();
+  const textColor = TextColor(theme);
+  const linkColor =
+    theme === 'dark'
+      ? palette.custom.white
+      : themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
+
   return (
     <>
       {title && (
         <Typography
+          component='div'
           variant='h5'
           mb={4}
-          color={palette.custom.white}
+          color={textColor}
           sx={{ maxWidth: '500px' }}
         >
           {title}
@@ -157,10 +197,25 @@ export const ImageText = ({
       )}
       {subtitle && (
         <Typography
+          component='div'
           paragraph
-          sx={{ fontSize: '16px', maxWidth: '500px' }}
+          sx={{
+            fontSize: '16px',
+            maxWidth: '500px',
+            '& a': {
+              color: linkColor,
+              textDecoration: 'underline',
+              fontWeight: 'bold',
+              '&:hover': {
+                color: linkColor,
+                textDecoration: 'underline',
+              },
+            },
+            '& p': {
+              color: textColor,
+            },
+          }}
           mb={3}
-          color={palette.custom.white}
         >
           {subtitle}
         </Typography>
@@ -183,6 +238,7 @@ export const VideoCaption = ({ caption, isCentered }: VideoCaptionProps) => {
     >
       {caption && (
         <Typography
+          component='div'
           paragraph
           sx={{ fontSize: '16px', fontWeight: 600 }}
           mb={3}
