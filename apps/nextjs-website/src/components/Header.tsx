@@ -19,9 +19,10 @@ const makeSublink = (
   href: string;
 } => ({
   label: sublink.label,
-  href:
-    sublink.page.data.attributes.slug +
-    (sublink.sectionID ? `#${sublink.sectionID}` : ''),
+  href: sublink.page.data
+    ? sublink.page.data.attributes.slug +
+      (sublink.sectionID ? `#${sublink.sectionID}` : '')
+    : sublink.externalURL ?? '',
 });
 
 const makeHeaderProps = (
@@ -72,7 +73,7 @@ const makeHeaderProps = (
     href: link.page.data?.attributes.slug,
     alignRight: link.alignRight,
     ...(link.sublinks.length > 0 && {
-      items: link.sublinks.map((sublink) => makeSublink(sublink)),
+      items: link.sublinks.map(makeSublink),
     }),
     ...(link.page.data && {
       active: pathname === link.page.data.attributes.slug,
@@ -105,7 +106,7 @@ const makeMegaHeaderProps = ({
     primary: link.label,
     secondary: link.sublinkGroups.map((sublinkGroup) => ({
       title: sublinkGroup.title,
-      items: sublinkGroup.sublinks.map((sublink) => makeSublink(sublink)),
+      items: sublinkGroup.sublinks.map(makeSublink),
     })),
   })),
 });

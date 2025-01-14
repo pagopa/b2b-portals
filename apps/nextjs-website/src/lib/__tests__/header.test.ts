@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatHeaderLinks } from '../header';
+import { allSublinksNonEmpty, formatHeaderLinks } from '../header';
 import {
   HeaderData,
   MegaHeaderData,
@@ -88,6 +88,7 @@ const standardHeader: HeaderData = {
                     label: 'label',
                     sectionID: null,
                     page: { data: { attributes: { slug: 'otherpage1' } } },
+                    externalURL: null,
                   },
                 ],
               },
@@ -107,6 +108,7 @@ const standardHeader: HeaderData = {
                     label: 'label',
                     sectionID: null,
                     page: { data: { attributes: { slug: 'homepage' } } },
+                    externalURL: null,
                   },
                 ],
               },
@@ -141,6 +143,7 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
                     label: 'label',
                     sectionID: null,
                     page: { data: { attributes: { slug: '/otherpage1' } } },
+                    externalURL: null,
                   },
                 ],
               },
@@ -160,6 +163,7 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
                     label: 'label',
                     sectionID: null,
                     page: { data: { attributes: { slug: '/' } } },
+                    externalURL: null,
                   },
                 ],
               },
@@ -194,6 +198,7 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
                     label: 'label',
                     sectionID: null,
                     page: { data: { attributes: { slug: '/en/otherpage1' } } },
+                    externalURL: null,
                   },
                 ],
               },
@@ -213,6 +218,7 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
                     label: 'label',
                     sectionID: null,
                     page: { data: { attributes: { slug: '/en/' } } },
+                    externalURL: null,
                   },
                 ],
               },
@@ -242,6 +248,7 @@ const megaHeader: HeaderData = {
                         label: 'sublink1',
                         sectionID: null,
                         page: { data: { attributes: { slug: 'homepage' } } },
+                        externalURL: null,
                       },
                       {
                         label: 'sublink1',
@@ -249,6 +256,7 @@ const megaHeader: HeaderData = {
                         page: {
                           data: { attributes: { slug: 'not-homepage' } },
                         },
+                        externalURL: null,
                       },
                     ],
                   },
@@ -279,6 +287,7 @@ const parsedMegaHeader_DefaultLocale: HeaderData = {
                         label: 'sublink1',
                         sectionID: null,
                         page: { data: { attributes: { slug: '/' } } },
+                        externalURL: null,
                       },
                       {
                         label: 'sublink1',
@@ -286,6 +295,7 @@ const parsedMegaHeader_DefaultLocale: HeaderData = {
                         page: {
                           data: { attributes: { slug: '/not-homepage' } },
                         },
+                        externalURL: null,
                       },
                     ],
                   },
@@ -316,6 +326,7 @@ const parsedMegaHeader_NonDefaultLocale: HeaderData = {
                         label: 'sublink1',
                         sectionID: null,
                         page: { data: { attributes: { slug: '/en/' } } },
+                        externalURL: null,
                       },
                       {
                         label: 'sublink1',
@@ -323,6 +334,44 @@ const parsedMegaHeader_NonDefaultLocale: HeaderData = {
                         page: {
                           data: { attributes: { slug: '/en/not-homepage' } },
                         },
+                        externalURL: null,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    },
+  },
+};
+const megaHeader_MissingSublink: HeaderData = {
+  data: {
+    attributes: {
+      header: [
+        {
+          ...megaHeaderBaseFields,
+          menu: {
+            links: [
+              {
+                label: 'label',
+                sublinkGroups: [
+                  {
+                    title: 'group1',
+                    sublinks: [
+                      {
+                        label: 'sublink1',
+                        sectionID: null,
+                        page: { data: { attributes: { slug: 'homepage' } } },
+                        externalURL: null,
+                      },
+                      {
+                        label: 'sublink1',
+                        sectionID: null,
+                        page: { data: null },
+                        externalURL: null,
                       },
                     ],
                   },
@@ -384,5 +433,23 @@ describe('formatHeaderLinks', () => {
     expect(actual).toStrictEqual(
       parsedMegaHeader_NonDefaultLocale.data.attributes.header[0]
     );
+  });
+});
+
+describe('allSublinksNonEmpty', () => {
+  it('should return false if any sublink has neither a page nor external URL to which to link', () => {
+    const actual = allSublinksNonEmpty(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      megaHeader_MissingSublink.data.attributes.header[0]!
+    );
+    expect(actual).toStrictEqual(false);
+  });
+
+  it('should return true only if all sublinks link to a page or external URL', () => {
+    const actual = allSublinksNonEmpty(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      megaHeader.data.attributes.header[0]!
+    );
+    expect(actual).toStrictEqual(true);
   });
 });
