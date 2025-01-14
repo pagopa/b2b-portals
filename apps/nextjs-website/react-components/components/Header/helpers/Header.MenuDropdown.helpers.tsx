@@ -87,6 +87,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             textDecoration: 'none',
           }}
           href={button.href ? button.href : `#${label}`}
+          target={button.href?.startsWith('https://') ? '_blank' : '_self'}
           onClick={onClick}
         >
           <Typography
@@ -138,6 +139,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
                   padding: 0,
                 }}
                 href={item.href}
+                target={item.href?.startsWith('https://') ? '_blank' : '_self'}
               >
                 {item.label}
               </Link>

@@ -16,7 +16,7 @@ import {
   fetchPageFromID,
   fetchPressReleaseFromID,
 } from './fetch/preview';
-import { formatHeaderLinks } from './header';
+import { allSublinksNonEmpty, formatHeaderLinks } from './header';
 import { getPreFooter, PreFooterAttributes } from './fetch/preFooter';
 import { getPressReleases, PressReleasePage } from './fetch/pressRelease';
 import {
@@ -67,18 +67,24 @@ export const getHeaderProps = async (
   defaultLocale: 'it' | 'en'
 ): Promise<HeaderData['data']['attributes']['header'][0]> => {
   const {
-    data: {
-      attributes: { header },
-    },
+    data: { attributes },
   } = await getHeader({ ...appEnv, locale });
+  const header = attributes.header[0];
 
-  if (header[0] === undefined) {
+  if (header === undefined) {
     // Disable lint for this case because we want the build to fail if user managed to not input a menu
     // eslint-disable-next-line
     throw new Error();
   }
 
-  return formatHeaderLinks(header[0], locale, defaultLocale);
+  // Make sure every sublink points to an internal page or links to an external URL
+  if (!allSublinksNonEmpty(header)) {
+    // Disable lint for this case because we don't currently allow empty links in the header
+    // eslint-disable-next-line
+    throw new Error();
+  }
+
+  return formatHeaderLinks(header, locale, defaultLocale);
 };
 
 export const getFooterProps = async (

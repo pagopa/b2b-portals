@@ -23,11 +23,13 @@ const formatSublink = ({
 }): HeaderSublink => ({
   ...sublink,
   page: {
-    data: {
-      attributes: {
-        slug: formatSlug(page.data.attributes.slug, locale, defaultLocale),
-      },
-    },
+    data: page.data
+      ? {
+          attributes: {
+            slug: formatSlug(page.data.attributes.slug, locale, defaultLocale),
+          },
+        }
+      : null,
   },
 });
 
@@ -83,4 +85,35 @@ export const formatHeaderLinks = (
         },
       };
   }
+};
+
+export const allSublinksNonEmpty = (
+  header: HeaderData['data']['attributes']['header'][0]
+): boolean => {
+  if (header.__component === 'headers.mega-header') {
+    const links = header.menu.links;
+    const sublinkGroups = links.flatMap((link) => link.sublinkGroups);
+    const sublinks = sublinkGroups.flatMap(
+      (sublinkGroup) => sublinkGroup.sublinks
+    );
+    const emptySublink = sublinks.find(
+      (sublink) => !sublink.page.data && !sublink.externalURL
+    );
+
+    if (emptySublink) {
+      return false;
+    }
+  } else {
+    // header.__component === 'headers.standard-header'
+    const links = header.menu.links;
+    const sublinks = links.flatMap((link) => link.sublinks);
+    const emptySublink = sublinks.find(
+      (sublink) => !sublink.page.data && !sublink.externalURL
+    );
+
+    if (emptySublink) {
+      return false;
+    }
+  }
+  return true;
 };

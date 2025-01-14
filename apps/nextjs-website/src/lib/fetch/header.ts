@@ -19,14 +19,11 @@ const HeaderPageCodec = t.strict({
   data: t.union([HeaderPageDataCodec, t.null]),
 });
 
-const HeaderRequiredPageCodec = t.strict({
-  data: HeaderPageDataCodec,
-});
-
 const HeaderSublinkCodec = t.strict({
   label: t.string,
   sectionID: t.union([t.string, t.null]),
-  page: HeaderRequiredPageCodec,
+  page: HeaderPageCodec,
+  externalURL: t.union([t.string, t.null]),
 });
 
 const HeaderSublinkGroupCodec = t.strict({

@@ -214,6 +214,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                   <a
                                     key={itemIndex}
                                     href={item.href}
+                                    target={item.href.startsWith('https://') ? '_blank' : '_self'}
                                     className={`menuSecondaryItem ${
                                       activeItem === item.label ? 'active' : ''
                                     }`}
@@ -273,6 +274,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                       <a
                         key={itemIndex}
                         href={item.href}
+                        target={item.href.startsWith('https://') ? '_blank' : '_self'}
                         className={`mobileMenuSecondaryItem ${
                           activeItem === item.label ? 'active' : ''
                         }`}
