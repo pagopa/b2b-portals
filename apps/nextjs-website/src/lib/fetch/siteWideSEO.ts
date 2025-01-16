@@ -20,6 +20,7 @@ const SiteWideSEOCodec = t.strict({
         shortName: t.string,
       }),
       matomoID: t.union([t.string, t.null]),
+      mixpanelToken: t.union([t.string, t.null]),
       themeVariant: ThemeVariantCodec,
       locales: t.strict({
         it: t.boolean,

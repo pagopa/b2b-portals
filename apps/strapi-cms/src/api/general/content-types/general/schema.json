@@ -59,6 +59,9 @@
       "repeatable": false,
       "component": "shared.locales",
       "required": true
+    },
+    "mixpanelToken": {
+      "type": "string"
     }
   }
 }
