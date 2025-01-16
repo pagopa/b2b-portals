@@ -68,6 +68,7 @@ const siteWideSEOResponse = {
         shortName: 'SEND-PagoPA',
       },
       matomoID: '12',
+      mixpanelToken: null,
       themeVariant: 'SEND',
       locales: {
         it: true,

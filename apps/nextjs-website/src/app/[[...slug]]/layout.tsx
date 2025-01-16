@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
 import Script from 'next/script';
+import mixpanel from 'mixpanel-browser';
 import { theme } from '../theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
@@ -83,7 +84,8 @@ export default async function Layout({
     return null;
   }
 
-  const { locales, matomoID, themeVariant } = await getSiteWideSEO();
+  const { locales, matomoID, mixpanelToken, themeVariant } =
+    await getSiteWideSEO();
   const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
@@ -103,6 +105,12 @@ export default async function Layout({
   const localesArray = Object.keys(locales).filter(
     (locale) => locales[locale as 'it' | 'en']
   );
+
+  if (mixpanelToken) {
+    mixpanel.init(mixpanelToken, {
+      track_pageview: true,
+    });
+  }
 
   return (
     <ThemeProvider theme={theme}>
