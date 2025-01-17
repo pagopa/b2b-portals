@@ -80,20 +80,6 @@ const MegaHeader = (props: MegaHeaderProps) => {
   }, [isMobile]);
 
   useEffect(() => {
-    const handleUrlChange = () => {
-      setMobileMenuOpen(false);
-      setDropdownOpen(null);
-      setActiveItem(null);
-    };
-
-    window.addEventListener('hashchange', handleUrlChange);
-
-    return () => {
-      window.removeEventListener('hashchange', handleUrlChange);
-    };
-  }, []);
-
-  useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
       document.body.style.touchAction = 'none';
