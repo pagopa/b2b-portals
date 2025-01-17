@@ -214,11 +214,18 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                   <a
                                     key={itemIndex}
                                     href={item.href}
-                                    target={item.href.startsWith('https://') ? '_blank' : '_self'}
+                                    target={
+                                      item.href.startsWith('https://')
+                                        ? '_blank'
+                                        : '_self'
+                                    }
                                     className={`menuSecondaryItem ${
                                       activeItem === item.label ? 'active' : ''
                                     }`}
-                                    onClick={() => setActiveItem(item.label)}
+                                    onClick={() => {
+                                      setActiveItem(item.label);
+                                      setDropdownOpen(null);
+                                    }}
                                   >
                                     {item.label}
                                     <ArrowForwardIcon className='arrowIcon' />
@@ -274,11 +281,16 @@ const MegaHeader = (props: MegaHeaderProps) => {
                       <a
                         key={itemIndex}
                         href={item.href}
-                        target={item.href.startsWith('https://') ? '_blank' : '_self'}
+                        target={
+                          item.href.startsWith('https://') ? '_blank' : '_self'
+                        }
                         className={`mobileMenuSecondaryItem ${
                           activeItem === item.label ? 'active' : ''
                         }`}
-                        onClick={() => setActiveItem(item.label)}
+                        onClick={() => {
+                          setActiveItem(item.label);
+                          setMobileMenuOpen(false);
+                        }}
                       >
                         <Typography variant='body2' fontSize={14}>
                           {item.label}
