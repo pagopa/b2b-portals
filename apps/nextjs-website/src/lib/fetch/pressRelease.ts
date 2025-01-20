@@ -5,6 +5,8 @@ import { PressReleaseSectionContentCodec } from './types/PageSection';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
+// TODO: Update all API calls to adapt to Strapi V5
+
 const PressReleasePageCodec = t.strict({
   slug: t.string,
   seo: PageSEOCodec,
@@ -42,6 +44,7 @@ export const getPressReleases = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
       }
     ),

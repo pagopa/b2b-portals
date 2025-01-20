@@ -7,6 +7,8 @@ import { extractFromResponse } from './extractFromResponse';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
+// TODO: Update all API calls to adapt to Strapi V5
+
 const PageIDsCodec = t.strict({
   data: t.array(
     t.strict({
@@ -53,6 +55,7 @@ export const fetchAllPageIDs = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       }
@@ -74,6 +77,7 @@ export const fetchAllPressReleaseIDs = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       }
@@ -107,6 +111,7 @@ export const fetchPageFromID = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       }
@@ -130,6 +135,7 @@ export const fetchPressReleaseFromID = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       }

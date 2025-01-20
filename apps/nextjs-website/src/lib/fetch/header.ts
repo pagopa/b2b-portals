@@ -9,6 +9,8 @@ import { HeaderMUIIconCodec } from './types/icons/HeaderIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
+// TODO: Update all API calls to adapt to Strapi V5
+
 const HeaderPageDataCodec = t.strict({
   attributes: t.strict({
     slug: t.string,
@@ -121,6 +123,7 @@ export const getHeader = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
       }
     ),

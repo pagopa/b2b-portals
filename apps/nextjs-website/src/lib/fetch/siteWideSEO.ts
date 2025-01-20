@@ -4,6 +4,8 @@ import { StrapiImageRequiredSchema } from './types/StrapiImage';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
+// TODO: Update all API calls to adapt to Strapi V5
+
 export const ThemeVariantCodec = t.keyof({
   IO: null,
   SEND: null,
@@ -52,6 +54,7 @@ export const fetchSiteWideSEO = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
       }
     ),

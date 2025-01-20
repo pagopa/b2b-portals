@@ -5,6 +5,8 @@ import { PageSEOCodec } from './types/SEO';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
+// TODO: Update all API calls to adapt to Strapi V5
+
 const NavigationCodec = t.strict({
   data: t.readonlyArray(
     t.strict({
@@ -49,6 +51,7 @@ export const getNavigation = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
       }
     ),

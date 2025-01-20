@@ -4,6 +4,8 @@ import { SocialIconCodec } from './types/icons/SocialIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
+// TODO: Update all API calls to adapt to Strapi V5
+
 // Codec
 const CompanyLinkCodec = t.strict({
   href: t.string,
@@ -64,6 +66,7 @@ export const getFooter = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
       }
     ),

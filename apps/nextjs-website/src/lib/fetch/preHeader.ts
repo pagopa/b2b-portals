@@ -5,6 +5,8 @@ import { MUIButtonIconCodec } from './types/icons/ButtonIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
+// TODO: Update all API calls to adapt to Strapi V5
+
 const PreHeaderButtonCodec = t.strict({
   text: t.string,
   href: t.string,
@@ -44,6 +46,7 @@ export const getPreHeader = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
       }
     ),

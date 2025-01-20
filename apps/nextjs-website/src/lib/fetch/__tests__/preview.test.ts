@@ -114,6 +114,7 @@ describe('fetchAllPageIDs', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       }
@@ -150,6 +151,7 @@ describe('fetchAllPressReleaseIDs', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       }
@@ -201,6 +203,7 @@ describe('fetchPageFromID', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       }
@@ -243,6 +246,7 @@ describe('fetchPressReleaseFromID', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       }

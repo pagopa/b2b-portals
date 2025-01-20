@@ -34,7 +34,7 @@ export default ({ env }: any) => {
   return {
     connection: {
       client,
-      ...(client === 'sqlite' || client === 'postgres') ? connections[client] : {},
+      ...((client === 'sqlite' || client === 'postgres') ? connections[client] : {}),
       acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
     },
   };
