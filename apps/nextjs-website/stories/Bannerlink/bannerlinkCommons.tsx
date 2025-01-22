@@ -7,7 +7,7 @@ export const BannerLinkTemplate: StoryFn<BannerLinkProps> = (args) => (
 );
 
 const generateDefaultProps = (
-  theme: 'light' | 'dark'
+  theme: 'light' | 'dark',
 ): Partial<BannerLinkProps> => ({
   sections: [
     {
@@ -43,7 +43,7 @@ export const defaultPropsLight = generateDefaultProps('light');
 export const defaultPropsDark = generateDefaultProps('dark');
 
 const generateTwoColumnProps = (
-  theme: 'light' | 'dark'
+  theme: 'light' | 'dark',
 ): Partial<BannerLinkProps> => ({
   sections: [
     {

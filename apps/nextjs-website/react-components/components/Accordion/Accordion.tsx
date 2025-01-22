@@ -41,8 +41,8 @@ const Accordion = (props: AccordionProps) => {
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      ? palette.primary.main
+      : palette.custom.primaryColorDark;
 
   return (
     <Box

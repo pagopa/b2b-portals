@@ -8,13 +8,15 @@ const meta: Meta<typeof RowText> = {
 };
 export default meta;
 
-export const RowTextLightLeftLayout: StoryFn<typeof RowText> = RowTextTemplate.bind({});
+export const RowTextLightLeftLayout: StoryFn<typeof RowText> =
+  RowTextTemplate.bind({});
 RowTextLightLeftLayout.args = {
   ...defaultPropsLight,
   layout: 'left',
 };
 
-export const RowTextLightCenterLayout: StoryFn<typeof RowText> = RowTextTemplate.bind({});
+export const RowTextLightCenterLayout: StoryFn<typeof RowText> =
+  RowTextTemplate.bind({});
 RowTextLightCenterLayout.args = {
   ...defaultPropsLight,
   layout: 'center',

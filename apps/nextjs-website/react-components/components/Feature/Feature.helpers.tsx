@@ -21,7 +21,7 @@ const FeatureCarousel = ({
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: activeStep,
-    afterChange: (index: number) => handleStepChange(index),
+    afterChange: (index?: number) => handleStepChange(index),
     rtl: themeComponentDirection === 'rtl',
   };
 

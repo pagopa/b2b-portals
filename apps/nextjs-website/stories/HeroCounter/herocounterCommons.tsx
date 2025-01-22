@@ -14,18 +14,24 @@ const subtitle = `In questa pagina puoi consultare la lista in costante aggiorna
 const createHeroCounterProps = (
   theme: 'dark' | 'light',
   themeVariant: 'IO' | 'SEND',
-  withSubtitle: boolean
+  withSubtitle: boolean,
 ): Partial<HeroCounterProps> => {
   let props: Partial<HeroCounterProps> = {
     theme,
     themeVariant,
     title,
-    ...(withSubtitle && { subtitle: MarkdownRenderer({ markdown: subtitle, locale: 'it', defaultLocale: 'it' }) }),
+    ...(withSubtitle && {
+      subtitle: MarkdownRenderer({
+        markdown: subtitle,
+        locale: 'it',
+        defaultLocale: 'it',
+      }),
+    }),
     ...(theme === 'dark' && {
       background: {
         src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
         srcSet: '',
-      }
+      },
     }),
   };
 
@@ -35,10 +41,10 @@ const createHeroCounterProps = (
 export const defaultsDarkWithoutButtons = createHeroCounterProps(
   'dark',
   'SEND',
-  false
+  false,
 );
 export const defaultsLightWithoutButtons = createHeroCounterProps(
   'light',
   'IO',
-  false
+  false,
 );

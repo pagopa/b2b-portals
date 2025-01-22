@@ -68,7 +68,7 @@ export const getFooter = ({
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
           'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     ),
-    FooterDataCodec
+    FooterDataCodec,
   );

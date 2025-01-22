@@ -17,11 +17,15 @@ export const generateCtaButtons = (count: number): CtaButtonProps[] =>
 
 // Function to generate default props
 const generateDefaultProps = (
-  theme: 'light' | 'dark'
+  theme: 'light' | 'dark',
 ): Partial<EditorialProps> => ({
   theme,
   title: 'Editorial Title',
-  body: <p>Editorial Body with <a href='/'>link</a></p>,
+  body: (
+    <p>
+      Editorial Body with <a href='/'>link</a>
+    </p>
+  ),
   width: 'standard',
   image: (
     <img

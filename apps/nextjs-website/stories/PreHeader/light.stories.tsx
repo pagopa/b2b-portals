@@ -13,7 +13,9 @@ const meta: Meta<typeof PreHeader> = {
 export default meta;
 
 // Define a "Template" function that sets how args map to rendering
-const PreHeaderTemplate: StoryFn<PreHeaderProps> = (args) => <PreHeader {...args} />;
+const PreHeaderTemplate: StoryFn<PreHeaderProps> = (args) => (
+  <PreHeader {...args} />
+);
 
 // Function to generate default CTA button props
 const generateCtaButtonProps = (withIcon: boolean): CtaButtonProps => ({
@@ -22,7 +24,9 @@ const generateCtaButtonProps = (withIcon: boolean): CtaButtonProps => ({
 });
 
 // Function to generate PreHeaderProps
-const generatePreHeaderProps = (withIcon: boolean): Partial<PreHeaderProps> => ({
+const generatePreHeaderProps = (
+  withIcon: boolean,
+): Partial<PreHeaderProps> => ({
   leftCtas: [generateCtaButtonProps(false)],
   rightCtas: [generateCtaButtonProps(withIcon)],
 });
@@ -31,12 +35,14 @@ const generatePreHeaderProps = (withIcon: boolean): Partial<PreHeaderProps> => (
 const defaultProps = generatePreHeaderProps(true);
 const defaultPropsNoIcon = generatePreHeaderProps(false);
 
-export const DefaultPreHeader: StoryFn<typeof PreHeader> = PreHeaderTemplate.bind({});
+export const DefaultPreHeader: StoryFn<typeof PreHeader> =
+  PreHeaderTemplate.bind({});
 DefaultPreHeader.args = {
   ...defaultProps,
 };
 
-export const DefaultPreHeaderNoIcon: StoryFn<typeof PreHeader> = PreHeaderTemplate.bind({});
+export const DefaultPreHeaderNoIcon: StoryFn<typeof PreHeader> =
+  PreHeaderTemplate.bind({});
 DefaultPreHeaderNoIcon.args = {
   ...defaultPropsNoIcon,
 };

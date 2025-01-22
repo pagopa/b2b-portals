@@ -22,7 +22,7 @@ const MarkdownRenderer = ({
       // @ts-expect-error: Temporary workaround until the library offers improved API. See: https://github.com/markedjs/marked/pull/3116
       marked.parse(LocalizeMarkdownLinks({ markdown, locale, defaultLocale }), {
         async: false,
-      })
+      }),
     )}
   </Typography>
 );

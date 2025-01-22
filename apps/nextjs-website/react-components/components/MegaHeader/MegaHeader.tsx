@@ -36,7 +36,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
 
   const handleClick = (
     event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,
-    menu: string
+    menu: string,
   ) => {
     event.preventDefault();
     setDropdownOpen((prev) => (prev === menu ? null : menu));
@@ -232,7 +232,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                   </a>
                                 ))}
                             </Typography>
-                          )
+                          ),
                         )}
                       </div>
                     </div>

@@ -1,6 +1,10 @@
 import { StoryFn, Meta } from '@storybook/react';
 import { HowTo } from '@react-components/components';
-import { HowToTemplate, defaultPropsDarkWithIcon, defaultPropsDarkWithoutIcon } from './howtoCommons';
+import {
+  HowToTemplate,
+  defaultPropsDarkWithIcon,
+  defaultPropsDarkWithoutIcon,
+} from './howtoCommons';
 
 // Define the default export with metadata about your component
 const meta: Meta<typeof HowTo> = {
@@ -14,12 +18,14 @@ DarkHowToFull.args = {
   ...defaultPropsDarkWithIcon,
   link: {
     label: 'Learn More',
-    href: '#'
+    href: '#',
   },
   stepsAlignment: 'center',
 };
 
-export const DarkHowToFullNoLink: StoryFn<typeof HowTo> = HowToTemplate.bind({});
+export const DarkHowToFullNoLink: StoryFn<typeof HowTo> = HowToTemplate.bind(
+  {},
+);
 DarkHowToFullNoLink.args = {
   ...defaultPropsDarkWithIcon,
   stepsAlignment: 'center',
@@ -30,23 +36,27 @@ DarkHowToNoIcons.args = {
   ...defaultPropsDarkWithoutIcon,
   link: {
     label: 'Learn More',
-    href: '#'
+    href: '#',
   },
   stepsAlignment: 'center',
 };
 
-export const DarkHowToNoLinkNoIcons: StoryFn<typeof HowTo> = HowToTemplate.bind({});
+export const DarkHowToNoLinkNoIcons: StoryFn<typeof HowTo> = HowToTemplate.bind(
+  {},
+);
 DarkHowToNoLinkNoIcons.args = {
   ...defaultPropsDarkWithoutIcon,
   stepsAlignment: 'center',
 };
 
-export const DarkHowToFullCenter: StoryFn<typeof HowTo> = HowToTemplate.bind({});
+export const DarkHowToFullCenter: StoryFn<typeof HowTo> = HowToTemplate.bind(
+  {},
+);
 DarkHowToFullCenter.args = {
   ...defaultPropsDarkWithIcon,
   link: {
     label: 'Learn More',
-    href: '#'
+    href: '#',
   },
   stepsAlignment: 'center',
 };
@@ -56,7 +66,7 @@ DarkHowToFullLeft.args = {
   ...defaultPropsDarkWithIcon,
   link: {
     label: 'Learn More',
-    href: '#'
+    href: '#',
   },
   stepsAlignment: 'left',
 };
@@ -66,7 +76,7 @@ DarkHowToFullRight.args = {
   ...defaultPropsDarkWithIcon,
   link: {
     label: 'Learn More',
-    href: '#'
+    href: '#',
   },
   stepsAlignment: 'right',
 };

@@ -76,7 +76,7 @@ LightCardsOnlyTitleWithLinksCenter.args = {
 };
 
 export const LightCardsNoLinksLeft: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {}
+  {},
 );
 LightCardsNoLinksLeft.args = {
   ...defaultPropsLightFour,
@@ -87,7 +87,7 @@ LightCardsNoLinksLeft.args = {
 };
 
 export const LightCardsNoLinksRight: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {}
+  {},
 );
 LightCardsNoLinksRight.args = {
   ...defaultPropsLightFour,

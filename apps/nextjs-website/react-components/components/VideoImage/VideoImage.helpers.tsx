@@ -124,8 +124,8 @@ export const VideoText = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      ? palette.primary.main
+      : palette.custom.primaryColorDark;
 
   return (
     <>
@@ -179,8 +179,8 @@ export const ImageText = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      ? palette.primary.main
+      : palette.custom.primaryColorDark;
 
   return (
     <>

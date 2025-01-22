@@ -95,8 +95,8 @@ const Editorial = (props: EditorialProps) => {
   const containerDirection = isMobile
     ? 'column-reverse'
     : reversed
-      ? 'row-reverse'
-      : 'row';
+    ? 'row-reverse'
+    : 'row';
 
   const gridItemStyles = { ...styles.half };
 

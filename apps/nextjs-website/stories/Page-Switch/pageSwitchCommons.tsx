@@ -8,7 +8,7 @@ export const PageSwitchTemplate: StoryFn<PageSwitchProps> = (args) => (
 
 const generateDefaultProps = (
   theme: 'light' | 'dark',
-  themeVariant: 'IO' | 'SEND'
+  themeVariant: 'IO' | 'SEND',
 ): Partial<PageSwitchProps> => ({
   theme,
   themeVariant,

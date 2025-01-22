@@ -3,9 +3,13 @@ import { VideoImage } from '@react-components/components';
 import { VideoImageProps } from '@react-components/types';
 
 // Define a "Template" function that sets how args map to rendering
-export const VideoImageTemplate: StoryFn<VideoImageProps> = (args) => <VideoImage {...args} />;
+export const VideoImageTemplate: StoryFn<VideoImageProps> = (args) => (
+  <VideoImage {...args} />
+);
 
-const createVideoImageDefaults = (theme: 'dark' | 'light'): VideoImageProps => ({
+const createVideoImageDefaults = (
+  theme: 'dark' | 'light',
+): VideoImageProps => ({
   theme,
   isCentered: false,
   sectionID: null,

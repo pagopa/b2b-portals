@@ -16,7 +16,7 @@ export default {
     try {
       await client.connect();
       await client.query(
-        `CREATE SCHEMA IF NOT EXISTS ${process.env['DATABASE_SCHEMA']};`
+        `CREATE SCHEMA IF NOT EXISTS ${process.env['DATABASE_SCHEMA']};`,
       );
       await client.end();
     } catch {

@@ -1,4 +1,4 @@
-import { SectionProps, Generic } from "../common/Common.types";
+import { SectionProps, Generic } from '../common/Common.types';
 
 export interface HeroChipsProps extends SectionProps {
   readonly background?: {

@@ -46,9 +46,7 @@ const PageSwitch = ({
     return null;
   }
 
-  const [currentPage, setCurrentPage] = useState<PageSwitchPage>(
-    pages[0]
-  );
+  const [currentPage, setCurrentPage] = useState<PageSwitchPage>(pages[0]);
 
   const handleButtonClick = (pageID: number) => {
     const page = pages.find((page) => page.id === pageID);
@@ -58,13 +56,13 @@ const PageSwitch = ({
   };
 
   const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false,
   );
 
   useEffect((): void | VoidFunction => {
     const handleResize = () => {
       setIsMobile(
-        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false,
       );
     };
 
@@ -123,7 +121,7 @@ const PageSwitch = ({
                   themeVariant,
                   page.id,
                   currentPage.id,
-                  palette
+                  palette,
                 )}
                 disableRipple
               >

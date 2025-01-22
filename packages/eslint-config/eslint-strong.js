@@ -4,7 +4,7 @@ module.exports = {
     // Load recommended config
     "./eslint-recommended.js",
     // Load PagoPA eslint config
-    "@pagopa/eslint-config/strong",
+    "@pagopa/eslint-config",
   ],
   overrides: [
     {

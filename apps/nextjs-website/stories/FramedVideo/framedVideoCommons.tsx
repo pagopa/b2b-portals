@@ -8,13 +8,13 @@ export const FramedVideoTemplate: StoryFn<FramedVideoProps> = (args) => (
 );
 
 const createFramedVideoDefaults = (
-  theme: 'dark' | 'light'
+  theme: 'dark' | 'light',
 ): FramedVideoProps => ({
   theme,
   sectionID: null,
   autoplay: false,
   loop: false,
-  themeVariant: 'SEND'
+  themeVariant: 'SEND',
 });
 
 export const defaultsDark = createFramedVideoDefaults('dark');

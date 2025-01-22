@@ -1,4 +1,4 @@
-import { SectionProps } from "../common/Common.types";
+import { SectionProps } from '../common/Common.types';
 
 export interface ServiceCardProps {
   readonly title: string;

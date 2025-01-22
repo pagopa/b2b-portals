@@ -34,7 +34,7 @@ const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
       applicati.
     </p>
   ),
-  themeVariant: 'SEND'
+  themeVariant: 'SEND',
 });
 
 export const FormTemplate: StoryFn<FormProps> = (args) => <Form {...args} />;

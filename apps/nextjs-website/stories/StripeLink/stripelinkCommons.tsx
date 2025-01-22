@@ -9,7 +9,7 @@ export const StripeLinkTemplate: StoryFn<StripeLinkProps> = (args) => (
 
 // Function to generate default props
 const generateDefaultProps = (
-  theme: 'dark' | 'light'
+  theme: 'dark' | 'light',
 ): Partial<StripeLinkProps> => ({
   theme,
   themeVariant: 'SEND',

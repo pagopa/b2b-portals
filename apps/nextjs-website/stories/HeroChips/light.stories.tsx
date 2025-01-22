@@ -8,12 +8,14 @@ const meta: Meta<typeof HeroChips> = {
 };
 export default meta;
 
-export const LightHeroChipsNoSubtitle: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
+export const LightHeroChipsNoSubtitle: StoryFn<typeof HeroChips> =
+  HeroChipsTemplate.bind({});
 LightHeroChipsNoSubtitle.args = {
   ...defaultsLight,
 };
 
-export const LightHeroChipsWithSubtitle: StoryFn<typeof HeroChips> = HeroChipsTemplate.bind({});
+export const LightHeroChipsWithSubtitle: StoryFn<typeof HeroChips> =
+  HeroChipsTemplate.bind({});
 LightHeroChipsWithSubtitle.args = {
   ...defaultsLight,
   subtitle: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`,

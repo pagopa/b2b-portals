@@ -41,7 +41,6 @@ const OneTrustSection = (props: OneTrustSectionProps) => {
       sx={{
         '.otnotice-content': {
           fontFamily: '"Titillium Web",sans-serif',
-          // eslint-disable-next-line sonarjs/no-duplicate-string
           color: 'text.primary',
           paddingTop: '64px',
         },

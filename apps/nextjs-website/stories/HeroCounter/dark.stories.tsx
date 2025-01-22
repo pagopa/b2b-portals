@@ -12,32 +12,38 @@ const meta: Meta<typeof HeroCounter> = {
 };
 export default meta;
 
-export const DarkHeroCounter: StoryFn<typeof HeroCounter> = HeroCounterTemplate.bind(
-  {}
-);
+export const DarkHeroCounter: StoryFn<typeof HeroCounter> =
+  HeroCounterTemplate.bind({});
 DarkHeroCounter.args = {
   ...defaultsDarkWithoutButtons,
   counter: {
     number: 1242,
-    text: 'Enti disponibili'
+    text: 'Enti disponibili',
   },
   title: 'Enti locali',
-  subtitle: MarkdownRenderer({ markdown: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`, locale: 'it', defaultLocale: 'it' }),
+  subtitle: MarkdownRenderer({
+    markdown: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`,
+    locale: 'it',
+    defaultLocale: 'it',
+  }),
   link: {
     label: 'Sto cercando un Ente nazionale',
-    href: '#'
+    href: '#',
   },
 };
 
-export const DarkHeroCounterNoLink: StoryFn<typeof HeroCounter> = HeroCounterTemplate.bind(
-  {}
-);
+export const DarkHeroCounterNoLink: StoryFn<typeof HeroCounter> =
+  HeroCounterTemplate.bind({});
 DarkHeroCounterNoLink.args = {
   ...defaultsDarkWithoutButtons,
   counter: {
     number: 1242,
-    text: 'Enti disponibili'
+    text: 'Enti disponibili',
   },
   title: 'Enti locali',
-  subtitle: MarkdownRenderer({ markdown: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`, locale: 'it', defaultLocale: 'it' }),
+  subtitle: MarkdownRenderer({
+    markdown: `In questa pagina puoi consultare la lista in costante aggiornamento di tutti gli Enti nazionali e locali che sono saliti a bordo di IO, con il dettaglio dei rispettivi servizi già a disposizione dei cittadini.`,
+    locale: 'it',
+    defaultLocale: 'it',
+  }),
 };

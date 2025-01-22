@@ -72,7 +72,7 @@ const AccordionSectionCodec = t.strict({
       itemID: t.union([t.string, t.null]),
       header: t.string,
       content: t.string,
-    })
+    }),
   ),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   layout: t.union([t.literal('left'), t.literal('center')]),
@@ -132,7 +132,7 @@ const BannerLinkSectionCodec = t.strict({
       body: t.string,
       ctaButtons: t.array(CTAButtonSimpleCodec),
       icon: StrapiImageSchema,
-    })
+    }),
   ),
 });
 
@@ -234,7 +234,7 @@ const EditorialSwitchSectionCodec = t.strict({
       id: t.number,
       buttonText: t.string,
       content: EditorialContentCodec,
-    })
+    }),
   ),
 });
 
@@ -329,7 +329,7 @@ const StatsSectionCodec = t.strict({
       title: t.string,
       description: t.union([t.string, t.null]),
       icon: StrapiImageSchema,
-    })
+    }),
   ),
   sectionID: t.union([t.string, t.null]),
 });
@@ -353,7 +353,7 @@ const PageSwitchPageCodec = t.strict({
         EditorialSectionCodec,
         CardsSectionCodec,
         BannerLinkSectionCodec,
-      ])
+      ]),
     ),
   }),
 });

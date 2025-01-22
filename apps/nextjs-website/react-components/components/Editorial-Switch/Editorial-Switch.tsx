@@ -29,7 +29,7 @@ const EditorialSwitch = ({
   }
 
   const [currentSection, setCurrentSection] = useState<EditorialSwitchSection>(
-    sections[0]
+    sections[0],
   );
 
   const handleButtonClick = (sectionID: number) => {
@@ -40,13 +40,13 @@ const EditorialSwitch = ({
   };
 
   const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false,
   );
 
   useEffect((): void | VoidFunction => {
     const handleResize = () => {
       setIsMobile(
-        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false,
       );
     };
 
@@ -105,7 +105,7 @@ const EditorialSwitch = ({
                   themeVariant,
                   section.id,
                   currentSection.id,
-                  palette
+                  palette,
                 )}
                 disableRipple
               >
