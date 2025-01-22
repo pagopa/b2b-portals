@@ -18,7 +18,7 @@ const PressReleasesCodec = t.strict({
     t.strict({
       id: t.number,
       attributes: PressReleasePageCodec,
-    }),
+    })
   ),
 });
 
@@ -46,7 +46,7 @@ export const getPressReleases = ({
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
           'Strapi-Response-Format': 'v4',
         },
-      },
+      }
     ),
-    PressReleasesCodec,
+    PressReleasesCodec
   );

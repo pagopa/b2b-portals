@@ -39,7 +39,7 @@ export const FooterColumn = ({
                   <EIcon icon={icon} color='text.primary' {...rest} />
                 </Link>
               </li>
-            ),
+            )
         )}
       </Stack>
     )}

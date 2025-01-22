@@ -25,7 +25,7 @@ const createHeroProps = (
   theme: 'dark' | 'light',
   themeVariant: 'IO' | 'SEND',
   withButtons: boolean,
-  withSubtitle: boolean,
+  withSubtitle: boolean
 ): Partial<HeroProps> => {
   let props: Partial<HeroProps> = {
     theme,
@@ -54,35 +54,35 @@ export const defaultsDarkWithButtons = createHeroProps(
   'dark',
   'SEND',
   true,
-  true,
+  true
 );
 export const defaultsDarkWithoutButtons = createHeroProps(
   'dark',
   'SEND',
   false,
-  true,
+  true
 );
 export const defaultsDarkWithoutButtonsNoSubtitle = createHeroProps(
   'dark',
   'SEND',
   false,
-  false,
+  false
 );
 export const defaultsLightWithButtons = createHeroProps(
   'light',
   'SEND',
   true,
-  true,
+  true
 );
 export const defaultsLightWithoutButtons = createHeroProps(
   'light',
   'SEND',
   false,
-  true,
+  true
 );
 export const defaultsLightWithoutButtonsNoSubtitle = createHeroProps(
   'light',
   'SEND',
   false,
-  false,
+  false
 );

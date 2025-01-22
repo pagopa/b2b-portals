@@ -146,7 +146,7 @@ const Form = ({
             ...(showSurname && { surname: formData.surname }),
             ...(showOrganization && { organization: formData.organization }),
           }),
-        },
+        }
       );
 
       const { email } = await res.json();

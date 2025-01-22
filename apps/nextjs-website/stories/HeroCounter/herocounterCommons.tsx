@@ -14,7 +14,7 @@ const subtitle = `In questa pagina puoi consultare la lista in costante aggiorna
 const createHeroCounterProps = (
   theme: 'dark' | 'light',
   themeVariant: 'IO' | 'SEND',
-  withSubtitle: boolean,
+  withSubtitle: boolean
 ): Partial<HeroCounterProps> => {
   let props: Partial<HeroCounterProps> = {
     theme,
@@ -41,10 +41,10 @@ const createHeroCounterProps = (
 export const defaultsDarkWithoutButtons = createHeroCounterProps(
   'dark',
   'SEND',
-  false,
+  false
 );
 export const defaultsLightWithoutButtons = createHeroCounterProps(
   'light',
   'IO',
-  false,
+  false
 );

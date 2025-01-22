@@ -9,7 +9,7 @@ import { DialogBubble } from './Header.DialogBubble.helpers';
 
 const useStyles = (
   { active, alignRight }: MenuDropdownProp,
-  { spacing }: Theme,
+  { spacing }: Theme
 ) => {
   const muiTheme = useTheme();
 

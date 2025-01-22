@@ -22,7 +22,7 @@ LightHeroBig.args = {
 };
 
 export const LightHeroBigStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 LightHeroBigStoreButtons.args = {
   ...defaultsLightWithoutButtons,
@@ -51,7 +51,7 @@ LightHeroBigStoreButtonsWithLink.args = {
 };
 
 export const LightHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 LightHeroBigNoButtons.args = {
   ...defaultsLightWithoutButtons,
@@ -126,7 +126,7 @@ LightHeroMediumStoreButtonsWithLink.args = {
 };
 
 export const LightHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 LightHeroMediumNoButtons.args = {
   ...defaultsLightWithoutButtons,
@@ -135,7 +135,7 @@ LightHeroMediumNoButtons.args = {
 };
 
 export const LightHeroMediumInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 LightHeroMediumInverted.args = {
   ...defaultsLightWithButtons,
@@ -187,7 +187,7 @@ LightHeroSmall.args = {
 };
 
 export const LightHeroSmallNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 LightHeroSmallNoButtons.args = {
   ...defaultsLightWithoutButtons,
@@ -196,7 +196,7 @@ LightHeroSmallNoButtons.args = {
 };
 
 export const LightHeroSmallNoSubtitle: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 LightHeroSmallNoSubtitle.args = {
   ...defaultsLightWithoutButtonsNoSubtitle,

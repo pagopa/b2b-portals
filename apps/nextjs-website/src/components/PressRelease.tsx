@@ -19,7 +19,7 @@ const makeTextSectionProps = ({
 });
 
 const PressRelease = (
-  props: PressReleaseSection & Omit<SiteWidePageData, 'themeVariant'>,
+  props: PressReleaseSection & Omit<SiteWidePageData, 'themeVariant'>
 ) => <PressReleaseRC {...makeTextSectionProps(props)} />;
 
 export default PressRelease;

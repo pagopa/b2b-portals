@@ -12,7 +12,7 @@ import { LocalizeURL } from '@/lib/linkLocalization';
 // (since editorial-components does not accept 'naked' variant)
 const makeCtas = (
   ctaButtons: PreHeaderAttributes['leftCtas'],
-  { themeVariant, locale, defaultLocale }: SiteWidePageData,
+  { themeVariant, locale, defaultLocale }: SiteWidePageData
 ): CtaButtonProps[] =>
   ctaButtons.map(({ href, ...ctaButton }) => ({
     ...ctaButton,

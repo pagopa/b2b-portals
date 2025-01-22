@@ -10,7 +10,7 @@ const meta: Meta<typeof VideoImage> = {
 export default meta;
 
 export const VideoFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
-  {},
+  {}
 );
 VideoFull.args = {
   ...defaultsDark,
@@ -119,7 +119,7 @@ VideoFullNoTitleNoSubtitleWithCaption.args = {
 };
 
 export const ImageFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
-  {},
+  {}
 );
 ImageFull.args = {
   ...defaultsDark,

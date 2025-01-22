@@ -31,7 +31,7 @@ import { PressReleasePage } from '@/lib/fetch/pressRelease';
 // eslint-disable-next-line complexity
 const PageSection = (
   props: PageSectionData &
-    SiteWidePageData & { pressReleasePages: ReadonlyArray<PressReleasePage> },
+    SiteWidePageData & { pressReleasePages: ReadonlyArray<PressReleasePage> }
 ) => {
   // eslint-disable-next-line no-underscore-dangle
   switch (props.__component) {

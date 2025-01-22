@@ -21,7 +21,7 @@ export const ArrowIcon = ({ color = 'none' }: { color?: string }) => (
 
 export const groupStepsByRows = (
   steps: ReadonlyArray<Step>,
-  rowMaxSteps: number,
+  rowMaxSteps: number
 ): Step[][] => {
   const numSteps = steps.length;
   return new Array(Math.ceil(numSteps / rowMaxSteps))

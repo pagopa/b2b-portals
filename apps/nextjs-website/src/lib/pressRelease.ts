@@ -3,7 +3,7 @@ import { PreviewPageData, PreviewPressReleaseData } from './fetch/preview';
 import { PageData } from './navigation';
 
 export const pressReleaseToPageDataArray = (
-  pressRelease: PressReleases,
+  pressRelease: PressReleases
 ): ReadonlyArray<PageData> =>
   pressRelease.data.map((item) => ({
     slug: ['press-releases', item.attributes.slug],
@@ -17,7 +17,7 @@ export const pressReleaseToPageDataArray = (
   }));
 
 export const previewPressReleaseToPreviewPageData = (
-  pressRelease: PreviewPressReleaseData,
+  pressRelease: PreviewPressReleaseData
 ): PreviewPageData => ({
   data: {
     attributes: {

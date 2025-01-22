@@ -58,7 +58,7 @@ export const getPreFooter = ({
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
           'Strapi-Response-Format': 'v4',
         },
-      },
+      }
     ),
-    PreFooterDataCodec,
+    PreFooterDataCodec
   );

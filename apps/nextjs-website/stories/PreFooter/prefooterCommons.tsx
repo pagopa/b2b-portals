@@ -10,7 +10,7 @@ export const PreFooterTemplate: StoryFn<PreFooterProps> = (args) => (
 // Function to generate default props with a given theme
 const generateDefaultProps = (
   theme: 'light' | 'dark',
-  layout: 'left' | 'center' = 'left',
+  layout: 'left' | 'center' = 'left'
 ): Partial<PreFooterProps> => ({
   title: 'This is the Title',
   theme,

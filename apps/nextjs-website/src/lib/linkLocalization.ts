@@ -81,13 +81,13 @@ export const LocalizeMarkdownLinks = ({
     links.map((link) => [
       `(${link.URL})`, // Enclose key inside parenthesis to isolate full markdown links
       `(${link.localizedURL})`,
-    ]),
+    ])
   );
   const urlsRegex = new RegExp(
     Object.keys(urlsMap)
       .map((key) => key.replace('(', '\\(').replace(')', '\\)')) // Escape parenthesis for regex
       .join('|'),
-    'gi',
+    'gi'
   );
 
   return markdown.replace(urlsRegex, (matched) => urlsMap[matched] ?? matched);

@@ -14,14 +14,14 @@ const meta: Meta<typeof Feature> = {
 export default meta;
 
 export const DarkFeatureFull: StoryFn<typeof Feature> = FeatureTemplate.bind(
-  {},
+  {}
 );
 DarkFeatureFull.args = {
   ...defaultPropsDarkWithLinks,
 };
 
 export const DarkFeatureNoLinks: StoryFn<typeof Feature> = FeatureTemplate.bind(
-  {},
+  {}
 );
 DarkFeatureNoLinks.args = {
   ...defaultPropsDarkWithoutLinks,

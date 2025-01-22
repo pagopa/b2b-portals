@@ -395,10 +395,10 @@ describe('formatHeaderLinks', () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       standardHeader.data.attributes.header[0]!,
       locale_it,
-      defaultLocale,
+      defaultLocale
     );
     expect(actual).toStrictEqual(
-      parsedStandardHeader_DefaultLocale.data.attributes.header[0],
+      parsedStandardHeader_DefaultLocale.data.attributes.header[0]
     );
   });
   it('should replace the "homepage" slug with "/" in all levels of the mega menu, while not prepending the default locale', () => {
@@ -406,10 +406,10 @@ describe('formatHeaderLinks', () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       megaHeader.data.attributes.header[0]!,
       locale_it,
-      defaultLocale,
+      defaultLocale
     );
     expect(actual).toStrictEqual(
-      parsedMegaHeader_DefaultLocale.data.attributes.header[0],
+      parsedMegaHeader_DefaultLocale.data.attributes.header[0]
     );
   });
   it('should replace the "homepage" slug with "/" in all levels of the standard menu, while prepending all non-default locales', () => {
@@ -417,10 +417,10 @@ describe('formatHeaderLinks', () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       standardHeader.data.attributes.header[0]!,
       locale_en,
-      defaultLocale,
+      defaultLocale
     );
     expect(actual).toStrictEqual(
-      parsedStandardHeader_NonDefaultLocale.data.attributes.header[0],
+      parsedStandardHeader_NonDefaultLocale.data.attributes.header[0]
     );
   });
   it('should replace the "homepage" slug with "/" in all levels of the mega menu, while prepending all non-default locales', () => {
@@ -428,10 +428,10 @@ describe('formatHeaderLinks', () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       megaHeader.data.attributes.header[0]!,
       locale_en,
-      defaultLocale,
+      defaultLocale
     );
     expect(actual).toStrictEqual(
-      parsedMegaHeader_NonDefaultLocale.data.attributes.header[0],
+      parsedMegaHeader_NonDefaultLocale.data.attributes.header[0]
     );
   });
 });
@@ -440,7 +440,7 @@ describe('allSublinksNonEmpty', () => {
   it('should return false if any sublink has neither a page nor external URL to which to link', () => {
     const actual = allSublinksNonEmpty(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      megaHeader_MissingSublink.data.attributes.header[0]!,
+      megaHeader_MissingSublink.data.attributes.header[0]!
     );
     expect(actual).toStrictEqual(false);
   });
@@ -448,7 +448,7 @@ describe('allSublinksNonEmpty', () => {
   it('should return true only if all sublinks link to a page or external URL', () => {
     const actual = allSublinksNonEmpty(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      megaHeader.data.attributes.header[0]!,
+      megaHeader.data.attributes.header[0]!
     );
     expect(actual).toStrictEqual(true);
   });

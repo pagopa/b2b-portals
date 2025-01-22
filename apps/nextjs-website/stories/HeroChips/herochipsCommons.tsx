@@ -13,7 +13,7 @@ const subtitle = `In questa pagina puoi consultare la lista in costante aggiorna
 const createHeroChipsProps = (
   theme: 'dark' | 'light',
   themeVariant: 'IO' | 'SEND',
-  withSubtitle: boolean,
+  withSubtitle: boolean
 ): Partial<HeroChipsProps> => {
   let props: Partial<HeroChipsProps> = {
     theme,

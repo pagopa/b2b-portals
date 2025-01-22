@@ -157,7 +157,7 @@ const BannerLink = ({
                           sx: {
                             width: 'auto',
                           },
-                        }),
+                        })
                       ),
                       theme,
                       themeVariant,

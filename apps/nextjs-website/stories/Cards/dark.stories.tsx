@@ -76,7 +76,7 @@ DarkCardsOnlyTitleWithLinksCenter.args = {
 };
 
 export const DarkCardsNoLinksLeft: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {},
+  {}
 );
 DarkCardsNoLinksLeft.args = {
   ...defaultPropsDarkFour,
@@ -87,7 +87,7 @@ DarkCardsNoLinksLeft.args = {
 };
 
 export const DarkCardsNoLinksRight: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {},
+  {}
 );
 DarkCardsNoLinksRight.args = {
   ...defaultPropsDarkFour,
@@ -98,7 +98,7 @@ DarkCardsNoLinksRight.args = {
 };
 
 export const DarkCardsNoLinksCenter: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {},
+  {}
 );
 DarkCardsNoLinksCenter.args = {
   ...defaultPropsDarkFour,
@@ -109,7 +109,7 @@ DarkCardsNoLinksCenter.args = {
 };
 
 export const DarkCardsWithLinksLeft: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {},
+  {}
 );
 DarkCardsWithLinksLeft.args = {
   ...defaultPropsDarkFourWithLinks,

@@ -24,7 +24,7 @@ DarkHowToFull.args = {
 };
 
 export const DarkHowToFullNoLink: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {},
+  {}
 );
 DarkHowToFullNoLink.args = {
   ...defaultPropsDarkWithIcon,
@@ -42,7 +42,7 @@ DarkHowToNoIcons.args = {
 };
 
 export const DarkHowToNoLinkNoIcons: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {},
+  {}
 );
 DarkHowToNoLinkNoIcons.args = {
   ...defaultPropsDarkWithoutIcon,
@@ -50,7 +50,7 @@ DarkHowToNoLinkNoIcons.args = {
 };
 
 export const DarkHowToFullCenter: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {},
+  {}
 );
 DarkHowToFullCenter.args = {
   ...defaultPropsDarkWithIcon,

@@ -156,7 +156,7 @@ const Page = async ({ params }: PageParams) => {
           locale,
           defaultLocale,
           pressReleasePages,
-        }),
+        })
       )}
     </main>
   );

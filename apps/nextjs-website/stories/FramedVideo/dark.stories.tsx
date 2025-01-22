@@ -56,7 +56,7 @@ VideoFullScreen.args = {
 };
 
 export const NoVideo: StoryFn<typeof FramedVideo> = FramedVideoTemplate.bind(
-  {},
+  {}
 );
 NoVideo.args = {
   ...defaultsDark,

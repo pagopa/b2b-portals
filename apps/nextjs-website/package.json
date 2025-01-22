@@ -3,14 +3,14 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "build-storybook": "storybook build",
     "compile": "tsc --noEmit",
-    "test": "vitest --coverage",
+    "dev": "next dev",
     "lint": "next lint",
+    "start": "next start",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "test": "vitest --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

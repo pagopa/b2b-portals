@@ -29,7 +29,7 @@ const makeHighlightBoxProps = ({
 });
 
 const HighlightBoxComponent = (
-  props: HighlightBoxSection & SiteWidePageData,
+  props: HighlightBoxSection & SiteWidePageData
 ) => <HighlightBoxRC {...makeHighlightBoxProps(props)} />;
 
 export default HighlightBoxComponent;

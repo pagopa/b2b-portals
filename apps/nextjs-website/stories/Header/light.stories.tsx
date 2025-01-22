@@ -47,7 +47,7 @@ const defaultProps: HeaderProps = {
 };
 
 export const HeaderFullWithLogo: StoryFn<typeof Header> = HeaderTemplate.bind(
-  {},
+  {}
 );
 HeaderFullWithLogo.args = {
   ...defaultProps,

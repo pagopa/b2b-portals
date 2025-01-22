@@ -13,7 +13,7 @@ const PageIDsCodec = t.strict({
   data: t.array(
     t.strict({
       id: t.number,
-    }),
+    })
   ),
 });
 
@@ -58,9 +58,9 @@ export const fetchAllPageIDs = ({
           'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
-      },
+      }
     ),
-    PageIDsCodec,
+    PageIDsCodec
   );
 
 export const fetchAllPressReleaseIDs = ({
@@ -80,9 +80,9 @@ export const fetchAllPressReleaseIDs = ({
           'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
-      },
+      }
     ),
-    PageIDsCodec,
+    PageIDsCodec
   );
 
 export const fetchPageFromID = ({
@@ -114,9 +114,9 @@ export const fetchPageFromID = ({
           'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
-      },
+      }
     ),
-    PreviewPageDataCodec,
+    PreviewPageDataCodec
   );
 
 export const fetchPressReleaseFromID = ({
@@ -138,7 +138,7 @@ export const fetchPressReleaseFromID = ({
           'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
-      },
+      }
     ),
-    PreviewPressReleaseDataCodec,
+    PreviewPressReleaseDataCodec
   );

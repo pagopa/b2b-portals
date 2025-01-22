@@ -10,7 +10,7 @@ export const AccordionTemplate: StoryFn<AccordionProps> = (args) => (
 
 // Function to generate accordion items with a given theme
 const generateAccordionItems = (
-  theme: 'light' | 'dark',
+  theme: 'light' | 'dark'
 ): AccordionItemProps[] => [
   {
     header: 'Accordion Item 1',

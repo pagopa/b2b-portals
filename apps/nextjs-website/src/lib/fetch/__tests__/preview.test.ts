@@ -117,7 +117,7 @@ describe('fetchAllPageIDs', () => {
           'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
-      },
+      }
     );
   });
 
@@ -154,7 +154,7 @@ describe('fetchAllPressReleaseIDs', () => {
           'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
-      },
+      }
     );
   });
 
@@ -206,7 +206,7 @@ describe('fetchPageFromID', () => {
           'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
-      },
+      }
     );
   });
 
@@ -249,7 +249,7 @@ describe('fetchPressReleaseFromID', () => {
           'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
-      },
+      }
     );
   });
 

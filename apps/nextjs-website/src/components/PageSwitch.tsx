@@ -12,7 +12,7 @@ import { PageSwitchContent } from '@react-components/types/Page-Switch/Page-Swit
 
 const makePageSwitchPageSections = (
   sections: PageSwitchSection['pages']['data'][0]['attributes']['sections'],
-  siteWidePageData: SiteWidePageData,
+  siteWidePageData: SiteWidePageData
 ): PageSwitchContent[] =>
   sections.map((section) => {
     // eslint-disable-next-line no-underscore-dangle

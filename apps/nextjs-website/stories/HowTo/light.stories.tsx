@@ -24,7 +24,7 @@ LightHowToFull.args = {
 };
 
 export const LightHowToFullNoLink: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {},
+  {}
 );
 LightHowToFullNoLink.args = {
   ...defaultPropsLightWithIcon,
@@ -49,7 +49,7 @@ LightHowToNoLinkNoIcons.args = {
 };
 
 export const LightHowToFullCenter: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {},
+  {}
 );
 LightHowToFullCenter.args = {
   ...defaultPropsLightWithIcon,
@@ -71,7 +71,7 @@ LightHowToFullLeft.args = {
 };
 
 export const LightHowToFullRight: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {},
+  {}
 );
 LightHowToFullRight.args = {
   ...defaultPropsLightWithIcon,

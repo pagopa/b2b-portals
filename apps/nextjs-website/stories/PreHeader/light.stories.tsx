@@ -25,7 +25,7 @@ const generateCtaButtonProps = (withIcon: boolean): CtaButtonProps => ({
 
 // Function to generate PreHeaderProps
 const generatePreHeaderProps = (
-  withIcon: boolean,
+  withIcon: boolean
 ): Partial<PreHeaderProps> => ({
   leftCtas: [generateCtaButtonProps(false)],
   rightCtas: [generateCtaButtonProps(withIcon)],

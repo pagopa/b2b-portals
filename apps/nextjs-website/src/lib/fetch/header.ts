@@ -41,7 +41,7 @@ const MenuCodec = t.strict({
       page: HeaderPageCodec,
       sectionID: t.union([t.string, t.null]),
       sublinks: t.array(HeaderSublinkCodec),
-    }),
+    })
   ),
 });
 
@@ -50,7 +50,7 @@ const MegaMenuCodec = t.strict({
     t.strict({
       label: t.string,
       sublinkGroups: t.array(HeaderSublinkGroupCodec),
-    }),
+    })
   ),
 });
 
@@ -125,7 +125,7 @@ export const getHeader = ({
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
           'Strapi-Response-Format': 'v4',
         },
-      },
+      }
     ),
-    HeaderDataCodec,
+    HeaderDataCodec
   );

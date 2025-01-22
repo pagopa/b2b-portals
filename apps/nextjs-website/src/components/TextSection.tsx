@@ -33,7 +33,7 @@ const makeTextSectionProps = ({
 });
 
 const TextSection = (
-  props: TextSectionSection & Omit<SiteWidePageData, 'themeVariant'>,
+  props: TextSectionSection & Omit<SiteWidePageData, 'themeVariant'>
 ) => <TextSectionRC {...makeTextSectionProps(props)} />;
 
 export default TextSection;

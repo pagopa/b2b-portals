@@ -22,7 +22,7 @@ DarkHeroBig.args = {
 };
 
 export const DarkHeroBigStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 DarkHeroBigStoreButtons.args = {
   ...defaultsDarkWithoutButtons,
@@ -136,7 +136,7 @@ DarkHeroMediumStoreButtonsWithLink.args = {
 };
 
 export const DarkHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 DarkHeroMediumNoButtons.args = {
   ...defaultsDarkWithoutButtons,
@@ -145,7 +145,7 @@ DarkHeroMediumNoButtons.args = {
 };
 
 export const DarkHeroMediumInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 DarkHeroMediumInverted.args = {
   ...defaultsDarkWithButtons,
@@ -197,7 +197,7 @@ DarkHeroSmall.args = {
 };
 
 export const DarkHeroSmallNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 DarkHeroSmallNoButtons.args = {
   ...defaultsDarkWithoutButtons,
@@ -206,7 +206,7 @@ DarkHeroSmallNoButtons.args = {
 };
 
 export const DarkHeroSmallNoSubtitle: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {},
+  {}
 );
 DarkHeroSmallNoSubtitle.args = {
   ...defaultsDarkWithoutButtonsNoSubtitle,

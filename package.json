@@ -19,6 +19,5 @@
     "@changesets/cli": "^2.26.2",
     "husky": "^8.0.3",
     "turbo": "^1.10.13"
-  },
-  "packageManager": "yarn@1.22.22"
+  }
 }

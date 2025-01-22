@@ -16,7 +16,7 @@ const NavigationCodec = t.strict({
         seo: PageSEOCodec,
         sections: t.array(PageSectionCodec),
       }),
-    }),
+    })
   ),
 });
 
@@ -53,7 +53,7 @@ export const getNavigation = ({
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
           'Strapi-Response-Format': 'v4',
         },
-      },
+      }
     ),
-    NavigationCodec,
+    NavigationCodec
   );

@@ -25,7 +25,7 @@ const Header = ({
   const backgroundColor = BackgroundColor(theme);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
-    null,
+    null
   );
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));

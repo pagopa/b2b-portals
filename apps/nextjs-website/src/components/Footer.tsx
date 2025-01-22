@@ -64,7 +64,7 @@ const makeFooterProps = ({
           'aria-label': ariaLabel,
           // above conversion is needed because social icons just pass through all props other than icon
           // this means we need to format them as if they were HTML attributes
-        }),
+        })
       ),
     },
   },
@@ -93,7 +93,7 @@ const Footer = (
   props: FooterData['data']['attributes'] & {
     locales: Array<'it' | 'en'>;
     defaultLocale: 'it' | 'en';
-  },
+  }
 ) => {
   const pathname = usePathname();
   const activeLocale = pathname.slice(1, 3) as 'it' | 'en';

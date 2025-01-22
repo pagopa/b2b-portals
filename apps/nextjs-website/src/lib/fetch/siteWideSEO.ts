@@ -56,7 +56,7 @@ export const fetchSiteWideSEO = ({
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
           'Strapi-Response-Format': 'v4',
         },
-      },
+      }
     ),
-    SiteWideSEOCodec,
+    SiteWideSEOCodec
   );

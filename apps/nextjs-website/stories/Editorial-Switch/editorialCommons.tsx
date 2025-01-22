@@ -5,7 +5,7 @@ import { CtaButtonProps } from '@react-components/types/common/Common.types';
 
 // Define a 'Template' function that sets how args map to rendering
 export const EditorialSwitchTemplate: StoryFn<EditorialSwitchProps> = (
-  args,
+  args
 ) => <EditorialSwitch {...args} />;
 
 // Function to generate CTA buttons
@@ -17,7 +17,7 @@ export const generateCtaButtons = (count: number): CtaButtonProps[] =>
 
 // Function to generate default props
 const generateDefaultProps = (
-  theme: 'light' | 'dark',
+  theme: 'light' | 'dark'
 ): Partial<EditorialSwitchProps> => ({
   theme,
   title: 'Top Title',

@@ -14,7 +14,7 @@ const meta: Meta<typeof Feature> = {
 export default meta;
 
 export const LightFeatureFull: StoryFn<typeof Feature> = FeatureTemplate.bind(
-  {},
+  {}
 );
 LightFeatureFull.args = {
   ...defaultPropsLightWithLinks,

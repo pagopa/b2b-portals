@@ -35,12 +35,12 @@ export type AppEnv = {
 
 // given env produce an AppEnv
 export const makeAppEnv = (
-  env: Record<string, undefined | string>,
+  env: Record<string, undefined | string>
 ): E.Either<string, AppEnv> =>
   pipe(
     ConfigCodec.decode(env),
     E.bimap(
       (errors) => PR.failure(errors).join('\n'),
-      (config) => ({ config, fetchFun: fetch }),
-    ),
+      (config) => ({ config, fetchFun: fetch })
+    )
   );

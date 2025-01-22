@@ -75,7 +75,7 @@ const PreviewPage = async ({
           locale,
           defaultLocale: locale, // Doesn't matter in preview
           pressReleasePages,
-        }),
+        })
       )}
     </div>
   );
