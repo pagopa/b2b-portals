@@ -1,5 +1,5 @@
-import { ThemeVariant } from "@/lib/fetch/siteWideSEO";
-import { SectionProps } from "../common/Common.types";
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { SectionProps } from '../common/Common.types';
 
 export interface PressReleasePreviewProps {
   date: string;
@@ -9,9 +9,11 @@ export interface PressReleasePreviewProps {
     href: string;
   };
   themeVariant: ThemeVariant;
+  locale: string;
 }
 
 export interface PressReleaseListProps extends Omit<SectionProps, 'theme'> {
   title: string;
   pressReleases: PressReleasePreviewProps[];
+  locale: string;
 }
