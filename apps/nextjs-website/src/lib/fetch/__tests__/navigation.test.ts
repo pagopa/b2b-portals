@@ -91,7 +91,7 @@ describe('getNavigation', () => {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
           'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     );
   });
   it('should parse navigation without error', async () => {

@@ -48,7 +48,7 @@ export const getPreHeader = ({
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
           'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     ),
-    PreHeaderCodec
+    PreHeaderCodec,
   );

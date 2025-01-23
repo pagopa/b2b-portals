@@ -13,7 +13,7 @@ import {
 } from '@/lib/fetch/header';
 
 const makeSublink = (
-  sublink: HeaderSublink
+  sublink: HeaderSublink,
 ): {
   label: string;
   href: string;
@@ -27,7 +27,7 @@ const makeSublink = (
 
 const makeHeaderProps = (
   { productName, menu, logo, beta, supportLink, drawer }: StandardHeaderData,
-  pathname: string
+  pathname: string,
 ): HeaderProps => ({
   beta,
   ...(drawer && {

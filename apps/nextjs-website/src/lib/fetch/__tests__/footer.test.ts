@@ -119,7 +119,7 @@ describe('getFooter', () => {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
           'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     );
   });
 

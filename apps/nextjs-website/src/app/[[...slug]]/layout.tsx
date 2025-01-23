@@ -103,7 +103,7 @@ export default async function Layout({
   const footerProps = await getFooterProps(locale);
   const preFooterProps = await getPreFooterProps(locale);
   const localesArray = Object.keys(locales).filter(
-    (locale) => locales[locale as 'it' | 'en']
+    (locale) => locales[locale as 'it' | 'en'],
   );
 
   if (mixpanelToken) {
