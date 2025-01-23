@@ -1,8 +1,8 @@
 {
-  "root": true,
-  "extends": [
-    "custom/eslint-recommended",
-    "custom/eslint-nextjs",
-    "plugin:storybook/recommended"
-  ]
-}
+    "root": true,
+    "extends": [
+      "custom/eslint-recommended",
+      "custom/eslint-nextjs",
+      "plugin:storybook/recommended"
+    ]
+  }
