@@ -5,8 +5,6 @@ import { PressReleaseSectionContentCodec } from './types/PageSection';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
-// TODO: Update all API calls to adapt to Strapi V5
-
 const PressReleasePageCodec = t.strict({
   slug: t.string,
   seo: PageSEOCodec,
@@ -37,8 +35,8 @@ export const getPressReleases = ({
       `${
         extractTenantStrapiApiData(config).baseUrl
       }/api/press-releases?locale=${locale}&pagination[pageSize]=100
-        &populate[seo][populate][0]=metaTitle
-        &populate[pressRelease]=*
+&populate[0]=seo
+&populate[1]=pressRelease
         `,
       {
         method: 'GET',

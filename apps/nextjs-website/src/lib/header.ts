@@ -4,7 +4,7 @@ import { HeaderData, HeaderSublink } from './fetch/header';
 const formatSlug = (
   slug: string,
   locale: 'it' | 'en',
-  defaultLocale: 'it' | 'en'
+  defaultLocale: 'it' | 'en',
 ): string => {
   const localeString = locale === defaultLocale ? '' : `/${locale}`;
   const slugString = slug === 'homepage' ? '/' : `/${slug}`;
@@ -39,7 +39,7 @@ const formatSublink = ({
 export const formatHeaderLinks = (
   header: HeaderData['data']['attributes']['header'][0],
   locale: 'it' | 'en',
-  defaultLocale: 'it' | 'en'
+  defaultLocale: 'it' | 'en',
 ): HeaderData['data']['attributes']['header'][0] => {
   switch (header.__component) {
     case 'headers.standard-header':
@@ -55,14 +55,14 @@ export const formatHeaderLinks = (
                       slug: formatSlug(
                         page.data.attributes.slug,
                         locale,
-                        defaultLocale
+                        defaultLocale,
                       ),
                     },
                   }
                 : null,
             },
             sublinks: sublinks.map((sublink) =>
-              formatSublink({ locale, defaultLocale, ...sublink })
+              formatSublink({ locale, defaultLocale, ...sublink }),
             ),
           })),
         },
@@ -77,9 +77,9 @@ export const formatHeaderLinks = (
               ({ sublinks, ...sublinkGroup }) => ({
                 ...sublinkGroup,
                 sublinks: sublinks.map((sublink) =>
-                  formatSublink({ locale, defaultLocale, ...sublink })
+                  formatSublink({ locale, defaultLocale, ...sublink }),
                 ),
-              })
+              }),
             ),
           })),
         },
@@ -88,16 +88,16 @@ export const formatHeaderLinks = (
 };
 
 export const allSublinksNonEmpty = (
-  header: HeaderData['data']['attributes']['header'][0]
+  header: HeaderData['data']['attributes']['header'][0],
 ): boolean => {
   if (header.__component === 'headers.mega-header') {
     const links = header.menu.links;
     const sublinkGroups = links.flatMap((link) => link.sublinkGroups);
     const sublinks = sublinkGroups.flatMap(
-      (sublinkGroup) => sublinkGroup.sublinks
+      (sublinkGroup) => sublinkGroup.sublinks,
     );
     const emptySublink = sublinks.find(
-      (sublink) => !sublink.page.data && !sublink.externalURL
+      (sublink) => !sublink.page.data && !sublink.externalURL,
     );
 
     if (emptySublink) {
@@ -108,7 +108,7 @@ export const allSublinksNonEmpty = (
     const links = header.menu.links;
     const sublinks = links.flatMap((link) => link.sublinks);
     const emptySublink = sublinks.find(
-      (sublink) => !sublink.page.data && !sublink.externalURL
+      (sublink) => !sublink.page.data && !sublink.externalURL,
     );
 
     if (emptySublink) {

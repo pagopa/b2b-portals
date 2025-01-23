@@ -122,7 +122,12 @@ describe('getPreFooter', () => {
     await getPreFooter({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-footer/?locale=it&populate=background,ctaButtons,storeButtons,exclude`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-footer/?locale=it
+&populate[0]=background
+&populate[1]=ctaButtons
+&populate[2]=storeButtons
+&populate[3]=exclude
+      `,
       {
         method: 'GET',
         headers: {

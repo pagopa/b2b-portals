@@ -7,8 +7,6 @@ import { StrapiImageSchema } from './types/StrapiImage';
 import { CTAButtonSimpleCodec } from './types/CTAButton';
 import { AppEnv } from '@/AppEnv';
 
-// TODO: Update all API calls to adapt to Strapi V5
-
 const PageRelationCodec = t.strict({
   attributes: t.strict({
     slug: t.string,
@@ -51,7 +49,12 @@ export const getPreFooter = ({
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pre-footer/?locale=${locale}&populate=background,ctaButtons,storeButtons,exclude`,
+      }/api/pre-footer/?locale=${locale}
+&populate[0]=background
+&populate[1]=ctaButtons
+&populate[2]=storeButtons
+&populate[3]=exclude
+      `,
       {
         method: 'GET',
         headers: {

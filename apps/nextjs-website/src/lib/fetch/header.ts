@@ -9,8 +9,6 @@ import { HeaderMUIIconCodec } from './types/icons/HeaderIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
-// TODO: Update all API calls to adapt to Strapi V5
-
 const HeaderPageDataCodec = t.strict({
   attributes: t.strict({
     slug: t.string,
@@ -116,9 +114,15 @@ export const getHeader = ({
 }: AppEnv & { readonly locale: 'it' | 'en' }): Promise<HeaderData> =>
   extractFromResponse(
     fetchFun(
-      `${
-        extractTenantStrapiApiData(config).baseUrl
-      }/api/header?locale=${locale}&populate=header.logo,header.ctaButton,header.menu.links.page,header.menu.links.sublinks.page,header.menu.links.sublinkGroups.sublinks.page,header.drawer.ctaCard,header.drawer.linkCards`,
+      `${extractTenantStrapiApiData(config).baseUrl}/api/header?locale=${locale}
+&populate[0]=header.logo
+&populate[1]=header.ctaButton
+&populate[2]=header.menu.links.page
+&populate[3]=header.menu.links.sublinks.page
+&populate[4]=header.menu.links.sublinkGroups.sublinks.page
+&populate[5]=header.drawer.ctaCard
+&populate[6]=header.drawer.linkCards
+      `,
       {
         method: 'GET',
         headers: {

@@ -7,12 +7,10 @@ import { extractFromResponse } from './extractFromResponse';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
-// TODO: Update all API calls to adapt to Strapi V5
-
 const PageIDsCodec = t.strict({
   data: t.array(
     t.strict({
-      id: t.number,
+      documentId: t.string,
     }),
   ),
 });
@@ -50,7 +48,7 @@ export const fetchAllPageIDs = ({
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pages?locale=${locale}&publicationState=preview&pagination[pageSize]=100`,
+      }/api/pages?locale=${locale}&pagination[pageSize]=100&status=draft`,
       {
         method: 'GET',
         headers: {
@@ -72,7 +70,7 @@ export const fetchAllPressReleaseIDs = ({
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/press-releases?locale=${locale}&publicationState=preview&pagination[pageSize]=100`,
+      }/api/press-releases?locale=${locale}&pagination[pageSize]=100&status=draft`,
       {
         method: 'GET',
         headers: {
@@ -88,25 +86,29 @@ export const fetchAllPressReleaseIDs = ({
 export const fetchPageFromID = ({
   config,
   fetchFun,
-  pageID,
-}: AppEnv & { readonly pageID: number }): Promise<PreviewPageData> =>
+  documentID,
+  locale,
+}: AppEnv & {
+  readonly documentID: string;
+  readonly locale: 'it' | 'en';
+}): Promise<PreviewPageData> =>
   extractFromResponse(
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pages/${pageID}?publicationState=preview
-        &populate[sections][populate][0]=ctaButtons,image,mobileImage,background,link,accordionItems,decoration,storeButtons,categories,counter,icon,chips
-        &populate[sections][populate][1]=items.links,items.link,items.icon,items.resource,items.thumbnail
-        &populate[sections][populate][2]=sections.icon,sections.ctaButtons
-        &populate[sections][populate][3]=sections.content.image,sections.content.mobileImage,sections.content.ctaButtons,sections.content.storeButtons
-        &populate[sections][populate][4]=video.src
-        &populate[sections][populate][5]=steps.icon
-        &populate[sections][populate][6]=cards.image,cards.link
-        &populate[sections][populate][7]=text.link
-        &populate[sections][populate][8]=pages.sections.ctaButtons,pages.sections.image,pages.sections.mobileImage,pages.sections.storeButtons
-        &populate[sections][populate][9]=pages.sections.items.links,pages.sections.items.icon
-        &populate[sections][populate][10]=pages.sections.sections.ctaButtons,pages.sections.sections.icon
-        `,
+      }/api/pages/${documentID}?locale=${locale}&status=draft
+&populate[1]=sections.ctaButtons,sections.image,sections.mobileImage,sections.background,sections.link,sections.accordionItems,sections.decoration,sections.storeButtons,sections.categories,sections.counter,sections.icon,sections.chips
+&populate[2]=sections.items.links,sections.items.link,sections.items.icon,sections.items.resource,sections.items.thumbnail
+&populate[3]=sections.sections.icon,sections.sections.ctaButtons
+&populate[4]=sections.sections.content.image,sections.sections.content.mobileImage,sections.sections.content.ctaButtons,sections.sections.content.storeButtons
+&populate[5]=sections.video.src
+&populate[6]=sections.steps.icon
+&populate[7]=sections.cards.image,sections.cards.link
+&populate[8]=sections.text.link
+&populate[9]=sections.pages.sections.ctaButtons,sections.pages.sections.image,sections.pages.sections.mobileImage,sections.pages.sections.storeButtons
+&populate[10]=sections.pages.sections.items.links,sections.pages.sections.items.icon
+&populate[11]=sections.pages.sections.sections.ctaButtons,sections.pages.sections.sections.icon
+      `,
       {
         method: 'GET',
         headers: {
@@ -122,15 +124,19 @@ export const fetchPageFromID = ({
 export const fetchPressReleaseFromID = ({
   config,
   fetchFun,
-  pressReleaseID,
+  documentID,
+  locale,
 }: AppEnv & {
-  readonly pressReleaseID: number;
+  readonly documentID: string;
+  readonly locale: 'it' | 'en';
 }): Promise<PreviewPressReleaseData> =>
   extractFromResponse(
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/press-releases/${pressReleaseID}?publicationState=preview&populate[pressRelease]=*`,
+      }/api/press-releases/${documentID}?locale=${locale}&status=draft
+&populate[1]=pressRelease
+        `,
       {
         method: 'GET',
         headers: {

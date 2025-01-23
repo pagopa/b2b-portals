@@ -4,8 +4,6 @@ import { StrapiImageRequiredSchema } from './types/StrapiImage';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
-// TODO: Update all API calls to adapt to Strapi V5
-
 export const ThemeVariantCodec = t.keyof({
   IO: null,
   SEND: null,
@@ -47,9 +45,13 @@ export const fetchSiteWideSEO = ({
 }: AppEnv): Promise<SiteWideSEO> =>
   extractFromResponse(
     fetchFun(
-      `${
-        extractTenantStrapiApiData(config).baseUrl
-      }/api/general?populate=metaImage,favicon,appleTouchIcon,manifest,locales`,
+      `${extractTenantStrapiApiData(config).baseUrl}/api/general
+?populate[0]=metaImage
+&populate[1]=favicon
+&populate[2]=appleTouchIcon
+&populate[3]=manifest
+&populate[4]=locales
+      `,
       {
         method: 'GET',
         headers: {
