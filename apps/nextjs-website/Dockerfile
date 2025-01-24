@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:18.20.6-alpine
 RUN apk add --no-cache g++ make py3-pip libc6-compat
 ARG ENVIRONMENT
 ENV ENVIRONMENT=${ENVIRONMENT}
