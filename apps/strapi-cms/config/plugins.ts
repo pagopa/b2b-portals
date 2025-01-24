@@ -22,7 +22,7 @@ export default ({ env }: any) => ({
     config: {
       owner: env('REPO_OWNER', 'pagopa'),
       repo: env('REPO_NAME', 'b2b-portals'),
-      workflowId: env('WORKFLOW_ID', 'deploy_website.yaml'),
+      workflowID: env('WORKFLOW_ID', 'deploy_website.yaml'),
       branch: env('TARGET_BRANCH', 'main'),
       githubToken: env('GITHUB_PAT'),
       environment: env('ENVIRONMENT', 'demo'),
