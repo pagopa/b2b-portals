@@ -34,7 +34,7 @@ export interface SubtitleProps {
 export interface FeatureCarouselProps {
   items: readonly FeatureItem[];
   activeStep: number;
-  handleStepChange: (step: number) => void;
+  handleStepChange: (step?: number) => void;
   theme: Theme;
   themeComponentDirection: 'rtl' | 'ltr';
   readonly themeVariant: ThemeVariant;

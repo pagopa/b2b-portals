@@ -39,13 +39,17 @@ export const getPreHeader = ({
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pre-header/?locale=${locale}&populate=leftCtas,rightCtas`,
+      }/api/pre-header/?locale=${locale}
+&populate[0]=leftCtas
+&populate[1]=rightCtas
+      `,
       {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     ),
-    PreHeaderCodec
+    PreHeaderCodec,
   );

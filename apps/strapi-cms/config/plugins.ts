@@ -17,15 +17,15 @@ export default ({ env }: any) => ({
       },
     },
   },
-  'update-static-content': {
+  'static-deploy': {
     enabled: true,
     config: {
-      environment: env('ENVIRONMENT'),
-      githubToken: env('GITHUB_PAT'),
       owner: env('REPO_OWNER', 'pagopa'),
       repo: env('REPO_NAME', 'b2b-portals'),
-      workflowId: env('WORKFLOW_ID', 'deploy_website.yaml'),
+      workflowID: env('WORKFLOW_ID', 'deploy_website.yaml'),
       branch: env('TARGET_BRANCH', 'main'),
+      githubToken: env('GITHUB_PAT'),
+      environment: env('ENVIRONMENT', 'demo'),
     },
   },
   'preview-button': {
@@ -38,7 +38,8 @@ export default ({ env }: any) => ({
             url: env('PREVIEW_URL'),
             query: {
               type: 'page',
-              pageID: '{id}',
+              documentID: '{documentId}',
+              locale: '{locale}',
               secret: env('PREVIEW_TOKEN'),
               tenant: env('ENVIRONMENT'),
             },
@@ -65,13 +66,4 @@ export default ({ env }: any) => ({
       ]
     }
   },
-  'copy-locales': {
-    enabled: true,
-    config: {
-      contentTypes: [
-        'api::page.page',
-        'api::page-switch-page.page-switch-page'
-      ]
-    }
-  }
 });

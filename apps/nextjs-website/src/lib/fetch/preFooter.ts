@@ -49,13 +49,19 @@ export const getPreFooter = ({
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/pre-footer/?locale=${locale}&populate=background,ctaButtons,storeButtons,exclude`,
+      }/api/pre-footer/?locale=${locale}
+&populate[0]=background
+&populate[1]=ctaButtons
+&populate[2]=storeButtons
+&populate[3]=exclude
+      `,
       {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     ),
-    PreFooterDataCodec
+    PreFooterDataCodec,
   );

@@ -31,7 +31,8 @@ const PreviewPage = async ({
   searchParams: {
     type: 'page' | 'press-release' | undefined;
     secret: string | undefined;
-    pageID: string | undefined;
+    documentID: string | undefined;
+    locale: 'it' | 'en' | undefined;
     tenant: Config['ENVIRONMENT'] | undefined;
   };
 }) => {
@@ -41,7 +42,8 @@ const PreviewPage = async ({
 
   const type = searchParams.type;
   const secret = searchParams.secret;
-  const pageID = Number(searchParams.pageID);
+  const documentID = searchParams.documentID;
+  const locale = searchParams.locale ?? 'it';
   const tenant = searchParams.tenant;
   const previewToken = getPreviewToken();
 
@@ -49,33 +51,33 @@ const PreviewPage = async ({
     return <div>401: Unathorized request</div>;
   }
 
-  if (!pageID || tenant === undefined) {
+  if (documentID === undefined || tenant === undefined) {
     return <div>404: Missing parameters</div>;
   }
 
-  const pageIDs = await (type === 'press-release'
-    ? getAllPressReleaseIDs(tenant)
-    : getAllPageIDs(tenant));
-  if (!pageIDs.map((obj) => obj.id).includes(pageID)) {
+  const documentIDs = await (type === 'press-release'
+    ? getAllPressReleaseIDs(tenant, locale)
+    : getAllPageIDs(tenant, locale));
+  if (!documentIDs.map((obj) => obj.documentId).includes(documentID)) {
     return <div>404: Missing page</div>;
   }
 
-  const { sections, locale } = await (type === 'press-release'
-    ? getPressReleaseDataFromID(tenant, pageID)
-    : getPageDataFromID(tenant, pageID));
+  const document = await (type === 'press-release'
+    ? getPressReleaseDataFromID(tenant, documentID, locale)
+    : getPageDataFromID(tenant, documentID, locale));
   const themeVariant = await GetThemeVariantForPreview();
   const pressReleasePages = await getPressReleasePages(locale);
 
   return (
     <div>
-      {sections.map((section) =>
+      {document.sections.map((section) =>
         PageSection({
           ...section,
           themeVariant,
-          locale,
-          defaultLocale: locale, // Doesn't matter in preview
+          locale: document.locale,
+          defaultLocale: document.locale, // Doesn't matter in preview
           pressReleasePages,
-        })
+        }),
       )}
     </div>
   );

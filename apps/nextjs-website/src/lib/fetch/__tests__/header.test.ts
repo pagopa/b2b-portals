@@ -81,13 +81,22 @@ describe('getHeader', () => {
     await getHeader({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/header?locale=it&populate=header.logo,header.ctaButton,header.menu.links.page,header.menu.links.sublinks.page,header.menu.links.sublinkGroups.sublinks.page,header.drawer.ctaCard,header.drawer.linkCards`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/header?locale=it
+&populate[0]=header.logo
+&populate[1]=header.ctaButton
+&populate[2]=header.menu.links.page
+&populate[3]=header.menu.links.sublinks.page
+&populate[4]=header.menu.links.sublinkGroups.sublinks.page
+&populate[5]=header.drawer.ctaCard
+&populate[6]=header.drawer.linkCards
+      `,
       {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     );
   });
 

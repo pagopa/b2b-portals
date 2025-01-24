@@ -17,8 +17,10 @@ const PressReleaseTemplate: StoryFn<PressReleaseProps> = (args) => (
 export const PressReleaseFull: StoryFn<typeof PressRelease> =
   PressReleaseTemplate.bind({});
 PressReleaseFull.args = {
-  title: 'Rimborsi in arrivo, scadenze e altri avvisi personalizzati. L’Agenzia comunica con i cittadini anche sull’App IO',
-  subtitle: 'A un anno dal lancio, in app oltre 12 mila servizi. Oggi IO supera gli 11,3 milioni di download e già 3,4 milioni di cittadini usano l’app almeno una volta alla settimana.',
+  title:
+    'Rimborsi in arrivo, scadenze e altri avvisi personalizzati. L’Agenzia comunica con i cittadini anche sull’App IO',
+  subtitle:
+    'A un anno dal lancio, in app oltre 12 mila servizi. Oggi IO supera gli 11,3 milioni di download e già 3,4 milioni di cittadini usano l’app almeno una volta alla settimana.',
   body: (
     <div>
       <p>

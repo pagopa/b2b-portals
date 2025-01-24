@@ -7,7 +7,7 @@ type TenantStrapiApiData = {
 };
 
 export const extractTenantStrapiApiData = (
-  strapiData: StrapiApiData
+  strapiData: StrapiApiData,
 ): TenantStrapiApiData => {
   switch (strapiData.ENVIRONMENT) {
     case 'demo':

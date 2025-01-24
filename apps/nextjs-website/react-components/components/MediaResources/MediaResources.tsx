@@ -27,8 +27,8 @@ const MediaResources = ({
     theme === 'dark'
       ? muiTheme.palette.custom.white
       : themeVariant === 'SEND'
-        ? muiTheme.palette.primary.main
-        : muiTheme.palette.custom.primaryColorDark;
+      ? muiTheme.palette.primary.main
+      : muiTheme.palette.custom.primaryColorDark;
 
   return (
     <Box
@@ -48,21 +48,11 @@ const MediaResources = ({
         marginX='auto'
       >
         {title && (
-          <Typography
-            variant='h4'
-            mb={4}
-            textAlign='left'
-            color='inherit'
-          >
+          <Typography variant='h4' mb={4} textAlign='left' color='inherit'>
             {title}
           </Typography>
         )}
-        <Stack
-          direction='row'
-          flexWrap='wrap'
-          rowGap={14}
-          columnGap={9}
-        >
+        <Stack direction='row' flexWrap='wrap' rowGap={14} columnGap={9}>
           {items.map((item, index) => (
             <Stack
               key={index}

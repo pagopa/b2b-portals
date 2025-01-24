@@ -20,12 +20,18 @@ const createHeroCounterProps = (
     theme,
     themeVariant,
     title,
-    ...(withSubtitle && { subtitle: MarkdownRenderer({ markdown: subtitle, locale: 'it', defaultLocale: 'it' }) }),
+    ...(withSubtitle && {
+      subtitle: MarkdownRenderer({
+        markdown: subtitle,
+        locale: 'it',
+        defaultLocale: 'it',
+      }),
+    }),
     ...(theme === 'dark' && {
       background: {
         src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
         srcSet: '',
-      }
+      },
     }),
   };
 

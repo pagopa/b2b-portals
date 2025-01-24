@@ -16,7 +16,7 @@ const PressReleasesCodec = t.strict({
     t.strict({
       id: t.number,
       attributes: PressReleasePageCodec,
-    })
+    }),
   ),
 });
 
@@ -35,15 +35,16 @@ export const getPressReleases = ({
       `${
         extractTenantStrapiApiData(config).baseUrl
       }/api/press-releases?locale=${locale}&pagination[pageSize]=100
-        &populate[seo][populate][0]=metaTitle
-        &populate[pressRelease]=*
+&populate[0]=seo
+&populate[1]=pressRelease
         `,
       {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     ),
-    PressReleasesCodec
+    PressReleasesCodec,
   );

@@ -38,8 +38,8 @@ export const CtaButtons = ({
                   theme === 'dark'
                     ? palette.custom.white
                     : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500],
                 color:
                   theme === 'dark'
                     ? themeVariant === 'SEND'
@@ -53,14 +53,14 @@ export const CtaButtons = ({
                   theme === 'dark'
                     ? palette.custom.matteWhiteBorder
                     : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500],
                 color:
                   theme === 'dark'
                     ? palette.custom.white
                     : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500],
               }),
             }}
             {...button}
@@ -306,13 +306,13 @@ export const getButtonStyles = (
           ? palette.primary.main
           : palette.custom.primaryColorDark
         : themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
+        ? palette.primary.main
+        : palette.custom.primaryColorDark
       : theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-        : palette.primary.contrastText,
+      ? themeVariant === 'SEND'
+        ? palette.primary.main
+        : palette.custom.primaryColorDark
+      : palette.primary.contrastText,
     borderColor:
       theme === 'light'
         ? themeVariant === 'SEND'
@@ -330,8 +330,8 @@ export const getButtonStyles = (
             ? palette.primary.main
             : palette.custom.primaryColorDark
           : themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark,
+          ? palette.primary.main
+          : palette.custom.primaryColorDark,
       borderColor:
         theme === 'light'
           ? themeVariant === 'SEND'

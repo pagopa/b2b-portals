@@ -82,8 +82,8 @@ const StripeLink = ({
                 theme === 'light'
                   ? palette.custom.white
                   : themeVariant === 'SEND'
-                    ? palette.primary.main
-                    : palette.custom.blueIO[500],
+                  ? palette.primary.main
+                  : palette.custom.blueIO[500],
               color:
                 theme === 'light'
                   ? themeVariant === 'SEND'
@@ -95,8 +95,8 @@ const StripeLink = ({
                   theme === 'light'
                     ? palette.custom.white
                     : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500],
               },
             }}
             endIcon={<ArrowForwardIcon color='inherit'></ArrowForwardIcon>}

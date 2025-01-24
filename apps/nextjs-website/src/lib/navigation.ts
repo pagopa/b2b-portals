@@ -9,7 +9,7 @@ export interface PageData {
 }
 
 export const navigationToPageDataArray = (
-  navigation: Navigation
+  navigation: Navigation,
 ): ReadonlyArray<PageData> =>
   navigation.data.map((item) => ({
     slug: item.attributes.slug === 'homepage' ? [''] : [item.attributes.slug],

@@ -52,7 +52,7 @@ const PressReleaseList = (
   props: PressReleaseListSection &
     SiteWidePageData & {
       pressReleasePages: ReadonlyArray<PressReleasePage>;
-    }
+    },
 ) => <PressReleaseListRC {...makePressReleaseListProps(props)} />;
 
 export default PressReleaseList;

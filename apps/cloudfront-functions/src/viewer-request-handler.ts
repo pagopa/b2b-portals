@@ -6,7 +6,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const handler = (
-  event: AWSCloudFrontFunction.Event
+  event: AWSCloudFrontFunction.Event,
 ): AWSCloudFrontFunction.Request => {
   if (event.context.eventType === 'viewer-request') {
     // do the rewrite

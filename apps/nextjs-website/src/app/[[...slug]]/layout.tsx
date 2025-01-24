@@ -95,15 +95,15 @@ export default async function Layout({
     slug === undefined
       ? defaultLocale
       : slug[0] === 'it' || slug[0] === 'en'
-      ? slug[0]
-      : defaultLocale;
+        ? slug[0]
+        : defaultLocale;
 
   const preHeaderProps = await getPreHeaderProps(locale);
   const headerProps = await getHeaderProps(locale, defaultLocale);
   const footerProps = await getFooterProps(locale);
   const preFooterProps = await getPreFooterProps(locale);
   const localesArray = Object.keys(locales).filter(
-    (locale) => locales[locale as 'it' | 'en']
+    (locale) => locales[locale as 'it' | 'en'],
   );
 
   if (mixpanelToken) {

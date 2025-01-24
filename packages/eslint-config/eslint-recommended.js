@@ -19,8 +19,6 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     // Load prettier recommended rules
     "plugin:prettier/recommended",
-    // PagoPA recommended rules
-    "@pagopa/eslint-config/recommended",
   ],
   rules: {
     "prettier/prettier": [

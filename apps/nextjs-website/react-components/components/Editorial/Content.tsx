@@ -23,8 +23,8 @@ export const Content = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      ? palette.primary.main
+      : palette.custom.primaryColorDark;
 
   return (
     <Stack maxWidth={{ md: maxTextWidth }} gap={2}>
@@ -38,7 +38,7 @@ export const Content = ({
       <Typography
         component='div'
         variant='body2'
-        color= {textColor}
+        color={textColor}
         sx={{
           fontSize: '18px',
           '& a': {

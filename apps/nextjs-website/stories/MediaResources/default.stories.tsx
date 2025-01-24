@@ -12,9 +12,8 @@ const Template: StoryFn<MediaResourcesProps> = (args) => (
   <MediaResources {...args} />
 );
 
-export const MediaResourcesFullLight: StoryFn<typeof MediaResources> = Template.bind(
-  {}
-);
+export const MediaResourcesFullLight: StoryFn<typeof MediaResources> =
+  Template.bind({});
 MediaResourcesFullLight.args = {
   title: 'Risorse per i media',
   theme: 'light',
@@ -66,9 +65,8 @@ MediaResourcesFullLight.args = {
   ],
 };
 
-export const MediaResourcesFullDark: StoryFn<typeof MediaResources> = Template.bind(
-  {}
-);
+export const MediaResourcesFullDark: StoryFn<typeof MediaResources> =
+  Template.bind({});
 MediaResourcesFullDark.args = {
   title: 'Risorse per i media',
   theme: 'dark',

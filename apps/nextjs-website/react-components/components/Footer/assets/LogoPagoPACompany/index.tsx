@@ -28,10 +28,10 @@ export const LogoPagoPACompany = ({
   variant = 'default',
 }: LogoPagoPACompanyProps): JSX.Element => (
   <SvgIcon
-    viewBox="0 0 119 33"
-    focusable="false"
-    aria-labelledby="logo-pagoPA-company-titleID"
-    role="img"
+    viewBox='0 0 119 33'
+    focusable='false'
+    aria-labelledby='logo-pagoPA-company-titleID'
+    role='img'
     sx={{
       width: size,
       height: 'auto',
@@ -42,6 +42,6 @@ export const LogoPagoPACompany = ({
   >
     {variant === 'default' ? <DefaultVariant /> : <FlatVariant />}
 
-    <title id="logo-pagopa-company-title">{title}</title>
+    <title id='logo-pagopa-company-title'>{title}</title>
   </SvgIcon>
 );

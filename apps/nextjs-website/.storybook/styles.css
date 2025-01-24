@@ -7,11 +7,13 @@
 }
 
 /* Override the default Storybook padding, workaround necessary to avoid 'Show Code' button to overlay the component on storybook */
-#story--components-preheader-light--default-pre-header--primary-inner .MuiStack-root {
+#story--components-preheader-light--default-pre-header--primary-inner
+  .MuiStack-root {
   padding-bottom: 1em;
 }
 
-#story--components-preheader-light--default-pre-header-no-icon-inner .MuiStack-root {
+#story--components-preheader-light--default-pre-header-no-icon-inner
+  .MuiStack-root {
   padding-bottom: 1em;
 }
 
