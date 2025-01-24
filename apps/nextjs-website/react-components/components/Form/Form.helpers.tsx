@@ -5,9 +5,7 @@ import {
   Typography,
   RadioGroup,
 } from '@mui/material';
-import {
-  FormCategoryProps,
-} from '@react-components/types/Form/Form.types';
+import { FormCategoryProps } from '@react-components/types/Form/Form.types';
 
 export const FormCategories = ({
   categories,
@@ -23,7 +21,12 @@ export const FormCategories = ({
           container
           alignItems='center'
           justifyContent='space-between'
-          sx={{ borderBottom: `1px solid ${borderColor}`, zIndex: 3,  }}
+          sx={{
+            borderBottom: `1px solid ${borderColor}`,
+            zIndex: 3,
+            display: 'flex',
+            flexWrap: 'nowrap',
+          }}
         >
           <Grid item sx={{ textAlign: 'left' }}>
             <Typography
