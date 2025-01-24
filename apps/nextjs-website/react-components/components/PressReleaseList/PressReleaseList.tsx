@@ -27,8 +27,12 @@ const PressReleaseList = ({
       columnGap={7}
       maxWidth='100%'
     >
-      {pressReleases.map((pressRelease) => (
-        <PressReleasePreview {...pressRelease} themeVariant={themeVariant} />
+      {pressReleases.map((pressRelease, index) => (
+        <PressReleasePreview
+          key={`press-release-${index}`}
+          {...pressRelease}
+          themeVariant={themeVariant}
+        />
       ))}
     </Stack>
   </ContainerRC>

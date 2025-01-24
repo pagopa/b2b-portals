@@ -48,7 +48,7 @@ const PressRelease = (props: PressReleaseProps) => {
         <Typography
           variant='h4'
           component='h2'
-          sx={{ fontSize: { xs: '32px', md: '38px' }, color: textColor }}
+          sx={{ fontSize: { xs: '32px', md: '38px' }, color: textColor, mt: 2 }}
         >
           {title}
         </Typography>
