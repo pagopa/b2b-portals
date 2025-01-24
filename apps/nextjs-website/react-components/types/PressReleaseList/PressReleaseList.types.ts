@@ -9,11 +9,9 @@ export interface PressReleasePreviewProps {
     href: string;
   };
   themeVariant: ThemeVariant;
-  locale: string;
 }
 
 export interface PressReleaseListProps extends Omit<SectionProps, 'theme'> {
   title: string;
   pressReleases: PressReleasePreviewProps[];
-  locale: string;
 }

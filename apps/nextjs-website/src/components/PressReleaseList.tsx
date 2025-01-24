@@ -8,7 +8,7 @@ import { PressReleaseListProps } from '@react-components/types';
 
 const formatDateToLocale = (
   dateString: string,
-  locale: string = 'en-GB'
+  locale: string = 'it'
 ): string => {
   const date = new Date(dateString);
 
@@ -16,11 +16,11 @@ const formatDateToLocale = (
     return dateString;
   }
 
-  const day = date.toLocaleString(locale, { day: '2-digit' });
-  const month = date.toLocaleString(locale, { month: 'long' });
-  const year = date.toLocaleString(locale, { year: 'numeric' });
-
-  return `${day} ${month} ${year}`;
+  return date.toLocaleDateString(locale, {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
 };
 
 const makePressReleaseListProps = ({
@@ -31,44 +31,28 @@ const makePressReleaseListProps = ({
 }: PressReleaseListSection &
   SiteWidePageData & {
     pressReleasePages: ReadonlyArray<PressReleasePage>;
-  }): PressReleaseListProps => {
-  const resolvedLocale = locale || defaultLocale || 'en-GB';
-
-  return {
-    ...rest,
-    locale: resolvedLocale,
-    pressReleases: pressReleasePages.map((PRPage) => ({
-      date: formatDateToLocale(PRPage.pressRelease.date, resolvedLocale),
-      title: PRPage.pressRelease.title,
-      link: {
-        label: resolvedLocale.startsWith('it') ? 'Leggi' : 'Read',
-        href: LocalizeURL({
-          URL: '/press-releases/' + PRPage.slug,
-          locale: resolvedLocale,
-          defaultLocale,
-        }),
-      },
-      themeVariant: rest.themeVariant,
-      locale: resolvedLocale,
-    })),
-  };
-};
+  }): PressReleaseListProps => ({
+  ...rest,
+  pressReleases: pressReleasePages.map((PRPage) => ({
+    date: formatDateToLocale(PRPage.pressRelease.date, locale),
+    title: PRPage.pressRelease.title,
+    link: {
+      label: locale === 'it' ? 'Leggi' : 'Read',
+      href: LocalizeURL({
+        URL: '/press-releases/' + PRPage.slug,
+        locale,
+        defaultLocale,
+      }),
+    },
+    themeVariant: rest.themeVariant,
+  })),
+});
 
 const PressReleaseList = (
   props: PressReleaseListSection &
     SiteWidePageData & {
       pressReleasePages: ReadonlyArray<PressReleasePage>;
-      locale: string;
     }
-) => {
-  const { locale, defaultLocale } = props;
-  const resolvedLocale = locale || defaultLocale || 'en-GB';
-
-  return (
-    <PressReleaseListRC
-      {...makePressReleaseListProps({ ...props, locale: resolvedLocale })}
-    />
-  );
-};
+) => <PressReleaseListRC {...makePressReleaseListProps(props)} />;
 
 export default PressReleaseList;

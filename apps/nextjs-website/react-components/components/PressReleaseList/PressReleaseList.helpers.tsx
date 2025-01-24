@@ -2,29 +2,11 @@ import { ArrowRightAlt } from '@mui/icons-material';
 import { Link, Stack, Typography, useTheme } from '@mui/material';
 import { PressReleasePreviewProps } from '@react-components/types/PressReleaseList/PressReleaseList.types';
 
-const formatDateToLocale = (
-  dateString: string,
-  locale: string = 'en-GB'
-): string => {
-  const date = new Date(dateString);
-
-  if (isNaN(date.getTime())) {
-    return dateString;
-  }
-
-  const day = date.toLocaleString(locale, { day: '2-digit' });
-  const month = date.toLocaleString(locale, { month: 'long' });
-  const year = date.toLocaleString(locale, { year: 'numeric' });
-
-  return `${day} ${month} ${year}`;
-};
-
 export const PressReleasePreview = ({
   date,
   title,
   link,
   themeVariant,
-  locale,
 }: PressReleasePreviewProps) => {
   const { palette } = useTheme();
 
@@ -36,7 +18,7 @@ export const PressReleasePreview = ({
   return (
     <Stack gap={2} width={330}>
       <Typography variant='overline' color='text.secondary'>
-        {formatDateToLocale(date, locale)}
+        {date}
       </Typography>
       <Typography variant='h6' fontWeight={700}>
         {title}

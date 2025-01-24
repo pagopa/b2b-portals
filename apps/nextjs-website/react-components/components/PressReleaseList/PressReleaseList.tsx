@@ -9,8 +9,7 @@ const PressReleaseList = ({
   title,
   pressReleases,
   themeVariant,
-  locale,
-}: PressReleaseListProps & { locale: string }) => (
+}: PressReleaseListProps) => (
   <ContainerRC
     {...(sectionID && { sectionID })}
     direction='column'
@@ -33,7 +32,6 @@ const PressReleaseList = ({
           key={`press-release-${index}`}
           {...pressRelease}
           themeVariant={themeVariant}
-          locale={locale}
         />
       ))}
     </Stack>

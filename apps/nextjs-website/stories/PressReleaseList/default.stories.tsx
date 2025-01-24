@@ -26,7 +26,6 @@ DefaultPressReleaseList.args = {
         href: '#',
       },
       themeVariant: 'IO',
-      locale: 'it-IT',
     },
     {
       date: '23 Dicembre 2022',
@@ -37,7 +36,6 @@ DefaultPressReleaseList.args = {
         href: '#',
       },
       themeVariant: 'IO',
-      locale: 'it-IT',
     },
     {
       date: '25 Luglio 2022',
@@ -48,7 +46,6 @@ DefaultPressReleaseList.args = {
         href: '#',
       },
       themeVariant: 'IO',
-      locale: 'it-IT',
     },
     {
       date: '19 Gennaio 2022',
@@ -58,7 +55,6 @@ DefaultPressReleaseList.args = {
         href: '#',
       },
       themeVariant: 'IO',
-      locale: 'it-IT',
     },
     {
       date: '20 Giugno 2022',
@@ -69,7 +65,6 @@ DefaultPressReleaseList.args = {
         href: '#',
       },
       themeVariant: 'IO',
-      locale: 'it-IT',
     },
     {
       date: '17 Giugno 2021',
@@ -79,7 +74,6 @@ DefaultPressReleaseList.args = {
         href: '#',
       },
       themeVariant: 'IO',
-      locale: 'it-IT',
     },
     {
       date: '17 Giugno 2021',
@@ -90,7 +84,6 @@ DefaultPressReleaseList.args = {
         href: '#',
       },
       themeVariant: 'IO',
-      locale: 'it-IT',
     },
     {
       date: '17 Giugno 2021',
@@ -100,7 +93,6 @@ DefaultPressReleaseList.args = {
         href: '#',
       },
       themeVariant: 'IO',
-      locale: 'it-IT',
     },
   ],
 };
