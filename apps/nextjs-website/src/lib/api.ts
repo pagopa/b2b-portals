@@ -30,12 +30,12 @@ const appEnv = pipe(
   E.getOrElseW((errors) => {
     // eslint-disable-next-line functional/no-throw-statements
     throw errors;
-  })
+  }),
 );
 
 // Return all the pages
 export const getAllPages = async (
-  locale: 'it' | 'en'
+  locale: 'it' | 'en',
 ): Promise<ReadonlyArray<PageData>> => {
   const navigation = await getNavigation({ ...appEnv, locale });
   const pressReleases = await getPressReleases({ ...appEnv, locale });
@@ -47,7 +47,7 @@ export const getAllPages = async (
 };
 
 export const getPressReleasePages = async (
-  locale: 'it' | 'en'
+  locale: 'it' | 'en',
 ): Promise<ReadonlyArray<PressReleasePage>> => {
   const { data } = await getPressReleases({ ...appEnv, locale });
 
@@ -56,7 +56,7 @@ export const getPressReleasePages = async (
 
 // Return PreHeaderProps
 export const getPreHeaderProps = async (
-  locale: 'it' | 'en'
+  locale: 'it' | 'en',
 ): Promise<PreHeaderAttributes | null> => {
   const { data } = await getPreHeader({ ...appEnv, locale });
   return data?.attributes ?? null;
@@ -64,7 +64,7 @@ export const getPreHeaderProps = async (
 
 export const getHeaderProps = async (
   locale: 'it' | 'en',
-  defaultLocale: 'it' | 'en'
+  defaultLocale: 'it' | 'en',
 ): Promise<HeaderData['data']['attributes']['header'][0]> => {
   const {
     data: { attributes },
@@ -88,7 +88,7 @@ export const getHeaderProps = async (
 };
 
 export const getFooterProps = async (
-  locale: 'it' | 'en'
+  locale: 'it' | 'en',
 ): Promise<FooterData['data']['attributes']> => {
   const {
     data: { attributes },
@@ -97,7 +97,7 @@ export const getFooterProps = async (
 };
 
 export const getPreFooterProps = async (
-  locale: 'it' | 'en'
+  locale: 'it' | 'en',
 ): Promise<PreFooterAttributes | null> => {
   const { data } = await getPreFooter({ ...appEnv, locale });
   return data?.attributes ?? null;
@@ -106,7 +106,7 @@ export const getPreFooterProps = async (
 // Return PageProps given the page path
 export const getPageProps = async (
   locale: 'it' | 'en',
-  slugString: string | undefined
+  slugString: string | undefined,
 ): Promise<PageData | undefined> => {
   if (slugString === undefined) {
     return undefined;
@@ -126,7 +126,8 @@ export const getSiteWideSEO = async (): Promise<
 };
 
 export const getAllPageIDs = async (
-  tenant: Config['ENVIRONMENT']
+  tenant: Config['ENVIRONMENT'],
+  locale: 'it' | 'en',
 ): Promise<PageIDs['data']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
@@ -135,19 +136,16 @@ export const getAllPageIDs = async (
     },
     fetchFun: appEnv.fetchFun,
   };
-  const pageIDs_it = await fetchAllPageIDs({
+  const pageIDs = await fetchAllPageIDs({
     ...appEnvWithRequestedTenant,
-    locale: 'it',
+    locale,
   });
-  const pageIDs_en = await fetchAllPageIDs({
-    ...appEnvWithRequestedTenant,
-    locale: 'en',
-  });
-  return [...pageIDs_it.data, ...pageIDs_en.data];
+  return pageIDs.data;
 };
 
 export const getAllPressReleaseIDs = async (
-  tenant: Config['ENVIRONMENT']
+  tenant: Config['ENVIRONMENT'],
+  locale: 'it' | 'en',
 ): Promise<PageIDs['data']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
@@ -156,20 +154,17 @@ export const getAllPressReleaseIDs = async (
     },
     fetchFun: appEnv.fetchFun,
   };
-  const pressReleaseIDs_it = await fetchAllPressReleaseIDs({
+  const pressReleaseIDs = await fetchAllPressReleaseIDs({
     ...appEnvWithRequestedTenant,
-    locale: 'it',
+    locale,
   });
-  const pressReleaseIDs_en = await fetchAllPressReleaseIDs({
-    ...appEnvWithRequestedTenant,
-    locale: 'en',
-  });
-  return [...pressReleaseIDs_it.data, ...pressReleaseIDs_en.data];
+  return pressReleaseIDs.data;
 };
 
 export const getPageDataFromID = async (
   tenant: Config['ENVIRONMENT'],
-  pageID: number
+  documentID: string,
+  locale: 'it' | 'en',
 ): Promise<PreviewPageData['data']['attributes']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
@@ -180,14 +175,19 @@ export const getPageDataFromID = async (
   };
   const {
     data: { attributes },
-  } = await fetchPageFromID({ ...appEnvWithRequestedTenant, pageID });
+  } = await fetchPageFromID({
+    ...appEnvWithRequestedTenant,
+    documentID,
+    locale,
+  });
 
   return attributes;
 };
 
 export const getPressReleaseDataFromID = async (
   tenant: Config['ENVIRONMENT'],
-  pressReleaseID: number
+  documentID: string,
+  locale: 'it' | 'en',
 ): Promise<PreviewPageData['data']['attributes']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
@@ -198,7 +198,8 @@ export const getPressReleaseDataFromID = async (
   };
   const pressRelease = await fetchPressReleaseFromID({
     ...appEnvWithRequestedTenant,
-    pressReleaseID,
+    documentID,
+    locale,
   });
 
   return previewPressReleaseToPreviewPageData(pressRelease).data.attributes;

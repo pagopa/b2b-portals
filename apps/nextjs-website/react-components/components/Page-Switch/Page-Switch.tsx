@@ -46,9 +46,7 @@ const PageSwitch = ({
     return null;
   }
 
-  const [currentPage, setCurrentPage] = useState<PageSwitchPage>(
-    pages[0]
-  );
+  const [currentPage, setCurrentPage] = useState<PageSwitchPage>(pages[0]);
 
   const handleButtonClick = (pageID: number) => {
     const page = pages.find((page) => page.id === pageID);

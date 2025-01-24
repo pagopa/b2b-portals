@@ -9,7 +9,12 @@ const translateTopRight = 'translate(40px, -30px)';
 const scaleAndTranslateBottomLeft = 'translate(-20px, 10px) scale(0.89)';
 const dots = 'radial-gradient(circle at 3px 3px, #EEEEEE 3px, transparent 0)';
 
-export const Image = ({ image, mobileImage, pattern = 'none', breakpoint = 834 }: EditorialImageProps) => {
+export const Image = ({
+  image,
+  mobileImage,
+  pattern = 'none',
+  breakpoint = 834,
+}: EditorialImageProps) => {
   const patterns: { [key: string]: SxProps<Theme> } = {
     dots: {
       backgroundColor: 'transparent',
@@ -37,10 +42,12 @@ export const Image = ({ image, mobileImage, pattern = 'none', breakpoint = 834 }
     transform: pattern && pattern !== 'none' ? translateTopRight : '',
   };
 
-  const mobileStyle = mobileImage ? {
-    ...mobileImage.props.style,
-    ...desktopStyle,
-  } : {};
+  const mobileStyle = mobileImage
+    ? {
+        ...mobileImage.props.style,
+        ...desktopStyle,
+      }
+    : {};
 
   return (
     <Box

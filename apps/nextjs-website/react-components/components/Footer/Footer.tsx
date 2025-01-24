@@ -39,13 +39,13 @@ const Footer = ({
         <Grid item xs={12} sm={3}>
           <FooterColumn data={resources} />
         </Grid>
-        <Grid 
-          item 
-          xs={12} 
-          sm={3} 
-          container 
-          direction='column' 
-          justifyContent={{ xs: 'center', sm: 'space-between' }} 
+        <Grid
+          item
+          xs={12}
+          sm={3}
+          container
+          direction='column'
+          justifyContent={{ xs: 'center', sm: 'space-between' }}
           alignItems={{ xs: 'center', sm: 'flex-start' }}
         >
           <Box width='100%'>
@@ -65,7 +65,3 @@ const Footer = ({
 );
 
 export default Footer;
-
-
-
-

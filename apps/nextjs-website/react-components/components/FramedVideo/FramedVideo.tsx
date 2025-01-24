@@ -30,8 +30,8 @@ const FramedVideo = ({
   const flexDirection = isMobileDevice
     ? 'column-reverse'
     : layout === 'left'
-      ? 'row'
-      : 'row-reverse';
+    ? 'row'
+    : 'row-reverse';
 
   const videoFlexBasis = text ? (isMobileDevice ? '100%' : '50%') : '80%';
   const justifyContent = text

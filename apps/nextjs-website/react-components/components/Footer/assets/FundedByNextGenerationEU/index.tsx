@@ -1,11 +1,6 @@
 import { theme } from '@pagopa/mui-italia';
 import { SvgIcon } from '@mui/material';
-import {
-  SvgFilled,
-  SvgOutline,
-  SvgColorDark,
-  SvgColorLight,
-} from './partials';
+import { SvgFilled, SvgOutline, SvgColorDark, SvgColorLight } from './partials';
 
 type NextGenerationEUVariants = 'filled' | 'outline' | 'color';
 type NextGenerationEUColors = 'light' | 'dark' | 'pantone';
@@ -46,10 +41,10 @@ export const FundedByNextGenerationEU = ({
   variant = 'outline',
 }: FundedByNextGenerationEUProps): JSX.Element => (
   <SvgIcon
-    viewBox="0 0 1174 270"
-    focusable="false"
-    role="img"
-    aria-labelledby="logo-next-genEU-titleID"
+    viewBox='0 0 1174 270'
+    focusable='false'
+    role='img'
+    aria-labelledby='logo-next-genEU-titleID'
     sx={{
       width: size,
       height: 'auto',
@@ -61,6 +56,6 @@ export const FundedByNextGenerationEU = ({
     }}
   >
     {variant === 'color' ? variantColorMap[color] : variantMap[variant]}
-    <title id="logo-next-gen-eu-title">{title}</title>
+    <title id='logo-next-gen-eu-title'>{title}</title>
   </SvgIcon>
 );

@@ -64,16 +64,16 @@ export async function generateMetadata({
     slug === undefined
       ? ''
       : slug[0] === 'it' || slug[0] === 'en'
-      ? slug.slice(1).toString()
-      : slug.toString();
+        ? slug.slice(1).toString()
+        : slug.toString();
 
   // The locale will NOT be found for the default locale and will be in slug[0] for all others
   const locale =
     slug === undefined
       ? defaultLocale
       : slug[0] === 'it' || slug[0] === 'en'
-      ? slug[0]
-      : defaultLocale;
+        ? slug[0]
+        : defaultLocale;
 
   const pageProps = await getPageProps(locale, slugString);
   if (pageProps === undefined) {
@@ -121,16 +121,16 @@ const Page = async ({ params }: PageParams) => {
     slug === undefined
       ? ''
       : slug[0] === 'it' || slug[0] === 'en'
-      ? slug.slice(1).toString()
-      : slug.toString();
+        ? slug.slice(1).toString()
+        : slug.toString();
 
   // The locale will NOT be found for the default locale and will be in slug[0] for all others
   const locale =
     slug === undefined
       ? defaultLocale
       : slug[0] === 'it' || slug[0] === 'en'
-      ? slug[0]
-      : defaultLocale;
+        ? slug[0]
+        : defaultLocale;
 
   const pageProps = await getPageProps(locale, slugString);
   if (pageProps === undefined) {
@@ -156,7 +156,7 @@ const Page = async ({ params }: PageParams) => {
           locale,
           defaultLocale,
           pressReleasePages,
-        })
+        }),
       )}
     </main>
   );

@@ -31,7 +31,7 @@ const HeroChips = (props: HeroChipsProps) => {
 
   const BackgroundImage = (
     <Box
-      role="presentation"
+      role='presentation'
       sx={{
         position: 'absolute',
         inset: 0,
@@ -40,7 +40,7 @@ const HeroChips = (props: HeroChipsProps) => {
         width: '100%',
       }}
     >
-      {background &&
+      {background && (
         <img
           src={background.src}
           srcSet={background.srcSet}
@@ -52,7 +52,7 @@ const HeroChips = (props: HeroChipsProps) => {
             objectFit: 'cover',
           }}
         />
-      }
+      )}
     </Box>
   );
 
@@ -94,11 +94,15 @@ const HeroChips = (props: HeroChipsProps) => {
             variant='body1'
             color={textColor}
             mb={2}
-            sx={{ fontSize: '1rem', '& p': {
-              color: textColor
-            }, '& a': {
-              color: linkColor
-            } }}
+            sx={{
+              fontSize: '1rem',
+              '& p': {
+                color: textColor,
+              },
+              '& a': {
+                color: linkColor,
+              },
+            }}
             textAlign='center'
           >
             {subtitle}

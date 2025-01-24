@@ -26,8 +26,8 @@ export const HowToStep = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      ? palette.primary.main
+      : palette.custom.primaryColorDark;
 
   return (
     <Stack

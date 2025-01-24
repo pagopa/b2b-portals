@@ -21,7 +21,9 @@ LightHeroBig.args = {
   inverse: false,
 };
 
-export const LightHeroBigStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
+export const LightHeroBigStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
 LightHeroBigStoreButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
@@ -32,7 +34,8 @@ LightHeroBigStoreButtons.args = {
   },
 };
 
-export const LightHeroBigStoreButtonsWithLink: StoryFn<typeof Hero> = HeroTemplate.bind({});
+export const LightHeroBigStoreButtonsWithLink: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
 LightHeroBigStoreButtonsWithLink.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
@@ -47,7 +50,9 @@ LightHeroBigStoreButtonsWithLink.args = {
   },
 };
 
-export const LightHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind({});
+export const LightHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
+  {}
+);
 LightHeroBigNoButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
@@ -75,7 +80,7 @@ LightHeroBigInvertedStoreButtons.args = {
 
 export const LightHeroBigInvertedStoreButtonsWithLink: StoryFn<typeof Hero> =
   HeroTemplate.bind({});
-  LightHeroBigInvertedStoreButtonsWithLink.args = {
+LightHeroBigInvertedStoreButtonsWithLink.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
   inverse: true,
@@ -104,9 +109,8 @@ LightHeroMedium.args = {
   inverse: false,
 };
 
-export const LightHeroMediumStoreButtonsWithLink: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {}
-);
+export const LightHeroMediumStoreButtonsWithLink: StoryFn<typeof Hero> =
+  HeroTemplate.bind({});
 LightHeroMediumStoreButtonsWithLink.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
@@ -153,7 +157,7 @@ LightHeroMediumInvertedStoreButtons.args = {
 
 export const LightHeroMediumInvertedStoreButtonsWithLink: StoryFn<typeof Hero> =
   HeroTemplate.bind({});
-  LightHeroMediumInvertedStoreButtonsWithLink.args = {
+LightHeroMediumInvertedStoreButtonsWithLink.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
   inverse: true,

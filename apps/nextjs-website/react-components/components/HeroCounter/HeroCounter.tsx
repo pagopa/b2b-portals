@@ -37,7 +37,7 @@ const HeroCounter = ({
 
   const BackgroundImage = (
     <Box
-      role="presentation"
+      role='presentation'
       sx={{
         position: 'absolute',
         inset: 0,
@@ -46,7 +46,7 @@ const HeroCounter = ({
         width: '100%',
       }}
     >
-      {background &&
+      {background && (
         <img
           src={background.src}
           srcSet={background.srcSet}
@@ -58,7 +58,7 @@ const HeroCounter = ({
             objectFit: 'cover',
           }}
         />
-      }
+      )}
     </Box>
   );
 

@@ -45,15 +45,20 @@ export const fetchSiteWideSEO = ({
 }: AppEnv): Promise<SiteWideSEO> =>
   extractFromResponse(
     fetchFun(
-      `${
-        extractTenantStrapiApiData(config).baseUrl
-      }/api/general?populate=metaImage,favicon,appleTouchIcon,manifest,locales`,
+      `${extractTenantStrapiApiData(config).baseUrl}/api/general
+?populate[0]=metaImage
+&populate[1]=favicon
+&populate[2]=appleTouchIcon
+&populate[3]=manifest
+&populate[4]=locales
+      `,
       {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     ),
-    SiteWideSEOCodec
+    SiteWideSEOCodec,
   );

@@ -90,13 +90,17 @@ describe('getPreHeader', () => {
     await getPreHeader({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-header/?locale=it&populate=leftCtas,rightCtas`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-header/?locale=it
+&populate[0]=leftCtas
+&populate[1]=rightCtas
+      `,
       {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     );
   });
 

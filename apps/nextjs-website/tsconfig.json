@@ -16,7 +16,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@react-components/*": ["./react-components/*"],
+      "@react-components/*": ["./react-components/*"]
     },
     "target": "es2021",
     "esModuleInterop": true,
@@ -34,7 +34,7 @@
     "noUnusedParameters": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "declaration": true,
+    "declaration": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

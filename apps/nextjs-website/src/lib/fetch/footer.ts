@@ -59,13 +59,21 @@ export const getFooter = ({
     fetchFun(
       `${
         extractTenantStrapiApiData(config).baseUrl
-      }/api/footer/?locale=${locale}&populate[0]=companyLink,links_aboutUs.links,links_followUs.links,links_followUs.socialLinks,links_resources.links,links_services.links`,
+      }/api/footer/?locale=${locale}
+&populate[0]=companyLink
+&populate[1]=links_aboutUs.links
+&populate[2]=links_followUs.links
+&populate[3]=links_followUs.socialLinks
+&populate[4]=links_resources.links
+&populate[5]=links_services.links
+      `,
       {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+          'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     ),
-    FooterDataCodec
+    FooterDataCodec,
   );

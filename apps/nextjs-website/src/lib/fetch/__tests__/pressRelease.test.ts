@@ -98,15 +98,16 @@ describe('getNavigation', () => {
 
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases?locale=it&pagination[pageSize]=100
-        &populate[seo][populate][0]=metaTitle
-        &populate[pressRelease]=*
+&populate[0]=seo
+&populate[1]=pressRelease
         `,
       {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     );
   });
   it('should parse navigation without error', async () => {

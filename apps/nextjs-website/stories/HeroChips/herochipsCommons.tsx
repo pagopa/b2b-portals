@@ -24,7 +24,7 @@ const createHeroChipsProps = (
       background: {
         src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
         srcSet: '',
-      }
+      },
     }),
     chips: [
       { label: 'Notifiche', targetID: 'notifiche' },

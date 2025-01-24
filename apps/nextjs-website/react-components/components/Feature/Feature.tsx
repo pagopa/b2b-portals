@@ -23,8 +23,10 @@ const Feature = ({
   const [activeStep, setActiveStep] = useState(0);
   const muiTheme = useTheme();
 
-  const handleStepChange = (step: number) => {
-    setActiveStep(step);
+  const handleStepChange = (step?: number) => {
+    if (step) {
+      setActiveStep(step);
+    }
     return step;
   };
 

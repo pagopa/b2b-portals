@@ -90,13 +90,20 @@ describe('fetchSiteWideSEO', () => {
     await fetchSiteWideSEO(appEnv);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/general?populate=metaImage,favicon,appleTouchIcon,manifest,locales`,
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/general
+?populate[0]=metaImage
+&populate[1]=favicon
+&populate[2]=appleTouchIcon
+&populate[3]=manifest
+&populate[4]=locales
+      `,
       {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          'Strapi-Response-Format': 'v4',
         },
-      }
+      },
     );
   });
 

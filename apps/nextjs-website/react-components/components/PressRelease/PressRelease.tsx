@@ -16,7 +16,7 @@ const PressRelease = (props: PressReleaseProps) => {
 
   return (
     <Box
-      component="section"
+      component='section'
       {...(sectionID && { id: sectionID })}
       sx={{
         width: '100%',
@@ -35,8 +35,8 @@ const PressRelease = (props: PressReleaseProps) => {
         }}
       >
         <Typography
-          variant="overline"
-          component="div"
+          variant='overline'
+          component='div'
           sx={{
             color: eyeletColor,
             fontSize: { xs: '16px', md: '16px' },
@@ -46,16 +46,16 @@ const PressRelease = (props: PressReleaseProps) => {
           {date}
         </Typography>
         <Typography
-          variant="h4"
-          component="h2"
+          variant='h4'
+          component='h2'
           sx={{ fontSize: { xs: '32px', md: '38px' }, color: textColor }}
         >
           {title}
         </Typography>
         {subtitle && (
           <Typography
-            variant="h6"
-            component="h3"
+            variant='h6'
+            component='h3'
             sx={{
               fontSize: { xs: '22px', md: '24px' },
               mt: 2,
@@ -66,8 +66,8 @@ const PressRelease = (props: PressReleaseProps) => {
           </Typography>
         )}
         <Typography
-          component="div"
-          variant="body1"
+          component='div'
+          variant='body1'
           sx={{
             fontSize: { xs: '14px', md: '16px' },
             mt: 1,

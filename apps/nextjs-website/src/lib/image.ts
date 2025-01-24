@@ -22,8 +22,8 @@ export const makeSrcSetFromStrapiImageData = ({
   return large
     ? `${small} 500w, ${medium} 750w, ${large} 1000w, ${original} ${originalWidth}w`
     : medium
-    ? `${small} 500w, ${medium} 750w, ${original} ${originalWidth}w`
-    : small
-    ? `${small} 500w, ${original} ${originalWidth}w`
-    : `${original} ${originalWidth}w`;
+      ? `${small} 500w, ${medium} 750w, ${original} ${originalWidth}w`
+      : small
+        ? `${small} 500w, ${original} ${originalWidth}w`
+        : `${original} ${originalWidth}w`;
 };
