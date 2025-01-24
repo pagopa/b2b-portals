@@ -6,6 +6,20 @@ import { LocalizeURL } from '@/lib/linkLocalization';
 import { PressReleaseList as PressReleaseListRC } from '@react-components/components';
 import { PressReleaseListProps } from '@react-components/types';
 
+const formatDateToLocale = (dateString: string, locale: string): string => {
+  const date = new Date(dateString);
+
+  if (isNaN(date.getTime())) {
+    return dateString;
+  }
+
+  return date.toLocaleDateString(locale, {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
 const makePressReleaseListProps = ({
   locale,
   defaultLocale,
@@ -17,7 +31,7 @@ const makePressReleaseListProps = ({
   }): PressReleaseListProps => ({
   ...rest,
   pressReleases: pressReleasePages.map((PRPage) => ({
-    date: PRPage.pressRelease.date,
+    date: formatDateToLocale(PRPage.pressRelease.date, locale),
     title: PRPage.pressRelease.title,
     link: {
       label: locale === 'it' ? 'Leggi' : 'Read',
