@@ -4,6 +4,7 @@ import { MUIButtonSizeCodec } from './types/MUIButtonSize';
 import { MUIButtonIconCodec } from './types/icons/ButtonIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
+import { Locale } from './siteWideSEO';
 
 const PreHeaderButtonCodec = t.strict({
   text: t.string,
@@ -34,7 +35,7 @@ export const getPreHeader = ({
   config,
   fetchFun,
   locale,
-}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<PreHeaderData> =>
+}: AppEnv & { readonly locale: Locale }): Promise<PreHeaderData> =>
   extractFromResponse(
     fetchFun(
       `${

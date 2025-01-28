@@ -3,11 +3,12 @@ import parse from 'html-react-parser';
 import { Typography } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { LocalizeMarkdownLinks } from '@/lib/linkLocalization';
+import { Locale } from '@/lib/fetch/siteWideSEO';
 
 type MarkdownRendererProps = {
   markdown: string;
-  locale: 'it' | 'en';
-  defaultLocale: 'it' | 'en';
+  locale: Locale;
+  defaultLocale: Locale;
   variant?: Variant;
 };
 

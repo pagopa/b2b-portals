@@ -6,6 +6,15 @@ import { Footer as FooterRC } from '@react-components/components';
 import { FooterProps } from '@react-components/types';
 import { FooterData } from '@/lib/fetch/footer';
 import { LocalizeURL } from '@/lib/linkLocalization';
+import { Locale } from '@/lib/fetch/siteWideSEO';
+
+const LanguageSwitchValues = {
+  it: 'Italiano',
+  en: 'English',
+  de: 'Deutsch',
+  fr: 'Français',
+  sl: 'Slovenski',
+};
 
 const makeFooterProps = ({
   legalInfo,
@@ -19,9 +28,9 @@ const makeFooterProps = ({
   companyLink,
   ...rest
 }: FooterData['data']['attributes'] & {
-  locales: Array<'it' | 'en'>;
-  defaultLocale: 'it' | 'en';
-  activeLocale: 'it' | 'en';
+  locales: Array<Locale>;
+  defaultLocale: Locale;
+  activeLocale: Locale;
 }): FooterProps => ({
   legalInfo: MarkdownRenderer({
     markdown: legalInfo,
@@ -70,12 +79,12 @@ const makeFooterProps = ({
   },
   languages: locales.map((locale) => ({
     id: locale,
-    value: locale === 'en' ? 'English' : 'Italiano',
+    value: LanguageSwitchValues[locale],
     href: defaultLocale === locale ? '/' : `/${locale}`,
   })),
   activeLanguage: {
     id: activeLocale,
-    value: activeLocale === 'en' ? 'English' : 'Italiano',
+    value: LanguageSwitchValues[activeLocale],
     href: '',
   },
   companyLink: {
@@ -91,12 +100,16 @@ const makeFooterProps = ({
 
 const Footer = (
   props: FooterData['data']['attributes'] & {
-    locales: Array<'it' | 'en'>;
-    defaultLocale: 'it' | 'en';
+    locales: Array<Locale>;
+    defaultLocale: Locale;
   },
 ) => {
-  const pathname = usePathname();
-  const activeLocale = pathname.slice(1, 3) as 'it' | 'en';
+  const pathname = usePathname() + '/'; // Add final slash to make sure not to miss a non-default locale's homepage (e.g.: \en)
+  const activeLocale = ['it/', 'en/', 'de/', 'fr/', 'sl/'].includes(
+    pathname.slice(1, 4),
+  ) // Include '/' to make sure not to detect slugs happening to begin with the same letters (e.g.: /enroll)
+    ? (pathname.slice(1, 3) as Locale)
+    : props.defaultLocale;
 
   return <FooterRC {...makeFooterProps({ ...props, activeLocale })} />;
 };

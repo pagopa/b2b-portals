@@ -8,6 +8,7 @@ import {
 import { HeaderMUIIconCodec } from './types/icons/HeaderIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
+import { Locale } from './siteWideSEO';
 
 const HeaderPageDataCodec = t.strict({
   attributes: t.strict({
@@ -111,7 +112,7 @@ export const getHeader = ({
   config,
   fetchFun,
   locale,
-}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<HeaderData> =>
+}: AppEnv & { readonly locale: Locale }): Promise<HeaderData> =>
   extractFromResponse(
     fetchFun(
       `${extractTenantStrapiApiData(config).baseUrl}/api/header?locale=${locale}

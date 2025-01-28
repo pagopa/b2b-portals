@@ -62,6 +62,18 @@
     },
     "mixpanelToken": {
       "type": "string"
+    },
+    "defaultLocale": {
+      "type": "enumeration",
+      "enum": [
+        "it",
+        "en",
+        "de",
+        "fr",
+        "sl"
+      ],
+      "required": true,
+      "default": "it"
     }
   }
 }

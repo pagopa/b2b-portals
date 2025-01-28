@@ -54,7 +54,8 @@ export default ({ env }: any) => ({
             url: env('PREVIEW_URL'),
             query: {
               type: 'press-release',
-              pageID: '{id}',
+              documentID: '{documentId}',
+              locale: '{locale}',
               secret: env('PREVIEW_TOKEN'),
               tenant: env('ENVIRONMENT'),
             },

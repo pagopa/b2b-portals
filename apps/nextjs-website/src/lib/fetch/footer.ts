@@ -3,6 +3,7 @@ import { extractFromResponse } from './extractFromResponse';
 import { SocialIconCodec } from './types/icons/SocialIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
+import { Locale } from './siteWideSEO';
 
 // Codec
 const CompanyLinkCodec = t.strict({
@@ -54,7 +55,7 @@ export const getFooter = ({
   config,
   fetchFun,
   locale,
-}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<FooterData> =>
+}: AppEnv & { readonly locale: Locale }): Promise<FooterData> =>
   extractFromResponse(
     fetchFun(
       `${

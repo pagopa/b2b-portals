@@ -10,7 +10,7 @@ import {
   getSiteWideSEO,
   isPreviewMode,
 } from '@/lib/api';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { Locale, ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 // Fetch themeVariant from General
 // Default to 'SEND' if General isn't present
@@ -32,7 +32,7 @@ const PreviewPage = async ({
     type: 'page' | 'press-release' | undefined;
     secret: string | undefined;
     documentID: string | undefined;
-    locale: 'it' | 'en' | undefined;
+    locale: Locale | undefined;
     tenant: Config['ENVIRONMENT'] | undefined;
   };
 }) => {

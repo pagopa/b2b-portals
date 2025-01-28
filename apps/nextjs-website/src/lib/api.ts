@@ -7,7 +7,7 @@ import { navigationToPageDataArray, PageData } from './navigation';
 import { PreHeaderAttributes, getPreHeader } from './fetch/preHeader';
 import { FooterData, getFooter } from './fetch/footer';
 import { getHeader, HeaderData } from './fetch/header';
-import { SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
+import { Locale, SiteWideSEO, fetchSiteWideSEO } from './fetch/siteWideSEO';
 import {
   PageIDs,
   PreviewPageData,
@@ -35,7 +35,7 @@ const appEnv = pipe(
 
 // Return all the pages
 export const getAllPages = async (
-  locale: 'it' | 'en',
+  locale: Locale,
 ): Promise<ReadonlyArray<PageData>> => {
   const navigation = await getNavigation({ ...appEnv, locale });
   const pressReleases = await getPressReleases({ ...appEnv, locale });
@@ -47,7 +47,7 @@ export const getAllPages = async (
 };
 
 export const getPressReleasePages = async (
-  locale: 'it' | 'en',
+  locale: Locale,
 ): Promise<ReadonlyArray<PressReleasePage>> => {
   const { data } = await getPressReleases({ ...appEnv, locale });
 
@@ -56,15 +56,15 @@ export const getPressReleasePages = async (
 
 // Return PreHeaderProps
 export const getPreHeaderProps = async (
-  locale: 'it' | 'en',
+  locale: Locale,
 ): Promise<PreHeaderAttributes | null> => {
   const { data } = await getPreHeader({ ...appEnv, locale });
   return data?.attributes ?? null;
 };
 
 export const getHeaderProps = async (
-  locale: 'it' | 'en',
-  defaultLocale: 'it' | 'en',
+  locale: Locale,
+  defaultLocale: Locale,
 ): Promise<HeaderData['data']['attributes']['header'][0]> => {
   const {
     data: { attributes },
@@ -88,7 +88,7 @@ export const getHeaderProps = async (
 };
 
 export const getFooterProps = async (
-  locale: 'it' | 'en',
+  locale: Locale,
 ): Promise<FooterData['data']['attributes']> => {
   const {
     data: { attributes },
@@ -97,7 +97,7 @@ export const getFooterProps = async (
 };
 
 export const getPreFooterProps = async (
-  locale: 'it' | 'en',
+  locale: Locale,
 ): Promise<PreFooterAttributes | null> => {
   const { data } = await getPreFooter({ ...appEnv, locale });
   return data?.attributes ?? null;
@@ -105,7 +105,7 @@ export const getPreFooterProps = async (
 
 // Return PageProps given the page path
 export const getPageProps = async (
-  locale: 'it' | 'en',
+  locale: Locale,
   slugString: string | undefined,
 ): Promise<PageData | undefined> => {
   if (slugString === undefined) {
@@ -122,12 +122,22 @@ export const getSiteWideSEO = async (): Promise<
   const {
     data: { attributes },
   } = await fetchSiteWideSEO(appEnv);
-  return attributes;
+
+  const localesArray = Object.keys(attributes.locales).filter(
+    (key) => attributes.locales[key as Locale],
+  ) as ReadonlyArray<Locale>;
+
+  return {
+    ...attributes,
+    defaultLocale: localesArray.includes(attributes.defaultLocale) // Is defaultLocale amongst the locales selected for building?
+      ? attributes.defaultLocale // Y: Use it as-is
+      : (localesArray[0] ?? 'it'), // N: Grab the first locale as the backup defaultLocale ('it' fallback is only needed for typescript)
+  };
 };
 
 export const getAllPageIDs = async (
   tenant: Config['ENVIRONMENT'],
-  locale: 'it' | 'en',
+  locale: Locale,
 ): Promise<PageIDs['data']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
@@ -145,7 +155,7 @@ export const getAllPageIDs = async (
 
 export const getAllPressReleaseIDs = async (
   tenant: Config['ENVIRONMENT'],
-  locale: 'it' | 'en',
+  locale: Locale,
 ): Promise<PageIDs['data']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
@@ -164,7 +174,7 @@ export const getAllPressReleaseIDs = async (
 export const getPageDataFromID = async (
   tenant: Config['ENVIRONMENT'],
   documentID: string,
-  locale: 'it' | 'en',
+  locale: Locale,
 ): Promise<PreviewPageData['data']['attributes']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
@@ -187,7 +197,7 @@ export const getPageDataFromID = async (
 export const getPressReleaseDataFromID = async (
   tenant: Config['ENVIRONMENT'],
   documentID: string,
-  locale: 'it' | 'en',
+  locale: Locale,
 ): Promise<PreviewPageData['data']['attributes']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {

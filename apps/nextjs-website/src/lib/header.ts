@@ -1,10 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 import { HeaderData, HeaderSublink } from './fetch/header';
+import { Locale } from './fetch/siteWideSEO';
 
 const formatSlug = (
   slug: string,
-  locale: 'it' | 'en',
-  defaultLocale: 'it' | 'en',
+  locale: Locale,
+  defaultLocale: Locale,
 ): string => {
   const localeString = locale === defaultLocale ? '' : `/${locale}`;
   const slugString = slug === 'homepage' ? '/' : `/${slug}`;
@@ -18,8 +19,8 @@ const formatSublink = ({
   page,
   ...sublink
 }: HeaderSublink & {
-  readonly locale: 'it' | 'en';
-  readonly defaultLocale: 'it' | 'en';
+  readonly locale: Locale;
+  readonly defaultLocale: Locale;
 }): HeaderSublink => ({
   ...sublink,
   page: {
@@ -38,8 +39,8 @@ const formatSublink = ({
 // 2. Prepends the locale, unless it's the default one
 export const formatHeaderLinks = (
   header: HeaderData['data']['attributes']['header'][0],
-  locale: 'it' | 'en',
-  defaultLocale: 'it' | 'en',
+  locale: Locale,
+  defaultLocale: Locale,
 ): HeaderData['data']['attributes']['header'][0] => {
   switch (header.__component) {
     case 'headers.standard-header':

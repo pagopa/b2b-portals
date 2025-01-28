@@ -4,6 +4,14 @@ import { StrapiImageRequiredSchema } from './types/StrapiImage';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
+export const LocaleCodec = t.keyof({
+  it: null,
+  en: null,
+  de: null,
+  fr: null,
+  sl: null,
+});
+
 export const ThemeVariantCodec = t.keyof({
   IO: null,
   SEND: null,
@@ -25,18 +33,23 @@ const SiteWideSEOCodec = t.strict({
       locales: t.strict({
         it: t.boolean,
         en: t.boolean,
+        fr: t.boolean,
+        de: t.boolean,
+        sl: t.boolean,
       }),
+      defaultLocale: LocaleCodec,
     }),
   }),
 });
 
 export type SiteWideSEO = t.TypeOf<typeof SiteWideSEOCodec>;
 export type ThemeVariant = t.TypeOf<typeof ThemeVariantCodec>;
+export type Locale = t.TypeOf<typeof LocaleCodec>;
 
 export interface SiteWidePageData {
   readonly themeVariant: ThemeVariant;
-  readonly locale: 'it' | 'en';
-  readonly defaultLocale: 'it' | 'en';
+  readonly locale: Locale;
+  readonly defaultLocale: Locale;
 }
 
 export const fetchSiteWideSEO = ({

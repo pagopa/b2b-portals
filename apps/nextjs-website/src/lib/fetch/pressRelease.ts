@@ -4,6 +4,7 @@ import { PageSEOCodec } from './types/SEO';
 import { PressReleaseSectionContentCodec } from './types/PageSection';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
+import { Locale } from './siteWideSEO';
 
 const PressReleasePageCodec = t.strict({
   slug: t.string,
@@ -27,7 +28,7 @@ export const getPressReleases = ({
   config,
   fetchFun,
   locale,
-}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<PressReleases> =>
+}: AppEnv & { readonly locale: Locale }): Promise<PressReleases> =>
   extractFromResponse(
     fetchFun(
       // All query parameters in the following URL indicate specific fields that would not otherwise be automatically returned by Strapi

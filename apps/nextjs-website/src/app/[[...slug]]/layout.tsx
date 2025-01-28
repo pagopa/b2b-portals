@@ -15,6 +15,7 @@ import {
   getAllPages,
 } from '@/lib/api';
 import PreFooter from '@/components/PreFooter';
+import { Locale } from '@/lib/fetch/siteWideSEO';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -55,10 +56,7 @@ export const generateStaticParams = async (): Promise<
   }
 
   // Get locales
-  const { locales } = await getSiteWideSEO();
-
-  // Set default locale as /it, unless /en is the only active locale
-  const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
+  const { defaultLocale, locales } = await getSiteWideSEO();
 
   const pages_it: Array<LayoutProps['params']> = locales.it
     ? (await getAllPages('it')).map((page) => ({
@@ -72,8 +70,26 @@ export const generateStaticParams = async (): Promise<
         slug: defaultLocale === 'en' ? [...page.slug] : ['en', ...page.slug],
       }))
     : [];
+  const pages_fr: Array<LayoutProps['params']> = locales.fr
+    ? (await getAllPages('fr')).map((page) => ({
+        // Prepend locale as the first level slug (unless it's the default locale)
+        slug: defaultLocale === 'fr' ? [...page.slug] : ['fr', ...page.slug],
+      }))
+    : [];
+  const pages_de: Array<LayoutProps['params']> = locales.de
+    ? (await getAllPages('de')).map((page) => ({
+        // Prepend locale as the first level slug (unless it's the default locale)
+        slug: defaultLocale === 'de' ? [...page.slug] : ['de', ...page.slug],
+      }))
+    : [];
+  const pages_sl: Array<LayoutProps['params']> = locales.sl
+    ? (await getAllPages('sl')).map((page) => ({
+        // Prepend locale as the first level slug (unless it's the default locale)
+        slug: defaultLocale === 'sl' ? [...page.slug] : ['sl', ...page.slug],
+      }))
+    : [];
 
-  return [...pages_it, ...pages_en];
+  return [...pages_it, ...pages_en, ...pages_fr, ...pages_de, ...pages_sl];
 };
 
 export default async function Layout({
@@ -84,9 +100,8 @@ export default async function Layout({
     return null;
   }
 
-  const { locales, matomoID, mixpanelToken, themeVariant } =
+  const { defaultLocale, locales, matomoID, mixpanelToken, themeVariant } =
     await getSiteWideSEO();
-  const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the locale to the default locale
@@ -94,8 +109,8 @@ export default async function Layout({
   const locale =
     slug === undefined
       ? defaultLocale
-      : slug[0] === 'it' || slug[0] === 'en'
-        ? slug[0]
+      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
+        ? (slug[0] as Locale)
         : defaultLocale;
 
   const preHeaderProps = await getPreHeaderProps(locale);
@@ -103,7 +118,7 @@ export default async function Layout({
   const footerProps = await getFooterProps(locale);
   const preFooterProps = await getPreFooterProps(locale);
   const localesArray = Object.keys(locales).filter(
-    (locale) => locales[locale as 'it' | 'en'],
+    (locale) => locales[locale as Locale],
   );
 
   if (mixpanelToken) {
@@ -136,7 +151,7 @@ export default async function Layout({
           )}
           <Footer
             {...footerProps}
-            locales={localesArray as Array<'it' | 'en'>}
+            locales={localesArray as Array<Locale>}
             defaultLocale={defaultLocale}
           />
           <Script

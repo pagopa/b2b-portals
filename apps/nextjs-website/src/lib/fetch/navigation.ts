@@ -4,6 +4,7 @@ import { PageSectionCodec } from './types/PageSection';
 import { PageSEOCodec } from './types/SEO';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
+import { Locale } from './siteWideSEO';
 
 const NavigationCodec = t.strict({
   data: t.readonlyArray(
@@ -24,7 +25,7 @@ export const getNavigation = ({
   config,
   fetchFun,
   locale,
-}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<Navigation> =>
+}: AppEnv & { readonly locale: Locale }): Promise<Navigation> =>
   extractFromResponse(
     fetchFun(
       // All query parameters in the following URL indicate specific fields that would not otherwise be automatically returned by Strapi
