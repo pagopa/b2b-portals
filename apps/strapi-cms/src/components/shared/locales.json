@@ -1,7 +1,8 @@
 {
   "collectionName": "components_shared_locales",
   "info": {
-    "displayName": "Locales"
+    "displayName": "Locales",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -11,6 +12,21 @@
       "required": true
     },
     "en": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "de": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "fr": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "sl": {
       "type": "boolean",
       "default": false,
       "required": true

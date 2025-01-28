@@ -1,13 +1,15 @@
+import { Locale } from './fetch/siteWideSEO';
+
 interface LocalizeURLProps {
   readonly URL: string;
-  readonly locale: 'it' | 'en';
-  readonly defaultLocale: 'it' | 'en';
+  readonly locale: Locale;
+  readonly defaultLocale: Locale;
 }
 
 interface LocalizeMarkdownLinksProps {
   readonly markdown: string;
-  readonly locale: 'it' | 'en';
-  readonly defaultLocale: 'it' | 'en';
+  readonly locale: Locale;
+  readonly defaultLocale: Locale;
 }
 
 const isValidInternalLink = (URL: string): boolean => {

@@ -45,7 +45,7 @@ export interface FooterColumnProps {
 }
 
 interface Language {
-  id: 'it' | 'en';
+  id: 'it' | 'en' | 'de' | 'fr' | 'sl';
   value: string;
   href: string;
 }

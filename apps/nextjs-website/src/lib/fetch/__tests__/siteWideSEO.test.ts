@@ -73,7 +73,11 @@ const siteWideSEOResponse = {
       locales: {
         it: true,
         en: false,
+        de: false,
+        fr: false,
+        sl: false,
       },
+      defaultLocale: 'it',
     },
   },
 };

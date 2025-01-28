@@ -7,6 +7,7 @@ import {
   isPreviewMode,
 } from '@/lib/api';
 import PageSection from '@/components/PageSection/PageSection';
+import { Locale } from '@/lib/fetch/siteWideSEO';
 
 type PageParams = {
   params: { slug?: string[] };
@@ -28,10 +29,7 @@ export const generateStaticParams = async (): Promise<
   }
 
   // Get locales
-  const { locales } = await getSiteWideSEO();
-
-  // Set default locale as /it, unless /en is the only active locale
-  const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
+  const { defaultLocale, locales } = await getSiteWideSEO();
 
   const pages_it: Array<PageParams['params']> = locales.it
     ? (await getAllPages('it')).map((page) => ({
@@ -45,16 +43,33 @@ export const generateStaticParams = async (): Promise<
         slug: defaultLocale === 'en' ? [...page.slug] : ['en', ...page.slug],
       }))
     : [];
+  const pages_fr: Array<PageParams['params']> = locales.fr
+    ? (await getAllPages('fr')).map((page) => ({
+        // Prepend locale as the first level slug (unless it's the default locale)
+        slug: defaultLocale === 'fr' ? [...page.slug] : ['fr', ...page.slug],
+      }))
+    : [];
+  const pages_de: Array<PageParams['params']> = locales.de
+    ? (await getAllPages('de')).map((page) => ({
+        // Prepend locale as the first level slug (unless it's the default locale)
+        slug: defaultLocale === 'de' ? [...page.slug] : ['de', ...page.slug],
+      }))
+    : [];
+  const pages_sl: Array<PageParams['params']> = locales.sl
+    ? (await getAllPages('sl')).map((page) => ({
+        // Prepend locale as the first level slug (unless it's the default locale)
+        slug: defaultLocale === 'sl' ? [...page.slug] : ['sl', ...page.slug],
+      }))
+    : [];
 
-  return [...pages_it, ...pages_en];
+  return [...pages_it, ...pages_en, ...pages_fr, ...pages_de, ...pages_sl];
 };
 
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
   const { slug } = params;
-  const { locales, ...siteWideSEO } = await getSiteWideSEO();
-  const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
+  const { defaultLocale, ...siteWideSEO } = await getSiteWideSEO();
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to '' and locale to the default locale
@@ -63,7 +78,7 @@ export async function generateMetadata({
   const slugString =
     slug === undefined
       ? ''
-      : slug[0] === 'it' || slug[0] === 'en'
+      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
         ? slug.slice(1).toString()
         : slug.toString();
 
@@ -71,8 +86,8 @@ export async function generateMetadata({
   const locale =
     slug === undefined
       ? defaultLocale
-      : slug[0] === 'it' || slug[0] === 'en'
-        ? slug[0]
+      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
+        ? (slug[0] as Locale)
         : defaultLocale;
 
   const pageProps = await getPageProps(locale, slugString);
@@ -110,8 +125,7 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const { slug } = params;
-  const { locales, themeVariant } = await getSiteWideSEO();
-  const defaultLocale = locales.en && !locales.it ? 'en' : 'it';
+  const { defaultLocale, themeVariant } = await getSiteWideSEO();
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to '' and locale to the default locale
@@ -120,7 +134,7 @@ const Page = async ({ params }: PageParams) => {
   const slugString =
     slug === undefined
       ? ''
-      : slug[0] === 'it' || slug[0] === 'en'
+      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
         ? slug.slice(1).toString()
         : slug.toString();
 
@@ -128,8 +142,8 @@ const Page = async ({ params }: PageParams) => {
   const locale =
     slug === undefined
       ? defaultLocale
-      : slug[0] === 'it' || slug[0] === 'en'
-        ? slug[0]
+      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
+        ? (slug[0] as Locale)
         : defaultLocale;
 
   const pageProps = await getPageProps(locale, slugString);

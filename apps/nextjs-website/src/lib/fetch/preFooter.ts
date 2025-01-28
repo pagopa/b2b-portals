@@ -6,6 +6,7 @@ import { StoreButtonsCodec } from './types/StoreButtons';
 import { StrapiImageSchema } from './types/StrapiImage';
 import { CTAButtonSimpleCodec } from './types/CTAButton';
 import { AppEnv } from '@/AppEnv';
+import { Locale } from './siteWideSEO';
 
 const PageRelationCodec = t.strict({
   attributes: t.strict({
@@ -44,7 +45,7 @@ export const getPreFooter = ({
   config,
   fetchFun,
   locale,
-}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<PreFooterData> =>
+}: AppEnv & { readonly locale: Locale }): Promise<PreFooterData> =>
   extractFromResponse(
     fetchFun(
       `${

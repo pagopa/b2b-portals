@@ -6,6 +6,7 @@ import {
 import { extractFromResponse } from './extractFromResponse';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
+import { Locale, LocaleCodec } from './siteWideSEO';
 
 const PageIDsCodec = t.strict({
   data: t.array(
@@ -18,7 +19,7 @@ const PageIDsCodec = t.strict({
 const PreviewPageDataCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
-      locale: t.union([t.literal('it'), t.literal('en')]),
+      locale: LocaleCodec,
       sections: t.array(PageSectionCodec),
     }),
   }),
@@ -27,7 +28,7 @@ const PreviewPageDataCodec = t.strict({
 const PreviewPressReleaseDataCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
-      locale: t.union([t.literal('it'), t.literal('en')]),
+      locale: LocaleCodec,
       pressRelease: PressReleaseSectionContentCodec,
     }),
   }),
@@ -43,7 +44,7 @@ export const fetchAllPageIDs = ({
   config,
   fetchFun,
   locale,
-}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<PageIDs> =>
+}: AppEnv & { readonly locale: Locale }): Promise<PageIDs> =>
   extractFromResponse(
     fetchFun(
       `${
@@ -65,7 +66,7 @@ export const fetchAllPressReleaseIDs = ({
   config,
   fetchFun,
   locale,
-}: AppEnv & { readonly locale: 'it' | 'en' }): Promise<PageIDs> =>
+}: AppEnv & { readonly locale: Locale }): Promise<PageIDs> =>
   extractFromResponse(
     fetchFun(
       `${
@@ -90,7 +91,7 @@ export const fetchPageFromID = ({
   locale,
 }: AppEnv & {
   readonly documentID: string;
-  readonly locale: 'it' | 'en';
+  readonly locale: Locale;
 }): Promise<PreviewPageData> =>
   extractFromResponse(
     fetchFun(
@@ -128,7 +129,7 @@ export const fetchPressReleaseFromID = ({
   locale,
 }: AppEnv & {
   readonly documentID: string;
-  readonly locale: 'it' | 'en';
+  readonly locale: Locale;
 }): Promise<PreviewPressReleaseData> =>
   extractFromResponse(
     fetchFun(
