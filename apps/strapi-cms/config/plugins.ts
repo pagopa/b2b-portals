@@ -5,8 +5,10 @@ export default ({ env }: any) => ({
       providerOptions: {
         baseUrl: env('CDN_URL'),
         s3Options: {
-          accessKeyId: env('AWS_ACCESS_KEY_ID'),
-          secretAccessKey: env('AWS_ACCESS_SECRET'),
+          credentials: {
+            accessKeyId: env('AWS_ACCESS_KEY_ID'),
+            secretAccessKey: env('AWS_ACCESS_SECRET'),
+          },
           endpoint: env('AWS_BUCKET_ENDPOINT'),
           params: {
             ACL: 'private',
