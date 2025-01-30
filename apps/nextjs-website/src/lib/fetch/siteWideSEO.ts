@@ -23,10 +23,6 @@ const SiteWideSEOCodec = t.strict({
       metaImage: StrapiImageRequiredSchema,
       favicon: StrapiImageRequiredSchema,
       appleTouchIcon: StrapiImageRequiredSchema,
-      manifest: t.strict({
-        name: t.string,
-        shortName: t.string,
-      }),
       matomoID: t.union([t.string, t.null]),
       mixpanelToken: t.union([t.string, t.null]),
       themeVariant: ThemeVariantCodec,
@@ -62,8 +58,7 @@ export const fetchSiteWideSEO = ({
 ?populate[0]=metaImage
 &populate[1]=favicon
 &populate[2]=appleTouchIcon
-&populate[3]=manifest
-&populate[4]=locales
+&populate[3]=locales
       `,
       {
         method: 'GET',
