@@ -13,7 +13,7 @@ import {
 } from '@/lib/fetch/header';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 
-const BadgeTextValues = {
+const LinkLabelValues = {
   it: 'NOVITÀ',
   en: 'NEW',
   de: 'NEU',
@@ -24,14 +24,13 @@ const BadgeTextValues = {
 const makeSublink = (
   sublink: HeaderSublink,
   locale: Locale,
-): { label: string; href: string; isNew: boolean; badge?: string } => ({
+): { label: string; href: string; badge?: string } => ({
   label: sublink.label,
   href: sublink.page.data
     ? sublink.page.data.attributes.slug +
       (sublink.sectionID ? `#${sublink.sectionID}` : '')
     : (sublink.externalURL ?? ''),
-  isNew: sublink.isNew,
-  badge: sublink.isNew ? BadgeTextValues[locale] : '',
+  ...(sublink.isNew && { label: LinkLabelValues[locale] }),
 });
 
 const makeHeaderProps = (
