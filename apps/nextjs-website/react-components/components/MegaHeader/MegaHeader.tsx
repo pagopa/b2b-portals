@@ -17,7 +17,7 @@ import {
   Logo,
   MobileMenu,
   Nav,
-  NewBadge,
+  LinkLabel,
   Overlay,
 } from './MegaHeader.Helpers';
 import { CtaButtons } from '../common/Common';
@@ -235,7 +235,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                   >
                                     {item.label}
                                     {item.badge && (
-                                      <NewBadge>{item.badge}</NewBadge>
+                                      <LinkLabel>{item.badge}</LinkLabel>
                                     )}
                                     <ArrowForwardIcon className='arrowIcon' />
                                   </a>
@@ -304,7 +304,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                         <Typography variant='body2' fontSize={14}>
                           {item.label}
                         </Typography>
-                        {item.badge && <NewBadge>{item.badge}</NewBadge>}
+                        {item.badge && <LinkLabel>{item.badge}</LinkLabel>}
                         <ArrowForwardIcon className='arrowIcon' />
                       </a>
                     ))}

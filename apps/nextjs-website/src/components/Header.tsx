@@ -129,34 +129,26 @@ const makeMegaHeaderProps = (
   })),
 });
 
-const Header = (
-  props: HeaderData['data']['attributes']['header'][0] & {
-    locales: Array<Locale>;
-    defaultLocale: Locale;
-  },
-) => {
-  const pathname = usePathname() + '/';
-  // eslint-disable-next-line
-  
-  const defaultLocale = props.defaultLocale;
-
-  const activeLocale = ['it/', 'en/', 'de/', 'fr/', 'sl/'].includes(
-    pathname.slice(1, 4),
-  )
-    ? (pathname.slice(1, 3) as Locale)
-    : defaultLocale;
-
+const Header = ({
+  locale,
+  defaultLocale,
+  ...props
+}: HeaderData['data']['attributes']['header'][0] & {
+  locale: Locale;
+  defaultLocale: Locale;
+}) => {
+  const pathname = usePathname();
   const menuType = props.__component;
 
   switch (menuType) {
     case 'headers.standard-header':
       return (
         <HeaderRC
-          {...makeHeaderProps(props, pathname, activeLocale, defaultLocale)}
+          {...makeHeaderProps(props, pathname, locale, defaultLocale)}
         />
       );
     case 'headers.mega-header':
-      return <MegaHeaderRC {...makeMegaHeaderProps(props, activeLocale)} />;
+      return <MegaHeaderRC {...makeMegaHeaderProps(props, locale)} />;
   }
 };
 

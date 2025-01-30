@@ -248,7 +248,7 @@ export const Overlay = styled('div')({
   },
 });
 
-export const NewBadge = styled('span')({
+export const LinkLabel = styled('span')({
   color: '#009EA2',
   fontWeight: 600,
   fontSize: 10,

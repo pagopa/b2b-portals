@@ -141,7 +141,7 @@ export default async function Layout({
           )}
           <Header
             {...headerProps}
-            locales={localesArray as Array<Locale>}
+            locale={locale}
             defaultLocale={defaultLocale}
           />
           {children}
