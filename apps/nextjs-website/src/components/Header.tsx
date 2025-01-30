@@ -11,27 +11,34 @@ import {
   MegaHeaderData,
   HeaderSublink,
 } from '@/lib/fetch/header';
+import { Locale } from '@/lib/fetch/siteWideSEO';
+
+const BadgeTextValues = {
+  it: 'NOVITÀ',
+  en: 'NEW',
+  de: 'NEU',
+  fr: 'NOUVEAU',
+  sl: 'NOVO',
+};
 
 const makeSublink = (
   sublink: HeaderSublink,
-): {
-  label: string;
-  href: string;
-  isNew: boolean;
-  badge?: string;
-} => ({
+  locale: Locale,
+): { label: string; href: string; isNew: boolean; badge?: string } => ({
   label: sublink.label,
   href: sublink.page.data
     ? sublink.page.data.attributes.slug +
       (sublink.sectionID ? `#${sublink.sectionID}` : '')
     : (sublink.externalURL ?? ''),
   isNew: sublink.isNew,
-  badge: sublink.isNew ? 'NOVITÀ' : '',
+  badge: sublink.isNew ? BadgeTextValues[locale] : '',
 });
 
 const makeHeaderProps = (
   { productName, menu, logo, beta, supportLink, drawer }: StandardHeaderData,
   pathname: string,
+  locale: Locale,
+  defaultLocale: Locale,
 ): HeaderProps => ({
   beta,
   ...(drawer && {
@@ -42,8 +49,8 @@ const makeHeaderProps = (
         subtitle: MarkdownRenderer({
           markdown: card.subtitle,
           variant: 'body2',
-          locale: 'en',
-          defaultLocale: 'en',
+          locale,
+          defaultLocale,
         }),
       })),
       ctaCard: {
@@ -51,8 +58,8 @@ const makeHeaderProps = (
         subtitle: MarkdownRenderer({
           markdown: drawer.ctaCard.subtitle,
           variant: 'body2',
-          locale: 'en',
-          defaultLocale: 'en',
+          locale,
+          defaultLocale,
         }),
       },
     },
@@ -77,7 +84,7 @@ const makeHeaderProps = (
     href: link.page.data?.attributes.slug,
     alignRight: link.alignRight,
     ...(link.sublinks.length > 0 && {
-      items: link.sublinks.map(makeSublink),
+      items: link.sublinks.map((sublink) => makeSublink(sublink, locale)),
     }),
     ...(link.page.data && {
       active: pathname === link.page.data.attributes.slug,
@@ -93,11 +100,10 @@ const makeHeaderProps = (
   })),
 });
 
-const makeMegaHeaderProps = ({
-  logo,
-  ctaButton,
-  menu,
-}: MegaHeaderData): MegaHeaderProps => ({
+const makeMegaHeaderProps = (
+  { logo, ctaButton, menu }: MegaHeaderData,
+  locale: Locale,
+): MegaHeaderProps => ({
   ...(ctaButton && {
     ctaButton: {
       ...ctaButton,
@@ -110,7 +116,9 @@ const makeMegaHeaderProps = ({
     primary: link.label,
     secondary: link.sublinkGroups.map((sublinkGroup) => ({
       title: sublinkGroup.title,
-      items: sublinkGroup.sublinks.map(makeSublink),
+      items: sublinkGroup.sublinks.map((sublink) =>
+        makeSublink(sublink, locale),
+      ),
     })),
     ...(link.ctaButton && {
       ctaButton: {
@@ -121,16 +129,34 @@ const makeMegaHeaderProps = ({
   })),
 });
 
-const Header = (props: HeaderData['data']['attributes']['header'][0]) => {
-  const pathname = usePathname();
+const Header = (
+  props: HeaderData['data']['attributes']['header'][0] & {
+    locales: Array<Locale>;
+    defaultLocale: Locale;
+  },
+) => {
+  const pathname = usePathname() + '/';
   // eslint-disable-next-line
+  
+  const defaultLocale = props.defaultLocale;
+
+  const activeLocale = ['it/', 'en/', 'de/', 'fr/', 'sl/'].includes(
+    pathname.slice(1, 4),
+  )
+    ? (pathname.slice(1, 3) as Locale)
+    : defaultLocale;
+
   const menuType = props.__component;
 
   switch (menuType) {
     case 'headers.standard-header':
-      return <HeaderRC {...makeHeaderProps(props, pathname)} />;
+      return (
+        <HeaderRC
+          {...makeHeaderProps(props, pathname, activeLocale, defaultLocale)}
+        />
+      );
     case 'headers.mega-header':
-      return <MegaHeaderRC {...makeMegaHeaderProps(props)} />;
+      return <MegaHeaderRC {...makeMegaHeaderProps(props, activeLocale)} />;
   }
 };
 
