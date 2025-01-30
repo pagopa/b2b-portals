@@ -30,6 +30,13 @@ declare module '@mui/material/styles' {
       readonly black: string;
       readonly white: string;
       readonly matteWhiteBorder: string;
+      readonly ioChipsBackgroundColorLight: string;
+      readonly sendChipsBackgroundColorLight: string;
+      readonly chipsBackgroundColorDark: string;
+      readonly ioChipsBackgroundColorLightHover: string;
+      readonly sendChipsBackgroundColorLightHover: string;
+      readonly chipsBackgroundColorDarkHover: string;
+      readonly chipsTextColor: string;
     };
   }
   // interface PaletteOptions {
@@ -85,6 +92,13 @@ export const theme = createTheme(MUIItaliaTheme, {
       black: '#000000',
       white: '#FFF',
       matteWhiteBorder: 'ffffff80',
+      ioChipsBackgroundColorLight: '#0B3EE3',
+      sendChipsBackgroundColorLight: '#0073E6',
+      chipsBackgroundColorDark: '#ebebf52e',
+      ioChipsBackgroundColorLightHover: '#0A34CC',
+      sendChipsBackgroundColorLightHover: '#0066CC',
+      chipsBackgroundColorDarkHover: '#ebebf54d',
+      chipsTextColor: '#ffffff',
     },
   },
 });
