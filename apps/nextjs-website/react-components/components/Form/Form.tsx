@@ -96,8 +96,8 @@ const Form = ({
       email: !validateRequired(formData.email)
         ? 'Campo obbligatorio'
         : !validateEmail(formData.email)
-        ? 'Email non valida'
-        : null,
+          ? 'Email non valida'
+          : null,
     };
 
     setValidationErrors(inputErrors);
@@ -142,11 +142,14 @@ const Form = ({
                 ? [formData.category]
                 : [defaultCategoryID],
             email: formData.email,
-            ...(showName && { name: formData.name }),
-            ...(showSurname && { surname: formData.surname }),
-            ...(showOrganization && { organization: formData.organization }),
+            // Optional fields must be all present or all absent (default values are inconsequential)
+            ...((showName || showSurname || showOrganization) && {
+              name: showName ? formData.name : 'none',
+              surname: showSurname ? formData.surname : 'none',
+              organization: showOrganization ? formData.organization : 'none',
+            }),
           }),
-        }
+        },
       );
 
       const { email } = await res.json();
@@ -359,8 +362,8 @@ const Form = ({
               theme === 'dark'
                 ? palette.custom.white
                 : themeVariant === 'SEND'
-                ? palette.primary.main
-                : palette.custom.blueIO[500],
+                  ? palette.primary.main
+                  : palette.custom.blueIO[500],
             color:
               theme === 'dark'
                 ? themeVariant === 'SEND'
@@ -372,8 +375,8 @@ const Form = ({
                 theme === 'dark'
                   ? palette.custom.white
                   : themeVariant === 'SEND'
-                  ? palette.primary.main
-                  : palette.custom.blueIO[500],
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500],
             },
           }}
           onClick={handleSubmit}
