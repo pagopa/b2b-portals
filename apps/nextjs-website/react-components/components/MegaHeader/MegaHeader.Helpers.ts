@@ -247,3 +247,15 @@ export const Overlay = styled('div')({
     display: 'block',
   },
 });
+
+export const NewBadge = styled('span')({
+  color: '#009EA2',
+  fontWeight: 600,
+  fontSize: 10,
+  lineHeight: '10px',
+  marginLeft: 5,
+  marginBottom: 8,
+  textTransform: 'uppercase',
+  letterSpacing: '0.5px',
+  fontFamily: '"Readex Pro", sans-serif',
+});

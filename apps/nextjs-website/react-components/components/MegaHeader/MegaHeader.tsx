@@ -17,6 +17,7 @@ import {
   Logo,
   MobileMenu,
   Nav,
+  NewBadge,
   Overlay,
 } from './MegaHeader.Helpers';
 import { CtaButtons } from '../common/Common';
@@ -33,6 +34,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [activeItem, setActiveItem] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const activeMenuItem = menuItems.find(
+    (menuItem) => menuItem.primary === activeItem
+  );
+  const activeCta = activeMenuItem?.ctaButton || ctaButton;
 
   const handleClick = (
     event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,
@@ -133,11 +139,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   </Typography>
                 ))}
               </Nav>
-              {ctaButton && (
+              {activeCta && (
                 <CtaButtons
                   ctaButtons={[
                     {
-                      ...ctaButton,
+                      ...activeCta,
                       sx: {
                         backgroundColor: '#0B3EE3',
                         color: 'white',
@@ -228,6 +234,9 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                     }}
                                   >
                                     {item.label}
+                                    {item.badge && (
+                                      <NewBadge>{item.badge}</NewBadge>
+                                    )}
                                     <ArrowForwardIcon className='arrowIcon' />
                                   </a>
                                 ))}
@@ -295,6 +304,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                         <Typography variant='body2' fontSize={14}>
                           {item.label}
                         </Typography>
+                        {item.badge && <NewBadge>{item.badge}</NewBadge>}
                         <ArrowForwardIcon className='arrowIcon' />
                       </a>
                     ))}
@@ -303,11 +313,11 @@ const MegaHeader = (props: MegaHeaderProps) => {
               </Stack>
             </React.Fragment>
           ))}
-          {ctaButton && (
+          {activeCta && (
             <CtaButtons
               ctaButtons={[
                 {
-                  ...ctaButton,
+                  ...activeCta,
                   sx: {
                     backgroundColor: '#0B3EE3',
                     color: 'white',

@@ -17,12 +17,16 @@ const makeSublink = (
 ): {
   label: string;
   href: string;
+  isNew: boolean;
+  badge?: string;
 } => ({
   label: sublink.label,
   href: sublink.page.data
     ? sublink.page.data.attributes.slug +
       (sublink.sectionID ? `#${sublink.sectionID}` : '')
     : (sublink.externalURL ?? ''),
+  isNew: sublink.isNew,
+  badge: sublink.isNew ? 'NOVITÀ' : '',
 });
 
 const makeHeaderProps = (
@@ -108,6 +112,12 @@ const makeMegaHeaderProps = ({
       title: sublinkGroup.title,
       items: sublinkGroup.sublinks.map(makeSublink),
     })),
+    ...(link.ctaButton && {
+      ctaButton: {
+        ...link.ctaButton,
+        ...(link.ctaButton.icon && { startIcon: Icon(link.ctaButton.icon) }),
+      },
+    }),
   })),
 });
 

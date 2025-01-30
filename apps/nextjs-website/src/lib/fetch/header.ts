@@ -25,6 +25,8 @@ const HeaderSublinkCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   page: HeaderPageCodec,
   externalURL: t.union([t.string, t.null]),
+  isNew: t.boolean,
+  badge: t.union([t.string, t.null]),
 });
 
 const HeaderSublinkGroupCodec = t.strict({
@@ -49,6 +51,7 @@ const MegaMenuCodec = t.strict({
     t.strict({
       label: t.string,
       sublinkGroups: t.array(HeaderSublinkGroupCodec),
+      ctaButton: t.union([CTAButtonSimpleCodec, t.null]),
     }),
   ),
 });
@@ -121,8 +124,9 @@ export const getHeader = ({
 &populate[2]=header.menu.links.page
 &populate[3]=header.menu.links.sublinks.page
 &populate[4]=header.menu.links.sublinkGroups.sublinks.page
-&populate[5]=header.drawer.ctaCard
-&populate[6]=header.drawer.linkCards
+&populate[5]=header.menu.links.sublinks.badge
+&populate[6]=header.drawer.ctaCard
+&populate[7]=header.drawer.linkCards
       `,
       {
         method: 'GET',
