@@ -139,7 +139,11 @@ export default async function Layout({
               defaultLocale={defaultLocale}
             />
           )}
-          <Header {...headerProps} />
+          <Header
+            {...headerProps}
+            locale={locale}
+            defaultLocale={defaultLocale}
+          />
           {children}
           {preFooterProps && (
             <PreFooter

@@ -1,7 +1,8 @@
 {
   "collectionName": "components_menu_menu_sub_link_groups",
   "info": {
-    "displayName": "Menu SubLink Group"
+    "displayName": "MegaMenu SubLink Group",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -12,7 +13,7 @@
     "sublinks": {
       "type": "component",
       "repeatable": true,
-      "component": "menu.menu-sub-link",
+      "component": "menu.mega-menu-sub-link",
       "required": true
     }
   }
