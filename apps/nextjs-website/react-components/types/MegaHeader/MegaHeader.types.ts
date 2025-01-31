@@ -7,8 +7,10 @@ export interface MegaMenuItem {
     items: {
       label: string;
       href: string;
+      badge?: string;
     }[];
   }[];
+  ctaButton?: CtaButtonProps;
 }
 
 export interface MegaHeaderProps {

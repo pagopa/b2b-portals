@@ -25,6 +25,7 @@ const HeaderSublinkCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   page: HeaderPageCodec,
   externalURL: t.union([t.string, t.null]),
+  isNew: t.boolean,
 });
 
 const HeaderSublinkGroupCodec = t.strict({
@@ -49,6 +50,7 @@ const MegaMenuCodec = t.strict({
     t.strict({
       label: t.string,
       sublinkGroups: t.array(HeaderSublinkGroupCodec),
+      ctaButton: t.union([CTAButtonSimpleCodec, t.null]),
     }),
   ),
 });
