@@ -30,7 +30,7 @@ const makeSublink = (
     ? sublink.page.data.attributes.slug +
       (sublink.sectionID ? `#${sublink.sectionID}` : '')
     : (sublink.externalURL ?? ''),
-  ...(sublink.isNew && { label: LinkLabelValues[locale] }),
+  ...(sublink.isNew && { badge: LinkLabelValues[locale] }),
 });
 
 const makeHeaderProps = (
