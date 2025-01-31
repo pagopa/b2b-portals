@@ -50,12 +50,17 @@ export const Nav = styled('ul')({
     fontWeight: 400,
   },
   '& .menuPrimaryItem': {
-    '&:hover, &.active': {
+    '&:hover, &.open': {
+      color: '#0B3EE3',
+      fontWeight: 600,
+      letterSpacing: '-0.003em',
+      backgroundColor: '#F4F4F4',
+      borderRadius: 6,
+    },
+    '&.active': {
       color: '#0B3EE3',
       fontWeight: 600,
       letterSpacing: '-0.0090em',
-      backgroundColor: '#F4F4F4',
-      borderRadius: 6,
     },
   },
   '& .menuSecondaryItem': {
@@ -116,11 +121,16 @@ export const Dropdown = styled(Box)({
     whiteSpace: 'nowrap',
     letterSpacing: 'normal',
   },
-  '& a:hover, & a.active': {
+  '& a:hover': {
     fontWeight: 600,
     letterSpacing: '-0.0090em',
   },
-  '& a:hover .arrowIcon, & a.active .arrowIcon': {
+  '& a.active': {
+    fontWeight: 600,
+    letterSpacing: '-0.0090em',
+    color: '#0B3EE3',
+  },
+  '& a:hover .arrowIcon': {
     visibility: 'visible',
     opacity: 1,
   },

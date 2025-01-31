@@ -21,8 +21,11 @@ import {
   Overlay,
 } from './MegaHeader.Helpers';
 import { CtaButtons } from '../common/Common';
+import { usePathname } from 'next/navigation';
 
 const MegaHeader = (props: MegaHeaderProps) => {
+  const pathname = usePathname();
+
   const { logoSrc, logoAlt, ctaButton } = props;
   const menuItems = props.menuItems || [];
 
@@ -32,21 +35,27 @@ const MegaHeader = (props: MegaHeaderProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
-  const [activeItem, setActiveItem] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const activeMenuItem = menuItems.find(
-    (menuItem) => menuItem.primary === activeItem
-  );
-  const activeCta = activeMenuItem?.ctaButton || ctaButton;
+  const isActiveSubLink = (href: string): boolean =>
+    pathname === href || pathname === href + '/' || pathname + '/' === href;
+
+  // Returns true if any one of the link's sublinks is active
+  const isActiveLink = (menuItem: MegaMenuItem): boolean =>
+    menuItem.secondary
+      .flatMap((sublinkGroup) =>
+        sublinkGroup.items.map((item) => isActiveSubLink(item.href)),
+      )
+      .reduce((acc, curr) => acc || curr);
+
+  const activeCta = menuItems.find(isActiveLink)?.ctaButton ?? ctaButton;
 
   const handleClick = (
     event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,
-    menu: string
+    menu: string,
   ) => {
     event.preventDefault();
     setDropdownOpen((prev) => (prev === menu ? null : menu));
-    setActiveItem(menu);
   };
 
   const handleMobileMenuToggle = () => {
@@ -75,7 +84,6 @@ const MegaHeader = (props: MegaHeaderProps) => {
         !menuRef.current.contains(event.target as Node)
       ) {
         setDropdownOpen(null);
-        setActiveItem(null);
       }
     };
 
@@ -126,12 +134,19 @@ const MegaHeader = (props: MegaHeaderProps) => {
             <>
               <Nav>
                 {menuItems.map((menuItem: MegaMenuItem, index) => (
-                  <Typography component='li' key={index}>
+                  <Typography
+                    component='li'
+                    key={index}
+                    {...(isActiveLink(menuItem) && {
+                      fontWeight: 600,
+                      color: palette.custom.primaryColorDark,
+                    })}
+                  >
                     <a
                       href='/'
                       className={`menuPrimaryItem ${
-                        dropdownOpen === menuItem.primary ? 'active' : ''
-                      }`}
+                        dropdownOpen === menuItem.primary ? 'open' : ''
+                      } ${isActiveLink(menuItem) ? 'active' : ''}`}
                       onClick={(e) => handleClick(e, menuItem.primary)}
                     >
                       {menuItem.primary}
@@ -225,13 +240,10 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                         ? '_blank'
                                         : '_self'
                                     }
-                                    className={`menuSecondaryItem ${
-                                      activeItem === item.label ? 'active' : ''
-                                    }`}
-                                    onClick={() => {
-                                      setActiveItem(item.label);
-                                      setDropdownOpen(null);
-                                    }}
+                                    {...(isActiveSubLink(item.href) && {
+                                      className: 'active',
+                                    })}
+                                    onClick={() => setDropdownOpen(null)}
                                   >
                                     {item.label}
                                     {item.badge && (
@@ -241,7 +253,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
                                   </a>
                                 ))}
                             </Typography>
-                          )
+                          ),
                         )}
                       </div>
                     </div>
@@ -265,7 +277,14 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   handleClick(e as any, `mobile${menuItem.primary}`)
                 }
               >
-                <Typography>{menuItem.primary}</Typography>
+                <Typography
+                  {...(isActiveLink(menuItem) && {
+                    fontWeight: 600,
+                    color: palette.custom.primaryColorDark,
+                  })}
+                >
+                  {menuItem.primary}
+                </Typography>
                 <KeyboardArrowDownIcon
                   style={{
                     transform:
@@ -294,14 +313,18 @@ const MegaHeader = (props: MegaHeaderProps) => {
                           item.href.startsWith('https://') ? '_blank' : '_self'
                         }
                         className={`mobileMenuSecondaryItem ${
-                          activeItem === item.label ? 'active' : ''
+                          isActiveSubLink(item.href) ? 'active' : ''
                         }`}
-                        onClick={() => {
-                          setActiveItem(item.label);
-                          setMobileMenuOpen(false);
-                        }}
+                        onClick={() => setMobileMenuOpen(false)}
                       >
-                        <Typography variant='body2' fontSize={14}>
+                        <Typography
+                          variant='body2'
+                          fontSize={14}
+                          {...(isActiveSubLink(item.href) && {
+                            fontWeight: 600,
+                            color: palette.custom.primaryColorDark,
+                          })}
+                        >
                           {item.label}
                         </Typography>
                         {item.badge && <LinkLabel>{item.badge}</LinkLabel>}

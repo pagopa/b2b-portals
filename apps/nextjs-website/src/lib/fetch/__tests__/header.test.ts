@@ -85,10 +85,11 @@ describe('getHeader', () => {
 &populate[0]=header.logo
 &populate[1]=header.ctaButton
 &populate[2]=header.menu.links.page
-&populate[3]=header.menu.links.sublinks.page
-&populate[4]=header.menu.links.sublinkGroups.sublinks.page
-&populate[5]=header.drawer.ctaCard
-&populate[6]=header.drawer.linkCards
+&populate[3]=header.menu.links.ctaButton
+&populate[4]=header.menu.links.sublinks.page
+&populate[5]=header.menu.links.sublinkGroups.sublinks.page
+&populate[6]=header.drawer.ctaCard
+&populate[7]=header.drawer.linkCards
       `,
       {
         method: 'GET',
