@@ -10,6 +10,7 @@ import {
   StandardHeaderData,
   MegaHeaderData,
   HeaderSublink,
+  MegaHeaderSublink,
 } from '@/lib/fetch/header';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 
@@ -21,8 +22,18 @@ const LinkLabelValues = {
   sl: 'NOVO',
 };
 
-const makeSublink = (
+const makeHeaderSublink = (
   sublink: HeaderSublink,
+): { label: string; href: string; badge?: string } => ({
+  label: sublink.label,
+  href: sublink.page.data
+    ? sublink.page.data.attributes.slug +
+      (sublink.sectionID ? `#${sublink.sectionID}` : '')
+    : (sublink.externalURL ?? ''),
+});
+
+const makeMegaHeaderSublink = (
+  sublink: MegaHeaderSublink,
   locale: Locale,
 ): { label: string; href: string; badge?: string } => ({
   label: sublink.label,
@@ -76,17 +87,13 @@ const makeHeaderProps = (
     name: productName,
     href: '/',
   },
-  // Add active link logic
   menu: menu.links.map((link) => ({
     theme: 'light',
     label: link.label,
     href: link.page.data?.attributes.slug,
     alignRight: link.alignRight,
     ...(link.sublinks.length > 0 && {
-      items: link.sublinks.map((sublink) => makeSublink(sublink, locale)),
-    }),
-    ...(link.page.data && {
-      active: pathname === link.page.data.attributes.slug,
+      items: link.sublinks.map(makeHeaderSublink),
     }),
     ...(link.page.data && {
       sx: {
@@ -116,7 +123,7 @@ const makeMegaHeaderProps = (
     secondary: link.sublinkGroups.map((sublinkGroup) => ({
       title: sublinkGroup.title,
       items: sublinkGroup.sublinks.map((sublink) =>
-        makeSublink(sublink, locale),
+        makeMegaHeaderSublink(sublink, locale),
       ),
     })),
     ...(link.ctaButton && {
