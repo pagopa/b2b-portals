@@ -134,14 +134,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
             <>
               <Nav>
                 {menuItems.map((menuItem: MegaMenuItem, index) => (
-                  <Typography
-                    component='li'
-                    key={index}
-                    {...(isActiveLink(menuItem) && {
-                      fontWeight: 600,
-                      color: palette.custom.primaryColorDark,
-                    })}
-                  >
+                  <Typography component='li' key={index}>
                     <a
                       href='/'
                       className={`menuPrimaryItem ${
