@@ -25,6 +25,7 @@ const HeaderSublinkCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   page: HeaderPageCodec,
   externalURL: t.union([t.string, t.null]),
+  isNew: t.boolean,
 });
 
 const MegaHeaderSublinkCodec = t.strict({
