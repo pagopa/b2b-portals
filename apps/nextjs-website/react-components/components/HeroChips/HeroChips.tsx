@@ -108,7 +108,7 @@ const HeroChips = (props: HeroChipsProps) => {
             {subtitle}
           </Typography>
         )}
-        {chips.length > 0 && <ChipsBlock chips={chips} theme={theme} />}
+        {chips.length > 0 && <ChipsBlock chips={chips} theme={theme} themeVariant={themeVariant}/>}
       </Box>
     </ContainerRC>
   );

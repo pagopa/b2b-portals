@@ -1,12 +1,21 @@
 import { Stack, Chip } from '@mui/material';
 import { ChipProps } from '@react-components/types/HeroChips/HeroChips.types';
+import {
+  SendChipsBackgroundColor,
+  IoChipsBackgroundColor,
+  SendChipsBackgroundColorHover,
+  IoChipsBackgroundColorHover,
+} from '../common/Common.helpers';
+import { useTheme } from '@mui/material/styles';
 
 export const ChipsBlock = ({
   chips,
   theme,
+  themeVariant,
 }: {
   chips: ReadonlyArray<ChipProps>;
   theme: 'light' | 'dark';
+  themeVariant: 'IO' | 'SEND';
 }) => {
   const SmoothScrollToTarget = (targetID: string) => {
     const targetSection = document.getElementById(targetID);
@@ -15,6 +24,20 @@ export const ChipsBlock = ({
       targetSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const { palette } = useTheme();
+
+  const chipBackgroundColor =
+    themeVariant === 'SEND'
+      ? SendChipsBackgroundColor(theme)
+      : IoChipsBackgroundColor(theme);
+
+  const chipBackgroundColorHover =
+    themeVariant === 'SEND'
+      ? SendChipsBackgroundColorHover(theme)
+      : IoChipsBackgroundColorHover(theme);
+
+  const chipTextColor = palette.custom.chipsTextColor;
 
   return (
     <Stack
@@ -42,12 +65,12 @@ export const ChipsBlock = ({
             label={chip.label}
             onClick={() => SmoothScrollToTarget(chip.targetID)}
             sx={{
-              backgroundColor: '#ebebf52e',
-              color: theme === 'dark' ? '#ffffff' : '#000000',
+              backgroundColor: `${chipBackgroundColor} !important`,
+              color: `${chipTextColor} !important`,
+              fontWeight: 'bold',
               '&:hover': {
-                backgroundColor: '#ebebf54d',
+                backgroundColor: `${chipBackgroundColorHover} !important`,
               },
-              border: theme === 'light' ? '1px solid #D0D0D0' : 'none',
               cursor: 'pointer',
             }}
           />
