@@ -34,6 +34,7 @@ const headerResponse: HeaderData = {
           drawer: {
             buttonText: 'Accedi',
             title: 'Accedi o Iscriviti',
+            subtitle: null,
             ctaCard: {
               buttonText: 'Accedi',
               href: '#',
@@ -46,14 +47,40 @@ const headerResponse: HeaderData = {
                 href: '#',
                 title: 'Cittadini',
                 subtitle: 'Sottotitolo Cittadini',
-                stackIcon: 'People',
+                icons: {
+                  data: [
+                    {
+                      attributes: {
+                        width: 32,
+                        height: 32,
+                        alternativeText: null,
+                        formats: null,
+                        mime: 'png',
+                        url: 'exampleURL',
+                      },
+                    },
+                  ],
+                },
               },
               {
                 buttonText: 'Accedi',
                 href: '#',
                 title: 'Imprese',
                 subtitle: 'Sottotitolo Imprese',
-                stackIcon: 'Business',
+                icons: {
+                  data: [
+                    {
+                      attributes: {
+                        width: 32,
+                        height: 32,
+                        alternativeText: null,
+                        formats: null,
+                        mime: 'png',
+                        url: 'exampleURL',
+                      },
+                    },
+                  ],
+                },
               },
             ],
           },
@@ -89,7 +116,7 @@ describe('getHeader', () => {
 &populate[4]=header.menu.links.sublinks.page
 &populate[5]=header.menu.links.sublinkGroups.sublinks.page
 &populate[6]=header.drawer.ctaCard
-&populate[7]=header.drawer.linkCards
+&populate[7]=header.drawer.linkCards.icons
       `,
       {
         method: 'GET',

@@ -18,16 +18,17 @@
       "type": "string",
       "required": true
     },
-    "stackIcon": {
-      "type": "enumeration",
-      "enum": [
-        "Business",
-        "People"
-      ],
-      "required": true
-    },
     "subtitle": {
       "type": "richtext",
+      "required": true
+    },
+    "icons": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": true,
       "required": true
     }
   }

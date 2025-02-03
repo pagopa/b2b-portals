@@ -203,6 +203,7 @@ const Header = ({
             anchor='right'
             theme='light'
             drawerMenuTitle={drawer.title}
+            {...(drawer.subtitle && { drawerMenuSubtitle: drawer.subtitle })}
             ctaCard={drawer.ctaCard}
             linkCards={drawer.linkCards}
           />
