@@ -1,6 +1,5 @@
 import { LinkProps, StackProps } from '@mui/material';
 import { Theme } from '../common/Common.types';
-import { EIconProps } from '@react-components/components/common/EIcon';
 
 export interface HeaderSideDrawerCtaCardProps {
   readonly title: string;
@@ -11,12 +10,13 @@ export interface HeaderSideDrawerCtaCardProps {
 
 export interface HeaderSideDrawerLinkCardProps
   extends HeaderSideDrawerCtaCardProps {
-  readonly stackIcon: 'Business' | 'People';
+  readonly icons: string[];
 }
 
 interface HeaderSideDrawerProps {
   readonly buttonText: string;
   readonly title: string;
+  readonly subtitle?: string;
   readonly ctaCard: HeaderSideDrawerCtaCardProps;
   readonly linkCards: HeaderSideDrawerLinkCardProps[];
 }
@@ -24,7 +24,7 @@ interface HeaderSideDrawerProps {
 export interface CardData {
   readonly title: string;
   readonly subtitle: string | JSX.Element;
-  readonly stackIcon: EIconProps;
+  readonly icons: string[];
   readonly buttonText: string;
   readonly href: string;
 }

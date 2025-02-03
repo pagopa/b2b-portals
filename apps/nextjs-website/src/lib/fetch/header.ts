@@ -2,10 +2,10 @@ import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
 import { CTAButtonSimpleCodec } from './types/CTAButton';
 import {
+  StrapiImageRequiredArraySchema,
   StrapiImageRequiredSchema,
   StrapiImageSchema,
 } from './types/StrapiImage';
-import { HeaderMUIIconCodec } from './types/icons/HeaderIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
@@ -25,7 +25,6 @@ const HeaderSublinkCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   page: HeaderPageCodec,
   externalURL: t.union([t.string, t.null]),
-  isNew: t.boolean,
 });
 
 const MegaHeaderSublinkCodec = t.strict({
@@ -66,9 +65,9 @@ const MegaMenuCodec = t.strict({
 const DrawerLinkCardCodec = t.strict({
   title: t.string,
   subtitle: t.string,
-  stackIcon: HeaderMUIIconCodec,
   buttonText: t.string,
   href: t.string,
+  icons: StrapiImageRequiredArraySchema,
 });
 
 const DrawerCtaCardCodec = t.strict({
@@ -81,6 +80,7 @@ const DrawerCtaCardCodec = t.strict({
 const SideDrawerCodec = t.strict({
   buttonText: t.string,
   title: t.string,
+  subtitle: t.union([t.string, t.null]),
   ctaCard: DrawerCtaCardCodec,
   linkCards: t.array(DrawerLinkCardCodec),
 });
@@ -134,7 +134,7 @@ export const getHeader = ({
 &populate[4]=header.menu.links.sublinks.page
 &populate[5]=header.menu.links.sublinkGroups.sublinks.page
 &populate[6]=header.drawer.ctaCard
-&populate[7]=header.drawer.linkCards
+&populate[7]=header.drawer.linkCards.icons
       `,
       {
         method: 'GET',

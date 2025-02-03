@@ -17,6 +17,7 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
   drawer: {
     buttonText: 'Accedi',
     title: 'Accedi o Iscriviti',
+    subtitle: null,
     ctaCard: {
       buttonText: 'Accedi',
       href: '#',
@@ -29,14 +30,40 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
         href: '#',
         title: 'Cittadini',
         subtitle: 'Sottotitolo Cittadini',
-        stackIcon: 'People',
+        icons: {
+          data: [
+            {
+              attributes: {
+                width: 32,
+                height: 32,
+                alternativeText: null,
+                formats: null,
+                mime: 'png',
+                url: 'iconURL',
+              },
+            },
+          ],
+        },
       },
       {
         buttonText: 'Accedi',
         href: '#',
         title: 'Imprese',
         subtitle: 'Sottotitolo Imprese',
-        stackIcon: 'Business',
+        icons: {
+          data: [
+            {
+              attributes: {
+                width: 32,
+                height: 32,
+                alternativeText: null,
+                formats: null,
+                mime: 'png',
+                url: 'iconURL',
+              },
+            },
+          ],
+        },
       },
     ],
   },
@@ -89,7 +116,6 @@ const standardHeader: HeaderData = {
                     sectionID: null,
                     page: { data: { attributes: { slug: 'otherpage1' } } },
                     externalURL: null,
-                    isNew: false,
                   },
                 ],
               },
@@ -110,7 +136,6 @@ const standardHeader: HeaderData = {
                     sectionID: null,
                     page: { data: { attributes: { slug: 'homepage' } } },
                     externalURL: null,
-                    isNew: false,
                   },
                 ],
               },
@@ -146,7 +171,6 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
                     sectionID: null,
                     page: { data: { attributes: { slug: '/otherpage1' } } },
                     externalURL: null,
-                    isNew: false,
                   },
                 ],
               },
@@ -167,7 +191,6 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
                     sectionID: null,
                     page: { data: { attributes: { slug: '/' } } },
                     externalURL: null,
-                    isNew: false,
                   },
                 ],
               },
@@ -203,7 +226,6 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
                     sectionID: null,
                     page: { data: { attributes: { slug: '/en/otherpage1' } } },
                     externalURL: null,
-                    isNew: false,
                   },
                 ],
               },
@@ -224,7 +246,6 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
                     sectionID: null,
                     page: { data: { attributes: { slug: '/en/' } } },
                     externalURL: null,
-                    isNew: false,
                   },
                 ],
               },

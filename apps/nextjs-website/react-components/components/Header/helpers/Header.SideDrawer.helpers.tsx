@@ -26,6 +26,7 @@ interface SideDrawerProps {
   onClose: () => void;
   anchor: Anchor;
   drawerMenuTitle: string;
+  drawerMenuSubtitle?: string;
   theme: 'dark' | 'light';
   linkCards: HeaderSideDrawerLinkCardProps[];
   ctaCard: HeaderSideDrawerCtaCardProps;
@@ -37,6 +38,7 @@ export default function SideDrawer({
   anchor,
   theme,
   drawerMenuTitle,
+  drawerMenuSubtitle,
   linkCards,
   ctaCard,
 }: SideDrawerProps) {
@@ -59,14 +61,35 @@ export default function SideDrawer({
           justifyContent='space-between'
           alignItems='center'
         >
-          <Typography
-            gutterBottom
-            variant='body1'
-            component='div'
-            style={{ fontWeight: '600', fontSize: '1.5em' }}
-          >
-            {drawerMenuTitle}
-          </Typography>
+          {drawerMenuSubtitle ? (
+            <Stack>
+              <Typography
+                variant='body1'
+                component='p'
+                fontSize={22}
+                fontWeight={600}
+              >
+                {drawerMenuTitle}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant='body2'
+                component='span'
+              >
+                {drawerMenuSubtitle}
+              </Typography>
+            </Stack>
+          ) : (
+            <Typography
+              gutterBottom
+              variant='body1'
+              component='p'
+              fontSize={22}
+              fontWeight={600}
+            >
+              {drawerMenuTitle}
+            </Typography>
+          )}
           <IconButton onClick={onClose}>
             <CloseIcon />
           </IconButton>
@@ -96,13 +119,13 @@ export default function SideDrawer({
               }
               buttonText={card.buttonText}
               href={card.href}
-              stackIcon={{ icon: card.stackIcon }}
+              icons={card.icons}
               theme={'light'}
             />
           ))}
         </div>
       </Box>
-      <div style={{ padding: '1em' }}>
+      <div style={{ padding: '1em', marginTop: 'auto' }}>
         <div
           style={{
             backgroundColor: 'white',
@@ -120,7 +143,6 @@ export default function SideDrawer({
             }}
           >
             <Typography
-              gutterBottom
               variant='body1'
               component='div'
               style={{ fontWeight: '600' }}

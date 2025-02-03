@@ -53,8 +53,10 @@ const makeHeaderProps = (
   beta,
   ...(drawer && {
     drawer: {
-      ...drawer,
-      linkCards: drawer.linkCards.map((card) => ({
+      title: drawer.title,
+      ...(drawer.subtitle && { subtitle: drawer.subtitle }),
+      buttonText: drawer.buttonText,
+      linkCards: drawer.linkCards.map(({ icons, ...card }) => ({
         ...card,
         subtitle: MarkdownRenderer({
           markdown: card.subtitle,
@@ -62,6 +64,7 @@ const makeHeaderProps = (
           locale,
           defaultLocale,
         }),
+        icons: icons.data.map((icon) => icon.attributes.url),
       })),
       ctaCard: {
         ...drawer.ctaCard,

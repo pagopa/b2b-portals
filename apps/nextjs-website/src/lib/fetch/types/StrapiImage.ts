@@ -57,4 +57,12 @@ export const StrapiGenericMediaRequiredSchema = t.strict({
   }),
 });
 
+export const StrapiImageRequiredArraySchema = t.strict({
+  data: t.array(
+    t.strict({
+      attributes: ImageDataCodec,
+    }),
+  ),
+});
+
 export type StrapiImage = t.TypeOf<typeof StrapiImageRequiredSchema>;

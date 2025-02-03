@@ -1,15 +1,15 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { CardActions, Button, Box } from '@mui/material';
+import { CardActions, Button, Stack } from '@mui/material';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { EIcon, EIconProps } from '@react-components/components/common/EIcon';
+import Image from 'next/image';
 
 interface ActionAreaCardProps {
   title: string;
   subtitle: string | JSX.Element;
-  stackIcon: EIconProps;
+  icons: string[];
   buttonText: string;
   href: string;
   theme: 'dark' | 'light';
@@ -18,7 +18,7 @@ interface ActionAreaCardProps {
 export default function ActionAreaCard({
   title,
   subtitle,
-  stackIcon,
+  icons,
   buttonText,
   href,
   theme,
@@ -40,18 +40,11 @@ export default function ActionAreaCard({
             paddingBottom: '0.5rem',
           }}
         >
-          <Box
-            mx='auto'
-            sx={{
-              svg: {
-                height: '2rem',
-                width: '2rem',
-              },
-            }}
-            color={textColorAlternative}
-          >
-            <EIcon {...stackIcon} />
-          </Box>
+          <Stack flexDirection={'row'} gap={2} marginBottom={2}>
+            {icons.map((iconURL) => (
+              <Image src={iconURL} alt='' height={32} width={32} />
+            ))}
+          </Stack>
           <Typography gutterBottom variant='h5' component='div'>
             {title}
           </Typography>
