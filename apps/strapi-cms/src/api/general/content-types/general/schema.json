@@ -54,9 +54,6 @@
       "component": "shared.locales",
       "required": true
     },
-    "mixpanelToken": {
-      "type": "string"
-    },
     "defaultLocale": {
       "type": "enumeration",
       "enum": [
@@ -68,6 +65,11 @@
       ],
       "required": true,
       "default": "it"
+    },
+    "mixpanel": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.mix-panel"
     }
   }
 }

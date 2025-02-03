@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_mix_panels",
+  "info": {
+    "displayName": "MixPanel",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "token": {
+      "type": "string",
+      "required": true
+    },
+    "apiHost": {
+      "type": "string"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "ip": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    }
+  }
+}
