@@ -64,7 +64,6 @@ const siteWideSEOResponse = {
         },
       },
       matomoID: '12',
-      mixpanelToken: null,
       themeVariant: 'SEND',
       locales: {
         it: true,
@@ -74,6 +73,7 @@ const siteWideSEOResponse = {
         sl: false,
       },
       defaultLocale: 'it',
+      mixpanel: null,
     },
   },
 };
@@ -95,6 +95,7 @@ describe('fetchSiteWideSEO', () => {
 &populate[1]=favicon
 &populate[2]=appleTouchIcon
 &populate[3]=locales
+&populate[4]=mixpanel
       `,
       {
         method: 'GET',
