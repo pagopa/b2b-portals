@@ -20,6 +20,7 @@ const Cards = ({
   ctaButtons,
   textPosition,
   sectionID,
+  bottomCTA,
 }: CardsProps) => {
   const backgroundColor =
     themeVariant === 'SEND'
@@ -29,14 +30,15 @@ const Cards = ({
   const textColor = TextColor(theme);
   const flexDirection = textPosition === 'right' ? 'row-reverse' : 'row';
   const isCenter = textPosition === 'center';
+  const isNone = textPosition === 'none';
   const { palette } = useTheme();
 
   const linkColor =
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <ContainerRC
@@ -53,95 +55,95 @@ const Cards = ({
       }}
       {...(sectionID && { sectionID })}
     >
-      <Typography
-        color={textColor}
-        sx={{
-          width: { md: isCenter ? '100%' : '30%', xs: '100%' },
-        }}
-        component={'div'}
-      >
-        {text.title && (
-          <Typography mb={3} component='div' color={'inherit'}>
-            <Title
-              variant='h4'
-              textColor={'inherit'}
-              title={text.title}
+      {!isNone && (
+        <Typography
+          color={textColor}
+          sx={{
+            width: { md: isCenter ? '100%' : '30%', xs: '100%' },
+          }}
+          component={'div'}
+        >
+          {text.title && (
+            <Typography mb={3} component='div' color={'inherit'}>
+              <Title
+                variant='h4'
+                textColor={'inherit'}
+                title={text.title}
+                textAlign={isCenter ? 'center' : 'left'}
+                marginBottom={0}
+              />
+            </Typography>
+          )}
+          {text.subtitle && (
+            <Typography mb={3} component='div' color={'inherit'}>
+              <Subtitle
+                variant='h6'
+                textColor={'inherit'}
+                subtitle={text.subtitle}
+                textAlign={isCenter ? 'center' : 'left'}
+                marginBottom={0}
+              />
+            </Typography>
+          )}
+          {text.body && (
+            <Typography
+              mb={4}
+              component='div'
+              variant='body1'
+              color={'inherit'}
               textAlign={isCenter ? 'center' : 'left'}
-              marginBottom={0}
-            />
-          </Typography>
-        )}
-
-        {text.subtitle && (
-          <Typography mb={3} component='div' color={'inherit'}>
-            <Subtitle
-              variant='h6'
-              textColor={'inherit'}
-              subtitle={text.subtitle}
-              textAlign={isCenter ? 'center' : 'left'}
-              marginBottom={0}
-            />
-          </Typography>
-        )}
-
-        {text.body && (
-          <Typography
-            mb={4}
-            component='div'
-            variant='body1'
-            color={'inherit'}
-            textAlign={isCenter ? 'center' : 'left'}
-            sx={{
-              '& a': {
-                color: linkColor,
-                textDecoration: 'underline',
-                '&:hover': {
+              sx={{
+                '& a': {
                   color: linkColor,
+                  textDecoration: 'underline',
+                  '&:hover': {
+                    color: linkColor,
+                  },
                 },
-              },
-              '& p': {
-                marginBottom: '0px',
-                color: textColor,
-                fontSize: '18px',
-              },
-            }}
-          >
-            {text.body}
-          </Typography>
-        )}
-
-        {ctaButtons?.length ? (
-          <Stack
-            direction={{ xs: 'column', md: 'row' }}
-            spacing={2}
-            mb={4}
-            justifyContent={isCenter ? 'center' : 'flex-start'}
-            alignItems={isCenter ? 'center' : 'flex-start'}
-            sx={{
-              width: '100%',
-              textAlign: isCenter ? 'center' : 'left',
-            }}
-          >
-            {CtaButtons({
-              ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
-                ...button,
-                sx: {
-                  width: 'auto',
+                '& p': {
+                  marginBottom: '0px',
+                  color: textColor,
+                  fontSize: '18px',
                 },
-              })),
-              theme,
-              themeVariant,
-            })}
-          </Stack>
-        ) : null}
-      </Typography>
+              }}
+            >
+              {text.body}
+            </Typography>
+          )}
+          {ctaButtons?.length ? (
+            <Stack
+              direction={{ xs: 'column', md: 'row' }}
+              spacing={2}
+              mb={4}
+              justifyContent={isCenter ? 'center' : 'flex-start'}
+              alignItems={isCenter ? 'center' : 'flex-start'}
+              sx={{
+                width: '100%',
+                textAlign: isCenter ? 'center' : 'left',
+              }}
+            >
+              {CtaButtons({
+                ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
+                  ...button,
+                  sx: {
+                    width: 'auto',
+                  },
+                })),
+                theme,
+                themeVariant,
+              })}
+            </Stack>
+          ) : null}
+        </Typography>
+      )}
       <Box
         sx={{
           display: 'flex',
-          width: isCenter ? '100%' : { xs: '100%', sm: '100%', md: '60%' },
+          width:
+            isCenter || isNone ? '100%' : { xs: '100%', sm: '100%', md: '60%' },
           gap: '20px',
-          flexWrap: isCenter ? 'wrap' : 'nowrap',
-          justifyContent: isCenter ? 'center' : 'flex-start',
+          flexWrap: isCenter || isNone ? 'wrap' : 'nowrap',
+          justifyContent: isCenter || isNone ? 'center' : 'flex-start',
           '@media (max-width: 600px)': {
             flexDirection: 'column',
             alignItems: 'center',
@@ -149,7 +151,7 @@ const Cards = ({
         }}
       >
         <>
-          {isCenter ? (
+          {isCenter || isNone ? (
             items.map((item, i) => (
               <Box
                 key={`${item.title}-${i}`}
@@ -199,6 +201,11 @@ const Cards = ({
           )}
         </>
       </Box>
+      {isNone && bottomCTA && (
+        <Box sx={{ textAlign: 'center', width: '100%', mt: { xs: 8, md: 0 } }}>
+          {CtaButtons({ ctaButtons: [bottomCTA], theme, themeVariant })}
+        </Box>
+      )}
     </ContainerRC>
   );
 };

@@ -340,3 +340,29 @@ LightCardsWithTextandButtonWithLinksCenter.args = {
   ],
   textPosition: 'center',
 };
+
+export const LightCardsNoTextWithBottomCta: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+LightCardsNoTextWithBottomCta.args = {
+  ...defaultPropsLightFourWithLinks,
+  text: {
+    title: 'Cards Title',
+    subtitle: 'Cards Subtitle',
+    body: 'This is a description for the cards.',
+  },
+  ctaButtons: [
+    {
+      text: 'Click Me',
+      variant: 'contained',
+    },
+    {
+      text: 'Click Me',
+      variant: 'outlined',
+    },
+  ],
+  bottomCTA: {
+    text: 'Click Me',
+    variant: 'contained',
+  },
+  textPosition: 'none',
+};

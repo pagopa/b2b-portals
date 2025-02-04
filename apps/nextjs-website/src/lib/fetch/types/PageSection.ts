@@ -153,7 +153,7 @@ const CardsItemCodec = t.strict({
   icon: StrapiImageSchema,
 });
 
-const CardsSectionCodec = t.strict({
+const CardsSectionRequiredCodec = t.strict({
   __component: t.literal('sections.cards'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   title: t.string,
@@ -165,9 +165,19 @@ const CardsSectionCodec = t.strict({
     left: null,
     center: null,
     right: null,
+    none: null,
   }),
   sectionID: t.union([t.string, t.null]),
 });
+
+const CardsSectionOptionalCodec = t.partial({
+  bottomCTA: t.union([CTAButtonSimpleCodec, t.null]),
+});
+
+const CardsSectionCodec = t.intersection([
+  CardsSectionRequiredCodec,
+  CardsSectionOptionalCodec,
+]);
 
 const OneTrustSectionPropsCodec = t.strict({
   __component: t.literal('sections.one-trust'),
