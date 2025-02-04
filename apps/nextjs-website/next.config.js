@@ -9,7 +9,7 @@ const nextConfig =
       }
     : {
         output: 'export',
-        staticPageGenerationTimeout: 120,
+        staticPageGenerationTimeout: 600,
         images: {
           unoptimized: true,
         },
