@@ -23,12 +23,7 @@ const SiteWideSEOCodec = t.strict({
       metaImage: StrapiImageRequiredSchema,
       favicon: StrapiImageRequiredSchema,
       appleTouchIcon: StrapiImageRequiredSchema,
-      manifest: t.strict({
-        name: t.string,
-        shortName: t.string,
-      }),
       matomoID: t.union([t.string, t.null]),
-      mixpanelToken: t.union([t.string, t.null]),
       themeVariant: ThemeVariantCodec,
       locales: t.strict({
         it: t.boolean,
@@ -37,6 +32,15 @@ const SiteWideSEOCodec = t.strict({
         de: t.boolean,
         sl: t.boolean,
       }),
+      mixpanel: t.union([
+        t.strict({
+          token: t.string,
+          apiHost: t.union([t.string, t.null]),
+          debug: t.boolean,
+          ip: t.boolean,
+        }),
+        t.null,
+      ]),
       defaultLocale: LocaleCodec,
     }),
   }),
@@ -62,8 +66,8 @@ export const fetchSiteWideSEO = ({
 ?populate[0]=metaImage
 &populate[1]=favicon
 &populate[2]=appleTouchIcon
-&populate[3]=manifest
-&populate[4]=locales
+&populate[3]=locales
+&populate[4]=mixpanel
       `,
       {
         method: 'GET',

@@ -26,6 +26,9 @@
       "component": "headers.header-drawer-link-card",
       "required": true,
       "min": 1
+    },
+    "subtitle": {
+      "type": "string"
     }
   }
 }

@@ -100,8 +100,14 @@ export default async function Layout({
     return null;
   }
 
-  const { defaultLocale, locales, matomoID, mixpanelToken, themeVariant } =
-    await getSiteWideSEO();
+  const siteWideSEO = await getSiteWideSEO();
+  const {
+    defaultLocale,
+    locales,
+    matomoID,
+    mixpanel: mixpanelConfig,
+    themeVariant,
+  } = siteWideSEO;
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the locale to the default locale
@@ -121,8 +127,15 @@ export default async function Layout({
     (locale) => locales[locale as Locale],
   );
 
-  if (mixpanelToken) {
-    mixpanel.init(mixpanelToken, {
+  if (mixpanelConfig) {
+    mixpanel.init(mixpanelConfig.token, {
+      ...(mixpanelConfig.apiHost && { api_host: mixpanelConfig.apiHost }),
+      cookie_domain: '.ioapp.it', // allow across-subdomain
+      cookie_expiration: 0, // session cookie
+      debug: mixpanelConfig.debug,
+      ip: mixpanelConfig.ip,
+      persistence: 'cookie',
+      secure_cookie: true,
       track_pageview: true,
     });
   }
@@ -139,7 +152,11 @@ export default async function Layout({
               defaultLocale={defaultLocale}
             />
           )}
-          <Header {...headerProps} />
+          <Header
+            {...headerProps}
+            locale={locale}
+            defaultLocale={defaultLocale}
+          />
           {children}
           {preFooterProps && (
             <PreFooter

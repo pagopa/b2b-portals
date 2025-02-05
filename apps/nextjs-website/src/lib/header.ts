@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { HeaderData, HeaderSublink } from './fetch/header';
+import { HeaderData, HeaderSublink, MegaHeaderSublink } from './fetch/header';
 import { Locale } from './fetch/siteWideSEO';
 
 const formatSlug = (
@@ -13,7 +13,7 @@ const formatSlug = (
   return localeString + slugString;
 };
 
-const formatSublink = ({
+const formatHeaderSublink = ({
   locale,
   defaultLocale,
   page,
@@ -22,6 +22,27 @@ const formatSublink = ({
   readonly locale: Locale;
   readonly defaultLocale: Locale;
 }): HeaderSublink => ({
+  ...sublink,
+  page: {
+    data: page.data
+      ? {
+          attributes: {
+            slug: formatSlug(page.data.attributes.slug, locale, defaultLocale),
+          },
+        }
+      : null,
+  },
+});
+
+const formatMegaHeaderSublink = ({
+  locale,
+  defaultLocale,
+  page,
+  ...sublink
+}: MegaHeaderSublink & {
+  readonly locale: Locale;
+  readonly defaultLocale: Locale;
+}): MegaHeaderSublink => ({
   ...sublink,
   page: {
     data: page.data
@@ -63,7 +84,7 @@ export const formatHeaderLinks = (
                 : null,
             },
             sublinks: sublinks.map((sublink) =>
-              formatSublink({ locale, defaultLocale, ...sublink }),
+              formatHeaderSublink({ locale, defaultLocale, ...sublink }),
             ),
           })),
         },
@@ -78,7 +99,11 @@ export const formatHeaderLinks = (
               ({ sublinks, ...sublinkGroup }) => ({
                 ...sublinkGroup,
                 sublinks: sublinks.map((sublink) =>
-                  formatSublink({ locale, defaultLocale, ...sublink }),
+                  formatMegaHeaderSublink({
+                    locale,
+                    defaultLocale,
+                    ...sublink,
+                  }),
                 ),
               }),
             ),
