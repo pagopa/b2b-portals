@@ -102,3 +102,31 @@ export const SendBackgroundColorAlternativeGrey = (theme: 'dark' | 'light') => {
     ? palette.custom.backgroundColorDarkAlternative
     : palette.custom.backgroundColorLightGrey;
 };
+
+export const IoChipsBackgroundColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.chipsBackgroundColorDark
+    : palette.custom.ioChipsBackgroundColorLight;
+};
+
+export const SendChipsBackgroundColor = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.chipsBackgroundColorDark
+    : palette.custom.sendChipsBackgroundColorLight;
+};
+
+export const IoChipsBackgroundColorHover = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.chipsBackgroundColorDarkHover
+    : palette.custom.ioChipsBackgroundColorLightHover;
+};
+
+export const SendChipsBackgroundColorHover = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.chipsBackgroundColorDarkHover
+    : palette.custom.sendChipsBackgroundColorLightHover;
+};

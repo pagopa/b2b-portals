@@ -21,6 +21,7 @@ const defaultMenuItems: MegaMenuItem[] = [
         ],
       },
     ],
+    ctaButton: { text: 'Scopri IO', href: '/' },
   },
   {
     primary: 'I Servizi',
@@ -30,7 +31,7 @@ const defaultMenuItems: MegaMenuItem[] = [
         items: [
           { label: 'Casa e utenze', href: '' },
           { label: 'Educazione e formazione', href: '' },
-          { label: 'Salute', href: '' },
+          { label: 'Salute', href: '', badge: 'NOVITÀ' },
           { label: 'Redditi, patrimoni e fisco', href: '' },
           { label: 'Servizi anagrafici e civici', href: '' },
           { label: 'Mobilità e trasporti', href: '' },
@@ -41,13 +42,17 @@ const defaultMenuItems: MegaMenuItem[] = [
           { label: 'Ambiente e animali', href: '' },
           { label: 'Giustizia e legge', href: '' },
           { label: 'Vita lavorativa', href: '' },
-          { label: 'Lavori edilizi, catasto e urbanistica', href: '' },
+          {
+            label: 'Lavori edilizi, catasto e urbanistica',
+            href: '',
+          },
           { label: 'Cultura, tempo libero e sport', href: '' },
           { label: 'Viaggi e turismo', href: '' },
           { label: 'Sicurezza e Protezione Civile', href: '' },
         ],
       },
     ],
+    ctaButton: { text: 'I Servizi', href: '/' },
   },
   {
     primary: 'Gli Enti',
@@ -59,7 +64,7 @@ const defaultMenuItems: MegaMenuItem[] = [
           { label: 'Agenzia delle Entrate', href: '' },
           { label: 'INPS', href: '' },
           { label: 'E-Distribuzione', href: '' },
-          { label: "Ministero dell'Interno", href: '' },
+          { label: 'Ministero dell’Interno', href: '' },
           { label: 'Altri enti nazionali', href: '' },
         ],
       },
@@ -75,6 +80,7 @@ const defaultMenuItems: MegaMenuItem[] = [
         ],
       },
     ],
+    ctaButton: { text: 'Gli Enti', href: '/' },
   },
   {
     primary: 'A proposito di IO',
@@ -89,6 +95,7 @@ const defaultMenuItems: MegaMenuItem[] = [
         ],
       },
     ],
+    ctaButton: { text: 'A proposito di IO', href: '/' },
   },
   {
     primary: 'Aiuto e risorse',
@@ -120,6 +127,7 @@ const defaultMenuItems: MegaMenuItem[] = [
         ],
       },
     ],
+    ctaButton: { text: 'Aiuto e risorse', href: '/' },
   },
 ];
 
@@ -129,12 +137,10 @@ const meta: Meta<typeof MegaHeader> = {
 };
 export default meta;
 
-// Define a "Template" function that sets how args map to rendering
 const MegaHeaderTemplate: StoryFn<MegaHeaderProps> = (args) => (
   <MegaHeader {...args} />
 );
 
-// Define the default props
 const defaultProps: MegaHeaderProps = {
   menuItems: defaultMenuItems,
   logoSrc: 'https://io.italia.it/assets/img/io-it-logo-blue.svg',

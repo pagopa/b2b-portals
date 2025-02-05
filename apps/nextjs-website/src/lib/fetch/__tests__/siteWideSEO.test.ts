@@ -63,12 +63,7 @@ const siteWideSEOResponse = {
           },
         },
       },
-      manifest: {
-        name: 'SEND-PagoPA - Servizio di Notifiche Digitali',
-        shortName: 'SEND-PagoPA',
-      },
       matomoID: '12',
-      mixpanelToken: null,
       themeVariant: 'SEND',
       locales: {
         it: true,
@@ -78,6 +73,7 @@ const siteWideSEOResponse = {
         sl: false,
       },
       defaultLocale: 'it',
+      mixpanel: null,
     },
   },
 };
@@ -98,8 +94,8 @@ describe('fetchSiteWideSEO', () => {
 ?populate[0]=metaImage
 &populate[1]=favicon
 &populate[2]=appleTouchIcon
-&populate[3]=manifest
-&populate[4]=locales
+&populate[3]=locales
+&populate[4]=mixpanel
       `,
       {
         method: 'GET',

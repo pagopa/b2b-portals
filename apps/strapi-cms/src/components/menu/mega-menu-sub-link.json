@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_menu_mega_menu_sub_links",
+  "info": {
+    "displayName": "MegaMenu SubLink"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "page": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
+    },
+    "sectionID": {
+      "type": "string"
+    },
+    "externalURL": {
+      "type": "string"
+    },
+    "isNew": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

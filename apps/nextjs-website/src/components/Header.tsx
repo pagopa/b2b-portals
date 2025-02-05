@@ -10,14 +10,21 @@ import {
   StandardHeaderData,
   MegaHeaderData,
   HeaderSublink,
+  MegaHeaderSublink,
 } from '@/lib/fetch/header';
+import { Locale } from '@/lib/fetch/siteWideSEO';
 
-const makeSublink = (
+const LinkLabelValues = {
+  it: 'NOVITÀ',
+  en: 'NEW',
+  de: 'NEU',
+  fr: 'NOUVEAU',
+  sl: 'NOVO',
+};
+
+const makeHeaderSublink = (
   sublink: HeaderSublink,
-): {
-  label: string;
-  href: string;
-} => ({
+): { label: string; href: string; badge?: string } => ({
   label: sublink.label,
   href: sublink.page.data
     ? sublink.page.data.attributes.slug +
@@ -25,30 +32,47 @@ const makeSublink = (
     : (sublink.externalURL ?? ''),
 });
 
+const makeMegaHeaderSublink = (
+  sublink: MegaHeaderSublink,
+  locale: Locale,
+): { label: string; href: string; badge?: string } => ({
+  label: sublink.label,
+  href: sublink.page.data
+    ? sublink.page.data.attributes.slug +
+      (sublink.sectionID ? `#${sublink.sectionID}` : '')
+    : (sublink.externalURL ?? ''),
+  ...(sublink.isNew && { badge: LinkLabelValues[locale] }),
+});
+
 const makeHeaderProps = (
   { productName, menu, logo, beta, supportLink, drawer }: StandardHeaderData,
   pathname: string,
+  locale: Locale,
+  defaultLocale: Locale,
 ): HeaderProps => ({
   beta,
   ...(drawer && {
     drawer: {
-      ...drawer,
-      linkCards: drawer.linkCards.map((card) => ({
+      title: drawer.title,
+      ...(drawer.subtitle && { subtitle: drawer.subtitle }),
+      buttonText: drawer.buttonText,
+      linkCards: drawer.linkCards.map(({ icons, ...card }) => ({
         ...card,
         subtitle: MarkdownRenderer({
           markdown: card.subtitle,
           variant: 'body2',
-          locale: 'en',
-          defaultLocale: 'en',
+          locale,
+          defaultLocale,
         }),
+        icons: icons.data.map((icon) => icon.attributes.url),
       })),
       ctaCard: {
         ...drawer.ctaCard,
         subtitle: MarkdownRenderer({
           markdown: drawer.ctaCard.subtitle,
           variant: 'body2',
-          locale: 'en',
-          defaultLocale: 'en',
+          locale,
+          defaultLocale,
         }),
       },
     },
@@ -66,17 +90,13 @@ const makeHeaderProps = (
     name: productName,
     href: '/',
   },
-  // Add active link logic
   menu: menu.links.map((link) => ({
     theme: 'light',
     label: link.label,
     href: link.page.data?.attributes.slug,
     alignRight: link.alignRight,
     ...(link.sublinks.length > 0 && {
-      items: link.sublinks.map(makeSublink),
-    }),
-    ...(link.page.data && {
-      active: pathname === link.page.data.attributes.slug,
+      items: link.sublinks.map(makeHeaderSublink),
     }),
     ...(link.page.data && {
       sx: {
@@ -89,11 +109,10 @@ const makeHeaderProps = (
   })),
 });
 
-const makeMegaHeaderProps = ({
-  logo,
-  ctaButton,
-  menu,
-}: MegaHeaderData): MegaHeaderProps => ({
+const makeMegaHeaderProps = (
+  { logo, ctaButton, menu }: MegaHeaderData,
+  locale: Locale,
+): MegaHeaderProps => ({
   ...(ctaButton && {
     ctaButton: {
       ...ctaButton,
@@ -106,21 +125,39 @@ const makeMegaHeaderProps = ({
     primary: link.label,
     secondary: link.sublinkGroups.map((sublinkGroup) => ({
       title: sublinkGroup.title,
-      items: sublinkGroup.sublinks.map(makeSublink),
+      items: sublinkGroup.sublinks.map((sublink) =>
+        makeMegaHeaderSublink(sublink, locale),
+      ),
     })),
+    ...(link.ctaButton && {
+      ctaButton: {
+        ...link.ctaButton,
+        ...(link.ctaButton.icon && { startIcon: Icon(link.ctaButton.icon) }),
+      },
+    }),
   })),
 });
 
-const Header = (props: HeaderData['data']['attributes']['header'][0]) => {
+const Header = ({
+  locale,
+  defaultLocale,
+  ...props
+}: HeaderData['data']['attributes']['header'][0] & {
+  locale: Locale;
+  defaultLocale: Locale;
+}) => {
   const pathname = usePathname();
-  // eslint-disable-next-line
   const menuType = props.__component;
 
   switch (menuType) {
     case 'headers.standard-header':
-      return <HeaderRC {...makeHeaderProps(props, pathname)} />;
+      return (
+        <HeaderRC
+          {...makeHeaderProps(props, pathname, locale, defaultLocale)}
+        />
+      );
     case 'headers.mega-header':
-      return <MegaHeaderRC {...makeMegaHeaderProps(props)} />;
+      return <MegaHeaderRC {...makeMegaHeaderProps(props, locale)} />;
   }
 };
 

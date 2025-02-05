@@ -61,6 +61,7 @@ HeaderFullWithLogo.args = {
   drawer: {
     buttonText: 'Accedi',
     title: 'Accedi a SEND',
+    subtitle: 'Sottotitolo opzionale',
     ctaCard: {
       title: 'Sei un Ente?',
       subtitle: (
@@ -82,14 +83,14 @@ HeaderFullWithLogo.args = {
         ),
         buttonText: 'Accedi',
         href: '#',
-        stackIcon: 'People',
+        icons: ['https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg']
       },
       {
         title: 'Imprese',
         subtitle: <p>Accedi come persona giuridica</p>,
         buttonText: 'Accedi',
         href: '#',
-        stackIcon: 'Business',
+        icons: ['https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg', 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg']
       },
     ],
   },
