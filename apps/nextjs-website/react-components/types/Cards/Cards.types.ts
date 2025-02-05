@@ -8,7 +8,8 @@ export interface CardsProps extends SectionProps {
     body?: string | Generic;
   };
   ctaButtons?: CtaButtonProps[];
-  textPosition: 'left' | 'right' | 'center';
+  textPosition: 'left' | 'right' | 'center' | 'none';
+  bottomCTA?: CtaButtonProps;
 }
 
 export interface CardsItemProps {

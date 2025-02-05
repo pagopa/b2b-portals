@@ -165,8 +165,10 @@ const CardsSectionCodec = t.strict({
     left: null,
     center: null,
     right: null,
+    none: null,
   }),
   sectionID: t.union([t.string, t.null]),
+  bottomCTA: t.union([CTAButtonSimpleCodec, t.null]),
 });
 
 const OneTrustSectionPropsCodec = t.strict({
