@@ -47,10 +47,16 @@
       "enum": [
         "left",
         "center",
-        "right"
+        "right",
+        "none"
       ],
       "default": "left",
       "required": true
+    },
+    "bottomCTA": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.cta-button-simple"
     }
   }
 }
