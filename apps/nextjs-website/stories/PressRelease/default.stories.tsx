@@ -53,5 +53,5 @@ PressReleaseFull.args = {
       </p>
     </div>
   ),
-  date: '2024-11-28',
+  date: '10 Aprile 2024',
 };
