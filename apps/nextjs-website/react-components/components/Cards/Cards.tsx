@@ -201,8 +201,14 @@ const Cards = ({
           )}
         </>
       </Box>
-      {isNone && bottomCTA && (
-        <Box sx={{ textAlign: 'center', width: '100%', mt: { xs: 8, md: 0 } }}>
+      {bottomCTA && (
+        <Box
+          sx={{
+            textAlign: 'center',
+            width: '100%',
+            mt: isCenter ? 6 : { xs: 6, md: 0 },
+          }}
+        >
           {CtaButtons({ ctaButtons: [bottomCTA], theme, themeVariant })}
         </Box>
       )}
