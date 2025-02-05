@@ -15,6 +15,7 @@ export const makeCardsProps = ({
   subtitle,
   body,
   ctaButtons,
+  bottomCTA,
   ...rest
 }: CardsSection & SiteWidePageData): CardsProps => ({
   text: {
@@ -51,6 +52,7 @@ export const makeCardsProps = ({
         href: LocalizeURL({ URL: href, locale, defaultLocale }),
       })),
     }),
+  ...(bottomCTA && { bottomCTA }),
   ...rest,
 });
 
