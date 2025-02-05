@@ -20,15 +20,16 @@ const PressRelease = (props: PressReleaseProps) => {
       {...(sectionID && { id: sectionID })}
       sx={{
         width: '100%',
+        maxWidth: '100vw',
         bgcolor: backgroundColor,
         color: textColor,
         py: 10,
-        px: 2,
+        mx: 'auto',
       }}
     >
       <Container
         sx={{
-          width: { xs: '100%', md: '60%' },
+          width: { xs: '96%', md: '60%' },
           mx: 'auto',
           ml: { xs: 'auto', md: 16 },
           mr: { xs: 'auto' },
