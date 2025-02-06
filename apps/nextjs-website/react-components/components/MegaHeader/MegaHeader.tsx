@@ -330,37 +330,39 @@ const MegaHeader = (props: MegaHeaderProps) => {
             </React.Fragment>
           ))}
           {activeCta && (
-            <CtaButtons
-              ctaButtons={[
-                {
-                  ...activeCta,
-                  sx: {
-                    backgroundColor: '#0B3EE3',
-                    color: 'white',
-                    padding: '10px 20px',
-                    borderRadius: 2,
-                    textDecoration: 'none',
-                    whiteSpace: 'nowrap',
-                    margin: '30px',
-                    fontSize: '16px!important',
-                    fontWeight: '700!important',
-                    letterSpacing: '0.3px',
-                    '&:hover': {
-                      backgroundColor: '#005bb5',
-                    },
-                    '&:focus': {
-                      backgroundColor: '#005bb5',
-                    },
-                    '&:active': {
-                      backgroundColor: '#004999',
-                    },
-                    '&:visited': {
+            <div style={{ padding: '0px 0px 90px 0px', width: '100%' }}>
+              <CtaButtons
+                ctaButtons={[
+                  {
+                    ...activeCta,
+                    sx: {
+                      backgroundColor: '#0B3EE3',
                       color: 'white',
+                      padding: '10px 20px',
+                      borderRadius: 2,
+                      textDecoration: 'none',
+                      whiteSpace: 'nowrap',
+                      margin: '30px',
+                      fontSize: '16px!important',
+                      fontWeight: '700!important',
+                      letterSpacing: '0.3px',
+                      '&:hover': {
+                        backgroundColor: '#005bb5',
+                      },
+                      '&:focus': {
+                        backgroundColor: '#005bb5',
+                      },
+                      '&:active': {
+                        backgroundColor: '#004999',
+                      },
+                      '&:visited': {
+                        color: 'white',
+                      },
                     },
                   },
-                },
-              ]}
-            />
+                ]}
+              />
+            </div>
           )}
         </MobileMenu>
       </Container>
