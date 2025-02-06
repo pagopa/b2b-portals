@@ -34,41 +34,49 @@ export default function ActionAreaCard({
       }}
     >
       <div>
-        <CardContent
-          sx={{
-            padding: '1.5rem',
-            paddingBottom: '0.5rem',
-          }}
-        >
-          <Stack flexDirection={'row'} gap={2} marginBottom={2}>
+        <CardContent sx={{ padding: '1.5rem', paddingBottom: '0.5rem' }}>
+          <Stack flexDirection='row' gap={2} marginBottom={2}>
             {icons.map((iconURL) => (
               <Image src={iconURL} alt='' height={32} width={32} />
             ))}
           </Stack>
-          <Typography gutterBottom variant='h5' component='div'>
-            {title}
-          </Typography>
-          <Typography variant='body2' color='text.secondary' component='div'>
-            {subtitle}
-          </Typography>
+
+          <Stack
+            direction='row'
+            alignItems='center'
+            justifyContent='space-between'
+          >
+            <Stack>
+              <Typography gutterBottom variant='h5' component='div'>
+                {title}
+              </Typography>
+              <Typography
+                variant='body2'
+                color='text.secondary'
+                component='div'
+              >
+                {subtitle}
+              </Typography>
+            </Stack>
+
+            <Button
+              size='small'
+              href={href}
+              endIcon={<ArrowForwardIcon />}
+              sx={{
+                color: textColorAlternative,
+                fontSize: '16px',
+                padding: '0 10px',
+                minWidth: 'auto',
+              }}
+            >
+              {buttonText}
+            </Button>
+          </Stack>
         </CardContent>
       </div>
-      <CardActions>
-        <Button
-          size='small'
-          href={href}
-          endIcon={<ArrowForwardIcon />}
-          sx={{
-            '& .MuiButtonBase-root': { color: textColorAlternative },
-            '& .MuiSvgIcon-root': { fontSize: '20px' },
-            color: textColorAlternative,
-            fontSize: '16px',
-            padding: 0,
-          }}
-        >
-          {buttonText}
-        </Button>
-      </CardActions>
+
+      <CardActions sx={{ display: 'none' }} />
     </Card>
   );
 }
