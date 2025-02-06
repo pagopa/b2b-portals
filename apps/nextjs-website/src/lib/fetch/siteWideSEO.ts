@@ -35,6 +35,7 @@ const SiteWideSEOCodec = t.strict({
       mixpanel: t.union([
         t.strict({
           token: t.string,
+          oneTrustDomainID: t.string,
           apiHost: t.union([t.string, t.null]),
           debug: t.boolean,
           ip: t.boolean,
