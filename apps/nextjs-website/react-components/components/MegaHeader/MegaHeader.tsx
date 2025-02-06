@@ -330,7 +330,7 @@ const MegaHeader = (props: MegaHeaderProps) => {
             </React.Fragment>
           ))}
           {activeCta && (
-            <div style={{ padding: '0px 0px 90px 0px', width: '100%' }}>
+            <div style={{ padding: '0px 0px 90px 0px', width: 'max-content' }}>
               <CtaButtons
                 ctaButtons={[
                   {
