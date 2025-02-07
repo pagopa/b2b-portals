@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
 import Script from 'next/script';
-import mixpanel from 'mixpanel-browser';
 import { theme } from '../theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
@@ -16,6 +15,7 @@ import {
 } from '@/lib/api';
 import PreFooter from '@/components/PreFooter';
 import { Locale } from '@/lib/fetch/siteWideSEO';
+import ConsentHandler from '@/components/ConsentHandler';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -127,19 +127,6 @@ export default async function Layout({
     (locale) => locales[locale as Locale],
   );
 
-  if (mixpanelConfig) {
-    mixpanel.init(mixpanelConfig.token, {
-      ...(mixpanelConfig.apiHost && { api_host: mixpanelConfig.apiHost }),
-      cookie_domain: '.ioapp.it', // allow across-subdomain
-      cookie_expiration: 0, // session cookie
-      debug: mixpanelConfig.debug,
-      ip: mixpanelConfig.ip,
-      persistence: 'cookie',
-      secure_cookie: true,
-      track_pageview: true,
-    });
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <html lang={locale}>
@@ -177,6 +164,17 @@ export default async function Layout({
             id='otprivacy-notice-script'
             strategy='beforeInteractive'
           />
+          {mixpanelConfig && (
+            <Script
+              id='ot-consent'
+              src='https://cdn.cookielaw.org/scripttemplates/otSDKStub.js'
+              type='text/javascript'
+              charSet='UTF-8'
+              strategy='lazyOnload'
+              data-domain-script={mixpanelConfig.oneTrustDomainID}
+            />
+          )}
+          {mixpanelConfig && <ConsentHandler {...mixpanelConfig} />}
           {matomoID !== null && (
             <Script
               id='matomo'
