@@ -130,16 +130,6 @@ export default async function Layout({
   return (
     <ThemeProvider theme={theme}>
       <html lang={locale}>
-        <head>
-          {mixpanelConfig && (
-            <Script
-              src='https://cdn.cookielaw.org/scripttemplates/otSDKStub.js'
-              type='text/javascript'
-              data-domain-script={mixpanelConfig.oneTrustDomainID}
-              strategy='beforeInteractive'
-            />
-          )}
-        </head>
         <body style={{ margin: 0 }}>
           {preHeaderProps && (
             <PreHeader
@@ -174,6 +164,14 @@ export default async function Layout({
             id='otprivacy-notice-script'
             strategy='beforeInteractive'
           />
+          {mixpanelConfig && (
+            <Script
+              src='https://cdn.cookielaw.org/scripttemplates/otSDKStub.js'
+              type='text/javascript'
+              data-domain-script={mixpanelConfig.oneTrustDomainID}
+              strategy='beforeInteractive'
+            />
+          )}
           {mixpanelConfig && <ConsentHandler {...mixpanelConfig} />}
           {matomoID !== null && (
             <Script
