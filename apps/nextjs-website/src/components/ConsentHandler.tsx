@@ -7,18 +7,21 @@ declare global {
   interface Window {
     // eslint-disable-next-line functional/no-return-void
     OptanonWrapper: () => void;
+    OptanonActiveGroups: string;
+    OneTrust: {
+      // eslint-disable-next-line functional/no-return-void
+      OnConsentChanged: (callback: () => void) => void;
+    };
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare const OneTrust: any;
-declare const OnetrustActiveGroups: string;
-
 const targCookiesGroup = 'C0002'; // Target cookies (Mixpanel)
+
+const hasConsent = () => window.OptanonActiveGroups.includes(targCookiesGroup);
 
 const initMixpanel = (
   mixpanelConfig: NonNullable<SiteWideSEO['data']['attributes']['mixpanel']>,
-) => {
+) =>
   mixpanel.init(mixpanelConfig.token, {
     ...(mixpanelConfig.apiHost && { api_host: mixpanelConfig.apiHost }),
     cookie_domain: '.ioapp.it', // allow across-subdomain
@@ -29,16 +32,6 @@ const initMixpanel = (
     secure_cookie: true,
     track_pageview: true,
   });
-};
-
-const hasConsent = () => {
-  const OTCookieValue: string =
-    document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('OptanonConsent=')) || '';
-  const checkValue = `${targCookiesGroup}%3A1`;
-  return OTCookieValue.indexOf(checkValue) > -1;
-};
 
 const ConsentHandler = (
   mixpanelConfig: NonNullable<SiteWideSEO['data']['attributes']['mixpanel']>,
@@ -46,8 +39,8 @@ const ConsentHandler = (
   useEffect(() => {
     // eslint-disable-next-line functional/immutable-data
     window.OptanonWrapper = function () {
-      OneTrust.OnConsentChanged(function () {
-        if (OnetrustActiveGroups.indexOf(targCookiesGroup) > -1) {
+      window.OneTrust.OnConsentChanged(function () {
+        if (hasConsent()) {
           initMixpanel(mixpanelConfig);
         }
       });

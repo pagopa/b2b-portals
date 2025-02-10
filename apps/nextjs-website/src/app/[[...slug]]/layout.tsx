@@ -166,12 +166,10 @@ export default async function Layout({
           />
           {mixpanelConfig && (
             <Script
-              id='ot-consent'
               src='https://cdn.cookielaw.org/scripttemplates/otSDKStub.js'
               type='text/javascript'
-              charSet='UTF-8'
-              strategy='lazyOnload'
               data-domain-script={mixpanelConfig.oneTrustDomainID}
+              strategy='beforeInteractive'
             />
           )}
           {mixpanelConfig && <ConsentHandler {...mixpanelConfig} />}
