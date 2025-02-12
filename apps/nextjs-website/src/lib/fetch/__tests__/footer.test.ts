@@ -66,7 +66,12 @@ const footerResponse = {
             icon: {
               data: {
                 attributes: {
-                  url: '/',
+                  width: 32,
+                  height: 32,
+                  alternativeText: null,
+                  formats: null,
+                  mime: 'image/png',
+                  url: 'exampleURL',
                 },
               },
             },

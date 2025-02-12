@@ -67,7 +67,7 @@ const makeFooterProps = ({
       })),
       socialLinks: links_followUs.socialLinks.map(
         ({ icon, href, ariaLabel }) => ({
-          iconURL: icon?.data?.attributes?.url ?? '',
+          iconURL: icon.data.attributes.url,
           href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
           ariaLabel,
         }),

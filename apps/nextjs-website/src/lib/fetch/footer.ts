@@ -3,6 +3,7 @@ import { extractFromResponse } from './extractFromResponse';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
+import { StrapiImageRequiredSchema } from './types/StrapiImage';
 
 // Codec
 const CompanyLinkCodec = t.strict({
@@ -17,19 +18,7 @@ const FooterLinkCodec = t.strict({
 });
 
 const FooterLinkSocialCodec = t.strict({
-  icon: t.union([
-    t.null,
-    t.strict({
-      data: t.union([
-        t.null,
-        t.strict({
-          attributes: t.strict({
-            url: t.string,
-          }),
-        }),
-      ]),
-    }),
-  ]),
+  icon: StrapiImageRequiredSchema,
   href: t.string,
   ariaLabel: t.string,
 });
