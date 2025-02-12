@@ -22,23 +22,6 @@ type LayoutProps = {
   params: { slug?: string[] };
 };
 
-const MatomoScript = (id: string): string => `
-var _paq = (window._paq = window._paq || []);
-/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-_paq.push(["trackPageView"]);
-_paq.push(["enableLinkTracking"]);
-(function () {
-  var u = "https://pagopa.matomo.cloud/";
-  _paq.push(["setTrackerUrl", u + "matomo.php"]);
-  _paq.push(["setSiteId", "${id}"]);
-  var d = document,
-    g = d.createElement("script"),
-    s = d.getElementsByTagName("script")[0];
-  g.async = true;
-  g.src = "//cdn.matomo.cloud/pagopa.matomo.cloud/matomo.js";
-  s.parentNode.insertBefore(g, s);
-})();`;
-
 // Same params as Page, we're later going to only extract the locale since the specific page's slug doesn't matter
 // We cannot extract the locale directly inside generateStaticParams
 // because, since the folder is called [[...slug]], NextJS will only populate params called slug
@@ -101,13 +84,7 @@ export default async function Layout({
   }
 
   const siteWideSEO = await getSiteWideSEO();
-  const {
-    defaultLocale,
-    locales,
-    matomoID,
-    mixpanel: mixpanelConfig,
-    themeVariant,
-  } = siteWideSEO;
+  const { defaultLocale, locales, analytics, themeVariant } = siteWideSEO;
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the locale to the default locale
@@ -164,25 +141,7 @@ export default async function Layout({
             id='otprivacy-notice-script'
             strategy='beforeInteractive'
           />
-          {mixpanelConfig && (
-            <Script
-              id='ot-consent'
-              src='https://cdn.cookielaw.org/scripttemplates/otSDKStub.js'
-              type='text/javascript'
-              charSet='UTF-8'
-              strategy='lazyOnload'
-              data-domain-script={mixpanelConfig.oneTrustDomainID}
-            />
-          )}
-          {mixpanelConfig && <ConsentHandler {...mixpanelConfig} />}
-          {matomoID !== null && (
-            <Script
-              id='matomo'
-              key='script-matomo'
-              dangerouslySetInnerHTML={{ __html: MatomoScript(matomoID) }}
-              strategy='lazyOnload'
-            />
-          )}
+          {analytics && <ConsentHandler {...analytics} />}
         </body>
       </html>
     </ThemeProvider>

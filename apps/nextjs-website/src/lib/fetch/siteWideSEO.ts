@@ -17,13 +17,26 @@ export const ThemeVariantCodec = t.keyof({
   SEND: null,
 });
 
+const MixpanelCodec = t.strict({
+  token: t.string,
+  apiHost: t.union([t.string, t.null]),
+  cookieDomain: t.union([t.string, t.null]),
+  debug: t.boolean,
+  ip: t.boolean,
+});
+
+const AnalyticsCodec = t.strict({
+  oneTrustDomainID: t.string,
+  mixpanel: t.union([MixpanelCodec, t.null]),
+  matomoID: t.union([t.string, t.null]),
+});
+
 const SiteWideSEOCodec = t.strict({
   data: t.strict({
     attributes: t.strict({
       metaImage: StrapiImageRequiredSchema,
       favicon: StrapiImageRequiredSchema,
       appleTouchIcon: StrapiImageRequiredSchema,
-      matomoID: t.union([t.string, t.null]),
       themeVariant: ThemeVariantCodec,
       locales: t.strict({
         it: t.boolean,
@@ -32,16 +45,7 @@ const SiteWideSEOCodec = t.strict({
         de: t.boolean,
         sl: t.boolean,
       }),
-      mixpanel: t.union([
-        t.strict({
-          token: t.string,
-          oneTrustDomainID: t.string,
-          apiHost: t.union([t.string, t.null]),
-          debug: t.boolean,
-          ip: t.boolean,
-        }),
-        t.null,
-      ]),
+      analytics: t.union([AnalyticsCodec, t.null]),
       defaultLocale: LocaleCodec,
     }),
   }),
@@ -50,6 +54,8 @@ const SiteWideSEOCodec = t.strict({
 export type SiteWideSEO = t.TypeOf<typeof SiteWideSEOCodec>;
 export type ThemeVariant = t.TypeOf<typeof ThemeVariantCodec>;
 export type Locale = t.TypeOf<typeof LocaleCodec>;
+export type Analytics = t.TypeOf<typeof AnalyticsCodec>;
+export type MixpanelConfig = t.TypeOf<typeof MixpanelCodec>;
 
 export interface SiteWidePageData {
   readonly themeVariant: ThemeVariant;
@@ -68,7 +74,7 @@ export const fetchSiteWideSEO = ({
 &populate[1]=favicon
 &populate[2]=appleTouchIcon
 &populate[3]=locales
-&populate[4]=mixpanel
+&populate[4]=analytics.mixpanel
       `,
       {
         method: 'GET',
