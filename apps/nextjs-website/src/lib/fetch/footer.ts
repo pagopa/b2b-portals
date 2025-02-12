@@ -1,6 +1,5 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { SocialIconCodec } from './types/icons/SocialIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
@@ -18,7 +17,19 @@ const FooterLinkCodec = t.strict({
 });
 
 const FooterLinkSocialCodec = t.strict({
-  icon: SocialIconCodec,
+  icon: t.union([
+    t.null,
+    t.strict({
+      data: t.union([
+        t.null,
+        t.strict({
+          attributes: t.strict({
+            url: t.string,
+          }),
+        }),
+      ]),
+    }),
+  ]),
   href: t.string,
   ariaLabel: t.string,
 });

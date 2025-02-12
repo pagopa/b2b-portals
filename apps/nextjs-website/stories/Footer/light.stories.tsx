@@ -2,7 +2,6 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { Footer } from '@react-components/components';
 import { FooterProps } from '@react-components/types';
-import { FacebookOutlined } from '@mui/icons-material';
 
 // Define the default export with metadata about your component
 const meta: Meta<typeof Footer> = {
@@ -54,8 +53,10 @@ Default.args = {
       title: 'Follow Us',
       socialLinks: [
         {
-          icon: <FacebookOutlined />,
+          iconURL:
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
           href: '#',
+          ariaLabel: 'label',
         },
       ],
       links: [

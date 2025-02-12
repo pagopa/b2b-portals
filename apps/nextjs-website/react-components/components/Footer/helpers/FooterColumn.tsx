@@ -1,7 +1,6 @@
 import { Link, Stack, Typography } from '@mui/material';
 import { hrefNoOp } from '../Footer.helpers';
 import { LogoPagoPACompany } from '../assets/LogoPagoPACompany';
-import { EIcon } from '../../common/EIcon';
 import { FooterColumnProps } from '../../../types/Footer/Footer.types';
 
 export const FooterColumn = ({
@@ -31,16 +30,19 @@ export const FooterColumn = ({
         alignItems={{ xs: 'center', sm: 'start' }}
         sx={{ padding: 0, mt: 0.5, listStyle: 'none' }}
       >
-        {icons.map(
-          ({ icon, href = hrefNoOp, onClick, ...rest }, i) =>
-            icon && (
-              <li key={i}>
-                <Link href={href}>
-                  <EIcon icon={icon} color='text.primary' {...rest} />
-                </Link>
-              </li>
-            )
-        )}
+        {icons.map(({ iconURL, href = hrefNoOp, ariaLabel }, i) => (
+          <li key={i}>
+            <Link href={href} aria-label={ariaLabel}>
+              <img
+                src={iconURL}
+                alt={ariaLabel || 'Social Icon'}
+                width={30}
+                height={30}
+                style={{ display: 'block' }}
+              />
+            </Link>
+          </li>
+        ))}
       </Stack>
     )}
 

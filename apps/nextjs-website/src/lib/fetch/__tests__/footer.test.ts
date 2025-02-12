@@ -63,15 +63,21 @@ const footerResponse = {
         title: 'SEGUICI SU',
         socialLinks: [
           {
-            icon: 'LinkedIn',
-            href: 'linkedin.com',
+            icon: {
+              data: {
+                attributes: {
+                  url: '/',
+                },
+              },
+            },
+            href: 'https://linkedin.com',
             ariaLabel: 'LinkedIn',
           },
         ],
         links: [
           {
             label: 'Accessibilità',
-            href: 'accessibilità',
+            href: 'https://example.com/accessibilita',
             ariaLabel: 'Accessibilità',
           },
         ],

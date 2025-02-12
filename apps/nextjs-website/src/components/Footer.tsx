@@ -1,7 +1,6 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import MarkdownRenderer from './MarkdownRenderer';
-import Icon from './Icon';
 import { Footer as FooterRC } from '@react-components/components';
 import { FooterProps } from '@react-components/types';
 import { FooterData } from '@/lib/fetch/footer';
@@ -68,11 +67,9 @@ const makeFooterProps = ({
       })),
       socialLinks: links_followUs.socialLinks.map(
         ({ icon, href, ariaLabel }) => ({
-          icon: Icon(icon),
+          iconURL: icon?.data?.attributes?.url ?? '',
           href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
-          'aria-label': ariaLabel,
-          // above conversion is needed because social icons just pass through all props other than icon
-          // this means we need to format them as if they were HTML attributes
+          ariaLabel,
         }),
       ),
     },
