@@ -77,7 +77,7 @@ const footerResponse = {
         links: [
           {
             label: 'Accessibilità',
-            href: 'https://example.com/accessibilita',
+            href: 'accessibilita',
             ariaLabel: 'Accessibilità',
           },
         ],
