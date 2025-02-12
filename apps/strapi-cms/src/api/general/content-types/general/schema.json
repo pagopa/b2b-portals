@@ -36,9 +36,6 @@
         "images"
       ]
     },
-    "matomoID": {
-      "type": "string"
-    },
     "themeVariant": {
       "type": "enumeration",
       "enum": [
@@ -66,10 +63,10 @@
       "required": true,
       "default": "it"
     },
-    "mixpanel": {
+    "analytics": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.mix-panel"
+      "component": "shared.analytics"
     }
   }
 }
