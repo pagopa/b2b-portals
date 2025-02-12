@@ -1,27 +1,52 @@
 'use client';
-import { SiteWideSEO } from '@/lib/fetch/siteWideSEO';
+import { Analytics, MixpanelConfig } from '@/lib/fetch/siteWideSEO';
 import mixpanel from 'mixpanel-browser';
+import Script from 'next/script';
 import { useEffect } from 'react';
+
+const MatomoScript = (id: string): string => `
+var _paq = (window._paq = window._paq || []);
+/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+_paq.push(["trackPageView"]);
+_paq.push(["enableLinkTracking"]);
+(function () {
+  var u = "https://pagopa.matomo.cloud/";
+  _paq.push(["setTrackerUrl", u + "matomo.php"]);
+  _paq.push(["setSiteId", "${id}"]);
+  var d = document,
+    g = d.createElement("script"),
+    s = d.getElementsByTagName("script")[0];
+  g.async = true;
+  g.src = "//cdn.matomo.cloud/pagopa.matomo.cloud/matomo.js";
+  s.parentNode.insertBefore(g, s);
+})();`;
 
 declare global {
   interface Window {
     // eslint-disable-next-line functional/no-return-void
     OptanonWrapper: () => void;
+    // OptanonActiveGroups will only be missing when CMS user inputs an invalid oneTrustDomainID
+    // We are only considering the case because we have no way to check beforehand if the id is valid
+    // Hence, this would cause a runtime error and break the built static website (which we want to avoid)
+    // Instead the cookie banner just won't show and an error will be logged to console
+    OptanonActiveGroups?: string;
+    OneTrust: {
+      // eslint-disable-next-line functional/no-return-void
+      OnConsentChanged: (callback: () => void) => void;
+    };
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare const OneTrust: any;
-declare const OnetrustActiveGroups: string;
-
 const targCookiesGroup = 'C0002'; // Target cookies (Mixpanel)
 
-const initMixpanel = (
-  mixpanelConfig: NonNullable<SiteWideSEO['data']['attributes']['mixpanel']>,
-) => {
+const hasConsent = () => window.OptanonActiveGroups?.includes(targCookiesGroup);
+
+const initMixpanel = (mixpanelConfig: NonNullable<MixpanelConfig>) =>
   mixpanel.init(mixpanelConfig.token, {
     ...(mixpanelConfig.apiHost && { api_host: mixpanelConfig.apiHost }),
-    cookie_domain: '.ioapp.it', // allow across-subdomain
+    ...(mixpanelConfig.cookieDomain && {
+      cookie_domain: mixpanelConfig.cookieDomain,
+    }), // allow across-subdomain
     cookie_expiration: 0, // session cookie
     debug: mixpanelConfig.debug,
     ip: mixpanelConfig.ip,
@@ -29,36 +54,49 @@ const initMixpanel = (
     secure_cookie: true,
     track_pageview: true,
   });
-};
 
-const hasConsent = () => {
-  const OTCookieValue: string =
-    document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('OptanonConsent=')) || '';
-  const checkValue = `${targCookiesGroup}%3A1`;
-  return OTCookieValue.indexOf(checkValue) > -1;
-};
-
-const ConsentHandler = (
-  mixpanelConfig: NonNullable<SiteWideSEO['data']['attributes']['mixpanel']>,
-) => {
+const ConsentHandler = ({
+  oneTrustDomainID,
+  mixpanel: mixpanelConfig,
+  matomoID,
+}: NonNullable<Analytics>) => {
   useEffect(() => {
+    if (window.OptanonActiveGroups === undefined) {
+      console.error('ERROR: Invalid OneTrust domain ID');
+    }
+
     // eslint-disable-next-line functional/immutable-data
     window.OptanonWrapper = function () {
-      OneTrust.OnConsentChanged(function () {
-        if (OnetrustActiveGroups.indexOf(targCookiesGroup) > -1) {
+      window.OneTrust.OnConsentChanged(function () {
+        if (hasConsent() && mixpanelConfig) {
           initMixpanel(mixpanelConfig);
         }
       });
     };
 
-    if (hasConsent()) {
+    if (hasConsent() && mixpanelConfig) {
       initMixpanel(mixpanelConfig);
     }
   }, [mixpanelConfig]);
 
-  return null;
+  return (
+    <>
+      <Script
+        src='https://cdn.cookielaw.org/scripttemplates/otSDKStub.js'
+        type='text/javascript'
+        data-domain-script={oneTrustDomainID}
+        strategy='afterInteractive'
+      />
+      {matomoID && (
+        <Script
+          id='matomo'
+          key='script-matomo'
+          dangerouslySetInnerHTML={{ __html: MatomoScript(matomoID) }}
+          strategy='lazyOnload'
+        />
+      )}
+    </>
+  );
 };
 
 export default ConsentHandler;

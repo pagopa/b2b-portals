@@ -23,9 +23,9 @@
       "default": true,
       "required": true
     },
-    "oneTrustDomainID": {
+    "cookieDomain": {
       "type": "string",
-      "required": true
+      "required": false
     }
   }
 }
