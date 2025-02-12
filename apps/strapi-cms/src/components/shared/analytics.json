@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_analytics",
+  "info": {
+    "displayName": "Analytics"
+  },
+  "options": {},
+  "attributes": {
+    "oneTrustDomainID": {
+      "type": "string",
+      "required": true
+    },
+    "mixpanel": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.mix-panel"
+    },
+    "matomoID": {
+      "type": "string"
+    }
+  }
+}
