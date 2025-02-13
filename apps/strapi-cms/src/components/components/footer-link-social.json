@@ -6,24 +6,21 @@
   },
   "options": {},
   "attributes": {
-    "icon": {
-      "type": "enumeration",
-      "enum": [
-        "Instagram",
-        "LinkedIn",
-        "Facebook",
-        "Twitter",
-        "Medium",
-        "YouTube"
-      ],
-      "required": true
-    },
     "href": {
       "type": "string",
       "required": true
     },
     "ariaLabel": {
       "type": "string",
+      "required": true
+    },
+    "icon": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false,
       "required": true
     }
   }
