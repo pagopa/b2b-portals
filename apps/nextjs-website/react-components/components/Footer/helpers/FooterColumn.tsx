@@ -38,7 +38,6 @@ export const FooterColumn = ({
                 alt={ariaLabel || 'Social Icon'}
                 width={30}
                 height={30}
-                style={{ display: 'block' }}
               />
             </Link>
           </li>
