@@ -116,7 +116,7 @@ describe('getFooter', () => {
 &populate[0]=companyLink
 &populate[1]=links_aboutUs.links
 &populate[2]=links_followUs.links
-&populate[3]=links_followUs.socialLinks
+&populate[3]=links_followUs.socialLinks.icon
 &populate[4]=links_resources.links
 &populate[5]=links_services.links
       `,
