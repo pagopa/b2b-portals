@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { fetchSiteWideSEO } from '../siteWideSEO';
+import { fetchSiteWideSEO, SiteWideSEO } from '../siteWideSEO';
 import { Config } from '@/AppEnv';
 
 const makeTestAppEnv = () => {
@@ -24,7 +24,7 @@ const makeTestAppEnv = () => {
 };
 
 // response example
-const siteWideSEOResponse = {
+const siteWideSEOResponse: SiteWideSEO = {
   data: {
     attributes: {
       metaImage: {
@@ -63,7 +63,6 @@ const siteWideSEOResponse = {
           },
         },
       },
-      matomoID: '12',
       themeVariant: 'SEND',
       locales: {
         it: true,
@@ -73,7 +72,7 @@ const siteWideSEOResponse = {
         sl: false,
       },
       defaultLocale: 'it',
-      mixpanel: null,
+      analytics: null,
     },
   },
 };
@@ -95,7 +94,7 @@ describe('fetchSiteWideSEO', () => {
 &populate[1]=favicon
 &populate[2]=appleTouchIcon
 &populate[3]=locales
-&populate[4]=mixpanel
+&populate[4]=analytics.mixpanel
       `,
       {
         method: 'GET',
