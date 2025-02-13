@@ -1,4 +1,3 @@
-import { type EIconProps } from '../../components/common/EIcon';
 import { Generic } from '../common/Common.types';
 
 export interface FooterProps extends LangSwitchProps {
@@ -19,13 +18,18 @@ interface PreLoginFooterSingleSectionType {
   links: FooterLinksType[];
 }
 
+interface SocialLinkType {
+  iconURL: string;
+  href: string;
+  ariaLabel: string;
+}
 interface PreLoginFooterLinksType {
   services: PreLoginFooterSingleSectionType;
   aboutUs: PreLoginFooterSingleSectionType;
   resources: PreLoginFooterSingleSectionType;
   followUs: {
     title: string;
-    socialLinks: EIconProps[];
+    socialLinks: SocialLinkType[];
     links: FooterLinksType[];
   };
 }
@@ -41,7 +45,7 @@ interface CompanyLinkType {
 export interface FooterColumnProps {
   data: PreLoginFooterSingleSectionType;
   companyLink?: CompanyLinkType;
-  icons?: EIconProps[];
+  icons?: SocialLinkType[];
 }
 
 interface Language {
