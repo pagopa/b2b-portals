@@ -32,7 +32,7 @@ export const FooterColumn = ({
       >
         {icons.map(({ iconURL, href = hrefNoOp, ariaLabel }, i) => (
           <li key={i}>
-            <Link href={href} aria-label={ariaLabel}>
+            <Link href={href} aria-label={ariaLabel} target='_blank'>
               <img
                 src={iconURL}
                 alt={ariaLabel || 'Social Icon'}

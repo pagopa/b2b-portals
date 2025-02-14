@@ -122,6 +122,7 @@ const PreFooter = (props: PreFooterProps) => {
                     }}
                     key='google'
                     href={storeButtons.hrefGoogle}
+                    target='_blank'
                   >
                     <img
                       src={googleBadgeBase64}
@@ -139,6 +140,7 @@ const PreFooter = (props: PreFooterProps) => {
                     }}
                     key='apple'
                     href={storeButtons.hrefApple}
+                    target='_blank'
                   >
                     <img
                       src={appleBadgeBase64}
