@@ -99,6 +99,7 @@ const MegaHeaderCodec = t.strict({
   __component: t.literal('headers.mega-header'),
   logo: StrapiImageRequiredSchema,
   ctaButton: t.union([CTAButtonSimpleCodec, t.null]),
+  drawer: t.union([SideDrawerCodec, t.null]),
   menu: MegaMenuCodec,
 });
 

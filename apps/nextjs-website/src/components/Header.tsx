@@ -110,13 +110,40 @@ const makeHeaderProps = (
 });
 
 const makeMegaHeaderProps = (
-  { logo, ctaButton, menu }: MegaHeaderData,
+  { logo, ctaButton, menu, drawer }: MegaHeaderData,
   locale: Locale,
+  defaultLocale: Locale,
 ): MegaHeaderProps => ({
   ...(ctaButton && {
     ctaButton: {
       ...ctaButton,
       ...(ctaButton.icon && { startIcon: Icon(ctaButton.icon) }),
+    },
+  }),
+  ...(drawer && {
+    drawer: {
+      title: drawer.title,
+      ...(drawer.subtitle && { subtitle: drawer.subtitle }),
+      buttonText: drawer.buttonText,
+      linkCards: drawer.linkCards.map(({ icons, ...card }) => ({
+        ...card,
+        subtitle: MarkdownRenderer({
+          markdown: card.subtitle,
+          variant: 'body2',
+          locale,
+          defaultLocale,
+        }),
+        icons: icons.data.map((icon) => icon.attributes.url),
+      })),
+      ctaCard: {
+        ...drawer.ctaCard,
+        subtitle: MarkdownRenderer({
+          markdown: drawer.ctaCard.subtitle,
+          variant: 'body2',
+          locale,
+          defaultLocale,
+        }),
+      },
     },
   }),
   logoSrc: logo.data.attributes.url,
@@ -157,7 +184,9 @@ const Header = ({
         />
       );
     case 'headers.mega-header':
-      return <MegaHeaderRC {...makeMegaHeaderProps(props, locale)} />;
+      return (
+        <MegaHeaderRC {...makeMegaHeaderProps(props, locale, defaultLocale)} />
+      );
   }
 };
 
