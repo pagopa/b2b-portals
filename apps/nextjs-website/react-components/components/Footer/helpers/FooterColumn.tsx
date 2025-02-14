@@ -16,6 +16,7 @@ export const FooterColumn = ({
         aria-label={companyLink.ariaLabel}
         href={companyLink.href ?? hrefNoOp}
         sx={{ display: 'inline-flex' }}
+        {...(companyLink.href?.startsWith('https') && { target: '_blank' })}
       >
         <LogoPagoPACompany />
       </Link>
@@ -32,7 +33,7 @@ export const FooterColumn = ({
       >
         {icons.map(({ iconURL, href = hrefNoOp, ariaLabel }, i) => (
           <li key={i}>
-            <Link href={href} aria-label={ariaLabel}>
+            <Link href={href} aria-label={ariaLabel} {...(href.startsWith('https') && { target: '_blank' })}>
               <img
                 src={iconURL}
                 alt={ariaLabel || 'Social Icon'}
@@ -61,6 +62,7 @@ export const FooterColumn = ({
             color='text.primary'
             sx={{ display: 'inline-block', py: 0.5 }}
             variant='subtitle2'
+            {...(href.startsWith('https') && { target: '_blank' })}
           >
             {label}
           </Link>

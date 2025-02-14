@@ -165,6 +165,7 @@ const PreFooter = (props: PreFooterProps) => {
                       width: 'auto',
                       marginTop: '16px',
                     },
+                    ...(button.href?.startsWith('https') && { target: '_blank' })
                   })),
                   theme,
                 })}
