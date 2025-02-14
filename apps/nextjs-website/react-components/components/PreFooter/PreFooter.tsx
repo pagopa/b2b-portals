@@ -122,7 +122,6 @@ const PreFooter = (props: PreFooterProps) => {
                     }}
                     key='google'
                     href={storeButtons.hrefGoogle}
-                    target='_blank'
                   >
                     <img
                       src={googleBadgeBase64}
@@ -140,7 +139,6 @@ const PreFooter = (props: PreFooterProps) => {
                     }}
                     key='apple'
                     href={storeButtons.hrefApple}
-                    target='_blank'
                   >
                     <img
                       src={appleBadgeBase64}
@@ -167,6 +165,7 @@ const PreFooter = (props: PreFooterProps) => {
                       width: 'auto',
                       marginTop: '16px',
                     },
+                    ...(button.href && button.href.startsWith('https') ? { target: '_blank' } : {})
                   })),
                   theme,
                 })}
