@@ -52,7 +52,7 @@ const initMixpanel = (mixpanelConfig: NonNullable<MixpanelConfig>) =>
     ip: mixpanelConfig.ip,
     persistence: 'cookie',
     secure_cookie: true,
-    track_pageview: true,
+    track_pageview: 'url-with-path',
   });
 
 const ConsentHandler = ({
