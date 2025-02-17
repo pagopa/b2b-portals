@@ -87,6 +87,10 @@ const ConsentHandler = ({
 
   return (
     <>
+      <div
+        id='onetrust-consent-sdk'
+        style={{ fontFamily: 'Titillium Web, sans-serif' }}
+      />
       <Script
         src='https://cdn.cookielaw.org/scripttemplates/otSDKStub.js'
         type='text/javascript'
