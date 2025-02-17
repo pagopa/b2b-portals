@@ -13,9 +13,20 @@ const LinkCodec = t.strict({
   href: t.string,
 });
 
+const TitleTagCodec = t.keyof({
+  h1: null,
+  h2: null,
+  h3: null,
+  h4: null,
+  h5: null,
+  h6: null,
+  p: null,
+});
+
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
   title: t.string,
+  titleTag: t.union([TitleTagCodec, t.null]),
   subtitle: t.union([t.string, t.null]),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   inverse: t.boolean,
@@ -34,6 +45,7 @@ const HeroSectionCodec = t.strict({
 
 const EditorialContentCodec = t.strict({
   title: t.string,
+  titleTag: t.union([TitleTagCodec, t.null]),
   eyelet: t.union([t.string, t.null]),
   body: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
