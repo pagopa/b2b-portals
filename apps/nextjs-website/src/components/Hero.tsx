@@ -17,10 +17,12 @@ const makeHeroProps = ({
   ctaButtons,
   storeButtons,
   link,
+  titleTag,
   ...rest
 }: HeroSection & SiteWidePageData): HeroProps => ({
   ...rest,
   useHoverlay: false,
+  ...(titleTag && { titleTag }),
   ...(subtitle && {
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
   }),

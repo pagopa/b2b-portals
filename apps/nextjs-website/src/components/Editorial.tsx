@@ -17,9 +17,11 @@ export const makeEditorialProps = ({
   mobileImage,
   ctaButtons,
   storeButtons,
+  titleTag,
   ...rest
 }: EditorialSection & SiteWidePageData): EditorialProps => ({
   ...(eyelet && { eyelet }),
+  ...(titleTag && { titleTag }),
   body: MarkdownRenderer({
     markdown: body,
     locale,

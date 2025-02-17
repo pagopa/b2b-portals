@@ -80,20 +80,20 @@ variable "websites_configs" {
   default = {
     "send" = {
       origin_path                = "/send"
-      url_tenant                 = "notifichedigitali.pagopa.it"
+      url_tenant                 = "dev.notifichedigitali.it"
       create_certificate         = true
       create_distribution        = true
       cdn_use_custom_certificate = true
-      cdn_use_alias              = false
+      cdn_use_alias              = true
       cdn_indexing_enable        = false
     },
     "appio" = {
       origin_path                = "/appio"
-      url_tenant                 = "io.italia.it"
-      create_certificate         = false
+      url_tenant                 = "ioapp.it"
+      create_certificate         = true
       create_distribution        = true
-      cdn_use_custom_certificate = false
-      cdn_use_alias              = false
+      cdn_use_custom_certificate = true
+      cdn_use_alias              = true
       cdn_indexing_enable        = false
     },
     "demo" = {
