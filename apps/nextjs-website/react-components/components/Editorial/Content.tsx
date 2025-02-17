@@ -9,6 +9,7 @@ import { TextColor, ExtraTextColor } from '../common/Common.helpers';
 export const Content = ({
   eyelet,
   title,
+  titleTag = 'p',
   body,
   theme,
   themeVariant,
@@ -34,6 +35,7 @@ export const Content = ({
         title={title}
         variant='h4'
         textAlign='left'
+        component={titleTag}
       />
       <Typography
         component='div'

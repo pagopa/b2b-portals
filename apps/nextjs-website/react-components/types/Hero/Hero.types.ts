@@ -27,6 +27,7 @@ export interface StoreButtonsProps {
 
 export interface HeroTextProps {
   readonly title: string;
+  readonly titleTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
   readonly subtitle?: string | Generic;
   readonly ctaButtons?: ReadonlyArray<CtaButtonProps>;
   readonly storeButtons?: StoreButtonsProps;

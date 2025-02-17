@@ -22,6 +22,7 @@ export const getOverlay = (useHoverlay: boolean, theme: string) =>
 
 export const HeroTextContent = ({
   title,
+  titleTag = 'p',
   subtitle,
   ctaButtons,
   storeButtons,
@@ -59,6 +60,7 @@ export const HeroTextContent = ({
       <Stack spacing={2} mb={size === 'small' ? 0 : { xs: 6, md: 4 }}>
         <Title
           variant='h1'
+          component={titleTag}
           textColor={textColor}
           title={title}
           textAlign={size === 'small' ? 'center' : 'left'}
