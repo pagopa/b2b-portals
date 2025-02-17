@@ -89,6 +89,7 @@ const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
     text: 'CTA',
     variant: 'contained',
   },
+  drawer: null,
 };
 
 const standardHeader: HeaderData = {

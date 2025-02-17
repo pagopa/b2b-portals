@@ -13,7 +13,7 @@ export interface HeaderSideDrawerLinkCardProps
   readonly icons: string[];
 }
 
-interface HeaderSideDrawerProps {
+export interface HeaderSideDrawerProps {
   readonly buttonText: string;
   readonly title: string;
   readonly subtitle?: string;

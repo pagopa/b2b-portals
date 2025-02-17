@@ -1,4 +1,5 @@
 import { CtaButtonProps } from '../common/Common.types';
+import { HeaderSideDrawerProps } from '../Header/Header.types';
 
 export interface MegaMenuItem {
   primary: string;
@@ -14,8 +15,9 @@ export interface MegaMenuItem {
 }
 
 export interface MegaHeaderProps {
-  menuItems?: MegaMenuItem[];
+  menuItems: MegaMenuItem[];
   logoSrc: string;
   logoAlt: string;
   ctaButton?: CtaButtonProps;
+  drawer?: HeaderSideDrawerProps;
 }

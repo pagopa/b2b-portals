@@ -22,19 +22,15 @@ import {
 } from './MegaHeader.Helpers';
 import { CtaButtons } from '../common/Common';
 import { usePathname } from 'next/navigation';
+import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
 
-const MegaHeader = (props: MegaHeaderProps) => {
+const MegaHeader = ({ logoSrc, logoAlt, ctaButton, menuItems, drawer }: MegaHeaderProps) => {
   const pathname = usePathname();
-
-  const { logoSrc, logoAlt, ctaButton } = props;
-  const menuItems = props.menuItems || [];
-
-  const { palette } = useTheme();
-
-  const theme = useTheme();
+  const { palette, ...theme } = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const isActiveSubLink = (href: string): boolean =>
@@ -61,6 +57,9 @@ const MegaHeader = (props: MegaHeaderProps) => {
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const openDrawer = () => setIsDrawerOpen(true);
+  const closeDrawer = () => setIsDrawerOpen(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -152,6 +151,39 @@ const MegaHeader = (props: MegaHeaderProps) => {
                   ctaButtons={[
                     {
                       ...activeCta,
+                      sx: {
+                        backgroundColor: '#0B3EE3',
+                        color: 'white',
+                        padding: '10px 20px',
+                        borderRadius: 2,
+                        textDecoration: 'none',
+                        whiteSpace: 'nowrap',
+                        fontSize: '16px!important',
+                        fontWeight: '700!important',
+                        letterSpacing: '0.3px',
+                        '&:hover': {
+                          backgroundColor: '#005bb5',
+                        },
+                        '&:focus': {
+                          backgroundColor: '#005bb5',
+                        },
+                        '&:active': {
+                          backgroundColor: '#004999',
+                        },
+                        '&:visited': {
+                          color: 'white',
+                        },
+                      },
+                    },
+                  ]}
+                />
+              )}
+              {!activeCta && drawer && (
+                <CtaButtons
+                  ctaButtons={[
+                    {
+                      text: drawer.buttonText,
+                      onClick: openDrawer,
                       sx: {
                         backgroundColor: '#0B3EE3',
                         color: 'white',
@@ -364,7 +396,56 @@ const MegaHeader = (props: MegaHeaderProps) => {
               />
             </div>
           )}
+          {!activeCta && drawer && (
+            <div style={{ padding: '0px 0px 90px 0px', width: 'max-content' }}>
+              <CtaButtons
+                ctaButtons={[
+                  {
+                    text: drawer.buttonText,
+                    onClick: openDrawer,
+                    sx: {
+                      backgroundColor: '#0B3EE3',
+                      color: 'white',
+                      padding: '10px 20px',
+                      borderRadius: 2,
+                      textDecoration: 'none',
+                      whiteSpace: 'nowrap',
+                      margin: '30px',
+                      fontSize: '16px!important',
+                      fontWeight: '700!important',
+                      letterSpacing: '0.3px',
+                      '&:hover': {
+                        backgroundColor: '#005bb5',
+                      },
+                      '&:focus': {
+                        backgroundColor: '#005bb5',
+                      },
+                      '&:active': {
+                        backgroundColor: '#004999',
+                      },
+                      '&:visited': {
+                        color: 'white',
+                      },
+                    },
+                  },
+                ]}
+              />
+            </div>
+          )}
         </MobileMenu>
+        
+        {drawer && (
+          <SideDrawer
+            isOpen={isDrawerOpen}
+            onClose={closeDrawer}
+            anchor='right'
+            theme='light'
+            drawerMenuTitle={drawer.title}
+            {...(drawer.subtitle && { drawerMenuSubtitle: drawer.subtitle })}
+            ctaCard={drawer.ctaCard}
+            linkCards={drawer.linkCards}
+          />
+        )}
       </Container>
     </>
   );

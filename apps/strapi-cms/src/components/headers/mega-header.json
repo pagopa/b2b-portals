@@ -1,17 +1,18 @@
 {
   "collectionName": "components_headers_mega_headers",
   "info": {
-    "displayName": "Mega Header"
+    "displayName": "Mega Header",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "logo": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "ctaButton": {
       "type": "component",
@@ -23,6 +24,11 @@
       "repeatable": false,
       "component": "menu.mega-menu",
       "required": true
+    },
+    "drawer": {
+      "type": "component",
+      "repeatable": false,
+      "component": "headers.header-drawer"
     }
   }
 }
