@@ -2,7 +2,6 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import ContainerRC from '../common/ContainerRC';
 import { EditorialProps } from '../../types/Editorial/Editorial.types';
-import { useIsMobile } from './Editorial.helpers';
 import {
   SendBackgroundColor,
   IoBackgroundColor,
@@ -34,23 +33,26 @@ const Editorial = (props: EditorialProps) => {
     reversed = false,
     sectionID,
   } = props;
-
-  const isMobile = useIsMobile();
   const backgroundColor =
     themeVariant === 'SEND'
       ? SendBackgroundColor(theme)
       : IoBackgroundColor(theme);
+  const columns = {
+    wide: 6,
+    center: 4,
+  };
+  const gridItemStyles = { ...styles.half };
 
   if (width === 'standard') {
-    // If 'width' is 'standard' use this layout
     return (
       <ContainerRC
         size='xl'
         alignItems='center'
         background={backgroundColor}
-        direction={
-          isMobile ? 'column-reverse' : reversed ? 'row-reverse' : 'row'
-        }
+        direction={{
+          xs: 'column-reverse',
+          md: reversed ? 'row-reverse' : 'row',
+        }}
         py={8}
         spacing={2}
         {...(sectionID && { sectionID })}
@@ -86,26 +88,15 @@ const Editorial = (props: EditorialProps) => {
     );
   }
 
-  // Otherwise use original layout
-  const columns = {
-    wide: 6,
-    center: 4,
-  };
-
-  const containerDirection = isMobile
-    ? 'column-reverse'
-    : reversed
-    ? 'row-reverse'
-    : 'row';
-
-  const gridItemStyles = { ...styles.half };
-
   return (
     <ContainerRC
       size='xl'
       alignItems='center'
       background={backgroundColor}
-      direction={containerDirection}
+      direction={{
+        xs: 'column-reverse',
+        md: reversed ? 'row-reverse' : 'row',
+      }}
       py={8}
       spacing={2}
     >
