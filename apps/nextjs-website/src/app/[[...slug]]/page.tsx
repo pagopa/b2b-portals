@@ -8,6 +8,7 @@ import {
 } from '@/lib/api';
 import PageSection from '@/components/PageSection/PageSection';
 import { Locale } from '@/lib/fetch/siteWideSEO';
+import TrackPageView from '@/components/TrackPageView';
 
 type PageParams = {
   params: { slug?: string[] };
@@ -125,7 +126,7 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const { slug } = params;
-  const { defaultLocale, themeVariant } = await getSiteWideSEO();
+  const { defaultLocale, themeVariant, analytics } = await getSiteWideSEO();
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to '' and locale to the default locale
@@ -163,6 +164,7 @@ const Page = async ({ params }: PageParams) => {
           }}
         />
       )}
+      {analytics?.mixpanel && <TrackPageView />}
       {sections.map((section) =>
         PageSection({
           ...section,
