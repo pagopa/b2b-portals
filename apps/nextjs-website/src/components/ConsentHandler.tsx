@@ -52,7 +52,7 @@ const initMixpanel = (mixpanelConfig: NonNullable<MixpanelConfig>) =>
     ip: mixpanelConfig.ip,
     persistence: 'cookie',
     secure_cookie: true,
-    track_pageview: 'url-with-path',
+    opt_out_tracking_by_default: true,
   });
 
 const ConsentHandler = ({
@@ -60,6 +60,10 @@ const ConsentHandler = ({
   mixpanel: mixpanelConfig,
   matomoID,
 }: NonNullable<Analytics>) => {
+  if (mixpanelConfig) {
+    initMixpanel(mixpanelConfig);
+  }
+
   useEffect(() => {
     if (window.OptanonActiveGroups === undefined) {
       console.error('ERROR: Invalid OneTrust domain ID');
@@ -69,13 +73,15 @@ const ConsentHandler = ({
     window.OptanonWrapper = function () {
       window.OneTrust.OnConsentChanged(function () {
         if (hasConsent() && mixpanelConfig) {
-          initMixpanel(mixpanelConfig);
+          mixpanel.opt_in_tracking();
+          // Track page view of page where consent is given
+          mixpanel.track_pageview();
         }
       });
     };
 
     if (hasConsent() && mixpanelConfig) {
-      initMixpanel(mixpanelConfig);
+      mixpanel.opt_in_tracking();
     }
   }, [mixpanelConfig]);
 
