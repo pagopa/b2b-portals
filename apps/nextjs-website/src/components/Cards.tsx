@@ -32,8 +32,8 @@ export const makeCardsProps = ({
   },
   items: items.map(({ icon, label, text, title, links }) => ({
     title,
-    ...(icon.data && {
-      iconURL: icon.data.attributes.url,
+    ...(icon && {
+      iconURL: icon.url,
     }),
     ...(label && { label }),
     ...(text && { text }),

@@ -33,21 +33,19 @@ const AnalyticsCodec = t.strict({
 
 const SiteWideSEOCodec = t.strict({
   data: t.strict({
-    attributes: t.strict({
-      metaImage: StrapiImageRequiredSchema,
-      favicon: StrapiImageRequiredSchema,
-      appleTouchIcon: StrapiImageRequiredSchema,
-      themeVariant: ThemeVariantCodec,
-      locales: t.strict({
-        it: t.boolean,
-        en: t.boolean,
-        fr: t.boolean,
-        de: t.boolean,
-        sl: t.boolean,
-      }),
-      analytics: t.union([AnalyticsCodec, t.null]),
-      defaultLocale: LocaleCodec,
+    metaImage: StrapiImageRequiredSchema,
+    favicon: StrapiImageRequiredSchema,
+    appleTouchIcon: StrapiImageRequiredSchema,
+    themeVariant: ThemeVariantCodec,
+    locales: t.strict({
+      it: t.boolean,
+      en: t.boolean,
+      fr: t.boolean,
+      de: t.boolean,
+      sl: t.boolean,
     }),
+    analytics: t.union([AnalyticsCodec, t.null]),
+    defaultLocale: LocaleCodec,
   }),
 });
 
@@ -80,7 +78,6 @@ export const fetchSiteWideSEO = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     ),

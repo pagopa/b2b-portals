@@ -6,64 +6,54 @@ import { Navigation } from '../fetch/navigation';
 const navigation: Navigation = {
   data: [
     {
-      id: 1,
-      attributes: {
-        slug: 'homepage',
-        seo: {
-          metaTitle: 'title',
-          metaDescription: 'description',
-          keywords: null,
-          canonicalURL: null,
-          ogTitle: null,
-          ogDescription: null,
-          structuredData: null,
-        },
-        sections: [
-          {
-            __component: 'sections.stripe-link',
-            theme: 'dark',
-            subtitle: 'subtitle',
-            icon: {
-              data: null,
-            },
-            link: {
-              label: 'link',
-              href: '/',
-            },
-            sectionID: null,
-          },
-        ],
+      slug: 'homepage',
+      seo: {
+        metaTitle: 'title',
+        metaDescription: 'description',
+        keywords: null,
+        canonicalURL: null,
+        ogTitle: null,
+        ogDescription: null,
+        structuredData: null,
       },
+      sections: [
+        {
+          __component: 'sections.stripe-link',
+          theme: 'dark',
+          subtitle: 'subtitle',
+          icon: null,
+          link: {
+            label: 'link',
+            href: '/',
+          },
+          sectionID: null,
+        },
+      ],
     },
     {
-      id: 2,
-      attributes: {
-        slug: 'other-page',
-        seo: {
-          metaTitle: 'title',
-          metaDescription: 'description',
-          keywords: null,
-          canonicalURL: null,
-          ogTitle: null,
-          ogDescription: null,
-          structuredData: null,
-        },
-        sections: [
-          {
-            __component: 'sections.stripe-link',
-            theme: 'dark',
-            subtitle: 'subtitle',
-            icon: {
-              data: null,
-            },
-            link: {
-              label: 'link',
-              href: '/',
-            },
-            sectionID: null,
-          },
-        ],
+      slug: 'other-page',
+      seo: {
+        metaTitle: 'title',
+        metaDescription: 'description',
+        keywords: null,
+        canonicalURL: null,
+        ogTitle: null,
+        ogDescription: null,
+        structuredData: null,
       },
+      sections: [
+        {
+          __component: 'sections.stripe-link',
+          theme: 'dark',
+          subtitle: 'subtitle',
+          icon: null,
+          link: {
+            label: 'link',
+            href: '/',
+          },
+          sectionID: null,
+        },
+      ],
     },
   ],
 };
@@ -73,13 +63,13 @@ describe('navigationToPageDataArray', () => {
     const actual = navigationToPageDataArray(navigation);
     const expected: ReadonlyArray<PageData> = [
       {
-        seo: navigation.data[0]!.attributes.seo,
-        sections: navigation.data[0]!.attributes.sections,
+        seo: navigation.data[0]!.seo,
+        sections: navigation.data[0]!.sections,
         slug: [''],
       },
       {
-        seo: navigation.data[1]!.attributes.seo,
-        sections: navigation.data[1]!.attributes.sections,
+        seo: navigation.data[1]!.seo,
+        sections: navigation.data[1]!.sections,
         slug: ['other-page'],
       },
     ];

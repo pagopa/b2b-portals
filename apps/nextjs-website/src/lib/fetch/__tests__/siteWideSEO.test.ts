@@ -26,54 +26,40 @@ const makeTestAppEnv = () => {
 // response example
 const siteWideSEOResponse: SiteWideSEO = {
   data: {
-    attributes: {
-      metaImage: {
-        data: {
-          attributes: {
-            alternativeText: null,
-            width: 1568,
-            height: 1504,
-            mime: 'image/jpeg',
-            url: '/uploads/THE_cool_guy_768eb95435.jpg',
-            formats: null,
-          },
-        },
-      },
-      favicon: {
-        data: {
-          attributes: {
-            alternativeText: null,
-            width: 1568,
-            height: 1504,
-            mime: 'image/jpeg',
-            url: '/uploads/THE_cool_guy_768eb95435.jpg',
-            formats: null,
-          },
-        },
-      },
-      appleTouchIcon: {
-        data: {
-          attributes: {
-            alternativeText: null,
-            width: 2880,
-            height: 1440,
-            mime: 'image/png',
-            url: '/uploads/hero_home_background_969783a4a7.png',
-            formats: null,
-          },
-        },
-      },
-      themeVariant: 'SEND',
-      locales: {
-        it: true,
-        en: false,
-        de: false,
-        fr: false,
-        sl: false,
-      },
-      defaultLocale: 'it',
-      analytics: null,
+    metaImage: {
+      alternativeText: null,
+      width: 1568,
+      height: 1504,
+      mime: 'image/jpeg',
+      url: '/uploads/THE_cool_guy_768eb95435.jpg',
+      formats: null,
     },
+    favicon: {
+      alternativeText: null,
+      width: 1568,
+      height: 1504,
+      mime: 'image/jpeg',
+      url: '/uploads/THE_cool_guy_768eb95435.jpg',
+      formats: null,
+    },
+    appleTouchIcon: {
+      alternativeText: null,
+      width: 2880,
+      height: 1440,
+      mime: 'image/png',
+      url: '/uploads/hero_home_background_969783a4a7.png',
+      formats: null,
+    },
+    themeVariant: 'SEND',
+    locales: {
+      it: true,
+      en: false,
+      de: false,
+      fr: false,
+      sl: false,
+    },
+    defaultLocale: 'it',
+    analytics: null,
   },
 };
 
@@ -100,7 +86,6 @@ describe('fetchSiteWideSEO', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     );

@@ -1,10 +1,10 @@
 import * as t from 'io-ts';
 
-export const ResponsiveImageDataCodec = t.strict({
+const ResponsiveImageDataCodec = t.strict({
   url: t.string,
 });
 
-export const ImageDataCodec = t.strict({
+const ImageDataCodec = t.strict({
   alternativeText: t.union([t.string, t.null]),
   url: t.string,
   width: t.number,
@@ -20,7 +20,7 @@ export const ImageDataCodec = t.strict({
   ]),
 });
 
-export const GenericMediaDataCodec = t.strict({
+const GenericMediaDataCodec = t.strict({
   alternativeText: t.union([t.string, t.null]),
   url: t.string,
   width: t.union([t.number, t.null]),
@@ -36,33 +36,9 @@ export const GenericMediaDataCodec = t.strict({
   ]),
 });
 
-export const StrapiImageSchema = t.strict({
-  data: t.union([
-    t.strict({
-      attributes: ImageDataCodec,
-    }),
-    t.null,
-  ]),
-});
-
-export const StrapiImageRequiredSchema = t.strict({
-  data: t.strict({
-    attributes: ImageDataCodec,
-  }),
-});
-
-export const StrapiGenericMediaRequiredSchema = t.strict({
-  data: t.strict({
-    attributes: GenericMediaDataCodec,
-  }),
-});
-
-export const StrapiImageRequiredArraySchema = t.strict({
-  data: t.array(
-    t.strict({
-      attributes: ImageDataCodec,
-    }),
-  ),
-});
+export const StrapiImageSchema = t.union([ImageDataCodec, t.null]);
+export const StrapiImageRequiredSchema = ImageDataCodec;
+export const StrapiImageRequiredArraySchema = t.array(ImageDataCodec);
+export const StrapiGenericMediaRequiredSchema = GenericMediaDataCodec;
 
 export type StrapiImage = t.TypeOf<typeof StrapiImageRequiredSchema>;

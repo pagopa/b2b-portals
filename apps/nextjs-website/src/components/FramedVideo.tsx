@@ -14,7 +14,7 @@ const makeFramedVideoProps = ({
   ...rest
 }: FramedVideoSection & SiteWidePageData): FramedVideoProps => ({
   ...(videoURL && { videoURL }),
-  ...(video.data && { videoURL: video.data.attributes.url }),
+  ...(video && { videoURL: video.url }),
   ...(text && {
     text: {
       ...text,

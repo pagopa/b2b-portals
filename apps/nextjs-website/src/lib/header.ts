@@ -23,15 +23,11 @@ const formatHeaderSublink = ({
   readonly defaultLocale: Locale;
 }): HeaderSublink => ({
   ...sublink,
-  page: {
-    data: page.data
-      ? {
-          attributes: {
-            slug: formatSlug(page.data.attributes.slug, locale, defaultLocale),
-          },
-        }
-      : null,
-  },
+  page: page
+    ? {
+        slug: formatSlug(page.slug, locale, defaultLocale),
+      }
+    : null,
 });
 
 const formatMegaHeaderSublink = ({
@@ -44,25 +40,21 @@ const formatMegaHeaderSublink = ({
   readonly defaultLocale: Locale;
 }): MegaHeaderSublink => ({
   ...sublink,
-  page: {
-    data: page.data
-      ? {
-          attributes: {
-            slug: formatSlug(page.data.attributes.slug, locale, defaultLocale),
-          },
-        }
-      : null,
-  },
+  page: page
+    ? {
+        slug: formatSlug(page.slug, locale, defaultLocale),
+      }
+    : null,
 });
 
 // This function does 2 things to all links and sublinks:
 // 1. Substitutes the 'homepage' slug with '/'
 // 2. Prepends the locale, unless it's the default one
 export const formatHeaderLinks = (
-  header: HeaderData['data']['attributes']['header'][0],
+  header: HeaderData['data']['header'][0],
   locale: Locale,
   defaultLocale: Locale,
-): HeaderData['data']['attributes']['header'][0] => {
+): HeaderData['data']['header'][0] => {
   switch (header.__component) {
     case 'headers.standard-header':
       return {
@@ -70,19 +62,9 @@ export const formatHeaderLinks = (
         menu: {
           links: header.menu.links.map(({ page, sublinks, ...link }) => ({
             ...link,
-            page: {
-              data: page.data
-                ? {
-                    attributes: {
-                      slug: formatSlug(
-                        page.data.attributes.slug,
-                        locale,
-                        defaultLocale,
-                      ),
-                    },
-                  }
-                : null,
-            },
+            page: page
+              ? { slug: formatSlug(page.slug, locale, defaultLocale) }
+              : null,
             sublinks: sublinks.map((sublink) =>
               formatHeaderSublink({ locale, defaultLocale, ...sublink }),
             ),
@@ -114,7 +96,7 @@ export const formatHeaderLinks = (
 };
 
 export const allSublinksNonEmpty = (
-  header: HeaderData['data']['attributes']['header'][0],
+  header: HeaderData['data']['header'][0],
 ): boolean => {
   if (header.__component === 'headers.mega-header') {
     const links = header.menu.links;
@@ -123,7 +105,7 @@ export const allSublinksNonEmpty = (
       (sublinkGroup) => sublinkGroup.sublinks,
     );
     const emptySublink = sublinks.find(
-      (sublink) => !sublink.page.data && !sublink.externalURL,
+      (sublink) => !sublink.page && !sublink.externalURL,
     );
 
     if (emptySublink) {
@@ -134,7 +116,7 @@ export const allSublinksNonEmpty = (
     const links = header.menu.links;
     const sublinks = links.flatMap((link) => link.sublinks);
     const emptySublink = sublinks.find(
-      (sublink) => !sublink.page.data && !sublink.externalURL,
+      (sublink) => !sublink.page && !sublink.externalURL,
     );
 
     if (emptySublink) {

@@ -26,28 +26,26 @@ const makeTestAppEnv = () => {
 // Response example for getPreHeader
 const preHeaderResponse = {
   data: {
-    attributes: {
-      createdAt: '2023-11-20T15:35:53.598Z',
-      updatedAt: '2024-01-31T15:12:25.352Z',
-      leftCtas: [
-        {
-          id: 1,
-          text: 'PagoPA S.p.A.',
-          href: 'https://www.pagopa.it',
-          icon: null,
-          size: 'medium',
-        },
-      ],
-      rightCtas: [
-        {
-          id: 2,
-          text: 'Assistenza',
-          href: 'mailto:destinatari-send@assistenza.pagopa.it',
-          icon: 'HelpOutlineOutlined',
-          size: 'medium',
-        },
-      ],
-    },
+    createdAt: '2023-11-20T15:35:53.598Z',
+    updatedAt: '2024-01-31T15:12:25.352Z',
+    leftCtas: [
+      {
+        id: 1,
+        text: 'PagoPA S.p.A.',
+        href: 'https://www.pagopa.it',
+        icon: null,
+        size: 'medium',
+      },
+    ],
+    rightCtas: [
+      {
+        id: 2,
+        text: 'Assistenza',
+        href: 'mailto:destinatari-send@assistenza.pagopa.it',
+        icon: 'HelpOutlineOutlined',
+        size: 'medium',
+      },
+    ],
   },
 };
 
@@ -57,24 +55,22 @@ const emptyPreHeaderResponse = {
 
 const preHeaderResponseAfterCodec = {
   data: {
-    attributes: {
-      leftCtas: [
-        {
-          text: 'PagoPA S.p.A.',
-          href: 'https://www.pagopa.it',
-          icon: null,
-          size: 'medium',
-        },
-      ],
-      rightCtas: [
-        {
-          text: 'Assistenza',
-          href: 'mailto:destinatari-send@assistenza.pagopa.it',
-          icon: 'HelpOutlineOutlined',
-          size: 'medium',
-        },
-      ],
-    },
+    leftCtas: [
+      {
+        text: 'PagoPA S.p.A.',
+        href: 'https://www.pagopa.it',
+        icon: null,
+        size: 'medium',
+      },
+    ],
+    rightCtas: [
+      {
+        text: 'Assistenza',
+        href: 'mailto:destinatari-send@assistenza.pagopa.it',
+        icon: 'HelpOutlineOutlined',
+        size: 'medium',
+      },
+    ],
   },
 };
 
@@ -98,7 +94,6 @@ describe('getPreHeader', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     );

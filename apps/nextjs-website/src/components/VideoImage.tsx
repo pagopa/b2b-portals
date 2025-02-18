@@ -24,9 +24,9 @@ const makeVideoImageProps = ({
   }),
   ...(caption && { caption }),
   ...(video &&
-    video.src.data && {
+    video.src && {
       video: {
-        src: video.src.data.attributes.url,
+        src: video.src.url,
         autoplay: video.autoplay,
         loop: video.loop,
         showControls: video.showControls,
@@ -35,20 +35,17 @@ const makeVideoImageProps = ({
         pausedPlayButtonLabel: video.pausedPlayButtonLabel,
       },
     }),
-  ...((!video || (!video.srcURL && !video.src.data)) &&
-    image.data && {
+  ...((!video || (!video.srcURL && !video.src)) &&
+    image && {
       image: {
-        src: image.data.attributes.url,
-        alt: image.data.attributes.alternativeText ?? '',
-        srcSet: makeSrcSetFromStrapiImageData(image.data),
+        src: image.url,
+        alt: image.alternativeText ?? '',
+        srcSet: makeSrcSetFromStrapiImageData(image),
       },
       mobileImage: {
-        src: mobileImage?.data?.attributes?.url ?? image.data.attributes.url,
-        alt:
-          mobileImage?.data?.attributes?.alternativeText ??
-          image.data.attributes.alternativeText ??
-          '',
-        srcSet: makeSrcSetFromStrapiImageData(mobileImage.data ?? image.data),
+        src: mobileImage?.url ?? image.url,
+        alt: mobileImage?.alternativeText ?? image.alternativeText ?? '',
+        srcSet: makeSrcSetFromStrapiImageData(mobileImage ?? image),
       },
     }),
 });

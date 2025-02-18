@@ -26,9 +26,8 @@ const makeHeaderSublink = (
   sublink: HeaderSublink,
 ): { label: string; href: string; badge?: string } => ({
   label: sublink.label,
-  href: sublink.page.data
-    ? sublink.page.data.attributes.slug +
-      (sublink.sectionID ? `#${sublink.sectionID}` : '')
+  href: sublink.page
+    ? sublink.page.slug + (sublink.sectionID ? `#${sublink.sectionID}` : '')
     : (sublink.externalURL ?? ''),
 });
 
@@ -37,9 +36,8 @@ const makeMegaHeaderSublink = (
   locale: Locale,
 ): { label: string; href: string; badge?: string } => ({
   label: sublink.label,
-  href: sublink.page.data
-    ? sublink.page.data.attributes.slug +
-      (sublink.sectionID ? `#${sublink.sectionID}` : '')
+  href: sublink.page
+    ? sublink.page.slug + (sublink.sectionID ? `#${sublink.sectionID}` : '')
     : (sublink.externalURL ?? ''),
   ...(sublink.isNew && { badge: LinkLabelValues[locale] }),
 });
@@ -64,7 +62,7 @@ const makeHeaderProps = (
           locale,
           defaultLocale,
         }),
-        icons: icons.data.map((icon) => icon.attributes.url),
+        icons: icons.map((icon) => icon.url),
       })),
       ctaCard: {
         ...drawer.ctaCard,
@@ -79,11 +77,11 @@ const makeHeaderProps = (
   }),
   theme: 'light',
   ...(supportLink && { supportLink }),
-  ...(logo.data && {
+  ...(logo && {
     logo: {
-      src: logo.data.attributes.url,
+      src: logo.url,
       href: '/',
-      alt: logo.data.attributes.alternativeText ?? productName,
+      alt: logo.alternativeText ?? productName,
     },
   }),
   product: {
@@ -93,17 +91,14 @@ const makeHeaderProps = (
   menu: menu.links.map((link) => ({
     theme: 'light',
     label: link.label,
-    href: link.page.data?.attributes.slug,
+    href: link.page?.slug,
     alignRight: link.alignRight,
     ...(link.sublinks.length > 0 && {
       items: link.sublinks.map(makeHeaderSublink),
     }),
-    ...(link.page.data && {
+    ...(link.page && {
       sx: {
-        color:
-          pathname === link.page.data.attributes.slug
-            ? 'primary.main'
-            : 'text.secondary',
+        color: pathname === link.page.slug ? 'primary.main' : 'text.secondary',
       },
     }),
   })),
@@ -133,7 +128,7 @@ const makeMegaHeaderProps = (
           locale,
           defaultLocale,
         }),
-        icons: icons.data.map((icon) => icon.attributes.url),
+        icons: icons.map((icon) => icon.url),
       })),
       ctaCard: {
         ...drawer.ctaCard,
@@ -146,8 +141,8 @@ const makeMegaHeaderProps = (
       },
     },
   }),
-  logoSrc: logo.data.attributes.url,
-  logoAlt: logo.data.attributes.alternativeText ?? '',
+  logoSrc: logo.url,
+  logoAlt: logo.alternativeText ?? '',
   menuItems: menu.links.map((link) => ({
     primary: link.label,
     secondary: link.sublinkGroups.map((sublinkGroup) => ({
@@ -169,7 +164,7 @@ const Header = ({
   locale,
   defaultLocale,
   ...props
-}: HeaderData['data']['attributes']['header'][0] & {
+}: HeaderData['data']['header'][0] & {
   locale: Locale;
   defaultLocale: Locale;
 }) => {

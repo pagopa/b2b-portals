@@ -36,15 +36,13 @@ const FooterLinkGroupWithSocialCodec = t.strict({
 
 const FooterDataCodec = t.strict({
   data: t.strict({
-    attributes: t.strict({
-      legalInfo: t.string,
-      showFundedByNextGenerationEULogo: t.boolean,
-      companyLink: CompanyLinkCodec,
-      links_services: FooterLinkGroupCodec,
-      links_aboutUs: FooterLinkGroupCodec,
-      links_resources: FooterLinkGroupCodec,
-      links_followUs: FooterLinkGroupWithSocialCodec,
-    }),
+    legalInfo: t.string,
+    showFundedByNextGenerationEULogo: t.boolean,
+    companyLink: CompanyLinkCodec,
+    links_services: FooterLinkGroupCodec,
+    links_aboutUs: FooterLinkGroupCodec,
+    links_resources: FooterLinkGroupCodec,
+    links_followUs: FooterLinkGroupWithSocialCodec,
   }),
 });
 
@@ -72,7 +70,6 @@ export const getFooter = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     ),

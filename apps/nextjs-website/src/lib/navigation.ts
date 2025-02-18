@@ -12,7 +12,7 @@ export const navigationToPageDataArray = (
   navigation: Navigation,
 ): ReadonlyArray<PageData> =>
   navigation.data.map((item) => ({
-    slug: item.attributes.slug === 'homepage' ? [''] : [item.attributes.slug],
-    seo: item.attributes.seo,
-    sections: item.attributes.sections,
+    slug: item.slug === 'homepage' ? [''] : [item.slug],
+    seo: item.seo,
+    sections: item.sections,
   }));

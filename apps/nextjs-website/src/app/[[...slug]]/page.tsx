@@ -109,12 +109,12 @@ export async function generateMetadata({
     openGraph: {
       title: seo.ogTitle ?? seo.metaTitle,
       description: seo.ogDescription ?? seo.metaDescription,
-      images: siteWideSEO.metaImage.data.attributes.url,
+      images: siteWideSEO.metaImage.url,
       type: 'website',
     },
     icons: {
-      icon: siteWideSEO.favicon.data.attributes.url,
-      apple: siteWideSEO.appleTouchIcon.data.attributes.url,
+      icon: siteWideSEO.favicon.url,
+      apple: siteWideSEO.appleTouchIcon.url,
     },
   };
 }

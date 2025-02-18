@@ -253,14 +253,7 @@ const EditorialSwitchSectionCodec = t.strict({
 });
 
 const VideoCodec = t.strict({
-  src: t.strict({
-    data: t.union([
-      t.strict({
-        attributes: t.strict({ url: t.string }),
-      }),
-      t.null,
-    ]),
-  }),
+  src: t.union([t.strict({ url: t.string }), t.null]),
   srcURL: t.union([t.string, t.null]),
   autoplay: t.boolean,
   loop: t.boolean,
@@ -360,16 +353,10 @@ const HighlightBoxSectionCodec = t.strict({
 
 const PageSwitchPageCodec = t.strict({
   id: t.number,
-  attributes: t.strict({
-    buttonText: t.string,
-    sections: t.array(
-      t.union([
-        EditorialSectionCodec,
-        CardsSectionCodec,
-        BannerLinkSectionCodec,
-      ]),
-    ),
-  }),
+  buttonText: t.string,
+  sections: t.array(
+    t.union([EditorialSectionCodec, CardsSectionCodec, BannerLinkSectionCodec]),
+  ),
 });
 
 const PageSwitchSectionCodec = t.strict({
@@ -377,9 +364,7 @@ const PageSwitchSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   title: t.string,
   subtitle: t.union([t.string, t.null]),
-  pages: t.strict({
-    data: t.array(PageSwitchPageCodec),
-  }),
+  pages: t.array(PageSwitchPageCodec),
 });
 
 const FramedVideoSectionCodec = t.strict({
@@ -387,14 +372,7 @@ const FramedVideoSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
   theme: ThemeCodec,
   videoURL: t.union([t.string, t.null]),
-  video: t.strict({
-    data: t.union([
-      t.strict({
-        attributes: t.strict({ url: t.string }),
-      }),
-      t.null,
-    ]),
-  }),
+  video: t.union([t.strict({ url: t.string }), t.null]),
   loop: t.boolean,
   autoplay: t.boolean,
   text: t.union([

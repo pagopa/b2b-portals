@@ -30,18 +30,18 @@ export const makeEditorialProps = ({
   }),
   image: (
     <img
-      src={image.data.attributes.url}
-      srcSet={makeSrcSetFromStrapiImageData(image.data)}
-      alt={image.data.attributes.alternativeText ?? ''}
+      src={image.url}
+      srcSet={makeSrcSetFromStrapiImageData(image)}
+      alt={image.alternativeText ?? ''}
       width={0}
       height={0}
     />
   ),
   mobileImage: (
     <img
-      src={mobileImage.data.attributes.url}
-      srcSet={makeSrcSetFromStrapiImageData(mobileImage.data)}
-      alt={mobileImage.data.attributes.alternativeText ?? ''}
+      src={mobileImage.url}
+      srcSet={makeSrcSetFromStrapiImageData(mobileImage)}
+      alt={mobileImage.alternativeText ?? ''}
       width={0}
       height={0}
     />

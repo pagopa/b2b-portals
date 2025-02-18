@@ -26,8 +26,8 @@ const makeHowToProps = ({
       locale,
       defaultLocale,
     }),
-    ...(step.icon.data && {
-      iconURL: step.icon.data.attributes.url,
+    ...(step.icon && {
+      iconURL: step.icon.url,
     }),
   })),
   ...rest,

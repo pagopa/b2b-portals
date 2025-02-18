@@ -26,51 +26,43 @@ const makeTestAppEnv = () => {
 // Response example for getPreFooter
 const preFooterResponse = {
   data: {
-    id: 1,
-    attributes: {
-      title: 'Titolo Pre Footer Senza Bottoni',
-      theme: 'dark',
-      layout: 'center',
-      createdAt: '2024-10-10T15:56:53.564Z',
-      updatedAt: '2024-10-10T16:19:54.516Z',
-      background: { data: null },
-      ctaButtons: [
-        {
-          id: 15,
-          text: 'Bottone Primario',
-          href: '#',
-          variant: 'contained',
-          icon: null,
-          size: 'medium',
-        },
-        {
-          id: 14,
-          text: 'Bottone Secondario',
-          href: '#',
-          variant: 'outlined',
-          icon: null,
-          size: 'medium',
-        },
-      ],
-      storeButtons: {
-        id: 3,
-        hrefGoogle: '#',
-        hrefApple: '#',
+    title: 'Titolo Pre Footer Senza Bottoni',
+    theme: 'dark',
+    layout: 'center',
+    createdAt: '2024-10-10T15:56:53.564Z',
+    updatedAt: '2024-10-10T16:19:54.516Z',
+    background: null,
+    ctaButtons: [
+      {
+        id: 15,
+        text: 'Bottone Primario',
+        href: '#',
+        variant: 'contained',
+        icon: null,
+        size: 'medium',
       },
-      exclude: {
-        data: [
-          {
-            id: 18,
-            attributes: {
-              slug: 'test',
-              createdAt: '2024-10-10T15:57:27.916Z',
-              updatedAt: '2024-10-10T15:57:36.790Z',
-              publishedAt: '2024-10-10T15:57:36.779Z',
-            },
-          },
-        ],
+      {
+        id: 14,
+        text: 'Bottone Secondario',
+        href: '#',
+        variant: 'outlined',
+        icon: null,
+        size: 'medium',
       },
+    ],
+    storeButtons: {
+      id: 3,
+      hrefGoogle: '#',
+      hrefApple: '#',
     },
+    exclude: [
+      {
+        slug: 'test',
+        createdAt: '2024-10-10T15:57:27.916Z',
+        updatedAt: '2024-10-10T15:57:36.790Z',
+        publishedAt: '2024-10-10T15:57:36.779Z',
+      },
+    ],
   },
 };
 
@@ -80,33 +72,31 @@ const emptyPreFooterResponse = {
 
 const preFooterResponseAfterCodec = {
   data: {
-    attributes: {
-      title: 'Titolo Pre Footer Senza Bottoni',
-      theme: 'dark',
-      layout: 'center',
-      background: { data: null },
-      ctaButtons: [
-        {
-          text: 'Bottone Primario',
-          href: '#',
-          variant: 'contained',
-          icon: null,
-          size: 'medium',
-        },
-        {
-          text: 'Bottone Secondario',
-          href: '#',
-          variant: 'outlined',
-          icon: null,
-          size: 'medium',
-        },
-      ],
-      storeButtons: {
-        hrefGoogle: '#',
-        hrefApple: '#',
+    title: 'Titolo Pre Footer Senza Bottoni',
+    theme: 'dark',
+    layout: 'center',
+    background: null,
+    ctaButtons: [
+      {
+        text: 'Bottone Primario',
+        href: '#',
+        variant: 'contained',
+        icon: null,
+        size: 'medium',
       },
-      exclude: { data: [{ attributes: { slug: 'test' } }] },
+      {
+        text: 'Bottone Secondario',
+        href: '#',
+        variant: 'outlined',
+        icon: null,
+        size: 'medium',
+      },
+    ],
+    storeButtons: {
+      hrefGoogle: '#',
+      hrefApple: '#',
     },
+    exclude: [{ slug: 'test' }],
   },
 };
 
@@ -132,7 +122,6 @@ describe('getPreFooter', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     );

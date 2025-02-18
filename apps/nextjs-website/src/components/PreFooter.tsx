@@ -14,7 +14,7 @@ const makePreFooterProps = ({
   exclude,
   ...rest
 }: PreFooterAttributes & SiteWidePageData): PreFooterProps => ({
-  ...(background.data && { background: background.data.attributes.url }),
+  ...(background && { background: background.url }),
   ...(storeButtons && {
     storeButtons: {
       ...(storeButtons.hrefGoogle && { hrefGoogle: storeButtons.hrefGoogle }),
@@ -27,8 +27,8 @@ const makePreFooterProps = ({
       href: LocalizeURL({ URL: href, locale, defaultLocale }),
     })),
   }),
-  ...(exclude.data.length > 0 && {
-    excludeSlugs: exclude.data.map((obj) => obj.attributes.slug),
+  ...(exclude.length > 0 && {
+    excludeSlugs: exclude.map((obj) => obj.slug),
   }),
   ...rest,
 });

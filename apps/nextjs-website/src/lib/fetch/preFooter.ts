@@ -9,9 +9,7 @@ import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
 
 const PageRelationCodec = t.strict({
-  attributes: t.strict({
-    slug: t.string,
-  }),
+  slug: t.string,
 });
 
 const PreFooterAttributesCodec = t.strict({
@@ -24,18 +22,11 @@ const PreFooterAttributesCodec = t.strict({
   background: StrapiImageSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
-  exclude: t.strict({
-    data: t.array(PageRelationCodec),
-  }),
+  exclude: t.array(PageRelationCodec),
 });
 
 const PreFooterDataCodec = t.strict({
-  data: t.union([
-    t.null,
-    t.strict({
-      attributes: PreFooterAttributesCodec,
-    }),
-  ]),
+  data: t.union([PreFooterAttributesCodec, t.null]),
 });
 
 type PreFooterData = t.TypeOf<typeof PreFooterDataCodec>;
@@ -60,7 +51,6 @@ export const getPreFooter = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     ),

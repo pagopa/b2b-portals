@@ -14,7 +14,7 @@ const makeFeatureProps = ({
   items: items.map((item) => ({
     title: item.title,
     subtitle: item.subtitle,
-    iconURL: item.icon.data.attributes.url,
+    iconURL: item.icon.url,
     ...(item.link && {
       link: {
         label: item.link.label,

@@ -9,12 +9,9 @@ import { Locale } from './siteWideSEO';
 const NavigationCodec = t.strict({
   data: t.readonlyArray(
     t.strict({
-      id: t.number,
-      attributes: t.strict({
-        slug: t.string,
-        seo: PageSEOCodec,
-        sections: t.array(PageSectionCodec),
-      }),
+      slug: t.string,
+      seo: PageSEOCodec,
+      sections: t.array(PageSectionCodec),
     }),
   ),
 });
@@ -50,7 +47,6 @@ export const getNavigation = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     ),

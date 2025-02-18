@@ -18,19 +18,15 @@ const PageIDsCodec = t.strict({
 
 const PreviewPageDataCodec = t.strict({
   data: t.strict({
-    attributes: t.strict({
-      locale: LocaleCodec,
-      sections: t.array(PageSectionCodec),
-    }),
+    locale: LocaleCodec,
+    sections: t.array(PageSectionCodec),
   }),
 });
 
 const PreviewPressReleaseDataCodec = t.strict({
   data: t.strict({
-    attributes: t.strict({
-      locale: LocaleCodec,
-      pressRelease: PressReleaseSectionContentCodec,
-    }),
+    locale: LocaleCodec,
+    pressRelease: PressReleaseSectionContentCodec,
   }),
 });
 
@@ -54,7 +50,6 @@ export const fetchAllPageIDs = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       },
@@ -76,7 +71,6 @@ export const fetchAllPressReleaseIDs = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       },
@@ -114,7 +108,6 @@ export const fetchPageFromID = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       },
@@ -142,7 +135,6 @@ export const fetchPressReleaseFromID = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       },

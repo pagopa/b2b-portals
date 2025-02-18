@@ -26,7 +26,7 @@ const makeFooterProps = ({
   activeLocale,
   companyLink,
   ...rest
-}: FooterData['data']['attributes'] & {
+}: FooterData['data'] & {
   locales: Array<Locale>;
   defaultLocale: Locale;
   activeLocale: Locale;
@@ -67,7 +67,7 @@ const makeFooterProps = ({
       })),
       socialLinks: links_followUs.socialLinks.map(
         ({ icon, href, ariaLabel }) => ({
-          iconURL: icon.data.attributes.url,
+          iconURL: icon.url,
           href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
           ariaLabel,
         }),
@@ -96,7 +96,7 @@ const makeFooterProps = ({
 });
 
 const Footer = (
-  props: FooterData['data']['attributes'] & {
+  props: FooterData['data'] & {
     locales: Array<Locale>;
     defaultLocale: Locale;
   },

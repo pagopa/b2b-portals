@@ -19,12 +19,7 @@ const PreHeaderAttributesCodec = t.strict({
 });
 
 const PreHeaderCodec = t.strict({
-  data: t.union([
-    t.null,
-    t.strict({
-      attributes: PreHeaderAttributesCodec,
-    }),
-  ]),
+  data: t.union([PreHeaderAttributesCodec, t.null]),
 });
 
 // Types
@@ -48,7 +43,6 @@ export const getPreHeader = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     ),
