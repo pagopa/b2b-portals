@@ -20,8 +20,8 @@ const makeStripeLinkProps = ({
     defaultLocale,
     variant: 'body2',
   }),
-  ...(icon.data && {
-    iconURL: icon.data.attributes.url,
+  ...(icon && {
+    iconURL: icon.url,
   }),
   link: {
     label: link.label,

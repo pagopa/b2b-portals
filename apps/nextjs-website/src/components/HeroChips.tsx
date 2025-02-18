@@ -17,10 +17,10 @@ const makeHeroChipsProps = ({
   ...(subtitle && {
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
   }),
-  ...(background.data && {
+  ...(background && {
     background: {
-      src: background.data.attributes.url,
-      srcSet: makeSrcSetFromStrapiImageData(background.data),
+      src: background.url,
+      srcSet: makeSrcSetFromStrapiImageData(background),
     },
   }),
 });

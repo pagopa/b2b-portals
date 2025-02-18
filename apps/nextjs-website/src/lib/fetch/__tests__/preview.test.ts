@@ -50,50 +50,42 @@ const pageIDsResponse: PageIDs = {
 
 const pageDataResponse: PreviewPageData = {
   data: {
-    attributes: {
-      locale: 'it',
-      sections: [
-        {
-          __component: 'sections.hero',
-          image: {
-            data: null,
-          },
-          background: {
-            data: null,
-          },
-          ctaButtons: [],
-          storeButtons: {
-            hrefGoogle: 'https://play.google.com',
-            hrefApple: 'https://apple.com',
-          },
-          inverse: false,
-          sectionID: null,
-          size: 'small',
-          subtitle: 'subtitle',
-          theme: 'light',
-          title: 'light',
-          titleTag: 'h1',
-          link: {
-            href: '/',
-            label: 'example',
-          },
+    locale: 'it',
+    sections: [
+      {
+        __component: 'sections.hero',
+        image: null,
+        background: null,
+        ctaButtons: [],
+        storeButtons: {
+          hrefGoogle: 'https://play.google.com',
+          hrefApple: 'https://apple.com',
         },
-      ],
-    },
+        inverse: false,
+        sectionID: null,
+        size: 'small',
+        subtitle: 'subtitle',
+        theme: 'light',
+        title: 'light',
+        titleTag: 'h1',
+        link: {
+          href: '/',
+          label: 'example',
+        },
+      },
+    ],
   },
 };
 
 const pressReleaseDataResponse: PreviewPressReleaseData = {
   data: {
-    attributes: {
-      locale: 'it',
-      pressRelease: {
-        sectionID: null,
-        title: 'Press Release Title',
-        subtitle: null,
-        body: 'Press Release Body',
-        date: '2024-10-12',
-      },
+    locale: 'it',
+    pressRelease: {
+      sectionID: null,
+      title: 'Press Release Title',
+      subtitle: null,
+      body: 'Press Release Body',
+      date: '2024-10-12',
     },
   },
 };
@@ -115,7 +107,6 @@ describe('fetchAllPageIDs', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
-          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       },
@@ -152,7 +143,6 @@ describe('fetchAllPressReleaseIDs', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
-          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       },
@@ -205,7 +195,6 @@ describe('fetchPageFromID', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
-          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       },
@@ -252,7 +241,6 @@ describe('fetchPressReleaseFromID', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
-          'Strapi-Response-Format': 'v4',
         },
         cache: 'no-cache',
       },

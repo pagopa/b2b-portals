@@ -9,9 +9,7 @@ import {
 const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
   __component: 'headers.standard-header',
   beta: true,
-  logo: {
-    data: null,
-  },
+  logo: null,
   productName: 'Demo',
   supportLink: '/assistenza',
   drawer: {
@@ -30,40 +28,32 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
         href: '#',
         title: 'Cittadini',
         subtitle: 'Sottotitolo Cittadini',
-        icons: {
-          data: [
-            {
-              attributes: {
-                width: 32,
-                height: 32,
-                alternativeText: null,
-                formats: null,
-                mime: 'png',
-                url: 'iconURL',
-              },
-            },
-          ],
-        },
+        icons: [
+          {
+            width: 32,
+            height: 32,
+            alternativeText: null,
+            formats: null,
+            mime: 'png',
+            url: 'iconURL',
+          },
+        ],
       },
       {
         buttonText: 'Accedi',
         href: '#',
         title: 'Imprese',
         subtitle: 'Sottotitolo Imprese',
-        icons: {
-          data: [
-            {
-              attributes: {
-                width: 32,
-                height: 32,
-                alternativeText: null,
-                formats: null,
-                mime: 'png',
-                url: 'iconURL',
-              },
-            },
-          ],
-        },
+        icons: [
+          {
+            width: 32,
+            height: 32,
+            alternativeText: null,
+            formats: null,
+            mime: 'png',
+            url: 'iconURL',
+          },
+        ],
       },
     ],
   },
@@ -71,16 +61,12 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
 const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
   __component: 'headers.mega-header',
   logo: {
-    data: {
-      attributes: {
-        height: 300,
-        width: 300,
-        mime: 'jpg',
-        url: 'imgSrc',
-        alternativeText: 'altText',
-        formats: null,
-      },
-    },
+    height: 300,
+    width: 300,
+    mime: 'jpg',
+    url: 'imgSrc',
+    alternativeText: 'altText',
+    formats: null,
   },
   ctaButton: {
     href: '#',
@@ -94,358 +80,314 @@ const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
 
 const standardHeader: HeaderData = {
   data: {
-    attributes: {
-      header: [
-        {
-          ...standardHeaderBaseFields,
-          menu: {
-            links: [
-              {
-                alignRight: false,
-                label: 'label',
-                sectionID: null,
-                page: {
-                  data: {
-                    attributes: {
-                      slug: 'homepage',
-                    },
-                  },
-                },
-                sublinks: [
-                  {
-                    label: 'label',
-                    sectionID: null,
-                    page: { data: { attributes: { slug: 'otherpage1' } } },
-                    externalURL: null,
-                  },
-                ],
+    header: [
+      {
+        ...standardHeaderBaseFields,
+        menu: {
+          links: [
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: {
+                slug: 'homepage',
               },
-              {
-                alignRight: false,
-                label: 'label',
-                sectionID: null,
-                page: {
-                  data: {
-                    attributes: {
-                      slug: 'otherpage2',
-                    },
-                  },
+              sublinks: [
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: { slug: 'otherpage1' },
+                  externalURL: null,
                 },
-                sublinks: [
-                  {
-                    label: 'label',
-                    sectionID: null,
-                    page: { data: { attributes: { slug: 'homepage' } } },
-                    externalURL: null,
-                  },
-                ],
-              },
-            ],
-          },
+              ],
+            },
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: { slug: 'otherpage2' },
+              sublinks: [
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: { slug: 'homepage' },
+                  externalURL: null,
+                },
+              ],
+            },
+          ],
         },
-      ],
-    },
+      },
+    ],
   },
 };
 const parsedStandardHeader_DefaultLocale: HeaderData = {
   data: {
-    attributes: {
-      header: [
-        {
-          ...standardHeaderBaseFields,
-          menu: {
-            links: [
-              {
-                alignRight: false,
-                label: 'label',
-                sectionID: null,
-                page: {
-                  data: {
-                    attributes: {
-                      slug: '/',
-                    },
-                  },
+    header: [
+      {
+        ...standardHeaderBaseFields,
+        menu: {
+          links: [
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: { slug: '/' },
+              sublinks: [
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: { slug: '/otherpage1' },
+                  externalURL: null,
                 },
-                sublinks: [
-                  {
-                    label: 'label',
-                    sectionID: null,
-                    page: { data: { attributes: { slug: '/otherpage1' } } },
-                    externalURL: null,
-                  },
-                ],
+              ],
+            },
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: {
+                slug: '/otherpage2',
               },
-              {
-                alignRight: false,
-                label: 'label',
-                sectionID: null,
-                page: {
-                  data: {
-                    attributes: {
-                      slug: '/otherpage2',
-                    },
-                  },
+              sublinks: [
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: { slug: '/' },
+                  externalURL: null,
                 },
-                sublinks: [
-                  {
-                    label: 'label',
-                    sectionID: null,
-                    page: { data: { attributes: { slug: '/' } } },
-                    externalURL: null,
-                  },
-                ],
-              },
-            ],
-          },
+              ],
+            },
+          ],
         },
-      ],
-    },
+      },
+    ],
   },
 };
 const parsedStandardHeader_NonDefaultLocale: HeaderData = {
   data: {
-    attributes: {
-      header: [
-        {
-          ...standardHeaderBaseFields,
-          menu: {
-            links: [
-              {
-                alignRight: false,
-                label: 'label',
-                sectionID: null,
-                page: {
-                  data: {
-                    attributes: {
-                      slug: '/en/',
-                    },
-                  },
+    header: [
+      {
+        ...standardHeaderBaseFields,
+        menu: {
+          links: [
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: { slug: '/en/' },
+              sublinks: [
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: { slug: '/en/otherpage1' },
+                  externalURL: null,
                 },
-                sublinks: [
-                  {
-                    label: 'label',
-                    sectionID: null,
-                    page: { data: { attributes: { slug: '/en/otherpage1' } } },
-                    externalURL: null,
-                  },
-                ],
+              ],
+            },
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: {
+                slug: '/en/otherpage2',
               },
-              {
-                alignRight: false,
-                label: 'label',
-                sectionID: null,
-                page: {
-                  data: {
-                    attributes: {
-                      slug: '/en/otherpage2',
-                    },
-                  },
+              sublinks: [
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: { slug: '/en/' },
+                  externalURL: null,
                 },
-                sublinks: [
-                  {
-                    label: 'label',
-                    sectionID: null,
-                    page: { data: { attributes: { slug: '/en/' } } },
-                    externalURL: null,
-                  },
-                ],
-              },
-            ],
-          },
+              ],
+            },
+          ],
         },
-      ],
-    },
+      },
+    ],
   },
 };
 
 const megaHeader: HeaderData = {
   data: {
-    attributes: {
-      header: [
-        {
-          ...megaHeaderBaseFields,
-          menu: {
-            links: [
-              {
-                label: 'label',
-                ctaButton: {
-                  text: 'CTA',
-                  href: '/',
-                  variant: 'contained',
-                  size: 'medium',
-                  icon: null,
-                },
-                sublinkGroups: [
-                  {
-                    title: 'group1',
-                    sublinks: [
-                      {
-                        label: 'sublink1',
-                        sectionID: null,
-                        page: { data: { attributes: { slug: 'homepage' } } },
-                        externalURL: null,
-                        isNew: false,
-                      },
-                      {
-                        label: 'sublink1',
-                        sectionID: null,
-                        page: {
-                          data: { attributes: { slug: 'not-homepage' } },
-                        },
-                        externalURL: null,
-                        isNew: false,
-                      },
-                    ],
-                  },
-                ],
+    header: [
+      {
+        ...megaHeaderBaseFields,
+        menu: {
+          links: [
+            {
+              label: 'label',
+              ctaButton: {
+                text: 'CTA',
+                href: '/',
+                variant: 'contained',
+                size: 'medium',
+                icon: null,
               },
-            ],
-          },
+              sublinkGroups: [
+                {
+                  title: 'group1',
+                  sublinks: [
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: { slug: 'homepage' },
+                      externalURL: null,
+                      isNew: false,
+                    },
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: {
+                        slug: 'not-homepage',
+                      },
+                      externalURL: null,
+                      isNew: false,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
-      ],
-    },
+      },
+    ],
   },
 };
 const parsedMegaHeader_DefaultLocale: HeaderData = {
   data: {
-    attributes: {
-      header: [
-        {
-          ...megaHeaderBaseFields,
-          menu: {
-            links: [
-              {
-                label: 'label',
-                ctaButton: {
-                  text: 'CTA',
-                  href: '/',
-                  variant: 'contained',
-                  size: 'medium',
-                  icon: null,
-                },
-                sublinkGroups: [
-                  {
-                    title: 'group1',
-                    sublinks: [
-                      {
-                        label: 'sublink1',
-                        sectionID: null,
-                        page: { data: { attributes: { slug: '/' } } },
-                        externalURL: null,
-                        isNew: false,
-                      },
-                      {
-                        label: 'sublink1',
-                        sectionID: null,
-                        page: {
-                          data: { attributes: { slug: '/not-homepage' } },
-                        },
-                        externalURL: null,
-                        isNew: false,
-                      },
-                    ],
-                  },
-                ],
+    header: [
+      {
+        ...megaHeaderBaseFields,
+        menu: {
+          links: [
+            {
+              label: 'label',
+              ctaButton: {
+                text: 'CTA',
+                href: '/',
+                variant: 'contained',
+                size: 'medium',
+                icon: null,
               },
-            ],
-          },
+              sublinkGroups: [
+                {
+                  title: 'group1',
+                  sublinks: [
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: { slug: '/' },
+                      externalURL: null,
+                      isNew: false,
+                    },
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: {
+                        slug: '/not-homepage',
+                      },
+                      externalURL: null,
+                      isNew: false,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
-      ],
-    },
+      },
+    ],
   },
 };
 const parsedMegaHeader_NonDefaultLocale: HeaderData = {
   data: {
-    attributes: {
-      header: [
-        {
-          ...megaHeaderBaseFields,
-          menu: {
-            links: [
-              {
-                label: 'label',
-                ctaButton: {
-                  text: 'CTA',
-                  href: '/',
-                  variant: 'contained',
-                  size: 'medium',
-                  icon: null,
-                },
-                sublinkGroups: [
-                  {
-                    title: 'group1',
-                    sublinks: [
-                      {
-                        label: 'sublink1',
-                        sectionID: null,
-                        page: { data: { attributes: { slug: '/en/' } } },
-                        externalURL: null,
-                        isNew: false,
-                      },
-                      {
-                        label: 'sublink1',
-                        sectionID: null,
-                        page: {
-                          data: { attributes: { slug: '/en/not-homepage' } },
-                        },
-                        externalURL: null,
-                        isNew: false,
-                      },
-                    ],
-                  },
-                ],
+    header: [
+      {
+        ...megaHeaderBaseFields,
+        menu: {
+          links: [
+            {
+              label: 'label',
+              ctaButton: {
+                text: 'CTA',
+                href: '/',
+                variant: 'contained',
+                size: 'medium',
+                icon: null,
               },
-            ],
-          },
+              sublinkGroups: [
+                {
+                  title: 'group1',
+                  sublinks: [
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: { slug: '/en/' },
+                      externalURL: null,
+                      isNew: false,
+                    },
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: {
+                        slug: '/en/not-homepage',
+                      },
+                      externalURL: null,
+                      isNew: false,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
-      ],
-    },
+      },
+    ],
   },
 };
 const megaHeader_MissingSublink: HeaderData = {
   data: {
-    attributes: {
-      header: [
-        {
-          ...megaHeaderBaseFields,
-          menu: {
-            links: [
-              {
-                label: 'label',
-                ctaButton: {
-                  text: 'CTA',
-                  href: '/',
-                  variant: 'contained',
-                  size: 'medium',
-                  icon: null,
-                },
-                sublinkGroups: [
-                  {
-                    title: 'group1',
-                    sublinks: [
-                      {
-                        label: 'sublink1',
-                        sectionID: null,
-                        page: { data: { attributes: { slug: 'homepage' } } },
-                        externalURL: null,
-                        isNew: false,
-                      },
-                      {
-                        label: 'sublink1',
-                        sectionID: null,
-                        page: { data: null },
-                        externalURL: null,
-                        isNew: false,
-                      },
-                    ],
-                  },
-                ],
+    header: [
+      {
+        ...megaHeaderBaseFields,
+        menu: {
+          links: [
+            {
+              label: 'label',
+              ctaButton: {
+                text: 'CTA',
+                href: '/',
+                variant: 'contained',
+                size: 'medium',
+                icon: null,
               },
-            ],
-          },
+              sublinkGroups: [
+                {
+                  title: 'group1',
+                  sublinks: [
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: { slug: 'homepage' },
+                      externalURL: null,
+                      isNew: false,
+                    },
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: null,
+                      externalURL: null,
+                      isNew: false,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
-      ],
-    },
+      },
+    ],
   },
 };
 
@@ -457,45 +399,43 @@ describe('formatHeaderLinks', () => {
   it('should replace the "homepage" slug with "/" in all levels of the standard menu, while not prepending the default locale', () => {
     const actual = formatHeaderLinks(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      standardHeader.data.attributes.header[0]!,
+      standardHeader.data.header[0]!,
       locale_it,
       defaultLocale,
     );
     expect(actual).toStrictEqual(
-      parsedStandardHeader_DefaultLocale.data.attributes.header[0],
+      parsedStandardHeader_DefaultLocale.data.header[0],
     );
   });
   it('should replace the "homepage" slug with "/" in all levels of the mega menu, while not prepending the default locale', () => {
     const actual = formatHeaderLinks(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      megaHeader.data.attributes.header[0]!,
+      megaHeader.data.header[0]!,
       locale_it,
       defaultLocale,
     );
-    expect(actual).toStrictEqual(
-      parsedMegaHeader_DefaultLocale.data.attributes.header[0],
-    );
+    expect(actual).toStrictEqual(parsedMegaHeader_DefaultLocale.data.header[0]);
   });
   it('should replace the "homepage" slug with "/" in all levels of the standard menu, while prepending all non-default locales', () => {
     const actual = formatHeaderLinks(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      standardHeader.data.attributes.header[0]!,
+      standardHeader.data.header[0]!,
       locale_en,
       defaultLocale,
     );
     expect(actual).toStrictEqual(
-      parsedStandardHeader_NonDefaultLocale.data.attributes.header[0],
+      parsedStandardHeader_NonDefaultLocale.data.header[0],
     );
   });
   it('should replace the "homepage" slug with "/" in all levels of the mega menu, while prepending all non-default locales', () => {
     const actual = formatHeaderLinks(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      megaHeader.data.attributes.header[0]!,
+      megaHeader.data.header[0]!,
       locale_en,
       defaultLocale,
     );
     expect(actual).toStrictEqual(
-      parsedMegaHeader_NonDefaultLocale.data.attributes.header[0],
+      parsedMegaHeader_NonDefaultLocale.data.header[0],
     );
   });
 });
@@ -504,7 +444,7 @@ describe('allSublinksNonEmpty', () => {
   it('should return false if any sublink has neither a page nor external URL to which to link', () => {
     const actual = allSublinksNonEmpty(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      megaHeader_MissingSublink.data.attributes.header[0]!,
+      megaHeader_MissingSublink.data.header[0]!,
     );
     expect(actual).toStrictEqual(false);
   });
@@ -512,7 +452,7 @@ describe('allSublinksNonEmpty', () => {
   it('should return true only if all sublinks link to a page or external URL', () => {
     const actual = allSublinksNonEmpty(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      megaHeader.data.attributes.header[0]!,
+      megaHeader.data.header[0]!,
     );
     expect(actual).toStrictEqual(true);
   });

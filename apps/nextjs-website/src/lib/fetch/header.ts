@@ -10,15 +10,12 @@ import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
 
-const HeaderPageDataCodec = t.strict({
-  attributes: t.strict({
+const HeaderPageCodec = t.union([
+  t.strict({
     slug: t.string,
   }),
-});
-
-const HeaderPageCodec = t.strict({
-  data: t.union([HeaderPageDataCodec, t.null]),
-});
+  t.null,
+]);
 
 const HeaderSublinkCodec = t.strict({
   label: t.string,
@@ -105,9 +102,7 @@ const MegaHeaderCodec = t.strict({
 
 export const HeaderDataCodec = t.strict({
   data: t.strict({
-    attributes: t.strict({
-      header: t.array(t.union([StandardHeaderCodec, MegaHeaderCodec])),
-    }),
+    header: t.array(t.union([StandardHeaderCodec, MegaHeaderCodec])),
   }),
 });
 
@@ -141,7 +136,6 @@ export const getHeader = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     ),

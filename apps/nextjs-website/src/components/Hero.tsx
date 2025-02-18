@@ -26,19 +26,19 @@ const makeHeroProps = ({
   ...(subtitle && {
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
   }),
-  ...(image.data && {
+  ...(image && {
     image: {
-      src: image.data.attributes.url,
-      srcSet: makeSrcSetFromStrapiImageData(image.data),
-      ...(image.data.attributes.alternativeText && {
-        alt: image.data.attributes.alternativeText,
+      src: image.url,
+      srcSet: makeSrcSetFromStrapiImageData(image),
+      ...(image.alternativeText && {
+        alt: image.alternativeText,
       }),
     },
   }),
-  ...(background.data && {
+  ...(background && {
     background: {
-      src: background.data.attributes.url,
-      srcSet: makeSrcSetFromStrapiImageData(background.data),
+      src: background.url,
+      srcSet: makeSrcSetFromStrapiImageData(background),
     },
   }),
   ...(ctaButtons &&

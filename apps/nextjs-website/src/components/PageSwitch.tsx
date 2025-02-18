@@ -11,7 +11,7 @@ import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PageSwitchContent } from '@react-components/types/Page-Switch/Page-Switch.types';
 
 const makePageSwitchPageSections = (
-  sections: PageSwitchSection['pages']['data'][0]['attributes']['sections'],
+  sections: PageSwitchSection['pages'][0]['sections'],
   siteWidePageData: SiteWidePageData,
 ): PageSwitchContent[] =>
   sections.map((section) => {
@@ -45,10 +45,10 @@ const makePageSwitchProps = ({
   ...(subtitle && {
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
   }),
-  pages: pages.data.map((page) => ({
+  pages: pages.map((page) => ({
     id: page.id,
-    buttonText: page.attributes.buttonText,
-    sections: makePageSwitchPageSections(page.attributes.sections, {
+    buttonText: page.buttonText,
+    sections: makePageSwitchPageSections(page.sections, {
       themeVariant: rest.themeVariant,
       locale,
       defaultLocale,
@@ -59,7 +59,7 @@ const makePageSwitchProps = ({
 
 const PageSwitch = (props: PageSwitchSection & SiteWidePageData) => {
   // No pages (or a single page) for PageSwitch have been input, notify of the problem in preview
-  if (props.pages.data.length < 2) {
+  if (props.pages.length < 2) {
     return (
       <section
         style={{

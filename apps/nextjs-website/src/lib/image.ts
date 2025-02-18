@@ -10,14 +10,12 @@ large: 1000px width
 (Any size larger than the original image won't be generated)
 */
 
-export const makeSrcSetFromStrapiImageData = ({
-  attributes,
-}: StrapiImage['data']): string => {
-  const small = attributes.formats?.small?.url;
-  const medium = attributes.formats?.medium?.url;
-  const large = attributes.formats?.large?.url;
-  const original = attributes.url;
-  const originalWidth = attributes.width;
+export const makeSrcSetFromStrapiImageData = (image: StrapiImage): string => {
+  const small = image.formats?.small?.url;
+  const medium = image.formats?.medium?.url;
+  const large = image.formats?.large?.url;
+  const original = image.url;
+  const originalWidth = image.width;
 
   return large
     ? `${small} 500w, ${medium} 750w, ${large} 1000w, ${original} ${originalWidth}w`

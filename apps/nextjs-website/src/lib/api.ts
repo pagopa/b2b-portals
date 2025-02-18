@@ -50,8 +50,7 @@ export const getPressReleasePages = async (
   locale: Locale,
 ): Promise<ReadonlyArray<PressReleasePage>> => {
   const { data } = await getPressReleases({ ...appEnv, locale });
-
-  return data.map((PressReleaseData) => PressReleaseData.attributes);
+  return data;
 };
 
 // Return PreHeaderProps
@@ -59,17 +58,15 @@ export const getPreHeaderProps = async (
   locale: Locale,
 ): Promise<PreHeaderAttributes | null> => {
   const { data } = await getPreHeader({ ...appEnv, locale });
-  return data?.attributes ?? null;
+  return data;
 };
 
 export const getHeaderProps = async (
   locale: Locale,
   defaultLocale: Locale,
-): Promise<HeaderData['data']['attributes']['header'][0]> => {
-  const {
-    data: { attributes },
-  } = await getHeader({ ...appEnv, locale });
-  const header = attributes.header[0];
+): Promise<HeaderData['data']['header'][0]> => {
+  const { data } = await getHeader({ ...appEnv, locale });
+  const header = data.header[0];
 
   if (header === undefined) {
     // Disable lint for this case because we want the build to fail if user managed to not input a menu
@@ -89,18 +86,16 @@ export const getHeaderProps = async (
 
 export const getFooterProps = async (
   locale: Locale,
-): Promise<FooterData['data']['attributes']> => {
-  const {
-    data: { attributes },
-  } = await getFooter({ ...appEnv, locale });
-  return attributes;
+): Promise<FooterData['data']> => {
+  const { data } = await getFooter({ ...appEnv, locale });
+  return data;
 };
 
 export const getPreFooterProps = async (
   locale: Locale,
 ): Promise<PreFooterAttributes | null> => {
   const { data } = await getPreFooter({ ...appEnv, locale });
-  return data?.attributes ?? null;
+  return data;
 };
 
 // Return PageProps given the page path
@@ -116,21 +111,17 @@ export const getPageProps = async (
   return allPages.find((page) => slugString === page.slug.toString());
 };
 
-export const getSiteWideSEO = async (): Promise<
-  SiteWideSEO['data']['attributes']
-> => {
-  const {
-    data: { attributes },
-  } = await fetchSiteWideSEO(appEnv);
+export const getSiteWideSEO = async (): Promise<SiteWideSEO['data']> => {
+  const { data } = await fetchSiteWideSEO(appEnv);
 
-  const localesArray = Object.keys(attributes.locales).filter(
-    (key) => attributes.locales[key as Locale],
+  const localesArray = Object.keys(data.locales).filter(
+    (key) => data.locales[key as Locale],
   ) as ReadonlyArray<Locale>;
 
   return {
-    ...attributes,
-    defaultLocale: localesArray.includes(attributes.defaultLocale) // Is defaultLocale amongst the locales selected for building?
-      ? attributes.defaultLocale // Y: Use it as-is
+    ...data,
+    defaultLocale: localesArray.includes(data.defaultLocale) // Is defaultLocale amongst the locales selected for building?
+      ? data.defaultLocale // Y: Use it as-is
       : (localesArray[0] ?? 'it'), // N: Grab the first locale as the backup defaultLocale ('it' fallback is only needed for typescript)
   };
 };
@@ -175,7 +166,7 @@ export const getPageDataFromID = async (
   tenant: Config['ENVIRONMENT'],
   documentID: string,
   locale: Locale,
-): Promise<PreviewPageData['data']['attributes']> => {
+): Promise<PreviewPageData['data']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
       ...appEnv.config,
@@ -183,22 +174,19 @@ export const getPageDataFromID = async (
     },
     fetchFun: appEnv.fetchFun,
   };
-  const {
-    data: { attributes },
-  } = await fetchPageFromID({
+  const { data } = await fetchPageFromID({
     ...appEnvWithRequestedTenant,
     documentID,
     locale,
   });
-
-  return attributes;
+  return data;
 };
 
 export const getPressReleaseDataFromID = async (
   tenant: Config['ENVIRONMENT'],
   documentID: string,
   locale: Locale,
-): Promise<PreviewPageData['data']['attributes']> => {
+): Promise<PreviewPageData['data']> => {
   const appEnvWithRequestedTenant: AppEnv = {
     config: {
       ...appEnv.config,
@@ -212,7 +200,7 @@ export const getPressReleaseDataFromID = async (
     locale,
   });
 
-  return previewPressReleaseToPreviewPageData(pressRelease).data.attributes;
+  return previewPressReleaseToPreviewPageData(pressRelease).data;
 };
 
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';

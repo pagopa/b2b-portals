@@ -11,8 +11,8 @@ const makeMediaResourcesProps = ({
 }: MediaResourcesSection & SiteWidePageData): MediaResourcesProps => ({
   ...(title && { title }),
   items: items.map(({ resource, thumbnail, ...item }) => ({
-    resourceURL: resource.data.attributes.url,
-    thumbnailURL: thumbnail.data.attributes.url,
+    resourceURL: resource.url,
+    thumbnailURL: thumbnail.url,
     ...item,
   })),
   ...rest,

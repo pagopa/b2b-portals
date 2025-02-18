@@ -13,12 +13,7 @@ const PressReleasePageCodec = t.strict({
 });
 
 const PressReleasesCodec = t.strict({
-  data: t.readonlyArray(
-    t.strict({
-      id: t.number,
-      attributes: PressReleasePageCodec,
-    }),
-  ),
+  data: t.readonlyArray(PressReleasePageCodec),
 });
 
 export type PressReleasePage = t.TypeOf<typeof PressReleasePageCodec>;
@@ -43,7 +38,6 @@ export const getPressReleases = ({
         method: 'GET',
         headers: {
           Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     ),

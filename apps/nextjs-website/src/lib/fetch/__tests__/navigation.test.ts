@@ -24,37 +24,32 @@ const makeTestAppEnv = () => {
 };
 
 // response example
-const navigationResponse = {
+const navigationResponse: Navigation = {
   data: [
     {
-      id: 1,
-      attributes: {
-        slug: 'homepage',
-        seo: {
-          metaTitle: 'title',
-          metaDescription: 'description',
-          keywords: null,
-          canonicalURL: null,
-          ogTitle: null,
-          ogDescription: null,
-          structuredData: null,
-        },
-        sections: [
-          {
-            __component: 'sections.stripe-link',
-            theme: 'dark',
-            subtitle: 'subtitle',
-            icon: {
-              data: null,
-            },
-            link: {
-              label: 'link',
-              href: '/',
-            },
-            sectionID: null,
-          },
-        ],
+      slug: 'homepage',
+      seo: {
+        metaTitle: 'title',
+        metaDescription: 'description',
+        keywords: null,
+        canonicalURL: null,
+        ogTitle: null,
+        ogDescription: null,
+        structuredData: null,
       },
+      sections: [
+        {
+          __component: 'sections.stripe-link',
+          theme: 'dark',
+          subtitle: 'subtitle',
+          icon: null,
+          link: {
+            label: 'link',
+            href: '/',
+          },
+          sectionID: null,
+        },
+      ],
     },
   ],
 };
@@ -89,7 +84,6 @@ describe('getNavigation', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     );
@@ -105,34 +99,29 @@ describe('getNavigation', () => {
     const expected: Navigation = {
       data: [
         {
-          id: 1,
-          attributes: {
-            slug: 'homepage',
-            seo: {
-              metaTitle: 'title',
-              metaDescription: 'description',
-              keywords: null,
-              canonicalURL: null,
-              ogTitle: null,
-              ogDescription: null,
-              structuredData: null,
-            },
-            sections: [
-              {
-                __component: 'sections.stripe-link',
-                theme: 'dark',
-                subtitle: 'subtitle',
-                icon: {
-                  data: null,
-                },
-                link: {
-                  label: 'link',
-                  href: '/',
-                },
-                sectionID: null,
-              },
-            ],
+          slug: 'homepage',
+          seo: {
+            metaTitle: 'title',
+            metaDescription: 'description',
+            keywords: null,
+            canonicalURL: null,
+            ogTitle: null,
+            ogDescription: null,
+            structuredData: null,
           },
+          sections: [
+            {
+              __component: 'sections.stripe-link',
+              theme: 'dark',
+              subtitle: 'subtitle',
+              icon: null,
+              link: {
+                label: 'link',
+                href: '/',
+              },
+              sectionID: null,
+            },
+          ],
         },
       ],
     };

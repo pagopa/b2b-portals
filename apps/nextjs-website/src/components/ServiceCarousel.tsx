@@ -23,7 +23,7 @@ const makeServiceCarouselProps = ({
       href: LocalizeURL({ URL: card.link.href, locale, defaultLocale }),
     },
     ...(card.description && { description: card.description }),
-    ...(card.image.data && { imageURL: card.image.data.attributes.url }),
+    ...(card.image && { imageURL: card.image.url }),
   })),
 });
 

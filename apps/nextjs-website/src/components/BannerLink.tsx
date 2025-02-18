@@ -20,8 +20,8 @@ export const makeBannerLinkProps = ({
       defaultLocale,
       variant: 'body2',
     }),
-    ...(icon.data && {
-      iconURL: icon.data.attributes.url,
+    ...(icon && {
+      iconURL: icon.url,
     }),
     ...(ctaButtons && {
       ctaButtons: ctaButtons.map(({ href, ...ctaButton }) => ({

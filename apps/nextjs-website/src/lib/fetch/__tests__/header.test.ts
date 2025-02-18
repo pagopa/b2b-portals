@@ -26,73 +26,63 @@ const makeTestAppEnv = () => {
 // response example
 const headerResponse: HeaderData = {
   data: {
-    attributes: {
-      header: [
-        {
-          __component: 'headers.standard-header',
-          beta: true,
-          drawer: {
+    header: [
+      {
+        __component: 'headers.standard-header',
+        beta: true,
+        drawer: {
+          buttonText: 'Accedi',
+          title: 'Accedi o Iscriviti',
+          subtitle: null,
+          ctaCard: {
             buttonText: 'Accedi',
-            title: 'Accedi o Iscriviti',
-            subtitle: null,
-            ctaCard: {
+            href: '#',
+            title: 'Titolo',
+            subtitle: 'Sottotitolo',
+          },
+          linkCards: [
+            {
               buttonText: 'Accedi',
               href: '#',
-              title: 'Titolo',
-              subtitle: 'Sottotitolo',
+              title: 'Cittadini',
+              subtitle: 'Sottotitolo Cittadini',
+              icons: [
+                {
+                  width: 32,
+                  height: 32,
+                  alternativeText: null,
+                  formats: null,
+                  mime: 'png',
+                  url: 'exampleURL',
+                },
+              ],
             },
-            linkCards: [
-              {
-                buttonText: 'Accedi',
-                href: '#',
-                title: 'Cittadini',
-                subtitle: 'Sottotitolo Cittadini',
-                icons: {
-                  data: [
-                    {
-                      attributes: {
-                        width: 32,
-                        height: 32,
-                        alternativeText: null,
-                        formats: null,
-                        mime: 'png',
-                        url: 'exampleURL',
-                      },
-                    },
-                  ],
+            {
+              buttonText: 'Accedi',
+              href: '#',
+              title: 'Imprese',
+              subtitle: 'Sottotitolo Imprese',
+              icons: [
+                {
+                  width: 32,
+                  height: 32,
+                  alternativeText: null,
+                  formats: null,
+                  mime: 'png',
+                  url: 'exampleURL',
                 },
-              },
-              {
-                buttonText: 'Accedi',
-                href: '#',
-                title: 'Imprese',
-                subtitle: 'Sottotitolo Imprese',
-                icons: {
-                  data: [
-                    {
-                      attributes: {
-                        width: 32,
-                        height: 32,
-                        alternativeText: null,
-                        formats: null,
-                        mime: 'png',
-                        url: 'exampleURL',
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-          menu: {
-            links: [],
-          },
-          logo: { data: null },
-          productName: 'SEND',
-          supportLink: '/assistenza',
+              ],
+            },
+          ],
         },
-      ],
-    },
+        menu: {
+          links: [],
+        },
+        logo: null,
+        productName: 'SEND',
+        supportLink: '/assistenza',
+      },
+    ],
   },
 };
 
@@ -122,7 +112,6 @@ describe('getHeader', () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
-          'Strapi-Response-Format': 'v4',
         },
       },
     );

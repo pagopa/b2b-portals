@@ -6,12 +6,12 @@ export const pressReleaseToPageDataArray = (
   pressRelease: PressReleases,
 ): ReadonlyArray<PageData> =>
   pressRelease.data.map((item) => ({
-    slug: ['press-releases', item.attributes.slug],
-    seo: item.attributes.seo,
+    slug: ['press-releases', item.slug],
+    seo: item.seo,
     sections: [
       {
         __component: 'sections.press-release',
-        ...item.attributes.pressRelease,
+        ...item.pressRelease,
       },
     ],
   }));
@@ -20,14 +20,12 @@ export const previewPressReleaseToPreviewPageData = (
   pressRelease: PreviewPressReleaseData,
 ): PreviewPageData => ({
   data: {
-    attributes: {
-      locale: pressRelease.data.attributes.locale,
-      sections: [
-        {
-          __component: 'sections.press-release',
-          ...pressRelease.data.attributes.pressRelease,
-        },
-      ],
-    },
+    locale: pressRelease.data.locale,
+    sections: [
+      {
+        __component: 'sections.press-release',
+        ...pressRelease.data.pressRelease,
+      },
+    ],
   },
 });

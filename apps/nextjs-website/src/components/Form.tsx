@@ -27,10 +27,10 @@ const makeFormProps = ({
   ...(notes && {
     notes: MarkdownRenderer({ markdown: notes, locale, defaultLocale }),
   }),
-  ...(background.data && {
+  ...(background && {
     background: {
-      src: background.data.attributes.url,
-      srcSet: makeSrcSetFromStrapiImageData(background.data),
+      src: background.url,
+      srcSet: makeSrcSetFromStrapiImageData(background),
     },
   }),
   ...rest,

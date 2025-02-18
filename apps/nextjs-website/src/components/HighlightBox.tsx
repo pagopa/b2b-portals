@@ -15,8 +15,8 @@ const makeHighlightBoxProps = ({
   ...rest
 }: HighlightBoxSection & SiteWidePageData): HighlightBoxProps => ({
   image: {
-    src: image.data.attributes.url,
-    srcSet: makeSrcSetFromStrapiImageData(image.data),
+    src: image.url,
+    srcSet: makeSrcSetFromStrapiImageData(image),
   },
   ...(eyelet && { eyelet }),
   ...(link && {
