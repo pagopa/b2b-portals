@@ -1,11 +1,8 @@
 import React, { ReactElement } from 'react';
 import { Button, Typography, TypographyProps } from '@mui/material';
 import { Theme, useTheme } from '@mui/material/styles';
-import {
-  CtaButtonProps,
-} from '../../types/common/Common.types';
+import { CtaButtonProps } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
-
 
 export const CtaButtons = ({
   ctaButtons,
