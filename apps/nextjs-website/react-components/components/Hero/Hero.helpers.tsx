@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { HeroTextProps } from '../../types/Hero/Hero.types';
-import { CtaButtons, Title } from '../common/Common';
+import { CtaButtons } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme, useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -49,8 +49,8 @@ export const HeroTextContent = ({
       alignItems={size === 'small' ? 'center' : 'inherit'}
       sx={{
         minHeight: 'inherit',
-        padding: size === 'small' ? '60px 0' : '0',
-        maxWidth: size === 'small' ? '60%' : '100%',
+        paddingY: size === 'small' ? '60px' : '0',
+        maxWidth: { xs: '100%', md: size === 'small' ? '60%' : '100%' },
         marginTop: size === 'small' ? '0' : { xs: '3em', lg: '0' },
         ...(size === 'small' && { margin: '0 auto' }),
       }}
@@ -58,14 +58,18 @@ export const HeroTextContent = ({
       spacing={2}
     >
       <Stack spacing={2} mb={size === 'small' ? 0 : { xs: 6, md: 4 }}>
-        <Title
-          variant='h1'
+        <Typography
           component={titleTag}
-          textColor={textColor}
-          title={title}
+          variant='h1'
           textAlign={size === 'small' ? 'center' : 'left'}
-          marginBottom={size === 'small' ? 0 : 2}
-        />
+          sx={{
+            fontSize: { xs: '36px', md: '50px' },
+            color: textColor,
+            marginBottom: size === 'small' ? 0 : 2,
+          }}
+        >
+          {title}
+        </Typography>
 
         <Typography
           component='div'
