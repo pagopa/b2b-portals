@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { CTAButtonSimpleCodec } from './types/CTAButton';
+import { CTAButtonAppCodec, CTAButtonSimpleCodec } from './types/CTAButton';
 import {
   StrapiImageRequiredArraySchema,
   StrapiImageRequiredSchema,
@@ -96,6 +96,7 @@ const MegaHeaderCodec = t.strict({
   __component: t.literal('headers.mega-header'),
   logo: StrapiImageRequiredSchema,
   ctaButton: t.union([CTAButtonSimpleCodec, t.null]),
+  appCtaButton: t.union([CTAButtonAppCodec, t.null]),
   drawer: t.union([SideDrawerCodec, t.null]),
   menu: MegaMenuCodec,
 });
@@ -125,12 +126,13 @@ export const getHeader = ({
       `${extractTenantStrapiApiData(config).baseUrl}/api/header?locale=${locale}
 &populate[0]=header.logo
 &populate[1]=header.ctaButton
-&populate[2]=header.menu.links.page
-&populate[3]=header.menu.links.ctaButton
-&populate[4]=header.menu.links.sublinks.page
-&populate[5]=header.menu.links.sublinkGroups.sublinks.page
-&populate[6]=header.drawer.ctaCard
-&populate[7]=header.drawer.linkCards.icons
+&populate[2]=header.appCtaButton
+&populate[3]=header.menu.links.page
+&populate[4]=header.menu.links.ctaButton
+&populate[5]=header.menu.links.sublinks.page
+&populate[6]=header.menu.links.sublinkGroups.sublinks.page
+&populate[7]=header.drawer.ctaCard
+&populate[8]=header.drawer.linkCards.icons
       `,
       {
         method: 'GET',

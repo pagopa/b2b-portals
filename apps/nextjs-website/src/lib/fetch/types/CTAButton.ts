@@ -40,3 +40,12 @@ export const CTAButtonSimpleCodec = t.strict({
   size: MUIButtonSizeCodec,
   icon: t.union([MUIButtonIconCodec, t.null]),
 });
+
+export const CTAButtonAppCodec = t.strict({
+  text: t.string,
+  googleStoreLink: t.string,
+  appStoreLink: t.string,
+  fallbackLink: t.string,
+  variant: t.keyof({ contained: null, outlined: null }),
+  size: MUIButtonSizeCodec,
+});

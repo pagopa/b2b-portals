@@ -19,5 +19,6 @@ export interface MegaHeaderProps {
   logoSrc: string;
   logoAlt: string;
   ctaButton?: CtaButtonProps;
+  appCtaButton?: CtaButtonProps;
   drawer?: HeaderSideDrawerProps;
 }

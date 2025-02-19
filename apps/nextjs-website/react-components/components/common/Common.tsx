@@ -18,7 +18,7 @@ export const CtaButtons = ({
   const { palette } = useTheme();
 
   const isCtaButtonProps = (
-    button: CtaButtonProps | JSX.Element
+    button: CtaButtonProps | JSX.Element,
   ): button is CtaButtonProps => {
     return (button as CtaButtonProps).text !== undefined;
   };
@@ -38,8 +38,8 @@ export const CtaButtons = ({
                   theme === 'dark'
                     ? palette.custom.white
                     : themeVariant === 'SEND'
-                    ? palette.primary.main
-                    : palette.custom.blueIO[500],
+                      ? palette.primary.main
+                      : palette.custom.blueIO[500],
                 color:
                   theme === 'dark'
                     ? themeVariant === 'SEND'
@@ -53,21 +53,21 @@ export const CtaButtons = ({
                   theme === 'dark'
                     ? palette.custom.matteWhiteBorder
                     : themeVariant === 'SEND'
-                    ? palette.primary.main
-                    : palette.custom.blueIO[500],
+                      ? palette.primary.main
+                      : palette.custom.blueIO[500],
                 color:
                   theme === 'dark'
                     ? palette.custom.white
                     : themeVariant === 'SEND'
-                    ? palette.primary.main
-                    : palette.custom.blueIO[500],
+                      ? palette.primary.main
+                      : palette.custom.blueIO[500],
               }),
             }}
             {...button}
           >
             {button.text}
           </Button>
-        )
+        ),
   );
 };
 
@@ -78,7 +78,7 @@ const StringTitle = (
   component: TypographyProps['component'] = 'p',
   textAlign: TypographyProps['align'] = 'center',
   marginTop: number | string = 0,
-  marginBottom: number | string = 0
+  marginBottom: number | string = 0,
 ) => (
   <Typography
     color={textColor}
@@ -98,7 +98,7 @@ const ElementTitle = (
   component: TypographyProps['component'] = 'p',
   textAlign: TypographyProps['align'] = 'center',
   marginTop: number | string = 0,
-  marginBottom: number | string = 0
+  marginBottom: number | string = 0,
 ) =>
   React.isValidElement(title)
     ? React.cloneElement(
@@ -110,7 +110,7 @@ const ElementTitle = (
           component,
           align: textAlign,
           style: { color: textColor, marginTop, marginBottom },
-        }
+        },
       )
     : null;
 
@@ -139,7 +139,7 @@ export const Title = ({
         component,
         textAlign,
         marginTop,
-        marginBottom
+        marginBottom,
       )
     : ElementTitle(
         title,
@@ -148,7 +148,7 @@ export const Title = ({
         component,
         textAlign,
         marginTop,
-        marginBottom
+        marginBottom,
       );
 };
 
@@ -157,7 +157,7 @@ const StringSubtitle = (
   textColor: string,
   textAlign: TypographyProps['align'] = 'inherit',
   variant: TypographyProps['variant'] = 'body1',
-  marginBottom: number | string = 0
+  marginBottom: number | string = 0,
 ) => (
   <Typography
     variant={variant}
@@ -173,7 +173,7 @@ const ElementSubtitle = (
   textColor: string,
   textAlign: TypographyProps['align'] = 'inherit',
   variant: TypographyProps['variant'] = 'body1',
-  marginBottom: number | string = 0
+  marginBottom: number | string = 0,
 ) =>
   React.isValidElement(subtitle)
     ? React.cloneElement(
@@ -184,7 +184,7 @@ const ElementSubtitle = (
           style: { color: textColor, marginBottom },
           align: textAlign,
           variant: variant,
-        }
+        },
       )
     : null;
 
@@ -215,7 +215,7 @@ const StringBody = (
   textColor: string,
   textAlign: TypographyProps['align'] = 'inherit',
   variant: TypographyProps['variant'] = 'body2',
-  marginBottom: number | string = 0
+  marginBottom: number | string = 0,
 ) => (
   <Typography
     variant={variant}
@@ -239,7 +239,7 @@ const ElementBody = (
   textColor: string,
   textAlign: TypographyProps['align'] = 'inherit',
   variant: TypographyProps['variant'] = 'body2',
-  marginBottom: number | string = 0
+  marginBottom: number | string = 0,
 ) =>
   React.isValidElement(body) ? (
     <Box
@@ -258,7 +258,7 @@ const ElementBody = (
           style: { color: textColor, marginBottom },
           align: textAlign,
           variant: variant,
-        }
+        },
       )}
     </Box>
   ) : null;
@@ -290,7 +290,7 @@ export const getButtonStyles = (
   themeVariant: 'SEND' | 'IO',
   sectionId: number,
   currentSectionId: number,
-  palette: Theme['palette']
+  palette: Theme['palette'],
 ) => {
   const isSelected = sectionId === currentSectionId;
 
@@ -306,13 +306,13 @@ export const getButtonStyles = (
           ? palette.primary.main
           : palette.custom.primaryColorDark
         : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark
+          ? palette.primary.main
+          : palette.custom.primaryColorDark
       : theme === 'light'
-      ? themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark
-      : palette.primary.contrastText,
+        ? themeVariant === 'SEND'
+          ? palette.primary.main
+          : palette.custom.primaryColorDark
+        : palette.primary.contrastText,
     borderColor:
       theme === 'light'
         ? themeVariant === 'SEND'
@@ -330,8 +330,8 @@ export const getButtonStyles = (
             ? palette.primary.main
             : palette.custom.primaryColorDark
           : themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark,
+            ? palette.primary.main
+            : palette.custom.primaryColorDark,
       borderColor:
         theme === 'light'
           ? themeVariant === 'SEND'
