@@ -14,12 +14,37 @@ import {
 } from '@/lib/fetch/header';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    opera: any;
+    MSStream: any;
+  }
+}
+
 const LinkLabelValues = {
   it: 'NOVITÀ',
   en: 'NEW',
   de: 'NEU',
   fr: 'NOUVEAU',
   sl: 'NOVO',
+};
+
+const makeAppStoreHref = ({
+  appStoreLink,
+  googleStoreLink,
+  fallbackLink,
+}: {
+  appStoreLink: string;
+  googleStoreLink: string;
+  fallbackLink: string;
+}): string => {
+  // Detect OS
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+  const isAndroid = /android/i.test(userAgent);
+
+  return isIOS ? appStoreLink : isAndroid ? googleStoreLink : fallbackLink;
 };
 
 const makeHeaderSublink = (
@@ -105,7 +130,7 @@ const makeHeaderProps = (
 });
 
 const makeMegaHeaderProps = (
-  { logo, ctaButton, menu, drawer }: MegaHeaderData,
+  { logo, ctaButton, menu, drawer, appCtaButton }: MegaHeaderData,
   locale: Locale,
   defaultLocale: Locale,
 ): MegaHeaderProps => ({
@@ -113,6 +138,18 @@ const makeMegaHeaderProps = (
     ctaButton: {
       ...ctaButton,
       ...(ctaButton.icon && { startIcon: Icon(ctaButton.icon) }),
+    },
+  }),
+  ...(appCtaButton && {
+    appCtaButton: {
+      text: appCtaButton.text,
+      variant: appCtaButton.variant,
+      size: appCtaButton.size,
+      href: makeAppStoreHref({
+        appStoreLink: appCtaButton.appStoreLink,
+        googleStoreLink: appCtaButton.googleStoreLink,
+        fallbackLink: appCtaButton.fallbackLink,
+      }),
     },
   }),
   ...(drawer && {

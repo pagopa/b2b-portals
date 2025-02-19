@@ -101,12 +101,13 @@ describe('getHeader', () => {
       `${config.DEMO_STRAPI_API_BASE_URL}/api/header?locale=it
 &populate[0]=header.logo
 &populate[1]=header.ctaButton
-&populate[2]=header.menu.links.page
-&populate[3]=header.menu.links.ctaButton
-&populate[4]=header.menu.links.sublinks.page
-&populate[5]=header.menu.links.sublinkGroups.sublinks.page
-&populate[6]=header.drawer.ctaCard
-&populate[7]=header.drawer.linkCards.icons
+&populate[2]=header.appCtaButton
+&populate[3]=header.menu.links.page
+&populate[4]=header.menu.links.ctaButton
+&populate[5]=header.menu.links.sublinks.page
+&populate[6]=header.menu.links.sublinkGroups.sublinks.page
+&populate[7]=header.drawer.ctaCard
+&populate[8]=header.drawer.linkCards.icons
       `,
       {
         method: 'GET',

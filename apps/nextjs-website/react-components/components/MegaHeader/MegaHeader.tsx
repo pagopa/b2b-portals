@@ -24,7 +24,7 @@ import { CtaButtons } from '../common/Common';
 import { usePathname } from 'next/navigation';
 import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
 
-const MegaHeader = ({ logoSrc, logoAlt, ctaButton, menuItems, drawer }: MegaHeaderProps) => {
+const MegaHeader = ({ logoSrc, logoAlt, ctaButton, appCtaButton, menuItems, drawer }: MegaHeaderProps) => {
   const pathname = usePathname();
   const { palette, ...theme } = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -44,7 +44,7 @@ const MegaHeader = ({ logoSrc, logoAlt, ctaButton, menuItems, drawer }: MegaHead
       )
       .reduce((acc, curr) => acc || curr);
 
-  const activeCta = menuItems.find(isActiveLink)?.ctaButton ?? ctaButton;
+  const activeCta = menuItems.find(isActiveLink)?.ctaButton ?? (isMobile ? appCtaButton : ctaButton);
 
   const handleClick = (
     event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,

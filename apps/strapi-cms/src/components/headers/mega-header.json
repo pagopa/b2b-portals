@@ -29,6 +29,11 @@
       "type": "component",
       "repeatable": false,
       "component": "headers.header-drawer"
+    },
+    "appCtaButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.cta-button-app"
     }
   }
 }
