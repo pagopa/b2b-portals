@@ -25,11 +25,6 @@ declare global {
   interface Window {
     // eslint-disable-next-line functional/no-return-void
     OptanonWrapper: () => void;
-    // OptanonActiveGroups will only be missing when CMS user inputs an invalid oneTrustDomainID
-    // We are only considering the case because we have no way to check beforehand if the id is valid
-    // Hence, this would cause a runtime error and break the built static website (which we want to avoid)
-    // Instead the cookie banner just won't show and an error will be logged to console
-    OptanonActiveGroups?: string;
     OneTrust: {
       // eslint-disable-next-line functional/no-return-void
       OnConsentChanged: (callback: () => void) => void;
