@@ -9,8 +9,9 @@ export interface FooterProps extends LangSwitchProps {
 
 interface FooterLinksType {
   label: string;
-  href?: string;
+  href: string;
   ariaLabel: string;
+  showOneTrustPreferencies?: boolean;
 }
 
 interface PreLoginFooterSingleSectionType {
