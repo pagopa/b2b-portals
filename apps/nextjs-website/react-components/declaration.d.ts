@@ -42,3 +42,5 @@ declare module 'react-google-recaptcha' {
     reset(): void;
   }
 }
+
+declare module '*.png';
