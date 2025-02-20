@@ -6,12 +6,14 @@ const TrackPageView = () => {
   useEffect(() => {
     // eslint-disable-next-line functional/no-try-statements
     try {
+      // Check opt in status to be sure
       if (mixpanel.has_opted_in_tracking()) {
         mixpanel.track_pageview();
+        console.log('TRACKED PAGE VIEW');
       }
     } catch {
-      // This component should only be used if mixpanelConfig is defined
-      // Wrap calls in a try-catch anyway to prevent static website from breaking if the component is used incorrectly
+      // mixpanel throws an error if it's not initialized
+      console.log('MP NOT INITIALIZED');
     }
   }, []);
 
