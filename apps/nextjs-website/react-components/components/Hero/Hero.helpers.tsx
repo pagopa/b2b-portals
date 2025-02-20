@@ -62,11 +62,9 @@ export const HeroTextContent = ({
           component={titleTag}
           variant='h1'
           textAlign={size === 'small' ? 'center' : 'left'}
-          sx={{
-            fontSize: { xs: '36px', md: '50px' },
-            color: textColor,
-            marginBottom: size === 'small' ? 0 : 2,
-          }}
+          fontSize={size === 'small' ? '36px' : '50px'}
+          color={textColor}
+          mb={size === 'small' ? 0 : 2}
         >
           {title}
         </Typography>
