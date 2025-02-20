@@ -8,8 +8,8 @@ import { CtaButtons } from '../common/Common';
 import { usePathname } from 'next/navigation';
 import GoogleStoreOutlinedLight from '../../assets/googleStoreOutlinedLight.png';
 import GoogleStoreOutlinedDark from '../../assets/googleStoreOutlinedDark.png';
-import AppleStoreOutlinedLight from '../../assets/googleStoreOutlinedLight.png';
-import AppleStoreOutlinedDark from '../../assets/googleStoreOutlinedDark.png';
+import AppleStoreOutlinedLight from '../../assets/appleStoreOutlinedLight.png';
+import AppleStoreOutlinedDark from '../../assets/appleStoreOutlinedDark.png';
 import Image from 'next/image';
 
 const styles = {
