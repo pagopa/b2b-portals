@@ -1,3 +1,4 @@
+/* eslint-disable functional/no-return-void */
 'use client';
 import { usePathname } from 'next/navigation';
 import Icon from './Icon';
@@ -18,6 +19,7 @@ declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     opera: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     MSStream: any;
   }
 }
@@ -30,7 +32,7 @@ const LinkLabelValues = {
   sl: 'NOVO',
 };
 
-const makeAppStoreHref = ({
+const openAppStore = ({
   appStoreLink,
   googleStoreLink,
   fallbackLink,
@@ -38,13 +40,22 @@ const makeAppStoreHref = ({
   appStoreLink: string;
   googleStoreLink: string;
   fallbackLink: string;
-}): string => {
+}): void => {
   // Detect OS
   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
   const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
   const isAndroid = /android/i.test(userAgent);
 
-  return isIOS ? appStoreLink : isAndroid ? googleStoreLink : fallbackLink;
+  if (isIOS) {
+    // eslint-disable-next-line functional/immutable-data
+    window.location.href = appStoreLink;
+  } else if (isAndroid) {
+    // eslint-disable-next-line functional/immutable-data
+    window.location.href = googleStoreLink;
+  } else {
+    // eslint-disable-next-line functional/immutable-data
+    window.location.href = fallbackLink;
+  }
 };
 
 const makeHeaderSublink = (
@@ -145,11 +156,7 @@ const makeMegaHeaderProps = (
       text: appCtaButton.text,
       variant: appCtaButton.variant,
       size: appCtaButton.size,
-      href: makeAppStoreHref({
-        appStoreLink: appCtaButton.appStoreLink,
-        googleStoreLink: appCtaButton.googleStoreLink,
-        fallbackLink: appCtaButton.fallbackLink,
-      }),
+      onClick: () => openAppStore(appCtaButton),
     },
   }),
   ...(drawer && {
