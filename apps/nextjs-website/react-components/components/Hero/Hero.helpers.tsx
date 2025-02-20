@@ -4,11 +4,12 @@ import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme, useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
-import appleBadgeBase64 from '../Editorial/BadgeImages/appleBadgeBase64';
-import googleBadgeBase64 from '../Editorial/BadgeImages/googleBadgeBase64';
 import Image from 'next/image';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
+import GoogleStoreBadge from '../../assets/googleStoreBadge.png'
+import AppleStoreBadge from '../../assets/appleStoreBadge.png'
+
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
   size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
@@ -115,7 +116,7 @@ export const HeroTextContent = ({
                 target='_blank'
               >
                 <Image
-                  src={googleBadgeBase64}
+                  src={GoogleStoreBadge}
                   alt='Download on Google Play'
                   height={0}
                   width={0}
@@ -135,7 +136,7 @@ export const HeroTextContent = ({
                 target='_blank'
               >
                 <Image
-                  src={appleBadgeBase64}
+                  src={AppleStoreBadge}
                   alt='Download on App store'
                   height={0}
                   width={0}
