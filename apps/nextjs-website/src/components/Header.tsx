@@ -43,10 +43,15 @@ const openAppStore = ({
 }): void => {
   // Detect OS
   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const isWindowsPhone = /windows phone/i.test(userAgent);
   const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
   const isAndroid = /android/i.test(userAgent);
 
-  if (isIOS) {
+  if (isWindowsPhone) {
+    // Check windows phone first because recent windows phone user agents contain "Android" and "iPhone"
+    // eslint-disable-next-line functional/immutable-data
+    window.location.href = fallbackLink;
+  } else if (isIOS) {
     // eslint-disable-next-line functional/immutable-data
     window.location.href = appStoreLink;
   } else if (isAndroid) {
