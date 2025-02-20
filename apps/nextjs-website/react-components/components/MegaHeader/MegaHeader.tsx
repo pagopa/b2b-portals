@@ -47,7 +47,7 @@ const MegaHeader = ({
   const isActiveLink = (menuItem: MegaMenuItem): boolean =>
     menuItem.secondary
       .flatMap((sublinkGroup) =>
-        sublinkGroup.items.map((item) => isActiveSubLink(item.href)),
+        sublinkGroup.items.map((item) => isActiveSubLink(item.href))
       )
       .reduce((acc, curr) => acc || curr);
 
@@ -57,7 +57,7 @@ const MegaHeader = ({
 
   const handleClick = (
     event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,
-    menu: string,
+    menu: string
   ) => {
     event.preventDefault();
     setDropdownOpen((prev) => (prev === menu ? null : menu));
@@ -287,7 +287,7 @@ const MegaHeader = ({
                                   </a>
                                 ))}
                             </Typography>
-                          ),
+                          )
                         )}
                       </div>
                     </div>
@@ -304,18 +304,17 @@ const MegaHeader = ({
           {menuItems.map((menuItem: MegaMenuItem, index) => (
             <React.Fragment key={index}>
               <Stack
-                className={`mobileMenuPrimaryItem ${
-                  dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''
-                }`}
+                className='mobileMenuPrimaryItem'
                 onClick={(e) =>
                   handleClick(e as any, `mobile${menuItem.primary}`)
                 }
               >
                 <Typography
-                  {...(isActiveLink(menuItem) && {
-                    fontWeight: 600,
-                    color: palette.custom.primaryColorDark,
-                  })}
+                  sx={{
+                    fontWeight:
+                      dropdownOpen === `mobile${menuItem.primary}` ? 600 : 400,
+                    color: '#2B2E38',
+                  }}
                 >
                   {menuItem.primary}
                 </Typography>

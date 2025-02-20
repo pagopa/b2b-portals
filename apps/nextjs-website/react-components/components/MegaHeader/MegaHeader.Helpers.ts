@@ -57,11 +57,6 @@ export const Nav = styled('ul')({
       backgroundColor: '#F4F4F4',
       borderRadius: 6,
     },
-    '&.active': {
-      color: '#0B3EE3',
-      fontWeight: 600,
-      letterSpacing: '-0.0090em',
-    },
   },
   '& .menuSecondaryItem': {
     fontSize: 14,
@@ -124,6 +119,7 @@ export const Dropdown = styled(Box)({
   '& a:hover': {
     fontWeight: 600,
     letterSpacing: '-0.0090em',
+    color: '#0E0F13',
   },
   '& a.active': {
     fontWeight: 600,
@@ -149,7 +145,7 @@ export const DropdownTitle = styled(Typography)(({ theme }) => ({
   fontSize: 14,
   letterSpacing: 1,
   textTransform: 'uppercase',
-  color: 'black',
+  color: '#2B2E38',
   padding: '10px 20px',
   cursor: 'default',
   [theme.breakpoints.down('md')]: {
@@ -222,6 +218,7 @@ export const MobileMenu = styled(Box)({
   '& .mobileMenuPrimaryItem': {
     fontSize: 18,
     fontWeight: 400,
+    color: '#2B2E38',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -230,9 +227,6 @@ export const MobileMenu = styled(Box)({
     justifyContent: 'space-between',
     padding: '10px 30px',
     cursor: 'pointer',
-    '&.active': {
-      fontWeight: 600,
-    },
   },
   '& .mobileMenuSecondaryItem': {
     fontSize: 12,
@@ -241,6 +235,25 @@ export const MobileMenu = styled(Box)({
     paddingLeft: '30px',
     display: 'flex',
     alignItems: 'center',
+  },
+  '& .mobileMenuSecondaryItem.active': {
+    fontWeight: 600,
+    color: '#0B3EE3',
+  },
+  '& .mobileMenuSecondaryItem .arrowIcon': {
+    visibility: 'hidden',
+    opacity: 0,
+  },
+  '& .mobileMenuSecondaryItem:hover .arrowIcon': {
+    visibility: 'visible',
+    opacity: 1,
+  },
+  '& .mobileMenuSecondaryItem:hover p': {
+    fontWeight: '600 !important',
+    color: '#0E0F13 !important',
+  },
+  '& .mobileMenuSecondaryItem.active:hover p': {
+    color: '#0B3EE3 !important',
   },
 });
 
