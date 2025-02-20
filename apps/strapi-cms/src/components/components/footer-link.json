@@ -2,7 +2,8 @@
   "collectionName": "components_components_footer_links",
   "info": {
     "displayName": "footerLink",
-    "icon": "link"
+    "icon": "link",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -17,6 +18,10 @@
     "ariaLabel": {
       "type": "string",
       "required": true
+    },
+    "showOneTrustPreferencies": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
