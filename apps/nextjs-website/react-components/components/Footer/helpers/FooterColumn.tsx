@@ -33,7 +33,11 @@ export const FooterColumn = ({
       >
         {icons.map(({ iconURL, href = hrefNoOp, ariaLabel }, i) => (
           <li key={i}>
-            <Link href={href} aria-label={ariaLabel} {...(href.startsWith('https') && { target: '_blank' })}>
+            <Link
+              href={href}
+              aria-label={ariaLabel}
+              {...(href.startsWith('https') && { target: '_blank' })}
+            >
               <img
                 src={iconURL}
                 alt={ariaLabel || 'Social Icon'}
@@ -52,22 +56,30 @@ export const FooterColumn = ({
       textAlign={{ xs: 'center', sm: 'left' }}
       sx={{ padding: 0, listStyle: 'none' }}
     >
-      {data.links.map(({ href = hrefNoOp, label, ariaLabel }, i) => (
-        <li key={i}>
-          <Link
-            aria-label={ariaLabel}
-            component='a'
-            href={href}
-            underline='none'
-            color='text.primary'
-            sx={{ display: 'inline-block', py: 0.5 }}
-            variant='subtitle2'
-            {...(href.startsWith('https') && { target: '_blank' })}
-          >
-            {label}
-          </Link>
-        </li>
-      ))}
+      {data.links.map(
+        ({ href, label, ariaLabel, showOneTrustPreferencies }, i) => (
+          <li key={i}>
+            <Link
+              aria-label={ariaLabel}
+              component='a'
+              underline='none'
+              color='text.primary'
+              sx={{ display: 'inline-block', py: 0.5, cursor: 'pointer' }}
+              variant='subtitle2'
+              {...(href.startsWith('https') && { target: '_blank' })}
+              {...(showOneTrustPreferencies
+                ? {
+                    onClick: () => window.OneTrust.ToggleInfoDisplay(),
+                  }
+                : {
+                    href,
+                  })}
+            >
+              {label}
+            </Link>
+          </li>
+        ),
+      )}
     </Stack>
   </Stack>
 );

@@ -39,32 +39,44 @@ const makeFooterProps = ({
   }),
   links: {
     aboutUs: {
-      links: links_aboutUs.links.map(({ href, ...link }) => ({
-        ...link,
-        href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
-      })),
+      links: links_aboutUs.links.map(
+        ({ href, showOneTrustPreferencies, ...link }) => ({
+          ...link,
+          href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
+          ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
+        }),
+      ),
       ...(links_aboutUs.title && { title: links_aboutUs.title }),
     },
     services: {
-      links: links_services.links.map(({ href, ...link }) => ({
-        ...link,
-        href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
-      })),
+      links: links_services.links.map(
+        ({ href, showOneTrustPreferencies, ...link }) => ({
+          ...link,
+          href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
+          ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
+        }),
+      ),
       ...(links_services.title && { title: links_services.title }),
     },
     resources: {
-      links: links_resources.links.map(({ href, ...link }) => ({
-        ...link,
-        href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
-      })),
+      links: links_resources.links.map(
+        ({ href, showOneTrustPreferencies, ...link }) => ({
+          ...link,
+          href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
+          ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
+        }),
+      ),
       ...(links_resources.title && { title: links_resources.title }),
     },
     followUs: {
       title: links_followUs.title,
-      links: links_followUs.links.map(({ href, ...link }) => ({
-        ...link,
-        href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
-      })),
+      links: links_followUs.links.map(
+        ({ href, showOneTrustPreferencies, ...link }) => ({
+          ...link,
+          href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
+          ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
+        }),
+      ),
       socialLinks: links_followUs.socialLinks.map(
         ({ icon, href, ariaLabel }) => ({
           iconURL: icon.url,

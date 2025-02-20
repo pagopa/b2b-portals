@@ -15,6 +15,7 @@ const FooterLinkCodec = t.strict({
   label: t.string,
   href: t.string,
   ariaLabel: t.string,
+  showOneTrustPreferencies: t.union([t.boolean, t.null]),
 });
 
 const FooterLinkSocialCodec = t.strict({
