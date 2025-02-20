@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import appleBadgeBase64 from './BadgeImages/appleBadgeBase64';
-import googleBadgeBase64 from './BadgeImages/googleBadgeBase64';
 import { EditorialCtaProps } from '../../types/Editorial/Editorial.types';
 import { CtaButtons } from '../common/Common';
 import { useTheme, useMediaQuery } from '@mui/material';
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
+import GoogleStoreBadge from '../../assets/googleStoreBadge.png'
+import AppleStoreBadge from '../../assets/appleStoreBadge.png'
 
 export const Ctas = ({
   ctaButtons,
@@ -39,7 +39,7 @@ export const Ctas = ({
             href={storeButtons.hrefGoogle}
           >
             <Image
-              src={googleBadgeBase64}
+              src={GoogleStoreBadge}
               alt='Download on Google Play'
               height={0}
               width={0}
@@ -58,7 +58,7 @@ export const Ctas = ({
             href={storeButtons.hrefApple}
           >
             <Image
-              src={appleBadgeBase64}
+              src={AppleStoreBadge}
               alt='Download on App store'
               height={0}
               width={0}
