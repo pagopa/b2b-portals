@@ -9,11 +9,9 @@ const TrackPageView = () => {
       // Check opt in status to be sure
       if (mixpanel.has_opted_in_tracking()) {
         mixpanel.track_pageview();
-        console.log('TRACKED PAGE VIEW');
       }
     } catch {
       // mixpanel throws an error if it's not initialized
-      console.log('MP NOT INITIALIZED');
     }
   }, []);
 

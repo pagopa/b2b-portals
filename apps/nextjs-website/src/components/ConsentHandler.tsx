@@ -55,8 +55,6 @@ const ConsentHandler = ({
   const initMixpanel = () => {
     if (!mixpanelConfig) return;
 
-    console.log('INIT MIXPANEL');
-
     mixpanel.init(mixpanelConfig.token, {
       ...(mixpanelConfig.apiHost && { api_host: mixpanelConfig.apiHost }),
       ...(mixpanelConfig.cookieDomain && {
