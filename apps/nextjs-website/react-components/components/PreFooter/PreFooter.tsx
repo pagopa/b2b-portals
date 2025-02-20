@@ -3,13 +3,14 @@ import Button from '@mui/material/Button';
 import { BackgroundColor } from '../common/Common.helpers';
 import { PreFooterProps } from '@react-components/types/PreFooter/PreFooter';
 import { useTheme, useMediaQuery } from '@mui/material';
-import googleBadgeLightBase64 from './BadgeImages/googleBadgeLightBase64';
-import appleBadgeLightBase64 from './BadgeImages/appleBadgeLightBase64';
-import googleBadgeDarkBase64 from './BadgeImages/googleBadgeDarkBase64';
-import appleBadgeDarkBase64 from './BadgeImages/appleBadgeDarkBase64';
 import ContainerRC from '../common/ContainerRC';
 import { CtaButtons } from '../common/Common';
 import { usePathname } from 'next/navigation';
+import GoogleStoreOutlinedLight from '../../assets/googleStoreOutlinedLight.png';
+import GoogleStoreOutlinedDark from '../../assets/googleStoreOutlinedDark.png';
+import AppleStoreOutlinedLight from '../../assets/googleStoreOutlinedLight.png';
+import AppleStoreOutlinedDark from '../../assets/googleStoreOutlinedDark.png';
+import Image from 'next/image';
 
 const styles = {
   main: (isSmallScreen: boolean, layout: 'left' | 'center') => ({
@@ -62,10 +63,10 @@ const PreFooter = (props: PreFooterProps) => {
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
-  const googleBadgeBase64 =
-    theme === 'dark' ? googleBadgeLightBase64 : googleBadgeDarkBase64;
-  const appleBadgeBase64 =
-    theme === 'dark' ? appleBadgeLightBase64 : appleBadgeDarkBase64;
+  const googleBadge =
+    theme === 'dark' ? GoogleStoreOutlinedLight : GoogleStoreOutlinedDark;
+  const appleBadge =
+    theme === 'dark' ? AppleStoreOutlinedLight : AppleStoreOutlinedDark;
 
   const backgroundColor = BackgroundColor(theme);
 
@@ -123,9 +124,11 @@ const PreFooter = (props: PreFooterProps) => {
                     key='google'
                     href={storeButtons.hrefGoogle}
                   >
-                    <img
-                      src={googleBadgeBase64}
+                    <Image
+                      src={googleBadge}
                       alt='Download on Google Play'
+                      height={0}
+                      width={0}
                       style={{ height: '3em', width: 'auto', display: 'block' }}
                     />
                   </Button>
@@ -140,9 +143,11 @@ const PreFooter = (props: PreFooterProps) => {
                     key='apple'
                     href={storeButtons.hrefApple}
                   >
-                    <img
-                      src={appleBadgeBase64}
+                    <Image
+                      src={appleBadge}
                       alt='Download on App Store'
+                      height={0}
+                      width={0}
                       style={{ height: '3em', width: 'auto', display: 'block' }}
                     />
                   </Button>
@@ -165,7 +170,9 @@ const PreFooter = (props: PreFooterProps) => {
                       width: 'auto',
                       marginTop: '16px',
                     },
-                    ...(button.href?.startsWith('https') && { target: '_blank' })
+                    ...(button.href?.startsWith('https') && {
+                      target: '_blank',
+                    }),
                   })),
                   theme,
                 })}
