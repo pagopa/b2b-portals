@@ -7,6 +7,7 @@ import {
 } from '@react-components/types/VideoImage/VideoImage.types';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 
 interface NextImageProps {
   overflow: 'hidden';
@@ -124,13 +125,19 @@ export const VideoText = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <>
       {title && (
-        <Typography component='div' variant='h5' mb={4} color={textColor}>
+        <Typography
+          component='div'
+          variant='h5'
+          mb={4}
+          color={textColor}
+          sx={{ maxWidth: '500px' }}
+        >
           {title}
         </Typography>
       )}
@@ -140,6 +147,7 @@ export const VideoText = ({
           paragraph
           sx={{
             fontSize: '16px',
+            maxWidth: '500px',
             '& a': {
               color: linkColor,
               textDecoration: 'underline',
@@ -179,8 +187,8 @@ export const ImageText = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <>
@@ -226,12 +234,26 @@ export const ImageText = ({
 
 export const VideoCaption = ({ caption, isCentered }: VideoCaptionProps) => {
   const { palette } = useTheme();
+  const [isMobileDevice, setIsMobileDevice] = useState(
+    window.innerWidth <= 768
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileDevice(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div
       style={{
         height: '116px',
-        marginLeft: isCentered ? '0' : '7em',
-        marginRight: isCentered ? '0' : '7em',
+        marginLeft: isMobileDevice ? '0' : isCentered ? '0' : '7em',
+        marginRight: isMobileDevice ? '0' : isCentered ? '0' : '7em',
+        padding: isMobileDevice ? '0px 20px' : 'initail',
         marginTop: '1em',
         textAlign: isCentered ? 'center' : 'left',
       }}

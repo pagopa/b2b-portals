@@ -101,14 +101,20 @@ const VideoImage = ({
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                padding: '20px',
+                padding: isMobileDevice ? '20px' : '0',
                 background: 'rgba(0, 0, 0, 0.60)',
-                alignItems: isCentered ? 'center' : 'left',
+                alignItems: isCentered ? 'center' : 'flex-start',
+                textAlign: isCentered ? 'center' : 'left',
               }}
             >
               <div
                 style={{
-                  marginLeft: title || subtitle ? '6em' : '0',
+                  marginLeft: isMobileDevice
+                    ? '0'
+                    : isCentered
+                      ? 'auto'
+                      : '7em',
+                  marginRight: isMobileDevice ? '0' : isCentered ? 'auto' : '0',
                   zIndex: 50,
                 }}
               >
@@ -128,8 +134,9 @@ const VideoImage = ({
                     width: 'fit-content',
                     gap: '0.5em',
                     alignItems: 'center',
-                    justifyContent: isCentered ? 'center' : 'left',
+                    justifyContent: isCentered ? 'center' : 'flex-start',
                     color: textColor,
+                    margin: isCentered ? '0 auto' : isMobileDevice ? '0' : '0',
                   }}
                 >
                   <p
@@ -141,6 +148,7 @@ const VideoImage = ({
                       color: textColor,
                       cursor: 'pointer',
                       alignSelf: 'flex-start',
+                      fontFamily: '"Titillium Web",sans-serif'
                     }}
                   >
                     {mediaState === 'pause'
@@ -184,7 +192,7 @@ const VideoImage = ({
                       right: 0,
                       width: '100%',
                       height: '100%',
-                      backgroundColor: 'rgba(0, 0, 0, 0.40)',
+                      backgroundColor: 'rgba(0, 0, 0, 0.60)',
                       zIndex: 10,
                     }}
                   />
@@ -201,7 +209,11 @@ const VideoImage = ({
                       alignItems: isCentered ? 'center' : 'flex-start',
                       zIndex: 20,
                       padding: '20px',
-                      marginLeft: isCentered ? '0' : '6em',
+                      marginLeft: isMobileDevice
+                        ? '0'
+                        : isCentered
+                          ? '0'
+                          : '6em',
                       textAlign: isCentered ? 'center' : 'left',
                     }}
                   >

@@ -123,10 +123,16 @@ export const ImageFull: StoryFn<typeof VideoImage> = VideoImageTemplate.bind(
 );
 ImageFull.args = {
   ...defaultsDark,
-  title: 'Sample Image Title',
+  title: 'Perché esiste IO',
   subtitle: (
     <p>
-      Sample Image Subtitle with <a href='/'>link</a>
+      IO rende concreto l’articolo 64bis del Codice dell’Amministrazione
+      Digitale (decreto legislativo 7 marzo 2005, n. 82). Questa legge prevede
+      un{' '}
+      <strong>
+        unico punto di accesso per tutti i servizi digitali pubblici
+      </strong>
+      , erogato dalla Presidenza del Consiglio dei Ministri.
     </p>
   ),
   image: {
@@ -139,7 +145,7 @@ ImageFull.args = {
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
   },
-  caption: 'Sample Video Caption',
+  caption: 'Sample Image Caption',
 };
 
 export const ImageNoTextWithCaptionCentered: StoryFn<typeof VideoImage> =
@@ -156,7 +162,7 @@ ImageNoTextWithCaptionCentered.args = {
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
   },
-  caption: 'Sample Video Caption',
+  caption: 'Sample Image Caption',
   isCentered: true,
 };
 
@@ -174,17 +180,23 @@ ImageNoTextWithCaptionLeft.args = {
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
   },
-  caption: 'Sample Video Caption',
+  caption: 'Sample Image Caption',
 };
 
 export const ImageNoCaptionWithTextCenter: StoryFn<typeof VideoImage> =
   VideoImageTemplate.bind({});
 ImageNoCaptionWithTextCenter.args = {
   ...defaultsDark,
-  title: 'Sample Image Title',
+  title: 'Perché esiste IO',
   subtitle: (
     <p>
-      Sample Image Subtitle with <a href='/'>link</a>
+      IO rende concreto l’articolo 64bis del Codice dell’Amministrazione
+      Digitale (decreto legislativo 7 marzo 2005, n. 82). Questa legge prevede
+      un{' '}
+      <strong>
+        unico punto di accesso per tutti i servizi digitali pubblici
+      </strong>
+      , erogato dalla Presidenza del Consiglio dei Ministri.
     </p>
   ),
   image: {
@@ -204,10 +216,16 @@ export const ImageNoCaptionWithTextLeft: StoryFn<typeof VideoImage> =
   VideoImageTemplate.bind({});
 ImageNoCaptionWithTextLeft.args = {
   ...defaultsDark,
-  title: 'Sample Image Title',
+  title: 'Perché esiste IO',
   subtitle: (
     <p>
-      Sample Image Subtitle with <a href='/'>link</a>
+      IO rende concreto l’articolo 64bis del Codice dell’Amministrazione
+      Digitale (decreto legislativo 7 marzo 2005, n. 82). Questa legge prevede
+      un{' '}
+      <strong>
+        unico punto di accesso per tutti i servizi digitali pubblici
+      </strong>
+      , erogato dalla Presidenza del Consiglio dei Ministri.
     </p>
   ),
   image: {
