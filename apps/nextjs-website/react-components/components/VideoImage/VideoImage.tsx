@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useIsVisible } from '@react-components/types/common/Common.types';
 import { VideoImageProps } from '@react-components/types';
 import { TextColor } from '../common/Common.helpers';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import {
   renderImage,
   renderVideo,
@@ -33,18 +36,10 @@ const VideoImage = ({
   const [mediaState, setMediaState] = useState<
     'play' | 'pause' | 'stop' | 'image'
   >(video ? 'stop' : 'image');
-  const [isMobileDevice, setIsMobileDevice] = useState(false);
 
   const textColor = TextColor(theme);
-
-  useEffect(() => {
-    setIsMobileDevice(window.innerWidth <= 768);
-    const handleResize = () => {
-      setIsMobileDevice(window.innerWidth <= 768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const themeMUI = useTheme();
+  const isMobileDevice = useMediaQuery(themeMUI.breakpoints.down('md'));
 
   useEffect(() => {
     if (mediaState === 'image') return;
@@ -61,9 +56,7 @@ const VideoImage = ({
     if (videoRef.current) {
       videoRef.current
         .play()
-        .then(() => {
-          setMediaState('play');
-        })
+        .then(() => setMediaState('play'))
         .catch(() => {});
     }
   };
@@ -81,9 +74,10 @@ const VideoImage = ({
 
   return (
     <>
-      <section
-        style={{
-          maxHeight: isMobileDevice ? '100vh' : '600px',
+      <Box
+        component='section'
+        sx={{
+          maxHeight: { xs: '100vh', md: '600px' },
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -91,8 +85,8 @@ const VideoImage = ({
       >
         {video?.showControls &&
           (mediaState === 'stop' || mediaState === 'pause') && (
-            <div
-              style={{
+            <Box
+              sx={{
                 position: 'absolute',
                 top: 0,
                 bottom: 0,
@@ -101,14 +95,16 @@ const VideoImage = ({
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                padding: '20px',
+                padding: { xs: '20px', md: '0' },
                 background: 'rgba(0, 0, 0, 0.60)',
-                alignItems: isCentered ? 'center' : 'left',
+                alignItems: isCentered ? 'center' : 'flex-start',
+                textAlign: isCentered ? 'center' : 'left',
               }}
             >
-              <div
-                style={{
-                  marginLeft: title || subtitle ? '6em' : '0',
+              <Box
+                sx={{
+                  marginLeft: { xs: '0', md: isCentered ? 'auto' : '7em' },
+                  marginRight: { xs: '0', md: isCentered ? 'auto' : '0' },
                   zIndex: 50,
                 }}
               >
@@ -120,20 +116,22 @@ const VideoImage = ({
                     {...(subtitle && { subtitle })}
                   />
                 )}
-                <div
+                <Box
                   onClick={play}
-                  style={{
+                  sx={{
                     display: 'flex',
                     flexDirection: 'row',
                     width: 'fit-content',
                     gap: '0.5em',
                     alignItems: 'center',
-                    justifyContent: isCentered ? 'center' : 'left',
+                    justifyContent: isCentered ? 'center' : 'flex-start',
                     color: textColor,
+                    margin: isCentered ? '0 auto' : '0',
                   }}
                 >
-                  <p
-                    style={{
+                  <Box
+                    component='p'
+                    sx={{
                       display: 'flex',
                       fontWeight: 700,
                       fontSize: '24px',
@@ -141,81 +139,74 @@ const VideoImage = ({
                       color: textColor,
                       cursor: 'pointer',
                       alignSelf: 'flex-start',
+                      fontFamily: '"Titillium Web", sans-serif',
                     }}
                   >
                     {mediaState === 'pause'
                       ? video.pausedPlayButtonLabel
                       : video.playButtonLabel}
-                  </p>
+                  </Box>
                   <PlayArrowIcon
-                    sx={{
-                      height: '2em',
-                      cursor: 'pointer',
-                      color: textColor,
-                    }}
+                    sx={{ height: '2em', cursor: 'pointer', color: textColor }}
                   />
-                </div>
-              </div>
-            </div>
+                </Box>
+              </Box>
+            </Box>
           )}
         {mediaState === 'image' ? (
-          <>
-            <div
-              style={{ position: 'relative', width: '100%', height: '600px' }}
-            >
-              {renderImage({
-                src: image!.src,
-                alt: image!.alt,
-                srcSet: image!.srcSet,
-                mobileSrc: mobileImage!.src,
-                mobileAlt: mobileImage!.alt,
-                mobileSrcSet: mobileImage!.srcSet,
-                isMobileDevice,
-              })}
+          <Box sx={{ position: 'relative', width: '100%', height: '600px' }}>
+            {renderImage({
+              src: image!.src,
+              alt: image!.alt,
+              srcSet: image!.srcSet,
+              mobileSrc: mobileImage!.src,
+              mobileAlt: mobileImage!.alt,
+              mobileSrcSet: mobileImage!.srcSet,
+              isMobileDevice,
+            })}
 
-              {(title || subtitle) && (
-                <>
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      width: '100%',
-                      height: '100%',
-                      backgroundColor: 'rgba(0, 0, 0, 0.40)',
-                      zIndex: 10,
-                    }}
+            {(title || subtitle) && (
+              <>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.60)',
+                    zIndex: 10,
+                  }}
+                />
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: isCentered ? 'center' : 'flex-start',
+                    zIndex: 20,
+                    padding: '20px',
+                    marginLeft: { xs: '0', md: isCentered ? '0' : '6em' },
+                    textAlign: isCentered ? 'center' : 'left',
+                  }}
+                >
+                  <ImageText
+                    theme={theme}
+                    themeVariant={themeVariant}
+                    title={title ?? ''}
+                    {...(subtitle && { subtitle })}
                   />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                      alignItems: isCentered ? 'center' : 'flex-start',
-                      zIndex: 20,
-                      padding: '20px',
-                      marginLeft: isCentered ? '0' : '6em',
-                      textAlign: isCentered ? 'center' : 'left',
-                    }}
-                  >
-                    <ImageText
-                      theme={theme}
-                      themeVariant={themeVariant}
-                      title={title ?? ''}
-                      {...(subtitle && { subtitle })}
-                    />
-                  </div>
-                </>
-              )}
-            </div>
-          </>
+                </Box>
+              </>
+            )}
+          </Box>
         ) : (
           renderVideo({
             videoRef,
@@ -230,7 +221,7 @@ const VideoImage = ({
             isMobileDevice,
           })
         )}
-      </section>
+      </Box>
       {caption && <VideoCaption caption={caption} isCentered={isCentered} />}
     </>
   );
