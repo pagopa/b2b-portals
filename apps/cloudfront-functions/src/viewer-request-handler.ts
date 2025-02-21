@@ -1,11 +1,11 @@
 /* eslint-disable functional/prefer-readonly-type */
 /* eslint-disable functional/no-loop-statements */
 /* eslint-disable functional/no-let */
+/* eslint-disable functional/immutable-data */
+/* eslint-disable functional/no-expression-statements */
 // This code is executed in the CloudFront Functions JavaScript runtime. In this
 // context we prefer performance over immutability.
 // https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html#function-code-modify-request
-/* eslint-disable functional/immutable-data */
-/* eslint-disable functional/no-expression-statements */
 
 interface RegExp {
   _helper?: string;
