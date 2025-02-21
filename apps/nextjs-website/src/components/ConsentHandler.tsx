@@ -1,5 +1,5 @@
 'use client';
-import { Analytics, MixpanelConfig } from '@/lib/fetch/siteWideSEO';
+import { Analytics } from '@/lib/fetch/siteWideSEO';
 import mixpanel from 'mixpanel-browser';
 import Script from 'next/script';
 import { useEffect } from 'react';
@@ -47,54 +47,48 @@ const hasConsent = () => {
   return OTCookieValue.indexOf(checkValue) > -1;
 };
 
-const initMixpanel = (mixpanelConfig: NonNullable<MixpanelConfig>) =>
-  mixpanel.init(mixpanelConfig.token, {
-    ...(mixpanelConfig.apiHost && { api_host: mixpanelConfig.apiHost }),
-    ...(mixpanelConfig.cookieDomain && {
-      cookie_domain: mixpanelConfig.cookieDomain,
-    }), // allow across-subdomain
-    cookie_expiration: 0, // session cookie
-    debug: mixpanelConfig.debug,
-    ip: mixpanelConfig.ip,
-    persistence: 'cookie',
-    secure_cookie: true,
-    opt_out_tracking_by_default: true,
-  });
-
 const ConsentHandler = ({
   oneTrustDomainID,
   mixpanel: mixpanelConfig,
   matomoID,
 }: NonNullable<Analytics>) => {
-  if (mixpanelConfig) {
-    initMixpanel(mixpanelConfig);
-  }
+  const initMixpanel = () => {
+    if (!mixpanelConfig) return;
 
-  const ToggleTracking = () => {
-    if (mixpanelConfig) {
-      if (hasConsent()) {
-        console.log('HAS CONSENT');
-        if (mixpanel.has_opted_out_tracking()) {
-          console.log('OPT IN');
-          mixpanel.opt_in_tracking();
-          // Track page view of page where consent is given
-          mixpanel.track_pageview();
-        }
-      } else if (mixpanel.has_opted_in_tracking()) {
-        console.log('OPT OUT');
-        mixpanel.opt_out_tracking();
-      }
-    }
+    mixpanel.init(mixpanelConfig.token, {
+      ...(mixpanelConfig.apiHost && { api_host: mixpanelConfig.apiHost }),
+      ...(mixpanelConfig.cookieDomain && {
+        cookie_domain: mixpanelConfig.cookieDomain,
+      }), // allow across-subdomain
+      cookie_expiration: 0, // session cookie
+      debug: mixpanelConfig.debug,
+      ip: mixpanelConfig.ip,
+      persistence: 'cookie',
+      secure_cookie: true,
+    });
+
+    // Explicitely opt into tracking because init doesn't overwrite this value (wherever it's persisted)
+    // which means if the user previously opted out (when the code implemented the function), init won't change that
+    mixpanel.opt_in_tracking();
+
+    // Track page view of page where consent is given
+    mixpanel.track_pageview();
   };
 
   useEffect(() => {
     // eslint-disable-next-line functional/immutable-data
     window.OptanonWrapper = function () {
-      window.OneTrust.OnConsentChanged(ToggleTracking);
+      window.OneTrust.OnConsentChanged(() => {
+        if (hasConsent()) {
+          initMixpanel();
+        }
+      });
     };
 
-    ToggleTracking();
-  }, [ToggleTracking]);
+    if (hasConsent()) {
+      initMixpanel();
+    }
+  }, [initMixpanel]);
 
   return (
     <>
