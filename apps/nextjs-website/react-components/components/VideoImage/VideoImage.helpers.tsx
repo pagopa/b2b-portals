@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import {
   VideoCaptionProps,
   VideoTextProps,
@@ -124,13 +124,19 @@ export const VideoText = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <>
       {title && (
-        <Typography component='div' variant='h5' mb={4} color={textColor}>
+        <Typography
+          component='div'
+          variant='h5'
+          mb={4}
+          color={textColor}
+          sx={{ maxWidth: '500px' }}
+        >
           {title}
         </Typography>
       )}
@@ -140,6 +146,7 @@ export const VideoText = ({
           paragraph
           sx={{
             fontSize: '16px',
+            maxWidth: '500px',
             '& a': {
               color: linkColor,
               textDecoration: 'underline',
@@ -179,8 +186,8 @@ export const ImageText = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <>
@@ -226,14 +233,16 @@ export const ImageText = ({
 
 export const VideoCaption = ({ caption, isCentered }: VideoCaptionProps) => {
   const { palette } = useTheme();
+
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         height: '116px',
-        marginLeft: isCentered ? '0' : '7em',
-        marginRight: isCentered ? '0' : '7em',
         marginTop: '1em',
         textAlign: isCentered ? 'center' : 'left',
+        padding: { xs: '0px 20px', md: '0' },
+        marginLeft: { xs: '0', md: isCentered ? '0' : '7em' },
+        marginRight: { xs: '0', md: isCentered ? '0' : '7em' },
       }}
     >
       {caption && (
@@ -247,6 +256,6 @@ export const VideoCaption = ({ caption, isCentered }: VideoCaptionProps) => {
           {caption}
         </Typography>
       )}
-    </div>
+    </Box>
   );
 };
