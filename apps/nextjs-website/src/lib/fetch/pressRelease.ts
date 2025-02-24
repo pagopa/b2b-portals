@@ -32,7 +32,7 @@ export const getPressReleases = ({
         extractTenantStrapiApiData(config).baseUrl
       }/api/press-releases?locale=${locale}&pagination[pageSize]=100
 &populate[0]=seo
-&populate[1]=pressRelease
+&populate[1]=pressRelease.backlink
 &sort[0]=pressRelease.date:desc
         `,
       {

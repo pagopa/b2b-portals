@@ -235,7 +235,7 @@ describe('fetchPressReleaseFromID', () => {
 
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases/${pageIDExample}?locale=it&status=draft
-&populate[1]=pressRelease
+&populate[1]=pressRelease.backlink
 &sort[0]=pressRelease.date:desc
         `,
       {
