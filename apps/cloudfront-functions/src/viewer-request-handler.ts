@@ -57,8 +57,9 @@ const handler = (
   event: AWSCloudFrontFunction.Event,
 ): AWSCloudFrontFunction.Request | AWSCloudFrontFunction.Response => {
   if (event.context.eventType === 'viewer-request') {
-    const uri = event.request.uri;
-    const host = event.request.headers['host']?.value.toLocaleLowerCase();
+    const { request } = event;
+    const { uri } = request;
+    const host = request.headers['host']?.value.toLocaleLowerCase();
 
     for (const pattern of regexPatterns) {
       if (pattern.host.toLocaleLowerCase() === host) {
@@ -87,17 +88,10 @@ const handler = (
       }
     }
 
-    // do the rewrite
-    const { request } = event;
-    const uriEndsWithSlash = request.uri.endsWith('/');
-    const isHomepage = request.uri === '/';
-
-    // Add the .html extension if missing
-    if (!isHomepage) {
-      if (uriEndsWithSlash) {
+    if (!(uri === '/')) {
+      if (uri.endsWith('/')) {
         request.uri = request.uri.replace(/\/$/, '');
       }
-      // Always add .html if there's no file extension, including special cases
       if (!/\.[0-9a-zA-Z]+$/.test(request.uri)) {
         request.uri += '.html';
       }
@@ -105,7 +99,6 @@ const handler = (
 
     return request;
   } else {
-    // do nothing
     return event.request;
   }
 };
