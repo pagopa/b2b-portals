@@ -56,6 +56,10 @@
       ],
       "required": true,
       "default": "center"
+    },
+    "trackItemOpen": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
