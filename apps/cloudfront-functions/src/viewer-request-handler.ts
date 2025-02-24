@@ -72,7 +72,7 @@ const handler = (
           }
 
           let targetUri = pattern.redirectTo;
-          if (path !== null) {
+          if (path) {
             targetUri += path;
           }
 
