@@ -96,6 +96,7 @@ describe('getNavigation', () => {
       `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases?locale=it&pagination[pageSize]=100
 &populate[0]=seo
 &populate[1]=pressRelease
+&sort[0]=pressRelease.date:desc
         `,
       {
         method: 'GET',

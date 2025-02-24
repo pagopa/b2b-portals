@@ -130,6 +130,7 @@ export const fetchPressReleaseFromID = ({
         extractTenantStrapiApiData(config).baseUrl
       }/api/press-releases/${documentID}?locale=${locale}&status=draft
 &populate[1]=pressRelease
+&sort[0]=pressRelease.date:desc
         `,
       {
         method: 'GET',
