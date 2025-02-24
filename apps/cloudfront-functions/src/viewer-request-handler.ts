@@ -88,7 +88,7 @@ const handler = (
       }
     }
 
-    if (!(uri === '/')) {
+    if (uri !== '/') {
       if (uri.endsWith('/')) {
         request.uri = request.uri.replace(/\/$/, '');
       }
