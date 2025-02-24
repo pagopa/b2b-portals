@@ -80,22 +80,8 @@ describe('ioapp.it redirects', () => {
   });
 
   it('Should intercept firma con IO redirects', () => {
-    expect(handler(makeEvent('firma.io.italia.it', '/note-legali'))).toEqual(
-      buildResponse('https://ioapp.it/firma-in-digitale/note-legali'),
-    );
-    expect(handler(makeEvent('firma.io.italia.it', '/note-legali/'))).toEqual(
-      buildResponse('https://ioapp.it/firma-in-digitale/note-legali'),
-    );
-
-    expect(
-      handler(makeEvent('firma.io.italia.it', '/informativa-privacy')),
-    ).toEqual(
-      buildResponse('https://ioapp.it/firma-in-digitale/informativa-privacy'),
-    );
-    expect(
-      handler(makeEvent('firma.io.italia.it', '/informativa-privacy/')),
-    ).toEqual(
-      buildResponse('https://ioapp.it/firma-in-digitale/informativa-privacy'),
+    expect(handler(makeEvent('firma.io.italia.it', '/whatever'))).toEqual(
+      buildResponse('https://ioapp.it/firma-in-digitale'),
     );
 
     expect(handler(makeEvent('firma.io.italia.it', ''))).toEqual(

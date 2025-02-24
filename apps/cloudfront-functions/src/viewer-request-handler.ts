@@ -37,16 +37,6 @@ const regexPatterns: readonly RedirectRule[] = [
   },
   {
     host: 'firma.io.italia.it',
-    regex: simpleHelper('/note-legali', false),
-    redirectTo: 'https://ioapp.it/firma-in-digitale/note-legali',
-  },
-  {
-    host: 'firma.io.italia.it',
-    regex: simpleHelper('/informativa-privacy', false),
-    redirectTo: 'https://ioapp.it/firma-in-digitale/informativa-privacy',
-  },
-  {
-    host: 'firma.io.italia.it',
     regex: simpleHelper('', false),
     redirectTo: 'https://ioapp.it/firma-in-digitale',
   },
