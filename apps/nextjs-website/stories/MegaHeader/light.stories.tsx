@@ -143,8 +143,11 @@ const MegaHeaderTemplate: StoryFn<MegaHeaderProps> = (args) => (
 
 const defaultProps: MegaHeaderProps = {
   menuItems: defaultMenuItems,
-  logoSrc: 'https://io.italia.it/assets/img/io-it-logo-blue.svg',
-  logoAlt: 'logo',
+  logo: {
+    src: 'https://io.italia.it/assets/img/io-it-logo-blue.svg',
+    alt: 'logo',
+    href: '#',
+  }
 };
 
 export const MegaHeaderFullWithLogo: StoryFn<typeof MegaHeader> =
