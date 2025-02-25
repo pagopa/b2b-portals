@@ -14,6 +14,7 @@ import {
   MegaHeaderSublink,
 } from '@/lib/fetch/header';
 import { Locale } from '@/lib/fetch/siteWideSEO';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 declare global {
   interface Window {
@@ -190,8 +191,15 @@ const makeMegaHeaderProps = (
       },
     },
   }),
-  logoSrc: logo.url,
-  logoAlt: logo.alternativeText ?? '',
+  logo: {
+    src: logo.url,
+    alt: logo.alternativeText ?? '',
+    href: LocalizeURL({
+      URL: '/',
+      locale,
+      defaultLocale,
+    }),
+  },
   menuItems: menu.links.map((link) => ({
     primary: link.label,
     secondary: link.sublinkGroups.map((sublinkGroup) => ({

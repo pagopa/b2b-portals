@@ -16,8 +16,11 @@ export interface MegaMenuItem {
 
 export interface MegaHeaderProps {
   menuItems: MegaMenuItem[];
-  logoSrc: string;
-  logoAlt: string;
+  logo: {
+    src: string;
+    alt: string;
+    href: string;
+  }
   ctaButton?: CtaButtonProps;
   appCtaButton?: CtaButtonProps;
   drawer?: HeaderSideDrawerProps;
