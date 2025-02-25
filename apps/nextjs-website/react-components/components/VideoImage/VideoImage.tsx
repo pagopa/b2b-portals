@@ -77,9 +77,10 @@ const VideoImage = ({
       <Box
         component='section'
         sx={{
-          maxHeight: { xs: '100vh', md: '600px' },
+          maxHeight: { xs: 'none', md: '600px' },
           position: 'relative',
           overflow: 'hidden',
+          lineHeight: 0,
         }}
         {...(sectionID && { id: sectionID })}
       >
@@ -154,7 +155,13 @@ const VideoImage = ({
             </Box>
           )}
         {mediaState === 'image' ? (
-          <Box sx={{ position: 'relative', width: '100%', height: '600px' }}>
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              height: { xs: 'auto', md: '600px' },
+            }}
+          >
             {renderImage({
               src: image!.src,
               alt: image!.alt,
