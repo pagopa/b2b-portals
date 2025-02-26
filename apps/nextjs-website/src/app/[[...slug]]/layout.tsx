@@ -108,6 +108,15 @@ export default async function Layout({
     <ThemeProvider theme={theme}>
       <html lang={locale}>
         <body style={{ margin: 0 }}>
+          {/* <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                if (typeof window !== 'undefined') {
+                  window.recaptchaOptions = { useRecaptchaNet: true };
+                }
+              `,
+            }}
+          /> */}
           {preHeaderProps && (
             <PreHeader
               {...preHeaderProps}
@@ -141,6 +150,16 @@ export default async function Layout({
             id='otprivacy-notice-script'
             strategy='beforeInteractive'
           />
+          <Script
+            // Set Recaptcha Options in a Script tag to ensure it runs before any ReCaptcha is rendered
+            id='set-recaptcha-options'
+            type='text/javascript'
+            strategy='beforeInteractive'
+          >{`
+              if (typeof window !== 'undefined') {
+                window.recaptchaOptions = { useRecaptchaNet: true };
+              }
+            `}</Script>
           {analytics && <ConsentHandler {...analytics} />}
         </body>
       </html>
