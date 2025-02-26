@@ -4,6 +4,7 @@ import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleaseSection } from '@/lib/fetch/types/PageSection';
 import { PressRelease as PressReleaseRC } from '@react-components/components';
 import { PressReleaseProps } from '@react-components/types';
+import { LocalizeURL } from '@/lib/linkLocalization';
 
 const formatDateToLocale = (dateString: string, locale: string): string => {
   const date = new Date(dateString);
@@ -32,7 +33,16 @@ const makeTextSectionProps = ({
   ...(subtitle && { subtitle }),
   body: MarkdownRenderer({ markdown: body, locale, defaultLocale }),
   date: formatDateToLocale(date, locale),
-  ...(backlink && { backlink }),
+  ...(backlink && {
+    backlink: {
+      label: backlink.label,
+      href: LocalizeURL({
+        URL: backlink.href,
+        locale,
+        defaultLocale,
+      }),
+    },
+  }),
   ...rest,
 });
 
