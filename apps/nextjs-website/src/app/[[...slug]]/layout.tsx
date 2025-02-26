@@ -108,15 +108,6 @@ export default async function Layout({
     <ThemeProvider theme={theme}>
       <html lang={locale}>
         <body style={{ margin: 0 }}>
-          {/* <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                if (typeof window !== 'undefined') {
-                  window.recaptchaOptions = { useRecaptchaNet: true };
-                }
-              `,
-            }}
-          /> */}
           {preHeaderProps && (
             <PreHeader
               {...preHeaderProps}
