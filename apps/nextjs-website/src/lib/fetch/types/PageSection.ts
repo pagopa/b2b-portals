@@ -396,6 +396,7 @@ export const PressReleaseSectionContentCodec = t.strict({
   subtitle: t.union([t.string, t.null]),
   body: t.string,
   sectionID: t.union([t.string, t.null]),
+  backlink: t.union([LinkCodec, t.null]),
 });
 
 const PressReleaseSectionCodec = t.intersection([

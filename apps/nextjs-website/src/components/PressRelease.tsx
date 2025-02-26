@@ -25,17 +25,19 @@ const makeTextSectionProps = ({
   subtitle,
   body,
   date,
+  backlink,
   ...rest
 }: PressReleaseSection &
   Omit<SiteWidePageData, 'themeVariant'>): PressReleaseProps => ({
   ...(subtitle && { subtitle }),
   body: MarkdownRenderer({ markdown: body, locale, defaultLocale }),
   date: formatDateToLocale(date, locale),
+  ...(backlink && { backlink }),
   ...rest,
 });
 
 const PressRelease = (
-  props: PressReleaseSection & Omit<SiteWidePageData, 'themeVariant'>,
+  props: PressReleaseSection & Omit<SiteWidePageData, 'themeVariant'>
 ) => <PressReleaseRC {...makeTextSectionProps(props)} />;
 
 export default PressRelease;
