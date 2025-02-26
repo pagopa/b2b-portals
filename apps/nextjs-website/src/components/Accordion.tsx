@@ -13,6 +13,7 @@ const makeAccordionProps = ({
   description,
   accordionItems,
   textAlignment,
+  trackItemOpen,
   ...rest
 }: AccordionSection & SiteWidePageData): AccordionProps => ({
   ...(subtitle && { subtitle }),
@@ -24,6 +25,7 @@ const makeAccordionProps = ({
       variant: 'body2',
     }),
   }),
+  trackItemOpen: trackItemOpen ?? false,
   accordionItems: accordionItems.map(({ itemID, header, content }) => ({
     ...(itemID && { itemID }),
     header,
