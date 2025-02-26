@@ -39,6 +39,7 @@ const OneTrustSection = (props: OneTrustSectionProps) => {
     <Box
       id={divID}
       sx={{
+        marginBottom: '6rem',
         '.otnotice-content': {
           fontFamily: '"Titillium Web",sans-serif',
           color: 'text.primary',
