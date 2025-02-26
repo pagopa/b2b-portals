@@ -4,4 +4,8 @@ export interface PressReleaseProps {
   body: JSX.Element;
   sectionID: string | null;
   date: string;
+  backlink?: {
+    label: string;
+    href: string;
+  };
 }

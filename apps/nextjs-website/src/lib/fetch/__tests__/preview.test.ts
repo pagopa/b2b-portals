@@ -86,6 +86,10 @@ const pressReleaseDataResponse: PreviewPressReleaseData = {
       subtitle: null,
       body: 'Press Release Body',
       date: '2024-10-12',
+      backlink: {
+        label: 'Torna ai comunicati stampa',
+        href: '/',
+      },
     },
   },
 };

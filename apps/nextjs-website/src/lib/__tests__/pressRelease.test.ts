@@ -23,6 +23,10 @@ const pressReleases: PressReleases = {
         body: 'E anche un corpo con tanto di testo **in grassetto** e [un link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)',
         sectionID: null,
         date: '2024-11-30',
+        backlink: {
+          label: 'Torna ai comunicati stampa',
+          href: '/',
+        },
       },
     },
     {
@@ -42,6 +46,10 @@ const pressReleases: PressReleases = {
         body: 'Corpo minimo',
         sectionID: null,
         date: '2024-11-26',
+        backlink: {
+          label: 'Torna ai comunicati stampa',
+          href: '/',
+        },
       },
     },
   ],
