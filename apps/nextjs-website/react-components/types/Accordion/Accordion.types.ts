@@ -13,6 +13,7 @@ export interface AccordionProps extends SectionProps {
   title: string;
   subtitle?: string;
   description?: string | JSX.Element;
+  trackItemOpen: boolean;
   accordionItems: AccordionItemProps[];
   layout: 'left' | 'center';
   textAlignment: 'left' | 'center' | 'right';
