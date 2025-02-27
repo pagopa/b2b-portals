@@ -49,10 +49,10 @@ const handler = (
   if (event.context.eventType === 'viewer-request') {
     const { request } = event;
     const { uri } = request;
-    const host = request.headers['host']?.value.toLocaleLowerCase();
+    const host = request.headers['host']?.value.toLowerCase();
 
     for (const pattern of regexPatterns) {
-      if (pattern.host.toLocaleLowerCase() === host) {
+      if (pattern.host.toLowerCase() === host) {
         const match = pattern.regex.exec(uri);
 
         if (match) {
