@@ -141,6 +141,16 @@ export default async function Layout({
             id='otprivacy-notice-script'
             strategy='beforeInteractive'
           />
+          <Script
+            // Set Recaptcha Options in a Script tag to ensure it runs before any ReCaptcha is rendered
+            id='set-recaptcha-options'
+            type='text/javascript'
+            strategy='beforeInteractive'
+          >{`
+              if (typeof window !== 'undefined') {
+                window.recaptchaOptions = { useRecaptchaNet: true };
+              }
+            `}</Script>
           {analytics && <ConsentHandler {...analytics} />}
         </body>
       </html>

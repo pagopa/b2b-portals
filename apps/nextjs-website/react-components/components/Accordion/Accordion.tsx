@@ -20,6 +20,7 @@ const Accordion = (props: AccordionProps) => {
     title,
     subtitle,
     description,
+    trackItemOpen,
     accordionItems,
     theme,
     themeVariant,
@@ -100,6 +101,7 @@ const Accordion = (props: AccordionProps) => {
                 <AccordionItem
                   key={i}
                   {...accordionItem}
+                  trackItemOpen={trackItemOpen}
                   themeVariant={themeVariant}
                 />
               ))}

@@ -86,6 +86,10 @@ const pressReleaseDataResponse: PreviewPressReleaseData = {
       subtitle: null,
       body: 'Press Release Body',
       date: '2024-10-12',
+      backlink: {
+        label: 'Torna ai comunicati stampa',
+        href: '/',
+      },
     },
   },
 };
@@ -235,7 +239,8 @@ describe('fetchPressReleaseFromID', () => {
 
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases/${pageIDExample}?locale=it&status=draft
-&populate[1]=pressRelease
+&populate[1]=pressRelease.backlink
+&sort[0]=pressRelease.date:desc
         `,
       {
         method: 'GET',

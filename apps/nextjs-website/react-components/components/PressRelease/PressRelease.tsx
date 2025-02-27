@@ -1,18 +1,20 @@
 import React from 'react';
-import { Box, Typography, Container, useTheme } from '@mui/material';
+import { Box, Typography, Container, Link, Stack } from '@mui/material';
 import {
   TextColor,
   BackgroundColor,
   ExtraTextColor,
+  TextAlternativeColor,
 } from '../common/Common.helpers';
 import { PressReleaseProps } from '@react-components/types';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const PressRelease = (props: PressReleaseProps) => {
-  const { date, title, subtitle, body, sectionID } = props;
+  const { date, title, subtitle, body, sectionID, backlink } = props;
   const textColor = TextColor('light');
   const eyeletColor = ExtraTextColor('light');
   const backgroundColor = BackgroundColor('light');
-  const { palette } = useTheme();
+  const backlinkColor = TextAlternativeColor('light');
 
   return (
     <Box
@@ -35,6 +37,21 @@ const PressRelease = (props: PressReleaseProps) => {
           mr: { xs: 'auto' },
         }}
       >
+        {backlink && (
+          <Stack direction='row' alignItems='center' spacing={1} sx={{ mb: 4 }}>
+            <ArrowBackIcon sx={{ color: backlinkColor }} />
+            <Link
+              href={backlink.href}
+              color={backlinkColor}
+              underline='none'
+              fontFamily='"Titillium Web",sans-serif'
+              fontWeight='bold'
+              fontSize='16px'
+            >
+              {backlink.label}
+            </Link>
+          </Stack>
+        )}
         <Typography
           variant='overline'
           component='div'
@@ -74,10 +91,10 @@ const PressRelease = (props: PressReleaseProps) => {
             mt: 1,
             color: textColor,
             '& a': {
-              color: palette.primary.main,
+              color: textColor,
               textDecoration: 'underline',
               '&:hover': {
-                color: palette.primary.main,
+                color: textColor,
                 textDecoration: 'underline',
               },
             },

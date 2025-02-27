@@ -79,6 +79,7 @@ const AccordionSectionCodec = t.strict({
   title: t.string,
   subtitle: t.union([t.string, t.null]),
   description: t.union([t.string, t.null]),
+  trackItemOpen: t.union([t.boolean, t.null]),
   accordionItems: t.array(
     t.strict({
       itemID: t.union([t.string, t.null]),
@@ -395,6 +396,7 @@ export const PressReleaseSectionContentCodec = t.strict({
   subtitle: t.union([t.string, t.null]),
   body: t.string,
   sectionID: t.union([t.string, t.null]),
+  backlink: t.union([LinkCodec, t.null]),
 });
 
 const PressReleaseSectionCodec = t.intersection([

@@ -25,8 +25,7 @@ import { usePathname } from 'next/navigation';
 import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
 
 const MegaHeader = ({
-  logoSrc,
-  logoAlt,
+  logo,
   ctaButton,
   appCtaButton,
   menuItems,
@@ -134,8 +133,8 @@ const MegaHeader = ({
       >
         <Content>
           <Logo>
-            <a href='/'>
-              <img src={logoSrc} alt={logoAlt} />
+            <a href={logo.href}>
+              <img src={logo.src} alt={logo.alt} />
             </a>
           </Logo>
           {!isMobile && (

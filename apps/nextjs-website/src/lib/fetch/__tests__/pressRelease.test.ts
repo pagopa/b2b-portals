@@ -50,6 +50,10 @@ const pressReleasesResponse = {
         body: 'E anche un corpo con tanto di testo **in grassetto** e [un link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)',
         sectionID: null,
         date: '2024-11-30',
+        backlink: {
+          label: 'Torna ai comunicati stampa',
+          href: '/',
+        },
       },
     },
     {
@@ -76,6 +80,10 @@ const pressReleasesResponse = {
         body: 'Corpo minimo',
         sectionID: null,
         date: '2024-11-26',
+        backlink: {
+          label: 'Torna ai comunicati stampa',
+          href: '/',
+        },
       },
     },
   ],
@@ -95,7 +103,8 @@ describe('getNavigation', () => {
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases?locale=it&pagination[pageSize]=100
 &populate[0]=seo
-&populate[1]=pressRelease
+&populate[1]=pressRelease.backlink
+&sort[0]=pressRelease.date:desc
         `,
       {
         method: 'GET',
@@ -132,6 +141,10 @@ describe('getNavigation', () => {
             body: 'E anche un corpo con tanto di testo **in grassetto** e [un link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)',
             sectionID: null,
             date: '2024-11-30',
+            backlink: {
+              label: 'Torna ai comunicati stampa',
+              href: '/',
+            },
           },
         },
         {
@@ -151,6 +164,10 @@ describe('getNavigation', () => {
             body: 'Corpo minimo',
             sectionID: null,
             date: '2024-11-26',
+            backlink: {
+              label: 'Torna ai comunicati stampa',
+              href: '/',
+            },
           },
         },
       ],

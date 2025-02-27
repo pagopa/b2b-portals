@@ -24,6 +24,11 @@
     "date": {
       "type": "date",
       "required": true
+    },
+    "backlink": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link"
     }
   }
 }

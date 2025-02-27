@@ -54,4 +54,8 @@ PressReleaseFull.args = {
     </div>
   ),
   date: '10 Aprile 2024',
+  backlink: {
+    label: 'Torna ai comunicati stampa',
+    href: '/',
+  },
 };
