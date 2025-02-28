@@ -49,14 +49,15 @@ const PreFooter = (props: PreFooterProps) => {
     ctaButtons,
     excludeSlugs,
   } = props;
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '';
+
   // Don't show PreFooter for any press release
-  if (pathname.includes('press-releases')) {
+  if (pathname && pathname.includes('press-releases')) {
     return null;
   }
 
   // Compare excluded slugs with current page slug (removing initial '/')
-  if (excludeSlugs && excludeSlugs.includes(pathname.slice(1))) {
+  if (excludeSlugs && pathname && excludeSlugs.includes(pathname.slice(1))) {
     return null;
   }
 
