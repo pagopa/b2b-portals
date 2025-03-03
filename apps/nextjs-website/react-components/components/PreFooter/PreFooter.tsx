@@ -1,16 +1,11 @@
 import { Box, Stack, Typography } from '@mui/material';
-import Button from '@mui/material/Button';
 import { BackgroundColor } from '../common/Common.helpers';
 import { PreFooterProps } from '@react-components/types/PreFooter/PreFooter';
 import { useTheme, useMediaQuery } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import { CtaButtons } from '../common/Common';
 import { usePathname } from 'next/navigation';
-import GoogleStoreOutlinedLight from '../../assets/googleStoreOutlinedLight.png';
-import GoogleStoreOutlinedDark from '../../assets/googleStoreOutlinedDark.png';
-import AppleStoreOutlinedLight from '../../assets/appleStoreOutlinedLight.png';
-import AppleStoreOutlinedDark from '../../assets/appleStoreOutlinedDark.png';
-import Image from 'next/image';
+import { AppStoreButton, GooglePlayButton } from '../common/StoreButtons';
 
 const styles = {
   main: (isSmallScreen: boolean, layout: 'left' | 'center') => ({
@@ -64,11 +59,6 @@ const PreFooter = (props: PreFooterProps) => {
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
-  const googleBadge =
-    theme === 'dark' ? GoogleStoreOutlinedLight : GoogleStoreOutlinedDark;
-  const appleBadge =
-    theme === 'dark' ? AppleStoreOutlinedLight : AppleStoreOutlinedDark;
-
   const backgroundColor = BackgroundColor(theme);
 
   return (
@@ -116,7 +106,7 @@ const PreFooter = (props: PreFooterProps) => {
                 marginLeft={0}
               >
                 {storeButtons.hrefGoogle && (
-                  <Button
+                  <GooglePlayButton
                     sx={{
                       padding: '0px',
                       justifyContent: 'start',
@@ -124,34 +114,20 @@ const PreFooter = (props: PreFooterProps) => {
                     }}
                     key='google'
                     href={storeButtons.hrefGoogle}
-                  >
-                    <Image
-                      src={googleBadge}
-                      alt='Download on Google Play'
-                      height={0}
-                      width={0}
-                      style={{ height: '3em', width: 'auto', display: 'block' }}
-                    />
-                  </Button>
+                    darkTheme={theme === 'dark'}
+                  />
                 )}
                 {storeButtons.hrefApple && (
-                  <Button
+                  <AppStoreButton
                     sx={{
                       padding: '0px',
                       justifyContent: 'start',
                       display: 'flex',
                     }}
-                    key='apple'
+                    key='google'
                     href={storeButtons.hrefApple}
-                  >
-                    <Image
-                      src={appleBadge}
-                      alt='Download on App Store'
-                      height={0}
-                      width={0}
-                      style={{ height: '3em', width: 'auto', display: 'block' }}
-                    />
-                  </Button>
+                    darkTheme={theme === 'dark'}
+                  />
                 )}
               </Stack>
             ) : ctaButtons ? (

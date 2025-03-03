@@ -1,12 +1,9 @@
-import Image from 'next/image';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { EditorialCtaProps } from '../../types/Editorial/Editorial.types';
 import { CtaButtons } from '../common/Common';
 import { useTheme, useMediaQuery } from '@mui/material';
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
-import GoogleStoreBadge from '../../assets/googleStoreBadge.png'
-import AppleStoreBadge from '../../assets/appleStoreBadge.png'
+import { AppStoreButton, GooglePlayButton } from '../common/StoreButtons';
 
 export const Ctas = ({
   ctaButtons,
@@ -26,7 +23,7 @@ export const Ctas = ({
         direction={isSmallScreen ? 'column' : 'row'}
       >
         {storeButtons.hrefGoogle && (
-          <Button
+          <GooglePlayButton
             sx={{
               padding: '0px',
               marginLeft: '0px',
@@ -37,18 +34,11 @@ export const Ctas = ({
             }}
             key='google'
             href={storeButtons.hrefGoogle}
-          >
-            <Image
-              src={GoogleStoreBadge}
-              alt='Download on Google Play'
-              height={0}
-              width={0}
-              style={{ height: '3em', width: 'auto' }}
-            />
-          </Button>
+            badge
+          />
         )}
         {storeButtons.hrefApple && (
-          <Button
+          <AppStoreButton
             sx={{
               padding: '0px',
               margin: '0px',
@@ -56,15 +46,8 @@ export const Ctas = ({
             }}
             key='apple'
             href={storeButtons.hrefApple}
-          >
-            <Image
-              src={AppleStoreBadge}
-              alt='Download on App store'
-              height={0}
-              width={0}
-              style={{ height: '3em', width: 'auto' }}
-            />
-          </Button>
+            badge
+          />
         )}
       </Stack>
     );
