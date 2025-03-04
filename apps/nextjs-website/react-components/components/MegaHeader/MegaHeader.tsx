@@ -23,6 +23,7 @@ import {
 import { CtaButtons } from '../common/Common';
 import { usePathname } from 'next/navigation';
 import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
+import mixpanel from 'mixpanel-browser';
 
 const MegaHeader = ({
   logo,
@@ -53,6 +54,23 @@ const MegaHeader = ({
   const activeCta =
     menuItems.find(isActiveLink)?.ctaButton ??
     (isMobile && appCtaButton ? appCtaButton : ctaButton);
+
+  const mixpanelTrackActiveCtaClick = (buttonOnClick?: Function) => {
+    try {
+      if (activeCta?.trackEvent && mixpanel.has_opted_in_tracking()) {
+        mixpanel.track(activeCta.trackEvent, {
+          Page: window.location.pathname,
+        });
+      }
+    } catch {
+      // Mixpanel is not initialized
+    } finally {
+      // If button had an original onClick event, launch it after Mixpanel tracking
+      if (buttonOnClick) {
+        buttonOnClick();
+      }
+    }
+  };
 
   const handleClick = (
     event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,
@@ -159,6 +177,9 @@ const MegaHeader = ({
                   ctaButtons={[
                     {
                       ...activeCta,
+                      onClick: () => {
+                        mixpanelTrackActiveCtaClick(activeCta.onClick);
+                      },
                       sx: {
                         backgroundColor: '#0B3EE3',
                         color: 'white',
@@ -375,6 +396,9 @@ const MegaHeader = ({
                 ctaButtons={[
                   {
                     ...activeCta,
+                    onClick: () => {
+                      mixpanelTrackActiveCtaClick(activeCta.onClick);
+                    },
                     sx: {
                       backgroundColor: '#0B3EE3',
                       color: 'white',

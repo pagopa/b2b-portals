@@ -95,6 +95,7 @@ const StandardHeaderCodec = t.strict({
 const MegaHeaderCodec = t.strict({
   __component: t.literal('headers.mega-header'),
   logo: StrapiImageRequiredSchema,
+  mixpanelCtaClickEvent: t.union([t.string, t.null]),
   ctaButton: t.union([CTAButtonSimpleCodec, t.null]),
   appCtaButton: t.union([CTAButtonAppCodec, t.null]),
   drawer: t.union([SideDrawerCodec, t.null]),

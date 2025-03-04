@@ -77,6 +77,7 @@ const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
   },
   appCtaButton: null,
   drawer: null,
+  mixpanelCtaClickEvent: null,
 };
 
 const standardHeader: HeaderData = {
