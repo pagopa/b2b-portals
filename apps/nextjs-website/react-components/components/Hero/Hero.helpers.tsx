@@ -3,12 +3,9 @@ import { HeroTextProps } from '../../types/Hero/Hero.types';
 import { CtaButtons } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme, useMediaQuery } from '@mui/material';
-import Button from '@mui/material/Button';
-import Image from 'next/image';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
-import GoogleStoreBadge from '../../assets/googleStoreBadge.png'
-import AppleStoreBadge from '../../assets/appleStoreBadge.png'
+import { AppStoreButton, GooglePlayButton } from '../common/StoreButtons';
 
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
@@ -104,7 +101,7 @@ export const HeroTextContent = ({
             direction={isSmallScreen ? 'column' : 'row'}
           >
             {storeButtons.hrefGoogle && (
-              <Button
+              <GooglePlayButton
                 sx={{
                   padding: '0px',
                   marginLeft: '0px',
@@ -115,19 +112,11 @@ export const HeroTextContent = ({
                 }}
                 key='google'
                 href={storeButtons.hrefGoogle}
-                target='_blank'
-              >
-                <Image
-                  src={GoogleStoreBadge}
-                  alt='Download on Google Play'
-                  height={0}
-                  width={0}
-                  style={{ height: '3em', width: 'auto' }}
-                />
-              </Button>
+                badge
+              />
             )}
             {storeButtons.hrefApple && (
-              <Button
+              <AppStoreButton
                 sx={{
                   padding: '0px',
                   margin: '0px',
@@ -135,16 +124,8 @@ export const HeroTextContent = ({
                 }}
                 key='apple'
                 href={storeButtons.hrefApple}
-                target='_blank'
-              >
-                <Image
-                  src={AppleStoreBadge}
-                  alt='Download on App store'
-                  height={0}
-                  width={0}
-                  style={{ height: '3em', width: 'auto' }}
-                />
-              </Button>
+                badge
+              />
             )}
           </Stack>
         </Stack>
