@@ -147,7 +147,14 @@ const makeHeaderProps = (
 });
 
 const makeMegaHeaderProps = (
-  { logo, ctaButton, menu, drawer, appCtaButton }: MegaHeaderData,
+  {
+    logo,
+    ctaButton,
+    menu,
+    drawer,
+    appCtaButton,
+    mixpanelCtaClickEvent,
+  }: MegaHeaderData,
   locale: Locale,
   defaultLocale: Locale,
 ): MegaHeaderProps => ({
@@ -155,6 +162,7 @@ const makeMegaHeaderProps = (
     ctaButton: {
       ...ctaButton,
       ...(ctaButton.icon && { startIcon: Icon(ctaButton.icon) }),
+      ...(mixpanelCtaClickEvent && { trackEvent: mixpanelCtaClickEvent }),
     },
   }),
   ...(appCtaButton && {
@@ -163,6 +171,7 @@ const makeMegaHeaderProps = (
       variant: appCtaButton.variant,
       size: appCtaButton.size,
       onClick: () => openAppStore(appCtaButton),
+      ...(mixpanelCtaClickEvent && { trackEvent: mixpanelCtaClickEvent }),
     },
   }),
   ...(drawer && {
