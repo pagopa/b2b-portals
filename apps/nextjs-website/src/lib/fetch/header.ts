@@ -50,6 +50,7 @@ const MenuCodec = t.strict({
 });
 
 const MegaMenuCodec = t.strict({
+  trackSublinkClickEvent: t.union([t.string, t.null]),
   links: t.array(
     t.strict({
       label: t.string,

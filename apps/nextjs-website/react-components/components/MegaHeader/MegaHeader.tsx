@@ -29,6 +29,7 @@ const MegaHeader = ({
   logo,
   ctaButton,
   appCtaButton,
+  trackSublinkClickEvent,
   menuItems,
   drawer,
 }: MegaHeaderProps) => {
@@ -69,6 +70,20 @@ const MegaHeader = ({
       if (buttonOnClick) {
         buttonOnClick();
       }
+    }
+  };
+
+  const mixpanelTrackSublinkClick = (tab: string, href: string) => {
+    try {
+      if (trackSublinkClickEvent && mixpanel.has_opted_in_tracking()) {
+        mixpanel.track(trackSublinkClickEvent, {
+          Tab: tab,
+          Link: href,
+          Page: window.location.pathname,
+        });
+      }
+    } catch {
+      // Mixpanel is not initialized
     }
   };
 
@@ -297,7 +312,13 @@ const MegaHeader = ({
                                     {...(isActiveSubLink(item.href) && {
                                       className: 'active',
                                     })}
-                                    onClick={() => setDropdownOpen(null)}
+                                    onClick={() => {
+                                      setDropdownOpen(null);
+                                      mixpanelTrackSublinkClick(
+                                        menuItem.primary,
+                                        item.href,
+                                      );
+                                    }}
                                   >
                                     {item.label}
                                     {item.badge && (
@@ -369,7 +390,13 @@ const MegaHeader = ({
                         className={`mobileMenuSecondaryItem ${
                           isActiveSubLink(item.href) ? 'active' : ''
                         }`}
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          mixpanelTrackSublinkClick(
+                            menuItem.primary,
+                            item.href,
+                          );
+                        }}
                       >
                         <Typography
                           variant='body2'

@@ -224,6 +224,9 @@ const makeMegaHeaderProps = (
       },
     }),
   })),
+  ...(menu.trackSublinkClickEvent && {
+    trackSublinkClickEvent: menu.trackSublinkClickEvent,
+  }),
 });
 
 const Header = ({

@@ -75,6 +75,7 @@ export const formatHeaderLinks = (
       return {
         ...header,
         menu: {
+          trackSublinkClickEvent: header.menu.trackSublinkClickEvent,
           links: header.menu.links.map(({ sublinkGroups, ...link }) => ({
             ...link,
             sublinkGroups: sublinkGroups.map(

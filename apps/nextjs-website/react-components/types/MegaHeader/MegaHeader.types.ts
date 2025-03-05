@@ -15,6 +15,7 @@ export interface MegaMenuItem {
 }
 
 export interface MegaHeaderProps {
+  trackSublinkClickEvent?: string;
   menuItems: MegaMenuItem[];
   logo: {
     src: string;
