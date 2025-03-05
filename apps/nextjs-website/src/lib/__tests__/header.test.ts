@@ -216,6 +216,7 @@ const megaHeader: HeaderData = {
       {
         ...megaHeaderBaseFields,
         menu: {
+          trackSublinkClickEvent: null,
           links: [
             {
               label: 'label',
@@ -262,6 +263,7 @@ const parsedMegaHeader_DefaultLocale: HeaderData = {
       {
         ...megaHeaderBaseFields,
         menu: {
+          trackSublinkClickEvent: null,
           links: [
             {
               label: 'label',
@@ -308,6 +310,7 @@ const parsedMegaHeader_NonDefaultLocale: HeaderData = {
       {
         ...megaHeaderBaseFields,
         menu: {
+          trackSublinkClickEvent: null,
           links: [
             {
               label: 'label',
@@ -354,6 +357,7 @@ const megaHeader_MissingSublink: HeaderData = {
       {
         ...megaHeaderBaseFields,
         menu: {
+          trackSublinkClickEvent: null,
           links: [
             {
               label: 'label',
