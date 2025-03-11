@@ -41,6 +41,15 @@ export const makeAppEnv = (
     ConfigCodec.decode(env),
     E.bimap(
       (errors) => PR.failure(errors).join('\n'),
-      (config) => ({ config, fetchFun: fetch }),
+      (config) => ({
+        config,
+        fetchFun: (input: RequestInfo | URL, init?: RequestInit) =>
+          fetch(input, {
+            ...init,
+            ...(process.env.NODE_ENV === 'development' && {
+              cache: 'no-store',
+            }),
+          }),
+      }),
     ),
   );
