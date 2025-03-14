@@ -33,8 +33,9 @@ export const AccordionItem: React.FC<AccordionItemProps & { trackItemOpen: boole
   const triggerMixpanelFAQEvent = () => {
     if (trackItemOpen && itemID) {
       try {
-        if (mixpanel.has_opted_in_tracking()) {
+        if (!mixpanel.has_opted_out_tracking()) {
           mixpanel.track('FAQ', { 'FAQ Name': itemID })
+          alert('TRACKED FAQ');
         }
       } catch {
         // Mixpanel is not initialized
