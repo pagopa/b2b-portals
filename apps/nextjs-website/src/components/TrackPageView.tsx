@@ -7,7 +7,7 @@ const TrackPageView = () => {
     // eslint-disable-next-line functional/no-try-statements
     try {
       // Check opt in status to be sure
-      if (mixpanel.has_opted_in_tracking()) {
+      if (!mixpanel.has_opted_out_tracking()) {
         mixpanel.track_pageview();
       }
     } catch {

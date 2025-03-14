@@ -58,7 +58,7 @@ const MegaHeader = ({
 
   const mixpanelTrackActiveCtaClick = (buttonOnClick?: Function) => {
     try {
-      if (activeCta?.trackEvent && mixpanel.has_opted_in_tracking()) {
+      if (activeCta?.trackEvent && !mixpanel.has_opted_out_tracking()) {
         mixpanel.track(activeCta.trackEvent, {
           Page: window.location.pathname,
         });
@@ -75,7 +75,7 @@ const MegaHeader = ({
 
   const mixpanelTrackSublinkClick = (tab: string, href: string) => {
     try {
-      if (trackSublinkClickEvent && mixpanel.has_opted_in_tracking()) {
+      if (trackSublinkClickEvent && !mixpanel.has_opted_out_tracking()) {
         mixpanel.track(trackSublinkClickEvent, {
           Tab: tab,
           Link: href,

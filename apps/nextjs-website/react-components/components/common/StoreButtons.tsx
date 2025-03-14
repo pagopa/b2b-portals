@@ -7,27 +7,40 @@ import GoogleStoreOutlinedDark from '../../assets/googleStoreOutlinedDark.png';
 import GoogleStoreBadge from '../../assets/googleStoreBadge.png';
 import AppleStoreBadge from '../../assets/appleStoreBadge.png';
 import mixpanel from 'mixpanel-browser';
+import { useEffect, useState } from 'react';
 
 export const AppStoreButton = ({
   badge,
   darkTheme,
   ...linkProps
 }: Omit<LinkProps, 'onClick'> & { darkTheme?: boolean; badge?: boolean }) => {
-  const mixpanelTrackEvent = () => {
+  const [randomID, setRandomID] = useState<string | undefined>(undefined);
+
+  // Generate randomID for tracking
+  // This has to be done inside useEffect (client side)
+  // Otherwise the server will generate a different randomID when building statically / generating server side
+  useEffect(() => {
+    setRandomID(Math.random().toString(36).substring(7));
+  }, []);
+
+  useEffect(() => {
     try {
-      if (mixpanel.has_opted_in_tracking()) {
-        // Hard-coding appio event name since no other tenant is currently using storeButtons
-        mixpanel.track('IO_WEBSITE_HP_DOWNLOAD_APPSTORE', {
-          Page: window.location.pathname,
-        });
+      if (randomID && !mixpanel.has_opted_out_tracking()) {
+        mixpanel.track_links(
+          `#${randomID}`,
+          'IO_WEBSITE_HP_DOWNLOAD_APPSTORE',
+          {
+            Page: window.location.pathname,
+          },
+        );
       }
     } catch {
       // Mixpanel is not initialized
     }
-  };
+  }, [randomID]);
 
   return (
-    <Link {...linkProps} target='_blank' onClick={mixpanelTrackEvent}>
+    <Link id={randomID} {...linkProps}>
       <Image
         src={
           badge
@@ -50,21 +63,33 @@ export const GooglePlayButton = ({
   darkTheme,
   ...linkProps
 }: Omit<LinkProps, 'onClick'> & { darkTheme?: boolean; badge?: boolean }) => {
-  const mixpanelTrackEvent = () => {
+  const [randomID, setRandomID] = useState<string | undefined>(undefined);
+
+  // Generate randomID for tracking
+  // This has to be done inside useEffect (client side)
+  // Otherwise the server will generate a different randomID when building statically / generating server side
+  useEffect(() => {
+    setRandomID(Math.random().toString(36).substring(7));
+  }, []);
+
+  useEffect(() => {
     try {
-      if (mixpanel.has_opted_in_tracking()) {
-        // Hard-coding appio event name since no other tenant is currently using storeButtons
-        mixpanel.track('IO_WEBSITE_HP_DOWNLOAD_GOOGLEPLAY', {
-          Page: window.location.pathname,
-        });
+      if (randomID && !mixpanel.has_opted_out_tracking()) {
+        mixpanel.track_links(
+          `#${randomID}`,
+          'IO_WEBSITE_HP_DOWNLOAD_GOOGLEPLAY',
+          {
+            Page: window.location.pathname,
+          },
+        );
       }
     } catch {
       // Mixpanel is not initialized
     }
-  };
+  }, [randomID]);
 
   return (
-    <Link {...linkProps} target='_blank' onClick={mixpanelTrackEvent}>
+    <Link id={randomID} {...linkProps}>
       <Image
         src={
           badge

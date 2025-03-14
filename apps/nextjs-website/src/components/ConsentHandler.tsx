@@ -65,13 +65,8 @@ const ConsentHandler = ({
       ip: mixpanelConfig.ip,
       persistence: 'cookie',
       secure_cookie: true,
+      batch_requests: false,
     });
-
-    if (mixpanel.has_opted_out_tracking()) {
-      // Explicitely opt into tracking because init doesn't overwrite this value (wherever it's persisted)
-      // which means if the user previously opted out (when the code implemented the function), init won't change that
-      mixpanel.opt_in_tracking();
-    }
 
     // Track page view of page where consent is given
     mixpanel.track_pageview();

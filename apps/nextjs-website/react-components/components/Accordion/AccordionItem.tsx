@@ -8,13 +8,9 @@ import { AccordionItemProps } from '../../types/Accordion/Accordion.types';
 import { useTheme } from '@mui/material/styles';
 import mixpanel from 'mixpanel-browser';
 
-export const AccordionItem: React.FC<AccordionItemProps & { trackItemOpen: boolean }> = ({
-  itemID,
-  header,
-  content,
-  themeVariant,
-  trackItemOpen,
-}) => {
+export const AccordionItem: React.FC<
+  AccordionItemProps & { trackItemOpen: boolean }
+> = ({ itemID, header, content, themeVariant, trackItemOpen }) => {
   const controlsId = React.useId() + '-controls';
   const headerId = React.useId() + '-header';
   const { palette } = useTheme();
@@ -33,14 +29,14 @@ export const AccordionItem: React.FC<AccordionItemProps & { trackItemOpen: boole
   const triggerMixpanelFAQEvent = () => {
     if (trackItemOpen && itemID) {
       try {
-        if (mixpanel.has_opted_in_tracking()) {
-          mixpanel.track('FAQ', { 'FAQ Name': itemID })
+        if (!mixpanel.has_opted_out_tracking()) {
+          mixpanel.track('FAQ', { 'FAQ Name': itemID });
         }
       } catch {
         // Mixpanel is not initialized
       }
     }
-  }
+  };
 
   useLayoutEffect(() => {
     if (itemID && window.location.hash === `#${itemID}`) {
