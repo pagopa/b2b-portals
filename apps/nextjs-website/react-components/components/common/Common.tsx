@@ -3,17 +3,43 @@ import { Button, Typography, TypographyProps } from '@mui/material';
 import { Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
+import { useMixpanelTracking } from './tracking';
+
+const CtaButton = ({
+  trackEvent,
+  ...buttonProps
+}: CtaButtonProps & {
+  trackEvent?: string;
+}) => {
+  const { randomID, trackedOnClick } = useMixpanelTracking({
+    isLink: buttonProps.href !== undefined,
+    trackEvent,
+    onClick: buttonProps.onClick,
+  });
+
+  return (
+    <Button
+      {...buttonProps}
+      {...(randomID && { id: randomID })} // Random ID used by Mixpanel to track links (overrides any existing ID)
+      {...(trackedOnClick && { onClick: trackedOnClick })} // Override onClick (if present) to add tracking
+    >
+      {buttonProps.text}
+    </Button>
+  );
+};
 
 export const CtaButtons = ({
   ctaButtons,
   theme = 'light',
   themeVariant = 'IO',
   disableRipple = false,
+  trackEvent,
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
   theme?: 'dark' | 'light';
   themeVariant?: 'IO' | 'SEND';
   disableRipple?: boolean;
+  trackEvent?: string;
 }) => {
   const { palette } = useTheme();
 
@@ -27,7 +53,7 @@ export const CtaButtons = ({
     React.isValidElement(button)
       ? button
       : isCtaButtonProps(button) && (
-          <Button
+          <CtaButton
             key={`${button.text}-${i}`}
             color={theme === 'dark' ? 'negative' : 'primary'}
             variant={button.variant || 'contained'}
@@ -64,9 +90,10 @@ export const CtaButtons = ({
               }),
             }}
             {...button}
+            {...(trackEvent && { trackEvent })}
           >
             {button.text}
-          </Button>
+          </CtaButton>
         ),
   );
 };

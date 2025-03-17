@@ -1,5 +1,13 @@
-import { AppBar, Toolbar, Typography, Box } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Link,
+  LinkProps,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useMixpanelTracking } from '../common/tracking';
 
 export const Container = styled(AppBar)({
   display: 'flex',
@@ -269,3 +277,20 @@ export const LinkLabel = styled('span')({
   letterSpacing: '0.5px',
   fontFamily: '"Readex Pro", sans-serif',
 });
+
+export const Sublink = ({
+  trackEvent,
+  trackingProperties,
+  ...linkProps
+}: LinkProps & {
+  trackEvent?: string | undefined;
+  trackingProperties?: Record<string, string> | undefined;
+}) => {
+  const { randomID } = useMixpanelTracking({
+    isLink: true,
+    trackEvent,
+    trackingProperties,
+  });
+
+  return <Link {...(randomID && { id: randomID })} {...linkProps} />;
+};

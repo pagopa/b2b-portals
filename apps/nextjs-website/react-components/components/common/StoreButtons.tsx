@@ -6,38 +6,17 @@ import GoogleStoreOutlinedLight from '../../assets/googleStoreOutlinedLight.png'
 import GoogleStoreOutlinedDark from '../../assets/googleStoreOutlinedDark.png';
 import GoogleStoreBadge from '../../assets/googleStoreBadge.png';
 import AppleStoreBadge from '../../assets/appleStoreBadge.png';
-import mixpanel from 'mixpanel-browser';
-import { useEffect, useState } from 'react';
+import { useMixpanelTracking } from './tracking';
 
 export const AppStoreButton = ({
   badge,
   darkTheme,
   ...linkProps
 }: Omit<LinkProps, 'onClick'> & { darkTheme?: boolean; badge?: boolean }) => {
-  const [randomID, setRandomID] = useState<string | undefined>(undefined);
-
-  // Generate randomID for tracking
-  // This has to be done inside useEffect (client side)
-  // Otherwise the server will generate a different randomID when building statically / generating server side
-  useEffect(() => {
-    setRandomID(Math.random().toString(36).substring(7));
-  }, []);
-
-  useEffect(() => {
-    try {
-      if (randomID && !mixpanel.has_opted_out_tracking()) {
-        mixpanel.track_links(
-          `#${randomID}`,
-          'IO_WEBSITE_HP_DOWNLOAD_APPSTORE',
-          {
-            Page: window.location.pathname,
-          },
-        );
-      }
-    } catch {
-      // Mixpanel is not initialized
-    }
-  }, [randomID]);
+  const { randomID } = useMixpanelTracking({
+    isLink: true,
+    trackEvent: 'IO_WEBSITE_HP_DOWNLOAD_APPSTORE',
+  });
 
   return (
     <Link id={randomID} {...linkProps}>
@@ -63,30 +42,10 @@ export const GooglePlayButton = ({
   darkTheme,
   ...linkProps
 }: Omit<LinkProps, 'onClick'> & { darkTheme?: boolean; badge?: boolean }) => {
-  const [randomID, setRandomID] = useState<string | undefined>(undefined);
-
-  // Generate randomID for tracking
-  // This has to be done inside useEffect (client side)
-  // Otherwise the server will generate a different randomID when building statically / generating server side
-  useEffect(() => {
-    setRandomID(Math.random().toString(36).substring(7));
-  }, []);
-
-  useEffect(() => {
-    try {
-      if (randomID && !mixpanel.has_opted_out_tracking()) {
-        mixpanel.track_links(
-          `#${randomID}`,
-          'IO_WEBSITE_HP_DOWNLOAD_GOOGLEPLAY',
-          {
-            Page: window.location.pathname,
-          },
-        );
-      }
-    } catch {
-      // Mixpanel is not initialized
-    }
-  }, [randomID]);
+  const { randomID } = useMixpanelTracking({
+    isLink: true,
+    trackEvent: 'IO_WEBSITE_HP_DOWNLOAD_GOOGLEPLAY',
+  });
 
   return (
     <Link id={randomID} {...linkProps}>
