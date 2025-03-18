@@ -80,7 +80,7 @@ variable "websites_configs" {
   default = {
     "send" = {
       origin_path                = "/send"
-      url_tenant                 = "dev.notifichedigitali.it"
+      url_tenant                 = "notifichedigitali.it"
       create_certificate         = true
       create_distribution        = true
       cdn_use_custom_certificate = true
