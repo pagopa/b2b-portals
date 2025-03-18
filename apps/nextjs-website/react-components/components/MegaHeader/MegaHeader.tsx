@@ -19,11 +19,11 @@ import {
   Nav,
   LinkLabel,
   Overlay,
+  Sublink,
 } from './MegaHeader.Helpers';
 import { CtaButtons } from '../common/Common';
 import { usePathname } from 'next/navigation';
 import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
-import mixpanel from 'mixpanel-browser';
 
 const MegaHeader = ({
   logo,
@@ -55,37 +55,6 @@ const MegaHeader = ({
   const activeCta =
     menuItems.find(isActiveLink)?.ctaButton ??
     (isMobile && appCtaButton ? appCtaButton : ctaButton);
-
-  const mixpanelTrackActiveCtaClick = (buttonOnClick?: Function) => {
-    try {
-      if (activeCta?.trackEvent && !mixpanel.has_opted_out_tracking()) {
-        mixpanel.track(activeCta.trackEvent, {
-          Page: window.location.pathname,
-        });
-      }
-    } catch {
-      // Mixpanel is not initialized
-    } finally {
-      // If button had an original onClick event, launch it after Mixpanel tracking
-      if (buttonOnClick) {
-        buttonOnClick();
-      }
-    }
-  };
-
-  const mixpanelTrackSublinkClick = (tab: string, href: string) => {
-    try {
-      if (trackSublinkClickEvent && !mixpanel.has_opted_out_tracking()) {
-        mixpanel.track(trackSublinkClickEvent, {
-          Tab: tab,
-          Link: href,
-          Page: window.location.pathname,
-        });
-      }
-    } catch {
-      // Mixpanel is not initialized
-    }
-  };
 
   const handleClick = (
     event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,
@@ -192,9 +161,6 @@ const MegaHeader = ({
                   ctaButtons={[
                     {
                       ...activeCta,
-                      onClick: () => {
-                        mixpanelTrackActiveCtaClick(activeCta.onClick);
-                      },
                       sx: {
                         backgroundColor: '#0B3EE3',
                         color: 'white',
@@ -301,7 +267,7 @@ const MegaHeader = ({
                               {submenu.items
                                 .slice(colIndex * 7, (colIndex + 1) * 7)
                                 .map((item, itemIndex) => (
-                                  <a
+                                  <Sublink
                                     key={itemIndex}
                                     href={item.href}
                                     target={
@@ -312,12 +278,11 @@ const MegaHeader = ({
                                     {...(isActiveSubLink(item.href) && {
                                       className: 'active',
                                     })}
-                                    onClick={() => {
-                                      setDropdownOpen(null);
-                                      mixpanelTrackSublinkClick(
-                                        menuItem.primary,
-                                        item.href,
-                                      );
+                                    onClick={() => setDropdownOpen(null)}
+                                    trackEvent={trackSublinkClickEvent}
+                                    trackingProperties={{
+                                      Tab: menuItem.primary,
+                                      Link: item.href,
                                     }}
                                   >
                                     {item.label}
@@ -325,7 +290,7 @@ const MegaHeader = ({
                                       <LinkLabel>{item.badge}</LinkLabel>
                                     )}
                                     <ArrowForwardIcon className='arrowIcon' />
-                                  </a>
+                                  </Sublink>
                                 ))}
                             </Typography>
                           ),
@@ -381,7 +346,7 @@ const MegaHeader = ({
                       <DropdownTitle>{submenu.title}</DropdownTitle>
                     )}
                     {submenu.items.map((item, itemIndex) => (
-                      <a
+                      <Sublink
                         key={itemIndex}
                         href={item.href}
                         target={
@@ -390,12 +355,11 @@ const MegaHeader = ({
                         className={`mobileMenuSecondaryItem ${
                           isActiveSubLink(item.href) ? 'active' : ''
                         }`}
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          mixpanelTrackSublinkClick(
-                            menuItem.primary,
-                            item.href,
-                          );
+                        onClick={() => setMobileMenuOpen(false)}
+                        trackEvent={trackSublinkClickEvent}
+                        trackingProperties={{
+                          Tab: menuItem.primary,
+                          Link: item.href,
                         }}
                       >
                         <Typography
@@ -410,7 +374,7 @@ const MegaHeader = ({
                         </Typography>
                         {item.badge && <LinkLabel>{item.badge}</LinkLabel>}
                         <ArrowForwardIcon className='arrowIcon' />
-                      </a>
+                      </Sublink>
                     ))}
                   </div>
                 ))}
@@ -423,9 +387,6 @@ const MegaHeader = ({
                 ctaButtons={[
                   {
                     ...activeCta,
-                    onClick: () => {
-                      mixpanelTrackActiveCtaClick(activeCta.onClick);
-                    },
                     sx: {
                       backgroundColor: '#0B3EE3',
                       color: 'white',
