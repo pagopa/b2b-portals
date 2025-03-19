@@ -3,7 +3,8 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "postbuild": "node scripts/postbuild.js",
+    "build": "next build && npm run postbuild",
     "build-storybook": "storybook build",
     "compile": "tsc --noEmit",
     "dev": "next dev",
