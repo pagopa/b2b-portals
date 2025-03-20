@@ -44,7 +44,7 @@ export const AccordionItem: React.FC<
         const targetItem = document.getElementById(itemID);
         if (targetItem) {
           setExpanded(true);
-          targetItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }
     };
