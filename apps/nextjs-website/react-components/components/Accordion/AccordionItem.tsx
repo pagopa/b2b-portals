@@ -39,15 +39,23 @@ export const AccordionItem: React.FC<
   };
 
   useLayoutEffect(() => {
-    if (itemID && window.location.hash === `#${itemID}`) {
-      const targetItem = document.getElementById(itemID);
-
-      if (targetItem) {
-        setExpanded(true);
-        targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const handleHashChange = () => {
+      if (itemID && window.location.hash === `#${itemID}`) {
+        const targetItem = document.getElementById(itemID);
+        if (targetItem) {
+          setExpanded(true);
+          targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
-    }
-  }, []);
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [itemID]);
 
   const handleChange = () => {
     setExpanded(!expanded);
