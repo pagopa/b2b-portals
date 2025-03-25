@@ -2,8 +2,10 @@ import { Config } from '@/AppEnv';
 import PageSection from '@/components/PageSection/PageSection';
 import {
   getAllPageIDs,
+  getAllPageSwitchPageIDs,
   getAllPressReleaseIDs,
   getPageDataFromID,
+  getPageSwitchPageDataFromID,
   getPressReleaseDataFromID,
   getPressReleasePages,
   getPreviewToken,
@@ -29,7 +31,7 @@ const PreviewPage = async ({
   searchParams,
 }: {
   searchParams: {
-    type: 'page' | 'press-release' | undefined;
+    type: 'page' | 'press-release' | 'page-switch-page' | undefined;
     secret: string | undefined;
     documentID: string | undefined;
     locale: Locale | undefined;
@@ -57,14 +59,20 @@ const PreviewPage = async ({
 
   const documentIDs = await (type === 'press-release'
     ? getAllPressReleaseIDs(tenant, locale)
-    : getAllPageIDs(tenant, locale));
+    : type === 'page-switch-page'
+      ? getAllPageSwitchPageIDs(tenant, locale)
+      : getAllPageIDs(tenant, locale));
+
   if (!documentIDs.map((obj) => obj.documentId).includes(documentID)) {
     return <div>404: Missing page</div>;
   }
 
   const document = await (type === 'press-release'
     ? getPressReleaseDataFromID(tenant, documentID, locale)
-    : getPageDataFromID(tenant, documentID, locale));
+    : type === 'page-switch-page'
+      ? getPageSwitchPageDataFromID(tenant, documentID, locale)
+      : getPageDataFromID(tenant, documentID, locale));
+
   const themeVariant = await GetThemeVariantForPreview();
   const pressReleasePages = await getPressReleasePages(locale);
 

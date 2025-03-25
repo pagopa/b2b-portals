@@ -142,3 +142,53 @@ export const fetchPressReleaseFromID = ({
     ),
     PreviewPressReleaseDataCodec,
   );
+
+export const fetchAllPageSwitchPageIDs = ({
+  config,
+  fetchFun,
+  locale,
+}: AppEnv & { readonly locale: Locale }): Promise<PageIDs> =>
+  extractFromResponse(
+    fetchFun(
+      `${
+        extractTenantStrapiApiData(config).baseUrl
+      }/api/page-switch-pages?locale=${locale}&pagination[pageSize]=100&status=draft`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+        },
+        cache: 'no-cache',
+      },
+    ),
+    PageIDsCodec,
+  );
+
+export const fetchPageSwitchPageFromID = ({
+  config,
+  fetchFun,
+  documentID,
+  locale,
+}: AppEnv & {
+  readonly documentID: string;
+  readonly locale: Locale;
+}): Promise<PreviewPageData> =>
+  extractFromResponse(
+    fetchFun(
+      `${
+        extractTenantStrapiApiData(config).baseUrl
+      }/api/page-switch-pages/${documentID}?locale=${locale}&status=draft
+&populate[1]=sections.ctaButtons,sections.image,sections.mobileImage,sections.storeButtons
+&populate[2]=sections.items.links,sections.items.icon
+&populate[3]=sections.sections.ctaButtons,sections.sections.icon
+      `,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${extractTenantStrapiApiData(config).token}`,
+        },
+        cache: 'no-cache',
+      },
+    ),
+    PreviewPageDataCodec,
+  );

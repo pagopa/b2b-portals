@@ -65,6 +65,22 @@ export default ({ env }: any) => ({
             copy: false,
             alwaysVisible: true,
           },
+        },
+        {
+          uid: 'api::page-switch-page.page-switch-page',
+          draft: {
+            url: env('PREVIEW_URL'),
+            query: {
+              type: 'page-switch-page',
+              documentID: '{documentId}',
+              locale: '{locale}',
+              secret: env('PREVIEW_TOKEN'),
+              tenant: env('ENVIRONMENT'),
+            },
+            openTarget: '_blank',
+            copy: false,
+            alwaysVisible: true,
+          },
         }
       ]
     }
