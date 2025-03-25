@@ -7,6 +7,8 @@ import {
   fetchAllPressReleaseIDs,
   fetchPressReleaseFromID,
   PreviewPressReleaseData,
+  fetchAllPageSwitchPageIDs,
+  fetchPageSwitchPageFromID,
 } from '../preview';
 import { Config } from '@/AppEnv';
 
@@ -94,6 +96,44 @@ const pressReleaseDataResponse: PreviewPressReleaseData = {
   },
 };
 
+const pageSwitchPageDataResponse: PreviewPageData = {
+  data: {
+    locale: 'it',
+    sections: [
+      {
+        __component: 'sections.editorial',
+        body: 'body',
+        ctaButtons: [],
+        eyelet: null,
+        image: {
+          alternativeText: null,
+          formats: null,
+          height: 300,
+          width: 300,
+          mime: 'jpg',
+          url: 'url',
+        },
+        mobileImage: {
+          alternativeText: null,
+          formats: null,
+          height: 300,
+          width: 300,
+          mime: 'jpg',
+          url: 'url-mobile',
+        },
+        pattern: 'none',
+        reversed: false,
+        sectionID: null,
+        storeButtons: null,
+        theme: 'light',
+        title: 'title',
+        titleTag: 'h1',
+        width: 'standard',
+      },
+    ],
+  },
+};
+
 describe('fetchAllPageIDs', () => {
   it('should call /api/pages including unpublished content', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
@@ -161,6 +201,42 @@ describe('fetchAllPressReleaseIDs', () => {
     } as unknown as Response);
 
     const actual = fetchAllPressReleaseIDs({ ...appEnv, locale: 'it' });
+
+    expect(await actual).toStrictEqual(pageIDsResponse);
+  });
+});
+
+describe('fetchAllPageSwitchPageIDs', () => {
+  it('should call /api/page-switch-pages including unpublished content', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+    const { config } = appEnv;
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(pageIDsResponse),
+    } as unknown as Response);
+
+    await fetchAllPageSwitchPageIDs({ ...appEnv, locale: 'it' });
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/page-switch-pages?locale=it&pagination[pageSize]=100&status=draft`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+        },
+        cache: 'no-cache',
+      },
+    );
+  });
+
+  it('should parse pageIDs without error', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(pageIDsResponse),
+    } as unknown as Response);
+
+    const actual = fetchAllPageSwitchPageIDs({ ...appEnv, locale: 'it' });
 
     expect(await actual).toStrictEqual(pageIDsResponse);
   });
@@ -266,5 +342,53 @@ describe('fetchPressReleaseFromID', () => {
     });
 
     expect(await actual).toStrictEqual(pressReleaseDataResponse);
+  });
+});
+
+describe('fetchPageSwitchPageFromID', () => {
+  it('should call /api/page-switch-pages/[pageID] including unpublished content', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+    const { config } = appEnv;
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(pageSwitchPageDataResponse),
+    } as unknown as Response);
+
+    await fetchPageSwitchPageFromID({
+      ...appEnv,
+      documentID: pageIDExample,
+      locale: 'it',
+    });
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      `${config.DEMO_STRAPI_API_BASE_URL}/api/page-switch-pages/${pageIDExample}?locale=it&status=draft
+&populate[1]=sections.ctaButtons,sections.image,sections.mobileImage,sections.storeButtons
+&populate[2]=sections.items.links,sections.items.icon
+&populate[3]=sections.sections.ctaButtons,sections.sections.icon
+      `,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+        },
+        cache: 'no-cache',
+      },
+    );
+  });
+
+  it('should parse pageData without error', async () => {
+    const { appEnv, fetchMock } = makeTestAppEnv();
+
+    fetchMock.mockResolvedValueOnce({
+      json: () => Promise.resolve(pageSwitchPageDataResponse),
+    } as unknown as Response);
+
+    const actual = fetchPageSwitchPageFromID({
+      ...appEnv,
+      documentID: pageIDExample,
+      locale: 'it',
+    });
+
+    expect(await actual).toStrictEqual(pageSwitchPageDataResponse);
   });
 });

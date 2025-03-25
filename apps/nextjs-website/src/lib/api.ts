@@ -12,8 +12,10 @@ import {
   PageIDs,
   PreviewPageData,
   fetchAllPageIDs,
+  fetchAllPageSwitchPageIDs,
   fetchAllPressReleaseIDs,
   fetchPageFromID,
+  fetchPageSwitchPageFromID,
   fetchPressReleaseFromID,
 } from './fetch/preview';
 import { allSublinksNonEmpty, formatHeaderLinks } from './header';
@@ -162,6 +164,24 @@ export const getAllPressReleaseIDs = async (
   return pressReleaseIDs.data;
 };
 
+export const getAllPageSwitchPageIDs = async (
+  tenant: Config['ENVIRONMENT'],
+  locale: Locale,
+): Promise<PageIDs['data']> => {
+  const appEnvWithRequestedTenant: AppEnv = {
+    config: {
+      ...appEnv.config,
+      ENVIRONMENT: tenant,
+    },
+    fetchFun: appEnv.fetchFun,
+  };
+  const pageSwitchPageIDs = await fetchAllPageSwitchPageIDs({
+    ...appEnvWithRequestedTenant,
+    locale,
+  });
+  return pageSwitchPageIDs.data;
+};
+
 export const getPageDataFromID = async (
   tenant: Config['ENVIRONMENT'],
   documentID: string,
@@ -201,6 +221,27 @@ export const getPressReleaseDataFromID = async (
   });
 
   return previewPressReleaseToPreviewPageData(pressRelease).data;
+};
+
+export const getPageSwitchPageDataFromID = async (
+  tenant: Config['ENVIRONMENT'],
+  documentID: string,
+  locale: Locale,
+): Promise<PreviewPageData['data']> => {
+  const appEnvWithRequestedTenant: AppEnv = {
+    config: {
+      ...appEnv.config,
+      ENVIRONMENT: tenant,
+    },
+    fetchFun: appEnv.fetchFun,
+  };
+  const { data } = await fetchPageSwitchPageFromID({
+    ...appEnvWithRequestedTenant,
+    documentID,
+    locale,
+  });
+
+  return data;
 };
 
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
