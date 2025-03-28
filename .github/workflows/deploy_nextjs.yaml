@@ -90,7 +90,7 @@ jobs:
        
       - name: Update Image in task definition
         id: task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        uses: aws-actions/amazon-ecs-render-task-definition@23e93b6b860a402948c739b0db055bc5dc55dfa9 # v1
         with:
            task-definition: apps/nextjs-website/task-definition.json
            container-name: nextjs-docker
