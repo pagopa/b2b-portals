@@ -6,6 +6,7 @@
     "postbuild": "node scripts/postbuild.js",
     "build": "next build && npm run postbuild",
     "build-storybook": "storybook build",
+    "clean": "shx rm -rf out/",
     "compile": "tsc --noEmit",
     "dev": "next dev",
     "lint": "next lint",
