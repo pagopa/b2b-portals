@@ -6,6 +6,7 @@
     "postbuild": "node scripts/postbuild.js",
     "build": "next build && npm run postbuild",
     "build-storybook": "storybook build",
+    "clean": "shx rm -rf out/",
     "compile": "tsc --noEmit",
     "dev": "next dev",
     "lint": "next lint",
@@ -52,6 +53,7 @@
     "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-storybook": "^0.8.0",
+    "shx": "^0.3.4",
     "storybook": "^8.1.4",
     "typescript": "5.2.2",
     "vitest": "^0.34.6"
