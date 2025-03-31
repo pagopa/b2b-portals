@@ -18,5 +18,7 @@ export const extractNoticeIDFromOneTrustURL = (
   const splitURL = OTNoticeURL.pathname.split('/');
   const fileName = splitURL[splitURL.length - 1];
 
-  return fileName?.split('.')[0] ?? null;
+  // We have already verified above (line 13) that the file name ends in .json, so we can assert the existence of a return value
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+  return fileName?.split('.')[0]!;
 };
