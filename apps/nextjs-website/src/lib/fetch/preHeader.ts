@@ -18,12 +18,12 @@ const PreHeaderAttributesCodec = t.strict({
   rightCtas: t.array(PreHeaderButtonCodec),
 });
 
-const PreHeaderCodec = t.strict({
+export const PreHeaderCodec = t.strict({
   data: t.union([PreHeaderAttributesCodec, t.null]),
 });
 
 // Types
-type PreHeaderData = t.TypeOf<typeof PreHeaderCodec>;
+export type PreHeaderData = t.TypeOf<typeof PreHeaderCodec>;
 export type PreHeaderAttributes = t.TypeOf<typeof PreHeaderAttributesCodec>;
 
 export const getPreHeader = ({

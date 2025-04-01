@@ -70,7 +70,8 @@ export const LocalizeMarkdownLinks = ({
     .map((link) => ({
       text: link[1],
       URL: link[2],
-      localizedURL: LocalizeURL({ URL: link[2] ?? '', locale, defaultLocale }),
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      localizedURL: LocalizeURL({ URL: link[2]!, locale, defaultLocale }),
     }))
     .filter((link) => link.URL !== link.localizedURL); // No need to replace URLs that didn't change
 
@@ -92,5 +93,6 @@ export const LocalizeMarkdownLinks = ({
     'gi',
   );
 
-  return markdown.replace(urlsRegex, (matched) => urlsMap[matched] ?? matched);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return markdown.replace(urlsRegex, (matched) => urlsMap[matched]!);
 };
