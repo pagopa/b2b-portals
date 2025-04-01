@@ -52,27 +52,27 @@ const ConsentHandler = ({
   mixpanel: mixpanelConfig,
   matomoID,
 }: NonNullable<Analytics>) => {
-  const initMixpanel = () => {
-    if (!mixpanelConfig) return;
-
-    mixpanel.init(mixpanelConfig.token, {
-      ...(mixpanelConfig.apiHost && { api_host: mixpanelConfig.apiHost }),
-      ...(mixpanelConfig.cookieDomain && {
-        cookie_domain: mixpanelConfig.cookieDomain,
-      }), // allow across-subdomain
-      cookie_expiration: 0, // session cookie
-      debug: mixpanelConfig.debug,
-      ip: mixpanelConfig.ip,
-      persistence: 'cookie',
-      secure_cookie: true,
-      batch_requests: false,
-    });
-
-    // Track page view of page where consent is given
-    mixpanel.track_pageview();
-  };
-
   useEffect(() => {
+    const initMixpanel = () => {
+      if (!mixpanelConfig) return;
+
+      mixpanel.init(mixpanelConfig.token, {
+        ...(mixpanelConfig.apiHost && { api_host: mixpanelConfig.apiHost }),
+        ...(mixpanelConfig.cookieDomain && {
+          cookie_domain: mixpanelConfig.cookieDomain,
+        }), // allow across-subdomain
+        cookie_expiration: 0, // session cookie
+        debug: mixpanelConfig.debug,
+        ip: mixpanelConfig.ip,
+        persistence: 'cookie',
+        secure_cookie: true,
+        batch_requests: false,
+      });
+
+      // Track page view of page where consent is given
+      mixpanel.track_pageview();
+    };
+
     // eslint-disable-next-line functional/immutable-data
     window.OptanonWrapper = function () {
       window.OneTrust.OnConsentChanged(() => {
@@ -85,7 +85,7 @@ const ConsentHandler = ({
     if (hasConsent()) {
       initMixpanel();
     }
-  }, [initMixpanel]);
+  }, [mixpanelConfig]);
 
   return (
     <>

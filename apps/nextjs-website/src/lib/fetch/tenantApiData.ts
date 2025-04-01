@@ -1,6 +1,6 @@
 import { Config } from '@/AppEnv';
 
-type StrapiApiData = Omit<Config, 'PREVIEW_MODE' | 'PREVIEW_TOKEN'>;
+export type StrapiApiData = Omit<Config, 'PREVIEW_MODE' | 'PREVIEW_TOKEN'>;
 type TenantStrapiApiData = {
   readonly baseUrl: string;
   readonly token: string;
