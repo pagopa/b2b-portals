@@ -27,6 +27,7 @@ import FramedVideo from './FramedVideo/FramedVideo';
 import PressRelease from './PressRelease/PressRelease';
 import PressReleaseList from './PressReleaseList/PressReleaseList';
 import MediaResources from './MediaResources/MediaResources';
+import DynamicsForm from './DynamicsForm/DynamicsForm';
 
 export {
   Hero,
@@ -58,4 +59,5 @@ export {
   PressRelease,
   PressReleaseList,
   MediaResources,
+  DynamicsForm,
 };
