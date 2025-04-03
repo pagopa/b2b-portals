@@ -115,6 +115,26 @@ const standardHeader: HeaderData = {
                   page: { slug: 'homepage' },
                   externalURL: null,
                 },
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: null,
+                  externalURL: 'externalURL',
+                },
+              ],
+            },
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: null,
+              sublinks: [
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: { slug: 'homepage' },
+                  externalURL: null,
+                },
               ],
             },
           ],
@@ -151,6 +171,26 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
               page: {
                 slug: '/otherpage2',
               },
+              sublinks: [
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: { slug: '/' },
+                  externalURL: null,
+                },
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: null,
+                  externalURL: 'externalURL',
+                },
+              ],
+            },
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: null,
               sublinks: [
                 {
                   label: 'label',
@@ -201,6 +241,61 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
                   page: { slug: '/en/' },
                   externalURL: null,
                 },
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: null,
+                  externalURL: 'externalURL',
+                },
+              ],
+            },
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: null,
+              sublinks: [
+                {
+                  label: 'label',
+                  sectionID: null,
+                  page: { slug: '/en/' },
+                  externalURL: null,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+};
+const standardHeader_MissingSublink: HeaderData = {
+  data: {
+    header: [
+      {
+        ...standardHeaderBaseFields,
+        menu: {
+          links: [
+            {
+              alignRight: false,
+              label: 'label',
+              sectionID: null,
+              page: {
+                slug: 'homepage',
+              },
+              sublinks: [
+                {
+                  label: 'sublink1',
+                  sectionID: null,
+                  page: { slug: 'homepage' },
+                  externalURL: null,
+                },
+                {
+                  label: 'sublink1',
+                  sectionID: null,
+                  page: null,
+                  externalURL: null,
+                },
               ],
             },
           ],
@@ -245,6 +340,13 @@ const megaHeader: HeaderData = {
                         slug: 'not-homepage',
                       },
                       externalURL: null,
+                      isNew: false,
+                    },
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: null,
+                      externalURL: 'externalURL',
                       isNew: false,
                     },
                   ],
@@ -294,6 +396,13 @@ const parsedMegaHeader_DefaultLocale: HeaderData = {
                       externalURL: null,
                       isNew: false,
                     },
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: null,
+                      externalURL: 'externalURL',
+                      isNew: false,
+                    },
                   ],
                 },
               ],
@@ -339,6 +448,13 @@ const parsedMegaHeader_NonDefaultLocale: HeaderData = {
                         slug: '/en/not-homepage',
                       },
                       externalURL: null,
+                      isNew: false,
+                    },
+                    {
+                      label: 'sublink1',
+                      sectionID: null,
+                      page: null,
+                      externalURL: 'externalURL',
                       isNew: false,
                     },
                   ],
@@ -447,7 +563,15 @@ describe('formatHeaderLinks', () => {
 });
 
 describe('allSublinksNonEmpty', () => {
-  it('should return false if any sublink has neither a page nor external URL to which to link', () => {
+  it('should return false if any standard header sublink has neither a page nor external URL to which to link', () => {
+    const actual = allSublinksNonEmpty(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      standardHeader_MissingSublink.data.header[0]!,
+    );
+    expect(actual).toStrictEqual(false);
+  });
+
+  it('should return false if any mega header sublink has neither a page nor external URL to which to link', () => {
     const actual = allSublinksNonEmpty(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       megaHeader_MissingSublink.data.header[0]!,
