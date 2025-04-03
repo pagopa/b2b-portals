@@ -20,8 +20,6 @@ const makeTestAppEnv = () => {
     SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
     APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
     APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
-    FIRMA_STRAPI_API_BASE_URL: 'firmaStrapiToken',
-    FIRMA_STRAPI_API_TOKEN: 'firmaStrapiApiBaseUrl',
     INTEROP_STRAPI_API_BASE_URL: 'interopStrapiToken',
     INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
     ENVIRONMENT: 'demo',
