@@ -23,18 +23,15 @@ const DynamicsForm = ({ formId, apiUrl, cachedUrl }: DynamicsFormProps) => {
   }, []);
 
   return (
-    <Box
-      ref={containerRef}
-      sx={{ width: '100%', minHeight: '600px' }}
-      dangerouslySetInnerHTML={{
-        __html: `
-          <div 
-            data-form-id='${formId}' 
-            data-form-api-url='${apiUrl}' 
-            data-cached-form-url='${cachedUrl}'></div>
-        `,
-      }}
-    />
+    <Box sx={{ width: '100%', minHeight: '600px' }}>
+      <div ref={containerRef} style={{ width: '100%' }}>
+        <div
+          data-form-id={formId}
+          data-form-api-url={apiUrl}
+          data-cached-form-url={cachedUrl}
+        />
+      </div>
+    </Box>
   );
 };
 
