@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_sections_dynamics_forms",
+  "info": {
+    "displayName": "DynamicsForm"
+  },
+  "options": {},
+  "attributes": {
+    "formID": {
+      "type": "string",
+      "required": true
+    },
+    "orgID": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
