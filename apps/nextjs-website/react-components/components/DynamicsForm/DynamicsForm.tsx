@@ -1,15 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Box } from '@mui/material';
 import Script from 'next/script';
 import { DynamicsFormProps } from '@react-components/types/DynamicsForm/DynamicsForm.types';
 
 const DynamicsForm = ({ formId, apiUrl, cachedUrl }: DynamicsFormProps) => {
-  useEffect(() => {
-    document.documentElement.lang = navigator.language;
-  }, []);
-
   return (
     <Box sx={{ width: '100%', minHeight: '600px' }}>
       <div
