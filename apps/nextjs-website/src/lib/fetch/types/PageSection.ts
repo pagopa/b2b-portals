@@ -431,6 +431,7 @@ const DynamicsFormSectionPropsCodec = t.strict({
   __component: t.literal('sections.dynamics-form'),
   formID: t.string,
   orgID: t.string,
+  scriptEndpoint: t.string,
 });
 
 export const PageSectionCodec = t.union([

@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import Script from 'next/script';
 import { DynamicsFormProps } from '@react-components/types/DynamicsForm/DynamicsForm.types';
 
-const DynamicsForm = ({ formID, orgID }: DynamicsFormProps) => (
+const DynamicsForm = ({ formID, orgID, scriptEndpoint }: DynamicsFormProps) => (
   <Box sx={{ width: '100%', minHeight: '600px' }}>
     <div
       id='dynamics-form-container'
@@ -12,7 +12,7 @@ const DynamicsForm = ({ formID, orgID }: DynamicsFormProps) => (
       data-cached-form-url={`https://assets-eur.mkt.dynamics.com/${orgID}/digitalassets/forms/${formID}`}
     />
 
-    <Script src='https://cxppusa1formui01cdnsa01-endpoint.azureedge.net/eur/FormLoader/FormLoader.bundle.js' />
+    <Script src={`https://${scriptEndpoint}-endpoint.azureedge.net/eur/FormLoader/FormLoader.bundle.js`} />
   </Box>
 );
 
