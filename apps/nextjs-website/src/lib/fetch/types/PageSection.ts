@@ -427,6 +427,13 @@ const MediaResourcesSectionCodec = t.strict({
   items: t.array(MediaResourcesItemCodec),
 });
 
+const DynamicsFormSectionPropsCodec = t.strict({
+  __component: t.literal('sections.dynamics-form'),
+  formId: t.string,
+  apiUrl: t.string,
+  cachedUrl: t.string,
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -453,6 +460,7 @@ export const PageSectionCodec = t.union([
   PressReleaseSectionCodec,
   PressReleaseListSectionCodec,
   MediaResourcesSectionCodec,
+  DynamicsFormSectionPropsCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -487,3 +495,6 @@ export type PressReleaseListSection = t.TypeOf<
   typeof PressReleaseListSectionCodec
 >;
 export type MediaResourcesSection = t.TypeOf<typeof MediaResourcesSectionCodec>;
+export type DynamicsFormSectionProps = t.TypeOf<
+  typeof DynamicsFormSectionPropsCodec
+>;
