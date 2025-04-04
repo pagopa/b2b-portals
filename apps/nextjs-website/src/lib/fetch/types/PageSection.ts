@@ -429,9 +429,9 @@ const MediaResourcesSectionCodec = t.strict({
 
 const DynamicsFormSectionPropsCodec = t.strict({
   __component: t.literal('sections.dynamics-form'),
-  formId: t.string,
-  apiUrl: t.string,
-  cachedUrl: t.string,
+  formID: t.string,
+  orgID: t.string,
+  scriptEndpoint: t.string,
 });
 
 export const PageSectionCodec = t.union([
