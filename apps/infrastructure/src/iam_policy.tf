@@ -232,10 +232,40 @@ resource "aws_iam_policy" "upload_image" {
   })
 }
 
+resource "aws_iam_policy" "send_email" {
+  name        = "SendEmailPolicy"
+  path        = "/"
+  description = "Policy to allow sending emails via SES."
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ses:SendCustomVerificationEmail",
+          "ses:SendEmail",
+          "ses:SendRawEmail",
+          "ses:SendTemplatedEmail"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:ses:${var.aws_region}:${data.aws_caller_identity.current.account_id}:identity/b2bportals.pagopa.it"
+      }
+    ]
+  })
+}
+
 resource "aws_iam_policy_attachment" "strapi-policy" {
   name       = "strapi-policy"
   users      = [aws_iam_user.strapi.name]
   policy_arn = aws_iam_policy.upload_image.arn
+}
+
+resource "aws_iam_policy_attachment" "ses-strapi-policy" {
+  name       = "ses-strapi-policy"
+  users      = [aws_iam_user.strapi.name]
+  policy_arn = aws_iam_policy.send_email.arn
 }
 
 resource "aws_iam_policy" "ecs_task_execution" {
