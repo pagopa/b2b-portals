@@ -1,48 +1,43 @@
-// Import the necessary modules
-import { StoryFn, Meta } from '@storybook/react';
-import { PreHeader } from '@react-components/components';
-import { PreHeaderProps } from '@react-components/types';
-import { CtaButtonProps } from '@react-components/types/common/Common.types';
-import { HelpOutlineOutlined } from '@mui/icons-material';
+import { Meta, StoryFn } from '@storybook/react';
+import { StorybookPreHeader, StorybookPreHeaderProps } from './component';
 
-// Define the default export with metadata about your component
-const meta: Meta<typeof PreHeader> = {
+const meta: Meta<typeof StorybookPreHeader> = {
   title: 'Components/PreHeader/Light',
-  component: PreHeader,
+  component: StorybookPreHeader,
+  argTypes: {
+    leftText: {
+      name: 'Testo CTA sinistra',
+      description: 'Testo mostrato nel pulsante a sinistra del preheader',
+      control: 'text',
+    },
+    rightText: {
+      name: 'Testo CTA destra',
+      description: 'Testo mostrato nel pulsante a destra del preheader',
+      control: 'text',
+    },
+    showLeftIcon: {
+      name: 'Mostra icona sinistra',
+      description: "Aggiunge un’icona alla CTA di sinistra",
+      control: 'boolean',
+    },
+    showRightIcon: {
+      name: 'Mostra icona destra',
+      description: "Aggiunge un’icona alla CTA di destra",
+      control: 'boolean',
+    },
+  },
 };
+
 export default meta;
 
-// Define a "Template" function that sets how args map to rendering
-const PreHeaderTemplate: StoryFn<PreHeaderProps> = (args) => (
-  <PreHeader {...args} />
+const Template: StoryFn<StorybookPreHeaderProps> = (args) => (
+  <StorybookPreHeader {...args} />
 );
 
-// Function to generate default CTA button props
-const generateCtaButtonProps = (withIcon: boolean): CtaButtonProps => ({
-  text: 'Click Me',
-  ...(withIcon ? { startIcon: <HelpOutlineOutlined /> } : {}),
-});
-
-// Function to generate PreHeaderProps
-const generatePreHeaderProps = (
-  withIcon: boolean
-): Partial<PreHeaderProps> => ({
-  leftCtas: [generateCtaButtonProps(false)],
-  rightCtas: [generateCtaButtonProps(withIcon)],
-});
-
-// Define the default props
-const defaultProps = generatePreHeaderProps(true);
-const defaultPropsNoIcon = generatePreHeaderProps(false);
-
-export const DefaultPreHeader: StoryFn<typeof PreHeader> =
-  PreHeaderTemplate.bind({});
-DefaultPreHeader.args = {
-  ...defaultProps,
-};
-
-export const DefaultPreHeaderNoIcon: StoryFn<typeof PreHeader> =
-  PreHeaderTemplate.bind({});
-DefaultPreHeaderNoIcon.args = {
-  ...defaultPropsNoIcon,
+export const PreHeaderDefault = Template.bind({});
+PreHeaderDefault.args = {
+  leftText: 'PagoPA S.p.A.',
+  rightText: 'Assistenza',
+  showLeftIcon: true,
+  showRightIcon: true,
 };
