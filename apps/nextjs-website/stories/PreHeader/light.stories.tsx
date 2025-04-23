@@ -17,12 +17,12 @@ const meta: Meta<typeof StorybookPreHeader> = {
     },
     showLeftIcon: {
       name: 'Mostra icona sinistra',
-      description: "Aggiunge un’icona alla CTA di sinistra",
+      description: 'Aggiunge un’icona alla CTA di sinistra',
       control: 'boolean',
     },
     showRightIcon: {
       name: 'Mostra icona destra',
-      description: "Aggiunge un’icona alla CTA di destra",
+      description: 'Aggiunge un’icona alla CTA di destra',
       control: 'boolean',
     },
   },
@@ -38,6 +38,6 @@ export const PreHeaderDefault = Template.bind({});
 PreHeaderDefault.args = {
   leftText: 'PagoPA S.p.A.',
   rightText: 'Assistenza',
-  showLeftIcon: true,
+  showLeftIcon: false,
   showRightIcon: true,
 };

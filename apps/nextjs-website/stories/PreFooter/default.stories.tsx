@@ -22,25 +22,28 @@ const meta: Meta<typeof StorybookPreFooter> = {
       options: ['left', 'center'],
       description: 'Allineamento del contenuto',
     },
+    ctaVariant: {
+      name: 'CTA',
+      control: {
+        type: 'radio',
+        labels: {
+          none: 'Nessuno',
+          store: 'Bottoni Store',
+          cta: 'Bottoni Semplici',
+        },
+      },
+      options: ['none', 'store', 'cta'],
+      description: 'Mostra i bottoni nel PreFooter',
+    },
+    showBackground: {
+      name: 'Mostra sfondo',
+      control: 'boolean',
+      description: 'Mostra o nasconde lo sfondo',
+    },
     background: {
       name: 'Sfondo personalizzato',
-      control: 'text',
-      description:
-        'URL immagine. Se vuoto, lo sfondo non sarà mostrato. Default: sfondo IO',
-    },
-    showStoreButtons: {
-      name: 'Mostra Store buttons',
-      control: 'boolean',
-      description:
-        'Mostra gli store buttons. Attiva solo uno tra questo e i CTA per evitare errori',
-      table: { defaultValue: { summary: '-' } },
-    },
-    showCtaButtons: {
-      name: 'Mostra CTA buttons',
-      control: 'boolean',
-      description:
-        'Mostra i pulsanti CTA. Attiva solo uno tra questo e gli store buttons per evitare errori',
-      table: { defaultValue: { summary: '-' } },
+      control: { type: 'file', accept: '.jpg,.jpeg,.png,.svg' },
+      description: 'Carica un’immagine di sfondo personalizzata',
     },
     storeButtons: { table: { disable: true } },
     ctaButtons: { table: { disable: true } },
@@ -59,7 +62,6 @@ Default.args = {
   title: 'Scarica l’app IO',
   theme: 'light',
   layout: 'left',
-  background: 'https://assets.innovazione.gov.it/1610704590-io.png',
-  showStoreButtons: true,
-  showCtaButtons: false,
+  ctaVariant: 'store',
+  showBackground: true,
 };

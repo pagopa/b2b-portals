@@ -5,11 +5,6 @@ const meta: Meta<typeof StorybookMegaHeader> = {
   title: 'Components/MegaHeader/Light',
   component: StorybookMegaHeader,
   argTypes: {
-    logo: {
-      name: 'Logo',
-      description: 'Mostra logo di esempio (o logo personalizzato se inserito)',
-      control: 'boolean',
-    },
     customLogo: {
       name: 'Logo Personalizzato',
       description:
@@ -19,13 +14,8 @@ const meta: Meta<typeof StorybookMegaHeader> = {
     showCtaButton: {
       name: 'Mostra CTA',
       description:
-        'Mostra il pulsante di call to action (CTA) a destra nell’header',
+        'Mostra il pulsante di call to action (CTA) a destra nell’header (se attivo ha priorità sul drawer)',
       control: 'boolean',
-    },
-    ctaText: {
-      name: 'Testo CTA',
-      description: 'Testo mostrato all’interno del pulsante CTA',
-      control: 'text',
     },
     drawer: {
       name: 'Drawer',
@@ -51,9 +41,7 @@ const Template: StoryFn<StorybookMegaHeaderProps> = (args) => (
 
 export const MegaHeaderFullWithLogo = Template.bind({});
 MegaHeaderFullWithLogo.args = {
-  logo: true,
   customLogo: null,
   showCtaButton: true,
-  ctaText: 'Assistenza',
   drawer: 'full',
 };

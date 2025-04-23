@@ -3,10 +3,8 @@ import { MegaHeaderProps } from '@react-components/types';
 import Icon from '@/components/Icon';
 
 export interface StorybookMegaHeaderProps {
-  logo: boolean;
   customLogo?: string | null;
   showCtaButton: boolean;
-  ctaText: string;
   drawer: 'full' | 'min' | 'none';
 }
 
@@ -20,10 +18,11 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
           { label: 'Gestire scadenze e pagamenti', href: '' },
           { label: 'Ricevere comunicazioni', href: '' },
           { label: 'Leggere le notifiche digitali', href: '' },
-          { label: 'Firmare digitalmente', href: '' },
+          { label: 'Firmare digitalmente', href: '', badge: 'NOVITÀ' },
           { label: 'Aggiungere i tuoi documenti', href: '' },
           { label: 'Aderire a iniziative di welfare', href: '' },
           { label: '[CGN]', href: '' },
+          { label: 'Novità su IO', href: '', badge: 'NOVITÀ' },
         ],
       },
     ],
@@ -36,8 +35,8 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
         title: 'SCOPRI I SERVIZI SU IO',
         items: [
           { label: 'Casa e utenze', href: '' },
-          { label: 'Educazione e formazione', href: '' },
-          { label: 'Salute', href: '', badge: 'NOVITÀ' },
+          { label: 'Educazione e formazione', href: '', badge: 'NOVITÀ' },
+          { label: 'Salute', href: '' },
           { label: 'Redditi, patrimoni e fisco', href: '' },
           { label: 'Servizi anagrafici e civici', href: '' },
           { label: 'Mobilità e trasporti', href: '' },
@@ -47,7 +46,7 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
           { label: 'Benessere sociale', href: '' },
           { label: 'Ambiente e animali', href: '' },
           { label: 'Giustizia e legge', href: '' },
-          { label: 'Vita lavorativa', href: '' },
+          { label: 'Vita lavorativa', href: '', badge: 'NOVITÀ' },
           { label: 'Lavori edilizi, catasto e urbanistica', href: '' },
           { label: 'Cultura, tempo libero e sport', href: '' },
           { label: 'Viaggi e turismo', href: '' },
@@ -65,7 +64,7 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
         items: [
           { label: 'ACI', href: '' },
           { label: 'Agenzia delle Entrate', href: '' },
-          { label: 'INPS', href: '' },
+          { label: 'INPS', href: '', badge: 'NOVITÀ' },
           { label: 'E-Distribuzione', href: '' },
           { label: 'Ministero dell’Interno', href: '' },
           { label: 'Altri enti nazionali', href: '' },
@@ -93,7 +92,7 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
         items: [
           { label: 'Vision', href: '' },
           { label: 'IO in numeri', href: '' },
-          { label: 'Blog', href: '' },
+          { label: 'Blog', href: '', badge: 'NOVITÀ' },
           { label: 'Casi studio', href: '' },
         ],
       },
@@ -116,7 +115,7 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
         title: 'CONSULTA LE RISORSE TECNICHE',
         items: [
           { label: 'Sviluppatori', href: '' },
-          { label: 'Partner commerciali', href: '' },
+          { label: 'Partner commerciali', href: '', badge: 'NOVITÀ' },
           { label: 'Partner tecnologici', href: '' },
           { label: 'Comunicati e Media', href: '' },
         ],
@@ -135,24 +134,20 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
 ];
 
 const makeMegaHeaderProps = ({
-  logo,
   customLogo,
   showCtaButton,
-  ctaText,
   drawer,
 }: StorybookMegaHeaderProps): MegaHeaderProps => {
   const baseProps: Partial<MegaHeaderProps> = {
     menuItems: defaultMenuItems,
     logo: {
-      src: logo
-        ? (customLogo ?? 'https://io.italia.it/assets/img/io-it-logo-blue.svg')
-        : '',
+      src: customLogo ?? 'https://io.italia.it/assets/img/io-it-logo-blue.svg',
       alt: 'logo',
       href: '#',
     },
     ...(showCtaButton && {
       ctaButton: {
-        text: ctaText,
+        text: 'Assistenza',
         startIcon: Icon('HelpOutlineOutlined'),
       },
     }),
