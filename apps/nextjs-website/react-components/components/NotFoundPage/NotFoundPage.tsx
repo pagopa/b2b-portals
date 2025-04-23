@@ -1,28 +1,14 @@
 'use client';
 import { useEffect } from 'react';
-import {
-  Box,
-  Typography,
-  Link,
-  Stack,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material';
+import Image from 'next/image';
+import { Box, Typography, Link, Stack, useTheme } from '@mui/material';
 import { NotFoundPageProps } from '@react-components/types/NotFoundPage/NotFoundPage.types';
 import {
   IoBackgroundColor,
   SendBackgroundColor,
   TextColor,
 } from '@react-components/components/common/Common.helpers';
-
-const safeUseRouter = () => {
-  try {
-    const { useRouter } = require('next/navigation');
-    return useRouter();
-  } catch {
-    return null;
-  }
-};
+import EmptyImage from '@react-components/assets/Empty.png';
 
 const localizedTexts = {
   it: {
@@ -58,26 +44,22 @@ const localizedTexts = {
 };
 
 const NotFoundPage = ({
-  image,
-  mobileImage,
-  redirectUrl = '/',
-  disableRedirect = false,
+  redirectUrl,
+  disableRedirect,
   theme,
   themeVariant,
   sectionID,
-  locale = 'it',
+  locale,
 }: NotFoundPageProps) => {
   const muiTheme = useTheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
-  const router = !disableRedirect ? safeUseRouter() : null;
 
   useEffect(() => {
-    if (!router || disableRedirect) return;
+    if (disableRedirect) return;
     const timeout = setTimeout(() => {
-      router.push(redirectUrl);
+      window.location.href = redirectUrl;
     }, 5000);
     return () => clearTimeout(timeout);
-  }, [router, redirectUrl, disableRedirect]);
+  }, []);
 
   const backgroundColor =
     themeVariant === 'SEND'
@@ -94,7 +76,7 @@ const NotFoundPage = ({
         ? muiTheme.palette.primary.main
         : muiTheme.palette.custom.primaryColorDark;
 
-  const texts = localizedTexts[locale] ?? localizedTexts.it;
+  const texts = localizedTexts[locale];
 
   return (
     <Box
@@ -110,7 +92,13 @@ const NotFoundPage = ({
       sx={{ backgroundColor }}
     >
       <Stack spacing={3} alignItems='center' maxWidth={480} mx='auto'>
-        {isMobile ? mobileImage : image}
+        <Image
+          src={EmptyImage}
+          alt='404'
+          width={140}
+          height={140}
+          style={{ display: 'block' }}
+        />
 
         <Typography variant='h4' fontWeight='bold' sx={{ color: textColor }}>
           {texts.title}

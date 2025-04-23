@@ -24,26 +24,8 @@ const Template: StoryFn<NotFoundPageProps> = (args) => (
   <NotFoundPage {...args} />
 );
 
-const image = (
-  <img
-    src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png'
-    alt='404'
-    style={{ maxWidth: 240 }}
-  />
-);
-
-const mobileImage = (
-  <img
-    src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png'
-    alt='404 mobile'
-    style={{ maxWidth: 200 }}
-  />
-);
-
 export const Italian = Template.bind({});
 Italian.args = {
-  image,
-  mobileImage,
   redirectUrl: '/',
   disableRedirect: true,
   theme: 'light',
