@@ -1,7 +1,8 @@
 {
   "collectionName": "components_shared_analytics",
   "info": {
-    "displayName": "Analytics"
+    "displayName": "Analytics",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -13,9 +14,6 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.mix-panel"
-    },
-    "matomoID": {
-      "type": "string"
     }
   }
 }
