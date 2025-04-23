@@ -28,7 +28,6 @@ const MixpanelCodec = t.strict({
 const AnalyticsCodec = t.strict({
   oneTrustDomainID: t.string,
   mixpanel: t.union([MixpanelCodec, t.null]),
-  matomoID: t.union([t.string, t.null]),
 });
 
 const SiteWideSEOCodec = t.strict({
