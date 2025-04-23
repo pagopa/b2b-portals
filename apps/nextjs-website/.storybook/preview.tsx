@@ -27,6 +27,9 @@ const preview: Preview = {
     docs: {
       toc: true,
     },
+    controls: {
+      expanded: true,
+    },
   },
   tags: ['autodocs'],
   decorators: [
