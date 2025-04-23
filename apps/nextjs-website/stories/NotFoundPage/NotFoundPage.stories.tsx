@@ -40,41 +40,37 @@ const mobileImage = (
   />
 );
 
-const baseArgs = {
+export const Italian = Template.bind({});
+Italian.args = {
   image,
   mobileImage,
-  title: 'Pagina non trovata',
-  body: 'Oops! La pagina che stai cercando non è disponibile.',
-  redirectIntroText: 'Se il reindirizzamento non avviene,',
-  redirectText: 'clicca qui per tornare alla home',
   redirectUrl: '/',
   disableRedirect: true,
-};
-
-export const LightSend = Template.bind({});
-LightSend.args = {
-  ...baseArgs,
   theme: 'light',
   themeVariant: 'SEND',
+  locale: 'it',
 };
 
-export const LightIo = Template.bind({});
-LightIo.args = {
-  ...baseArgs,
-  theme: 'light',
-  themeVariant: 'IO',
+export const English = Template.bind({});
+English.args = {
+  ...Italian.args,
+  locale: 'en',
 };
 
-export const DarkSend = Template.bind({});
-DarkSend.args = {
-  ...baseArgs,
-  theme: 'dark',
-  themeVariant: 'SEND',
+export const French = Template.bind({});
+French.args = {
+  ...Italian.args,
+  locale: 'fr',
 };
 
-export const DarkIo = Template.bind({});
-DarkIo.args = {
-  ...baseArgs,
-  theme: 'dark',
-  themeVariant: 'IO',
+export const German = Template.bind({});
+German.args = {
+  ...Italian.args,
+  locale: 'de',
+};
+
+export const Slovenian = Template.bind({});
+Slovenian.args = {
+  ...Italian.args,
+  locale: 'sl',
 };

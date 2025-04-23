@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect } from 'react';
 import {
   Box,
@@ -25,18 +24,48 @@ const safeUseRouter = () => {
   }
 };
 
+const localizedTexts = {
+  it: {
+    title: 'Pagina non trovata',
+    body: 'Oops! La pagina che stai cercando non è disponibile.',
+    redirectIntroText: 'Se il reindirizzamento non avviene,',
+    redirectText: 'clicca qui per tornare alla home',
+  },
+  en: {
+    title: 'Page not found',
+    body: 'Oops! The page you are looking for is not available.',
+    redirectIntroText: 'If the redirect does not happen,',
+    redirectText: 'click here to go back to the homepage',
+  },
+  fr: {
+    title: 'Page non trouvée',
+    body: 'Oops ! La page que vous recherchez est introuvable.',
+    redirectIntroText: 'Si la redirection ne fonctionne pas,',
+    redirectText: 'cliquez ici pour revenir à la page d’accueil',
+  },
+  de: {
+    title: 'Seite nicht gefunden',
+    body: 'Die Seite, die Sie suchen, ist nicht verfügbar.',
+    redirectIntroText: 'Wenn die Weiterleitung nicht erfolgt,',
+    redirectText: 'klicken Sie hier, um zur Startseite zurückzukehren',
+  },
+  sl: {
+    title: 'Stran ni najdena',
+    body: 'Stran, ki jo iščete, ni na voljo.',
+    redirectIntroText: 'Če preusmeritev ne uspe,',
+    redirectText: 'kliknite tukaj za vrnitev na domačo stran',
+  },
+};
+
 const NotFoundPage = ({
   image,
   mobileImage,
-  title = 'Qui non c’è nulla!',
-  body = 'La pagina che cercavi non esiste o non è più disponibile.',
-  redirectIntroText = 'Se il reindirizzamento non avviene,',
-  redirectText = 'torna alla home da qui',
   redirectUrl = '/',
   disableRedirect = false,
   theme,
   themeVariant,
   sectionID,
+  locale = 'it',
 }: NotFoundPageProps) => {
   const muiTheme = useTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
@@ -65,6 +94,8 @@ const NotFoundPage = ({
         ? muiTheme.palette.primary.main
         : muiTheme.palette.custom.primaryColorDark;
 
+  const texts = localizedTexts[locale] ?? localizedTexts.it;
+
   return (
     <Box
       id={sectionID ?? undefined}
@@ -82,11 +113,11 @@ const NotFoundPage = ({
         {isMobile ? mobileImage : image}
 
         <Typography variant='h4' fontWeight='bold' sx={{ color: textColor }}>
-          {title}
+          {texts.title}
         </Typography>
 
         <Typography variant='body1' sx={{ color: textColor }}>
-          {body}
+          {texts.body}
         </Typography>
 
         <Typography
@@ -104,7 +135,8 @@ const NotFoundPage = ({
             },
           }}
         >
-          {redirectIntroText} <Link href={redirectUrl}>{redirectText}</Link>
+          {texts.redirectIntroText}{' '}
+          <Link href={redirectUrl}>{texts.redirectText}</Link>
         </Typography>
       </Stack>
     </Box>
