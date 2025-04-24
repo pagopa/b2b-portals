@@ -1,58 +1,40 @@
 import { Meta, StoryFn } from '@storybook/react';
-import NotFoundPage from '@react-components/components/NotFoundPage/NotFoundPage';
-import { NotFoundPageProps } from '@react-components/types/NotFoundPage/NotFoundPage.types';
+import { StorybookNotFoundPage, StorybookNotFoundPageProps } from './component';
 
-const meta: Meta<typeof NotFoundPage> = {
+const meta: Meta<typeof StorybookNotFoundPage> = {
   title: 'Components/NotFoundPage/Default',
-  component: NotFoundPage,
+  component: StorybookNotFoundPage,
   tags: ['autodocs'],
+  args: {
+    defaultLocale: 'it',
+  },
   argTypes: {
-    theme: {
-      control: { type: 'radio' },
-      options: ['light', 'dark'],
-    },
-    themeVariant: {
-      control: { type: 'radio' },
-      options: ['SEND', 'IO'],
+    defaultLocale: {
+      name: 'Lingua',
+      control: {
+        type: 'select',
+        labels: {
+          it: 'Italiano',
+          en: 'English',
+          fr: 'Français',
+          de: 'Deutsch',
+          sl: 'Slovenščina',
+        },
+      },
+      options: ['it', 'en', 'fr', 'de', 'sl'],
+    }
+  },
+  parameters: {
+    nextjs: {
+      appDirectory: true,
     },
   },
 };
 
 export default meta;
 
-const Template: StoryFn<NotFoundPageProps> = (args) => (
-  <NotFoundPage {...args} />
+const Template: StoryFn<StorybookNotFoundPageProps> = (args) => (
+  <StorybookNotFoundPage {...args} />
 );
 
-export const Italian = Template.bind({});
-Italian.args = {
-  redirectUrl: '/',
-  disableRedirect: true,
-  theme: 'light',
-  themeVariant: 'SEND',
-  locale: 'it',
-};
-
-export const English = Template.bind({});
-English.args = {
-  ...Italian.args,
-  locale: 'en',
-};
-
-export const French = Template.bind({});
-French.args = {
-  ...Italian.args,
-  locale: 'fr',
-};
-
-export const German = Template.bind({});
-German.args = {
-  ...Italian.args,
-  locale: 'de',
-};
-
-export const Slovenian = Template.bind({});
-Slovenian.args = {
-  ...Italian.args,
-  locale: 'sl',
-};
+export const Default: StoryFn<typeof StorybookNotFoundPage> = Template.bind({});

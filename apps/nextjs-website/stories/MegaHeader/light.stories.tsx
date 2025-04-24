@@ -39,7 +39,7 @@ const Template: StoryFn<StorybookMegaHeaderProps> = (args) => (
   <StorybookMegaHeader {...args} />
 );
 
-export const MegaHeaderFullWithLogo = Template.bind({});
+export const MegaHeaderFullWithLogo: StoryFn<typeof StorybookMegaHeader> = Template.bind({});
 MegaHeaderFullWithLogo.args = {
   customLogo: null,
   showCtaButton: true,
