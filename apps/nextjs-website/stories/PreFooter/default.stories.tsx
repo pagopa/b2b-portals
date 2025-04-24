@@ -57,7 +57,7 @@ const Template: StoryFn<StorybookPreFooterProps> = (args) => (
   <StorybookPreFooter {...args} />
 );
 
-export const Default = Template.bind({});
+export const Default: StoryFn<typeof StorybookPreFooter> = Template.bind({});
 Default.args = {
   title: 'Scarica l’app IO',
   theme: 'light',

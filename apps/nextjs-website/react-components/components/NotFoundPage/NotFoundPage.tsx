@@ -4,11 +4,13 @@ import Image from 'next/image';
 import { Box, Typography, Link, Stack, useTheme } from '@mui/material';
 import { NotFoundPageProps } from '@react-components/types/NotFoundPage/NotFoundPage.types';
 import {
-  IoBackgroundColor,
   SendBackgroundColor,
   TextColor,
 } from '@react-components/components/common/Common.helpers';
 import EmptyImage from '@react-components/assets/Empty.png';
+import { usePathname, useRouter } from 'next/navigation';
+
+type Locale = NotFoundPageProps['defaultLocale'];
 
 const localizedTexts = {
   it: {
@@ -49,43 +51,49 @@ const localizedTexts = {
 };
 
 const NotFoundPage = ({
-  redirectUrl,
   disableRedirect,
-  theme,
-  themeVariant,
-  sectionID,
-  locale,
+  defaultLocale,
+  validLocales,
 }: NotFoundPageProps) => {
   const muiTheme = useTheme();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const isValidLocale = (locale: string): boolean => {
+    return validLocales.includes(locale as Locale);
+  };
+
+  const redirectUrl =
+    pathname.length < 5
+      ? // No locale (/x) or an invalid locale's homepage (/xx/)
+        // (If it was valid, we would not be here in the 404 page)
+        // Redirect to the default locale's homepage
+        '/'
+      : pathname[3] === '/' && isValidLocale(pathname.slice(1, 3))
+        ? // If a valid locale is present in the pathname
+          // Redirect to said locale's homepage
+          `/${pathname.slice(1, 3) === defaultLocale ? '' : pathname.slice(1, 3)}`
+        : // No locale has been specified, simply redirect to the default locale's homepage
+          '/';
+
+  const locale = redirectUrl === '/' ? defaultLocale : redirectUrl.slice(1, 3);
 
   useEffect(() => {
     if (disableRedirect) return;
     const timeout = setTimeout(() => {
-      window.location.href = redirectUrl;
+      router.replace(redirectUrl);
     }, 5000);
     return () => clearTimeout(timeout);
   }, []);
 
-  const backgroundColor =
-    themeVariant === 'SEND'
-      ? SendBackgroundColor(theme)
-      : IoBackgroundColor(theme);
+  const backgroundColor = SendBackgroundColor('light');
+  const textColor = TextColor('light');
+  const linkColor = muiTheme.palette.primary.main;
 
-  const textColor =
-    theme === 'dark' ? muiTheme.palette.primary.contrastText : TextColor(theme);
-
-  const linkColor =
-    theme === 'dark'
-      ? muiTheme.palette.custom.white
-      : themeVariant === 'SEND'
-        ? muiTheme.palette.primary.main
-        : muiTheme.palette.custom.primaryColorDark;
-
-  const texts = localizedTexts[locale];
+  const texts = localizedTexts[locale as Locale];
 
   return (
     <Box
-      id={sectionID ?? undefined}
       minHeight={{ xs: 'auto', md: '70vh' }}
       display='flex'
       justifyContent='center'
