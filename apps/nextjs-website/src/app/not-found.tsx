@@ -1,30 +1,57 @@
-'use client';
-import { redirect, usePathname } from 'next/navigation';
+import { ThemeProvider } from '@mui/material';
+import NotFoundPage from '@react-components/components/NotFoundPage/NotFoundPage';
+import { theme } from './theme';
+import {
+  getFooterProps,
+  getHeaderProps,
+  getPreHeaderProps,
+  getSiteWideSEO,
+} from '@/lib/api';
+import PreHeader from '@/components/PreHeader';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Locale } from '@/lib/fetch/siteWideSEO';
 
-const NotFound = () => {
-  const pathname = usePathname();
+const NotFound = async () => {
+  const { defaultLocale, locales, themeVariant } = await getSiteWideSEO();
 
-  if (pathname.length < 5) {
-    // No locale (/x) or an invalid locale's homepage (/xx/)
-    // Redirect to the default locale's homepage
-    redirect('/');
-  }
+  const preHeaderProps = await getPreHeaderProps(defaultLocale);
+  const headerProps = await getHeaderProps(defaultLocale, defaultLocale);
+  const footerProps = await getFooterProps(defaultLocale);
+  const localesArray = Object.keys(locales).filter(
+    (locale) => locales[locale as Locale],
+  );
 
-  if (pathname[3] === '/') {
-    // If an hypothetical locale is present in the pathname
-    // Redirect to said locale's homepage
-    const locale = pathname.slice(1, 3);
-    redirect(`/${locale}`);
-    /**
-     * We are not checking if the locale has a homepage
-     * because, if it doesn't, a new 404 page will be shown and
-     * the check at line 7 will redirect to the default locale's homepage.
-     * This is done in an effort to maintain the user's locale preference.
-     **/
-  }
-
-  // No locale has been specified, simply redirect to the default locale's homepage
-  redirect('/');
+  return (
+    <ThemeProvider theme={theme}>
+      <html lang={defaultLocale}>
+        <body style={{ margin: 0 }}>
+          {preHeaderProps && (
+            <PreHeader
+              {...preHeaderProps}
+              themeVariant={themeVariant}
+              locale={defaultLocale}
+              defaultLocale={defaultLocale}
+            />
+          )}
+          <Header
+            {...headerProps}
+            locale={defaultLocale}
+            defaultLocale={defaultLocale}
+          />
+          <NotFoundPage
+            defaultLocale={defaultLocale}
+            validLocales={localesArray as Array<Locale>}
+          />
+          <Footer
+            {...footerProps}
+            locales={localesArray as Array<Locale>}
+            defaultLocale={defaultLocale}
+          />
+        </body>
+      </html>
+    </ThemeProvider>
+  );
 };
 
 export default NotFound;

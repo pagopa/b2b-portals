@@ -34,7 +34,7 @@ const Template: StoryFn<StorybookPreHeaderProps> = (args) => (
   <StorybookPreHeader {...args} />
 );
 
-export const PreHeaderDefault = Template.bind({});
+export const PreHeaderDefault: StoryFn<typeof StorybookPreHeader> = Template.bind({});
 PreHeaderDefault.args = {
   leftText: 'PagoPA S.p.A.',
   rightText: 'Assistenza',

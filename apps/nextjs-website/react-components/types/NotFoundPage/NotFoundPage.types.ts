@@ -1,7 +1,7 @@
-import { SectionProps } from '@react-components/types/common/Common.types';
+type Locale = 'it' | 'en' | 'fr' | 'de' | 'sl';
 
-export interface NotFoundPageProps extends SectionProps {
-  redirectUrl: string;
+export interface NotFoundPageProps {
   disableRedirect?: boolean;
-  locale: 'it' | 'en' | 'fr' | 'de' | 'sl';
+  defaultLocale: Locale;
+  validLocales: Array<Locale>;
 }

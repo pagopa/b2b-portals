@@ -21,7 +21,7 @@ export default meta;
 
 const Template: StoryFn<Props> = (args) => <StorybookFooter {...args} />;
 
-export const Default = Template.bind({});
+export const Default: StoryFn<typeof StorybookFooter> = Template.bind({});
 Default.args = {
   showFundedByNextGenerationEULogo: true,
 };
