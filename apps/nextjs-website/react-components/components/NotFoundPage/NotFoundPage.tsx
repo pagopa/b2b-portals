@@ -12,34 +12,39 @@ import EmptyImage from '@react-components/assets/Empty.png';
 
 const localizedTexts = {
   it: {
-    title: 'Pagina non trovata',
-    body: 'Oops! La pagina che stai cercando non è disponibile.',
+    title: 'Qui non c’è nulla!',
+    bodyLine1: 'La pagina che cercavi non esiste o non è più disponibile.',
+    bodyLine2: 'Non preoccuparti, tornerai alla home tra pochi secondi…',
     redirectIntroText: 'Se il reindirizzamento non avviene,',
-    redirectText: 'clicca qui per tornare alla home',
+    redirectText: 'torna alla home da qui',
   },
   en: {
-    title: 'Page not found',
-    body: 'Oops! The page you are looking for is not available.',
-    redirectIntroText: 'If the redirect does not happen,',
-    redirectText: 'click here to go back to the homepage',
+    title: 'There’s nothing here!',
+    bodyLine1: 'The page you were looking for doesn’t exist or is no longer available.',
+    bodyLine2: 'Don’t worry, you’ll be redirected to the homepage in a few seconds…',
+    redirectIntroText: 'If the redirect doesn’t happen,',
+    redirectText: 'go back to the homepage here',
   },
   fr: {
-    title: 'Page non trouvée',
-    body: 'Oops ! La page que vous recherchez est introuvable.',
+    title: 'Il n’y a rien ici !',
+    bodyLine1: 'La page que vous cherchez n’existe pas ou n’est plus disponible.',
+    bodyLine2: 'Ne vous inquiétez pas, vous serez redirigé vers la page d’accueil dans quelques secondes…',
     redirectIntroText: 'Si la redirection ne fonctionne pas,',
-    redirectText: 'cliquez ici pour revenir à la page d’accueil',
+    redirectText: 'retournez à la page d’accueil ici',
   },
   de: {
-    title: 'Seite nicht gefunden',
-    body: 'Die Seite, die Sie suchen, ist nicht verfügbar.',
+    title: 'Hier gibt’s nichts!',
+    bodyLine1: 'Die Seite, die du suchst, existiert nicht oder ist nicht mehr verfügbar.',
+    bodyLine2: 'Keine Sorge, du wirst in wenigen Sekunden zur Startseite weitergeleitet…',
     redirectIntroText: 'Wenn die Weiterleitung nicht erfolgt,',
-    redirectText: 'klicken Sie hier, um zur Startseite zurückzukehren',
+    redirectText: 'gehe hier zurück zur Startseite',
   },
   sl: {
-    title: 'Stran ni najdena',
-    body: 'Stran, ki jo iščete, ni na voljo.',
-    redirectIntroText: 'Če preusmeritev ne uspe,',
-    redirectText: 'kliknite tukaj za vrnitev na domačo stran',
+    title: 'Tu ni ničesar!',
+    bodyLine1: 'Stran, ki jo iščete, ne obstaja ali ni več na voljo.',
+    bodyLine2: 'Brez skrbi, čez nekaj sekund boste preusmerjeni na domačo stran…',
+    redirectIntroText: 'Če preusmeritev ne deluje,',
+    redirectText: 'se tukaj vrnite na domačo stran',
   },
 };
 
@@ -105,7 +110,10 @@ const NotFoundPage = ({
         </Typography>
 
         <Typography variant='body1' sx={{ color: textColor }}>
-          {texts.body}
+          {texts.bodyLine1}
+        </Typography>
+        <Typography variant='body1' sx={{ color: textColor }}>
+          {texts.bodyLine2}
         </Typography>
 
         <Typography
