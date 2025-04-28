@@ -28,7 +28,7 @@ import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
 const MegaHeader = ({
   logo,
   ctaButton,
-  appCtaButton,
+  mobileCtaButton,
   trackSublinkClickEvent,
   menuItems,
   drawer,
@@ -54,7 +54,7 @@ const MegaHeader = ({
 
   const activeCta =
     menuItems.find(isActiveLink)?.ctaButton ??
-    (isMobile && appCtaButton ? appCtaButton : ctaButton);
+    (isMobile && mobileCtaButton ? mobileCtaButton : ctaButton);
 
   const handleClick = (
     event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,

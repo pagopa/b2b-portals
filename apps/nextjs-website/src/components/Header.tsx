@@ -33,37 +33,6 @@ const LinkLabelValues = {
   sl: 'NOVO',
 };
 
-const openAppStore = ({
-  appStoreLink,
-  googleStoreLink,
-  fallbackLink,
-}: {
-  appStoreLink: string;
-  googleStoreLink: string;
-  fallbackLink: string;
-}): void => {
-  // Detect OS
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  const isWindowsPhone = /windows phone/i.test(userAgent);
-  const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-  const isAndroid = /android/i.test(userAgent);
-
-  if (isWindowsPhone) {
-    // Check windows phone first because recent windows phone user agents contain "Android" and "iPhone"
-    // eslint-disable-next-line functional/immutable-data
-    window.location.href = fallbackLink;
-  } else if (isIOS) {
-    // eslint-disable-next-line functional/immutable-data
-    window.location.href = appStoreLink;
-  } else if (isAndroid) {
-    // eslint-disable-next-line functional/immutable-data
-    window.location.href = googleStoreLink;
-  } else {
-    // eslint-disable-next-line functional/immutable-data
-    window.location.href = fallbackLink;
-  }
-};
-
 const makeHeaderSublink = (
   sublink: HeaderSublink,
 ): { label: string; href: string; badge?: string } => ({
@@ -152,7 +121,7 @@ const makeMegaHeaderProps = (
     ctaButton,
     menu,
     drawer,
-    appCtaButton,
+    mobileCtaButton,
     mixpanelCtaClickEvent,
   }: MegaHeaderData,
   locale: Locale,
@@ -165,12 +134,10 @@ const makeMegaHeaderProps = (
       ...(mixpanelCtaClickEvent && { trackEvent: mixpanelCtaClickEvent }),
     },
   }),
-  ...(appCtaButton && {
-    appCtaButton: {
-      text: appCtaButton.text,
-      variant: appCtaButton.variant,
-      size: appCtaButton.size,
-      onClick: () => openAppStore(appCtaButton),
+  ...(mobileCtaButton && {
+    mobileCtaButton: {
+      ...mobileCtaButton,
+      ...(mobileCtaButton.icon && { startIcon: Icon(mobileCtaButton.icon) }),
       ...(mixpanelCtaClickEvent && { trackEvent: mixpanelCtaClickEvent }),
     },
   }),
