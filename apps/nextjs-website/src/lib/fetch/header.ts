@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { CTAButtonAppCodec, CTAButtonSimpleCodec } from './types/CTAButton';
+import { CTAButtonSimpleCodec } from './types/CTAButton';
 import {
   StrapiImageRequiredArraySchema,
   StrapiImageRequiredSchema,
@@ -98,7 +98,7 @@ const MegaHeaderCodec = t.strict({
   logo: StrapiImageRequiredSchema,
   mixpanelCtaClickEvent: t.union([t.string, t.null]),
   ctaButton: t.union([CTAButtonSimpleCodec, t.null]),
-  appCtaButton: t.union([CTAButtonAppCodec, t.null]),
+  mobileCtaButton: t.union([CTAButtonSimpleCodec, t.null]),
   drawer: t.union([SideDrawerCodec, t.null]),
   menu: MegaMenuCodec,
 });
@@ -128,7 +128,7 @@ export const getHeader = ({
       `${extractTenantStrapiApiData(config).baseUrl}/api/header?locale=${locale}
 &populate[0]=header.logo
 &populate[1]=header.ctaButton
-&populate[2]=header.appCtaButton
+&populate[2]=header.mobileCtaButton
 &populate[3]=header.menu.links.page
 &populate[4]=header.menu.links.ctaButton
 &populate[5]=header.menu.links.sublinks.page
