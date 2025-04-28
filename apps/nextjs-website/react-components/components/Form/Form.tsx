@@ -46,6 +46,10 @@ const Form = ({
   buttonLabel,
   notes,
   background,
+  labelName,
+  labelSurname,
+  labelEmail,
+  labelOrganization,
 }: FormProps) => {
   const textColor = TextColor(theme);
   const graylinkColor = GrayLinkColor(theme);
@@ -149,7 +153,7 @@ const Form = ({
               organization: showOrganization ? formData.organization : 'none',
             }),
           }),
-        },
+        }
       );
 
       const { email } = await res.json();
@@ -208,22 +212,22 @@ const Form = ({
   const inputFields: InputFieldData[] = [
     {
       name: 'name',
-      placeholder: 'Nome*',
+      placeholder: `${labelName ?? 'Nome'}*`,
       show: showName,
     },
     {
       name: 'surname',
-      placeholder: 'Cognome*',
+      placeholder: `${labelSurname ?? 'Cognome'}*`,
       show: showSurname,
     },
     {
       name: 'email',
-      placeholder: 'Indirizzo e-mail*',
+      placeholder: `${labelEmail ?? 'Indirizzo e-mail'}*`,
       show: true,
     },
     {
       name: 'organization',
-      placeholder: 'Nome ente*',
+      placeholder: `${labelOrganization ?? 'Nome ente'}*`,
       show: showOrganization,
     },
   ];
