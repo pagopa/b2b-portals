@@ -30,13 +30,13 @@
       "repeatable": false,
       "component": "headers.header-drawer"
     },
-    "appCtaButton": {
-      "type": "component",
-      "repeatable": false,
-      "component": "components.cta-button-app"
-    },
     "mixpanelCtaClickEvent": {
       "type": "string"
+    },
+    "mobileCtaButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.cta-button-simple"
     }
   }
 }

@@ -23,6 +23,6 @@ export interface MegaHeaderProps {
     href: string;
   }
   ctaButton?: CtaButtonProps;
-  appCtaButton?: CtaButtonProps;
+  mobileCtaButton?: CtaButtonProps;
   drawer?: HeaderSideDrawerProps;
 }
