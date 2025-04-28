@@ -75,7 +75,7 @@ const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
     text: 'CTA',
     variant: 'contained',
   },
-  appCtaButton: null,
+  mobileCtaButton: null,
   drawer: null,
   mixpanelCtaClickEvent: null,
 };
