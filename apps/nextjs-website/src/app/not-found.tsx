@@ -6,6 +6,7 @@ import {
   getHeaderProps,
   getPreHeaderProps,
   getSiteWideSEO,
+  isPreviewMode,
 } from '@/lib/api';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
@@ -13,6 +14,10 @@ import Footer from '@/components/Footer';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 
 const NotFound = async () => {
+  if (isPreviewMode()) {
+    return null;
+  }
+
   const { defaultLocale, locales, themeVariant } = await getSiteWideSEO();
 
   const preHeaderProps = await getPreHeaderProps(defaultLocale);
