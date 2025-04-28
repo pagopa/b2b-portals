@@ -46,10 +46,10 @@ const Form = ({
   buttonLabel,
   notes,
   background,
-  labelName,
-  labelSurname,
-  labelEmail,
-  labelOrganization,
+  placeholderName,
+  placeholderSurname,
+  placeholderEmail,
+  placeholderOrganization,
 }: FormProps) => {
   const textColor = TextColor(theme);
   const graylinkColor = GrayLinkColor(theme);
@@ -212,22 +212,22 @@ const Form = ({
   const inputFields: InputFieldData[] = [
     {
       name: 'name',
-      placeholder: `${labelName ?? 'Nome'}*`,
+      placeholder: `${placeholderName ?? 'Nome'}*`,
       show: showName,
     },
     {
       name: 'surname',
-      placeholder: `${labelSurname ?? 'Cognome'}*`,
+      placeholder: `${placeholderSurname ?? 'Cognome'}*`,
       show: showSurname,
     },
     {
       name: 'email',
-      placeholder: `${labelEmail ?? 'Indirizzo e-mail'}*`,
+      placeholder: `${placeholderEmail ?? 'Indirizzo e-mail'}*`,
       show: true,
     },
     {
       name: 'organization',
-      placeholder: `${labelOrganization ?? 'Nome ente'}*`,
+      placeholder: `${placeholderOrganization ?? 'Nome ente'}*`,
       show: showOrganization,
     },
   ];

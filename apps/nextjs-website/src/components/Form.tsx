@@ -15,10 +15,10 @@ const makeFormProps = ({
   buttonLabel,
   notes,
   background,
-  labelName,
-  labelSurname,
-  labelEmail,
-  labelOrganization,
+  placeholderName,
+  placeholderSurname,
+  placeholderEmail,
+  placeholderOrganization,
   ...rest
 }: FormSection & SiteWidePageData): FormProps => ({
   categories: categories.map(({ additionalInfo, ...category }) => ({
@@ -37,10 +37,10 @@ const makeFormProps = ({
       srcSet: makeSrcSetFromStrapiImageData(background),
     },
   }),
-  ...(labelName && { labelName }),
-  ...(labelSurname && { labelSurname }),
-  ...(labelEmail && { labelEmail }),
-  ...(labelOrganization && { labelOrganization }),
+  ...(placeholderName && { placeholderName }),
+  ...(placeholderSurname && { placeholderSurname }),
+  ...(placeholderEmail && { placeholderEmail }),
+  ...(placeholderOrganization && { placeholderOrganization }),
   ...rest,
 });
 

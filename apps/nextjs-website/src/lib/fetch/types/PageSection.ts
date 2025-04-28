@@ -221,10 +221,10 @@ const FormSectionCodec = t.strict({
   buttonLabel: t.string,
   notes: t.union([t.string, t.null]),
   background: StrapiImageSchema,
-  labelName: t.union([t.string, t.null]),
-  labelSurname: t.union([t.string, t.null]),
-  labelEmail: t.union([t.string, t.null]),
-  labelOrganization: t.union([t.string, t.null]),
+  placeholderName: t.union([t.string, t.null]),
+  placeholderSurname: t.union([t.string, t.null]),
+  placeholderEmail: t.union([t.string, t.null]),
+  placeholderOrganization: t.union([t.string, t.null]),
 });
 
 const CounterCodec = t.strict({
