@@ -21,6 +21,45 @@ resource "aws_cloudfront_response_headers_policy" "websites" {
   }
 }
 
+import {
+  to = aws_cloudfront_response_headers_policy.custom["appio"]
+  id = "6c76a5e1-206e-4e8a-b7ca-39076b1af3ee"
+}
+
+resource "aws_cloudfront_response_headers_policy" "custom" {
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if length(config.custom_headers) > 0 || config.content_security_policy != null
+  }
+  name    = "custom-${each.key}"
+  comment = "Response custom headers for ${each.key} static website"
+
+  dynamic "custom_headers_config" {
+    for_each = length(var.cdn_custom_headers) > 0 || each.value.cdn_indexing_enable ? ["dummy"] : []
+    content {
+      dynamic "items" {
+        for_each = each.value.cdn_indexing_enable ? concat(each.value.custom_headers, var.cdn_custom_headers) : each.value.custom_headers
+        content {
+          header   = items.value.header
+          override = items.value.override
+          value    = items.value.value
+        }
+      }
+    }
+  }
+
+  dynamic "security_headers_config" {
+    for_each = each.value.content_security_policy != null ? ["dummy"] : []
+    content {
+      content_security_policy {
+        content_security_policy = each.value.content_security_policy
+        override                = true
+      }
+    }
+  }
+}
+
 ## Function to manipulate the request
 resource "aws_cloudfront_function" "website_viewer_request_handler" {
   name    = "website-viewer-request-handler"
@@ -64,7 +103,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
     allowed_methods            = ["GET", "HEAD", "OPTIONS"]
     cached_methods             = ["GET", "HEAD"]
     target_origin_id           = aws_s3_bucket.website.bucket
-    response_headers_policy_id = each.value.cdn_indexing_enable ? aws_cloudfront_response_headers_policy.websites.id : null
+    response_headers_policy_id = length(each.value.custom_headers) > 0 || each.value.content_security_policy != null || each.value.cdn_indexing_enable ? aws_cloudfront_response_headers_policy.custom[each.key].id : null
 
     forwarded_values {
       query_string = false
