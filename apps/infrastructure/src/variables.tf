@@ -75,6 +75,12 @@ variable "websites_configs" {
     cdn_use_custom_certificate = bool
     cdn_use_alias              = bool
     cdn_indexing_enable        = bool
+    custom_headers             = optional(list(object({
+      header   = string
+      override = optional(bool, true)
+      value    = string
+    })), [])
+    content_security_policy = optional(string, null)
   }))
 
   default = {
@@ -95,6 +101,7 @@ variable "websites_configs" {
       cdn_use_custom_certificate = true
       cdn_use_alias              = true
       cdn_indexing_enable        = false
+      content_security_policy    = "script-src-elem 'self' 'unsafe-inline' https://cdn.mxpnl.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js https://cdn.cookielaw.org/scripttemplates/otSDKStub.js https://cdn.cookielaw.org https://recaptcha.net https://www.gstatic.com; img-src 'self' https://d3qjb3tf4m0ri0.cloudfront.net https://cdn.cookielaw.org data:; frame-src https://recaptcha.net https://io.italia.it https://io.italia.it/enti-embeddable https://d2ekco8qmvzmh1.cloudfront.net https://d3qjb3tf4m0ri0.cloudfront.net;"
     },
     "demo" = {
       origin_path                = "/demo"
