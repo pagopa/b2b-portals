@@ -36,7 +36,7 @@ resource "aws_cloudfront_response_headers_policy" "custom" {
   comment = "Response custom headers for ${each.key} static website"
 
   dynamic "custom_headers_config" {
-    for_each = length(var.cdn_custom_headers) > 0 ? ["dummy"] : []
+    for_each = length(var.cdn_custom_headers) > 0 || each.value.cdn_indexing_enable ? ["dummy"] : []
     content {
       dynamic "items" {
         for_each = each.value.cdn_indexing_enable ? concat(each.value.custom_headers, var.cdn_custom_headers) : each.value.custom_headers
