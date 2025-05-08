@@ -75,7 +75,7 @@ variable "websites_configs" {
     cdn_use_custom_certificate = bool
     cdn_use_alias              = bool
     cdn_indexing_enable        = bool
-    custom_headers             = optional(list(object({
+    custom_headers = optional(list(object({
       header   = string
       override = optional(bool, true)
       value    = string
