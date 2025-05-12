@@ -37,8 +37,8 @@ jobs:
         with:
           environment: ${{ inputs.environment }}
           iam_role: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
-          bucket: ${{ vars.S3_BUCKET_NAME }}
-          cloudfront_distribution_id: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+          bucket: ${{ vars.S3_STAGING_BUCKET_NAME }}
+          cloudfront_distribution_id: ${{ vars.CLOUDFRONT_STAGING_DISTRIBUTION_ID }}
           send_strapi_api_token: ${{ secrets.SEND_STRAPI_TOKEN }}
           send_strapi_api_base_url: ${{ vars.SEND_STRAPI_URL }}
           appio_strapi_api_token: ${{ secrets.APPIO_STRAPI_TOKEN }}
