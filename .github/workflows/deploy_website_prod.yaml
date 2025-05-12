@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'The Tenant for which the static site will be moved to production'
+        description: 'The Tenant for which the static site will be promoted to production'
         type: choice
         required: true
         options:
