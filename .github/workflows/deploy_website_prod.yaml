@@ -1,10 +1,10 @@
-name: Deploy Website (Staging)
+name: Deploy Website (Production)
 
 on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'The Tenant for which the static site will be built'
+        description: 'The Tenant for which the static site will be moved to production'
         type: choice
         required: true
         options:
@@ -19,8 +19,8 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
-    name: Deploy to S3 - (${{ inputs.environment }})
+  promote-to-prod:
+    name: Promote to production S3 - (${{ inputs.environment }})
     runs-on: 'ubuntu-latest'
     environment: ${{ inputs.environment }}
 
@@ -29,12 +29,19 @@ jobs:
       cancel-in-progress: false
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
-
-      - name: Deploy website
-        uses: ./.github/actions/deploy
+      - name: Configure AWS credentials
+        uses: ./.github/actions/configure-aws-credentials
         with:
+          aws_region: eu-south-1
+          role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
+
+      - name: Sync from staging to production
+        shell: bash
+        run: aws s3 sync ${{ vars.S3_STAGING_BUCKET_NAME }} ${{ vars.S3_PROD_BUCKET_NAME }} --delete
+
+      - name: Create AWS Cloudfront Invalidation
+        shell: bash
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*" # At the moment we invalidate all the paths
           environment: ${{ inputs.environment }}
           iam_role: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
           bucket: ${{ vars.S3_BUCKET_NAME }}
