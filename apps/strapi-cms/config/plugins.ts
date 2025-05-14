@@ -19,6 +19,20 @@ export default ({ env }: any) => ({
       },
     },
   },
+  email: {
+    config: {
+      provider: 'amazon-ses',
+      providerOptions: {
+        key: env('AWS_ACCESS_KEY_ID'),
+        secret: env('AWS_ACCESS_SECRET'),
+        amazon: `https://email.${env('AWS_REGION', 'eu-south-1')}.amazonaws.com`,
+      },
+      settings: {
+        defaultFrom: 'no-reply@b2bportals.pagopa.it',
+        defaultReplyTo: 'no-reply@b2bportals.pagopa.it',
+      },
+    },
+  },
   'static-deploy': {
     enabled: true,
     config: {
