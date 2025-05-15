@@ -11,4 +11,7 @@ export default ({ env }: any) => ({
     },
   },
   autoOpen: false,
+  forgotPassword: {
+    emailTemplate: 'Testing coded configuration'
+  }
 });
