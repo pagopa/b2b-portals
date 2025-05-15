@@ -12,6 +12,10 @@ export default ({ env }: any) => ({
   },
   autoOpen: false,
   forgotPassword: {
-    emailTemplate: 'Testing coded configuration'
+    emailTemplate: {
+      subject: "Strapi - Password Reset",
+      text: 'Admin configuration template testing',
+      html: '<p>Admin configuration <em>template</em> testing</p>'
+    }
   }
 });
