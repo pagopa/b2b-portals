@@ -91,6 +91,10 @@
       {
         "name": "ENVIRONMENT",
         "value": "${environment}"
+      },
+      {
+        "name": "ADMIN_PANEL_URL",
+        "value": "${admin_panel_url}"
       }
     ],
     "secrets" : [
