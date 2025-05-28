@@ -4,8 +4,10 @@ on:
   pull_request:
     paths:
       - 'apps/nextjs-website/**'
-      - '.github/actions/dry-build/**'
       - '.github/workflows/dry_build.yaml'
+
+permissions:
+  contents: read
 
 jobs:
   dry_build:
@@ -16,5 +18,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run dry build action
-        uses: ./.github/actions/dry-build
+      - name: Setup Node.JS
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile packages
+        run: npm run compile
+
+      - name: Run Dry Build
+        run: npm run build:dry
+        working-directory: apps/nextjs-website
