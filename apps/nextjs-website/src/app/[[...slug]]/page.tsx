@@ -14,6 +14,8 @@ type PageParams = {
   params: { slug?: string[] };
 };
 
+const isDryBuild = process.env['USE_MOCK'] === 'true';
+
 // Statically generate routes at build time instead of on-demand at request time.
 // more: https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params
 export const generateStaticParams = async (): Promise<
@@ -25,7 +27,7 @@ export const generateStaticParams = async (): Promise<
   // not satisfy the constraint '{ __tag__: "generateStaticParams";
   // __return_type__: any[] | Promise<any[]>; }'.
 
-  if (isPreviewMode()) {
+  if (isPreviewMode() || isDryBuild) {
     return [];
   }
 
@@ -69,6 +71,10 @@ export const generateStaticParams = async (): Promise<
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
+  if (isDryBuild) {
+    return {};
+  }
+
   const { slug } = params;
   const { defaultLocale, ...siteWideSEO } = await getSiteWideSEO();
 
@@ -121,7 +127,7 @@ export async function generateMetadata({
 
 const Page = async ({ params }: PageParams) => {
   // Prevent any page other than /preview from showing when in Preview Mode
-  if (isPreviewMode()) {
+  if (isPreviewMode() || isDryBuild) {
     return null;
   }
 

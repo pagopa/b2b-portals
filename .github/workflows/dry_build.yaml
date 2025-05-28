@@ -1,0 +1,20 @@
+name: Dry Build
+
+on:
+  pull_request:
+    paths:
+      - 'apps/nextjs-website/**'
+      - '.github/actions/dry-build/**'
+      - '.github/workflows/dry_build.yaml'
+
+jobs:
+  dry_build:
+    name: Run Dry Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run dry build action
+        uses: ./.github/actions/dry-build

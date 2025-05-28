@@ -1,0 +1,21 @@
+name: "Dry Build"
+description: "Run a dry Next.js build using mock data"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node.JS
+      uses: ./.github/actions/setup-node
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Compile packages
+      shell: bash
+      run: npm run compile
+
+    - name: Run Dry Build
+      shell: bash
+      run: node scripts/dry-build.js
+      working-directory: apps/nextjs-website

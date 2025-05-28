@@ -18,6 +18,19 @@ const NotFound = async () => {
     return null;
   }
 
+  const isDryBuild = process.env['USE_MOCK'] === 'true';
+  if (isDryBuild) {
+    return (
+      <ThemeProvider theme={theme}>
+        <html lang='it'>
+          <body style={{ margin: 0 }}>
+            <NotFoundPage defaultLocale='it' validLocales={['it']} />
+          </body>
+        </html>
+      </ThemeProvider>
+    );
+  }
+
   const { defaultLocale, locales, themeVariant } = await getSiteWideSEO();
 
   const preHeaderProps = await getPreHeaderProps(defaultLocale);

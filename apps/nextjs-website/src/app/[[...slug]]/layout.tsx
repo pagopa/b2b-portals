@@ -22,6 +22,8 @@ type LayoutProps = {
   params: { slug?: string[] };
 };
 
+const isDryBuild = process.env['USE_MOCK'] === 'true';
+
 // Same params as Page, we're later going to only extract the locale since the specific page's slug doesn't matter
 // We cannot extract the locale directly inside generateStaticParams
 // because, since the folder is called [[...slug]], NextJS will only populate params called slug
@@ -34,7 +36,7 @@ export const generateStaticParams = async (): Promise<
   // not satisfy the constraint '{ __tag__: "generateStaticParams";
   // __return_type__: any[] | Promise<any[]>; }'.
 
-  if (isPreviewMode()) {
+  if (isPreviewMode() || isDryBuild) {
     return [];
   }
 
@@ -81,6 +83,16 @@ export default async function Layout({
 }: LayoutProps) {
   if (isPreviewMode()) {
     return null;
+  }
+
+  if (isDryBuild) {
+    return (
+      <ThemeProvider theme={theme}>
+        <html lang='it'>
+          <body style={{ margin: 0 }}>`{children}`</body>
+        </html>
+      </ThemeProvider>
+    );
   }
 
   const siteWideSEO = await getSiteWideSEO();

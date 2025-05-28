@@ -25,6 +25,11 @@ import {
   pressReleaseToPageDataArray,
   previewPressReleaseToPreviewPageData,
 } from './pressRelease';
+import { footerMockData } from './__mocks__/footer.mock';
+import { preHeaderMockData } from './__mocks__/preHeader.mock';
+import { preFooterMockData } from './__mocks__/preFooter.mock';
+import { editorialMockData } from './__mocks__/editorial.mock';
+import { headerMockData } from './__mocks__/header.mock';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -35,10 +40,30 @@ const appEnv = pipe(
   }),
 );
 
+const isDryBuild = process.env['USE_MOCK'] === 'true';
+
 // Return all the pages
 export const getAllPages = async (
   locale: Locale,
 ): Promise<ReadonlyArray<PageData>> => {
+  if (isDryBuild) {
+    return [
+      {
+        slug: ['mock'],
+        seo: {
+          metaTitle: 'Mock Title',
+          metaDescription: 'Mock description',
+          keywords: 'mock,keywords',
+          canonicalURL: 'https://example.com/mock',
+          structuredData: {},
+          ogTitle: 'Mock OG Title',
+          ogDescription: 'Mock OG Description',
+        },
+        sections: [editorialMockData],
+      },
+    ];
+  }
+
   const navigation = await getNavigation({ ...appEnv, locale });
   const pressReleases = await getPressReleases({ ...appEnv, locale });
 
@@ -59,6 +84,7 @@ export const getPressReleasePages = async (
 export const getPreHeaderProps = async (
   locale: Locale,
 ): Promise<PreHeaderAttributes | null> => {
+  if (isDryBuild) return preHeaderMockData;
   const { data } = await getPreHeader({ ...appEnv, locale });
   return data;
 };
@@ -67,6 +93,7 @@ export const getHeaderProps = async (
   locale: Locale,
   defaultLocale: Locale,
 ): Promise<HeaderData['data']['header'][0]> => {
+  if (isDryBuild) return headerMockData;
   const { data } = await getHeader({ ...appEnv, locale });
   const header = data.header[0];
 
@@ -89,6 +116,7 @@ export const getHeaderProps = async (
 export const getFooterProps = async (
   locale: Locale,
 ): Promise<FooterData['data']> => {
+  if (isDryBuild) return footerMockData;
   const { data } = await getFooter({ ...appEnv, locale });
   return data;
 };
@@ -96,6 +124,7 @@ export const getFooterProps = async (
 export const getPreFooterProps = async (
   locale: Locale,
 ): Promise<PreFooterAttributes | null> => {
+  if (isDryBuild) return preFooterMockData;
   const { data } = await getPreFooter({ ...appEnv, locale });
   return data;
 };
@@ -114,6 +143,60 @@ export const getPageProps = async (
 };
 
 export const getSiteWideSEO = async (): Promise<SiteWideSEO['data']> => {
+  if (isDryBuild) {
+    return {
+      themeVariant: 'SEND',
+      defaultLocale: 'it',
+      locales: {
+        it: true,
+        en: false,
+        fr: false,
+        de: false,
+        sl: false,
+      },
+      metaImage: {
+        alternativeText: 'Mock Meta Image',
+        url: '/meta.jpg',
+        width: 1200,
+        height: 630,
+        mime: 'image/jpeg',
+        formats: {
+          small: { url: '/meta-small.jpg' },
+        },
+      },
+      favicon: {
+        alternativeText: 'Favicon',
+        url: '/favicon.ico',
+        width: 48,
+        height: 48,
+        mime: 'image/x-icon',
+        formats: {
+          small: { url: '/favicon-small.ico' },
+        },
+      },
+      appleTouchIcon: {
+        alternativeText: 'Apple Touch Icon',
+        url: '/apple-touch-icon.png',
+        width: 180,
+        height: 180,
+        mime: 'image/png',
+        formats: {
+          small: { url: '/apple-touch-icon-small.png' },
+        },
+      },
+      analytics: {
+        oneTrustDomainID: 'mock-onetrust-id',
+        mixpanel: {
+          token: 'mock-token',
+          apiHost: null,
+          cookieDomain: null,
+          debug: false,
+          ip: false,
+        },
+      },
+    };
+  }
+
   const { data } = await fetchSiteWideSEO(appEnv);
 
   const localesArray = Object.keys(data.locales).filter(

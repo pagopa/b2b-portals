@@ -42,6 +42,17 @@ const PreviewPage = async ({
     return null;
   }
 
+  const isDryBuild = process.env['USE_MOCK'] === 'true';
+  if (isDryBuild) {
+    return (
+      <div>
+        <p style={{ padding: '2rem', textAlign: 'center' }}>
+          [Dry Build] Mock preview not available in this mode
+        </p>
+      </div>
+    );
+  }
+
   const type = searchParams.type;
   const secret = searchParams.secret;
   const documentID = searchParams.documentID;
@@ -50,7 +61,7 @@ const PreviewPage = async ({
   const previewToken = getPreviewToken();
 
   if (previewToken === undefined || secret !== previewToken) {
-    return <div>401: Unathorized request</div>;
+    return <div>401: Unauthorized request</div>;
   }
 
   if (documentID === undefined || tenant === undefined) {
