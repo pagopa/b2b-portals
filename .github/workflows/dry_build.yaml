@@ -14,6 +14,20 @@ jobs:
     name: Run Dry Build
     runs-on: ubuntu-latest
 
+    env:
+      PREVIEW_MODE: 'true'
+      PREVIEW_TOKEN: mock
+      ENVIRONMENT: demo
+      SEND_STRAPI_API_TOKEN: mock
+      SEND_STRAPI_API_BASE_URL: mock
+      APPIO_STRAPI_API_TOKEN: mock
+      APPIO_STRAPI_API_BASE_URL: mock
+      DEMO_STRAPI_API_TOKEN: mock
+      DEMO_STRAPI_API_BASE_URL: mock
+      INTEROP_STRAPI_API_TOKEN: mock
+      INTEROP_STRAPI_API_BASE_URL: mock
+      CDN_PATH: mock
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
