@@ -6,6 +6,7 @@
     "postbuild": "node scripts/postbuild.js",
     "build": "next build && npm run postbuild",
     "build-storybook": "storybook build",
+    "dry-build": "node scripts/drybuild.js",
     "clean": "shx rm -rf out/",
     "compile": "tsc --noEmit",
     "dev": "next dev",

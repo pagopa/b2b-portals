@@ -1,0 +1,49 @@
+name: Dry Build
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    paths:
+      - 'apps/nextjs-website/**'
+      - '.github/workflows/dry_build.yaml'
+
+jobs:
+  dry_build:
+    name: Run Dry Build
+    runs-on: ubuntu-latest
+
+    env:
+      PREVIEW_MODE: 'true'
+      PREVIEW_TOKEN: mock
+      ENVIRONMENT: demo
+      SEND_STRAPI_API_TOKEN: mock
+      SEND_STRAPI_API_BASE_URL: mock
+      APPIO_STRAPI_API_TOKEN: mock
+      APPIO_STRAPI_API_BASE_URL: mock
+      DEMO_STRAPI_API_TOKEN: mock
+      DEMO_STRAPI_API_BASE_URL: mock
+      INTEROP_STRAPI_API_TOKEN: mock
+      INTEROP_STRAPI_API_BASE_URL: mock
+      CDN_PATH: mock
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.JS
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile packages
+        run: npm run compile
+
+      - name: Run Dry Build
+        run: npm run dry-build
+        working-directory: apps/nextjs-website
