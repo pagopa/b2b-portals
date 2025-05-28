@@ -1,13 +1,13 @@
 name: Dry Build
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     paths:
       - 'apps/nextjs-website/**'
       - '.github/workflows/dry_build.yaml'
-
-permissions:
-  contents: read
 
 jobs:
   dry_build:
