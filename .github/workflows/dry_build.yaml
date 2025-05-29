@@ -1,8 +1,5 @@
 name: Dry Build
 
-permissions:
-  contents: read
-
 on:
   pull_request:
 
