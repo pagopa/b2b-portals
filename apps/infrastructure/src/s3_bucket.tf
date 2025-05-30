@@ -78,3 +78,30 @@ resource "aws_s3_bucket_policy" "cloudfront_cms_multitenant" {
   bucket = aws_s3_bucket.cms_multitenant_medialibrary_bucket[each.key].id
   policy = data.aws_iam_policy_document.cms_multitenant_iam_policy[each.key].json
 }
+
+
+# Staging
+
+resource "aws_s3_bucket" "website_staging" {
+  bucket = "website-bucket-staging-${random_integer.website_bucket_random_integer.result}"
+}
+
+resource "aws_s3_bucket_public_access_block" "website_staging" {
+  bucket                  = aws_s3_bucket.website_staging.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_versioning" "website_staging" {
+  bucket = aws_s3_bucket.website_staging.id
+  versioning_configuration {
+    status = "Disabled"
+  }
+}
+
+resource "aws_s3_bucket_policy" "cloudfront_staging" {
+  bucket = aws_s3_bucket.website_staging.id
+  policy = data.aws_iam_policy_document.website_staging_iam_policy.json
+}
