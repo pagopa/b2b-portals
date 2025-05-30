@@ -122,61 +122,61 @@ const expectedOutput = {
   allAssets: {
     data: {
       image: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: {
           small: {
-            url: '/small/asset.jpg',
+            url: '/assets/small/asset.jpg',
           },
           medium: {
-            url: '/medium/asset.jpg',
+            url: '/assets/medium/asset.jpg',
           },
           large: {
-            url: '/large/asset.jpg',
+            url: '/assets/large/asset.jpg',
           },
         },
       },
       mobileImage: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: {
           small: {
-            url: '/small/asset.jpg',
+            url: '/assets/small/asset.jpg',
           },
         },
       },
       background: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: null,
       },
       icon: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: null,
       },
       logo: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: null,
       },
       metaImage: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: null,
       },
       favicon: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: null,
       },
       appleTouchIcon: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: null,
       },
       thumbnail: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: null,
       },
       resource: {
-        url: '/asset.pdf',
+        url: '/assets/asset.pdf',
         formats: null,
       },
       video: {
-        url: '/asset.mp4',
+        url: '/assets/asset.mp4',
         formats: null,
       },
     },
@@ -187,7 +187,7 @@ const expectedOutput = {
         secondLevel: {
           thirdLevel: {
             image: {
-              url: '/asset.jpg',
+              url: '/assets/asset.jpg',
               formats: null,
             },
           },
@@ -199,7 +199,7 @@ const expectedOutput = {
     data: {
       full: {
         image: {
-          url: '/asset.jpg',
+          url: '/assets/asset.jpg',
           formats: null,
         },
       },
@@ -215,7 +215,7 @@ const expectedOutput = {
     data: {
       formURL: 'https://example.com/endpoint',
       image: {
-        url: '/asset.jpg',
+        url: '/assets/asset.jpg',
         formats: null,
       },
     },
@@ -224,7 +224,7 @@ const expectedOutput = {
     data: {
       asset: {
         image: {
-          url: '/asset.jpg',
+          url: '/assets/asset.jpg',
           formats: null,
         },
       },
