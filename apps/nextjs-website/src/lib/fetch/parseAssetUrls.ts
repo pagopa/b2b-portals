@@ -19,7 +19,7 @@ const makeURLRelative = (URL: string): string => {
   if (URL.startsWith('http')) {
     // Assuming an URL formed like the following: https://example.com/asset.jpg
     // Remove https://example.com, aka everything up to the 3rd forward slash
-    return '/' + URL.split('/').slice(3).join('/');
+    return '/assets/' + URL.split('/').slice(3).join('/');
   } else {
     return URL;
   }
