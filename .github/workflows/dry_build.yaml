@@ -1,0 +1,46 @@
+name: Dry Build
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+
+jobs:
+  dry_build:
+    name: Run Dry Build
+    runs-on: ubuntu-latest
+
+    env:
+      PREVIEW_MODE: 'true'
+      PREVIEW_TOKEN: mock
+      ENVIRONMENT: demo
+      SEND_STRAPI_API_TOKEN: mock
+      SEND_STRAPI_API_BASE_URL: mock
+      APPIO_STRAPI_API_TOKEN: mock
+      APPIO_STRAPI_API_BASE_URL: mock
+      DEMO_STRAPI_API_TOKEN: mock
+      DEMO_STRAPI_API_BASE_URL: mock
+      INTEROP_STRAPI_API_TOKEN: mock
+      INTEROP_STRAPI_API_BASE_URL: mock
+      CDN_PATH: mock
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+
+      - name: Setup Node.JS
+        uses: ./.github/actions/setup-node
+
+      - name: Install dependencies
+        shell: bash
+        run: npm ci
+
+      - name: Compile packages
+        shell: bash
+        run: npm run compile
+
+      - name: Run Preview Build
+        shell: bash
+        run: npm run build
+        working-directory: apps/nextjs-website
