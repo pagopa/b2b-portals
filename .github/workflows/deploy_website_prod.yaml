@@ -1,4 +1,4 @@
-name: Deploy Website (Production)
+name: Promote Website to Production
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Deploy Website (Staging)
+name: Deploy Website to Staging
 
 on:
   workflow_dispatch:
@@ -41,10 +41,14 @@ jobs:
           cloudfront_distribution_id: ${{ vars.CLOUDFRONT_STAGING_DISTRIBUTION_ID }}
           send_strapi_api_token: ${{ secrets.SEND_STRAPI_TOKEN }}
           send_strapi_api_base_url: ${{ vars.SEND_STRAPI_URL }}
+          send_strapi_media_library: ${{ vars.SEND_STRAPI_MEDIA_LIBRARY_S3_BUCKET_NAME }}
           appio_strapi_api_token: ${{ secrets.APPIO_STRAPI_TOKEN }}
           appio_strapi_api_base_url: ${{ vars.APPIO_STRAPI_URL }}
+          appio_strapi_media_library: ${{ vars.APPIO_STRAPI_MEDIA_LIBRARY_S3_BUCKET_NAME }}
           demo_strapi_api_token: ${{ secrets.DEMO_STRAPI_TOKEN }}
           demo_strapi_api_base_url: ${{ vars.DEMO_STRAPI_URL }}
+          demo_strapi_media_library: ${{ vars.DEMO_STRAPI_MEDIA_LIBRARY_S3_BUCKET_NAME }}
           interop_strapi_api_token: ${{ secrets.INTEROP_STRAPI_TOKEN }}
           interop_strapi_api_base_url: ${{ vars.INTEROP_STRAPI_URL }}
+          interop_strapi_media_library: ${{ vars.INTEROP_STRAPI_MEDIA_LIBRARY_S3_BUCKET_NAME }}
           cdn_path: ${{ vars.CDN_PATH }}
