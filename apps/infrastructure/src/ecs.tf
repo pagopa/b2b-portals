@@ -91,6 +91,7 @@ resource "aws_ecs_task_definition" "cms_multitenant_task_def" {
     preview_url          = "https://preview.${keys(var.dns_domain_name)[0]}/preview"
     environment          = "${each.key}"
     db_schema            = "${each.key}"
+    admin_panel_url      = "https://${each.key}.${keys(var.dns_domain_name)[0]}"
   })
 }
 
