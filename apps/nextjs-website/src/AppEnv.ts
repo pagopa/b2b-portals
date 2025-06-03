@@ -43,9 +43,7 @@ export const makeAppEnv = (
         fetchFun: (input: RequestInfo | URL, init?: RequestInit) =>
           fetch(input, {
             ...init,
-            ...(process.env.NODE_ENV === 'development' && {
-              cache: 'no-store',
-            }),
+            cache: 'no-store',
           }),
       }),
     ),
