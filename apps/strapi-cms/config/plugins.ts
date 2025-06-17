@@ -40,7 +40,7 @@ export default ({ env }: any) => ({
       repo: env('REPO_NAME', 'b2b-portals'),
       workflowID: env('WORKFLOW_ID', 'deploy_website_prod.yaml'),
       branch: env('TARGET_BRANCH', 'main'),
-      githubToken: env('GITHUB_PAT'),
+      githubToken: env('GITHUB_PAT', 'test-token'),
       environment: env('ENVIRONMENT', 'demo'),
       staging: {
         workflowID: env('STAGING_WORKFLOW_ID', 'deploy_website_staging.yaml'),
