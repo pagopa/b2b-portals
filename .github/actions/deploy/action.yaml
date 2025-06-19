@@ -24,24 +24,36 @@ inputs:
   send_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
+  send_strapi_media_library:
+    description: "The name of the AWS S3 Bucket used by SEND's Strapi instance as Media Library"
+    required: true
   appio_strapi_api_token:
     description: 'The Token to communicate with Strapi'
     required: false
   appio_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
+  appio_strapi_media_library:
+    description: "The name of the AWS S3 Bucket used by APPIO's Strapi instance as Media Library"
+    required: true
   demo_strapi_api_token:
     description: 'The Token to communicate with Strapi'
     required: false
   demo_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
+  demo_strapi_media_library:
+    description: "The name of the AWS S3 Bucket used by DEMO's Strapi instance as Media Library"
+    required: true
   interop_strapi_api_token:
     description: 'The Token to communicate with Strapi'
     required: false
   interop_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
+  interop_strapi_media_library:
+    description: "The name of the AWS S3 Bucket used by INTEROP's Strapi instance as Media Library"
+    required: true
   cdn_path:
     description: 'The CDN bucket S3 URL'
     required: false
@@ -87,6 +99,26 @@ runs:
     - name: Deploy to S3 Bucket
       shell: bash
       run: aws s3 sync ./apps/nextjs-website/out s3://${{ inputs.bucket }}/${{ inputs.environment }} --delete
+
+    - name: Copy Media Library Assets - SEND
+      shell: bash
+      if: ${{ inputs.environment == 'send' }}
+      run: aws s3 sync s3://${{ inputs.send_strapi_media_library }} s3://${{ inputs.bucket }}/${{ inputs.environment }}/assets/ --delete --exact-timestamps
+
+    - name: Copy Media Library Assets - APPIO
+      shell: bash
+      if: ${{ inputs.environment == 'appio' }}
+      run: aws s3 sync s3://${{ inputs.appio_strapi_media_library }} s3://${{ inputs.bucket }}/${{ inputs.environment }}/assets/ --delete --exact-timestamps
+
+    - name: Copy Media Library Assets - DEMO
+      shell: bash
+      if: ${{ inputs.environment == 'demo' }}
+      run: aws s3 sync s3://${{ inputs.demo_strapi_media_library }} s3://${{ inputs.bucket }}/${{ inputs.environment }}/assets/ --delete --exact-timestamps
+
+    - name: Copy Media Library Assets - INTEROP
+      shell: bash
+      if: ${{ inputs.environment == 'interop' }}
+      run: aws s3 sync s3://${{ inputs.interop_strapi_media_library }} s3://${{ inputs.bucket }}/${{ inputs.environment }}/assets/ --delete --exact-timestamps
 
     - name: Create AWS Cloudfront Invalidation
       shell: bash
