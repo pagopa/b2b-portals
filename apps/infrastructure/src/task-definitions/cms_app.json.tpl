@@ -95,6 +95,14 @@
       {
         "name": "ADMIN_PANEL_URL",
         "value": "${admin_panel_url}"
+      },
+      {
+        "name": "STAGING_WORKFLOW_ID",
+        "value": "deploy_website_staging.yaml"
+      },
+      {
+        "name": "STAGING_TARGET_BRANCH",
+        "value": "main"
       }
     ],
     "secrets" : [
