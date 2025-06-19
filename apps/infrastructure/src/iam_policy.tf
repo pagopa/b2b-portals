@@ -169,7 +169,8 @@ resource "aws_iam_policy" "deploy_website" {
         ]
         Effect = "Allow"
         Resource = [
-          aws_s3_bucket.website.arn
+          aws_s3_bucket.website.arn,
+          aws_s3_bucket.website_staging.arn
         ]
       },
       {
