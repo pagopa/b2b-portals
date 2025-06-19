@@ -168,10 +168,12 @@ resource "aws_iam_policy" "deploy_website" {
           "s3:ListBucket"
         ]
         Effect = "Allow"
-        Resource = [
+        Resource = concat([
           aws_s3_bucket.website.arn,
-          aws_s3_bucket.website_staging.arn
-        ]
+          aws_s3_bucket.website_staging.arn,
+
+          ],
+        [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn])
       },
       {
         Action = [
