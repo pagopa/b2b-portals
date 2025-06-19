@@ -92,3 +92,32 @@ module "cms_multitenant_ssl_certificate" {
   validation_method   = "DNS"
   dns_ttl             = 3600
 }
+
+
+
+## Certificate HTTPS for Cloudfront Staging Websites
+module "cdn_websites_staging_ssl_certificate" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-acm.git?ref=8d0b22f1f242a1b36e29b8cb38aaeac9b887500d" # v5.0.0
+
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+  }
+
+  providers = {
+    aws = aws.us-east-1
+  }
+
+  domain_name = "staging.${each.key}.${keys(var.dns_domain_name)[0]}"
+  zone_id     = module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]]
+
+  wait_for_validation = true
+  validation_method   = "DNS"
+  dns_ttl             = 3600
+
+  create_route53_records = true
+
+  subject_alternative_names = [
+    "www.staging.${each.key}.${keys(var.dns_domain_name)[0]}"
+  ]
+}

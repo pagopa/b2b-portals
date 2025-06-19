@@ -84,7 +84,7 @@ resource "aws_ecs_task_definition" "cms_multitenant_task_def" {
     aws_bucket_endpoint  = "https://s3.${var.aws_region}.amazonaws.com"
     repo_owner           = "pagopa"
     repo_name            = "b2b-portals"
-    workflow_id          = "deploy_website.yaml"
+    workflow_id          = "deploy_website_prod.yaml"
     target_branch        = "main"
     github_pat           = aws_ssm_parameter.cms_github_pat.arn
     preview_token        = aws_ssm_parameter.preview_token.arn

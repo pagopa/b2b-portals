@@ -60,6 +60,23 @@ data "aws_iam_policy_document" "website_iam_policy" {
   }
 }
 
+data "aws_iam_policy_document" "website_staging_iam_policy" {
+  statement {
+    actions = ["s3:GetObject", "s3:ListBucket"]
+    resources = [
+      "${aws_s3_bucket.website_staging.arn}",
+      "${aws_s3_bucket.website_staging.arn}/*"
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.main.iam_arn]
+    }
+  }
+}
+
+
+
 data "aws_iam_policy_document" "task_role" {
   statement {
     effect  = "Allow"
