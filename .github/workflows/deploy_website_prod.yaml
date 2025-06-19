@@ -1,0 +1,44 @@
+name: Promote Website to Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'The Tenant for which the static site will be promoted to production'
+        type: choice
+        required: true
+        options:
+          - send
+          - appio
+          - demo
+          - interop
+
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  promote-to-prod:
+    name: Promote to production S3 - (${{ inputs.environment }})
+    runs-on: 'ubuntu-latest'
+    environment: ${{ inputs.environment }}
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ inputs.environment }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Configure AWS credentials
+        uses: ./.github/actions/configure-aws-credentials
+        with:
+          aws_region: eu-south-1
+          role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
+
+      - name: Sync from staging to production
+        shell: bash
+        run: aws s3 sync ${{ vars.S3_STAGING_BUCKET_NAME }} ${{ vars.S3_PROD_BUCKET_NAME }} --delete
+
+      - name: Create AWS Cloudfront Invalidation
+        shell: bash
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_PROD_DISTRIBUTION_ID }} --paths "/*" # At the moment we invalidate all the paths

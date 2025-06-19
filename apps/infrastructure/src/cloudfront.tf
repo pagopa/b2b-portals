@@ -251,3 +251,76 @@ resource "aws_cloudfront_distribution" "cms_multitenant_medialibrary" {
     cloudfront_default_certificate = true
   }
 }
+
+
+# Cloudfront staging distribution
+
+resource "aws_cloudfront_distribution" "cdn_multi_website_staging" {
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_distribution
+  }
+
+  origin {
+    domain_name = aws_s3_bucket.website_staging.bucket_regional_domain_name
+    origin_id   = aws_s3_bucket.website_staging.bucket
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.main.cloudfront_access_identity_path
+    }
+    origin_path = each.value.origin_path
+  }
+
+  enabled             = true # enable CloudFront distribution
+  is_ipv6_enabled     = true
+  comment             = "CloudFront distribution for the staging website ${each.key}"
+  default_root_object = "index.html"
+
+  aliases = ["staging.${each.key}.${keys(var.dns_domain_name)[0]}", "www.staging.${each.key}.${keys(var.dns_domain_name)[0]}"]
+
+  custom_error_response {
+    error_code         = 404
+    response_code      = 404
+    response_page_path = "/404.html"
+  }
+
+  default_cache_behavior {
+    # HTTPS requests we permit the distribution to serve
+    allowed_methods            = ["GET", "HEAD", "OPTIONS"]
+    cached_methods             = ["GET", "HEAD"]
+    target_origin_id           = aws_s3_bucket.website_staging.bucket
+    response_headers_policy_id = length(each.value.custom_headers) > 0 || each.value.content_security_policy != null || each.value.cdn_indexing_enable ? aws_cloudfront_response_headers_policy.custom[each.key].id : null
+
+    forwarded_values {
+      query_string = false
+      headers      = []
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0     # min time for objects to live in the distribution cache
+    default_ttl            = 3600  # default time for objects to live in the distribution cache
+    max_ttl                = 86400 # max time for objects to live in the distribution cache
+    compress               = true
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.website_viewer_request_handler.arn
+    }
+  }
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = false
+    acm_certificate_arn            = module.cdn_websites_staging_ssl_certificate[each.key].acm_certificate_arn
+    ssl_support_method             = "sni-only"
+    minimum_protocol_version       = "TLSv1.2_2021"
+  }
+}
