@@ -40,7 +40,7 @@ jobs:
 
       - name: Sync from staging to production
         shell: bash
-        run: aws s3 sync ${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} ${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete
+        run: aws s3 sync s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete --exact-timestamps
 
       - name: Create AWS Cloudfront Invalidation
         shell: bash
