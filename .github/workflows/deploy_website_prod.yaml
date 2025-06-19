@@ -29,6 +29,9 @@ jobs:
       cancel-in-progress: false
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+
       - name: Configure AWS credentials
         uses: ./.github/actions/configure-aws-credentials
         with:
@@ -37,7 +40,7 @@ jobs:
 
       - name: Sync from staging to production
         shell: bash
-        run: aws s3 sync ${{ vars.S3_STAGING_BUCKET_NAME }} ${{ vars.S3_PROD_BUCKET_NAME }} --delete
+        run: aws s3 sync s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete --exact-timestamps
 
       - name: Create AWS Cloudfront Invalidation
         shell: bash
