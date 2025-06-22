@@ -105,11 +105,11 @@ variable "websites_configs" {
     },
     "demo" = {
       origin_path                = "/demo"
-      url_tenant                 = "demo.b2bportals.pagopa.it"
-      create_certificate         = false
+      url_tenant                 = "demowebsite.b2bportals.pagopa.it"
+      create_certificate         = true
       create_distribution        = true
-      cdn_use_custom_certificate = false
-      cdn_use_alias              = false
+      cdn_use_custom_certificate = true
+      cdn_use_alias              = true
       cdn_indexing_enable        = false
     },
     "interop" = {
