@@ -16,6 +16,7 @@ import {
 import PreFooter from '@/components/PreFooter';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import ConsentHandler from '@/components/ConsentHandler';
+import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -104,6 +105,19 @@ export default async function Layout({
     (locale) => locales[locale as Locale],
   );
 
+  const slugWithoutLocale =
+    slug === undefined
+      ? []
+      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
+        ? slug.slice(1)
+        : slug;
+
+  const localizedLinks = await getLocalizedSlugs({
+    currentSlug: slugWithoutLocale,
+    defaultLocale,
+    availableLocales: localesArray as Locale[],
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <html lang={locale}>
@@ -132,8 +146,8 @@ export default async function Layout({
           )}
           <Footer
             {...footerProps}
-            locales={localesArray as Array<Locale>}
             defaultLocale={defaultLocale}
+            localizedLinks={localizedLinks}
           />
           <Script
             src='/scripts/otnotice-1.0.min.js'

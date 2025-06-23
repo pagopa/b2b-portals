@@ -12,6 +12,7 @@ import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Locale } from '@/lib/fetch/siteWideSEO';
+import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 
 const NotFound = async () => {
   if (isPreviewMode()) {
@@ -26,6 +27,12 @@ const NotFound = async () => {
   const localesArray = Object.keys(locales).filter(
     (locale) => locales[locale as Locale],
   );
+
+  const localizedLinks = await getLocalizedSlugs({
+    currentSlug: [],
+    defaultLocale,
+    availableLocales: localesArray as Locale[],
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -50,8 +57,8 @@ const NotFound = async () => {
           />
           <Footer
             {...footerProps}
-            locales={localesArray as Array<Locale>}
             defaultLocale={defaultLocale}
+            localizedLinks={localizedLinks}
           />
         </body>
       </html>

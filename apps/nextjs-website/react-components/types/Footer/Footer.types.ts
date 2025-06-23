@@ -56,7 +56,7 @@ interface Language {
 }
 
 export interface LangSwitchProps {
-  languages: Language[];
+  languages: readonly Language[];
   activeLanguage: Language;
 }
 
