@@ -21,7 +21,7 @@ const makeFooterProps = ({
 }: FooterData['data'] & {
   defaultLocale: Locale;
   activeLocale: Locale;
-  localizedLinks: Array<{ id: Locale; value: string; href: string }>;
+  localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
 }): FooterProps => ({
   legalInfo: MarkdownRenderer({
     markdown: legalInfo,
@@ -98,7 +98,7 @@ const makeFooterProps = ({
 const Footer = (
   props: FooterData['data'] & {
     defaultLocale: Locale;
-    localizedLinks: Array<{ id: Locale; value: string; href: string }>;
+    localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
   },
 ) => {
   const pathname = usePathname() + '/'; // Add final slash to make sure not to miss a non-default locale's homepage (e.g.: \en)

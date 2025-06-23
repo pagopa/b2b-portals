@@ -112,13 +112,11 @@ export default async function Layout({
         ? slug.slice(1)
         : slug;
 
-  const localizedLinks = [
-    ...(await getLocalizedSlugs({
-      currentSlug: slugWithoutLocale,
-      defaultLocale,
-      availableLocales: localesArray as Locale[],
-    })),
-  ];
+  const localizedLinks = await getLocalizedSlugs({
+    currentSlug: slugWithoutLocale,
+    defaultLocale,
+    availableLocales: localesArray as Locale[],
+  });
 
   return (
     <ThemeProvider theme={theme}>

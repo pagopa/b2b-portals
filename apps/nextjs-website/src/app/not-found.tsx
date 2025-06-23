@@ -28,13 +28,11 @@ const NotFound = async () => {
     (locale) => locales[locale as Locale],
   );
 
-  const localizedLinks = [
-    ...(await getLocalizedSlugs({
-      currentSlug: [],
-      defaultLocale,
-      availableLocales: localesArray as Locale[],
-    })),
-  ];
+  const localizedLinks = await getLocalizedSlugs({
+    currentSlug: [],
+    defaultLocale,
+    availableLocales: localesArray as Locale[],
+  });
 
   return (
     <ThemeProvider theme={theme}>
