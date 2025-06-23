@@ -155,7 +155,8 @@ resource "aws_iam_policy" "deploy_website" {
           "s3:PutObject",
           "s3:GetObject",
           "s3:PutObjectAcl",
-          "s3:DeleteObject"
+          "s3:DeleteObject",
+          "s3:GetObjectTagging",
         ]
         Effect = "Allow"
         Resource = concat([
