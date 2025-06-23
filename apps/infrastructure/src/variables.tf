@@ -71,6 +71,7 @@ variable "websites_configs" {
     origin_path                = string
     url_tenant                 = string
     create_certificate         = bool
+    create_route53_records     = optional(bool, false)
     create_distribution        = bool
     cdn_use_custom_certificate = bool
     cdn_use_alias              = bool
@@ -107,6 +108,7 @@ variable "websites_configs" {
       origin_path                = "/demo"
       url_tenant                 = "demowebsite.b2bportals.pagopa.it"
       create_certificate         = true
+      create_route53_records     = true
       create_distribution        = true
       cdn_use_custom_certificate = true
       cdn_use_alias              = true
