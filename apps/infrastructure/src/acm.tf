@@ -34,7 +34,10 @@ module "cdn_websites_ssl_certificate" {
   validation_method   = "DNS"
   dns_ttl             = 3600
 
-  create_route53_records = false
+  create_route53_records = each.value.create_route53_records
+
+  zone_id = each.value.create_route53_records ? module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]] : null
+
 }
 
 ## Certificate HTTPS for Storybook
