@@ -158,18 +158,22 @@ resource "aws_iam_policy" "deploy_website" {
           "s3:DeleteObject"
         ]
         Effect = "Allow"
-        Resource = [
-          format("%s/*", aws_s3_bucket.website.arn)
-        ]
+        Resource = concat([
+          "${aws_s3_bucket.website.arn}/*",
+          "${aws_s3_bucket.website_staging.arn}/*",
+        ], [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : "${bucket.arn}/*"])
       },
       {
         Action = [
           "s3:ListBucket"
         ]
         Effect = "Allow"
-        Resource = [
-          aws_s3_bucket.website.arn
-        ]
+        Resource = concat([
+          aws_s3_bucket.website.arn,
+          aws_s3_bucket.website_staging.arn,
+
+          ],
+        [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : bucket.arn])
       },
       {
         Action = [
@@ -178,7 +182,8 @@ resource "aws_iam_policy" "deploy_website" {
         Effect = "Allow"
         Resource = concat(
           [aws_cloudfront_distribution.storybook.arn],
-          [for name, distribution in aws_cloudfront_distribution.cdn_multi_website : distribution.arn]
+          [for name, distribution in aws_cloudfront_distribution.cdn_multi_website : distribution.arn],
+          [for name, distribution in aws_cloudfront_distribution.cdn_multi_website_staging : distribution.arn],
         )
       }
     ]
