@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   IFrameProps,
   IFrameResizerRef,
@@ -20,6 +20,20 @@ const IFrame = ({ src }: IFrameProps) => {
       iframeRef.current.getElement().style.height = `${newChildHeight}px`;
     }
   };
+
+  useEffect(() => {
+    const handleScrollMessage = (event: MessageEvent) => {
+      if (event.data?.type === 'scrollTo' && event.data?.target) {
+        const targetSection = document.getElementById(event.data.target);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    };
+
+    window.addEventListener('message', handleScrollMessage);
+    return () => window.removeEventListener('message', handleScrollMessage);
+  }, []);
 
   return (
     <IframeResizer
