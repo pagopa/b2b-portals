@@ -28,6 +28,7 @@ const IFrame = ({ src }: IFrameProps) => {
       style={{ width: '100%', height: '100vh', border: 'none' }}
       forwardRef={iframeRef}
       onMessage={handleMessage}
+      allow='geolocation; clipboard-write'
     />
   );
 };
