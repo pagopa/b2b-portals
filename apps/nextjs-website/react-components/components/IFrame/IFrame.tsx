@@ -6,7 +6,7 @@ import {
 } from '../../types/IFrame/IFrame.types';
 import IframeResizer from '@iframe-resizer/react';
 
-const IFrame = ({ src }: IFrameProps) => {
+const IFrame = ({ src, sectionID }: IFrameProps) => {
   const iframeRef = useRef<IFrameResizerRef>(null);
 
   const handleMessage = ({
@@ -36,14 +36,16 @@ const IFrame = ({ src }: IFrameProps) => {
   }, []);
 
   return (
-    <IframeResizer
-      license='GPLv3' // Open Source License
-      src={src}
-      style={{ width: '100%', height: '100vh', border: 'none' }}
-      forwardRef={iframeRef}
-      onMessage={handleMessage}
-      allow='geolocation; clipboard-write'
-    />
+    <section {...(sectionID && { id: sectionID })}>
+      <IframeResizer
+        license='GPLv3' // Open Source License
+        src={src}
+        style={{ width: '100%', height: '100vh', border: 'none' }}
+        forwardRef={iframeRef}
+        onMessage={handleMessage}
+        allow='geolocation; clipboard-write'
+      />
+    </section>
   );
 };
 

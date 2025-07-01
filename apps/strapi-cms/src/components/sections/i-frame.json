@@ -9,6 +9,10 @@
     "src": {
       "type": "string",
       "required": true
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
     }
   }
 }
