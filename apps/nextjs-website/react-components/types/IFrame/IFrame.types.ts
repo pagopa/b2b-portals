@@ -1,5 +1,6 @@
 export interface IFrameProps {
   src: string;
+  sectionID?: string;
 }
 
 export interface IFrameResizerMessage {
