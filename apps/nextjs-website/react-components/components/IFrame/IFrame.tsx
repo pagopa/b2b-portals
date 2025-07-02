@@ -35,8 +35,8 @@ const IFrame = ({ src, sectionID }: IFrameProps) => {
     return () => window.removeEventListener('message', handleScrollMessage);
   }, []);
 
-  return (
-    <section {...(sectionID && { id: sectionID })}>
+  return sectionID ? (
+    <section id={sectionID}>
       <IframeResizer
         license='GPLv3' // Open Source License
         src={src}
@@ -46,6 +46,15 @@ const IFrame = ({ src, sectionID }: IFrameProps) => {
         allow='geolocation; clipboard-write'
       />
     </section>
+  ) : (
+    <IframeResizer
+      license='GPLv3' // Open Source License
+      src={src}
+      style={{ width: '100%', height: '100vh', border: 'none' }}
+      forwardRef={iframeRef}
+      onMessage={handleMessage}
+      allow='geolocation; clipboard-write'
+    />
   );
 };
 
