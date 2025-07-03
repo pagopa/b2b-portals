@@ -44,7 +44,6 @@ const IFrame = ({ src, sectionID }: IFrameProps) => {
         forwardRef={iframeRef}
         onMessage={handleMessage}
         allow='geolocation; clipboard-write'
-        scrolling={true}
       />
     </section>
   ) : (
@@ -55,7 +54,6 @@ const IFrame = ({ src, sectionID }: IFrameProps) => {
       forwardRef={iframeRef}
       onMessage={handleMessage}
       allow='geolocation; clipboard-write'
-      scrolling={true}
     />
   );
 };
