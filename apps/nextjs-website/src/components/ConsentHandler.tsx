@@ -33,7 +33,8 @@ const hasConsent = () => {
 const ConsentHandler = ({
   oneTrustDomainID,
   mixpanel: mixpanelConfig,
-}: NonNullable<Analytics>) => {
+  locale,
+}: NonNullable<Analytics> & { locale: string }) => {
   useEffect(() => {
     const initMixpanel = () => {
       if (!mixpanelConfig) return;
@@ -79,6 +80,7 @@ const ConsentHandler = ({
         src='https://cdn.cookielaw.org/scripttemplates/otSDKStub.js'
         type='text/javascript'
         data-domain-script={oneTrustDomainID}
+        data-language={locale}
         strategy='afterInteractive'
       />
     </>
