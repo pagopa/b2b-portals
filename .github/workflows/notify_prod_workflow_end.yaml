@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ github.event.workflow_run.inputs.environment }}
+      
+    environment: ${{ matrix.environment }}
     steps:
       - name: Call Strapi API (${{ matrix.environment }})
         shell: bash
