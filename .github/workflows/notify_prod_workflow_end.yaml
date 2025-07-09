@@ -10,26 +10,12 @@ jobs:
   call-api:
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        include:
-          - environment: demo
-            url: ${{ vars.DEMO_STRAPI_URL }}
-            token: ${{ secrets.DEMO_WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}
-          - environment: send
-            url: ${{ vars.SEND_STRAPI_URL }}
-            token: ${{ secrets.SEND_WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}
-          - environment: appio
-            url: ${{ vars.APPIO_STRAPI_URL }}
-            token: ${{ secrets.APPIO_WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}
-          - environment: interop
-            url: ${{ vars.INTEROP_STRAPI_URL }}
-            token: ${{ secrets.INTEROP_WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}
-    if: ${{ github.event.workflow_run.inputs.environment == matrix.environment }}
+      matrix: ${{ github.event.workflow_run.inputs.environment }}
     steps:
       - name: Call Strapi API (${{ matrix.environment }})
         shell: bash
         run: |
-          curl -X POST "${{ matrix.url }}/static-deploy/notify-workflow-end" \
+          curl -X POST "${{ vars.STRAPI_URL }}/static-deploy/notify-workflow-end" \
             -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ matrix.token }}" \
+            -H "Authorization: Bearer ${{ secrets.WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}" \
             -d '{"event": "prod-end"}'
