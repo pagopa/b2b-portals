@@ -48,7 +48,7 @@ export default ({ env }: any) => ({
       },
       notifications: {
         enabled: true,
-        bearerToken: env('WORKFLOW_NOTIFICATIONS_BEARER_TOKEN'),
+        bearerToken: env('WORKFLOW_NOTIFICATIONS_BEARER_TOKEN', 'test-token'),
       }
     },
   },
