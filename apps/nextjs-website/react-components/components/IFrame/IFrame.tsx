@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   IFrameProps,
   IFrameResizerRef,
@@ -6,7 +6,7 @@ import {
 } from '../../types/IFrame/IFrame.types';
 import IframeResizer from '@iframe-resizer/react';
 
-const IFrame = ({ src }: IFrameProps) => {
+const IFrame = ({ src, sectionID }: IFrameProps) => {
   const iframeRef = useRef<IFrameResizerRef>(null);
 
   const handleMessage = ({
@@ -21,13 +21,39 @@ const IFrame = ({ src }: IFrameProps) => {
     }
   };
 
-  return (
+  useEffect(() => {
+    const handleScrollMessage = (event: MessageEvent) => {
+      if (event.data?.type === 'scrollTo' && event.data?.target) {
+        const targetSection = document.getElementById(event.data.target);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    };
+
+    window.addEventListener('message', handleScrollMessage);
+    return () => window.removeEventListener('message', handleScrollMessage);
+  }, []);
+
+  return sectionID ? (
+    <section id={sectionID}>
+      <IframeResizer
+        license='GPLv3' // Open Source License
+        src={src}
+        style={{ width: '100%', height: '100vh', border: 'none' }}
+        forwardRef={iframeRef}
+        onMessage={handleMessage}
+        allow='geolocation; clipboard-write'
+      />
+    </section>
+  ) : (
     <IframeResizer
       license='GPLv3' // Open Source License
       src={src}
       style={{ width: '100%', height: '100vh', border: 'none' }}
       forwardRef={iframeRef}
       onMessage={handleMessage}
+      allow='geolocation; clipboard-write'
     />
   );
 };
