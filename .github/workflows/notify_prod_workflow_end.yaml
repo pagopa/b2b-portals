@@ -9,12 +9,10 @@ on:
 jobs:
   call-api:
     runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ github.event.workflow_run.inputs.environment }}
-      
-    environment: ${{ matrix.environment }}
+    
+    environment: ${{ github.event.workflow_run.inputs.environment }}
     steps:
-      - name: Call Strapi API (${{ matrix.environment }})
+      - name: Call Strapi API (${{ github.event.workflow_run.inputs.environment }})
         shell: bash
         run: |
           curl -X POST "${{ vars.STRAPI_URL }}/static-deploy/notify-workflow-end" \
