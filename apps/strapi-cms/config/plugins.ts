@@ -45,6 +45,10 @@ export default ({ env }: any) => ({
       staging: {
         workflowID: env('STAGING_WORKFLOW_ID', 'deploy_website_staging.yaml'),
         branch: env('STAGING_TARGET_BRANCH'),
+      },
+      notifications: {
+        enabled: true,
+        bearerToken: env('WORKFLOW_NOTIFICATIONS_BEARER_TOKEN'),
       }
     },
   },

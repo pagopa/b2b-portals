@@ -1,0 +1,56 @@
+name: Notify of Production Workflow End
+
+on:
+  workflow_run:
+    workflows: ["Promote Website to Production"]
+    types:
+      - completed
+
+jobs:
+  call-api-demo:
+    if: ${{ github.event.workflow_run.inputs.environment == 'demo' }}
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Call Strapi API - DEMO
+        shell: bash
+        run: |
+            curl -X POST ${{ vars.DEMO_STRAPI_URL }}/static-deploy/notify-workflow-end \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer ${{ secrets.DEMO_WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}" \
+              -d '{"event": "prod-end"}'
+  
+  call-api-send:
+    if: ${{ github.event.workflow_run.inputs.environment == 'send' }}
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Call Strapi API - SEND
+        shell: bash
+        run: |
+            curl -X POST ${{ vars.SEND_STRAPI_URL }}/static-deploy/notify-workflow-end \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer ${{ secrets.SEND_WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}" \
+              -d '{"event": "prod-end"}'
+  
+  call-api-appio:
+    if: ${{ github.event.workflow_run.inputs.environment == 'appio' }}
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Call Strapi API - APPIO
+        shell: bash
+        run: |
+            curl -X POST ${{ vars.APPIO_STRAPI_URL }}/static-deploy/notify-workflow-end \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer ${{ secrets.APPIO_WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}" \
+              -d '{"event": "prod-end"}'
+  
+  call-api-interop:
+    if: ${{ github.event.workflow_run.inputs.environment == 'interop' }}
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Call Strapi API - INTEROP
+        shell: bash
+        run: |
+            curl -X POST ${{ vars.INTEROP_STRAPI_URL }}/static-deploy/notify-workflow-end \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer ${{ secrets.INTEROP_WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}" \
+              -d '{"event": "prod-end"}'
