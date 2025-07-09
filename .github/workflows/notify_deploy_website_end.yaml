@@ -1,16 +1,17 @@
-name: Notify of Production Workflow End
+name: Notify of Website Deploy Completion
 
 on:
   workflow_run:
-    workflows: ["Promote Website to Production"]
+    workflows: ["Deploy Website to Staging", "Promote Website to Production"]
     types:
       - completed
 
 jobs:
   call-api:
     runs-on: ubuntu-latest
-    
     environment: ${{ github.event.workflow_run.inputs.environment }}
+    env:
+      EVENT_NAME: ${{ github.event.workflow.name == 'Deploy Website to Staging' && 'staging-end' || 'prod-end' }}
     steps:
       - name: Call Strapi API (${{ github.event.workflow_run.inputs.environment }})
         shell: bash
@@ -18,4 +19,4 @@ jobs:
           curl -X POST "${{ vars.STRAPI_URL }}/static-deploy/notify-workflow-end" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}" \
-            -d '{"event": "prod-end"}'
+            -d '{"event": "${{ env.EVENT_NAME }}"}'
