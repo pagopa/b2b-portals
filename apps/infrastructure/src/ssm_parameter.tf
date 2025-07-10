@@ -156,23 +156,3 @@ resource "aws_ssm_parameter" "cms_multitenant_api_token_salt" {
   type  = "SecureString"
   value = random_password.cms_multitenant_api_token_salt[each.key].result
 }
-
-resource "random_password" "cms_multitenant_wf_notifications_bearer_token" {
-  for_each = {
-    for key, config in var.websites_configs :
-    key => config
-  }
-  length           = 16
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-}
-
-resource "aws_ssm_parameter" "cms_multitenant_wf_notifications_bearer_token" {
-  for_each = {
-    for key, config in var.websites_configs :
-    key => config
-  }
-  name  = "/cms/workflow_notifications_bearer_token_${each.key}"
-  type  = "SecureString"
-  value = random_password.cms_multitenant_wf_notifications_bearer_token[each.key].result
-}
