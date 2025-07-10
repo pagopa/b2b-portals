@@ -145,10 +145,6 @@
       {
         "name": "PREVIEW_TOKEN",
         "valueFrom": "${preview_token}"
-      },
-      {
-        "name": "WORKFLOW_NOTIFICATIONS_BEARER_TOKEN",
-        "valueFrom": "${workflow_notifications_bearer_token}"
       }
     ]
   }

@@ -132,7 +132,6 @@
 | [aws_ssm_parameter.cms_github_pat](https://registry.terraform.io/providers/hashicorp/aws/5.16.2/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.cms_jwt_secret](https://registry.terraform.io/providers/hashicorp/aws/5.16.2/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.cms_multitenant_api_token_salt](https://registry.terraform.io/providers/hashicorp/aws/5.16.2/docs/resources/ssm_parameter) | resource |
-| [aws_ssm_parameter.cms_multitenant_wf_notifications_bearer_token](https://registry.terraform.io/providers/hashicorp/aws/5.16.2/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.cms_transfer_token_salt](https://registry.terraform.io/providers/hashicorp/aws/5.16.2/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.preview_token](https://registry.terraform.io/providers/hashicorp/aws/5.16.2/docs/resources/ssm_parameter) | resource |
 | [aws_ssm_parameter.strapi_api_token](https://registry.terraform.io/providers/hashicorp/aws/5.16.2/docs/resources/ssm_parameter) | resource |
@@ -146,7 +145,6 @@
 | [random_password.cms_github_pat](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.cms_jwt_secret](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.cms_multitenant_api_token_salt](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
-| [random_password.cms_multitenant_wf_notifications_bearer_token](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.cms_transfer_token_salt](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.preview_token](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.strapi_api_token](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
