@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any,functional/no-expression-statements,functional/immutable-data */
 
+import { isPreviewMode } from '../api';
+
 const ASSET_OBJECT_KEY_NAMES = [
   'image',
   'mobileImage',
@@ -58,7 +60,8 @@ const makeAssetObjectURLsRelative = (
 };
 
 export const makeAllAssetURLsRelative = (result: any): any => {
-  if (result === null) {
+  const preview = isPreviewMode();
+  if (result === null || preview) {
     return result;
   }
 
