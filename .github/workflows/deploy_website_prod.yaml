@@ -47,7 +47,7 @@ jobs:
         run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_PROD_DISTRIBUTION_ID }} --paths "/*" # At the moment we invalidate all the paths
   
   notify:
-    needs: deploy
+    needs: promote-to-prod
     name: Notify of Workflow End - (${{ inputs.environment }})
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
