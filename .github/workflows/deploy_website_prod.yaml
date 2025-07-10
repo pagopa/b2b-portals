@@ -45,3 +45,17 @@ jobs:
       - name: Create AWS Cloudfront Invalidation
         shell: bash
         run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_PROD_DISTRIBUTION_ID }} --paths "/*" # At the moment we invalidate all the paths
+  
+  notify:
+    needs: deploy
+    name: Notify of Workflow End - (${{ inputs.environment }})
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Call Strapi API
+        shell: bash
+        run: |
+          curl -X POST "${{ vars.STRAPI_URL }}/static-deploy/notify-workflow-end" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}" \
+            -d '{"event": "prod-end"}'

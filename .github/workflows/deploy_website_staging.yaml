@@ -52,3 +52,17 @@ jobs:
           interop_strapi_api_base_url: ${{ vars.INTEROP_STRAPI_URL }}
           interop_strapi_media_library: ${{ vars.INTEROP_STRAPI_MEDIA_LIBRARY_S3_BUCKET_NAME }}
           cdn_path: ${{ vars.CDN_PATH }}
+  
+  notify:
+    needs: deploy
+    name: Notify of Workflow End - (${{ inputs.environment }})
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Call Strapi API
+        shell: bash
+        run: |
+          curl -X POST "${{ vars.STRAPI_URL }}/static-deploy/notify-workflow-end" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.WORKFLOW_NOTIFICATIONS_BEARER_TOKEN }}" \
+            -d '{"event": "staging-end"}'
