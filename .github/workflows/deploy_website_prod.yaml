@@ -37,10 +37,19 @@ jobs:
         with:
           aws_region: eu-south-1
           role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
-
-      - name: Sync from staging to production
+      
+      - name: Copy staging site to temp folder
         shell: bash
-        run: aws s3 sync s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete --exact-timestamps
+        run: aws s3 sync s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} ./tmp-site/
+      
+      # Touch all files so that sync sees all of them as updated and advances the version of every file in prod
+      - name: Touch all files
+        shell: bash
+        run: find ./tmp-site -type f -exec touch {} +
+
+      - name: Sync from temp folder to production
+        shell: bash
+        run: aws s3 sync ./tmp-site/ s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete
 
       - name: Create AWS Cloudfront Invalidation
         shell: bash
