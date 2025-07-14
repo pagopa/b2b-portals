@@ -1,0 +1,78 @@
+name: Rollback Production Website
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'The Tenant for which the static site will be rolled back'
+        type: choice
+        required: true
+        options:
+          - send
+          - appio
+          - demo
+          - interop
+      snapshot_filename:
+        description: "Snapshot filename (e.g. 2025-07-14_18-00-00.txt)"
+        type: string
+        required: true
+
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  rollback:
+    name: Rollback to Snapshot ${{ inputs.snapshot_filename }} - (${{ inputs.environment }})
+    runs-on: 'ubuntu-latest'
+    environment: ${{ inputs.environment }}
+    
+    concurrency:
+      group: ${{ github.workflow }}-${{ inputs.environment }}
+      cancel-in-progress: false
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+
+      - name: Configure AWS credentials
+        uses: ./.github/actions/configure-aws-credentials
+        with:
+          aws_region: eu-south-1
+          role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
+
+      - name: Download Snapshot File
+        shell: bash
+        run: aws s3 cp s3://${{ vars.S3_PROD_BUCKET_NAME }}/deploys/${{ inputs.environment }}/${{ inputs.snapshot_filename }} snapshot.txt
+    
+      - name: Reconstruct files of desired version in temp folder
+        shell: bash
+        run: |
+          mkdir -p /tmp-site/
+          while read -r key versionId; do
+            target_path="/tmp-site/$key"
+            mkdir -p "$(dirname "$target_path")"
+            echo "Downloading $key@${versionId}"
+            aws s3api get-object \
+              --bucket "${{ vars.S3_PROD_BUCKET_NAME }}" \
+              --key "${{ inputs.environment }}/$key" \
+              --version-id "$versionId" \
+              "$target_path"
+          done < snapshot.txt
+      
+      # Touch all files so that sync sees all of them as updated and advances the version of every file in prod
+      - name: Touch all files
+        shell: bash
+        run: find ./tmp-site -type f -exec touch {} +
+      
+      - name: Sync from temp folder to production
+        shell: bash
+        run: aws s3 sync ./tmp-site/ s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete
+      
+      # Omit creating new snapshot since it's a direct copy of an older one
+
+      - name: Create AWS Cloudfront Invalidation
+        shell: bash
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_PROD_DISTRIBUTION_ID }} --paths "/*" # At the moment we invalidate all the paths
+

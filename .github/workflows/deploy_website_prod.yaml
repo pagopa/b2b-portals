@@ -52,16 +52,19 @@ jobs:
         run: aws s3 sync ./tmp-site/ s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete
       
       - name: Set snapshot timestamp
+        shell: bash
         id: time
         run: echo "timestamp=$(date +%Y-%m-%d_%H-%M-%S)" >> $GITHUB_OUTPUT
 
       - name: Get object versions from S3
+        shell: bash
         run: |
           aws s3api list-object-versions \
             --bucket ${{ vars.S3_PROD_BUCKET_NAME }} \
             --prefix ${{ inputs.environment }}/ > versions.json
 
       - name: Extract latest versions into snapshot
+        shell: bash
         run: |
           jq -r '
             [
@@ -73,6 +76,7 @@ jobs:
           ' versions.json > "${{ steps.time.outputs.timestamp }}.txt"
 
       - name: Upload snapshot to S3
+        shell: bash
         run: |
           aws s3 cp \
             "${{ steps.time.outputs.timestamp }}.txt" \
