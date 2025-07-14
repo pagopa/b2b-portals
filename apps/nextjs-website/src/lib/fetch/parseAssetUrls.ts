@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any,functional/no-expression-statements,functional/immutable-data */
 
-import { isPreviewMode } from '../api';
-
 const ASSET_OBJECT_KEY_NAMES = [
   'image',
   'mobileImage',
@@ -59,15 +57,17 @@ const makeAssetObjectURLsRelative = (
   };
 };
 
-export const makeAllAssetURLsRelative = (result: any): any => {
-  const preview = isPreviewMode();
+export const makeAllAssetURLsRelative = (
+  result: any,
+  preview: boolean,
+): any => {
   if (result === null || preview) {
     return result;
   }
 
   if (Array.isArray(result)) {
     // Recursively process each item in the array
-    return result.map((item) => makeAllAssetURLsRelative(item));
+    return result.map((item) => makeAllAssetURLsRelative(item, preview));
   }
 
   if (typeof result === 'object') {
@@ -87,7 +87,10 @@ export const makeAllAssetURLsRelative = (result: any): any => {
         continue;
       }
 
-      updatedResult[key] = makeAllAssetURLsRelative(updatedResult[key]);
+      updatedResult[key] = makeAllAssetURLsRelative(
+        updatedResult[key],
+        preview,
+      );
     }
 
     return updatedResult;

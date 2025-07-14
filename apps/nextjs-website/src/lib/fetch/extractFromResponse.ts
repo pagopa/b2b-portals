@@ -3,7 +3,6 @@ import * as t from 'io-ts';
 import * as PR from 'io-ts/lib/PathReporter';
 import * as TE from 'fp-ts/lib/TaskEither';
 import * as E from 'fp-ts/lib/Either';
-import { makeAllAssetURLsRelative } from './parseAssetUrls';
 
 // Given a response decode from the structure with the given codec
 export const extractFromResponse = <A, O, I>(
@@ -33,6 +32,6 @@ export const extractFromResponse = <A, O, I>(
     TE.fold(
       // eslint-disable-next-line functional/no-promise-reject
       (errors) => () => Promise.reject(errors),
-      (result) => () => Promise.resolve(makeAllAssetURLsRelative(result)),
+      (result) => () => Promise.resolve(result),
     ),
   )();
