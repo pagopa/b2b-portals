@@ -50,6 +50,33 @@ jobs:
       - name: Sync from temp folder to production
         shell: bash
         run: aws s3 sync ./tmp-site/ s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete
+      
+      - name: Set snapshot timestamp
+        id: time
+        run: echo "timestamp=$(date +%Y-%m-%d_%H-%M-%S)" >> $GITHUB_OUTPUT
+
+      - name: Get object versions from S3
+        run: |
+          aws s3api list-object-versions \
+            --bucket ${{ vars.S3_PROD_BUCKET_NAME }} \
+            --prefix ${{ inputs.environment }}/ > versions.json
+
+      - name: Extract latest versions into snapshot
+        run: |
+          jq -r '
+            [
+              (.Versions[] | select(.IsLatest == true)),
+              (.DeleteMarkers[] | select(.IsLatest == true))
+            ]
+            | map("\(.Key) \(.VersionId)")
+            | .[]
+          ' versions.json > "${{ steps.time.outputs.timestamp }}.txt"
+
+      - name: Upload snapshot to S3
+        run: |
+          aws s3 cp \
+            "${{ steps.time.outputs.timestamp }}.txt" \
+            s3://${{ vars.S3_PROD_BUCKET_NAME }}/deploys/${{ inputs.environment }}/${{ steps.time.outputs.timestamp }}.txt
 
       - name: Create AWS Cloudfront Invalidation
         shell: bash
