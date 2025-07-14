@@ -57,14 +57,17 @@ const makeAssetObjectURLsRelative = (
   };
 };
 
-export const makeAllAssetURLsRelative = (result: any): any => {
-  if (result === null) {
+export const makeAllAssetURLsRelative = (
+  result: any,
+  preview: boolean,
+): any => {
+  if (result === null || preview) {
     return result;
   }
 
   if (Array.isArray(result)) {
     // Recursively process each item in the array
-    return result.map((item) => makeAllAssetURLsRelative(item));
+    return result.map((item) => makeAllAssetURLsRelative(item, preview));
   }
 
   if (typeof result === 'object') {
@@ -84,7 +87,10 @@ export const makeAllAssetURLsRelative = (result: any): any => {
         continue;
       }
 
-      updatedResult[key] = makeAllAssetURLsRelative(updatedResult[key]);
+      updatedResult[key] = makeAllAssetURLsRelative(
+        updatedResult[key],
+        preview,
+      );
     }
 
     return updatedResult;

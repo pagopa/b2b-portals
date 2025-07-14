@@ -25,6 +25,7 @@ import {
   pressReleaseToPageDataArray,
   previewPressReleaseToPreviewPageData,
 } from './pressRelease';
+import { makeAllAssetURLsRelative } from './fetch/parseAssetUrls';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -39,8 +40,14 @@ const appEnv = pipe(
 export const getAllPages = async (
   locale: Locale,
 ): Promise<ReadonlyArray<PageData>> => {
-  const navigation = await getNavigation({ ...appEnv, locale });
-  const pressReleases = await getPressReleases({ ...appEnv, locale });
+  const navigation = makeAllAssetURLsRelative(
+    await getNavigation({ ...appEnv, locale }),
+    appEnv.config.PREVIEW_MODE === 'true',
+  );
+  const pressReleases = makeAllAssetURLsRelative(
+    await getPressReleases({ ...appEnv, locale }),
+    appEnv.config.PREVIEW_MODE === 'true',
+  );
 
   return [
     ...navigationToPageDataArray(navigation),
@@ -51,7 +58,10 @@ export const getAllPages = async (
 export const getPressReleasePages = async (
   locale: Locale,
 ): Promise<ReadonlyArray<PressReleasePage>> => {
-  const { data } = await getPressReleases({ ...appEnv, locale });
+  const { data } = makeAllAssetURLsRelative(
+    await getPressReleases({ ...appEnv, locale }),
+    appEnv.config.PREVIEW_MODE === 'true',
+  );
   return data;
 };
 
@@ -59,7 +69,10 @@ export const getPressReleasePages = async (
 export const getPreHeaderProps = async (
   locale: Locale,
 ): Promise<PreHeaderAttributes | null> => {
-  const { data } = await getPreHeader({ ...appEnv, locale });
+  const { data } = makeAllAssetURLsRelative(
+    await getPreHeader({ ...appEnv, locale }),
+    appEnv.config.PREVIEW_MODE === 'true',
+  );
   return data;
 };
 
@@ -67,7 +80,10 @@ export const getHeaderProps = async (
   locale: Locale,
   defaultLocale: Locale,
 ): Promise<HeaderData['data']['header'][0]> => {
-  const { data } = await getHeader({ ...appEnv, locale });
+  const { data } = makeAllAssetURLsRelative(
+    await getHeader({ ...appEnv, locale }),
+    appEnv.config.PREVIEW_MODE === 'true',
+  );
   const header = data.header[0];
 
   if (header === undefined) {
@@ -89,14 +105,20 @@ export const getHeaderProps = async (
 export const getFooterProps = async (
   locale: Locale,
 ): Promise<FooterData['data']> => {
-  const { data } = await getFooter({ ...appEnv, locale });
+  const { data } = makeAllAssetURLsRelative(
+    await getFooter({ ...appEnv, locale }),
+    appEnv.config.PREVIEW_MODE === 'true',
+  );
   return data;
 };
 
 export const getPreFooterProps = async (
   locale: Locale,
 ): Promise<PreFooterAttributes | null> => {
-  const { data } = await getPreFooter({ ...appEnv, locale });
+  const { data } = makeAllAssetURLsRelative(
+    await getPreFooter({ ...appEnv, locale }),
+    appEnv.config.PREVIEW_MODE === 'true',
+  );
   return data;
 };
 
@@ -114,7 +136,10 @@ export const getPageProps = async (
 };
 
 export const getSiteWideSEO = async (): Promise<SiteWideSEO['data']> => {
-  const { data } = await fetchSiteWideSEO(appEnv);
+  const { data } = makeAllAssetURLsRelative(
+    await fetchSiteWideSEO(appEnv),
+    appEnv.config.PREVIEW_MODE === 'true',
+  );
 
   const localesArray = Object.keys(data.locales).filter(
     (key) => data.locales[key as Locale],
