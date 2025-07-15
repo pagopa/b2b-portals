@@ -26,7 +26,7 @@ resource "aws_lb_listener" "front_end_https" {
   load_balancer_arn = aws_alb.cms_load_balancer.id
   port              = "443"
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-2021-06"
   certificate_arn   = module.acm.acm_certificate_arn
 
   default_action {

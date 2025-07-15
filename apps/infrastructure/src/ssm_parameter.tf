@@ -162,9 +162,8 @@ resource "random_password" "cms_multitenant_wf_notifications_bearer_token" {
     for key, config in var.websites_configs :
     key => config
   }
-  length           = 16
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  length  = 32
+  special = false
 }
 
 resource "aws_ssm_parameter" "cms_multitenant_wf_notifications_bearer_token" {
