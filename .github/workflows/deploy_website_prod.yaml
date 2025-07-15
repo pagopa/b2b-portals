@@ -37,11 +37,11 @@ jobs:
         with:
           aws_region: eu-south-1
           role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
-      
+
       - name: Sync from staging to production
         shell: bash
         run: aws s3 sync s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete
-      
+
       - name: Set snapshot timestamp
         shell: bash
         id: time

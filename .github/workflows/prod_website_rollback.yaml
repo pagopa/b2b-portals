@@ -45,8 +45,8 @@ jobs:
       - name: Download Snapshot File
         shell: bash
         run: aws s3 cp s3://${{ vars.S3_PROD_BUCKET_NAME }}/deploys/${{ inputs.environment }}/${{ inputs.snapshot_filename }} snapshot.txt
-    
-      - name: Reconstruct files of desired version in temp folder
+
+      - name: Reconstruct files of desired version in local temp folder
         shell: bash
         run: |
           mkdir -p /tmp-site/
@@ -60,17 +60,12 @@ jobs:
               --version-id "$versionId" \
               "$target_path"
           done < snapshot.txt
-      
-      # Touch all files so that sync sees all of them as updated and advances the version of every file in prod
-      - name: Touch all files
+
+      - name: Sync from local temp folder to production
         shell: bash
-        run: find ./tmp-site -type f -exec touch {} +
-      
-      - name: Sync from temp folder to production
-        shell: bash
-        run: aws s3 sync ./tmp-site/ s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete
-      
-      # Omit creating new snapshot since it's a direct copy of an older one
+        run: aws s3 sync ./tmp-site/ s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }} --delete --exact-timestamps
+
+      # Omit creating new snapshot since it'd be a direct copy of an older one
 
       - name: Create AWS Cloudfront Invalidation
         shell: bash
