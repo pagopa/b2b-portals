@@ -92,13 +92,13 @@ module "demowebsite_records" {
       name    = "demowebsite"
       type    = "TXT"
       ttl     = 300
-      records = ["d365mktkey=xp7LE9KWHxvlgR5TAynaMgJb8IW7BNed7GUC09NVbXcx"]
+      records = ["d365mktkey=me62nCqGbQxxMBSVcvKjy0hUtKhJIX67IPOpSZKj78Ix"]
     },
     {
       name    = "www.demowebsite"
       type    = "TXT"
       ttl     = 300
-      records = ["d365mktkey=xp7LE9KWHxvlgR5TAynaMgJb8IW7BNed7GUC09NVbXcx"]
+      records = ["d365mktkey=me62nCqGbQxxMBSVcvKjy0hUtKhJIX67IPOpSZKj78Ix"]
     }
   ]
 
