@@ -22,6 +22,10 @@ const DynamicsForm = (
           display: 'grid',
           justifyContent: 'center',
         },
+        '.columnContainer': {
+          paddingLeft: 'unset !important',
+          paddingRight: 'unset !important',
+        },
         '.textFormFieldBlock label, .dateTimeFormFieldBlock label, .lookupFormFieldBlock label, .twoOptionFormFieldBlock label.block-label, .optionSetFormFieldBlock label.block-label, .multiOptionSetFormFieldBlock label.block-label, div[data-editorblocktype="Captcha"] label[id^="wlspispHipInstructionContainer"], .textFormFieldBlock label *, .dateTimeFormFieldBlock label *, .lookupFormFieldBlock label *, .twoOptionFormFieldBlock label.block-label *, .optionSetFormFieldBlock label.block-label *, .multiOptionSetFormFieldBlock label.block-label *, .consentBlock label p':
           {
             fontFamily: '"Titillium Web", sans-serif',
@@ -38,6 +42,10 @@ const DynamicsForm = (
         '.optionSetFormFieldBlock select, .textFormFieldBlock input, .dateTimeFormFieldBlock input, .lookupFormFieldBlock input, .marketingForm textarea, div[data-editorblocktype="Captcha"] input:focus-visible':
           {
             outlineColor: '#0073e6',
+          },
+        '.optionSetFormFieldBlock select:-webkit-autofill, .textFormFieldBlock input:-webkit-autofill, .dateTimeFormFieldBlock input:-webkit-autofill, .lookupFormFieldBlock input:-webkit-autofill, .marketingForm textarea:-webkit-autofill, div[data-editorblocktype="Captcha"] input:-webkit-autofill':
+          {
+            WebkitBoxShadow: '0 0 0px 100px white inset !important',
           },
         '.twoOptionFormFieldBlock div.radiobuttons div input, .twoOptionFormFieldBlock div.twooption_checkbox div input, .optionSetFormFieldBlock div.radiobuttons div input, .multiOptionSetFormFieldBlock fieldset > div > input[type="checkbox"], .eventSession > div > input[type="checkbox"], .eventSession > div > input[type="radio"], .consentBlock div input:focus-visible':
           {
