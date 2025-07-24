@@ -62,6 +62,20 @@ const fetchResults = {
         url: 'https://example.com/asset.mp4',
         formats: null,
       },
+      icons: [
+        {
+          url: 'https://example.com/asset.jpg',
+          formats: null,
+        },
+        {
+          url: 'https://example.com/asset.jpg',
+          formats: null,
+        },
+        {
+          url: 'https://example.com/asset.jpg',
+          formats: null,
+        },
+      ],
     },
   },
   deeplyNested: {
@@ -116,6 +130,24 @@ const fetchResults = {
       },
     },
   },
+  array: [
+    {
+      data: {
+        image: {
+          url: 'https://example.com/asset.jpg',
+          formats: null,
+        },
+      },
+    },
+    {
+      data: {
+        image: {
+          url: 'https://example.com/asset.jpg',
+          formats: null,
+        },
+      },
+    },
+  ],
 };
 
 const expectedOutput = {
@@ -179,6 +211,20 @@ const expectedOutput = {
         url: '/assets/asset.mp4',
         formats: null,
       },
+      icons: [
+        {
+          url: '/assets/asset.jpg',
+          formats: null,
+        },
+        {
+          url: '/assets/asset.jpg',
+          formats: null,
+        },
+        {
+          url: '/assets/asset.jpg',
+          formats: null,
+        },
+      ],
     },
   },
   deeplyNested: {
@@ -233,27 +279,59 @@ const expectedOutput = {
       },
     },
   },
+  array: [
+    {
+      data: {
+        image: {
+          url: '/assets/asset.jpg',
+          formats: null,
+        },
+      },
+    },
+    {
+      data: {
+        image: {
+          url: '/assets/asset.jpg',
+          formats: null,
+        },
+      },
+    },
+  ],
 };
 
 describe('makeAllAssetURLsRelative', () => {
   it('should make all asset URLs relative', () => {
-    const actual = makeAllAssetURLsRelative(fetchResults.allAssets);
+    const actual = makeAllAssetURLsRelative(fetchResults.allAssets, false);
     expect(actual).toStrictEqual(expectedOutput.allAssets);
   });
   it('should convert indefinitely nested fields', () => {
-    const actual = makeAllAssetURLsRelative(fetchResults.deeplyNested);
+    const actual = makeAllAssetURLsRelative(fetchResults.deeplyNested, false);
     expect(actual).toStrictEqual(expectedOutput.deeplyNested);
   });
+  it('should convert all asset urls in a results array', () => {
+    const actual = makeAllAssetURLsRelative(fetchResults.array, false);
+    expect(actual).toStrictEqual(expectedOutput.array);
+  });
   it('should not convert already relative asset urls', () => {
-    const actual = makeAllAssetURLsRelative(fetchResults.alreadyRelative);
+    const actual = makeAllAssetURLsRelative(
+      fetchResults.alreadyRelative,
+      false,
+    );
     expect(actual).toStrictEqual(expectedOutput.alreadyRelative);
   });
   it('should not convert any non-asset url', () => {
-    const actual = makeAllAssetURLsRelative(fetchResults.nonAssets);
+    const actual = makeAllAssetURLsRelative(fetchResults.nonAssets, false);
     expect(actual).toStrictEqual(expectedOutput.nonAssets);
   });
   it('should not convert non-asset fields with the same name as asset fields', () => {
-    const actual = makeAllAssetURLsRelative(fetchResults.sameNameNonAssets);
+    const actual = makeAllAssetURLsRelative(
+      fetchResults.sameNameNonAssets,
+      false,
+    );
     expect(actual).toStrictEqual(expectedOutput.sameNameNonAssets);
+  });
+  it('should not convert any assets url in preview mode', () => {
+    const actual = makeAllAssetURLsRelative(fetchResults.allAssets, true);
+    expect(actual).toStrictEqual(fetchResults.allAssets);
   });
 });

@@ -8,11 +8,11 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /opt/
 COPY package*.json ./
-RUN yarn config set fetch-retry-maxtimeout 600000 -g && yarn
+RUN npm config set fetch-retry-maxtimeout 600000 && npm install
 ENV PATH /opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
 COPY . .
-RUN yarn build
+RUN npm run build
 
 # Creating final production image
 FROM ${NODE_IMAGE} as buildfinal

@@ -129,7 +129,8 @@ data "aws_iam_policy_document" "ecs_task_execution" {
         aws_ssm_parameter.cms_github_pat.arn,
         aws_ssm_parameter.strapi_api_token.arn,
       aws_ssm_parameter.preview_token.arn],
-      [for name, parameter in aws_ssm_parameter.cms_multitenant_api_token_salt : parameter.arn]
+      [for name, parameter in aws_ssm_parameter.cms_multitenant_api_token_salt : parameter.arn],
+      [for name, parameter in aws_ssm_parameter.cms_multitenant_wf_notifications_bearer_token : parameter.arn]
     )
   }
 

@@ -36,7 +36,7 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "strapi-plugin-preview-button": "^3.0.0",
-    "strapi-plugin-static-deploy": "^0.0.9",
+    "strapi-plugin-static-deploy": "^0.0.13",
     "styled-components": "^6.0.0"
   },
   "strapi": {

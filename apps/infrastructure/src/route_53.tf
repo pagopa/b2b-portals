@@ -63,6 +63,48 @@ module "storybook_records" {
   depends_on = [module.dns_zone]
 }
 
+// This Route53 record will point at the Storybook CDN
+module "demowebsite_records" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-route53.git//modules/records?ref=bc63328714550fd903d2574b263833c9ce1c867e" # v2.11.0"
+
+  zone_id = module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]]
+
+  records = [
+    {
+      name = "demowebsite"
+      type = "A"
+      alias = {
+        name                   = aws_cloudfront_distribution.cdn_multi_website["demo"].domain_name
+        zone_id                = aws_cloudfront_distribution.cdn_multi_website["demo"].hosted_zone_id
+        evaluate_target_health = false
+      }
+    },
+    {
+      name = "www.demowebsite"
+      type = "A"
+      alias = {
+        name                   = aws_cloudfront_distribution.cdn_multi_website["demo"].domain_name
+        zone_id                = aws_cloudfront_distribution.cdn_multi_website["demo"].hosted_zone_id
+        evaluate_target_health = false
+      }
+    },
+    {
+      name    = "demowebsite"
+      type    = "TXT"
+      ttl     = 300
+      records = ["d365mktkey=me62nCqGbQxxMBSVcvKjy0hUtKhJIX67IPOpSZKj78Ix"]
+    },
+    {
+      name    = "www.demowebsite"
+      type    = "TXT"
+      ttl     = 300
+      records = ["d365mktkey=me62nCqGbQxxMBSVcvKjy0hUtKhJIX67IPOpSZKj78Ix"]
+    }
+  ]
+
+  depends_on = [module.dns_zone]
+}
+
 module "preview_strapi_records" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-route53.git//modules/records?ref=bc63328714550fd903d2574b263833c9ce1c867e" # v2.11.0"
 
