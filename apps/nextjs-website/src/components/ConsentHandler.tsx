@@ -1,5 +1,5 @@
 'use client';
-import { Analytics } from '@/lib/fetch/siteWideSEO';
+import { Analytics, Locale } from '@/lib/fetch/siteWideSEO';
 import mixpanel from 'mixpanel-browser';
 import Script from 'next/script';
 import { useEffect } from 'react';
@@ -34,7 +34,7 @@ const ConsentHandler = ({
   oneTrustDomainID,
   mixpanel: mixpanelConfig,
   locale,
-}: NonNullable<Analytics> & { locale: string }) => {
+}: NonNullable<Analytics> & { locale: Locale }) => {
   useEffect(() => {
     const initMixpanel = () => {
       if (!mixpanelConfig) return;
