@@ -165,7 +165,7 @@ export default async function Layout({
                 window.recaptchaOptions = { useRecaptchaNet: true };
               }
             `}</Script>
-          {analytics && <ConsentHandler {...analytics} />}
+          {analytics && <ConsentHandler {...analytics} locale={locale} />}
         </body>
       </html>
     </ThemeProvider>
