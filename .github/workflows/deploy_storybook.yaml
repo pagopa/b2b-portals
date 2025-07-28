@@ -49,7 +49,7 @@ jobs:
           
       - name: Deploy to S3 Bucket
         shell: bash
-        run: aws s3 sync ./apps/nextjs-website/storybook-static s3://${{ vars.S3_BUCKET_NAME }}/storybook --delete
+        run: aws s3 sync ./apps/nextjs-website/storybook-static s3://${{ vars.STORYBOOK_S3_BUCKET_NAME }}/storybook --delete
 
       - name: Create AWS Cloudfront Invalidation
         shell: bash
