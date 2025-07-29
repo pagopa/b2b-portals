@@ -12,6 +12,7 @@ const makePreFooterProps = ({
   background,
   ctaButtons,
   exclude,
+  pressReleasesParentSlug,
   ...rest
 }: PreFooterAttributes & SiteWidePageData): PreFooterProps => ({
   ...(background && { background: background.url }),
@@ -30,6 +31,7 @@ const makePreFooterProps = ({
   ...(exclude.length > 0 && {
     excludeSlugs: exclude.map((obj) => obj.slug),
   }),
+  ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
   ...rest,
 });
 

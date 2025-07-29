@@ -48,10 +48,14 @@ export const getAllPages = async (
     await getPressReleases({ ...appEnv, locale }),
     appEnv.config.PREVIEW_MODE === 'true',
   );
+  const { pressReleasesParentSlug } = await getSiteWideSEO();
 
   return [
     ...navigationToPageDataArray(navigation),
-    ...pressReleaseToPageDataArray(pressReleases),
+    ...pressReleaseToPageDataArray(
+      pressReleases,
+      pressReleasesParentSlug ?? undefined,
+    ),
   ];
 };
 

@@ -58,6 +58,7 @@ const siteWideSEOResponse: SiteWideSEO = {
     },
     defaultLocale: 'it',
     analytics: null,
+    pressReleasesParentSlug: null,
   },
 };
 

@@ -4,9 +4,10 @@ import { PageData } from './navigation';
 
 export const pressReleaseToPageDataArray = (
   pressRelease: PressReleases,
+  pressReleasesParentSlug = 'press-releases',
 ): ReadonlyArray<PageData> =>
   pressRelease.data.map((item) => ({
-    slug: ['press-releases', item.slug],
+    slug: [pressReleasesParentSlug, item.slug],
     seo: item.seo,
     sections: [
       {

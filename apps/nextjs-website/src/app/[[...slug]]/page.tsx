@@ -126,7 +126,8 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const { slug } = params;
-  const { defaultLocale, themeVariant, analytics } = await getSiteWideSEO();
+  const { defaultLocale, themeVariant, analytics, pressReleasesParentSlug } =
+    await getSiteWideSEO();
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to '' and locale to the default locale
@@ -172,6 +173,7 @@ const Page = async ({ params }: PageParams) => {
           locale,
           defaultLocale,
           pressReleasePages,
+          ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
         }),
       )}
     </main>

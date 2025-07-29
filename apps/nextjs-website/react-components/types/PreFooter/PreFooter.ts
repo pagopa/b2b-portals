@@ -12,6 +12,7 @@ export interface PreFooterProps extends PreFooterContentProps {
   readonly ctaButtons?: CtaButtonProps[];
   readonly layout: 'left' | 'center';
   readonly excludeSlugs?: string[];
+  readonly pressReleasesParentSlug?: string;
 }
 
 export interface PreFooterContentProps {

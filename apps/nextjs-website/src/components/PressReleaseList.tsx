@@ -24,6 +24,7 @@ const makePressReleaseListProps = ({
   locale,
   defaultLocale,
   pressReleasePages,
+  pressReleasesParentSlug = 'press-releases',
   ...rest
 }: PressReleaseListSection &
   SiteWidePageData & {
@@ -36,7 +37,7 @@ const makePressReleaseListProps = ({
     link: {
       label: locale === 'it' ? 'Leggi' : 'Read',
       href: LocalizeURL({
-        URL: '/press-releases/' + PRPage.slug,
+        URL: `/${pressReleasesParentSlug}/` + PRPage.slug,
         locale,
         defaultLocale,
       }),

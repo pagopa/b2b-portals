@@ -85,7 +85,13 @@ export default async function Layout({
   }
 
   const siteWideSEO = await getSiteWideSEO();
-  const { defaultLocale, locales, analytics, themeVariant } = siteWideSEO;
+  const {
+    defaultLocale,
+    locales,
+    analytics,
+    themeVariant,
+    pressReleasesParentSlug,
+  } = siteWideSEO;
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the locale to the default locale
@@ -142,6 +148,7 @@ export default async function Layout({
               themeVariant={themeVariant}
               locale={locale}
               defaultLocale={defaultLocale}
+              {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
             />
           )}
           <Footer
