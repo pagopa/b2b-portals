@@ -125,6 +125,7 @@ const BannerLink = ({
                 <Typography
                   component='div'
                   variant='body2'
+                  maxWidth={{ sm: '60%', xs: 'none' }}
                   sx={{
                     textAlign: 'center',
                     '& a': {
