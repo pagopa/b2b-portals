@@ -67,6 +67,11 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.analytics"
+    },
+    "pressReleasesParentSlug": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$",
+      "default": "press-releases"
     }
   }
 }

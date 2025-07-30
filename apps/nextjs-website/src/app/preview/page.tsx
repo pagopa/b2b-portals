@@ -12,20 +12,7 @@ import {
   getSiteWideSEO,
   isPreviewMode,
 } from '@/lib/api';
-import { Locale, ThemeVariant } from '@/lib/fetch/siteWideSEO';
-
-// Fetch themeVariant from General
-// Default to 'SEND' if General isn't present
-const GetThemeVariantForPreview = async (): Promise<ThemeVariant> => {
-  // Disable eslint because making the preview work when General has not been filled by the CMS user is more important
-  // eslint-disable-next-line functional/no-try-statements
-  try {
-    const { themeVariant } = await getSiteWideSEO();
-    return themeVariant;
-  } catch {
-    return 'SEND';
-  }
-};
+import { Locale } from '@/lib/fetch/siteWideSEO';
 
 const PreviewPage = async ({
   searchParams,
@@ -73,7 +60,7 @@ const PreviewPage = async ({
       ? getPageSwitchPageDataFromID(tenant, documentID, locale)
       : getPageDataFromID(tenant, documentID, locale));
 
-  const themeVariant = await GetThemeVariantForPreview();
+  const { themeVariant, pressReleasesParentSlug } = await getSiteWideSEO();
   const pressReleasePages = await getPressReleasePages(locale);
 
   return (
@@ -85,6 +72,7 @@ const PreviewPage = async ({
           locale: document.locale,
           defaultLocale: document.locale, // Doesn't matter in preview
           pressReleasePages,
+          ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
         }),
       )}
     </div>

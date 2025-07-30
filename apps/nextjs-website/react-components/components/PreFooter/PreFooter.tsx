@@ -43,11 +43,12 @@ const PreFooter = (props: PreFooterProps) => {
     background,
     ctaButtons,
     excludeSlugs,
+    pressReleasesParentSlug = 'press-releases',
   } = props;
   const pathname = usePathname() ?? '';
 
   // Don't show PreFooter for any press release
-  if (pathname && pathname.includes('press-releases')) {
+  if (pathname && pathname.includes(pressReleasesParentSlug)) {
     return null;
   }
 

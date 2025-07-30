@@ -45,6 +45,7 @@ const SiteWideSEOCodec = t.strict({
     }),
     analytics: t.union([AnalyticsCodec, t.null]),
     defaultLocale: LocaleCodec,
+    pressReleasesParentSlug: t.union([t.string, t.null]),
   }),
 });
 
@@ -58,6 +59,7 @@ export interface SiteWidePageData {
   readonly themeVariant: ThemeVariant;
   readonly locale: Locale;
   readonly defaultLocale: Locale;
+  readonly pressReleasesParentSlug?: string;
 }
 
 export const fetchSiteWideSEO = ({
