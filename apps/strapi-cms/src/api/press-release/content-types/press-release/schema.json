@@ -58,6 +58,16 @@
       },
       "component": "sections.press-release",
       "required": true
+    },
+    "credits": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "sections.text-and-image"
     }
   }
 }

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_sections_text_and_images",
+  "info": {
+    "displayName": "TextAndImage"
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "body": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "imageLinkUrl": {
+      "type": "string"
+    }
+  }
+}
