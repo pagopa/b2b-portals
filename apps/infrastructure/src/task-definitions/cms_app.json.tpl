@@ -12,7 +12,9 @@
       "options": {
         "awslogs-group": "strapi-ecs-task",
         "awslogs-region": "eu-south-1",
-        "awslogs-stream-prefix": "strapi"
+        "awslogs-stream-prefix": "strapi",
+        "mode": "non-blocking",
+        "max-buffer-size": "1m"
       }
     },
     "environment": [
