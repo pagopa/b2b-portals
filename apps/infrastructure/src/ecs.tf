@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "nextjs_task_def" {
   cpu                      = var.nextjs_app_cpu
   memory                   = var.nextjs_app_memory
   container_definitions = templatefile("./task-definitions/nextjs_app.json.tpl", {
-    image            = aws_ecr_repository.nextjs_image_repository.repository_url
+    image            = format("%s:%s", aws_ecr_repository.nextjs_image_repository.repository_url, var.nextjs_app_image_tag)
     fargate_cpu      = var.nextjs_app_cpu
     fargate_memory   = var.nextjs_app_memory
     aws_region       = var.aws_region
@@ -61,7 +61,7 @@ resource "aws_ecs_task_definition" "cms_multitenant_task_def" {
   cpu                      = var.cms_app_cpu
   memory                   = var.cms_app_memory
   container_definitions = templatefile("./task-definitions/cms_app.json.tpl", {
-    image                               = aws_ecr_repository.strapi_image_repository.repository_url
+    image                               = format("%s:%s", aws_ecr_repository.strapi_image_repository.repository_url, var.cms_app_image_tag)
     fargate_cpu                         = var.cms_app_cpu
     fargate_memory                      = var.cms_app_memory
     aws_region                          = var.aws_region

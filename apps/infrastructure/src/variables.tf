@@ -139,3 +139,14 @@ variable "nextjs_app_memory" {
   description = "Fargate instance memory to provision (in MiB)"
   default     = "3072" ##### 3 GB RAM
 }
+
+# set here the image tag for the Next.js application due to this issue: https://github.com/hashicorp/terraform-provider-aws/issues/20121
+variable "nextjs_app_image_tag" {
+  description = "Docker image tag for the Next.js application"
+  type        = string
+}
+
+variable "cms_app_image_tag" {
+  description = "Docker image tag for the CMS application"
+  type        = string
+}
