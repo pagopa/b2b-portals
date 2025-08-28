@@ -12,7 +12,9 @@
       "options": {
         "awslogs-group": "nextjs-ecs-task",
         "awslogs-region": "eu-south-1",
-        "awslogs-stream-prefix": "nextjs"
+        "awslogs-stream-prefix": "nextjs",
+        "mode": "non-blocking",
+        "max-buffer-size": "1m"
       }
     },
     "environment": [
