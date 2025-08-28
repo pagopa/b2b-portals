@@ -1,5 +1,5 @@
 import { Link, Stack, Typography } from "@mui/material";
-import { TextAndImageProps } from "@react-components/types/TextAndImage/TextAndImage.types";
+import { TextAndImageProps } from "../../types";
 
 const TextAndImage = ({
     sectionID,

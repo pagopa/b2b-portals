@@ -2,6 +2,7 @@ import * as t from 'io-ts';
 import {
   PageSectionCodec,
   PressReleaseSectionContentCodec,
+  TextAndImageSectionContentCodec,
 } from './types/PageSection';
 import { extractFromResponse } from './extractFromResponse';
 import { extractTenantStrapiApiData } from './tenantApiData';
@@ -27,6 +28,7 @@ const PreviewPressReleaseDataCodec = t.strict({
   data: t.strict({
     locale: LocaleCodec,
     pressRelease: PressReleaseSectionContentCodec,
+    credits: t.union([TextAndImageSectionContentCodec, t.null]),
   }),
 });
 
@@ -130,6 +132,7 @@ export const fetchPressReleaseFromID = ({
         extractTenantStrapiApiData(config).baseUrl
       }/api/press-releases/${documentID}?locale=${locale}&status=draft
 &populate[1]=pressRelease.backlink
+&populate[2]=credits.image
 &sort[0]=pressRelease.date:desc
         `,
       {

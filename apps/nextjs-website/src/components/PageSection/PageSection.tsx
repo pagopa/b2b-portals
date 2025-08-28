@@ -28,6 +28,7 @@ import DynamicsForm from '../DynamicsForm';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleasePage } from '@/lib/fetch/pressRelease';
+import TextAndImage from '../TextAndImage';
 
 // eslint-disable-next-line complexity
 const PageSection = (
@@ -88,6 +89,8 @@ const PageSection = (
       return <MediaResources {...props} />;
     case 'sections.dynamics-form':
       return <DynamicsForm {...props} />;
+    case 'sections.text-and-image':
+      return <TextAndImage {...props} />;
     default:
       return null;
   }

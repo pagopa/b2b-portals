@@ -53,6 +53,7 @@ const pressReleasesResponse = {
           href: '/',
         },
       },
+      credits: null,
     },
     {
       id: 1,
@@ -83,6 +84,7 @@ const pressReleasesResponse = {
           href: '/',
         },
       },
+      credits: null,
     },
   ],
 };
@@ -102,6 +104,7 @@ describe('getNavigation', () => {
       `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases?locale=it&pagination[pageSize]=100
 &populate[0]=seo
 &populate[1]=pressRelease.backlink
+&populate[2]=credits.image
 &sort[0]=pressRelease.date:desc
         `,
       {
@@ -144,6 +147,7 @@ describe('getNavigation', () => {
               href: '/',
             },
           },
+          credits: null,
         },
         {
           slug: 'art-1',
@@ -167,6 +171,7 @@ describe('getNavigation', () => {
               href: '/',
             },
           },
+          credits: null,
         },
       ],
     };

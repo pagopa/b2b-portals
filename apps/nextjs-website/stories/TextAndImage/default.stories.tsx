@@ -1,5 +1,5 @@
-import TextAndImage from "@react-components/components/TextAndImage/TextAndImage";
-import { TextAndImageProps } from "@react-components/types/TextAndImage/TextAndImage.types";
+import { TextAndImage } from "@react-components/components";
+import { TextAndImageProps } from "@react-components/types";
 import { Meta, StoryFn } from "@storybook/react";
 
 // Define the default export with metadata about your component

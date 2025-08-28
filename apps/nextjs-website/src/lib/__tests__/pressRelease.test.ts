@@ -32,6 +32,7 @@ const pressReleases: PressReleases = {
           href: '/',
         },
       },
+      credits: null,
     },
     {
       slug: 'art-1',
@@ -55,6 +56,7 @@ const pressReleases: PressReleases = {
           href: '/',
         },
       },
+      credits: null,
     },
   ],
 };
@@ -73,6 +75,7 @@ const previewPressReleaseData: PreviewPressReleaseData = {
         href: '/',
       },
     },
+    credits: null,
   },
 };
 const previewPageData: PreviewPageData = {
