@@ -1,7 +1,8 @@
 {
   "collectionName": "components_sections_text_and_images",
   "info": {
-    "displayName": "TextAndImage"
+    "displayName": "TextAndImage",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -14,14 +15,17 @@
       "required": true
     },
     "image": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "imageLinkUrl": {
+      "type": "string"
+    },
+    "imageLinkTitle": {
       "type": "string"
     }
   }
