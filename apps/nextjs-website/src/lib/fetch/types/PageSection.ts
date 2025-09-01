@@ -439,6 +439,21 @@ const DynamicsFormSectionPropsCodec = t.strict({
   scriptEndpoint: t.string,
 });
 
+export const TextAndImageSectionContentCodec = t.strict({
+  sectionID: t.union([t.string, t.null]),
+  body: t.string,
+  image: StrapiImageRequiredSchema,
+  imageLinkUrl: t.union([t.string, t.null]),
+  imageLinkTitle: t.union([t.string, t.null]),
+});
+
+const TextAndImageSectionCodec = t.intersection([
+  t.strict({
+    __component: t.literal('sections.text-and-image'),
+  }),
+  TextAndImageSectionContentCodec,
+]);
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -466,6 +481,7 @@ export const PageSectionCodec = t.union([
   PressReleaseListSectionCodec,
   MediaResourcesSectionCodec,
   DynamicsFormSectionPropsCodec,
+  TextAndImageSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -503,3 +519,4 @@ export type MediaResourcesSection = t.TypeOf<typeof MediaResourcesSectionCodec>;
 export type DynamicsFormSectionProps = t.TypeOf<
   typeof DynamicsFormSectionPropsCodec
 >;
+export type TextAndImageSection = t.TypeOf<typeof TextAndImageSectionCodec>;

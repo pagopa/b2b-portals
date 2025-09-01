@@ -1,7 +1,10 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
 import { PageSEOCodec } from './types/SEO';
-import { PressReleaseSectionContentCodec } from './types/PageSection';
+import {
+  PressReleaseSectionContentCodec,
+  TextAndImageSectionContentCodec,
+} from './types/PageSection';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
@@ -10,6 +13,7 @@ const PressReleasePageCodec = t.strict({
   slug: t.string,
   seo: PageSEOCodec,
   pressRelease: PressReleaseSectionContentCodec,
+  credits: t.union([TextAndImageSectionContentCodec, t.null]),
 });
 
 const PressReleasesCodec = t.strict({
@@ -33,6 +37,7 @@ export const getPressReleases = ({
       }/api/press-releases?locale=${locale}&pagination[pageSize]=100
 &populate[0]=seo
 &populate[1]=pressRelease.backlink
+&populate[2]=credits.image
 &sort[0]=pressRelease.date:desc
         `,
       {

@@ -91,6 +91,7 @@ const pressReleaseDataResponse: PreviewPressReleaseData = {
         href: '/',
       },
     },
+    credits: null,
   },
 };
 
@@ -314,6 +315,7 @@ describe('fetchPressReleaseFromID', () => {
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases/${pageIDExample}?locale=it&status=draft
 &populate[1]=pressRelease.backlink
+&populate[2]=credits.image
 &sort[0]=pressRelease.date:desc
         `,
       {

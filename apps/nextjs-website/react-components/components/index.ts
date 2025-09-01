@@ -28,6 +28,7 @@ import PressRelease from './PressRelease/PressRelease';
 import PressReleaseList from './PressReleaseList/PressReleaseList';
 import MediaResources from './MediaResources/MediaResources';
 import DynamicsForm from './DynamicsForm/DynamicsForm';
+import TextAndImage from './TextAndImage/TextAndImage';
 
 export {
   Hero,
@@ -60,4 +61,5 @@ export {
   PressReleaseList,
   MediaResources,
   DynamicsForm,
+  TextAndImage,
 };
