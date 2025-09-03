@@ -9,12 +9,23 @@ export const pressReleaseToPageDataArray = (
   pressRelease.data.map((item) => ({
     slug: [pressReleasesParentSlug, item.slug],
     seo: item.seo,
-    sections: [
-      {
-        __component: 'sections.press-release',
-        ...item.pressRelease,
-      },
-    ],
+    sections: item.credits
+      ? [
+          {
+            __component: 'sections.press-release',
+            ...item.pressRelease,
+          },
+          {
+            __component: 'sections.text-and-image',
+            ...item.credits,
+          },
+        ]
+      : [
+          {
+            __component: 'sections.press-release',
+            ...item.pressRelease,
+          },
+        ],
   }));
 
 export const previewPressReleaseToPreviewPageData = (
@@ -22,11 +33,22 @@ export const previewPressReleaseToPreviewPageData = (
 ): PreviewPageData => ({
   data: {
     locale: pressRelease.data.locale,
-    sections: [
-      {
-        __component: 'sections.press-release',
-        ...pressRelease.data.pressRelease,
-      },
-    ],
+    sections: pressRelease.data.credits
+      ? [
+          {
+            __component: 'sections.press-release',
+            ...pressRelease.data.pressRelease,
+          },
+          {
+            __component: 'sections.text-and-image',
+            ...pressRelease.data.credits,
+          },
+        ]
+      : [
+          {
+            __component: 'sections.press-release',
+            ...pressRelease.data.pressRelease,
+          },
+        ],
   },
 });
