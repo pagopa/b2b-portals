@@ -41,8 +41,12 @@ const MegaHeader = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // Sublink is active if it points to the current page or one of its parents
+  // .slice(1) is needed because (assuming a relative url built like /example-slug or /parent/child)
+  // the first item in the array is always going to be an empty string, which matches with the homepage
+  // We can safely assume a relative url because an external one will simply never strike a match
   const isActiveSubLink = (href: string): boolean =>
-    pathname === href || pathname === href + '/' || pathname + '/' === href;
+    pathname.split('/').slice(1).includes(href.replace('/', ''));
 
   // Returns true if any one of the link's sublinks is active
   const isActiveLink = (menuItem: MegaMenuItem): boolean =>
