@@ -21,16 +21,7 @@ export const ChipsBlock = ({
     const targetSection = document.getElementById(targetID);
 
     if (targetSection) {
-      console.log('there is target');
-      let scrollTimeout: ReturnType<typeof setTimeout>;
-      const scrollEnd = () => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          window.location.hash = `#${targetSection.id}`;
-          window.removeEventListener(`scroll`, scrollEnd);
-        }, 100);
-      };
-      window.addEventListener('scroll', scrollEnd);
+      history.pushState({}, ``, `#${targetSection.id}`);
       targetSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -51,7 +42,7 @@ export const ChipsBlock = ({
 
   return (
     <Stack
-      direction="row"
+      direction='row'
       spacing={1}
       mt={2}
       sx={{
@@ -60,7 +51,7 @@ export const ChipsBlock = ({
       }}
     >
       <Stack
-        direction="row"
+        direction='row'
         spacing={1}
         sx={{
           maxWidth: '600px',
