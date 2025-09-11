@@ -21,15 +21,16 @@ export const ChipsBlock = ({
     const targetSection = document.getElementById(targetID);
 
     if (targetSection) {
+      console.log('there is target');
       let scrollTimeout: ReturnType<typeof setTimeout>;
       const scrollEnd = () => {
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
-          window.location.href = `./#${targetSection.id}`;
+          window.location.hash = `#${targetSection.id}`;
           window.removeEventListener(`scroll`, scrollEnd);
         }, 100);
       };
-      window.location.replace(`./#${targetSection.id}`);
+      window.addEventListener('scroll', scrollEnd);
       targetSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
