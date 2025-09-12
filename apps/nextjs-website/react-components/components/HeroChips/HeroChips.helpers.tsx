@@ -23,6 +23,7 @@ export const ChipsBlock = ({
     if (targetSection) {
       targetSection.focus({ preventScroll: true });
       targetSection.scrollIntoView({ behavior: 'smooth' });
+      history.pushState({}, '', `#${targetID}`);
     }
   };
 
