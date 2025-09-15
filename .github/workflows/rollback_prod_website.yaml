@@ -1,0 +1,59 @@
+name: Rollback Production Website
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'The Tenant for which the static site will be rolled back'
+        type: choice
+        required: true
+        options:
+          - send
+          - appio
+          - demo
+          - interop
+      timestamp:
+        description: "Timestamp indicating target folder for rollback (e.g. 2025-07-14_18-00-00)"
+        type: string
+        required: true
+
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  rollback:
+    name: Rollback to Timestamp ${{ inputs.timestamp }} - (${{ inputs.environment }})
+    runs-on: 'ubuntu-latest'
+    environment: ${{ inputs.environment }}
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ inputs.environment }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+
+      - name: Configure AWS credentials
+        uses: ./.github/actions/configure-aws-credentials
+        with:
+          aws_region: eu-south-1
+          role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
+      
+      - name: Validate ${{ inputs.timestamp }} folder exists
+        shell: bash
+        run: |
+          if ! aws s3 ls s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${{ inputs.timestamp }}/ >/dev/null; then
+            echo "❌ No folder found for timestamp ${{ inputs.timestamp }}. Aborting rollback."
+            exit 1
+          fi
+
+      - name: Sync from ${{ inputs.timestamp }} folder to latest
+        shell: bash
+        run: aws s3 sync s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${{ inputs.timestamp }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/latest --delete --exact-timestamps
+
+      - name: Create AWS Cloudfront Invalidation
+        shell: bash
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_PROD_DISTRIBUTION_ID }} --paths "/*" # At the moment we invalidate all the paths
