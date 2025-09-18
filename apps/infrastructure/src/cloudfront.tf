@@ -82,7 +82,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.main.cloudfront_access_identity_path
     }
-    origin_path = format("%s/", each.value.origin_path)
+    origin_path = format("%s/latest", each.value.origin_path)
   }
 
   enabled             = true # enable CloudFront distribution
