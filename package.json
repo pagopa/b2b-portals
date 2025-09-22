@@ -20,5 +20,9 @@
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
     "turbo": "^1.10.13"
+  },
+  "overrides": { 
+    "html-webpack-plugin": "5.6.3", 
+    "webpack": "5.95.0" 
   }
 }
