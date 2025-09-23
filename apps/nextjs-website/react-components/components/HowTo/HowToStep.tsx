@@ -26,8 +26,8 @@ export const HowToStep = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <Stack
@@ -115,7 +115,7 @@ export const HowToStep = ({
               alignItems: 'center',
               width: '100%',
               opacity: 1,
-              transform: { xs: 'rotate(90deg)', md: 'none' },
+              '> svg': { transform: { xs: 'rotate(90deg)', md: 'none' } },
               minHeight: '2em',
             }}
           >
