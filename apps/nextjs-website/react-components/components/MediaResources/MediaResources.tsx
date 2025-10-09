@@ -27,14 +27,15 @@ const MediaResources = ({
     theme === 'dark'
       ? muiTheme.palette.custom.white
       : themeVariant === 'SEND'
-      ? muiTheme.palette.primary.main
-      : muiTheme.palette.custom.primaryColorDark;
+        ? muiTheme.palette.primary.main
+        : muiTheme.palette.custom.primaryColorDark;
 
   return (
     <Box
       sx={{
         backgroundColor: backgroundColor,
       }}
+      tabIndex={0}
     >
       <Box
         component='section'

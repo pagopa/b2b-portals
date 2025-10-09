@@ -85,6 +85,7 @@ const PageSwitch = ({
       <ContainerRC
         sx={{ display: 'grid', justifyContent: 'center', alignItems: 'center' }}
         background={backgroundColor}
+        tabIndex={0}
       >
         <TitleSubtitleBlock
           title={title}

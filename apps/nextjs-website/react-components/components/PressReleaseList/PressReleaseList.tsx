@@ -14,6 +14,7 @@ const PressReleaseList = ({
     {...(sectionID && { sectionID })}
     direction='column'
     sx={{ marginY: { xs: 8, md: 12 } }}
+    tabIndex={0}
   >
     <Typography variant='h4' maxWidth='100%'>
       {title}

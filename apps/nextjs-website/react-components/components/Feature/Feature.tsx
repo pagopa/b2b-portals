@@ -42,6 +42,7 @@ const Feature = ({
       background={background ?? backgroundColorAlernative}
       py={{ xs: 4, sm: 4, md: 8 }}
       {...(sectionID && { sectionID })}
+      tabIndex={0}
     >
       <Grid item xs={12}>
         <Title variant='h4' textColor={textColor} title={title} />

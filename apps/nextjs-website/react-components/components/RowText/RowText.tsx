@@ -19,6 +19,7 @@ const RowText = (props: RowTextProps) => {
         color: textColor,
         py: 10,
       }}
+      tabIndex={0}
     >
       <Container
         sx={{

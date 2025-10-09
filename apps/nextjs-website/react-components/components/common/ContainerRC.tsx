@@ -16,6 +16,7 @@ interface ContainerProps {
   sx?: GridProps['sx'];
   size?: 'lg' | 'xl';
   sectionID?: string;
+  tabIndex?: number;
 }
 
 const ContainerRC = (props: ContainerProps) => {
@@ -30,6 +31,7 @@ const ContainerRC = (props: ContainerProps) => {
     sx = {},
     size = 'lg',
     sectionID,
+    tabIndex,
   } = props;
   const backgroundIsJSX = isJSX(background);
 
@@ -40,6 +42,7 @@ const ContainerRC = (props: ContainerProps) => {
       sx={{ px: { xs: 4 }, position: 'relative', overflow: 'hidden' }}
       py={py}
       px={px}
+      tabIndex={tabIndex}
       bgcolor={!backgroundIsJSX ? background : undefined}
     >
       {backgroundIsJSX && background}

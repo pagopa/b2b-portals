@@ -56,6 +56,7 @@ const Editorial = (props: EditorialProps) => {
         py={8}
         spacing={2}
         {...(sectionID && { sectionID })}
+        tabIndex={0}
       >
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
 

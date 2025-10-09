@@ -65,7 +65,7 @@ const EditorialSwitch = ({
       : IoBackgroundColor(theme);
 
   return (
-    <Box>
+    <Box tabIndex={0}>
       <ContainerRC
         sx={{ display: 'grid', justifyContent: 'center', alignItems: 'center' }}
         background={backgroundColor}

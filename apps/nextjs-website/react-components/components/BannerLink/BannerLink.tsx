@@ -66,11 +66,12 @@ const BannerLink = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <Box
+      tabIndex={0}
       bgcolor={backgroundColor}
       component='section'
       {...(sectionID && { id: sectionID })}
@@ -88,8 +89,8 @@ const BannerLink = ({
                   theme === 'light'
                     ? lightBackgrounds[index % 2]
                     : themeVariant === 'SEND'
-                    ? darkBackgroundsSend[index % 2]
-                    : darkBackgroundsIo[index % 2],
+                      ? darkBackgroundsSend[index % 2]
+                      : darkBackgroundsIo[index % 2],
                 width: '100%',
                 flex: 1,
                 display: 'flex',

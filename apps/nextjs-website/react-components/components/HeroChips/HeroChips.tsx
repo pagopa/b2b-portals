@@ -69,6 +69,7 @@ const HeroChips = (props: HeroChipsProps) => {
         py: 4,
       }}
       {...(sectionID && { sectionID })}
+      tabIndex={0}
     >
       <Box
         sx={{
@@ -108,7 +109,9 @@ const HeroChips = (props: HeroChipsProps) => {
             {subtitle}
           </Typography>
         )}
-        {chips.length > 0 && <ChipsBlock chips={chips} theme={theme} themeVariant={themeVariant}/>}
+        {chips.length > 0 && (
+          <ChipsBlock chips={chips} theme={theme} themeVariant={themeVariant} />
+        )}
       </Box>
     </ContainerRC>
   );
