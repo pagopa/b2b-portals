@@ -4,7 +4,7 @@ import Script from 'next/script';
 import { DynamicsFormProps } from '@react-components/types/DynamicsForm/DynamicsForm.types';
 
 const DynamicsForm = ({ formID, orgID, scriptEndpoint }: DynamicsFormProps) => (
-  <Box sx={{ width: '100%', minHeight: '600px' }}>
+  <Box sx={{ width: '100%', minHeight: '600px' }} tabIndex={0}>
     <div
       id='dynamics-form-container'
       data-form-id={formID}
@@ -12,7 +12,9 @@ const DynamicsForm = ({ formID, orgID, scriptEndpoint }: DynamicsFormProps) => (
       data-cached-form-url={`https://assets-eur.mkt.dynamics.com/${orgID}/digitalassets/forms/${formID}`}
     />
 
-    <Script src={`https://${scriptEndpoint}-endpoint.azureedge.net/eur/FormLoader/FormLoader.bundle.js`} />
+    <Script
+      src={`https://${scriptEndpoint}-endpoint.azureedge.net/eur/FormLoader/FormLoader.bundle.js`}
+    />
   </Box>
 );
 

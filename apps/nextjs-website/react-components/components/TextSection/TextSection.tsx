@@ -39,6 +39,7 @@ const TextSection = ({
         color: textColor,
         py: { xs: 4, md: 6 },
       }}
+      tabIndex={0}
     >
       <Container sx={{ width: { xs: '100%', md: '75%' }, textAlign: 'left' }}>
         {eyelet && (
