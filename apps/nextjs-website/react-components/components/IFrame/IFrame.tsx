@@ -5,6 +5,7 @@ import {
   IFrameResizerMessage,
 } from '../../types/IFrame/IFrame.types';
 import IframeResizer from '@iframe-resizer/react';
+import mixpanel from 'mixpanel-browser';
 
 const IFrame = ({ src, sectionID }: IFrameProps) => {
   const iframeRef = useRef<IFrameResizerRef>(null);
@@ -22,17 +23,40 @@ const IFrame = ({ src, sectionID }: IFrameProps) => {
   };
 
   useEffect(() => {
-    const handleScrollMessage = (event: MessageEvent) => {
+    const handleChildMessage = (event: MessageEvent) => {
+      // Request to scroll to section outside the iFrame
       if (event.data?.type === 'scrollTo' && event.data?.target) {
         const targetSection = document.getElementById(event.data.target);
         if (targetSection) {
           targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }
+
+      // Request to track MixPanel event
+      if (event.data?.type === 'track' && event.data?.event) {
+        const eventName = event.data.event.name;
+        const eventProperties = event.data.event.properties ?? undefined; // Turn null into undefined
+
+        if (
+          typeof eventName === 'string' &&
+          (typeof eventProperties === 'object' || eventProperties === undefined)
+        ) {
+          try {
+            if (!mixpanel.has_opted_out_tracking()) {
+              mixpanel.track(
+                event.data.event.name,
+                event.data.event.properties,
+              );
+            }
+          } catch {
+            // Mixpanel is not initialized
+          }
+        }
+      }
     };
 
-    window.addEventListener('message', handleScrollMessage);
-    return () => window.removeEventListener('message', handleScrollMessage);
+    window.addEventListener('message', handleChildMessage);
+    return () => window.removeEventListener('message', handleChildMessage);
   }, []);
 
   return sectionID ? (

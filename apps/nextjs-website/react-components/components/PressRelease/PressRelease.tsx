@@ -28,6 +28,7 @@ const PressRelease = (props: PressReleaseProps) => {
         py: 10,
         mx: 'auto',
       }}
+      tabIndex={0}
     >
       <Container
         sx={{

@@ -1,6 +1,5 @@
 ARG NODE_IMAGE=node:22.19-alpine@sha256:d2166de198f26e17e5a442f537754dd616ab069c47cc57b889310a717e0abbf9
 
-
 # Creating multi-stage build for production
 FROM ${NODE_IMAGE} as build
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev > /dev/null 2>&1

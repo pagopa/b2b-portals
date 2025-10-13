@@ -16,6 +16,7 @@ const Stats = ({ eyelet, title, body, items, sectionID }: StatsProps) => {
         px: { xs: 4, md: 16 },
         backgroundColor: 'background.paper',
       }}
+      tabIndex={0}
     >
       <Stack
         direction={{ xs: 'column', lg: 'row' }}

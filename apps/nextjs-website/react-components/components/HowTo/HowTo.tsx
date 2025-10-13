@@ -48,6 +48,7 @@ const HowTo = (props: HowToProps) => {
       background={backgroundColor}
       py={{ xs: 6, md: 8 }}
       {...(sectionID && { sectionID })}
+      tabIndex={0}
     >
       <Grid item xs={12}>
         {/** Section title */}

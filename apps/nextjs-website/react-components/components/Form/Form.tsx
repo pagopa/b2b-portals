@@ -259,6 +259,7 @@ const Form = ({
 
   return (
     <Box
+      tabIndex={0}
       sx={{
         width: '100%',
         position: 'relative',

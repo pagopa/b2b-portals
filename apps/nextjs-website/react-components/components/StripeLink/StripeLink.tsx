@@ -31,6 +31,7 @@ const StripeLink = ({
       py={2}
       sx={{ justifyContent: { xs: 'start', md: 'start' } }}
       {...(sectionID && { sectionID })}
+      tabIndex={0}
     >
       <Grid item>
         <Stack
@@ -82,8 +83,8 @@ const StripeLink = ({
                 theme === 'light'
                   ? palette.custom.white
                   : themeVariant === 'SEND'
-                  ? palette.primary.main
-                  : palette.custom.blueIO[500],
+                    ? palette.primary.main
+                    : palette.custom.blueIO[500],
               color:
                 theme === 'light'
                   ? themeVariant === 'SEND'
@@ -95,8 +96,8 @@ const StripeLink = ({
                   theme === 'light'
                     ? palette.custom.white
                     : themeVariant === 'SEND'
-                    ? palette.primary.main
-                    : palette.custom.blueIO[500],
+                      ? palette.primary.main
+                      : palette.custom.blueIO[500],
               },
             }}
             endIcon={<ArrowForwardIcon color='inherit'></ArrowForwardIcon>}
