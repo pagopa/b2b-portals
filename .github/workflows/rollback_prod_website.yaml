@@ -17,6 +17,10 @@ on:
         type: string
         required: true
 
+concurrency:
+  group: s3-deploy-${{ inputs.environment }}
+  cancel-in-progress: false
+
 # These permissions are needed to interact with GitHub's OIDC Token endpoint.
 permissions:
   id-token: write
