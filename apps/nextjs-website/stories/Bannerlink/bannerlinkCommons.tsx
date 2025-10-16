@@ -6,6 +6,11 @@ export const BannerLinkTemplate: StoryFn<BannerLinkProps> = (args) => (
   <BannerLink {...args} />
 );
 
+const getIcon = (theme: 'light' | 'dark') =>
+  theme === 'light'
+    ? 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg'
+    : 'https://d2mk0pc4ejgxx6.cloudfront.net/dark_icon_dee9ab4f99.svg';
+
 const generateDefaultProps = (
   theme: 'light' | 'dark'
 ): Partial<BannerLinkProps> => ({
@@ -19,8 +24,7 @@ const generateDefaultProps = (
           informazioni utili come il codice univoco della notifica (IUN)
         </p>
       ),
-      iconURL:
-        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+      iconURL: getIcon(theme),
       ctaButtons: [
         {
           text: 'Scrivici',
@@ -55,8 +59,7 @@ const generateTwoColumnProps = (
           informazioni utili come il codice univoco della notifica (IUN)
         </p>
       ),
-      iconURL:
-        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+      iconURL: getIcon(theme),
       ctaButtons: [
         {
           text: 'Scrivici',
@@ -79,8 +82,7 @@ const generateTwoColumnProps = (
           venerdì dalle 08:00 alle 20:00 e il sabato dalle 08:00 alle 14:00.
         </p>
       ),
-      iconURL:
-        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+      iconURL: getIcon(theme),
       ctaButtons: [
         {
           text: 'Chiamaci',

@@ -29,13 +29,13 @@ const generateDefaultProps = (
   width: 'standard',
   image: (
     <img
-      src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png'
+      src='https://d2mk0pc4ejgxx6.cloudfront.net/editorial_4e8d32980e.png'
       alt='placeholder'
     />
   ),
   mobileImage: (
     <img
-      src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png'
+      src='https://d2mk0pc4ejgxx6.cloudfront.net/editorial_4e8d32980e.png'
       alt='placeholder'
     />
   ),

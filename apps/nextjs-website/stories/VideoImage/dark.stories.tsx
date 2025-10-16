@@ -21,7 +21,7 @@ VideoFull.args = {
     </p>
   ),
   video: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/2023_12_14_16_24_35_Trim_online_video_cutter_com_d9b4283685.mp4',
     autoplay: false,
     fallback: 'fallback',
     loop: false,
@@ -37,7 +37,7 @@ VideoFullNoSubtitle.args = {
   ...defaultsDark,
   title: 'Sample Video Title',
   video: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/2023_12_14_16_24_35_Trim_online_video_cutter_com_d9b4283685.mp4',
     autoplay: false,
     fallback: 'fallback',
     loop: false,
@@ -52,7 +52,7 @@ export const VideoFullNoTitleNoSubtitle: StoryFn<typeof VideoImage> =
 VideoFullNoTitleNoSubtitle.args = {
   ...defaultsDark,
   video: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/2023_12_14_16_24_35_Trim_online_video_cutter_com_d9b4283685.mp4',
     autoplay: false,
     fallback: 'fallback',
     loop: false,
@@ -74,7 +74,7 @@ VideoFullWithCaption.args = {
   ),
   caption: 'Sample Video Caption',
   video: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/2023_12_14_16_24_35_Trim_online_video_cutter_com_d9b4283685.mp4',
     autoplay: false,
     fallback: 'fallback',
     loop: false,
@@ -91,7 +91,7 @@ VideoFullNoSubtitleWithCaption.args = {
   title: 'Sample Video Title',
   caption: 'Sample Video Caption',
   video: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/2023_12_14_16_24_35_Trim_online_video_cutter_com_d9b4283685.mp4',
     autoplay: false,
     fallback: 'fallback',
     loop: false,
@@ -108,7 +108,7 @@ VideoFullNoTitleNoSubtitleWithCaption.args = {
   caption: 'Sample Video Caption',
   isCentered: true,
   video: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/2023_12_14_16_24_35_Trim_online_video_cutter_com_d9b4283685.mp4',
     autoplay: false,
     fallback: 'fallback',
     loop: false,
@@ -136,12 +136,12 @@ ImageFull.args = {
     </p>
   ),
   image: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
   },
   mobileImage: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
   },
@@ -153,12 +153,12 @@ export const ImageNoTextWithCaptionCentered: StoryFn<typeof VideoImage> =
 ImageNoTextWithCaptionCentered.args = {
   ...defaultsDark,
   image: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
   },
   mobileImage: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
   },
@@ -171,12 +171,12 @@ export const ImageNoTextWithCaptionLeft: StoryFn<typeof VideoImage> =
 ImageNoTextWithCaptionLeft.args = {
   ...defaultsDark,
   image: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
   },
   mobileImage: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
   },
@@ -200,12 +200,12 @@ ImageNoCaptionWithTextCenter.args = {
     </p>
   ),
   image: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
   },
   mobileImage: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
   },
@@ -229,12 +229,12 @@ ImageNoCaptionWithTextLeft.args = {
     </p>
   ),
   image: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
   },
   mobileImage: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
   },
@@ -245,12 +245,12 @@ export const ImageNoTitleNoCaption: StoryFn<typeof VideoImage> =
 ImageNoTitleNoCaption.args = {
   ...defaultsDark,
   image: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
   },
   mobileImage: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/pi-hero-background.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
   },

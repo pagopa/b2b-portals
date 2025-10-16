@@ -141,7 +141,9 @@ const makeMegaHeaderProps = ({
   const baseProps: Partial<MegaHeaderProps> = {
     menuItems: defaultMenuItems,
     logo: {
-      src: customLogo ?? 'https://io.italia.it/assets/img/io-it-logo-blue.svg',
+      src:
+        customLogo ??
+        'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg',
       alt: 'logo',
       href: '#',
     },
@@ -179,7 +181,7 @@ const makeMegaHeaderProps = ({
             buttonText: 'Apri link',
             href: '#',
             icons: [
-              'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+              'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
             ],
           },
         ],

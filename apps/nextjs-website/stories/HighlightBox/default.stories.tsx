@@ -20,7 +20,7 @@ HighlightBoxFull.args = {
   title: 'Sta arrivando IT Wallet!',
   body: 'Se hai tra 18 e 35 anni compiuti puoi richiedere su IO la Carta Giovani Nazionale, istituita dal Dipartimento per le Politiche Giovanili e il Servizio Civile Universale. La carta dà diritto a sconti e agevolazioni per l’accesso ad attività culturali, sportive e ricreative, anche con finalità formative.',
   image: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/heo_cittadini_5acf230a3e.png',
     srcSet: '',
   },
   eyelet: 'In arrivo su IO',
@@ -37,7 +37,7 @@ HighlightBoxWithoutButton.args = {
   title: 'Sta arrivando IT Wallet!',
   body: 'Se hai tra 18 e 35 anni compiuti puoi richiedere su IO la Carta Giovani Nazionale, istituita dal Dipartimento per le Politiche Giovanili e il Servizio Civile Universale. La carta dà diritto a sconti e agevolazioni per l’accesso ad attività culturali, sportive e ricreative, anche con finalità formative.',
   image: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/heo_cittadini_5acf230a3e.png',
     srcSet: '',
   },
   eyelet: 'In arrivo su IO',
@@ -50,7 +50,7 @@ HighlightBoxWithoutEyelet.args = {
   title: 'Sta arrivando IT Wallet!',
   body: 'Se hai tra 18 e 35 anni compiuti puoi richiedere su IO la Carta Giovani Nazionale, istituita dal Dipartimento per le Politiche Giovanili e il Servizio Civile Universale. La carta dà diritto a sconti e agevolazioni per l’accesso ad attività culturali, sportive e ricreative, anche con finalità formative.',
   image: {
-    src: 'https://notifichedigitali.pagopa.it/static/images/hero-cittadini-foreground.png',
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/heo_cittadini_5acf230a3e.png',
     srcSet: '',
   },
   eyelet: '',

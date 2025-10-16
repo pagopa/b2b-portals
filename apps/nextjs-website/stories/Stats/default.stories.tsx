@@ -23,17 +23,17 @@ StatsFull.args = {
     {
       title: '647M',
       description: 'messaggi inviati dagli enti su IO',
-      iconURL: 'https://io.italia.it/assets/img/io-it-logo-blue.svg',
+      iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg',
     },
     {
       title: '8M',
       description: 'metodi di pagamento aggiunti dalle persone',
-      iconURL: 'https://io.italia.it/assets/img/io-it-logo-blue.svg',
+      iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg',
     },
     {
       title: '319.629',
       description: 'servizi locali e nazionali disponibili',
-      iconURL: 'https://io.italia.it/assets/img/io-it-logo-blue.svg',
+      iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg',
     },
   ],
 };
