@@ -37,5 +37,5 @@ export const LightFeatureFullWithCustomBackground: StoryFn<typeof Feature> =
   FeatureTemplate.bind({});
 LightFeatureFullWithCustomBackground.args = {
   ...defaultPropsLightWithLinks,
-  background: '#DDDDDD',
+  background: '#F2F2F2',
 };
