@@ -14,7 +14,7 @@ export const VideoWithTextLeft: StoryFn<typeof FramedVideo> =
 VideoWithTextLeft.args = {
   ...defaultsDark,
   videoURL:
-    'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    'https://d2mk0pc4ejgxx6.cloudfront.net/2023_12_14_16_24_35_Trim_online_video_cutter_com_d9b4283685.mp4',
   text: {
     title: 'Aenean commodo ligula eget dolor',
     body: `Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
@@ -33,7 +33,7 @@ export const VideoWithTextRight: StoryFn<typeof FramedVideo> =
 VideoWithTextRight.args = {
   ...defaultsDark,
   videoURL:
-    'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    'https://d2mk0pc4ejgxx6.cloudfront.net/2023_12_14_16_24_35_Trim_online_video_cutter_com_d9b4283685.mp4',
   text: {
     title: 'Aenean commodo ligula eget dolor',
     body: `Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
@@ -52,7 +52,7 @@ export const VideoFullScreen: StoryFn<typeof FramedVideo> =
 VideoFullScreen.args = {
   ...defaultsDark,
   videoURL:
-    'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-in-detail-4907-large.mp4',
+    'https://d2mk0pc4ejgxx6.cloudfront.net/2023_12_14_16_24_35_Trim_online_video_cutter_com_d9b4283685.mp4',
 };
 
 export const NoVideo: StoryFn<typeof FramedVideo> = FramedVideoTemplate.bind(

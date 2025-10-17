@@ -23,7 +23,7 @@ const generateSteps = (
       iconURL:
         theme === 'dark'
           ? 'https://d2mk0pc4ejgxx6.cloudfront.net/dark_icon_dee9ab4f99.svg'
-          : 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+          : 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
     }),
     index: i,
     theme,

@@ -8,7 +8,7 @@ export const generateItems = (count: number): CardsItemProps[] =>
   Array.from({ length: count }, (_, i) => ({
     title: `Card ${i + 1}`,
     text: `This is card ${i + 1}`,
-    iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+    iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
   }));
 
 // Function to generate items
@@ -16,7 +16,7 @@ export const generateItemsWithLinks = (count: number): CardsItemProps[] =>
   Array.from({ length: count }, (_, i) => ({
     title: `Card ${i + 1}`,
     text: `This is card ${i + 1}`,
-    iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+    iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
     links: [
       {
         label: `Link ${i + 1}`,

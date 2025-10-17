@@ -31,13 +31,13 @@ Default.args = {
             width: 'standard',
             image: (
               <img
-                src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png'
+                src='https://d2mk0pc4ejgxx6.cloudfront.net/editorial_4e8d32980e.png'
                 alt='placeholder'
               />
             ),
             mobileImage: (
               <img
-                src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png'
+                src='https://d2mk0pc4ejgxx6.cloudfront.net/editorial_4e8d32980e.png'
                 alt='placeholder'
               />
             ),
@@ -54,13 +54,13 @@ Default.args = {
                 title: 'Card 1',
                 text: 'This is card 1',
                 iconURL:
-                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
               },
               {
                 title: 'Card 2',
                 text: 'This is card 2',
                 iconURL:
-                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
               },
             ],
             text: {
@@ -89,7 +89,7 @@ Default.args = {
                   </p>
                 ),
                 iconURL:
-                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
                 ctaButtons: [
                   {
                     text: 'Scrivici',
@@ -118,13 +118,13 @@ Default.args = {
             width: 'standard',
             image: (
               <img
-                src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png'
+                src='https://d2mk0pc4ejgxx6.cloudfront.net/editorial_4e8d32980e.png'
                 alt='placeholder'
               />
             ),
             mobileImage: (
               <img
-                src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png'
+                src='https://d2mk0pc4ejgxx6.cloudfront.net/editorial_4e8d32980e.png'
                 alt='placeholder'
               />
             ),
@@ -142,7 +142,7 @@ Default.args = {
                 title: 'Card 3',
                 text: 'This is card 3',
                 iconURL:
-                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
               },
             ],
             text: {
@@ -171,7 +171,7 @@ Default.args = {
                   </p>
                 ),
                 iconURL:
-                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
                 ctaButtons: [
                   {
                     text: 'Contattaci',
@@ -200,13 +200,13 @@ Default.args = {
             width: 'standard',
             image: (
               <img
-                src='https://notifichedigitali.pagopa.it/static/images/pa-infoblock-5.png'
+                src='https://d2mk0pc4ejgxx6.cloudfront.net/editorial_4e8d32980e.png'
                 alt='placeholder'
               />
             ),
             mobileImage: (
               <img
-                src='https://notifichedigitali.pagopa.it/static/images/pi-infoblock-1.png'
+                src='https://d2mk0pc4ejgxx6.cloudfront.net/editorial_4e8d32980e.png'
                 alt='placeholder'
               />
             ),
@@ -223,13 +223,13 @@ Default.args = {
                 title: 'Card 4',
                 text: 'This is card 4',
                 iconURL:
-                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
               },
               {
                 title: 'Card 5',
                 text: 'This is card 5',
                 iconURL:
-                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
               },
             ],
             text: {
@@ -258,7 +258,7 @@ Default.args = {
                   </p>
                 ),
                 iconURL:
-                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+                  'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
                 ctaButtons: [
                   {
                     text: 'Aiuto',
