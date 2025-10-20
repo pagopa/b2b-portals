@@ -56,6 +56,26 @@ jobs:
       - name: Create AWS Cloudfront Invalidation
         shell: bash
         run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_PROD_DISTRIBUTION_ID }} --paths "/*" # At the moment we invalidate all the paths
+
+      - name: Azure Login
+        if: ${{ inputs.environment == 'appio' }}
+        uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Purge Azure CDN endpoint (appio only)
+        if: ${{ inputs.environment == 'appio' }}
+        uses: azure/cli@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az cdn endpoint purge \
+            --resource-group io-p-weu-ioweb-fe-rg \
+            --profile-name io-p-weu-ioweb-portal-cdn-profile \
+            --name io-p-weu-ioweb-portal-cdn-endpoint \
+            --content-paths '/*'
   
   notify:
     needs: promote-to-prod
