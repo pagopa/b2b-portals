@@ -68,7 +68,8 @@ export const StorybookPreFooter: React.FC<StorybookPreFooterProps> = ({
     }
 
     setBackgroundUrl(
-      customImage ?? 'https://assets.innovazione.gov.it/1610704590-io.png'
+      customImage ??
+        'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg'
     );
 
     return cleanup;

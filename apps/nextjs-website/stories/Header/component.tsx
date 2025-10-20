@@ -33,7 +33,7 @@ const makeHeaderProps = ({
     logo: {
       src:
         customLogo ??
-        'https://notifichedigitali.pagopa.it/static/images/logo.svg',
+        'https://d2mk0pc4ejgxx6.cloudfront.net/logo_sedn_6453fc30cd.svg',
       alt: 'Logo',
       href: '#',
     },
@@ -100,7 +100,7 @@ const makeHeaderProps = ({
           buttonText: 'Bottone Card Link',
           href: '#',
           icons: [
-            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
           ],
         },
         {
@@ -113,8 +113,8 @@ const makeHeaderProps = ({
           buttonText: 'Bottone Card Link',
           href: '#',
           icons: [
-            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
-            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
           ],
         },
         {
@@ -127,9 +127,9 @@ const makeHeaderProps = ({
           buttonText: 'Bottone Card Link',
           href: '#',
           icons: [
-            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
-            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
-            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
           ],
         },
       ],
@@ -160,7 +160,7 @@ const makeHeaderProps = ({
           buttonText: 'Bottone Card Link',
           href: '#',
           icons: [
-            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_f76dbe7883.svg',
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
           ],
         },
       ],

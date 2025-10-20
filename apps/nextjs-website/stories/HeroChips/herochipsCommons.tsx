@@ -22,7 +22,7 @@ const createHeroChipsProps = (
     subtitle: withSubtitle ? subtitle : '',
     ...(theme === 'dark' && {
       background: {
-        src: 'https://notifichedigitali.pagopa.it/static/images/hero-enti-background.png',
+        src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
         srcSet: '',
       },
     }),

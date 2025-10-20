@@ -46,7 +46,9 @@ const MegaHeader = ({
   // the first item in the array is always going to be an empty string, which matches with the homepage
   // We can safely assume a relative url because an external one will simply never strike a match
   const isActiveSubLink = (href: string): boolean =>
-    pathname.split('/').slice(1).includes(href.replace('/', ''));
+    pathname
+      ? pathname.split('/').slice(1).includes(href.replace('/', ''))
+      : false;
 
   // Returns true if any one of the link's sublinks is active
   const isActiveLink = (menuItem: MegaMenuItem): boolean =>
