@@ -1,4 +1,4 @@
-import { Grid, Stack, Button, Box, Typography, useTheme } from '@mui/material';
+import { Grid, Stack, Button, Typography, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import { HighlightBoxProps } from '../../types/HighlightBox/HighlightBox.types';
 
@@ -19,7 +19,7 @@ const HighlightBox = ({
       sx={{
         justifyContent: { xs: 'start', md: 'start' },
         borderRadius: '24px',
-        padding: '48px',
+        padding: { xs: '48px', md: '0 48px' },
         backgroundColor: theme.palette.custom.highLightBoxLightGreenBackground,
       }}
       {...(sectionID && { sectionID })}
@@ -81,7 +81,7 @@ const HighlightBox = ({
           </Stack>
         </Grid>
         <Grid item xs={12} md={6} sx={{ display: { xs: 'none', md: 'block' } }}>
-          <Box sx={{ width: '100%' }}>
+          <Stack sx={{ width: '100%' }}>
             <img
               src={image.src}
               srcSet={image.srcSet}
@@ -93,7 +93,7 @@ const HighlightBox = ({
                 width: '100%',
               }}
             />
-          </Box>
+          </Stack>
         </Grid>
       </Grid>
     </ContainerRC>
