@@ -15,6 +15,7 @@ const HighlightBox = ({
   return (
     <ContainerRC
       tabIndex={0}
+      py={4}
       sx={{
         justifyContent: { xs: 'start', md: 'start' },
         borderRadius: '24px',
