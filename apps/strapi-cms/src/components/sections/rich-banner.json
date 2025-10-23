@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_sections_rich_banners",
+  "info": {
+    "displayName": "RichBanner"
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "title": {
+      "type": "richtext"
+    },
+    "body": {
+      "type": "richtext"
+    }
+  }
+}

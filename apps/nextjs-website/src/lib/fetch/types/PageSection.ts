@@ -313,6 +313,13 @@ const ServiceCarouselSectionCodec = t.strict({
   sectionID: t.union([t.string, t.null]),
 });
 
+const RichBannerSectionCodec = t.strict({
+  __component: t.literal('sections.rich-banner'),
+  title: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  sectionID: t.union([t.string, t.null]),
+});
+
 const RowTextSectionCodec = t.strict({
   __component: t.literal('sections.row-text'),
   title: t.string,
@@ -473,6 +480,7 @@ export const PageSectionCodec = t.union([
   ServiceCarouselSectionCodec,
   HighlightBoxSectionCodec,
   StatsSectionCodec,
+  RichBannerSectionCodec,
   RowTextSectionCodec,
   TextSectionSectionCodec,
   PageSwitchSectionCodec,
@@ -507,6 +515,7 @@ export type ServiceCarouselSection = t.TypeOf<
 >;
 export type HighlightBoxSection = t.TypeOf<typeof HighlightBoxSectionCodec>;
 export type StatsSection = t.TypeOf<typeof StatsSectionCodec>;
+export type RichBannerSection = t.TypeOf<typeof RichBannerSectionCodec>;
 export type RowTextSection = t.TypeOf<typeof RowTextSectionCodec>;
 export type TextSectionSection = t.TypeOf<typeof TextSectionSectionCodec>;
 export type PageSwitchSection = t.TypeOf<typeof PageSwitchSectionCodec>;

@@ -65,7 +65,8 @@
         "sections.press-release-list",
         "sections.media-resources",
         "sections.dynamics-form",
-        "sections.text-and-image"
+        "sections.text-and-image",
+        "sections.rich-banner"
       ],
       "required": true,
       "min": 1,
