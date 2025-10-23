@@ -29,6 +29,7 @@ import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleasePage } from '@/lib/fetch/pressRelease';
 import TextAndImage from '../TextAndImage';
+import RichBanner from '../RichBanner';
 
 // eslint-disable-next-line complexity
 const PageSection = (
@@ -91,6 +92,8 @@ const PageSection = (
       return <DynamicsForm {...props} />;
     case 'sections.text-and-image':
       return <TextAndImage {...props} />;
+    case 'sections.rich-banner':
+      return <RichBanner {...props} />;
     default:
       return null;
   }
