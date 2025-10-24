@@ -29,6 +29,7 @@ import PressReleaseList from './PressReleaseList/PressReleaseList';
 import MediaResources from './MediaResources/MediaResources';
 import DynamicsForm from './DynamicsForm/DynamicsForm';
 import TextAndImage from './TextAndImage/TextAndImage';
+import RichBanner from './RichBanner/RichBanner';
 
 export {
   Hero,
@@ -62,4 +63,5 @@ export {
   MediaResources,
   DynamicsForm,
   TextAndImage,
+  RichBanner,
 };

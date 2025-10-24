@@ -29,6 +29,7 @@ import { PressReleaseListProps } from './PressReleaseList/PressReleaseList.types
 import { MediaResourcesProps } from './MediaResources/MediaResources.types';
 import { DynamicsFormProps } from './DynamicsForm/DynamicsForm.types';
 import { TextAndImageProps } from './TextAndImage/TextAndImage.types';
+import { RichBannerProps } from './RichBanner/RichBanner.types';
 
 export type {
   HeroProps,
@@ -62,4 +63,5 @@ export type {
   MediaResourcesProps,
   DynamicsFormProps,
   TextAndImageProps,
+  RichBannerProps,
 };
