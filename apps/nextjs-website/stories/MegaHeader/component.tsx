@@ -147,6 +147,32 @@ const makeMegaHeaderProps = ({
       alt: 'logo',
       href: '#',
     },
+    socialLinks: [
+      {
+        iconURL:
+          'https://d2m1nc4792c1zk.cloudfront.net/assets/instagram_de29d07b80.png',
+        href: '#',
+        ariaLabel: 'Social',
+      },
+      {
+        iconURL:
+          'https://d2m1nc4792c1zk.cloudfront.net/assets/threads_333bb6f8a2.png',
+        href: '#',
+        ariaLabel: 'Social',
+      },
+      {
+        iconURL:
+          'https://d2m1nc4792c1zk.cloudfront.net/assets/youtube_507c941e81.png',
+        href: '#',
+        ariaLabel: 'Social',
+      },
+      {
+        iconURL:
+          'https://d2m1nc4792c1zk.cloudfront.net/assets/linkedin_7b06c1c632.png',
+        href: '#',
+        ariaLabel: 'Social',
+      },
+    ],
     ...(showCtaButton && {
       ctaButton: {
         text: 'Assistenza',

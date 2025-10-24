@@ -123,6 +123,7 @@ const makeMegaHeaderProps = (
     drawer,
     mobileCtaButton,
     mixpanelCtaClickEvent,
+    socialLinks,
   }: MegaHeaderData,
   locale: Locale,
   defaultLocale: Locale,
@@ -193,6 +194,13 @@ const makeMegaHeaderProps = (
   })),
   ...(menu.trackSublinkClickEvent && {
     trackSublinkClickEvent: menu.trackSublinkClickEvent,
+  }),
+  ...(socialLinks && {
+    socialLinks: socialLinks.map(({ icon, href, ariaLabel }) => ({
+      iconURL: icon.url,
+      href: LocalizeURL({ URL: href, locale, defaultLocale }),
+      ariaLabel,
+    })),
   }),
 });
 

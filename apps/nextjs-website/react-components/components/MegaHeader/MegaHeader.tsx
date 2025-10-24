@@ -32,10 +32,11 @@ const MegaHeader = ({
   trackSublinkClickEvent,
   menuItems,
   drawer,
+  socialLinks,
 }: MegaHeaderProps) => {
   const pathname = usePathname();
   const { palette, ...theme } = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -162,6 +163,36 @@ const MegaHeader = ({
                   </Typography>
                 ))}
               </Nav>
+              {socialLinks && socialLinks.length > 0 && (
+                <Stack
+                  direction='row'
+                  spacing={3}
+                  alignItems='center'
+                  sx={{
+                    ml: 2,
+                    mr: 5,
+                  }}
+                >
+                  {socialLinks.map(({ iconURL, href, ariaLabel }, i) => (
+                    <a
+                      key={i}
+                      href={href}
+                      aria-label={ariaLabel}
+                      target={href.startsWith('http') ? '_blank' : undefined}
+                      rel='noopener noreferrer'
+                      style={{ display: 'inline-flex', alignItems: 'center' }}
+                    >
+                      <img
+                        src={iconURL}
+                        alt={ariaLabel || 'Social Icon'}
+                        width={24}
+                        height={24}
+                        style={{ display: 'block' }}
+                      />
+                    </a>
+                  ))}
+                </Stack>
+              )}
               {activeCta && (
                 <CtaButtons
                   ctaButtons={[
@@ -233,7 +264,7 @@ const MegaHeader = ({
             className='hamburger'
             onClick={handleMobileMenuToggle}
             sx={{
-              display: { md: 'none' },
+              display: { lg: 'none' },
               color: palette.custom.primaryColorDark,
             }}
           >
@@ -457,6 +488,44 @@ const MegaHeader = ({
                 ]}
               />
             </div>
+          )}
+          {socialLinks && socialLinks.length > 0 && (
+            <Stack
+              direction='row'
+              justifyContent='flex-start'
+              alignItems='center'
+              sx={{
+                mt: 4,
+                mb: 6,
+                px: 4,
+                gap: '30px',
+                flexWrap: 'wrap',
+              }}
+            >
+              {socialLinks.map(({ iconURL, href, ariaLabel }, i) => (
+                <a
+                  key={i}
+                  href={href}
+                  aria-label={ariaLabel}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel='noopener noreferrer'
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: 0,
+                    margin: 0,
+                  }}
+                >
+                  <img
+                    src={iconURL}
+                    alt={ariaLabel || 'Social Icon'}
+                    width={32}
+                    height={32}
+                    style={{ display: 'block' }}
+                  />
+                </a>
+              ))}
+            </Stack>
           )}
         </MobileMenu>
 

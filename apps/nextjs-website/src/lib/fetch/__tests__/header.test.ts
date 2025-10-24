@@ -106,6 +106,7 @@ describe('getHeader', () => {
 &populate[6]=header.menu.links.sublinkGroups.sublinks.page
 &populate[7]=header.drawer.ctaCard
 &populate[8]=header.drawer.linkCards.icons
+&populate[9]=header.socialLinks.icon
       `,
       {
         method: 'GET',

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_headers_header_link_socials",
+  "info": {
+    "displayName": "headerLinkSocial"
+  },
+  "options": {},
+  "attributes": {
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "ariaLabel": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}
