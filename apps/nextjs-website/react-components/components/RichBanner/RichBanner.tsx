@@ -10,12 +10,9 @@ const RichBanner = (props: RichBannerProps) => {
   const titleSx: SxProps = {
     widh: '100%',
     textAlign: 'center',
-    fontFeatureSettings: "'liga' off, 'clig' off",
     color: textColor,
     '& p': {
-      fontStyle: 'normal',
       fontWeight: 600,
-      fontSize: '18px',
       lineHeight: '24px',
       verticalAlign: 'middle',
       '& img': {
@@ -28,13 +25,10 @@ const RichBanner = (props: RichBannerProps) => {
   };
 
   const bodySx: SxProps = {
-    fontFeatureSettings: "'liga' off, 'clig' off",
     color: textColor,
     textAlign: 'center',
     '& p': {
       color: textColor,
-      fontStyle: 'normal',
-      fontWeight: 400,
       fontSize: '14px',
       lineHeight: '18px',
       '& a': {
