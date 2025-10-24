@@ -93,6 +93,12 @@ const StandardHeaderCodec = t.strict({
   drawer: t.union([SideDrawerCodec, t.null]),
 });
 
+const HeaderSocialLinkCodec = t.strict({
+  icon: StrapiImageRequiredSchema,
+  href: t.string,
+  ariaLabel: t.string,
+});
+
 const MegaHeaderCodec = t.strict({
   __component: t.literal('headers.mega-header'),
   logo: StrapiImageRequiredSchema,
@@ -101,6 +107,7 @@ const MegaHeaderCodec = t.strict({
   mobileCtaButton: t.union([CTAButtonSimpleCodec, t.null]),
   drawer: t.union([SideDrawerCodec, t.null]),
   menu: MegaMenuCodec,
+  socialLinks: t.array(HeaderSocialLinkCodec),
 });
 
 export const HeaderDataCodec = t.strict({
@@ -135,6 +142,7 @@ export const getHeader = ({
 &populate[6]=header.menu.links.sublinkGroups.sublinks.page
 &populate[7]=header.drawer.ctaCard
 &populate[8]=header.drawer.linkCards.icons
+&populate[9]=header.socialLinks.icon
       `,
       {
         method: 'GET',

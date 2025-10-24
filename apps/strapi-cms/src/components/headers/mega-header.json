@@ -37,6 +37,11 @@
       "type": "component",
       "repeatable": false,
       "component": "components.cta-button-simple"
+    },
+    "socialLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "headers.header-link-social"
     }
   }
 }

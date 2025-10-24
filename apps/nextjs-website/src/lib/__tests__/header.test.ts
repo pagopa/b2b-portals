@@ -78,6 +78,7 @@ const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
   mobileCtaButton: null,
   drawer: null,
   mixpanelCtaClickEvent: null,
+  socialLinks: [],
 };
 
 const standardHeader: HeaderData = {
