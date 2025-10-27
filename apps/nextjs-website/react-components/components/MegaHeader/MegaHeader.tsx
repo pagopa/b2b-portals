@@ -177,6 +177,7 @@ const MegaHeader = ({
                     <a
                       key={i}
                       href={href}
+                      title={ariaLabel}
                       aria-label={ariaLabel}
                       target={href.startsWith('http') ? '_blank' : undefined}
                       rel='noopener noreferrer'
@@ -184,7 +185,7 @@ const MegaHeader = ({
                     >
                       <img
                         src={iconURL}
-                        alt={ariaLabel || 'Social Icon'}
+                        alt={ariaLabel}
                         width={24}
                         height={24}
                         style={{ display: 'block' }}
@@ -506,6 +507,7 @@ const MegaHeader = ({
                 <a
                   key={i}
                   href={href}
+                  title={ariaLabel}
                   aria-label={ariaLabel}
                   target={href.startsWith('http') ? '_blank' : undefined}
                   rel='noopener noreferrer'
@@ -518,7 +520,7 @@ const MegaHeader = ({
                 >
                   <img
                     src={iconURL}
-                    alt={ariaLabel || 'Social Icon'}
+                    alt={ariaLabel}
                     width={32}
                     height={32}
                     style={{ display: 'block' }}

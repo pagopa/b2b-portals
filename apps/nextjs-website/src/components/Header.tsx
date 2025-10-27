@@ -195,7 +195,7 @@ const makeMegaHeaderProps = (
   ...(menu.trackSublinkClickEvent && {
     trackSublinkClickEvent: menu.trackSublinkClickEvent,
   }),
-  ...(socialLinks && {
+  ...(socialLinks.length > 0 && {
     socialLinks: socialLinks.map(({ icon, href, ariaLabel }) => ({
       iconURL: icon.url,
       href: LocalizeURL({ URL: href, locale, defaultLocale }),
