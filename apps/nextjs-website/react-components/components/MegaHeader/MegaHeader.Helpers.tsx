@@ -184,8 +184,9 @@ export const MobileMenu = styled(Box)({
     display: 'flex',
   },
   '& > *:last-child': {
-    position: 'absolute',
-    bottom: '120px',
+    position: 'fixed',
+    bottom: '0px',
+    left: '0px',
   },
   '& .button': {
     color: 'white',
