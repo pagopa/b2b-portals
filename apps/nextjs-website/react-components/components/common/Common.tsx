@@ -20,6 +20,7 @@ const CtaButton = ({
   return (
     <Button
       {...buttonProps}
+      {...(buttonProps.openInNewTab && { target: '_blank' })}
       {...(randomID && { id: randomID })} // Random ID used by Mixpanel to track links (overrides any existing ID)
       {...(trackedOnClick && { onClick: trackedOnClick })} // Override onClick (if present) to add tracking
     >

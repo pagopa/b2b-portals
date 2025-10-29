@@ -38,6 +38,9 @@
       ],
       "default": "medium",
       "required": true
+    },
+    "openInNewTab": {
+      "type": "boolean"
     }
   }
 }

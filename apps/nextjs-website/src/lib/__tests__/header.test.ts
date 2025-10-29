@@ -74,6 +74,7 @@ const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
     size: 'medium',
     text: 'CTA',
     variant: 'contained',
+    openInNewTab: null,
   },
   mobileCtaButton: null,
   drawer: null,
@@ -322,6 +323,7 @@ const megaHeader: HeaderData = {
                 variant: 'contained',
                 size: 'medium',
                 icon: null,
+                openInNewTab: null,
               },
               sublinkGroups: [
                 {
@@ -376,6 +378,7 @@ const parsedMegaHeader_DefaultLocale: HeaderData = {
                 variant: 'contained',
                 size: 'medium',
                 icon: null,
+                openInNewTab: null,
               },
               sublinkGroups: [
                 {
@@ -430,6 +433,7 @@ const parsedMegaHeader_NonDefaultLocale: HeaderData = {
                 variant: 'contained',
                 size: 'medium',
                 icon: null,
+                openInNewTab: null,
               },
               sublinkGroups: [
                 {
@@ -484,6 +488,7 @@ const megaHeader_MissingSublink: HeaderData = {
                 variant: 'contained',
                 size: 'medium',
                 icon: null,
+                openInNewTab: null,
               },
               sublinkGroups: [
                 {
