@@ -107,4 +107,8 @@ export default ({ env }: any) => ({
       ]
     }
   },
+  rollback: {
+    enabled: true,
+    resolve: './src/plugins/rollback',
+  },
 });
