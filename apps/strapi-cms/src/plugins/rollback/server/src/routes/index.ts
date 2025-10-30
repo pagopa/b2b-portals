@@ -1,11 +1,18 @@
 export default [
   {
     method: 'GET',
-    path: '/',
-    // name of the controller file & the method.
-    handler: 'controller.index',
+    path: '/deployments',
+    handler: 's3.deployments',
     config: {
-      policies: [],
+      policies: ['admin::isAuthenticatedAdmin'],
+    },
+  },
+  {
+    method: 'POST',
+    path: '/trigger',
+    handler: 'githubActions.trigger',
+    config: {
+      policies: ['admin::isAuthenticatedAdmin'], // TODO: Add policies to validate trigger parameters
     },
   },
 ];

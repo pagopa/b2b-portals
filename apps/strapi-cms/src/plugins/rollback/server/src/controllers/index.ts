@@ -1,5 +1,4 @@
-import controller from './controller';
+import s3 from './s3';
+import githubActions from './githubActions';
 
-export default {
-  controller,
-};
+export default { s3, githubActions };
