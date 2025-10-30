@@ -11,9 +11,6 @@ import { useEffect, useState } from 'react';
 import { PLUGIN_ID } from '../pluginId';
 import { Tbody } from '@strapi/design-system';
 import { Td } from '@strapi/design-system';
-import { Tooltip } from '@strapi/design-system';
-import { IconButton } from '@strapi/design-system';
-import { Play } from '@strapi/icons';
 import { Button } from '@strapi/design-system';
 import { Flex } from '@strapi/design-system';
 
@@ -31,8 +28,6 @@ const HomePage = () => {
 
     try {
       const res = await get<string[]>(`/${PLUGIN_ID}/deployments`);
-      console.log(res);
-      console.log(res.data);
       setDeployments(res.data);
     } catch (error: any) {
       if (error.name === 'AbortError') {
@@ -48,6 +43,13 @@ const HomePage = () => {
     } finally {
       setLoading(false);
     }
+  }
+
+  const formatDeployment = (deployment: string) => {
+    const date = deployment.split('_')[0].split('-').reverse().join('/');
+    const time = deployment.split('_')[1].replaceAll('-', ':');
+
+    return `${date} (${time})`;
   }
 
   useEffect(() => {
@@ -72,7 +74,7 @@ const HomePage = () => {
                 Deploy passati disponibili
               </Typography>
             </Th>
-            {(!loading && canTrigger) && <Th key={'actions'}></Th>}
+            <Th key={'actions'}/>
           </Tr>
         </Thead>
         <Tbody>
@@ -85,11 +87,11 @@ const HomePage = () => {
           ) : deployments.map(deployment => (
             <Tr>
               <Td>
-                <Typography variant="sigma">{deployment}</Typography>
+                <Typography variant="sigma">{formatDeployment(deployment)}</Typography>
               </Td>
               <Td>
-                <Flex>
-                  <Button style={{ marginLeft: 'auto' }} onClick={() => {console.log('TODO - ' + deployment)}}>
+                <Flex justifyContent='flex-end'>
+                  <Button disabled={!canTrigger} onClick={() => {console.log('TODO - ' + deployment)}}>
                     ROLLBACK A QUESTO DEPLOY
                   </Button>
                 </Flex>
