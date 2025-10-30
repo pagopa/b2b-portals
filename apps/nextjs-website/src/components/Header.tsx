@@ -189,6 +189,9 @@ const makeMegaHeaderProps = (
       ctaButton: {
         ...link.ctaButton,
         ...(link.ctaButton.icon && { startIcon: Icon(link.ctaButton.icon) }),
+        ...(link.ctaButton.openInNewTab && {
+          openInNewTab: link.ctaButton.openInNewTab,
+        }),
       },
     }),
   })),
