@@ -55,7 +55,7 @@ export const makeCardsProps = ({
   ...(bottomCTA && {
     bottomCTA: {
       ...bottomCTA,
-      openInNewTab: !!bottomCTA.openInNewTab,
+      openInNewTab: bottomCTA.openInNewTab ?? false,
     },
   }),
   ...rest,
