@@ -7,6 +7,7 @@ import { useMixpanelTracking } from './tracking';
 
 const CtaButton = ({
   trackEvent,
+  openInNewTab,
   ...buttonProps
 }: CtaButtonProps & {
   trackEvent?: string;
@@ -20,6 +21,7 @@ const CtaButton = ({
   return (
     <Button
       {...buttonProps}
+      {...(openInNewTab && { target: '_blank' })}
       {...(randomID && { id: randomID })} // Random ID used by Mixpanel to track links (overrides any existing ID)
       {...(trackedOnClick && { onClick: trackedOnClick })} // Override onClick (if present) to add tracking
     >

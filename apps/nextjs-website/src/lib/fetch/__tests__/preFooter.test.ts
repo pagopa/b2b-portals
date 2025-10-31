@@ -38,6 +38,7 @@ const preFooterResponse = {
         variant: 'contained',
         icon: null,
         size: 'medium',
+        openInNewTab: null,
       },
       {
         id: 14,
@@ -46,6 +47,7 @@ const preFooterResponse = {
         variant: 'outlined',
         icon: null,
         size: 'medium',
+        openInNewTab: null,
       },
     ],
     storeButtons: {
@@ -81,6 +83,7 @@ const preFooterResponseAfterCodec = {
         variant: 'contained',
         icon: null,
         size: 'medium',
+        openInNewTab: null,
       },
       {
         text: 'Bottone Secondario',
@@ -88,6 +91,7 @@ const preFooterResponseAfterCodec = {
         variant: 'outlined',
         icon: null,
         size: 'medium',
+        openInNewTab: null,
       },
     ],
     storeButtons: {
