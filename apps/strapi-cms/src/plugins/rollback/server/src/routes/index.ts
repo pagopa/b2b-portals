@@ -12,7 +12,7 @@ export default [
     path: '/trigger',
     handler: 'githubActions.trigger',
     config: {
-      policies: ['admin::isAuthenticatedAdmin'], // TODO: Add policies to validate trigger parameters
+      policies: ['admin::isAuthenticatedAdmin'],
     },
   },
 ];

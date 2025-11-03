@@ -110,5 +110,9 @@ export default ({ env }: any) => ({
   rollback: {
     enabled: true,
     resolve: './src/plugins/rollback',
+    config: {
+      environment: env('ENVIRONMENT', 'demo'),
+      githubToken: env('GITHUB_PAT', 'test-token'),
+    }
   },
 });

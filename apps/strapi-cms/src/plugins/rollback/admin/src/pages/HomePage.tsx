@@ -15,8 +15,9 @@ import { Button } from '@strapi/design-system';
 import { Flex } from '@strapi/design-system';
 
 const HomePage = () => {
-  const { get } = useFetchClient();
+  const { get, post } = useFetchClient();
   const [loading, setLoading] = useState<boolean>(false);
+  const [triggering, setTriggering] = useState<boolean>(false);
   const [deployments, setDeployments] = useState<string[]>([]);
   const {
     allowedActions: { canTrigger },
@@ -42,6 +43,35 @@ const HomePage = () => {
       }
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function triggerRollback(deployment: string) {
+    setTriggering(true);
+
+    try {
+      const { data } = await post(`/${PLUGIN_ID}/trigger`, { deployment });
+      if (data.success) {
+        toggleNotification({
+          type: 'success',
+          title: 'Rollback lanciato con successo!',
+        });
+      } else {
+        throw new Error(`GITHUB WORKFLOW ERROR.\n\nStatus: ${data.status}\nError: ${data.err}`);
+      }
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        // User likely just changed page before fetch completed, do nothing
+        return;
+      } else {
+        console.error(error);
+        toggleNotification({
+          type: 'danger',
+          title: 'Impossibile lanciare il rollback!',
+        });
+      }
+    } finally {
+      setTriggering(false);
     }
   }
 
@@ -85,13 +115,13 @@ const HomePage = () => {
               </Td>
             </Tr>
           ) : deployments.map(deployment => (
-            <Tr>
+            <Tr key={deployment}>
               <Td>
                 <Typography variant="sigma">{formatDeployment(deployment)}</Typography>
               </Td>
               <Td>
                 <Flex justifyContent='flex-end'>
-                  <Button disabled={!canTrigger} onClick={() => {console.log('TODO - ' + deployment)}}>
+                  <Button disabled={!canTrigger || triggering} onClick={() => {triggerRollback(deployment)}}>
                     ROLLBACK A QUESTO DEPLOY
                   </Button>
                 </Flex>
