@@ -113,11 +113,11 @@ export default ({ env }: any) => ({
     config: {
       environment: env('ENVIRONMENT', 'demo'),
       githubToken: env('GITHUB_PAT', 'test-token'),
-      s3_accessKeyId: env('AWS_ACCESS_KEY_ID'),
-      s3_secretAccessKey: env('AWS_ACCESS_SECRET'),
-      s3_endpoint: env('AWS_BUCKET_ENDPOINT'),
-      s3_bucketName: env('AWS_BUCKET_NAME'),
-      s3_region: env('AWS_REGION'),
+      s3_accessKeyId: env('AWS_ACCESS_KEY_ID', 'test-akid'),
+      s3_secretAccessKey: env('AWS_ACCESS_SECRET', 'test-secret'),
+      s3_endpoint: env('AWS_BUCKET_ENDPOINT', 'test-endpoint'),
+      s3_bucketName: env('AWS_BUCKET_NAME', 'test-bucket'),
+      s3_region: env('AWS_REGION', 'test-region'),
     }
   },
 });
