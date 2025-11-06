@@ -99,8 +99,8 @@ public/uploads/*
 # Build
 ############################
 
-# Save dist to Github to avoid having to build the plugin on every Strapi deploy
-# dist
+# Force save dist to Github to avoid having to build the plugin on every Strapi deploy
+!dist
 build
 
 
