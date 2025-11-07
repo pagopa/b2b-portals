@@ -8,7 +8,7 @@ import {
   ListItemText,
   IconButton,
   Typography,
-  Link,
+  Button,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
@@ -44,6 +44,8 @@ export default function MobileNav({
     setOpenMenuIndex(openMenuIndex === index ? null : index);
   };
 
+  const goToLink = (href: string) => (window.location.href = href);
+
   return (
     <Drawer anchor={anchor} open={isOpen} onClose={onClose} sx={drawerStyles}>
       <Box
@@ -76,6 +78,10 @@ export default function MobileNav({
               return (
                 <React.Fragment key={index}>
                   <ListItem
+                    onClick={() =>
+                      goToLink(item.href ? item.href : `#${item.label}`)
+                    }
+                    component={Button}
                     sx={{
                       '&:hover': {
                         backgroundColor: 'transparent',
@@ -90,28 +96,16 @@ export default function MobileNav({
                       color: '#5c6f82',
                     }}
                   >
-                    <Link
-                      href={item.href ? item.href : `#${item.label}`}
-                      underline='none'
-                      sx={{
-                        color: '#5c6f82',
-                        display: 'flex',
-                        alignItems: 'center',
+                    <Typography
+                      style={{
                         fontWeight: 600,
-                        flexGrow: 1,
+                        color: '#5c6f82',
                       }}
                     >
-                      <Typography
-                        style={{
-                          fontWeight: 600,
-                          color: '#5c6f82',
-                        }}
-                      >
-                        {item.label}
-                      </Typography>
-                    </Link>
+                      {item.label}
+                    </Typography>
                     {item.items && (
-                      <Box
+                      <IconButton
                         onClick={() => toggleMenu(index)}
                         sx={{
                           cursor: 'pointer',
@@ -128,7 +122,7 @@ export default function MobileNav({
                             color: '#5c6f82',
                           }}
                         />
-                      </Box>
+                      </IconButton>
                     )}
                   </ListItem>
                   {isSelected && item.items && (
@@ -148,9 +142,11 @@ export default function MobileNav({
                             fontWeight: 600,
                             color: '#5c6f82',
                           }}
-                          component={Link}
-                          href={
-                            subItem.href ? subItem.href : `#${subItem.label}`
+                          component={Button}
+                          onClick={() =>
+                            goToLink(
+                              subItem.href ? subItem.href : `#${subItem.label}`,
+                            )
                           }
                         >
                           <ListItemText
