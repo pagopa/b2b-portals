@@ -93,6 +93,8 @@ resource "aws_ecs_task_definition" "cms_multitenant_task_def" {
     db_schema                           = "${each.key}"
     admin_panel_url                     = "https://${each.key}.${keys(var.dns_domain_name)[0]}"
     workflow_notifications_bearer_token = aws_ssm_parameter.cms_multitenant_wf_notifications_bearer_token[each.key].arn
+    prod_website_bucket_endpoint        = "https://s3.${var.aws_region}.amazonaws.com"
+    prod_website_bucket_name            = aws_s3_bucket.website.bucket
   })
 }
 
