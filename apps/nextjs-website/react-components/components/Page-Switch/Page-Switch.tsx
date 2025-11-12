@@ -56,13 +56,13 @@ const PageSwitch = ({
   };
 
   const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false,
   );
 
   useEffect((): void | VoidFunction => {
     const handleResize = () => {
       setIsMobile(
-        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false,
       );
     };
 
@@ -83,7 +83,11 @@ const PageSwitch = ({
   return (
     <Box>
       <ContainerRC
-        sx={{ display: 'grid', justifyContent: 'center', alignItems: 'center' }}
+        sxInner={{
+          display: 'grid',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
         background={backgroundColor}
         tabIndex={0}
       >
@@ -122,7 +126,7 @@ const PageSwitch = ({
                   themeVariant,
                   page.id,
                   currentPage.id,
-                  palette
+                  palette,
                 )}
                 disableRipple
               >

@@ -29,7 +29,7 @@ const StripeLink = ({
     <ContainerRC
       background={extraBackgroundColor}
       py={2}
-      sx={{ justifyContent: { xs: 'start', md: 'start' } }}
+      sxInner={{ justifyContent: { xs: 'start', md: 'start' } }}
       {...(sectionID && { sectionID })}
       tabIndex={0}
     >

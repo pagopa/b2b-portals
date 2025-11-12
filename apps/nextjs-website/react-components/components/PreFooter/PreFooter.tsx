@@ -82,7 +82,7 @@ const PreFooter = (props: PreFooterProps) => {
         />
         <ContainerRC
           background={!background ? backgroundColor : 'transparent'}
-          sx={styles.container}
+          sxInner={styles.container}
         >
           <Box sx={styles.main(isSmallScreen, layout)}>
             <Typography
