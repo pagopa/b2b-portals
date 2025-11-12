@@ -110,30 +110,37 @@ const routes = [
 ];
 const s3Service = ({ strapi }) => ({
   async deployments() {
-    const environment = strapi.plugin(PLUGIN_ID).config("environment");
-    const accessKeyId = strapi.plugin(PLUGIN_ID).config("s3_accessKeyId");
-    const secretAccessKey = strapi.plugin(PLUGIN_ID).config("s3_secretAccessKey");
-    const endpoint = strapi.plugin(PLUGIN_ID).config("s3_endpoint");
-    const bucket = strapi.plugin(PLUGIN_ID).config("s3_bucketName");
-    const region = strapi.plugin(PLUGIN_ID).config("s3_region");
-    const s3 = new S3Client({
-      region,
-      endpoint,
-      credentials: {
-        accessKeyId,
-        secretAccessKey
-      }
-    });
-    const command = new ListObjectsV2Command({
-      Bucket: bucket,
-      Prefix: `${environment}/`,
-      Delimiter: "/"
-    });
-    const res = await s3.send(command);
-    const folders = res.CommonPrefixes?.map(
-      (p) => p.Prefix.replace(`${environment}/`, "").replace(/\/$/, "")
-    ) ?? [];
-    return folders.filter((f) => f && f !== "latest");
+    try {
+      const environment = strapi.plugin(PLUGIN_ID).config("environment");
+      const accessKeyId = strapi.plugin(PLUGIN_ID).config("s3_accessKeyId");
+      const secretAccessKey = strapi.plugin(PLUGIN_ID).config("s3_secretAccessKey");
+      const endpoint = strapi.plugin(PLUGIN_ID).config("s3_endpoint");
+      const bucket = strapi.plugin(PLUGIN_ID).config("s3_bucketName");
+      const region = strapi.plugin(PLUGIN_ID).config("s3_region");
+      const s3 = new S3Client({
+        region,
+        endpoint,
+        credentials: {
+          accessKeyId,
+          secretAccessKey
+        }
+      });
+      const command = new ListObjectsV2Command({
+        Bucket: bucket,
+        Prefix: `${environment}/`,
+        Delimiter: "/"
+      });
+      const res = await s3.send(command);
+      return {
+        err: null,
+        res
+      };
+    } catch (err) {
+      return {
+        err,
+        res: null
+      };
+    }
   }
 });
 const fetch = globalThis.fetch;

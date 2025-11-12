@@ -4,7 +4,7 @@ const jsxRuntime = require("react/jsx-runtime");
 const admin = require("@strapi/strapi/admin");
 const reactRouterDom = require("react-router-dom");
 const designSystem = require("@strapi/design-system");
-const index = require("./index-UJkGH4oZ.js");
+const index = require("./index-CJp0v1ln.js");
 const react = require("react");
 const HomePage = () => {
   const { get, post } = admin.useFetchClient();
@@ -19,7 +19,7 @@ const HomePage = () => {
     setLoading(true);
     try {
       const res = await get(`/${index.PLUGIN_ID}/deployments`);
-      setDeployments(res.data);
+      console.log(res);
     } catch (error) {
       if (error.name === "AbortError") {
         return;
