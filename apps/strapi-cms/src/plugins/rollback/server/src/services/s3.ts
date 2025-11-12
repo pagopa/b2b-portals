@@ -37,7 +37,7 @@ const s3Service = ({ strapi }: { strapi: Core.Strapi }) => ({
         p.Prefix!.replace(`${environment}/`, '').replace(/\/$/, ''),
       ) ?? [];
 
-    return folders.filter((f) => f && f !== 'latest');
+    return folders.filter((f) => f && f !== 'latest').reverse();
   },
 });
 

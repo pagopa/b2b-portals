@@ -134,7 +134,7 @@ const s3Service = ({ strapi }) => ({
     const folders = res.CommonPrefixes?.map(
       (p) => p.Prefix.replace(`${environment}/`, "").replace(/\/$/, "")
     ) ?? [];
-    return folders.filter((f) => f && f !== "latest");
+    return folders.filter((f) => f && f !== "latest").reverse();
   }
 });
 const fetch = globalThis.fetch;
