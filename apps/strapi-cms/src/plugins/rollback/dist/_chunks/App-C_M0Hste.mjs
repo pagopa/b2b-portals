@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useFetchClient, useRBAC, useNotification, Page } from "@strapi/strapi/admin";
 import { Routes, Route } from "react-router-dom";
 import { Main, Box, Typography, Table, Thead, Tr, Th, Tbody, Td, Flex, Button } from "@strapi/design-system";
-import { p as pluginPermissions, P as PLUGIN_ID } from "./index-Ba_K9Xol.mjs";
+import { p as pluginPermissions, P as PLUGIN_ID } from "./index-P0oa0Puu.mjs";
 import { useState, useEffect } from "react";
 const HomePage = () => {
   const { get, post } = useFetchClient();
@@ -17,7 +17,7 @@ const HomePage = () => {
     setLoading(true);
     try {
       const res = await get(`/${PLUGIN_ID}/deployments`);
-      console.log(res);
+      setDeployments(res.data);
     } catch (error) {
       if (error.name === "AbortError") {
         return;

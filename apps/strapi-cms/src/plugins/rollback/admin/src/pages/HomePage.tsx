@@ -28,10 +28,8 @@ const HomePage = () => {
     setLoading(true);
 
     try {
-      // const res = await get<string[]>(`/${PLUGIN_ID}/deployments`);
-      const res = await get(`/${PLUGIN_ID}/deployments`);
-      // setDeployments(res.data);
-      console.log(res);
+      const res = await get<string[]>(`/${PLUGIN_ID}/deployments`);
+      setDeployments(res.data);
     } catch (error: any) {
       if (error.name === 'AbortError') {
         // User likely just changed page before fetch completed, do nothing
