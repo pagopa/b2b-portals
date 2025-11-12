@@ -251,6 +251,19 @@ resource "aws_iam_policy" "upload_image" {
         ]
         Effect   = "Allow"
         Resource = [for name, bucket in aws_s3_bucket.cms_multitenant_medialibrary_bucket : "${bucket.arn}/*"]
+      },
+      {
+        Action = [
+          "s3:DeleteObject",
+          "s3:GetObject",
+          "s3:GetObjectAttributes",
+          "s3:ListBucket",
+          "s3:PutObject"
+        ]
+        Effect = "Allow"
+        Resource = ["${aws_s3_bucket.website.arn}/*",
+          aws_s3_bucket.website.arn
+        ]
       }
     ]
   })

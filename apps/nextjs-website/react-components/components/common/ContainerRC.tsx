@@ -13,7 +13,7 @@ interface ContainerProps {
   py?: BoxProps['py'];
   px?: BoxProps['px'];
   spacing?: GridProps['spacing'];
-  sx?: GridProps['sx'];
+  sxInner?: GridProps['sx'];
   size?: 'lg' | 'xl';
   sectionID?: string;
   tabIndex?: number;
@@ -28,7 +28,7 @@ const ContainerRC = (props: ContainerProps) => {
     py = {},
     px,
     spacing = 0,
-    sx = {},
+    sxInner = {},
     size = 'lg',
     sectionID,
     tabIndex,
@@ -52,7 +52,7 @@ const ContainerRC = (props: ContainerProps) => {
           direction={direction}
           spacing={spacing}
           alignItems={alignItems}
-          sx={sx}
+          sx={sxInner}
         >
           {children}
         </Grid>

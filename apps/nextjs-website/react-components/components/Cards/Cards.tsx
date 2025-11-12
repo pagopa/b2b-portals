@@ -45,7 +45,7 @@ const Cards = ({
       background={backgroundColor}
       tabIndex={0}
       py={8}
-      sx={{
+      sxInner={{
         display: 'flex',
         flexDirection: isCenter ? 'column' : { md: flexDirection },
         width: '100%',

@@ -61,7 +61,7 @@ const HeroChips = (props: HeroChipsProps) => {
       size='xl'
       background={!background ? backgroundColor : BackgroundImage}
       direction='row'
-      sx={{
+      sxInner={{
         display: 'flex',
         flexDirection: { xs: 'column', lg: 'row' },
         alignItems: 'center',

@@ -29,7 +29,7 @@ const EditorialSwitch = ({
   }
 
   const [currentSection, setCurrentSection] = useState<EditorialSwitchSection>(
-    sections[0]
+    sections[0],
   );
 
   const handleButtonClick = (sectionID: number) => {
@@ -40,13 +40,13 @@ const EditorialSwitch = ({
   };
 
   const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+    typeof window !== 'undefined' ? window.innerWidth <= 1024 : false,
   );
 
   useEffect((): void | VoidFunction => {
     const handleResize = () => {
       setIsMobile(
-        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false
+        typeof window !== 'undefined' ? window.innerWidth <= 1024 : false,
       );
     };
 
@@ -67,7 +67,11 @@ const EditorialSwitch = ({
   return (
     <Box tabIndex={0}>
       <ContainerRC
-        sx={{ display: 'grid', justifyContent: 'center', alignItems: 'center' }}
+        sxInner={{
+          display: 'grid',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
         background={backgroundColor}
       >
         <TitleSubtitleBlock
@@ -105,7 +109,7 @@ const EditorialSwitch = ({
                   themeVariant,
                   section.id,
                   currentSection.id,
-                  palette
+                  palette,
                 )}
                 disableRipple
               >
