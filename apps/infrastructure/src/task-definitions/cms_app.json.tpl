@@ -105,6 +105,14 @@
       {
         "name": "STAGING_TARGET_BRANCH",
         "value": "main"
+      },
+      {
+        "name": "AWS_PROD_WEBSITE_BUCKET_NAME",
+        "value": "${prod_website_bucket_name}"
+      },
+      {
+        "name": "AWS_PROD_WEBSITE_BUCKET_ENDPOINT",
+        "value": "${prod_website_bucket_endpoint}"
       }
     ],
     "secrets" : [
