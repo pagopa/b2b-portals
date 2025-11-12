@@ -1,5 +1,11 @@
 import React, { useState, useEffect, MouseEvent, useRef } from 'react';
-import { IconButton, useMediaQuery, Typography, Stack } from '@mui/material';
+import {
+  IconButton,
+  useMediaQuery,
+  Typography,
+  Stack,
+  Button,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -342,12 +348,15 @@ const MegaHeader = ({
 
         <MobileMenu
           paddingTop={2}
+          role='navigation'
           id='mobileMenu'
           className={mobileMenuOpen ? 'open' : ''}
         >
           {menuItems.map((menuItem: MegaMenuItem, index) => (
             <React.Fragment key={index}>
               <Stack
+                component={Button}
+                sx={{ width: '100% !important' }}
                 className={`mobileMenuPrimaryItem ${
                   dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''
                 }`}

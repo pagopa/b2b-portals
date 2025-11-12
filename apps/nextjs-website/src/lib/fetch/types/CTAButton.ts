@@ -39,4 +39,5 @@ export const CTAButtonSimpleCodec = t.strict({
   variant: t.keyof({ contained: null, outlined: null }),
   size: MUIButtonSizeCodec,
   icon: t.union([MUIButtonIconCodec, t.null]),
+  openInNewTab: t.union([t.boolean, t.null]),
 });

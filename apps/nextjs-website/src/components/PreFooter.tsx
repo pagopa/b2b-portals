@@ -23,8 +23,9 @@ const makePreFooterProps = ({
     },
   }),
   ...(ctaButtons.length > 0 && {
-    ctaButtons: ctaButtons.map(({ href, ...ctaButton }) => ({
+    ctaButtons: ctaButtons.map(({ href, openInNewTab, ...ctaButton }) => ({
       ...ctaButton,
+      ...(openInNewTab && { openInNewTab }),
       href: LocalizeURL({ URL: href, locale, defaultLocale }),
     })),
   }),

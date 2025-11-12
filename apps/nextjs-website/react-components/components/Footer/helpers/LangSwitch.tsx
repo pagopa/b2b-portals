@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Menu, MenuItem, Stack, Button, Link } from '@mui/material';
+import { Menu, MenuItem, Stack, Button } from '@mui/material';
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
@@ -14,6 +14,11 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
   };
 
   const anchorEl = useRef(null);
+
+  /* Currently linking to the other locale's homepage since we have
+  no certainty that each page's slug is the same in both languages
+  or that the same pages exist at all in each language */
+  const goToLanguageLink = (href: string) => (window.location.href = href);
 
   return (
     <Stack
@@ -66,11 +71,12 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
           MenuListProps={{ 'aria-labelledby': 'lang-menu-button' }}
         >
           {languages.map((language) => (
-            <MenuItem aria-label={language.value} key={language.id}>
-              {/* Currently linking to the other locale's homepage since we have
-              no certainty that each page's slug is the same in both languages
-              or that the same pages exist at all in each language */}
-              <Link href={language.href}>{language.value}</Link>
+            <MenuItem
+              aria-label={language.value}
+              key={language.id}
+              onClick={() => goToLanguageLink(language.href)}
+            >
+              {language.value}
             </MenuItem>
           ))}
         </Menu>

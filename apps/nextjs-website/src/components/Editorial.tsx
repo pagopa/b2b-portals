@@ -48,8 +48,9 @@ export const makeEditorialProps = ({
   ),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
-      ctaButtons: ctaButtons.map(({ icon, href, ...ctaBtn }) => ({
+      ctaButtons: ctaButtons.map(({ icon, href, openInNewTab, ...ctaBtn }) => ({
         ...ctaBtn,
+        ...(openInNewTab && { openInNewTab }),
         ...(icon && { startIcon: Icon(icon) }),
         href: LocalizeURL({ URL: href, locale, defaultLocale }),
       })),

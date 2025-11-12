@@ -92,7 +92,7 @@ export const HeroTextContent = ({
       {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
         <Stack direction='column' spacing={2}>
           <Typography color={textColor} fontWeight={700}>
-            Scarica l'app
+            Scarica l'app IO
           </Typography>
           <Stack
             justifyContent='left'

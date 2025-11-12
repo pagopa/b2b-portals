@@ -19,7 +19,6 @@ export const makeCardsProps = ({
   ...rest
 }: CardsSection & SiteWidePageData): CardsProps => ({
   text: {
-    title,
     ...(subtitle && { subtitle }),
     ...(body && {
       body: MarkdownRenderer({
@@ -46,13 +45,19 @@ export const makeCardsProps = ({
   })),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
-      ctaButtons: ctaButtons.map(({ icon, href, ...ctaBtn }) => ({
+      ctaButtons: ctaButtons.map(({ icon, href, openInNewTab, ...ctaBtn }) => ({
         ...ctaBtn,
+        ...(openInNewTab && { openInNewTab }),
         ...(icon && { startIcon: Icon(icon) }),
         href: LocalizeURL({ URL: href, locale, defaultLocale }),
       })),
     }),
-  ...(bottomCTA && { bottomCTA }),
+  ...(bottomCTA && {
+    bottomCTA: {
+      ...bottomCTA,
+      openInNewTab: bottomCTA.openInNewTab ?? false,
+    },
+  }),
   ...rest,
 });
 
