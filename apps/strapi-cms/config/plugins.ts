@@ -107,4 +107,17 @@ export default ({ env }: any) => ({
       ]
     }
   },
+  rollback: {
+    enabled: true,
+    resolve: './src/plugins/rollback',
+    config: {
+      environment: env('ENVIRONMENT', 'demo'),
+      githubToken: env('GITHUB_PAT', 'test-token'),
+      s3_accessKeyId: env('AWS_ACCESS_KEY_ID', 'test-akid'),
+      s3_secretAccessKey: env('AWS_ACCESS_SECRET', 'test-secret'),
+      s3_endpoint: env('AWS_PROD_WEBSITE_BUCKET_ENDPOINT', 'test-endpoint'),
+      s3_bucketName: env('AWS_PROD_WEBSITE_BUCKET_NAME', 'test-bucket'),
+      s3_region: env('AWS_REGION', 'test-region'),
+    }
+  },
 });

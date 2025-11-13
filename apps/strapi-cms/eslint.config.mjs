@@ -23,6 +23,7 @@ export default [{
         "src/admin/**/*",
         "src/api/**/*",
         "src/components/*",
+        "src/plugins/**",
         "types/generated",
         "dist/*",
         "types/generated/*",
