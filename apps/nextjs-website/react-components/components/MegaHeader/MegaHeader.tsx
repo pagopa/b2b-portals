@@ -70,7 +70,7 @@ const MegaHeader = ({
     (isMobile && mobileCtaButton ? mobileCtaButton : ctaButton);
 
   const handleClick = (
-    event: MouseEvent<HTMLAnchorElement | HTMLDivElement>,
+    event: MouseEvent<HTMLElement | HTMLDivElement>,
     menu: string,
   ) => {
     event.preventDefault();
@@ -157,15 +157,16 @@ const MegaHeader = ({
               <Nav>
                 {menuItems.map((menuItem: MegaMenuItem, index) => (
                   <Typography component='li' key={index}>
-                    <a
-                      href='/'
-                      className={`menuPrimaryItem ${
-                        dropdownOpen === menuItem.primary ? 'open' : ''
-                      } ${isActiveLink(menuItem) ? 'active' : ''}`}
+                    <button
+                      type='button'
+                      className={`menuPrimaryItem ${dropdownOpen === menuItem.primary ? 'open' : ''
+                        } ${isActiveLink(menuItem) ? 'active' : ''}`}
+                      aria-expanded={dropdownOpen === menuItem.primary}
+                      aria-controls={`submenu-${index}`}
                       onClick={(e) => handleClick(e, menuItem.primary)}
                     >
                       {menuItem.primary}
-                    </a>
+                    </button>
                   </Typography>
                 ))}
               </Nav>
@@ -269,6 +270,9 @@ const MegaHeader = ({
           )}
           <IconButton
             className='hamburger'
+            aria-label={mobileMenuOpen ? "Chiudi menu" : "Apri menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobileMenu"
             onClick={handleMobileMenuToggle}
             sx={{
               display: { lg: 'none' },
@@ -357,12 +361,13 @@ const MegaHeader = ({
               <Stack
                 component={Button}
                 sx={{ width: '100% !important' }}
-                className={`mobileMenuPrimaryItem ${
-                  dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''
-                }`}
+                className={`mobileMenuPrimaryItem ${dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''
+                  }`}
                 onClick={(e) =>
                   handleClick(e as any, `mobile${menuItem.primary}`)
                 }
+                aria-expanded={dropdownOpen === `mobile${menuItem.primary}`}
+                aria-controls={`mobile-submenu-${index}`}
               >
                 <Typography
                   {...(isActiveLink(menuItem) && {
@@ -383,9 +388,9 @@ const MegaHeader = ({
                 />
               </Stack>
               <Stack
-                className={`dropdownMobile ${
-                  dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''
-                }`}
+                id={`mobile-submenu-${index}`}
+                className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''
+                  }`}
               >
                 {menuItem.secondary.map((submenu, subIndex) => (
                   <div key={subIndex}>
@@ -399,9 +404,8 @@ const MegaHeader = ({
                         target={
                           item.href.startsWith('https://') ? '_blank' : '_self'
                         }
-                        className={`mobileMenuSecondaryItem ${
-                          isActiveSubLink(item.href) ? 'active' : ''
-                        }`}
+                        className={`mobileMenuSecondaryItem ${isActiveSubLink(item.href) ? 'active' : ''
+                          }`}
                         onClick={() => setMobileMenuOpen(false)}
                         trackEvent={trackSublinkClickEvent}
                         trackingProperties={{
