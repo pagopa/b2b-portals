@@ -172,21 +172,17 @@ export const MobileMenu = styled(Box)({
   top: '100%',
   left: 0,
   width: '100%',
-  height: 'calc(100vh - 76px)', // Take sticky header into account
+  height: 'calc(100dvh - 76px)', // Take sticky header into account
   backgroundColor: '#ffffff',
   zIndex: 999,
   flexDirection: 'column',
   alignItems: 'flex-start',
   overflowY: 'auto',
-  minHeight: '100vh',
   boxShadow: 'inset 0 4px 16px 0 rgba(14, 15, 19, 0.06)',
   '&.open': {
     display: 'flex',
-  },
-  '& > *:last-child': {
-    position: 'fixed',
-    bottom: '0px',
-    left: '0px',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
   '& .button': {
     color: 'white',
