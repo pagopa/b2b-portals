@@ -179,6 +179,9 @@ export const MobileMenu = styled(Box)({
   alignItems: 'flex-start',
   overflowY: 'auto',
   boxShadow: 'inset 0 4px 16px 0 rgba(14, 15, 19, 0.06)',
+  'body.sb-main-fullscreen & .storybook-mobilemenu-padding-bottom': {
+    paddingBottom: '0 !important',
+  },
   '&.open': {
     display: 'flex',
     flexDirection: 'column',

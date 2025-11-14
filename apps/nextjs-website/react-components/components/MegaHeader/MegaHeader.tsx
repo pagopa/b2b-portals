@@ -353,6 +353,7 @@ const MegaHeader = ({
           className={mobileMenuOpen ? 'open' : ''}
         >
           <Box
+            className='storybook-mobilemenu-padding-bottom'
             sx={{
               width: '100%',
               display: 'flex',
@@ -519,7 +520,14 @@ const MegaHeader = ({
                 </div>
               )}
             </Box>
-            <Box sx={{ width: '100%', mt: 'auto', mb: 2 }}>
+            <Box
+              sx={{
+                width: '100%',
+                mt: 'auto',
+                mb: 2,
+                '@media (min-width:360px)': { mb: 0 },
+              }}
+            >
               {socialLinks && socialLinks.length > 0 && (
                 <Stack
                   direction='row'
