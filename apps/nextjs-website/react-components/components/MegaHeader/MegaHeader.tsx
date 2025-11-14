@@ -30,7 +30,6 @@ import {
 import { CtaButtons } from '../common/Common';
 import { usePathname } from 'next/navigation';
 import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
-import { Locale } from '@/lib/fetch/siteWideSEO';
 
 const MegaHeader = ({
   logo,
@@ -40,6 +39,8 @@ const MegaHeader = ({
   menuItems,
   drawer,
   socialLinks,
+  toggleAriaLabelsOpen,
+  toggleAriaLabelsClose
 }: MegaHeaderProps) => {
   const pathname = usePathname();
   const { palette, ...theme } = useTheme();
@@ -49,24 +50,7 @@ const MegaHeader = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const AriaLabels = {
-    open: {
-      it: 'Apri Menù',
-      en: 'Open Menù',
-      de: 'Menü öffnen',
-      fr: 'Ouvrir le menu',
-      sl: 'Odpri meni'
-    },
-    close: {
-      it: 'Chiudi Menù',
-      en: 'Close Menù',
-      de: 'Menü schließen',
-      fr: 'Fermer le menu',
-      sl: 'Zapri meni'
-    }
-  };
 
-  const locale: Locale = 'it';
 
   // Sublink is active if it points to the current page or one of its parents
   // .slice(1) is needed because (assuming a relative url built like /example-slug or /parent/child)
@@ -96,6 +80,9 @@ const MegaHeader = ({
     event.preventDefault();
     setDropdownOpen((prev) => (prev === menu ? null : menu));
   };
+
+  const openMenuLabel = toggleAriaLabelsOpen ?? 'Open menu';
+  const closeMenuLabel = toggleAriaLabelsClose ?? 'Close menu';
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -290,7 +277,7 @@ const MegaHeader = ({
           )}
           <IconButton
             className='hamburger'
-            aria-label={mobileMenuOpen ? AriaLabels["close"][locale]: AriaLabels["open"][locale]}
+            aria-label={mobileMenuOpen ? toggleAriaLabelsClose : toggleAriaLabelsOpen}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobileMenu"
             onClick={handleMobileMenuToggle}
@@ -306,11 +293,11 @@ const MegaHeader = ({
             )}
           </IconButton>
         </Content>
-
+        aria-label={mobileMenuOpen ? closeMenuLabel : openMenuLabel}
         {!isMobile &&
           menuItems.map((menuItem: MegaMenuItem, index) => (
             <Dropdown
-             id={`submenu-${index}`}
+              id={`submenu-${index}`}
               key={index}
               className={dropdownOpen === menuItem.primary ? 'open' : ''}
             >

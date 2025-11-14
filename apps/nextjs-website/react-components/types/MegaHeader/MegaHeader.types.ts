@@ -26,6 +26,8 @@ export interface MegaHeaderProps {
   mobileCtaButton?: CtaButtonProps;
   drawer?: HeaderSideDrawerProps;
   socialLinks?: HeaderSocialLink[];
+  toggleAriaLabelsOpen?: string;
+  toggleAriaLabelsClose?: string;
 }
 
 export interface HeaderSocialLink {
