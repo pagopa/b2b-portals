@@ -30,6 +30,13 @@ const AnalyticsCodec = t.strict({
   mixpanel: t.union([MixpanelCodec, t.null]),
 });
 
+const SiteNameCodec = t.strict({
+  name: t.string,
+  url: t.string,
+  ogSiteName: t.union([t.string, t.null]),
+  alternateName: t.union([t.string, t.null]),
+});
+
 const SiteWideSEOCodec = t.strict({
   data: t.strict({
     metaImage: StrapiImageRequiredSchema,
@@ -46,6 +53,7 @@ const SiteWideSEOCodec = t.strict({
     analytics: t.union([AnalyticsCodec, t.null]),
     defaultLocale: LocaleCodec,
     pressReleasesParentSlug: t.union([t.string, t.null]),
+    siteName: t.union([SiteNameCodec, t.null]),
   }),
 });
 
@@ -74,6 +82,7 @@ export const fetchSiteWideSEO = ({
 &populate[2]=appleTouchIcon
 &populate[3]=locales
 &populate[4]=analytics.mixpanel
+&populate[5]=siteName
       `,
       {
         method: 'GET',

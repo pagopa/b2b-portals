@@ -59,6 +59,7 @@ const siteWideSEOResponse: SiteWideSEO = {
     defaultLocale: 'it',
     analytics: null,
     pressReleasesParentSlug: null,
+    siteName: null,
   },
 };
 
@@ -80,6 +81,7 @@ describe('fetchSiteWideSEO', () => {
 &populate[2]=appleTouchIcon
 &populate[3]=locales
 &populate[4]=analytics.mixpanel
+&populate[5]=siteName
       `,
       {
         method: 'GET',
