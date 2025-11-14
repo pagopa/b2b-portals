@@ -19,6 +19,7 @@ export const makeCardsProps = ({
   ...rest
 }: CardsSection & SiteWidePageData): CardsProps => ({
   text: {
+    title,
     ...(subtitle && { subtitle }),
     ...(body && {
       body: MarkdownRenderer({
