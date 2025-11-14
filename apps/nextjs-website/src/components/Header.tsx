@@ -33,6 +33,23 @@ const LinkLabelValues = {
   sl: 'NOVO',
 };
 
+const AriaLabels = {
+  open: {
+    it: 'Apri Menù',
+    en: 'Open Menù',
+    de: 'Menü öffnen',
+    fr: 'Ouvrir le menu',
+    sl: 'Odpri meni',
+  },
+  close: {
+    it: 'Chiudi Menù',
+    en: 'Close Menù',
+    de: 'Menü schließen',
+    fr: 'Fermer le menu',
+    sl: 'Zapri meni',
+  },
+};
+
 const makeHeaderSublink = (
   sublink: HeaderSublink,
 ): { label: string; href: string; badge?: string } => ({
@@ -205,6 +222,10 @@ const makeMegaHeaderProps = (
       ariaLabel,
     })),
   }),
+  mobileMenuIconAriaLabel: {
+    open: AriaLabels.open[locale],
+    close: AriaLabels.close[locale],
+  },
 });
 
 const Header = ({
