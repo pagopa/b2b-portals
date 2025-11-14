@@ -348,7 +348,6 @@ const MegaHeader = ({
           ))}
 
         <MobileMenu
-          paddingTop={2}
           role='navigation'
           id='mobileMenu'
           className={mobileMenuOpen ? 'open' : ''}
@@ -363,7 +362,7 @@ const MegaHeader = ({
               pb: 6,
             }}
           >
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ width: '100%', pt: 2 }}>
               {menuItems.map((menuItem: MegaMenuItem, index) => (
                 <React.Fragment key={index}>
                   <Stack
@@ -446,7 +445,7 @@ const MegaHeader = ({
               ))}
               {activeCta && (
                 <div
-                  style={{ padding: '0px 0px 90px 0px', width: 'max-content' }}
+                  style={{ width: 'max-content' }}
                 >
                   <CtaButtons
                     ctaButtons={[
@@ -483,7 +482,7 @@ const MegaHeader = ({
               )}
               {!activeCta && drawer && (
                 <div
-                  style={{ padding: '0px 0px 90px 0px', width: 'max-content' }}
+                  style={{ width: 'max-content' }}
                 >
                   <CtaButtons
                     ctaButtons={[
@@ -528,7 +527,7 @@ const MegaHeader = ({
                   alignItems='center'
                   sx={{
                     mt: 4,
-                    mb: 6,
+                    mb: 4,
                     px: 4,
                     gap: '30px',
                     flexWrap: 'wrap',
