@@ -111,6 +111,10 @@ export async function generateMetadata({
       description: seo.ogDescription ?? seo.metaDescription,
       images: siteWideSEO.metaImage.url,
       type: 'website',
+      ...(siteWideSEO.siteName &&
+        siteWideSEO.siteName.ogSiteName && {
+          siteName: siteWideSEO.siteName.ogSiteName,
+        }),
     },
     icons: {
       icon: siteWideSEO.favicon.url,
@@ -126,8 +130,13 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const { slug } = params;
-  const { defaultLocale, themeVariant, analytics, pressReleasesParentSlug } =
-    await getSiteWideSEO();
+  const {
+    defaultLocale,
+    themeVariant,
+    analytics,
+    pressReleasesParentSlug,
+    siteName,
+  } = await getSiteWideSEO();
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the slug back to '' and locale to the default locale
@@ -148,6 +157,21 @@ const Page = async ({ params }: PageParams) => {
         ? (slug[0] as Locale)
         : defaultLocale;
 
+  // Build out WebSite structured data
+  const WebSiteStructuredData = siteName
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: siteName.name,
+        url: siteName.url,
+        ...(siteName.alternateName && {
+          alternateName: siteName.alternateName
+            .split(',')
+            .map((altName) => altName.trim()),
+        }),
+      }
+    : null;
+
   const pageProps = await getPageProps(locale, slugString);
   if (pageProps === undefined) {
     return null;
@@ -162,6 +186,14 @@ const Page = async ({ params }: PageParams) => {
           type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(pageProps.seo.structuredData),
+          }}
+        />
+      )}
+      {WebSiteStructuredData && (
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(WebSiteStructuredData),
           }}
         />
       )}

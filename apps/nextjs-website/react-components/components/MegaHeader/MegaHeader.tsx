@@ -81,9 +81,6 @@ const MegaHeader = ({
     setDropdownOpen((prev) => (prev === menu ? null : menu));
   };
 
-  const openMenuLabel = toggleAriaLabelsOpen ?? 'Open menu';
-  const closeMenuLabel = toggleAriaLabelsClose ?? 'Close menu';
-
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
@@ -293,7 +290,6 @@ const MegaHeader = ({
             )}
           </IconButton>
         </Content>
-        aria-label={mobileMenuOpen ? closeMenuLabel : openMenuLabel}
         {!isMobile &&
           menuItems.map((menuItem: MegaMenuItem, index) => (
             <Dropdown

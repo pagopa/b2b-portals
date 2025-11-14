@@ -72,6 +72,11 @@
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$",
       "default": "press-releases"
+    },
+    "siteName": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.site-name"
     }
   }
 }
