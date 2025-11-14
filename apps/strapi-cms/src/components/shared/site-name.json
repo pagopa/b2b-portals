@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_site_names",
+  "info": {
+    "displayName": "siteName"
+  },
+  "options": {},
+  "attributes": {
+    "ogSiteName": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "alternateName": {
+      "type": "string"
+    }
+  }
+}
