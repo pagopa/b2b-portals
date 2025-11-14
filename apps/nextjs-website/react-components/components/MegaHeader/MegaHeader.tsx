@@ -39,8 +39,7 @@ const MegaHeader = ({
   menuItems,
   drawer,
   socialLinks,
-  toggleAriaLabelsOpen,
-  toggleAriaLabelsClose
+  mobileMenuIconAriaLabel
 }: MegaHeaderProps) => {
   const pathname = usePathname();
   const { palette, ...theme } = useTheme();
@@ -274,7 +273,7 @@ const MegaHeader = ({
           )}
           <IconButton
             className='hamburger'
-            aria-label={mobileMenuOpen ? toggleAriaLabelsClose : toggleAriaLabelsOpen}
+            aria-label={mobileMenuOpen ? mobileMenuIconAriaLabel.close : mobileMenuIconAriaLabel.open}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobileMenu"
             onClick={handleMobileMenuToggle}

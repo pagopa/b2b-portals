@@ -222,8 +222,10 @@ const makeMegaHeaderProps = (
       ariaLabel,
     })),
   }),
-  toggleAriaLabelsOpen: AriaLabels.open[locale],
-  toggleAriaLabelsClose: AriaLabels.close[locale],
+  mobileMenuIconAriaLabel: {
+    open: AriaLabels.open[locale],
+    close: AriaLabels.close[locale],
+  },
 });
 
 const Header = ({
