@@ -45,6 +45,7 @@ export const Nav = styled('ul')({
   padding: 0,
   position: 'relative',
   flex: 1,
+  marginBlock: '6px',
   '& li': {
     marginRight: 20,
     position: 'relative',
@@ -58,6 +59,11 @@ export const Nav = styled('ul')({
     fontWeight: 400,
   },
   '& .menuPrimaryItem': {
+    color: '#2B2E38',
+    padding: '10px',
+    fontWeight: 400,
+    height: 'min-content',
+    transition: 'none',
     '&:hover, &.open': {
       color: '#0B3EE3',
       fontWeight: 600,
@@ -172,21 +178,20 @@ export const MobileMenu = styled(Box)({
   top: '100%',
   left: 0,
   width: '100%',
-  height: 'calc(100vh - 76px)', // Take sticky header into account
+  height: 'calc(100dvh - 76px)', // Take sticky header into account
   backgroundColor: '#ffffff',
   zIndex: 999,
   flexDirection: 'column',
   alignItems: 'flex-start',
   overflowY: 'auto',
-  minHeight: '100vh',
   boxShadow: 'inset 0 4px 16px 0 rgba(14, 15, 19, 0.06)',
+  'body.sb-main-fullscreen & .storybook-mobilemenu-padding-bottom': {
+    paddingBottom: '0 !important',
+  },
   '&.open': {
     display: 'flex',
-  },
-  '& > *:last-child': {
-    position: 'fixed',
-    bottom: '0px',
-    left: '0px',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
   '& .button': {
     color: 'white',
