@@ -45,6 +45,7 @@ export const Nav = styled('ul')({
   padding: 0,
   position: 'relative',
   flex: 1,
+  marginBlock: '6px',
   '& li': {
     marginRight: 20,
     position: 'relative',
@@ -58,6 +59,11 @@ export const Nav = styled('ul')({
     fontWeight: 400,
   },
   '& .menuPrimaryItem': {
+    color: '#2B2E38',
+    padding: '10px',
+    fontWeight: 400,
+    height: 'min-content',
+    transition: 'none',
     '&:hover, &.open': {
       color: '#0B3EE3',
       fontWeight: 600,
