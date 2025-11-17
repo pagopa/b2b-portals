@@ -225,6 +225,10 @@ const makeMegaHeaderProps = ({
         ],
       },
     }),
+    mobileMenuIconAriaLabel: {
+      open: 'Apri menu mobile',
+      close: 'Chiudi menu mobile',
+    },
   };
 
   return baseProps as MegaHeaderProps;
