@@ -40,12 +40,12 @@ const OneTrustSection = (props: OneTrustSectionProps) => {
       id={divID}
       sx={{
         marginBottom: '6rem',
-        '.otnotice .otnotice-content': {
+        '.otnotice-content': {
           fontFamily: '"Titillium Web",sans-serif',
           color: 'text.primary',
           paddingTop: '64px',
         },
-        '.otnotice .otnotice-content .otnotice-menu': {
+        '.otnotice-content .otnotice-menu': {
           position: 'absolute',
           backgroundColor: 'transparent',
           border: 'none',
@@ -54,36 +54,36 @@ const OneTrustSection = (props: OneTrustSectionProps) => {
           marginLeft: 0,
           paddingTop: 0,
         },
-        '.otnotice .otnotice-content .otnotice-menu-mobile': {
+        '.otnotice-content .otnotice-menu-mobile': {
           backgroundColor: 'transparent',
           border: 'none',
           boxShadow: 'custom.otMenuMobile',
         },
-        '.otnotice .otnotice-content .otnotice-menu-mobile .otnotice-menu-mobile-container':
-        {
-          backgroundColor: 'transparent',
-        },
-        '.otnotice .otnotice-content .otnotice-menu > .otnotice-menu-section': {
+        '.otnotice-content .otnotice-menu-mobile .otnotice-menu-mobile-container':
+          {
+            backgroundColor: 'transparent',
+          },
+        '.otnotice-content .otnotice-menu > .otnotice-menu-section': {
           margin: 0,
           padding: '1rem',
           width: '100%',
         },
-        '.otnotice .otnotice-content .otnotice-menu > .otnotice-menu-section:hover, .otnotice-content .otnotice-menu-mobile .otnotice-menu-section-mobile:hover':
-        {
-          backgroundColor: 'action.hover',
-        },
-        '.otnotice .otnotice-content .otnotice-menu > .otnotice-menu-section a, .otnotice-content .otnotice-menu-mobile .otnotice-menu-selected, .otnotice-content .otnotice-menu-mobile .otnotice-menu-section-mobile a':
-        {
-          fontSize: '1.125rem',
-          fontWeight: 600,
-          lineHeight: 1.5,
-          color: 'text.primary !important',
-        },
+        '.otnotice-content .otnotice-menu > .otnotice-menu-section:hover, .otnotice-content .otnotice-menu-mobile .otnotice-menu-section-mobile:hover':
+          {
+            backgroundColor: 'action.hover',
+          },
+        '.otnotice-content .otnotice-menu > .otnotice-menu-section a, .otnotice-content .otnotice-menu-mobile .otnotice-menu-selected, .otnotice-content .otnotice-menu-mobile .otnotice-menu-section-mobile a':
+          {
+            fontSize: '1.125rem',
+            fontWeight: 600,
+            lineHeight: 1.5,
+            color: 'text.primary !important',
+          },
         '.otnotice-menu-mobile .otnotice-menu-selected-container .otnotice-menu-display__expand::after, .otnotice-menu-mobile .otnotice-menu-selected-container .otnotice-menu-display__collapse::after':
-        {
-          color: 'text.primary !important',
-        },
-        '.otnotice .otnotice-content .otnotice-section:first-child h2': {
+          {
+            color: 'text.primary !important',
+          },
+        '.otnotice-content .otnotice-section:first-child h2': {
           fontSize: '2.375rem',
           color: 'text.primary',
           lineHeight: '3.25rem',
