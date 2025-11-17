@@ -68,7 +68,7 @@ export const Nav = styled('ul')({
       color: '#0B3EE3',
       fontWeight: 600,
       letterSpacing: '-0.003em',
-      backgroundColor: '#F4F4F4',
+      backgroundColor: '#F4F4F4 !important',
       borderRadius: 6,
     },
     '&.active': {
