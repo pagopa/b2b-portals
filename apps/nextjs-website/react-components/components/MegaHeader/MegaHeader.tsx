@@ -5,6 +5,7 @@ import {
   Typography,
   Stack,
   Button,
+  Box,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -354,197 +355,223 @@ const MegaHeader = ({
           ))}
 
         <MobileMenu
-          paddingTop={2}
           role='navigation'
           id='mobileMenu'
           className={mobileMenuOpen ? 'open' : ''}
         >
-          {menuItems.map((menuItem: MegaMenuItem, index) => (
-            <React.Fragment key={index}>
-              <Stack
-                component={Button}
-                sx={{ width: '100% !important' }}
-                className={`mobileMenuPrimaryItem ${dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''
-                  }`}
-                onClick={(e) =>
-                  handleClick(e as any, `mobile${menuItem.primary}`)
-                }
-                aria-expanded={dropdownOpen === `mobile${menuItem.primary}`}
-                aria-controls={`mobile-submenu-${index}`}
-              >
-                <Typography
-                  {...(isActiveLink(menuItem) && {
-                    fontWeight: 600,
-                    color: palette.custom.primaryColorDark,
-                  })}
-                >
-                  {menuItem.primary}
-                </Typography>
-                <KeyboardArrowDownIcon
-                  style={{
-                    transform:
-                      dropdownOpen === `mobile${menuItem.primary}`
-                        ? 'rotate(180deg)'
-                        : 'rotate(0deg)',
-                    color: palette.custom.primaryColorDark,
-                  }}
-                />
-              </Stack>
-              <Stack
-                id={`mobile-submenu-${index}`}
-                className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''
-                  }`}
-              >
-                {menuItem.secondary.map((submenu, subIndex) => (
-                  <div key={subIndex}>
-                    {submenu.title && (
-                      <DropdownTitle>{submenu.title}</DropdownTitle>
-                    )}
-                    {submenu.items.map((item, itemIndex) => (
-                      <Sublink
-                        key={itemIndex}
-                        href={item.href}
-                        target={
-                          item.href.startsWith('https://') ? '_blank' : '_self'
-                        }
-                        className={`mobileMenuSecondaryItem ${isActiveSubLink(item.href) ? 'active' : ''
-                          }`}
-                        onClick={() => setMobileMenuOpen(false)}
-                        trackEvent={trackSublinkClickEvent}
-                        trackingProperties={{
-                          Tab: menuItem.primary,
-                          Link: item.href,
-                        }}
-                      >
-                        <Typography
-                          variant='body2'
-                          fontSize={14}
-                          {...(isActiveSubLink(item.href) && {
-                            fontWeight: 600,
-                            color: palette.custom.primaryColorDark,
-                          })}
-                        >
-                          {item.label}
-                        </Typography>
-                        {item.badge && <LinkLabel>{item.badge}</LinkLabel>}
-                        <ArrowForwardIcon className='arrowIcon' />
-                      </Sublink>
+          <Box
+            className='storybook-mobilemenu-padding-bottom'
+            sx={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              overflowY: 'auto',
+              height: '100%',
+              pb: 6,
+            }}
+          >
+            <Box sx={{ width: '100%', pt: 2 }}>
+              {menuItems.map((menuItem: MegaMenuItem, index) => (
+                <React.Fragment key={index}>
+                  <Stack
+                    component={Button}
+                    sx={{ width: '100% !important' }}
+                    className={`mobileMenuPrimaryItem ${dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''
+                      }`}
+                    onClick={(e) =>
+                      handleClick(e as any, `mobile${menuItem.primary}`)
+                    }
+                    aria-expanded={dropdownOpen === `mobile${menuItem.primary}`}
+                    aria-controls={`mobile-submenu-${index}`}
+                  >
+                    <Typography
+                      {...(isActiveLink(menuItem) && {
+                        fontWeight: 600,
+                        color: palette.custom.primaryColorDark,
+                      })}
+                    >
+                      {menuItem.primary}
+                    </Typography>
+                    <KeyboardArrowDownIcon
+                      style={{
+                        transform:
+                          dropdownOpen === `mobile${menuItem.primary}`
+                            ? 'rotate(180deg)'
+                            : 'rotate(0deg)',
+                        color: palette.custom.primaryColorDark,
+                      }}
+                    />
+                  </Stack>
+                  <Stack
+                    id={`mobile-submenu-${index}`}
+                    className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''
+                      }`}
+                  >
+                    {menuItem.secondary.map((submenu, subIndex) => (
+                      <div key={subIndex}>
+                        {submenu.title && (
+                          <DropdownTitle>{submenu.title}</DropdownTitle>
+                        )}
+                        {submenu.items.map((item, itemIndex) => (
+                          <Sublink
+                            key={itemIndex}
+                            href={item.href}
+                            target={
+                              item.href.startsWith('https://') ? '_blank' : '_self'
+                            }
+                            className={`mobileMenuSecondaryItem ${isActiveSubLink(item.href) ? 'active' : ''
+                              }`}
+                            onClick={() => setMobileMenuOpen(false)}
+                            trackEvent={trackSublinkClickEvent}
+                            trackingProperties={{
+                              Tab: menuItem.primary,
+                              Link: item.href,
+                            }}
+                          >
+                            <Typography
+                              variant='body2'
+                              fontSize={14}
+                              {...(isActiveSubLink(item.href) && {
+                                fontWeight: 600,
+                                color: palette.custom.primaryColorDark,
+                              })}
+                            >
+                              {item.label}
+                            </Typography>
+                            {item.badge && <LinkLabel>{item.badge}</LinkLabel>}
+                            <ArrowForwardIcon className='arrowIcon' />
+                          </Sublink>
+                        ))}
+                      </div>
                     ))}
-                  </div>
-                ))}
-              </Stack>
-            </React.Fragment>
-          ))}
-          {activeCta && (
-            <div style={{ padding: '0px 0px 90px 0px', width: 'max-content' }}>
-              <CtaButtons
-                ctaButtons={[
-                  {
-                    ...activeCta,
-                    sx: {
-                      backgroundColor: '#0B3EE3',
-                      color: 'white',
-                      padding: '10px 20px',
-                      borderRadius: 2,
-                      textDecoration: 'none',
-                      whiteSpace: 'nowrap',
-                      margin: '30px',
-                      fontSize: '16px!important',
-                      fontWeight: '700!important',
-                      letterSpacing: '0.3px',
-                      '&:hover': {
-                        backgroundColor: '#005bb5',
+                  </Stack>
+                </React.Fragment>
+              ))}
+              {activeCta && (
+                <div
+                  style={{ width: 'max-content' }}
+                >
+                  <CtaButtons
+                    ctaButtons={[
+                      {
+                        ...activeCta,
+                        sx: {
+                          backgroundColor: '#0B3EE3',
+                          color: 'white',
+                          padding: '10px 20px',
+                          borderRadius: 2,
+                          textDecoration: 'none',
+                          whiteSpace: 'nowrap',
+                          margin: '30px',
+                          fontSize: '16px!important',
+                          fontWeight: '700!important',
+                          letterSpacing: '0.3px',
+                          '&:hover': {
+                            backgroundColor: '#005bb5',
+                          },
+                          '&:focus': {
+                            backgroundColor: '#005bb5',
+                          },
+                          '&:active': {
+                            backgroundColor: '#004999',
+                          },
+                          '&:visited': {
+                            color: 'white',
+                          },
+                        },
                       },
-                      '&:focus': {
-                        backgroundColor: '#005bb5',
+                    ]}
+                  />
+                </div>
+              )}
+              {!activeCta && drawer && (
+                <div
+                  style={{ width: 'max-content' }}
+                >
+                  <CtaButtons
+                    ctaButtons={[
+                      {
+                        text: drawer.buttonText,
+                        onClick: openDrawer,
+                        sx: {
+                          backgroundColor: '#0B3EE3',
+                          color: 'white',
+                          padding: '10px 20px',
+                          borderRadius: 2,
+                          textDecoration: 'none',
+                          whiteSpace: 'nowrap',
+                          margin: '30px',
+                          fontSize: '16px!important',
+                          fontWeight: '700!important',
+                          letterSpacing: '0.3px',
+                          '&:hover': {
+                            backgroundColor: '#005bb5',
+                          },
+                          '&:focus': {
+                            backgroundColor: '#005bb5',
+                          },
+                          '&:active': {
+                            backgroundColor: '#004999',
+                          },
+                          '&:visited': {
+                            color: 'white',
+                          },
+                        },
                       },
-                      '&:active': {
-                        backgroundColor: '#004999',
-                      },
-                      '&:visited': {
-                        color: 'white',
-                      },
-                    },
-                  },
-                ]}
-              />
-            </div>
-          )}
-          {!activeCta && drawer && (
-            <div style={{ padding: '0px 0px 90px 0px', width: 'max-content' }}>
-              <CtaButtons
-                ctaButtons={[
-                  {
-                    text: drawer.buttonText,
-                    onClick: openDrawer,
-                    sx: {
-                      backgroundColor: '#0B3EE3',
-                      color: 'white',
-                      padding: '10px 20px',
-                      borderRadius: 2,
-                      textDecoration: 'none',
-                      whiteSpace: 'nowrap',
-                      margin: '30px',
-                      fontSize: '16px!important',
-                      fontWeight: '700!important',
-                      letterSpacing: '0.3px',
-                      '&:hover': {
-                        backgroundColor: '#005bb5',
-                      },
-                      '&:focus': {
-                        backgroundColor: '#005bb5',
-                      },
-                      '&:active': {
-                        backgroundColor: '#004999',
-                      },
-                      '&:visited': {
-                        color: 'white',
-                      },
-                    },
-                  },
-                ]}
-              />
-            </div>
-          )}
-          {socialLinks && socialLinks.length > 0 && (
-            <Stack
-              direction='row'
-              justifyContent='flex-start'
-              alignItems='center'
+                    ]}
+                  />
+                </div>
+              )}
+            </Box>
+            <Box
               sx={{
-                mt: 4,
-                mb: 6,
-                px: 4,
-                gap: '30px',
-                flexWrap: 'wrap',
+                width: '100%',
+                mt: 'auto',
+                mb: 2,
+                '@media (min-width:360px)': { mb: 0 },
               }}
             >
-              {socialLinks.map(({ iconURL, href, ariaLabel }, i) => (
-                <a
-                  key={i}
-                  href={href}
-                  title={ariaLabel}
-                  aria-label={ariaLabel}
-                  target={href.startsWith('http') ? '_blank' : undefined}
-                  rel='noopener noreferrer'
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    padding: 0,
-                    margin: 0,
+              {socialLinks && socialLinks.length > 0 && (
+                <Stack
+                  direction='row'
+                  justifyContent='flex-start'
+                  alignItems='center'
+                  sx={{
+                    mt: 4,
+                    mb: 4,
+                    px: 4,
+                    gap: '30px',
+                    flexWrap: 'wrap',
                   }}
                 >
-                  <img
-                    src={iconURL}
-                    alt={ariaLabel}
-                    width={32}
-                    height={32}
-                    style={{ display: 'block' }}
-                  />
-                </a>
-              ))}
-            </Stack>
-          )}
+                  {socialLinks.map(({ iconURL, href, ariaLabel }, i) => (
+                    <a
+                      key={i}
+                      href={href}
+                      title={ariaLabel}
+                      aria-label={ariaLabel}
+                      target={href.startsWith('http') ? '_blank' : undefined}
+                      rel='noopener noreferrer'
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        padding: 0,
+                        margin: 0,
+                      }}
+                    >
+                      <img
+                        src={iconURL}
+                        alt={ariaLabel}
+                        width={32}
+                        height={32}
+                        style={{ display: 'block' }}
+                      />
+                    </a>
+                  ))}
+                </Stack>
+              )}
+            </Box>
+          </Box>
         </MobileMenu>
 
         {drawer && (
