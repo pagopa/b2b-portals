@@ -51,7 +51,7 @@ const MediaResources = ({
         {title && (
           <Typography
             variant='h4'
-            component={'h2'}
+            component='h2'
             mb={4}
             textAlign='left'
             color='inherit'
