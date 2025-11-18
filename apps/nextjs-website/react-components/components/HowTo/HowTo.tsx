@@ -54,7 +54,7 @@ const HowTo = (props: HowToProps) => {
         {/** Section title */}
         <Title
           variant='h4'
-          component='p'
+          component='h2'
           textColor={textColor}
           title={title}
           marginBottom={32}

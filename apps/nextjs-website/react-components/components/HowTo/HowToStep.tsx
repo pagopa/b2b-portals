@@ -66,7 +66,7 @@ export const HowToStep = ({
           {/** Step title */}
           <Title
             variant='h6'
-            component='p'
+            component='h3'
             textColor={textColor}
             title={title}
             textAlign='left'
@@ -124,7 +124,7 @@ export const HowToStep = ({
 
           <Title
             variant='h6'
-            component='p'
+            component='h3'
             textColor={textColor}
             title={title}
             textAlign='left'

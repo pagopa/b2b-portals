@@ -49,7 +49,13 @@ const MediaResources = ({
         marginX='auto'
       >
         {title && (
-          <Typography variant='h4' mb={4} textAlign='left' color='inherit'>
+          <Typography
+            variant='h4'
+            component={'h2'}
+            mb={4}
+            textAlign='left'
+            color='inherit'
+          >
             {title}
           </Typography>
         )}
@@ -92,6 +98,7 @@ const MediaResources = ({
               </Stack>
               <Typography
                 variant='h6'
+                component='h3'
                 fontWeight={700}
                 mt={3}
                 sx={{ color: textColor }}

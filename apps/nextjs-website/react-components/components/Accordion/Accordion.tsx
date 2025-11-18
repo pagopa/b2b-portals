@@ -59,6 +59,7 @@ const Accordion = (props: AccordionProps) => {
             <Stack px={{ xs: 1, md: 0 }} spacing={{ xs: 2, md: 4 }}>
               <Title
                 variant='h4'
+                component='h2'
                 textColor={textColor}
                 title={title}
                 textAlign={layout === 'center' ? textAlignment : 'left'}

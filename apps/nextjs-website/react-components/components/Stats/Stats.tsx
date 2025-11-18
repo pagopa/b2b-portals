@@ -36,6 +36,7 @@ const Stats = ({ eyelet, title, body, items, sectionID }: StatsProps) => {
           )}
           <Typography
             variant='h4'
+            component='h2'
             fontSize={{ xs: 28, md: 32 }}
             color={palette.text.primary}
             sx={{ mb: 2, mt: 2 }}

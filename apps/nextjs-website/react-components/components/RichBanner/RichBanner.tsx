@@ -46,7 +46,7 @@ const RichBanner = (props: RichBannerProps) => {
     >
       <Container>
         {title && (
-          <Typography variant='body1' component='div' sx={titleSx}>
+          <Typography variant='body1' component='h2' sx={titleSx}>
             {title}
           </Typography>
         )}

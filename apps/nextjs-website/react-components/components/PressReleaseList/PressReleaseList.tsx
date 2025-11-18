@@ -16,7 +16,7 @@ const PressReleaseList = ({
     sxInner={{ marginY: { xs: 8, md: 12 } }}
     tabIndex={0}
   >
-    <Typography variant='h4' maxWidth='100%'>
+    <Typography variant='h4' component='h2' maxWidth='100%'>
       {title}
     </Typography>
 

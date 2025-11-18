@@ -41,7 +41,7 @@ export const FeatureStackItem = ({
       <Stack spacing={1} textAlign='center'>
         <Title
           variant='h6'
-          component='p'
+          component='h3'
           textColor={textColor}
           title={item.title}
         />
