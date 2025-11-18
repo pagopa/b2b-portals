@@ -47,6 +47,7 @@ const ServiceCarousel = ({
           title={title}
           textColor={palette.text.primary}
           variant='h4'
+          component='h2'
           textAlign='left'
         />
 

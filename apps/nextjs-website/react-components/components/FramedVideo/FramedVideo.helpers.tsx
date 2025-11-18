@@ -87,7 +87,7 @@ export const renderTextSection = ({
         padding: '1.5em',
       }}
     >
-      <Typography variant='h4' color={textColor} mb={2}>
+      <Typography variant='h4' component='h2' color={textColor} mb={2}>
         {title}
       </Typography>
 

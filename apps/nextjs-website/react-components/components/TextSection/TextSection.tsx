@@ -58,7 +58,7 @@ const TextSection = ({
         {title && (
           <Typography
             variant='h1'
-            component='div'
+            component='h2'
             sx={{
               fontSize: { xs: '32px', md: '50px' },
               color: textColor,

@@ -49,6 +49,7 @@ const HighlightBox = ({
 
             <Typography
               variant='h6'
+              component='h2'
               color='textPrimary'
               fontWeight={700}
               sx={{ fontSize: { xs: '22px', md: '24px' } }}
