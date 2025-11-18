@@ -86,10 +86,12 @@ const OneTrustSection = (props: OneTrustSectionProps) => {
         '.otnotice-content .otnotice-section:first-child h2': {
           fontSize: '2.375rem',
           color: 'text.primary',
+          lineHeight: '3.25rem',
         },
         '.otnotice-content .otnotice-section:not(:first-child) h2': {
           fontSize: '1.75rem',
           color: 'text.primary',
+          lineHeight: '2.25rem',
         },
       }}
     />
