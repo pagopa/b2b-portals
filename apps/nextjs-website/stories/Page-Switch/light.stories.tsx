@@ -49,6 +49,7 @@ Default.args = {
           type: 'Cards',
           props: {
             theme: 'light',
+            titleTag: 'h2',
             items: [
               {
                 title: 'Card 1',
@@ -137,6 +138,7 @@ Default.args = {
           type: 'Cards',
           props: {
             theme: 'light',
+            titleTag: 'h2',
             items: [
               {
                 title: 'Card 3',
@@ -218,6 +220,7 @@ Default.args = {
           type: 'Cards',
           props: {
             theme: 'light',
+            titleTag: 'h2',
             items: [
               {
                 title: 'Card 4',

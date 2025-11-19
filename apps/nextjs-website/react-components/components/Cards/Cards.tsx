@@ -21,6 +21,7 @@ const Cards = ({
   textPosition,
   sectionID,
   bottomCTA,
+  titleTag,
 }: CardsProps) => {
   const backgroundColor =
     themeVariant === 'SEND'
@@ -67,6 +68,7 @@ const Cards = ({
           {text.title && (
             <Typography mb={3} component='div' color={'inherit'}>
               <Title
+                component={titleTag ?? 'h2'}
                 variant='h4'
                 textColor={'inherit'}
                 title={text.title}

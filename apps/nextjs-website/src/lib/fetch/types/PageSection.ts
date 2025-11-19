@@ -23,6 +23,11 @@ const TitleTagCodec = t.keyof({
   p: null,
 });
 
+const TitleTagH1H2Codec = t.keyof({
+  h1: null,
+  h2: null,
+});
+
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
   title: t.string,
@@ -170,6 +175,7 @@ const CardsSectionCodec = t.strict({
   __component: t.literal('sections.cards'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   title: t.string,
+  titleTag: t.union([TitleTagH1H2Codec, t.null]),
   subtitle: t.union([t.string, t.null]),
   body: t.union([t.string, t.null]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
