@@ -61,6 +61,10 @@ module "video_streaming" {
 
   custom_domain_name = "video.pagopa.it"
   environment        = var.environment
+
+  cors_allowed_origins = [
+    "https://my.pagopa.it/"
+  ]
 }
 
 
