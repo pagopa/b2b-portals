@@ -63,7 +63,7 @@ module "video_streaming" {
   environment        = var.environment
 
   cors_allowed_origins = [
-    "https://my.pagopa.it/"
+    "https://my.pagopa.it",
   ]
 }
 
