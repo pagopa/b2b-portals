@@ -17,3 +17,7 @@ output "dns_zone_name" {
 output "dns_name_servers" {
   value = try(module.dns_zone.route53_zone_name_servers, null)
 }
+
+output "video_name_servers" {
+  value = try(module.video_streaming.route53_zone_name_servers, null)
+}

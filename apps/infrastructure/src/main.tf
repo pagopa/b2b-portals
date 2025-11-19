@@ -27,8 +27,44 @@ provider "aws" {
   }
 }
 
+provider "aws" {
+  alias  = "eu-central-1"
+  region = "eu-central-1"
+
+  default_tags {
+    tags = var.tags
+  }
+}
+
 # Init IaC resources ##########################################################
 module "identity" {
-  source            = "./identity"
+  source            = "./modules/identity"
   github_repository = var.github_repository
 }
+
+
+## Video straming ##############################################################
+module "video_streaming" {
+  source = "./modules/video_streaming"
+
+  providers = {
+    aws           = aws.eu-central-1
+    aws.us-east-1 = aws.us-east-1 #
+  }
+
+  project_name = "video-streaming"
+  ivs_channels = {
+    "channell-01" = {
+      name = "channel-01"
+    }
+  }
+
+  custom_domain_name = "video.pagopa.it"
+  environment        = var.environment
+
+  cors_allowed_origins = [
+    "https://my.pagopa.it",
+  ]
+}
+
+
