@@ -23,6 +23,7 @@ DarkCardsOnlyTitleNoLinksLeft.args = {
     title: 'Cards Title',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const DarkCardsOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
@@ -33,6 +34,7 @@ DarkCardsOnlyTitleNoLinksRight.args = {
     title: 'Cards Title',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const DarkCardsOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
@@ -43,6 +45,7 @@ DarkCardsOnlyTitleNoLinksCenter.args = {
     title: 'Cards Title',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const DarkCardsOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
@@ -53,6 +56,7 @@ DarkCardsOnlyTitleWithLinksLeft.args = {
     title: 'Cards Title',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const DarkCardsOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
@@ -63,6 +67,7 @@ DarkCardsOnlyTitleWithLinksRight.args = {
     title: 'Cards Title',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const DarkCardsOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
@@ -73,10 +78,11 @@ DarkCardsOnlyTitleWithLinksCenter.args = {
     title: 'Cards Title',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const DarkCardsNoLinksLeft: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {}
+  {},
 );
 DarkCardsNoLinksLeft.args = {
   ...defaultPropsDarkFour,
@@ -84,10 +90,11 @@ DarkCardsNoLinksLeft.args = {
     title: 'Cards Title',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const DarkCardsNoLinksRight: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {}
+  {},
 );
 DarkCardsNoLinksRight.args = {
   ...defaultPropsDarkFour,
@@ -95,10 +102,11 @@ DarkCardsNoLinksRight.args = {
     title: 'Cards Title',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const DarkCardsNoLinksCenter: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {}
+  {},
 );
 DarkCardsNoLinksCenter.args = {
   ...defaultPropsDarkFour,
@@ -106,10 +114,11 @@ DarkCardsNoLinksCenter.args = {
     title: 'Cards Title',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithLinksLeft: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {}
+  {},
 );
 DarkCardsWithLinksLeft.args = {
   ...defaultPropsDarkFourWithLinks,
@@ -117,6 +126,7 @@ DarkCardsWithLinksLeft.args = {
     title: 'Cards Title',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithLinksRight: StoryFn<typeof Cards> =
@@ -127,6 +137,7 @@ DarkCardsWithLinksRight.args = {
     title: 'Cards Title',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithLinksCenter: StoryFn<typeof Cards> =
@@ -137,6 +148,7 @@ DarkCardsWithLinksCenter.args = {
     title: 'Cards Title',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextNoLinksLeft: StoryFn<typeof Cards> =
@@ -149,6 +161,7 @@ DarkCardsWithTextNoLinksLeft.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextNoLinksRight: StoryFn<typeof Cards> =
@@ -161,6 +174,7 @@ DarkCardsWithTextNoLinksRight.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextNoLinksCenter: StoryFn<typeof Cards> =
@@ -173,6 +187,7 @@ DarkCardsWithTextNoLinksCenter.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextWithLinksLeft: StoryFn<typeof Cards> =
@@ -185,6 +200,7 @@ DarkCardsWithTextWithLinksLeft.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextWithLinksRight: StoryFn<typeof Cards> =
@@ -197,6 +213,7 @@ DarkCardsWithTextWithLinksRight.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextWithLinksCenter: StoryFn<typeof Cards> =
@@ -209,6 +226,7 @@ DarkCardsWithTextWithLinksCenter.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextandButtonNoLinksLeft: StoryFn<typeof Cards> =
@@ -231,6 +249,7 @@ DarkCardsWithTextandButtonNoLinksLeft.args = {
     },
   ],
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextandButtonNoLinksRight: StoryFn<typeof Cards> =
@@ -253,6 +272,7 @@ DarkCardsWithTextandButtonNoLinksRight.args = {
     },
   ],
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextandButtonNoLinksCenter: StoryFn<typeof Cards> =
@@ -275,6 +295,7 @@ DarkCardsWithTextandButtonNoLinksCenter.args = {
     },
   ],
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextandButtonWithLinksLeft: StoryFn<typeof Cards> =
@@ -297,6 +318,7 @@ DarkCardsWithTextandButtonWithLinksLeft.args = {
     },
   ],
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextandButtonWithLinksRight: StoryFn<typeof Cards> =
@@ -319,6 +341,7 @@ DarkCardsWithTextandButtonWithLinksRight.args = {
     },
   ],
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const DarkCardsWithTextandButtonWithLinksCenter: StoryFn<typeof Cards> =
@@ -341,6 +364,7 @@ DarkCardsWithTextandButtonWithLinksCenter.args = {
     },
   ],
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const DarkCardsNoTextWithBottomCta: StoryFn<typeof Cards> =
@@ -367,4 +391,5 @@ DarkCardsNoTextWithBottomCta.args = {
     variant: 'contained',
   },
   textPosition: 'none',
+  titleTag: 'h2',
 };

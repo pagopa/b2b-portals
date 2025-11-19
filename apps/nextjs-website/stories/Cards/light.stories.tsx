@@ -23,6 +23,7 @@ LightCardsOnlyTitleNoLinksLeft.args = {
     title: 'Cards Title',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const LightCardsOnlyTitleNoLinksRight: StoryFn<typeof Cards> =
@@ -33,6 +34,7 @@ LightCardsOnlyTitleNoLinksRight.args = {
     title: 'Cards Title',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const LightCardsOnlyTitleNoLinksCenter: StoryFn<typeof Cards> =
@@ -43,6 +45,7 @@ LightCardsOnlyTitleNoLinksCenter.args = {
     title: 'Cards Title',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const LightCardsOnlyTitleWithLinksLeft: StoryFn<typeof Cards> =
@@ -53,6 +56,7 @@ LightCardsOnlyTitleWithLinksLeft.args = {
     title: 'Cards Title',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const LightCardsOnlyTitleWithLinksRight: StoryFn<typeof Cards> =
@@ -63,6 +67,7 @@ LightCardsOnlyTitleWithLinksRight.args = {
     title: 'Cards Title',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const LightCardsOnlyTitleWithLinksCenter: StoryFn<typeof Cards> =
@@ -73,10 +78,11 @@ LightCardsOnlyTitleWithLinksCenter.args = {
     title: 'Cards Title',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const LightCardsNoLinksLeft: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {}
+  {},
 );
 LightCardsNoLinksLeft.args = {
   ...defaultPropsLightFour,
@@ -84,10 +90,11 @@ LightCardsNoLinksLeft.args = {
     title: 'Cards Title',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const LightCardsNoLinksRight: StoryFn<typeof Cards> = CardsTemplate.bind(
-  {}
+  {},
 );
 LightCardsNoLinksRight.args = {
   ...defaultPropsLightFour,
@@ -95,6 +102,7 @@ LightCardsNoLinksRight.args = {
     title: 'Cards Title',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const LightCardsNoLinksCenter: StoryFn<typeof Cards> =
@@ -105,6 +113,7 @@ LightCardsNoLinksCenter.args = {
     title: 'Cards Title',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithLinksLeft: StoryFn<typeof Cards> =
@@ -115,6 +124,7 @@ LightCardsWithLinksLeft.args = {
     title: 'Cards Title',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithLinksRight: StoryFn<typeof Cards> =
@@ -125,6 +135,7 @@ LightCardsWithLinksRight.args = {
     title: 'Cards Title',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithLinksCenter: StoryFn<typeof Cards> =
@@ -135,6 +146,7 @@ LightCardsWithLinksCenter.args = {
     title: 'Cards Title',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextNoLinksLeft: StoryFn<typeof Cards> =
@@ -147,6 +159,7 @@ LightCardsWithTextNoLinksLeft.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextNoLinksRight: StoryFn<typeof Cards> =
@@ -159,6 +172,7 @@ LightCardsWithTextNoLinksRight.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextNoLinksCenter: StoryFn<typeof Cards> =
@@ -171,6 +185,7 @@ LightCardsWithTextNoLinksCenter.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextWithLinksLeft: StoryFn<typeof Cards> =
@@ -183,6 +198,7 @@ LightCardsWithTextWithLinksLeft.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextWithLinksRight: StoryFn<typeof Cards> =
@@ -195,6 +211,7 @@ LightCardsWithTextWithLinksRight.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextWithLinksCenter: StoryFn<typeof Cards> =
@@ -207,6 +224,7 @@ LightCardsWithTextWithLinksCenter.args = {
     body: 'This is a description for the cards.',
   },
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextandButtonNoLinksLeft: StoryFn<typeof Cards> =
@@ -229,6 +247,7 @@ LightCardsWithTextandButtonNoLinksLeft.args = {
     },
   ],
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextandButtonNoLinksRight: StoryFn<typeof Cards> =
@@ -251,6 +270,7 @@ LightCardsWithTextandButtonNoLinksRight.args = {
     },
   ],
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextandButtonNoLinksCenter: StoryFn<typeof Cards> =
@@ -273,6 +293,7 @@ LightCardsWithTextandButtonNoLinksCenter.args = {
     },
   ],
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextandButtonWithLinksLeft: StoryFn<typeof Cards> =
@@ -295,6 +316,7 @@ LightCardsWithTextandButtonWithLinksLeft.args = {
     },
   ],
   textPosition: 'left',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextandButtonWithLinksRight: StoryFn<typeof Cards> =
@@ -317,6 +339,7 @@ LightCardsWithTextandButtonWithLinksRight.args = {
     },
   ],
   textPosition: 'right',
+  titleTag: 'h2',
 };
 
 export const LightCardsWithTextandButtonWithLinksCenter: StoryFn<typeof Cards> =
@@ -339,6 +362,7 @@ LightCardsWithTextandButtonWithLinksCenter.args = {
     },
   ],
   textPosition: 'center',
+  titleTag: 'h2',
 };
 
 export const LightCardsNoTextWithBottomCta: StoryFn<typeof Cards> =
@@ -365,4 +389,5 @@ LightCardsNoTextWithBottomCta.args = {
     variant: 'contained',
   },
   textPosition: 'none',
+  titleTag: 'h2',
 };
