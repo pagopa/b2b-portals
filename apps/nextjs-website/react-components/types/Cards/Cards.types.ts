@@ -7,6 +7,7 @@ export interface CardsProps extends SectionProps {
     subtitle?: string;
     body?: string | Generic;
   };
+  titleTag: 'h1' | 'h2' | null;
   ctaButtons?: CtaButtonProps[];
   textPosition: 'left' | 'right' | 'center' | 'none';
   bottomCTA?: CtaButtonProps;
