@@ -97,6 +97,14 @@
     },
     "placeholderOrganization": {
       "type": "string"
+    },
+    "titleTag": {
+      "type": "enumeration",
+      "enum": [
+        "h1",
+        "h2"
+      ],
+      "default": "h2"
     }
   }
 }

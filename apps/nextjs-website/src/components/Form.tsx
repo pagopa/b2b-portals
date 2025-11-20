@@ -19,12 +19,14 @@ const makeFormProps = ({
   placeholderSurname,
   placeholderEmail,
   placeholderOrganization,
+  titleTag,
   ...rest
 }: FormSection & SiteWidePageData): FormProps => ({
   categories: categories.map(({ additionalInfo, ...category }) => ({
     ...(additionalInfo && { additionalInfo }),
     ...category,
   })),
+  ...(titleTag && { titleTag }),
   ...(subtitle && { subtitle }),
   ...(categoriesTitle && { categoriesTitle }),
   buttonLabel,
