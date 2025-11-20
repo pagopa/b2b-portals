@@ -12,6 +12,7 @@ export const makeCardsProps = ({
   defaultLocale,
   items,
   title,
+  titleTag,
   subtitle,
   body,
   ctaButtons,
@@ -30,6 +31,7 @@ export const makeCardsProps = ({
       }),
     }),
   },
+  ...(titleTag && { titleTag }),
   items: items.map(({ icon, label, text, title, links }) => ({
     title,
     ...(icon && {
