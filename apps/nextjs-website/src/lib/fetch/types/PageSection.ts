@@ -330,6 +330,7 @@ const RichBannerSectionCodec = t.strict({
 const RowTextSectionCodec = t.strict({
   __component: t.literal('sections.row-text'),
   title: t.string,
+  titleTag: t.union([TitleTagH1H2Codec, t.null]),
   subtitle: t.union([t.string, t.null]),
   body: t.union([t.string, t.null]),
   layout: t.union([t.literal('left'), t.literal('center')]),

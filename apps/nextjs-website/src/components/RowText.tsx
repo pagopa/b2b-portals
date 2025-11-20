@@ -11,8 +11,10 @@ const makeRowTextProps = ({
   defaultLocale,
   subtitle,
   body,
+  titleTag,
   ...rest
 }: RowTextSection & SiteWidePageData): RowTextProps => ({
+  ...(titleTag && { titleTag }),
   ...(subtitle && { subtitle }),
   ...(body && {
     body: MarkdownRenderer({
