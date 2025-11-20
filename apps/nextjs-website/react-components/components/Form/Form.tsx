@@ -30,6 +30,7 @@ interface InputFieldData {
 
 const Form = ({
   title,
+  titleTag,
   subtitle,
   theme,
   themeVariant,
@@ -153,7 +154,7 @@ const Form = ({
               organization: showOrganization ? formData.organization : 'none',
             }),
           }),
-        }
+        },
       );
 
       const { email } = await res.json();
@@ -300,6 +301,7 @@ const Form = ({
         />
         <Typography
           variant='h4'
+          component={titleTag ?? 'h2'}
           gutterBottom
           sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
         >
