@@ -210,6 +210,7 @@ const FormCategoryCodec = t.strict({
 const FormSectionCodec = t.strict({
   __component: t.literal('sections.form'),
   title: t.string,
+  titleTag: t.union([TitleTagH1H2Codec, t.null]),
   subtitle: t.union([t.string, t.null]),
   showName: t.boolean,
   showSurname: t.boolean,

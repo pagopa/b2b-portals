@@ -18,6 +18,7 @@ interface FormCategories {
 
 export interface FormProps extends SectionProps, FormFields, FormCategories {
   readonly title: string;
+  readonly titleTag?: 'h1' | 'h2';
   readonly subtitle?: string;
   readonly clientID: 'io' | 'pagopa';
   readonly listID: string;
