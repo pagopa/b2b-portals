@@ -81,6 +81,12 @@ export const AccordionItem: React.FC<
         expandIcon={<ExpandMoreIcon />}
         aria-controls={controlsId}
         id={headerId}
+        sx={{
+          '&.Mui-focusVisible': {
+            outline: 'revert',
+            backgroundColor: "unset",
+          },
+        }}
       >
         <Typography sx={{ my: 1.2 }} fontWeight={600}>
           {header}
