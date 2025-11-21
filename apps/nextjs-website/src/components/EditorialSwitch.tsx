@@ -12,11 +12,13 @@ const makeEditorialSwitchProps = ({
   defaultLocale,
   subtitle,
   sections,
+  titleTag,
   ...rest
 }: EditorialSwitchSection & SiteWidePageData): EditorialSwitchProps => ({
   ...(subtitle && {
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
   }),
+  ...(titleTag && { titleTag }),
   sections: sections.map(({ content, ...section }) => ({
     ...section,
     content: makeEditorialProps({

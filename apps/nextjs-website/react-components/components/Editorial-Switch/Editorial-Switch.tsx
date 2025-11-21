@@ -22,6 +22,7 @@ const EditorialSwitch = ({
   theme,
   themeVariant,
   title,
+  titleTag,
   subtitle,
 }: EditorialSwitchProps) => {
   if (sections[0] === undefined) {
@@ -76,6 +77,7 @@ const EditorialSwitch = ({
       >
         <TitleSubtitleBlock
           title={title}
+          titleTag={titleTag ?? 'h2'}
           {...(subtitle && { subtitle })}
           theme={theme}
           themeVariant={themeVariant}

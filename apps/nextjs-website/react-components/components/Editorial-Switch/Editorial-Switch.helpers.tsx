@@ -21,6 +21,7 @@ export const TitleSubtitleBlock = ({
   title,
   subtitle,
   theme,
+  titleTag,
   themeVariant,
 }: EditorialSwitchBaseProps) => {
   const textColor = TextColor(theme);
@@ -30,8 +31,8 @@ export const TitleSubtitleBlock = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <div
@@ -46,6 +47,7 @@ export const TitleSubtitleBlock = ({
     >
       <Title
         variant='h4'
+        component={titleTag}
         textColor={textColor}
         title={title}
         textAlign='center'
