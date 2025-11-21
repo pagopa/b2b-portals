@@ -295,7 +295,7 @@
   },
   {
     "key": "plugin_content_manager_configuration_components::sections.editorial-switch",
-    "value": "{\"uid\":\"sections.editorial-switch\",\"settings\":{\"bulkable\":true,\"filterable\":true,\"searchable\":true,\"pageSize\":10,\"mainField\":\"title\",\"defaultSortBy\":\"title\",\"defaultSortOrder\":\"ASC\"},\"metadatas\":{\"id\":{\"edit\":{},\"list\":{\"label\":\"id\",\"searchable\":false,\"sortable\":false}},\"theme\":{\"edit\":{\"label\":\"Tema\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"theme\",\"searchable\":true,\"sortable\":true}},\"title\":{\"edit\":{\"label\":\"Titolo\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"title\",\"searchable\":true,\"sortable\":true}},\"subtitle\":{\"edit\":{\"label\":\"Sottotitolo\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"subtitle\",\"searchable\":false,\"sortable\":false}},\"sections\":{\"edit\":{\"label\":\"Sezioni\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"sections\",\"searchable\":false,\"sortable\":false}}},\"layouts\":{\"list\":[\"id\",\"theme\",\"title\"],\"edit\":[[{\"name\":\"title\",\"size\":6},{\"name\":\"theme\",\"size\":6}],[{\"name\":\"subtitle\",\"size\":12}],[{\"name\":\"sections\",\"size\":12}]]},\"isComponent\":true}",
+    "value": "{\"uid\":\"sections.editorial-switch\",\"settings\":{\"bulkable\":true,\"filterable\":true,\"searchable\":true,\"pageSize\":10,\"mainField\":\"title\",\"defaultSortBy\":\"title\",\"defaultSortOrder\":\"ASC\"},\"metadatas\":{\"id\":{\"edit\":{},\"list\":{\"label\":\"id\",\"searchable\":false,\"sortable\":false}},\"theme\":{\"edit\":{\"label\":\"Tema\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"theme\",\"searchable\":true,\"sortable\":true}},\"title\":{\"edit\":{\"label\":\"Titolo\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"title\",\"searchable\":true,\"sortable\":true}},\"subtitle\":{\"edit\":{\"label\":\"Sottotitolo\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"subtitle\",\"searchable\":false,\"sortable\":false}},\"sections\":{\"edit\":{\"label\":\"Sezioni\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"sections\",\"searchable\":false,\"sortable\":false}},\"titleTag\":{\"edit\":{\"label\":\"Tag Titolo\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"titleTag\",\"searchable\":true,\"sortable\":true}}},\"layouts\":{\"list\":[\"id\",\"theme\",\"title\",\"titleTag\"],\"edit\":[[{\"name\":\"title\",\"size\":4},{\"name\":\"titleTag\",\"size\":4},{\"name\":\"theme\",\"size\":4}],[{\"name\":\"subtitle\",\"size\":12}],[{\"name\":\"sections\",\"size\":12}]]},\"isComponent\":true}",
     "type": "object",
     "environment": null,
     "tag": null
@@ -729,7 +729,7 @@
   },
   {
     "key": "plugin_upload_metrics",
-    "value": "{\"weeklySchedule\":\"20 5 16 * * 4\",\"lastWeeklyUpdate\":1763046320060}",
+    "value": "{\"weeklySchedule\":\"49 22 16 * * 4\",\"lastWeeklyUpdate\":1763046320060}",
     "type": "object",
     "environment": null,
     "tag": null
