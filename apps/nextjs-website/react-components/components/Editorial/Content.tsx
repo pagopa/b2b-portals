@@ -9,7 +9,7 @@ import { TextColor, ExtraTextColor } from '../common/Common.helpers';
 export const Content = ({
   eyelet,
   title,
-  titleTag,
+  titleTag = 'h2',
   body,
   theme,
   themeVariant,
