@@ -255,6 +255,7 @@ const EditorialSwitchSectionCodec = t.strict({
   __component: t.literal('sections.editorial-switch'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   title: t.string,
+  titleTag: t.union([TitleTagH1H2Codec, t.null]),
   subtitle: t.union([t.string, t.null]),
   sections: t.array(
     t.strict({

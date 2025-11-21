@@ -95,7 +95,7 @@
         "h6",
         "p"
       ],
-      "default": "p"
+      "default": "h2"
     }
   }
 }

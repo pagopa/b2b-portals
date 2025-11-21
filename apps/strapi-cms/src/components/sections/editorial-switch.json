@@ -28,6 +28,14 @@
       "component": "components.editorial-switch-section",
       "required": true,
       "min": 2
+    },
+    "titleTag": {
+      "type": "enumeration",
+      "enum": [
+        "h1",
+        "h2"
+      ],
+      "default": "h2"
     }
   }
 }
