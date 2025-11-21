@@ -108,6 +108,7 @@ const Editorial = (props: EditorialProps) => {
           <EditorialContent
             theme={theme}
             themeVariant={themeVariant}
+            {...(titleTag && { titleTag })}
             title={title}
             body={body}
             {...(eyelet && { eyelet })}
