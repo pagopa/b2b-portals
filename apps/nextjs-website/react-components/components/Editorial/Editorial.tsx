@@ -22,6 +22,7 @@ const Editorial = (props: EditorialProps) => {
     image,
     mobileImage,
     eyelet,
+    titleTag,
     title,
     body,
     theme,
@@ -65,6 +66,7 @@ const Editorial = (props: EditorialProps) => {
             <EditorialContent
               theme={theme}
               themeVariant={themeVariant}
+              {...(titleTag && { titleTag })}
               title={title}
               body={body}
               {...(eyelet && { eyelet })}
@@ -106,6 +108,7 @@ const Editorial = (props: EditorialProps) => {
           <EditorialContent
             theme={theme}
             themeVariant={themeVariant}
+            {...(titleTag && { titleTag })}
             title={title}
             body={body}
             {...(eyelet && { eyelet })}
