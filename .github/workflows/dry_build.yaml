@@ -39,6 +39,7 @@ jobs:
       - name: Compile packages
         shell: bash
         run: npm run compile
+        working-directory: apps/nextjs-website
 
       - name: Run Preview Build
         shell: bash
