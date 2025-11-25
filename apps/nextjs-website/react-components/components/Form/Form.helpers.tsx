@@ -44,6 +44,7 @@ export const FormCategories = ({
           </Grid>
           <Grid item sx={{ textAlign: 'right' }}>
             <FormControlLabel
+            id={categoryID}
               value={categoryID}
               control={
                 <Radio
@@ -52,6 +53,7 @@ export const FormCategories = ({
                     '&.Mui-checked': { color: textColor },
                     '&:hover': { bgcolor: 'transparent' },
                   }}
+                  inputProps={{ 'aria-label': label }}
                 />
               }
               label=''
