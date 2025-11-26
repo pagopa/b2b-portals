@@ -75,6 +75,7 @@ runs:
     - name: Compile packages
       shell: bash
       run: npm run compile
+      working-directory: apps/nextjs-website
 
     - name: Build static website
       env:
