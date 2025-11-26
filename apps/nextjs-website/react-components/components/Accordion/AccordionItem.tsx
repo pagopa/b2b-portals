@@ -5,7 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Typography } from '@mui/material';
 import { AccordionItemProps } from '../../types/Accordion/Accordion.types';
-import { useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import mixpanel from 'mixpanel-browser';
 
 export const AccordionItem: React.FC<
@@ -20,6 +20,16 @@ export const AccordionItem: React.FC<
     themeVariant === 'SEND'
       ? palette.primary.main
       : palette.custom.primaryColorDark;
+
+  const focusOutlineColor =
+    themeVariant === 'SEND'
+      ? palette.custom.outlineColor
+      : palette.custom.primaryColorDark;
+
+  const focusBackgroundColor =
+    themeVariant === 'SEND'
+      ? alpha(palette.primary.main, 0.08)
+      : alpha(palette.custom.primaryColorDark, 0.08);
 
   const appendItemIDToURLHash = () => {
     if (!itemID) return;
@@ -83,8 +93,8 @@ export const AccordionItem: React.FC<
         id={headerId}
         sx={{
           '&.Mui-focusVisible': {
-            outline: 'revert',
-            backgroundColor: "unset",
+            outline: `3px solid ${focusOutlineColor}`,
+            backgroundColor: focusBackgroundColor,
           },
         }}
       >
