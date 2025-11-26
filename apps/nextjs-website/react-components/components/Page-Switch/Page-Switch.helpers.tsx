@@ -30,8 +30,8 @@ export const TitleSubtitleBlock = ({
     theme === 'dark'
       ? palette.custom.white
       : themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+        ? palette.primary.main
+        : palette.custom.primaryColorDark;
 
   return (
     <Stack
@@ -45,6 +45,7 @@ export const TitleSubtitleBlock = ({
         variant='h4'
         textColor={textColor}
         title={title}
+        component={'h1'}
         textAlign='center'
         marginTop={3}
         marginBottom={3}
