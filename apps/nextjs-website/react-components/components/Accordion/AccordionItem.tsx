@@ -95,6 +95,7 @@ export const AccordionItem: React.FC<
           '&.Mui-focusVisible': {
             outline: `3px solid ${focusOutlineColor}`,
             backgroundColor: focusBackgroundColor,
+            borderRadius: '8px',
           },
         }}
       >
