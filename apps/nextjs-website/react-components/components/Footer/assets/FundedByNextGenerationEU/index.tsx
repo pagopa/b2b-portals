@@ -35,16 +35,16 @@ const variantColorMap = {
 };
 
 export const FundedByNextGenerationEU = ({
-  title = "Finanziato dall'Unione Europea · NextGenerationEU",
   size = 200,
   color = 'dark',
   variant = 'outline',
+  title,
 }: FundedByNextGenerationEUProps): JSX.Element => (
   <SvgIcon
     viewBox='0 0 1174 270'
     focusable='false'
     role='img'
-    aria-labelledby='logo-next-genEU-titleID'
+    aria-label= {title}
     sx={{
       width: size,
       height: 'auto',

@@ -87,6 +87,7 @@ export const StorybookFooter = ({
       companyLink={{ href: '#', ariaLabel: 'Company' }}
       languages={[]}
       activeLanguage={{ id: 'it', value: 'Italiano', href: '#' }}
+      titleSVG="Finanziato dall'Unione Europea · NextGenerationEU"
     />
   );
 };
