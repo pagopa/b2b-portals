@@ -37,6 +37,7 @@ declare module '@mui/material/styles' {
       readonly sendChipsBackgroundColorLightHover: string;
       readonly chipsBackgroundColorDarkHover: string;
       readonly chipsTextColor: string;
+      readonly outlineColor: string;
     };
   }
   // interface PaletteOptions {
@@ -99,6 +100,7 @@ export const theme = createTheme(MUIItaliaTheme, {
       sendChipsBackgroundColorLightHover: '#0066CC',
       chipsBackgroundColorDarkHover: '#ebebf54d',
       chipsTextColor: '#ffffff',
+      outlineColor: '#0073e6',
     },
   },
 });

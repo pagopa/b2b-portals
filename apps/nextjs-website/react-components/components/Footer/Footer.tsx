@@ -10,6 +10,7 @@ const Footer = ({
   legalInfo,
   links: { aboutUs, resources, followUs, services },
   showFundedByNextGenerationEULogo = false,
+  titleSVG,
   ...langProps
 }: FooterProps) => (
   <Box
@@ -29,6 +30,7 @@ const Footer = ({
         gap: 4,
       }}
     >
+      
       <Grid container spacing={4}>
         <Grid item xs={12} sm={3}>
           <FooterColumn data={aboutUs} companyLink={companyLink} />
@@ -54,12 +56,12 @@ const Footer = ({
           </Box>
           {showFundedByNextGenerationEULogo && (
             <Box sx={{ mt: 2 }}>
-              <FundedByNextGenerationEU size={180} />
+              <FundedByNextGenerationEU size={180} title={titleSVG} />
             </Box>
           )}
         </Grid>
       </Grid>
-    </Container>
+    </Container>\
     <LegalInfo data={legalInfo} />
   </Box>
 );
