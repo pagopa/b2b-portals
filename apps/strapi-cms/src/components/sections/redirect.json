@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_sections_redirects",
+  "info": {
+    "displayName": "Redirect",
+    "description": "Sezione che effettua un redirect automatico"
+  },
+  "options": {},
+  "attributes": {
+    "redirectCode": {
+      "type": "enumeration",
+      "enum": [
+        "301",
+        "302"
+      ],
+      "default": "302",
+      "required": true
+    },
+    "redirectURL": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
