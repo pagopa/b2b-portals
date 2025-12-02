@@ -190,6 +190,15 @@ const CardsSectionCodec = t.strict({
   bottomCTA: t.union([CTAButtonSimpleCodec, t.null]),
 });
 
+const RedirectSectionCodec = t.strict({
+  __component: t.literal('sections.redirect'),
+  redirectCode: t.keyof({
+    '301': null,
+    '302': null,
+  }),
+  redirectURL: t.string,
+});
+
 const OneTrustSectionPropsCodec = t.strict({
   __component: t.literal('sections.one-trust'),
   oneTrustNoticeURL: t.string,
@@ -479,6 +488,7 @@ export const PageSectionCodec = t.union([
   BannerLinkSectionCodec,
   StripeLinkSectionCodec,
   CardsSectionCodec,
+  RedirectSectionCodec,
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
   FormSectionCodec,
@@ -510,6 +520,7 @@ export type HowToSection = t.TypeOf<typeof HowToSectionCodec>;
 export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
 export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
+export type RedirectSection = t.TypeOf<typeof RedirectSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;

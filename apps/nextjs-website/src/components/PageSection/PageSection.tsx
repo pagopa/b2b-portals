@@ -30,6 +30,7 @@ import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleasePage } from '@/lib/fetch/pressRelease';
 import TextAndImage from '../TextAndImage';
 import RichBanner from '../RichBanner';
+import RedirectSection from '../Redirect';
 
 // eslint-disable-next-line complexity
 const PageSection = (
@@ -54,6 +55,8 @@ const PageSection = (
       return <StripeLink {...props} />;
     case 'sections.cards':
       return <Cards {...props} />;
+    case 'sections.redirect':
+      return <RedirectSection {...props} />;
     case 'sections.one-trust':
       return <OneTrustSection {...props} />;
     case 'sections.i-frame':
