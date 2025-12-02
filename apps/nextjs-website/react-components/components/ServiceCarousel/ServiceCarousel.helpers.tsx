@@ -1,4 +1,12 @@
-import { Box, Link, Stack, styled, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Link,
+  Stack,
+  styled,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import { ServiceCardProps } from '../../types/ServiceCarousel/ServiceCarousel.types';
 import Image from 'next/image';
 import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
@@ -41,6 +49,9 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
 export const ServiceCard = (card: ServiceCardProps) => {
   const { palette } = useTheme();
 
+  /* --- Il tabIndex è necessario per la navigazione interna alle slide.
+  La definizione di component article permette una corretta identificazione dell'elemento. */
+
   return (
     <Stack
       sx={{
@@ -58,6 +69,8 @@ export const ServiceCard = (card: ServiceCardProps) => {
       // Styles for mobile image
       position='relative'
       overflow='hidden'
+      component={'article'}
+      tabIndex={0}
     >
       <Stack
         gap={1}
@@ -116,8 +129,8 @@ export const SliderArrowControl = ({
 }) => {
   const { palette } = useTheme();
 
-  return (
-    <Box
+  /*
+      <Box
       sx={{ display: 'grid', placeItems: 'center', cursor: 'pointer' }}
       bgcolor={palette.custom.blueIO[500]}
       width={32}
@@ -129,5 +142,30 @@ export const SliderArrowControl = ({
     >
       {direction === 'right' ? <ChevronRight /> : <ChevronLeft />}
     </Box>
+  */
+
+  /* --- Box viene sostituito da IconButton che genera un button vero e proprio.
+  Il solo role button del Box non era sufficiente a meno che on si metta il tabIndex={0}.
+  Tuttavia è più corretta questa strada. */
+
+  return (
+    <IconButton
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        cursor: 'pointer',
+        color: palette.primary.contrastText,
+        bgcolor: palette.custom.blueIO[500],
+        width: 32,
+        height: 32,
+        borderRadius: 16,
+        '&.Mui-focusVisible': { bgcolor: palette.custom.blueIO[500] },
+      }}
+      disableRipple={true}
+      onClick={action}
+    >
+      {direction === 'right' ? <ChevronRight /> : <ChevronLeft />}
+    </IconButton>
   );
 };

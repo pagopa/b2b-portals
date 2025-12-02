@@ -4,12 +4,23 @@ import { Body, Title } from '../common/Common';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useRef } from 'react';
+import { CSSProperties, useRef } from 'react';
 import {
   CarouselDots,
   ServiceCard,
   SliderArrowControl,
 } from './ServiceCarousel.helpers';
+//import { useKeenSlider } from 'keen-slider/react';
+//import 'keen-slider/keen-slider.min.css';
+
+/* 
+  --- Alternative per il corretto funzionamento dello Slick Slider e altra proposta di usare Keen Slider.
+  Nota: Keen Slider deve essere installato:
+    npm install keen-slider
+  produce circa 50 criticità durante l'installazione per via delle versioni npm, react e altro.
+
+  In entrambi i casi, è stato fatto un ritocco a ServiceCard, vedasi anche tale funzione.
+*/
 
 const ServiceCarousel = ({
   title,
@@ -20,6 +31,34 @@ const ServiceCarousel = ({
 }: ServiceCarouselProps) => {
   let sliderRef = useRef<Slider>();
   const { palette } = useTheme();
+
+  /* --- hook per keen slider e definizione parametri */
+  /*
+  const [keenRef] = useKeenSlider<HTMLUListElement>({
+    loop: true, // è identico a "infinite" di Slick ma sembra essere buggato
+    mode: 'snap', // definisce la modalità di aggancio dello slide mentre scrolla. C'è anche il free mode volendo.
+    slides: {
+      // 'auto' si basa sulla larghezza specifica di ogni slide anziché usare numeri per definire quante slide far vedere
+      perView: 'auto',
+    },
+  });
+  */
+
+  /* --- stile CSS per Screen Reader only */
+  const srOnly: CSSProperties = {
+    position: 'absolute',
+    width: '1px',
+    height: '1px',
+    padding: 0,
+    margin: '-1px',
+    overflow: 'hidden',
+    clip: 'rect(0, 0, 0, 0)',
+    whiteSpace: 'nowrap',
+    border: 0,
+  };
+
+  /* --- ref che punta all'elemento usato per stabilire allo screen reader quale slide corrente stiamo visualizzando */
+  const liveRegionRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <Box
@@ -75,7 +114,17 @@ const ServiceCarousel = ({
           />
         </Stack>
 
+        {/* --- allo Slider viene aggiunto il role region e la descrizione del role per lo screen reader.
+        inoltre, beforeChange permetterebbe una ottimizzazione per
+        lo screen reader che farà capire quale slide stiamo visualizzando ora */}
         <Slider
+          role='region'
+          aria-roledescription='carousel'
+          beforeChange={(_current: number, next: number): void => {
+            if (liveRegionRef.current) {
+              liveRegionRef.current.textContent = `Slide ${next + 1} di ${cards.length}`;
+            }
+          }}
           speed={500}
           variableWidth={true}
           infinite={true}
@@ -90,8 +139,35 @@ const ServiceCarousel = ({
             </CarouselDots>
           )}
         >
-          {cards.map(ServiceCard)}
+          {/* --- Parte modificata affinché vengano correttamente gestiti i role */}
+          {cards.map((c, index) => (
+            <div
+              key={`${c.title}_${index}`}
+              role='list'
+              aria-roledescription='slide'
+              aria-label={`Slide ${index + 1} di ${cards.length}`}
+            >
+              <div role='listitem'>{ServiceCard(c)}</div>
+            </div>
+          ))}
         </Slider>
+
+        {/* --- "contenitore" per screen reader sulla slide corrente */}
+        <div ref={liveRegionRef} aria-live='polite' style={srOnly}></div>
+
+        {/* --- Questo che segue è keen slider, l'alternativa allo Slick. */}
+        {/*
+        <Box component={'ul'} className='keen-slider' ref={keenRef} p={0} m={0}>
+          {cards.map((card) => (
+            <li
+              className='keen-slider__slide'
+              style={{ width: 'fit-content !important' }}
+            >
+              {ServiceCard(card)}
+            </li>
+          ))}
+        </Box>
+        */}
       </Stack>
     </Box>
   );
