@@ -60,6 +60,38 @@ const ServiceCarousel = ({
   /* --- ref che punta all'elemento usato per stabilire allo screen reader quale slide corrente stiamo visualizzando */
   const liveRegionRef = useRef<HTMLDivElement | null>(null);
 
+  /* --- la funzione resetAttributes è un'accortezza aggiuntiva. Poiché usiamo il parametro infinite
+  Slick genera slide nascoste che servono a fare un passaggio seamless tra l'ultima e la prima diapositiva e viceversa.
+  Detto ciò si impostano in maniera  tabIndex e aria-hidden, soprattutto per tabIndex
+  che fa sì che si eviti di avere focus su elementi nascosti.
+  Questo va preso come esempio perché il parametro "infinite" è problematico in quanto Slick appunto
+  clona slide ai lati del carosello. Difatti dovremmo anche togliere il focusable ai pulsanti CTA.
+  Bisogna valutare di poter disattivare l'infinite.
+  */
+  const resetAttributes = () => {
+    const slides = document.querySelectorAll('.slick-slide');
+
+    slides.forEach((slide) => {
+      const element = slide as HTMLElement;
+
+      if (element.classList.contains('slick-active')) {
+        element.removeAttribute('aria-hidden');
+        const article = element.querySelector('article');
+        console.log('0', article);
+        if (article) {
+          article.setAttribute('tabindex', '0');
+        }
+      } else {
+        element.setAttribute('aria-hidden', 'true');
+        const article = element.querySelector('article');
+        console.log('-', article);
+        if (article) {
+          article.removeAttribute('tabindex');
+        }
+      }
+    });
+  };
+
   return (
     <Box
       py={{ xs: 3, sm: 3, md: 6 }}
@@ -125,6 +157,8 @@ const ServiceCarousel = ({
               liveRegionRef.current.textContent = `Slide ${next + 1} di ${cards.length}`;
             }
           }}
+          onInit={resetAttributes}
+          afterChange={resetAttributes}
           speed={500}
           variableWidth={true}
           infinite={true}
