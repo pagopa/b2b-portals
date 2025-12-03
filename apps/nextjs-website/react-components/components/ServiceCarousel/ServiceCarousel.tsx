@@ -4,23 +4,13 @@ import { Body, Title } from '../common/Common';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { CSSProperties, useRef } from 'react';
+import { useRef } from 'react';
 import {
   CarouselDots,
   ServiceCard,
   SliderArrowControl,
 } from './ServiceCarousel.helpers';
-//import { useKeenSlider } from 'keen-slider/react';
-//import 'keen-slider/keen-slider.min.css';
-
-/* 
-  --- Alternative per il corretto funzionamento dello Slick Slider e altra proposta di usare Keen Slider.
-  Nota: Keen Slider deve essere installato:
-    npm install keen-slider
-  produce circa 50 criticità durante l'installazione per via delle versioni npm, react e altro.
-
-  In entrambi i casi, è stato fatto un ritocco a ServiceCard, vedasi anche tale funzione.
-*/
+import { visuallyHidden } from '@mui/utils';
 
 const ServiceCarousel = ({
   title,
@@ -32,41 +22,17 @@ const ServiceCarousel = ({
   let sliderRef = useRef<Slider>();
   const { palette } = useTheme();
 
-  /* --- hook per keen slider e definizione parametri */
-  /*
-  const [keenRef] = useKeenSlider<HTMLUListElement>({
-    loop: true, // è identico a "infinite" di Slick ma sembra essere buggato
-    mode: 'snap', // definisce la modalità di aggancio dello slide mentre scrolla. C'è anche il free mode volendo.
-    slides: {
-      // 'auto' si basa sulla larghezza specifica di ogni slide anziché usare numeri per definire quante slide far vedere
-      perView: 'auto',
-    },
-  });
-  */
-
-  /* --- stile CSS per Screen Reader only */
-  const srOnly: CSSProperties = {
-    position: 'absolute',
-    width: '1px',
-    height: '1px',
-    padding: 0,
-    margin: '-1px',
-    overflow: 'hidden',
-    clip: 'rect(0, 0, 0, 0)',
-    whiteSpace: 'nowrap',
-    border: 0,
-  };
-
   /* --- ref che punta all'elemento usato per stabilire allo screen reader quale slide corrente stiamo visualizzando */
   const liveRegionRef = useRef<HTMLDivElement | null>(null);
 
   /* --- la funzione resetAttributes è un'accortezza aggiuntiva. Poiché usiamo il parametro infinite
   Slick genera slide nascoste che servono a fare un passaggio seamless tra l'ultima e la prima diapositiva e viceversa.
-  Detto ciò si impostano in maniera  tabIndex e aria-hidden, soprattutto per tabIndex
+  Detto ciò si impostano in maniera selettiva tabIndex e aria-hidden, soprattutto per tabIndex
   che fa sì che si eviti di avere focus su elementi nascosti.
-  Questo va preso come esempio perché il parametro "infinite" è problematico in quanto Slick appunto
-  clona slide ai lati del carosello. Difatti dovremmo anche togliere il focusable ai pulsanti CTA.
-  Bisogna valutare di poter disattivare l'infinite.
+  Vengono quindi tolte tutte le possibilità avere focus sulle slide "clonate".
+  Lo screen reader legge di conseguenza  tutte le slide "vere", comprese quelle al di fuori del campo visivo.
+  Ai fini dell'accessibilità questo ha senso in quanto l'ipovedente può scorrere tutte le slide senza aver bisogno
+  di fare il "click" sul pulsante avanti / indietro delle slide.
   */
   const resetAttributes = () => {
     const slides = document.querySelectorAll('.slick-slide');
@@ -74,27 +40,24 @@ const ServiceCarousel = ({
     slides.forEach((slide) => {
       const element = slide as HTMLElement;
 
-      if (element.classList.contains('slick-active')) {
+      if (element.classList.contains('slick-cloned')) {
+        element.setAttribute('aria-hidden', 'true');
+        const article = element.querySelector('article');
+        if (article) {
+          article.setAttribute('tabindex', '-1');
+          const link = article.querySelector('a');
+          if (link) {
+            link.setAttribute('tabindex', '-1');
+          }
+        }
+      } else {
         element.removeAttribute('aria-hidden');
         const article = element.querySelector('article');
-        console.log('0', article);
         if (article) {
           article.setAttribute('tabindex', '0');
           const link = article.querySelector('a');
           if (link) {
             link.removeAttribute('tabindex');
-          }
-        }
-      } else {
-        element.setAttribute('aria-hidden', 'true');
-        const article = element.querySelector('article');
-        console.log('-', article);
-        if (article) {
-          article.setAttribute('tabindex', '-1');
-          const link = article.querySelector('a');
-          if (link) {
-            //link.style.pointerEvents = 'none';
-            link.setAttribute('tabindex', '-1');
           }
         }
       }
@@ -177,9 +140,14 @@ const ServiceCarousel = ({
           // @ts-ignore Legacy use of ref
           ref={sliderRef}
           appendDots={(dots) => (
-            <CarouselDots>
-              <ul>{dots}</ul>
-            </CarouselDots>
+            <div aria-label='paginazione carosello' role='navigation'>
+              <CarouselDots>
+                <ul>{dots}</ul>
+              </CarouselDots>
+            </div>
+          )}
+          customPaging={(_: any, index: number) => (
+            <button type='button' aria-label={`Vai alla slide ${index + 1}`} />
           )}
         >
           {/* --- Parte modificata affinché vengano correttamente gestiti i role */}
@@ -196,21 +164,11 @@ const ServiceCarousel = ({
         </Slider>
 
         {/* --- "contenitore" per screen reader sulla slide corrente */}
-        <div ref={liveRegionRef} aria-live='polite' style={srOnly}></div>
-
-        {/* --- Questo che segue è keen slider, l'alternativa allo Slick. */}
-        {/*
-        <Box component={'ul'} className='keen-slider' ref={keenRef} p={0} m={0}>
-          {cards.map((card) => (
-            <li
-              className='keen-slider__slide'
-              style={{ width: 'fit-content !important' }}
-            >
-              {ServiceCard(card)}
-            </li>
-          ))}
-        </Box>
-        */}
+        <Box
+          ref={liveRegionRef}
+          aria-live='polite'
+          style={visuallyHidden}
+        ></Box>
       </Stack>
     </Box>
   );

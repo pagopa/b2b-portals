@@ -38,6 +38,10 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
         '::before': {
           display: 'none',
         },
+        '&:focus': {
+          outline: `3px solid ${theme.palette.primary.main}`,
+          outlineOffset: `'2px'`,
+        },
       },
       '&.slick-active button': {
         backgroundColor: theme.palette.custom.blueIO[500] + ' !important',
