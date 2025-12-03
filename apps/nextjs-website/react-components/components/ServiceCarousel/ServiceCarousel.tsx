@@ -82,7 +82,7 @@ const ServiceCarousel = ({
           article.setAttribute('tabindex', '0');
           const link = article.querySelector('a');
           if (link) {
-            link.removeAttribute('disabled');
+            link.removeAttribute('tabindex');
           }
         }
       } else {
@@ -93,7 +93,8 @@ const ServiceCarousel = ({
           article.setAttribute('tabindex', '-1');
           const link = article.querySelector('a');
           if (link) {
-            link.setAttribute('disabled', 'true');
+            //link.style.pointerEvents = 'none';
+            link.setAttribute('tabindex', '-1');
           }
         }
       }
