@@ -164,6 +164,7 @@ export const SliderArrowControl = ({
       }}
       disableRipple={true}
       onClick={action}
+      aria-label={direction === 'right' ? 'successiva' : 'precedente'}
     >
       {direction === 'right' ? <ChevronRight /> : <ChevronLeft />}
     </IconButton>

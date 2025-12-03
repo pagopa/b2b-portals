@@ -80,13 +80,21 @@ const ServiceCarousel = ({
         console.log('0', article);
         if (article) {
           article.setAttribute('tabindex', '0');
+          const link = article.querySelector('a');
+          if (link) {
+            link.removeAttribute('disabled');
+          }
         }
       } else {
         element.setAttribute('aria-hidden', 'true');
         const article = element.querySelector('article');
         console.log('-', article);
         if (article) {
-          article.removeAttribute('tabindex');
+          article.setAttribute('tabindex', '-1');
+          const link = article.querySelector('a');
+          if (link) {
+            link.setAttribute('disabled', 'true');
+          }
         }
       }
     });
