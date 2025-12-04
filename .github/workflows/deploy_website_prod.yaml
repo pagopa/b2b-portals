@@ -106,18 +106,12 @@ jobs:
             --query "CommonPrefixes[?Prefix != '${ENV}/latest/'].Prefix" \
             --output text)
 
-          echo "FOLDERS (debug):"
-          printf '[%s]\n' "$FOLDERS"
-
           if [[ -z "$FOLDERS" ]]; then
             echo "No past deployments found. Nothing to delete."
             exit 0
           fi
 
           readarray -t SORTED <<< "$(printf '%s\n' $FOLDERS | sort -r)"
-
-          echo "SORTED (debug):"
-          printf '[%s]\n' "$SORTED"
 
           if (( ${#SORTED[@]} <= 5 )); then
             echo "5 or fewer past deployments exist — nothing will be deleted."
