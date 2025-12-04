@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { permanentRedirect, redirect as nextRedirect } from 'next/navigation';
 import {
   getAllPages,
   getPageProps,
@@ -10,7 +9,8 @@ import {
 import PageSection from '@/components/PageSection/PageSection';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import TrackPageView from '@/components/TrackPageView';
-import { RedirectSection } from '@/lib/fetch/types/PageSection';
+import RedirectSectionComponent from '@/components/Redirect';
+import type { RedirectSection as RedirectSectionData } from '@/lib/fetch/types/PageSection';
 
 type PageParams = {
   params: { slug?: string[] };
@@ -180,17 +180,14 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const sections = pageProps.sections;
+
   const redirectSection = sections.find(
-    (section): section is RedirectSection =>
+    (section): section is RedirectSectionData =>
       section.__component === 'sections.redirect',
   );
 
-  if (redirectSection?.redirectURL && redirectSection.redirectURL.trim()) {
-    if (redirectSection.redirectCode === '301') {
-      permanentRedirect(redirectSection.redirectURL);
-    }
-
-    nextRedirect(redirectSection.redirectURL);
+  if (redirectSection?.redirectURL?.trim()) {
+    return <RedirectSectionComponent {...redirectSection} />;
   }
 
   const pressReleasePages = await getPressReleasePages(locale);
