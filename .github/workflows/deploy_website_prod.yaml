@@ -103,7 +103,7 @@ jobs:
             --bucket "$BUCKET" \
             --prefix "$ENV/" \
             --delimiter "/" \
-            --query "CommonPrefixes[?Prefix!='\`${ENV}/latest/\`'].Prefix" \
+            --query "CommonPrefixes[?Prefix!='`${ENV}/latest/`'].Prefix" \
             --output text)
 
           echo "FOLDERS (debug):"
@@ -115,6 +115,9 @@ jobs:
           fi
 
           readarray -t SORTED <<< "$(printf '%s\n' $FOLDERS | sort -r)"
+
+          echo "SORTED (debug):"
+          printf '[%s]\n' "$SORTED"
 
           if (( ${#SORTED[@]} <= 5 )); then
             echo "5 or fewer past deployments exist — nothing will be deleted."
