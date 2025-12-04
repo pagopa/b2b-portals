@@ -103,7 +103,7 @@ jobs:
             --bucket "$BUCKET" \
             --prefix "$ENV/" \
             --delimiter "/" \
-            --query "CommonPrefixes[?Prefix!='`${ENV}/latest/`'].Prefix" \
+            --query "CommonPrefixes[?Prefix != '${ENV}/latest/'].Prefix" \
             --output text)
 
           echo "FOLDERS (debug):"
