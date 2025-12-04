@@ -83,6 +83,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Checkout
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
 
@@ -104,14 +107,14 @@ jobs:
             --prefix "$ENV/" \
             --delimiter "/" \
             --query "CommonPrefixes[?Prefix!='\`${ENV}/latest/\`'].Prefix" \
-            --output text)
+            --output json | jq -r '.[]')
 
           if [[ -z "$FOLDERS" ]]; then
             echo "No past deployments found. Nothing to delete."
             exit 0
           fi
 
-          readarray -t SORTED <<< "$(printf '%s\n' $FOLDERS | sort -r)"
+          readarray -t SORTED <<< "$(printf '%s\n' "$FOLDERS" | sort -r)"
 
           if (( ${#SORTED[@]} <= 5 )); then
             echo "5 or fewer past deployments exist — nothing will be deleted."
