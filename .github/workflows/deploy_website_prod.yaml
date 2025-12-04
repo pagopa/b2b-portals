@@ -113,12 +113,13 @@ jobs:
 
           readarray -t SORTED <<< "$(printf '%s\n' $FOLDERS | sort -r)"
 
-          if (( ${#SORTED[@]} <= 5 )); then
+          # Check 6 latest deployments to account for current one
+          if (( ${#SORTED[@]} <= 6 )); then
             echo "5 or fewer past deployments exist — nothing will be deleted."
             exit 0
           fi
 
-          TO_DELETE=("${SORTED[@]:5}")
+          TO_DELETE=("${SORTED[@]:6}")
 
           echo "Deleting older snapshots:"
           for OLD_PREFIX in "${TO_DELETE[@]}"; do
