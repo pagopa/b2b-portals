@@ -186,8 +186,10 @@ const Page = async ({ params }: PageParams) => {
       section.__component === 'sections.redirect',
   );
 
-  if (redirectSection?.redirectURL?.trim()) {
-    return <RedirectSectionComponent {...redirectSection} />;
+  if (redirectSection) {
+    return (
+      <RedirectSectionComponent redirectURL={redirectSection.redirectURL} />
+    );
   }
 
   const pressReleasePages = await getPressReleasePages(locale);

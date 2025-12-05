@@ -192,10 +192,6 @@ const CardsSectionCodec = t.strict({
 
 const RedirectSectionCodec = t.strict({
   __component: t.literal('sections.redirect'),
-  redirectCode: t.keyof({
-    '301': null,
-    '302': null,
-  }),
   redirectURL: t.string,
 });
 

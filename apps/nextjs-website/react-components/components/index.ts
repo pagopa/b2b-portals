@@ -30,7 +30,6 @@ import MediaResources from './MediaResources/MediaResources';
 import DynamicsForm from './DynamicsForm/DynamicsForm';
 import TextAndImage from './TextAndImage/TextAndImage';
 import RichBanner from './RichBanner/RichBanner';
-import Redirect from './Redirect/Redirect';
 
 export {
   Hero,
@@ -65,5 +64,4 @@ export {
   DynamicsForm,
   TextAndImage,
   RichBanner,
-  Redirect,
 };
