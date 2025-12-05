@@ -1,8 +1,8 @@
 'use client';
 
-import type { RedirectProps } from '@react-components/types/Redirect/Redirect.types';
+import { RedirectSection } from '@/lib/fetch/types/PageSection';
 
-const Redirect = ({ redirectURL }: RedirectProps) => (
+const Redirect = ({ redirectURL }: RedirectSection) => (
   <>
     <meta httpEquiv='refresh' content={`0; url=${redirectURL}`} />
     <p>

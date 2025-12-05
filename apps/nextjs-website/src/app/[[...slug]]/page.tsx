@@ -182,13 +182,12 @@ const Page = async ({ params }: PageParams) => {
   const sections = pageProps.sections;
 
   const redirectSection = sections.find(
-    (section): section is RedirectSectionData =>
-      section.__component === 'sections.redirect',
+    (section) => section.__component === 'sections.redirect',
   );
 
   if (redirectSection) {
     return (
-      <RedirectSectionComponent redirectURL={redirectSection.redirectURL} />
+      <RedirectSectionComponent {...(redirectSection as RedirectSectionData)} />
     );
   }
 
