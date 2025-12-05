@@ -30,6 +30,7 @@ import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleasePage } from '@/lib/fetch/pressRelease';
 import TextAndImage from '../TextAndImage';
 import RichBanner from '../RichBanner';
+import Redirect from '../Redirect';
 
 // eslint-disable-next-line complexity
 const PageSection = (
@@ -94,6 +95,8 @@ const PageSection = (
       return <TextAndImage {...props} />;
     case 'sections.rich-banner':
       return <RichBanner {...props} />;
+    case 'sections.redirect':
+      return <Redirect {...props} />;
     default:
       return null;
   }
