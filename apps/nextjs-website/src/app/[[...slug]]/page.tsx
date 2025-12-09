@@ -187,7 +187,10 @@ const Page = async ({ params }: PageParams) => {
 
   if (redirectSection) {
     return (
-      <RedirectSectionComponent {...(redirectSection as RedirectSectionData)} />
+      <RedirectSectionComponent
+        {...(redirectSection as RedirectSectionData)}
+        locale={locale}
+      />
     );
   }
 
