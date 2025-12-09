@@ -40,6 +40,7 @@ const pressReleasesResponse = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       pressRelease: {
         id: 2,
@@ -71,6 +72,7 @@ const pressReleasesResponse = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       pressRelease: {
         id: 1,
@@ -135,6 +137,7 @@ describe('getNavigation', () => {
             ogTitle: null,
             ogDescription: null,
             structuredData: null,
+            hideFromSearchEngines: null,
           },
           pressRelease: {
             title: 'Articolo completo',
@@ -159,6 +162,7 @@ describe('getNavigation', () => {
             ogTitle: null,
             ogDescription: null,
             structuredData: null,
+            hideFromSearchEngines: null,
           },
           pressRelease: {
             title: 'Articolo minimo',

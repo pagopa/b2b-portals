@@ -106,6 +106,7 @@ export async function generateMetadata({
         canonical: seo.canonicalURL,
       },
     }),
+    ...(seo.hideFromSearchEngines && { robots: 'noindex, nofollow' }),
     openGraph: {
       title: seo.ogTitle ?? seo.metaTitle,
       description: seo.ogDescription ?? seo.metaDescription,
