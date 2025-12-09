@@ -20,6 +20,7 @@ const pressReleases: PressReleases = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       pressRelease: {
         title: 'Articolo completo',
@@ -44,6 +45,7 @@ const pressReleases: PressReleases = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       pressRelease: {
         title: 'Articolo minimo',
