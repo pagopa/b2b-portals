@@ -8,15 +8,15 @@
   "options": {},
   "attributes": {
     "metaTitle": {
-      "required": true,
       "type": "string",
-      "maxLength": 60
+      "maxLength": 60,
+      "required": true
     },
     "metaDescription": {
       "type": "string",
-      "required": true,
+      "minLength": 50,
       "maxLength": 160,
-      "minLength": 50
+      "required": true
     },
     "keywords": {
       "type": "text",
@@ -27,8 +27,8 @@
     },
     "ogTitle": {
       "type": "string",
-      "required": false,
-      "maxLength": 60
+      "maxLength": 60,
+      "required": false
     },
     "ogDescription": {
       "type": "string",
@@ -36,6 +36,10 @@
     },
     "structuredData": {
       "type": "json"
+    },
+    "hideFromSearchEngines": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

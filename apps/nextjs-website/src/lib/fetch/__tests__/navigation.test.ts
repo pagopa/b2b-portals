@@ -34,6 +34,7 @@ const navigationResponse: Navigation = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       sections: [
         {
@@ -106,6 +107,7 @@ describe('getNavigation', () => {
             ogTitle: null,
             ogDescription: null,
             structuredData: null,
+            hideFromSearchEngines: null,
           },
           sections: [
             {
