@@ -1,12 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import type { RedirectSection } from '@/lib/fetch/types/PageSection';
-
-type RedirectProps = {
-  redirectURL: RedirectSection['redirectURL'];
-  redirectDelay: RedirectSection['redirectDelay'];
-};
+import type { RedirectSection as RedirectProps } from '@/lib/fetch/types/PageSection';
 
 const Redirect = ({ redirectURL, redirectDelay }: RedirectProps) => {
   useEffect(() => {
