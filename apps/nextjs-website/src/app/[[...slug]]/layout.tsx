@@ -124,6 +124,8 @@ export default async function Layout({
     availableLocales: localesArray as Locale[],
   });
 
+  const { oneTrustToken } = siteWideSEO;
+
   return (
     <ThemeProvider theme={theme}>
       <html lang={locale}>
@@ -161,6 +163,7 @@ export default async function Layout({
             type='text/javascript'
             id='otprivacy-notice-script'
             strategy='beforeInteractive'
+            data-settings={oneTrustToken ?? ''}
           />
           <Script
             // Set Recaptcha Options in a Script tag to ensure it runs before any ReCaptcha is rendered
