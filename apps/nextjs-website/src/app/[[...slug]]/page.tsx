@@ -9,8 +9,6 @@ import {
 import PageSection from '@/components/PageSection/PageSection';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import TrackPageView from '@/components/TrackPageView';
-import RedirectSectionComponent from '@/components/Redirect';
-import type { RedirectSection as RedirectSectionData } from '@/lib/fetch/types/PageSection';
 
 type PageParams = {
   params: { slug?: string[] };
@@ -180,19 +178,6 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const sections = pageProps.sections;
-
-  const redirectSection = sections.find(
-    (section) => section.__component === 'sections.redirect',
-  );
-
-  if (redirectSection) {
-    return (
-      <RedirectSectionComponent
-        {...(redirectSection as RedirectSectionData)}
-        locale={locale}
-      />
-    );
-  }
 
   const pressReleasePages = await getPressReleasePages(locale);
   return (

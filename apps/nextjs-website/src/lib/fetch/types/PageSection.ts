@@ -193,6 +193,7 @@ const CardsSectionCodec = t.strict({
 const RedirectSectionCodec = t.strict({
   __component: t.literal('sections.redirect'),
   redirectURL: t.string,
+  redirectDelay: t.Int,
 });
 
 const OneTrustSectionPropsCodec = t.strict({

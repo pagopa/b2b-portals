@@ -3,4 +3,4 @@
 "strapi-cms": patch
 ---
 
-add Redirect component and update routing logic for redirects
+new `redirectDelay` field in Strapi with a default of 0, and update the client component to perform only the timed redirect without UI

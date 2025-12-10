@@ -9,6 +9,11 @@
     "redirectURL": {
       "type": "string",
       "required": true
+    },
+    "redirectDelay": {
+      "type": "integer",
+      "required": true,
+      "default": 0
     }
   }
 }
