@@ -179,7 +179,6 @@ const Page = async ({ params }: PageParams) => {
   }
 
   const sections = pageProps.sections;
-
   const pressReleasePages = await getPressReleasePages(locale);
   return (
     <main>
