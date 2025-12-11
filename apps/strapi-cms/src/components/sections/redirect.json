@@ -14,7 +14,7 @@
       "type": "integer",
       "required": true,
       "default": 0,
-      "description": "Espresso in millisecondi"
+      "min": 0
     }
   }
 }
