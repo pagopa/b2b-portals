@@ -50,11 +50,8 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const ServiceCard = (card: ServiceCardProps) => {
+export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
   const { palette } = useTheme();
-
-  /* --- Il tabIndex è necessario per la navigazione interna alle slide.
-  La definizione di component article permette una corretta identificazione dell'elemento. */
 
   return (
     <Stack
@@ -74,7 +71,7 @@ export const ServiceCard = (card: ServiceCardProps) => {
       position='relative'
       overflow='hidden'
       component={'article'}
-      tabIndex={0}
+      tabIndex={-1}
     >
       <Stack
         gap={1}
@@ -87,29 +84,31 @@ export const ServiceCard = (card: ServiceCardProps) => {
         {card.description && (
           <Typography variant='body2'>{card.description}</Typography>
         )}
-        <Typography
-          mt='auto'
-          color={palette.custom.blueIO[500]}
-          fontWeight={700}
-        >
-          <Link
-            href={card.link.href}
-            display='flex'
-            flexDirection='row'
-            alignItems='center'
-            gap={1}
-            width='fit-content'
-            color='inherit'
-            underline='hover'
-            fontSize={16}
+        {!noLink && (
+          <Typography
+            mt='auto'
+            color={palette.custom.blueIO[500]}
+            fontWeight={700}
           >
-            {card.link.label}
-            <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
-          </Link>
-        </Typography>
+            <Link
+              href={card.link.href}
+              display='flex'
+              flexDirection='row'
+              alignItems='center'
+              gap={1}
+              width='fit-content'
+              color='inherit'
+              underline='hover'
+              fontSize={16}
+            >
+              {card.link.label}
+              <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
+            </Link>
+          </Typography>
+        )}
       </Stack>
 
-      {card.imageURL && (
+      {card.image && (
         <Box
           height={{ xs: 80, sm: 80, md: 124 }}
           width={{ xs: 80, sm: 80, md: 124 }}
@@ -117,7 +116,11 @@ export const ServiceCard = (card: ServiceCardProps) => {
           bottom={14}
           right={-12}
         >
-          <Image src={card.imageURL} alt='' fill={true} />
+          <Image
+            src={card.image.url}
+            alt={card.image.alternativeText ?? ''}
+            fill={true}
+          />
         </Box>
       )}
     </Stack>
@@ -132,25 +135,6 @@ export const SliderArrowControl = ({
   action: (() => void) | undefined;
 }) => {
   const { palette } = useTheme();
-
-  /*
-      <Box
-      sx={{ display: 'grid', placeItems: 'center', cursor: 'pointer' }}
-      bgcolor={palette.custom.blueIO[500]}
-      width={32}
-      height={32}
-      borderRadius={16}
-      color={palette.primary.contrastText}
-      role={'button'}
-      onClick={action}
-    >
-      {direction === 'right' ? <ChevronRight /> : <ChevronLeft />}
-    </Box>
-  */
-
-  /* --- Box viene sostituito da IconButton che genera un button vero e proprio.
-  Il solo role button del Box non era sufficiente a meno che on si metta il tabIndex={0}.
-  Tuttavia è più corretta questa strada. */
 
   return (
     <IconButton
@@ -168,7 +152,7 @@ export const SliderArrowControl = ({
       }}
       disableRipple={true}
       onClick={action}
-      aria-label={direction === 'right' ? 'successiva' : 'precedente'}
+      aria-label={direction === 'right' ? 'Card successiva' : 'Card precedente'}
     >
       {direction === 'right' ? <ChevronRight /> : <ChevronLeft />}
     </IconButton>

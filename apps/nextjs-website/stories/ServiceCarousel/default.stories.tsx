@@ -30,8 +30,9 @@ ServiceCarouselFull.args = {
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
-      imageURL:
-        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      image: {
+        url: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      },
     },
     {
       title: 'Funzionalità',
@@ -41,8 +42,9 @@ ServiceCarouselFull.args = {
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
-      imageURL:
-        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      image: {
+        url: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      },
     },
     {
       title: 'Funzionalità',
@@ -52,8 +54,9 @@ ServiceCarouselFull.args = {
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
-      imageURL:
-        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      image: {
+        url: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      },
     },
     {
       title: 'Funzionalità',
@@ -63,8 +66,9 @@ ServiceCarouselFull.args = {
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
-      imageURL:
-        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      image: {
+        url: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      },
     },
     {
       title: 'Funzionalità',
@@ -74,8 +78,9 @@ ServiceCarouselFull.args = {
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
-      imageURL:
-        'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      image: {
+        url: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+      },
     },
   ],
 };
