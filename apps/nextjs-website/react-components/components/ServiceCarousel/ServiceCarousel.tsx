@@ -21,7 +21,7 @@ const ServiceCarousel = ({
 }: ServiceCarouselProps) => {
   let sliderRef = useRef<Slider>();
   const { palette } = useTheme();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentCard, setCurrentCard] = useState(cards[0]);
   const liveRegionRef = useRef<HTMLDivElement>();
 
   const resetAttributes = () => {
@@ -105,7 +105,7 @@ const ServiceCarousel = ({
           aria-roledescription='carousel'
           beforeChange={(_current: number, next: number): void => {
             if (liveRegionRef.current) {
-              setCurrentSlide(next);
+              setCurrentCard(cards[next]);
             }
           }}
           onInit={resetAttributes}
@@ -142,7 +142,7 @@ const ServiceCarousel = ({
         </Slider>
 
         <Box ref={liveRegionRef} aria-live='polite' style={visuallyHidden}>
-          {cards[currentSlide] && ServiceCard(cards[currentSlide], true)}
+          {currentCard && ServiceCard(currentCard, true)}
         </Box>
       </Stack>
     </Box>
