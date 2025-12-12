@@ -25,6 +25,7 @@ import PressRelease from '../PressRelease';
 import PressReleaseList from '../PressReleaseList';
 import MediaResources from '../MediaResources';
 import DynamicsForm from '../DynamicsForm';
+import Redirect from '../Redirect';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleasePage } from '@/lib/fetch/pressRelease';
@@ -90,6 +91,8 @@ const PageSection = (
       return <MediaResources {...props} />;
     case 'sections.dynamics-form':
       return <DynamicsForm {...props} />;
+    case 'sections.redirect':
+      return <Redirect {...props} />;
     case 'sections.text-and-image':
       return <TextAndImage {...props} />;
     case 'sections.rich-banner':
