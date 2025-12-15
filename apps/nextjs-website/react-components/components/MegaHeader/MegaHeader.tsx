@@ -40,7 +40,7 @@ const MegaHeader = ({
   menuItems,
   drawer,
   socialLinks,
-  mobileMenuIconAriaLabel
+  mobileMenuIconAriaLabel,
 }: MegaHeaderProps) => {
   const pathname = usePathname();
   const { palette, ...theme } = useTheme();
@@ -49,8 +49,6 @@ const MegaHeader = ({
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
-
 
   // Sublink is active if it points to the current page or one of its parents
   // .slice(1) is needed because (assuming a relative url built like /example-slug or /parent/child)
@@ -73,10 +71,7 @@ const MegaHeader = ({
     menuItems.find(isActiveLink)?.ctaButton ??
     (isMobile && mobileCtaButton ? mobileCtaButton : ctaButton);
 
-  const handleClick = (
-    event: MouseEvent<HTMLElement>,
-    menu: string,
-  ) => {
+  const handleClick = (event: MouseEvent<HTMLElement>, menu: string) => {
     event.preventDefault();
     setDropdownOpen((prev) => (prev === menu ? null : menu));
   };
@@ -158,22 +153,30 @@ const MegaHeader = ({
           </Logo>
           {!isMobile && (
             <>
-              <Nav>
-                {menuItems.map((menuItem: MegaMenuItem, index) => (
-                  <Typography component='li' key={index}>
-                    <Button
-                      type='button'
-                      className={`menuPrimaryItem ${dropdownOpen === menuItem.primary ? 'open' : ''
+              <Box
+                component='nav'
+                sx={{ mr: 'auto' }}
+                role='navigation'
+                aria-label='Menu principale'
+              >
+                <Nav>
+                  {menuItems.map((menuItem: MegaMenuItem, index) => (
+                    <Typography component='li' key={index}>
+                      <Button
+                        type='button'
+                        className={`menuPrimaryItem ${
+                          dropdownOpen === menuItem.primary ? 'open' : ''
                         } ${isActiveLink(menuItem) ? 'active' : ''}`}
-                      aria-expanded={dropdownOpen === menuItem.primary}
-                      aria-controls={`submenu-${index}`}
-                      onClick={(e) => handleClick(e, menuItem.primary)}
-                    >
-                      {menuItem.primary}
-                    </Button>
-                  </Typography>
-                ))}
-              </Nav>
+                        aria-expanded={dropdownOpen === menuItem.primary}
+                        aria-controls={`submenu-${index}`}
+                        onClick={(e) => handleClick(e, menuItem.primary)}
+                      >
+                        {menuItem.primary} asd
+                      </Button>
+                    </Typography>
+                  ))}
+                </Nav>
+              </Box>
               {socialLinks && socialLinks.length > 0 && (
                 <Stack
                   direction='row'
@@ -274,9 +277,13 @@ const MegaHeader = ({
           )}
           <IconButton
             className='hamburger'
-            aria-label={mobileMenuOpen ? mobileMenuIconAriaLabel.close : mobileMenuIconAriaLabel.open}
+            aria-label={
+              mobileMenuOpen
+                ? mobileMenuIconAriaLabel.close
+                : mobileMenuIconAriaLabel.open
+            }
             aria-expanded={mobileMenuOpen}
-            aria-controls="mobileMenu"
+            aria-controls='mobileMenu'
             onClick={handleMobileMenuToggle}
             sx={{
               display: { lg: 'none' },
@@ -357,6 +364,8 @@ const MegaHeader = ({
         <MobileMenu
           role='navigation'
           id='mobileMenu'
+          component='nav'
+          aria-label='Menu principale'
           className={mobileMenuOpen ? 'open' : ''}
         >
           <Box
@@ -376,8 +385,11 @@ const MegaHeader = ({
                   <Stack
                     component={Button}
                     sx={{ width: '100% !important' }}
-                    className={`mobileMenuPrimaryItem ${dropdownOpen === `mobile${menuItem.primary}` ? 'active' : ''
-                      }`}
+                    className={`mobileMenuPrimaryItem ${
+                      dropdownOpen === `mobile${menuItem.primary}`
+                        ? 'active'
+                        : ''
+                    }`}
                     onClick={(e) =>
                       handleClick(e as any, `mobile${menuItem.primary}`)
                     }
@@ -404,8 +416,9 @@ const MegaHeader = ({
                   </Stack>
                   <Stack
                     id={`mobile-submenu-${index}`}
-                    className={`dropdownMobile ${dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''
-                      }`}
+                    className={`dropdownMobile ${
+                      dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''
+                    }`}
                   >
                     {menuItem.secondary.map((submenu, subIndex) => (
                       <div key={subIndex}>
@@ -417,10 +430,13 @@ const MegaHeader = ({
                             key={itemIndex}
                             href={item.href}
                             target={
-                              item.href.startsWith('https://') ? '_blank' : '_self'
+                              item.href.startsWith('https://')
+                                ? '_blank'
+                                : '_self'
                             }
-                            className={`mobileMenuSecondaryItem ${isActiveSubLink(item.href) ? 'active' : ''
-                              }`}
+                            className={`mobileMenuSecondaryItem ${
+                              isActiveSubLink(item.href) ? 'active' : ''
+                            }`}
                             onClick={() => setMobileMenuOpen(false)}
                             trackEvent={trackSublinkClickEvent}
                             trackingProperties={{
@@ -448,9 +464,7 @@ const MegaHeader = ({
                 </React.Fragment>
               ))}
               {activeCta && (
-                <div
-                  style={{ width: 'max-content' }}
-                >
+                <div style={{ width: 'max-content' }}>
                   <CtaButtons
                     ctaButtons={[
                       {
@@ -485,9 +499,7 @@ const MegaHeader = ({
                 </div>
               )}
               {!activeCta && drawer && (
-                <div
-                  style={{ width: 'max-content' }}
-                >
+                <div style={{ width: 'max-content' }}>
                   <CtaButtons
                     ctaButtons={[
                       {

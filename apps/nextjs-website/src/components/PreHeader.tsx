@@ -27,12 +27,18 @@ const makeCtas = (
 const makePreHeaderProps = ({
   leftCtas,
   rightCtas,
+  include,
   themeVariant,
   locale,
   defaultLocale,
+  pressReleasesParentSlug,
 }: PreHeaderAttributes & SiteWidePageData): PreHeaderProps => ({
   leftCtas: makeCtas(leftCtas, { themeVariant, locale, defaultLocale }),
   rightCtas: makeCtas(rightCtas, { themeVariant, locale, defaultLocale }),
+  ...(include.length > 0 && {
+    includeSlugs: include.map((obj) => obj.slug),
+  }),
+  ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
 });
 
 const PreHeader = (preHeaderData: PreHeaderAttributes & SiteWidePageData) => (

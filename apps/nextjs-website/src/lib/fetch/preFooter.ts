@@ -7,10 +7,7 @@ import { StrapiImageSchema } from './types/StrapiImage';
 import { CTAButtonSimpleCodec } from './types/CTAButton';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
-
-const PageRelationCodec = t.strict({
-  slug: t.string,
-});
+import PageRelationCodec from './types/PageRelation';
 
 const PreFooterAttributesCodec = t.strict({
   title: t.string,
