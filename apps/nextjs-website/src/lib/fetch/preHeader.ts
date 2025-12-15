@@ -5,6 +5,7 @@ import { MUIButtonIconCodec } from './types/icons/ButtonIcon';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
+import PageRelationCodec from './types/PageRelation';
 
 const PreHeaderButtonCodec = t.strict({
   text: t.string,
@@ -16,6 +17,7 @@ const PreHeaderButtonCodec = t.strict({
 const PreHeaderAttributesCodec = t.strict({
   leftCtas: t.array(PreHeaderButtonCodec),
   rightCtas: t.array(PreHeaderButtonCodec),
+  include: t.array(PageRelationCodec),
 });
 
 export const PreHeaderCodec = t.strict({
@@ -38,6 +40,7 @@ export const getPreHeader = ({
       }/api/pre-header/?locale=${locale}
 &populate[0]=leftCtas
 &populate[1]=rightCtas
+&populate[2]=include
       `,
       {
         method: 'GET',
