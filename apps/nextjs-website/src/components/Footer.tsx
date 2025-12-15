@@ -7,6 +7,14 @@ import { FooterData } from '@/lib/fetch/footer';
 import { LocalizeURL } from '@/lib/linkLocalization';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 
+const titleSVG = {
+  it: "Finanziato dall'Unione Europea · NextGenerationEU",
+  en: 'Funded by the European Union · NextGenerationEU',
+  de: 'Gefördert von der Europäischen Union · NextGenerationEU',
+  fr: "Financé par l'Union européenne · NextGenerationEU",
+  sl: 'Financirano s strani Evropske unije · NextGenerationEU',
+};
+
 const makeFooterProps = ({
   legalInfo,
   links_aboutUs,
@@ -92,6 +100,7 @@ const makeFooterProps = ({
       defaultLocale,
     }),
   },
+  titleSVG: titleSVG[activeLocale],
   ...rest,
 });
 
