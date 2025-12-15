@@ -5,6 +5,7 @@ export interface FooterProps extends LangSwitchProps {
   legalInfo: string | Generic | Generic[];
   links: PreLoginFooterLinksType;
   showFundedByNextGenerationEULogo?: boolean;
+  titleSVG: string;
 }
 
 interface FooterLinksType {

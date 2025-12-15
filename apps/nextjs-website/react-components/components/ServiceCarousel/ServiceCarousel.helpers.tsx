@@ -1,4 +1,12 @@
-import { Box, Link, Stack, styled, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Link,
+  Stack,
+  styled,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import { ServiceCardProps } from '../../types/ServiceCarousel/ServiceCarousel.types';
 import Image from 'next/image';
 import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
@@ -8,7 +16,6 @@ import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
 // to overwrite react-slick's absolute positioning
 // @ts-ignore
 export const CarouselDots = styled(Box)(({ theme }) => ({
-  position: 'static !important',
   ul: {
     display: 'flex',
     flexDirection: 'row',
@@ -30,6 +37,10 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
         '::before': {
           display: 'none',
         },
+        '&:focus': {
+          outline: `3px solid ${theme.palette.primary.main}`,
+          outlineOffset: `'2px'`,
+        },
       },
       '&.slick-active button': {
         backgroundColor: theme.palette.custom.blueIO[500] + ' !important',
@@ -38,7 +49,7 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const ServiceCard = (card: ServiceCardProps) => {
+export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
   const { palette } = useTheme();
 
   return (
@@ -58,6 +69,8 @@ export const ServiceCard = (card: ServiceCardProps) => {
       // Styles for mobile image
       position='relative'
       overflow='hidden'
+      component={'article'}
+      tabIndex={-1}
     >
       <Stack
         gap={1}
@@ -70,29 +83,31 @@ export const ServiceCard = (card: ServiceCardProps) => {
         {card.description && (
           <Typography variant='body2'>{card.description}</Typography>
         )}
-        <Typography
-          mt='auto'
-          color={palette.custom.blueIO[500]}
-          fontWeight={700}
-        >
-          <Link
-            href={card.link.href}
-            display='flex'
-            flexDirection='row'
-            alignItems='center'
-            gap={1}
-            width='fit-content'
-            color='inherit'
-            underline='hover'
-            fontSize={16}
+        {!noLink && (
+          <Typography
+            mt='auto'
+            color={palette.custom.blueIO[500]}
+            fontWeight={700}
           >
-            {card.link.label}
-            <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
-          </Link>
-        </Typography>
+            <Link
+              href={card.link.href}
+              display='flex'
+              flexDirection='row'
+              alignItems='center'
+              gap={1}
+              width='fit-content'
+              color='inherit'
+              underline='hover'
+              fontSize={16}
+            >
+              {card.link.label}
+              <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
+            </Link>
+          </Typography>
+        )}
       </Stack>
 
-      {card.imageURL && (
+      {card.image && (
         <Box
           height={{ xs: 80, sm: 80, md: 124 }}
           width={{ xs: 80, sm: 80, md: 124 }}
@@ -100,7 +115,11 @@ export const ServiceCard = (card: ServiceCardProps) => {
           bottom={14}
           right={-12}
         >
-          <Image src={card.imageURL} alt='' fill={true} />
+          <Image
+            src={card.image.url}
+            alt={card.image.alternativeText ?? ''}
+            fill={true}
+          />
         </Box>
       )}
     </Stack>
@@ -117,17 +136,24 @@ export const SliderArrowControl = ({
   const { palette } = useTheme();
 
   return (
-    <Box
-      sx={{ display: 'grid', placeItems: 'center', cursor: 'pointer' }}
-      bgcolor={palette.custom.blueIO[500]}
-      width={32}
-      height={32}
-      borderRadius={16}
-      color={palette.primary.contrastText}
-      role={'button'}
+    <IconButton
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        cursor: 'pointer',
+        color: palette.primary.contrastText,
+        bgcolor: palette.custom.blueIO[500],
+        width: 32,
+        height: 32,
+        borderRadius: 16,
+        '&.Mui-focusVisible': { bgcolor: palette.custom.blueIO[500] },
+      }}
+      disableRipple={true}
       onClick={action}
+      aria-label={direction === 'right' ? 'Card successiva' : 'Card precedente'}
     >
       {direction === 'right' ? <ChevronRight /> : <ChevronLeft />}
-    </Box>
+    </IconButton>
   );
 };
