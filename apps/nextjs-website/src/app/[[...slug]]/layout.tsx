@@ -91,6 +91,7 @@ export default async function Layout({
     analytics,
     themeVariant,
     pressReleasesParentSlug,
+    oneTrustToken,
   } = siteWideSEO;
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
@@ -123,8 +124,6 @@ export default async function Layout({
     defaultLocale,
     availableLocales: localesArray as Locale[],
   });
-
-  const { oneTrustToken } = siteWideSEO;
 
   return (
     <ThemeProvider theme={theme}>
@@ -163,7 +162,7 @@ export default async function Layout({
             type='text/javascript'
             id='otprivacy-notice-script'
             strategy='beforeInteractive'
-            data-settings={oneTrustToken ?? ''}
+            {...(oneTrustToken && { 'data-settings': oneTrustToken })}
           />
           <Script
             // Set Recaptcha Options in a Script tag to ensure it runs before any ReCaptcha is rendered
