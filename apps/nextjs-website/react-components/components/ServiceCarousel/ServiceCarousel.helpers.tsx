@@ -16,7 +16,6 @@ import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
 // to overwrite react-slick's absolute positioning
 // @ts-ignore
 export const CarouselDots = styled(Box)(({ theme }) => ({
-  position: 'static !important',
   ul: {
     display: 'flex',
     flexDirection: 'row',

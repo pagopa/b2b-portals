@@ -119,11 +119,15 @@ const ServiceCarousel = ({
           // @ts-ignore Legacy use of ref
           ref={sliderRef}
           appendDots={(dots) => (
-            <div aria-label='paginazione carosello' role='navigation'>
+            <Box
+              aria-label='paginazione carosello'
+              role='navigation'
+              sx={{ position: 'static !important' }}
+            >
               <CarouselDots>
                 <ul>{dots}</ul>
               </CarouselDots>
-            </div>
+            </Box>
           )}
           customPaging={(_: any, index: number) => (
             <button type='button' aria-label={`Vai alla slide ${index + 1}`} />
