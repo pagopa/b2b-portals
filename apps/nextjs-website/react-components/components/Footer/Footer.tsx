@@ -30,7 +30,6 @@ const Footer = ({
         gap: 4,
       }}
     >
-      
       <Grid container spacing={4}>
         <Grid item xs={12} sm={3}>
           <FooterColumn data={aboutUs} companyLink={companyLink} />
@@ -61,7 +60,7 @@ const Footer = ({
           )}
         </Grid>
       </Grid>
-    </Container>\
+    </Container>
     <LegalInfo data={legalInfo} />
   </Box>
 );
