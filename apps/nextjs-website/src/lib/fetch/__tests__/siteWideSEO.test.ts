@@ -60,7 +60,6 @@ const siteWideSEOResponse: SiteWideSEO = {
     analytics: null,
     pressReleasesParentSlug: null,
     siteName: null,
-    oneTrustToken: null,
   },
 };
 

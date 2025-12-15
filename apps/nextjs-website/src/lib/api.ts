@@ -26,6 +26,7 @@ import {
   previewPressReleaseToPreviewPageData,
 } from './pressRelease';
 import { makeAllAssetURLsRelative } from './fetch/parseAssetUrls';
+import { fetchOneTrustToken } from './fetch/oneTrustToken';
 
 // create AppEnv given process env
 const appEnv = pipe(
@@ -271,6 +272,11 @@ export const getPageSwitchPageDataFromID = async (
   });
 
   return data;
+};
+
+export const getOneTrustToken = async (): Promise<string | null> => {
+  const { data } = await fetchOneTrustToken(appEnv);
+  return data.oneTrustToken;
 };
 
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';

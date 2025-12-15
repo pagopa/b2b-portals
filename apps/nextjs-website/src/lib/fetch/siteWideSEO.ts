@@ -54,7 +54,6 @@ const SiteWideSEOCodec = t.strict({
     defaultLocale: LocaleCodec,
     pressReleasesParentSlug: t.union([t.string, t.null]),
     siteName: t.union([SiteNameCodec, t.null]),
-    oneTrustToken: t.union([t.string, t.null]),
   }),
 });
 
