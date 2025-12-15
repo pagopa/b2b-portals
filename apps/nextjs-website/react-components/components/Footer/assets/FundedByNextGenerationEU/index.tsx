@@ -44,7 +44,7 @@ export const FundedByNextGenerationEU = ({
     viewBox='0 0 1174 270'
     focusable='false'
     role='img'
-    aria-hidden={undefined}
+    aria-hidden={false}
     aria-label= {title}
     sx={{
       width: size,

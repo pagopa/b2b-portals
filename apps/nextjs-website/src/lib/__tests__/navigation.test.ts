@@ -15,6 +15,7 @@ const navigation: Navigation = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       sections: [
         {
@@ -40,6 +41,7 @@ const navigation: Navigation = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       sections: [
         {

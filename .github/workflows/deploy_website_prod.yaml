@@ -77,6 +77,58 @@ jobs:
             --name io-p-weu-ioweb-portal-cdn-endpoint \
             --content-paths '/*'
   
+  delete-old-deployments:
+    needs: promote-to-prod
+    name: Delete Older Deployments - (${{ inputs.environment }})
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+
+      - name: Configure AWS credentials
+        uses: ./.github/actions/configure-aws-credentials
+        with:
+          aws_region: eu-south-1
+          role_to_assume: ${{ secrets.IAM_ROLE_DEPLOY_WEBSITE }}
+      
+      - name: Delete old deployments (keep latest 5)
+        shell: bash
+        run: |
+          BUCKET="${{ vars.S3_PROD_BUCKET_NAME }}"
+          ENV="${{ inputs.environment }}"
+
+          # List all prefixes except 'latest/'
+          FOLDERS=$(aws s3api list-objects-v2 \
+            --bucket "$BUCKET" \
+            --prefix "$ENV/" \
+            --delimiter "/" \
+            --query "CommonPrefixes[?Prefix != '${ENV}/latest/'].Prefix" \
+            --output text)
+
+          if [[ -z "$FOLDERS" ]]; then
+            echo "No past deployments found. Nothing to delete."
+            exit 0
+          fi
+
+          readarray -t SORTED <<< "$(printf '%s\n' $FOLDERS | sort -r)"
+
+          # Check 6 latest deployments to account for current one
+          if (( ${#SORTED[@]} <= 6 )); then
+            echo "5 or fewer past deployments exist — nothing will be deleted."
+            exit 0
+          fi
+
+          TO_DELETE=("${SORTED[@]:6}")
+
+          echo "Deleting older snapshots:"
+          for OLD_PREFIX in "${TO_DELETE[@]}"; do
+            echo "Deleting s3://$BUCKET/$OLD_PREFIX"
+            aws s3 rm "s3://$BUCKET/$OLD_PREFIX" --recursive
+          done
+
+          echo "Cleanup complete."
+
   notify:
     needs: promote-to-prod
     name: Notify of Workflow End - (${{ inputs.environment }})
