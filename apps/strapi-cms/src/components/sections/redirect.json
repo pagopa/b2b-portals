@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_sections_redirects",
+  "info": {
+    "displayName": "Redirect",
+    "description": "Sezione che effettua un redirect automatico"
+  },
+  "options": {},
+  "attributes": {
+    "redirectURL": {
+      "type": "string",
+      "required": true
+    },
+    "redirectDelay": {
+      "type": "integer",
+      "required": true,
+      "default": 0,
+      "min": 0
+    }
+  }
+}

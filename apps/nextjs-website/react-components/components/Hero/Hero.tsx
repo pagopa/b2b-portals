@@ -45,6 +45,7 @@ const Hero = (props: HeroProps) => {
     >
       {background && (
         <img
+          alt=''
           src={background.src}
           srcSet={background.srcSet}
           width={0}
