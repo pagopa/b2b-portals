@@ -1,21 +1,20 @@
 import { CtaButtonProps } from '../common/Common.types';
 
-export type PreHeaderProps =
+type PreHeaderButtons =
   | {
       rightCtas: CtaButtonProps[];
       leftCtas: CtaButtonProps[];
-      readonly includeSlugs?: string[];
-      readonly pressReleasesParentSlug?: string;
     }
   | {
       rightCtas: CtaButtonProps[];
       leftCtas?: CtaButtonProps[];
-      readonly includeSlugs?: string[];
-      readonly pressReleasesParentSlug?: string;
     }
   | {
       rightCtas?: CtaButtonProps[];
       leftCtas: CtaButtonProps[];
-      readonly includeSlugs?: string[];
-      readonly pressReleasesParentSlug?: string;
     };
+
+export type PreHeaderProps = PreHeaderButtons & {
+  readonly includeSlugs?: string[];
+  readonly pressReleasesParentSlug?: string;
+};
