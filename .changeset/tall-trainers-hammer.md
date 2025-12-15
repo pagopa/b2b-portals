@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-Herto: add attribute alt
+Hero: add empty alt attribute
