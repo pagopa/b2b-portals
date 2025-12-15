@@ -135,6 +135,7 @@ export default async function Layout({
               themeVariant={themeVariant}
               locale={locale}
               defaultLocale={defaultLocale}
+              {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
             />
           )}
           <Header

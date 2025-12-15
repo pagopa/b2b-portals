@@ -18,27 +18,32 @@
   "attributes": {
     "leftCtas": {
       "type": "component",
-      "repeatable": true,
-      "component": "components.pre-header-button",
-      "required": true,
-      "min": 1,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "component": "components.pre-header-button",
+      "repeatable": true,
+      "required": true,
+      "min": 1
     },
     "rightCtas": {
       "type": "component",
-      "repeatable": true,
-      "component": "components.pre-header-button",
-      "required": true,
-      "min": 1,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "component": "components.pre-header-button",
+      "repeatable": true,
+      "required": true,
+      "min": 1
+    },
+    "include": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::page.page"
     }
   }
 }
