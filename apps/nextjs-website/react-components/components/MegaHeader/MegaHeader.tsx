@@ -171,7 +171,7 @@ const MegaHeader = ({
                         aria-controls={`submenu-${index}`}
                         onClick={(e) => handleClick(e, menuItem.primary)}
                       >
-                        {menuItem.primary} asd
+                        {menuItem.primary}
                       </Button>
                     </Typography>
                   ))}
