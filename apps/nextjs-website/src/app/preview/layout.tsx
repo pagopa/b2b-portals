@@ -2,7 +2,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { ReactNode } from 'react';
 import Script from 'next/script';
 import { theme } from '../theme';
-import { getSiteWideSEO, isPreviewMode } from '@/lib/api';
+import { getSiteWideSEO, isPreviewMode, isDryBuild } from '@/lib/api';
 
 type PreviewLayoutProps = {
   children: ReactNode;
@@ -10,9 +10,11 @@ type PreviewLayoutProps = {
 
 // This layout is needed mainly to pass theme to the preview page
 const PreviewLayout = async ({ children }: PreviewLayoutProps) => {
-  const oneTrustToken = isPreviewMode()
-    ? null
-    : (await getSiteWideSEO()).oneTrustToken;
+  const fetchOneTrustToken = isPreviewMode() && !isDryBuild();
+
+  const oneTrustToken = fetchOneTrustToken
+    ? (await getSiteWideSEO()).oneTrustToken
+    : null;
 
   return (
     <ThemeProvider theme={theme}>
