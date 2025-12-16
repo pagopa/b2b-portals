@@ -11,8 +11,8 @@ type PreviewLayoutProps = {
 // This layout is needed mainly to pass theme to the preview page
 const PreviewLayout = async ({ children }: PreviewLayoutProps) => {
   const oneTrustToken = isPreviewMode()
-    ? (await getSiteWideSEO()).oneTrustToken
-    : null;
+    ? null
+    : (await getSiteWideSEO()).oneTrustToken;
 
   return (
     <ThemeProvider theme={theme}>
