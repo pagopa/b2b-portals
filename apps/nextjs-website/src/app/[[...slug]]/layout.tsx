@@ -12,7 +12,6 @@ import {
   isPreviewMode,
   getPreFooterProps,
   getAllPages,
-  getOneTrustToken,
 } from '@/lib/api';
 import PreFooter from '@/components/PreFooter';
 import { Locale } from '@/lib/fetch/siteWideSEO';
@@ -92,6 +91,7 @@ export default async function Layout({
     analytics,
     themeVariant,
     pressReleasesParentSlug,
+    oneTrustToken,
   } = siteWideSEO;
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
@@ -124,8 +124,6 @@ export default async function Layout({
     defaultLocale,
     availableLocales: localesArray as Locale[],
   });
-
-  const oneTrustToken = await getOneTrustToken();
 
   return (
     <ThemeProvider theme={theme}>
