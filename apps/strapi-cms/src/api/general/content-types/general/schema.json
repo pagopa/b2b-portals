@@ -38,45 +38,48 @@
     },
     "themeVariant": {
       "type": "enumeration",
+      "required": true,
+      "default": "SEND",
       "enum": [
         "IO",
         "SEND"
-      ],
-      "default": "SEND",
-      "required": true
+      ]
     },
     "locales": {
       "type": "component",
-      "repeatable": false,
       "component": "shared.locales",
+      "repeatable": false,
       "required": true
     },
     "defaultLocale": {
       "type": "enumeration",
+      "required": true,
+      "default": "it",
       "enum": [
         "it",
         "en",
         "de",
         "fr",
         "sl"
-      ],
-      "required": true,
-      "default": "it"
+      ]
     },
     "analytics": {
       "type": "component",
-      "repeatable": false,
-      "component": "shared.analytics"
+      "component": "shared.analytics",
+      "repeatable": false
     },
     "pressReleasesParentSlug": {
       "type": "string",
-      "regex": "^[a-z]+[a-z\\-]*$",
-      "default": "press-releases"
+      "default": "press-releases",
+      "regex": "^[a-z]+[a-z\\-]*$"
     },
     "siteName": {
       "type": "component",
-      "repeatable": false,
-      "component": "shared.site-name"
+      "component": "shared.site-name",
+      "repeatable": false
+    },
+    "oneTrustToken": {
+      "type": "text"
     }
   }
 }

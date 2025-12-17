@@ -20,6 +20,7 @@ const ConfigCodec = t.type({
   ]),
   PREVIEW_MODE: t.union([t.string, t.undefined]),
   PREVIEW_TOKEN: t.union([t.string, t.undefined]),
+  DRY_BUILD: t.union([t.string, t.undefined]),
 });
 
 export type Config = t.TypeOf<typeof ConfigCodec>;
