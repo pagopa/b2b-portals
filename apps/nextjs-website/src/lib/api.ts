@@ -283,3 +283,5 @@ export const getPageSwitchPageDataFromID = async (
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
+
+export const isDryBuild = () => appEnv.config.DRY_BUILD === 'true';
