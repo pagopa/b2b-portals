@@ -88,6 +88,7 @@ export const StorybookFooter = ({
       languages={[]}
       activeLanguage={{ id: 'it', value: 'Italiano', href: '#' }}
       titleSVG="Finanziato dall'Unione Europea · NextGenerationEU"
+      svgLocale='it'
     />
   );
 };
