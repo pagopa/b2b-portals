@@ -101,6 +101,7 @@ const makeFooterProps = ({
     }),
   },
   titleSVG: titleSVG[activeLocale],
+  svgLocale: activeLocale,
   ...rest,
 });
 

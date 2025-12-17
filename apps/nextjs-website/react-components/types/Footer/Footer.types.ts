@@ -1,4 +1,5 @@
 import { Generic } from '../common/Common.types';
+import type { SvgLocale } from '../../components/Footer/assets/FundedByNextGenerationEU/svg';
 
 export interface FooterProps extends LangSwitchProps {
   companyLink: CompanyLinkType;
@@ -6,6 +7,7 @@ export interface FooterProps extends LangSwitchProps {
   links: PreLoginFooterLinksType;
   showFundedByNextGenerationEULogo?: boolean;
   titleSVG: string;
+  svgLocale: SvgLocale;
 }
 
 interface FooterLinksType {
