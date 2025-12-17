@@ -15,6 +15,16 @@ export const extractNoticeIDFromOneTrustURL = (
     return null;
   }
 
+  // Check for new-style URL
+  const newFormatMatch = OTNoticeURL.pathname.match(
+    /\/privacy-notices\/([^/]+)\/(published|draft)\//,
+  );
+
+  if (newFormatMatch?.[1]) {
+    return newFormatMatch[1];
+  }
+
+  // Fallback to old-style URL
   const splitURL = OTNoticeURL.pathname.split('/');
   const fileName = splitURL[splitURL.length - 1];
 
