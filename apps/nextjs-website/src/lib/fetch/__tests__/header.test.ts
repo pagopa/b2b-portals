@@ -24,6 +24,7 @@ const makeTestAppEnv = () => {
 // response example
 const headerResponse: HeaderData = {
   data: {
+    exclude: [],
     header: [
       {
         __component: 'headers.standard-header',
@@ -107,6 +108,7 @@ describe('getHeader', () => {
 &populate[7]=header.drawer.ctaCard
 &populate[8]=header.drawer.linkCards.icons
 &populate[9]=header.socialLinks.icon
+&populate[10]=exclude
       `,
       {
         method: 'GET',

@@ -18,18 +18,23 @@
   "attributes": {
     "header": {
       "type": "dynamiczone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "components": [
         "headers.standard-header",
         "headers.mega-header"
       ],
       "required": true,
       "min": 1,
-      "max": 1,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "max": 1
+    },
+    "exclude": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::page.page"
     }
   }
 }
