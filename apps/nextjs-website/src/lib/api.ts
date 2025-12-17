@@ -83,7 +83,11 @@ export const getPreHeaderProps = async (
 export const getHeaderProps = async (
   locale: Locale,
   defaultLocale: Locale,
-): Promise<HeaderData['data']['header'][0]> => {
+): Promise<
+  HeaderData['data']['header'][0] & {
+    readonly exclude: HeaderData['data']['exclude'];
+  }
+> => {
   const { data } = makeAllAssetURLsRelative(
     await getHeader({ ...appEnv, locale }),
     appEnv.config.PREVIEW_MODE === 'true',
@@ -103,7 +107,10 @@ export const getHeaderProps = async (
     throw new Error();
   }
 
-  return formatHeaderLinks(header, locale, defaultLocale);
+  return {
+    exclude: data.exclude,
+    ...formatHeaderLinks(header, locale, defaultLocale),
+  };
 };
 
 export const getFooterProps = async (
