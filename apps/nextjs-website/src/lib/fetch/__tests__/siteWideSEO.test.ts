@@ -84,6 +84,7 @@ describe('fetchSiteWideSEO', () => {
 &populate[3]=locales
 &populate[4]=analytics.mixpanel
 &populate[5]=siteName
+&populate[6]=oneTrustToken
       `,
       {
         method: 'GET',
