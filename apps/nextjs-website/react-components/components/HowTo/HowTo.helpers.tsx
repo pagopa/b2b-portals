@@ -1,6 +1,5 @@
 import React from 'react';
 import { Typography, TypographyProps } from '@mui/material';
-import { Step } from '../../types/HowTo/HowTo.types';
 
 export const ArrowIcon = ({ color = 'none' }: { color?: string }) => (
   <svg
@@ -18,16 +17,6 @@ export const ArrowIcon = ({ color = 'none' }: { color?: string }) => (
     />
   </svg>
 );
-
-export const groupStepsByRows = (
-  steps: ReadonlyArray<Step>,
-  rowMaxSteps: number
-): Step[][] => {
-  const numSteps = steps.length;
-  return new Array(Math.ceil(numSteps / rowMaxSteps))
-    .fill(undefined)
-    .map((_, i) => steps.slice(i * rowMaxSteps, i * rowMaxSteps + rowMaxSteps));
-};
 
 export const HowToStepNum = ({
   variant = 'body1',
