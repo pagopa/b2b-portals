@@ -9,6 +9,7 @@ import {
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
+import PageRelationCodec from './types/PageRelation';
 
 const HeaderPageCodec = t.union([
   t.strict({
@@ -112,6 +113,7 @@ const MegaHeaderCodec = t.strict({
 
 export const HeaderDataCodec = t.strict({
   data: t.strict({
+    exclude: t.array(PageRelationCodec),
     header: t.array(t.union([StandardHeaderCodec, MegaHeaderCodec])),
   }),
 });
@@ -143,6 +145,7 @@ export const getHeader = ({
 &populate[7]=header.drawer.ctaCard
 &populate[8]=header.drawer.linkCards.icons
 &populate[9]=header.socialLinks.icon
+&populate[10]=exclude
       `,
       {
         method: 'GET',

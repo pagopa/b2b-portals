@@ -10,6 +10,7 @@ const Footer = ({
   legalInfo,
   links: { aboutUs, resources, followUs, services },
   showFundedByNextGenerationEULogo = false,
+  titleSVG,
   ...langProps
 }: FooterProps) => (
   <Box
@@ -54,7 +55,7 @@ const Footer = ({
           </Box>
           {showFundedByNextGenerationEULogo && (
             <Box sx={{ mt: 2 }}>
-              <FundedByNextGenerationEU size={180} />
+              <FundedByNextGenerationEU size={180} title={titleSVG} />
             </Box>
           )}
         </Grid>

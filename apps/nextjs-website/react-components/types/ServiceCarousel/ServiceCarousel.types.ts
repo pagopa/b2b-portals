@@ -7,7 +7,10 @@ export interface ServiceCardProps {
     readonly href: string;
   };
   readonly description?: string;
-  readonly imageURL?: string;
+  readonly image?: {
+    readonly url: string;
+    readonly alternativeText?: string;
+  };
 }
 
 export interface ServiceCarouselProps extends Omit<SectionProps, 'theme'> {

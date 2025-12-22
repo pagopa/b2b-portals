@@ -23,6 +23,11 @@ const TitleTagCodec = t.keyof({
   p: null,
 });
 
+const TitleTagH1H2Codec = t.keyof({
+  h1: null,
+  h2: null,
+});
+
 const HeroSectionCodec = t.strict({
   __component: t.literal('sections.hero'),
   title: t.string,
@@ -170,6 +175,7 @@ const CardsSectionCodec = t.strict({
   __component: t.literal('sections.cards'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   title: t.string,
+  titleTag: t.union([TitleTagH1H2Codec, t.null]),
   subtitle: t.union([t.string, t.null]),
   body: t.union([t.string, t.null]),
   ctaButtons: t.array(CTAButtonSimpleCodec),
@@ -182,6 +188,12 @@ const CardsSectionCodec = t.strict({
   }),
   sectionID: t.union([t.string, t.null]),
   bottomCTA: t.union([CTAButtonSimpleCodec, t.null]),
+});
+
+const RedirectSectionCodec = t.strict({
+  __component: t.literal('sections.redirect'),
+  redirectURL: t.string,
+  redirectDelay: t.number,
 });
 
 const OneTrustSectionPropsCodec = t.strict({
@@ -204,6 +216,7 @@ const FormCategoryCodec = t.strict({
 const FormSectionCodec = t.strict({
   __component: t.literal('sections.form'),
   title: t.string,
+  titleTag: t.union([TitleTagH1H2Codec, t.null]),
   subtitle: t.union([t.string, t.null]),
   showName: t.boolean,
   showSurname: t.boolean,
@@ -248,6 +261,7 @@ const EditorialSwitchSectionCodec = t.strict({
   __component: t.literal('sections.editorial-switch'),
   theme: t.union([t.literal('light'), t.literal('dark')]),
   title: t.string,
+  titleTag: t.union([TitleTagH1H2Codec, t.null]),
   subtitle: t.union([t.string, t.null]),
   sections: t.array(
     t.strict({
@@ -323,6 +337,7 @@ const RichBannerSectionCodec = t.strict({
 const RowTextSectionCodec = t.strict({
   __component: t.literal('sections.row-text'),
   title: t.string,
+  titleTag: t.union([TitleTagH1H2Codec, t.null]),
   subtitle: t.union([t.string, t.null]),
   body: t.union([t.string, t.null]),
   layout: t.union([t.literal('left'), t.literal('center')]),
@@ -470,6 +485,7 @@ export const PageSectionCodec = t.union([
   BannerLinkSectionCodec,
   StripeLinkSectionCodec,
   CardsSectionCodec,
+  RedirectSectionCodec,
   OneTrustSectionPropsCodec,
   IFrameSectionCodec,
   FormSectionCodec,
@@ -501,6 +517,7 @@ export type HowToSection = t.TypeOf<typeof HowToSectionCodec>;
 export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
 export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
+export type RedirectSection = t.TypeOf<typeof RedirectSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
 export type IFrameSectionProps = t.TypeOf<typeof IFrameSectionCodec>;
 export type FormSection = t.TypeOf<typeof FormSectionCodec>;

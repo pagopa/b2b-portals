@@ -22,29 +22,36 @@ const localizedTexts = {
   },
   en: {
     title: 'There’s nothing here!',
-    bodyLine1: 'The page you were looking for doesn’t exist or is no longer available.',
-    bodyLine2: 'Don’t worry, you’ll be redirected to the homepage in a few seconds…',
+    bodyLine1:
+      'The page you were looking for doesn’t exist or is no longer available.',
+    bodyLine2:
+      'Don’t worry, you’ll be redirected to the homepage in a few seconds…',
     redirectIntroText: 'If the redirect doesn’t happen,',
     redirectText: 'go back to the homepage here',
   },
   fr: {
     title: 'Il n’y a rien ici !',
-    bodyLine1: 'La page que vous cherchez n’existe pas ou n’est plus disponible.',
-    bodyLine2: 'Ne vous inquiétez pas, vous serez redirigé vers la page d’accueil dans quelques secondes…',
+    bodyLine1:
+      'La page que vous cherchez n’existe pas ou n’est plus disponible.',
+    bodyLine2:
+      'Ne vous inquiétez pas, vous serez redirigé vers la page d’accueil dans quelques secondes…',
     redirectIntroText: 'Si la redirection ne fonctionne pas,',
     redirectText: 'retournez à la page d’accueil ici',
   },
   de: {
     title: 'Hier gibt’s nichts!',
-    bodyLine1: 'Die Seite, die du suchst, existiert nicht oder ist nicht mehr verfügbar.',
-    bodyLine2: 'Keine Sorge, du wirst in wenigen Sekunden zur Startseite weitergeleitet…',
+    bodyLine1:
+      'Die Seite, die du suchst, existiert nicht oder ist nicht mehr verfügbar.',
+    bodyLine2:
+      'Keine Sorge, du wirst in wenigen Sekunden zur Startseite weitergeleitet…',
     redirectIntroText: 'Wenn die Weiterleitung nicht erfolgt,',
     redirectText: 'gehe hier zurück zur Startseite',
   },
   sl: {
     title: 'Tu ni ničesar!',
     bodyLine1: 'Stran, ki jo iščete, ne obstaja ali ni več na voljo.',
-    bodyLine2: 'Brez skrbi, čez nekaj sekund boste preusmerjeni na domačo stran…',
+    bodyLine2:
+      'Brez skrbi, čez nekaj sekund boste preusmerjeni na domačo stran…',
     redirectIntroText: 'Če preusmeritev ne deluje,',
     redirectText: 'se tukaj vrnite na domačo stran',
   },
@@ -113,7 +120,12 @@ const NotFoundPage = ({
           style={{ display: 'block' }}
         />
 
-        <Typography variant='h4' fontWeight='bold' sx={{ color: textColor }}>
+        <Typography
+          variant='h4'
+          component='h1'
+          fontWeight='bold'
+          sx={{ color: textColor }}
+        >
           {texts.title}
         </Typography>
 

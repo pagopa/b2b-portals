@@ -35,13 +35,13 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.1.4",
-    "@storybook/addon-interactions": "^8.1.4",
-    "@storybook/addon-links": "^8.1.4",
-    "@storybook/addon-mdx-gfm": "^8.1.4",
-    "@storybook/addon-onboarding": "^8.1.4",
-    "@storybook/nextjs": "^8.1.4",
-    "@storybook/react": "^8.1.4",
+    "@storybook/addon-essentials": "8.6.14",
+    "@storybook/addon-interactions": "8.6.14",
+    "@storybook/addon-links": "8.6.14",
+    "@storybook/addon-mdx-gfm": "8.6.14",
+    "@storybook/addon-onboarding": "8.6.14",
+    "@storybook/nextjs": "8.6.14",
+    "@storybook/react": "8.6.14",
     "@types/mixpanel-browser": "^2.51.0",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
@@ -54,7 +54,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-storybook": "^0.8.0",
     "shx": "^0.3.4",
-    "storybook": "^8.1.4",
+    "storybook": "8.6.14",
     "typescript": "5.2.2",
     "vitest": "^0.34.6"
   }

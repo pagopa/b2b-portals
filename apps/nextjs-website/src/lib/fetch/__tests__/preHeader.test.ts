@@ -15,6 +15,7 @@ const makeTestAppEnv = () => {
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
+    DRY_BUILD: undefined,
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };
@@ -44,6 +45,7 @@ const preHeaderResponse = {
         size: 'medium',
       },
     ],
+    include: [],
   },
 };
 
@@ -69,6 +71,7 @@ const preHeaderResponseAfterCodec = {
         size: 'medium',
       },
     ],
+    include: [],
   },
 };
 
@@ -87,6 +90,7 @@ describe('getPreHeader', () => {
       `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-header/?locale=it
 &populate[0]=leftCtas
 &populate[1]=rightCtas
+&populate[2]=include
       `,
       {
         method: 'GET',

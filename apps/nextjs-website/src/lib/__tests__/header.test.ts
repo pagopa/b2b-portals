@@ -84,6 +84,7 @@ const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
 
 const standardHeader: HeaderData = {
   data: {
+    exclude: [],
     header: [
       {
         ...standardHeaderBaseFields,
@@ -147,6 +148,7 @@ const standardHeader: HeaderData = {
 };
 const parsedStandardHeader_DefaultLocale: HeaderData = {
   data: {
+    exclude: [],
     header: [
       {
         ...standardHeaderBaseFields,
@@ -210,6 +212,7 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
 };
 const parsedStandardHeader_NonDefaultLocale: HeaderData = {
   data: {
+    exclude: [],
     header: [
       {
         ...standardHeaderBaseFields,
@@ -273,6 +276,7 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
 };
 const standardHeader_MissingSublink: HeaderData = {
   data: {
+    exclude: [],
     header: [
       {
         ...standardHeaderBaseFields,
@@ -309,6 +313,7 @@ const standardHeader_MissingSublink: HeaderData = {
 
 const megaHeader: HeaderData = {
   data: {
+    exclude: [],
     header: [
       {
         ...megaHeaderBaseFields,
@@ -364,6 +369,7 @@ const megaHeader: HeaderData = {
 };
 const parsedMegaHeader_DefaultLocale: HeaderData = {
   data: {
+    exclude: [],
     header: [
       {
         ...megaHeaderBaseFields,
@@ -419,6 +425,7 @@ const parsedMegaHeader_DefaultLocale: HeaderData = {
 };
 const parsedMegaHeader_NonDefaultLocale: HeaderData = {
   data: {
+    exclude: [],
     header: [
       {
         ...megaHeaderBaseFields,
@@ -474,6 +481,7 @@ const parsedMegaHeader_NonDefaultLocale: HeaderData = {
 };
 const megaHeader_MissingSublink: HeaderData = {
   data: {
+    exclude: [],
     header: [
       {
         ...megaHeaderBaseFields,

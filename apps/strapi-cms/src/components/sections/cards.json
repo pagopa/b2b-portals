@@ -57,6 +57,14 @@
       "type": "component",
       "repeatable": false,
       "component": "components.cta-button-simple"
+    },
+    "titleTag": {
+      "type": "enumeration",
+      "enum": [
+        "h1",
+        "h2"
+      ],
+      "default": "h2"
     }
   }
 }

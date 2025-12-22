@@ -28,6 +28,14 @@
     },
     "body": {
       "type": "richtext"
+    },
+    "titleTag": {
+      "type": "enumeration",
+      "enum": [
+        "h1",
+        "h2"
+      ],
+      "default": "h2"
     }
   }
 }

@@ -15,6 +15,7 @@ const makeTestAppEnv = () => {
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
+    DRY_BUILD: undefined,
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };
@@ -34,6 +35,7 @@ const navigationResponse: Navigation = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       sections: [
         {
@@ -106,6 +108,7 @@ describe('getNavigation', () => {
             ogTitle: null,
             ogDescription: null,
             structuredData: null,
+            hideFromSearchEngines: null,
           },
           sections: [
             {

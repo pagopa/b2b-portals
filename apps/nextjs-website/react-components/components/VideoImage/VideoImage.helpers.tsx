@@ -131,7 +131,7 @@ export const VideoText = ({
     <>
       {title && (
         <Typography
-          component='div'
+          component='h2'
           variant='h5'
           mb={4}
           color={textColor}

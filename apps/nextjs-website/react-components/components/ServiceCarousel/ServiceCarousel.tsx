@@ -4,12 +4,13 @@ import { Body, Title } from '../common/Common';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
   CarouselDots,
   ServiceCard,
   SliderArrowControl,
 } from './ServiceCarousel.helpers';
+import { visuallyHidden } from '@mui/utils';
 
 const ServiceCarousel = ({
   title,
@@ -20,6 +21,30 @@ const ServiceCarousel = ({
 }: ServiceCarouselProps) => {
   let sliderRef = useRef<Slider>();
   const { palette } = useTheme();
+  const [currentCard, setCurrentCard] = useState(cards[0]);
+  const liveRegionRef = useRef<HTMLDivElement>();
+
+  const resetAttributes = () => {
+    const slides = document.querySelectorAll('.slick-slide');
+
+    slides.forEach((slide) => {
+      const element = slide as HTMLElement;
+
+      if (element.classList.contains('slick-active')) {
+        element.removeAttribute('aria-hidden');
+        const link = element.querySelector('article a');
+        if (link) {
+          link.removeAttribute('tabindex');
+        }
+      } else {
+        element.setAttribute('aria-hidden', 'true');
+        const link = element.querySelector('article a');
+        if (link) {
+          link.setAttribute('tabindex', '-1');
+        }
+      }
+    });
+  };
 
   return (
     <Box
@@ -47,6 +72,7 @@ const ServiceCarousel = ({
           title={title}
           textColor={palette.text.primary}
           variant='h4'
+          component='h2'
           textAlign='left'
         />
 
@@ -75,6 +101,15 @@ const ServiceCarousel = ({
         </Stack>
 
         <Slider
+          role='region'
+          aria-roledescription='carousel'
+          beforeChange={(_current: number, next: number): void => {
+            if (liveRegionRef.current) {
+              setCurrentCard(cards[next]);
+            }
+          }}
+          onInit={resetAttributes}
+          afterChange={resetAttributes}
           speed={500}
           variableWidth={true}
           infinite={true}
@@ -84,13 +119,35 @@ const ServiceCarousel = ({
           // @ts-ignore Legacy use of ref
           ref={sliderRef}
           appendDots={(dots) => (
-            <CarouselDots>
-              <ul>{dots}</ul>
-            </CarouselDots>
+            <Box
+              aria-label='paginazione carosello'
+              role='navigation'
+              sx={{ position: 'static !important' }}
+            >
+              <CarouselDots>
+                <ul>{dots}</ul>
+              </CarouselDots>
+            </Box>
+          )}
+          customPaging={(_: any, index: number) => (
+            <button type='button' aria-label={`Vai alla slide ${index + 1}`} />
           )}
         >
-          {cards.map(ServiceCard)}
+          {cards.map((c, index) => (
+            <div
+              key={`${c.title}_${index}`}
+              role='list'
+              aria-roledescription='slide'
+              aria-label={`Slide ${index + 1} di ${cards.length}`}
+            >
+              <div role='listitem'>{ServiceCard(c)}</div>
+            </div>
+          ))}
         </Slider>
+
+        <Box ref={liveRegionRef} aria-live='polite' style={visuallyHidden}>
+          {currentCard && ServiceCard(currentCard, true)}
+        </Box>
       </Stack>
     </Box>
   );

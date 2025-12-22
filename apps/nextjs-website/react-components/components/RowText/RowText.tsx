@@ -4,7 +4,7 @@ import { RowTextProps } from '../../types/RowText/RowText.types';
 import { TextColor, BackgroundColor } from '../common/Common.helpers';
 
 const RowText = (props: RowTextProps) => {
-  const { title, subtitle, body, layout, sectionID } = props;
+  const { title, subtitle, body, layout, sectionID, titleTag } = props;
   const textColor = TextColor('light');
   const backgroundColor = BackgroundColor('light');
   const { palette } = useTheme();
@@ -32,7 +32,7 @@ const RowText = (props: RowTextProps) => {
       >
         <Typography
           variant='h4'
-          component='h2'
+          component={titleTag ?? 'h2'}
           sx={{ fontSize: { xs: '32px', md: '38px' }, color: textColor }}
         >
           {title}

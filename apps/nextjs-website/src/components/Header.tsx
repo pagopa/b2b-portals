@@ -231,12 +231,25 @@ const makeMegaHeaderProps = (
 const Header = ({
   locale,
   defaultLocale,
+  exclude,
   ...props
 }: HeaderData['data']['header'][0] & {
   locale: Locale;
   defaultLocale: Locale;
+  exclude: HeaderData['data']['exclude'];
 }) => {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '';
+  const excludeSlugs = exclude.map((obj) => obj.slug);
+
+  // Compare excluded slugs with current page slug (removing initial '/')
+  if (
+    excludeSlugs.length > 0 &&
+    pathname &&
+    excludeSlugs.includes(pathname.slice(1))
+  ) {
+    return null;
+  }
+
   const menuType = props.__component;
 
   switch (menuType) {

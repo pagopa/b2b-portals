@@ -114,6 +114,7 @@ const BannerLink = ({
 
                 <Typography
                   variant='h4'
+                  component='h2'
                   sx={{
                     color: textColor,
                     mt: 2,
@@ -159,7 +160,7 @@ const BannerLink = ({
                           sx: {
                             width: 'auto',
                           },
-                        })
+                        }),
                       ),
                       theme,
                       themeVariant,

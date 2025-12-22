@@ -15,6 +15,7 @@ const makeTestAppEnv = () => {
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
+    DRY_BUILD: undefined,
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };
@@ -40,6 +41,7 @@ const pressReleasesResponse = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       pressRelease: {
         id: 2,
@@ -71,6 +73,7 @@ const pressReleasesResponse = {
         ogTitle: null,
         ogDescription: null,
         structuredData: null,
+        hideFromSearchEngines: null,
       },
       pressRelease: {
         id: 1,
@@ -135,6 +138,7 @@ describe('getNavigation', () => {
             ogTitle: null,
             ogDescription: null,
             structuredData: null,
+            hideFromSearchEngines: null,
           },
           pressRelease: {
             title: 'Articolo completo',
@@ -159,6 +163,7 @@ describe('getNavigation', () => {
             ogTitle: null,
             ogDescription: null,
             structuredData: null,
+            hideFromSearchEngines: null,
           },
           pressRelease: {
             title: 'Articolo minimo',

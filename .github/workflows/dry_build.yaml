@@ -13,6 +13,7 @@ jobs:
 
     env:
       PREVIEW_MODE: 'true'
+      DRY_BUILD: 'true'
       PREVIEW_TOKEN: mock
       ENVIRONMENT: demo
       SEND_STRAPI_API_TOKEN: mock
@@ -39,6 +40,7 @@ jobs:
       - name: Compile packages
         shell: bash
         run: npm run compile
+        working-directory: apps/nextjs-website
 
       - name: Run Preview Build
         shell: bash
