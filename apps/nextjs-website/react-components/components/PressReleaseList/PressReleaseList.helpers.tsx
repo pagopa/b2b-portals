@@ -16,8 +16,13 @@ export const PressReleasePreview = ({
       : palette.custom.primaryColorDark;
 
   return (
-    <Box component={'li'} style={{ listStyleType: 'none' }}>
-      <Stack component={'article'} gap={2} width={330}>
+    <Box
+      component={'li'}
+      style={{ listStyleType: 'none' }}
+      maxWidth={330}
+      width={'100%'}
+    >
+      <Stack component={'article'} gap={2}>
         <Typography
           variant='overline'
           color='text.secondary'
