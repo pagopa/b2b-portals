@@ -17,7 +17,6 @@ export const HowToStep = ({
   isLastStep,
 }: HowToStepProps) => {
   const isDarkTheme = theme === 'dark';
-  const stepNum = index + 1;
   const color2 = TextAlternativeColor(theme);
   const textColor = TextColor(theme);
   const { palette } = useTheme();
@@ -40,9 +39,9 @@ export const HowToStep = ({
     >
       {/** Step with icon */}
       {iconURL && (
-        <Stack spacing={1.2}>
+        <Stack>
           <Stack spacing={1.2}>
-            <HowToStepNum variant='overline' color={color2} stepNum={stepNum} />
+            <HowToStepNum variant='overline' color={color2} stepNum={index} />
             <Stack
               justifyContent='space-between'
               alignItems='center'
@@ -99,12 +98,12 @@ export const HowToStep = ({
 
       {/** Step without icon */}
       {!iconURL && (
-        <Stack spacing={1.2}>
+        <Stack>
           <HowToStepNum
             variant='h6'
             component='p'
             color={color2}
-            stepNum={stepNum}
+            stepNum={index}
             marginBottom={12}
           />
 
