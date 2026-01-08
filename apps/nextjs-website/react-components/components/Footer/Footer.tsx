@@ -11,6 +11,7 @@ const Footer = ({
   links: { aboutUs, resources, followUs, services },
   showFundedByNextGenerationEULogo = false,
   titleSVG,
+  svgLocale,
   ...langProps
 }: FooterProps) => (
   <Box
@@ -55,7 +56,12 @@ const Footer = ({
           </Box>
           {showFundedByNextGenerationEULogo && (
             <Box sx={{ mt: 2 }}>
-              <FundedByNextGenerationEU size={180} title={titleSVG} />
+              <FundedByNextGenerationEU
+                size={180}
+                title={titleSVG}
+                variant='localized'
+                locale={svgLocale}
+              />
             </Box>
           )}
         </Grid>
