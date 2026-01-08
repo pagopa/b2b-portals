@@ -146,9 +146,21 @@ export const getPageProps = async (
   return allPages.find((page) => slugString === page.slug.toString());
 };
 
-export const getSiteWideSEO = async (): Promise<SiteWideSEO['data']> => {
+export const getSiteWideSEO = async (
+  tenant?: AppEnv['config']['ENVIRONMENT'],
+): Promise<SiteWideSEO['data']> => {
   const { data } = makeAllAssetURLsRelative(
-    await fetchSiteWideSEO(appEnv),
+    await fetchSiteWideSEO(
+      tenant
+        ? {
+            fetchFun: appEnv.fetchFun,
+            config: {
+              ...appEnv.config,
+              ENVIRONMENT: tenant,
+            },
+          }
+        : appEnv,
+    ),
     appEnv.config.PREVIEW_MODE === 'true',
   );
 

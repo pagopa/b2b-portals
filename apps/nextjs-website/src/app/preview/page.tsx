@@ -13,6 +13,7 @@ import {
   isPreviewMode,
 } from '@/lib/api';
 import { Locale } from '@/lib/fetch/siteWideSEO';
+import Script from 'next/script';
 
 const PreviewPage = async ({
   searchParams,
@@ -44,6 +45,8 @@ const PreviewPage = async ({
     return <div>404: Missing parameters</div>;
   }
 
+  const { oneTrustToken } = await getSiteWideSEO(tenant);
+
   const documentIDs = await (type === 'press-release'
     ? getAllPressReleaseIDs(tenant, locale)
     : type === 'page-switch-page'
@@ -64,18 +67,27 @@ const PreviewPage = async ({
   const pressReleasePages = await getPressReleasePages(locale);
 
   return (
-    <div>
-      {document.sections.map((section) =>
-        PageSection({
-          ...section,
-          themeVariant,
-          locale: document.locale,
-          defaultLocale: document.locale, // Doesn't matter in preview
-          pressReleasePages,
-          ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
-        }),
-      )}
-    </div>
+    <>
+      <Script
+        src='/scripts/otnotice-1.0.min.js'
+        type='text/javascript'
+        id='otprivacy-notice-script'
+        strategy='beforeInteractive'
+        {...(oneTrustToken && { 'data-settings': oneTrustToken })}
+      />
+      <div>
+        {document.sections.map((section) =>
+          PageSection({
+            ...section,
+            themeVariant,
+            locale: document.locale,
+            defaultLocale: document.locale, // Doesn't matter in preview
+            pressReleasePages,
+            ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
+          }),
+        )}
+      </div>
+    </>
   );
 };
 

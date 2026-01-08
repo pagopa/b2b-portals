@@ -1,37 +1,18 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { ReactNode } from 'react';
-import Script from 'next/script';
 import { theme } from '../theme';
-import { getSiteWideSEO, isPreviewMode, isDryBuild } from '@/lib/api';
 
 type PreviewLayoutProps = {
   children: ReactNode;
 };
 
 // This layout is needed mainly to pass theme to the preview page
-const PreviewLayout = async ({ children }: PreviewLayoutProps) => {
-  const fetchOneTrustToken = isPreviewMode() && !isDryBuild();
-
-  const oneTrustToken = fetchOneTrustToken
-    ? (await getSiteWideSEO()).oneTrustToken
-    : null;
-
-  return (
-    <ThemeProvider theme={theme}>
-      <html lang='it'>
-        <body style={{ margin: 0, scrollBehavior: 'smooth' }}>
-          {children}
-          <Script
-            src='/scripts/otnotice-1.0.min.js'
-            type='text/javascript'
-            id='otprivacy-notice-script'
-            strategy='beforeInteractive'
-            {...(oneTrustToken && { 'data-settings': oneTrustToken })}
-          />
-        </body>
-      </html>
-    </ThemeProvider>
-  );
-};
+const PreviewLayout = async ({ children }: PreviewLayoutProps) => (
+  <ThemeProvider theme={theme}>
+    <html lang='it'>
+      <body style={{ margin: 0, scrollBehavior: 'smooth' }}>{children}</body>
+    </html>
+  </ThemeProvider>
+);
 
 export default PreviewLayout;
