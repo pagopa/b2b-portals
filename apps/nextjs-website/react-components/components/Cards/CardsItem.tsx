@@ -12,8 +12,8 @@ const CardsItem = ({
   links,
   textAlign,
   label,
-  masonry,
   themeVariant,
+  masonry,
 }: CardsItemProps & { themeVariant: 'IO' | 'SEND' }) => {
   const { palette } = useTheme();
   const linkColor =
@@ -21,6 +21,7 @@ const CardsItem = ({
 
   return (
     <Card
+      component='li'
       elevation={16}
       sx={{
         display: 'flex',
@@ -28,6 +29,9 @@ const CardsItem = ({
         width: '100%',
         flex: { md: masonry ? '0 0 auto' : '1 1 0' },
         borderRadius: '16px',
+        listStyle: 'none',
+        padding: 0,
+        margin: 0,
       }}
     >
       <CardContent

@@ -5,7 +5,6 @@ import { CardsProps } from '../../types/Cards/Cards.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
 import { CtaButtons } from '../common/Common';
 import { Title, Subtitle } from '../common/Common';
-import { CardsItemContainer } from './Cards.helpers';
 import {
   SendBackgroundColor,
   IoBackgroundColor,
@@ -32,7 +31,9 @@ const Cards = ({
   const flexDirection = textPosition === 'right' ? 'row-reverse' : 'row';
   const isCenter = textPosition === 'center';
   const isNone = textPosition === 'none';
-  const { palette } = useTheme();
+  const muiTheme = useTheme();
+  const { palette } = muiTheme;
+  const isStackLayout = isCenter || isNone;
 
   const linkColor =
     theme === 'dark'
@@ -40,6 +41,28 @@ const Cards = ({
       : themeVariant === 'SEND'
         ? palette.primary.main
         : palette.custom.primaryColorDark;
+
+  // Cards flow top-to-bottom per column to mimic the design's vertical masonry effect.
+  const columnCount = {
+    xs: 1,
+    sm: 2,
+    md: isStackLayout ? 3: 2,
+  }
+
+
+  const cardListStyles = {
+    width: isStackLayout ? '100%' : { xs: '100%', md: '60%' },
+    columnCount,
+    columnGap: '20px',
+    margin: 0,
+    padding: 0,
+    listStyle: 'none',
+    '& > li': {
+      breakInside: 'avoid',
+      marginBottom: '20px',
+      width: '100%',
+    },
+  } as const;
 
   return (
     <ContainerRC
@@ -139,70 +162,16 @@ const Cards = ({
           ) : null}
         </Typography>
       )}
-      <Box
-        sx={{
-          display: 'flex',
-          width:
-            isCenter || isNone ? '100%' : { xs: '100%', sm: '100%', md: '60%' },
-          gap: '20px',
-          flexWrap: isCenter || isNone ? 'wrap' : 'nowrap',
-          justifyContent: isCenter || isNone ? 'center' : 'flex-start',
-          '@media (max-width: 600px)': {
-            flexDirection: 'column',
-            alignItems: 'center',
-          },
-        }}
-      >
-        <>
-          {isCenter || isNone ? (
-            items.map((item, i) => (
-              <Box
-                key={`${item.title}-${i}`}
-                sx={{
-                  flex: '1 1 auto',
-                  maxWidth: 'calc(33.333% - 20px)',
-                  minWidth: '300px',
-                  '@media (max-width: 600px)': {
-                    maxWidth: '100%',
-                    minWidth: 'auto',
-                  },
-                }}
-              >
-                <Item
-                  {...item}
-                  textAlign='left'
-                  masonry={true}
-                  themeVariant={themeVariant}
-                />
-              </Box>
-            ))
-          ) : (
-            <>
-              <CardsItemContainer masonry={true}>
-                {items.slice(0, Math.ceil(items.length / 2)).map((item, i) => (
-                  <Item
-                    key={`${item.title}-${i}`}
-                    {...item}
-                    textAlign='left'
-                    masonry={true}
-                    themeVariant={themeVariant}
-                  />
-                ))}
-              </CardsItemContainer>
-              <CardsItemContainer masonry={true}>
-                {items.slice(Math.ceil(items.length / 2)).map((item, i) => (
-                  <Item
-                    key={`${item.title}-${i}`}
-                    {...item}
-                    textAlign='left'
-                    masonry={true}
-                    themeVariant={themeVariant}
-                  />
-                ))}
-              </CardsItemContainer>
-            </>
-          )}
-        </>
+      <Box component='ul' sx={cardListStyles}>
+        {items.map((item, i) => (
+          <Item
+            key={`${item.title}-${i}`}
+            {...item}
+            textAlign='left'
+            masonry={true}
+            themeVariant={themeVariant}
+          />
+        ))}
       </Box>
       {bottomCTA && (
         <Box
