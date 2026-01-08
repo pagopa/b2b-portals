@@ -1,8 +1,7 @@
 import React from 'react';
-import { Box, Grid, Link, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Grid, Link, Typography, useTheme } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContainerRC from '../common/ContainerRC';
-import { groupStepsByRows } from './HowTo.helpers';
 import {
   TextColor,
   SendBackgroundColorAlternativeGrey,
@@ -28,13 +27,11 @@ const HowTo = (props: HowToProps) => {
     themeVariant === 'SEND'
       ? SendBackgroundColorAlternativeGrey(theme)
       : IoBackgroundColorAlternativeGrey(theme);
-  const { palette } = useTheme();
+  const { palette, spacing } = useTheme();
 
-  const alignment = { center: 'center', left: 'start', right: 'end' }[
+  const alignment = { center: 'center', left: 'flex-start', right: 'flex-end' }[
     stepsAlignment
   ];
-
-  const stepsRows = groupStepsByRows(steps, rowMaxSteps);
 
   const linkColor =
     theme === 'light'
@@ -65,44 +62,50 @@ const HowTo = (props: HowToProps) => {
         container
         direction='column'
         justifyContent='center'
-        alignItems='center'
+        alignItems={alignment}
         gap='24px'
         sx={{ paddingLeft: '2em', paddingRight: '2em' }}
       >
         {/** Steps */}
-        {stepsRows.map((stepRow, i) => (
-          <Stack
-            direction={{ md: 'row' }}
-            justifyContent={alignment}
-            spacing={{ xs: 4, md: 8 }}
-            sx={{
-              mt: i > 0 ? { xs: 4, md: 8 } : 0,
-              marginX: 'auto',
-              width: '100%',
-            }}
-            key={i}
-          >
-            {stepRow.map((step, j) => (
-              <Box
-                key={j}
-                flex={0.25}
-                width='100%'
-                sx={{
-                  minWidth: 'auto',
-                }}
-              >
-                <HowToStep
-                  index={i * rowMaxSteps + j}
-                  theme={theme}
-                  themeVariant={themeVariant}
-                  isLastStep={i * rowMaxSteps + j === steps.length - 1}
-                  {...step}
-                />
-              </Box>
-            ))}
-          </Stack>
-        ))}
-
+        <Box
+          component='ol'
+          sx={{
+            display: { md: 'grid' },
+            gridTemplateColumns: 'auto '.repeat(rowMaxSteps).trim(),
+            p: 0,
+            marginBlockStart: 0,
+            marginBlockEnd: 0,
+            listStyleType: 'none',
+            gap: { xs: spacing(4), md: spacing(8) },
+          }}
+        >
+          {steps.map((step, j) => (
+            <Box
+              component='li'
+              key={j}
+              flex={0.25}
+              width='100%'
+              sx={{
+                minWidth: 'auto',
+                p: 0,
+                '&:not(:first-child)': {
+                  mt: {
+                    xs: 4,
+                    sm: 0,
+                  },
+                },
+              }}
+            >
+              <HowToStep
+                index={j + 1}
+                theme={theme}
+                themeVariant={themeVariant}
+                isLastStep={j === steps.length - 1}
+                {...step}
+              />
+            </Box>
+          ))}
+        </Box>
         {/** Link */}
         {link && (
           <Typography component='span' display={'contents'}>

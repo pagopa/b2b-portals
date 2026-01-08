@@ -10,7 +10,7 @@ export const HowToTemplate: StoryFn<HowToProps> = (args) => <HowTo {...args} />;
 const generateSteps = (
   count: number,
   theme: 'dark' | 'light',
-  withIcons: boolean
+  withIcons: boolean,
 ): HowToStepProps[] =>
   Array.from({ length: count }, (_, i) => ({
     title: `Step ${i + 1}`,
@@ -25,7 +25,7 @@ const generateSteps = (
           ? 'https://d2mk0pc4ejgxx6.cloudfront.net/dark_icon_dee9ab4f99.svg'
           : 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
     }),
-    index: i,
+    index: i + 1,
     theme,
     isLastStep: i === count - 1,
     themeVariant: 'SEND',
@@ -34,7 +34,7 @@ const generateSteps = (
 // Function to generate default props
 const generateDefaultProps = (
   theme: 'dark' | 'light',
-  withIcons: boolean
+  withIcons: boolean,
 ): Partial<HowToProps> => ({
   theme,
   title: 'HowTo Title',
@@ -48,5 +48,5 @@ export const defaultPropsDarkWithoutIcon = generateDefaultProps('dark', false);
 export const defaultPropsLightWithIcon = generateDefaultProps('light', true);
 export const defaultPropsLightWithoutIcon = generateDefaultProps(
   'light',
-  false
+  false,
 );
