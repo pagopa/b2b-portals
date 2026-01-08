@@ -41,7 +41,11 @@ export const HowToStep = ({
       {iconURL && (
         <Stack>
           <Stack spacing={1.2}>
-            <HowToStepNum variant='overline' color={color2} stepNum={index} />
+            <HowToStepNum
+              variant='overline'
+              color={color2}
+              stepNum={index + 1}
+            />
             <Stack
               justifyContent='space-between'
               alignItems='center'

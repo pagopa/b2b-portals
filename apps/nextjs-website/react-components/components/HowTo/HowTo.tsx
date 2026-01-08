@@ -88,7 +88,12 @@ const HowTo = (props: HowToProps) => {
               sx={{
                 minWidth: 'auto',
                 p: 0,
-                m: 0,
+                '&:not(:first-child)': {
+                  mt: {
+                    xs: 4,
+                    sm: 0,
+                  },
+                },
               }}
             >
               <HowToStep
