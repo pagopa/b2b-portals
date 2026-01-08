@@ -43,17 +43,12 @@ const Cards = ({
         : palette.custom.primaryColorDark;
 
   // Cards flow top-to-bottom per column to mimic the design's vertical masonry effect.
-  const columnCount = isStackLayout
-    ? {
-        xs: 1,
-        sm: Math.min(2, Math.max(1, items.length)),
-        md: Math.min(3, Math.max(1, items.length)),
-      }
-    : {
-        xs: 1,
-        sm: Math.min(2, Math.max(1, items.length)),
-        md: Math.min(2, Math.max(1, items.length)),
-      };
+  const columnCount = {
+    xs: 1,
+    sm: 2,
+    md: isStackLayout ? 3: 2,
+  }
+
 
   const cardListStyles = {
     width: isStackLayout ? '100%' : { xs: '100%', md: '60%' },
