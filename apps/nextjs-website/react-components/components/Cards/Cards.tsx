@@ -42,6 +42,7 @@ const Cards = ({
         ? palette.primary.main
         : palette.custom.primaryColorDark;
 
+  // isStackLayout (center|none text) uses full-width cards; otherwise a 60% two-column grid.
   const cardListStyles = {
     width: isStackLayout ? '100%' : { xs: '100%', md: '60%' },
     display: 'flex',
@@ -58,22 +59,22 @@ const Cards = ({
     },
     '& > li': isStackLayout
       ? {
-          flex: '1 1 auto',
-          maxWidth: 'calc(33.333% - 20px)',
-          minWidth: '300px',
-          [muiTheme.breakpoints.down('sm')]: {
-            maxWidth: '100%',
-            minWidth: 'auto',
-          },
-        }
-      : {
-          flex: '1 1 calc(50% - 20px)',
-          maxWidth: 'calc(50% - 20px)',
-          [muiTheme.breakpoints.down('sm')]: {
-            maxWidth: '100%',
-            flex: '1 1 100%',
-          },
+        flex: '1 1 auto',
+        maxWidth: 'calc(33.333% - 20px)',
+        minWidth: '300px',
+        [muiTheme.breakpoints.down('sm')]: {
+          maxWidth: '100%',
+          minWidth: 'auto',
         },
+      }
+      : {
+        flex: '1 1 calc(50% - 20px)',
+        maxWidth: 'calc(50% - 20px)',
+        [muiTheme.breakpoints.down('sm')]: {
+          maxWidth: '100%',
+          flex: '1 1 100%',
+        },
+      },
   } as const;
 
   return (
