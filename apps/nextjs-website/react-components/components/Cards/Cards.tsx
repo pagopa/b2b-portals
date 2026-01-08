@@ -42,39 +42,31 @@ const Cards = ({
         ? palette.primary.main
         : palette.custom.primaryColorDark;
 
-  // isStackLayout (center|none text) uses full-width cards; otherwise a 60% two-column grid.
+  // Cards flow top-to-bottom per column to mimic the design's vertical masonry effect.
+  const columnCount = isStackLayout
+    ? {
+        xs: 1,
+        sm: Math.min(2, Math.max(1, items.length)),
+        md: Math.min(3, Math.max(1, items.length)),
+      }
+    : {
+        xs: 1,
+        sm: Math.min(2, Math.max(1, items.length)),
+        md: Math.min(2, Math.max(1, items.length)),
+      };
+
   const cardListStyles = {
     width: isStackLayout ? '100%' : { xs: '100%', md: '60%' },
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: isStackLayout ? 'center' : 'flex-start',
-    alignItems: 'stretch',
-    gap: '20px',
-    padding: 0,
+    columnCount,
+    columnGap: '20px',
     margin: 0,
+    padding: 0,
     listStyle: 'none',
-    [muiTheme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
-      alignItems: 'center',
+    '& > li': {
+      breakInside: 'avoid',
+      marginBottom: '20px',
+      width: '100%',
     },
-    '& > li': isStackLayout
-      ? {
-        flex: '1 1 auto',
-        maxWidth: 'calc(33.333% - 20px)',
-        minWidth: '300px',
-        [muiTheme.breakpoints.down('sm')]: {
-          maxWidth: '100%',
-          minWidth: 'auto',
-        },
-      }
-      : {
-        flex: '1 1 calc(50% - 20px)',
-        maxWidth: 'calc(50% - 20px)',
-        [muiTheme.breakpoints.down('sm')]: {
-          maxWidth: '100%',
-          flex: '1 1 100%',
-        },
-      },
   } as const;
 
   return (
