@@ -13,7 +13,6 @@ jobs:
 
     env:
       PREVIEW_MODE: 'true'
-      DRY_BUILD: 'true'
       PREVIEW_TOKEN: mock
       ENVIRONMENT: demo
       SEND_STRAPI_API_TOKEN: mock

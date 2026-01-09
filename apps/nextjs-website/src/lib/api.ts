@@ -146,9 +146,21 @@ export const getPageProps = async (
   return allPages.find((page) => slugString === page.slug.toString());
 };
 
-export const getSiteWideSEO = async (): Promise<SiteWideSEO['data']> => {
+export const getSiteWideSEO = async (
+  tenant?: AppEnv['config']['ENVIRONMENT'],
+): Promise<SiteWideSEO['data']> => {
   const { data } = makeAllAssetURLsRelative(
-    await fetchSiteWideSEO(appEnv),
+    await fetchSiteWideSEO(
+      tenant
+        ? {
+            fetchFun: appEnv.fetchFun,
+            config: {
+              ...appEnv.config,
+              ENVIRONMENT: tenant,
+            },
+          }
+        : appEnv,
+    ),
     appEnv.config.PREVIEW_MODE === 'true',
   );
 
@@ -283,5 +295,3 @@ export const getPageSwitchPageDataFromID = async (
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
-
-export const isDryBuild = () => appEnv.config.DRY_BUILD === 'true';
