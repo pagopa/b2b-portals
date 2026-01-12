@@ -16,6 +16,8 @@ const makeServiceCarouselProps = ({
   ...rest,
   ...(eyelet && { eyelet }),
   ...(description && { description }),
+  locale,
+  defaultLocale,
   cards: cards.map((card) => ({
     title: card.title,
     link: {

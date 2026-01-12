@@ -1,3 +1,4 @@
+import { Locale } from '@/lib/fetch/siteWideSEO';
 import { SectionProps } from '../common/Common.types';
 
 export interface ServiceCardProps {
@@ -17,5 +18,7 @@ export interface ServiceCarouselProps extends Omit<SectionProps, 'theme'> {
   readonly title: string;
   readonly eyelet?: string;
   readonly description?: string;
+  readonly locale: Locale;
+  readonly defaultLocale: Locale;
   cards: ReadonlyArray<ServiceCardProps>;
 }

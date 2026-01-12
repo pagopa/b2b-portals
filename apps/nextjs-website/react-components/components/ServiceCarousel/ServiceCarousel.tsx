@@ -11,6 +11,8 @@ import {
   SliderArrowControl,
 } from './ServiceCarousel.helpers';
 import { visuallyHidden } from '@mui/utils';
+import { createI18n } from '@/lib/i18n';
+import { serviceCarouselTranslations } from './ServiceCarousel.translations';
 
 const ServiceCarousel = ({
   title,
@@ -18,11 +20,18 @@ const ServiceCarousel = ({
   description,
   cards,
   sectionID,
+  locale,
+  defaultLocale,
 }: ServiceCarouselProps) => {
   let sliderRef = useRef<Slider>();
   const { palette } = useTheme();
   const [currentCard, setCurrentCard] = useState(cards[0]);
   const liveRegionRef = useRef<HTMLDivElement>();
+  const translate = createI18n(
+    locale,
+    defaultLocale,
+    serviceCarouselTranslations,
+  );
 
   const resetAttributes = () => {
     const slides = document.querySelectorAll('.slick-slide');
@@ -80,7 +89,6 @@ const ServiceCarousel = ({
           <Body body={description} textColor={palette.text.primary} />
         )}
       </Stack>
-
       {/* Cards */}
       <Stack gap={{ xs: 3.375, sm: 3.375, md: 4 }} width={'100%'}>
         <Stack
@@ -92,10 +100,12 @@ const ServiceCarousel = ({
         >
           <SliderArrowControl
             direction='left'
+            ariaLabel={translate('cardPrevious')}
             action={() => sliderRef.current?.slickPrev()}
           />
           <SliderArrowControl
             direction='right'
+            ariaLabel={translate('cardNext')}
             action={() => sliderRef.current?.slickNext()}
           />
         </Stack>
@@ -120,7 +130,7 @@ const ServiceCarousel = ({
           ref={sliderRef}
           appendDots={(dots) => (
             <Box
-              aria-label='paginazione carosello'
+              aria-label={translate('pagination')}
               role='navigation'
               sx={{ position: 'static !important' }}
             >
@@ -129,8 +139,11 @@ const ServiceCarousel = ({
               </CarouselDots>
             </Box>
           )}
-          customPaging={(_: any, index: number) => (
-            <button type='button' aria-label={`Vai alla slide ${index + 1}`} />
+          customPaging={(index: number) => (
+            <button
+              type='button'
+              aria-label={translate('goToSlide', { index: index + 1 })}
+            />
           )}
         >
           {cards.map((c, index) => (
@@ -138,7 +151,10 @@ const ServiceCarousel = ({
               key={`${c.title}_${index}`}
               role='list'
               aria-roledescription='slide'
-              aria-label={`Slide ${index + 1} di ${cards.length}`}
+              aria-label={translate('slideOf', {
+                index: index + 1,
+                total: cards.length,
+              })}
             >
               <div role='listitem'>{ServiceCard(c)}</div>
             </div>
