@@ -52,7 +52,7 @@ const index = {
         defaultMessage: PLUGIN_ID
       },
       Component: async () => {
-        const { App } = await Promise.resolve().then(() => require("./App-D3AWDBKO.js"));
+        const { App } = await Promise.resolve().then(() => require("./App-pmf6CYEA.js"));
         return App;
       }
     });
@@ -79,4 +79,3 @@ const index = {
 exports.PLUGIN_ID = PLUGIN_ID;
 exports.index = index;
 exports.pluginPermissions = pluginPermissions;
-//# sourceMappingURL=index-BVPJC-24.js.map

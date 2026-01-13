@@ -1,4 +1,3 @@
 "use strict";
-const index = require("../_chunks/index-BVPJC-24.js");
+const index = require("../_chunks/index-C6tsoY7K.js");
 module.exports = index.index;
-//# sourceMappingURL=index.js.map

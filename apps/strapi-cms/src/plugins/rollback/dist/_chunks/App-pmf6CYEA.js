@@ -4,7 +4,7 @@ const jsxRuntime = require("react/jsx-runtime");
 const admin = require("@strapi/strapi/admin");
 const reactRouterDom = require("react-router-dom");
 const designSystem = require("@strapi/design-system");
-const index = require("./index-BVPJC-24.js");
+const index = require("./index-C6tsoY7K.js");
 const react = require("react");
 const HomePage = () => {
   const { get, post } = admin.useFetchClient();
@@ -87,7 +87,7 @@ Error: ${data.err}`);
           /* @__PURE__ */ jsxRuntime.jsx(designSystem.Tbody, { children: loading ? /* @__PURE__ */ jsxRuntime.jsx(designSystem.Tr, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", children: "Recuperando i deploy passati..." }) }) }) : deployments.map((deployment, index2) => /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Tr, { children: [
             /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { variant: "sigma", children: [
               formatDeployment(deployment),
-              index2 === 0 && " (Attualmente in prod)"
+              index2 === 0 && " - Attualmente in prod"
             ] }) }),
             /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { justifyContent: "flex-end", children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { disabled: !canTrigger || triggering || index2 === 0, onClick: () => {
               triggerRollback(deployment);
@@ -105,4 +105,3 @@ const App = () => {
   ] }) });
 };
 exports.App = App;
-//# sourceMappingURL=App-D3AWDBKO.js.map

@@ -117,7 +117,7 @@ const HomePage = () => {
           ) : deployments.map((deployment, index) => (
             <Tr key={deployment}>
               <Td>
-                <Typography variant="sigma">{formatDeployment(deployment)}{index === 0 && ' (Attualmente in prod)'}</Typography>
+                <Typography variant="sigma">{formatDeployment(deployment)}{index === 0 && ' - Attualmente in prod'}</Typography>
               </Td>
               <Td>
                 <Flex justifyContent='flex-end'>
