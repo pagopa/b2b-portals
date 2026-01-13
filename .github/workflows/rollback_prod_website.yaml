@@ -53,10 +53,21 @@ jobs:
             echo "❌ No folder found for timestamp ${{ inputs.timestamp }}. Aborting rollback."
             exit 1
           fi
+      
+      - name: Generate timestamp
+        run: echo "DEPLOY_TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
 
-      - name: Sync from ${{ inputs.timestamp }} folder to latest
+      - name: Sync from ${{ inputs.timestamp }} folder to latest (actual rollback)
         shell: bash
         run: aws s3 sync s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${{ inputs.timestamp }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/latest --delete --exact-timestamps
+
+      - name: Copy ${{ inputs.timestamp }} folder content into folder with current timestamp
+        shell: bash
+        run: aws s3 sync s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${{ inputs.timestamp }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${DEPLOY_TIMESTAMP} --delete --exact-timestamps
+
+      - name: Delete old ${{ inputs.timestamp }} folder
+        shell: bash
+        run: aws s3 rm s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${{ inputs.timestamp }} --recursive
 
       - name: Create AWS Cloudfront Invalidation
         shell: bash
