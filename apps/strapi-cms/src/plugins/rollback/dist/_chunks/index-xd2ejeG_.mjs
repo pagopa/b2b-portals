@@ -51,7 +51,7 @@ const index = {
         defaultMessage: PLUGIN_ID
       },
       Component: async () => {
-        const { App } = await import("./App-C_M0Hste.mjs");
+        const { App } = await import("./App-D4JMVNJL.mjs");
         return App;
       }
     });
@@ -80,3 +80,4 @@ export {
   index as i,
   pluginPermissions as p
 };
+//# sourceMappingURL=index-xd2ejeG_.mjs.map

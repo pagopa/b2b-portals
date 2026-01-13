@@ -114,14 +114,14 @@ const HomePage = () => {
                 <Typography variant="sigma">Recuperando i deploy passati...</Typography>
               </Td>
             </Tr>
-          ) : deployments.map(deployment => (
+          ) : deployments.map((deployment, index) => (
             <Tr key={deployment}>
               <Td>
-                <Typography variant="sigma">{formatDeployment(deployment)}</Typography>
+                <Typography variant="sigma">{formatDeployment(deployment)}{index === 0 && ' (Attualmente in prod)'}</Typography>
               </Td>
               <Td>
                 <Flex justifyContent='flex-end'>
-                  <Button disabled={!canTrigger || triggering} onClick={() => {triggerRollback(deployment)}}>
+                  <Button disabled={!canTrigger || triggering || index === 0} onClick={() => {triggerRollback(deployment)}}>
                     ROLLBACK A QUESTO DEPLOY
                   </Button>
                 </Flex>
