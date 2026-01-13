@@ -245,7 +245,8 @@ const Header = ({
   if (
     excludeSlugs.length > 0 &&
     pathname &&
-    excludeSlugs.includes(pathname.slice(1))
+    (excludeSlugs.includes(pathname.slice(1)) ||
+      (pathname === '/' && excludeSlugs.includes('homepage'))) // Special check for homepage
   ) {
     return null;
   }
