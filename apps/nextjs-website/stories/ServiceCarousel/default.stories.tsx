@@ -83,6 +83,13 @@ ServiceCarouselFull.args = {
       },
     },
   ],
+  labels: {
+    pagination: 'Paginazione carosello',
+    cardNext: 'Card successiva',
+    cardPrevious: 'Card precedente',
+    goToSlide: (index) => `Vai alla slide ${index + 1}`,
+    slideOf: (index, total) => `Slide ${index + 1} di ${total}`,
+  },
 };
 
 export const ServiceCarouselMinimum: StoryFn<typeof ServiceCarousel> =
@@ -126,4 +133,11 @@ ServiceCarouselMinimum.args = {
       },
     },
   ],
+  labels: {
+    pagination: 'Paginazione carosello',
+    cardNext: 'Card successiva',
+    cardPrevious: 'Card precedente',
+    goToSlide: (index) => `Vai alla slide ${index + 1}`,
+    slideOf: (index, total) => `Slide ${index + 1} di ${total}`,
+  },
 };

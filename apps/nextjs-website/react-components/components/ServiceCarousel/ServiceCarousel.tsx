@@ -18,6 +18,7 @@ const ServiceCarousel = ({
   description,
   cards,
   sectionID,
+  labels,
 }: ServiceCarouselProps) => {
   let sliderRef = useRef<Slider>();
   const { palette } = useTheme();
@@ -80,7 +81,6 @@ const ServiceCarousel = ({
           <Body body={description} textColor={palette.text.primary} />
         )}
       </Stack>
-
       {/* Cards */}
       <Stack gap={{ xs: 3.375, sm: 3.375, md: 4 }} width={'100%'}>
         <Stack
@@ -92,10 +92,12 @@ const ServiceCarousel = ({
         >
           <SliderArrowControl
             direction='left'
+            ariaLabel={labels.cardPrevious}
             action={() => sliderRef.current?.slickPrev()}
           />
           <SliderArrowControl
             direction='right'
+            ariaLabel={labels.cardNext}
             action={() => sliderRef.current?.slickNext()}
           />
         </Stack>
@@ -120,7 +122,7 @@ const ServiceCarousel = ({
           ref={sliderRef}
           appendDots={(dots) => (
             <Box
-              aria-label='paginazione carosello'
+              aria-label={labels.pagination}
               role='navigation'
               sx={{ position: 'static !important' }}
             >
@@ -129,8 +131,8 @@ const ServiceCarousel = ({
               </CarouselDots>
             </Box>
           )}
-          customPaging={(_: any, index: number) => (
-            <button type='button' aria-label={`Vai alla slide ${index + 1}`} />
+          customPaging={(index: number) => (
+            <button type='button' aria-label={labels.goToSlide(index)} />
           )}
         >
           {cards.map((c, index) => (
@@ -138,7 +140,7 @@ const ServiceCarousel = ({
               key={`${c.title}_${index}`}
               role='list'
               aria-roledescription='slide'
-              aria-label={`Slide ${index + 1} di ${cards.length}`}
+              aria-label={labels.slideOf(index, cards.length)}
             >
               <div role='listitem'>{ServiceCard(c)}</div>
             </div>

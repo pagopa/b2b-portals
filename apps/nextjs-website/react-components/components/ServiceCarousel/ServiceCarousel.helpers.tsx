@@ -129,9 +129,11 @@ export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
 export const SliderArrowControl = ({
   direction,
   action,
+  ariaLabel,
 }: {
   direction: 'left' | 'right';
   action: (() => void) | undefined;
+  ariaLabel: string;
 }) => {
   const { palette } = useTheme();
 
@@ -151,7 +153,7 @@ export const SliderArrowControl = ({
       }}
       disableRipple={true}
       onClick={action}
-      aria-label={direction === 'right' ? 'Card successiva' : 'Card precedente'}
+      aria-label={ariaLabel}
     >
       {direction === 'right' ? <ChevronRight /> : <ChevronLeft />}
     </IconButton>
