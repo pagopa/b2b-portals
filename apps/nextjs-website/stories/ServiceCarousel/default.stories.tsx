@@ -23,10 +23,6 @@ ServiceCarouselFull.args = {
     'Piattaforma Notifiche digitalizza e semplifica la gestione delle comunicazioni a valore legale. Gli enti mittenti non devono che depositare l’atto da notificare: sarà la piattaforma a occuparsi dell’invio, per via digitale o analogica.',
   cards: [
     {
-      labels: {
-        slideOf: 'Slide 1 di 5',
-        goToSlide: 'Vai alla slide 1',
-      },
       title: 'Funzionalità',
       link: {
         label: 'Scopri funzionalità',
@@ -40,10 +36,6 @@ ServiceCarouselFull.args = {
     },
     {
       title: 'Funzionalità',
-      labels: {
-        slideOf: 'Slide 2 di 5',
-        goToSlide: 'Vai alla slide 2',
-      },
       link: {
         label: 'Scopri funzionalità',
         href: '#',
@@ -56,10 +48,6 @@ ServiceCarouselFull.args = {
     },
     {
       title: 'Funzionalità',
-      labels: {
-        slideOf: 'Slide 3 di 5',
-        goToSlide: 'Vai alla slide 3',
-      },
       link: {
         label: 'Scopri funzionalità',
         href: '#',
@@ -72,10 +60,6 @@ ServiceCarouselFull.args = {
     },
     {
       title: 'Funzionalità',
-      labels: {
-        slideOf: 'Slide 4 di 5',
-        goToSlide: 'Vai alla slide 4',
-      },
       link: {
         label: 'Scopri funzionalità',
         href: '#',
@@ -88,10 +72,6 @@ ServiceCarouselFull.args = {
     },
     {
       title: 'Funzionalità',
-      labels: {
-        slideOf: 'Slide 5 di 5',
-        goToSlide: 'Vai alla slide 5',
-      },
       link: {
         label: 'Scopri funzionalità',
         href: '#',
@@ -107,6 +87,8 @@ ServiceCarouselFull.args = {
     pagination: 'Paginazione carosello',
     cardNext: 'Card successiva',
     cardPrevious: 'Card precedente',
+    goToSlide: (index) => `Vai alla slide ${index + 1}`,
+    slideOf: (index, total) => `Slide ${index + 1} di ${total}`,
   },
 };
 
@@ -117,10 +99,6 @@ ServiceCarouselMinimum.args = {
   cards: [
     {
       title: 'Funzionalità',
-      labels: {
-        slideOf: 'Slide 1 di 5',
-        goToSlide: 'Vai alla slide 1',
-      },
       link: {
         label: 'Scopri funzionalità',
         href: '#',
@@ -128,10 +106,6 @@ ServiceCarouselMinimum.args = {
     },
     {
       title: 'Funzionalità',
-      labels: {
-        slideOf: 'Slide 2 di 5',
-        goToSlide: 'Vai alla slide 2',
-      },
       link: {
         label: 'Scopri funzionalità',
         href: '#',
@@ -139,10 +113,6 @@ ServiceCarouselMinimum.args = {
     },
     {
       title: 'Funzionalità',
-      labels: {
-        slideOf: 'Slide 3 di 5',
-        goToSlide: 'Vai alla slide 3',
-      },
       link: {
         label: 'Scopri funzionalità',
         href: '#',
@@ -150,10 +120,6 @@ ServiceCarouselMinimum.args = {
     },
     {
       title: 'Funzionalità',
-      labels: {
-        slideOf: 'Slide 4 di 5',
-        goToSlide: 'Vai alla slide 4',
-      },
       link: {
         label: 'Scopri funzionalità',
         href: '#',
@@ -161,10 +127,6 @@ ServiceCarouselMinimum.args = {
     },
     {
       title: 'Funzionalità',
-      labels: {
-        slideOf: 'Slide 5 di 5',
-        goToSlide: 'Vai alla slide 5',
-      },
       link: {
         label: 'Scopri funzionalità',
         href: '#',
@@ -175,5 +137,7 @@ ServiceCarouselMinimum.args = {
     pagination: 'Paginazione carosello',
     cardNext: 'Card successiva',
     cardPrevious: 'Card precedente',
+    goToSlide: (index) => `Vai alla slide ${index + 1}`,
+    slideOf: (index, total) => `Slide ${index + 1} di ${total}`,
   },
 };

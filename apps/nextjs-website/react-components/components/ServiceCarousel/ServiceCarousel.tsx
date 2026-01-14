@@ -132,7 +132,7 @@ const ServiceCarousel = ({
             </Box>
           )}
           customPaging={(index: number) => (
-            <button type='button' aria-label={cards[index]?.labels.goToSlide} />
+            <button type='button' aria-label={labels.goToSlide(index)} />
           )}
         >
           {cards.map((c, index) => (
@@ -140,7 +140,7 @@ const ServiceCarousel = ({
               key={`${c.title}_${index}`}
               role='list'
               aria-roledescription='slide'
-              aria-label={c.labels.slideOf}
+              aria-label={labels.slideOf(index, cards.length)}
             >
               <div role='listitem'>{ServiceCard(c)}</div>
             </div>
