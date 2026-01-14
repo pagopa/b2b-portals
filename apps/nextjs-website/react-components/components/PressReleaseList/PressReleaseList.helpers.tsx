@@ -47,6 +47,7 @@ export const PressReleasePreview = ({
             href={link.href}
             color='inherit'
             sx={{ textDecoration: 'none' }}
+            aria-label={`${link.label} "${title}"`}
           >
             {link.label}
           </Link>

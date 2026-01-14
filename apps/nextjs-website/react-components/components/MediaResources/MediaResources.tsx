@@ -72,6 +72,7 @@ const MediaResources = ({
               sx={{
                 textDecoration: 'none',
               }}
+              aria-label={`${item.label} "${item.title}"`}
             >
               <img
                 src={item.thumbnailURL}
