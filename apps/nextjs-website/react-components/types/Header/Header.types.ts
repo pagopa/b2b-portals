@@ -32,6 +32,11 @@ export interface CardData {
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
   drawer?: HeaderSideDrawerProps;
   supportLink?: string;
+  readonly labels: {
+    openMenu: string;
+    closeMenu: string;
+    shortMainMenu: string;
+  };
 }
 
 interface DropdownLink extends LinkProps {

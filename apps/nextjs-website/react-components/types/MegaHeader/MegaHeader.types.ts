@@ -8,7 +8,7 @@ export interface MegaMenuItem {
     items: {
       label: string;
       href: string;
-      badge?: string;
+      isNew?: boolean;
     }[];
   }[];
   ctaButton?: CtaButtonProps;
@@ -21,15 +21,17 @@ export interface MegaHeaderProps {
     src: string;
     alt: string;
     href: string;
-  }
+  };
   ctaButton?: CtaButtonProps;
   mobileCtaButton?: CtaButtonProps;
   drawer?: HeaderSideDrawerProps;
   socialLinks?: HeaderSocialLink[];
-  mobileMenuIconAriaLabel: {
-    open: string;
-    close: string;
-  }
+  labels: {
+    news: string;
+    openMenu: string;
+    closeMenu: string;
+    mainMenu: string;
+  };
 }
 
 export interface HeaderSocialLink {
