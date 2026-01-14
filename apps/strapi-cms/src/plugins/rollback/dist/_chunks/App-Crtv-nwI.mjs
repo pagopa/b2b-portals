@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useFetchClient, useRBAC, useNotification, Page } from "@strapi/strapi/admin";
 import { Routes, Route } from "react-router-dom";
 import { Main, Box, Typography, Table, Thead, Tr, Th, Tbody, Td, Flex, Button } from "@strapi/design-system";
-import { p as pluginPermissions, P as PLUGIN_ID } from "./index-P0oa0Puu.mjs";
+import { p as pluginPermissions, P as PLUGIN_ID } from "./index-CZdpln7H.mjs";
 import { useState, useEffect } from "react";
 const HomePage = () => {
   const { get, post } = useFetchClient();
@@ -82,9 +82,12 @@ Error: ${data.err}`);
             /* @__PURE__ */ jsx(Th, { children: /* @__PURE__ */ jsx(Typography, { variant: "sigma", children: "Deploy passati disponibili" }) }, "date"),
             /* @__PURE__ */ jsx(Th, {}, "actions")
           ] }) }),
-          /* @__PURE__ */ jsx(Tbody, { children: loading ? /* @__PURE__ */ jsx(Tr, { children: /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(Typography, { variant: "sigma", children: "Recuperando i deploy passati..." }) }) }) : deployments.map((deployment) => /* @__PURE__ */ jsxs(Tr, { children: [
-            /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(Typography, { variant: "sigma", children: formatDeployment(deployment) }) }),
-            /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(Flex, { justifyContent: "flex-end", children: /* @__PURE__ */ jsx(Button, { disabled: !canTrigger || triggering, onClick: () => {
+          /* @__PURE__ */ jsx(Tbody, { children: loading ? /* @__PURE__ */ jsx(Tr, { children: /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(Typography, { variant: "sigma", children: "Recuperando i deploy passati..." }) }) }) : deployments.map((deployment, index) => /* @__PURE__ */ jsxs(Tr, { children: [
+            /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsxs(Typography, { variant: "sigma", children: [
+              formatDeployment(deployment),
+              index === 0 && " - Attualmente in prod"
+            ] }) }),
+            /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(Flex, { justifyContent: "flex-end", children: /* @__PURE__ */ jsx(Button, { disabled: !canTrigger || triggering || index === 0, onClick: () => {
               triggerRollback(deployment);
             }, children: "ROLLBACK A QUESTO DEPLOY" }) }) })
           ] }, deployment)) })
