@@ -11,10 +11,6 @@ export interface ServiceCardProps {
     readonly url: string;
     readonly alternativeText?: string;
   };
-  readonly labels: {
-    slideOf: string;
-    goToSlide: string;
-  };
 }
 
 export interface ServiceCarouselProps extends Omit<SectionProps, 'theme'> {
@@ -25,6 +21,8 @@ export interface ServiceCarouselProps extends Omit<SectionProps, 'theme'> {
     cardNext: string;
     cardPrevious: string;
     pagination: string;
+    goToSlide: (index: number) => string;
+    slideOf: (index: number, total: number) => string;
   };
   cards: ReadonlyArray<ServiceCardProps>;
 }
