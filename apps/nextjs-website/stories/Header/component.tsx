@@ -74,6 +74,11 @@ const makeHeaderProps = ({
         ]
       : []),
   ],
+  labels: {
+    openMenu: 'Apri menu',
+    closeMenu: 'Chiudi menu',
+    shortMainMenu: 'Menu',
+  },
   ...(drawer === 'full' && {
     drawer: {
       buttonText: 'Apri Drawer',

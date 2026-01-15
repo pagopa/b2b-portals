@@ -7,10 +7,15 @@ export const HamburgerMenu = ({
   open,
   onOpen,
   onClose,
+  ariaLabels,
 }: {
   open: boolean;
   onOpen: () => void;
   onClose: () => void;
+  ariaLabels: {
+    openMenu: string;
+    closeMenu: string;
+  };
 }) => {
   const muiTheme = useTheme();
 
@@ -19,7 +24,7 @@ export const HamburgerMenu = ({
       sx={{ color: muiTheme.palette.text.secondary }}
       cursor='pointer'
       onClick={onClose}
-      aria-label='chiudi'
+      aria-label={ariaLabels.closeMenu}
       aria-haspopup='true'
       aria-expanded='true'
     />
@@ -28,7 +33,7 @@ export const HamburgerMenu = ({
       sx={{ color: muiTheme.palette.text.secondary }}
       cursor='pointer'
       onClick={onOpen}
-      aria-label='apri'
+      aria-label={ariaLabels.openMenu}
       aria-haspopup='true'
       aria-expanded='false'
     />

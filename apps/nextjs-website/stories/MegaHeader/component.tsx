@@ -18,11 +18,11 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
           { label: 'Gestire scadenze e pagamenti', href: '' },
           { label: 'Ricevere comunicazioni', href: '' },
           { label: 'Leggere le notifiche digitali', href: '' },
-          { label: 'Firmare digitalmente', href: '', badge: 'NOVITÀ' },
+          { label: 'Firmare digitalmente', href: '', isNew: true },
           { label: 'Aggiungere i tuoi documenti', href: '' },
           { label: 'Aderire a iniziative di welfare', href: '' },
           { label: '[CGN]', href: '' },
-          { label: 'Novità su IO', href: '', badge: 'NOVITÀ' },
+          { label: 'Novità su IO', href: '', isNew: true },
         ],
       },
     ],
@@ -35,7 +35,7 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
         title: 'SCOPRI I SERVIZI SU IO',
         items: [
           { label: 'Casa e utenze', href: '' },
-          { label: 'Educazione e formazione', href: '', badge: 'NOVITÀ' },
+          { label: 'Educazione e formazione', href: '', isNew: true },
           { label: 'Salute', href: '' },
           { label: 'Redditi, patrimoni e fisco', href: '' },
           { label: 'Servizi anagrafici e civici', href: '' },
@@ -46,7 +46,7 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
           { label: 'Benessere sociale', href: '' },
           { label: 'Ambiente e animali', href: '' },
           { label: 'Giustizia e legge', href: '' },
-          { label: 'Vita lavorativa', href: '', badge: 'NOVITÀ' },
+          { label: 'Vita lavorativa', href: '', isNew: true },
           { label: 'Lavori edilizi, catasto e urbanistica', href: '' },
           { label: 'Cultura, tempo libero e sport', href: '' },
           { label: 'Viaggi e turismo', href: '' },
@@ -64,7 +64,7 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
         items: [
           { label: 'ACI', href: '' },
           { label: 'Agenzia delle Entrate', href: '' },
-          { label: 'INPS', href: '', badge: 'NOVITÀ' },
+          { label: 'INPS', href: '', isNew: true },
           { label: 'E-Distribuzione', href: '' },
           { label: 'Ministero dell’Interno', href: '' },
           { label: 'Altri enti nazionali', href: '' },
@@ -92,7 +92,7 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
         items: [
           { label: 'Vision', href: '' },
           { label: 'IO in numeri', href: '' },
-          { label: 'Blog', href: '', badge: 'NOVITÀ' },
+          { label: 'Blog', href: '', isNew: true },
           { label: 'Casi studio', href: '' },
         ],
       },
@@ -115,7 +115,7 @@ const defaultMenuItems: MegaHeaderProps['menuItems'] = [
         title: 'CONSULTA LE RISORSE TECNICHE',
         items: [
           { label: 'Sviluppatori', href: '' },
-          { label: 'Partner commerciali', href: '', badge: 'NOVITÀ' },
+          { label: 'Partner commerciali', href: '', isNew: true },
           { label: 'Partner tecnologici', href: '' },
           { label: 'Comunicati e Media', href: '' },
         ],
@@ -191,6 +191,12 @@ const makeMegaHeaderProps = ({
         startIcon: Icon('HelpOutlineOutlined'),
       },
     }),
+    labels: {
+      news: 'NOVITA',
+      openMenu: 'Apri menù',
+      closeMenu: 'Chiudi menù',
+      mainMenu: 'Menu Principale',
+    },
     ...(drawer !== 'none' && {
       drawer: {
         title: 'Drawer Title',
@@ -225,10 +231,6 @@ const makeMegaHeaderProps = ({
         ],
       },
     }),
-    mobileMenuIconAriaLabel: {
-      open: 'Apri menu mobile',
-      close: 'Chiudi menu mobile',
-    },
   };
 
   return baseProps as MegaHeaderProps;
