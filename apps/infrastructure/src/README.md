@@ -10,7 +10,7 @@
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 5.16.2 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.7.2 |
 
 ## Modules
 
@@ -33,13 +33,14 @@
 | <a name="module_dns_zone"></a> [dns\_zone](#module\_dns\_zone) | git::https://github.com/terraform-aws-modules/terraform-aws-route53.git//modules/zones | bc63328714550fd903d2574b263833c9ce1c867e |
 | <a name="module_ecs_cpu_alarm"></a> [ecs\_cpu\_alarm](#module\_ecs\_cpu\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm | 0b4aa2b9aa19060205965a938de89a7bf0ff477b |
 | <a name="module_ecs_memory_alarm"></a> [ecs\_memory\_alarm](#module\_ecs\_memory\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm | 0b4aa2b9aa19060205965a938de89a7bf0ff477b |
-| <a name="module_identity"></a> [identity](#module\_identity) | ./identity | n/a |
+| <a name="module_identity"></a> [identity](#module\_identity) | ./modules/identity | n/a |
 | <a name="module_preview_strapi_records"></a> [preview\_strapi\_records](#module\_preview\_strapi\_records) | git::https://github.com/terraform-aws-modules/terraform-aws-route53.git//modules/records | bc63328714550fd903d2574b263833c9ce1c867e |
 | <a name="module_preview_strapi_ssl_certificate"></a> [preview\_strapi\_ssl\_certificate](#module\_preview\_strapi\_ssl\_certificate) | git::https://github.com/terraform-aws-modules/terraform-aws-acm.git | 8d0b22f1f242a1b36e29b8cb38aaeac9b887500d |
 | <a name="module_rds_acu_alarm"></a> [rds\_acu\_alarm](#module\_rds\_acu\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm | 0b4aa2b9aa19060205965a938de89a7bf0ff477b |
 | <a name="module_rds_cpu_alarm"></a> [rds\_cpu\_alarm](#module\_rds\_cpu\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm | 0b4aa2b9aa19060205965a938de89a7bf0ff477b |
 | <a name="module_records"></a> [records](#module\_records) | git::https://github.com/terraform-aws-modules/terraform-aws-route53.git//modules/records | bc63328714550fd903d2574b263833c9ce1c867e |
 | <a name="module_storybook_records"></a> [storybook\_records](#module\_storybook\_records) | git::https://github.com/terraform-aws-modules/terraform-aws-route53.git//modules/records | bc63328714550fd903d2574b263833c9ce1c867e |
+| <a name="module_video_streaming"></a> [video\_streaming](#module\_video\_streaming) | ./modules/video_streaming | n/a |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 5.1.2 |
 | <a name="module_website_staging_records"></a> [website\_staging\_records](#module\_website\_staging\_records) | git::https://github.com/terraform-aws-modules/terraform-aws-route53.git//modules/records | bc63328714550fd903d2574b263833c9ce1c867e |
 
@@ -169,7 +170,7 @@
 | <a name="input_github_repository"></a> [github\_repository](#input\_github\_repository) | The repository where the IaC workflows will run | `string` | n/a | yes |
 | <a name="input_nextjs_app_image_tag"></a> [nextjs\_app\_image\_tag](#input\_nextjs\_app\_image\_tag) | Docker image tag for the Next.js application | `string` | n/a | yes |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region to create resources. Default Milan | `string` | `"eu-south-1"` | no |
-| <a name="input_cdn_custom_headers"></a> [cdn\_custom\_headers](#input\_cdn\_custom\_headers) | n/a | <pre>list(object(<br/>    {<br/>      header   = string<br/>      override = bool<br/>      value    = string<br/>    }<br/>  ))</pre> | `[]` | no |
+| <a name="input_cdn_custom_headers"></a> [cdn\_custom\_headers](#input\_cdn\_custom\_headers) | n/a | <pre>list(object(<br/>    {<br/>      header   = string<br/>      override = bool<br/>      value    = string<br/>    }<br/>  ))</pre> | <pre>[<br/>  {<br/>    "header": "Server",<br/>    "override": true,<br/>    "value": "None"<br/>  }<br/>]</pre> | no |
 | <a name="input_cms_app_cpu"></a> [cms\_app\_cpu](#input\_cms\_app\_cpu) | Fargate instance CPU units to provision (1 vCPU = 1024 CPU units) | `string` | `"1024"` | no |
 | <a name="input_cms_app_memory"></a> [cms\_app\_memory](#input\_cms\_app\_memory) | Fargate instance memory to provision (in MiB) | `string` | `"3072"` | no |
 | <a name="input_cms_app_port"></a> [cms\_app\_port](#input\_cms\_app\_port) | ## required for security group ALB, ECS and RDS | `number` | `1337` | no |
@@ -191,3 +192,4 @@
 | <a name="output_dns_zone_name"></a> [dns\_zone\_name](#output\_dns\_zone\_name) | n/a |
 | <a name="output_terraform_backend_bucket_name"></a> [terraform\_backend\_bucket\_name](#output\_terraform\_backend\_bucket\_name) | n/a |
 | <a name="output_terraform_lock_dynamodb_table"></a> [terraform\_lock\_dynamodb\_table](#output\_terraform\_lock\_dynamodb\_table) | n/a |
+| <a name="output_video_name_servers"></a> [video\_name\_servers](#output\_video\_name\_servers) | n/a |

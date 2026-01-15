@@ -29,7 +29,13 @@ variable "cdn_custom_headers" {
       value    = string
     }
   ))
-  default = []
+  default = [
+    {
+      header   = "Server"
+      override = true
+      value    = "None"
+    }
+  ]
 }
 
 ### required for security group ALB, ECS and RDS
