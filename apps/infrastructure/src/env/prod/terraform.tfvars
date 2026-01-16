@@ -8,11 +8,6 @@ cdn_custom_headers = [
     override = true
     value    = "noindex"
   },
-  {
-    header   = "Server"
-    override = true
-    value    = "None"
-  }
 ]
 
 dns_domain_name = {
