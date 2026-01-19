@@ -67,7 +67,7 @@ jobs:
 
       - name: Purge Azure CDN endpoint (appio only)
         if: ${{ inputs.environment == 'appio' }}
-        uses: azure/cli@v1
+        uses: azure/cli@4db43908b9df2e7ac93c8275a8f9a448c59338dd # v1
         with:
           azcliversion: 2.30.0
           inlineScript: |
