@@ -131,10 +131,28 @@ const s3Service = ({ strapi }) => ({
       Delimiter: "/"
     });
     const res = await s3.send(command);
-    const folders = res.CommonPrefixes?.map(
+    const folders = (res.CommonPrefixes?.map(
       (p) => p.Prefix.replace(`${environment}/`, "").replace(/\/$/, "")
-    ) ?? [];
-    return folders.filter((f) => f && f !== "latest").reverse();
+    ) ?? []).filter((f) => f && f !== "latest").reverse();
+    const deployments = await Promise.all(folders.map(async (folder) => {
+      try {
+        const headCommand = new clientS3.HeadObjectCommand({
+          Bucket: bucket,
+          Key: `${environment}/${folder}/index.html`
+        });
+        const headRes = await s3.send(headCommand);
+        return {
+          folder,
+          description: headRes.Metadata?.description ?? null
+        };
+      } catch (err) {
+        return {
+          folder,
+          description: null
+        };
+      }
+    }));
+    return deployments;
   }
 });
 const fetch = globalThis.fetch;
