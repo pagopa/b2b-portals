@@ -17,6 +17,7 @@ import PreFooter from '@/components/PreFooter';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
+import LocaleGuard from '@/components/LocaleGuard';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -126,58 +127,60 @@ export default async function Layout({
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <html lang={locale}>
-        <body style={{ margin: 0 }}>
-          {preHeaderProps && (
-            <PreHeader
-              {...preHeaderProps}
-              themeVariant={themeVariant}
+    <LocaleGuard slug={slug}>
+      <ThemeProvider theme={theme}>
+        <html lang={locale}>
+          <body style={{ margin: 0 }}>
+            {preHeaderProps && (
+              <PreHeader
+                {...preHeaderProps}
+                themeVariant={themeVariant}
+                locale={locale}
+                defaultLocale={defaultLocale}
+                {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
+              />
+            )}
+            <Header
+              {...headerProps}
               locale={locale}
               defaultLocale={defaultLocale}
-              {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
             />
-          )}
-          <Header
-            {...headerProps}
-            locale={locale}
-            defaultLocale={defaultLocale}
-          />
-          {children}
-          {preFooterProps && (
-            <PreFooter
-              {...preFooterProps}
-              themeVariant={themeVariant}
-              locale={locale}
+            {children}
+            {preFooterProps && (
+              <PreFooter
+                {...preFooterProps}
+                themeVariant={themeVariant}
+                locale={locale}
+                defaultLocale={defaultLocale}
+                {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
+              />
+            )}
+            <Footer
+              {...footerProps}
               defaultLocale={defaultLocale}
-              {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
+              localizedLinks={localizedLinks}
             />
-          )}
-          <Footer
-            {...footerProps}
-            defaultLocale={defaultLocale}
-            localizedLinks={localizedLinks}
-          />
-          <Script
-            src='/scripts/otnotice-1.0.min.js'
-            type='text/javascript'
-            id='otprivacy-notice-script'
-            strategy='beforeInteractive'
-            {...(oneTrustToken && { 'data-settings': oneTrustToken })}
-          />
-          <Script
-            // Set Recaptcha Options in a Script tag to ensure it runs before any ReCaptcha is rendered
-            id='set-recaptcha-options'
-            type='text/javascript'
-            strategy='beforeInteractive'
-          >{`
+            <Script
+              src='/scripts/otnotice-1.0.min.js'
+              type='text/javascript'
+              id='otprivacy-notice-script'
+              strategy='beforeInteractive'
+              {...(oneTrustToken && { 'data-settings': oneTrustToken })}
+            />
+            <Script
+              // Set Recaptcha Options in a Script tag to ensure it runs before any ReCaptcha is rendered
+              id='set-recaptcha-options'
+              type='text/javascript'
+              strategy='beforeInteractive'
+            >{`
               if (typeof window !== 'undefined') {
                 window.recaptchaOptions = { useRecaptchaNet: true };
               }
             `}</Script>
-          {analytics && <ConsentHandler {...analytics} locale={locale} />}
-        </body>
-      </html>
-    </ThemeProvider>
+            {analytics && <ConsentHandler {...analytics} locale={locale} />}
+          </body>
+        </html>
+      </ThemeProvider>
+    </LocaleGuard>
   );
 }
