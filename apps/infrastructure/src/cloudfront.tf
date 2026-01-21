@@ -98,6 +98,42 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
     response_page_path = "/404.html"
   }
 
+  custom_error_response {
+    error_code         = 403
+    response_code      = 403
+    response_page_path = "/4xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 400
+    response_code      = 400
+    response_page_path = "/4xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 500
+    response_code      = 500
+    response_page_path = "/5xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 502
+    response_code      = 502
+    response_page_path = "/5xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 503
+    response_code      = 503
+    response_page_path = "/5xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 504
+    response_code      = 504
+    response_page_path = "/5xx.html"
+  }
+
   default_cache_behavior {
     # HTTPS requests we permit the distribution to serve
     allowed_methods            = ["GET", "HEAD", "OPTIONS"]
@@ -164,6 +200,42 @@ resource "aws_cloudfront_distribution" "storybook" {
     error_code         = 404
     response_code      = 404
     response_page_path = "/404.html"
+  }
+
+  custom_error_response {
+    error_code         = 403
+    response_code      = 403
+    response_page_path = "/4xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 400
+    response_code      = 400
+    response_page_path = "/4xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 500
+    response_code      = 500
+    response_page_path = "/5xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 502
+    response_code      = 502
+    response_page_path = "/5xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 503
+    response_code      = 503
+    response_page_path = "/5xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 504
+    response_code      = 504
+    response_page_path = "/5xx.html"
   }
 
   default_cache_behavior {
@@ -282,6 +354,42 @@ resource "aws_cloudfront_distribution" "cdn_multi_website_staging" {
     error_code         = 404
     response_code      = 404
     response_page_path = "/404.html"
+  }
+
+  custom_error_response {
+    error_code         = 403
+    response_code      = 403
+    response_page_path = "/4xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 400
+    response_code      = 400
+    response_page_path = "/4xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 500
+    response_code      = 500
+    response_page_path = "/5xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 502
+    response_code      = 502
+    response_page_path = "/5xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 503
+    response_code      = 503
+    response_page_path = "/5xx.html"
+  }
+
+  custom_error_response {
+    error_code         = 504
+    response_code      = 504
+    response_page_path = "/5xx.html"
   }
 
   default_cache_behavior {
