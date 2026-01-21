@@ -29,7 +29,13 @@ variable "cdn_custom_headers" {
       value    = string
     }
   ))
-  default = []
+  default = [
+    {
+      header   = "Server"
+      override = true
+      value    = "None"
+    }
+  ]
 }
 
 ### required for security group ALB, ECS and RDS
@@ -93,6 +99,13 @@ variable "websites_configs" {
       cdn_use_custom_certificate = true
       cdn_use_alias              = true
       cdn_indexing_enable        = false
+      custom_headers = [
+        {
+          header   = "Server"
+          value    = "None"
+          override = true
+        }
+      ]
     },
     "appio" = {
       origin_path                = "/appio"
@@ -103,6 +116,13 @@ variable "websites_configs" {
       cdn_use_alias              = true
       cdn_indexing_enable        = false
       content_security_policy    = "script-src-elem 'self' 'unsafe-inline' https://cdn.mxpnl.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js https://cdn.cookielaw.org/scripttemplates/otSDKStub.js https://cdn.cookielaw.org https://recaptcha.net https://www.gstatic.com; img-src 'self' https://d3qjb3tf4m0ri0.cloudfront.net https://cdn.cookielaw.org data:; frame-src https://recaptcha.net https://io.italia.it https://io.italia.it/enti-embeddable https://d2ekco8qmvzmh1.cloudfront.net https://d3qjb3tf4m0ri0.cloudfront.net;"
+      custom_headers = [
+        {
+          header   = "Server"
+          value    = "None"
+          override = true
+        }
+      ]
     },
     "demo" = {
       origin_path                = "/demo"
@@ -113,6 +133,13 @@ variable "websites_configs" {
       cdn_use_custom_certificate = true
       cdn_use_alias              = true
       cdn_indexing_enable        = false
+      custom_headers = [
+        {
+          header   = "Server"
+          value    = "None"
+          override = true
+        }
+      ]
     },
     "interop" = {
       origin_path                = "/interop"
@@ -122,6 +149,13 @@ variable "websites_configs" {
       cdn_use_custom_certificate = false
       cdn_use_alias              = false
       cdn_indexing_enable        = false
+      custom_headers = [
+        {
+          header   = "Server"
+          value    = "None"
+          override = true
+        }
+      ]
     }
   }
 }

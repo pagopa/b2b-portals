@@ -7,7 +7,7 @@ cdn_custom_headers = [
     header   = "X-Robots-Tag"
     override = true
     value    = "noindex"
-  }
+  },
 ]
 
 dns_domain_name = {
