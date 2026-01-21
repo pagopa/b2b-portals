@@ -37,7 +37,7 @@ permissions:
 jobs:
   deploy:
     name: Build and push NextJS image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     continue-on-error: false
     strategy:
       matrix:

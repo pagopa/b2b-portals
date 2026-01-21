@@ -15,7 +15,7 @@ permissions:
 jobs:
   deploy_demo:
     name: Build and push CMS demo image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment: demo
 
     concurrency:
