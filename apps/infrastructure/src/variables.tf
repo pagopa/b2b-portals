@@ -99,6 +99,13 @@ variable "websites_configs" {
       cdn_use_custom_certificate = true
       cdn_use_alias              = true
       cdn_indexing_enable        = false
+      custom_headers = [
+        {
+          header   = "Server"
+          value    = "None"
+          override = true
+        }
+      ]
     },
     "appio" = {
       origin_path                = "/appio"
@@ -126,6 +133,13 @@ variable "websites_configs" {
       cdn_use_custom_certificate = true
       cdn_use_alias              = true
       cdn_indexing_enable        = false
+      custom_headers = [
+        {
+          header   = "Server"
+          value    = "None"
+          override = true
+        }
+      ]
     },
     "interop" = {
       origin_path                = "/interop"
@@ -135,6 +149,13 @@ variable "websites_configs" {
       cdn_use_custom_certificate = false
       cdn_use_alias              = false
       cdn_indexing_enable        = false
+      custom_headers = [
+        {
+          header   = "Server"
+          value    = "None"
+          override = true
+        }
+      ]
     }
   }
 }
