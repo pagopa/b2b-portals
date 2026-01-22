@@ -40,7 +40,7 @@ const MegaHeader = ({
   menuItems,
   drawer,
   socialLinks,
-  mobileMenuIconAriaLabel,
+  labels,
 }: MegaHeaderProps) => {
   const pathname = usePathname();
   const { palette, ...theme } = useTheme();
@@ -157,7 +157,7 @@ const MegaHeader = ({
                 component='nav'
                 sx={{ mr: 'auto' }}
                 role='navigation'
-                aria-label='Menu principale'
+                aria-label={labels.mainMenu}
               >
                 <Nav>
                   {menuItems.map((menuItem: MegaMenuItem, index) => (
@@ -277,11 +277,7 @@ const MegaHeader = ({
           )}
           <IconButton
             className='hamburger'
-            aria-label={
-              mobileMenuOpen
-                ? mobileMenuIconAriaLabel.close
-                : mobileMenuIconAriaLabel.open
-            }
+            aria-label={mobileMenuOpen ? labels.closeMenu : labels.openMenu}
             aria-expanded={mobileMenuOpen}
             aria-controls='mobileMenu'
             onClick={handleMobileMenuToggle}
@@ -345,8 +341,8 @@ const MegaHeader = ({
                                     }}
                                   >
                                     {item.label}
-                                    {item.badge && (
-                                      <LinkLabel>{item.badge}</LinkLabel>
+                                    {item.isNew && (
+                                      <LinkLabel>{labels.news}</LinkLabel>
                                     )}
                                     <ArrowForwardIcon className='arrowIcon' />
                                   </Sublink>
@@ -365,7 +361,7 @@ const MegaHeader = ({
           role='navigation'
           id='mobileMenu'
           component='nav'
-          aria-label='Menu principale'
+          aria-label={labels.mainMenu}
           className={mobileMenuOpen ? 'open' : ''}
         >
           <Box
@@ -454,7 +450,7 @@ const MegaHeader = ({
                             >
                               {item.label}
                             </Typography>
-                            {item.badge && <LinkLabel>{item.badge}</LinkLabel>}
+                            {item.isNew && <LinkLabel>{labels.news}</LinkLabel>}
                             <ArrowForwardIcon className='arrowIcon' />
                           </Sublink>
                         ))}

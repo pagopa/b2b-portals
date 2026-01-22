@@ -20,12 +20,13 @@ const Header = ({
   logo,
   drawer,
   supportLink,
+  labels,
 }: HeaderProps) => {
   const muiTheme = useTheme();
   const backgroundColor = BackgroundColor(theme);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
-    null
+    null,
   );
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
@@ -165,13 +166,17 @@ const Header = ({
                 onOpen={openHeader}
                 onClose={closeHeader}
                 open={menuOpen}
+                ariaLabels={{
+                  openMenu: labels.openMenu,
+                  closeMenu: labels.closeMenu,
+                }}
               />
               <Typography
                 variant='body1'
                 color='text.secondary'
                 sx={{ fontWeight: 600 }}
               >
-                Menu
+                {labels.shortMainMenu}
               </Typography>
             </Stack>
             {drawer && (

@@ -29,7 +29,7 @@ permissions:
 jobs:
   rollback:
     name: Rollback to Timestamp ${{ inputs.timestamp }} - (${{ inputs.environment }})
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-24.04'
     environment: ${{ inputs.environment }}
 
     concurrency:

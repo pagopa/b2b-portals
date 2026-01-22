@@ -25,28 +25,64 @@ declare global {
   }
 }
 
-const LinkLabelValues = {
-  it: 'NOVITÀ',
-  en: 'NEW',
-  de: 'NEU',
-  fr: 'NOUVEAU',
-  sl: 'NOVO',
+const megaHeaderLabels: Record<Locale, MegaHeaderProps['labels']> = {
+  it: {
+    news: 'NOVITÀ',
+    openMenu: 'Apri menù',
+    closeMenu: 'Chiudi menù',
+    mainMenu: 'Menu principale',
+  },
+  en: {
+    news: 'NEW',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    mainMenu: 'Main menu',
+  },
+  de: {
+    news: 'NEU',
+    openMenu: 'Menü öffnen',
+    closeMenu: 'Menü schließen',
+    mainMenu: 'Hauptmenü',
+  },
+  fr: {
+    news: 'NOUVEAU',
+    openMenu: 'Ouvrir le menu',
+    closeMenu: 'Fermer le menu',
+    mainMenu: 'Menu principal',
+  },
+  sl: {
+    news: 'NOVO',
+    openMenu: 'Odpri meni',
+    closeMenu: 'Zapri meni',
+    mainMenu: 'Glavni meni',
+  },
 };
 
-const AriaLabels = {
-  open: {
-    it: 'Apri Menù',
-    en: 'Open Menù',
-    de: 'Menü öffnen',
-    fr: 'Ouvrir le menu',
-    sl: 'Odpri meni',
+const headerLabels: Record<Locale, HeaderProps['labels']> = {
+  it: {
+    openMenu: 'Apri menù',
+    closeMenu: 'Chiudi menù',
+    shortMainMenu: 'Menu',
   },
-  close: {
-    it: 'Chiudi Menù',
-    en: 'Close Menù',
-    de: 'Menü schließen',
-    fr: 'Fermer le menu',
-    sl: 'Zapri meni',
+  en: {
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    shortMainMenu: 'Menu',
+  },
+  de: {
+    openMenu: 'Menü öffnen',
+    closeMenu: 'Menü schließen',
+    shortMainMenu: 'Menü',
+  },
+  fr: {
+    openMenu: 'Ouvrir le menu',
+    closeMenu: 'Fermer le menu',
+    shortMainMenu: 'Menu',
+  },
+  sl: {
+    openMenu: 'Odpri meni',
+    closeMenu: 'Zapri meni',
+    shortMainMenu: 'Meni',
   },
 };
 
@@ -61,13 +97,12 @@ const makeHeaderSublink = (
 
 const makeMegaHeaderSublink = (
   sublink: MegaHeaderSublink,
-  locale: Locale,
-): { label: string; href: string; badge?: string } => ({
+): { label: string; href: string; isNew?: boolean } => ({
   label: sublink.label,
   href: sublink.page
     ? sublink.page.slug + (sublink.sectionID ? `#${sublink.sectionID}` : '')
     : (sublink.externalURL ?? ''),
-  ...(sublink.isNew && { badge: LinkLabelValues[locale] }),
+  ...(sublink.isNew && { isNew: sublink.isNew }),
 });
 
 const makeHeaderProps = (
@@ -130,6 +165,11 @@ const makeHeaderProps = (
       },
     }),
   })),
+  labels: {
+    openMenu: headerLabels[locale].openMenu,
+    closeMenu: headerLabels[locale].closeMenu,
+    shortMainMenu: headerLabels[locale].shortMainMenu,
+  },
 });
 
 const makeMegaHeaderProps = (
@@ -201,7 +241,7 @@ const makeMegaHeaderProps = (
     secondary: link.sublinkGroups.map((sublinkGroup) => ({
       title: sublinkGroup.title,
       items: sublinkGroup.sublinks.map((sublink) =>
-        makeMegaHeaderSublink(sublink, locale),
+        makeMegaHeaderSublink(sublink),
       ),
     })),
     ...(link.ctaButton && {
@@ -222,9 +262,11 @@ const makeMegaHeaderProps = (
       ariaLabel,
     })),
   }),
-  mobileMenuIconAriaLabel: {
-    open: AriaLabels.open[locale],
-    close: AriaLabels.close[locale],
+  labels: {
+    news: megaHeaderLabels[locale].news,
+    mainMenu: megaHeaderLabels[locale].mainMenu,
+    openMenu: megaHeaderLabels[locale].openMenu,
+    closeMenu: megaHeaderLabels[locale].closeMenu,
   },
 });
 

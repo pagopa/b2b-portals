@@ -12,7 +12,7 @@ jobs:
     # Execute this job only if the head branch is not the one created by changeset
     if: ${{ github.head_ref }} != 'changeset-release/main'
     name: Check PR title
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code

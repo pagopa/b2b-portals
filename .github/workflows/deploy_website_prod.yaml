@@ -25,7 +25,7 @@ permissions:
 jobs:
   promote-to-prod:
     name: Promote to production S3 - (${{ inputs.environment }})
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-24.04'
     environment: ${{ inputs.environment }}
 
     concurrency:
@@ -80,7 +80,7 @@ jobs:
   delete-old-deployments:
     needs: promote-to-prod
     name: Delete Older Deployments - (${{ inputs.environment }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment: ${{ inputs.environment }}
     steps:
       - name: Checkout
@@ -132,7 +132,7 @@ jobs:
   notify:
     needs: promote-to-prod
     name: Notify of Workflow End - (${{ inputs.environment }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment: ${{ inputs.environment }}
     steps:
       - name: Call Strapi API
