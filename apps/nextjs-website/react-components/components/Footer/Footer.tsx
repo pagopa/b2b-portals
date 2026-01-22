@@ -55,7 +55,10 @@ const Footer = ({
           </Box>
           {showFundedByNextGenerationEULogo && (
             <Box sx={{ mt: 2 }}>
-              <FundedByNextGenerationEU size={180} title={titleSVG} />
+              <FundedByNextGenerationEU
+                title={titleSVG}
+                language={langProps.activeLanguage.id}
+              />
             </Box>
           )}
         </Grid>
