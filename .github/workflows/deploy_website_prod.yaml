@@ -47,7 +47,7 @@ jobs:
 
       - name: Sync from staging to production (timestamp)
         shell: bash
-        run: aws s3 sync s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${DEPLOY_TIMESTAMP} --delete --exact-timestamps
+        run: aws s3 sync s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${DEPLOY_TIMESTAMP} --delete --exact-timestamps --metadata description=TestDescription-${DEPLOY_TIMESTAMP}
 
       - name: Sync from staging to production (latest)
         shell: bash

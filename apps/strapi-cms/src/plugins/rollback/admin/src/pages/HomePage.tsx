@@ -13,12 +13,13 @@ import { Tbody } from '@strapi/design-system';
 import { Td } from '@strapi/design-system';
 import { Button } from '@strapi/design-system';
 import { Flex } from '@strapi/design-system';
+import Deployment from "../../../types/deployment";
 
 const HomePage = () => {
   const { get, post } = useFetchClient();
   const [loading, setLoading] = useState<boolean>(false);
   const [triggering, setTriggering] = useState<boolean>(false);
-  const [deployments, setDeployments] = useState<string[]>([]);
+  const [deployments, setDeployments] = useState<Deployment[]>([]);
   const {
     allowedActions: { canTrigger },
   } = useRBAC(pluginPermissions.trigger);
@@ -28,7 +29,7 @@ const HomePage = () => {
     setLoading(true);
 
     try {
-      const res = await get<string[]>(`/${PLUGIN_ID}/deployments`);
+      const res = await get<Deployment[]>(`/${PLUGIN_ID}/deployments`);
       setDeployments(res.data);
     } catch (error: any) {
       if (error.name === 'AbortError') {
@@ -75,9 +76,9 @@ const HomePage = () => {
     }
   }
 
-  const formatDeployment = (deployment: string) => {
-    const date = deployment.split('_')[0].split('-').reverse().join('/');
-    const time = deployment.split('_')[1].replaceAll('-', ':');
+  const formatDeploymentDate = (folder: string) => {
+    const date = folder.split('_')[0].split('-').reverse().join('/');
+    const time = folder.split('_')[1].replaceAll('-', ':');
 
     return `${date} (${time})`;
   }
@@ -104,6 +105,11 @@ const HomePage = () => {
                 Deploy passati disponibili
               </Typography>
             </Th>
+            <Th key={'description'}>
+              <Typography variant="sigma">
+                Descrizione
+              </Typography>
+            </Th>
             <Th key={'actions'}/>
           </Tr>
         </Thead>
@@ -117,11 +123,14 @@ const HomePage = () => {
           ) : deployments.map((deployment, index) => (
             <Tr key={deployment}>
               <Td>
-                <Typography variant="sigma">{formatDeployment(deployment)}{index === 0 && ' - Attualmente in prod'}</Typography>
+                <Typography variant="sigma">{formatDeploymentDate(deployment.folder)}{index === 0 && ' - Attualmente in prod'}</Typography>
+              </Td>
+              <Td>
+                <Typography variant="sigma">{deployment.description ?? 'N/P'}</Typography>
               </Td>
               <Td>
                 <Flex justifyContent='flex-end'>
-                  <Button disabled={!canTrigger || triggering || index === 0} onClick={() => {triggerRollback(deployment)}}>
+                  <Button disabled={!canTrigger || triggering || index === 0} onClick={() => {triggerRollback(deployment.folder)}}>
                     ROLLBACK A QUESTO DEPLOY
                   </Button>
                 </Flex>
