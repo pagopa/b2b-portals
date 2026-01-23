@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function LocaleGuard({ slug, children }: Props) {
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState<ReactNode>(<></>);
 
   useEffect(() => {
     const languages = ['it', 'en', 'de', 'fr', 'sl'];
@@ -19,6 +19,7 @@ export default function LocaleGuard({ slug, children }: Props) {
 
     if (storedLanguage && languages.includes(storedLanguage)) {
       // Locale is already set. The user was already there.
+      setReady(children);
       return;
     }
 
@@ -30,7 +31,7 @@ export default function LocaleGuard({ slug, children }: Props) {
         localStorage.setItem('storedLanguage', localeSlug);
         // Or a popup which helps the user to switch to in his own language pages?
       }
-      setReady(true);
+      setReady(children);
       return;
     }
 
@@ -38,17 +39,17 @@ export default function LocaleGuard({ slug, children }: Props) {
     if (isBrowserDefaultLocale) {
       // browser locale is the same as website default locale
       localStorage.setItem('storedLanguage', browserLocale);
-      setReady(true);
+      setReady(children);
     } else if (languages.includes(browserLocale)) {
       // switch to proper locale home page
       localStorage.setItem('storedLanguage', browserLocale);
       window.open(`/${browserLocale}`, '_self');
+      setReady(<></>);
     } else {
       localStorage.setItem('storedLanguage', defaultLocale);
-      setReady(true);
+      setReady(children);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [slug, children]);
 
-  return <>{ready && <>{children}</>}</>;
+  return ready;
 }
