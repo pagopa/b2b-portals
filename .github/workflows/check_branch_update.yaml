@@ -10,7 +10,7 @@ jobs:
 
   check_branch_up_to_date:
     name: Verify branch is up to date
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code

@@ -50,7 +50,7 @@ export interface FooterColumnProps {
   icons?: SocialLinkType[];
 }
 
-interface Language {
+export interface Language {
   id: 'it' | 'en' | 'de' | 'fr' | 'sl';
   value: string;
   href: string;

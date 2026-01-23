@@ -30,7 +30,7 @@ permissions:
 jobs:
   deploy_multitenant:
     name: Build and push CMS Multitenant image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     continue-on-error: false
     strategy:
       matrix:
