@@ -98,10 +98,14 @@ export default async function Layout({
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the locale to the default locale
   // The locale will NOT be found for the default locale and will be in slug[0] for all others
+  const localesArray = Object.keys(locales).filter(
+    (locale) => locales[locale as Locale],
+  );
+
   const locale =
     slug === undefined
       ? defaultLocale
-      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
+      : localesArray.includes(slug[0] ?? '')
         ? (slug[0] as Locale)
         : defaultLocale;
 
@@ -109,14 +113,10 @@ export default async function Layout({
   const headerProps = await getHeaderProps(locale, defaultLocale);
   const footerProps = await getFooterProps(locale);
   const preFooterProps = await getPreFooterProps(locale);
-  const localesArray = Object.keys(locales).filter(
-    (locale) => locales[locale as Locale],
-  );
-
   const slugWithoutLocale =
     slug === undefined
       ? []
-      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
+      : localesArray.includes(slug[0] ?? '')
         ? slug.slice(1)
         : slug;
 
@@ -127,7 +127,12 @@ export default async function Layout({
   });
 
   return (
-    <LocaleGuard slug={slug}>
+    <LocaleGuard
+      slug={slug}
+      locale={locale}
+      defaultLocale={defaultLocale}
+      languages={localesArray}
+    >
       <ThemeProvider theme={theme}>
         <html lang={locale}>
           <body style={{ margin: 0 }}>

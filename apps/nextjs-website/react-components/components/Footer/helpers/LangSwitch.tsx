@@ -76,10 +76,7 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
               key={language.id}
               onClick={() => {
                 goToLanguageLink(language.href);
-                localStorage.setItem(
-                  'storedLanguage',
-                  language.href === '/' ? 'it' : language.href,
-                );
+                localStorage.setItem('storedLanguage', language.id);
               }}
             >
               {language.value}
