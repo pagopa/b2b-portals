@@ -75,6 +75,7 @@ const PreviewPage = async ({
         strategy='beforeInteractive'
         {...(oneTrustToken && { 'data-settings': oneTrustToken })}
       />
+      <p>{tenant} - {oneTrustToken}</p>
       <div>
         {document.sections.map((section) =>
           PageSection({
