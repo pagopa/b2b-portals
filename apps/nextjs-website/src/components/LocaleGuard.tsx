@@ -20,79 +20,47 @@ export default function LocaleGuard({
 }: Props) {
   const [ready, setReady] = useState<ReactNode>(<></>);
 
-  const checkLocale = (children: ReactNode, slug?: string[]) => {
-    const isLocaleStored = !!localStorage.getItem('storedLanguage');
-    const storedLanguage = localStorage.getItem('storedLanguage');
+  const checkLocale = (children: ReactNode, locale: Locale) => {
+    const isLocaleStored = !!localStorage.getItem('storedLocale');
+    const storedLocale = localStorage.getItem('storedLocale') ?? '';
     const browserLocale = navigator.language.substring(0, 2).toLowerCase();
     const isBrowserLocaleSupported = languages.includes(browserLocale ?? '');
-    const redirectUrl = (lang: string) => {
-      const slugWithoutLocale =
-        slug === undefined
-          ? []
-          : languages.includes(slug[0] ?? '')
-            ? slug.slice(1)
-            : slug;
+    const isLocaleSupported = languages.includes(locale);
+    const isStoredLocaleSupported = languages.includes(storedLocale);
+    const redirectUrl = (lang: string) =>
+      `/${lang !== defaultLocale ? lang : ''}`;
 
-      const slugs = (lang !== defaultLocale ? [lang] : []).concat(
-        slugWithoutLocale,
-      );
-      return `/${slugs.join('/')}`;
-    };
-
-    console.log('isLocaleStored', isLocaleStored);
-    console.log('browseLocale', browserLocale);
-    console.log('storedLanguage', storedLanguage);
-    console.log('locale', locale);
-    console.log('isBrowseLocaleSupported', isBrowserLocaleSupported);
-    console.log('slug array', slug);
-
-    if (
-      !isLocaleStored &&
-      browserLocale !== locale &&
-      isBrowserLocaleSupported
-    ) {
-      console.log(
-        '1 - No OBJ + Lingua del browser diversa da quella attuale + Lingua del browser\
-        è tra le lingue disponibili/renderizzate --> Vai alla lingua del browser\
-        (in futuro sarà da mostrare il popup ma sarà un task separato) e imposta OBJ',
-        `${redirectUrl(browserLocale)}`,
-      );
-      localStorage.setItem('storedLanguage', browserLocale);
-      setReady(<></>);
-      window.open(`${redirectUrl(browserLocale)}`, '_self');
-      return;
-    } else if (isLocaleStored && locale !== storedLanguage) {
-      console.log(
-        '2 - OBJ + Lingua attuale diversa da lingua in OBJ --> Reindirizza automaticamente a lingua OBJ',
-        `${redirectUrl(storedLanguage ?? '')}`,
-      );
-      setReady(<></>);
-      window.open(`${redirectUrl(storedLanguage ?? '')}`, '_self');
-      return;
-    } else if (
-      !isLocaleStored &&
-      browserLocale !== locale &&
-      !isBrowserLocaleSupported
-    ) {
-      console.log(
-        'No OBJ + Lingua del browser diversa da quella attuale + Lingua non supportata --> Non fare nulla',
-      );
-    } else if (!isLocaleStored && browserLocale === locale) {
-      console.log(
-        'No OBJ + Lingua del browser uguale a quella attuale --> Non fare nulla',
-      );
-    } else if (isLocaleStored && locale === storedLanguage) {
-      console.log(
-        'OBJ + Lingua attuale uguale a lingua in OBJ --> Non fare nulla',
-      );
+    if (!isLocaleStored) {
+      if (browserLocale !== locale && isBrowserLocaleSupported) {
+        localStorage.setItem('storedLocale', browserLocale);
+        setReady(<></>);
+        window.open(`${redirectUrl(browserLocale)}`, '_self');
+        return;
+      }
+      if (!isLocaleSupported) {
+        setReady(<></>);
+        window.open(`${redirectUrl(defaultLocale)}`, '_self');
+        return;
+      }
+    } else {
+      if (storedLocale !== locale) {
+        setReady(<></>);
+        if (isStoredLocaleSupported) {
+          window.open(`${redirectUrl(storedLocale)}`, '_self');
+        } else {
+          localStorage.removeItem('storedLocale');
+          window.open(`${redirectUrl(defaultLocale)}`, '_self');
+        }
+        return;
+      }
     }
     setReady(children);
   };
 
   useEffect(() => {
-    checkLocale(children, slug);
+    checkLocale(children, locale);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug, children]);
+  }, [slug, children, locale]);
 
   return ready;
 }
