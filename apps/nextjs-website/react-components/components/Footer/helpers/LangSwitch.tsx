@@ -75,7 +75,7 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
               aria-label={language.value}
               key={language.id}
               onClick={() => {
-                localStorage.setItem('storedLocale', language.id);
+                localStorage.setItem('preferredLang', language.id);
                 goToLanguageLink(language.href);
               }}
             >
