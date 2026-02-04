@@ -4,7 +4,7 @@ import { Locale } from '@/lib/fetch/siteWideSEO';
 import { defineRedirectBehaviour } from '@/lib/localeGuard';
 import { useLayoutEffect, useState } from 'react';
 
-interface Props {
+interface LocaleGuardProps {
   children: JSX.Element;
   noLocaleSlug: string[];
   locale: Locale;
@@ -18,7 +18,7 @@ export default function LocaleGuard({
   languages,
   locale,
   defaultLocale,
-}: Props) {
+}: LocaleGuardProps) {
   const [ready, setReady] = useState<boolean>(false);
   const preferredLang = localStorage.getItem('preferredLang');
   const browserLang = navigator.language.substring(0, 2).toLowerCase();
