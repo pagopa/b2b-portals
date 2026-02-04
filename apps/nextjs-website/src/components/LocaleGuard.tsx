@@ -8,6 +8,7 @@ interface Props {
   children: JSX.Element;
   noLocaleSlug: string[];
   locale: Locale;
+  defaultLocale: Locale;
   languages: string[];
 }
 
@@ -16,13 +17,11 @@ export default function LocaleGuard({
   children,
   languages,
   locale,
+  defaultLocale,
 }: Props) {
   const [ready, setReady] = useState<boolean>(false);
   const preferredLang = localStorage.getItem('preferredLang');
   const browserLang = navigator.language.substring(0, 2).toLowerCase();
-
-  console.log(languages);
-  console.log(noLocaleSlug);
 
   useLayoutEffect(() => {
     const expectedBehaviour = defineRedirectBehaviour({
@@ -47,13 +46,17 @@ export default function LocaleGuard({
         break;
       case 'browser':
         window.open(
-          `/${[browserLang].concat(noLocaleSlug).join('/')}`,
+          browserLang === defaultLocale
+            ? `/${noLocaleSlug.join('/')}`
+            : `/${[browserLang].concat(noLocaleSlug).join('/')}`,
           '_self',
         );
         break;
       case 'preferred':
         window.open(
-          `/${[preferredLang].concat(noLocaleSlug).join('/')}`,
+          preferredLang === defaultLocale
+            ? `/${noLocaleSlug.join('/')}`
+            : `/${[preferredLang].concat(noLocaleSlug).join('/')}`,
           '_self',
         );
         break;

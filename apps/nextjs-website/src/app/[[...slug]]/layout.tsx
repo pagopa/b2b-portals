@@ -129,6 +129,7 @@ export default async function Layout({
     <LocaleGuard
       noLocaleSlug={slugWithoutLocale}
       locale={locale}
+      defaultLocale={defaultLocale}
       languages={activeLocalesArray}
     >
       <ThemeProvider theme={theme}>
