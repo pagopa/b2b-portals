@@ -127,7 +127,7 @@ export default async function Layout({
 
   return (
     <LocaleGuard
-      slug={slug}
+      noLocaleSlug={slugWithoutLocale}
       locale={locale}
       defaultLocale={defaultLocale}
       languages={activeLocalesArray}
