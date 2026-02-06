@@ -25,16 +25,16 @@ describe('defineRedirectBehaviour - no preferredLang', () => {
     expect(unsupportedLocaleResult).toStrictEqual(expectedResult);
   });
 
-  it('should redirect to browser language which is supported and current locale is unsupported', () => {
+  it('should delete preferred language and redirect to default language when locale, browser language and preferred language are unsupported', () => {
     const result = defineRedirectBehaviour({
-      preferredLang: null,
-      browserLang: 'it',
+      preferredLang: 'sl',
+      browserLang: 'sl',
       supportedLangs,
       locale: 'sl',
     });
     expect(result).toStrictEqual({
-      redirect: 'browser',
-      localStorage: 'write',
+      redirect: 'default',
+      localStorage: 'delete',
     });
   });
 
@@ -90,7 +90,7 @@ describe('defineRedirectBehaviour - with preferredLang', () => {
     expect(result).toStrictEqual({ redirect: 'preferred' });
   });
 
-  it('Should delete preferred languange and redirect to default language', () => {
+  it('should delete preferred language and not redirect when preferred language and browser language are unsupported, but current language is supported', () => {
     const result = defineRedirectBehaviour({
       preferredLang: 'sl',
       browserLang: 'sl',
@@ -98,7 +98,6 @@ describe('defineRedirectBehaviour - with preferredLang', () => {
       locale: 'en',
     });
     expect(result).toStrictEqual({
-      redirect: 'default',
       localStorage: 'delete',
     });
   });

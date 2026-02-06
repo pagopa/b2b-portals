@@ -29,9 +29,9 @@ export const defineRedirectBehaviour = ({
 
     if (
       !isPreferredLangSupported &&
-      browserLang === locale &&
-      isBrowserLocaleSupported &&
-      isLocaleSupported
+      isLocaleSupported &&
+      ((browserLang === locale && isBrowserLocaleSupported) ||
+        (!isBrowserLocaleSupported && isLocaleSupported))
     ) {
       return {
         localStorage: 'delete',
