@@ -3,8 +3,8 @@ import { defineRedirectBehaviour } from '../localeGuard';
 
 const supportedLangs = ['it', 'en', 'fr'];
 
-describe('LocalGuard - localStorage data does not exists', () => {
-  it('Browser language is different from current language and is supported - redirect to browser language home page, write local storage', () => {
+describe('defineRedirectBehaviour - no preferredLang', () => {
+  it('should redirect to the browser language when browser language is supported and different from current language', () => {
     const result = defineRedirectBehaviour({
       preferredLang: null,
       browserLang: 'it',
@@ -17,7 +17,7 @@ describe('LocalGuard - localStorage data does not exists', () => {
     });
   });
 
-  it('Current language unsupported, browser language supported - redirect to browser language home page, write local storage', () => {
+  it('should redirect to browser language which is supported and current locale is unsupported', () => {
     const result = defineRedirectBehaviour({
       preferredLang: null,
       browserLang: 'it',
@@ -30,7 +30,7 @@ describe('LocalGuard - localStorage data does not exists', () => {
     });
   });
 
-  it('Current language unsupported, browser language unsupported - redirect to default home page, write local storage', () => {
+  it('should redirect to default language when neither current language or browser language are supported', () => {
     const result = defineRedirectBehaviour({
       preferredLang: null,
       browserLang: 'sl',
@@ -63,8 +63,8 @@ describe('LocalGuard - localStorage data does not exists', () => {
   });
 });
 
-describe('LocaleGuard - localStorage data exists', () => {
-  it('Current language is different from local storage language - redirect to local storage language home page', () => {
+describe('defineRedirectBehaviour - with preferredLang', () => {
+  it('should redirect to the preferred language when the current language is different from the preferred language', () => {
     const result = defineRedirectBehaviour({
       preferredLang: 'it',
       browserLang: 'en',
@@ -74,7 +74,7 @@ describe('LocaleGuard - localStorage data exists', () => {
     expect(result).toStrictEqual({ redirect: 'preferred' });
   });
 
-  it('Current language is different from local storage language and also unsupported - delete local storage and redirect to default home page', () => {
+  it('Should delete preferred languange and redirect to default language', () => {
     const result = defineRedirectBehaviour({
       preferredLang: 'sl',
       browserLang: 'sl',
@@ -87,7 +87,7 @@ describe('LocaleGuard - localStorage data exists', () => {
     });
   });
 
-  it('Browser language and current language are different from local storage language and also current language is unsupported - delete local storage and redirect to browser language home page', () => {
+  it('should delete preferred language and not redirect when preferred language is unsupported but browser language and current language coincide and are supported', () => {
     const result = defineRedirectBehaviour({
       preferredLang: 'sl',
       browserLang: 'en',
@@ -100,23 +100,40 @@ describe('LocaleGuard - localStorage data exists', () => {
     });
   });
 
-  it('Current language and browser language are to local storage language - do nothing', () => {
+  it('should save browser language as new preferred language and redirect to browser language', () => {
     const result = defineRedirectBehaviour({
+      preferredLang: 'sl',
+      browserLang: 'en',
+      supportedLangs,
+      locale: 'it',
+    });
+    expect(result).toStrictEqual({
+      redirect: 'browser',
+      localStorage: 'write',
+    });
+  });
+
+  it('should do nothing when the preferred language and the current language coincide and are supported', () => {
+    const sameBrowserLanguageResult = defineRedirectBehaviour({
       preferredLang: 'it',
       browserLang: 'it',
       supportedLangs,
       locale: 'it',
     });
-    expect(result).toStrictEqual({});
-  });
-
-  it('Current language is equals to local storage language, browser language is different - do nothing', () => {
-    const result = defineRedirectBehaviour({
+    const differentSupportedBrowserLanguageResult = defineRedirectBehaviour({
       preferredLang: 'it',
       browserLang: 'en',
       supportedLangs,
       locale: 'it',
     });
-    expect(result).toStrictEqual({});
+    const differentUnsupportedBrowserLanguageResult = defineRedirectBehaviour({
+      preferredLang: 'it',
+      browserLang: 'sl',
+      supportedLangs,
+      locale: 'it',
+    });
+    expect(sameBrowserLanguageResult).toStrictEqual({});
+    expect(differentSupportedBrowserLanguageResult).toStrictEqual({});
+    expect(differentUnsupportedBrowserLanguageResult).toStrictEqual({});
   });
 });

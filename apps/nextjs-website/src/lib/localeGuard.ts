@@ -29,7 +29,8 @@ export const defineRedirectBehaviour = ({
 
     return {
       redirect: isBrowserLocaleSupported ? 'browser' : 'default',
-      localStorage: 'delete',
+      localStorage:
+        isBrowserLocaleSupported && browserLang !== locale ? 'write' : 'delete',
     };
   }
 
