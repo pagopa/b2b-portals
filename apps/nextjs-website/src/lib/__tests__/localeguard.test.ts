@@ -4,17 +4,25 @@ import { defineRedirectBehaviour } from '../localeGuard';
 const supportedLangs = ['it', 'en', 'fr'];
 
 describe('defineRedirectBehaviour - no preferredLang', () => {
-  it('should redirect to the browser language when browser language is supported and different from current language', () => {
-    const result = defineRedirectBehaviour({
+  it('should redirect to the browser language and save it to local storage when browser language is supported and different from current language', () => {
+    const supportedLocaleResult = defineRedirectBehaviour({
       preferredLang: null,
       browserLang: 'it',
       supportedLangs,
       locale: 'en',
     });
-    expect(result).toStrictEqual({
+    const unsupportedLocaleResult = defineRedirectBehaviour({
+      preferredLang: null,
+      browserLang: 'it',
+      supportedLangs,
+      locale: 'sl',
+    });
+    const expectedResult = {
       redirect: 'browser',
       localStorage: 'write',
-    });
+    };
+    expect(supportedLocaleResult).toStrictEqual(expectedResult);
+    expect(unsupportedLocaleResult).toStrictEqual(expectedResult);
   });
 
   it('should redirect to browser language which is supported and current locale is unsupported', () => {
@@ -31,18 +39,26 @@ describe('defineRedirectBehaviour - no preferredLang', () => {
   });
 
   it('should redirect to default language when neither current language or browser language are supported', () => {
-    const result = defineRedirectBehaviour({
+    const sameLanguageResult = defineRedirectBehaviour({
       preferredLang: null,
       browserLang: 'sl',
       supportedLangs,
       locale: 'sl',
     });
-    expect(result).toStrictEqual({
-      redirect: 'default',
+    const differentLanguageResult = defineRedirectBehaviour({
+      preferredLang: null,
+      browserLang: 'sl',
+      supportedLangs,
+      locale: 'de',
     });
+    const expectedResult = {
+      redirect: 'default',
+    };
+    expect(sameLanguageResult).toStrictEqual(expectedResult);
+    expect(differentLanguageResult).toStrictEqual(expectedResult);
   });
 
-  it('Browser language different from current language and is also unsupported - do nothing', () => {
+  it('should do nothing when browser language is unsupported and current language is supported', () => {
     const result = defineRedirectBehaviour({
       preferredLang: null,
       browserLang: 'sl',
@@ -52,7 +68,7 @@ describe('defineRedirectBehaviour - no preferredLang', () => {
     expect(result).toStrictEqual({});
   });
 
-  it('Browser language is equals to current language - do nothing', () => {
+  it('should do nothing when browser language and current language coincide and are supported', () => {
     const result = defineRedirectBehaviour({
       preferredLang: null,
       browserLang: 'en',
@@ -95,22 +111,29 @@ describe('defineRedirectBehaviour - with preferredLang', () => {
       locale: 'en',
     });
     expect(result).toStrictEqual({
-      redirect: 'browser',
       localStorage: 'delete',
     });
   });
 
-  it('should save browser language as new preferred language and redirect to browser language', () => {
-    const result = defineRedirectBehaviour({
+  it('should redirect to the browser language and save it to local storage when the preferred language is unsupported and the browser language is supported and different from the current language', () => {
+    const supportedLocaleResult = defineRedirectBehaviour({
       preferredLang: 'sl',
       browserLang: 'en',
       supportedLangs,
       locale: 'it',
     });
-    expect(result).toStrictEqual({
+    const unsupportedLocaleResult = defineRedirectBehaviour({
+      preferredLang: 'sl',
+      browserLang: 'en',
+      supportedLangs,
+      locale: 'de',
+    });
+    const expectedResult = {
       redirect: 'browser',
       localStorage: 'write',
-    });
+    };
+    expect(supportedLocaleResult).toStrictEqual(expectedResult);
+    expect(unsupportedLocaleResult).toStrictEqual(expectedResult);
   });
 
   it('should do nothing when the preferred language and the current language coincide and are supported', () => {

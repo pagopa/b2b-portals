@@ -27,6 +27,17 @@ export const defineRedirectBehaviour = ({
       return preferredLang === locale ? {} : { redirect: 'preferred' };
     }
 
+    if (
+      !isPreferredLangSupported &&
+      browserLang === locale &&
+      isBrowserLocaleSupported &&
+      isLocaleSupported
+    ) {
+      return {
+        localStorage: 'delete',
+      };
+    }
+
     return {
       redirect: isBrowserLocaleSupported ? 'browser' : 'default',
       localStorage:
