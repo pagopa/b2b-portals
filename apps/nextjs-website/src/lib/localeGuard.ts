@@ -27,22 +27,13 @@ export const defineRedirectBehaviour = ({
       return preferredLang === locale ? {} : { redirect: 'preferred' };
     }
 
-    if (
-      !isPreferredLangSupported &&
-      isLocaleSupported &&
-      ((browserLang === locale && isBrowserLocaleSupported) ||
-        (!isBrowserLocaleSupported && isLocaleSupported))
-    ) {
-      return {
-        localStorage: 'delete',
-      };
+    if (!isLocaleSupported && !isBrowserLocaleSupported) {
+      return { redirect: 'default', localStorage: 'delete' };
     }
-
-    return {
-      redirect: isBrowserLocaleSupported ? 'browser' : 'default',
-      localStorage:
-        isBrowserLocaleSupported && browserLang !== locale ? 'write' : 'delete',
-    };
+    if (isBrowserLocaleSupported && browserLang !== locale) {
+      return { redirect: 'browser', localStorage: 'write' };
+    }
+    return { localStorage: 'delete' };
   }
 
   if (isBrowserLocaleSupported) {
