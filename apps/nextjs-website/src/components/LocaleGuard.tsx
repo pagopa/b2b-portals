@@ -20,10 +20,11 @@ export default function LocaleGuard({
   defaultLocale,
 }: LocaleGuardProps) {
   const [ready, setReady] = useState<boolean>(false);
-  const preferredLang = localStorage.getItem('preferredLang');
-  const browserLang = navigator.language.substring(0, 2).toLowerCase();
 
   useLayoutEffect(() => {
+    const preferredLang = localStorage.getItem('preferredLang');
+    const browserLang = navigator.language.substring(0, 2).toLowerCase();
+
     const expectedBehaviour = defineRedirectBehaviour({
       preferredLang,
       browserLang,
@@ -63,7 +64,7 @@ export default function LocaleGuard({
     }
 
     setReady(!expectedBehaviour.redirect);
-  }, [browserLang, languages, locale, noLocaleSlug, preferredLang]);
+  }, [languages, locale, noLocaleSlug]);
 
   return ready ? children : null;
 }
