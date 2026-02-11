@@ -64,7 +64,7 @@ const IFrame = ({ src, sectionID, title }: IFrameProps) => {
       <IframeResizer
         license='GPLv3' // Open Source License
         src={src}
-        title={title}
+        {...(title && { title })}
         style={{ width: '100%', height: '100vh', border: 'none' }}
         forwardRef={iframeRef}
         onMessage={handleMessage}
@@ -75,7 +75,7 @@ const IFrame = ({ src, sectionID, title }: IFrameProps) => {
     <IframeResizer
       license='GPLv3' // Open Source License
       src={src}
-      title={title}
+      {...(title && { title })}
       style={{ width: '100%', height: '100vh', border: 'none' }}
       forwardRef={iframeRef}
       onMessage={handleMessage}

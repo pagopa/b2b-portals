@@ -10,7 +10,7 @@ const makeIFrameProps = ({
 }: IFrameSectionProps): IFrameProps => ({
   src,
   ...(sectionID && { sectionID }),
-  title,
+  ...(title && { title }),
 });
 
 const IFrameSection = (props: IFrameSectionProps) => (

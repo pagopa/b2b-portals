@@ -15,8 +15,7 @@
       "regex": "^[a-z]+[a-z\\-]*$"
     },
     "title": {
-      "type": "string",
-      "required": true
+      "type": "string"
     }
   }
 }
