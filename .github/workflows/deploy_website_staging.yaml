@@ -36,15 +36,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
 
-      - name: Generate robots.txt (${{ inputs.environment }})
-        shell: bash
-        run: |
-          mkdir -p ${{ vars.S3_STAGING_BUCKET_NAME }}
-          cat <<EOF > ${{ vars.S3_STAGING_BUCKET_NAME }}/robots.txt
-          User-agent: *
-          Disallow: /
-          EOF
-
       - name: Deploy website
         uses: ./.github/actions/deploy
         with:
@@ -66,6 +57,14 @@ jobs:
           interop_strapi_api_base_url: ${{ vars.INTEROP_STRAPI_URL }}
           interop_strapi_media_library: ${{ vars.INTEROP_STRAPI_MEDIA_LIBRARY_S3_BUCKET_NAME }}
           cdn_path: ${{ vars.CDN_PATH }}
+
+      - name: Generate robots.txt (${{ inputs.environment }})
+        shell: bash
+        run: |
+          cat <<EOF > ${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }}/robots.txt
+          User-agent: *
+          Disallow: /
+          EOF
 
   notify:
     needs: deploy
