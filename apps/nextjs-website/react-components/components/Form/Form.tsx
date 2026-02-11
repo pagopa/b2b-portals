@@ -233,6 +233,13 @@ const Form = ({
     },
   ];
 
+  const autocompleteMap: Record<InputFieldData['name'], string> = {
+    name: 'given-name',
+    surname: 'family-name',
+    email: 'email',
+    organization: 'organization',
+  };
+
   const InputField = ({ name, placeholder, show }: InputFieldData) => {
     return show ? (
       <Grid item xs={12} sm={name === 'name' || name === 'surname' ? 6 : 12}>
@@ -242,6 +249,7 @@ const Form = ({
             name={name}
             value={formData[name]}
             onChange={handleInputChange}
+            autoComplete={autocompleteMap[name]}
             sx={{ backgroundColor: 'white', color: 'black' }}
           />
           {validationErrors[name] !== null && (
