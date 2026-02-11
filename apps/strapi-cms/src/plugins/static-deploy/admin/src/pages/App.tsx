@@ -5,13 +5,10 @@ import { HomePage } from './HomePage';
 import pluginPermissions from '../permissions';
 import { NotificationsPage } from './NotificationsPage';
 import { Flex } from '@strapi/design-system';
-import { BaseLink } from '@strapi/design-system';
 import { Typography } from '@strapi/design-system';
-import { useIntl } from 'react-intl';
 import { Link } from '@strapi/design-system';
 
 const App = () => {
-  const { formatMessage } = useIntl();
   const location = useLocation();
   const {
     allowedActions: { canNotifications },

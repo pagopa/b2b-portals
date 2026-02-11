@@ -10,30 +10,30 @@ import {
   Tr,
   Th,
   Td,
-} from '@strapi/design-system';
-import { useIntl } from 'react-intl';
-import { Play, ArrowClockwise, ExternalLink, Expand } from '@strapi/icons';
-import { useEffect, useState } from 'react';
-import { ConfirmDialog, useFetchClient, useNotification, useRBAC } from '@strapi/strapi/admin';
-import { PLUGIN_ID } from '../pluginId';
-import { differenceInMilliseconds, formatRelative } from 'date-fns';
-import pluginPermissions from '../permissions';
-import { Dialog } from '@strapi/design-system';
-import Workflow from '../../../types/workflow';
-import Config from '../../../types/config';
-import StagingStatus from '../../../types/StagingStatus';
-import { Tooltip } from '@strapi/design-system';
-import { IconButton } from '@strapi/design-system';
+} from "@strapi/design-system";
+import { Play, ArrowClockwise, ExternalLink, Expand } from "@strapi/icons";
+import { useEffect, useState } from "react";
+import { useFetchClient, useNotification, useRBAC } from "@strapi/strapi/admin";
+import { PLUGIN_ID } from "../pluginId";
+import { differenceInMilliseconds, formatRelative } from "date-fns";
+import pluginPermissions from "../permissions";
+import { Dialog } from "@strapi/design-system";
+import Workflow from "../../../types/workflow";
+import Config from "../../../types/config";
+import StagingStatus from "../../../types/StagingStatus";
+import { IconButton } from "@strapi/design-system";
 
 const HomePage = () => {
-  const { formatMessage } = useIntl();
   const { get, post } = useFetchClient();
   const [loadingTriggerButton, setLoadingTriggerButton] = useState(false);
   const [config, setConfig] = useState<Config | null>(null);
   const [unstagedUpdates, setUnstagedUpdates] = useState<boolean>(true);
   const [history, setHistory] = useState<Array<Workflow>>([]);
-  const [loadingHistory, setLoadingHistory] = useState<'loading' | 'planned' | 'none'>('none');
-  const [showTriggerConfirmationPopup, setShowTriggerConfirmationPopup] = useState(false);
+  const [loadingHistory, setLoadingHistory] = useState<
+    "loading" | "planned" | "none"
+  >("none");
+  const [showTriggerConfirmationPopup, setShowTriggerConfirmationPopup] =
+    useState(false);
   const {
     allowedActions: { canTrigger },
   } = useRBAC(pluginPermissions.trigger);
@@ -49,7 +49,9 @@ const HomePage = () => {
     }
   }
 
-  async function sendEmailNotification(event: 'staging-trigger' | 'prod-trigger' | 'trigger') {
+  async function sendEmailNotification(
+    event: "staging-trigger" | "prod-trigger" | "trigger",
+  ) {
     try {
       post(`/${PLUGIN_ID}/notify`, { event });
     } catch (error: any) {
@@ -68,7 +70,9 @@ const HomePage = () => {
     }
   }
 
-  async function setStagingStatus(newDocumentData: Omit<StagingStatus, 'createdAt'>) {
+  async function setStagingStatus(
+    newDocumentData: Omit<StagingStatus, "createdAt">,
+  ) {
     try {
       await post(`/${PLUGIN_ID}/staging-status`, newDocumentData);
     } catch (error: any) {
@@ -86,8 +90,9 @@ const HomePage = () => {
       // If no lastWorkflow --> Leave everything as is
       // If no currentStagingStatus --> There's been an issue --> Leave everything as is (which in this case will be the prod trigger being blocked)
       if (currentStagingStatus && lastWorkflow) {
-        const lastWorkflowPathArray = lastWorkflow.path.split('/');
-        const lastWorkflowFileName = lastWorkflowPathArray[lastWorkflowPathArray.length - 1];
+        const lastWorkflowPathArray = lastWorkflow.path.split("/");
+        const lastWorkflowFileName =
+          lastWorkflowPathArray[lastWorkflowPathArray.length - 1];
 
         const lastWorkflowCreationDate = new Date(lastWorkflow.created_at);
         const lastUpdateDate = new Date(currentStagingStatus.createdAt);
@@ -102,7 +107,7 @@ const HomePage = () => {
           }
 
           // If it ended unsuccessfully, regardless of staging status, disable prod trigger
-          if (lastWorkflow.conclusion !== 'success'){
+          if (lastWorkflow.conclusion !== "success") {
             setUnstagedUpdates(true);
             setStagingStatus({ unstagedUpdates: true });
             return;
@@ -112,7 +117,7 @@ const HomePage = () => {
             // If there are no updates, enable prod trigger
             if (!currentStagingStatus.unstagedUpdates) {
               setUnstagedUpdates(false);
-              return
+              return;
             }
 
             // If the updates are more recent than the last workflow, disable prod trigger
@@ -134,7 +139,7 @@ const HomePage = () => {
           }
 
           // It finished unsuccessfully
-          if (lastWorkflow.conclusion !== 'success') {
+          if (lastWorkflow.conclusion !== "success") {
             // If last staging workflow was successful, it set unstaged updates to false
             // Knowing this, if there are any unstaged updates, we can assume they come after the last staging workflow and disable prod trigger
             if (currentStagingStatus.unstagedUpdates) {
@@ -144,14 +149,14 @@ const HomePage = () => {
 
             // If no unstaged updates, check last staging workflow staging
             // Only enable prod trigger if the last staging workflow was successful
-            const lastStagingWorkflow: Workflow | undefined = data.workflow_runs.filter(
-              (workflow) => {
-                const workflowPathArray = workflow.path.split('/');
-                const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
+            const lastStagingWorkflow: Workflow | undefined =
+              data.workflow_runs.filter((workflow) => {
+                const workflowPathArray = workflow.path.split("/");
+                const workflowFileName =
+                  workflowPathArray[workflowPathArray.length - 1];
 
                 return workflowFileName === config.staging!.workflowID;
-              }
-            )[0];
+              })[0];
 
             // No last staging workflow before current prod workflow, disable prod
             if (!lastStagingWorkflow) {
@@ -168,7 +173,7 @@ const HomePage = () => {
             }
 
             // Last staging workflow FAIL --> disable prod
-            if (lastStagingWorkflow.conclusion !== 'success') {
+            if (lastStagingWorkflow.conclusion !== "success") {
               setUnstagedUpdates(true);
               setStagingStatus({ unstagedUpdates: true });
             } else {
@@ -189,25 +194,25 @@ const HomePage = () => {
   }
 
   async function fetchHistory() {
-    setLoadingHistory('loading');
+    setLoadingHistory("loading");
 
     try {
       const { data } = await get(`/${PLUGIN_ID}/history`);
       await verifyStagingStatus(data);
       setHistory(data.workflow_runs.slice(0, 10));
     } catch (error: any) {
-      if (error.name === 'AbortError') {
+      if (error.name === "AbortError") {
         // User likely just changed page before fetch completed, do nothing
         return;
       } else {
         console.error(error);
         toggleNotification({
-          type: 'danger',
-          title: 'Failed to fetch workflow history!',
+          type: "danger",
+          title: "Impossibile recuperare storico dei deploy!",
         });
       }
     } finally {
-      setLoadingHistory('none');
+      setLoadingHistory("none");
     }
   }
 
@@ -218,7 +223,7 @@ const HomePage = () => {
       if (config?.staging && unstagedUpdates) {
         // Staging
         await post(`/${PLUGIN_ID}/trigger-staging`);
-        sendEmailNotification('staging-trigger');
+        sendEmailNotification("staging-trigger");
       } else {
         // Prod
         // Check for unstaged updates to prevent triggering if another editor published changes while the user was on this page
@@ -227,9 +232,9 @@ const HomePage = () => {
           // Disable prod trigger and show error
           setUnstagedUpdates(true);
           toggleNotification({
-            type: 'danger',
-            title: 'Trigger was aborted!',
-            message: 'Could not fetch current staging status',
+            type: "danger",
+            title: "Lancio del workflow annullato!",
+            message: "Impossibile recuperare lo staging status corrente",
             timeout: 5000,
           });
           return;
@@ -238,51 +243,52 @@ const HomePage = () => {
           // Disable prod trigger and show message
           setUnstagedUpdates(true);
           toggleNotification({
-            type: 'danger',
-            title: 'Trigger was aborted!',
-            message: 'New unstaged updates found!',
+            type: "danger",
+            title: "Lancio del workflow annullato!",
+            message:
+              "Sono state trovate nuove modifiche non deployate in staging!",
             timeout: 5000,
           });
           return;
         }
 
         await post(`/${PLUGIN_ID}/trigger`);
-        sendEmailNotification(config?.staging ? 'prod-trigger' : 'trigger');
+        sendEmailNotification(config?.staging ? "prod-trigger" : "trigger");
       }
 
-
       toggleNotification({
-        type: 'success',
-        title: 'Successfully started workflow!',
-        message: 'History will be refetched in 5 seconds',
+        type: "success",
+        title: "Workflow lanciato con successo!",
+        message: "Lo storico dei deploy sarà ricaricato tra 5 secondi",
         timeout: 5000,
       });
-      setLoadingHistory('planned');
+      setLoadingHistory("planned");
       setTimeout(fetchHistory, 5000);
     } catch (error: any) {
       console.error(error);
       const { status, name } = error.response.data.error;
 
-      if (status === 422 && name === 'UnprocessableEntityError') {
+      if (status === 422 && name === "UnprocessableEntityError") {
         toggleNotification({
-          type: 'danger',
-          title: 'Error 422: Unprocessable Entity',
+          type: "danger",
+          title: "Error 422: Unprocessable Entity",
         });
         return;
       }
 
-      if (status === 403 && name === 'PolicyError') {
+      if (status === 403 && name === "PolicyError") {
         toggleNotification({
-          type: 'danger',
-          title: 'Error 403: Permission Denied',
+          type: "danger",
+          title: "Error 403: Permission Denied",
         });
         return;
       }
 
       toggleNotification({
-        type: 'danger',
-        title: 'Failed to trigger workflow!',
-        message: 'Unknown error occurred. Please check the console for more details.',
+        type: "danger",
+        title: "Impossibile lanciare il workflow!",
+        message:
+          "Errore sconosciuto. Controllare la console per maggiori dettagli.",
       });
     } finally {
       setLoadingTriggerButton(false);
@@ -293,8 +299,9 @@ const HomePage = () => {
     if (config?.staging && unstagedUpdates) {
       // Staging
       const stagingHistory = history.filter((workflow) => {
-        const workflowPathArray = workflow.path.split('/');
-        const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
+        const workflowPathArray = workflow.path.split("/");
+        const workflowFileName =
+          workflowPathArray[workflowPathArray.length - 1];
 
         return workflowFileName === config.staging!.workflowID;
       });
@@ -302,12 +309,13 @@ const HomePage = () => {
     } else {
       // Prod
       const prodHistory = history.filter((workflow) => {
-        const workflowPathArray = workflow.path.split('/');
-        const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
+        const workflowPathArray = workflow.path.split("/");
+        const workflowFileName =
+          workflowPathArray[workflowPathArray.length - 1];
 
         return workflowFileName === config?.workflowID;
       });
-      return `"${prodHistory[0]?.name ?? config?.workflowID ?? ''}"`;
+      return `"${prodHistory[0]?.name ?? config?.workflowID ?? ""}"`;
     }
   }
 
@@ -324,18 +332,23 @@ const HomePage = () => {
   return (
     <Main
       style={{
-        padding: '0 5.4rem 3.2rem 5.4rem',
+        padding: "0 5.4rem 3.2rem 5.4rem",
       }}
     >
-      <Flex direction="row" alignItems="center" justifyContent="space-between" marginBottom="4rem">
-        <Typography variant="alpha">Deployments</Typography>
+      <Flex
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        marginBottom="4rem"
+      >
+        <Typography variant="beta">Deployments</Typography>
 
         <Flex direction="row" alignItems="center" gap="1rem">
           <Button
             onClick={fetchHistory}
-            loading={loadingHistory !== 'none'}
+            loading={loadingHistory !== "none"}
             disabled={loadingTriggerButton}
-            style={{ height: '4.2rem' }}
+            style={{ height: "4.2rem" }}
             variant="secondary"
             startIcon={<ArrowClockwise />}
           >
@@ -351,9 +364,13 @@ const HomePage = () => {
                 <Flex>
                   <Button
                     loading={loadingTriggerButton}
-                    disabled={loadingHistory !== 'none' || !canTrigger || !unstagedUpdates}
+                    disabled={
+                      loadingHistory !== "none" ||
+                      !canTrigger ||
+                      !unstagedUpdates
+                    }
                     style={{
-                      height: '4.2rem',
+                      height: "4.2rem",
                       borderTopRightRadius: 0,
                       borderBottomRightRadius: 0,
                     }}
@@ -364,45 +381,71 @@ const HomePage = () => {
                   </Button>
                   <Button
                     loading={loadingTriggerButton}
-                    disabled={loadingHistory !== 'none' || !canTrigger || unstagedUpdates}
-                    style={{ height: '4.2rem', borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+                    disabled={
+                      loadingHistory !== "none" ||
+                      !canTrigger ||
+                      unstagedUpdates
+                    }
+                    style={{
+                      height: "4.2rem",
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0,
+                    }}
                     variant="default"
                     startIcon={<Play />}
-                    title="Trigger will unlock once staging has successfully completed"
+                    title={
+                      loadingHistory !== "none" ||
+                      !canTrigger ||
+                      unstagedUpdates
+                        ? "Il deploy in produzione sarà disponibile a seguito di un deploy in staging terminato con successo"
+                        : ""
+                    }
                   >
-                    <Typography fontSize="1.6rem">Trigger</Typography>
+                    <Typography fontSize="1.6rem">Produzione</Typography>
                   </Button>
                 </Flex>
               ) : (
                 <Button
                   loading={loadingTriggerButton}
-                  disabled={loadingHistory !== 'none' || !canTrigger}
-                  style={{ height: '4.2rem' }}
+                  disabled={loadingHistory !== "none" || !canTrigger}
+                  style={{ height: "4.2rem" }}
                   variant="default"
                   startIcon={<Play />}
                 >
-                  <Typography fontSize="1.6rem">Trigger</Typography>
+                  <Typography fontSize="1.6rem">Produzione</Typography>
                 </Button>
               )}
             </Dialog.Trigger>
 
-            <ConfirmDialog
-              variant="default"
-              icon={null}
-              onConfirm={triggerGithubActions}
-              title="Confirm Workflow Trigger"
-            >
-              <Typography fontSize="1.4rem">Triggering workflow {getWorkflowName()}</Typography>
-              {config && (
-                <Typography fontSize="1.2rem">
-                  (Workflow ID:{' '}
-                  {config.staging && unstagedUpdates
-                    ? config.staging.workflowID
-                    : config.workflowID}
-                  )
+            <Dialog.Content>
+              <Dialog.Header>Conferma Lancio del Workflow</Dialog.Header>
+              <Dialog.Body>
+                <Typography fontSize="1.4rem">
+                  Lancio del workflow {getWorkflowName()}
                 </Typography>
-              )}
-            </ConfirmDialog>
+                {config && (
+                  <Typography fontSize="1.2rem">
+                    (Workflow ID:{" "}
+                    {config.staging && unstagedUpdates
+                      ? config.staging.workflowID
+                      : config.workflowID}
+                    )
+                  </Typography>
+                )}
+              </Dialog.Body>
+              <Dialog.Footer>
+                <Dialog.Cancel>
+                  <Button fullWidth variant="tertiary">
+                    Annulla
+                  </Button>
+                </Dialog.Cancel>
+                <Dialog.Action>
+                  <Button fullWidth onClick={triggerGithubActions}>
+                    Conferma
+                  </Button>
+                </Dialog.Action>
+              </Dialog.Footer>
+            </Dialog.Content>
           </Dialog.Root>
         </Flex>
       </Flex>
@@ -410,26 +453,26 @@ const HomePage = () => {
       <Table colCount={5} rowCount={11}>
         <Thead>
           <Tr>
-            <Th key={'run-number'}>
+            <Th key={"run-number"}>
               <Typography variant="sigma">NUMERO RUN</Typography>
             </Th>
-            <Th key={'workflow-name'}>
+            <Th key={"workflow-name"}>
               <Typography variant="sigma">NOME WORKFLOW</Typography>
             </Th>
-            <Th key={'status'}>
+            <Th key={"status"}>
               <Typography variant="sigma">STATO</Typography>
             </Th>
-            <Th key={'creation-date'}>
+            <Th key={"creation-date"}>
               <Typography variant="sigma">DATA CREAZIONE</Typography>
             </Th>
-            <Th key={'duration'}>
+            <Th key={"duration"}>
               <Typography variant="sigma">DURATA</Typography>
             </Th>
-            {!config?.hideGithubLink && <Th key={'actions'}></Th>}
+            {!config?.hideGithubLink && <Th key={"actions"}></Th>}
           </Tr>
         </Thead>
         <Tbody>
-          {loadingHistory === 'loading' && (
+          {loadingHistory === "loading" && (
             <Tr>
               <Td></Td>
               <Td></Td>
@@ -442,12 +485,14 @@ const HomePage = () => {
             </Tr>
           )}
 
-          {loadingHistory === 'planned' && (
+          {loadingHistory === "planned" && (
             <Tr>
               <Td></Td>
               <Td></Td>
               <Td>
-                <Typography variant="sigma">Loading history in 5 seconds...</Typography>
+                <Typography variant="sigma">
+                  Loading history in 5 seconds...
+                </Typography>
               </Td>
               <Td></Td>
               <Td></Td>
@@ -455,26 +500,37 @@ const HomePage = () => {
             </Tr>
           )}
 
-          {loadingHistory === 'none' &&
+          {loadingHistory === "none" &&
             history.map((workflow: Workflow) => {
               const msDuration = differenceInMilliseconds(
                 new Date(workflow.updated_at),
-                new Date(workflow.run_started_at)
+                new Date(workflow.run_started_at),
               );
               const secs = (msDuration / 1000) % 60;
               const mins = Math.floor(msDuration / 1000 / 60);
-              const relativeDate = formatRelative(new Date(workflow.created_at), new Date());
-              const year = relativeDate.includes('/') ? relativeDate.split('/')[2] : null;
-              const month = relativeDate.includes('/') ? relativeDate.split('/')[0] : null;
-              const day = relativeDate.includes('/') ? relativeDate.split('/')[1] : null;
-              const ymdRelativeDate = relativeDate.includes('/')
+              const relativeDate = formatRelative(
+                new Date(workflow.created_at),
+                new Date(),
+              );
+              const year = relativeDate.includes("/")
+                ? relativeDate.split("/")[2]
+                : null;
+              const month = relativeDate.includes("/")
+                ? relativeDate.split("/")[0]
+                : null;
+              const day = relativeDate.includes("/")
+                ? relativeDate.split("/")[1]
+                : null;
+              const ymdRelativeDate = relativeDate.includes("/")
                 ? `${year}-${month}-${day}`
                 : relativeDate;
 
               return (
                 <Tr key={workflow.id}>
                   <Td>
-                    <Typography variant="sigma">{workflow.run_number}</Typography>
+                    <Typography variant="sigma">
+                      {workflow.run_number}
+                    </Typography>
                   </Td>
                   <Td>
                     <Typography variant="sigma">{workflow.name}</Typography>
@@ -487,18 +543,23 @@ const HomePage = () => {
                   </Td>
                   <Td>
                     <Typography variant="sigma">
-                      {workflow.conclusion ? `${mins}m ${secs}s` : 'in progress'}
+                      {workflow.conclusion
+                        ? `${mins}m ${secs}s`
+                        : "in progress"}
                     </Typography>
                   </Td>
                   {!config?.hideGithubLink && (
                     <Td>
-                      <Tooltip description="Show in Github">
-                        <a href={workflow.html_url} target="_blank" rel="noreferrer">
-                          <IconButton aria-label="Show in Github">
-                            <ExternalLink />
-                          </IconButton>
-                        </a>
-                      </Tooltip>
+                      <a
+                        href={workflow.html_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="Mostra in Github"
+                      >
+                        <IconButton aria-label="Mostra in Github">
+                          <ExternalLink />
+                        </IconButton>
+                      </a>
                     </Td>
                   )}
                 </Tr>

@@ -65,7 +65,7 @@ const index = {
         defaultMessage: name
       },
       Component: async () => {
-        const { App } = await Promise.resolve().then(() => require("./App-CsoiqvSI.js"));
+        const { App } = await Promise.resolve().then(() => require("./App-CZ-3Htkg.js"));
         return App;
       }
     });

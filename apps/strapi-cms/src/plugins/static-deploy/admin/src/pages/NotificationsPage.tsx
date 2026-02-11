@@ -7,7 +7,6 @@ import { Dialog } from '@strapi/design-system';
 import { useEffect, useState } from 'react';
 import { Button } from '@strapi/design-system';
 import { Plus, Trash } from '@strapi/icons';
-import { useIntl } from 'react-intl';
 import { TextInput } from '@strapi/design-system';
 import { Table } from '@strapi/design-system';
 import { Thead } from '@strapi/design-system';
@@ -18,10 +17,8 @@ import { PLUGIN_ID } from '../pluginId';
 import { Td } from '@strapi/design-system';
 import { Tooltip } from '@strapi/design-system';
 import { IconButton } from '@strapi/design-system';
-import { VisuallyHidden } from '@strapi/design-system';
 
 const NotificationsPage = () => {
-  const { formatMessage } = useIntl();
   const { get, post, del } = useFetchClient();
   const [showAddEmailPopup, setShowAddEmailPopup] = useState(false);
   const [showConfirmEmailDeletionPopup, setShowConfirmEmailDeletionPopup] = useState(false);
@@ -67,15 +64,15 @@ const NotificationsPage = () => {
             getEmailsForNotifications();
             toggleNotification({
                 type: 'success',
-                title: 'Email added successfully!',
+                title: 'Indirizzo email aggiunto con successo!',
                 timeout: 5000,
             });
         } else {
             console.error(data.err);
             toggleNotification({
                 type: 'danger',
-                title: 'Failed to add email',
-                message: 'Please try again',
+                title: 'Impossibile aggiungere indirizzo email',
+                message: 'Si prega di riprovare',
                 timeout: 5000,
             });
         }
@@ -83,8 +80,8 @@ const NotificationsPage = () => {
         console.error(error);
         toggleNotification({
             type: 'danger',
-            title: 'Failed to add email',
-            message: 'Please try again',
+            title: 'Impossibile aggiungere indirizzo email',
+            message: 'Si prega di riprovare',
             timeout: 5000,
         });
     }
@@ -97,15 +94,15 @@ const NotificationsPage = () => {
             getEmailsForNotifications();
             toggleNotification({
                 type: 'success',
-                title: 'Email removed successfully!',
+                title: 'Indirizzo email rimosso con successo!',
                 timeout: 5000,
             });
         } else {
             console.error(data.err);
             toggleNotification({
                 type: 'danger',
-                title: 'Failed to add email',
-                message: 'Please try again',
+                title: 'Impossibile rimuovere indirizzo email',
+                message: 'Si prega di riprovare',
                 timeout: 5000,
             });
         }
@@ -113,8 +110,8 @@ const NotificationsPage = () => {
         console.error(error);
         toggleNotification({
             type: 'danger',
-            title: 'Failed to remove email',
-            message: 'Please try again',
+            title: 'Impossibile rimuovere indirizzo email',
+            message: 'Si prega di riprovare',
             timeout: 5000,
         });
     } finally {
@@ -145,7 +142,7 @@ const NotificationsPage = () => {
           justifyContent="space-between"
           marginBottom="4rem"
         >
-          <Typography variant="alpha">Email Notifications</Typography>
+          <Typography variant="beta">Notifiche Email</Typography>
 
           <Flex direction="row" alignItems="center" gap="1rem">
             <Dialog.Root open={showAddEmailPopup} onOpenChange={setShowAddEmailPopup}>
@@ -156,22 +153,22 @@ const NotificationsPage = () => {
               </Dialog.Trigger>
 
               <Dialog.Content>
-                <Dialog.Header>Add Email Address</Dialog.Header>
+                <Dialog.Header>Aggiungi Indirizzo Email</Dialog.Header>
                 <Dialog.Body>
                   <Flex direction="column" alignItems="stretch" gap="1rem" width="100%">
-                    <Typography>This address will receive email notifications</Typography>
-                    <TextInput type="email" placeholder="Email Address" onChange={(e: any) => validateNewEmail(e.target.value)}/>
+                    <Typography>Questo indirizzo riceverà le email di notifica</Typography>
+                    <TextInput type="email" placeholder="Indirizzo Email" onChange={(e: any) => validateNewEmail(e.target.value)}/>
                   </Flex>
                 </Dialog.Body>
                 <Dialog.Footer>
                   <Dialog.Cancel>
                     <Button fullWidth variant="tertiary">
-                      Cancel
+                      Annulla
                     </Button>
                   </Dialog.Cancel>
                   <Dialog.Action>
                     <Button fullWidth variant="success-light" disabled={!newEmail} onClick={addNewEmail}>
-                      Confirm
+                      Conferma
                     </Button>
                   </Dialog.Action>
                 </Dialog.Footer>
@@ -184,7 +181,7 @@ const NotificationsPage = () => {
           <Thead>
             <Tr>
               <Th key={'email'}>
-                <Typography variant="sigma">Email Address</Typography>
+                <Typography variant="sigma">Indirizzo Email</Typography>
               </Th>
               <Th key={'actions'}></Th>
             </Tr>
@@ -193,7 +190,7 @@ const NotificationsPage = () => {
             {emailsForNotifications.length <= 0 && (
               <Tr key="empty">
                 <Td>
-                  <Typography variant="sigma">No Emails</Typography>
+                  <Typography variant="sigma">Nessun Indirizzo Email</Typography>
                 </Td>
                 <Td />
               </Tr>
@@ -205,11 +202,9 @@ const NotificationsPage = () => {
                   <Typography variant="sigma">{email}</Typography>
                 </Td>
                 <Td>
-                    <Tooltip description="Remove Email">
-                        <IconButton aria-label="Remove Email" marginLeft='auto' onClick={() => setEmailToDelete(email)}>
-                            <Trash />
-                        </IconButton>
-                    </Tooltip>
+                  <IconButton title="Rimuovi Email" marginLeft='auto' onClick={() => setEmailToDelete(email)}>
+                      <Trash />
+                  </IconButton>
                 </Td>
               </Tr>
             ))}
@@ -217,16 +212,24 @@ const NotificationsPage = () => {
         </Table>
 
         <Dialog.Root open={showConfirmEmailDeletionPopup} onOpenChange={setShowConfirmEmailDeletionPopup}>
-            <ConfirmDialog
-                variant="default"
-                icon={null}
-                onConfirm={deleteEmail}
-                // @ts-ignore
-                onCancel={() => setEmailToDelete(undefined)}
-                title="Confirm Email Deletion?"
-            >
-                <Typography fontSize="1.4rem">The address [{emailToDelete}] will stop receiving all email notifications</Typography>
-            </ConfirmDialog>
+          <Dialog.Content>
+            <Dialog.Header>Conferma Rimozione Email</Dialog.Header>
+            <Dialog.Body>
+              <Typography fontSize="1.4rem">L'indirizzo email [{emailToDelete}] smetterà di ricevere qualunque notifica</Typography>
+            </Dialog.Body>
+            <Dialog.Footer>
+              <Dialog.Cancel>
+                <Button fullWidth variant="tertiary" onClick={() => setEmailToDelete(undefined)}>
+                  Annulla
+                </Button>
+              </Dialog.Cancel>
+              <Dialog.Action>
+                <Button fullWidth variant="danger-light" onClick={deleteEmail}>
+                  Conferma
+                </Button>
+              </Dialog.Action>
+            </Dialog.Footer>
+          </Dialog.Content>
         </Dialog.Root>
       </Main>
     </Page.Protect>

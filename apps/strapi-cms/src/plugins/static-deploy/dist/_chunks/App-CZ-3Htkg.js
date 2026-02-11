@@ -4,10 +4,9 @@ const jsxRuntime = require("react/jsx-runtime");
 const admin = require("@strapi/strapi/admin");
 const reactRouterDom = require("react-router-dom");
 const designSystem = require("@strapi/design-system");
-const reactIntl = require("react-intl");
 const icons = require("@strapi/icons");
 const react = require("react");
-const index = require("./index-B-2tTSFT.js");
+const index = require("./index-DM0zIqbv.js");
 function _typeof(o) {
   "@babel/helpers - typeof";
   return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -1578,7 +1577,6 @@ function formatRelative2(dirtyDate, dirtyBaseDate, options) {
   });
 }
 const HomePage = () => {
-  const { formatMessage } = reactIntl.useIntl();
   const { get, post } = admin.useFetchClient();
   const [loadingTriggerButton, setLoadingTriggerButton] = react.useState(false);
   const [config, setConfig] = react.useState(null);
@@ -1664,13 +1662,11 @@ const HomePage = () => {
               setUnstagedUpdates(true);
               return;
             }
-            const lastStagingWorkflow = data.workflow_runs.filter(
-              (workflow) => {
-                const workflowPathArray = workflow.path.split("/");
-                const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
-                return workflowFileName === config.staging.workflowID;
-              }
-            )[0];
+            const lastStagingWorkflow = data.workflow_runs.filter((workflow) => {
+              const workflowPathArray = workflow.path.split("/");
+              const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
+              return workflowFileName === config.staging.workflowID;
+            })[0];
             if (!lastStagingWorkflow) {
               setUnstagedUpdates(true);
               setStagingStatus({ unstagedUpdates: true });
@@ -1707,7 +1703,7 @@ const HomePage = () => {
         console.error(error);
         toggleNotification({
           type: "danger",
-          title: "Failed to fetch workflow history!"
+          title: "Impossibile recuperare storico dei deploy!"
         });
       }
     } finally {
@@ -1726,8 +1722,8 @@ const HomePage = () => {
           setUnstagedUpdates(true);
           toggleNotification({
             type: "danger",
-            title: "Trigger was aborted!",
-            message: "Could not fetch current staging status",
+            title: "Lancio del workflow annullato!",
+            message: "Impossibile recuperare lo staging status corrente",
             timeout: 5e3
           });
           return;
@@ -1736,8 +1732,8 @@ const HomePage = () => {
           setUnstagedUpdates(true);
           toggleNotification({
             type: "danger",
-            title: "Trigger was aborted!",
-            message: "New unstaged updates found!",
+            title: "Lancio del workflow annullato!",
+            message: "Sono state trovate nuove modifiche non deployate in staging!",
             timeout: 5e3
           });
           return;
@@ -1747,8 +1743,8 @@ const HomePage = () => {
       }
       toggleNotification({
         type: "success",
-        title: "Successfully started workflow!",
-        message: "History will be refetched in 5 seconds",
+        title: "Workflow lanciato con successo!",
+        message: "Lo storico dei deploy sarà ricaricato tra 5 secondi",
         timeout: 5e3
       });
       setLoadingHistory("planned");
@@ -1772,8 +1768,8 @@ const HomePage = () => {
       }
       toggleNotification({
         type: "danger",
-        title: "Failed to trigger workflow!",
-        message: "Unknown error occurred. Please check the console for more details."
+        title: "Impossibile lanciare il workflow!",
+        message: "Errore sconosciuto. Controllare la console per maggiori dettagli."
       });
     } finally {
       setLoadingTriggerButton(false);
@@ -1811,92 +1807,103 @@ const HomePage = () => {
         padding: "0 5.4rem 3.2rem 5.4rem"
       },
       children: [
-        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "row", alignItems: "center", justifyContent: "space-between", marginBottom: "4rem", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "alpha", children: "Deployments" }),
-          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "row", alignItems: "center", gap: "1rem", children: [
-            /* @__PURE__ */ jsxRuntime.jsx(
-              designSystem.Button,
-              {
-                onClick: fetchHistory,
-                loading: loadingHistory !== "none",
-                disabled: loadingTriggerButton,
-                style: { height: "4.2rem" },
-                variant: "secondary",
-                startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.ArrowClockwise, {}),
-                children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontSize: "1.6rem", children: "Ricarica Cronologia" })
-              }
-            ),
-            /* @__PURE__ */ jsxRuntime.jsxs(
-              designSystem.Dialog.Root,
-              {
-                open: showTriggerConfirmationPopup,
-                onOpenChange: setShowTriggerConfirmationPopup,
-                children: [
-                  /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Trigger, { children: config?.staging ? /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { children: [
-                    /* @__PURE__ */ jsxRuntime.jsx(
-                      designSystem.Button,
-                      {
-                        loading: loadingTriggerButton,
-                        disabled: loadingHistory !== "none" || !canTrigger || !unstagedUpdates,
-                        style: {
-                          height: "4.2rem",
-                          borderTopRightRadius: 0,
-                          borderBottomRightRadius: 0
-                        },
-                        variant: "default",
-                        startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Expand, {}),
-                        children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontSize: "1.6rem", children: "Staging" })
-                      }
-                    ),
-                    /* @__PURE__ */ jsxRuntime.jsx(
-                      designSystem.Button,
-                      {
-                        loading: loadingTriggerButton,
-                        disabled: loadingHistory !== "none" || !canTrigger || unstagedUpdates,
-                        style: { height: "4.2rem", borderTopLeftRadius: 0, borderBottomLeftRadius: 0 },
-                        variant: "default",
-                        startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Play, {}),
-                        title: "Trigger will unlock once staging has successfully completed",
-                        children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontSize: "1.6rem", children: "Trigger" })
-                      }
-                    )
-                  ] }) : /* @__PURE__ */ jsxRuntime.jsx(
-                    designSystem.Button,
-                    {
-                      loading: loadingTriggerButton,
-                      disabled: loadingHistory !== "none" || !canTrigger,
-                      style: { height: "4.2rem" },
-                      variant: "default",
-                      startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Play, {}),
-                      children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontSize: "1.6rem", children: "Trigger" })
-                    }
-                  ) }),
-                  /* @__PURE__ */ jsxRuntime.jsxs(
-                    admin.ConfirmDialog,
-                    {
-                      variant: "default",
-                      icon: null,
-                      onConfirm: triggerGithubActions,
-                      title: "Confirm Workflow Trigger",
-                      children: [
-                        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { fontSize: "1.4rem", children: [
-                          "Triggering workflow ",
-                          getWorkflowName()
+        /* @__PURE__ */ jsxRuntime.jsxs(
+          designSystem.Flex,
+          {
+            direction: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "4rem",
+            children: [
+              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "beta", children: "Deployments" }),
+              /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "row", alignItems: "center", gap: "1rem", children: [
+                /* @__PURE__ */ jsxRuntime.jsx(
+                  designSystem.Button,
+                  {
+                    onClick: fetchHistory,
+                    loading: loadingHistory !== "none",
+                    disabled: loadingTriggerButton,
+                    style: { height: "4.2rem" },
+                    variant: "secondary",
+                    startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.ArrowClockwise, {}),
+                    children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontSize: "1.6rem", children: "Ricarica Cronologia" })
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntime.jsxs(
+                  designSystem.Dialog.Root,
+                  {
+                    open: showTriggerConfirmationPopup,
+                    onOpenChange: setShowTriggerConfirmationPopup,
+                    children: [
+                      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Trigger, { children: config?.staging ? /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { children: [
+                        /* @__PURE__ */ jsxRuntime.jsx(
+                          designSystem.Button,
+                          {
+                            loading: loadingTriggerButton,
+                            disabled: loadingHistory !== "none" || !canTrigger || !unstagedUpdates,
+                            style: {
+                              height: "4.2rem",
+                              borderTopRightRadius: 0,
+                              borderBottomRightRadius: 0
+                            },
+                            variant: "default",
+                            startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Expand, {}),
+                            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontSize: "1.6rem", children: "Staging" })
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntime.jsx(
+                          designSystem.Button,
+                          {
+                            loading: loadingTriggerButton,
+                            disabled: loadingHistory !== "none" || !canTrigger || unstagedUpdates,
+                            style: {
+                              height: "4.2rem",
+                              borderTopLeftRadius: 0,
+                              borderBottomLeftRadius: 0
+                            },
+                            variant: "default",
+                            startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Play, {}),
+                            title: loadingHistory !== "none" || !canTrigger || unstagedUpdates ? "Il deploy in produzione sarà disponibile a seguito di un deploy in staging terminato con successo" : "",
+                            children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontSize: "1.6rem", children: "Produzione" })
+                          }
+                        )
+                      ] }) : /* @__PURE__ */ jsxRuntime.jsx(
+                        designSystem.Button,
+                        {
+                          loading: loadingTriggerButton,
+                          disabled: loadingHistory !== "none" || !canTrigger,
+                          style: { height: "4.2rem" },
+                          variant: "default",
+                          startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Play, {}),
+                          children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontSize: "1.6rem", children: "Produzione" })
+                        }
+                      ) }),
+                      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Content, { children: [
+                        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Header, { children: "Conferma Lancio del Workflow" }),
+                        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Body, { children: [
+                          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { fontSize: "1.4rem", children: [
+                            "Lancio del workflow ",
+                            getWorkflowName()
+                          ] }),
+                          config && /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { fontSize: "1.2rem", children: [
+                            "(Workflow ID:",
+                            " ",
+                            config.staging && unstagedUpdates ? config.staging.workflowID : config.workflowID,
+                            ")"
+                          ] })
                         ] }),
-                        config && /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { fontSize: "1.2rem", children: [
-                          "(Workflow ID:",
-                          " ",
-                          config.staging && unstagedUpdates ? config.staging.workflowID : config.workflowID,
-                          ")"
+                        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Footer, { children: [
+                          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Cancel, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "tertiary", children: "Annulla" }) }),
+                          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Action, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, onClick: triggerGithubActions, children: "Conferma" }) })
                         ] })
-                      ]
-                    }
-                  )
-                ]
-              }
-            )
-          ] })
-        ] }),
+                      ] })
+                    ]
+                  }
+                )
+              ] })
+            ]
+          }
+        ),
         /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Table, { colCount: 5, rowCount: 11, children: [
           /* @__PURE__ */ jsxRuntime.jsx(designSystem.Thead, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Tr, { children: [
             /* @__PURE__ */ jsxRuntime.jsx(designSystem.Th, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", children: "NUMERO RUN" }) }, "run-number"),
@@ -1930,7 +1937,10 @@ const HomePage = () => {
               );
               const secs = msDuration / 1e3 % 60;
               const mins = Math.floor(msDuration / 1e3 / 60);
-              const relativeDate = formatRelative2(new Date(workflow.created_at), /* @__PURE__ */ new Date());
+              const relativeDate = formatRelative2(
+                new Date(workflow.created_at),
+                /* @__PURE__ */ new Date()
+              );
               const year = relativeDate.includes("/") ? relativeDate.split("/")[2] : null;
               const month = relativeDate.includes("/") ? relativeDate.split("/")[0] : null;
               const day = relativeDate.includes("/") ? relativeDate.split("/")[1] : null;
@@ -1941,7 +1951,16 @@ const HomePage = () => {
                 /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Badge, { children: workflow.conclusion ?? workflow.status }) }),
                 /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", children: ymdRelativeDate }) }),
                 /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", children: workflow.conclusion ? `${mins}m ${secs}s` : "in progress" }) }),
-                !config?.hideGithubLink && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Tooltip, { description: "Show in Github", children: /* @__PURE__ */ jsxRuntime.jsx("a", { href: workflow.html_url, target: "_blank", rel: "noreferrer", children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.IconButton, { "aria-label": "Show in Github", children: /* @__PURE__ */ jsxRuntime.jsx(icons.ExternalLink, {}) }) }) }) })
+                !config?.hideGithubLink && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(
+                  "a",
+                  {
+                    href: workflow.html_url,
+                    target: "_blank",
+                    rel: "noreferrer",
+                    title: "Mostra in Github",
+                    children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.IconButton, { "aria-label": "Mostra in Github", children: /* @__PURE__ */ jsxRuntime.jsx(icons.ExternalLink, {}) })
+                  }
+                ) })
               ] }, workflow.id);
             })
           ] })
@@ -1951,7 +1970,6 @@ const HomePage = () => {
   );
 };
 const NotificationsPage = () => {
-  const { formatMessage } = reactIntl.useIntl();
   const { get, post, del } = admin.useFetchClient();
   const [showAddEmailPopup, setShowAddEmailPopup] = react.useState(false);
   const [showConfirmEmailDeletionPopup, setShowConfirmEmailDeletionPopup] = react.useState(false);
@@ -1992,15 +2010,15 @@ const NotificationsPage = () => {
         getEmailsForNotifications();
         toggleNotification({
           type: "success",
-          title: "Email added successfully!",
+          title: "Indirizzo email aggiunto con successo!",
           timeout: 5e3
         });
       } else {
         console.error(data.err);
         toggleNotification({
           type: "danger",
-          title: "Failed to add email",
-          message: "Please try again",
+          title: "Impossibile aggiungere indirizzo email",
+          message: "Si prega di riprovare",
           timeout: 5e3
         });
       }
@@ -2008,8 +2026,8 @@ const NotificationsPage = () => {
       console.error(error);
       toggleNotification({
         type: "danger",
-        title: "Failed to add email",
-        message: "Please try again",
+        title: "Impossibile aggiungere indirizzo email",
+        message: "Si prega di riprovare",
         timeout: 5e3
       });
     }
@@ -2021,15 +2039,15 @@ const NotificationsPage = () => {
         getEmailsForNotifications();
         toggleNotification({
           type: "success",
-          title: "Email removed successfully!",
+          title: "Indirizzo email rimosso con successo!",
           timeout: 5e3
         });
       } else {
         console.error(data.err);
         toggleNotification({
           type: "danger",
-          title: "Failed to add email",
-          message: "Please try again",
+          title: "Impossibile rimuovere indirizzo email",
+          message: "Si prega di riprovare",
           timeout: 5e3
         });
       }
@@ -2037,8 +2055,8 @@ const NotificationsPage = () => {
       console.error(error);
       toggleNotification({
         type: "danger",
-        title: "Failed to remove email",
-        message: "Please try again",
+        title: "Impossibile rimuovere indirizzo email",
+        message: "Si prega di riprovare",
         timeout: 5e3
       });
     } finally {
@@ -2068,18 +2086,18 @@ const NotificationsPage = () => {
             justifyContent: "space-between",
             marginBottom: "4rem",
             children: [
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "alpha", children: "Email Notifications" }),
+              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "beta", children: "Notifiche Email" }),
               /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { direction: "row", alignItems: "center", gap: "1rem", children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Root, { open: showAddEmailPopup, onOpenChange: setShowAddEmailPopup, children: [
                 /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Trigger, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { style: { height: "4.2rem" }, variant: "default", startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Plus, {}), children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { fontSize: "1.6rem", children: "Aggiungi Email" }) }) }),
                 /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Content, { children: [
-                  /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Header, { children: "Add Email Address" }),
+                  /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Header, { children: "Aggiungi Indirizzo Email" }),
                   /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Body, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", alignItems: "stretch", gap: "1rem", width: "100%", children: [
-                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: "This address will receive email notifications" }),
-                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.TextInput, { type: "email", placeholder: "Email Address", onChange: (e2) => validateNewEmail(e2.target.value) })
+                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: "Questo indirizzo riceverà le email di notifica" }),
+                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.TextInput, { type: "email", placeholder: "Indirizzo Email", onChange: (e2) => validateNewEmail(e2.target.value) })
                   ] }) }),
                   /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Footer, { children: [
-                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Cancel, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "tertiary", children: "Cancel" }) }),
-                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Action, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "success-light", disabled: !newEmail, onClick: addNewEmail, children: "Confirm" }) })
+                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Cancel, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "tertiary", children: "Annulla" }) }),
+                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Action, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "success-light", disabled: !newEmail, onClick: addNewEmail, children: "Conferma" }) })
                   ] })
                 ] })
               ] }) })
@@ -2088,41 +2106,37 @@ const NotificationsPage = () => {
         ),
         /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Table, { colCount: 2, children: [
           /* @__PURE__ */ jsxRuntime.jsx(designSystem.Thead, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Tr, { children: [
-            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Th, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", children: "Email Address" }) }, "email"),
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Th, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", children: "Indirizzo Email" }) }, "email"),
             /* @__PURE__ */ jsxRuntime.jsx(designSystem.Th, {}, "actions")
           ] }) }),
           /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Tbody, { children: [
             emailsForNotifications.length <= 0 && /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Tr, { children: [
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", children: "No Emails" }) }),
+              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", children: "Nessun Indirizzo Email" }) }),
               /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, {})
             ] }, "empty"),
             emailsForNotifications.map((email) => /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Tr, { children: [
               /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", children: email }) }),
-              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Tooltip, { description: "Remove Email", children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.IconButton, { "aria-label": "Remove Email", marginLeft: "auto", onClick: () => setEmailToDelete(email), children: /* @__PURE__ */ jsxRuntime.jsx(icons.Trash, {}) }) }) })
+              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Td, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.IconButton, { title: "Rimuovi Email", marginLeft: "auto", onClick: () => setEmailToDelete(email), children: /* @__PURE__ */ jsxRuntime.jsx(icons.Trash, {}) }) })
             ] }, email))
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Root, { open: showConfirmEmailDeletionPopup, onOpenChange: setShowConfirmEmailDeletionPopup, children: /* @__PURE__ */ jsxRuntime.jsx(
-          admin.ConfirmDialog,
-          {
-            variant: "default",
-            icon: null,
-            onConfirm: deleteEmail,
-            onCancel: () => setEmailToDelete(void 0),
-            title: "Confirm Email Deletion?",
-            children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { fontSize: "1.4rem", children: [
-              "The address [",
-              emailToDelete,
-              "] will stop receiving all email notifications"
-            ] })
-          }
-        ) })
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Root, { open: showConfirmEmailDeletionPopup, onOpenChange: setShowConfirmEmailDeletionPopup, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Content, { children: [
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Header, { children: "Conferma Rimozione Email" }),
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Body, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { fontSize: "1.4rem", children: [
+            "L'indirizzo email [",
+            emailToDelete,
+            "] smetterà di ricevere qualunque notifica"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Footer, { children: [
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Cancel, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "tertiary", onClick: () => setEmailToDelete(void 0), children: "Annulla" }) }),
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Action, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "danger-light", onClick: deleteEmail, children: "Conferma" }) })
+          ] })
+        ] }) })
       ]
     }
   ) });
 };
 const App = () => {
-  const { formatMessage } = reactIntl.useIntl();
   const location = reactRouterDom.useLocation();
   const {
     allowedActions: { canNotifications }
