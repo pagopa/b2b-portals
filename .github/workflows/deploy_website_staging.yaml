@@ -61,7 +61,8 @@ jobs:
       - name: Generate robots.txt (${{ inputs.environment }})
         shell: bash
         run: |
-          cat <<EOF > /${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }}/robots.txt
+          aws s3 cp - s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }}/robots.txt \
+            --content-type text/plain <<EOF
           User-agent: *
           Disallow: /
           EOF
