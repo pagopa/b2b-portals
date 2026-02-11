@@ -13,6 +13,10 @@
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "title": {
+      "type": "string",
+      "required": true
     }
   }
 }

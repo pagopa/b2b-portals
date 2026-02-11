@@ -7,7 +7,7 @@ import {
 import IframeResizer from '@iframe-resizer/react';
 import mixpanel from 'mixpanel-browser';
 
-const IFrame = ({ src, sectionID }: IFrameProps) => {
+const IFrame = ({ src, sectionID, title }: IFrameProps) => {
   const iframeRef = useRef<IFrameResizerRef>(null);
 
   const handleMessage = ({
@@ -64,6 +64,7 @@ const IFrame = ({ src, sectionID }: IFrameProps) => {
       <IframeResizer
         license='GPLv3' // Open Source License
         src={src}
+        title={title}
         style={{ width: '100%', height: '100vh', border: 'none' }}
         forwardRef={iframeRef}
         onMessage={handleMessage}
@@ -74,6 +75,7 @@ const IFrame = ({ src, sectionID }: IFrameProps) => {
     <IframeResizer
       license='GPLv3' // Open Source License
       src={src}
+      title={title}
       style={{ width: '100%', height: '100vh', border: 'none' }}
       forwardRef={iframeRef}
       onMessage={handleMessage}

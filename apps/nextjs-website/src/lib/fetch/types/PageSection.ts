@@ -205,6 +205,7 @@ const IFrameSectionCodec = t.strict({
   __component: t.literal('sections.i-frame'),
   src: t.string,
   sectionID: t.union([t.string, t.null]),
+  title: t.string,
 });
 
 const FormCategoryCodec = t.strict({

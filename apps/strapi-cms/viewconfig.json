@@ -358,7 +358,7 @@
   },
   {
     "key": "plugin_content_manager_configuration_components::sections.i-frame",
-    "value": "{\"uid\":\"sections.i-frame\",\"settings\":{\"bulkable\":true,\"filterable\":true,\"searchable\":true,\"pageSize\":10,\"mainField\":\"sectionID\",\"defaultSortBy\":\"src\",\"defaultSortOrder\":\"ASC\"},\"metadatas\":{\"id\":{\"edit\":{},\"list\":{\"label\":\"id\",\"searchable\":false,\"sortable\":false}},\"src\":{\"edit\":{\"label\":\"URL Sorgente\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"src\",\"searchable\":true,\"sortable\":true}},\"sectionID\":{\"edit\":{\"label\":\"ID Sezione\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"sectionID\",\"searchable\":true,\"sortable\":true}},\"documentId\":{\"edit\":{},\"list\":{\"label\":\"documentId\",\"searchable\":true,\"sortable\":true}}},\"layouts\":{\"list\":[\"id\",\"src\",\"sectionID\",\"documentId\"],\"edit\":[[{\"name\":\"sectionID\",\"size\":12}],[{\"name\":\"src\",\"size\":12}]]},\"isComponent\":true}",
+    "value": "{\"uid\":\"sections.i-frame\",\"settings\":{\"bulkable\":true,\"filterable\":true,\"searchable\":true,\"pageSize\":10,\"mainField\":\"title\",\"defaultSortBy\":\"src\",\"defaultSortOrder\":\"ASC\"},\"metadatas\":{\"id\":{\"edit\":{},\"list\":{\"label\":\"id\",\"searchable\":false,\"sortable\":false}},\"src\":{\"edit\":{\"label\":\"URL Sorgente\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"src\",\"searchable\":true,\"sortable\":true}},\"sectionID\":{\"edit\":{\"label\":\"ID Sezione\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"sectionID\",\"searchable\":true,\"sortable\":true}},\"title\":{\"edit\":{\"label\":\"Titolo\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"title\",\"searchable\":true,\"sortable\":true}},\"documentId\":{\"edit\":{},\"list\":{\"label\":\"documentId\",\"searchable\":true,\"sortable\":true}}},\"layouts\":{\"edit\":[[{\"name\":\"title\",\"size\":12}],[{\"name\":\"sectionID\",\"size\":12}],[{\"name\":\"src\",\"size\":12}]],\"list\":[\"id\",\"src\",\"sectionID\",\"documentId\"]},\"isComponent\":true}",
     "type": "object",
     "environment": null,
     "tag": null
@@ -743,7 +743,7 @@
   },
   {
     "key": "plugin_upload_metrics",
-    "value": "{\"weeklySchedule\":\"37 43 12 * * 3\",\"lastWeeklyUpdate\":1765971817096}",
+    "value": "{\"weeklySchedule\":\"53 13 16 * * 3\",\"lastWeeklyUpdate\":1770822833122}",
     "type": "object",
     "environment": null,
     "tag": null

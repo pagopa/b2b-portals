@@ -6,9 +6,11 @@ import { IFrameProps } from '@react-components/types';
 const makeIFrameProps = ({
   src,
   sectionID,
+  title,
 }: IFrameSectionProps): IFrameProps => ({
   src,
   ...(sectionID && { sectionID }),
+  title,
 });
 
 const IFrameSection = (props: IFrameSectionProps) => (
