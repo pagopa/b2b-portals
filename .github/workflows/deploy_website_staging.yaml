@@ -57,7 +57,16 @@ jobs:
           interop_strapi_api_base_url: ${{ vars.INTEROP_STRAPI_URL }}
           interop_strapi_media_library: ${{ vars.INTEROP_STRAPI_MEDIA_LIBRARY_S3_BUCKET_NAME }}
           cdn_path: ${{ vars.CDN_PATH }}
-  
+
+      - name: Generate robots.txt (${{ inputs.environment }})
+        shell: bash
+        run: |
+          aws s3 cp - s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }}/robots.txt \
+            --content-type text/plain <<EOF
+          User-agent: *
+          Disallow: /
+          EOF
+
   notify:
     needs: deploy
     name: Notify of Workflow End - (${{ inputs.environment }})
