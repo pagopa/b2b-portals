@@ -35,6 +35,7 @@ export default ({ env }: any) => ({
   },
   'static-deploy': {
     enabled: true,
+    resolve: './src/plugins/static-deploy',
     config: {
       owner: env('REPO_OWNER', 'pagopa'),
       repo: env('REPO_NAME', 'b2b-portals'),
