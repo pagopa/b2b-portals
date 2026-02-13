@@ -70,7 +70,7 @@ const VideoImage = ({
       videoRef.current.pause();
       setMediaState('pause');
     }
-  };               
+  };
 
   return (
     <>
