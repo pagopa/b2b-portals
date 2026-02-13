@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useFetchClient, useRBAC, useNotification, Page } from "@strapi/strapi/admin";
 import { Routes, Route } from "react-router-dom";
 import { Main, Box, Typography, Table, Thead, Tr, Th, Tbody, Td, Flex, Button } from "@strapi/design-system";
-import { p as pluginPermissions, P as PLUGIN_ID } from "./index-CZdpln7H.mjs";
+import { p as pluginPermissions, P as PLUGIN_ID } from "./index-BOsgndRZ.mjs";
 import { useState, useEffect } from "react";
 const HomePage = () => {
   const { get, post } = useFetchClient();
@@ -61,9 +61,9 @@ Error: ${data.err}`);
       setTriggering(false);
     }
   }
-  const formatDeployment = (deployment) => {
-    const date = deployment.split("_")[0].split("-").reverse().join("/");
-    const time = deployment.split("_")[1].replaceAll("-", ":");
+  const formatDeploymentDate = (folder) => {
+    const date = folder.split("_")[0].split("-").reverse().join("/");
+    const time = folder.split("_")[1].replaceAll("-", ":");
     return `${date} (${time})`;
   };
   useEffect(() => {
@@ -80,15 +80,17 @@ Error: ${data.err}`);
         /* @__PURE__ */ jsxs(Table, { colCount: 5, rowCount: 11, children: [
           /* @__PURE__ */ jsx(Thead, { children: /* @__PURE__ */ jsxs(Tr, { children: [
             /* @__PURE__ */ jsx(Th, { children: /* @__PURE__ */ jsx(Typography, { variant: "sigma", children: "Deploy passati disponibili" }) }, "date"),
+            /* @__PURE__ */ jsx(Th, { children: /* @__PURE__ */ jsx(Typography, { variant: "sigma", children: "Descrizione" }) }, "description"),
             /* @__PURE__ */ jsx(Th, {}, "actions")
           ] }) }),
           /* @__PURE__ */ jsx(Tbody, { children: loading ? /* @__PURE__ */ jsx(Tr, { children: /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(Typography, { variant: "sigma", children: "Recuperando i deploy passati..." }) }) }) : deployments.map((deployment, index) => /* @__PURE__ */ jsxs(Tr, { children: [
             /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsxs(Typography, { variant: "sigma", children: [
-              formatDeployment(deployment),
+              formatDeploymentDate(deployment.folder),
               index === 0 && " - Attualmente in prod"
             ] }) }),
+            /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(Typography, { variant: "sigma", children: deployment.description ?? "N/P" }) }),
             /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(Flex, { justifyContent: "flex-end", children: /* @__PURE__ */ jsx(Button, { disabled: !canTrigger || triggering || index === 0, onClick: () => {
-              triggerRollback(deployment);
+              triggerRollback(deployment.folder);
             }, children: "ROLLBACK A QUESTO DEPLOY" }) }) })
           ] }, deployment)) })
         ] })
