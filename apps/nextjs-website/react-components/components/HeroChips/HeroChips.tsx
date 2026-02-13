@@ -69,7 +69,6 @@ const HeroChips = (props: HeroChipsProps) => {
         py: 4,
       }}
       {...(sectionID && { sectionID })}
-      tabIndex={0}
     >
       <Box
         sx={{

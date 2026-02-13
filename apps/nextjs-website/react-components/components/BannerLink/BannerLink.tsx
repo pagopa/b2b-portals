@@ -71,7 +71,6 @@ const BannerLink = ({
 
   return (
     <Box
-      tabIndex={0}
       bgcolor={backgroundColor}
       component='section'
       {...(sectionID && { id: sectionID })}

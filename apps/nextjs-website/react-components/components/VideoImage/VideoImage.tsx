@@ -70,7 +70,7 @@ const VideoImage = ({
       videoRef.current.pause();
       setMediaState('pause');
     }
-  };
+  };               
 
   return (
     <>
@@ -83,7 +83,6 @@ const VideoImage = ({
           lineHeight: 0,
         }}
         {...(sectionID && { id: sectionID })}
-        tabIndex={0}
       >
         {video?.showControls &&
           (mediaState === 'stop' || mediaState === 'pause') && (

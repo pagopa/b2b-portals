@@ -89,7 +89,6 @@ const PageSwitch = ({
           alignItems: 'center',
         }}
         background={backgroundColor}
-        tabIndex={0}
       >
         <TitleSubtitleBlock
           title={title}

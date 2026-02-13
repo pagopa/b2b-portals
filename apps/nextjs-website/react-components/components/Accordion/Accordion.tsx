@@ -48,7 +48,6 @@ const Accordion = (props: AccordionProps) => {
   return (
     <Box
       sx={{ py: { xs: 4, md: 10 } }}
-      tabIndex={0}
       bgcolor={backgroundColor}
       component='section'
       {...(sectionID && { id: sectionID })}

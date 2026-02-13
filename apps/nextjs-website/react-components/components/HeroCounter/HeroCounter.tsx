@@ -75,7 +75,6 @@ const HeroCounter = ({
         py: 4,
       }}
       {...(sectionID && { sectionID })}
-      tabIndex={0}
     >
       <Box
         sx={{

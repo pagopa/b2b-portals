@@ -67,7 +67,6 @@ const Cards = ({
   return (
     <ContainerRC
       background={backgroundColor}
-      tabIndex={0}
       py={8}
       sxInner={{
         display: 'flex',

@@ -41,7 +41,6 @@ const RichBanner = (props: RichBannerProps) => {
     <Box
       component={'section'}
       {...(sectionID && { id: sectionID })}
-      tabIndex={0}
       sx={{ backgroundColor, py: '32px' }}
     >
       <Container>

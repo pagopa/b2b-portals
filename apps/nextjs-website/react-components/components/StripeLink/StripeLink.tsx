@@ -31,7 +31,6 @@ const StripeLink = ({
       py={2}
       sxInner={{ justifyContent: { xs: 'start', md: 'start' } }}
       {...(sectionID && { sectionID })}
-      tabIndex={0}
     >
       <Grid item>
         <Stack
