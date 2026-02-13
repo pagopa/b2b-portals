@@ -54,7 +54,6 @@ const ServiceCarousel = ({
       overflow='hidden'
       component='section'
       {...(sectionID && { id: sectionID })}
-      tabIndex={0}
     >
       {/* Text Content */}
       <Stack

@@ -7,7 +7,6 @@ const TextAndImage = ({ sectionID, body, image }: TextAndImageProps) => (
     p={4}
     gap={2.5}
     alignItems='center'
-    tabIndex={0}
   >
     <Typography variant='body2' textAlign='center' maxWidth={420}>
       {body}

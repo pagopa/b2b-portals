@@ -66,7 +66,7 @@ const EditorialSwitch = ({
       : IoBackgroundColor(theme);
 
   return (
-    <Box tabIndex={0}>
+    <Box>
       <ContainerRC
         sxInner={{
           display: 'grid',
