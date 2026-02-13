@@ -12,6 +12,10 @@ on:
           - appio
           - demo
           - interop
+      description:
+        description: 'Optional description to more easily identify a deployment'
+        type: string
+        default: 'Nessuna descrizione'
 
 concurrency:
   group: s3-deploy-${{ inputs.environment }}
@@ -47,7 +51,7 @@ jobs:
 
       - name: Sync from staging to production (timestamp)
         shell: bash
-        run: aws s3 sync s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${DEPLOY_TIMESTAMP} --delete --exact-timestamps
+        run: aws s3 sync s3://${{ vars.S3_STAGING_BUCKET_NAME }}/${{ inputs.environment }} s3://${{ vars.S3_PROD_BUCKET_NAME }}/${{ inputs.environment }}/${DEPLOY_TIMESTAMP} --delete --exact-timestamps --metadata description="${{ inputs.description }}"
 
       - name: Sync from staging to production (latest)
         shell: bash
