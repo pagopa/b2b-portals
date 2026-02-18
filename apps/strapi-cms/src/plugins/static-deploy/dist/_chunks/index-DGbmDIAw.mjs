@@ -64,7 +64,7 @@ const index = {
         defaultMessage: name
       },
       Component: async () => {
-        const { App } = await import("./App-Bq3wz5mn.mjs");
+        const { App } = await import("./App-KhtY_O_S.mjs");
         return App;
       }
     });

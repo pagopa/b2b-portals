@@ -22,6 +22,7 @@ import Workflow from "../../../types/workflow";
 import Config from "../../../types/config";
 import StagingStatus from "../../../types/StagingStatus";
 import { IconButton } from "@strapi/design-system";
+import { TextInput } from "@strapi/design-system";
 
 const HomePage = () => {
   const { get, post } = useFetchClient();
@@ -29,6 +30,8 @@ const HomePage = () => {
   const [config, setConfig] = useState<Config | null>(null);
   const [unstagedUpdates, setUnstagedUpdates] = useState<boolean>(true);
   const [history, setHistory] = useState<Array<Workflow>>([]);
+  const [prodDeploymentDescription, setProdDeploymentDescription] =
+    useState<string>("");
   const [loadingHistory, setLoadingHistory] = useState<
     "loading" | "planned" | "none"
   >("none");
@@ -252,7 +255,9 @@ const HomePage = () => {
           return;
         }
 
-        await post(`/${PLUGIN_ID}/trigger`);
+        await post(`/${PLUGIN_ID}/trigger`, {
+          description: prodDeploymentDescription,
+        });
         sendEmailNotification(config?.staging ? "prod-trigger" : "trigger");
       }
 
@@ -328,6 +333,12 @@ const HomePage = () => {
       fetchHistory();
     }
   }, [config]);
+
+  useEffect(() => {
+    if (!showTriggerConfirmationPopup) {
+      setProdDeploymentDescription("");
+    }
+  }, [showTriggerConfirmationPopup]);
 
   return (
     <Main
@@ -431,6 +442,31 @@ const HomePage = () => {
                       : config.workflowID}
                     )
                   </Typography>
+                )}
+                {(loadingHistory !== "none" ||
+                  !canTrigger ||
+                  !unstagedUpdates) && (
+                  <Flex
+                    direction="column"
+                    style={{
+                      borderTop: "1px solid white",
+                      marginTop: "16px",
+                      paddingTop: "24px",
+                      alignItems: "stretch",
+                      gap: "12px",
+                    }}
+                  >
+                    <Typography>
+                      Aggiungi una descrizione al deployment (opzionale)
+                    </Typography>
+                    <TextInput
+                      type="text"
+                      placeholder="Breve descrizione"
+                      onChange={(e: any) =>
+                        setProdDeploymentDescription(e.target.value)
+                      }
+                    />
+                  </Flex>
                 )}
               </Dialog.Body>
               <Dialog.Footer>

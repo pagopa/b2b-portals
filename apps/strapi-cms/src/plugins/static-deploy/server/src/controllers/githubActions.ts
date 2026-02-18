@@ -6,7 +6,8 @@ const githubActionsController = {
     ctx.send(response.data);
   },
   async trigger(ctx: any) {
-    const response = await strapi.plugin(PLUGIN_ID).service('githubActions').trigger();
+    const { description } = ctx.request.body;
+    const response = await strapi.plugin(PLUGIN_ID).service('githubActions').trigger(description);
     if (response.status === 422 && response.statusText == 'Unprocessable Entity') {
       return ctx.unprocessableEntity('Unprocessable Entity');
     }
