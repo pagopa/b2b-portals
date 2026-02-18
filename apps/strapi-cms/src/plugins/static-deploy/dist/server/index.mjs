@@ -161,7 +161,8 @@ const githubActionsController = {
     ctx.send(response.data);
   },
   async trigger(ctx) {
-    const response = await strapi.plugin(PLUGIN_ID).service("githubActions").trigger();
+    const { description } = ctx.request.body;
+    const response = await strapi.plugin(PLUGIN_ID).service("githubActions").trigger(description);
     if (response.status === 422 && response.statusText == "Unprocessable Entity") {
       return ctx.unprocessableEntity("Unprocessable Entity");
     }
@@ -2834,7 +2835,7 @@ const {
   mergeConfig
 } = axios;
 const githubActionsService = ({ strapi: strapi2 }) => ({
-  async trigger() {
+  async trigger(description) {
     try {
       const owner = strapi2.plugin(PLUGIN_ID).config("owner");
       const repo = strapi2.plugin(PLUGIN_ID).config("repo");
@@ -2845,8 +2846,7 @@ const githubActionsService = ({ strapi: strapi2 }) => ({
       return await axios.post(
         `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowID}/dispatches`,
         {
-          inputs: { environment },
-          // TODO: Handle case in which "environment" isn't inserted --> Add inputs conditionally
+          inputs: description.length > 0 ? { environment, description } : { environment },
           ref: branch
         },
         {
@@ -2951,7 +2951,9 @@ const githubActionsService = ({ strapi: strapi2 }) => ({
       );
       return {
         data: {
-          workflow_runs: history.filter((_, index2) => environmentHistory[index2])
+          workflow_runs: history.filter(
+            (_, index2) => environmentHistory[index2]
+          )
         }
       };
     } catch (err) {

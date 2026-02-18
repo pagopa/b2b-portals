@@ -6,7 +6,7 @@ const reactRouterDom = require("react-router-dom");
 const designSystem = require("@strapi/design-system");
 const icons = require("@strapi/icons");
 const react = require("react");
-const index = require("./index-DM0zIqbv.js");
+const index = require("./index-vabKbsnD.js");
 function _typeof(o) {
   "@babel/helpers - typeof";
   return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -1582,6 +1582,7 @@ const HomePage = () => {
   const [config, setConfig] = react.useState(null);
   const [unstagedUpdates, setUnstagedUpdates] = react.useState(true);
   const [history, setHistory] = react.useState([]);
+  const [prodDeploymentDescription, setProdDeploymentDescription] = react.useState("");
   const [loadingHistory, setLoadingHistory] = react.useState("none");
   const [showTriggerConfirmationPopup, setShowTriggerConfirmationPopup] = react.useState(false);
   const {
@@ -1738,7 +1739,9 @@ const HomePage = () => {
           });
           return;
         }
-        await post(`/${index.PLUGIN_ID}/trigger`);
+        await post(`/${index.PLUGIN_ID}/trigger`, {
+          description: prodDeploymentDescription
+        });
         sendEmailNotification(config?.staging ? "prod-trigger" : "trigger");
       }
       toggleNotification({
@@ -1800,6 +1803,11 @@ const HomePage = () => {
       fetchHistory();
     }
   }, [config]);
+  react.useEffect(() => {
+    if (!showTriggerConfirmationPopup) {
+      setProdDeploymentDescription("");
+    }
+  }, [showTriggerConfirmationPopup]);
   return /* @__PURE__ */ jsxRuntime.jsxs(
     designSystem.Main,
     {
@@ -1890,7 +1898,31 @@ const HomePage = () => {
                             " ",
                             config.staging && unstagedUpdates ? config.staging.workflowID : config.workflowID,
                             ")"
-                          ] })
+                          ] }),
+                          (loadingHistory !== "none" || !canTrigger || !unstagedUpdates) && /* @__PURE__ */ jsxRuntime.jsxs(
+                            designSystem.Flex,
+                            {
+                              direction: "column",
+                              style: {
+                                borderTop: "1px solid white",
+                                marginTop: "16px",
+                                paddingTop: "24px",
+                                alignItems: "stretch",
+                                gap: "12px"
+                              },
+                              children: [
+                                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: "Aggiungi una descrizione al deployment (opzionale)" }),
+                                /* @__PURE__ */ jsxRuntime.jsx(
+                                  designSystem.TextInput,
+                                  {
+                                    type: "text",
+                                    placeholder: "Breve descrizione",
+                                    onChange: (e2) => setProdDeploymentDescription(e2.target.value)
+                                  }
+                                )
+                              ]
+                            }
+                          )
                         ] }),
                         /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Footer, { children: [
                           /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Cancel, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "tertiary", children: "Annulla" }) }),

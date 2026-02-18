@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useFetchClient, useRBAC, useNotification, Page } from "@strapi/strapi/admin";
 import { useLocation, Routes, Route } from "react-router-dom";
-import { Main, Flex, Typography, Button, Dialog, Table, Thead, Tr, Th, Tbody, Td, Badge, IconButton, TextInput, Link } from "@strapi/design-system";
+import { Main, Flex, Typography, Button, Dialog, TextInput, Table, Thead, Tr, Th, Tbody, Td, Badge, IconButton, Link } from "@strapi/design-system";
 import { ArrowClockwise, Expand, Play, ExternalLink, Plus, Trash } from "@strapi/icons";
 import { useState, useEffect } from "react";
-import { p as pluginPermissions, P as PLUGIN_ID } from "./index-0clf45WF.mjs";
+import { p as pluginPermissions, P as PLUGIN_ID } from "./index-DGbmDIAw.mjs";
 function _typeof(o) {
   "@babel/helpers - typeof";
   return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -1580,6 +1580,7 @@ const HomePage = () => {
   const [config, setConfig] = useState(null);
   const [unstagedUpdates, setUnstagedUpdates] = useState(true);
   const [history, setHistory] = useState([]);
+  const [prodDeploymentDescription, setProdDeploymentDescription] = useState("");
   const [loadingHistory, setLoadingHistory] = useState("none");
   const [showTriggerConfirmationPopup, setShowTriggerConfirmationPopup] = useState(false);
   const {
@@ -1736,7 +1737,9 @@ const HomePage = () => {
           });
           return;
         }
-        await post(`/${PLUGIN_ID}/trigger`);
+        await post(`/${PLUGIN_ID}/trigger`, {
+          description: prodDeploymentDescription
+        });
         sendEmailNotification(config?.staging ? "prod-trigger" : "trigger");
       }
       toggleNotification({
@@ -1798,6 +1801,11 @@ const HomePage = () => {
       fetchHistory();
     }
   }, [config]);
+  useEffect(() => {
+    if (!showTriggerConfirmationPopup) {
+      setProdDeploymentDescription("");
+    }
+  }, [showTriggerConfirmationPopup]);
   return /* @__PURE__ */ jsxs(
     Main,
     {
@@ -1888,7 +1896,31 @@ const HomePage = () => {
                             " ",
                             config.staging && unstagedUpdates ? config.staging.workflowID : config.workflowID,
                             ")"
-                          ] })
+                          ] }),
+                          (loadingHistory !== "none" || !canTrigger || !unstagedUpdates) && /* @__PURE__ */ jsxs(
+                            Flex,
+                            {
+                              direction: "column",
+                              style: {
+                                borderTop: "1px solid white",
+                                marginTop: "16px",
+                                paddingTop: "24px",
+                                alignItems: "stretch",
+                                gap: "12px"
+                              },
+                              children: [
+                                /* @__PURE__ */ jsx(Typography, { children: "Aggiungi una descrizione al deployment (opzionale)" }),
+                                /* @__PURE__ */ jsx(
+                                  TextInput,
+                                  {
+                                    type: "text",
+                                    placeholder: "Breve descrizione",
+                                    onChange: (e2) => setProdDeploymentDescription(e2.target.value)
+                                  }
+                                )
+                              ]
+                            }
+                          )
                         ] }),
                         /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
                           /* @__PURE__ */ jsx(Dialog.Cancel, { children: /* @__PURE__ */ jsx(Button, { fullWidth: true, variant: "tertiary", children: "Annulla" }) }),
