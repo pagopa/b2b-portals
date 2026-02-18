@@ -93,6 +93,9 @@ export default async function Layout({
     pressReleasesParentSlug,
     oneTrustToken,
   } = siteWideSEO;
+  const activeLocalesArray = Object.keys(locales).filter(
+    (locale) => locales[locale as Locale],
+  );
 
   // Check if slug is undefined, which happens for the default locale's homepage due to generateStaticParams' internal logic
   // If it is, set the locale to the default locale
@@ -100,7 +103,7 @@ export default async function Layout({
   const locale =
     slug === undefined
       ? defaultLocale
-      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
+      : activeLocalesArray.includes(slug[0] ?? '')
         ? (slug[0] as Locale)
         : defaultLocale;
 
@@ -108,21 +111,17 @@ export default async function Layout({
   const headerProps = await getHeaderProps(locale, defaultLocale);
   const footerProps = await getFooterProps(locale);
   const preFooterProps = await getPreFooterProps(locale);
-  const localesArray = Object.keys(locales).filter(
-    (locale) => locales[locale as Locale],
-  );
-
   const slugWithoutLocale =
     slug === undefined
       ? []
-      : ['it', 'en', 'de', 'fr', 'sl'].includes(slug[0] ?? '')
+      : activeLocalesArray.includes(slug[0] ?? '')
         ? slug.slice(1)
         : slug;
 
   const localizedLinks = await getLocalizedSlugs({
     currentSlug: slugWithoutLocale,
     defaultLocale,
-    availableLocales: localesArray as Locale[],
+    availableLocales: activeLocalesArray as Locale[],
   });
 
   return (

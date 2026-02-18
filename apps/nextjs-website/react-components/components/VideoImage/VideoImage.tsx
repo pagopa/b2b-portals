@@ -83,7 +83,6 @@ const VideoImage = ({
           lineHeight: 0,
         }}
         {...(sectionID && { id: sectionID })}
-        tabIndex={0}
       >
         {video?.showControls &&
           (mediaState === 'stop' || mediaState === 'pause') && (

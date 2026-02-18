@@ -5,7 +5,7 @@
 import seo from "@strapi/plugin-seo/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import previewButton from "strapi-plugin-preview-button/strapi-admin";
-import staticDeploy from "strapi-plugin-static-deploy/strapi-admin";
+import staticDeploy from "../../src/plugins/static-deploy/./dist/admin/index.mjs";
 import rollback from "../../src/plugins/rollback/./dist/admin/index.mjs";
 import { renderAdmin } from "@strapi/strapi/admin";
 

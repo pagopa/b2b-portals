@@ -41,7 +41,6 @@ const Hero = (props: HeroProps) => {
         width: '100%',
         background: overlay,
       }}
-      tabIndex={0}
     >
       {background && (
         <img

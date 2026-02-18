@@ -253,6 +253,44 @@ resource "aws_cloudfront_distribution" "cms_multitenant_medialibrary" {
 }
 
 
+# Response headers policy for staging (always includes x-robots-tag: none)
+resource "aws_cloudfront_response_headers_policy" "staging" {
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_distribution
+  }
+  name    = "staging-${each.key}"
+  comment = "Response custom headers for ${each.key} staging website"
+
+  custom_headers_config {
+    items {
+      header   = "x-robots-tag"
+      override = true
+      value    = "none"
+    }
+
+    dynamic "items" {
+      for_each = each.value.cdn_indexing_enable ? concat(each.value.custom_headers, var.cdn_custom_headers) : each.value.custom_headers
+      content {
+        header   = items.value.header
+        override = items.value.override
+        value    = items.value.value
+      }
+    }
+  }
+
+  dynamic "security_headers_config" {
+    for_each = each.value.content_security_policy != null ? ["dummy"] : []
+    content {
+      content_security_policy {
+        content_security_policy = each.value.content_security_policy
+        override                = true
+      }
+    }
+  }
+}
+
 # Cloudfront staging distribution
 
 resource "aws_cloudfront_distribution" "cdn_multi_website_staging" {
@@ -289,7 +327,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website_staging" {
     allowed_methods            = ["GET", "HEAD", "OPTIONS"]
     cached_methods             = ["GET", "HEAD"]
     target_origin_id           = aws_s3_bucket.website_staging.bucket
-    response_headers_policy_id = length(each.value.custom_headers) > 0 || each.value.content_security_policy != null || each.value.cdn_indexing_enable ? aws_cloudfront_response_headers_policy.custom[each.key].id : null
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.staging[each.key].id
 
     forwarded_values {
       query_string = false

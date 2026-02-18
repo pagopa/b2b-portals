@@ -35,7 +35,6 @@ const MediaResources = ({
       sx={{
         backgroundColor: backgroundColor,
       }}
-      tabIndex={0}
     >
       <Box
         component='section'
