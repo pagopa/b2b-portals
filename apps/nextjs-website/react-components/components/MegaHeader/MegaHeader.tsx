@@ -50,6 +50,24 @@ const MegaHeader = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const toggleAccessibility = (disableAccessibility: boolean) => {
+    const main = document.querySelector('main');
+    const footer = document.querySelector('footer');
+    if (footer && main) {
+      if (disableAccessibility) {
+        main.setAttribute('inert', '');
+        footer.setAttribute('inert', '');
+        return;
+      }
+      main.removeAttribute('inert');
+      footer.removeAttribute('inert');
+    }
+  };
+
+  useEffect(() => {
+    toggleAccessibility(!!dropdownOpen);
+  }, [dropdownOpen]);
+
   // Sublink is active if it points to the current page or one of its parents
   // .slice(1) is needed because (assuming a relative url built like /example-slug or /parent/child)
   // the first item in the array is always going to be an empty string, which matches with the homepage
@@ -78,6 +96,7 @@ const MegaHeader = ({
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+    toggleAccessibility(!mobileMenuOpen);
   };
 
   const openDrawer = () => setIsDrawerOpen(true);
