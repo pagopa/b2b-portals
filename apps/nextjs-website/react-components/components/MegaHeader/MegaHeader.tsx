@@ -50,6 +50,30 @@ const MegaHeader = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const toggleAccessibility = (disableAccessibility: boolean) => {
+    const main = document.querySelector('main');
+    const footer = document.querySelector('footer');
+    if (footer) {
+      if (disableAccessibility) {
+        footer.setAttribute('inert', '');
+      } else {
+        footer.removeAttribute('inert');
+      }
+    }
+
+    if (main) {
+      if (disableAccessibility) {
+        main.setAttribute('inert', '');
+      } else {
+        main.removeAttribute('inert');
+      }
+    }
+  };
+
+  useEffect(() => {
+    toggleAccessibility(!!dropdownOpen || mobileMenuOpen);
+  }, [dropdownOpen, mobileMenuOpen]);
+
   // Sublink is active if it points to the current page or one of its parents
   // .slice(1) is needed because (assuming a relative url built like /example-slug or /parent/child)
   // the first item in the array is always going to be an empty string, which matches with the homepage
@@ -84,20 +108,12 @@ const MegaHeader = ({
   const closeDrawer = () => setIsDrawerOpen(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1000) {
-        setMobileMenuOpen(false);
-      }
-    };
+    if (isMobile) {
+      setDropdownOpen(null);
+    } else {
+      setMobileMenuOpen(false);
+    }
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
     const handleClickOutside = (event: Event) => {
       if (
         !isMobile &&
