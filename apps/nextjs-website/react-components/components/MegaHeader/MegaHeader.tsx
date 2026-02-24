@@ -108,21 +108,12 @@ const MegaHeader = ({
   const closeDrawer = () => setIsDrawerOpen(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1000) {
-        setMobileMenuOpen(false);
-        setDropdownOpen(null);
-      }
-    };
+    if (isMobile) {
+      setDropdownOpen(null);
+    } else {
+      setMobileMenuOpen(false);
+    }
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
     const handleClickOutside = (event: Event) => {
       if (
         !isMobile &&
