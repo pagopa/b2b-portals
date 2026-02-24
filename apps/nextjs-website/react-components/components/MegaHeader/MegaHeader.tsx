@@ -53,20 +53,26 @@ const MegaHeader = ({
   const toggleAccessibility = (disableAccessibility: boolean) => {
     const main = document.querySelector('main');
     const footer = document.querySelector('footer');
-    if (footer && main) {
+    if (footer) {
+      if (disableAccessibility) {
+        footer.setAttribute('inert', '');
+      } else {
+        footer.removeAttribute('inert');
+      }
+    }
+
+    if (main) {
       if (disableAccessibility) {
         main.setAttribute('inert', '');
-        footer.setAttribute('inert', '');
-        return;
+      } else {
+        main.removeAttribute('inert');
       }
-      main.removeAttribute('inert');
-      footer.removeAttribute('inert');
     }
   };
 
   useEffect(() => {
-    toggleAccessibility(!!dropdownOpen);
-  }, [dropdownOpen]);
+    toggleAccessibility(!!dropdownOpen || mobileMenuOpen);
+  }, [dropdownOpen, mobileMenuOpen]);
 
   // Sublink is active if it points to the current page or one of its parents
   // .slice(1) is needed because (assuming a relative url built like /example-slug or /parent/child)
@@ -96,7 +102,6 @@ const MegaHeader = ({
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
-    toggleAccessibility(!mobileMenuOpen);
   };
 
   const openDrawer = () => setIsDrawerOpen(true);
@@ -106,6 +111,7 @@ const MegaHeader = ({
     const handleResize = () => {
       if (window.innerWidth >= 1000) {
         setMobileMenuOpen(false);
+        setDropdownOpen(null);
       }
     };
 
