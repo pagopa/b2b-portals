@@ -52,7 +52,7 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
 
 export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
   const { palette } = useTheme();
-  const cardTitleId = 'service-carousel-card-title-' + useId();
+  const cardTitleId = useId();
 
   return (
     <Stack

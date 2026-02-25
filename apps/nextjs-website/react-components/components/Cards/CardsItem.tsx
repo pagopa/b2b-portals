@@ -19,7 +19,7 @@ const CardsItem = ({
   const { palette } = useTheme();
   const linkColor =
     themeVariant === 'SEND' ? palette.primary.main : palette.custom.blueIO[500];
-  const cardTitleId = 'card-title-' + useId();
+  const cardTitleId = useId();
 
   return (
     <Card
@@ -71,7 +71,7 @@ const CardsItem = ({
               title={title}
               marginBottom={1}
               textAlign='left'
-              titleId={cardTitleId}
+              id={cardTitleId}
             />
           </Typography>
           <Body
