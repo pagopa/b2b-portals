@@ -126,7 +126,7 @@ export default async function Layout({
 
   return (
     <ThemeProvider theme={theme}>
-      <html lang={locale}>
+      <html lang={locale} style={{ scrollPaddingTop: 84 }}>
         <body style={{ margin: 0 }}>
           {preHeaderProps && (
             <PreHeader
