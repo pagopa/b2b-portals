@@ -116,7 +116,7 @@ const StringTitle = (
     component={component}
     align={textAlign}
     style={{ marginTop, marginBottom }}
-    id={titleId}
+    {...(titleId && { id: titleId })}
   >
     {title}
   </Typography>
@@ -138,8 +138,8 @@ const ElementTitle = (
           TypographyProps & { style?: React.CSSProperties }
         >,
         {
+          ...(titleId && { id: titleId }),
           variant,
-          id: titleId,
           component,
           align: textAlign,
           style: { color: textColor, marginTop, marginBottom },
