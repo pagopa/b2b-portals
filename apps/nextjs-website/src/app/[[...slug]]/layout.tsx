@@ -17,6 +17,7 @@ import PreFooter from '@/components/PreFooter';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
+import ScrollPaddingTopManager from '@/components/ScrollMarginTopManager';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -126,7 +127,7 @@ export default async function Layout({
 
   return (
     <ThemeProvider theme={theme}>
-      <html lang={locale} style={{ scrollPaddingTop: 84 }}>
+      <html lang={locale}>
         <body style={{ margin: 0 }}>
           {preHeaderProps && (
             <PreHeader
@@ -142,6 +143,7 @@ export default async function Layout({
             locale={locale}
             defaultLocale={defaultLocale}
           />
+          <ScrollPaddingTopManager />
           {children}
           {preFooterProps && (
             <PreFooter
