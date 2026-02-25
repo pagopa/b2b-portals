@@ -108,6 +108,7 @@ const StringTitle = (
   textAlign: TypographyProps['align'] = 'center',
   marginTop: number | string = 0,
   marginBottom: number | string = 0,
+  titleId?: string,
 ) => (
   <Typography
     color={textColor}
@@ -115,6 +116,7 @@ const StringTitle = (
     component={component}
     align={textAlign}
     style={{ marginTop, marginBottom }}
+    id={titleId}
   >
     {title}
   </Typography>
@@ -128,6 +130,7 @@ const ElementTitle = (
   textAlign: TypographyProps['align'] = 'center',
   marginTop: number | string = 0,
   marginBottom: number | string = 0,
+  titleId?: string,
 ) =>
   React.isValidElement(title)
     ? React.cloneElement(
@@ -136,6 +139,7 @@ const ElementTitle = (
         >,
         {
           variant,
+          id: titleId,
           component,
           align: textAlign,
           style: { color: textColor, marginTop, marginBottom },
@@ -151,6 +155,7 @@ export const Title = ({
   textAlign = 'center',
   marginTop = 0,
   marginBottom = 0,
+  titleId,
 }: {
   title: string | JSX.Element;
   textColor: string;
@@ -159,6 +164,7 @@ export const Title = ({
   textAlign?: TypographyProps['align'];
   marginTop?: number | string;
   marginBottom?: number | string;
+  titleId?: string;
 }) => {
   return typeof title === 'string'
     ? StringTitle(
@@ -169,6 +175,7 @@ export const Title = ({
         textAlign,
         marginTop,
         marginBottom,
+        titleId,
       )
     : ElementTitle(
         title,
@@ -178,6 +185,7 @@ export const Title = ({
         textAlign,
         marginTop,
         marginBottom,
+        titleId,
       );
 };
 

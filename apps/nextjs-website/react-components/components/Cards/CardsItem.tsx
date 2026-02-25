@@ -4,6 +4,7 @@ import { CardsItemProps } from '../../types/Cards/Cards.types';
 import { Title, Body } from '../common/Common';
 import Image from 'next/image';
 import { useTheme } from '@mui/material/styles';
+import { useId } from 'react';
 
 const CardsItem = ({
   title,
@@ -18,6 +19,7 @@ const CardsItem = ({
   const { palette } = useTheme();
   const linkColor =
     themeVariant === 'SEND' ? palette.primary.main : palette.custom.blueIO[500];
+  const cardTitleId = 'card-title-' + useId();
 
   return (
     <Card
@@ -69,6 +71,7 @@ const CardsItem = ({
               title={title}
               marginBottom={1}
               textAlign='left'
+              titleId={cardTitleId}
             />
           </Typography>
           <Body
@@ -95,6 +98,7 @@ const CardsItem = ({
                     title={link.title}
                     fontSize={14}
                     fontWeight={600}
+                    aria-labelledby={cardTitleId}
                     {...(link.href.startsWith('https') && { target: '_blank' })}
                   >
                     {link.label}
