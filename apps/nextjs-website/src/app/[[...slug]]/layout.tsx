@@ -17,6 +17,7 @@ import PreFooter from '@/components/PreFooter';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
+import ScrollPaddingTopManager from '@/components/ScrollMarginTopManager';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -142,6 +143,7 @@ export default async function Layout({
             locale={locale}
             defaultLocale={defaultLocale}
           />
+          <ScrollPaddingTopManager />
           {children}
           {preFooterProps && (
             <PreFooter
