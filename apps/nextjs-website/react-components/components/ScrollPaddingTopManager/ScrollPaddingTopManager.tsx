@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 
 const ScrollPaddingTopManager = () => {
-  // The class ResizeObserver used in useEffect() checks in realtime the dimensions of an element (Header in this case).
-  // This updates the value of scrollPaddingTop CSS property when Header height changes and also adds 16px
-  // to the Header height for safe distance.
+  // ResizeObserver catches the header's height change when the user resizes from desktop to mobile (or viceversa)
 
   useEffect(() => {
     const header = document.querySelector('header');
