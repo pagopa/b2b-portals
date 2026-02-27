@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-Fix LocaleGuard issue with OneTrust
+Utilize LocaleGuard while keeping OneTrust script outside of it for pre-loading
