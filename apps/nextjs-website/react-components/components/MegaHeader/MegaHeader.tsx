@@ -294,7 +294,6 @@ const MegaHeader = ({
           <IconButton
             className='hamburger'
             aria-label={mobileMenuOpen ? labels.closeMenu : labels.openMenu}
-            aria-expanded={mobileMenuOpen}
             aria-controls='mobileMenu'
             onClick={handleMobileMenuToggle}
             sx={{
