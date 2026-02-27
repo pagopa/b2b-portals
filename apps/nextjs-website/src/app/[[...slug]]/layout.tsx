@@ -18,6 +18,7 @@ import { Locale } from '@/lib/fetch/siteWideSEO';
 import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import ScrollPaddingTopManager from '@/components/ScrollMarginTopManager';
+import LocaleGuard from '@/components/LocaleGuard';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -129,36 +130,43 @@ export default async function Layout({
     <ThemeProvider theme={theme}>
       <html lang={locale}>
         <body style={{ margin: 0 }}>
-          {preHeaderProps && (
-            <PreHeader
-              {...preHeaderProps}
-              themeVariant={themeVariant}
-              locale={locale}
-              defaultLocale={defaultLocale}
-              {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
-            />
-          )}
-          <Header
-            {...headerProps}
+          <LocaleGuard
+            noLocaleSlug={slugWithoutLocale}
             locale={locale}
             defaultLocale={defaultLocale}
-          />
-          <ScrollPaddingTopManager />
-          {children}
-          {preFooterProps && (
-            <PreFooter
-              {...preFooterProps}
-              themeVariant={themeVariant}
+            languages={activeLocalesArray}
+          >
+            {preHeaderProps && (
+              <PreHeader
+                {...preHeaderProps}
+                themeVariant={themeVariant}
+                locale={locale}
+                defaultLocale={defaultLocale}
+                {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
+              />
+            )}
+            <Header
+              {...headerProps}
               locale={locale}
               defaultLocale={defaultLocale}
-              {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
             />
-          )}
-          <Footer
-            {...footerProps}
-            defaultLocale={defaultLocale}
-            localizedLinks={localizedLinks}
-          />
+            <ScrollPaddingTopManager />
+            {children}
+            {preFooterProps && (
+              <PreFooter
+                {...preFooterProps}
+                themeVariant={themeVariant}
+                locale={locale}
+                defaultLocale={defaultLocale}
+                {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
+              />
+            )}
+            <Footer
+              {...footerProps}
+              defaultLocale={defaultLocale}
+              localizedLinks={localizedLinks}
+            />
+          </LocaleGuard>
           <Script
             src='/scripts/otnotice-1.0.min.js'
             type='text/javascript'
