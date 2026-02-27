@@ -5,7 +5,7 @@ import { defineRedirectBehaviour } from '@/lib/localeGuard';
 import { useLayoutEffect, useState } from 'react';
 
 interface LocaleGuardProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   noLocaleSlug: string[];
   locale: Locale;
   defaultLocale: Locale;
