@@ -107,6 +107,7 @@ const pageSwitchPageDataResponse: PreviewPageData = {
         body: 'body',
         ctaButtons: [],
         eyelet: null,
+        ariaLabelSection: null,
         image: {
           alternativeText: null,
           formats: null,

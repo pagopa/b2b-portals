@@ -9,6 +9,7 @@ import {
 import { Content as EditorialContent } from './Content';
 import { Ctas as EditorialCtas } from './Ctas';
 import { Image as EditorialImage } from './Image';
+import { useId, useMemo } from 'react';
 
 const styles = {
   half: {
@@ -22,6 +23,7 @@ const Editorial = (props: EditorialProps) => {
     image,
     mobileImage,
     eyelet,
+    ariaLabelSection,
     titleTag,
     title,
     body,
@@ -43,6 +45,15 @@ const Editorial = (props: EditorialProps) => {
     center: 4,
   };
   const gridItemStyles = { ...styles.half };
+  const eyeletId = useId();
+
+  const arialabels = useMemo(
+    () => ({
+      ...(ariaLabelSection && { ariaLabel: ariaLabelSection }),
+      ...(!ariaLabelSection && eyelet && { ariaLabelledBy: eyeletId }),
+    }),
+    [ariaLabelSection, eyelet, eyeletId],
+  );
 
   if (width === 'standard') {
     return (
@@ -50,6 +61,7 @@ const Editorial = (props: EditorialProps) => {
         size='xl'
         alignItems='center'
         background={backgroundColor}
+        {...arialabels}
         direction={{
           xs: 'column-reverse',
           md: reversed ? 'row-reverse' : 'row',
@@ -59,7 +71,6 @@ const Editorial = (props: EditorialProps) => {
         {...(sectionID && { sectionID })}
       >
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
-
         <Grid item xs={12} md={4}>
           <Stack gap={4}>
             <EditorialContent
@@ -68,7 +79,7 @@ const Editorial = (props: EditorialProps) => {
               {...(titleTag && { titleTag })}
               title={title}
               body={body}
-              {...(eyelet && { eyelet })}
+              {...(eyelet && eyeletId && { eyelet, eyeletId })}
             />
             <EditorialCtas
               theme={theme}
@@ -78,13 +89,10 @@ const Editorial = (props: EditorialProps) => {
             />
           </Stack>
         </Grid>
-
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
-
         <Grid item xs={12} md={5}>
           <EditorialImage {...{ pattern, image, theme, mobileImage }} />
         </Grid>
-
         <Grid item md={1} sx={{ display: { xs: 'none', md: 'block' } }} />
       </ContainerRC>
     );
@@ -94,6 +102,7 @@ const Editorial = (props: EditorialProps) => {
     <ContainerRC
       size='xl'
       alignItems='center'
+      {...arialabels}
       background={backgroundColor}
       direction={{
         xs: 'column-reverse',
@@ -110,7 +119,7 @@ const Editorial = (props: EditorialProps) => {
             {...(titleTag && { titleTag })}
             title={title}
             body={body}
-            {...(eyelet && { eyelet })}
+            {...(eyelet && eyeletId && { eyelet, eyeletId })}
           />
           <EditorialCtas
             theme={theme}
