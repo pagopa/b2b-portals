@@ -115,6 +115,7 @@ const PreFooter = (props: PreFooterProps) => {
                     }}
                     key='google'
                     href={storeButtons.hrefGoogle}
+                    aria-label={storeButtons.ariaLabelGoogle}
                     darkTheme={theme === 'dark'}
                   />
                 )}
@@ -127,6 +128,7 @@ const PreFooter = (props: PreFooterProps) => {
                     }}
                     key='google'
                     href={storeButtons.hrefApple}
+                    aria-label={storeButtons.ariaLabelApple}
                     darkTheme={theme === 'dark'}
                   />
                 )}

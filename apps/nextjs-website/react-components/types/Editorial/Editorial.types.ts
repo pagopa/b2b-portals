@@ -38,6 +38,8 @@ export type CtaEditorialButton = CtaButtonProps | JSX.Element;
 export interface StoreButtonsProps {
   readonly hrefGoogle?: string;
   readonly hrefApple?: string;
+  readonly ariaLabelGoogle?: string;
+  readonly ariaLabelApple?: string;
 }
 
 export interface EditorialCtaProps {

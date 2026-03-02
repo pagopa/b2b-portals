@@ -61,6 +61,8 @@ const pageDataResponse: PreviewPageData = {
         storeButtons: {
           hrefGoogle: 'https://play.google.com',
           hrefApple: 'https://apple.com',
+          ariaLabelApple: 'Scarica IO su App Store',
+          ariaLabelGoogle: 'Scarica IO su Google Play',
         },
         inverse: false,
         sectionID: null,

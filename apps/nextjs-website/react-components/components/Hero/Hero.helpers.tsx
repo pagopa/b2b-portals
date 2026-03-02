@@ -7,7 +7,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
 import { AppStoreButton, GooglePlayButton } from '../common/StoreButtons';
 
-
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
   size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
 
@@ -112,6 +111,7 @@ export const HeroTextContent = ({
                 }}
                 key='google'
                 href={storeButtons.hrefGoogle}
+                aria-label={storeButtons.ariaLabelGoogle}
                 badge
               />
             )}
@@ -124,6 +124,7 @@ export const HeroTextContent = ({
                 }}
                 key='apple'
                 href={storeButtons.hrefApple}
+                aria-label={storeButtons.ariaLabelApple}
                 badge
               />
             )}

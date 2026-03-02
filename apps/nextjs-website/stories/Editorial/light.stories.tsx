@@ -107,6 +107,8 @@ LightEditorialFullStoreButtons.args = {
   storeButtons: {
     hrefGoogle: 'https://play.google.com',
     hrefApple: 'https://apple.com',
+    ariaLabelGoogle: 'Scarica IO su Google Play',
+    ariaLabelApple: 'Scarica IO su App Store',
   },
 };
 
@@ -119,6 +121,8 @@ LightEditorialFullStoreButtonsReversed.args = {
   storeButtons: {
     hrefGoogle: 'https://play.google.com',
     hrefApple: 'https://apple.com',
+    ariaLabelGoogle: 'Scarica IO su Google Play',
+    ariaLabelApple: 'Scarica IO su App Store',
   },
   reversed: true,
 };
@@ -143,6 +147,7 @@ LightEditorialFullOneStoreButtonsReversed.args = {
   eyelet: 'Editorial Eyelet',
   storeButtons: {
     hrefGoogle: 'https://play.google.com',
+    ariaLabelGoogle: 'Scarica IO su Google Play',
   },
   reversed: true,
 };

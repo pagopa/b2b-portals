@@ -13,6 +13,13 @@ const meta: Meta<typeof Editorial> = {
 };
 export default meta;
 
+const storeButtons = {
+  hrefGoogle: 'https://play.google.com',
+  hrefApple: 'https://apple.com',
+  ariaLabelGoogle: 'Scarica IO su Google Play',
+  ariaLabelApple: 'Scarica IO su App Store',
+};
+
 export const DarkEditorialFullOneButtonNoPattern: StoryFn<typeof Editorial> =
   EditorialTemplate.bind({});
 DarkEditorialFullOneButtonNoPattern.args = {
@@ -104,10 +111,7 @@ DarkEditorialFullStoreButtons.args = {
   ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
-  storeButtons: {
-    hrefGoogle: 'https://play.google.com',
-    hrefApple: 'https://apple.com',
-  },
+  storeButtons,
 };
 
 export const DarkEditorialFullStoreButtonsReversed: StoryFn<typeof Editorial> =
@@ -116,10 +120,7 @@ DarkEditorialFullStoreButtonsReversed.args = {
   ...defaultPropsDark,
   ctaButtons: generateCtaButtons(1),
   eyelet: 'Editorial Eyelet',
-  storeButtons: {
-    hrefGoogle: 'https://play.google.com',
-    hrefApple: 'https://apple.com',
-  },
+  storeButtons,
   reversed: true,
 };
 
@@ -143,6 +144,7 @@ DarkEditorialFullOneStoreButtonsReversed.args = {
   eyelet: 'Editorial Eyelet',
   storeButtons: {
     hrefGoogle: 'https://play.google.com',
+    ariaLabelGoogle: 'Scarica IO su Google Play',
   },
   reversed: true,
 };

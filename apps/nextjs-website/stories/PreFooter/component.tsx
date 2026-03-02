@@ -40,6 +40,8 @@ export const StorybookPreFooter: React.FC<StorybookPreFooterProps> = ({
     return {
       hrefGoogle: 'https://play.google.com',
       hrefApple: 'https://apple.com',
+      ariaLabelGoogle: 'Scarica IO su Google Play',
+      ariaLabelApple: 'Scarica IO su App Store',
     };
   }, [showStoreButtons]);
 
@@ -69,7 +71,7 @@ export const StorybookPreFooter: React.FC<StorybookPreFooterProps> = ({
 
     setBackgroundUrl(
       customImage ??
-        'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg'
+        'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg',
     );
 
     return cleanup;
