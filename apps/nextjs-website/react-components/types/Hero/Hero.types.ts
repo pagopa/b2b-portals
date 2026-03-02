@@ -23,6 +23,8 @@ export interface HeroProps extends SectionProps, HeroTextProps {
 export interface StoreButtonsProps {
   readonly hrefGoogle?: string;
   readonly hrefApple?: string;
+  readonly ariaLabelGoogle?: string;
+  readonly ariaLabelApple?: string;
 }
 
 export interface HeroTextProps {

@@ -54,6 +54,12 @@ const makeHeroProps = ({
     storeButtons: {
       ...(storeButtons.hrefGoogle && { hrefGoogle: storeButtons.hrefGoogle }),
       ...(storeButtons.hrefApple && { hrefApple: storeButtons.hrefApple }),
+      ...(storeButtons.ariaLabelApple && {
+        ariaLabelApple: storeButtons.ariaLabelApple,
+      }),
+      ...(storeButtons.ariaLabelGoogle && {
+        ariaLabelGoogle: storeButtons.ariaLabelGoogle,
+      }),
     },
   }),
   ...(link && {

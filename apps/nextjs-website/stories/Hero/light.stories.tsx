@@ -14,6 +14,13 @@ const meta: Meta<typeof Hero> = {
 };
 export default meta;
 
+const storeButtons = {
+  hrefGoogle: 'https://play.google.com',
+  hrefApple: 'https://apple.com',
+  ariaLabelGoogle: 'Scarica IO su Google Play',
+  ariaLabelApple: 'Scarica IO su App Store',
+};
+
 export const LightHeroBig: StoryFn<typeof Hero> = HeroTemplate.bind({});
 LightHeroBig.args = {
   ...defaultsLightWithButtons,
@@ -22,16 +29,13 @@ LightHeroBig.args = {
 };
 
 export const LightHeroBigStoreButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {}
+  {},
 );
 LightHeroBigStoreButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
   inverse: false,
-  storeButtons: {
-    hrefGoogle: 'https://play.google.com',
-    hrefApple: 'https://apple.com',
-  },
+  storeButtons,
 };
 
 export const LightHeroBigStoreButtonsWithLink: StoryFn<typeof Hero> =
@@ -40,10 +44,7 @@ LightHeroBigStoreButtonsWithLink.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
   inverse: false,
-  storeButtons: {
-    hrefGoogle: 'https://play.google.com',
-    hrefApple: 'https://apple.com',
-  },
+  storeButtons,
   link: {
     label: 'Learn more',
     href: '/',
@@ -51,7 +52,7 @@ LightHeroBigStoreButtonsWithLink.args = {
 };
 
 export const LightHeroBigNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {}
+  {},
 );
 LightHeroBigNoButtons.args = {
   ...defaultsLightWithoutButtons,
@@ -72,10 +73,7 @@ LightHeroBigInvertedStoreButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
   inverse: true,
-  storeButtons: {
-    hrefGoogle: 'https://play.google.com',
-    hrefApple: 'https://apple.com',
-  },
+  storeButtons,
 };
 
 export const LightHeroBigInvertedStoreButtonsWithLink: StoryFn<typeof Hero> =
@@ -84,10 +82,7 @@ LightHeroBigInvertedStoreButtonsWithLink.args = {
   ...defaultsLightWithoutButtons,
   size: 'big',
   inverse: true,
-  storeButtons: {
-    hrefGoogle: 'https://play.google.com',
-    hrefApple: 'https://apple.com',
-  },
+  storeButtons,
   link: {
     label: 'Learn more',
     href: '/',
@@ -115,10 +110,7 @@ LightHeroMediumStoreButtonsWithLink.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
   inverse: false,
-  storeButtons: {
-    hrefGoogle: 'https://play.google.com',
-    hrefApple: 'https://apple.com',
-  },
+  storeButtons,
   link: {
     label: 'Learn more',
     href: '/',
@@ -126,7 +118,7 @@ LightHeroMediumStoreButtonsWithLink.args = {
 };
 
 export const LightHeroMediumNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {}
+  {},
 );
 LightHeroMediumNoButtons.args = {
   ...defaultsLightWithoutButtons,
@@ -135,7 +127,7 @@ LightHeroMediumNoButtons.args = {
 };
 
 export const LightHeroMediumInverted: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {}
+  {},
 );
 LightHeroMediumInverted.args = {
   ...defaultsLightWithButtons,
@@ -149,10 +141,7 @@ LightHeroMediumInvertedStoreButtons.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
   inverse: true,
-  storeButtons: {
-    hrefGoogle: 'https://play.google.com',
-    hrefApple: 'https://apple.com',
-  },
+  storeButtons,
 };
 
 export const LightHeroMediumInvertedStoreButtonsWithLink: StoryFn<typeof Hero> =
@@ -161,10 +150,7 @@ LightHeroMediumInvertedStoreButtonsWithLink.args = {
   ...defaultsLightWithoutButtons,
   size: 'medium',
   inverse: true,
-  storeButtons: {
-    hrefGoogle: 'https://play.google.com',
-    hrefApple: 'https://apple.com',
-  },
+  storeButtons,
   link: {
     label: 'Learn more',
     href: '/',
@@ -187,7 +173,7 @@ LightHeroSmall.args = {
 };
 
 export const LightHeroSmallNoButtons: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {}
+  {},
 );
 LightHeroSmallNoButtons.args = {
   ...defaultsLightWithoutButtons,
@@ -196,7 +182,7 @@ LightHeroSmallNoButtons.args = {
 };
 
 export const LightHeroSmallNoSubtitle: StoryFn<typeof Hero> = HeroTemplate.bind(
-  {}
+  {},
 );
 LightHeroSmallNoSubtitle.args = {
   ...defaultsLightWithoutButtonsNoSubtitle,

@@ -34,6 +34,7 @@ export const Ctas = ({
             }}
             key='google'
             href={storeButtons.hrefGoogle}
+            aria-label={storeButtons.ariaLabelGoogle}
             badge
           />
         )}
@@ -46,6 +47,7 @@ export const Ctas = ({
             }}
             key='apple'
             href={storeButtons.hrefApple}
+            aria-label={storeButtons.ariaLabelApple}
             badge
           />
         )}

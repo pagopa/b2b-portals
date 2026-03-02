@@ -55,6 +55,8 @@ const preFooterResponse = {
       id: 3,
       hrefGoogle: '#',
       hrefApple: '#',
+      ariaLabelGoogle: 'Scarica IO su Google Play',
+      ariaLabelApple: 'Scarica IO su App Store',
     },
     exclude: [
       {
@@ -98,6 +100,8 @@ const preFooterResponseAfterCodec = {
     storeButtons: {
       hrefGoogle: '#',
       hrefApple: '#',
+      ariaLabelGoogle: 'Scarica IO su Google Play',
+      ariaLabelApple: 'Scarica IO su App Store',
     },
     exclude: [{ slug: 'test' }],
   },
