@@ -49,7 +49,8 @@ const ContainerRC = (props: ContainerProps) => {
       tabIndex={tabIndex}
       bgcolor={!backgroundIsJSX ? background : undefined}
       {...(ariaLabel && { 'aria-label': ariaLabel })}
-      {...(ariaLabelledBy && { 'aria-labelledby': ariaLabelledBy })}
+      {...(!ariaLabel &&
+        ariaLabelledBy && { 'aria-labelledby': ariaLabelledBy })}
     >
       {backgroundIsJSX && background}
       <Container maxWidth={size} disableGutters>

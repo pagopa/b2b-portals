@@ -9,7 +9,7 @@ import {
 import { Content as EditorialContent } from './Content';
 import { Ctas as EditorialCtas } from './Ctas';
 import { Image as EditorialImage } from './Image';
-import { useId, useMemo } from 'react';
+import { useId } from 'react';
 
 const styles = {
   half: {
@@ -47,13 +47,10 @@ const Editorial = (props: EditorialProps) => {
   const gridItemStyles = { ...styles.half };
   const eyeletId = useId();
 
-  const arialabels = useMemo(
-    () => ({
-      ...(ariaLabelSection && { ariaLabel: ariaLabelSection }),
-      ...(!ariaLabelSection && eyelet && { ariaLabelledBy: eyeletId }),
-    }),
-    [ariaLabelSection, eyelet, eyeletId],
-  );
+  const arialabels = {
+    ...(ariaLabelSection && { ariaLabel: ariaLabelSection }),
+    ...(!ariaLabelSection && eyelet && { ariaLabelledBy: eyeletId }),
+  };
 
   if (width === 'standard') {
     return (
