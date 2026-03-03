@@ -20,8 +20,10 @@ export default function LocaleGuard({
   defaultLocale,
 }: LocaleGuardProps) {
   const [ready, setReady] = useState<boolean>(false);
+  const breaking = localStorage.getItem('preferredLang');
 
   useLayoutEffect(() => {
+    console.log(breaking);
     const preferredLang = localStorage.getItem('preferredLang');
     const browserLang = navigator.language.substring(0, 2).toLowerCase();
 
