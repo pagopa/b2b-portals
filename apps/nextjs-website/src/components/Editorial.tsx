@@ -18,10 +18,12 @@ export const makeEditorialProps = ({
   ctaButtons,
   storeButtons,
   titleTag,
+  ariaLabelSection,
   ...rest
 }: EditorialSection & SiteWidePageData): EditorialProps => ({
   ...(eyelet && { eyelet }),
   ...(titleTag && { titleTag }),
+  ...(ariaLabelSection && { ariaLabelSection }),
   body: MarkdownRenderer({
     markdown: body,
     locale,
