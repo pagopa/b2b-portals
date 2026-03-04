@@ -19,6 +19,7 @@ const HeroChips = (props: HeroChipsProps) => {
     subtitle,
     chips,
     sectionID,
+    ariaLabelChips,
   } = props;
 
   const backgroundColor =
@@ -109,7 +110,12 @@ const HeroChips = (props: HeroChipsProps) => {
           </Typography>
         )}
         {chips.length > 0 && (
-          <ChipsBlock chips={chips} theme={theme} themeVariant={themeVariant} />
+          <ChipsBlock
+            chips={chips}
+            theme={theme}
+            themeVariant={themeVariant}
+            {...(ariaLabelChips && { ariaLabelChips })}
+          />
         )}
       </Box>
     </ContainerRC>

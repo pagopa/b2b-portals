@@ -12,8 +12,10 @@ export const ChipsBlock = ({
   chips,
   theme,
   themeVariant,
+  ariaLabelChips,
 }: {
   chips: ReadonlyArray<ChipProps>;
+  ariaLabelChips?: string;
   theme: 'light' | 'dark';
   themeVariant: 'IO' | 'SEND';
 }) => {
@@ -50,32 +52,42 @@ export const ChipsBlock = ({
         width: '100%',
         justifyContent: 'center',
       }}
+      component='nav'
+      {...(ariaLabelChips && { 'aria-label': ariaLabelChips })}
     >
       <Stack
         direction='row'
         spacing={1}
+        component='ul'
         sx={{
           maxWidth: '600px',
           flexWrap: 'wrap',
           rowGap: '8px',
           justifyContent: 'center',
+          listStyle: 'none',
+          padding: 0,
+          '& > li': {
+            padding: 0,
+          },
         }}
       >
         {chips.map((chip, index) => (
-          <Chip
-            key={index}
-            label={chip.label}
-            onClick={() => SmoothScrollToTarget(chip.targetID)}
-            sx={{
-              backgroundColor: `${chipBackgroundColor} !important`,
-              color: `${chipTextColor} !important`,
-              fontWeight: 'bold',
-              '&:hover': {
-                backgroundColor: `${chipBackgroundColorHover} !important`,
-              },
-              cursor: 'pointer',
-            }}
-          />
+          <li key={index}>
+            <Chip
+              role='link'
+              label={chip.label}
+              onClick={() => SmoothScrollToTarget(chip.targetID)}
+              sx={{
+                backgroundColor: `${chipBackgroundColor} !important`,
+                color: `${chipTextColor} !important`,
+                fontWeight: 'bold',
+                '&:hover': {
+                  backgroundColor: `${chipBackgroundColorHover} !important`,
+                },
+                cursor: 'pointer',
+              }}
+            />
+          </li>
         ))}
       </Stack>
     </Stack>

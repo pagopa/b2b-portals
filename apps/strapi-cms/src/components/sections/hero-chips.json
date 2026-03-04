@@ -19,12 +19,12 @@
     },
     "theme": {
       "type": "enumeration",
+      "required": true,
+      "default": "light",
       "enum": [
         "light",
         "dark"
-      ],
-      "required": true,
-      "default": "light"
+      ]
     },
     "background": {
       "type": "media",
@@ -36,10 +36,13 @@
     },
     "chips": {
       "type": "component",
-      "repeatable": true,
       "component": "components.chip",
+      "repeatable": true,
       "required": true,
       "min": 1
+    },
+    "ariaLabelChips": {
+      "type": "string"
     }
   }
 }
