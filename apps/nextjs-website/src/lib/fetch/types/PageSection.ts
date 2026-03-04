@@ -310,6 +310,7 @@ const HeroChipsSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   sectionID: t.union([t.string, t.null]),
   background: StrapiImageSchema,
+  ariaLabelChips: t.union([t.string, t.null]),
   chips: t.array(ChipPropsCodec),
 });
 

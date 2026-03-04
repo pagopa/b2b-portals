@@ -11,6 +11,7 @@ const makeHeroChipsProps = ({
   defaultLocale,
   subtitle,
   background,
+  ariaLabelChips,
   ...rest
 }: HeroChipsSection & SiteWidePageData): HeroChipsProps => ({
   ...rest,
@@ -23,6 +24,7 @@ const makeHeroChipsProps = ({
       srcSet: makeSrcSetFromStrapiImageData(background),
     },
   }),
+  ...(ariaLabelChips && { ariaLabelChips }),
 });
 
 const HeroChips = (props: HeroChipsSection & SiteWidePageData) => (
