@@ -21,13 +21,16 @@
     },
     "size": {
       "type": "enumeration",
+      "required": true,
+      "default": "medium",
       "enum": [
         "small",
         "medium",
         "large"
-      ],
-      "required": true,
-      "default": "medium"
+      ]
+    },
+    "ariaLabel": {
+      "type": "string"
     }
   }
 }

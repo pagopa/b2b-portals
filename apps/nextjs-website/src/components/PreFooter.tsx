@@ -29,11 +29,14 @@ const makePreFooterProps = ({
     },
   }),
   ...(ctaButtons.length > 0 && {
-    ctaButtons: ctaButtons.map(({ href, openInNewTab, ...ctaButton }) => ({
-      ...ctaButton,
-      ...(openInNewTab && { openInNewTab }),
-      href: LocalizeURL({ URL: href, locale, defaultLocale }),
-    })),
+    ctaButtons: ctaButtons.map(
+      ({ href, openInNewTab, ariaLabel, ...ctaButton }) => ({
+        ...ctaButton,
+        ...(openInNewTab && { openInNewTab }),
+        ...(ariaLabel && { ariaLabel }),
+        href: LocalizeURL({ URL: href, locale, defaultLocale }),
+      }),
+    ),
   }),
   ...(exclude.length > 0 && {
     excludeSlugs: exclude.map((obj) => obj.slug),

@@ -191,6 +191,7 @@ const makeMegaHeaderProps = (
       ...(ctaButton.icon && { startIcon: Icon(ctaButton.icon) }),
       ...(mixpanelCtaClickEvent && { trackEvent: mixpanelCtaClickEvent }),
       openInNewTab: ctaButton.openInNewTab ?? false,
+      ariaLabel: ctaButton.ariaLabel ?? '',
     },
   }),
   ...(mobileCtaButton && {
@@ -199,6 +200,7 @@ const makeMegaHeaderProps = (
       ...(mobileCtaButton.icon && { startIcon: Icon(mobileCtaButton.icon) }),
       ...(mixpanelCtaClickEvent && { trackEvent: mixpanelCtaClickEvent }),
       openInNewTab: mobileCtaButton.openInNewTab ?? false,
+      ariaLabel: mobileCtaButton.ariaLabel ?? '',
     },
   }),
   ...(drawer && {
@@ -248,6 +250,7 @@ const makeMegaHeaderProps = (
       ctaButton: {
         ...link.ctaButton,
         ...(link.ctaButton.icon && { startIcon: Icon(link.ctaButton.icon) }),
+        ariaLabel: link.ctaButton.ariaLabel ?? '',
         openInNewTab: link.ctaButton.openInNewTab ?? false,
       },
     }),

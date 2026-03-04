@@ -14,12 +14,13 @@ const makeCtas = (
   ctaButtons: PreHeaderAttributes['leftCtas'],
   { themeVariant, locale, defaultLocale }: SiteWidePageData,
 ): CtaButtonProps[] =>
-  ctaButtons.map(({ href, ...ctaButton }) => ({
+  ctaButtons.map(({ href, ariaLabel, ...ctaButton }) => ({
     ...ctaButton,
     target: '_blank',
     rel: 'noopener noreferrer',
     variant: 'text',
     ...(ctaButton.icon && { startIcon: Icon(ctaButton.icon) }),
+    ...(ariaLabel && { 'aria-label': ariaLabel }),
     href: LocalizeURL({ URL: href, locale, defaultLocale }),
     themeVariant,
   }));
