@@ -5,6 +5,7 @@
   "scripts": {
     "postbuild": "node scripts/postbuild.js",
     "build": "next build && npm run postbuild",
+    "build:dry": "cross-env DRY_BUILD=true && next build",
     "build-storybook": "storybook build",
     "clean": "shx rm -rf out/",
     "compile": "tsc --noEmit",

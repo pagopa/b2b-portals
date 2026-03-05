@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     env:
-      PREVIEW_MODE: 'true'
-      PREVIEW_TOKEN: mock
+      DRY_BUILD: 'true'
       ENVIRONMENT: demo
       SEND_STRAPI_API_TOKEN: mock
       SEND_STRAPI_API_BASE_URL: mock
