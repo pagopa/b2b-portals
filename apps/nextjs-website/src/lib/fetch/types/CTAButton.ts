@@ -42,3 +42,5 @@ export const CTAButtonSimpleCodec = t.strict({
   openInNewTab: t.union([t.boolean, t.null]),
   ariaLabel: t.union([t.string, t.null]),
 });
+
+export type CTAButtonSimple = t.TypeOf<typeof CTAButtonSimpleCodec>;

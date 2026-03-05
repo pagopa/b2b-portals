@@ -1,5 +1,7 @@
-import { getAllPages } from '@/lib/api';
+import { getters } from '@/lib/api';
 import { Locale } from '@/lib/fetch/siteWideSEO';
+
+const { getAllPages } = getters;
 
 const labelMap: Record<Locale, string> = {
   it: 'Italiano',

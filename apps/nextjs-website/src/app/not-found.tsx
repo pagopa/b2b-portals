@@ -1,18 +1,15 @@
 import { ThemeProvider } from '@mui/material';
 import NotFoundPage from '@react-components/components/NotFoundPage/NotFoundPage';
 import { theme } from './theme';
-import {
-  getFooterProps,
-  getHeaderProps,
-  getPreHeaderProps,
-  getSiteWideSEO,
-  isPreviewMode,
-} from '@/lib/api';
+import { isPreviewMode, getters } from '@/lib/api';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
+
+const { getFooterProps, getHeaderProps, getPreHeaderProps, getSiteWideSEO } =
+  getters;
 
 const NotFound = async () => {
   if (isPreviewMode()) {
