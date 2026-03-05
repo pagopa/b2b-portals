@@ -16,12 +16,12 @@
     },
     "variant": {
       "type": "enumeration",
+      "required": true,
+      "default": "contained",
       "enum": [
         "contained",
         "outlined"
-      ],
-      "required": true,
-      "default": "contained"
+      ]
     },
     "icon": {
       "type": "enumeration",
@@ -31,16 +31,19 @@
     },
     "size": {
       "type": "enumeration",
+      "required": true,
+      "default": "medium",
       "enum": [
         "small",
         "medium",
         "large"
-      ],
-      "default": "medium",
-      "required": true
+      ]
     },
     "openInNewTab": {
       "type": "boolean"
+    },
+    "ariaLabel": {
+      "type": "string"
     }
   }
 }
