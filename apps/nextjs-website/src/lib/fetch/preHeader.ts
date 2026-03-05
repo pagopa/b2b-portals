@@ -12,6 +12,7 @@ const PreHeaderButtonCodec = t.strict({
   href: t.string,
   icon: t.union([MUIButtonIconCodec, t.null]),
   size: MUIButtonSizeCodec,
+  ariaLabel: t.union([t.string, t.null]),
 });
 
 const PreHeaderAttributesCodec = t.strict({

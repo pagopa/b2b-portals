@@ -31,6 +31,7 @@ const preHeaderResponse = {
       {
         id: 1,
         text: 'PagoPA S.p.A.',
+        ariaLabel: 'PagoPA S.p.A.',
         href: 'https://www.pagopa.it',
         icon: null,
         size: 'medium',
@@ -40,6 +41,7 @@ const preHeaderResponse = {
       {
         id: 2,
         text: 'Assistenza',
+        ariaLabel: 'Assistenza',
         href: 'mailto:destinatari-send@assistenza.pagopa.it',
         icon: 'HelpOutlineOutlined',
         size: 'medium',
@@ -58,6 +60,7 @@ const preHeaderResponseAfterCodec = {
     leftCtas: [
       {
         text: 'PagoPA S.p.A.',
+        ariaLabel: 'PagoPA S.p.A.',
         href: 'https://www.pagopa.it',
         icon: null,
         size: 'medium',
@@ -66,6 +69,7 @@ const preHeaderResponseAfterCodec = {
     rightCtas: [
       {
         text: 'Assistenza',
+        ariaLabel: 'Assistenza',
         href: 'mailto:destinatari-send@assistenza.pagopa.it',
         icon: 'HelpOutlineOutlined',
         size: 'medium',

@@ -8,6 +8,7 @@ export interface HeroChipsProps extends SectionProps {
   readonly title: string;
   readonly subtitle?: string | Generic;
   readonly chips: ReadonlyArray<ChipProps>;
+  readonly ariaLabelChips?: string;
 }
 
 export interface ChipProps {

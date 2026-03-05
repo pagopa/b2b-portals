@@ -73,6 +73,7 @@ const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
     icon: null,
     size: 'medium',
     text: 'CTA',
+    ariaLabel: 'CTA text',
     variant: 'contained',
     openInNewTab: null,
   },
@@ -324,6 +325,7 @@ const megaHeader: HeaderData = {
               label: 'label',
               ctaButton: {
                 text: 'CTA',
+                ariaLabel: 'CTA text',
                 href: '/',
                 variant: 'contained',
                 size: 'medium',
@@ -380,6 +382,7 @@ const parsedMegaHeader_DefaultLocale: HeaderData = {
               label: 'label',
               ctaButton: {
                 text: 'CTA',
+                ariaLabel: 'CTA text',
                 href: '/',
                 variant: 'contained',
                 size: 'medium',
@@ -436,6 +439,7 @@ const parsedMegaHeader_NonDefaultLocale: HeaderData = {
               label: 'label',
               ctaButton: {
                 text: 'CTA',
+                ariaLabel: 'CTA text',
                 href: '/',
                 variant: 'contained',
                 size: 'medium',
@@ -492,6 +496,7 @@ const megaHeader_MissingSublink: HeaderData = {
               label: 'label',
               ctaButton: {
                 text: 'CTA',
+                ariaLabel: 'CTA text',
                 href: '/',
                 variant: 'contained',
                 size: 'medium',

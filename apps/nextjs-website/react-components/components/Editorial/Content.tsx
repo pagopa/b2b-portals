@@ -13,6 +13,7 @@ export const Content = ({
   body,
   theme,
   themeVariant,
+  eyeletId,
 }: EditorialContentProps) => {
   const muiTheme = useTheme();
   const { breakpoints, palette } = muiTheme;
@@ -29,7 +30,7 @@ export const Content = ({
 
   return (
     <Stack maxWidth={{ md: maxTextWidth }} gap={2}>
-      {Eyelet(eyeletColor, eyelet)}
+      {Eyelet(eyeletColor, eyelet, eyeletId)}
       <Title
         textColor={textColor}
         title={title}

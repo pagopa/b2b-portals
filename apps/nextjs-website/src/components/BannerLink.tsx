@@ -24,11 +24,14 @@ export const makeBannerLinkProps = ({
       iconURL: icon.url,
     }),
     ...(ctaButtons && {
-      ctaButtons: ctaButtons.map(({ href, openInNewTab, ...ctaButton }) => ({
-        ...ctaButton,
-        ...(openInNewTab && { openInNewTab }),
-        href: LocalizeURL({ URL: href, locale, defaultLocale }),
-      })),
+      ctaButtons: ctaButtons.map(
+        ({ href, openInNewTab, ariaLabel, ...ctaButton }) => ({
+          ...ctaButton,
+          ...(ariaLabel && { ariaLabel }),
+          ...(openInNewTab && { openInNewTab }),
+          href: LocalizeURL({ URL: href, locale, defaultLocale }),
+        }),
+      ),
     }),
   })),
   ...rest,

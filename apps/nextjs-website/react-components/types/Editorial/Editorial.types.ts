@@ -20,6 +20,8 @@ export interface EditorialContentProps {
   readonly title: string;
   readonly titleTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
   readonly eyelet?: string;
+  readonly ariaLabelSection?: string;
+  readonly eyeletId?: string;
   readonly body: string | JSX.Element;
   readonly theme: Theme;
   readonly themeVariant: ThemeVariant;

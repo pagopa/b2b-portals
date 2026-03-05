@@ -29,6 +29,7 @@ export interface CtaButtonProps extends Partial<ButtonProps> {
   readonly disableRipple?: boolean;
   readonly trackEvent?: string;
   readonly openInNewTab?: boolean;
+  readonly ariaLabel?: string;
 }
 
 export function useIsVisible(ref: React.RefObject<Element>) {
