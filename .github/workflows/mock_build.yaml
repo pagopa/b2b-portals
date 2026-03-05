@@ -7,12 +7,12 @@ on:
   pull_request:
 
 jobs:
-  dry_build:
+  mock_build:
     name: Run Dry Build
     runs-on: ubuntu-24.04
 
     env:
-      DRY_BUILD: 'true'
+      MOCK_BUILD: 'true'
       ENVIRONMENT: demo
       SEND_STRAPI_API_TOKEN: mock
       SEND_STRAPI_API_BASE_URL: mock
