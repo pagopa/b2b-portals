@@ -52,6 +52,7 @@ const EditorialContentCodec = t.strict({
   title: t.string,
   titleTag: t.union([TitleTagCodec, t.null]),
   eyelet: t.union([t.string, t.null]),
+  ariaLabelSection: t.union([t.string, t.null]),
   body: t.string,
   theme: t.union([t.literal('light'), t.literal('dark')]),
   pattern: t.keyof({
@@ -309,6 +310,7 @@ const HeroChipsSectionCodec = t.strict({
   theme: t.union([t.literal('light'), t.literal('dark')]),
   sectionID: t.union([t.string, t.null]),
   background: StrapiImageSchema,
+  ariaLabelChips: t.union([t.string, t.null]),
   chips: t.array(ChipPropsCodec),
 });
 

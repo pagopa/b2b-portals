@@ -17,6 +17,8 @@ interface ContainerProps {
   size?: 'lg' | 'xl';
   sectionID?: string;
   tabIndex?: number;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
 }
 
 const ContainerRC = (props: ContainerProps) => {
@@ -32,6 +34,8 @@ const ContainerRC = (props: ContainerProps) => {
     size = 'lg',
     sectionID,
     tabIndex,
+    ariaLabel,
+    ariaLabelledBy,
   } = props;
   const backgroundIsJSX = isJSX(background);
 
@@ -44,6 +48,9 @@ const ContainerRC = (props: ContainerProps) => {
       px={px}
       tabIndex={tabIndex}
       bgcolor={!backgroundIsJSX ? background : undefined}
+      {...(ariaLabel && { 'aria-label': ariaLabel })}
+      {...(!ariaLabel &&
+        ariaLabelledBy && { 'aria-labelledby': ariaLabelledBy })}
     >
       {backgroundIsJSX && background}
       <Container maxWidth={size} disableGutters>

@@ -35,6 +35,7 @@ const preFooterResponse = {
       {
         id: 15,
         text: 'Bottone Primario',
+        ariaLabel: 'Bottone',
         href: '#',
         variant: 'contained',
         icon: null,
@@ -45,6 +46,7 @@ const preFooterResponse = {
         id: 14,
         text: 'Bottone Secondario',
         href: '#',
+        ariaLabel: 'Bottone',
         variant: 'outlined',
         icon: null,
         size: 'medium',
@@ -82,6 +84,7 @@ const preFooterResponseAfterCodec = {
     ctaButtons: [
       {
         text: 'Bottone Primario',
+        ariaLabel: 'Bottone',
         href: '#',
         variant: 'contained',
         icon: null,
@@ -90,6 +93,7 @@ const preFooterResponseAfterCodec = {
       },
       {
         text: 'Bottone Secondario',
+        ariaLabel: 'Bottone',
         href: '#',
         variant: 'outlined',
         icon: null,

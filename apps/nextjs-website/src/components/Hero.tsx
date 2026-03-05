@@ -43,12 +43,15 @@ const makeHeroProps = ({
   }),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
-      ctaButtons: ctaButtons.map(({ icon, href, openInNewTab, ...ctaBtn }) => ({
-        ...ctaBtn,
-        ...(openInNewTab && { openInNewTab }),
-        ...(icon && { startIcon: Icon(icon) }),
-        href: LocalizeURL({ URL: href, locale, defaultLocale }),
-      })),
+      ctaButtons: ctaButtons.map(
+        ({ icon, href, openInNewTab, ariaLabel, ...ctaBtn }) => ({
+          ...ctaBtn,
+          ...(openInNewTab && { openInNewTab }),
+          ...(icon && { startIcon: Icon(icon) }),
+          ...(ariaLabel && { ariaLabel }),
+          href: LocalizeURL({ URL: href, locale, defaultLocale }),
+        }),
+      ),
     }),
   ...(storeButtons && {
     storeButtons: {

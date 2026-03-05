@@ -40,6 +40,7 @@ export const CTAButtonSimpleCodec = t.strict({
   size: MUIButtonSizeCodec,
   icon: t.union([MUIButtonIconCodec, t.null]),
   openInNewTab: t.union([t.boolean, t.null]),
+  ariaLabel: t.union([t.string, t.null]),
 });
 
 export type CTAButtonSimple = t.TypeOf<typeof CTAButtonSimpleCodec>;

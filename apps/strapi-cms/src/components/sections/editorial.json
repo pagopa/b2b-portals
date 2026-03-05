@@ -27,54 +27,54 @@
     },
     "theme": {
       "type": "enumeration",
+      "required": true,
+      "default": "light",
       "enum": [
         "light",
         "dark"
-      ],
-      "default": "light",
-      "required": true
+      ]
     },
     "pattern": {
       "type": "enumeration",
+      "required": true,
+      "default": "none",
       "enum": [
         "none",
         "dots",
         "solid"
-      ],
-      "default": "none",
-      "required": true
+      ]
     },
     "width": {
       "type": "enumeration",
+      "required": true,
+      "default": "standard",
       "enum": [
         "standard",
         "wide",
         "center"
-      ],
-      "default": "standard",
-      "required": true
+      ]
     },
     "reversed": {
       "type": "boolean",
-      "default": false,
-      "required": true
+      "required": true,
+      "default": false
     },
     "sectionID": {
       "type": "string",
-      "regex": "^[a-z]+[a-z\\-]*$",
       "required": false,
-      "unique": false
+      "unique": false,
+      "regex": "^[a-z]+[a-z\\-]*$"
     },
     "ctaButtons": {
       "type": "component",
-      "repeatable": true,
       "component": "components.cta-button-simple",
+      "repeatable": true,
       "max": 2
     },
     "storeButtons": {
       "type": "component",
-      "repeatable": false,
-      "component": "components.store-buttons"
+      "component": "components.store-buttons",
+      "repeatable": false
     },
     "mobileImage": {
       "type": "media",
@@ -86,6 +86,7 @@
     },
     "titleTag": {
       "type": "enumeration",
+      "default": "h2",
       "enum": [
         "h1",
         "h2",
@@ -94,8 +95,10 @@
         "h5",
         "h6",
         "p"
-      ],
-      "default": "h2"
+      ]
+    },
+    "ariaLabelSection": {
+      "type": "string"
     }
   }
 }
