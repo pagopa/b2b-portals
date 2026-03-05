@@ -1,4 +1,4 @@
-name: Dry Build
+name: Mock Build
 
 permissions:
   contents: read
@@ -8,7 +8,7 @@ on:
 
 jobs:
   mock_build:
-    name: Run Dry Build
+    name: Run Mock Build
     runs-on: ubuntu-24.04
 
     env:
@@ -40,7 +40,7 @@ jobs:
         run: npm run compile
         working-directory: apps/nextjs-website
 
-      - name: Run Preview Build
+      - name: Run Mock Build
         shell: bash
         run: npm run build
         working-directory: apps/nextjs-website
