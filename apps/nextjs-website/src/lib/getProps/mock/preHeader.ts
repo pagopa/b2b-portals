@@ -8,6 +8,7 @@ export const mockPreHeaderProps: Getters['getPreHeaderProps'] = async () => ({
       icon: null,
       size: 'medium',
       text: 'mock',
+      ariaLabel: 'mock',
     },
   ],
   rightCtas: [
@@ -16,6 +17,7 @@ export const mockPreHeaderProps: Getters['getPreHeaderProps'] = async () => ({
       icon: 'HelpOutlineOutlined',
       size: 'medium',
       text: 'mock',
+      ariaLabel: 'mock',
     },
   ],
 });

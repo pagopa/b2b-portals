@@ -18,6 +18,7 @@ export const mockCTAButtonData: CTAButtonSimple = {
   size: 'medium',
   text: 'mock',
   variant: 'contained',
+  ariaLabel: 'mock',
 };
 
 export const mockPageSEOData: PageSEO = {
