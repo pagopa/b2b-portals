@@ -104,7 +104,7 @@ const BannerLink = ({
                 {section.iconURL && (
                   <Image
                     src={section.iconURL}
-                    alt={section.title}
+                    alt=''
                     width={60}
                     height={60}
                     style={{ display: 'block', margin: '0 auto' }}
