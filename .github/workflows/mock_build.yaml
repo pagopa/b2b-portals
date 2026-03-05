@@ -1,4 +1,4 @@
-name: Dry Build
+name: Mock Build
 
 permissions:
   contents: read
@@ -7,13 +7,12 @@ on:
   pull_request:
 
 jobs:
-  dry_build:
-    name: Run Dry Build
+  mock_build:
+    name: Run Mock Build
     runs-on: ubuntu-24.04
 
     env:
-      PREVIEW_MODE: 'true'
-      PREVIEW_TOKEN: mock
+      MOCK_BUILD: 'true'
       ENVIRONMENT: demo
       SEND_STRAPI_API_TOKEN: mock
       SEND_STRAPI_API_BASE_URL: mock
@@ -41,7 +40,7 @@ jobs:
         run: npm run compile
         working-directory: apps/nextjs-website
 
-      - name: Run Preview Build
+      - name: Run Mock Build
         shell: bash
         run: npm run build
         working-directory: apps/nextjs-website

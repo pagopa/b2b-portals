@@ -1,6 +1,10 @@
 import { Config } from '@/AppEnv';
 import PageSection from '@/components/PageSection/PageSection';
-import {
+import { getPreviewToken, isPreviewMode, getters } from '@/lib/api';
+import { Locale } from '@/lib/fetch/siteWideSEO';
+import Script from 'next/script';
+
+const {
   getAllPageIDs,
   getAllPageSwitchPageIDs,
   getAllPressReleaseIDs,
@@ -8,12 +12,8 @@ import {
   getPageSwitchPageDataFromID,
   getPressReleaseDataFromID,
   getPressReleasePages,
-  getPreviewToken,
   getSiteWideSEO,
-  isPreviewMode,
-} from '@/lib/api';
-import { Locale } from '@/lib/fetch/siteWideSEO';
-import Script from 'next/script';
+} = getters;
 
 const PreviewPage = async ({
   searchParams,
