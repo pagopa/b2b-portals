@@ -5,7 +5,14 @@ import { mockAllPages, mockPageProps } from './navigation';
 import { mockPreFooterProps } from './preFooter';
 import { mockPreHeaderProps } from './preHeader';
 import { mockPressReleasePages } from './pressRelease';
-import { mockAllPageIDs, mockAllPageSwitchPageIDs, mockAllPressReleaseIDs, mockPageDataFromID, mockPageSwitchPageDataFromID, mockPressReleaseDataFromID } from './preview';
+import {
+  mockAllPageIDs,
+  mockAllPageSwitchPageIDs,
+  mockAllPressReleaseIDs,
+  mockPageDataFromID,
+  mockPageSwitchPageDataFromID,
+  mockPressReleaseDataFromID,
+} from './preview';
 import { mockSiteWideSEO } from './siteWideSEO';
 
 const mockers: Getters = {

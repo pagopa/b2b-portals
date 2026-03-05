@@ -9,53 +9,57 @@ import { PageIDs, PreviewPageData } from '../fetch/preview';
 import { AppEnv, Config } from '@/AppEnv';
 
 export interface Getters {
-  getFooterProps(locale: Locale): Promise<FooterData['data']>;
-  getHeaderProps(
+  readonly getFooterProps: (locale: Locale) => Promise<FooterData['data']>;
+  readonly getHeaderProps: (
     locale: Locale,
     defaultLocale: Locale,
-  ): Promise<
+  ) => Promise<
     HeaderData['data']['header'][0] & {
       readonly exclude: HeaderData['data']['exclude'];
     }
   >;
-  getAllPages(locale: Locale): Promise<ReadonlyArray<PageData>>;
-  getPageProps(
+  readonly getAllPages: (locale: Locale) => Promise<ReadonlyArray<PageData>>;
+  readonly getPageProps: (
     locale: Locale,
     slugString: string | undefined,
-  ): Promise<PageData | undefined>;
-  getPreFooterProps(locale: Locale): Promise<PreFooterAttributes | null>;
-  getPreHeaderProps(locale: Locale): Promise<PreHeaderAttributes | null>;
-  getPressReleasePages(
+  ) => Promise<PageData | undefined>;
+  readonly getPreFooterProps: (
     locale: Locale,
-  ): Promise<ReadonlyArray<PressReleasePage>>;
-  getAllPageIDs(
+  ) => Promise<PreFooterAttributes | null>;
+  readonly getPreHeaderProps: (
+    locale: Locale,
+  ) => Promise<PreHeaderAttributes | null>;
+  readonly getPressReleasePages: (
+    locale: Locale,
+  ) => Promise<ReadonlyArray<PressReleasePage>>;
+  readonly getAllPageIDs: (
     tenant: Config['ENVIRONMENT'],
     locale: Locale,
-  ): Promise<PageIDs['data']>;
-  getAllPageSwitchPageIDs(
+  ) => Promise<PageIDs['data']>;
+  readonly getAllPageSwitchPageIDs: (
     tenant: Config['ENVIRONMENT'],
     locale: Locale,
-  ): Promise<PageIDs['data']>;
-  getAllPressReleaseIDs(
+  ) => Promise<PageIDs['data']>;
+  readonly getAllPressReleaseIDs: (
     tenant: Config['ENVIRONMENT'],
     locale: Locale,
-  ): Promise<PageIDs['data']>;
-  getPageDataFromID(
-    tenant: Config['ENVIRONMENT'],
-    documentID: string,
-    locale: Locale,
-  ): Promise<PreviewPageData['data']>;
-  getPageSwitchPageDataFromID(
-    tenant: Config['ENVIRONMENT'],
-    documentID: string,
-    locale: Locale,
-  ): Promise<PreviewPageData['data']>;
-  getPressReleaseDataFromID(
+  ) => Promise<PageIDs['data']>;
+  readonly getPageDataFromID: (
     tenant: Config['ENVIRONMENT'],
     documentID: string,
     locale: Locale,
-  ): Promise<PreviewPageData['data']>;
-  getSiteWideSEO(
+  ) => Promise<PreviewPageData['data']>;
+  readonly getPageSwitchPageDataFromID: (
+    tenant: Config['ENVIRONMENT'],
+    documentID: string,
+    locale: Locale,
+  ) => Promise<PreviewPageData['data']>;
+  readonly getPressReleaseDataFromID: (
+    tenant: Config['ENVIRONMENT'],
+    documentID: string,
+    locale: Locale,
+  ) => Promise<PreviewPageData['data']>;
+  readonly getSiteWideSEO: (
     tenant?: AppEnv['config']['ENVIRONMENT'],
-  ): Promise<SiteWideSEO['data']>;
+  ) => Promise<SiteWideSEO['data']>;
 }
