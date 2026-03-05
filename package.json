@@ -20,5 +20,24 @@
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
     "turbo": "^1.10.13"
+  },
+  "overrides": {
+    "@casl/ability": "^6.8.0",
+    "form-data": "^4.0.5",
+    "pbkdf2": "^3.1.5",
+    "sha.js": "^2.4.12",
+    "@remix-run/router": "^1.23.2",
+    "axios": "^1.13.5",
+    "glob": "^13.0.4",
+    "image-size": "^2.0.2",
+    "qs": "^6.15.0",
+    "tar": "^7.5.9",
+    "tar-fs": "^3.1.1",
+    "fast-xml-parser": "5.3.6",
+    "@smithy/config-resolver": "4.4.6",
+    "tough-cookie": "6.0.0",
+    "undici": "7.22.0",
+    "xml2js": "0.6.2",
+    "markdown-it": "14.1.1"
   }
 }
