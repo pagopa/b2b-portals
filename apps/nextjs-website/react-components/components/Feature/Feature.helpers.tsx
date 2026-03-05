@@ -1,12 +1,18 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Box, Grid, styled } from '@mui/material';
+import { alpha, Box, BoxProps, Grid, styled } from '@mui/material';
 import { FeatureStackItem } from './FeatureStackItem';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FeatureCarouselProps } from '../../types/Feature/Feature.types';
 
-export const CarouselDots = styled(Box)(({ theme }) => ({
+interface CarouselDotsProps {
+  mode: 'light' | 'dark';
+}
+
+export const CarouselDots = styled((props: CarouselDotsProps & BoxProps) => (
+  <Box {...props} />
+))(({ theme, mode }) => ({
   ul: {
     display: 'flex',
     width: '100%',
@@ -24,18 +30,25 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
         width: '.5rem',
         height: '.5rem',
         borderRadius: '.5rem',
-        backgroundColor: theme.palette.grey[300],
+        backgroundColor:
+          mode === 'light' ? theme.palette.grey[300] : alpha('#ffffff', 0.5),
         padding: '0',
         '::before': {
           display: 'none',
         },
         '&:focus': {
-          outline: `3px solid ${theme.palette.primary.main}`,
-          outlineOffset: `'2px'`,
+          outline:
+            mode === 'dark'
+              ? '#ffffff' + ' !important'
+              : theme.palette.custom.blueIO[500] + ' !important',
+          outlineOffset: `2px`,
         },
       },
       '&.slick-active button': {
-        backgroundColor: theme.palette.custom.blueIO[500] + ' !important',
+        backgroundColor:
+          mode === 'dark'
+            ? '#ffffff' + ' !important'
+            : theme.palette.custom.blueIO[500] + ' !important',
       },
     },
   },
@@ -73,7 +86,7 @@ const FeatureCarousel = ({
         aria-roledescription='carousel'
         appendDots={(dots) => (
           <Box aria-label={labels.pagination} role='navigation'>
-            <CarouselDots>
+            <CarouselDots mode={theme}>
               <ul>{dots}</ul>
             </CarouselDots>
           </Box>
