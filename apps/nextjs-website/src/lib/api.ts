@@ -17,5 +17,4 @@ export const appEnv = pipe(
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
 
-const getters: Getters = appEnv.config.DRY_BUILD === 'true' ? mock : real;
-export default getters;
+export const getters: Getters = appEnv.config.DRY_BUILD === 'true' ? mock : real;

@@ -1,5 +1,12 @@
 import { Getters } from '../types';
 import { mockFooterProps } from './footer';
+import { mockHeaderProps } from './header';
+import { mockAllPages, mockPageProps } from './navigation';
+import { mockPreFooterProps } from './preFooter';
+import { mockPreHeaderProps } from './preHeader';
+import { mockPressReleasePages } from './pressRelease';
+import { mockAllPageIDs, mockAllPageSwitchPageIDs, mockAllPressReleaseIDs, mockPageDataFromID, mockPageSwitchPageDataFromID, mockPressReleaseDataFromID } from './preview';
+import { mockSiteWideSEO } from './siteWideSEO';
 
 const mockers: Getters = {
   getFooterProps: mockFooterProps,

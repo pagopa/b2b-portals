@@ -1,14 +1,13 @@
 import { Metadata } from 'next';
 import {
-  getAllPages,
-  getPageProps,
-  getPressReleasePages,
-  getSiteWideSEO,
   isPreviewMode,
+  getters,
 } from '@/lib/api';
 import PageSection from '@/components/PageSection/PageSection';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import TrackPageView from '@/components/TrackPageView';
+
+const { getSiteWideSEO, getAllPages, getPageProps, getPressReleasePages } = getters;
 
 type PageParams = {
   params: { slug?: string[] };
