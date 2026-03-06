@@ -2,7 +2,7 @@ import { Config } from '@/AppEnv';
 
 export type StrapiApiData = Omit<
   Config,
-  'PREVIEW_MODE' | 'PREVIEW_TOKEN' | 'DRY_BUILD'
+  'PREVIEW_MODE' | 'PREVIEW_TOKEN' | 'MOCK_BUILD'
 >;
 type TenantStrapiApiData = {
   readonly baseUrl: string;

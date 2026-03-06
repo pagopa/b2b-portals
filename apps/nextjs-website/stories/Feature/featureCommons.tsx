@@ -12,7 +12,7 @@ export const FeatureTemplate: StoryFn<FeatureProps> = (args) => (
 const generateItems = (
   count: number,
   withLinks: boolean,
-  theme: 'dark' | 'light'
+  theme: 'dark' | 'light',
 ): FeatureItem[] =>
   Array.from({ length: count }, (_, i) => ({
     title: `Feature ${i + 1}`,
@@ -34,12 +34,19 @@ const generateItems = (
 // Function to generate default props
 const generateDefaultProps = (
   theme: 'dark' | 'light',
-  withLinks: boolean
+  withLinks: boolean,
 ): Partial<FeatureProps> => ({
   theme,
   title: 'Feature Title',
   items: generateItems(3, withLinks, theme),
   themeVariant: 'SEND',
+  labels: {
+    pagination: 'Paginazione carosello',
+    cardNext: 'Card successiva',
+    cardPrevious: 'Card precedente',
+    goToSlide: (index) => `Vai alla slide ${index + 1}`,
+    slideOf: (index, total) => `Slide ${index + 1} di ${total}`,
+  },
 });
 
 // Define the default props
@@ -48,5 +55,5 @@ export const defaultPropsDarkWithoutLinks = generateDefaultProps('dark', false);
 export const defaultPropsLightWithLinks = generateDefaultProps('light', true);
 export const defaultPropsLightWithoutLinks = generateDefaultProps(
   'light',
-  false
+  false,
 );

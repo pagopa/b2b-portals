@@ -19,6 +19,7 @@ const Feature = ({
   showCarouselMobile,
   background,
   sectionID,
+  labels,
 }: FeatureProps) => {
   const [activeStep, setActiveStep] = useState(0);
   const muiTheme = useTheme();
@@ -52,11 +53,24 @@ const Feature = ({
         />
       </Grid>
       <Grid item mt={8} justifyContent='center' sx={{ width: '100%' }}>
-        <Grid container spacing={{ xs: 6, md: 4 }} justifyContent='center'>
+        <Grid
+          component='ul'
+          container
+          spacing={{ xs: 6, md: 4 }}
+          justifyContent='center'
+          sx={{
+            padding: 0,
+            listStyle: 'none',
+            '& > li': {
+              padding: 0,
+            },
+          }}
+        >
           {items.map((item, index) => (
             <Grid
               md={3}
               item
+              component='li'
               display={showCarouselMobile ? { xs: 'none', md: 'block' } : {}}
               key={index}
             >
@@ -67,19 +81,20 @@ const Feature = ({
               />
             </Grid>
           ))}
-          {showCarouselMobile && (
-            <FeatureCarousel
-              items={items}
-              activeStep={activeStep}
-              handleStepChange={handleStepChange}
-              theme={theme}
-              themeVariant={themeVariant}
-              themeComponentDirection={
-                muiTheme.direction === 'rtl' ? 'rtl' : 'ltr'
-              }
-            />
-          )}
         </Grid>
+        {showCarouselMobile && (
+          <FeatureCarousel
+            labels={labels}
+            items={items}
+            activeStep={activeStep}
+            handleStepChange={handleStepChange}
+            theme={theme}
+            themeVariant={themeVariant}
+            themeComponentDirection={
+              muiTheme.direction === 'rtl' ? 'rtl' : 'ltr'
+            }
+          />
+        )}
       </Grid>
     </ContainerRC>
   );

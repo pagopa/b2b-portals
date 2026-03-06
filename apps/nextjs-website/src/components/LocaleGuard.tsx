@@ -64,7 +64,7 @@ export default function LocaleGuard({
     }
 
     setReady(!expectedBehaviour.redirect);
-  }, [languages, locale, noLocaleSlug]);
+  }, [languages, locale, defaultLocale, noLocaleSlug]);
 
   return ready ? children : null;
 }
