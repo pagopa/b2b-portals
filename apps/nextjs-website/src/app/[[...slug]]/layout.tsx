@@ -4,21 +4,22 @@ import { theme } from '../theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import {
-  getPreHeaderProps,
-  getHeaderProps,
-  getFooterProps,
-  getSiteWideSEO,
-  isPreviewMode,
-  getPreFooterProps,
-  getAllPages,
-} from '@/lib/api';
+import { isPreviewMode, getters } from '@/lib/api';
 import PreFooter from '@/components/PreFooter';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import ScrollPaddingTopManager from '@/components/ScrollMarginTopManager';
 import LocaleGuard from '@/components/LocaleGuard';
+
+const {
+  getSiteWideSEO,
+  getAllPages,
+  getPreHeaderProps,
+  getHeaderProps,
+  getPreFooterProps,
+  getFooterProps,
+} = getters;
 
 type LayoutProps = {
   children: React.ReactNode;
