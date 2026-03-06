@@ -118,11 +118,7 @@ export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
           bottom={14}
           right={-12}
         >
-          <Image
-            src={card.image.url}
-            alt={card.image.alternativeText ?? ''}
-            fill={true}
-          />
+          <Image src={card.image.url} alt={''} fill={true} />
         </Box>
       )}
     </Stack>
