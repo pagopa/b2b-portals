@@ -74,6 +74,7 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
             <MenuItem
               aria-label={language.value}
               key={language.id}
+              lang={language.id}
               onClick={() => {
                 localStorage.setItem('preferredLang', language.id);
                 goToLanguageLink(language.href);
