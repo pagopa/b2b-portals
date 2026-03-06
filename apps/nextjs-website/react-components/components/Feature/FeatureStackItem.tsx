@@ -15,7 +15,6 @@ export const FeatureStackItem = ({
 
   return (
     <Stack
-      component='article'
       alignContent='center'
       justifyContent='flex-start'
       alignItems='center'
