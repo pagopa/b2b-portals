@@ -63,6 +63,10 @@ MediaResourcesFullLight.args = {
       label: 'Scarica il manuale',
     },
   ],
+  labels: {
+    ariaLabelDownload: (file: string, title: string) =>
+      `${title}: Scarica ${file}`,
+  },
 };
 
 export const MediaResourcesFullDark: StoryFn<typeof MediaResources> =
