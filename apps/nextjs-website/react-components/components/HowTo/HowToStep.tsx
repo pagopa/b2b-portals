@@ -31,7 +31,6 @@ export const HowToStep = ({
   return (
     <Stack
       spacing={1}
-      component='article'
       sx={{
         maxWidth: '15em',
         minWidth: 'auto',
