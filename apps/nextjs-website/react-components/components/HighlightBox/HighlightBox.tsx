@@ -85,6 +85,7 @@ const HighlightBox = ({
             <img
               src={image.src}
               srcSet={image.srcSet}
+              sizes={image.sizes}
               alt={'Highlight'}
               width={300}
               height={200}

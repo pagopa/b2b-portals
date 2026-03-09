@@ -277,6 +277,7 @@ const Form = ({
         <img
           src={background.src}
           srcSet={background.srcSet}
+          sizes={background.sizes}
           width={0}
           height={0}
           style={{

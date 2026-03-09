@@ -47,6 +47,7 @@ const Hero = (props: HeroProps) => {
           alt=''
           src={background.src}
           srcSet={background.srcSet}
+          sizes={background.sizes}
           width={0}
           height={0}
           style={{
@@ -95,6 +96,7 @@ const Hero = (props: HeroProps) => {
               alt={image.alt}
               src={image.src}
               srcSet={image.srcSet}
+              sizes={image.sizes}
               width={0}
               height={0}
               style={{

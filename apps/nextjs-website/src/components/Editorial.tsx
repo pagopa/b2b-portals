@@ -6,7 +6,7 @@ import { EditorialSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { LocalizeURL } from '@/lib/linkLocalization';
-import { makeSrcSetFromStrapiImageData } from '@/lib/image';
+import { makeSrcSetFromStrapiImageData, IMAGE_SIZES } from '@/lib/image';
 
 export const makeEditorialProps = ({
   locale,
@@ -34,6 +34,7 @@ export const makeEditorialProps = ({
     <img
       src={image.url}
       srcSet={makeSrcSetFromStrapiImageData(image)}
+      sizes={IMAGE_SIZES.half}
       alt={image.alternativeText ?? ''}
       width={0}
       height={0}
@@ -43,6 +44,7 @@ export const makeEditorialProps = ({
     <img
       src={mobileImage.url}
       srcSet={makeSrcSetFromStrapiImageData(mobileImage)}
+      sizes={IMAGE_SIZES.full}
       alt={mobileImage.alternativeText ?? ''}
       width={0}
       height={0}
