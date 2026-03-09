@@ -64,8 +64,8 @@ MediaResourcesFullLight.args = {
     },
   ],
   labels: {
-    ariaLabelDownload: (file: string, title: string) =>
-      `${title}: Scarica ${file}`,
+    ariaLabelDownload: (filename: string, title: string) =>
+      `${title}: Scarica ${filename}`,
   },
 };
 

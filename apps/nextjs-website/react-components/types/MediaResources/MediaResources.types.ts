@@ -11,6 +11,6 @@ export interface MediaResourcesProps extends SectionProps {
   items: MediaResourcesItem[];
   title?: string;
   labels: {
-    ariaLabelDownload: (file: string, title: string) => string;
+    ariaLabelDownload: (filename: string, title: string) => string;
   };
 }

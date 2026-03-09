@@ -6,24 +6,24 @@ import { MediaResourcesProps } from '@react-components/types';
 
 const mediaResourcesLabels: Record<Locale, MediaResourcesProps['labels']> = {
   it: {
-    ariaLabelDownload: (file: string, title: string) =>
-      `${title}: Scarica ${file}`,
+    ariaLabelDownload: (filename: string, title: string) =>
+      `${title}: Scarica ${filename}`,
   },
   en: {
-    ariaLabelDownload: (file: string, title: string) =>
-      `${title}: Download ${file}`,
+    ariaLabelDownload: (filename: string, title: string) =>
+      `${title}: Download ${filename}`,
   },
   fr: {
-    ariaLabelDownload: (file: string, title: string) =>
-      `${title}: Télécharger ${file}`,
+    ariaLabelDownload: (filename: string, title: string) =>
+      `${title}: Télécharger ${filename}`,
   },
   de: {
-    ariaLabelDownload: (file: string, title: string) =>
-      `${title}: Herunterladen ${file}`,
+    ariaLabelDownload: (filename: string, title: string) =>
+      `${title}: Herunterladen ${filename}`,
   },
   sl: {
-    ariaLabelDownload: (file: string, title: string) =>
-      `${title}: Prenes ${file}`,
+    ariaLabelDownload: (filename: string, title: string) =>
+      `${title}: Prenes ${filename}`,
   },
 };
 const makeMediaResourcesProps = ({
