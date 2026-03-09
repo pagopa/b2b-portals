@@ -13,6 +13,7 @@ const MediaResources = ({
   theme,
   themeVariant,
   title,
+  labels,
 }: MediaResourcesProps) => {
   const muiTheme = useTheme();
 
@@ -71,7 +72,7 @@ const MediaResources = ({
               sx={{
                 textDecoration: 'none',
               }}
-              aria-label={`${item.label} "${item.title}"`}
+              aria-label={labels.ariaLabelDownload(item.label, item.title)}
             >
               <img
                 src={item.thumbnailURL}
