@@ -27,6 +27,7 @@ const makeTextSectionProps = ({
     link: {
       label: link.label,
       href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+      ariaLabel: link.ariaLabel ?? '',
     },
   }),
   ...rest,

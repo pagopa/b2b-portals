@@ -36,6 +36,9 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
               color={linkColor}
               href={item.link.href}
               underline='none'
+              {...(item.link.ariaLabel && {
+                'aria-label': item.link.ariaLabel,
+              })}
               sx={{ fontWeight: 'bold' }}
             >
               {item.link.label}

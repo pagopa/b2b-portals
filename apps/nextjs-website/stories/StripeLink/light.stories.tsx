@@ -17,6 +17,7 @@ LightStripeLinkFull.args = {
   link: {
     label: 'link',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
 };
 
@@ -27,5 +28,6 @@ LightStripeLinkNoIcon.args = {
   link: {
     label: 'link',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
 };

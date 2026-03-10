@@ -11,6 +11,7 @@ import { ThemeCodec } from './Theme';
 const LinkCodec = t.strict({
   label: t.string,
   href: t.string,
+  ariaLabel: t.union([t.string, t.null]),
 });
 
 const TitleTagCodec = t.keyof({
@@ -414,6 +415,7 @@ const FramedVideoSectionCodec = t.strict({
       link: t.strict({
         href: t.string,
         label: t.string,
+        ariaLabel: t.union([t.string, t.null]),
       }),
     }),
     t.null,

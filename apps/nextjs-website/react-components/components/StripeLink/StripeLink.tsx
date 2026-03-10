@@ -77,6 +77,7 @@ const StripeLink = ({
           <Button
             variant='contained'
             size='small'
+            {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
             sx={{
               backgroundColor:
                 theme === 'light'

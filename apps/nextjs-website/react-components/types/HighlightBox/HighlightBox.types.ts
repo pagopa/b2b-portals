@@ -1,3 +1,5 @@
+import { LinkProps } from '../common/Common.types';
+
 export interface HighlightBoxProps {
   title: string;
   body: string;
@@ -6,9 +8,6 @@ export interface HighlightBoxProps {
     srcSet: string;
   };
   eyelet?: string;
-  link?: {
-    label: string;
-    href: string;
-  };
+  link?: LinkProps;
   sectionID: string | null;
 }

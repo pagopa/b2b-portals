@@ -10,7 +10,6 @@ import {
 import { ServiceCardProps } from '../../types/ServiceCarousel/ServiceCarousel.types';
 import Image from 'next/image';
 import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
-import { useId } from 'react';
 
 // Style Carousel Dots (unfortunately react-slick doesn't offer an easy way)
 // Ignore TS error for position because we need to use !important
@@ -52,7 +51,6 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
 
 export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
   const { palette } = useTheme();
-  const cardTitleId = useId();
 
   return (
     <Stack
@@ -79,7 +77,7 @@ export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
         width={{ xs: 216, sm: 264, md: 264 }} // 216 has been found by testing: a higher number breaks react-slick and makes the last slide wrap under the first one
         alignSelf={'stretch'}
       >
-        <Typography variant='h6' fontWeight={700} id={cardTitleId}>
+        <Typography variant='h6' fontWeight={700}>
           {card.title}
         </Typography>
         {card.description && (
@@ -101,7 +99,9 @@ export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
               color='inherit'
               underline='hover'
               fontSize={16}
-              aria-labelledby={cardTitleId}
+              {...(card.link.ariaLabel && {
+                'aria-label': card.link.ariaLabel,
+              })}
             >
               {card.link.label}
               <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
