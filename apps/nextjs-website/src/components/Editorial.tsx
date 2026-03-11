@@ -44,7 +44,7 @@ export const makeEditorialProps = ({
     <img
       src={mobileImage.url}
       srcSet={makeSrcSetFromStrapiImageData(mobileImage)}
-      sizes={IMAGE_SIZES.background}
+      sizes={IMAGE_SIZES.content}
       alt={mobileImage.alternativeText ?? ''}
       width={0}
       height={0}
