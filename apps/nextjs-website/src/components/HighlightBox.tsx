@@ -17,7 +17,7 @@ const makeHighlightBoxProps = ({
   image: {
     src: image.url,
     srcSet: makeSrcSetFromStrapiImageData(image),
-    sizes: IMAGE_SIZES.half,
+    sizes: IMAGE_SIZES.content,
   },
   ...(eyelet && { eyelet }),
   ...(link && {

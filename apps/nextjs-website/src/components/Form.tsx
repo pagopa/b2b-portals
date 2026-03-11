@@ -37,7 +37,7 @@ const makeFormProps = ({
     background: {
       src: background.url,
       srcSet: makeSrcSetFromStrapiImageData(background),
-      sizes: IMAGE_SIZES.full,
+      sizes: IMAGE_SIZES.background,
     },
   }),
   ...(placeholderName && { placeholderName }),

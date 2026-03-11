@@ -27,6 +27,6 @@ export const makeSrcSetFromStrapiImageData = (image: StrapiImage): string => {
 };
 
 export const IMAGE_SIZES = {
-  full: '100vw',
-  half: '(min-width: 900px) 50vw, 100vw',
-} as const;
+  background: '100vw',
+  content: '(min-width: 1200px) 50vw, 100vw',
+};

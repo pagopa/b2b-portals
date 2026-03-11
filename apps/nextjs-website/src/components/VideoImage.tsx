@@ -41,13 +41,13 @@ const makeVideoImageProps = ({
         src: image.url,
         alt: image.alternativeText ?? '',
         srcSet: makeSrcSetFromStrapiImageData(image),
-        sizes: IMAGE_SIZES.full,
+        sizes: IMAGE_SIZES.background,
       },
       mobileImage: {
         src: mobileImage?.url ?? image.url,
         alt: mobileImage?.alternativeText ?? image.alternativeText ?? '',
         srcSet: makeSrcSetFromStrapiImageData(mobileImage ?? image),
-        sizes: IMAGE_SIZES.full,
+        sizes: IMAGE_SIZES.background,
       },
     }),
 });

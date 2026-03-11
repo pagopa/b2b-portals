@@ -33,14 +33,14 @@ const makeHeroProps = ({
       ...(image.alternativeText && {
         alt: image.alternativeText,
       }),
-      sizes: IMAGE_SIZES.half,
+      sizes: IMAGE_SIZES.content,
     },
   }),
   ...(background && {
     background: {
       src: background.url,
       srcSet: makeSrcSetFromStrapiImageData(background),
-      sizes: IMAGE_SIZES.full,
+      sizes: IMAGE_SIZES.background,
     },
   }),
   ...(ctaButtons &&
