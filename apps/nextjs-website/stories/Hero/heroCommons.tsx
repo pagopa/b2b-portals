@@ -37,12 +37,14 @@ const createHeroProps = (
     image: {
       src: 'https://d2mk0pc4ejgxx6.cloudfront.net/bg_hero_54e55afdee.png',
       srcSet: '',
+      sizes: '',
       alt: 'Alt text for image',
     },
     ...(theme === 'dark' && {
       background: {
         src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
         srcSet: '',
+        sizes: '',
       },
     }),
   };

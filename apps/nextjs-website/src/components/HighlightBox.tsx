@@ -2,7 +2,7 @@
 import { HighlightBoxProps } from '@react-components/types';
 import { HighlightBox as HighlightBoxRC } from '@react-components/components';
 import { HighlightBoxSection } from '@/lib/fetch/types/PageSection';
-import { makeSrcSetFromStrapiImageData } from '@/lib/image';
+import { makeSrcSetFromStrapiImageData, IMAGE_SIZES } from '@/lib/image';
 import { LocalizeURL } from '@/lib/linkLocalization';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 
@@ -17,6 +17,7 @@ const makeHighlightBoxProps = ({
   image: {
     src: image.url,
     srcSet: makeSrcSetFromStrapiImageData(image),
+    sizes: IMAGE_SIZES.content,
   },
   ...(eyelet && { eyelet }),
   ...(link && {

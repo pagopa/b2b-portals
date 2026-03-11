@@ -28,6 +28,7 @@ export interface FormProps extends SectionProps, FormFields, FormCategories {
   readonly background?: {
     src: string;
     srcSet: string;
+    sizes: string;
   };
   readonly placeholderName?: string;
   readonly placeholderSurname?: string;
