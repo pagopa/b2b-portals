@@ -2,4 +2,4 @@
 "nextjs-website": minor
 ---
 
-change link label text color
+MegaHeader: change link label text color
