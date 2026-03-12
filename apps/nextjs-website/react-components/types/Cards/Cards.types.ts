@@ -1,4 +1,9 @@
-import { SectionProps, CtaButtonProps, Generic } from '../common/Common.types';
+import {
+  SectionProps,
+  CtaButtonProps,
+  Generic,
+  LinkProps,
+} from '../common/Common.types';
 
 export interface CardsProps extends SectionProps {
   items: CardsItemProps[];
@@ -19,10 +24,10 @@ export interface CardsItemProps {
   label?: string;
   title: string;
   text?: string;
-  links?: Array<{
-    href: string;
-    label: string;
-    title?: string;
-  }>;
+  links?: Array<
+    LinkProps & {
+      title?: string;
+    }
+  >;
   masonry?: boolean;
 }

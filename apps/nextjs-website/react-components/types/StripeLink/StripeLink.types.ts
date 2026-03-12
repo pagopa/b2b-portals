@@ -1,10 +1,7 @@
-import { SectionProps } from '../common/Common.types';
+import { LinkProps, SectionProps } from '../common/Common.types';
 
 export interface StripeLinkProps extends SectionProps {
   subtitle: JSX.Element;
   iconURL?: string;
-  link: {
-    label: string;
-    href: string;
-  };
+  link: LinkProps;
 }

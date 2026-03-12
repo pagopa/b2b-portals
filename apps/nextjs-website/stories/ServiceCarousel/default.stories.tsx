@@ -27,6 +27,7 @@ ServiceCarouselFull.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
@@ -39,6 +40,7 @@ ServiceCarouselFull.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
@@ -51,6 +53,7 @@ ServiceCarouselFull.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
@@ -63,6 +66,7 @@ ServiceCarouselFull.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
@@ -75,6 +79,7 @@ ServiceCarouselFull.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
       description:
         'Con pagoPA integrata nell’app, paghi in modo rapido e sicuro i servizi di tutti gli Enti della Pubblica Amministrazione.',
@@ -102,6 +107,7 @@ ServiceCarouselMinimum.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
     },
     {
@@ -109,6 +115,7 @@ ServiceCarouselMinimum.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
     },
     {
@@ -116,6 +123,7 @@ ServiceCarouselMinimum.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
     },
     {
@@ -123,6 +131,7 @@ ServiceCarouselMinimum.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
     },
     {
@@ -130,6 +139,7 @@ ServiceCarouselMinimum.args = {
       link: {
         label: 'Scopri funzionalità',
         href: '#',
+        ariaLabel: `Scopri funzionalità`,
       },
     },
   ],

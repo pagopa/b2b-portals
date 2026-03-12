@@ -1,5 +1,5 @@
 import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
-import { SectionProps } from '../common/Common.types';
+import { LinkProps, SectionProps } from '../common/Common.types';
 
 export interface Step {
   readonly iconURL?: string;
@@ -17,9 +17,7 @@ export interface HowToStepProps extends Step {
 export interface HowToProps extends SectionProps {
   readonly title: string;
   readonly steps: ReadonlyArray<Step>;
-  readonly link?: {
-    readonly href: string;
-    readonly label: string;
+  readonly link?: LinkProps & {
     readonly target?: React.HTMLAttributeAnchorTarget;
   };
   readonly rowMaxSteps?: number;

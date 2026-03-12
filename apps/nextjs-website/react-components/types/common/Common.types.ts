@@ -50,3 +50,9 @@ export function useIsVisible(ref: React.RefObject<Element>) {
 
   return isIntersecting;
 }
+
+export interface LinkProps {
+  readonly label: string;
+  readonly href: string;
+  readonly ariaLabel?: string;
+}

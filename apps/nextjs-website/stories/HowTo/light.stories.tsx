@@ -19,12 +19,13 @@ LightHowToFull.args = {
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'center',
 };
 
 export const LightHowToFullNoLink: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {}
+  {},
 );
 LightHowToFullNoLink.args = {
   ...defaultPropsLightWithIcon,
@@ -37,6 +38,7 @@ LightHowToNoIcons.args = {
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'center',
 };
@@ -49,13 +51,14 @@ LightHowToNoLinkNoIcons.args = {
 };
 
 export const LightHowToFullCenter: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {}
+  {},
 );
 LightHowToFullCenter.args = {
   ...defaultPropsLightWithIcon,
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'center',
 };
@@ -66,18 +69,20 @@ LightHowToFullLeft.args = {
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'left',
 };
 
 export const LightHowToFullRight: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {}
+  {},
 );
 LightHowToFullRight.args = {
   ...defaultPropsLightWithIcon,
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'right',
 };

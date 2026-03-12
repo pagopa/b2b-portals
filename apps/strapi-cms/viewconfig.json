@@ -113,7 +113,7 @@
   },
   {
     "key": "plugin_content_manager_configuration_components::components.link",
-    "value": "{\"uid\":\"components.link\",\"settings\":{\"bulkable\":true,\"filterable\":true,\"searchable\":true,\"pageSize\":10,\"mainField\":\"label\",\"defaultSortBy\":\"label\",\"defaultSortOrder\":\"ASC\"},\"metadatas\":{\"id\":{\"edit\":{},\"list\":{\"label\":\"id\",\"searchable\":false,\"sortable\":false}},\"label\":{\"edit\":{\"label\":\"Testo\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"label\",\"searchable\":true,\"sortable\":true}},\"href\":{\"edit\":{\"label\":\"Href\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"href\",\"searchable\":true,\"sortable\":true}},\"documentId\":{\"edit\":{},\"list\":{\"label\":\"documentId\",\"searchable\":true,\"sortable\":true}}},\"layouts\":{\"list\":[\"id\",\"href\",\"label\",\"documentId\"],\"edit\":[[{\"name\":\"label\",\"size\":6},{\"name\":\"href\",\"size\":6}]]},\"isComponent\":true}",
+    "value": "{\"uid\":\"components.link\",\"settings\":{\"bulkable\":true,\"filterable\":true,\"searchable\":true,\"pageSize\":10,\"mainField\":\"label\",\"defaultSortBy\":\"label\",\"defaultSortOrder\":\"ASC\"},\"metadatas\":{\"id\":{\"edit\":{},\"list\":{\"label\":\"id\",\"searchable\":false,\"sortable\":false}},\"label\":{\"edit\":{\"label\":\"Testo\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"label\",\"searchable\":true,\"sortable\":true}},\"href\":{\"edit\":{\"label\":\"Href\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"href\",\"searchable\":true,\"sortable\":true}},\"ariaLabel\":{\"edit\":{\"label\":\"Descrizione per accessibilità\",\"description\":\"\",\"placeholder\":\"\",\"visible\":true,\"editable\":true},\"list\":{\"label\":\"ariaLabel\",\"searchable\":true,\"sortable\":true}},\"documentId\":{\"edit\":{},\"list\":{\"label\":\"documentId\",\"searchable\":true,\"sortable\":true}}},\"layouts\":{\"edit\":[[{\"name\":\"label\",\"size\":6},{\"name\":\"href\",\"size\":6}],[{\"name\":\"ariaLabel\",\"size\":6}]],\"list\":[\"id\",\"href\",\"label\",\"documentId\"]},\"isComponent\":true}",
     "type": "object",
     "environment": null,
     "tag": null
@@ -743,7 +743,7 @@
   },
   {
     "key": "plugin_upload_metrics",
-    "value": "{\"weeklySchedule\":\"1 35 10 * * 1\",\"lastWeeklyUpdate\":1772444101270}",
+    "value": "{\"weeklySchedule\":\"11 3 10 * * 2\",\"lastWeeklyUpdate\":1773133391332}",
     "type": "object",
     "environment": null,
     "tag": null

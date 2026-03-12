@@ -21,6 +21,7 @@ export const generateItemsWithLinks = (count: number): CardsItemProps[] =>
       {
         label: `Link ${i + 1}`,
         href: '#',
+        ariaLabel: `aria-label Link ${i + 1}`,
       },
     ],
   }));
@@ -32,7 +33,7 @@ export const CardsTemplate: StoryFn<CardsProps> = (args) => <Cards {...args} />;
 const generateDefaultProps = (
   theme: 'light' | 'dark',
   itemCount: number,
-  withLinks: boolean = false
+  withLinks: boolean = false,
 ): Partial<CardsProps> => ({
   theme,
   items: withLinks
@@ -46,23 +47,23 @@ export const defaultPropsDarkThree = generateDefaultProps('dark', 3);
 export const defaultPropsDarkThreeWithLinks = generateDefaultProps(
   'dark',
   3,
-  true
+  true,
 );
 export const defaultPropsDarkFour = generateDefaultProps('dark', 4);
 export const defaultPropsDarkFourWithLinks = generateDefaultProps(
   'dark',
   4,
-  true
+  true,
 );
 export const defaultPropsLightThree = generateDefaultProps('light', 3);
 export const defaultPropsLightThreeWithLinks = generateDefaultProps(
   'light',
   3,
-  true
+  true,
 );
 export const defaultPropsLightFour = generateDefaultProps('light', 4);
 export const defaultPropsLightFourWithLinks = generateDefaultProps(
   'light',
   4,
-  true
+  true,
 );

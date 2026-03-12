@@ -105,6 +105,7 @@ const TextSection = ({
             <Typography component='div'>
               <Link
                 href={link.href}
+                {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
                 underline='none'
                 sx={{
                   display: 'flex',

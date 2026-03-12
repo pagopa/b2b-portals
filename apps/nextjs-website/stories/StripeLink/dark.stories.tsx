@@ -17,6 +17,7 @@ DarkStripeLinkFull.args = {
   link: {
     label: 'link',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
 };
 
@@ -27,5 +28,6 @@ DarkStripeLinkNoIcon.args = {
   link: {
     label: 'link',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
 };

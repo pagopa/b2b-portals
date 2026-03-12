@@ -48,6 +48,7 @@ LightHeroBigStoreButtonsWithLink.args = {
   link: {
     label: 'Learn more',
     href: '/',
+    ariaLabel: 'Learn more',
   },
 };
 
@@ -86,6 +87,7 @@ LightHeroBigInvertedStoreButtonsWithLink.args = {
   link: {
     label: 'Learn more',
     href: '/',
+    ariaLabel: 'Learn more',
   },
 };
 
@@ -114,6 +116,7 @@ LightHeroMediumStoreButtonsWithLink.args = {
   link: {
     label: 'Learn more',
     href: '/',
+    ariaLabel: 'Learn more',
   },
 };
 
@@ -154,6 +157,7 @@ LightHeroMediumInvertedStoreButtonsWithLink.args = {
   link: {
     label: 'Learn more',
     href: '/',
+    ariaLabel: 'Learn more',
   },
 };
 

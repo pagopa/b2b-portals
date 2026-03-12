@@ -1,4 +1,4 @@
-import { SectionProps } from '../common/Common.types';
+import { LinkProps, SectionProps } from '../common/Common.types';
 
 export interface FramedVideoProps extends SectionProps {
   videoURL?: string;
@@ -7,10 +7,7 @@ export interface FramedVideoProps extends SectionProps {
   text?: {
     title: string;
     body: string;
-    link: {
-      href: string;
-      label: string;
-    };
+    link: LinkProps;
     textPosition: 'left' | 'right';
   };
 }

@@ -31,6 +31,7 @@ const pressReleases: PressReleases = {
         backlink: {
           label: 'Torna ai comunicati stampa',
           href: '/',
+          ariaLabel: 'label',
         },
       },
       credits: null,
@@ -56,6 +57,7 @@ const pressReleases: PressReleases = {
         backlink: {
           label: 'Torna ai comunicati stampa',
           href: '/',
+          ariaLabel: 'label',
         },
       },
       credits: null,
@@ -75,6 +77,7 @@ const previewPressReleaseData: PreviewPressReleaseData = {
       backlink: {
         label: 'Torna ai comunicati stampa',
         href: '/',
+        ariaLabel: 'label',
       },
     },
     credits: {
@@ -107,6 +110,7 @@ const previewPageData: PreviewPageData = {
         backlink: {
           label: 'Torna ai comunicati stampa',
           href: '/',
+          ariaLabel: 'label',
         },
       },
       {
@@ -140,6 +144,7 @@ const previewPressReleaseDataNoCredits: PreviewPressReleaseData = {
       backlink: {
         label: 'Torna ai comunicati stampa',
         href: '/',
+        ariaLabel: 'label',
       },
     },
     credits: null,
@@ -159,6 +164,7 @@ const previewPageDataNoCredits: PreviewPageData = {
         backlink: {
           label: 'Torna ai comunicati stampa',
           href: '/',
+          ariaLabel: 'label',
         },
       },
     ],
