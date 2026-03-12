@@ -16,6 +16,7 @@ export default [{
         ".cache/*",
         ".strapi/*",
         ".turbo/*",
+        ".tmp/*",
         "config/*.ts",
         "types/**/*",
         "database/**/*",

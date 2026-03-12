@@ -278,7 +278,7 @@ export const Overlay = styled('div')({
 });
 
 export const LinkLabel = styled('span')({
-  color: '#009EA2',
+  color: '#017E80',
   fontWeight: 600,
   fontSize: 10,
   lineHeight: '10px',
