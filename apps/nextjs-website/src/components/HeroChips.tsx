@@ -4,7 +4,7 @@ import { HeroChips as HeroChipsRC } from '@react-components/components';
 import { HeroChipsProps } from '@react-components/types';
 import { HeroChipsSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
-import { makeSrcSetFromStrapiImageData } from '@/lib/image';
+import { makeSrcSetFromStrapiImageData, IMAGE_SIZES } from '@/lib/image';
 
 const makeHeroChipsProps = ({
   locale,
@@ -22,6 +22,7 @@ const makeHeroChipsProps = ({
     background: {
       src: background.url,
       srcSet: makeSrcSetFromStrapiImageData(background),
+      sizes: IMAGE_SIZES.background,
     },
   }),
   ...(ariaLabelChips && { ariaLabelChips }),

@@ -13,6 +13,7 @@ export interface HeroProps extends SectionProps, HeroTextProps {
     | {
         src: string;
         srcSet: string;
+        sizes: string;
         alt?: string;
       };
   readonly inverse?: boolean;
@@ -21,6 +22,7 @@ export interface HeroProps extends SectionProps, HeroTextProps {
     | {
         src: string;
         srcSet: string;
+        sizes: string;
       };
   readonly useHoverlay?: boolean;
 }

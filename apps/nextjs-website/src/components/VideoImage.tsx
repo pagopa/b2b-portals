@@ -4,7 +4,7 @@ import { VideoImage as VideoImageRC } from '@react-components/components';
 import { VideoImageProps } from '@react-components/types';
 import { VideoImageSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
-import { makeSrcSetFromStrapiImageData } from '@/lib/image';
+import { makeSrcSetFromStrapiImageData, IMAGE_SIZES } from '@/lib/image';
 
 const makeVideoImageProps = ({
   locale,
@@ -41,11 +41,13 @@ const makeVideoImageProps = ({
         src: image.url,
         alt: image.alternativeText ?? '',
         srcSet: makeSrcSetFromStrapiImageData(image),
+        sizes: IMAGE_SIZES.background,
       },
       mobileImage: {
         src: mobileImage?.url ?? image.url,
         alt: mobileImage?.alternativeText ?? image.alternativeText ?? '',
         srcSet: makeSrcSetFromStrapiImageData(mobileImage ?? image),
+        sizes: IMAGE_SIZES.background,
       },
     }),
 });

@@ -75,9 +75,11 @@ export const renderImage = ({
   src,
   alt,
   srcSet,
+  sizes,
   mobileSrc,
   mobileAlt,
   mobileSrcSet,
+  mobileSizes,
   isMobileDevice,
 }: RenderImageProps) => {
   const mobileStyle: NextImageProps = {
@@ -99,12 +101,14 @@ export const renderImage = ({
   const imageSrc = isMobileDevice ? mobileSrc : src;
   const imageAlt = isMobileDevice ? mobileAlt : alt;
   const imageSrcSet = isMobileDevice ? mobileSrcSet : srcSet;
+  const imageSizes = isMobileDevice ? mobileSizes : sizes;
 
   return (
     <img
       src={imageSrc}
       alt={imageAlt}
       srcSet={imageSrcSet}
+      sizes={imageSizes}
       width={0}
       height={0}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}

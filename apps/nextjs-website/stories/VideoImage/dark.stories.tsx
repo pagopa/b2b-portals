@@ -139,11 +139,13 @@ ImageFull.args = {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
+    sizes: '',
   },
   mobileImage: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
+    sizes: '',
   },
   caption: 'Sample Image Caption',
 };
@@ -156,11 +158,13 @@ ImageNoTextWithCaptionCentered.args = {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
+    sizes: '',
   },
   mobileImage: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
+    sizes: '',
   },
   caption: 'Sample Image Caption',
   isCentered: true,
@@ -174,11 +178,13 @@ ImageNoTextWithCaptionLeft.args = {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
+    sizes: '',
   },
   mobileImage: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
+    sizes: '',
   },
   caption: 'Sample Image Caption',
 };
@@ -203,11 +209,13 @@ ImageNoCaptionWithTextCenter.args = {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
+    sizes: '',
   },
   mobileImage: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
+    sizes: '',
   },
   isCentered: true,
 };
@@ -232,11 +240,13 @@ ImageNoCaptionWithTextLeft.args = {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
+    sizes: '',
   },
   mobileImage: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
+    sizes: '',
   },
 };
 
@@ -248,10 +258,12 @@ ImageNoTitleNoCaption.args = {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Image Alt',
     srcSet: '',
+    sizes: '',
   },
   mobileImage: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
     alt: 'Sample Mobile Image Alt',
     srcSet: '',
+    sizes: '',
   },
 };

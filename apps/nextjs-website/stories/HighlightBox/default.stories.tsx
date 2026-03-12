@@ -22,6 +22,7 @@ HighlightBoxFull.args = {
   image: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/heo_cittadini_5acf230a3e.png',
     srcSet: '',
+    sizes: '',
   },
   eyelet: 'In arrivo su IO',
   link: {
@@ -40,6 +41,7 @@ HighlightBoxWithoutButton.args = {
   image: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/heo_cittadini_5acf230a3e.png',
     srcSet: '',
+    sizes: '',
   },
   eyelet: 'In arrivo su IO',
   sectionID: 'highlight-box-2',
@@ -53,6 +55,7 @@ HighlightBoxWithoutEyelet.args = {
   image: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/heo_cittadini_5acf230a3e.png',
     srcSet: '',
+    sizes: '',
   },
   eyelet: '',
   link: {

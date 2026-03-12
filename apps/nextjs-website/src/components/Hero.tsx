@@ -5,7 +5,7 @@ import { HeroProps } from '@react-components/types';
 import { HeroSection } from '@/lib/fetch/types/PageSection';
 import Icon from '@/components/Icon';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
-import { makeSrcSetFromStrapiImageData } from '@/lib/image';
+import { makeSrcSetFromStrapiImageData, IMAGE_SIZES } from '@/lib/image';
 import { LocalizeURL } from '@/lib/linkLocalization';
 
 const makeHeroProps = ({
@@ -33,12 +33,14 @@ const makeHeroProps = ({
       ...(image.alternativeText && {
         alt: image.alternativeText,
       }),
+      sizes: IMAGE_SIZES.content,
     },
   }),
   ...(background && {
     background: {
       src: background.url,
       srcSet: makeSrcSetFromStrapiImageData(background),
+      sizes: IMAGE_SIZES.background,
     },
   }),
   ...(ctaButtons &&
