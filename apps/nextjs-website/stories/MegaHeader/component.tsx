@@ -196,6 +196,7 @@ const makeMegaHeaderProps = ({
       openMenu: 'Apri menù',
       closeMenu: 'Chiudi menù',
       mainMenu: 'Menu Principale',
+      close: 'Chiudi',
     },
     ...(drawer !== 'none' && {
       drawer: {

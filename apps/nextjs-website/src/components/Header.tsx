@@ -31,30 +31,35 @@ const megaHeaderLabels: Record<Locale, MegaHeaderProps['labels']> = {
     openMenu: 'Apri menù',
     closeMenu: 'Chiudi menù',
     mainMenu: 'Menu principale',
+    close: 'Chiudi',
   },
   en: {
     news: 'NEW',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     mainMenu: 'Main menu',
+    close: 'Close',
   },
   de: {
     news: 'NEU',
     openMenu: 'Menü öffnen',
     closeMenu: 'Menü schließen',
     mainMenu: 'Hauptmenü',
+    close: 'Schließen',
   },
   fr: {
     news: 'NOUVEAU',
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
     mainMenu: 'Menu principal',
+    close: 'Fermer',
   },
   sl: {
     news: 'NOVO',
     openMenu: 'Odpri meni',
     closeMenu: 'Zapri meni',
     mainMenu: 'Glavni meni',
+    close: 'Zapri',
   },
 };
 
@@ -270,6 +275,7 @@ const makeMegaHeaderProps = (
     mainMenu: megaHeaderLabels[locale].mainMenu,
     openMenu: megaHeaderLabels[locale].openMenu,
     closeMenu: megaHeaderLabels[locale].closeMenu,
+    close: megaHeaderLabels[locale].close,
   },
 });
 

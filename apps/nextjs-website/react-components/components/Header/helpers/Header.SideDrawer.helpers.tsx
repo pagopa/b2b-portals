@@ -30,6 +30,7 @@ interface SideDrawerProps {
   theme: 'dark' | 'light';
   linkCards: HeaderSideDrawerLinkCardProps[];
   ctaCard: HeaderSideDrawerCtaCardProps;
+  ariaLabelClose?: string;
 }
 
 export default function SideDrawer({
@@ -41,6 +42,7 @@ export default function SideDrawer({
   drawerMenuSubtitle,
   linkCards,
   ctaCard,
+  ariaLabelClose,
 }: SideDrawerProps) {
   const textColorAlternative = TextAlternativeColor(theme);
 
@@ -71,11 +73,7 @@ export default function SideDrawer({
               >
                 {drawerMenuTitle}
               </Typography>
-              <Typography
-                gutterBottom
-                variant='body2'
-                component='span'
-              >
+              <Typography gutterBottom variant='body2' component='span'>
                 {drawerMenuSubtitle}
               </Typography>
             </Stack>
@@ -90,7 +88,10 @@ export default function SideDrawer({
               {drawerMenuTitle}
             </Typography>
           )}
-          <IconButton onClick={onClose}>
+          <IconButton
+            onClick={onClose}
+            {...(ariaLabelClose && { 'aria-label': ariaLabelClose })}
+          >
             <CloseIcon />
           </IconButton>
         </Stack>

@@ -600,6 +600,7 @@ const MegaHeader = ({
         {drawer && (
           <SideDrawer
             isOpen={isDrawerOpen}
+            ariaLabelClose={labels.close}
             onClose={closeDrawer}
             anchor='right'
             theme='light'
