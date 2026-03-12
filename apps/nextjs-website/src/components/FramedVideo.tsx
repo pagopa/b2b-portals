@@ -21,7 +21,7 @@ const makeFramedVideoProps = ({
       link: {
         label: text.link.label,
         href: LocalizeURL({ URL: text.link.href, locale, defaultLocale }),
-        ariaLabel: text.link.ariaLabel ?? '',
+        ...(text.link.ariaLabel && { ariaLabel: text.link.ariaLabel }),
       },
     },
   }),

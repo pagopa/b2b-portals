@@ -41,7 +41,7 @@ const makeTextSectionProps = ({
         locale,
         defaultLocale,
       }),
-      ariaLabel: backlink.ariaLabel ?? '',
+      ...(backlink.ariaLabel && { ariaLabel: backlink.ariaLabel }),
     },
   }),
   ...rest,

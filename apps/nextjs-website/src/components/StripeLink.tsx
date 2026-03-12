@@ -26,7 +26,7 @@ const makeStripeLinkProps = ({
   link: {
     label: link.label,
     href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
-    ariaLabel: link.ariaLabel ?? '',
+    ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
   },
   ...rest,
 });

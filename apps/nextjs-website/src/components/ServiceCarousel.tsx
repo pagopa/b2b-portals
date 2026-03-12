@@ -60,7 +60,7 @@ const makeServiceCarouselProps = ({
     link: {
       label: card.link.label,
       href: LocalizeURL({ URL: card.link.href, locale, defaultLocale }),
-      ariaLabel: card.link.ariaLabel ?? '',
+      ...(card.link.ariaLabel && { ariaLabel: card.link.ariaLabel }),
     },
     ...(card.description && { description: card.description }),
     ...(card.image && {
