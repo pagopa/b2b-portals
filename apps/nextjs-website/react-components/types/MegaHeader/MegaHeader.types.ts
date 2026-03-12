@@ -31,6 +31,7 @@ export interface MegaHeaderProps {
     openMenu: string;
     closeMenu: string;
     mainMenu: string;
+    close: string;
   };
 }
 
