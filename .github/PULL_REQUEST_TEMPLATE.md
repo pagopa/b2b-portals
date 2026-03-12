@@ -10,9 +10,14 @@
 <!--- Why is this change required? What problem does it solve? -->
 
 #### How Has This Been Tested?
-<!--- Please describe in detail how you tested your changes. -->
-<!--- Include details of your testing environment, tests ran to see how -->
-<!--- your change affects other areas of the code, etc. -->
+<!--- Put an `x` in all the boxes that apply. -->
+<!--- Where necessary, please describe in detail how you tested your changes. -->
+<!--- Especially how your change affects other areas of the code. -->
+- [ ] Tested locally in dev
+- [ ] Ran Storybook locally
+- [ ] Built locally
+- [ ] Tested locally in dev fetching from production Strapi instance
+- [ ] Built locally fetching from production Strapi instance
 
 #### Screenshots (if appropriate):
 
