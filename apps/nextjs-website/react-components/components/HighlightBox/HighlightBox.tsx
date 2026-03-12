@@ -64,6 +64,7 @@ const HighlightBox = ({
               <Button
                 variant='contained'
                 href={link.href}
+                {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
                 size='small'
                 sx={{
                   width: 'fit-content',

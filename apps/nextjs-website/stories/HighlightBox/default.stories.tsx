@@ -28,6 +28,7 @@ HighlightBoxFull.args = {
   link: {
     label: 'Scopri di più',
     href: '/',
+    ariaLabel: 'Scopri di più',
   },
   sectionID: 'highlight-box-1',
 };
@@ -60,6 +61,7 @@ HighlightBoxWithoutEyelet.args = {
   link: {
     label: 'Scopri di più',
     href: '/',
+    ariaLabel: 'Scopri di più',
   },
   sectionID: 'highlight-box-3',
 };

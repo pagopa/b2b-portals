@@ -46,6 +46,7 @@ const navigationResponse: Navigation = {
           link: {
             label: 'link',
             href: '/',
+            ariaLabel: 'label',
           },
           sectionID: null,
         },
@@ -119,6 +120,7 @@ describe('getNavigation', () => {
               link: {
                 label: 'link',
                 href: '/',
+                ariaLabel: 'label',
               },
               sectionID: null,
             },

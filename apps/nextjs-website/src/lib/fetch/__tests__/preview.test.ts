@@ -74,6 +74,7 @@ const pageDataResponse: PreviewPageData = {
         link: {
           href: '/',
           label: 'example',
+          ariaLabel: 'label',
         },
       },
     ],
@@ -92,6 +93,7 @@ const pressReleaseDataResponse: PreviewPressReleaseData = {
       backlink: {
         label: 'Torna ai comunicati stampa',
         href: '/',
+        ariaLabel: 'label',
       },
     },
     credits: null,

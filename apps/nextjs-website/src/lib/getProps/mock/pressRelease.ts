@@ -10,6 +10,7 @@ export const mockPressReleasePages: Getters['getPressReleasePages'] =
         backlink: {
           href: 'mock',
           label: 'mock',
+          ariaLabel: 'label',
         },
         body: 'mock',
         date: 'mock',

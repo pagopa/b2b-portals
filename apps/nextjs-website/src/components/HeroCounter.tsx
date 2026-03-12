@@ -30,6 +30,7 @@ const makeHeroCounterProps = ({
     link: {
       label: link.label,
       href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+      ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
     },
   }),
 });

@@ -53,6 +53,7 @@ const pressReleasesResponse = {
         backlink: {
           label: 'Torna ai comunicati stampa',
           href: '/',
+          ariaLabel: 'label',
         },
       },
       credits: null,
@@ -85,6 +86,7 @@ const pressReleasesResponse = {
         backlink: {
           label: 'Torna ai comunicati stampa',
           href: '/',
+          ariaLabel: 'label',
         },
       },
       credits: null,
@@ -149,6 +151,7 @@ describe('getNavigation', () => {
             backlink: {
               label: 'Torna ai comunicati stampa',
               href: '/',
+              ariaLabel: 'label',
             },
           },
           credits: null,
@@ -174,6 +177,7 @@ describe('getNavigation', () => {
             backlink: {
               label: 'Torna ai comunicati stampa',
               href: '/',
+              ariaLabel: 'label',
             },
           },
           credits: null,

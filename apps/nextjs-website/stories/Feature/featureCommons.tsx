@@ -26,6 +26,7 @@ const generateItems = (
           link: {
             label: `Link ${i + 1}`,
             href: `https://example.com/link${i + 1}`,
+            ariaLabel: `aria-label Link ${i + 1}`,
           },
         }
       : {}),

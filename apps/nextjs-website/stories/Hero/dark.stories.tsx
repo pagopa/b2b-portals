@@ -48,6 +48,7 @@ DarkHeroBigStoreButtonsWithLink.args = {
   link: {
     label: 'Learn more',
     href: '/',
+    ariaLabel: 'Learn more',
   },
 };
 
@@ -84,6 +85,7 @@ DarkHeroBigInvertedStoreButtonsWithLink.args = {
   link: {
     label: 'Learn more',
     href: '/',
+    ariaLabel: 'Learn more',
   },
 };
 
@@ -121,6 +123,7 @@ DarkHeroMediumStoreButtonsWithLink.args = {
   link: {
     label: 'Learn more',
     href: '/',
+    ariaLabel: 'Learn more',
   },
 };
 
@@ -152,6 +155,7 @@ DarkHeroMediumInvertedStoreButtonsWithLink.args = {
   link: {
     label: 'Learn more',
     href: '/',
+    ariaLabel: 'Learn more',
   },
 };
 

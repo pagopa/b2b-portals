@@ -1,4 +1,4 @@
-import { Theme, type SectionProps } from '../common/Common.types';
+import { LinkProps, Theme, type SectionProps } from '../common/Common.types';
 
 export interface HeroCounterProps extends SectionProps, HeroCounterTextProps {
   readonly background?: {
@@ -15,9 +15,6 @@ export interface HeroCounterProps extends SectionProps, HeroCounterTextProps {
 export interface HeroCounterTextProps {
   readonly title: string;
   readonly subtitle?: JSX.Element;
-  readonly link?: {
-    readonly label: string;
-    readonly href: string;
-  };
+  readonly link?: LinkProps;
   readonly theme: Theme;
 }

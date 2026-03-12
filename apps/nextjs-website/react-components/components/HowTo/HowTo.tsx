@@ -115,6 +115,7 @@ const HowTo = (props: HowToProps) => {
                 mt: 6,
                 alignSelf: 'flex-start',
               }}
+              {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
               href={link.href}
               target={link.target}
               color={linkColor}

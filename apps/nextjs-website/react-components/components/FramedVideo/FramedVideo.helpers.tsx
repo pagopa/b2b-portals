@@ -66,7 +66,7 @@ export const renderTextSection = ({
 }: {
   title: string;
   body: string;
-  link: { href: string; label: string };
+  link: { href: string; label: string; ariaLabel?: string };
   theme: 'light' | 'dark';
   themeVariant: 'SEND' | 'IO';
 }) => {
@@ -103,6 +103,7 @@ export const renderTextSection = ({
             textDecoration: 'none',
             marginBottom: '32px',
           }}
+          {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
         >
           {link.label}
         </Link>

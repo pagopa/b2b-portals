@@ -156,6 +156,7 @@ export const HeroTextContent = ({
         <Typography
           component='a'
           href={link.href}
+          {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
           sx={{
             display: 'flex',
             alignItems: 'center',

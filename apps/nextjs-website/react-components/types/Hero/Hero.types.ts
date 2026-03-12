@@ -1,6 +1,11 @@
 import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
-import { type SectionProps, type Generic, Theme } from '../common/Common.types';
-import { CtaButtonProps } from '../common/Common.types';
+import {
+  type SectionProps,
+  type Generic,
+  Theme,
+  LinkProps,
+  CtaButtonProps,
+} from '../common/Common.types';
 
 export interface HeroProps extends SectionProps, HeroTextProps {
   readonly image?:
@@ -36,10 +41,7 @@ export interface HeroTextProps {
   readonly ctaButtons?: ReadonlyArray<CtaButtonProps>;
   readonly storeButtons?: StoreButtonsProps;
   readonly size?: 'medium' | 'big' | 'small';
-  readonly link?: {
-    readonly label: string;
-    readonly href: string;
-  };
+  readonly link?: LinkProps;
   readonly theme: Theme;
   readonly themeVariant: ThemeVariant;
 }

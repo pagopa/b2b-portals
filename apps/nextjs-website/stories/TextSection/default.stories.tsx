@@ -62,6 +62,7 @@ TextSectionFull.args = {
   link: {
     label: 'Torna ai comunicati stampa',
     href: '#',
+    ariaLabel: 'Indietro',
   },
 };
 

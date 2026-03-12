@@ -29,6 +29,7 @@ DarkHeroCounter.args = {
   link: {
     label: 'Sto cercando un Ente nazionale',
     href: '#',
+    ariaLabel: 'Sto cercando un Ente nazionale',
   },
 };
 

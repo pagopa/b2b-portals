@@ -19,12 +19,13 @@ DarkHowToFull.args = {
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'center',
 };
 
 export const DarkHowToFullNoLink: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {}
+  {},
 );
 DarkHowToFullNoLink.args = {
   ...defaultPropsDarkWithIcon,
@@ -37,12 +38,13 @@ DarkHowToNoIcons.args = {
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'center',
 };
 
 export const DarkHowToNoLinkNoIcons: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {}
+  {},
 );
 DarkHowToNoLinkNoIcons.args = {
   ...defaultPropsDarkWithoutIcon,
@@ -50,13 +52,14 @@ DarkHowToNoLinkNoIcons.args = {
 };
 
 export const DarkHowToFullCenter: StoryFn<typeof HowTo> = HowToTemplate.bind(
-  {}
+  {},
 );
 DarkHowToFullCenter.args = {
   ...defaultPropsDarkWithIcon,
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'center',
 };
@@ -67,6 +70,7 @@ DarkHowToFullLeft.args = {
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'left',
 };
@@ -77,6 +81,7 @@ DarkHowToFullRight.args = {
   link: {
     label: 'Learn More',
     href: '#',
+    ariaLabel: 'Scopri di più',
   },
   stepsAlignment: 'right',
 };

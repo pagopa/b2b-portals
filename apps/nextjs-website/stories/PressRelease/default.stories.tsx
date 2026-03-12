@@ -57,5 +57,6 @@ PressReleaseFull.args = {
   backlink: {
     label: 'Torna ai comunicati stampa',
     href: '/',
+    ariaLabel: 'Torna indietro',
   },
 };

@@ -57,6 +57,7 @@ const makeFeatureProps = ({
       link: {
         label: item.link.label,
         href: LocalizeURL({ URL: item.link.href, locale, defaultLocale }),
+        ...(item.link.ariaLabel && { ariaLabel: item.link.ariaLabel }),
       },
     }),
   })),

@@ -26,6 +26,7 @@ const navigation: Navigation = {
           link: {
             label: 'link',
             href: '/',
+            ariaLabel: 'test',
           },
           sectionID: null,
         },
@@ -52,6 +53,7 @@ const navigation: Navigation = {
           link: {
             label: 'link',
             href: '/',
+            ariaLabel: 'test',
           },
           sectionID: null,
         },

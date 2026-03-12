@@ -23,6 +23,7 @@ VideoWithTextLeft.args = {
     link: {
       href: '#',
       label: 'Guarda il video',
+      ariaLabel: `Guarda il video`,
     },
     textPosition: 'left',
   },
@@ -42,6 +43,7 @@ VideoWithTextRight.args = {
     link: {
       href: '#',
       label: 'Guarda il video',
+      ariaLabel: `Guarda il video`,
     },
     textPosition: 'right',
   },
@@ -56,7 +58,7 @@ VideoFullScreen.args = {
 };
 
 export const NoVideo: StoryFn<typeof FramedVideo> = FramedVideoTemplate.bind(
-  {}
+  {},
 );
 NoVideo.args = {
   ...defaultsLight,
