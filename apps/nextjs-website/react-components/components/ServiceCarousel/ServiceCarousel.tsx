@@ -20,7 +20,7 @@ const ServiceCarousel = ({
   sectionID,
   labels,
 }: ServiceCarouselProps) => {
-  let sliderRef = useRef<Slider>();
+  const sliderRef = useRef<Slider>();
   const { palette } = useTheme();
   const [currentCard, setCurrentCard] = useState(cards[0]);
   const liveRegionRef = useRef<HTMLDivElement>();
@@ -87,7 +87,7 @@ const ServiceCarousel = ({
           alignItems='center'
           justifyContent='flex-start'
           gap={2}
-          display={{ xs: 'none', sm: 'none', md: 'flex' }}
+          display='flex'
         >
           <SliderArrowControl
             direction='left'
@@ -133,6 +133,12 @@ const ServiceCarousel = ({
           customPaging={(index: number) => (
             <button type='button' aria-label={labels.goToSlide(index)} />
           )}
+          responsive={[
+            {
+              breakpoint: 900,
+              settings: { dots: false },
+            },
+          ]}
         >
           {cards.map((c, index) => (
             <div
