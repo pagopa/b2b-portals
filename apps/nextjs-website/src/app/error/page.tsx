@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@mui/material';
-import { theme } from './theme';
+import { theme } from '../theme';
 import { isPreviewMode, getters } from '@/lib/api';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
@@ -11,7 +11,7 @@ import ErrorPage from '@react-components/components/ErrorPage/ErrorPage';
 const { getFooterProps, getHeaderProps, getPreHeaderProps, getSiteWideSEO } =
   getters;
 
-const Error = async () => {
+const Page = async () => {
   if (isPreviewMode()) {
     return null;
   }
@@ -63,4 +63,4 @@ const Error = async () => {
   );
 };
 
-export default Error;
+export default Page;
