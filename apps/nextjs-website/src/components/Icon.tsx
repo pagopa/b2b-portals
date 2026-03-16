@@ -6,7 +6,7 @@ import {
   Twitter,
   YouTube,
 } from '@mui/icons-material';
-import { MediumIcon } from '@pagopa/mui-italia/dist/icons/MediumIcon';
+import { MediumIcon } from '@pagopa/mui-italia/icons';
 
 const iconMapping = {
   // Button Icons
