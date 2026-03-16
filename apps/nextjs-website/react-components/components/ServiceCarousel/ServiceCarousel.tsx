@@ -6,7 +6,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useRef, useState } from 'react';
 import {
-  CarouselDots,
   ServiceCard,
   SliderArrowControl,
 } from './ServiceCarousel.helpers';
@@ -115,30 +114,10 @@ const ServiceCarousel = ({
           variableWidth={true}
           infinite={true}
           arrows={false}
-          dots={true}
+          dots={false}
           swipeToSlide={true}
           // @ts-ignore Legacy use of ref
           ref={sliderRef}
-          appendDots={(dots) => (
-            <Box
-              aria-label={labels.pagination}
-              role='navigation'
-              sx={{ position: 'static !important' }}
-            >
-              <CarouselDots>
-                <ul>{dots}</ul>
-              </CarouselDots>
-            </Box>
-          )}
-          customPaging={(index: number) => (
-            <button type='button' aria-label={labels.goToSlide(index)} />
-          )}
-          responsive={[
-            {
-              breakpoint: 900,
-              settings: { dots: false },
-            },
-          ]}
         >
           {cards.map((c, index) => (
             <div
