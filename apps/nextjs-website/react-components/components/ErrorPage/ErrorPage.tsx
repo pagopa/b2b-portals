@@ -44,20 +44,13 @@ const ErrorPage = ({ defaultLocale, validLocales }: ErrorPageProps) => {
     return validLocales.includes(locale as Locale);
   };
 
-  const url =
-    pathname.length < 5
-      ? // No locale (/x) or an invalid locale's homepage (/xx/)
-        // (If it was valid, we would not be here in the 404 page)
-        // Redirect to the default locale's homepage
-        '/'
-      : pathname[3] === '/' && isValidLocale(pathname.slice(1, 3))
-        ? // If a valid locale is present in the pathname
-          // Redirect to said locale's homepage
-          `/${pathname.slice(1, 3) === defaultLocale ? '' : pathname.slice(1, 3)}`
-        : // No locale has been specified, simply redirect to the default locale's homepage
-          '/';
+  const locale =
+    pathname === '/error'
+      ? defaultLocale
+      : isValidLocale(pathname.substring(1, 3))
+        ? pathname.substring(1, 3)
+        : defaultLocale;
 
-  const locale = url === '/' ? defaultLocale : url.slice(1, 3);
   const backgroundColor = SendBackgroundColor('light');
   const textColor = TextColor('light');
   const texts = localizedTexts[locale as Locale];
