@@ -9,6 +9,24 @@ import { LangSwitchProps } from '../../../types/Footer/Footer.types';
 export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const ariaLabels = {
+    it: {
+      ariaLabel: (language: string) => `Seleziona lingua: ${language}`,
+    },
+    en: {
+      ariaLabel: (language: string) => `Select language: ${language}`,
+    },
+    de: {
+      ariaLabel: (language: string) => `Sprache auswählen: ${language}`,
+    },
+    fr: {
+      ariaLabel: (language: string) => `Sélectionnez la langue : ${language}`,
+    },
+    sl: {
+      ariaLabel: (language: string) => `Izberite jezik: ${language}`,
+    },
+  };
+
   const toggleMenu = () => {
     setMenuOpen((open) => !open);
   };
@@ -24,9 +42,10 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
     <Stack
       display='flex'
       flexDirection='column'
-      aria-label='cambia la lingua'
+      aria-label={ariaLabels[activeLanguage.id].ariaLabel(activeLanguage.value)}
       alignItems={{ xs: 'center', sm: 'flex-start' }}
       width='100%'
+      role='menu'
     >
       <Button
         sx={{
