@@ -23,9 +23,11 @@ export const ChipsBlock = ({
     const targetSection = document.getElementById(targetID);
 
     if (targetSection) {
-      targetSection.focus({ preventScroll: true });
+      /*targetSection.focus({ preventScroll: true });
       targetSection.scrollIntoView({ behavior: 'smooth' });
       history.pushState({}, '', `#${targetID}`);
+      */
+      window.location.href = `#${targetID}`;
     }
   };
 
@@ -83,6 +85,9 @@ export const ChipsBlock = ({
                 fontWeight: 'bold',
                 '&:hover': {
                   backgroundColor: `${chipBackgroundColorHover} !important`,
+                },
+                '&:focus': {
+                  outline: `1px solid ${theme === 'light' ? chipBackgroundColor : 'white'}`,
                 },
                 cursor: 'pointer',
               }}

@@ -11,6 +11,7 @@ import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import ScrollPaddingTopManager from '@/components/ScrollMarginTopManager';
 import LocaleGuard from '@/components/LocaleGuard';
+import styles from './layout.module.css';
 
 const {
   getSiteWideSEO,
@@ -129,7 +130,7 @@ export default async function Layout({
 
   return (
     <ThemeProvider theme={theme}>
-      <html lang={locale}>
+      <html lang={locale} className={styles['html']}>
         <body style={{ margin: 0 }}>
           <LocaleGuard
             noLocaleSlug={slugWithoutLocale}
