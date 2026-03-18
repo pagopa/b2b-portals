@@ -23,10 +23,6 @@ export const ChipsBlock = ({
     const targetSection = document.getElementById(targetID);
 
     if (targetSection) {
-      /*targetSection.focus({ preventScroll: true });
-      targetSection.scrollIntoView({ behavior: 'smooth' });
-      history.pushState({}, '', `#${targetID}`);
-      */
       window.location.href = `#${targetID}`;
     }
   };
