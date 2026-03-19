@@ -8,7 +8,19 @@ type RootLayoutProps = {
 // required for static builds, even if it's just passing children through.
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang='it'>
-    <body style={{ margin: 0, scrollBehavior: 'smooth' }}>{children}</body>
+    <head>
+      <style>{`
+          html {
+            scroll-behavior: smooth;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            html {
+              scroll-behavior: auto;
+            }
+          }
+        `}</style>
+    </head>
+    <body style={{ margin: 0 }}>{children}</body>
   </html>
 );
 

@@ -19,16 +19,6 @@ export const ChipsBlock = ({
   theme: 'light' | 'dark';
   themeVariant: 'IO' | 'SEND';
 }) => {
-  const SmoothScrollToTarget = (targetID: string) => {
-    const targetSection = document.getElementById(targetID);
-
-    if (targetSection) {
-      targetSection.focus({ preventScroll: true });
-      targetSection.scrollIntoView({ behavior: 'smooth' });
-      history.pushState({}, '', `#${targetID}`);
-    }
-  };
-
   const { palette } = useTheme();
 
   const chipBackgroundColor =
@@ -75,14 +65,18 @@ export const ChipsBlock = ({
           <li key={index}>
             <Chip
               role='link'
+              component='a'
+              href={`#${chip.targetID}`}
               label={chip.label}
-              onClick={() => SmoothScrollToTarget(chip.targetID)}
               sx={{
                 backgroundColor: `${chipBackgroundColor} !important`,
                 color: `${chipTextColor} !important`,
                 fontWeight: 'bold',
                 '&:hover': {
                   backgroundColor: `${chipBackgroundColorHover} !important`,
+                },
+                '&:focus': {
+                  outline: `2px solid ${theme === 'light' ? chipBackgroundColor : 'white'}`,
                 },
                 cursor: 'pointer',
               }}
