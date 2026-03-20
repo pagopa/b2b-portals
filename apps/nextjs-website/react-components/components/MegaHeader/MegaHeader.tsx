@@ -179,6 +179,7 @@ const MegaHeader = ({
                   {menuItems.map((menuItem: MegaMenuItem, index) => (
                     <Typography component='li' key={index}>
                       <Button
+                        id={`nav-button-${index}`}
                         type='button'
                         className={`menuPrimaryItem ${
                           dropdownOpen === menuItem.primary ? 'open' : ''
@@ -189,6 +190,95 @@ const MegaHeader = ({
                       >
                         {menuItem.primary}
                       </Button>
+                      <Dropdown
+                        id={`submenu-${index}`}
+                        role='region'
+                        aria-labelledby={`nav-button-${index}`}
+                        className={
+                          dropdownOpen === menuItem.primary ? 'open' : ''
+                        }
+                      >
+                        {dropdownOpen === menuItem.primary &&
+                          menuItem.secondary.map((submenu, subIndex) => (
+                            <div key={subIndex} className='dropdownSection'>
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                }}
+                              >
+                                {submenu.title && (
+                                  <DropdownTitle component='h2'>
+                                    {submenu.title}
+                                  </DropdownTitle>
+                                )}
+                                <div style={{ display: 'flex' }}>
+                                  {Array.from(
+                                    {
+                                      length: Math.ceil(
+                                        submenu.items.length / 7,
+                                      ),
+                                    },
+                                    (_, colIndex) => (
+                                      <Typography
+                                        component='ul'
+                                        key={colIndex}
+                                        className='column'
+                                        sx={{
+                                          listStyle: 'none',
+                                          padding: 0,
+                                        }}
+                                      >
+                                        {submenu.items
+                                          .slice(
+                                            colIndex * 7,
+                                            (colIndex + 1) * 7,
+                                          )
+                                          .map((item, itemIndex) => (
+                                            <li key={itemIndex}>
+                                              <Sublink
+                                                href={item.href}
+                                                target={
+                                                  item.href.startsWith(
+                                                    'https://',
+                                                  )
+                                                    ? '_blank'
+                                                    : '_self'
+                                                }
+                                                {...(isActiveSubLink(
+                                                  item.href,
+                                                ) && {
+                                                  className: 'active',
+                                                })}
+                                                onClick={() =>
+                                                  setDropdownOpen(null)
+                                                }
+                                                trackEvent={
+                                                  trackSublinkClickEvent
+                                                }
+                                                trackingProperties={{
+                                                  Tab: menuItem.primary,
+                                                  Link: item.href,
+                                                }}
+                                              >
+                                                {item.label}
+                                                {item.isNew && (
+                                                  <LinkLabel>
+                                                    {labels.news}
+                                                  </LinkLabel>
+                                                )}
+                                                <ArrowForwardIcon className='arrowIcon' />
+                                              </Sublink>
+                                            </li>
+                                          ))}
+                                      </Typography>
+                                    ),
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                      </Dropdown>
                     </Typography>
                   ))}
                 </Nav>
@@ -308,69 +398,6 @@ const MegaHeader = ({
             )}
           </IconButton>
         </Content>
-        {!isMobile &&
-          menuItems.map((menuItem: MegaMenuItem, index) => (
-            <Dropdown
-              id={`submenu-${index}`}
-              key={index}
-              className={dropdownOpen === menuItem.primary ? 'open' : ''}
-            >
-              {dropdownOpen === menuItem.primary &&
-                menuItem.secondary.map((submenu, subIndex) => (
-                  <div key={subIndex} className='dropdownSection'>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      {submenu.title && (
-                        <DropdownTitle>{submenu.title}</DropdownTitle>
-                      )}
-                      <div style={{ display: 'flex' }}>
-                        {Array.from(
-                          {
-                            length: Math.ceil(submenu.items.length / 7),
-                          },
-                          (_, colIndex) => (
-                            <Typography
-                              component='div'
-                              key={colIndex}
-                              className='column'
-                              style={{ flex: 1 }}
-                            >
-                              {submenu.items
-                                .slice(colIndex * 7, (colIndex + 1) * 7)
-                                .map((item, itemIndex) => (
-                                  <Sublink
-                                    key={itemIndex}
-                                    href={item.href}
-                                    target={
-                                      item.href.startsWith('https://')
-                                        ? '_blank'
-                                        : '_self'
-                                    }
-                                    {...(isActiveSubLink(item.href) && {
-                                      className: 'active',
-                                    })}
-                                    onClick={() => setDropdownOpen(null)}
-                                    trackEvent={trackSublinkClickEvent}
-                                    trackingProperties={{
-                                      Tab: menuItem.primary,
-                                      Link: item.href,
-                                    }}
-                                  >
-                                    {item.label}
-                                    {item.isNew && (
-                                      <LinkLabel>{labels.news}</LinkLabel>
-                                    )}
-                                    <ArrowForwardIcon className='arrowIcon' />
-                                  </Sublink>
-                                ))}
-                            </Typography>
-                          ),
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </Dropdown>
-          ))}
 
         <MobileMenu
           role='navigation'
@@ -391,89 +418,108 @@ const MegaHeader = ({
             }}
           >
             <Box sx={{ width: '100%', pt: 2 }}>
-              {menuItems.map((menuItem: MegaMenuItem, index) => (
-                <React.Fragment key={index}>
-                  <Stack
-                    component={Button}
-                    sx={{ width: '100% !important' }}
-                    className={`mobileMenuPrimaryItem ${
-                      dropdownOpen === `mobile${menuItem.primary}`
-                        ? 'active'
-                        : ''
-                    }`}
-                    onClick={(e) =>
-                      handleClick(e as any, `mobile${menuItem.primary}`)
-                    }
-                    aria-expanded={dropdownOpen === `mobile${menuItem.primary}`}
-                    aria-controls={`mobile-submenu-${index}`}
-                  >
-                    <Typography
-                      {...(isActiveLink(menuItem) && {
-                        fontWeight: 600,
-                        color: palette.custom.primaryColorDark,
-                      })}
+              <Box
+                component='ul'
+                sx={{ listStyle: 'none', padding: 0, margin: 0, width: '100%' }}
+              >
+                {menuItems.map((menuItem: MegaMenuItem, index) => (
+                  <Box component='li' key={index}>
+                    <Stack
+                      component={Button}
+                      sx={{ width: '100% !important' }}
+                      className={`mobileMenuPrimaryItem ${
+                        dropdownOpen === `mobile${menuItem.primary}`
+                          ? 'active'
+                          : ''
+                      }`}
+                      onClick={(e) =>
+                        handleClick(e , `mobile${menuItem.primary}`)
+                      }
+                      aria-expanded={
+                        dropdownOpen === `mobile${menuItem.primary}`
+                      }
+                      aria-controls={`mobile-submenu-${index}`}
                     >
-                      {menuItem.primary}
-                    </Typography>
-                    <KeyboardArrowDownIcon
-                      style={{
-                        transform:
-                          dropdownOpen === `mobile${menuItem.primary}`
-                            ? 'rotate(180deg)'
-                            : 'rotate(0deg)',
-                        color: palette.custom.primaryColorDark,
-                      }}
-                    />
-                  </Stack>
-                  <Stack
-                    id={`mobile-submenu-${index}`}
-                    className={`dropdownMobile ${
-                      dropdownOpen === `mobile${menuItem.primary}` ? 'open' : ''
-                    }`}
-                  >
-                    {menuItem.secondary.map((submenu, subIndex) => (
-                      <div key={subIndex}>
-                        {submenu.title && (
-                          <DropdownTitle>{submenu.title}</DropdownTitle>
-                        )}
-                        {submenu.items.map((item, itemIndex) => (
-                          <Sublink
-                            key={itemIndex}
-                            href={item.href}
-                            target={
-                              item.href.startsWith('https://')
-                                ? '_blank'
-                                : '_self'
-                            }
-                            className={`mobileMenuSecondaryItem ${
-                              isActiveSubLink(item.href) ? 'active' : ''
-                            }`}
-                            onClick={() => setMobileMenuOpen(false)}
-                            trackEvent={trackSublinkClickEvent}
-                            trackingProperties={{
-                              Tab: menuItem.primary,
-                              Link: item.href,
-                            }}
+                      <Typography
+                        {...(isActiveLink(menuItem) && {
+                          fontWeight: 600,
+                          color: palette.custom.primaryColorDark,
+                        })}
+                      >
+                        {menuItem.primary}
+                      </Typography>
+                      <KeyboardArrowDownIcon
+                        style={{
+                          transform:
+                            dropdownOpen === `mobile${menuItem.primary}`
+                              ? 'rotate(180deg)'
+                              : 'rotate(0deg)',
+                          color: palette.custom.primaryColorDark,
+                        }}
+                      />
+                    </Stack>
+                    <Stack
+                      id={`mobile-submenu-${index}`}
+                      className={`dropdownMobile ${
+                        dropdownOpen === `mobile${menuItem.primary}`
+                          ? 'open'
+                          : ''
+                      }`}
+                    >
+                      {menuItem.secondary.map((submenu, subIndex) => (
+                        <div key={subIndex}>
+                          {submenu.title && (
+                            <DropdownTitle component='h2'>
+                              {submenu.title}
+                            </DropdownTitle>
+                          )}
+                          <Typography
+                            component='ul'
+                            sx={{ listStyle: 'none', padding: 0 }}
                           >
-                            <Typography
-                              variant='body2'
-                              fontSize={14}
-                              {...(isActiveSubLink(item.href) && {
-                                fontWeight: 600,
-                                color: palette.custom.primaryColorDark,
-                              })}
-                            >
-                              {item.label}
-                            </Typography>
-                            {item.isNew && <LinkLabel>{labels.news}</LinkLabel>}
-                            <ArrowForwardIcon className='arrowIcon' />
-                          </Sublink>
-                        ))}
-                      </div>
-                    ))}
-                  </Stack>
-                </React.Fragment>
-              ))}
+                            {submenu.items.map((item, itemIndex) => (
+                              <li key={itemIndex}>
+                                <Sublink
+                                  href={item.href}
+                                  target={
+                                    item.href.startsWith('https://')
+                                      ? '_blank'
+                                      : '_self'
+                                  }
+                                  className={`mobileMenuSecondaryItem ${
+                                    isActiveSubLink(item.href) ? 'active' : ''
+                                  }`}
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  trackEvent={trackSublinkClickEvent}
+                                  trackingProperties={{
+                                    Tab: menuItem.primary,
+                                    Link: item.href,
+                                  }}
+                                >
+                                  <Typography
+                                    variant='body2'
+                                    fontSize={14}
+                                    {...(isActiveSubLink(item.href) && {
+                                      fontWeight: 600,
+                                      color: palette.custom.primaryColorDark,
+                                    })}
+                                  >
+                                    {item.label}
+                                  </Typography>
+                                  {item.isNew && (
+                                    <LinkLabel>{labels.news}</LinkLabel>
+                                  )}
+                                  <ArrowForwardIcon className='arrowIcon' />
+                                </Sublink>
+                              </li>
+                            ))}
+                          </Typography>
+                        </div>
+                      ))}
+                    </Stack>
+                  </Box>
+                ))}
+              </Box>
               {activeCta && (
                 <div style={{ width: 'max-content' }}>
                   <CtaButtons
