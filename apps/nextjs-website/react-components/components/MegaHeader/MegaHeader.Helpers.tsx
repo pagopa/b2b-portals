@@ -43,12 +43,10 @@ export const Nav = styled('ul')({
   display: 'flex',
   listStyleType: 'none',
   padding: 0,
-  position: 'relative',
   flex: 1,
   marginBlock: '6px',
   '& li': {
     marginRight: 20,
-    position: 'relative',
   },
   '& a': {
     textDecoration: 'none',
@@ -110,7 +108,7 @@ export const Nav = styled('ul')({
 export const Dropdown = styled(Box)({
   display: 'none',
   position: 'absolute',
-  top: '100%',
+  top: 'calc(100% + 10px)',
   left: 0,
   backgroundColor: '#fff',
   padding: '50px 70px',
@@ -158,7 +156,9 @@ export const Dropdown = styled(Box)({
   },
 });
 
-export const DropdownTitle = styled(Typography)(({ theme }) => ({
+export const DropdownTitle = styled(Typography)<{
+  component?: React.ElementType;
+}>(({ theme }) => ({
   fontWeight: 700,
   fontSize: 14,
   letterSpacing: 1,
