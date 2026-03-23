@@ -260,13 +260,7 @@ const Form = ({
             '& .MuiInputLabel-root': {
               color: '#949494',
             },
-            '& .MuiInputLabel-root.Mui-focused': {
-              color: '#949494',
-            },
             '& .MuiInputLabel-root.Mui-error': {
-              color: '#949494',
-            },
-            '& .MuiInputLabel-root.Mui-error.Mui-focused': {
               color: '#949494',
             },
             '& .MuiOutlinedInput-input::placeholder': {
