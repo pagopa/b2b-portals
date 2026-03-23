@@ -3,12 +3,11 @@ import RECAPTCHA from 'react-google-recaptcha';
 import {
   Box,
   Grid,
-  OutlinedInput,
   Typography,
-  FormControl,
   Button,
   Alert,
   useTheme,
+  TextField,
 } from '@mui/material';
 import { FormProps } from '@react-components/types/Form/Form.types';
 import { TextColor, GrayLinkColor } from '../common/Common.helpers';
@@ -243,25 +242,49 @@ const Form = ({
   const InputField = ({ name, placeholder, show }: InputFieldData) => {
     return show ? (
       <Grid item xs={12} sm={name === 'name' || name === 'surname' ? 6 : 12}>
-        <FormControl fullWidth error={validationErrors[name] !== null}>
-          <OutlinedInput
-            placeholder={placeholder}
-            name={name}
-            value={formData[name]}
-            onChange={handleInputChange}
-            autoComplete={autocompleteMap[name]}
-            sx={{ backgroundColor: 'white', color: 'black' }}
-          />
-          {validationErrors[name] !== null && (
-            <Typography
-              id={`${name}-error-text`}
-              variant='caption'
-              sx={{ color: 'error.main' }}
-            >
-              {validationErrors[name]}
-            </Typography>
-          )}
-        </FormControl>
+        <TextField
+          fullWidth
+          variant='outlined'
+          name={name}
+          label={placeholder}
+          placeholder={placeholder}
+          value={formData[name]}
+          onChange={handleInputChange}
+          autoComplete={autocompleteMap[name]}
+          error={validationErrors[name] !== null}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              backgroundColor: 'white',
+              color: 'black',
+            },
+            '& .MuiInputLabel-root': {
+              color: '#949494',
+            },
+            '& .MuiInputLabel-root.Mui-focused': {
+              color: '#949494',
+            },
+            '& .MuiInputLabel-root.Mui-error': {
+              color: '#949494',
+            },
+            '& .MuiInputLabel-root.Mui-error.Mui-focused': {
+              color: '#949494',
+            },
+            '& .MuiOutlinedInput-input::placeholder': {
+              color: 'transparent',
+              opacity: 1,
+            },
+          }}
+        />
+
+        {validationErrors[name] !== null && (
+          <Typography
+            id={`${name}-error-text`}
+            variant='caption'
+            sx={{ color: 'error.main', display: 'block', mt: '0px' }}
+          >
+            {validationErrors[name]}
+          </Typography>
+        )}
       </Grid>
     ) : null;
   };
