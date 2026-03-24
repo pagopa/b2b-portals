@@ -79,7 +79,7 @@ export const generateStaticParams = async (): Promise<
   return [...pages_it, ...pages_en, ...pages_fr, ...pages_de, ...pages_sl];
 };
 
-export default async function Layout({
+export default async function RootLayout({
   children,
   params: { slug },
 }: LayoutProps) {
@@ -130,6 +130,18 @@ export default async function Layout({
   return (
     <ThemeProvider theme={theme}>
       <html lang={locale}>
+        <head>
+          <style>{`
+          html {
+            scroll-behavior: smooth;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            html {
+              scroll-behavior: auto;
+            }
+          }
+        `}</style>
+        </head>
         <body style={{ margin: 0 }}>
           <LocaleGuard
             noLocaleSlug={slugWithoutLocale}
