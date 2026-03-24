@@ -130,6 +130,7 @@ const HeroCounter = ({
               textDecoration: 'none',
               fontWeight: 'bold',
               fontSize: '1rem',
+              position: 'relative',
             }}
           >
             {link.label}
