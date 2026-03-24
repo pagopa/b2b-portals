@@ -11,6 +11,7 @@ import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import ScrollPaddingTopManager from '@/components/ScrollMarginTopManager';
 import LocaleGuard from '@/components/LocaleGuard';
+import EmptyLayout from '@/components/EmptyLayout';
 
 const {
   getSiteWideSEO,
@@ -84,7 +85,7 @@ export default async function RootLayout({
   params: { slug },
 }: LayoutProps) {
   if (isPreviewMode()) {
-    return null;
+    return <EmptyLayout />;
   }
 
   const siteWideSEO = await getSiteWideSEO();

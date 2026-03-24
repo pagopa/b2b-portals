@@ -6,7 +6,8 @@ import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getters } from '@/lib/api';
+import { getters, isPreviewMode } from '@/lib/api';
+import EmptyLayout from '@/components/EmptyLayout';
 
 const { getSiteWideSEO, getPreHeaderProps, getHeaderProps, getFooterProps } =
   getters;
@@ -16,6 +17,10 @@ type ErrorsLayoutProps = {
 };
 
 const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
+  if (isPreviewMode()) {
+    return <EmptyLayout />;
+  }
+
   const { defaultLocale, locales, themeVariant } = await getSiteWideSEO();
 
   const preHeaderProps = await getPreHeaderProps(defaultLocale);
