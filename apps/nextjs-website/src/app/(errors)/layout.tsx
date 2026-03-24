@@ -11,11 +11,11 @@ import { getters } from '@/lib/api';
 const { getSiteWideSEO, getPreHeaderProps, getHeaderProps, getFooterProps } =
   getters;
 
-type RootLayoutProps = {
+type ErrorsLayoutProps = {
   readonly children: ReactNode;
 };
 
-const ErrorsRootLayout = async ({ children }: RootLayoutProps) => {
+const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
   const { defaultLocale, locales, themeVariant } = await getSiteWideSEO();
 
   const preHeaderProps = await getPreHeaderProps(defaultLocale);
