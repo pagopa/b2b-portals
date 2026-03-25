@@ -20,6 +20,14 @@ const formatDateToLocale = (dateString: string, locale: string): string => {
   });
 };
 
+const linkAriaLabels = {
+  it: 'Leggi',
+  en: 'Read',
+  de: 'Lesen',
+  fr: 'Lire',
+  sl: 'Preberi',
+};
+
 const makePressReleaseListProps = ({
   locale,
   defaultLocale,
@@ -35,7 +43,7 @@ const makePressReleaseListProps = ({
     date: formatDateToLocale(PRPage.pressRelease.date, locale),
     title: PRPage.pressRelease.title,
     link: {
-      label: locale === 'it' ? 'Leggi' : 'Read',
+      label: linkAriaLabels[locale],
       href: LocalizeURL({
         URL: `/${pressReleasesParentSlug}/` + PRPage.slug,
         locale,
