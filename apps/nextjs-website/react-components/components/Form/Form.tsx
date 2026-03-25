@@ -19,6 +19,7 @@ interface ValidationErrors {
   surname: string | null;
   email: string | null;
   organization: string | null;
+  category: string | null;
 }
 
 interface InputFieldData {
@@ -57,11 +58,23 @@ const Form = ({
   const recaptchaRef = useRef<RECAPTCHA>(null);
   const { palette } = useTheme();
 
+  const requiredMessages: Record<InputFieldData['name'], string> = {
+    name: 'Inserisci il nome',
+    surname: 'Inserisci il cognome',
+    email: 'Inserisci l’indirizzo email',
+    organization: 'Inserisci il nome dell’ente',
+  };
+
+  const invalidMessages: Partial<Record<InputFieldData['name'], string>> = {
+    email: 'Inserisci un indirizzo email valido',
+  };
+
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({
     name: null,
     surname: null,
     email: null,
     organization: null,
+    category: null,
   });
 
   const [formData, setFormData] = useState({
@@ -78,47 +91,50 @@ const Form = ({
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, category: event.target.value });
+    setValidationErrors({ ...validationErrors, category: null });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate inputs
     const inputErrors = {
       name:
         showName && !validateRequired(formData.name)
-          ? 'Campo obbligatorio'
+          ? requiredMessages.name
           : null,
       surname:
         showSurname && !validateRequired(formData.surname)
-          ? 'Campo obbligatorio'
+          ? requiredMessages.surname
           : null,
       organization:
         showOrganization && !validateRequired(formData.organization)
-          ? 'Campo obbligatorio'
+          ? requiredMessages.organization
           : null,
       email: !validateRequired(formData.email)
-        ? 'Campo obbligatorio'
+        ? requiredMessages.email
         : !validateEmail(formData.email)
-          ? 'Email non valida'
+          ? (invalidMessages.email ?? null)
           : null,
     };
 
-    setValidationErrors(inputErrors);
+    const categoryError =
+      categories.length > 0 && formData.category === ''
+        ? 'Seleziona una categoria dalla lista per cui vuoi ricevere aggiornamenti'
+        : null;
+
+    setValidationErrors({
+      ...inputErrors,
+      category: categoryError,
+    });
 
     if (
       inputErrors.name ||
       inputErrors.surname ||
       inputErrors.organization ||
-      inputErrors.email
+      inputErrors.email ||
+      categoryError
     ) {
       alert('Si prega di compilare tutti i campi richiesti');
-      return;
-    }
-
-    // Validate category
-    if (categories.length > 0 && formData.category === '') {
-      alert('Si prega di selezionare una delle categorie dalla lista');
       return;
     }
 
@@ -166,6 +182,13 @@ const Form = ({
           organization: '',
           category: '',
         });
+        setValidationErrors({
+          name: null,
+          surname: null,
+          email: null,
+          organization: null,
+          category: null,
+        });
         setSubmissionStatus('success');
         return;
       }
@@ -191,18 +214,19 @@ const Form = ({
   }): void => {
     setFormData({ ...formData, [name]: value });
 
-    // All inputs are required so check that first
     if (!validateRequired(value)) {
       setValidationErrors({
         ...validationErrors,
-        [name]: 'Campo obbligatorio',
+        [name]: requiredMessages[name as InputFieldData['name']],
       });
       return;
     }
 
-    // If input is email, loosely verify its validity
     if (name === 'email' && !validateEmail(value)) {
-      setValidationErrors({ ...validationErrors, [name]: 'Email non valida' });
+      setValidationErrors({
+        ...validationErrors,
+        [name]: invalidMessages.email ?? null,
+      });
       return;
     }
 
@@ -246,12 +270,27 @@ const Form = ({
           fullWidth
           variant='outlined'
           name={name}
+          id={name}
           label={placeholder}
           placeholder={placeholder}
           value={formData[name]}
           onChange={handleInputChange}
           autoComplete={autocompleteMap[name]}
           error={validationErrors[name] !== null}
+          FormHelperTextProps={{
+            id: `${name}-error-text`,
+          }}
+          inputProps={{
+            'aria-invalid': validationErrors[name] !== null ? 'true' : 'false',
+            'aria-errormessage':
+              validationErrors[name] !== null
+                ? `${name}-error-text`
+                : undefined,
+            'aria-describedby':
+              validationErrors[name] !== null
+                ? `${name}-error-text`
+                : undefined,
+          }}
           sx={{
             '& .MuiOutlinedInput-root': {
               backgroundColor: 'white',
@@ -371,6 +410,7 @@ const Form = ({
             borderColor={borderColor}
             selectedCategory={formData.category}
             handleRadioChange={handleRadioChange}
+            categoryError={validationErrors.category}
           />
         )}
         <Typography
@@ -383,7 +423,7 @@ const Form = ({
             textAlign: 'start',
           }}
         >
-          *Campo obbligatorio
+          I campi contrassegnati con * sono obbligatori
         </Typography>
         <Button
           variant='contained'
