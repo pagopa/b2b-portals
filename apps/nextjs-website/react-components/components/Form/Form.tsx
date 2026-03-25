@@ -19,7 +19,7 @@ interface ValidationErrors {
   surname: string | null;
   email: string | null;
   organization: string | null;
-  category: string | null;
+  category?: string;
 }
 
 interface InputFieldData {
@@ -65,7 +65,7 @@ const Form = ({
     organization: 'Inserisci il nome dell’ente',
   };
 
-  const invalidMessages: Partial<Record<InputFieldData['name'], string>> = {
+  const invalidMessages: Record<'email', string> = {
     email: 'Inserisci un indirizzo email valido',
   };
 
@@ -74,7 +74,6 @@ const Form = ({
     surname: null,
     email: null,
     organization: null,
-    category: null,
   });
 
   const [formData, setFormData] = useState({
@@ -91,7 +90,8 @@ const Form = ({
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, category: event.target.value });
-    setValidationErrors({ ...validationErrors, category: null });
+    const { category, ...restErrors } = validationErrors;
+    setValidationErrors(restErrors);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -113,18 +113,18 @@ const Form = ({
       email: !validateRequired(formData.email)
         ? requiredMessages.email
         : !validateEmail(formData.email)
-          ? (invalidMessages.email ?? null)
+          ? invalidMessages.email
           : null,
     };
 
     const categoryError =
       categories.length > 0 && formData.category === ''
         ? 'Seleziona una categoria dalla lista per cui vuoi ricevere aggiornamenti'
-        : null;
+        : undefined;
 
     setValidationErrors({
       ...inputErrors,
-      category: categoryError,
+      ...(categoryError ? { category: categoryError } : {}),
     });
 
     if (
@@ -187,7 +187,6 @@ const Form = ({
           surname: null,
           email: null,
           organization: null,
-          category: null,
         });
         setSubmissionStatus('success');
         return;
@@ -225,7 +224,7 @@ const Form = ({
     if (name === 'email' && !validateEmail(value)) {
       setValidationErrors({
         ...validationErrors,
-        [name]: invalidMessages.email ?? null,
+        [name]: invalidMessages.email,
       });
       return;
     }
@@ -410,7 +409,9 @@ const Form = ({
             borderColor={borderColor}
             selectedCategory={formData.category}
             handleRadioChange={handleRadioChange}
-            categoryError={validationErrors.category}
+            {...(validationErrors.category
+              ? { categoryError: validationErrors.category }
+              : {})}
           />
         )}
         <Typography
