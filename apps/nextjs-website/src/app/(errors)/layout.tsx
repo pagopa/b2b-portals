@@ -1,19 +1,24 @@
 import { ThemeProvider } from '@mui/material';
-import NotFoundPage from '@react-components/components/NotFoundPage/NotFoundPage';
-import { theme } from './theme';
-import { isPreviewMode, getters } from '@/lib/api';
+import { ReactNode } from 'react';
+import { theme } from '../theme';
+import { Locale } from '@/lib/fetch/siteWideSEO';
+import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Locale } from '@/lib/fetch/siteWideSEO';
-import { getLocalizedSlugs } from '@/lib/localizedSlugs';
+import { getters, isPreviewMode } from '@/lib/api';
+import EmptyLayout from '@/components/EmptyLayout';
 
-const { getFooterProps, getHeaderProps, getPreHeaderProps, getSiteWideSEO } =
+const { getSiteWideSEO, getPreHeaderProps, getHeaderProps, getFooterProps } =
   getters;
 
-const NotFound = async () => {
+type ErrorsLayoutProps = {
+  readonly children: ReactNode;
+};
+
+const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
   if (isPreviewMode()) {
-    return null;
+    return <EmptyLayout />;
   }
 
   const { defaultLocale, locales, themeVariant } = await getSiteWideSEO();
@@ -48,10 +53,7 @@ const NotFound = async () => {
             locale={defaultLocale}
             defaultLocale={defaultLocale}
           />
-          <NotFoundPage
-            defaultLocale={defaultLocale}
-            validLocales={localesArray as Array<Locale>}
-          />
+          {children}
           <Footer
             {...footerProps}
             defaultLocale={defaultLocale}
@@ -63,4 +65,4 @@ const NotFound = async () => {
   );
 };
 
-export default NotFound;
+export default ErrorsRootLayout;
