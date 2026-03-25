@@ -11,6 +11,7 @@ import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import ScrollPaddingTopManager from '@/components/ScrollMarginTopManager';
 import LocaleGuard from '@/components/LocaleGuard';
+import EmptyLayout from '@/components/EmptyLayout';
 
 const {
   getSiteWideSEO,
@@ -79,12 +80,12 @@ export const generateStaticParams = async (): Promise<
   return [...pages_it, ...pages_en, ...pages_fr, ...pages_de, ...pages_sl];
 };
 
-export default async function Layout({
+export default async function RootLayout({
   children,
   params: { slug },
 }: LayoutProps) {
   if (isPreviewMode()) {
-    return null;
+    return <EmptyLayout />;
   }
 
   const siteWideSEO = await getSiteWideSEO();
@@ -130,6 +131,18 @@ export default async function Layout({
   return (
     <ThemeProvider theme={theme}>
       <html lang={locale}>
+        <head>
+          <style>{`
+          html {
+            scroll-behavior: smooth;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            html {
+              scroll-behavior: auto;
+            }
+          }
+        `}</style>
+        </head>
         <body style={{ margin: 0 }}>
           <LocaleGuard
             noLocaleSlug={slugWithoutLocale}
