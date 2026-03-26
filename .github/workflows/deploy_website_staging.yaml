@@ -12,6 +12,7 @@ on:
           - appio
           - demo
           - interop
+          - pagopa
 
 concurrency:
   group: s3-deploy-${{ inputs.environment }}
