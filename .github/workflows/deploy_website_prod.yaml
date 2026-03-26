@@ -12,6 +12,7 @@ on:
           - appio
           - demo
           - interop
+          - pagopa
       description:
         description: 'Optional description to more easily identify a deployment'
         type: string
