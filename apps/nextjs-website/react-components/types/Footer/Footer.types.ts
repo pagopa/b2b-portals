@@ -11,7 +11,7 @@ export interface FooterProps extends LangSwitchProps {
 interface FooterLinksType {
   label: string;
   href: string;
-  ariaLabel: string;
+  ariaLabel?: string;
   showOneTrustPreferencies?: boolean;
 }
 

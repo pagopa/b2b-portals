@@ -743,7 +743,7 @@
   },
   {
     "key": "plugin_upload_metrics",
-    "value": "{\"weeklySchedule\":\"11 3 10 * * 2\",\"lastWeeklyUpdate\":1773133391332}",
+    "value": "{\"weeklySchedule\":\"34 23 16 * * 5\",\"lastWeeklyUpdate\":1774625014240}",
     "type": "object",
     "environment": null,
     "tag": null

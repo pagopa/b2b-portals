@@ -17,7 +17,7 @@
     },
     "ariaLabel": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "showOneTrustPreferencies": {
       "type": "boolean",
