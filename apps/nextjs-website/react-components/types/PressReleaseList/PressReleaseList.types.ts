@@ -3,6 +3,7 @@ import { SectionProps } from '../common/Common.types';
 
 export interface PressReleasePreviewProps {
   date: string;
+  dateIso: string;
   title: string;
   link: {
     label: string;

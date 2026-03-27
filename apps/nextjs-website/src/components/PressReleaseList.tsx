@@ -41,6 +41,7 @@ const makePressReleaseListProps = ({
   ...rest,
   pressReleases: pressReleasePages.map((PRPage) => ({
     date: formatDateToLocale(PRPage.pressRelease.date, locale),
+    dateIso: PRPage.pressRelease.date,
     title: PRPage.pressRelease.title,
     link: {
       label: linkAriaLabels[locale],

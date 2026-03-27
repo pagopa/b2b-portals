@@ -30,7 +30,7 @@ export const LogoPagoPACompany = ({
   <SvgIcon
     viewBox='0 0 119 33'
     focusable='false'
-    aria-labelledby='logo-pagoPA-company-titleID'
+    aria-labelledby='logo-pagopa-company-title'
     role='img'
     sx={{
       width: size,

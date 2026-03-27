@@ -4,6 +4,7 @@ import { PressReleasePreviewProps } from '@react-components/types/PressReleaseLi
 
 export const PressReleasePreview = ({
   date,
+  dateIso,
   title,
   link,
   themeVariant,
@@ -27,10 +28,11 @@ export const PressReleasePreview = ({
           variant='overline'
           color='text.secondary'
           component={'time'}
+          dateTime={dateIso}
         >
           {date}
         </Typography>
-        <Typography variant='h6' fontWeight={700}>
+        <Typography component='h3' variant='h6' fontWeight={700}>
           {title}
         </Typography>
         <Typography

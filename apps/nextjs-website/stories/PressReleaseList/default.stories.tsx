@@ -20,6 +20,7 @@ DefaultPressReleaseList.args = {
   pressReleases: [
     {
       date: '31 Gennaio 2024',
+      dateIso: '2024-01-31',
       title: 'App IO: arriva la nuova funzionalità per un accesso rapido',
       link: {
         label: 'Leggi',
@@ -29,6 +30,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '23 Dicembre 2022',
+      dateIso: '2024-01-31',
       title:
         'Donazioni Ucraina: terminata l’iniziativa su piattaforma pagoPA e app IO',
       link: {
@@ -39,6 +41,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '25 Luglio 2022',
+      dateIso: '2024-01-31',
       title:
         'Emergenza Ucraina: cresce la platea di organizzazioni umanitarie per cui è possibile donare con app IO e pagoPA',
       link: {
@@ -49,6 +52,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '19 Gennaio 2022',
+      dateIso: '2024-01-31',
       title: 'PayPal si aggiunge al “Portafoglio” di IO',
       link: {
         label: 'Leggi',
@@ -58,6 +62,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '20 Giugno 2022',
+      dateIso: '2024-01-31',
       title:
         'IO, l’app dei servizi pubblici, premiata con il Compasso d’Oro ADI',
       link: {
@@ -68,6 +73,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '17 Giugno 2021',
+      dateIso: '2024-01-31',
       title: 'La Certificazione verde COVID-19 anche sull’app IO',
       link: {
         label: 'Leggi',
@@ -77,6 +83,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '17 Giugno 2021',
+      dateIso: '2024-01-31',
       title:
         'Bonus Vacanze: da oggi è possibile richiederlo tramite l’app IO in pochi semplici passaggi',
       link: {
@@ -87,6 +94,7 @@ DefaultPressReleaseList.args = {
     },
     {
       date: '17 Giugno 2021',
+      dateIso: '2024-01-31',
       title: 'IO: arriva l’app per i cittadini progettata con i cittadini',
       link: {
         label: 'Leggi',
