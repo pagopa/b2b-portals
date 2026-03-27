@@ -295,11 +295,17 @@ const Form = ({
               backgroundColor: 'white',
               color: 'black',
             },
+            '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#636B82',
+            },
+            '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#636B82',
+            },
             '& .MuiInputLabel-root': {
-              color: '#949494',
+              color: '#555C70',
             },
             '& .MuiInputLabel-root.Mui-error': {
-              color: '#949494',
+              color: '#555C70',
             },
             '& .MuiOutlinedInput-input::placeholder': {
               color: 'transparent',
@@ -330,6 +336,7 @@ const Form = ({
     >
       {background && (
         <img
+          alt=''
           src={background.src}
           srcSet={background.srcSet}
           sizes={background.sizes}
@@ -506,10 +513,10 @@ const Form = ({
               zIndex: 3,
               color: graylinkColor,
               '& a': {
-                color: graylinkColor,
+                color: palette.custom.blueIO[500],
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: graylinkColor,
+                  color: palette.custom.blueIO[500],
                   textDecoration: 'underline',
                 },
               },
