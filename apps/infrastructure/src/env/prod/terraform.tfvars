@@ -16,6 +16,6 @@ dns_domain_name = {
   }
 }
 
-nextjs_app_image_tag = "630c195a2f6988be442e9e86c898ffb2538ee94a"
+nextjs_app_image_tag = "217c4927ca3c6fefd3ae332ded97831eee973b98"
 
-cms_app_image_tag = "bea1de1836c63f536d27e0cb106d71d4f013642b"
+cms_app_image_tag = "12cfab442db2c2e21ad83678d4894afb2d64d5c2"
