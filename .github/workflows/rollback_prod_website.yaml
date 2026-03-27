@@ -12,6 +12,7 @@ on:
           - appio
           - demo
           - interop
+          - pagopa
       timestamp:
         description: "Timestamp indicating target folder for rollback (e.g. 2025-07-14_18-00-00)"
         type: string

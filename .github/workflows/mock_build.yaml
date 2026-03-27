@@ -22,6 +22,8 @@ jobs:
       DEMO_STRAPI_API_BASE_URL: mock
       INTEROP_STRAPI_API_TOKEN: mock
       INTEROP_STRAPI_API_BASE_URL: mock
+      PAGOPA_STRAPI_API_TOKEN: mock
+      PAGOPA_STRAPI_API_BASE_URL: mock
       CDN_PATH: mock
 
     steps:

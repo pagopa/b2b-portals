@@ -12,6 +12,8 @@ const makeTestAppEnv = () => {
     APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
     INTEROP_STRAPI_API_BASE_URL: 'interopStrapiToken',
     INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
+    PAGOPA_STRAPI_API_TOKEN: 'pagopaStrapiApiBaseUrl',
+    PAGOPA_STRAPI_API_BASE_URL: 'pagopaStrapiToken',
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
