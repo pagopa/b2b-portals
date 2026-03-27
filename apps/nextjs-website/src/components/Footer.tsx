@@ -40,8 +40,9 @@ const makeFooterProps = ({
   links: {
     aboutUs: {
       links: links_aboutUs.links.map(
-        ({ href, showOneTrustPreferencies, ...link }) => ({
-          ...link,
+        ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+          label,
+          ...(ariaLabel && { ariaLabel }),
           href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
           ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
@@ -50,8 +51,9 @@ const makeFooterProps = ({
     },
     services: {
       links: links_services.links.map(
-        ({ href, showOneTrustPreferencies, ...link }) => ({
-          ...link,
+        ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+          label,
+          ...(ariaLabel && { ariaLabel }),
           href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
           ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
@@ -60,8 +62,9 @@ const makeFooterProps = ({
     },
     resources: {
       links: links_resources.links.map(
-        ({ href, showOneTrustPreferencies, ...link }) => ({
-          ...link,
+        ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+          label,
+          ...(ariaLabel && { ariaLabel }),
           href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
           ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
@@ -71,8 +74,9 @@ const makeFooterProps = ({
     followUs: {
       title: links_followUs.title,
       links: links_followUs.links.map(
-        ({ href, showOneTrustPreferencies, ...link }) => ({
-          ...link,
+        ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+          label,
+          ...(ariaLabel && { ariaLabel }),
           href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
           ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),

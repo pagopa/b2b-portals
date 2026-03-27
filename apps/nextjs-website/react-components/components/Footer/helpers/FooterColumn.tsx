@@ -60,7 +60,7 @@ export const FooterColumn = ({
         ({ href, label, ariaLabel, showOneTrustPreferencies }, i) => (
           <li key={i}>
             <Link
-              aria-label={ariaLabel}
+              {...(ariaLabel && { 'aria-label': ariaLabel })}
               component='a'
               underline='none'
               color='text.primary'

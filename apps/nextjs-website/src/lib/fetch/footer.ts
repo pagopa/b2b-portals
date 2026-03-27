@@ -14,7 +14,7 @@ const CompanyLinkCodec = t.strict({
 const FooterLinkCodec = t.strict({
   label: t.string,
   href: t.string,
-  ariaLabel: t.string,
+  ariaLabel: t.union([t.string, t.null]),
   showOneTrustPreferencies: t.union([t.boolean, t.null]),
 });
 
