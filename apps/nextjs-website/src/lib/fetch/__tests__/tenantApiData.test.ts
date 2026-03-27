@@ -10,6 +10,8 @@ const strapiApiData: Omit<StrapiApiData, 'ENVIRONMENT'> = {
   INTEROP_STRAPI_API_TOKEN: 'INTEROP_STRAPI_API_TOKEN',
   SEND_STRAPI_API_BASE_URL: 'SEND_STRAPI_API_BASE_URL',
   SEND_STRAPI_API_TOKEN: 'SEND_STRAPI_API_TOKEN',
+  PAGOPA_STRAPI_API_TOKEN: 'pagopaStrapiApiBaseUrl',
+  PAGOPA_STRAPI_API_BASE_URL: 'pagopaStrapiToken',
 };
 
 describe('extractTenantStrapiApiData', () => {
@@ -31,6 +33,10 @@ describe('extractTenantStrapiApiData', () => {
         ENVIRONMENT: 'send',
         ...strapiApiData,
       }),
+      pagopa: extractTenantStrapiApiData({
+        ENVIRONMENT: 'pagopa',
+        ...strapiApiData,
+      }),
     };
 
     expect(actual.appio).toStrictEqual({
@@ -48,6 +54,10 @@ describe('extractTenantStrapiApiData', () => {
     expect(actual.send).toStrictEqual({
       baseUrl: strapiApiData.SEND_STRAPI_API_BASE_URL,
       token: strapiApiData.SEND_STRAPI_API_TOKEN,
+    });
+    expect(actual.pagopa).toStrictEqual({
+      baseUrl: strapiApiData.PAGOPA_STRAPI_API_BASE_URL,
+      token: strapiApiData.PAGOPA_STRAPI_API_TOKEN,
     });
   });
 });

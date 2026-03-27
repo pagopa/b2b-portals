@@ -33,5 +33,10 @@ export const extractTenantStrapiApiData = (
         baseUrl: strapiData.INTEROP_STRAPI_API_BASE_URL,
         token: strapiData.INTEROP_STRAPI_API_TOKEN,
       };
+    case 'pagopa':
+      return {
+        baseUrl: strapiData.PAGOPA_STRAPI_API_BASE_URL,
+        token: strapiData.PAGOPA_STRAPI_API_TOKEN,
+      };
   }
 };

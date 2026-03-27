@@ -53,4 +53,5 @@ export interface FormCategoryProps {
   textColor: string;
   borderColor: string;
   handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  categoryError?: string;
 }
