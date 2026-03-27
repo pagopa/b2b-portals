@@ -29,6 +29,7 @@ const HighlightBox = ({
             {eyelet && (
               <Typography
                 variant='subtitle2'
+                component='p'
                 color='textSecondary'
                 sx={{
                   backgroundColor:

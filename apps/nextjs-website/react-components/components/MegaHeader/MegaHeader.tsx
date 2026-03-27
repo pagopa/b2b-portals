@@ -433,7 +433,7 @@ const MegaHeader = ({
                           : ''
                       }`}
                       onClick={(e) =>
-                        handleClick(e , `mobile${menuItem.primary}`)
+                        handleClick(e, `mobile${menuItem.primary}`)
                       }
                       aria-expanded={
                         dropdownOpen === `mobile${menuItem.primary}`
@@ -441,6 +441,7 @@ const MegaHeader = ({
                       aria-controls={`mobile-submenu-${index}`}
                     >
                       <Typography
+                        component='span'
                         {...(isActiveLink(menuItem) && {
                           fontWeight: 600,
                           color: palette.custom.primaryColorDark,
