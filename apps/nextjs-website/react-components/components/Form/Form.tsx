@@ -235,22 +235,22 @@ const Form = ({
   const inputFields: InputFieldData[] = [
     {
       name: 'name',
-      placeholder: `${placeholderName ?? 'Nome'}*`,
+      placeholder: placeholderName ?? 'Nome',
       show: showName,
     },
     {
       name: 'surname',
-      placeholder: `${placeholderSurname ?? 'Cognome'}*`,
+      placeholder: placeholderSurname ?? 'Cognome',
       show: showSurname,
     },
     {
       name: 'email',
-      placeholder: `${placeholderEmail ?? 'Indirizzo e-mail'}*`,
+      placeholder: placeholderEmail ?? 'Indirizzo e-mail',
       show: true,
     },
     {
       name: 'organization',
-      placeholder: `${placeholderOrganization ?? 'Nome ente'}*`,
+      placeholder: placeholderOrganization ?? 'Nome ente',
       show: showOrganization,
     },
   ];
@@ -275,6 +275,7 @@ const Form = ({
           value={formData[name]}
           onChange={handleInputChange}
           autoComplete={autocompleteMap[name]}
+          required
           error={validationErrors[name] !== null}
           FormHelperTextProps={{
             id: `${name}-error-text`,
@@ -306,6 +307,9 @@ const Form = ({
             },
             '& .MuiInputLabel-root.Mui-error': {
               color: '#555C70',
+            },
+            '& .MuiFormLabel-asterisk': {
+              color: 'error.main',
             },
             '& .MuiOutlinedInput-input::placeholder': {
               color: 'transparent',
@@ -373,9 +377,21 @@ const Form = ({
           variant='h4'
           component={titleTag ?? 'h2'}
           gutterBottom
-          sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
+          sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 3 }}
         >
           {title}
+        </Typography>
+        <Typography
+          variant='body2'
+          sx={{
+            color: 'error.main',
+            textAlign: 'start',
+            position: 'relative',
+            zIndex: 3,
+            mb: 3,
+          }}
+        >
+          *Campo obbligatorio
         </Typography>
         {subtitle && (
           <Typography
@@ -406,7 +422,17 @@ const Form = ({
               fontWeight: '700',
             }}
           >
-            {categoriesTitle}
+            {categoriesTitle.split('*').map((part, i, arr) => {
+              if (i < arr.length - 1) {
+                return (
+                  <React.Fragment key={i}>
+                    {part}
+                    <span style={{ color: palette.error.main }}>*</span>
+                  </React.Fragment>
+                );
+              }
+              return part;
+            })}
           </Typography>
         )}
         {categories.length > 0 && (
@@ -421,18 +447,6 @@ const Form = ({
               : {})}
           />
         )}
-        <Typography
-          variant='body2'
-          sx={{
-            mb: 2,
-            position: 'relative',
-            zIndex: 3,
-            color: textColor,
-            textAlign: 'start',
-          }}
-        >
-          I campi contrassegnati con * sono obbligatori
-        </Typography>
         <Button
           variant='contained'
           sx={{
