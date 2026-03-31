@@ -11,6 +11,7 @@ import {
   HeaderSideDrawerCtaCardProps,
   HeaderSideDrawerLinkCardProps,
 } from '@react-components/types/Header/Header.types';
+import { ExternalLinkIcon } from '@react-components/components/common/Common';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorRight': {
@@ -163,6 +164,7 @@ export default function SideDrawer({
               }}
             >
               {ctaCard.buttonText}
+              <ExternalLinkIcon url={ctaCard.href} />
             </Button>
           </div>
           <Divider sx={{ marginBottom: 2, marginTop: 2 }} />

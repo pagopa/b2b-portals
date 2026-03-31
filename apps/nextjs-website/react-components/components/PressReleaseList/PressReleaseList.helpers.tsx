@@ -1,6 +1,7 @@
 import { ArrowRightAlt } from '@mui/icons-material';
 import { Box, Link, Stack, Typography, useTheme } from '@mui/material';
 import { PressReleasePreviewProps } from '@react-components/types/PressReleaseList/PressReleaseList.types';
+import { ExternalLinkIcon } from '../common/Common';
 
 export const PressReleasePreview = ({
   date,
@@ -52,6 +53,7 @@ export const PressReleasePreview = ({
             aria-label={`${link.label} "${title}"`}
           >
             {link.label}
+            <ExternalLinkIcon url={link.href} />
           </Link>
           <ArrowRightAlt color='inherit' />
         </Typography>

@@ -2,6 +2,7 @@ import { Link, Stack, Typography } from '@mui/material';
 import { hrefNoOp } from '../Footer.helpers';
 import { LogoPagoPACompany } from '../assets/LogoPagoPACompany';
 import { FooterColumnProps } from '../../../types/Footer/Footer.types';
+import { ExternalLinkIcon } from '@react-components/components/common/Common';
 
 export const FooterColumn = ({
   data,
@@ -76,6 +77,7 @@ export const FooterColumn = ({
                   })}
             >
               {label}
+              <ExternalLinkIcon url={href} />
             </Link>
           </li>
         ),

@@ -4,6 +4,7 @@ import { Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
+import { Launch } from '@mui/icons-material';
 
 const CtaButton = ({
   trackEvent,
@@ -33,6 +34,7 @@ const CtaButton = ({
       {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {buttonProps.text}
+      <ExternalLinkIcon url={buttonProps.href} />
     </Button>
   );
 };
@@ -384,4 +386,23 @@ export const getButtonStyles = (
           : palette.background.paper,
     },
   };
+};
+
+const isValidExternalLink = (URL: string): boolean => {
+  if (
+    URL.toLowerCase().startsWith('http:') ||
+    URL.toLowerCase().startsWith('https:')
+  ) {
+    return true;
+  }
+  return false;
+};
+
+export const ExternalLinkIcon = ({ url }: { url: string | undefined }) => {
+  if (url && isValidExternalLink(url)) {
+    return (
+      <Launch sx={{ ml: 1, width: 20, height: 20, verticalAlign: 'middle' }} />
+    );
+  }
+  return null;
 };

@@ -13,6 +13,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import { MenuDropdownProp } from '@react-components/types/Header/Header.types';
+import { ExternalLinkIcon } from '@react-components/components/common/Common';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorLeft': {
@@ -108,6 +109,7 @@ export default function MobileNav({
                         }}
                       >
                         {item.label}
+                        <ExternalLinkIcon url={item.href} />
                       </Typography>
                     </Link>
                     {item.items && (
