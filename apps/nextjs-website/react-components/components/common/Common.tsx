@@ -34,7 +34,7 @@ const CtaButton = ({
       {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {buttonProps.text}
-      <ExternalLinkIcon url={buttonProps.href} />
+      <ExternalLinkIcon show={isValidExternalLink(buttonProps.href)} />
     </Button>
   );
 };
@@ -388,7 +388,10 @@ export const getButtonStyles = (
   };
 };
 
-const isValidExternalLink = (URL: string): boolean => {
+export const isValidExternalLink = (URL?: string): boolean => {
+  if (!URL) {
+    return false;
+  }
   if (
     URL.toLowerCase().startsWith('http:') ||
     URL.toLowerCase().startsWith('https:')
@@ -398,11 +401,7 @@ const isValidExternalLink = (URL: string): boolean => {
   return false;
 };
 
-export const ExternalLinkIcon = ({ url }: { url: string | undefined }) => {
-  if (url && isValidExternalLink(url)) {
-    return (
-      <Launch sx={{ ml: 1, width: 20, height: 20, verticalAlign: 'middle' }} />
-    );
-  }
-  return null;
-};
+export const ExternalLinkIcon = ({ show = true }: { show?: boolean }) =>
+  show ? (
+    <Launch sx={{ ml: 1, width: 20, height: 20, verticalAlign: 'middle' }} />
+  ) : null;

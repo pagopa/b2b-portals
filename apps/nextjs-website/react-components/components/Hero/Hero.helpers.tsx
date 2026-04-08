@@ -1,6 +1,10 @@
 import { Stack, Typography } from '@mui/material';
 import { HeroTextProps } from '../../types/Hero/Hero.types';
-import { CtaButtons, ExternalLinkIcon } from '../common/Common';
+import {
+  CtaButtons,
+  ExternalLinkIcon,
+  isValidExternalLink,
+} from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme, useMediaQuery } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -168,7 +172,7 @@ export const HeroTextContent = ({
           }}
         >
           {link.label}
-          <ExternalLinkIcon url={link.href} />
+          <ExternalLinkIcon show={isValidExternalLink(link.href)} />
           <ArrowForwardIcon
             sx={{
               display: 'inline-block',

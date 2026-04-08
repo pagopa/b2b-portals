@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useMixpanelTracking } from '../common/tracking';
-import { ExternalLinkIcon } from '../common/Common';
 
 export const Container = styled(AppBar)({
   display: 'flex',
@@ -309,7 +308,6 @@ export const Sublink = ({
   return (
     <Link {...(randomID && { id: randomID })} {...linkProps}>
       {children}
-      <ExternalLinkIcon url={href} />
     </Link>
   );
 };

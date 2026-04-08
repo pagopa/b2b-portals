@@ -9,7 +9,7 @@ import {
   TextColor,
 } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
-import { ExternalLinkIcon } from '../common/Common';
+import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
 
 const HeroCounter = ({
   theme,
@@ -135,7 +135,7 @@ const HeroCounter = ({
             }}
           >
             {link.label}
-            <ExternalLinkIcon url={link.href} />
+            <ExternalLinkIcon show={isValidExternalLink(link.href)} />
             <ArrowForwardIcon
               sx={{
                 display: 'inline-block',

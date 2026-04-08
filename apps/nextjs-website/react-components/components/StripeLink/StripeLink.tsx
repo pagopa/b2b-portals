@@ -8,7 +8,7 @@ import {
 } from '../common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
-import { ExternalLinkIcon } from '../common/Common';
+import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
 
 const StripeLink = ({
   iconURL,
@@ -105,7 +105,7 @@ const StripeLink = ({
             href={link.href}
           >
             {link.label}
-            <ExternalLinkIcon url={link.href} />
+            <ExternalLinkIcon show={isValidExternalLink(link.href)} />
           </Button>
         </Stack>
       </Grid>

@@ -28,7 +28,11 @@ import {
   Overlay,
   Sublink,
 } from './MegaHeader.Helpers';
-import { CtaButtons, ExternalLinkIcon } from '../common/Common';
+import {
+  CtaButtons,
+  ExternalLinkIcon,
+  isValidExternalLink,
+} from '../common/Common';
 import { usePathname } from 'next/navigation';
 import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
 
@@ -263,7 +267,9 @@ const MegaHeader = ({
                                               >
                                                 {item.label}
                                                 <ExternalLinkIcon
-                                                  url={item.href}
+                                                  show={isValidExternalLink(
+                                                    item.href,
+                                                  )}
                                                 />
                                                 {item.isNew && (
                                                   <LinkLabel>
@@ -509,6 +515,9 @@ const MegaHeader = ({
                                     })}
                                   >
                                     {item.label}
+                                    <ExternalLinkIcon
+                                      show={isValidExternalLink(item.href)}
+                                    />
                                   </Typography>
                                   {item.isNew && (
                                     <LinkLabel>{labels.news}</LinkLabel>

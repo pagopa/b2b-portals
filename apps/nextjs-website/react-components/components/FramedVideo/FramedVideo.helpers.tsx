@@ -1,7 +1,7 @@
 import { Link, Stack, Typography, useTheme } from '@mui/material';
 import { RenderVideoProps } from '@react-components/types/FramedVideo/FramedVideo.types';
 import { TextColor } from '../common/Common.helpers';
-import { ExternalLinkIcon } from '../common/Common';
+import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
 
 export const renderVideo = ({
   videoRef,
@@ -107,7 +107,7 @@ export const renderTextSection = ({
           {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
         >
           {link.label}
-          <ExternalLinkIcon url={link.href} />
+          <ExternalLinkIcon show={isValidExternalLink(link.href)} />
         </Link>
       </Typography>
     </Stack>

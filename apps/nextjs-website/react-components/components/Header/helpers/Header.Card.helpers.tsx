@@ -5,7 +5,10 @@ import { CardActions, Button, Stack } from '@mui/material';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
-import { ExternalLinkIcon } from '@react-components/components/common/Common';
+import {
+  ExternalLinkIcon,
+  isValidExternalLink,
+} from '@react-components/components/common/Common';
 
 interface ActionAreaCardProps {
   title: string;
@@ -72,7 +75,7 @@ export default function ActionAreaCard({
               }}
             >
               {buttonText}
-              <ExternalLinkIcon url={href} />
+              <ExternalLinkIcon show={isValidExternalLink(href)} />
             </Button>
           </Stack>
         </CardContent>

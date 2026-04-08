@@ -2,7 +2,10 @@ import { Link, Stack, Typography } from '@mui/material';
 import { hrefNoOp } from '../Footer.helpers';
 import { LogoPagoPACompany } from '../assets/LogoPagoPACompany';
 import { FooterColumnProps } from '../../../types/Footer/Footer.types';
-import { ExternalLinkIcon } from '@react-components/components/common/Common';
+import {
+  ExternalLinkIcon,
+  isValidExternalLink,
+} from '@react-components/components/common/Common';
 
 export const FooterColumn = ({
   data,
@@ -65,7 +68,12 @@ export const FooterColumn = ({
               component='a'
               underline='none'
               color='text.primary'
-              sx={{ display: 'inline-block', py: 0.5, cursor: 'pointer' }}
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                py: 0.5,
+                cursor: 'pointer',
+              }}
               variant='subtitle2'
               {...(href.startsWith('https') && { target: '_blank' })}
               {...(showOneTrustPreferencies
@@ -77,7 +85,7 @@ export const FooterColumn = ({
                   })}
             >
               {label}
-              <ExternalLinkIcon url={href} />
+              <ExternalLinkIcon show={isValidExternalLink(href)} />
             </Link>
           </li>
         ),
