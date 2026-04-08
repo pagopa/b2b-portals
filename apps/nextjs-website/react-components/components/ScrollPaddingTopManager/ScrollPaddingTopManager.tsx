@@ -6,11 +6,13 @@ const ScrollPaddingTopManager = () => {
   useEffect(() => {
     const header = document.querySelector('header');
     const html = document.querySelector('html');
-    if (!header || !html) return;
-
+    const main = document.querySelector('main');
+    if (!header || !html || !main) return;
     const updateHeight = () => {
-      const height = header.getBoundingClientRect().height;
-      html.style.scrollPaddingTop = `${height + 16}px`;
+      const height = main.hasAttribute('inert')
+        ? 0
+        : `${header.getBoundingClientRect().height + 16}`;
+      html.style.scrollPaddingTop = `${height}px`;
     };
 
     updateHeight();
@@ -18,7 +20,12 @@ const ScrollPaddingTopManager = () => {
     const observer = new ResizeObserver(updateHeight);
     observer.observe(header);
 
-    return () => observer.disconnect();
+    window.addEventListener('FORCE_HEADER_UPDATE', updateHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('FORCE_HEADER_UPDATE', updateHeight);
+    };
   }, []);
 
   return null;
