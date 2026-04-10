@@ -144,6 +144,7 @@ const SplitButton = ({
                 : 'transparent',
             color: textColor,
             borderColor: borderColor,
+            scrollMarginTop: '100px',
             '&:hover': {
               backgroundColor:
                 theme === 'light'
@@ -167,6 +168,7 @@ const SplitButton = ({
                 : 'transparent',
             color: textColor,
             borderColor: borderColor,
+            scrollMarginTop: '100px',
             '&:hover': {
               backgroundColor:
                 theme === 'light'

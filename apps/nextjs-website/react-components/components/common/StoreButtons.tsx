@@ -31,7 +31,12 @@ export const AppStoreButton = ({
         alt='App Store'
         height={0}
         width={0}
-        style={{ height: '3em', width: 'auto', display: 'block' }}
+        style={{
+          height: '3em',
+          width: 'auto',
+          display: 'block',
+          scrollMarginTop: '100px',
+        }}
       />
     </Link>
   );
@@ -60,7 +65,12 @@ export const GooglePlayButton = ({
         alt='Google Play'
         height={0}
         width={0}
-        style={{ height: '3em', width: 'auto', display: 'block' }}
+        style={{
+          height: '3em',
+          width: 'auto',
+          display: 'block',
+          scrollMarginTop: '100px',
+        }}
       />
     </Link>
   );

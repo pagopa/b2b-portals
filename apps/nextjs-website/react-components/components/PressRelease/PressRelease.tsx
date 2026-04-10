@@ -47,6 +47,7 @@ const PressRelease = (props: PressReleaseProps) => {
               fontFamily='"Titillium Web",sans-serif'
               fontWeight='bold'
               fontSize='16px'
+              sx={{ scrollMarginTop: '100px' }}
               {...(backlink.ariaLabel && { 'aria-label': backlink.ariaLabel })}
             >
               {backlink.label}

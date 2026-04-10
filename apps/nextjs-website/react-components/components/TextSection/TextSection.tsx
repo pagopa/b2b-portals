@@ -113,6 +113,7 @@ const TextSection = ({
                   fontWeight: 'bold',
                   color: palette.custom.primaryColorDark,
                   fontSize: '16px',
+                  scrollMarginTop: '100px',
                   '&:hover': {
                     textDecoration: 'underline',
                   },

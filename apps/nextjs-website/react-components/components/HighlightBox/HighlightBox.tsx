@@ -75,6 +75,7 @@ const HighlightBox = ({
                   borderRadius: '4px',
                   fontSize: '16px',
                   fontWeight: 700,
+                  scrollMarginTop: '100px',
                 }}
               >
                 {link.label}

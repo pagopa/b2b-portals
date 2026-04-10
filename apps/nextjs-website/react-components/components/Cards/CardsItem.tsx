@@ -97,6 +97,7 @@ const CardsItem = ({
                     fontWeight={600}
                     {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
                     {...(link.href.startsWith('https') && { target: '_blank' })}
+                    sx={{ scrollMarginTop: '100px' }}
                   >
                     {link.label}
                   </Link>

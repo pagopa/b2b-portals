@@ -15,7 +15,7 @@ export const FooterColumn = ({
       <Link
         aria-label={companyLink.ariaLabel}
         href={companyLink.href ?? hrefNoOp}
-        sx={{ display: 'inline-flex' }}
+        sx={{ display: 'inline-flex', scrollMarginTop: '100px' }}
         {...(companyLink.href?.startsWith('https') && { target: '_blank' })}
       >
         <LogoPagoPACompany />
@@ -37,6 +37,7 @@ export const FooterColumn = ({
               href={href}
               aria-label={ariaLabel}
               {...(href.startsWith('https') && { target: '_blank' })}
+              sx={{ scrollMarginTop: '100px' }}
             >
               <img
                 src={iconURL}
@@ -64,7 +65,12 @@ export const FooterColumn = ({
               component='a'
               underline='none'
               color='text.primary'
-              sx={{ display: 'inline-block', py: 0.5, cursor: 'pointer' }}
+              sx={{
+                display: 'inline-block',
+                py: 0.5,
+                cursor: 'pointer',
+                scrollMarginTop: '100px',
+              }}
               variant='subtitle2'
               {...(href.startsWith('https') && { target: '_blank' })}
               {...(showOneTrustPreferencies

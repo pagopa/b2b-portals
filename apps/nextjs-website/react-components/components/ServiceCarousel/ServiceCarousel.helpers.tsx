@@ -32,6 +32,7 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
         width: '.5rem',
         height: '.5rem',
         borderRadius: '.5rem',
+        scrollMarginTop: '100px',
         backgroundColor: theme.palette.grey[300],
         padding: '0',
         '::before': {
@@ -99,6 +100,7 @@ export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
               color='inherit'
               underline='hover'
               fontSize={16}
+              sx={{ scrollMarginTop: '100px' }}
               {...(card.link.ariaLabel && {
                 'aria-label': card.link.ariaLabel,
               })}

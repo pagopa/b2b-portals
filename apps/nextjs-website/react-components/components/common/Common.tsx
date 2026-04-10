@@ -31,6 +31,7 @@ const CtaButton = ({
       {...(randomID && { id: randomID })} // Random ID used by Mixpanel to track links (overrides any existing ID)
       {...(trackedOnClick && { onClick: trackedOnClick })} // Override onClick (if present) to add tracking
       {...(ariaLabel && { 'aria-label': ariaLabel })}
+      style={{ scrollMarginTop: '100px' }}
     >
       {buttonProps.text}
     </Button>
@@ -97,6 +98,7 @@ export const CtaButtons = ({
                       ? palette.primary.main
                       : palette.custom.blueIO[500],
               }),
+              scrollMarginTop: '100px',
             }}
             {...button}
             {...(trackEvent && { trackEvent })}
@@ -339,6 +341,7 @@ export const getButtonStyles = (
   const isSelected = sectionId === currentSectionId;
 
   return {
+    scrollMarginTop: '100px',
     backgroundColor: isSelected
       ? theme === 'light'
         ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
