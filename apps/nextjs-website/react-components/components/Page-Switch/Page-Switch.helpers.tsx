@@ -146,7 +146,6 @@ const SplitButton = ({
               color: externalButtonTextColor,
               borderColor,
             },
-            scrollMarginTop: '100px',
           }}
         >
           {selectedButton.text}
@@ -171,7 +170,6 @@ const SplitButton = ({
               color: externalButtonTextColor,
               borderColor,
             },
-            scrollMarginTop: '100px',
           }}
         >
           <ArrowDropDown sx={{ color: borderColor }} />

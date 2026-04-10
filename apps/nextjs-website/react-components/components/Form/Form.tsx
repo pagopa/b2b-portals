@@ -473,7 +473,6 @@ const Form = ({
                     ? palette.primary.main
                     : palette.custom.blueIO[500],
             },
-            scrollMarginTop: '100px',
           }}
           onClick={handleSubmit}
         >

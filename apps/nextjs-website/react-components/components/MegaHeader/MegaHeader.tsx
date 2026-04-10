@@ -338,7 +338,6 @@ const MegaHeader = ({
                         whiteSpace: 'nowrap',
                         fontSize: '16px!important',
                         fontWeight: '700!important',
-                        scrollMarginTop: '0 !important',
                         letterSpacing: '0.3px',
                         '&:hover': {
                           backgroundColor: '#005bb5',
@@ -373,7 +372,6 @@ const MegaHeader = ({
                         fontSize: '16px!important',
                         fontWeight: '700!important',
                         letterSpacing: '0.3px',
-                        scrollMarginTop: '0 !important',
                         '&:hover': {
                           backgroundColor: '#005bb5',
                         },

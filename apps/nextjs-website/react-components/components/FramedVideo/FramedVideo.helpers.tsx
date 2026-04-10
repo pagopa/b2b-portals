@@ -102,7 +102,6 @@ export const renderTextSection = ({
             color: linkTextColor,
             textDecoration: 'none',
             marginBottom: '32px',
-            scrollMarginTop: '100px',
           }}
           {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
         >

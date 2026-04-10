@@ -99,7 +99,6 @@ const StripeLink = ({
                       ? palette.primary.main
                       : palette.custom.blueIO[500],
               },
-              scrollMarginTop: '100px',
             }}
             endIcon={<ArrowForwardIcon color='inherit'></ArrowForwardIcon>}
             href={link.href}

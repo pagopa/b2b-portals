@@ -39,7 +39,7 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
               {...(item.link.ariaLabel && {
                 'aria-label': item.link.ariaLabel,
               })}
-              sx={{ fontWeight: 'bold', scrollMarginTop: '100px' }}
+              sx={{ fontWeight: 'bold' }}
             >
               {item.link.label}
             </Link>

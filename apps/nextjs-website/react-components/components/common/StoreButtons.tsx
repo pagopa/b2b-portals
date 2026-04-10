@@ -35,7 +35,6 @@ export const AppStoreButton = ({
           height: '3em',
           width: 'auto',
           display: 'block',
-          scrollMarginTop: '100px',
         }}
       />
     </Link>
@@ -69,7 +68,6 @@ export const GooglePlayButton = ({
           height: '3em',
           width: 'auto',
           display: 'block',
-          scrollMarginTop: '100px',
         }}
       />
     </Link>

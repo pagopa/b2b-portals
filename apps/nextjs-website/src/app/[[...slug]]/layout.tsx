@@ -140,6 +140,12 @@ export default async function RootLayout({
               scroll-behavior: auto;
             }
           }
+          a:not(header a, #preheader a),
+          button:not(header button,#preheader button),
+          input:not(header input,#preheader input),
+          textarea:not(header textarea, #preheader textarea) {
+            scroll-margin-top: 100px;
+          }
         `}</style>
         </head>
         <body style={{ margin: 0 }}>

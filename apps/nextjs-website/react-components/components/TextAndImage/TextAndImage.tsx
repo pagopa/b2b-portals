@@ -12,12 +12,7 @@ const TextAndImage = ({ sectionID, body, image }: TextAndImageProps) => (
       {body}
     </Typography>
 
-    <Link
-      href={image.href}
-      title={image.title}
-      target='_blank'
-      sx={{ scrollMarginTop: '100px' }}
-    >
+    <Link href={image.href} title={image.title} target='_blank'>
       <img src={image.src} width='280px' height='auto' />
     </Link>
   </Stack>

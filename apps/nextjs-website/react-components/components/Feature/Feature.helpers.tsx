@@ -30,7 +30,6 @@ export const CarouselDots = styled((props: CarouselDotsProps & BoxProps) => (
         width: '.5rem',
         height: '.5rem',
         borderRadius: '.5rem',
-        scrollMarginTop: '100px',
         backgroundColor:
           mode === 'light' ? theme.palette.grey[300] : alpha('#ffffff', 0.5),
         padding: '0',
@@ -93,11 +92,7 @@ const FeatureCarousel = ({
           </Box>
         )}
         customPaging={(index: number) => (
-          <button
-            type='button'
-            aria-label={labels.goToSlide(index)}
-            style={{ scrollMarginTop: '100px' }}
-          />
+          <button type='button' aria-label={labels.goToSlide(index)} />
         )}
       >
         {items.map((item, index) => (

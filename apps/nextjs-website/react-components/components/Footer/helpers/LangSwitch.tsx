@@ -50,7 +50,6 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
             backgroundColor: 'transparent',
           },
           justifyContent: 'flex-start',
-          scrollMarginTop: '100px',
         }}
         variant='text'
         size='small'

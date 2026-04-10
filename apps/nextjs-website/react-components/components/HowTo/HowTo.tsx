@@ -114,7 +114,6 @@ const HowTo = (props: HowToProps) => {
                 alignItems: 'center',
                 mt: 6,
                 alignSelf: 'flex-start',
-                scrollMarginTop: '100px',
               }}
               {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
               href={link.href}

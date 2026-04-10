@@ -69,7 +69,6 @@ export const ChipsBlock = ({
               href={`#${chip.targetID}`}
               label={chip.label}
               sx={{
-                scrollMarginTop: '100px',
                 backgroundColor: `${chipBackgroundColor} !important`,
                 color: `${chipTextColor} !important`,
                 fontWeight: 'bold',
