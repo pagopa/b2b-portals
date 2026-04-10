@@ -143,6 +143,7 @@ export default async function RootLayout({
           a:not(header a, #preheader a),
           button:not(header button,#preheader button),
           input:not(header input,#preheader input),
+          select:not(header select,#preheader select),
           textarea:not(header textarea, #preheader textarea) {
             scroll-margin-top: 100px;
           }
