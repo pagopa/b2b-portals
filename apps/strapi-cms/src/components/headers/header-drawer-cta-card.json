@@ -21,6 +21,9 @@
     "subtitle": {
       "type": "richtext",
       "required": true
+    },
+    "ariaLabel": {
+      "type": "string"
     }
   }
 }

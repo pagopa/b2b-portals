@@ -23,13 +23,16 @@
       "required": true
     },
     "icons": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": true,
-      "required": true
+      ]
+    },
+    "ariaLabel": {
+      "type": "string"
     }
   }
 }

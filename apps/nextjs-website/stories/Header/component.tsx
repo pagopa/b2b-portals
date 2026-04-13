@@ -86,6 +86,7 @@ const makeHeaderProps = ({
       subtitle: 'Sottotitolo Drawer',
       ctaCard: {
         title: 'Titolo Card CTA',
+        ariaLabel: 'Titolo Card CTA',
         subtitle: (
           <p>
             Sottotitolo Card CTA abilitato al <strong>markdown</strong>
@@ -97,6 +98,7 @@ const makeHeaderProps = ({
       linkCards: [
         {
           title: 'Titolo Card Link 1',
+          ariaLabel: 'Aria label 1',
           subtitle: (
             <p>
               Sottotitolo Card Link abilitato al <strong>markdown</strong>
@@ -110,6 +112,7 @@ const makeHeaderProps = ({
         },
         {
           title: 'Titolo Card Link 2',
+          ariaLabel: 'Aria label 2',
           subtitle: (
             <p>
               Sottotitolo Card Link abilitato al <strong>markdown</strong>
@@ -124,6 +127,7 @@ const makeHeaderProps = ({
         },
         {
           title: 'Titolo Card Link 3',
+          ariaLabel: 'Aria label 3',
           subtitle: (
             <p>
               Sottotitolo Card Link abilitato al <strong>markdown</strong>
@@ -146,6 +150,7 @@ const makeHeaderProps = ({
       title: 'Titolo Drawer',
       ctaCard: {
         title: 'Titolo Card CTA',
+        ariaLabel: 'Titolo Card CTA',
         subtitle: (
           <p>
             Sottotitolo Card CTA abilitato al <strong>markdown</strong>
@@ -157,6 +162,7 @@ const makeHeaderProps = ({
       linkCards: [
         {
           title: 'Titolo Card Link',
+          ariaLabel: 'Aria label',
           subtitle: (
             <p>
               Sottotitolo Card Link abilitato al <strong>markdown</strong>

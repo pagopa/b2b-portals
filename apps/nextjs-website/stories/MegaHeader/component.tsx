@@ -207,6 +207,7 @@ const makeMegaHeaderProps = ({
         }),
         ctaCard: {
           title: 'Titolo Card CTA',
+          ariaLabel: 'Titolo Card CTA',
           subtitle: (
             <p>
               Sottotitolo Card CTA con <strong>markdown</strong>
@@ -218,6 +219,7 @@ const makeMegaHeaderProps = ({
         linkCards: [
           {
             title: 'Titolo Card Link 1',
+            ariaLabel: 'Aria label 1',
             subtitle: (
               <p>
                 Sottotitolo Card Link <strong>markdown</strong>

@@ -21,10 +21,12 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
       href: '#',
       title: 'Titolo',
       subtitle: 'Sottotitolo',
+      ariaLabel: 'Accedi',
     },
     linkCards: [
       {
         buttonText: 'Accedi',
+        ariaLabel: 'Accedi',
         href: '#',
         title: 'Cittadini',
         subtitle: 'Sottotitolo Cittadini',
@@ -41,6 +43,7 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
       },
       {
         buttonText: 'Accedi',
+        ariaLabel: 'Accedi',
         href: '#',
         title: 'Imprese',
         subtitle: 'Sottotitolo Imprese',

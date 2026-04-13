@@ -6,6 +6,7 @@ export interface HeaderSideDrawerCtaCardProps {
   readonly subtitle: JSX.Element;
   readonly buttonText: string;
   readonly href: string;
+  readonly ariaLabel?: string;
 }
 
 export interface HeaderSideDrawerLinkCardProps

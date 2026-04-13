@@ -66,6 +66,7 @@ const DrawerLinkCardCodec = t.strict({
   subtitle: t.string,
   buttonText: t.string,
   href: t.string,
+  ariaLabel: t.union([t.string, t.null]),
   icons: StrapiImageRequiredArraySchema,
 });
 
@@ -74,6 +75,7 @@ const DrawerCtaCardCodec = t.strict({
   subtitle: t.string,
   buttonText: t.string,
   href: t.string,
+  ariaLabel: t.union([t.string, t.null]),
 });
 
 const SideDrawerCodec = t.strict({

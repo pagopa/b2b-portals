@@ -122,23 +122,33 @@ const makeHeaderProps = (
       title: drawer.title,
       ...(drawer.subtitle && { subtitle: drawer.subtitle }),
       buttonText: drawer.buttonText,
-      linkCards: drawer.linkCards.map(({ icons, ...card }) => ({
-        ...card,
-        subtitle: MarkdownRenderer({
-          markdown: card.subtitle,
-          variant: 'body2',
-          locale,
-          defaultLocale,
+      linkCards: drawer.linkCards.map(
+        ({ icons, title, subtitle, href, buttonText, ariaLabel }) => ({
+          title,
+          href,
+          buttonText,
+          subtitle: MarkdownRenderer({
+            markdown: subtitle,
+            variant: 'body2',
+            locale,
+            defaultLocale,
+          }),
+          icons: icons.map((icon) => icon.url),
+          ...(ariaLabel && { ariaLabel }),
         }),
-        icons: icons.map((icon) => icon.url),
-      })),
+      ),
       ctaCard: {
-        ...drawer.ctaCard,
+        title: drawer.ctaCard.title,
+        buttonText: drawer.ctaCard.buttonText,
+        href: drawer.ctaCard.href,
         subtitle: MarkdownRenderer({
           markdown: drawer.ctaCard.subtitle,
           variant: 'body2',
           locale,
           defaultLocale,
+        }),
+        ...(drawer.ctaCard.ariaLabel && {
+          ariaLabel: drawer.ctaCard.ariaLabel,
         }),
       },
     },
@@ -213,23 +223,33 @@ const makeMegaHeaderProps = (
       title: drawer.title,
       ...(drawer.subtitle && { subtitle: drawer.subtitle }),
       buttonText: drawer.buttonText,
-      linkCards: drawer.linkCards.map(({ icons, ...card }) => ({
-        ...card,
-        subtitle: MarkdownRenderer({
-          markdown: card.subtitle,
-          variant: 'body2',
-          locale,
-          defaultLocale,
+      linkCards: drawer.linkCards.map(
+        ({ icons, title, subtitle, buttonText, href, ariaLabel }) => ({
+          title,
+          href,
+          buttonText,
+          subtitle: MarkdownRenderer({
+            markdown: subtitle,
+            variant: 'body2',
+            locale,
+            defaultLocale,
+          }),
+          icons: icons.map((icon) => icon.url),
+          ...(ariaLabel && { ariaLabel }),
         }),
-        icons: icons.map((icon) => icon.url),
-      })),
+      ),
       ctaCard: {
-        ...drawer.ctaCard,
+        title: drawer.ctaCard.title,
+        buttonText: drawer.ctaCard.buttonText,
+        href: drawer.ctaCard.href,
         subtitle: MarkdownRenderer({
           markdown: drawer.ctaCard.subtitle,
           variant: 'body2',
           locale,
           defaultLocale,
+        }),
+        ...(drawer.ctaCard.ariaLabel && {
+          ariaLabel: drawer.ctaCard.ariaLabel,
         }),
       },
     },

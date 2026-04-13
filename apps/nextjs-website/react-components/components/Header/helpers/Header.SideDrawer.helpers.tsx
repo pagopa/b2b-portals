@@ -109,6 +109,7 @@ export default function SideDrawer({
             <ActionAreaCard
               key={index}
               title={card.title}
+              ariaLabel={card.ariaLabel}
               subtitle={
                 <Typography
                   component='div'
@@ -154,6 +155,7 @@ export default function SideDrawer({
               size='small'
               href={ctaCard.href}
               endIcon={<ArrowForwardIcon />}
+              {...(ctaCard.ariaLabel && { 'aria-label': ctaCard.ariaLabel })}
               sx={{
                 '& .MuiButtonBase-root': { color: textColorAlternative },
                 '& .MuiSvgIcon-root': { fontSize: '20px' },

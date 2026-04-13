@@ -38,6 +38,7 @@ const headerResponse: HeaderData = {
           subtitle: null,
           ctaCard: {
             buttonText: 'Accedi',
+            ariaLabel: 'Accedi',
             href: '#',
             title: 'Titolo',
             subtitle: 'Sottotitolo',
@@ -45,6 +46,7 @@ const headerResponse: HeaderData = {
           linkCards: [
             {
               buttonText: 'Accedi',
+              ariaLabel: 'Accedi',
               href: '#',
               title: 'Cittadini',
               subtitle: 'Sottotitolo Cittadini',
@@ -61,6 +63,7 @@ const headerResponse: HeaderData = {
             },
             {
               buttonText: 'Accedi',
+              ariaLabel: 'Accedi',
               href: '#',
               title: 'Imprese',
               subtitle: 'Sottotitolo Imprese',

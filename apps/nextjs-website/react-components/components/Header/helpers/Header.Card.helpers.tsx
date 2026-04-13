@@ -13,6 +13,7 @@ interface ActionAreaCardProps {
   buttonText: string;
   href: string;
   theme: 'dark' | 'light';
+  ariaLabel: string | undefined;
 }
 
 export default function ActionAreaCard({
@@ -22,6 +23,7 @@ export default function ActionAreaCard({
   buttonText,
   href,
   theme,
+  ariaLabel,
 }: ActionAreaCardProps) {
   const textColorAlternative = TextAlternativeColor(theme);
 
@@ -63,6 +65,7 @@ export default function ActionAreaCard({
               size='small'
               href={href}
               endIcon={<ArrowForwardIcon />}
+              {...(ariaLabel && { 'aria-label': ariaLabel })}
               sx={{
                 color: textColorAlternative,
                 fontSize: '16px',

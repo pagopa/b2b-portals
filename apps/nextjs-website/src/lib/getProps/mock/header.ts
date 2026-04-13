@@ -8,6 +8,7 @@ export const mockHeaderProps: Getters['getHeaderProps'] = async () => ({
     buttonText: 'mock',
     ctaCard: {
       buttonText: 'mock',
+      ariaLabel: 'mock',
       href: 'mock',
       subtitle: 'mock',
       title: 'mock',
@@ -15,6 +16,7 @@ export const mockHeaderProps: Getters['getHeaderProps'] = async () => ({
     linkCards: [
       {
         buttonText: 'mock',
+        ariaLabel: 'mock',
         href: 'mock',
         icons: [mockImageData, mockImageData],
         subtitle: 'mock',
