@@ -81,7 +81,6 @@ const MegaHeader = ({
 
   useEffect(() => {
     toggleAccessibility(!!dropdownOpen || mobileMenuOpen);
-    window.dispatchEvent(new Event('FORCE_HEADER_UPDATE'));
   }, [dropdownOpen, mobileMenuOpen]);
 
   // Sublink is active if it points to the current page or one of its parents
