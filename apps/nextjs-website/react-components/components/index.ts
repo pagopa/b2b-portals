@@ -30,7 +30,6 @@ import MediaResources from './MediaResources/MediaResources';
 import DynamicsForm from './DynamicsForm/DynamicsForm';
 import TextAndImage from './TextAndImage/TextAndImage';
 import RichBanner from './RichBanner/RichBanner';
-import ScrollPaddingTopManager from './ScrollPaddingTopManager/ScrollPaddingTopManager';
 export {
   Hero,
   Editorial,
@@ -64,5 +63,4 @@ export {
   DynamicsForm,
   TextAndImage,
   RichBanner,
-  ScrollPaddingTopManager,
 };

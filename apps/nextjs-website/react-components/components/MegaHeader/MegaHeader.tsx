@@ -652,7 +652,6 @@ const MegaHeader = ({
             </Box>
           </Box>
         </MobileMenu>
-
         {drawer && (
           <SideDrawer
             isOpen={isDrawerOpen}
