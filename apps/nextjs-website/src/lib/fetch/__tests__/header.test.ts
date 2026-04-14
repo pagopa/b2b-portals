@@ -37,17 +37,16 @@ const headerResponse: HeaderData = {
           title: 'Accedi o Iscriviti',
           subtitle: null,
           ctaCard: {
-            buttonText: 'Accedi',
-            ariaLabel: 'Accedi',
-            href: '#',
             title: 'Titolo',
             subtitle: 'Sottotitolo',
+            link: {
+              label: 'Accedi',
+              ariaLabel: 'Accedi',
+              href: '#',
+            },
           },
           linkCards: [
             {
-              buttonText: 'Accedi',
-              ariaLabel: 'Accedi',
-              href: '#',
               title: 'Cittadini',
               subtitle: 'Sottotitolo Cittadini',
               icons: [
@@ -60,11 +59,13 @@ const headerResponse: HeaderData = {
                   url: 'exampleURL',
                 },
               ],
+              link: {
+                label: 'Accedi',
+                ariaLabel: 'Accedi',
+                href: '#',
+              },
             },
             {
-              buttonText: 'Accedi',
-              ariaLabel: 'Accedi',
-              href: '#',
               title: 'Imprese',
               subtitle: 'Sottotitolo Imprese',
               icons: [
@@ -77,6 +78,11 @@ const headerResponse: HeaderData = {
                   url: 'exampleURL',
                 },
               ],
+              link: {
+                label: 'Accedi',
+                ariaLabel: 'Accedi',
+                href: '#',
+              },
             },
           ],
         },
@@ -112,9 +118,11 @@ describe('getHeader', () => {
 &populate[5]=header.menu.links.sublinks.page
 &populate[6]=header.menu.links.sublinkGroups.sublinks.page
 &populate[7]=header.drawer.ctaCard
-&populate[8]=header.drawer.linkCards.icons
-&populate[9]=header.socialLinks.icon
-&populate[10]=exclude
+&populate[8]=header.drawer.ctaCard.link
+&populate[9]=header.drawer.linkCards.icons
+&populate[10]=header.drawer.linkCards.link
+&populate[11]=header.socialLinks.icon
+&populate[12]=exclude
       `,
       {
         method: 'GET',

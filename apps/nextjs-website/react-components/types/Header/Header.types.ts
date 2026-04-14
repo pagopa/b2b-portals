@@ -1,12 +1,10 @@
-import { LinkProps, StackProps } from '@mui/material';
-import { Theme } from '../common/Common.types';
+import { StackProps, LinkProps as LinkPropsMUI } from '@mui/material';
+import { LinkProps, Theme } from '../common/Common.types';
 
 export interface HeaderSideDrawerCtaCardProps {
   readonly title: string;
   readonly subtitle: JSX.Element;
-  readonly buttonText: string;
-  readonly href: string;
-  readonly ariaLabel?: string;
+  readonly link: LinkProps;
 }
 
 export interface HeaderSideDrawerLinkCardProps
@@ -40,13 +38,14 @@ export interface HeaderProps extends HeaderTitleProps, NavigationProps {
   };
 }
 
-interface DropdownLink extends LinkProps {
+interface DropdownLink extends LinkPropsMUI {
   label: string;
 }
 
 export type DropdownItem = DropdownLink;
 
-export interface MenuDropdownProp extends Partial<Omit<LinkProps, 'children'>> {
+export interface MenuDropdownProp
+  extends Partial<Omit<LinkPropsMUI, 'children'>> {
   label: string;
   active?: boolean;
   items?: DropdownItem[];

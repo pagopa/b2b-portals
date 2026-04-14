@@ -109,7 +109,6 @@ export default function SideDrawer({
             <ActionAreaCard
               key={index}
               title={card.title}
-              ariaLabel={card.ariaLabel}
               subtitle={
                 <Typography
                   component='div'
@@ -119,10 +118,9 @@ export default function SideDrawer({
                   {card.subtitle}
                 </Typography>
               }
-              buttonText={card.buttonText}
-              href={card.href}
               icons={card.icons}
               theme={'light'}
+              link={card.link}
             />
           ))}
         </div>
@@ -153,9 +151,11 @@ export default function SideDrawer({
             </Typography>
             <Button
               size='small'
-              href={ctaCard.href}
+              href={ctaCard.link.href}
               endIcon={<ArrowForwardIcon />}
-              {...(ctaCard.ariaLabel && { 'aria-label': ctaCard.ariaLabel })}
+              {...(ctaCard.link.ariaLabel && {
+                'aria-label': ctaCard.link.ariaLabel,
+              })}
               sx={{
                 '& .MuiButtonBase-root': { color: textColorAlternative },
                 '& .MuiSvgIcon-root': { fontSize: '20px' },
@@ -164,7 +164,7 @@ export default function SideDrawer({
                 padding: 0,
               }}
             >
-              {ctaCard.buttonText}
+              {ctaCard.link.label}
             </Button>
           </div>
           <Divider sx={{ marginBottom: 2, marginTop: 2 }} />

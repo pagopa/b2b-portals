@@ -5,25 +5,22 @@ import { CardActions, Button, Stack } from '@mui/material';
 import { TextAlternativeColor } from '@react-components/components/common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
+import { LinkProps } from '@react-components/types/common/Common.types';
 
 interface ActionAreaCardProps {
   title: string;
   subtitle: string | JSX.Element;
   icons: string[];
-  buttonText: string;
-  href: string;
   theme: 'dark' | 'light';
-  ariaLabel: string | undefined;
+  link: LinkProps;
 }
 
 export default function ActionAreaCard({
   title,
   subtitle,
   icons,
-  buttonText,
-  href,
   theme,
-  ariaLabel,
+  link,
 }: ActionAreaCardProps) {
   const textColorAlternative = TextAlternativeColor(theme);
 
@@ -63,9 +60,9 @@ export default function ActionAreaCard({
 
             <Button
               size='small'
-              href={href}
+              href={link.href}
               endIcon={<ArrowForwardIcon />}
-              {...(ariaLabel && { 'aria-label': ariaLabel })}
+              {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
               sx={{
                 color: textColorAlternative,
                 fontSize: '16px',
@@ -73,7 +70,7 @@ export default function ActionAreaCard({
                 minWidth: 'auto',
               }}
             >
-              {buttonText}
+              {link.label}
             </Button>
           </Stack>
         </CardContent>

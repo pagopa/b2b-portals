@@ -10,14 +10,6 @@
       "type": "string",
       "required": true
     },
-    "buttonText": {
-      "type": "string",
-      "required": true
-    },
-    "href": {
-      "type": "string",
-      "required": true
-    },
     "subtitle": {
       "type": "richtext",
       "required": true
@@ -31,8 +23,11 @@
         "files"
       ]
     },
-    "ariaLabel": {
-      "type": "string"
+    "link": {
+      "type": "component",
+      "component": "components.link",
+      "repeatable": false,
+      "required": true
     }
   }
 }

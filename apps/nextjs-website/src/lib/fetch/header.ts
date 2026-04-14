@@ -61,21 +61,23 @@ const MegaMenuCodec = t.strict({
   ),
 });
 
+const LinkCodec = t.strict({
+  label: t.string,
+  href: t.string,
+  ariaLabel: t.union([t.string, t.null]),
+});
+
 const DrawerLinkCardCodec = t.strict({
   title: t.string,
   subtitle: t.string,
-  buttonText: t.string,
-  href: t.string,
-  ariaLabel: t.union([t.string, t.null]),
+  link: LinkCodec,
   icons: StrapiImageRequiredArraySchema,
 });
 
 const DrawerCtaCardCodec = t.strict({
   title: t.string,
   subtitle: t.string,
-  buttonText: t.string,
-  href: t.string,
-  ariaLabel: t.union([t.string, t.null]),
+  link: LinkCodec,
 });
 
 const SideDrawerCodec = t.strict({
@@ -145,9 +147,11 @@ export const getHeader = ({
 &populate[5]=header.menu.links.sublinks.page
 &populate[6]=header.menu.links.sublinkGroups.sublinks.page
 &populate[7]=header.drawer.ctaCard
-&populate[8]=header.drawer.linkCards.icons
-&populate[9]=header.socialLinks.icon
-&populate[10]=exclude
+&populate[8]=header.drawer.ctaCard.link
+&populate[9]=header.drawer.linkCards.icons
+&populate[10]=header.drawer.linkCards.link
+&populate[11]=header.socialLinks.icon
+&populate[12]=exclude
       `,
       {
         method: 'GET',
