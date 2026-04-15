@@ -46,7 +46,7 @@ export const CtaButtons = ({
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
   theme?: 'dark' | 'light';
-  themeVariant?: 'IO' | 'SEND';
+  themeVariant?: 'IO' | 'SEND' | 'WALLET';
   disableRipple?: boolean;
   trackEvent?: string;
 }) => {
@@ -72,14 +72,28 @@ export const CtaButtons = ({
                 backgroundColor:
                   theme === 'dark'
                     ? palette.custom.white
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
                 color:
                   theme === 'dark'
-                    ? themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500]
+                    ? (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })()
                     : palette.custom.white,
               }),
 
@@ -87,15 +101,29 @@ export const CtaButtons = ({
                 borderColor:
                   theme === 'dark'
                     ? palette.custom.matteWhiteBorder
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
                 color:
                   theme === 'dark'
                     ? palette.custom.white
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
               }),
             }}
             {...button}
@@ -331,12 +359,23 @@ export const Body = ({
 
 export const getButtonStyles = (
   theme: 'light' | 'dark',
-  themeVariant: 'SEND' | 'IO',
+  themeVariant: 'SEND' | 'IO' | 'WALLET',
   sectionId: number,
   currentSectionId: number,
   palette: Theme['palette'],
 ) => {
   const isSelected = sectionId === currentSectionId;
+
+  const variantColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.primaryColorDark;
+      case 'WALLET':
+        return palette.custom.primaryColorDark;
+    }
+  })();
 
   return {
     backgroundColor: isSelected
@@ -346,42 +385,19 @@ export const getButtonStyles = (
       : 'transparent',
     color: isSelected
       ? theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-        : themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
+        ? variantColor
+        : variantColor
       : theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
+        ? variantColor
         : palette.primary.contrastText,
-    borderColor:
-      theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-        : palette.background.paper,
+    borderColor: theme === 'light' ? variantColor : palette.background.paper,
     '&:hover': {
       backgroundColor:
         theme === 'light'
           ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
           : palette.background.paper,
-      color:
-        theme === 'light'
-          ? themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark
-          : themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark,
-      borderColor:
-        theme === 'light'
-          ? themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark
-          : palette.background.paper,
+      color: theme === 'light' ? variantColor : variantColor,
+      borderColor: theme === 'light' ? variantColor : palette.background.paper,
     },
   };
 };

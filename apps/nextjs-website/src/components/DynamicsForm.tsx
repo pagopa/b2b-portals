@@ -5,13 +5,21 @@ import { DynamicsFormSectionProps } from '@/lib/fetch/types/PageSection';
 import { Box, useTheme } from '@mui/material';
 
 const DynamicsForm = (
-  props: DynamicsFormSectionProps & { themeVariant: 'SEND' | 'IO' },
+  props: DynamicsFormSectionProps & { themeVariant: 'SEND' | 'IO' | 'WALLET' },
 ) => {
   const { palette } = useTheme();
   const { themeVariant } = props;
 
-  const primaryColor =
-    themeVariant === 'SEND' ? palette.primary.main : palette.custom.blueIO[500];
+  const primaryColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.blueIO[500];
+      case 'WALLET':
+        return palette.custom.blueIO[500];
+    }
+  })();
 
   return (
     <Box

@@ -14,10 +14,18 @@ const CardsItem = ({
   label,
   themeVariant,
   masonry,
-}: CardsItemProps & { themeVariant: 'IO' | 'SEND' }) => {
+}: CardsItemProps & { themeVariant: 'IO' | 'SEND' | 'WALLET' }) => {
   const { palette } = useTheme();
-  const linkColor =
-    themeVariant === 'SEND' ? palette.primary.main : palette.custom.blueIO[500];
+  const linkColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.blueIO[500];
+      case 'WALLET':
+        return palette.custom.blueIO[500];
+    }
+  })();
 
   return (
     <Card

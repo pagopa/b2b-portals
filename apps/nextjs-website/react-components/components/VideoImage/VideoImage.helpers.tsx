@@ -127,9 +127,16 @@ export const VideoText = ({
   const linkColor =
     theme === 'dark'
       ? palette.custom.white
-      : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      : (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.primaryColorDark;
+            case 'WALLET':
+              return palette.custom.primaryColorDark;
+          }
+        })();
 
   return (
     <>
@@ -182,16 +189,23 @@ export const ImageText = ({
   title?: string;
   subtitle?: JSX.Element;
   theme: 'dark' | 'light';
-  themeVariant: 'SEND' | 'IO';
+  themeVariant: 'SEND' | 'IO' | 'WALLET';
 }) => {
   const { palette } = useTheme();
   const textColor = TextColor(theme);
   const linkColor =
     theme === 'dark'
       ? palette.custom.white
-      : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      : (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.primaryColorDark;
+            case 'WALLET':
+              return palette.custom.primaryColorDark;
+          }
+        })();
 
   return (
     <>

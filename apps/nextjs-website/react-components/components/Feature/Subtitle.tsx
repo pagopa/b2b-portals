@@ -12,9 +12,16 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
 
   const linkColor =
     theme === 'light'
-      ? themeVariant === 'SEND'
-        ? muiTheme.palette.primary.main
-        : muiTheme.palette.custom.blueIO[500]
+      ? (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return muiTheme.palette.primary.main;
+            case 'IO':
+              return muiTheme.palette.custom.blueIO[500];
+            case 'WALLET':
+              return muiTheme.palette.custom.blueIO[500];
+          }
+        })()
       : muiTheme.palette.common.white;
 
   return (

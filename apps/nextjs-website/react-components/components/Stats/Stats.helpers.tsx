@@ -3,8 +3,24 @@ import { Box, Stack, Typography, useTheme } from '@mui/material';
 import Image from 'next/image';
 import { StatsItemProps } from '@react-components/types/Stats/Stats.types';
 
-export const StatsItem = ({ title, description, iconURL }: StatsItemProps) => {
+export const StatsItem = ({
+  title,
+  description,
+  iconURL,
+  themeVariant,
+}: StatsItemProps & { themeVariant: 'SEND' | 'IO' | 'WALLET' }) => {
   const { palette } = useTheme();
+
+  const textColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.primaryColorDark;
+      case 'WALLET':
+        return palette.custom.primaryColorDark;
+    }
+  })();
 
   return (
     <Stack
@@ -23,7 +39,7 @@ export const StatsItem = ({ title, description, iconURL }: StatsItemProps) => {
       <Typography
         fontSize={{ xs: 28, md: 32 }}
         fontWeight='bold'
-        color={palette.custom.primaryColorDark}
+        color={textColor}
         mb={0}
       >
         {title}
@@ -32,7 +48,7 @@ export const StatsItem = ({ title, description, iconURL }: StatsItemProps) => {
         <Typography
           fontSize={14}
           fontWeight='bold'
-          color={palette.custom.primaryColorDark}
+          color={textColor}
           sx={{ marginTop: '0px!important' }}
         >
           {description}

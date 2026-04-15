@@ -11,11 +11,12 @@ export default meta;
 
 // Define a 'Template' function that sets how args map to rendering
 const StatsTemplate: StoryFn<StatsProps> = (args) => {
-  return <Stats {...args} themeVariant='SEND' />;
+  return <Stats {...args} />;
 };
 
 export const StatsFull: StoryFn<typeof Stats> = StatsTemplate.bind({});
 StatsFull.args = {
+  themeVariant: 'SEND',
   eyelet: 'I NUMERI',
   title: 'Siamo in tanti',
   body: 'Ogni giorno si uniscono nuovi enti e servizi, e sempre più persone usano IO.',
@@ -40,6 +41,7 @@ StatsFull.args = {
 
 export const StatsMinimum: StoryFn<typeof Stats> = StatsTemplate.bind({});
 StatsMinimum.args = {
+  themeVariant: 'SEND',
   title: 'Siamo in tanti',
   items: [
     { title: '647M', description: 'messaggi inviati dagli enti su IO' },

@@ -23,10 +23,16 @@ const Hero = (props: HeroProps) => {
 
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
-  const backgroundColor =
-    themeVariant === 'SEND'
-      ? SendBackgroundColor(theme)
-      : IoBackgroundColor(theme);
+  const backgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendBackgroundColor(theme);
+      case 'IO':
+        return IoBackgroundColor(theme);
+      case 'WALLET':
+        return IoBackgroundColor(theme);
+    }
+  })();
 
   const BackgroundImage = isJSX(background) ? (
     background
