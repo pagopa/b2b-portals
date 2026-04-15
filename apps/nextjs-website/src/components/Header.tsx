@@ -122,7 +122,7 @@ const makeHeaderProps = (
       title: drawer.title,
       ...(drawer.subtitle && { subtitle: drawer.subtitle }),
       buttonText: drawer.buttonText,
-      linkCards: drawer.linkCards.map(({ icons, ...card }) => ({
+      linkCards: drawer.linkCards.map(({ icons, link, ...card }) => ({
         ...card,
         subtitle: MarkdownRenderer({
           markdown: card.subtitle,
@@ -131,15 +131,29 @@ const makeHeaderProps = (
           defaultLocale,
         }),
         icons: icons.map((icon) => icon.url),
+        link: {
+          label: link.label,
+          href: link.href,
+          ...(link.ariaLabel && {
+            ariaLabel: link.ariaLabel,
+          }),
+        },
       })),
       ctaCard: {
-        ...drawer.ctaCard,
+        title: drawer.ctaCard.title,
         subtitle: MarkdownRenderer({
           markdown: drawer.ctaCard.subtitle,
           variant: 'body2',
           locale,
           defaultLocale,
         }),
+        link: {
+          label: drawer.ctaCard.link.label,
+          href: drawer.ctaCard.link.href,
+          ...(drawer.ctaCard.link.ariaLabel && {
+            ariaLabel: drawer.ctaCard.link.ariaLabel,
+          }),
+        },
       },
     },
   }),
@@ -159,7 +173,7 @@ const makeHeaderProps = (
   menu: menu.links.map((link) => ({
     theme: 'light',
     label: link.label,
-    href: link.page?.slug,
+    href: link.page?.slug ?? '',
     alignRight: link.alignRight,
     ...(link.sublinks.length > 0 && {
       items: link.sublinks.map(makeHeaderSublink),
@@ -213,7 +227,7 @@ const makeMegaHeaderProps = (
       title: drawer.title,
       ...(drawer.subtitle && { subtitle: drawer.subtitle }),
       buttonText: drawer.buttonText,
-      linkCards: drawer.linkCards.map(({ icons, ...card }) => ({
+      linkCards: drawer.linkCards.map(({ icons, link, ...card }) => ({
         ...card,
         subtitle: MarkdownRenderer({
           markdown: card.subtitle,
@@ -222,15 +236,27 @@ const makeMegaHeaderProps = (
           defaultLocale,
         }),
         icons: icons.map((icon) => icon.url),
+        link: {
+          label: link.label,
+          href: link.href,
+          ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
+        },
       })),
       ctaCard: {
-        ...drawer.ctaCard,
+        title: drawer.ctaCard.title,
         subtitle: MarkdownRenderer({
           markdown: drawer.ctaCard.subtitle,
           variant: 'body2',
           locale,
           defaultLocale,
         }),
+        link: {
+          href: drawer.ctaCard.link.href,
+          label: drawer.ctaCard.link.label,
+          ...(drawer.ctaCard.link.ariaLabel && {
+            ariaLabel: drawer.ctaCard.link.ariaLabel,
+          }),
+        },
       },
     },
   }),

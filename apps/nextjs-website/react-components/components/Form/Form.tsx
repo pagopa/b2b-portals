@@ -51,6 +51,7 @@ const Form = ({
   placeholderSurname,
   placeholderEmail,
   placeholderOrganization,
+  labels,
 }: FormProps) => {
   const textColor = TextColor(theme);
   const graylinkColor = GrayLinkColor(theme);
@@ -59,14 +60,14 @@ const Form = ({
   const { palette } = useTheme();
 
   const requiredMessages: Record<InputFieldData['name'], string> = {
-    name: 'Inserisci il nome',
-    surname: 'Inserisci il cognome',
-    email: 'Inserisci l’indirizzo email',
-    organization: 'Inserisci il nome dell’ente',
+    name: labels.insertName,
+    surname: labels.insertSurname,
+    email: labels.insertEmail,
+    organization: labels.insertOrganization,
   };
 
   const invalidMessages: Record<'email', string> = {
-    email: 'Inserisci un indirizzo email valido',
+    email: labels.insertValidEmail,
   };
 
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({
@@ -235,22 +236,22 @@ const Form = ({
   const inputFields: InputFieldData[] = [
     {
       name: 'name',
-      placeholder: `${placeholderName ?? 'Nome'}*`,
+      placeholder: placeholderName ?? labels.name,
       show: showName,
     },
     {
       name: 'surname',
-      placeholder: `${placeholderSurname ?? 'Cognome'}*`,
+      placeholder: placeholderSurname ?? labels.surname,
       show: showSurname,
     },
     {
       name: 'email',
-      placeholder: `${placeholderEmail ?? 'Indirizzo e-mail'}*`,
+      placeholder: placeholderEmail ?? labels.email,
       show: true,
     },
     {
       name: 'organization',
-      placeholder: `${placeholderOrganization ?? 'Nome ente'}*`,
+      placeholder: placeholderOrganization ?? labels.organization,
       show: showOrganization,
     },
   ];
@@ -275,6 +276,7 @@ const Form = ({
           value={formData[name]}
           onChange={handleInputChange}
           autoComplete={autocompleteMap[name]}
+          required
           error={validationErrors[name] !== null}
           FormHelperTextProps={{
             id: `${name}-error-text`,
@@ -306,6 +308,9 @@ const Form = ({
             },
             '& .MuiInputLabel-root.Mui-error': {
               color: '#555C70',
+            },
+            '& .MuiFormLabel-asterisk': {
+              color: 'error.main',
             },
             '& .MuiOutlinedInput-input::placeholder': {
               color: 'transparent',
@@ -387,9 +392,21 @@ const Form = ({
           variant='h4'
           component={titleTag ?? 'h2'}
           gutterBottom
-          sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 4 }}
+          sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 3 }}
         >
           {title}
+        </Typography>
+        <Typography
+          variant='body2'
+          sx={{
+            color: 'error.main',
+            textAlign: 'start',
+            position: 'relative',
+            zIndex: 3,
+            mb: 3,
+          }}
+        >
+          *Campo obbligatorio
         </Typography>
         {subtitle && (
           <Typography
@@ -420,7 +437,17 @@ const Form = ({
               fontWeight: '700',
             }}
           >
-            {categoriesTitle}
+            {categoriesTitle.split('*').map((part, i, arr) => {
+              if (i < arr.length - 1) {
+                return (
+                  <React.Fragment key={i}>
+                    {part}
+                    <span style={{ color: palette.error.main }}>*</span>
+                  </React.Fragment>
+                );
+              }
+              return part;
+            })}
           </Typography>
         )}
         {categories.length > 0 && (
@@ -435,21 +462,10 @@ const Form = ({
               : {})}
           />
         )}
-        <Typography
-          variant='body2'
-          sx={{
-            mb: 2,
-            position: 'relative',
-            zIndex: 3,
-            color: textColor,
-            textAlign: 'start',
-          }}
-        >
-          I campi contrassegnati con * sono obbligatori
-        </Typography>
         <Button
           variant='contained'
           sx={{
+            mt: 4,
             width: { md: 'auto', xs: '100%' },
             zIndex: 4,
             backgroundColor:

@@ -17,15 +17,21 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
     title: 'Accedi o Iscriviti',
     subtitle: null,
     ctaCard: {
-      buttonText: 'Accedi',
-      href: '#',
       title: 'Titolo',
       subtitle: 'Sottotitolo',
+      link: {
+        label: 'Accedi',
+        ariaLabel: 'Accedi',
+        href: '#',
+      },
     },
     linkCards: [
       {
-        buttonText: 'Accedi',
-        href: '#',
+        link: {
+          label: 'Accedi',
+          ariaLabel: 'Accedi',
+          href: '#',
+        },
         title: 'Cittadini',
         subtitle: 'Sottotitolo Cittadini',
         icons: [
@@ -40,8 +46,11 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
         ],
       },
       {
-        buttonText: 'Accedi',
-        href: '#',
+        link: {
+          label: 'Accedi',
+          ariaLabel: 'Accedi',
+          href: '#',
+        },
         title: 'Imprese',
         subtitle: 'Sottotitolo Imprese',
         icons: [

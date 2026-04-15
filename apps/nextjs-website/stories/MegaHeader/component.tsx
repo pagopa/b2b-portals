@@ -212,8 +212,11 @@ const makeMegaHeaderProps = ({
               Sottotitolo Card CTA con <strong>markdown</strong>
             </p>
           ),
-          buttonText: 'Vai alla CTA',
-          href: '#',
+          link: {
+            label: 'Vai alla CTA',
+            href: '#',
+            ariaLabel: 'Titolo Card CTA',
+          },
         },
         linkCards: [
           {
@@ -223,8 +226,11 @@ const makeMegaHeaderProps = ({
                 Sottotitolo Card Link <strong>markdown</strong>
               </p>
             ),
-            buttonText: 'Apri link',
-            href: '#',
+            link: {
+              label: 'Vai alla CTA',
+              href: '#',
+              ariaLabel: 'Titolo Card CTA',
+            },
             icons: [
               'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
             ],
