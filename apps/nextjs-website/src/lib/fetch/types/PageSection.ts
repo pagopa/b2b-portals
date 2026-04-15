@@ -8,7 +8,7 @@ import {
 import { StoreButtonsCodec } from './StoreButtons';
 import { ThemeCodec } from './Theme';
 
-const LinkCodec = t.strict({
+export const LinkCodec = t.strict({
   label: t.string,
   href: t.string,
   ariaLabel: t.union([t.string, t.null]),

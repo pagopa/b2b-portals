@@ -10,6 +10,7 @@ import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
 import PageRelationCodec from './types/PageRelation';
+import { LinkCodec } from './types/PageSection';
 
 const HeaderPageCodec = t.union([
   t.strict({
@@ -59,12 +60,6 @@ const MegaMenuCodec = t.strict({
       ctaButton: t.union([CTAButtonSimpleCodec, t.null]),
     }),
   ),
-});
-
-const LinkCodec = t.strict({
-  label: t.string,
-  href: t.string,
-  ariaLabel: t.union([t.string, t.null]),
 });
 
 const DrawerLinkCardCodec = t.strict({
