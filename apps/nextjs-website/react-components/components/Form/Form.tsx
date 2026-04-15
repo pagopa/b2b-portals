@@ -51,6 +51,7 @@ const Form = ({
   placeholderSurname,
   placeholderEmail,
   placeholderOrganization,
+  labels,
 }: FormProps) => {
   const textColor = TextColor(theme);
   const graylinkColor = GrayLinkColor(theme);
@@ -59,14 +60,14 @@ const Form = ({
   const { palette } = useTheme();
 
   const requiredMessages: Record<InputFieldData['name'], string> = {
-    name: 'Inserisci il nome',
-    surname: 'Inserisci il cognome',
-    email: 'Inserisci l’indirizzo email',
-    organization: 'Inserisci il nome dell’ente',
+    name: labels.insertName,
+    surname: labels.insertSurname,
+    email: labels.insertEmail,
+    organization: labels.insertOrganization,
   };
 
   const invalidMessages: Record<'email', string> = {
-    email: 'Inserisci un indirizzo email valido',
+    email: labels.insertValidEmail,
   };
 
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({
@@ -235,22 +236,22 @@ const Form = ({
   const inputFields: InputFieldData[] = [
     {
       name: 'name',
-      placeholder: placeholderName ?? 'Nome',
+      placeholder: placeholderName ?? labels.name,
       show: showName,
     },
     {
       name: 'surname',
-      placeholder: placeholderSurname ?? 'Cognome',
+      placeholder: placeholderSurname ?? labels.surname,
       show: showSurname,
     },
     {
       name: 'email',
-      placeholder: placeholderEmail ?? 'Indirizzo e-mail',
+      placeholder: placeholderEmail ?? labels.email,
       show: true,
     },
     {
       name: 'organization',
-      placeholder: placeholderOrganization ?? 'Nome ente',
+      placeholder: placeholderOrganization ?? labels.organization,
       show: showOrganization,
     },
   ];
