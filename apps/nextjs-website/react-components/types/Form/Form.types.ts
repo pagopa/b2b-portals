@@ -38,12 +38,12 @@ export interface FormProps extends SectionProps, FormFields, FormCategories {
     insertName: string;
     insertSurname: string;
     insertEmail: string;
-    insertInstitutionName: string;
+    insertOrganization: string;
     insertValidEmail: string;
     name: string;
     surname: string;
     email: string;
-    institutionName: string;
+    organization: string;
   };
 }
 

@@ -63,7 +63,7 @@ const Form = ({
     name: labels.insertName,
     surname: labels.insertSurname,
     email: labels.insertEmail,
-    organization: labels.insertInstitutionName,
+    organization: labels.insertOrganization,
   };
 
   const invalidMessages: Record<'email', string> = {
@@ -251,7 +251,7 @@ const Form = ({
     },
     {
       name: 'organization',
-      placeholder: placeholderOrganization ?? labels.institutionName,
+      placeholder: placeholderOrganization ?? labels.organization,
       show: showOrganization,
     },
   ];
