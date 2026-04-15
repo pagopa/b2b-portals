@@ -64,7 +64,11 @@ export const FooterColumn = ({
               component='a'
               underline='none'
               color='text.primary'
-              sx={{ display: 'inline-block', py: 0.5, cursor: 'pointer' }}
+              sx={{
+                display: 'inline-block',
+                py: 0.5,
+                cursor: 'pointer',
+              }}
               variant='subtitle2'
               {...(href.startsWith('https') && { target: '_blank' })}
               {...(showOneTrustPreferencies

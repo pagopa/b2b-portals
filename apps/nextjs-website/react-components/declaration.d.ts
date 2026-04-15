@@ -1,3 +1,4 @@
+declare module '*.css';
 declare module 'react-slick' {
   import { Component } from 'react';
 

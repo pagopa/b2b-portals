@@ -91,8 +91,11 @@ const makeHeaderProps = ({
             Sottotitolo Card CTA abilitato al <strong>markdown</strong>
           </p>
         ),
-        buttonText: 'Bottone CTA',
-        href: '#',
+        link: {
+          ariaLabel: 'Aria label Card CTA',
+          label: 'Titolo Card CTA',
+          href: '#',
+        },
       },
       linkCards: [
         {
@@ -102,21 +105,27 @@ const makeHeaderProps = ({
               Sottotitolo Card Link abilitato al <strong>markdown</strong>
             </p>
           ),
-          buttonText: 'Bottone Card Link',
-          href: '#',
+          link: {
+            ariaLabel: 'Aria label 1',
+            label: 'Bottone Card Link 1',
+            href: '#',
+          },
           icons: [
             'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
           ],
         },
         {
           title: 'Titolo Card Link 2',
+          link: {
+            ariaLabel: 'Aria label 2',
+            label: 'Bottone Card Link 2',
+            href: '#',
+          },
           subtitle: (
             <p>
               Sottotitolo Card Link abilitato al <strong>markdown</strong>
             </p>
           ),
-          buttonText: 'Bottone Card Link',
-          href: '#',
           icons: [
             'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
             'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
@@ -129,8 +138,11 @@ const makeHeaderProps = ({
               Sottotitolo Card Link abilitato al <strong>markdown</strong>
             </p>
           ),
-          buttonText: 'Bottone Card Link',
-          href: '#',
+          link: {
+            ariaLabel: 'Aria label 3',
+            label: 'Bottone Card Link 3',
+            href: '#',
+          },
           icons: [
             'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
             'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
@@ -151,8 +163,11 @@ const makeHeaderProps = ({
             Sottotitolo Card CTA abilitato al <strong>markdown</strong>
           </p>
         ),
-        buttonText: 'Bottone CTA',
-        href: '#',
+        link: {
+          ariaLabel: 'Titolo Card CTA',
+          label: 'Bottone CTA',
+          href: '#',
+        },
       },
       linkCards: [
         {
@@ -162,11 +177,14 @@ const makeHeaderProps = ({
               Sottotitolo Card Link abilitato al <strong>markdown</strong>
             </p>
           ),
-          buttonText: 'Bottone Card Link',
-          href: '#',
           icons: [
             'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
           ],
+          link: {
+            ariaLabel: 'Aria label',
+            label: 'Bottone Card Link',
+            href: '#',
+          },
         },
       ],
     },

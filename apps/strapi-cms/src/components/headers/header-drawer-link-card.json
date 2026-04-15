@@ -10,25 +10,23 @@
       "type": "string",
       "required": true
     },
-    "buttonText": {
-      "type": "string",
-      "required": true
-    },
-    "href": {
-      "type": "string",
-      "required": true
-    },
     "subtitle": {
       "type": "richtext",
       "required": true
     },
     "icons": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": true,
+      ]
+    },
+    "link": {
+      "type": "component",
+      "component": "components.link",
+      "repeatable": false,
       "required": true
     }
   }
