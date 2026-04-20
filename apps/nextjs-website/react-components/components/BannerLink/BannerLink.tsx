@@ -39,10 +39,16 @@ const BannerLink = ({
 }: BannerLinkProps) => {
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('md'));
-  const backgroundColor =
-    themeVariant === 'SEND'
-      ? SendBackgroundColor(theme)
-      : IoBackgroundColor(theme);
+  const backgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendBackgroundColor(theme);
+      case 'IO':
+        return IoBackgroundColor(theme);
+      case 'WALLET':
+        return IoBackgroundColor(theme);
+    }
+  })();
 
   const lightBackgrounds = [
     muiTheme.palette.grey[100],
@@ -57,6 +63,11 @@ const BannerLink = ({
     muiTheme.palette.custom.bannerLinkLightBlueSend,
   ];
 
+  const darkBackgroundsWallet = [
+    muiTheme.palette.custom.bannerLinkDarkBlueIO,
+    muiTheme.palette.custom.bannerLinkLightBlueIO,
+  ];
+
   const textColor =
     theme === 'dark' ? muiTheme.palette.primary.contrastText : TextColor(theme);
 
@@ -65,9 +76,16 @@ const BannerLink = ({
   const linkColor =
     theme === 'dark'
       ? palette.custom.white
-      : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      : (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.primaryColorDark;
+            case 'WALLET':
+              return palette.custom.primaryColorDark;
+          }
+        })();
 
   return (
     <Box
@@ -87,9 +105,16 @@ const BannerLink = ({
                 backgroundColor:
                   theme === 'light'
                     ? lightBackgrounds[index % 2]
-                    : themeVariant === 'SEND'
-                      ? darkBackgroundsSend[index % 2]
-                      : darkBackgroundsIo[index % 2],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return darkBackgroundsSend[index % 2];
+                          case 'IO':
+                            return darkBackgroundsIo[index % 2];
+                          case 'WALLET':
+                            return darkBackgroundsWallet[index % 2];
+                        }
+                      })(),
                 width: '100%',
                 flex: 1,
                 display: 'flex',

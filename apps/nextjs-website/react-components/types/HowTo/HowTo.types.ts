@@ -1,5 +1,4 @@
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
-import { LinkProps, SectionProps } from '../common/Common.types';
+import { LinkProps, SectionProps, ThemeVariant } from '../common/Common.types';
 
 export interface Step {
   readonly iconURL?: string;

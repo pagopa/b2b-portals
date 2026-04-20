@@ -1,5 +1,5 @@
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 import { EditorialProps } from '../Editorial/Editorial.types';
+import { ThemeVariant } from '../common/Common.types';
 
 export interface EditorialSwitchBaseProps {
   title: string;

@@ -3,6 +3,7 @@ import {
   CtaButtonProps,
   Generic,
   LinkProps,
+  ThemeVariant,
 } from '../common/Common.types';
 
 export interface CardsProps extends SectionProps {
@@ -30,4 +31,5 @@ export interface CardsItemProps {
     }
   >;
   masonry?: boolean;
+  themeVariant: ThemeVariant;
 }

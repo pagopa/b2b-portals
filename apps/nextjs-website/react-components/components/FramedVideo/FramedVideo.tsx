@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { FramedVideoProps } from '@react-components/types';
 import { renderVideo, renderTextSection } from './FramedVideo.helpers';
-import { IoBackgroundColorAlternativeBlue } from '../common/Common.helpers';
+import {
+  SendBackgroundColor,
+  IoBackgroundColor,
+} from '../common/Common.helpers';
 
 const FramedVideo = ({
   videoURL,
@@ -30,8 +33,8 @@ const FramedVideo = ({
   const flexDirection = isMobileDevice
     ? 'column-reverse'
     : layout === 'left'
-    ? 'row'
-    : 'row-reverse';
+      ? 'row'
+      : 'row-reverse';
 
   const videoFlexBasis = text ? (isMobileDevice ? '100%' : '50%') : '80%';
   const justifyContent = text
@@ -40,7 +43,16 @@ const FramedVideo = ({
       : 'space-between'
     : 'center';
 
-  const backgroundColor = IoBackgroundColorAlternativeBlue(theme);
+  const backgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendBackgroundColor(theme);
+      case 'IO':
+        return IoBackgroundColor(theme);
+      case 'WALLET':
+        return IoBackgroundColor(theme);
+    }
+  })();
 
   if (!videoURL) {
     return (

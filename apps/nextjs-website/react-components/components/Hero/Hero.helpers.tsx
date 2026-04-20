@@ -35,9 +35,16 @@ export const HeroTextContent = ({
 
   const linkColor =
     theme === 'light'
-      ? themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.blueIO[500]
+      ? (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.blueIO[500];
+            case 'WALLET':
+              return palette.custom.blueIO[500];
+          }
+        })()
       : palette.custom.white;
 
   return (

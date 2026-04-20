@@ -29,9 +29,16 @@ export const TitleSubtitleBlock = ({
   const linkColor =
     theme === 'dark'
       ? palette.custom.white
-      : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      : (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.primaryColorDark;
+            case 'WALLET':
+              return palette.custom.primaryColorDark;
+          }
+        })();
 
   return (
     <Stack
@@ -106,16 +113,30 @@ const SplitButton = ({
 
   const borderColor =
     theme === 'light'
-      ? themeVariant === 'SEND'
-        ? muiTheme.palette.primary.main
-        : palette.custom.primaryColorDark
+      ? (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return muiTheme.palette.primary.main;
+            case 'IO':
+              return palette.custom.primaryColorDark;
+            case 'WALLET':
+              return palette.custom.primaryColorDark;
+          }
+        })()
       : muiTheme.palette.primary.contrastText;
 
   const textColor =
     theme === 'light'
-      ? themeVariant === 'SEND'
-        ? muiTheme.palette.primary.main
-        : palette.custom.primaryColorDark
+      ? (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return muiTheme.palette.primary.main;
+            case 'IO':
+              return palette.custom.primaryColorDark;
+            case 'WALLET':
+              return palette.custom.primaryColorDark;
+          }
+        })()
       : muiTheme.palette.primary.main;
 
   const externalButtonTextColor =
@@ -238,7 +259,7 @@ export const ButtonSwitchRowBlock = ({
   theme,
   themeVariant,
   selectedButton,
-}: ButtonSwitchRowBlockProps & { themeVariant: 'SEND' | 'IO' }) => {
+}: ButtonSwitchRowBlockProps & { themeVariant: 'SEND' | 'IO' | 'WALLET' }) => {
   const muiTheme = useTheme();
   const { palette } = useTheme();
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
@@ -257,9 +278,16 @@ export const ButtonSwitchRowBlock = ({
                 : 'transparent',
             color:
               theme === 'light'
-                ? themeVariant === 'SEND'
-                  ? muiTheme.palette.primary.main
-                  : palette.custom.primaryColorDark
+                ? (() => {
+                    switch (themeVariant) {
+                      case 'SEND':
+                        return muiTheme.palette.primary.main;
+                      case 'IO':
+                        return palette.custom.primaryColorDark;
+                      case 'WALLET':
+                        return palette.custom.primaryColorDark;
+                    }
+                  })()
                 : muiTheme.palette.primary.contrastText,
             '&:hover': {
               backgroundColor:
@@ -268,9 +296,16 @@ export const ButtonSwitchRowBlock = ({
                   : 'transparent',
               color:
                 theme === 'light'
-                  ? themeVariant === 'SEND'
-                    ? muiTheme.palette.primary.main
-                    : palette.custom.primaryColorDark
+                  ? (() => {
+                      switch (themeVariant) {
+                        case 'SEND':
+                          return muiTheme.palette.primary.main;
+                        case 'IO':
+                          return palette.custom.primaryColorDark;
+                        case 'WALLET':
+                          return palette.custom.primaryColorDark;
+                      }
+                    })()
                   : muiTheme.palette.primary.contrastText,
             },
           },
