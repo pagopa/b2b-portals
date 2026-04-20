@@ -254,7 +254,7 @@ export const ButtonSwitchRowBlock = ({
   theme,
   themeVariant,
   selectedButton,
-}: ButtonSwitchRowBlockProps & { themeVariant: 'SEND' | 'IO' | 'WALLET' }) => {
+}: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
   const { palette } = useTheme();
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));

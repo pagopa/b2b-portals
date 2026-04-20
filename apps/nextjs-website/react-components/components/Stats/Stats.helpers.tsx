@@ -8,7 +8,7 @@ export const StatsItem = ({
   description,
   iconURL,
   themeVariant,
-}: StatsItemProps & { themeVariant: 'SEND' | 'IO' | 'WALLET' }) => {
+}: StatsItemProps) => {
   const { palette } = useTheme();
 
   const textColor = (() => {

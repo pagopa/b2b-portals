@@ -383,21 +383,22 @@ export const getButtonStyles = (
         ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
         : palette.background.paper
       : 'transparent',
-    color: isSelected
-      ? theme === 'light'
+    color:
+      theme === 'light'
         ? variantColor
-        : variantColor
-      : theme === 'light'
-        ? variantColor
-        : palette.primary.contrastText,
-    borderColor: theme === 'light' ? variantColor : palette.background.paper,
+        : isSelected
+          ? variantColor
+          : palette.primary.contrastText,
+    borderColor:
+      theme === 'light' ? variantColor : palette.background.paper,
     '&:hover': {
       backgroundColor:
         theme === 'light'
           ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
           : palette.background.paper,
-      color: theme === 'light' ? variantColor : variantColor,
-      borderColor: theme === 'light' ? variantColor : palette.background.paper,
+      color: variantColor,
+      borderColor:
+        theme === 'light' ? variantColor : palette.background.paper,
     },
   };
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 import { type ButtonProps } from '@mui/material';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 export type Theme = Readonly<'dark' | 'light'>;
+export type ThemeVariant = 'IO' | 'SEND' | 'WALLET';
 
 /** this Generic type is meant to be used
  * fot those components that will accept any JSX to

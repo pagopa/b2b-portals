@@ -14,7 +14,7 @@ const CardsItem = ({
   label,
   themeVariant,
   masonry,
-}: CardsItemProps & { themeVariant: 'IO' | 'SEND' | 'WALLET' }) => {
+}: CardsItemProps) => {
   const { palette } = useTheme();
   const linkColor = (() => {
     switch (themeVariant) {

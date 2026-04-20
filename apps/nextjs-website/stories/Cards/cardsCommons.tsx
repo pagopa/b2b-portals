@@ -9,6 +9,7 @@ export const generateItems = (count: number): CardsItemProps[] =>
     title: `Card ${i + 1}`,
     text: `This is card ${i + 1}`,
     iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+    themeVariant: 'SEND',
   }));
 
 // Function to generate items
@@ -24,6 +25,7 @@ export const generateItemsWithLinks = (count: number): CardsItemProps[] =>
         ariaLabel: `aria-label Link ${i + 1}`,
       },
     ],
+    themeVariant: 'SEND',
   }));
 
 // Define a 'Template' function that sets how args map to rendering
