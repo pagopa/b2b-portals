@@ -203,7 +203,10 @@ const Page = async ({ params }: PageParams) => {
           locale,
           defaultLocale,
           pressReleasePages,
+          createdAt: pageProps.createdAt,
+          updatedAt: pageProps.updatedAt,
           ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
+          ...(pageProps.publishedAt && { publishedAt: pageProps.publishedAt }),
         }),
       )}
     </main>
