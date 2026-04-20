@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Button, Typography, TypographyProps } from '@mui/material';
 import { Theme, useTheme } from '@mui/material/styles';
-import { CtaButtonProps } from '../../types/common/Common.types';
+import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
 
@@ -46,7 +46,7 @@ export const CtaButtons = ({
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
   theme?: 'dark' | 'light';
-  themeVariant?: 'IO' | 'SEND' | 'WALLET';
+  themeVariant?: ThemeVariant;
   disableRipple?: boolean;
   trackEvent?: string;
 }) => {
@@ -359,7 +359,7 @@ export const Body = ({
 
 export const getButtonStyles = (
   theme: 'light' | 'dark',
-  themeVariant: 'SEND' | 'IO' | 'WALLET',
+  themeVariant: ThemeVariant,
   sectionId: number,
   currentSectionId: number,
   palette: Theme['palette'],
