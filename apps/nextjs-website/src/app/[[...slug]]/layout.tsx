@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
 import Script from 'next/script';
-import { theme } from '../theme';
+import { createTenantTheme } from '../theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -96,6 +96,9 @@ export default async function RootLayout({
     pressReleasesParentSlug,
     oneTrustToken,
   } = siteWideSEO;
+
+  const theme = createTenantTheme('WALLET');
+
   const activeLocalesArray = Object.keys(locales).filter(
     (locale) => locales[locale as Locale],
   );
