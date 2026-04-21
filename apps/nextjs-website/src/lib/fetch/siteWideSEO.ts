@@ -65,6 +65,11 @@ export type Locale = t.TypeOf<typeof LocaleCodec>;
 export type Analytics = t.TypeOf<typeof AnalyticsCodec>;
 export type MixpanelConfig = t.TypeOf<typeof MixpanelCodec>;
 
+export interface PagePublishDates {
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly publishedAt?: string;
+}
 export interface SiteWidePageData {
   readonly themeVariant: ThemeVariant;
   readonly locale: Locale;

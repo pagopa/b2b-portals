@@ -14,6 +14,9 @@ const PressReleasePageCodec = t.strict({
   seo: PageSEOCodec,
   pressRelease: PressReleaseSectionContentCodec,
   credits: t.union([TextAndImageSectionContentCodec, t.null]),
+  createdAt: t.string,
+  updatedAt: t.string,
+  publishedAt: t.union([t.string, t.null]),
 });
 
 const PressReleasesCodec = t.strict({

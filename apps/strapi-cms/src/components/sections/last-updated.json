@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_sections_last_updateds",
+  "info": {
+    "displayName": "LastUpdated"
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "lastUpdated": {
+      "type": "datetime"
+    }
+  },
+  "config": {}
+}

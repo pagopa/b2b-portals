@@ -12,6 +12,9 @@ const NavigationCodec = t.strict({
       slug: t.string,
       seo: PageSEOCodec,
       sections: t.array(PageSectionCodec),
+      createdAt: t.string,
+      updatedAt: t.string,
+      publishedAt: t.union([t.string, t.null]),
     }),
   ),
 });

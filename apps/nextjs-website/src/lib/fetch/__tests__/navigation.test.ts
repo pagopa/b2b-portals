@@ -53,6 +53,9 @@ const navigationResponse: Navigation = {
           sectionID: null,
         },
       ],
+      createdAt: '2024-11-28T15:14:28.486Z',
+      publishedAt: '2024-11-28T15:14:29.486Z',
+      updatedAt: '2024-11-28T15:14:28.486Z',
     },
   ],
 };
@@ -127,6 +130,9 @@ describe('getNavigation', () => {
               sectionID: null,
             },
           ],
+          createdAt: '2024-11-28T15:14:28.486Z',
+          publishedAt: '2024-11-28T15:14:29.486Z',
+          updatedAt: '2024-11-28T15:14:28.486Z',
         },
       ],
     };

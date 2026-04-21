@@ -27,14 +27,16 @@ import MediaResources from '../MediaResources';
 import DynamicsForm from '../DynamicsForm';
 import Redirect from '../Redirect';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
-import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { PagePublishDates, SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleasePage } from '@/lib/fetch/pressRelease';
 import TextAndImage from '../TextAndImage';
 import RichBanner from '../RichBanner';
+import LastUpdated from '../LastUpdated';
 
 // eslint-disable-next-line complexity
 const PageSection = (
   props: PageSectionData &
+    PagePublishDates &
     SiteWidePageData & { pressReleasePages: ReadonlyArray<PressReleasePage> },
 ) => {
   // eslint-disable-next-line no-underscore-dangle
@@ -97,6 +99,8 @@ const PageSection = (
       return <TextAndImage {...props} />;
     case 'sections.rich-banner':
       return <RichBanner {...props} />;
+    case 'sections.last-updated':
+      return <LastUpdated {...props} />;
     default:
       return null;
   }
