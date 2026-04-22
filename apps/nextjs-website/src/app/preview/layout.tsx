@@ -1,17 +1,25 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { ReactNode } from 'react';
-import { theme } from '../theme';
+import { themeBase, themeExperimental } from '../theme';
 import { isPreviewMode } from '@/lib/api';
 import EmptyLayout from '@/components/EmptyLayout';
+import { getSiteWideSEO } from '@/lib/getProps/siteWideSEO';
 
 type PreviewLayoutProps = {
   children: ReactNode;
 };
 
 // This layout is needed mainly to pass theme to the preview page
-const PreviewRootLayout = async ({ children }: PreviewLayoutProps) =>
-  isPreviewMode() ? (
-    <ThemeProvider theme={theme}>
+const PreviewRootLayout = async ({ children }: PreviewLayoutProps) => {
+  const siteWideSEO = await getSiteWideSEO();
+  const { themeVariant } = siteWideSEO;
+  if (themeVariant === 'WALLET') {
+    import('../../styles/wallet-font.css');
+  }
+  return isPreviewMode() ? (
+    <ThemeProvider
+      theme={themeVariant === 'WALLET' ? themeExperimental : themeBase}
+    >
       <html lang='it'>
         <head>
           <style>{`
@@ -31,5 +39,5 @@ const PreviewRootLayout = async ({ children }: PreviewLayoutProps) =>
   ) : (
     <EmptyLayout />
   );
-
+};
 export default PreviewRootLayout;

@@ -58,62 +58,10 @@ declare module '@mui/material/styles' {
   // }
 }
 
-export const createTenantTheme = (themeVariant?: 'SEND' | 'IO' | 'WALLET') => {
-  const fontFamily =
-    themeVariant === 'WALLET' ? 'Times New Roman, serif' : 'Arial, sans-serif';
-  return createTheme(MUIItaliaTheme, {
-    typography: { fontFamily },
-    shadows: {
-      custom: {
-        boxShadow: '-6px -6px 19px 2px #002B551A',
-        otMenuMobile:
-          'rgb(0 43 85 / 10%) 0px 2px 4px -1px, rgb(0 43 85 / 5%) 0px 4px 5px',
-      },
-    },
-    palette: {
-      error: {
-        main: '#D13333',
-        dark: '#D13333',
-      },
-      custom: {
-        backgroundColorDark: '#0B3EE3',
-        backgroundColorDarkAlternative: '#0062C3',
-        backgroundColorLight: '#FFF',
-        backgroundColorLightGrey: '#FAFAFA',
-        divider: '#E3E7EB',
-        primaryColorDark: '#0B3EE3',
-        backgroundColorDefault: '#FAFAFA',
-        darkLinkColor: '#1A73E8',
-        grayLinkColor: '#F4F5F8',
-        black50: '#00000050',
-        editorialSwitchButtonsBackgroundLightBlue: '#0073e61a',
-        editorialSwitchButtonsBackgroundWhite: '#ffffff1a',
-        bannerLinkLightBlueIO: '#1043e8',
-        bannerLinkDarkBlueIO: '#0B3EE3',
-        bannerLinkLightBlueSend: '#0A64D2',
-        bannerLinkDarkBlueSend: '#0062C3',
-        blueIO: {
-          500: '#0B3EE3',
-        },
-        highLightBoxLightGreenBackground: '#EFFBFF',
-        highLightBoxPurpleText: '#5517E3',
-        highLightBoxLightPurpleBackground: '#DDD1F9',
-        black: '#000000',
-        white: '#FFF',
-        matteWhiteBorder: 'ffffff80',
-        ioChipsBackgroundColorLight: '#0B3EE3',
-        sendChipsBackgroundColorLight: '#0073E6',
-        chipsBackgroundColorDark: '#ebebf52e',
-        ioChipsBackgroundColorLightHover: '#0A34CC',
-        sendChipsBackgroundColorLightHover: '#0066CC',
-        chipsBackgroundColorDarkHover: '#ebebf54d',
-        chipsTextColor: '#ffffff',
-        outlineColor: '#0073e6',
-      },
-    },
-  });
-};
-export const theme = createTheme(MUIItaliaTheme, {
+export const FONT_THEME_WALLET = '"Titillium Sans Pro", sans-serif';
+export const FONT_THEME_BASE = '"Titillium Web", sans-serif';
+
+const themeStyles = {
   shadows: {
     custom: {
       boxShadow: '-6px -6px 19px 2px #002B551A',
@@ -162,4 +110,33 @@ export const theme = createTheme(MUIItaliaTheme, {
       outlineColor: '#0073e6',
     },
   },
-});
+};
+
+const createTenantTheme = (themeVariant?: 'SEND' | 'IO' | 'WALLET') => {
+  const fontFamily =
+    themeVariant === 'WALLET' ? FONT_THEME_WALLET : FONT_THEME_BASE;
+  return createTheme(MUIItaliaTheme, {
+    typography: {
+      fontFamily,
+      body1: { fontFamily },
+      body2: { fontFamily },
+      h1: { fontFamily },
+      h2: { fontFamily },
+      h3: { fontFamily },
+      h4: { fontFamily },
+      h5: { fontFamily },
+      h6: { fontFamily },
+      button: { fontFamily },
+      overline: { fontFamily },
+      subtitle1: { fontFamily },
+      subtitle2: { fontFamily },
+      caption: { fontFamily },
+    },
+    ...themeStyles,
+  });
+};
+
+export const themeExperimental = createTenantTheme('WALLET');
+export const themeBase = createTheme(MUIItaliaTheme, { ...themeStyles });
+
+export const theme = createTheme(MUIItaliaTheme, { ...themeStyles });

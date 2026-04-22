@@ -1,4 +1,5 @@
 'use client';
+import { FONT_THEME_BASE, FONT_THEME_WALLET } from '@/app/theme';
 import { Analytics, Locale } from '@/lib/fetch/siteWideSEO';
 import mixpanel from 'mixpanel-browser';
 import Script from 'next/script';
@@ -34,7 +35,11 @@ const ConsentHandler = ({
   oneTrustDomainID,
   mixpanel: mixpanelConfig,
   locale,
-}: NonNullable<Analytics> & { locale: Locale }) => {
+  themeVariant,
+}: NonNullable<Analytics> & {
+  locale: Locale;
+  themeVariant: 'IO' | 'SEND' | 'WALLET';
+}) => {
   useEffect(() => {
     const initMixpanel = () => {
       if (!mixpanelConfig) return;
@@ -74,7 +79,10 @@ const ConsentHandler = ({
     <>
       <div
         id='onetrust-consent-sdk'
-        style={{ fontFamily: 'Titillium Web, sans-serif' }}
+        style={{
+          fontFamily:
+            themeVariant === 'WALLET' ? FONT_THEME_WALLET : FONT_THEME_BASE,
+        }}
       />
       <Script
         src='https://cdn.cookielaw.org/scripttemplates/otSDKStub.js'

@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@mui/material';
 import { ReactNode } from 'react';
-import { theme } from '../theme';
+import { themeBase, themeExperimental } from '../theme';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import PreHeader from '@/components/PreHeader';
@@ -23,6 +23,10 @@ const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
 
   const { defaultLocale, locales, themeVariant } = await getSiteWideSEO();
 
+  if (themeVariant === 'WALLET') {
+    import('../../styles/wallet-font.css');
+  }
+
   const preHeaderProps = await getPreHeaderProps(defaultLocale);
   const headerProps = await getHeaderProps(defaultLocale, defaultLocale);
   const footerProps = await getFooterProps(defaultLocale);
@@ -37,7 +41,9 @@ const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider
+      theme={themeVariant === 'WALLET' ? themeExperimental : themeBase}
+    >
       <html lang={defaultLocale}>
         <body style={{ margin: 0 }}>
           {preHeaderProps && (

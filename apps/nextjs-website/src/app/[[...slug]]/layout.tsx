@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
 import Script from 'next/script';
-import { createTenantTheme } from '../theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -11,6 +10,8 @@ import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import LocaleGuard from '@/components/LocaleGuard';
 import EmptyLayout from '@/components/EmptyLayout';
+import { themeExperimental, themeBase } from '../theme';
+import { CssBaseline } from '@mui/material';
 
 const {
   getSiteWideSEO,
@@ -97,8 +98,9 @@ export default async function RootLayout({
     oneTrustToken,
   } = siteWideSEO;
 
-  const theme = createTenantTheme('WALLET');
-
+  if (themeVariant === 'WALLET') {
+    import('../../styles/wallet-font.css');
+  }
   const activeLocalesArray = Object.keys(locales).filter(
     (locale) => locales[locale as Locale],
   );
@@ -131,7 +133,10 @@ export default async function RootLayout({
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider
+      theme={themeVariant === 'WALLET' ? themeExperimental : themeBase}
+    >
+      <CssBaseline />
       <html lang={locale}>
         <head>
           <style>{`
@@ -206,7 +211,13 @@ export default async function RootLayout({
                 window.recaptchaOptions = { useRecaptchaNet: true };
               }
             `}</Script>
-          {analytics && <ConsentHandler {...analytics} locale={locale} />}
+          {analytics && (
+            <ConsentHandler
+              {...analytics}
+              locale={locale}
+              themeVariant={themeVariant}
+            />
+          )}
         </body>
       </html>
     </ThemeProvider>

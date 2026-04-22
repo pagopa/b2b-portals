@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'Titillium Sans Pro';
+  src: url('/themes/WALLET/font/TitilliumSansPro-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Titillium Sans Pro';
+  src: url('/themes/WALLET/font/TitilliumSansPro-SemiBold.woff2')
+    format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Titillium Sans Pro';
+  src: url('/themes/WALLET/font/TitilliumSansPro-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Titillium Sans Pro';
+  src: url('/themes/WALLET/font/TitilliumSansPro-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Titillium Sans Pro';
+  src: url('/themes/WALLET/font/TitilliumSansPro-SemiBoldItalic.woff2')
+    format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Titillium Sans Pro';
+  src: url('/themes/WALLET/font/TitilliumSansPro-BoldItalic.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
