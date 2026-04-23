@@ -4,6 +4,7 @@ import { themeBase, themeExperimental } from '../theme';
 import { isPreviewMode } from '@/lib/api';
 import EmptyLayout from '@/components/EmptyLayout';
 import { getSiteWideSEO } from '@/lib/getProps/siteWideSEO';
+import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 
 type PreviewLayoutProps = {
   children: ReactNode;
@@ -13,12 +14,12 @@ type PreviewLayoutProps = {
 const PreviewRootLayout = async ({ children }: PreviewLayoutProps) => {
   const siteWideSEO = await getSiteWideSEO();
   const { themeVariant } = siteWideSEO;
-  if (themeVariant === 'WALLET') {
-    import('../../styles/wallet-font.css');
-  }
+
   return isPreviewMode() ? (
     <ThemeProvider
-      theme={themeVariant === 'WALLET' ? themeExperimental : themeBase}
+      theme={
+        isExperimentalThemeVariant(themeVariant) ? themeExperimental : themeBase
+      }
     >
       <html lang='it'>
         <head>

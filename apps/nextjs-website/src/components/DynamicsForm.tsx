@@ -3,7 +3,7 @@
 import { DynamicsForm as DynamicsFormRC } from '@react-components/components';
 import { DynamicsFormSectionProps } from '@/lib/fetch/types/PageSection';
 import { Box, useTheme } from '@mui/material';
-import { FONT_THEME_BASE, FONT_THEME_WALLET } from '@/app/theme';
+import { getThemeVariantFont } from '@react-components/components/common/Common.helpers';
 
 const DynamicsForm = (
   props: DynamicsFormSectionProps & { themeVariant: 'SEND' | 'IO' | 'WALLET' },
@@ -22,8 +22,7 @@ const DynamicsForm = (
     }
   })();
 
-  const fontFamily =
-    themeVariant === 'WALLET' ? FONT_THEME_WALLET : FONT_THEME_BASE;
+  const fontFamily = getThemeVariantFont(themeVariant);
 
   return (
     <Box

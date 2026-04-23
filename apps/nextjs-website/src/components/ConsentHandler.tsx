@@ -1,6 +1,6 @@
 'use client';
-import { FONT_THEME_BASE, FONT_THEME_WALLET } from '@/app/theme';
 import { Analytics, Locale } from '@/lib/fetch/siteWideSEO';
+import { getThemeVariantFont } from '@react-components/components/common/Common.helpers';
 import mixpanel from 'mixpanel-browser';
 import Script from 'next/script';
 import { useEffect } from 'react';
@@ -80,8 +80,7 @@ const ConsentHandler = ({
       <div
         id='onetrust-consent-sdk'
         style={{
-          fontFamily:
-            themeVariant === 'WALLET' ? FONT_THEME_WALLET : FONT_THEME_BASE,
+          fontFamily: getThemeVariantFont(themeVariant),
         }}
       />
       <Script

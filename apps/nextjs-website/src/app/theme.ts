@@ -1,6 +1,7 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
 import { theme as MUIItaliaTheme } from '@pagopa/mui-italia';
+import { FONT_THEME_EXPERIMENTAL } from '@react-components/components/common/Common.helpers';
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -58,9 +59,6 @@ declare module '@mui/material/styles' {
   // }
 }
 
-export const FONT_THEME_WALLET = '"Titillium Sans Pro", sans-serif';
-export const FONT_THEME_BASE = '"Titillium Web", sans-serif';
-
 const themeStyles = {
   shadows: {
     custom: {
@@ -112,31 +110,27 @@ const themeStyles = {
   },
 };
 
-const createTenantTheme = (themeVariant?: 'SEND' | 'IO' | 'WALLET') => {
-  const fontFamily =
-    themeVariant === 'WALLET' ? FONT_THEME_WALLET : FONT_THEME_BASE;
-  return createTheme(MUIItaliaTheme, {
-    typography: {
-      fontFamily,
-      body1: { fontFamily },
-      body2: { fontFamily },
-      h1: { fontFamily },
-      h2: { fontFamily },
-      h3: { fontFamily },
-      h4: { fontFamily },
-      h5: { fontFamily },
-      h6: { fontFamily },
-      button: { fontFamily },
-      overline: { fontFamily },
-      subtitle1: { fontFamily },
-      subtitle2: { fontFamily },
-      caption: { fontFamily },
-    },
-    ...themeStyles,
-  });
-};
+const fontFamily = FONT_THEME_EXPERIMENTAL;
+export const themeExperimental = createTheme(MUIItaliaTheme, {
+  typography: {
+    fontFamily,
+    body1: { fontFamily },
+    body2: { fontFamily },
+    h1: { fontFamily },
+    h2: { fontFamily },
+    h3: { fontFamily },
+    h4: { fontFamily },
+    h5: { fontFamily },
+    h6: { fontFamily },
+    button: { fontFamily },
+    overline: { fontFamily },
+    subtitle1: { fontFamily },
+    subtitle2: { fontFamily },
+    caption: { fontFamily },
+  },
+  ...themeStyles,
+});
 
-export const themeExperimental = createTenantTheme('WALLET');
 export const themeBase = createTheme(MUIItaliaTheme, { ...themeStyles });
 
 export const theme = createTheme(MUIItaliaTheme, { ...themeStyles });

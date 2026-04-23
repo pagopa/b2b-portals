@@ -12,6 +12,7 @@ import LocaleGuard from '@/components/LocaleGuard';
 import EmptyLayout from '@/components/EmptyLayout';
 import { themeExperimental, themeBase } from '../theme';
 import { CssBaseline } from '@mui/material';
+import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 
 const {
   getSiteWideSEO,
@@ -98,9 +99,9 @@ export default async function RootLayout({
     oneTrustToken,
   } = siteWideSEO;
 
-  if (themeVariant === 'WALLET') {
-    import('../../styles/wallet-font.css');
-  }
+  /*if (themeVariant === 'WALLET') {
+    import('@/styles/font-titillium-sans-pro.css');
+  }*/
   const activeLocalesArray = Object.keys(locales).filter(
     (locale) => locales[locale as Locale],
   );
@@ -134,7 +135,9 @@ export default async function RootLayout({
 
   return (
     <ThemeProvider
-      theme={themeVariant === 'WALLET' ? themeExperimental : themeBase}
+      theme={
+        isExperimentalThemeVariant(themeVariant) ? themeExperimental : themeBase
+      }
     >
       <CssBaseline />
       <html lang={locale}>

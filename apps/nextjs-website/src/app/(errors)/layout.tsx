@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getters, isPreviewMode } from '@/lib/api';
 import EmptyLayout from '@/components/EmptyLayout';
+import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 
 const { getSiteWideSEO, getPreHeaderProps, getHeaderProps, getFooterProps } =
   getters;
@@ -22,10 +23,6 @@ const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
   }
 
   const { defaultLocale, locales, themeVariant } = await getSiteWideSEO();
-
-  if (themeVariant === 'WALLET') {
-    import('../../styles/wallet-font.css');
-  }
 
   const preHeaderProps = await getPreHeaderProps(defaultLocale);
   const headerProps = await getHeaderProps(defaultLocale, defaultLocale);
@@ -42,7 +39,9 @@ const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
 
   return (
     <ThemeProvider
-      theme={themeVariant === 'WALLET' ? themeExperimental : themeBase}
+      theme={
+        isExperimentalThemeVariant(themeVariant) ? themeExperimental : themeBase
+      }
     >
       <html lang={defaultLocale}>
         <body style={{ margin: 0 }}>
