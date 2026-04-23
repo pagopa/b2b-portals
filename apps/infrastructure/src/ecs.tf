@@ -25,7 +25,7 @@ resource "aws_ecs_task_definition" "nextjs_task_def" {
 resource "aws_ecs_service" "nextjs_ecs_service" {
   name                              = "nextjs-ecs"
   cluster                           = aws_ecs_cluster.cms_ecs_cluster.id
-  desired_count                     = 1
+  desired_count                     = 2
   launch_type                       = "FARGATE"
   force_new_deployment              = true
   task_definition                   = aws_ecs_task_definition.nextjs_task_def.arn
@@ -105,7 +105,7 @@ resource "aws_ecs_service" "cms_multitenant_ecs_service" {
   }
   name                              = "cms-ecs-${each.key}"
   cluster                           = aws_ecs_cluster.cms_ecs_cluster.id
-  desired_count                     = 1
+  desired_count                     = 2
   launch_type                       = "FARGATE"
   force_new_deployment              = true
   task_definition                   = aws_ecs_task_definition.cms_multitenant_task_def[each.key].arn
