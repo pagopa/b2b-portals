@@ -9,7 +9,6 @@ import PreFooter from '@/components/PreFooter';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
-import ScrollPaddingTopManager from '@/components/ScrollMarginTopManager';
 import LocaleGuard from '@/components/LocaleGuard';
 import EmptyLayout from '@/components/EmptyLayout';
 
@@ -141,6 +140,13 @@ export default async function RootLayout({
               scroll-behavior: auto;
             }
           }
+          a:not(header a, #preheader a),
+          button:not(header button,#preheader button),
+          input:not(header input,#preheader input),
+          select:not(header select,#preheader select),
+          textarea:not(header textarea, #preheader textarea) {
+            scroll-margin-top: 100px;
+          }
         `}</style>
         </head>
         <body style={{ margin: 0 }}>
@@ -164,7 +170,6 @@ export default async function RootLayout({
               locale={locale}
               defaultLocale={defaultLocale}
             />
-            <ScrollPaddingTopManager />
             {children}
             {preFooterProps && (
               <PreFooter

@@ -42,7 +42,8 @@
       "default": "SEND",
       "enum": [
         "IO",
-        "SEND"
+        "SEND",
+        "WALLET"
       ]
     },
     "locales": {

@@ -17,19 +17,32 @@ const MediaResources = ({
 }: MediaResourcesProps) => {
   const muiTheme = useTheme();
 
-  const backgroundColor =
-    themeVariant === 'SEND'
-      ? SendBackgroundColor(theme)
-      : IoBackgroundColor(theme);
+  const backgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendBackgroundColor(theme);
+      case 'IO':
+        return IoBackgroundColor(theme);
+      case 'WALLET':
+        return IoBackgroundColor(theme);
+    }
+  })();
 
   const textColor = TextColor(theme);
 
   const linkColor =
     theme === 'dark'
       ? muiTheme.palette.custom.white
-      : themeVariant === 'SEND'
-        ? muiTheme.palette.primary.main
-        : muiTheme.palette.custom.primaryColorDark;
+      : (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return muiTheme.palette.primary.main;
+            case 'IO':
+              return muiTheme.palette.custom.primaryColorDark;
+            case 'WALLET':
+              return muiTheme.palette.custom.primaryColorDark;
+          }
+        })();
 
   return (
     <Box

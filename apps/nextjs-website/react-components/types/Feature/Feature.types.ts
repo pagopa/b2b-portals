@@ -1,5 +1,4 @@
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
-import { LinkProps, SectionProps, Theme } from '../common/Common.types';
+import { LinkProps, SectionProps, Theme, ThemeVariant } from '../common/Common.types';
 
 export interface FeatureItem {
   readonly iconURL: string;

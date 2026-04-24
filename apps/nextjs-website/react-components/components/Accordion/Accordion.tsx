@@ -30,20 +30,32 @@ const Accordion = (props: AccordionProps) => {
   } = props;
 
   const textColor = TextColor(theme);
-
-  const backgroundColor =
-    themeVariant === 'SEND'
-      ? SendBackgroundColorAlternativeGrey(theme)
-      : IoBackgroundColorAlternativeGrey(theme);
-
   const { palette } = useTheme();
+
+  const backgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendBackgroundColorAlternativeGrey(theme);
+      case 'IO':
+        return IoBackgroundColorAlternativeGrey(theme);
+      case 'WALLET':
+        return IoBackgroundColorAlternativeGrey(theme);
+    }
+  })();
 
   const linkColor =
     theme === 'dark'
       ? palette.custom.white
-      : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      : (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.primaryColorDark;
+            case 'WALLET':
+              return palette.custom.primaryColorDark;
+          }
+        })();
 
   return (
     <Box

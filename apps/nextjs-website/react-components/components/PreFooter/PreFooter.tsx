@@ -63,7 +63,11 @@ const PreFooter = (props: PreFooterProps) => {
   const backgroundColor = BackgroundColor(theme);
 
   return (
-    <Box component='section' sx={styles.backgroundImage(isSmallScreen, theme)}>
+    <Box
+      component='section'
+      sx={styles.backgroundImage(isSmallScreen, theme)}
+      id='prefooter'
+    >
       <Box sx={{ position: 'relative', overflow: 'hidden' }}>
         <Box
           role='presentation'

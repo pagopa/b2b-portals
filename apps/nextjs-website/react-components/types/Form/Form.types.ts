@@ -34,6 +34,17 @@ export interface FormProps extends SectionProps, FormFields, FormCategories {
   readonly placeholderSurname?: string;
   readonly placeholderEmail?: string;
   readonly placeholderOrganization?: string;
+  readonly labels: {
+    insertName: string;
+    insertSurname: string;
+    insertEmail: string;
+    insertOrganization: string;
+    insertValidEmail: string;
+    name: string;
+    surname: string;
+    email: string;
+    organization: string;
+  };
 }
 
 export interface FormData {

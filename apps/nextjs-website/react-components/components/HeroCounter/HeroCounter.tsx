@@ -21,19 +21,32 @@ const HeroCounter = ({
   background,
   sectionID,
 }: HeroCounterProps) => {
-  const backgroundColor =
-    themeVariant === 'SEND'
-      ? SendBackgroundColor(theme)
-      : IoBackgroundColor(theme);
+  const backgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendBackgroundColor(theme);
+      case 'IO':
+        return IoBackgroundColor(theme);
+      case 'WALLET':
+        return IoBackgroundColor(theme);
+    }
+  })();
 
   const textColor = TextColor(theme);
   const { palette } = useTheme();
 
   const linkColor =
     theme === 'light'
-      ? themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.blueIO[500]
+      ? (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.blueIO[500];
+            case 'WALLET':
+              return palette.custom.blueIO[500];
+          }
+        })()
       : palette.custom.white;
 
   const BackgroundImage = (

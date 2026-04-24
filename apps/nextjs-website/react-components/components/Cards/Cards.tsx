@@ -22,10 +22,16 @@ const Cards = ({
   bottomCTA,
   titleTag,
 }: CardsProps) => {
-  const backgroundColor =
-    themeVariant === 'SEND'
-      ? SendBackgroundColor(theme)
-      : IoBackgroundColor(theme);
+  const backgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendBackgroundColor(theme);
+      case 'IO':
+        return IoBackgroundColor(theme);
+      case 'WALLET':
+        return IoBackgroundColor(theme);
+    }
+  })();
 
   const textColor = TextColor(theme);
   const flexDirection = textPosition === 'right' ? 'row-reverse' : 'row';
@@ -38,17 +44,23 @@ const Cards = ({
   const linkColor =
     theme === 'dark'
       ? palette.custom.white
-      : themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.primaryColorDark;
+      : (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.primaryColorDark;
+            case 'WALLET':
+              return palette.custom.primaryColorDark;
+          }
+        })();
 
   // Cards flow top-to-bottom per column to mimic the design's vertical masonry effect.
   const columnCount = {
     xs: 1,
     sm: 2,
-    md: isStackLayout ? 3: 2,
-  }
-
+    md: isStackLayout ? 3 : 2,
+  };
 
   const cardListStyles = {
     width: isStackLayout ? '100%' : { xs: '100%', md: '60%' },

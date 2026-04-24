@@ -3,7 +3,14 @@ import { Box, Stack, Typography, useTheme } from '@mui/material';
 import { StatsProps } from '@react-components/types/Stats/Stats.types';
 import { StatsItem } from './Stats.helpers';
 
-const Stats = ({ eyelet, title, body, items, sectionID }: StatsProps) => {
+const Stats = ({
+  eyelet,
+  title,
+  body,
+  items,
+  sectionID,
+  themeVariant,
+}: StatsProps) => {
   const { palette } = useTheme();
 
   return (
@@ -59,7 +66,7 @@ const Stats = ({ eyelet, title, body, items, sectionID }: StatsProps) => {
           flex={1}
         >
           {items.map((item, index) => (
-            <StatsItem key={index} {...item} />
+            <StatsItem key={index} {...item} themeVariant={themeVariant} />
           ))}
         </Stack>
       </Stack>

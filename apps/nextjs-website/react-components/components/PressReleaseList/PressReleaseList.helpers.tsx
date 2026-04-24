@@ -12,10 +12,16 @@ export const PressReleasePreview = ({
 }: PressReleasePreviewProps) => {
   const { palette } = useTheme();
 
-  const linkColor =
-    themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+  const linkColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.primaryColorDark;
+      case 'WALLET':
+        return palette.custom.primaryColorDark;
+    }
+  })();
 
   return (
     <Box

@@ -50,8 +50,23 @@ export const CarouselDots = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
+export const ServiceCard = (
+  card: ServiceCardProps,
+  themeVariant: 'SEND' | 'IO' | 'WALLET',
+  noLink = false,
+) => {
   const { palette } = useTheme();
+
+  const linkColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.blueIO[500];
+      case 'WALLET':
+        return palette.custom.blueIO[500];
+    }
+  })();
 
   return (
     <Stack
@@ -85,11 +100,7 @@ export const ServiceCard = (card: ServiceCardProps, noLink = false) => {
           <Typography variant='body2'>{card.description}</Typography>
         )}
         {!noLink && (
-          <Typography
-            mt='auto'
-            color={palette.custom.blueIO[500]}
-            fontWeight={700}
-          >
+          <Typography mt='auto' color={linkColor} fontWeight={700}>
             <Link
               href={card.link.href}
               display='flex'
@@ -131,12 +142,25 @@ export const SliderArrowControl = ({
   direction,
   action,
   ariaLabel,
+  themeVariant,
 }: {
   direction: 'left' | 'right';
   action: (() => void) | undefined;
   ariaLabel: string;
+  themeVariant: 'SEND' | 'IO' | 'WALLET';
 }) => {
   const { palette } = useTheme();
+
+  const arrowBackgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.blueIO[500];
+      case 'WALLET':
+        return palette.custom.blueIO[500];
+    }
+  })();
 
   return (
     <IconButton
@@ -146,11 +170,11 @@ export const SliderArrowControl = ({
         alignItems: 'center',
         cursor: 'pointer',
         color: palette.primary.contrastText,
-        bgcolor: palette.custom.blueIO[500],
+        bgcolor: arrowBackgroundColor,
         width: 32,
         height: 32,
         borderRadius: 16,
-        '&.Mui-focusVisible': { bgcolor: palette.custom.blueIO[500] },
+        '&.Mui-focusVisible': { bgcolor: arrowBackgroundColor },
       }}
       disableRipple={true}
       onClick={action}

@@ -57,6 +57,7 @@ const MegaHeader = ({
   const toggleAccessibility = (disableAccessibility: boolean) => {
     const main = document.querySelector('main');
     const footer = document.querySelector('footer');
+    const prefooter = document.querySelector('#prefooter');
     if (footer) {
       if (disableAccessibility) {
         footer.setAttribute('inert', '');
@@ -70,6 +71,14 @@ const MegaHeader = ({
         main.setAttribute('inert', '');
       } else {
         main.removeAttribute('inert');
+      }
+    }
+
+    if (prefooter) {
+      if (disableAccessibility) {
+        prefooter.setAttribute('inert', '');
+      } else {
+        prefooter.removeAttribute('inert');
       }
     }
   };
@@ -655,7 +664,6 @@ const MegaHeader = ({
             </Box>
           </Box>
         </MobileMenu>
-
         {drawer && (
           <SideDrawer
             isOpen={isDrawerOpen}

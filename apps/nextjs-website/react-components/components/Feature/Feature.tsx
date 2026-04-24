@@ -33,10 +33,16 @@ const Feature = ({
 
   const textColor = TextColor(theme);
 
-  const backgroundColorAlernative =
-    themeVariant === 'SEND'
-      ? SendBackgroundColorAlternativeGrey(theme)
-      : IoBackgroundColorAlternativeGrey(theme);
+  const backgroundColorAlernative = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendBackgroundColorAlternativeGrey(theme);
+      case 'IO':
+        return IoBackgroundColorAlternativeGrey(theme);
+      case 'WALLET':
+        return IoBackgroundColorAlternativeGrey(theme);
+    }
+  })();
 
   return (
     <ContainerRC

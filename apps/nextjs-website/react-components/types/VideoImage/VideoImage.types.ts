@@ -1,5 +1,4 @@
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
-import { SectionProps, Theme } from '../common/Common.types';
+import { SectionProps, Theme, ThemeVariant } from '../common/Common.types';
 
 export interface VideoImageProps
   extends SectionProps,

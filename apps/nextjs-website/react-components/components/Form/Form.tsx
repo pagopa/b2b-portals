@@ -51,6 +51,7 @@ const Form = ({
   placeholderSurname,
   placeholderEmail,
   placeholderOrganization,
+  labels,
 }: FormProps) => {
   const textColor = TextColor(theme);
   const graylinkColor = GrayLinkColor(theme);
@@ -59,14 +60,14 @@ const Form = ({
   const { palette } = useTheme();
 
   const requiredMessages: Record<InputFieldData['name'], string> = {
-    name: 'Inserisci il nome',
-    surname: 'Inserisci il cognome',
-    email: 'Inserisci l’indirizzo email',
-    organization: 'Inserisci il nome dell’ente',
+    name: labels.insertName,
+    surname: labels.insertSurname,
+    email: labels.insertEmail,
+    organization: labels.insertOrganization,
   };
 
   const invalidMessages: Record<'email', string> = {
-    email: 'Inserisci un indirizzo email valido',
+    email: labels.insertValidEmail,
   };
 
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({
@@ -235,22 +236,22 @@ const Form = ({
   const inputFields: InputFieldData[] = [
     {
       name: 'name',
-      placeholder: placeholderName ?? 'Nome',
+      placeholder: placeholderName ?? labels.name,
       show: showName,
     },
     {
       name: 'surname',
-      placeholder: placeholderSurname ?? 'Cognome',
+      placeholder: placeholderSurname ?? labels.surname,
       show: showSurname,
     },
     {
       name: 'email',
-      placeholder: placeholderEmail ?? 'Indirizzo e-mail',
+      placeholder: placeholderEmail ?? labels.email,
       show: true,
     },
     {
       name: 'organization',
-      placeholder: placeholderOrganization ?? 'Nome ente',
+      placeholder: placeholderOrganization ?? labels.organization,
       show: showOrganization,
     },
   ];
@@ -330,6 +331,20 @@ const Form = ({
       </Grid>
     ) : null;
   };
+
+  const notesLinkColor =
+    theme === 'dark'
+      ? palette.custom.white
+      : (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.blueIO[500];
+            case 'WALLET':
+              return palette.custom.blueIO[500];
+          }
+        })();
 
   return (
     <Box
@@ -456,22 +471,43 @@ const Form = ({
             backgroundColor:
               theme === 'dark'
                 ? palette.custom.white
-                : themeVariant === 'SEND'
-                  ? palette.primary.main
-                  : palette.custom.blueIO[500],
+                : (() => {
+                    switch (themeVariant) {
+                      case 'SEND':
+                        return palette.primary.main;
+                      case 'IO':
+                        return palette.custom.blueIO[500];
+                      case 'WALLET':
+                        return palette.custom.blueIO[500];
+                    }
+                  })(),
             color:
               theme === 'dark'
-                ? themeVariant === 'SEND'
-                  ? palette.primary.main
-                  : palette.custom.blueIO[500]
+                ? (() => {
+                    switch (themeVariant) {
+                      case 'SEND':
+                        return palette.primary.main;
+                      case 'IO':
+                        return palette.custom.blueIO[500];
+                      case 'WALLET':
+                        return palette.custom.blueIO[500];
+                    }
+                  })()
                 : palette.custom.white,
             '&:hover': {
               backgroundColor:
                 theme === 'dark'
                   ? palette.custom.white
-                  : themeVariant === 'SEND'
-                    ? palette.primary.main
-                    : palette.custom.blueIO[500],
+                  : (() => {
+                      switch (themeVariant) {
+                        case 'SEND':
+                          return palette.primary.main;
+                        case 'IO':
+                          return palette.custom.blueIO[500];
+                        case 'WALLET':
+                          return palette.custom.blueIO[500];
+                      }
+                    })(),
             },
           }}
           onClick={handleSubmit}
@@ -528,10 +564,10 @@ const Form = ({
               zIndex: 3,
               color: graylinkColor,
               '& a': {
-                color: palette.custom.blueIO[500],
+                color: notesLinkColor,
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: palette.custom.blueIO[500],
+                  color: notesLinkColor,
                   textDecoration: 'underline',
                 },
               },

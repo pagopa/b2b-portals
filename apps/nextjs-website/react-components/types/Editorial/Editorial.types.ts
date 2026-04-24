@@ -2,9 +2,9 @@ import { ReactElement } from 'react';
 import {
   CtaButtonProps,
   Theme,
+  ThemeVariant,
   type SectionProps,
 } from '../common/Common.types';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 
 export interface EditorialProps
   extends SectionProps,

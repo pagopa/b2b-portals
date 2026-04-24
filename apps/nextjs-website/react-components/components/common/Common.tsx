@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Button, Typography, TypographyProps } from '@mui/material';
 import { Theme, useTheme } from '@mui/material/styles';
-import { CtaButtonProps } from '../../types/common/Common.types';
+import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
 import { Launch } from '@mui/icons-material';
@@ -48,7 +48,7 @@ export const CtaButtons = ({
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
   theme?: 'dark' | 'light';
-  themeVariant?: 'IO' | 'SEND';
+  themeVariant?: ThemeVariant;
   disableRipple?: boolean;
   trackEvent?: string;
 }) => {
@@ -74,14 +74,28 @@ export const CtaButtons = ({
                 backgroundColor:
                   theme === 'dark'
                     ? palette.custom.white
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
                 color:
                   theme === 'dark'
-                    ? themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500]
+                    ? (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })()
                     : palette.custom.white,
               }),
 
@@ -89,15 +103,29 @@ export const CtaButtons = ({
                 borderColor:
                   theme === 'dark'
                     ? palette.custom.matteWhiteBorder
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
                 color:
                   theme === 'dark'
                     ? palette.custom.white
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
               }),
             }}
             {...button}
@@ -333,12 +361,23 @@ export const Body = ({
 
 export const getButtonStyles = (
   theme: 'light' | 'dark',
-  themeVariant: 'SEND' | 'IO',
+  themeVariant: ThemeVariant,
   sectionId: number,
   currentSectionId: number,
   palette: Theme['palette'],
 ) => {
   const isSelected = sectionId === currentSectionId;
+
+  const variantColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.primaryColorDark;
+      case 'WALLET':
+        return palette.custom.primaryColorDark;
+    }
+  })();
 
   return {
     backgroundColor: isSelected
@@ -346,44 +385,22 @@ export const getButtonStyles = (
         ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
         : palette.background.paper
       : 'transparent',
-    color: isSelected
-      ? theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-        : themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-      : theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-        : palette.primary.contrastText,
-    borderColor:
+    color:
       theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-        : palette.background.paper,
+        ? variantColor
+        : isSelected
+          ? variantColor
+          : palette.primary.contrastText,
+    borderColor:
+      theme === 'light' ? variantColor : palette.background.paper,
     '&:hover': {
       backgroundColor:
         theme === 'light'
           ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
           : palette.background.paper,
-      color:
-        theme === 'light'
-          ? themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark
-          : themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark,
+      color: variantColor,
       borderColor:
-        theme === 'light'
-          ? themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark
-          : palette.background.paper,
+        theme === 'light' ? variantColor : palette.background.paper,
     },
   };
 };

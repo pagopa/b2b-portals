@@ -82,6 +82,13 @@ export const IoBackgroundColorAlternativeBlue = (theme: 'dark' | 'light') => {
     : palette.custom.backgroundColorLight;
 };
 
+export const SendBackgroundColorAlternativeBlue = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.backgroundColorDarkAlternative
+    : palette.custom.backgroundColorLight;
+};
+
 export const IoBackgroundColorAlternativeGrey = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
   return theme === 'dark'

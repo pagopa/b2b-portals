@@ -3,6 +3,17 @@ import { StoryFn } from '@storybook/react';
 import Form from '@react-components/components/Form/Form';
 
 const generateFormProps = (theme: 'light' | 'dark'): FormProps => ({
+  labels: {
+    insertName: 'Inserisci il nome',
+    insertSurname: 'Inserisci il cognome',
+    insertEmail: 'Inserisci l’indirizzo email',
+    insertOrganization: 'Inserisci il nome dell’ente',
+    insertValidEmail: 'Inserisci un indirizzo email valido',
+    name: 'Nome',
+    surname: 'Cognome',
+    email: 'Indirizzo e-mail',
+    organization: 'Nome ente',
+  },
   title: 'Resta aggiornato, iscriviti alla newsletter!',
   theme,
   sectionID: null,

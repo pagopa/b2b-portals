@@ -69,16 +69,23 @@ export const renderTextSection = ({
   body: string;
   link: { href: string; label: string; ariaLabel?: string };
   theme: 'light' | 'dark';
-  themeVariant: 'SEND' | 'IO';
+  themeVariant: 'SEND' | 'IO' | 'WALLET';
 }) => {
   const textColor = TextColor(theme);
   const { palette } = useTheme();
 
   const linkTextColor =
     theme === 'light'
-      ? themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.blueIO[500]
+      ? (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.blueIO[500];
+            case 'WALLET':
+              return palette.custom.blueIO[500];
+          }
+        })()
       : palette.custom.white;
 
   return (
