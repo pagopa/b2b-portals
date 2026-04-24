@@ -4,7 +4,7 @@ import { Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
-import { Launch } from '@mui/icons-material';
+import { ArrowOutward } from '@mui/icons-material';
 
 const CtaButton = ({
   trackEvent,
@@ -391,16 +391,14 @@ export const getButtonStyles = (
         : isSelected
           ? variantColor
           : palette.primary.contrastText,
-    borderColor:
-      theme === 'light' ? variantColor : palette.background.paper,
+    borderColor: theme === 'light' ? variantColor : palette.background.paper,
     '&:hover': {
       backgroundColor:
         theme === 'light'
           ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
           : palette.background.paper,
       color: variantColor,
-      borderColor:
-        theme === 'light' ? variantColor : palette.background.paper,
+      borderColor: theme === 'light' ? variantColor : palette.background.paper,
     },
   };
 };
@@ -420,5 +418,26 @@ export const isValidExternalLink = (URL?: string): boolean => {
 
 export const ExternalLinkIcon = ({ show = true }: { show?: boolean }) =>
   show ? (
-    <Launch sx={{ ml: 1, width: 20, height: 20, verticalAlign: 'middle' }} />
+    <ArrowOutward
+      sx={{ ml: 1, width: 24, height: 24, verticalAlign: 'middle' }}
+    />
   ) : null;
+
+export const LinkIcon = ({
+  showExternalLink,
+  internalLinkIcon,
+  externalLinkIcon = (
+    <ArrowOutward
+      sx={{
+        ml: 1,
+        width: 24,
+        height: 24,
+        verticalAlign: 'middle',
+      }}
+    />
+  ),
+}: {
+  showExternalLink?: boolean;
+  internalLinkIcon: JSX.Element;
+  externalLinkIcon?: JSX.Element;
+}) => (showExternalLink ? externalLinkIcon : internalLinkIcon);

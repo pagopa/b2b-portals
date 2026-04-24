@@ -12,8 +12,8 @@ import {
   HeaderSideDrawerLinkCardProps,
 } from '@react-components/types/Header/Header.types';
 import {
-  ExternalLinkIcon,
   isValidExternalLink,
+  LinkIcon,
 } from '@react-components/components/common/Common';
 
 const drawerStyles = {
@@ -156,7 +156,12 @@ export default function SideDrawer({
             <Button
               size='small'
               href={ctaCard.link.href}
-              endIcon={<ArrowForwardIcon />}
+              endIcon={
+                <LinkIcon
+                  showExternalLink={isValidExternalLink(ctaCard.link.href)}
+                  internalLinkIcon={<ArrowForwardIcon />}
+                />
+              }
               {...(ctaCard.link.ariaLabel && {
                 'aria-label': ctaCard.link.ariaLabel,
               })}
@@ -169,7 +174,6 @@ export default function SideDrawer({
               }}
             >
               {ctaCard.link.label}
-              <ExternalLinkIcon show={isValidExternalLink(ctaCard.link.href)} />
             </Button>
           </div>
           <Divider sx={{ marginBottom: 2, marginTop: 2 }} />

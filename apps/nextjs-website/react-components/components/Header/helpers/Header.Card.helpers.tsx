@@ -6,8 +6,8 @@ import { TextAlternativeColor } from '@react-components/components/common/Common
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
 import {
-  ExternalLinkIcon,
   isValidExternalLink,
+  LinkIcon,
 } from '@react-components/components/common/Common';
 import { LinkProps } from '@react-components/types/common/Common.types';
 
@@ -65,7 +65,12 @@ export default function ActionAreaCard({
             <Button
               size='small'
               href={link.href}
-              endIcon={<ArrowForwardIcon />}
+              endIcon={
+                <LinkIcon
+                  showExternalLink={isValidExternalLink(link.href)}
+                  internalLinkIcon={<ArrowForwardIcon />}
+                />
+              }
               {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
               sx={{
                 color: textColorAlternative,
@@ -75,7 +80,6 @@ export default function ActionAreaCard({
               }}
             >
               {link.label}
-              <ExternalLinkIcon show={isValidExternalLink(link.href)} />
             </Button>
           </Stack>
         </CardContent>
