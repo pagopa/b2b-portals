@@ -292,7 +292,6 @@ export const LinkLabel = styled('span')({
 export const Sublink = ({
   trackEvent,
   trackingProperties,
-  children,
   ...linkProps
 }: LinkProps & {
   trackEvent?: string | undefined;
@@ -304,9 +303,5 @@ export const Sublink = ({
     trackingProperties,
   });
 
-  return (
-    <Link {...(randomID && { id: randomID })} {...linkProps}>
-      {children}
-    </Link>
-  );
+  return <Link {...(randomID && { id: randomID })} {...linkProps} />;
 };
