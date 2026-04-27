@@ -8,7 +8,6 @@ import {
 } from '../common/Common.helpers';
 import { PressReleaseProps } from '@react-components/types';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
 
 const PressRelease = (props: PressReleaseProps) => {
   const { date, title, subtitle, body, sectionID, backlink } = props;
@@ -51,7 +50,6 @@ const PressRelease = (props: PressReleaseProps) => {
               {...(backlink.ariaLabel && { 'aria-label': backlink.ariaLabel })}
             >
               {backlink.label}
-              <ExternalLinkIcon show={isValidExternalLink(backlink.href)} />
             </Link>
           </Stack>
         )}

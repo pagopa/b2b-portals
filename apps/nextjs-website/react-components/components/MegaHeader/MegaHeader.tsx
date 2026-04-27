@@ -283,7 +283,13 @@ const MegaHeader = ({
                                                 {isValidExternalLink(
                                                   item.href,
                                                 ) ? (
-                                                  <ExternalLinkIcon className='arrowIcon' />
+                                                  <ExternalLinkIcon
+                                                    className='arrowIcon'
+                                                    sx={{
+                                                      width: 24,
+                                                      height: 24,
+                                                    }}
+                                                  />
                                                 ) : (
                                                   <ArrowForwardIcon className='arrowIcon' />
                                                 )}
@@ -525,14 +531,21 @@ const MegaHeader = ({
                                     })}
                                   >
                                     {item.label}
-                                    <ExternalLinkIcon
-                                      show={isValidExternalLink(item.href)}
-                                    />
                                   </Typography>
                                   {item.isNew && (
                                     <LinkLabel>{labels.news}</LinkLabel>
                                   )}
-                                  <ArrowForwardIcon className='arrowIcon' />
+                                  {isValidExternalLink(item.href) ? (
+                                    <ExternalLinkIcon
+                                      className='arrowIcon'
+                                      sx={{
+                                        width: 24,
+                                        height: 24,
+                                      }}
+                                    />
+                                  ) : (
+                                    <ArrowForwardIcon className='arrowIcon' />
+                                  )}
                                 </Sublink>
                               </li>
                             ))}

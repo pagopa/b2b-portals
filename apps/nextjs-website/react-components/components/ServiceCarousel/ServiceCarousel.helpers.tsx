@@ -10,7 +10,7 @@ import {
 import { ServiceCardProps } from '../../types/ServiceCarousel/ServiceCarousel.types';
 import Image from 'next/image';
 import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
-import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
+import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 // Style Carousel Dots (unfortunately react-slick doesn't offer an easy way)
 // Ignore TS error for position because we need to use !important
@@ -116,8 +116,16 @@ export const ServiceCard = (
               })}
             >
               {card.link.label}
-              <ExternalLinkIcon show={isValidExternalLink(card.link.href)} />
-              <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
+              <LinkIcon
+                sxExternalIcon={{
+                  width: 24,
+                  height: 24,
+                }}
+                showExternalLink={isValidExternalLink(card.link.href)}
+                internalLinkIcon={
+                  <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
+                }
+              />
             </Link>
           </Typography>
         )}

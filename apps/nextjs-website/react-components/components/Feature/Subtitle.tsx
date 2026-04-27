@@ -1,7 +1,7 @@
 import { Link, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Body, ExternalLinkIcon, isValidExternalLink } from '../common/Common';
+import { Body, isValidExternalLink, LinkIcon } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { FeatureStackItemProps } from '../../types/Feature/Feature.types';
 import { useTheme } from '@mui/material/styles';
@@ -49,14 +49,18 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
               sx={{ fontWeight: 'bold' }}
             >
               {item.link.label}
-              <ExternalLinkIcon show={isValidExternalLink(item.link.href)} />
             </Link>
           </Typography>
-
-          <ArrowForwardIcon
-            sx={{
-              color: linkColor,
-            }}
+          <LinkIcon
+            sxExternalIcon={{ width: 24, height: 24, color: linkColor }}
+            showExternalLink={isValidExternalLink(item.link.href)}
+            internalLinkIcon={
+              <ArrowForwardIcon
+                sx={{
+                  color: linkColor,
+                }}
+              />
+            }
           />
         </Stack>
       )}

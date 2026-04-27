@@ -9,7 +9,7 @@ import {
 } from '../common/Common.helpers';
 import { HowToProps } from '../../types/HowTo/HowTo.types';
 import { HowToStep } from './HowToStep';
-import { ExternalLinkIcon, isValidExternalLink, Title } from '../common/Common';
+import { isValidExternalLink, LinkIcon, Title } from '../common/Common';
 
 const HowTo = (props: HowToProps) => {
   const {
@@ -136,11 +136,15 @@ const HowTo = (props: HowToProps) => {
               fontWeight={600}
             >
               {link.label}
-              <ExternalLinkIcon show={isValidExternalLink(link.href)} />
-              <ArrowForwardIcon
-                sx={{ ml: 1 }}
-                fontSize='small'
-                aria-hidden='true'
+              <LinkIcon
+                showExternalLink={isValidExternalLink(link.href)}
+                internalLinkIcon={
+                  <ArrowForwardIcon
+                    sx={{ ml: 1 }}
+                    fontSize='small'
+                    aria-hidden='true'
+                  />
+                }
               />
             </Link>
           </Typography>

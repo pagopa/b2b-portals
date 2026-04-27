@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 import { Button, Typography, TypographyProps } from '@mui/material';
-import { Theme, useTheme } from '@mui/material/styles';
+import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
-import { ArrowOutward } from '@mui/icons-material';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const CtaButton = ({
   trackEvent,
@@ -34,7 +34,9 @@ const CtaButton = ({
       {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {buttonProps.text}
-      <ExternalLinkIcon show={isValidExternalLink(buttonProps.href)} />
+      {buttonProps.showExternalLinkIcon && (
+        <ExternalLinkIcon show={isValidExternalLink(buttonProps.href)} />
+      )}
     </Button>
   );
 };
@@ -45,12 +47,14 @@ export const CtaButtons = ({
   themeVariant = 'IO',
   disableRipple = false,
   trackEvent,
+  showExternalLinkIcon = true,
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
   theme?: 'dark' | 'light';
   themeVariant?: ThemeVariant;
   disableRipple?: boolean;
   trackEvent?: string;
+  showExternalLinkIcon?: boolean;
 }) => {
   const { palette } = useTheme();
 
@@ -69,6 +73,7 @@ export const CtaButtons = ({
             color={theme === 'dark' ? 'negative' : 'primary'}
             variant={button.variant || 'contained'}
             disableRipple={disableRipple}
+            showExternalLinkIcon={showExternalLinkIcon}
             style={{
               ...(button.variant === 'contained' && {
                 backgroundColor:
@@ -416,21 +421,41 @@ export const isValidExternalLink = (URL?: string): boolean => {
 export const ExternalLinkIcon = ({
   show = true,
   className,
+  color,
+  sx = { ml: 1, width: 24, height: 24, verticalAlign: 'middle' },
 }: {
   show?: boolean;
   className?: string;
+  color?: string;
+  sx?: SxProps;
 }) =>
   show ? (
-    <ArrowOutward
-      sx={{ ml: 1, width: 24, height: 24, verticalAlign: 'middle' }}
+    <ArrowOutwardIcon
+      sx={sx}
       {...(className && { className })}
+      {...(color && { htmlColor: color })}
     />
   ) : null;
 
 export const LinkIcon = ({
   showExternalLink,
   internalLinkIcon,
+  color,
+  sxExternalIcon,
 }: {
   showExternalLink?: boolean;
   internalLinkIcon: JSX.Element;
-}) => <>{showExternalLink ? ExternalLinkIcon : internalLinkIcon}</>;
+  color?: string;
+  sxExternalIcon?: SxProps;
+}) => (
+  <>
+    {showExternalLink ? (
+      <ExternalLinkIcon
+        {...(color && { color })}
+        {...(sxExternalIcon && { sx: sxExternalIcon })}
+      />
+    ) : (
+      internalLinkIcon
+    )}
+  </>
+);

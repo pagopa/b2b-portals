@@ -15,7 +15,6 @@ import {
   BackgroundColor,
 } from '../common/Common.helpers';
 import { TextSectionProps } from '@react-components/types';
-import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
 
 const TextSection = ({
   eyelet,
@@ -123,7 +122,6 @@ const TextSection = ({
                   sx={{ mr: 1, color: palette.custom.primaryColorDark }}
                 />
                 {link.label}
-                <ExternalLinkIcon show={isValidExternalLink(link.href)} />
               </Link>
             </Typography>
           </Stack>
