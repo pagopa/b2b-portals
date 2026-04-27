@@ -292,7 +292,6 @@ export const LinkLabel = styled('span')({
 export const Sublink = ({
   trackEvent,
   trackingProperties,
-  href,
   children,
   ...linkProps
 }: LinkProps & {

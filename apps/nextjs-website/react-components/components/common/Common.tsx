@@ -407,37 +407,30 @@ export const isValidExternalLink = (URL?: string): boolean => {
   if (!URL) {
     return false;
   }
-  if (
+  return (
     URL.toLowerCase().startsWith('http:') ||
     URL.toLowerCase().startsWith('https:')
-  ) {
-    return true;
-  }
-  return false;
+  );
 };
 
-export const ExternalLinkIcon = ({ show = true }: { show?: boolean }) =>
+export const ExternalLinkIcon = ({
+  show = true,
+  className,
+}: {
+  show?: boolean;
+  className?: string;
+}) =>
   show ? (
     <ArrowOutward
       sx={{ ml: 1, width: 24, height: 24, verticalAlign: 'middle' }}
+      {...(className && { className })}
     />
   ) : null;
 
 export const LinkIcon = ({
   showExternalLink,
   internalLinkIcon,
-  externalLinkIcon = (
-    <ArrowOutward
-      sx={{
-        ml: 1,
-        width: 24,
-        height: 24,
-        verticalAlign: 'middle',
-      }}
-    />
-  ),
 }: {
   showExternalLink?: boolean;
   internalLinkIcon: JSX.Element;
-  externalLinkIcon?: JSX.Element;
-}) => (showExternalLink ? externalLinkIcon : internalLinkIcon);
+}) => <>{showExternalLink ? ExternalLinkIcon : internalLinkIcon}</>;

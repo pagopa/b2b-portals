@@ -275,17 +275,18 @@ const MegaHeader = ({
                                                 }}
                                               >
                                                 {item.label}
-                                                <ExternalLinkIcon
-                                                  show={isValidExternalLink(
-                                                    item.href,
-                                                  )}
-                                                />
                                                 {item.isNew && (
                                                   <LinkLabel>
                                                     {labels.news}
                                                   </LinkLabel>
                                                 )}
-                                                <ArrowForwardIcon className='arrowIcon' />
+                                                {isValidExternalLink(
+                                                  item.href,
+                                                ) ? (
+                                                  <ExternalLinkIcon className='arrowIcon' />
+                                                ) : (
+                                                  <ArrowForwardIcon className='arrowIcon' />
+                                                )}
                                               </Sublink>
                                             </li>
                                           ))}
