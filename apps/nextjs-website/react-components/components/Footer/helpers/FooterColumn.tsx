@@ -2,6 +2,10 @@ import { Link, Stack, Typography } from '@mui/material';
 import { hrefNoOp } from '../Footer.helpers';
 import { LogoPagoPACompany } from '../assets/LogoPagoPACompany';
 import { FooterColumnProps } from '../../../types/Footer/Footer.types';
+import {
+  ExternalLinkIcon,
+  isValidExternalLink,
+} from '@react-components/components/common/Common';
 
 export const FooterColumn = ({
   data,
@@ -65,7 +69,8 @@ export const FooterColumn = ({
               underline='none'
               color='text.primary'
               sx={{
-                display: 'inline-block',
+                display: 'inline-flex',
+                alignItems: 'center',
                 py: 0.5,
                 cursor: 'pointer',
               }}
@@ -80,6 +85,7 @@ export const FooterColumn = ({
                   })}
             >
               {label}
+              <ExternalLinkIcon show={isValidExternalLink(href)} />
             </Link>
           </li>
         ),
