@@ -176,7 +176,7 @@ export const HeroTextContent = ({
         >
           {link.label}
           <LinkIcon
-            showExternalLink={isValidExternalLink(link.href)}
+            showExternalLinkIcon={isValidExternalLink(link.href)}
             internalLinkIcon={
               <ArrowForwardIcon
                 sx={{

@@ -117,11 +117,8 @@ export const ServiceCard = (
             >
               {card.link.label}
               <LinkIcon
-                sxExternalIcon={{
-                  width: 24,
-                  height: 24,
-                }}
-                showExternalLink={isValidExternalLink(card.link.href)}
+                sxExternalLinkIcon={{ ml: 0 }}
+                showExternalLinkIcon={isValidExternalLink(card.link.href)}
                 internalLinkIcon={
                   <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
                 }

@@ -52,8 +52,8 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
             </Link>
           </Typography>
           <LinkIcon
-            sxExternalIcon={{ width: 24, height: 24, color: linkColor }}
-            showExternalLink={isValidExternalLink(item.link.href)}
+            sxExternalLinkIcon={{ ml: 0, color: linkColor }}
+            showExternalLinkIcon={isValidExternalLink(item.link.href)}
             internalLinkIcon={
               <ArrowForwardIcon
                 sx={{

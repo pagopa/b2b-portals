@@ -158,7 +158,8 @@ export default function SideDrawer({
               href={ctaCard.link.href}
               endIcon={
                 <LinkIcon
-                  showExternalLink={isValidExternalLink(ctaCard.link.href)}
+                  sxExternalLinkIcon={{ ml: 0 }}
+                  showExternalLinkIcon={isValidExternalLink(ctaCard.link.href)}
                   internalLinkIcon={<ArrowForwardIcon />}
                 />
               }

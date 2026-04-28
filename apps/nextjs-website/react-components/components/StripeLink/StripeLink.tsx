@@ -130,7 +130,8 @@ const StripeLink = ({
             }}
             endIcon={
               <LinkIcon
-                showExternalLink={isValidExternalLink(link.href)}
+                sxExternalLinkIcon={{ ml: 0 }}
+                showExternalLinkIcon={isValidExternalLink(link.href)}
                 internalLinkIcon={<ArrowForwardIcon color='inherit' />}
               />
             }

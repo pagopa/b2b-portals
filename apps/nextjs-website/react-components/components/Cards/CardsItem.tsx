@@ -109,7 +109,7 @@ const CardsItem = ({
                     {link.label}
                   </Link>
                   <LinkIcon
-                    showExternalLink={isValidExternalLink(link.href)}
+                    showExternalLinkIcon={isValidExternalLink(link.href)}
                     internalLinkIcon={
                       <ArrowRightAltIcon
                         sx={{ color: linkColor, fontSize: 18, marginLeft: 1 }}

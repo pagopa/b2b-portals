@@ -61,8 +61,8 @@ export const PressReleasePreview = ({
             {link.label}
           </Link>
           <LinkIcon
-            sxExternalIcon={{ width: 24, height: 24 }}
-            showExternalLink={isValidExternalLink(link.href)}
+            sxExternalLinkIcon={{ ml: 0 }}
+            showExternalLinkIcon={isValidExternalLink(link.href)}
             internalLinkIcon={<ArrowRightAlt color='inherit' />}
           />
         </Typography>

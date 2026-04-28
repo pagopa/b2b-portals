@@ -67,7 +67,8 @@ export default function ActionAreaCard({
               href={link.href}
               endIcon={
                 <LinkIcon
-                  showExternalLink={isValidExternalLink(link.href)}
+                  showExternalLinkIcon={isValidExternalLink(link.href)}
+                  sxExternalLinkIcon={{ ml: 0 }}
                   internalLinkIcon={<ArrowForwardIcon />}
                 />
               }

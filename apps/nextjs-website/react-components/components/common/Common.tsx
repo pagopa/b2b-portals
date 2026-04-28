@@ -10,6 +10,7 @@ const CtaButton = ({
   trackEvent,
   openInNewTab,
   ariaLabel,
+  showExternalLinkIcon = true,
   ...buttonProps
 }: CtaButtonProps & {
   trackEvent?: string;
@@ -34,9 +35,9 @@ const CtaButton = ({
       {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {buttonProps.text}
-      {buttonProps.showExternalLinkIcon && (
-        <ExternalLinkIcon show={isValidExternalLink(buttonProps.href)} />
-      )}
+      <ExternalLinkIcon
+        show={showExternalLinkIcon && isValidExternalLink(buttonProps.href)}
+      />
     </Button>
   );
 };
@@ -421,41 +422,30 @@ export const isValidExternalLink = (URL?: string): boolean => {
 export const ExternalLinkIcon = ({
   show = true,
   className,
-  color,
-  sx = { ml: 1, width: 24, height: 24, verticalAlign: 'middle' },
+  sx,
 }: {
   show?: boolean;
   className?: string;
-  color?: string;
   sx?: SxProps;
 }) =>
   show ? (
     <ArrowOutwardIcon
-      sx={sx}
+      sx={{ ml: 1, width: 24, height: 24, verticalAlign: 'middle', ...sx }}
       {...(className && { className })}
-      {...(color && { htmlColor: color })}
     />
   ) : null;
 
 export const LinkIcon = ({
-  showExternalLink,
+  showExternalLinkIcon,
   internalLinkIcon,
-  color,
-  sxExternalIcon,
+  sxExternalLinkIcon,
 }: {
-  showExternalLink?: boolean;
+  showExternalLinkIcon?: boolean;
   internalLinkIcon: JSX.Element;
-  color?: string;
-  sxExternalIcon?: SxProps;
-}) => (
-  <>
-    {showExternalLink ? (
-      <ExternalLinkIcon
-        {...(color && { color })}
-        {...(sxExternalIcon && { sx: sxExternalIcon })}
-      />
-    ) : (
-      internalLinkIcon
-    )}
-  </>
-);
+  sxExternalLinkIcon?: SxProps;
+}) =>
+  showExternalLinkIcon ? (
+    <ExternalLinkIcon {...(sxExternalLinkIcon && { sx: sxExternalLinkIcon })} />
+  ) : (
+    internalLinkIcon
+  );

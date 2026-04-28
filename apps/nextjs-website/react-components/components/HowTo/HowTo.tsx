@@ -137,7 +137,7 @@ const HowTo = (props: HowToProps) => {
             >
               {link.label}
               <LinkIcon
-                showExternalLink={isValidExternalLink(link.href)}
+                showExternalLinkIcon={isValidExternalLink(link.href)}
                 internalLinkIcon={
                   <ArrowForwardIcon
                     sx={{ ml: 1 }}
