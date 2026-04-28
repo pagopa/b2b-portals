@@ -285,10 +285,7 @@ const MegaHeader = ({
                                                 ) ? (
                                                   <ExternalLinkIcon
                                                     className='arrowIcon'
-                                                    sx={{
-                                                      width: 24,
-                                                      height: 24,
-                                                    }}
+                                                    sx={{ ml: 0 }}
                                                   />
                                                 ) : (
                                                   <ArrowForwardIcon className='arrowIcon' />
@@ -538,10 +535,7 @@ const MegaHeader = ({
                                   {isValidExternalLink(item.href) ? (
                                     <ExternalLinkIcon
                                       className='arrowIcon'
-                                      sx={{
-                                        width: 24,
-                                        height: 24,
-                                      }}
+                                      sx={{ ml: 0 }}
                                     />
                                   ) : (
                                     <ArrowForwardIcon className='arrowIcon' />
