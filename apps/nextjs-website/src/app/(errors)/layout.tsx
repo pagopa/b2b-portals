@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@mui/material';
 import { ReactNode } from 'react';
-import { theme } from '../theme';
+import { themeBase, themeExperimental } from '../theme';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import PreHeader from '@/components/PreHeader';
@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getters, isPreviewMode } from '@/lib/api';
 import EmptyLayout from '@/components/EmptyLayout';
+import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 
 const { getSiteWideSEO, getPreHeaderProps, getHeaderProps, getFooterProps } =
   getters;
@@ -37,7 +38,11 @@ const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider
+      theme={
+        isExperimentalThemeVariant(themeVariant) ? themeExperimental : themeBase
+      }
+    >
       <html lang={defaultLocale}>
         <body style={{ margin: 0 }}>
           {preHeaderProps && (
