@@ -1,6 +1,7 @@
 import { ArrowRightAlt } from '@mui/icons-material';
 import { Box, Link, Stack, Typography, useTheme } from '@mui/material';
 import { PressReleasePreviewProps } from '@react-components/types/PressReleaseList/PressReleaseList.types';
+import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 export const PressReleasePreview = ({
   date,
@@ -59,7 +60,11 @@ export const PressReleasePreview = ({
           >
             {link.label}
           </Link>
-          <ArrowRightAlt color='inherit' />
+          <LinkIcon
+            sxExternalLinkIcon={{ ml: 0 }}
+            showExternalLinkIcon={isValidExternalLink(link.href)}
+            internalLinkIcon={<ArrowRightAlt color='inherit' />}
+          />
         </Typography>
       </Stack>
     </Box>

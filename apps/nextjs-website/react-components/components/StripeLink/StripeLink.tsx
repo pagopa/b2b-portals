@@ -8,6 +8,7 @@ import {
 } from '../common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
+import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 const StripeLink = ({
   iconURL,
@@ -127,7 +128,13 @@ const StripeLink = ({
                       })(),
               },
             }}
-            endIcon={<ArrowForwardIcon color='inherit'></ArrowForwardIcon>}
+            endIcon={
+              <LinkIcon
+                sxExternalLinkIcon={{ ml: 0 }}
+                showExternalLinkIcon={isValidExternalLink(link.href)}
+                internalLinkIcon={<ArrowForwardIcon color='inherit' />}
+              />
+            }
             href={link.href}
           >
             {link.label}
