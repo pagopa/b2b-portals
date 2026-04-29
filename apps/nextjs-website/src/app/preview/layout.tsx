@@ -1,9 +1,8 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { ReactNode } from 'react';
 import { themeBase, themeExperimental } from '../theme';
-import { isPreviewMode } from '@/lib/api';
+import { getters, isPreviewMode } from '@/lib/api';
 import EmptyLayout from '@/components/EmptyLayout';
-import { getSiteWideSEO } from '@/lib/getProps/siteWideSEO';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 
 type PreviewLayoutProps = {
@@ -12,8 +11,8 @@ type PreviewLayoutProps = {
 
 // This layout is needed mainly to pass theme to the preview page
 const PreviewRootLayout = async ({ children }: PreviewLayoutProps) => {
-  const siteWideSEO = await getSiteWideSEO();
-  const { themeVariant } = siteWideSEO;
+  const { getSiteWideSEO } = getters;
+  const { themeVariant } = await getSiteWideSEO();
 
   return isPreviewMode() ? (
     <ThemeProvider
