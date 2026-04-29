@@ -5,24 +5,19 @@ import { Body } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { FeatureStackItemProps } from '../../types/Feature/Feature.types';
 import { useTheme } from '@mui/material/styles';
+import { resolveByThemeVariant, variantActionColorMap } from '../../theme';
 
 const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
-  const muiTheme = useTheme();
+  const { palette } = useTheme();
   const textColor = TextColor(theme);
 
   const linkColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return muiTheme.palette.primary.main;
-            case 'IO':
-              return muiTheme.palette.custom.blueIO[500];
-            case 'WALLET':
-              return muiTheme.palette.custom.blueIO[500];
-          }
-        })()
-      : muiTheme.palette.common.white;
+    theme === 'dark'
+      ? palette.custom.white
+      : resolveByThemeVariant(variantActionColorMap, themeVariant, {
+          palette,
+          theme,
+        });
 
   return (
     <Stack spacing={3} justifyContent='center' alignItems='center'>
@@ -32,7 +27,7 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
           spacing={1}
           justifyContent='center'
           alignItems='center'
-          direction={'row'}
+          direction='row'
         >
           <Typography
             component='span'

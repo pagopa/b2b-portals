@@ -7,6 +7,7 @@ import {
 } from '@react-components/types/VideoImage/VideoImage.types';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
+import { resolveByThemeVariant, variantContentLinkColorMap } from '../../theme';
 
 interface NextImageProps {
   overflow: 'hidden';
@@ -124,19 +125,12 @@ export const VideoText = ({
 }: VideoTextProps) => {
   const textColor = TextColor(theme);
   const { palette } = useTheme();
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })();
+
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   return (
     <>
@@ -193,19 +187,12 @@ export const ImageText = ({
 }) => {
   const { palette } = useTheme();
   const textColor = TextColor(theme);
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })();
+
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   return (
     <>

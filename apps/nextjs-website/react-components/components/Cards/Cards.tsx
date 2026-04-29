@@ -5,11 +5,12 @@ import { CardsProps } from '../../types/Cards/Cards.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
 import { CtaButtons } from '../common/Common';
 import { Title, Subtitle } from '../common/Common';
+import { TextColor } from '../common/Common.helpers';
 import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-  TextColor,
-} from '../common/Common.helpers';
+  resolveByThemeVariant,
+  variantContentLinkColorMap,
+  variantSectionBackgroundColorMap,
+} from '../../theme';
 
 const Cards = ({
   items,
@@ -22,38 +23,27 @@ const Cards = ({
   bottomCTA,
   titleTag,
 }: CardsProps) => {
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const muiTheme = useTheme();
+  const { palette } = muiTheme;
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundColorMap,
+    themeVariant,
+    ctx,
+  );
 
   const textColor = TextColor(theme);
   const flexDirection = textPosition === 'right' ? 'row-reverse' : 'row';
   const isCenter = textPosition === 'center';
   const isNone = textPosition === 'none';
-  const muiTheme = useTheme();
-  const { palette } = muiTheme;
   const isStackLayout = isCenter || isNone;
 
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })();
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    ctx,
+  );
 
   // Cards flow top-to-bottom per column to mimic the design's vertical masonry effect.
   const columnCount = {
@@ -97,14 +87,14 @@ const Cards = ({
           sx={{
             width: { md: isCenter ? '100%' : '30%', xs: '100%' },
           }}
-          component={'div'}
+          component='div'
         >
           {text.title && (
-            <Typography mb={3} component='div' color={'inherit'}>
+            <Typography mb={3} component='div' color='inherit'>
               <Title
                 component={titleTag ?? 'h2'}
                 variant='h4'
-                textColor={'inherit'}
+                textColor='inherit'
                 title={text.title}
                 textAlign={isCenter ? 'center' : 'left'}
                 marginBottom={0}
@@ -112,10 +102,10 @@ const Cards = ({
             </Typography>
           )}
           {text.subtitle && (
-            <Typography mb={3} component='div' color={'inherit'}>
+            <Typography mb={3} component='div' color='inherit'>
               <Subtitle
                 variant='h6'
-                textColor={'inherit'}
+                textColor='inherit'
                 subtitle={text.subtitle}
                 textAlign={isCenter ? 'center' : 'left'}
                 marginBottom={0}
@@ -127,7 +117,7 @@ const Cards = ({
               mb={4}
               component='div'
               variant='body1'
-              color={'inherit'}
+              color='inherit'
               textAlign={isCenter ? 'center' : 'left'}
               sx={{
                 '& a': {

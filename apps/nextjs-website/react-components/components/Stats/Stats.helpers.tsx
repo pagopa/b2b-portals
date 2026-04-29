@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import Image from 'next/image';
 import { StatsItemProps } from '@react-components/types/Stats/Stats.types';
+import { resolveByThemeVariant, variantAccentColorMap } from '../../theme';
 
 export const StatsItem = ({
   title,
@@ -11,16 +12,10 @@ export const StatsItem = ({
 }: StatsItemProps) => {
   const { palette } = useTheme();
 
-  const textColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.primary.main;
-      case 'IO':
-        return palette.custom.primaryColorDark;
-      case 'WALLET':
-        return palette.custom.primaryColorDark;
-    }
-  })();
+  const textColor = resolveByThemeVariant(variantAccentColorMap, themeVariant, {
+    palette,
+    theme: 'light',
+  });
 
   return (
     <Stack

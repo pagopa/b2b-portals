@@ -10,6 +10,7 @@ import {
 import { ServiceCardProps } from '../../types/ServiceCarousel/ServiceCarousel.types';
 import Image from 'next/image';
 import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
+import { resolveByThemeVariant, variantActionColorMap } from '../../theme';
 
 // Style Carousel Dots (unfortunately react-slick doesn't offer an easy way)
 // Ignore TS error for position because we need to use !important
@@ -56,42 +57,31 @@ export const ServiceCard = (
 ) => {
   const { palette } = useTheme();
 
-  const linkColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.primary.main;
-      case 'IO':
-        return palette.custom.blueIO[500];
-      case 'WALLET':
-        return palette.custom.blueIO[500];
-    }
-  })();
+  const linkColor = resolveByThemeVariant(variantActionColorMap, themeVariant, {
+    palette,
+    theme: 'light',
+  });
 
   return (
     <Stack
       sx={{
         display: 'flex !important',
         width: 'fit-content !important',
-      }} // Prevent Slider from overwriting
-      direction={'row'}
+      }}
+      direction='row'
       gap={8}
       p={3}
       mr={4}
-      alignItems={'flex-end'}
+      alignItems='flex-end'
       height={272}
       bgcolor={palette.grey[50]}
       borderRadius={4}
-      // Styles for mobile image
       position='relative'
       overflow='hidden'
-      component={'article'}
+      component='article'
       tabIndex={-1}
     >
-      <Stack
-        gap={1}
-        width={{ xs: 216, sm: 264, md: 264 }} // 216 has been found by testing: a higher number breaks react-slick and makes the last slide wrap under the first one
-        alignSelf={'stretch'}
-      >
+      <Stack gap={1} width={{ xs: 216, sm: 264, md: 264 }} alignSelf='stretch'>
         <Typography component='h3' variant='h6' fontWeight={700}>
           {card.title}
         </Typography>
@@ -129,7 +119,7 @@ export const ServiceCard = (
           bottom={14}
           right={-12}
         >
-          <Image src={card.image.url} alt={''} fill={true} />
+          <Image src={card.image.url} alt='' fill={true} />
         </Box>
       )}
     </Stack>
@@ -149,16 +139,11 @@ export const SliderArrowControl = ({
 }) => {
   const { palette } = useTheme();
 
-  const arrowBackgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.primary.main;
-      case 'IO':
-        return palette.custom.blueIO[500];
-      case 'WALLET':
-        return palette.custom.blueIO[500];
-    }
-  })();
+  const arrowBackgroundColor = resolveByThemeVariant(
+    variantActionColorMap,
+    themeVariant,
+    { palette, theme: 'light' },
+  );
 
   return (
     <IconButton

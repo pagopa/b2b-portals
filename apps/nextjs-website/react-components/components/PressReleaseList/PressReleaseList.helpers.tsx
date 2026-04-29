@@ -1,6 +1,7 @@
 import { ArrowRightAlt } from '@mui/icons-material';
 import { Box, Link, Stack, Typography, useTheme } from '@mui/material';
 import { PressReleasePreviewProps } from '@react-components/types/PressReleaseList/PressReleaseList.types';
+import { resolveByThemeVariant, variantContentLinkColorMap } from '../../theme';
 
 export const PressReleasePreview = ({
   date,
@@ -11,29 +12,24 @@ export const PressReleasePreview = ({
 }: PressReleasePreviewProps) => {
   const { palette } = useTheme();
 
-  const linkColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.primary.main;
-      case 'IO':
-        return palette.custom.primaryColorDark;
-      case 'WALLET':
-        return palette.custom.primaryColorDark;
-    }
-  })();
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    { palette, theme: 'light' },
+  );
 
   return (
     <Box
-      component={'li'}
+      component='li'
       style={{ listStyleType: 'none' }}
       maxWidth={330}
-      width={'100%'}
+      width='100%'
     >
-      <Stack component={'article'} gap={2}>
+      <Stack component='article' gap={2}>
         <Typography
           variant='overline'
           color='text.secondary'
-          component={'time'}
+          component='time'
           dateTime={dateIso}
         >
           {date}

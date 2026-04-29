@@ -16,6 +16,11 @@ import {
   useTheme,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
+import {
+  resolveByThemeVariant,
+  variantAccentColorMap,
+  variantContentLinkColorMap,
+} from '../../theme';
 
 export const TitleSubtitleBlock = ({
   title,
@@ -26,19 +31,11 @@ export const TitleSubtitleBlock = ({
   const textColor = TextColor(theme);
   const { palette } = useTheme();
 
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })();
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   return (
     <Stack
@@ -52,7 +49,7 @@ export const TitleSubtitleBlock = ({
         variant='h4'
         textColor={textColor}
         title={title}
-        component={'h1'}
+        component='h1'
         textAlign='center'
         marginTop={3}
         marginBottom={3}
@@ -91,7 +88,7 @@ const SplitButton = ({
   themeVariant,
 }: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
-  const { palette } = useTheme();
+  const { palette } = muiTheme;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [open, setOpen] = React.useState(false);
 
@@ -111,33 +108,17 @@ const SplitButton = ({
 
   const anchorRef = React.useRef<HTMLDivElement>(null);
 
+  const variantColor = resolveByThemeVariant(
+    variantAccentColorMap,
+    themeVariant,
+    { palette, theme },
+  );
+
   const borderColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return muiTheme.palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })()
-      : muiTheme.palette.primary.contrastText;
+    theme === 'light' ? variantColor : muiTheme.palette.primary.contrastText;
 
   const textColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return muiTheme.palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })()
-      : muiTheme.palette.primary.main;
+    theme === 'light' ? variantColor : muiTheme.palette.primary.main;
 
   const externalButtonTextColor =
     theme === 'dark' ? muiTheme.palette.primary.contrastText : textColor;
@@ -261,9 +242,15 @@ export const ButtonSwitchRowBlock = ({
   selectedButton,
 }: ButtonSwitchRowBlockProps & { themeVariant: 'SEND' | 'IO' | 'WALLET' }) => {
   const muiTheme = useTheme();
-  const { palette } = useTheme();
+  const { palette } = muiTheme;
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
+
+  const variantColor = resolveByThemeVariant(
+    variantAccentColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   return isLarge ? (
     <Stack direction={isSmallScreen ? 'column' : 'row'} spacing={2}>
@@ -278,16 +265,7 @@ export const ButtonSwitchRowBlock = ({
                 : 'transparent',
             color:
               theme === 'light'
-                ? (() => {
-                    switch (themeVariant) {
-                      case 'SEND':
-                        return muiTheme.palette.primary.main;
-                      case 'IO':
-                        return palette.custom.primaryColorDark;
-                      case 'WALLET':
-                        return palette.custom.primaryColorDark;
-                    }
-                  })()
+                ? variantColor
                 : muiTheme.palette.primary.contrastText,
             '&:hover': {
               backgroundColor:
@@ -296,16 +274,7 @@ export const ButtonSwitchRowBlock = ({
                   : 'transparent',
               color:
                 theme === 'light'
-                  ? (() => {
-                      switch (themeVariant) {
-                        case 'SEND':
-                          return muiTheme.palette.primary.main;
-                        case 'IO':
-                          return palette.custom.primaryColorDark;
-                        case 'WALLET':
-                          return palette.custom.primaryColorDark;
-                      }
-                    })()
+                  ? variantColor
                   : muiTheme.palette.primary.contrastText,
             },
           },
@@ -313,6 +282,7 @@ export const ButtonSwitchRowBlock = ({
           onClick: () => onButtonClick(button.id),
         })),
         theme,
+        themeVariant,
       })}
     </Stack>
   ) : (

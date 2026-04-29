@@ -5,49 +5,42 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Typography } from '@mui/material';
 import { AccordionItemProps } from '../../types/Accordion/Accordion.types';
-import { alpha, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import mixpanel from 'mixpanel-browser';
+import {
+  resolveByThemeVariant,
+  variantAccentColorMap,
+  variantFocusBackgroundColorMap,
+  variantFocusOutlineColorMap,
+} from '../../theme';
 
 export const AccordionItem: React.FC<
   AccordionItemProps & { trackItemOpen: boolean }
-> = ({ itemID, header, content, themeVariant, trackItemOpen }) => {
+> = ({ itemID, header, content, themeVariant, theme, trackItemOpen }) => {
   const controlsId = React.useId() + '-controls';
   const headerId = React.useId() + '-header';
   const { palette } = useTheme();
   const [expanded, setExpanded] = useState(false);
 
-  const linkColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.primary.main;
-      case 'IO':
-        return palette.custom.primaryColorDark;
-      case 'WALLET':
-        return palette.custom.primaryColorDark;
-    }
-  })();
+  const ctx = { palette, theme };
 
-  const focusOutlineColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.custom.outlineColor;
-      case 'IO':
-        return palette.custom.primaryColorDark;
-      case 'WALLET':
-        return palette.custom.primaryColorDark;
-    }
-  })();
+  const linkColor = resolveByThemeVariant(
+    variantAccentColorMap,
+    themeVariant,
+    ctx,
+  );
 
-  const focusBackgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return alpha(palette.primary.main, 0.08);
-      case 'IO':
-        return alpha(palette.custom.primaryColorDark, 0.08);
-      case 'WALLET':
-        return alpha(palette.custom.primaryColorDark, 0.08);
-    }
-  })();
+  const focusOutlineColor = resolveByThemeVariant(
+    variantFocusOutlineColorMap,
+    themeVariant,
+    ctx,
+  );
+
+  const focusBackgroundColor = resolveByThemeVariant(
+    variantFocusBackgroundColorMap,
+    themeVariant,
+    ctx,
+  );
 
   const appendItemIDToURLHash = () => {
     if (!itemID) return;

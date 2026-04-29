@@ -96,7 +96,7 @@ export const theme = createTheme(MUIItaliaTheme, {
       highLightBoxLightPurpleBackground: '#DDD1F9',
       black: '#000000',
       white: '#FFF',
-      matteWhiteBorder: 'ffffff80',
+      matteWhiteBorder: '#ffffff80',
       ioChipsBackgroundColorLight: '#0B3EE3',
       sendChipsBackgroundColorLight: '#0073E6',
       chipsBackgroundColorDark: '#ebebf52e',

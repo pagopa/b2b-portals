@@ -9,11 +9,12 @@ import {
 import { AccordionItem } from './AccordionItem';
 import { Title, Subtitle } from '../common/Common';
 import { AccordionProps } from '../../types/Accordion/Accordion.types';
+import { TextColor } from '../common/Common.helpers';
 import {
-  SendBackgroundColorAlternativeGrey,
-  IoBackgroundColorAlternativeGrey,
-  TextColor,
-} from '../common/Common.helpers';
+  resolveByThemeVariant,
+  variantContentLinkColorMap,
+  variantSectionBackgroundAlternativeGreyMap,
+} from '../../theme';
 
 const Accordion = (props: AccordionProps) => {
   const {
@@ -31,31 +32,19 @@ const Accordion = (props: AccordionProps) => {
 
   const textColor = TextColor(theme);
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColorAlternativeGrey(theme);
-      case 'IO':
-        return IoBackgroundColorAlternativeGrey(theme);
-      case 'WALLET':
-        return IoBackgroundColorAlternativeGrey(theme);
-    }
-  })();
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundAlternativeGreyMap,
+    themeVariant,
+    ctx,
+  );
 
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })();
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -116,6 +105,7 @@ const Accordion = (props: AccordionProps) => {
                   {...accordionItem}
                   trackItemOpen={trackItemOpen}
                   themeVariant={themeVariant}
+                  theme={theme}
                 />
               ))}
             </Stack>

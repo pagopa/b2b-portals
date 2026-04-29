@@ -13,6 +13,12 @@ import { FormProps } from '@react-components/types/Form/Form.types';
 import { TextColor, GrayLinkColor } from '../common/Common.helpers';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { FormCategories } from './Form.helpers';
+import {
+  ctaContainedBackgroundColorMap,
+  ctaContainedTextColorMap,
+  resolveByThemeVariant,
+  variantContentLinkColorMap,
+} from '../../theme';
 
 interface ValidationErrors {
   name: string | null;
@@ -58,6 +64,7 @@ const Form = ({
   const borderColor = theme === 'light' ? graylinkColor : 'white';
   const recaptchaRef = useRef<RECAPTCHA>(null);
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
   const requiredMessages: Record<InputFieldData['name'], string> = {
     name: labels.insertName,
@@ -163,7 +170,6 @@ const Form = ({
                 ? [formData.category]
                 : [defaultCategoryID],
             email: formData.email,
-            // Optional fields must be all present or all absent (default values are inconsequential)
             ...((showName || showSurname || showOrganization) && {
               name: showName ? formData.name : 'none',
               surname: showSurname ? formData.surname : 'none',
@@ -332,19 +338,23 @@ const Form = ({
     ) : null;
   };
 
-  const notesLinkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.blueIO[500];
-            case 'WALLET':
-              return palette.custom.blueIO[500];
-          }
-        })();
+  const notesLinkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    ctx,
+  );
+
+  const submitButtonBackgroundColor = resolveByThemeVariant(
+    ctaContainedBackgroundColorMap,
+    themeVariant,
+    ctx,
+  );
+
+  const submitButtonTextColor = resolveByThemeVariant(
+    ctaContainedTextColorMap,
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -468,46 +478,10 @@ const Form = ({
             mt: 4,
             width: { md: 'auto', xs: '100%' },
             zIndex: 4,
-            backgroundColor:
-              theme === 'dark'
-                ? palette.custom.white
-                : (() => {
-                    switch (themeVariant) {
-                      case 'SEND':
-                        return palette.primary.main;
-                      case 'IO':
-                        return palette.custom.blueIO[500];
-                      case 'WALLET':
-                        return palette.custom.blueIO[500];
-                    }
-                  })(),
-            color:
-              theme === 'dark'
-                ? (() => {
-                    switch (themeVariant) {
-                      case 'SEND':
-                        return palette.primary.main;
-                      case 'IO':
-                        return palette.custom.blueIO[500];
-                      case 'WALLET':
-                        return palette.custom.blueIO[500];
-                    }
-                  })()
-                : palette.custom.white,
+            backgroundColor: submitButtonBackgroundColor,
+            color: submitButtonTextColor,
             '&:hover': {
-              backgroundColor:
-                theme === 'dark'
-                  ? palette.custom.white
-                  : (() => {
-                      switch (themeVariant) {
-                        case 'SEND':
-                          return palette.primary.main;
-                        case 'IO':
-                          return palette.custom.blueIO[500];
-                        case 'WALLET':
-                          return palette.custom.blueIO[500];
-                      }
-                    })(),
+              backgroundColor: submitButtonBackgroundColor,
             },
           }}
           onClick={handleSubmit}

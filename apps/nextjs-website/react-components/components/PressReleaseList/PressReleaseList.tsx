@@ -26,7 +26,7 @@ const PressReleaseList = ({
       rowGap={6}
       columnGap={7}
       maxWidth='100%'
-      component={'ul'}
+      component='ul'
       style={{ paddingInlineStart: 0 }}
     >
       {pressReleases.map((pressRelease, index) => (
