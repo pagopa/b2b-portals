@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Stack, Link, Box } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { CardsItemProps } from '../../types/Cards/Cards.types';
-import { Title, Body } from '../common/Common';
+import { Title, Body, isValidExternalLink, LinkIcon } from '../common/Common';
 import Image from 'next/image';
 import { useTheme } from '@mui/material/styles';
 
@@ -108,8 +108,13 @@ const CardsItem = ({
                   >
                     {link.label}
                   </Link>
-                  <ArrowRightAltIcon
-                    sx={{ color: linkColor, fontSize: 18, marginLeft: 1 }}
+                  <LinkIcon
+                    showExternalLinkIcon={isValidExternalLink(link.href)}
+                    internalLinkIcon={
+                      <ArrowRightAltIcon
+                        sx={{ color: linkColor, fontSize: 18, marginLeft: 1 }}
+                      />
+                    }
                   />
                 </Stack>
               ))
