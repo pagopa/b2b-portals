@@ -38,5 +38,10 @@ export const extractTenantStrapiApiData = (
         baseUrl: strapiData.PAGOPA_STRAPI_API_BASE_URL,
         token: strapiData.PAGOPA_STRAPI_API_TOKEN,
       };
+    case 'wallet':
+      return {
+        baseUrl: strapiData.WALLET_STRAPI_API_BASE_URL,
+        token: strapiData.WALLET_STRAPI_API_TOKEN,
+      };
   }
 };
