@@ -99,9 +99,6 @@ export default async function RootLayout({
     oneTrustToken,
   } = siteWideSEO;
 
-  /*if (themeVariant === 'WALLET') {
-    import('@/styles/font-titillium-sans-pro.css');
-  }*/
   const activeLocalesArray = Object.keys(locales).filter(
     (locale) => locales[locale as Locale],
   );
