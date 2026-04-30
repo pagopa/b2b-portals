@@ -48,7 +48,8 @@ const PreviewPage = async ({
     return <div>404: Missing parameters</div>;
   }
 
-  const { oneTrustToken } = await getSiteWideSEO(tenant);
+  const { oneTrustToken, themeVariant, pressReleasesParentSlug } =
+    await getSiteWideSEO(tenant);
 
   const documentIDs = await (type === 'press-release'
     ? getAllPressReleaseIDs(tenant, locale)
@@ -66,7 +67,6 @@ const PreviewPage = async ({
       ? getPageSwitchPageDataFromID(tenant, documentID, locale)
       : getPageDataFromID(tenant, documentID, locale));
 
-  const { themeVariant, pressReleasesParentSlug } = await getSiteWideSEO();
   const pressReleasePages = await getPressReleasePages(locale);
 
   return (
