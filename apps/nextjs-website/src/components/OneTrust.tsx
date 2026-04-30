@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { extractNoticeIDFromOneTrustURL } from '@/lib/oneTrust';
 import { OneTrustSectionProps } from '@/lib/fetch/types/PageSection';
+import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { getThemeVariantFont } from '@react-components/components/common/Common.helpers';
 
 // Declare OneTrust object created by otnotice-1.0.min.js
 declare const OneTrust: {
@@ -16,7 +18,9 @@ declare const OneTrust: {
   };
 };
 
-const OneTrustSection = (props: OneTrustSectionProps) => {
+const OneTrustSection = (
+  props: OneTrustSectionProps & { themeVariant: ThemeVariant },
+) => {
   const { oneTrustNoticeURL } = props;
   // Extrapolate notice ID and build the ID of the div to be populated
   // akin to how otnotice-1.0.min.js does
@@ -41,7 +45,7 @@ const OneTrustSection = (props: OneTrustSectionProps) => {
       sx={{
         marginBottom: '6rem',
         '.otnotice-content': {
-          fontFamily: '"Titillium Web",sans-serif',
+          fontFamily: getThemeVariantFont(props.themeVariant),
           color: 'text.primary',
           paddingTop: '64px',
         },
