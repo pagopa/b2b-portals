@@ -149,7 +149,7 @@ export const isExperimentalThemeVariant = (themeVariant: ThemeVariant) =>
 
 export const getThemeVariantFont = (themeVariant?: ThemeVariant) => {
   if (themeVariant && isExperimentalThemeVariant(themeVariant)) {
-    import('@/styles/font-titillium-sans-pro.css');
+    import('@react-components/styles/font-titillium-sans-pro.css');
     return FONT_THEME_EXPERIMENTAL;
   }
   return FONT_THEME_BASE;
