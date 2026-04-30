@@ -1,6 +1,7 @@
 'use client';
 import { Analytics, Locale } from '@/lib/fetch/siteWideSEO';
 import { getThemeVariantFont } from '@react-components/components/common/Common.helpers';
+import { ThemeVariant } from '@react-components/types/common/Common.types';
 import mixpanel from 'mixpanel-browser';
 import Script from 'next/script';
 import { useEffect } from 'react';
@@ -38,7 +39,7 @@ const ConsentHandler = ({
   themeVariant,
 }: NonNullable<Analytics> & {
   locale: Locale;
-  themeVariant: 'IO' | 'SEND' | 'WALLET';
+  themeVariant: ThemeVariant;
 }) => {
   useEffect(() => {
     const initMixpanel = () => {
