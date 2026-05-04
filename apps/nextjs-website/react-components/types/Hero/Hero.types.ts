@@ -1,10 +1,10 @@
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
 import {
   type SectionProps,
   type Generic,
   Theme,
   LinkProps,
   CtaButtonProps,
+  ThemeVariant,
 } from '../common/Common.types';
 
 export interface HeroProps extends SectionProps, HeroTextProps {

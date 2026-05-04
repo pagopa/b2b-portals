@@ -16,20 +16,38 @@ export const AccordionItem: React.FC<
   const { palette } = useTheme();
   const [expanded, setExpanded] = useState(false);
 
-  const linkColor =
-    themeVariant === 'SEND'
-      ? palette.primary.main
-      : palette.custom.primaryColorDark;
+  const linkColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.primaryColorDark;
+      case 'WALLET':
+        return palette.custom.primaryColorDark;
+    }
+  })();
 
-  const focusOutlineColor =
-    themeVariant === 'SEND'
-      ? palette.custom.outlineColor
-      : palette.custom.primaryColorDark;
+  const focusOutlineColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.custom.outlineColor;
+      case 'IO':
+        return palette.custom.primaryColorDark;
+      case 'WALLET':
+        return palette.custom.primaryColorDark;
+    }
+  })();
 
-  const focusBackgroundColor =
-    themeVariant === 'SEND'
-      ? alpha(palette.primary.main, 0.08)
-      : alpha(palette.custom.primaryColorDark, 0.08);
+  const focusBackgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return alpha(palette.primary.main, 0.08);
+      case 'IO':
+        return alpha(palette.custom.primaryColorDark, 0.08);
+      case 'WALLET':
+        return alpha(palette.custom.primaryColorDark, 0.08);
+    }
+  })();
 
   const appendItemIDToURLHash = () => {
     if (!itemID) return;

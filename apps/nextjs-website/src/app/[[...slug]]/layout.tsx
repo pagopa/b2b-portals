@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@mui/material/styles';
 import Script from 'next/script';
-import { theme } from '../theme';
 import PreHeader from '@/components/PreHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -9,9 +8,11 @@ import PreFooter from '@/components/PreFooter';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
-import ScrollPaddingTopManager from '@/components/ScrollMarginTopManager';
 import LocaleGuard from '@/components/LocaleGuard';
 import EmptyLayout from '@/components/EmptyLayout';
+import { themeExperimental, themeBase } from '../theme';
+import { CssBaseline } from '@mui/material';
+import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 
 const {
   getSiteWideSEO,
@@ -97,6 +98,7 @@ export default async function RootLayout({
     pressReleasesParentSlug,
     oneTrustToken,
   } = siteWideSEO;
+
   const activeLocalesArray = Object.keys(locales).filter(
     (locale) => locales[locale as Locale],
   );
@@ -129,7 +131,12 @@ export default async function RootLayout({
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider
+      theme={
+        isExperimentalThemeVariant(themeVariant) ? themeExperimental : themeBase
+      }
+    >
+      <CssBaseline />
       <html lang={locale}>
         <head>
           <style>{`
@@ -140,6 +147,13 @@ export default async function RootLayout({
             html {
               scroll-behavior: auto;
             }
+          }
+          a:not(header a, #preheader a),
+          button:not(header button,#preheader button),
+          input:not(header input,#preheader input),
+          select:not(header select,#preheader select),
+          textarea:not(header textarea, #preheader textarea) {
+            scroll-margin-top: 100px;
           }
         `}</style>
         </head>
@@ -164,7 +178,6 @@ export default async function RootLayout({
               locale={locale}
               defaultLocale={defaultLocale}
             />
-            <ScrollPaddingTopManager />
             {children}
             {preFooterProps && (
               <PreFooter
@@ -198,7 +211,13 @@ export default async function RootLayout({
                 window.recaptchaOptions = { useRecaptchaNet: true };
               }
             `}</Script>
-          {analytics && <ConsentHandler {...analytics} locale={locale} />}
+          {analytics && (
+            <ConsentHandler
+              {...analytics}
+              locale={locale}
+              themeVariant={themeVariant}
+            />
+          )}
         </body>
       </html>
     </ThemeProvider>

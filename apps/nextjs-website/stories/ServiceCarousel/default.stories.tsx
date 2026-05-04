@@ -11,12 +11,13 @@ export default meta;
 
 // Define a "Template" function that sets how args map to rendering
 const ServiceCarouselTemplate: StoryFn<ServiceCarouselProps> = (args) => (
-  <ServiceCarousel {...args} themeVariant='SEND' />
+  <ServiceCarousel {...args} />
 );
 
 export const ServiceCarouselFull: StoryFn<typeof ServiceCarousel> =
   ServiceCarouselTemplate.bind({});
 ServiceCarouselFull.args = {
+  themeVariant: 'SEND',
   title: 'Le funzionalità su IO',
   eyelet: 'FIORE',
   description:
@@ -100,6 +101,7 @@ ServiceCarouselFull.args = {
 export const ServiceCarouselMinimum: StoryFn<typeof ServiceCarousel> =
   ServiceCarouselTemplate.bind({});
 ServiceCarouselMinimum.args = {
+  themeVariant: 'SEND',
   title: 'Le funzionalità su IO',
   cards: [
     {

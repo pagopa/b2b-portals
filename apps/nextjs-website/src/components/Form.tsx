@@ -4,7 +4,65 @@ import { Form as FormRC } from '@react-components/components';
 import { FormProps } from '@react-components/types';
 import { FormSection } from '@/lib/fetch/types/PageSection';
 import { makeSrcSetFromStrapiImageData, IMAGE_SIZES } from '@/lib/image';
-import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { Locale, SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+
+const formLabels: Record<Locale, FormProps['labels']> = {
+  it: {
+    insertName: 'Inserisci il nome',
+    insertSurname: 'Inserisci il cognome',
+    insertEmail: 'Inserisci l’indirizzo email',
+    insertOrganization: 'Inserisci il nome dell’ente',
+    insertValidEmail: 'Inserisci un indirizzo email valido',
+    name: 'Nome',
+    surname: 'Cognome',
+    email: 'Indirizzo e-mail',
+    organization: 'Nome ente',
+  },
+  en: {
+    insertName: 'Enter your first name',
+    insertSurname: 'Enter your last name',
+    insertEmail: 'Enter your email address',
+    insertOrganization: 'Enter your institution name',
+    insertValidEmail: 'Enter a valid email address',
+    name: 'First name',
+    surname: 'Surname',
+    email: 'Email address',
+    organization: 'Institution name',
+  },
+  fr: {
+    insertName: 'Saisissez votre prénom',
+    insertSurname: 'Saisissez votre nom',
+    insertEmail: 'Saisissez votre adresse courriel',
+    insertOrganization: 'Saisissez le nom de votre établissement',
+    insertValidEmail: 'Saisissez une adresse courriel valide',
+    name: 'Prénom',
+    surname: 'Nom',
+    email: 'Adresse courriel',
+    organization: "Nom de l'établissement",
+  },
+  de: {
+    insertName: 'Geben Sie Ihren Vornamen ein',
+    insertSurname: 'Geben Sie Ihren Nachnamen ein',
+    insertEmail: 'Geben Sie Ihre E-Mail-Adresse ein',
+    insertOrganization: 'Geben Sie den Namen Ihrer Institution ein',
+    insertValidEmail: 'Geben Sie eine gültige E-Mail-Adresse ein',
+    name: 'Vorname',
+    surname: 'Nachname',
+    email: 'E-Mail-Adresse',
+    organization: 'Name der Institution',
+  },
+  sl: {
+    insertName: 'Vnesite svoje ime',
+    insertSurname: 'Vnesite svoj priimek',
+    insertEmail: 'Vnesite svoj e-poštni naslov',
+    insertOrganization: 'Vnesite ime svoje ustanove',
+    insertValidEmail: 'Vnesite veljaven e-poštni naslov',
+    name: 'Ime',
+    surname: 'Priimek',
+    email: 'E-poštni naslov',
+    organization: 'Ime ustanove',
+  },
+};
 
 const makeFormProps = ({
   locale,
@@ -22,6 +80,7 @@ const makeFormProps = ({
   titleTag,
   ...rest
 }: FormSection & SiteWidePageData): FormProps => ({
+  labels: formLabels[locale],
   categories: categories.map(({ additionalInfo, ...category }) => ({
     ...(additionalInfo && { additionalInfo }),
     ...category,

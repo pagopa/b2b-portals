@@ -24,12 +24,17 @@ const PreHeader = ({
 
   // Compare included slugs with current page slug (removing initial '/')
   // Only check includeSlugs if it contains at least 1 item, otherwise render PreHeader for all pages
-  if (includeSlugs && includeSlugs.length > 0 && !includeSlugs.includes(pathname.slice(1))) {
+  if (
+    includeSlugs &&
+    includeSlugs.length > 0 &&
+    !includeSlugs.includes(pathname.slice(1))
+  ) {
     return null;
   }
 
   return (
     <Stack
+      id='preheader'
       display='flex'
       flexDirection='row'
       bgcolor='background.paper'
@@ -62,6 +67,7 @@ const PreHeader = ({
               },
             })),
             disableRipple: true,
+            showExternalLinkIcon: false,
           })}
         </Stack>
       )}
@@ -87,6 +93,7 @@ const PreHeader = ({
               },
             })),
             disableRipple: true,
+            showExternalLinkIcon: false,
           })}
         </Stack>
       )}

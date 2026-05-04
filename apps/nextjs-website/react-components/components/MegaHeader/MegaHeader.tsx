@@ -28,7 +28,11 @@ import {
   Overlay,
   Sublink,
 } from './MegaHeader.Helpers';
-import { CtaButtons } from '../common/Common';
+import {
+  CtaButtons,
+  ExternalLinkIcon,
+  isValidExternalLink,
+} from '../common/Common';
 import { usePathname } from 'next/navigation';
 import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
 
@@ -276,7 +280,16 @@ const MegaHeader = ({
                                                     {labels.news}
                                                   </LinkLabel>
                                                 )}
-                                                <ArrowForwardIcon className='arrowIcon' />
+                                                {isValidExternalLink(
+                                                  item.href,
+                                                ) ? (
+                                                  <ExternalLinkIcon
+                                                    className='arrowIcon'
+                                                    sx={{ ml: 0 }}
+                                                  />
+                                                ) : (
+                                                  <ArrowForwardIcon className='arrowIcon' />
+                                                )}
                                               </Sublink>
                                             </li>
                                           ))}
@@ -519,7 +532,14 @@ const MegaHeader = ({
                                   {item.isNew && (
                                     <LinkLabel>{labels.news}</LinkLabel>
                                   )}
-                                  <ArrowForwardIcon className='arrowIcon' />
+                                  {isValidExternalLink(item.href) ? (
+                                    <ExternalLinkIcon
+                                      className='arrowIcon'
+                                      sx={{ ml: 0 }}
+                                    />
+                                  ) : (
+                                    <ArrowForwardIcon className='arrowIcon' />
+                                  )}
                                 </Sublink>
                               </li>
                             ))}
@@ -652,7 +672,6 @@ const MegaHeader = ({
             </Box>
           </Box>
         </MobileMenu>
-
         {drawer && (
           <SideDrawer
             isOpen={isDrawerOpen}

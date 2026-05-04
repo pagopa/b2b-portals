@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { HeroTextProps } from '../../types/Hero/Hero.types';
-import { CtaButtons } from '../common/Common';
+import { CtaButtons, isValidExternalLink, LinkIcon } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme, useMediaQuery } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -35,9 +35,16 @@ export const HeroTextContent = ({
 
   const linkColor =
     theme === 'light'
-      ? themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.blueIO[500]
+      ? (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.blueIO[500];
+            case 'WALLET':
+              return palette.custom.blueIO[500];
+          }
+        })()
       : palette.custom.white;
 
   return (
@@ -168,17 +175,22 @@ export const HeroTextContent = ({
           }}
         >
           {link.label}
-          <ArrowForwardIcon
-            sx={{
-              display: 'inline-block',
-              ml: 1,
-              fontSize: '1rem',
-              color: linkColor,
-              transition: 'transform 0.2s',
-              '&:hover': {
-                transform: 'translateX(2px)',
-              },
-            }}
+          <LinkIcon
+            showExternalLinkIcon={isValidExternalLink(link.href)}
+            internalLinkIcon={
+              <ArrowForwardIcon
+                sx={{
+                  display: 'inline-block',
+                  ml: 1,
+                  fontSize: '1rem',
+                  color: linkColor,
+                  transition: 'transform 0.2s',
+                  '&:hover': {
+                    transform: 'translateX(2px)',
+                  },
+                }}
+              />
+            }
           />
         </Typography>
       )}

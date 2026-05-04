@@ -17,19 +17,31 @@ export const ChipsBlock = ({
   chips: ReadonlyArray<ChipProps>;
   ariaLabelChips?: string;
   theme: 'light' | 'dark';
-  themeVariant: 'IO' | 'SEND';
+  themeVariant: 'IO' | 'SEND' | 'WALLET';
 }) => {
   const { palette } = useTheme();
 
-  const chipBackgroundColor =
-    themeVariant === 'SEND'
-      ? SendChipsBackgroundColor(theme)
-      : IoChipsBackgroundColor(theme);
+  const chipBackgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendChipsBackgroundColor(theme);
+      case 'IO':
+        return IoChipsBackgroundColor(theme);
+      case 'WALLET':
+        return IoChipsBackgroundColor(theme);
+    }
+  })();
 
-  const chipBackgroundColorHover =
-    themeVariant === 'SEND'
-      ? SendChipsBackgroundColorHover(theme)
-      : IoChipsBackgroundColorHover(theme);
+  const chipBackgroundColorHover = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendChipsBackgroundColorHover(theme);
+      case 'IO':
+        return IoChipsBackgroundColorHover(theme);
+      case 'WALLET':
+        return IoChipsBackgroundColorHover(theme);
+    }
+  })();
 
   const chipTextColor = palette.custom.chipsTextColor;
 

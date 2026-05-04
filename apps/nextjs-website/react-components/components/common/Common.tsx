@@ -1,14 +1,16 @@
 import React, { ReactElement } from 'react';
 import { Button, Typography, TypographyProps } from '@mui/material';
-import { Theme, useTheme } from '@mui/material/styles';
-import { CtaButtonProps } from '../../types/common/Common.types';
+import { SxProps, Theme, useTheme } from '@mui/material/styles';
+import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const CtaButton = ({
   trackEvent,
   openInNewTab,
   ariaLabel,
+  showExternalLinkIcon = true,
   ...buttonProps
 }: CtaButtonProps & {
   trackEvent?: string;
@@ -33,6 +35,9 @@ const CtaButton = ({
       {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {buttonProps.text}
+      <ExternalLinkIcon
+        show={showExternalLinkIcon && isValidExternalLink(buttonProps.href)}
+      />
     </Button>
   );
 };
@@ -43,12 +48,14 @@ export const CtaButtons = ({
   themeVariant = 'IO',
   disableRipple = false,
   trackEvent,
+  showExternalLinkIcon = true,
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
   theme?: 'dark' | 'light';
-  themeVariant?: 'IO' | 'SEND';
+  themeVariant?: ThemeVariant;
   disableRipple?: boolean;
   trackEvent?: string;
+  showExternalLinkIcon?: boolean;
 }) => {
   const { palette } = useTheme();
 
@@ -67,19 +74,34 @@ export const CtaButtons = ({
             color={theme === 'dark' ? 'negative' : 'primary'}
             variant={button.variant || 'contained'}
             disableRipple={disableRipple}
+            showExternalLinkIcon={showExternalLinkIcon}
             style={{
               ...(button.variant === 'contained' && {
                 backgroundColor:
                   theme === 'dark'
                     ? palette.custom.white
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
                 color:
                   theme === 'dark'
-                    ? themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500]
+                    ? (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })()
                     : palette.custom.white,
               }),
 
@@ -87,15 +109,29 @@ export const CtaButtons = ({
                 borderColor:
                   theme === 'dark'
                     ? palette.custom.matteWhiteBorder
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
                 color:
                   theme === 'dark'
                     ? palette.custom.white
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
               }),
             }}
             {...button}
@@ -331,12 +367,23 @@ export const Body = ({
 
 export const getButtonStyles = (
   theme: 'light' | 'dark',
-  themeVariant: 'SEND' | 'IO',
+  themeVariant: ThemeVariant,
   sectionId: number,
   currentSectionId: number,
   palette: Theme['palette'],
 ) => {
   const isSelected = sectionId === currentSectionId;
+
+  const variantColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return palette.primary.main;
+      case 'IO':
+        return palette.custom.primaryColorDark;
+      case 'WALLET':
+        return palette.custom.primaryColorDark;
+    }
+  })();
 
   return {
     backgroundColor: isSelected
@@ -344,44 +391,61 @@ export const getButtonStyles = (
         ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
         : palette.background.paper
       : 'transparent',
-    color: isSelected
-      ? theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-        : themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-      : theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-        : palette.primary.contrastText,
-    borderColor:
+    color:
       theme === 'light'
-        ? themeVariant === 'SEND'
-          ? palette.primary.main
-          : palette.custom.primaryColorDark
-        : palette.background.paper,
+        ? variantColor
+        : isSelected
+          ? variantColor
+          : palette.primary.contrastText,
+    borderColor: theme === 'light' ? variantColor : palette.background.paper,
     '&:hover': {
       backgroundColor:
         theme === 'light'
           ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
           : palette.background.paper,
-      color:
-        theme === 'light'
-          ? themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark
-          : themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark,
-      borderColor:
-        theme === 'light'
-          ? themeVariant === 'SEND'
-            ? palette.primary.main
-            : palette.custom.primaryColorDark
-          : palette.background.paper,
+      color: variantColor,
+      borderColor: theme === 'light' ? variantColor : palette.background.paper,
     },
   };
 };
+
+export const isValidExternalLink = (URL?: string): boolean => {
+  if (!URL) {
+    return false;
+  }
+  return (
+    URL.toLowerCase().startsWith('http:') ||
+    URL.toLowerCase().startsWith('https:')
+  );
+};
+
+export const ExternalLinkIcon = ({
+  show = true,
+  className,
+  sx,
+}: {
+  show?: boolean;
+  className?: string;
+  sx?: SxProps;
+}) =>
+  show ? (
+    <ArrowOutwardIcon
+      sx={{ ml: 1, width: 24, height: 24, verticalAlign: 'middle', ...sx }}
+      {...(className && { className })}
+    />
+  ) : null;
+
+export const LinkIcon = ({
+  showExternalLinkIcon,
+  internalLinkIcon,
+  sxExternalLinkIcon,
+}: {
+  showExternalLinkIcon?: boolean;
+  internalLinkIcon: JSX.Element;
+  sxExternalLinkIcon?: SxProps;
+}) =>
+  showExternalLinkIcon ? (
+    <ExternalLinkIcon {...(sxExternalLinkIcon && { sx: sxExternalLinkIcon })} />
+  ) : (
+    internalLinkIcon
+  );

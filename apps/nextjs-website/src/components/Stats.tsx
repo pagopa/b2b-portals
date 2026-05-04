@@ -14,6 +14,7 @@ const makeStatsProps = ({
   ...(body && { body }),
   items: items.map((item) => ({
     title: item.title,
+    themeVariant: rest.themeVariant,
     ...(item.description && { description: item.description }),
     ...(item.icon && { iconURL: item.icon.url }),
   })),

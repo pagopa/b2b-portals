@@ -11,11 +11,12 @@ export default meta;
 
 // Define a 'Template' function that sets how args map to rendering
 const StatsTemplate: StoryFn<StatsProps> = (args) => {
-  return <Stats {...args} themeVariant='SEND' />;
+  return <Stats {...args} />;
 };
 
 export const StatsFull: StoryFn<typeof Stats> = StatsTemplate.bind({});
 StatsFull.args = {
+  themeVariant: 'SEND',
   eyelet: 'I NUMERI',
   title: 'Siamo in tanti',
   body: 'Ogni giorno si uniscono nuovi enti e servizi, e sempre più persone usano IO.',
@@ -24,25 +25,37 @@ StatsFull.args = {
       title: '647M',
       description: 'messaggi inviati dagli enti su IO',
       iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg',
+      themeVariant: 'SEND',
     },
     {
       title: '8M',
       description: 'metodi di pagamento aggiunti dalle persone',
       iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg',
+      themeVariant: 'SEND',
     },
     {
       title: '319.629',
       description: 'servizi locali e nazionali disponibili',
       iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/IO_logo_aaacbceaf0.svg',
+      themeVariant: 'SEND',
     },
   ],
 };
 
 export const StatsMinimum: StoryFn<typeof Stats> = StatsTemplate.bind({});
 StatsMinimum.args = {
+  themeVariant: 'SEND',
   title: 'Siamo in tanti',
   items: [
-    { title: '647M', description: 'messaggi inviati dagli enti su IO' },
-    { title: '8M', description: 'metodi di pagamento aggiunti dalle persone' },
+    {
+      title: '647M',
+      description: 'messaggi inviati dagli enti su IO',
+      themeVariant: 'SEND',
+    },
+    {
+      title: '8M',
+      description: 'metodi di pagamento aggiunti dalle persone',
+      themeVariant: 'SEND',
+    },
   ],
 };

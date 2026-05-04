@@ -5,10 +5,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useRef, useState } from 'react';
-import {
-  ServiceCard,
-  SliderArrowControl,
-} from './ServiceCarousel.helpers';
+import { ServiceCard, SliderArrowControl } from './ServiceCarousel.helpers';
 import { visuallyHidden } from '@mui/utils';
 
 const ServiceCarousel = ({
@@ -18,6 +15,7 @@ const ServiceCarousel = ({
   cards,
   sectionID,
   labels,
+  themeVariant,
 }: ServiceCarouselProps) => {
   const sliderRef = useRef<Slider>();
   const { palette } = useTheme();
@@ -92,11 +90,13 @@ const ServiceCarousel = ({
             direction='left'
             ariaLabel={labels.cardPrevious}
             action={() => sliderRef.current?.slickPrev()}
+            themeVariant={themeVariant}
           />
           <SliderArrowControl
             direction='right'
             ariaLabel={labels.cardNext}
             action={() => sliderRef.current?.slickNext()}
+            themeVariant={themeVariant}
           />
         </Stack>
 
@@ -126,13 +126,13 @@ const ServiceCarousel = ({
               aria-roledescription='slide'
               aria-label={labels.slideOf(index, cards.length)}
             >
-              <div role='listitem'>{ServiceCard(c)}</div>
+              <div role='listitem'>{ServiceCard(c, themeVariant)}</div>
             </div>
           ))}
         </Slider>
 
         <Box ref={liveRegionRef} aria-live='polite' style={visuallyHidden}>
-          {currentCard && ServiceCard(currentCard, true)}
+          {currentCard && ServiceCard(currentCard, themeVariant, true)}
         </Box>
       </Stack>
     </Box>

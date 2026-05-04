@@ -11,6 +11,10 @@ import {
   HeaderSideDrawerCtaCardProps,
   HeaderSideDrawerLinkCardProps,
 } from '@react-components/types/Header/Header.types';
+import {
+  isValidExternalLink,
+  LinkIcon,
+} from '@react-components/components/common/Common';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorRight': {
@@ -118,10 +122,9 @@ export default function SideDrawer({
                   {card.subtitle}
                 </Typography>
               }
-              buttonText={card.buttonText}
-              href={card.href}
               icons={card.icons}
               theme={'light'}
+              link={card.link}
             />
           ))}
         </div>
@@ -152,8 +155,17 @@ export default function SideDrawer({
             </Typography>
             <Button
               size='small'
-              href={ctaCard.href}
-              endIcon={<ArrowForwardIcon />}
+              href={ctaCard.link.href}
+              endIcon={
+                <LinkIcon
+                  sxExternalLinkIcon={{ ml: 0 }}
+                  showExternalLinkIcon={isValidExternalLink(ctaCard.link.href)}
+                  internalLinkIcon={<ArrowForwardIcon />}
+                />
+              }
+              {...(ctaCard.link.ariaLabel && {
+                'aria-label': ctaCard.link.ariaLabel,
+              })}
               sx={{
                 '& .MuiButtonBase-root': { color: textColorAlternative },
                 '& .MuiSvgIcon-root': { fontSize: '20px' },
@@ -162,7 +174,7 @@ export default function SideDrawer({
                 padding: 0,
               }}
             >
-              {ctaCard.buttonText}
+              {ctaCard.link.label}
             </Button>
           </div>
           <Divider sx={{ marginBottom: 2, marginTop: 2 }} />

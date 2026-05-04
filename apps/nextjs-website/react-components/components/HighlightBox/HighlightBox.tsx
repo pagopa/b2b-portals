@@ -1,6 +1,7 @@
 import { Grid, Stack, Button, Typography, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import { HighlightBoxProps } from '../../types/HighlightBox/HighlightBox.types';
+import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
 
 const HighlightBox = ({
   title,
@@ -78,6 +79,7 @@ const HighlightBox = ({
                 }}
               >
                 {link.label}
+                <ExternalLinkIcon show={isValidExternalLink(link.href)} />
               </Button>
             )}
           </Stack>
