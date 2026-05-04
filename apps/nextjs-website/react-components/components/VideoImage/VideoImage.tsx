@@ -140,7 +140,6 @@ const VideoImage = ({
                       color: textColor,
                       cursor: 'pointer',
                       alignSelf: 'flex-start',
-                      fontFamily: '"Titillium Web", sans-serif',
                     }}
                   >
                     {mediaState === 'pause'

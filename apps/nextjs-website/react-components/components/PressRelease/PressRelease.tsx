@@ -44,7 +44,6 @@ const PressRelease = (props: PressReleaseProps) => {
               href={backlink.href}
               color={backlinkColor}
               underline='none'
-              fontFamily='"Titillium Web",sans-serif'
               fontWeight='bold'
               fontSize='16px'
               {...(backlink.ariaLabel && { 'aria-label': backlink.ariaLabel })}

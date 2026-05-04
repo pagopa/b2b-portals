@@ -3,6 +3,7 @@
 import { DynamicsForm as DynamicsFormRC } from '@react-components/components';
 import { DynamicsFormSectionProps } from '@/lib/fetch/types/PageSection';
 import { Box, useTheme } from '@mui/material';
+import { getThemeVariantFont } from '@react-components/components/common/Common.helpers';
 
 const DynamicsForm = (
   props: DynamicsFormSectionProps & { themeVariant: 'SEND' | 'IO' | 'WALLET' },
@@ -21,6 +22,8 @@ const DynamicsForm = (
     }
   })();
 
+  const fontFamily = getThemeVariantFont(themeVariant);
+
   return (
     <Box
       sx={{
@@ -36,12 +39,12 @@ const DynamicsForm = (
         },
         '.textFormFieldBlock label, .dateTimeFormFieldBlock label, .lookupFormFieldBlock label, .twoOptionFormFieldBlock label.block-label, .optionSetFormFieldBlock label.block-label, .multiOptionSetFormFieldBlock label.block-label, div[data-editorblocktype="Captcha"] label[id^="wlspispHipInstructionContainer"], .textFormFieldBlock label *, .dateTimeFormFieldBlock label *, .lookupFormFieldBlock label *, .twoOptionFormFieldBlock label.block-label *, .optionSetFormFieldBlock label.block-label *, .multiOptionSetFormFieldBlock label.block-label *, .consentBlock label p':
           {
-            fontFamily: '"Titillium Web", sans-serif',
+            fontFamily,
             fontSize: '18px',
           },
         '.optionSetFormFieldBlock select, .textFormFieldBlock input, .dateTimeFormFieldBlock input, .lookupFormFieldBlock input, .marketingForm textarea, div[data-editorblocktype="Captcha"] input':
           {
-            fontFamily: '"Titillium Web", sans-serif',
+            fontFamily,
             borderRadius: '6px',
             fontSize: '18px',
             padding: '16.5px 14px',
@@ -65,16 +68,16 @@ const DynamicsForm = (
         },
         '.twoOptionFormFieldBlock div.radiobuttons, .twoOptionFormFieldBlock div.twooption_checkbox, .optionSetFormFieldBlock div.radiobuttons, .multiOptionSetFormFieldBlock fieldset':
           {
-            fontFamily: '"Titillium Web", sans-serif',
+            fontFamily,
           },
         '.twoOptionFormFieldBlock div.twooption_checkbox div label, .twoOptionFormFieldBlock div.twooption_checkbox div label div, .consentBlock div label p':
           {
-            fontFamily: '"Titillium Web", sans-serif',
+            fontFamily,
             fontSize: '16px',
           },
         '.marketingForm .primaryButton, .submitButton': {
           backgroundColor: primaryColor,
-          fontFamily: '"Titillium Web", sans-serif',
+          fontFamily,
           fontWeight: 600,
           fontSize: '16px',
           padding: '0px 24px',

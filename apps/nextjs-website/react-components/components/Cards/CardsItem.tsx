@@ -50,12 +50,7 @@ const CardsItem = ({
           minHeight: '200px',
         }}
       >
-        <Stack
-          px={4}
-          justifyContent='flex-start'
-          alignItems='flex-start'
-          fontFamily='"Titillium Web",sans-serif'
-        >
+        <Stack px={4} justifyContent='flex-start' alignItems='flex-start'>
           <Box mb={2} color='primary.dark'>
             {iconURL && <Image src={iconURL} alt='' height={40} width={40} />}
           </Box>
