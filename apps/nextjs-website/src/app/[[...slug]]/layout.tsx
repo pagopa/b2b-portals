@@ -13,6 +13,7 @@ import EmptyLayout from '@/components/EmptyLayout';
 import { themeExperimental, themeBase } from '../theme';
 import { CssBaseline } from '@mui/material';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
+import GlobalsWrapper from '@/components/GlobalsWrapper';
 
 const {
   getSiteWideSEO,
@@ -131,15 +132,18 @@ export default async function RootLayout({
   });
 
   return (
-    <ThemeProvider
-      theme={
-        isExperimentalThemeVariant(themeVariant) ? themeExperimental : themeBase
-      }
-    >
-      <CssBaseline />
-      <html lang={locale}>
-        <head>
-          <style>{`
+    <GlobalsWrapper locale={locale}>
+      <ThemeProvider
+        theme={
+          isExperimentalThemeVariant(themeVariant)
+            ? themeExperimental
+            : themeBase
+        }
+      >
+        <CssBaseline />
+        <html lang={locale}>
+          <head>
+            <style>{`
           html {
             scroll-behavior: smooth;
           }
@@ -156,70 +160,71 @@ export default async function RootLayout({
             scroll-margin-top: 100px;
           }
         `}</style>
-        </head>
-        <body style={{ margin: 0 }}>
-          <LocaleGuard
-            noLocaleSlug={slugWithoutLocale}
-            locale={locale}
-            defaultLocale={defaultLocale}
-            languages={activeLocalesArray}
-          >
-            {preHeaderProps && (
-              <PreHeader
-                {...preHeaderProps}
-                themeVariant={themeVariant}
-                locale={locale}
-                defaultLocale={defaultLocale}
-                {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
-              />
-            )}
-            <Header
-              {...headerProps}
+          </head>
+          <body style={{ margin: 0 }}>
+            <LocaleGuard
+              noLocaleSlug={slugWithoutLocale}
               locale={locale}
               defaultLocale={defaultLocale}
-            />
-            {children}
-            {preFooterProps && (
-              <PreFooter
-                {...preFooterProps}
-                themeVariant={themeVariant}
+              languages={activeLocalesArray}
+            >
+              {preHeaderProps && (
+                <PreHeader
+                  {...preHeaderProps}
+                  themeVariant={themeVariant}
+                  locale={locale}
+                  defaultLocale={defaultLocale}
+                  {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
+                />
+              )}
+              <Header
+                {...headerProps}
                 locale={locale}
                 defaultLocale={defaultLocale}
-                {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
               />
-            )}
-            <Footer
-              {...footerProps}
-              defaultLocale={defaultLocale}
-              localizedLinks={localizedLinks}
+              {children}
+              {preFooterProps && (
+                <PreFooter
+                  {...preFooterProps}
+                  themeVariant={themeVariant}
+                  locale={locale}
+                  defaultLocale={defaultLocale}
+                  {...(pressReleasesParentSlug && { pressReleasesParentSlug })}
+                />
+              )}
+              <Footer
+                {...footerProps}
+                defaultLocale={defaultLocale}
+                localizedLinks={localizedLinks}
+              />
+            </LocaleGuard>
+            <Script
+              src='/scripts/otnotice-1.0.min.js'
+              type='text/javascript'
+              id='otprivacy-notice-script'
+              strategy='beforeInteractive'
+              {...(oneTrustToken && { 'data-settings': oneTrustToken })}
             />
-          </LocaleGuard>
-          <Script
-            src='/scripts/otnotice-1.0.min.js'
-            type='text/javascript'
-            id='otprivacy-notice-script'
-            strategy='beforeInteractive'
-            {...(oneTrustToken && { 'data-settings': oneTrustToken })}
-          />
-          <Script
-            // Set Recaptcha Options in a Script tag to ensure it runs before any ReCaptcha is rendered
-            id='set-recaptcha-options'
-            type='text/javascript'
-            strategy='beforeInteractive'
-          >{`
+            <Script
+              // Set Recaptcha Options in a Script tag to ensure it runs before any ReCaptcha is rendered
+              id='set-recaptcha-options'
+              type='text/javascript'
+              strategy='beforeInteractive'
+            >{`
               if (typeof window !== 'undefined') {
                 window.recaptchaOptions = { useRecaptchaNet: true };
               }
             `}</Script>
-          {analytics && (
-            <ConsentHandler
-              {...analytics}
-              locale={locale}
-              themeVariant={themeVariant}
-            />
-          )}
-        </body>
-      </html>
-    </ThemeProvider>
+            {analytics && (
+              <ConsentHandler
+                {...analytics}
+                locale={locale}
+                themeVariant={themeVariant}
+              />
+            )}
+          </body>
+        </html>
+      </ThemeProvider>
+    </GlobalsWrapper>
   );
 }

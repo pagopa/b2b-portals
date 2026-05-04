@@ -30,6 +30,7 @@ import { MediaResourcesProps } from './MediaResources/MediaResources.types';
 import { DynamicsFormProps } from './DynamicsForm/DynamicsForm.types';
 import { TextAndImageProps } from './TextAndImage/TextAndImage.types';
 import { RichBannerProps } from './RichBanner/RichBanner.types';
+import { GlobalsWrapperProps } from './GlobalsWrapper/GlobalsWrapper.types';
 
 export type {
   HeroProps,
@@ -64,4 +65,5 @@ export type {
   DynamicsFormProps,
   TextAndImageProps,
   RichBannerProps,
+  GlobalsWrapperProps,
 };
