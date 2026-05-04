@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Box, Button, Typography, TypographyProps } from '@mui/material';
-import { Theme, useTheme } from '@mui/material/styles';
+import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { useMixpanelTracking } from './tracking';
 import {
@@ -11,11 +11,13 @@ import {
   resolveByThemeVariant,
   variantAccentColorMap,
 } from '../../theme';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const CtaButton = ({
   trackEvent,
   openInNewTab,
   ariaLabel,
+  showExternalLinkIcon = true,
   ...buttonProps
 }: CtaButtonProps & {
   trackEvent?: string;
@@ -40,6 +42,9 @@ const CtaButton = ({
       {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {buttonProps.text}
+      <ExternalLinkIcon
+        show={showExternalLinkIcon && isValidExternalLink(buttonProps.href)}
+      />
     </Button>
   );
 };
@@ -50,12 +55,14 @@ export const CtaButtons = ({
   themeVariant = 'IO',
   disableRipple = false,
   trackEvent,
+  showExternalLinkIcon = true,
 }: {
   ctaButtons: ReadonlyArray<CtaButtonProps | JSX.Element>;
   theme?: 'dark' | 'light';
   themeVariant?: ThemeVariant;
   disableRipple?: boolean;
   trackEvent?: string;
+  showExternalLinkIcon?: boolean;
 }) => {
   const { palette } = useTheme();
   const ctx = { palette, theme };
@@ -75,6 +82,7 @@ export const CtaButtons = ({
             color={theme === 'dark' ? 'negative' : 'primary'}
             variant={button.variant || 'contained'}
             disableRipple={disableRipple}
+            showExternalLinkIcon={showExternalLinkIcon}
             style={{
               ...(button.variant === 'contained' && {
                 backgroundColor: resolveByThemeVariant(
@@ -373,3 +381,44 @@ export const getButtonStyles = (
     },
   };
 };
+
+export const isValidExternalLink = (URL?: string): boolean => {
+  if (!URL) {
+    return false;
+  }
+  return (
+    URL.toLowerCase().startsWith('http:') ||
+    URL.toLowerCase().startsWith('https:')
+  );
+};
+
+export const ExternalLinkIcon = ({
+  show = true,
+  className,
+  sx,
+}: {
+  show?: boolean;
+  className?: string;
+  sx?: SxProps;
+}) =>
+  show ? (
+    <ArrowOutwardIcon
+      sx={{ ml: 1, width: 24, height: 24, verticalAlign: 'middle', ...sx }}
+      {...(className && { className })}
+    />
+  ) : null;
+
+export const LinkIcon = ({
+  showExternalLinkIcon,
+  internalLinkIcon,
+  sxExternalLinkIcon,
+}: {
+  showExternalLinkIcon?: boolean;
+  internalLinkIcon: JSX.Element;
+  sxExternalLinkIcon?: SxProps;
+}) =>
+  showExternalLinkIcon ? (
+    <ExternalLinkIcon {...(sxExternalLinkIcon && { sx: sxExternalLinkIcon })} />
+  ) : (
+    internalLinkIcon
+  );

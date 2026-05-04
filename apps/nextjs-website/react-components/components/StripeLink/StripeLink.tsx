@@ -10,6 +10,7 @@ import {
   stripeLinkButtonTextColorMap,
   variantExtraBackgroundColorMap,
 } from '../../theme';
+import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 const StripeLink = ({
   iconURL,
@@ -101,7 +102,13 @@ const StripeLink = ({
                 backgroundColor: buttonBackgroundColor,
               },
             }}
-            endIcon={<ArrowForwardIcon color='inherit' />}
+            endIcon={
+              <LinkIcon
+                sxExternalLinkIcon={{ ml: 0 }}
+                showExternalLinkIcon={isValidExternalLink(link.href)}
+                internalLinkIcon={<ArrowForwardIcon color='inherit' />}
+              />
+            }
             href={link.href}
           >
             {link.label}

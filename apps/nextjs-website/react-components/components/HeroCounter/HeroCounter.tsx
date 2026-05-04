@@ -11,6 +11,7 @@ import {
   variantSectionBackgroundColorMap,
   variantAccentColorMap,
 } from '../../theme';
+import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 const HeroCounter = ({
   theme,
@@ -136,16 +137,22 @@ const HeroCounter = ({
             }}
           >
             {link.label}
-            <ArrowForwardIcon
-              sx={{
-                display: 'inline-block',
-                ml: 1,
-                fontSize: '1rem',
-                transition: 'transform 0.2s',
-                '&:hover': {
-                  transform: 'translateX(2px)',
-                },
-              }}
+
+            <LinkIcon
+              showExternalLinkIcon={isValidExternalLink(link.href)}
+              internalLinkIcon={
+                <ArrowForwardIcon
+                  sx={{
+                    display: 'inline-block',
+                    ml: 1,
+                    fontSize: '1rem',
+                    transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateX(2px)',
+                    },
+                  }}
+                />
+              }
             />
           </Typography>
         )}

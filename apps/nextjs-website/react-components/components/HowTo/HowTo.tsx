@@ -5,12 +5,12 @@ import ContainerRC from '../common/ContainerRC';
 import { TextColor } from '../common/Common.helpers';
 import { HowToProps } from '../../types/HowTo/HowTo.types';
 import { HowToStep } from './HowToStep';
-import { Title } from '../common/Common';
 import {
   resolveByThemeVariant,
   variantContentLinkColorMap,
   variantSectionBackgroundAlternativeGreyMap,
 } from '../../theme';
+import { isValidExternalLink, LinkIcon, Title } from '../common/Common';
 
 const HowTo = (props: HowToProps) => {
   const {
@@ -123,10 +123,15 @@ const HowTo = (props: HowToProps) => {
               fontWeight={600}
             >
               {link.label}
-              <ArrowForwardIcon
-                sx={{ ml: 1 }}
-                fontSize='small'
-                aria-hidden='true'
+              <LinkIcon
+                showExternalLinkIcon={isValidExternalLink(link.href)}
+                internalLinkIcon={
+                  <ArrowForwardIcon
+                    sx={{ ml: 1 }}
+                    fontSize='small'
+                    aria-hidden='true'
+                  />
+                }
               />
             </Link>
           </Typography>

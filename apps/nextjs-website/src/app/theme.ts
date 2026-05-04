@@ -1,6 +1,7 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
 import { theme as MUIItaliaTheme } from '@pagopa/mui-italia';
+import { FONT_THEME_EXPERIMENTAL } from '@react-components/components/common/Common.helpers';
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -58,7 +59,7 @@ declare module '@mui/material/styles' {
   // }
 }
 
-export const theme = createTheme(MUIItaliaTheme, {
+const themeStyles = {
   shadows: {
     custom: {
       boxShadow: '-6px -6px 19px 2px #002B551A',
@@ -107,4 +108,29 @@ export const theme = createTheme(MUIItaliaTheme, {
       outlineColor: '#0073e6',
     },
   },
+};
+
+const fontFamily = FONT_THEME_EXPERIMENTAL;
+export const themeExperimental = createTheme(MUIItaliaTheme, {
+  typography: {
+    fontFamily,
+    body1: { fontFamily },
+    body2: { fontFamily },
+    h1: { fontFamily },
+    h2: { fontFamily },
+    h3: { fontFamily },
+    h4: { fontFamily },
+    h5: { fontFamily },
+    h6: { fontFamily },
+    button: { fontFamily },
+    overline: { fontFamily },
+    subtitle1: { fontFamily },
+    subtitle2: { fontFamily },
+    caption: { fontFamily },
+  },
+  ...themeStyles,
 });
+
+export const themeBase = createTheme(MUIItaliaTheme, { ...themeStyles });
+
+export const theme = createTheme(MUIItaliaTheme, { ...themeStyles });
