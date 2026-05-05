@@ -61,6 +61,9 @@ jobs:
           pagopa_strapi_api_token: ${{ secrets.PAGOPA_STRAPI_TOKEN }}
           pagopa_strapi_api_base_url: ${{ vars.PAGOPA_STRAPI_URL }}
           pagopa_strapi_media_library: ${{ vars.PAGOPA_STRAPI_MEDIA_LIBRARY_S3_BUCKET_NAME }}
+          wallet_strapi_api_token: ${{ secrets.WALLET_STRAPI_TOKEN }}
+          wallet_strapi_api_base_url: ${{ vars.WALLET_STRAPI_URL }}
+          wallet_strapi_media_library: ${{ vars.WALLET_STRAPI_MEDIA_LIBRARY_S3_BUCKET_NAME }}
           cdn_path: ${{ vars.CDN_PATH }}
   
   notify:
