@@ -136,7 +136,8 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
     cloudfront_default_certificate = each.value.cdn_use_custom_certificate ? false : true
     acm_certificate_arn            = each.value.cdn_use_custom_certificate ? module.cdn_websites_ssl_certificate[each.key].acm_certificate_arn : null
     ssl_support_method             = each.value.cdn_use_custom_certificate ? "sni-only" : null
-    minimum_protocol_version       = "TLSv1.2_2021"
+
+    minimum_protocol_version = each.value.cdn_use_custom_certificate ? "TLSv1.2_2021" : null
   }
 }
 
