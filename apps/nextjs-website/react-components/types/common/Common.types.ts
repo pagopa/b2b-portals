@@ -57,3 +57,5 @@ export interface LinkProps {
   readonly href: string;
   readonly ariaLabel?: string;
 }
+
+export type Locale = 'it' | 'en' | 'de' | 'fr' | 'sl';

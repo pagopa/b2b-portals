@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 import Script from 'next/script';
 import { themeBase, themeExperimental } from '../theme';
+import GlobalsWrapper from '@/components/GlobalsWrapper';
 
 const {
   getAllPageIDs,
@@ -92,18 +93,20 @@ const PreviewPage = async ({
         strategy='beforeInteractive'
         {...(oneTrustToken && { 'data-settings': oneTrustToken })}
       />
-      <div>
-        {document.sections.map((section) =>
-          PageSection({
-            ...section,
-            themeVariant,
-            locale: document.locale,
-            defaultLocale: document.locale, // Doesn't matter in preview
-            pressReleasePages,
-            ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
-          }),
-        )}
-      </div>
+      <GlobalsWrapper locale={locale}>
+        <>
+          {document.sections.map((section) =>
+            PageSection({
+              ...section,
+              themeVariant,
+              locale: document.locale,
+              defaultLocale: document.locale, // Doesn't matter in preview
+              pressReleasePages,
+              ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
+            }),
+          )}
+        </>
+      </GlobalsWrapper>
     </ThemeProvider>
   );
 };

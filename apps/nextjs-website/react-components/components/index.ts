@@ -30,6 +30,7 @@ import MediaResources from './MediaResources/MediaResources';
 import DynamicsForm from './DynamicsForm/DynamicsForm';
 import TextAndImage from './TextAndImage/TextAndImage';
 import RichBanner from './RichBanner/RichBanner';
+import GlobalsWrapper from './GlobalsWrapper/GlobalsWrapper';
 export {
   Hero,
   Editorial,
@@ -63,4 +64,5 @@ export {
   DynamicsForm,
   TextAndImage,
   RichBanner,
+  GlobalsWrapper,
 };
