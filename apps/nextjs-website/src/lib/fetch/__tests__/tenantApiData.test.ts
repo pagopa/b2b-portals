@@ -12,6 +12,8 @@ const strapiApiData: Omit<StrapiApiData, 'ENVIRONMENT'> = {
   SEND_STRAPI_API_TOKEN: 'SEND_STRAPI_API_TOKEN',
   PAGOPA_STRAPI_API_TOKEN: 'pagopaStrapiApiBaseUrl',
   PAGOPA_STRAPI_API_BASE_URL: 'pagopaStrapiToken',
+  WALLET_STRAPI_API_TOKEN: 'walletStrapiApiBaseUrl',
+  WALLET_STRAPI_API_BASE_URL: 'walletStrapiToken',
 };
 
 describe('extractTenantStrapiApiData', () => {
@@ -35,6 +37,10 @@ describe('extractTenantStrapiApiData', () => {
       }),
       pagopa: extractTenantStrapiApiData({
         ENVIRONMENT: 'pagopa',
+        ...strapiApiData,
+      }),
+      wallet: extractTenantStrapiApiData({
+        ENVIRONMENT: 'wallet',
         ...strapiApiData,
       }),
     };
