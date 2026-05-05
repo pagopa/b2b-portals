@@ -2,7 +2,10 @@ import { Config } from '@/AppEnv';
 import PageSection from '@/components/PageSection/PageSection';
 import { getPreviewToken, isPreviewMode, getters } from '@/lib/api';
 import { Locale } from '@/lib/fetch/siteWideSEO';
+import { ThemeProvider } from '@mui/material/styles';
+import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 import Script from 'next/script';
+import { themeBase, themeExperimental } from '../theme';
 
 const {
   getAllPageIDs,
@@ -50,7 +53,8 @@ const PreviewPage = async ({
   if (pageProps === undefined) {
     return {};
   }
-  const { oneTrustToken } = await getSiteWideSEO(tenant);
+  const { oneTrustToken, themeVariant, pressReleasesParentSlug } =
+    await getSiteWideSEO(tenant);
 
   const documentIDs = await (type === 'press-release'
     ? getAllPressReleaseIDs(tenant, locale)
@@ -68,11 +72,24 @@ const PreviewPage = async ({
       ? getPageSwitchPageDataFromID(tenant, documentID, locale)
       : getPageDataFromID(tenant, documentID, locale));
 
-  const { themeVariant, pressReleasesParentSlug } = await getSiteWideSEO();
   const pressReleasePages = await getPressReleasePages(locale);
 
   return (
-    <>
+    <ThemeProvider
+      theme={
+        isExperimentalThemeVariant(themeVariant) ? themeExperimental : themeBase
+      }
+    >
+      <style>{`
+          html {
+            scroll-behavior: smooth;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            html {
+              scroll-behavior: auto;
+            }
+          }
+        `}</style>
       <Script
         src='/scripts/otnotice-1.0.min.js'
         type='text/javascript'
@@ -97,7 +114,7 @@ const PreviewPage = async ({
           }),
         )}
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 

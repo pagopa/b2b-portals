@@ -1,7 +1,7 @@
 import { EditorialProps } from '../Editorial/Editorial.types';
 import { CardsProps } from '../Cards/Cards.types';
 import { BannerLinkProps } from '../BannerLink/BannerLink.types';
-import { ThemeVariant } from '@/lib/fetch/siteWideSEO';
+import { ThemeVariant } from '../common/Common.types';
 
 export interface PageSwitchBaseProps {
   title: string;

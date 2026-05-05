@@ -332,6 +332,20 @@ const Form = ({
     ) : null;
   };
 
+  const notesLinkColor =
+    theme === 'dark'
+      ? palette.custom.white
+      : (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.blueIO[500];
+            case 'WALLET':
+              return palette.custom.blueIO[500];
+          }
+        })();
+
   return (
     <Box
       sx={{
@@ -457,22 +471,43 @@ const Form = ({
             backgroundColor:
               theme === 'dark'
                 ? palette.custom.white
-                : themeVariant === 'SEND'
-                  ? palette.primary.main
-                  : palette.custom.blueIO[500],
+                : (() => {
+                    switch (themeVariant) {
+                      case 'SEND':
+                        return palette.primary.main;
+                      case 'IO':
+                        return palette.custom.blueIO[500];
+                      case 'WALLET':
+                        return palette.custom.blueIO[500];
+                    }
+                  })(),
             color:
               theme === 'dark'
-                ? themeVariant === 'SEND'
-                  ? palette.primary.main
-                  : palette.custom.blueIO[500]
+                ? (() => {
+                    switch (themeVariant) {
+                      case 'SEND':
+                        return palette.primary.main;
+                      case 'IO':
+                        return palette.custom.blueIO[500];
+                      case 'WALLET':
+                        return palette.custom.blueIO[500];
+                    }
+                  })()
                 : palette.custom.white,
             '&:hover': {
               backgroundColor:
                 theme === 'dark'
                   ? palette.custom.white
-                  : themeVariant === 'SEND'
-                    ? palette.primary.main
-                    : palette.custom.blueIO[500],
+                  : (() => {
+                      switch (themeVariant) {
+                        case 'SEND':
+                          return palette.primary.main;
+                        case 'IO':
+                          return palette.custom.blueIO[500];
+                        case 'WALLET':
+                          return palette.custom.blueIO[500];
+                      }
+                    })(),
             },
           }}
           onClick={handleSubmit}
@@ -529,10 +564,10 @@ const Form = ({
               zIndex: 3,
               color: graylinkColor,
               '& a': {
-                color: palette.custom.blueIO[500],
+                color: notesLinkColor,
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: palette.custom.blueIO[500],
+                  color: notesLinkColor,
                   textDecoration: 'underline',
                 },
               },

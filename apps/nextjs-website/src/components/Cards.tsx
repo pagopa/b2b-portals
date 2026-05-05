@@ -34,6 +34,7 @@ export const makeCardsProps = ({
   ...(titleTag && { titleTag }),
   items: items.map(({ icon, label, text, title, links }) => ({
     title,
+    themeVariant: rest.themeVariant,
     ...(icon && {
       iconURL: icon.url,
     }),

@@ -6,10 +6,14 @@ import {
   DropdownItem,
 } from '@react-components/types/Header/Header.types';
 import { DialogBubble } from './Header.DialogBubble.helpers';
+import {
+  ExternalLinkIcon,
+  isValidExternalLink,
+} from '@react-components/components/common/Common';
 
 const useStyles = (
   { active, alignRight }: MenuDropdownProp,
-  { spacing }: Theme
+  { spacing }: Theme,
 ) => {
   const muiTheme = useTheme();
 
@@ -101,6 +105,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             }}
           >
             {label}
+            <ExternalLinkIcon show={isValidExternalLink(button.href)} />
           </Typography>
         </Link>
         {hasLinks && (
@@ -142,6 +147,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
                 target={item.href?.startsWith('https://') ? '_blank' : '_self'}
               >
                 {item.label}
+                <ExternalLinkIcon show={isValidExternalLink(item.href)} />
               </Link>
             ))}
           </Stack>

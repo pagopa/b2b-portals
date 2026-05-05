@@ -1,4 +1,5 @@
 import { useTheme } from '@mui/material/styles';
+import { ThemeVariant } from '@react-components/types/common/Common.types';
 
 export const BackgroundColor = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
@@ -82,6 +83,13 @@ export const IoBackgroundColorAlternativeBlue = (theme: 'dark' | 'light') => {
     : palette.custom.backgroundColorLight;
 };
 
+export const SendBackgroundColorAlternativeBlue = (theme: 'dark' | 'light') => {
+  const { palette } = useTheme();
+  return theme === 'dark'
+    ? palette.custom.backgroundColorDarkAlternative
+    : palette.custom.backgroundColorLight;
+};
+
 export const IoBackgroundColorAlternativeGrey = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
   return theme === 'dark'
@@ -129,4 +137,20 @@ export const SendChipsBackgroundColorHover = (theme: 'dark' | 'light') => {
   return theme === 'dark'
     ? palette.custom.chipsBackgroundColorDarkHover
     : palette.custom.sendChipsBackgroundColorLightHover;
+};
+
+export const FONT_THEME_EXPERIMENTAL = '"Titillium Sans Pro", sans-serif';
+export const FONT_THEME_BASE = '"Titillium Web", sans-serif';
+
+const themeVariantsExperimentalFont = ['WALLET'];
+
+export const isExperimentalThemeVariant = (themeVariant: ThemeVariant) =>
+  themeVariantsExperimentalFont.includes(themeVariant);
+
+export const getThemeVariantFont = (themeVariant?: ThemeVariant) => {
+  if (themeVariant && isExperimentalThemeVariant(themeVariant)) {
+    import('@react-components/styles/font-titillium-sans-pro.css');
+    return FONT_THEME_EXPERIMENTAL;
+  }
+  return FONT_THEME_BASE;
 };

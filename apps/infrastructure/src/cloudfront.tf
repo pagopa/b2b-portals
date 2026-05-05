@@ -136,7 +136,8 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
     cloudfront_default_certificate = each.value.cdn_use_custom_certificate ? false : true
     acm_certificate_arn            = each.value.cdn_use_custom_certificate ? module.cdn_websites_ssl_certificate[each.key].acm_certificate_arn : null
     ssl_support_method             = each.value.cdn_use_custom_certificate ? "sni-only" : null
-    minimum_protocol_version       = "TLSv1.2_2021"
+
+    minimum_protocol_version = each.value.cdn_use_custom_certificate ? "TLSv1.2_2021" : null
   }
 }
 
@@ -236,9 +237,9 @@ resource "aws_cloudfront_distribution" "cms_multitenant_medialibrary" {
     }
 
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0     # min time for objects to live in the distribution cache
-    default_ttl            = 3600  # default time for objects to live in the distribution cache
-    max_ttl                = 86400 # max time for objects to live in the distribution cache
+    min_ttl                = 0 # no cache
+    default_ttl            = 0 # no cache
+    max_ttl                = 0 # no cache
   }
 
   restrictions {

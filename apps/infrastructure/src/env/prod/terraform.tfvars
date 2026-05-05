@@ -18,4 +18,4 @@ dns_domain_name = {
 
 nextjs_app_image_tag = "217c4927ca3c6fefd3ae332ded97831eee973b98"
 
-cms_app_image_tag = "12cfab442db2c2e21ad83678d4894afb2d64d5c2"
+cms_app_image_tag = "175a79193a785035c8e9a40e547855e23da8c264"

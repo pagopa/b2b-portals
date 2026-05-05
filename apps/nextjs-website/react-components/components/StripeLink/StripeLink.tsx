@@ -8,6 +8,7 @@ import {
 } from '../common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
+import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 const StripeLink = ({
   iconURL,
@@ -19,10 +20,16 @@ const StripeLink = ({
 }: StripeLinkProps) => {
   const textColorWhiteOnly = TextColor('dark');
 
-  const extraBackgroundColor =
-    themeVariant === 'SEND'
-      ? SendExtraBackgroundColor(theme)
-      : IoExtraBackgroundColor(theme);
+  const extraBackgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendExtraBackgroundColor(theme);
+      case 'IO':
+        return IoExtraBackgroundColor(theme);
+      case 'WALLET':
+        return IoExtraBackgroundColor(theme);
+    }
+  })();
 
   const { palette } = useTheme();
   return (
@@ -82,25 +89,52 @@ const StripeLink = ({
               backgroundColor:
                 theme === 'light'
                   ? palette.custom.white
-                  : themeVariant === 'SEND'
-                    ? palette.primary.main
-                    : palette.custom.blueIO[500],
+                  : (() => {
+                      switch (themeVariant) {
+                        case 'SEND':
+                          return palette.primary.main;
+                        case 'IO':
+                          return palette.custom.blueIO[500];
+                        case 'WALLET':
+                          return palette.custom.blueIO[500];
+                      }
+                    })(),
               color:
                 theme === 'light'
-                  ? themeVariant === 'SEND'
-                    ? palette.primary.main
-                    : palette.custom.blueIO[500]
+                  ? (() => {
+                      switch (themeVariant) {
+                        case 'SEND':
+                          return palette.primary.main;
+                        case 'IO':
+                          return palette.custom.blueIO[500];
+                        case 'WALLET':
+                          return palette.custom.blueIO[500];
+                      }
+                    })()
                   : palette.custom.white,
               '&:hover': {
                 backgroundColor:
                   theme === 'light'
                     ? palette.custom.white
-                    : themeVariant === 'SEND'
-                      ? palette.primary.main
-                      : palette.custom.blueIO[500],
+                    : (() => {
+                        switch (themeVariant) {
+                          case 'SEND':
+                            return palette.primary.main;
+                          case 'IO':
+                            return palette.custom.blueIO[500];
+                          case 'WALLET':
+                            return palette.custom.blueIO[500];
+                        }
+                      })(),
               },
             }}
-            endIcon={<ArrowForwardIcon color='inherit'></ArrowForwardIcon>}
+            endIcon={
+              <LinkIcon
+                sxExternalLinkIcon={{ ml: 0 }}
+                showExternalLinkIcon={isValidExternalLink(link.href)}
+                internalLinkIcon={<ArrowForwardIcon color='inherit' />}
+              />
+            }
             href={link.href}
           >
             {link.label}

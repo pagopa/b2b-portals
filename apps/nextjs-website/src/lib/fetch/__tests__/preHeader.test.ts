@@ -14,6 +14,8 @@ const makeTestAppEnv = () => {
     INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
     PAGOPA_STRAPI_API_TOKEN: 'pagopaStrapiApiBaseUrl',
     PAGOPA_STRAPI_API_BASE_URL: 'pagopaStrapiToken',
+    WALLET_STRAPI_API_TOKEN: 'walletStrapiApiBaseUrl',
+    WALLET_STRAPI_API_BASE_URL: 'walletStrapiToken',
     ENVIRONMENT: 'demo',
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,

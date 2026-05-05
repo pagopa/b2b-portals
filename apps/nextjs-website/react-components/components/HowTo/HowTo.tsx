@@ -9,7 +9,7 @@ import {
 } from '../common/Common.helpers';
 import { HowToProps } from '../../types/HowTo/HowTo.types';
 import { HowToStep } from './HowToStep';
-import { Title } from '../common/Common';
+import { isValidExternalLink, LinkIcon, Title } from '../common/Common';
 
 const HowTo = (props: HowToProps) => {
   const {
@@ -23,10 +23,16 @@ const HowTo = (props: HowToProps) => {
     sectionID,
   } = props;
   const textColor = TextColor(theme);
-  const backgroundColor =
-    themeVariant === 'SEND'
-      ? SendBackgroundColorAlternativeGrey(theme)
-      : IoBackgroundColorAlternativeGrey(theme);
+  const backgroundColor = (() => {
+    switch (themeVariant) {
+      case 'SEND':
+        return SendBackgroundColorAlternativeGrey(theme);
+      case 'IO':
+        return IoBackgroundColorAlternativeGrey(theme);
+      case 'WALLET':
+        return IoBackgroundColorAlternativeGrey(theme);
+    }
+  })();
   const { palette, spacing } = useTheme();
 
   const alignment = { center: 'center', left: 'flex-start', right: 'flex-end' }[
@@ -35,9 +41,16 @@ const HowTo = (props: HowToProps) => {
 
   const linkColor =
     theme === 'light'
-      ? themeVariant === 'SEND'
-        ? palette.primary.main
-        : palette.custom.blueIO[500]
+      ? (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return palette.primary.main;
+            case 'IO':
+              return palette.custom.blueIO[500];
+            case 'WALLET':
+              return palette.custom.blueIO[500];
+          }
+        })()
       : palette.custom.white;
 
   return (
@@ -123,10 +136,15 @@ const HowTo = (props: HowToProps) => {
               fontWeight={600}
             >
               {link.label}
-              <ArrowForwardIcon
-                sx={{ ml: 1 }}
-                fontSize='small'
-                aria-hidden='true'
+              <LinkIcon
+                showExternalLinkIcon={isValidExternalLink(link.href)}
+                internalLinkIcon={
+                  <ArrowForwardIcon
+                    sx={{ ml: 1 }}
+                    fontSize='small'
+                    aria-hidden='true'
+                  />
+                }
               />
             </Link>
           </Typography>

@@ -56,12 +56,14 @@ Default.args = {
                 text: 'This is card 1',
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+                themeVariant: 'SEND',
               },
               {
                 title: 'Card 2',
                 text: 'This is card 2',
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+                themeVariant: 'SEND',
               },
             ],
             text: {
@@ -145,6 +147,7 @@ Default.args = {
                 text: 'This is card 3',
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+                themeVariant: 'SEND',
               },
             ],
             text: {
@@ -227,12 +230,14 @@ Default.args = {
                 text: 'This is card 4',
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+                themeVariant: 'SEND',
               },
               {
                 title: 'Card 5',
                 text: 'This is card 5',
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+                themeVariant: 'SEND',
               },
             ],
             text: {

@@ -15,6 +15,7 @@ export const LocaleCodec = t.keyof({
 export const ThemeVariantCodec = t.keyof({
   IO: null,
   SEND: null,
+  WALLET: null,
 });
 
 const MixpanelCodec = t.strict({

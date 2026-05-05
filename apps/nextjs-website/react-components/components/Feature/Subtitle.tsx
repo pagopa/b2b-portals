@@ -1,7 +1,7 @@
 import { Link, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Body } from '../common/Common';
+import { Body, isValidExternalLink, LinkIcon } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { FeatureStackItemProps } from '../../types/Feature/Feature.types';
 import { useTheme } from '@mui/material/styles';
@@ -12,9 +12,16 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
 
   const linkColor =
     theme === 'light'
-      ? themeVariant === 'SEND'
-        ? muiTheme.palette.primary.main
-        : muiTheme.palette.custom.blueIO[500]
+      ? (() => {
+          switch (themeVariant) {
+            case 'SEND':
+              return muiTheme.palette.primary.main;
+            case 'IO':
+              return muiTheme.palette.custom.blueIO[500];
+            case 'WALLET':
+              return muiTheme.palette.custom.blueIO[500];
+          }
+        })()
       : muiTheme.palette.common.white;
 
   return (
@@ -44,11 +51,16 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
               {item.link.label}
             </Link>
           </Typography>
-
-          <ArrowForwardIcon
-            sx={{
-              color: linkColor,
-            }}
+          <LinkIcon
+            sxExternalLinkIcon={{ ml: 0, color: linkColor }}
+            showExternalLinkIcon={isValidExternalLink(item.link.href)}
+            internalLinkIcon={
+              <ArrowForwardIcon
+                sx={{
+                  color: linkColor,
+                }}
+              />
+            }
           />
         </Stack>
       )}
