@@ -84,6 +84,8 @@ jobs:
                 INTEROP_STRAPI_API_BASE_URL=${{ vars.INTEROP_STRAPI_URL }}
                 PAGOPA_STRAPI_API_TOKEN=${{ secrets.PAGOPA_STRAPI_TOKEN }}
                 PAGOPA_STRAPI_API_BASE_URL=${{ vars.PAGOPA_STRAPI_URL }}
+                WALLET_STRAPI_API_TOKEN=${{ secrets.WALLET_STRAPI_TOKEN }}
+                WALLET_STRAPI_API_BASE_URL=${{ vars.WALLET_STRAPI_URL }}
 
       - name: Generate definition file
         run: aws ecs describe-task-definition --task-definition nextjs-task-def --query taskDefinition > task-definition.json

@@ -172,8 +172,25 @@ variable "websites_configs" {
           override = true
         }
       ]
+    },
+    "wallet" = {
+      origin_path                = "/wallet"
+      url_tenant                 = "wallet.b2bportals.pagopa.it"
+      create_certificate         = false
+      create_distribution        = true
+      cdn_use_custom_certificate = false
+      cdn_use_alias              = false
+      cdn_indexing_enable        = false
+      custom_headers = [
+        {
+          header   = "Server"
+          value    = "None"
+          override = true
+        }
+      ]
     }
   }
+
 }
 
 variable "nextjs_app_port" {
