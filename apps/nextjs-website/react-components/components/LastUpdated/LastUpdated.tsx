@@ -11,7 +11,7 @@ const LastUpdated = ({
   return (
     <Box
       component='section'
-      py={{ xs: 3, md: 5 }}
+      sx={{ backgroundColor: '#ffffff', py: { xs: 3, md: 5 } }}
       {...(sectionID && { sectionID })}
     >
       <Container sx={{ px: 3, width: { xs: '100%', md: '75%' } }}>

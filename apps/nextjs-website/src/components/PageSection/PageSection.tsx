@@ -27,11 +27,12 @@ import MediaResources from '../MediaResources';
 import DynamicsForm from '../DynamicsForm';
 import Redirect from '../Redirect';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
-import { PagePublishDates, SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleasePage } from '@/lib/fetch/pressRelease';
 import TextAndImage from '../TextAndImage';
 import RichBanner from '../RichBanner';
 import LastUpdated from '../LastUpdated';
+import { PagePublishDates } from '@/lib/fetch/navigation';
 
 // eslint-disable-next-line complexity
 const PageSection = (

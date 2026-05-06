@@ -26,7 +26,6 @@ export const pressReleaseToPageDataArray = (
             ...item.pressRelease,
           },
         ],
-    createdAt: item.createdAt,
     updatedAt: item.updatedAt,
     ...(item.publishedAt && { publishedAt: item.publishedAt }),
   }));
@@ -53,5 +52,7 @@ export const previewPressReleaseToPreviewPageData = (
             ...pressRelease.data.pressRelease,
           },
         ],
+    publishedAt: pressRelease.data.publishedAt,
+    updatedAt: pressRelease.data.updatedAt,
   },
 });

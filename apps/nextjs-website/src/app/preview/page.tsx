@@ -16,7 +16,6 @@ const {
   getPressReleaseDataFromID,
   getPressReleasePages,
   getSiteWideSEO,
-  getPageProps,
 } = getters;
 
 const PreviewPage = async ({
@@ -49,10 +48,6 @@ const PreviewPage = async ({
     return <div>404: Missing parameters</div>;
   }
 
-  const pageProps = await getPageProps(locale, '');
-  if (pageProps === undefined) {
-    return {};
-  }
   const { oneTrustToken, themeVariant, pressReleasesParentSlug } =
     await getSiteWideSEO(tenant);
 
@@ -105,11 +100,10 @@ const PreviewPage = async ({
             locale: document.locale,
             defaultLocale: document.locale, // Doesn't matter in preview
             pressReleasePages,
-            createdAt: pageProps.createdAt,
-            updatedAt: pageProps.updatedAt,
+            updatedAt: document.updatedAt,
             ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
-            ...(pageProps.publishedAt && {
-              publishedAt: pageProps.publishedAt,
+            ...(document.publishedAt && {
+              publishedAt: document.publishedAt,
             }),
           }),
         )}

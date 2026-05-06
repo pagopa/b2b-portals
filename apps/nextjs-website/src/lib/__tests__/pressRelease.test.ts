@@ -35,7 +35,6 @@ const pressReleases: PressReleases = {
         },
       },
       credits: null,
-      createdAt: '2024-11-28T15:14:28.486Z',
       publishedAt: '2024-11-28T15:14:29.486Z',
       updatedAt: '2024-11-28T15:14:28.486Z',
     },
@@ -64,7 +63,6 @@ const pressReleases: PressReleases = {
         },
       },
       credits: null,
-      createdAt: '2024-11-28T15:14:28.486Z',
       publishedAt: '2024-11-28T15:14:29.486Z',
       updatedAt: '2024-11-28T15:14:28.486Z',
     },
@@ -100,6 +98,8 @@ const previewPressReleaseData: PreviewPressReleaseData = {
       imageLinkTitle: null,
       imageLinkUrl: null,
     },
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 const previewPageData: PreviewPageData = {
@@ -135,6 +135,8 @@ const previewPageData: PreviewPageData = {
         imageLinkUrl: null,
       },
     ],
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 
@@ -154,6 +156,8 @@ const previewPressReleaseDataNoCredits: PreviewPressReleaseData = {
       },
     },
     credits: null,
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 const previewPageDataNoCredits: PreviewPageData = {
@@ -174,6 +178,8 @@ const previewPageDataNoCredits: PreviewPageData = {
         },
       },
     ],
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 
@@ -190,7 +196,6 @@ describe('pressReleaseToPageDataArray', () => {
           },
         ],
         slug: ['press-releases', 'art-2'],
-        createdAt: '2024-11-28T15:14:28.486Z',
         publishedAt: '2024-11-28T15:14:29.486Z',
         updatedAt: '2024-11-28T15:14:28.486Z',
       },
@@ -203,7 +208,6 @@ describe('pressReleaseToPageDataArray', () => {
           },
         ],
         slug: ['press-releases', 'art-1'],
-        createdAt: '2024-11-28T15:14:28.486Z',
         publishedAt: '2024-11-28T15:14:29.486Z',
         updatedAt: '2024-11-28T15:14:28.486Z',
       },

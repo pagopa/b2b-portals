@@ -21,7 +21,7 @@ LastUpdatedSectionFull.args = {
   lastUpdated: '05 maggio 2026',
   licenseLink: {
     label: 'Licenza',
-    href: 'https://www.google.it',
+    href: 'https://storybook.b2bportals.pagopa.it/?path=/story/components-lastupdated',
     ariaLabel: 'a11y',
   },
 };

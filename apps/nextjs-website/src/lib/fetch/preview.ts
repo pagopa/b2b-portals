@@ -21,6 +21,8 @@ const PreviewPageDataCodec = t.strict({
   data: t.strict({
     locale: LocaleCodec,
     sections: t.array(PageSectionCodec),
+    updatedAt: t.string,
+    publishedAt: t.union([t.string, t.null]),
   }),
 });
 
@@ -29,6 +31,8 @@ const PreviewPressReleaseDataCodec = t.strict({
     locale: LocaleCodec,
     pressRelease: PressReleaseSectionContentCodec,
     credits: t.union([TextAndImageSectionContentCodec, t.null]),
+    updatedAt: t.string,
+    publishedAt: t.union([t.string, t.null]),
   }),
 });
 

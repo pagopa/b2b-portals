@@ -1,8 +1,9 @@
 'use client';
-import { PagePublishDates, SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { LastUpdatedSection } from '@/lib/fetch/types/PageSection';
 import { LastUpdatedProps } from '@react-components/types/LastUpdated/LastUpdated.types';
 import { LastUpdated as LastUpdatedRC } from '@react-components/components';
+import { PagePublishDates } from '@/lib/fetch/navigation';
 
 const lastUpdatedLabels = {
   it: 'Ultimo aggiornamento',
@@ -42,7 +43,7 @@ const makeLastUpdatedProps = ({
     lastUpdated: formatDateToLocale(effectiveDate, locale),
     licenseLink: {
       href: licenseLink.href,
-      label: licenseLink.href,
+      label: licenseLink.label,
       ...(licenseLink.ariaLabel && { ariaLabel: licenseLink.ariaLabel }),
     },
     ...rest,
