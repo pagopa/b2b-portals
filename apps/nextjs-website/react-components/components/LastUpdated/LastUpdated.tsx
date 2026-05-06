@@ -1,6 +1,6 @@
 import { Box, Container, Link, Typography } from '@mui/material';
 import { LastUpdatedProps } from '@react-components/types/LastUpdated/LastUpdated.types';
-import { ExternalLinkIcon } from '../common/Common';
+import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
 
 const LastUpdated = ({
   lastUpdated,
@@ -31,7 +31,7 @@ const LastUpdated = ({
             sx={{ fontWeight: 'bold' }}
           >
             {licenseLink.label}
-            <ExternalLinkIcon show={true} />
+            <ExternalLinkIcon show={isValidExternalLink(licenseLink.href)} />
           </Link>
         </Box>
       </Container>

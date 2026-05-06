@@ -39,9 +39,7 @@ const makeLastUpdatedProps = ({
   const effectiveDate = lastUpdated ?? publishedAt ?? updatedAt;
   return {
     label: lastUpdatedLabels[locale],
-    ...(effectiveDate && {
-      lastUpdated: formatDateToLocale(effectiveDate, locale),
-    }),
+    lastUpdated: formatDateToLocale(effectiveDate, locale),
     licenseLink: {
       href: licenseLink.href,
       label: licenseLink.href,
