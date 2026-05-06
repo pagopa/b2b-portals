@@ -10,7 +10,13 @@
       "regex": "^[a-z]+[a-z\\-]*$"
     },
     "lastUpdated": {
-      "type": "datetime"
+      "type": "date"
+    },
+    "licenseLink": {
+      "type": "component",
+      "component": "components.link",
+      "repeatable": false,
+      "required": true
     }
   },
   "config": {}

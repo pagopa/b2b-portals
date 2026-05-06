@@ -5,11 +5,11 @@ import { LastUpdatedProps } from '@react-components/types/LastUpdated/LastUpdate
 import { LastUpdated as LastUpdatedRC } from '@react-components/components';
 
 const lastUpdatedLabels = {
-  it: 'Data ultimo aggiornamento',
-  en: 'Last updated date',
-  de: 'Datum der letzten Aktualisierung',
+  it: 'Ultimo aggiornamento',
+  en: 'Last updated',
+  de: 'Letzte Aktualisierung',
   fr: 'Dernière mise à jour',
-  sl: 'Datum zadnje posodobitve',
+  sl: 'Zadnja posodobitev',
 };
 
 const formatDateToLocale = (dateString: string, locale: string): string => {
@@ -23,8 +23,6 @@ const formatDateToLocale = (dateString: string, locale: string): string => {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
   });
 };
 
@@ -33,6 +31,7 @@ const makeLastUpdatedProps = ({
   lastUpdated,
   publishedAt,
   updatedAt,
+  licenseLink,
   ...rest
 }: LastUpdatedSection &
   SiteWidePageData &
@@ -43,6 +42,11 @@ const makeLastUpdatedProps = ({
     ...(effectiveDate && {
       lastUpdated: formatDateToLocale(effectiveDate, locale),
     }),
+    licenseLink: {
+      href: licenseLink.href,
+      label: licenseLink.href,
+      ...(licenseLink.ariaLabel && { ariaLabel: licenseLink.ariaLabel }),
+    },
     ...rest,
   };
 };
