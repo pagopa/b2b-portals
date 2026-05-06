@@ -11,6 +11,10 @@ import {
   HeaderSideDrawerCtaCardProps,
   HeaderSideDrawerLinkCardProps,
 } from '@react-components/types/Header/Header.types';
+import {
+  isValidExternalLink,
+  LinkIcon,
+} from '@react-components/components/common/Common';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorRight': {
@@ -152,7 +156,13 @@ export default function SideDrawer({
             <Button
               size='small'
               href={ctaCard.link.href}
-              endIcon={<ArrowForwardIcon />}
+              endIcon={
+                <LinkIcon
+                  sxExternalLinkIcon={{ ml: 0 }}
+                  showExternalLinkIcon={isValidExternalLink(ctaCard.link.href)}
+                  internalLinkIcon={<ArrowForwardIcon />}
+                />
+              }
               {...(ctaCard.link.ariaLabel && {
                 'aria-label': ctaCard.link.ariaLabel,
               })}

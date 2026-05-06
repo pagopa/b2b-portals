@@ -67,6 +67,7 @@ const PreHeader = ({
               },
             })),
             disableRipple: true,
+            showExternalLinkIcon: false,
           })}
         </Stack>
       )}
@@ -92,6 +93,7 @@ const PreHeader = ({
               },
             })),
             disableRipple: true,
+            showExternalLinkIcon: false,
           })}
         </Stack>
       )}

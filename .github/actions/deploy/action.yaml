@@ -65,6 +65,15 @@ inputs:
   pagopa_strapi_media_library:
     description: "The name of the AWS S3 Bucket used by PAGOPA's Strapi instance as Media Library"
     required: true
+  wallet_strapi_api_token:
+    description: 'The Token to communicate with Strapi'
+    required: false
+  wallet_strapi_api_base_url:
+    description: 'The API URL to communicate with Strapi'
+    required: false
+  wallet_strapi_media_library:
+    description: "The name of the AWS S3 Bucket used by WALLET's Strapi instance as Media Library"
+    required: true
   cdn_path:
     description: 'The CDN bucket S3 URL'
     required: false
@@ -100,6 +109,8 @@ runs:
         INTEROP_STRAPI_API_BASE_URL: ${{ inputs.interop_strapi_api_base_url }}
         PAGOPA_STRAPI_API_TOKEN: ${{ inputs.pagopa_strapi_api_token }}
         PAGOPA_STRAPI_API_BASE_URL: ${{ inputs.pagopa_strapi_api_base_url }}
+        WALLET_STRAPI_API_TOKEN: ${{ inputs.wallet_strapi_api_token }}
+        WALLET_STRAPI_API_BASE_URL: ${{ inputs.wallet_strapi_api_base_url }}
         CDN_PATH: ${{ inputs.cdn_path }}
       shell: bash
       run: npm run build -w nextjs-website
