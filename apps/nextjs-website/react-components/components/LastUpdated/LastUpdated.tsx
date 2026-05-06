@@ -6,7 +6,7 @@ const LastUpdated = ({
   lastUpdated,
   label,
   sectionID,
-  licenseLink,
+  link,
 }: LastUpdatedProps) => {
   return (
     <Box
@@ -24,14 +24,14 @@ const LastUpdated = ({
             {label}: {lastUpdated}
           </Typography>
           <Link
-            href={licenseLink.href}
-            {...(licenseLink.ariaLabel && {
-              'aria-label': licenseLink.ariaLabel,
+            href={link.href}
+            {...(link.ariaLabel && {
+              'aria-label': link.ariaLabel,
             })}
             sx={{ fontWeight: 'bold' }}
           >
-            {licenseLink.label}
-            <ExternalLinkIcon show={isValidExternalLink(licenseLink.href)} />
+            {link.label}
+            <ExternalLinkIcon show={isValidExternalLink(link.href)} />
           </Link>
         </Box>
       </Container>

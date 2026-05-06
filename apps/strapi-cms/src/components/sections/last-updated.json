@@ -12,7 +12,7 @@
     "lastUpdated": {
       "type": "date"
     },
-    "licenseLink": {
+    "link": {
       "type": "component",
       "component": "components.link",
       "repeatable": false,

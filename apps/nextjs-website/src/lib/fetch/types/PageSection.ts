@@ -131,7 +131,7 @@ const LastUpdatedCodec = t.strict({
   __component: t.literal('sections.last-updated'),
   sectionID: t.union([t.string, t.null]),
   lastUpdated: t.union([t.string, t.null]),
-  licenseLink: LinkCodec,
+  link: LinkCodec,
 });
 
 const HowToSectionCodec = t.strict({

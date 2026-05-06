@@ -32,7 +32,7 @@ const makeLastUpdatedProps = ({
   lastUpdated,
   publishedAt,
   updatedAt,
-  licenseLink,
+  link,
   ...rest
 }: LastUpdatedSection &
   SiteWidePageData &
@@ -41,10 +41,10 @@ const makeLastUpdatedProps = ({
   return {
     label: lastUpdatedLabels[locale],
     lastUpdated: formatDateToLocale(effectiveDate, locale),
-    licenseLink: {
-      href: licenseLink.href,
-      label: licenseLink.label,
-      ...(licenseLink.ariaLabel && { ariaLabel: licenseLink.ariaLabel }),
+    link: {
+      href: link.href,
+      label: link.label,
+      ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
     },
     ...rest,
   };

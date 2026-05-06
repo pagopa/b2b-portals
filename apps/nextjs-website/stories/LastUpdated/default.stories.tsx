@@ -19,7 +19,7 @@ export const LastUpdatedSectionFull: StoryFn<typeof LastUpdated> =
 LastUpdatedSectionFull.args = {
   label: 'Ultimo aggiornamento',
   lastUpdated: '05 maggio 2026',
-  licenseLink: {
+  link: {
     label: 'Licenza',
     href: 'https://storybook.b2bportals.pagopa.it/?path=/story/components-lastupdated',
     ariaLabel: 'a11y',
