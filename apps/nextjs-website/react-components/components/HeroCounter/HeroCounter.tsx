@@ -3,12 +3,14 @@ import { Box, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContainerRC from '../common/ContainerRC';
 import { HeroCounterProps } from '@react-components/types/HeroCounter/HeroCounter.types';
-import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-  TextColor,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
+import {
+  resolveByThemeVariant,
+  variantContentLinkColorMap,
+  variantSectionBackgroundColorMap,
+  variantAccentColorMap,
+} from '../../theme';
 import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 const HeroCounter = ({
@@ -21,33 +23,21 @@ const HeroCounter = ({
   background,
   sectionID,
 }: HeroCounterProps) => {
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
-
-  const textColor = TextColor(theme);
   const { palette } = useTheme();
 
-  const linkColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.blueIO[500];
-            case 'WALLET':
-              return palette.custom.blueIO[500];
-          }
-        })()
-      : palette.custom.white;
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundColorMap,
+    themeVariant,
+    { palette, theme },
+  );
+
+  const textColor = TextColor(theme);
+
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   const BackgroundImage = (
     <Box
@@ -114,7 +104,6 @@ const HeroCounter = ({
             variant='body2'
             sx={{
               textAlign: 'left',
-
               '& a': {
                 color: linkColor,
                 textDecoration: 'underline',
@@ -180,9 +169,10 @@ const HeroCounter = ({
       >
         <Typography
           component='div'
-          color={
-            theme === 'light' ? palette.custom.primaryColorDark : textColor
-          }
+          color={resolveByThemeVariant(variantAccentColorMap, themeVariant, {
+            palette,
+            theme,
+          })}
           sx={{
             fontSize: { xs: '5.625rem', md: '8rem' },
             display: 'flex',

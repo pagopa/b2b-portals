@@ -2,14 +2,15 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import ContainerRC from '../common/ContainerRC';
 import { EditorialProps } from '../../types/Editorial/Editorial.types';
-import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-} from '../common/Common.helpers';
 import { Content as EditorialContent } from './Content';
 import { Ctas as EditorialCtas } from './Ctas';
 import { Image as EditorialImage } from './Image';
 import { useId } from 'react';
+import {
+  resolveByThemeVariant,
+  variantSectionBackgroundColorMap,
+} from '../../theme';
+import { useTheme } from '@mui/material/styles';
 
 const styles = {
   half: {
@@ -36,16 +37,16 @@ const Editorial = (props: EditorialProps) => {
     reversed = false,
     sectionID,
   } = props;
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+
+  const { palette } = useTheme();
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundColorMap,
+    themeVariant,
+    ctx,
+  );
+
   const columns = {
     wide: 6,
     center: 4,

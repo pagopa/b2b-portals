@@ -6,6 +6,7 @@ import { useTheme, useMediaQuery } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
 import { AppStoreButton, GooglePlayButton } from '../common/StoreButtons';
+import { resolveByThemeVariant, variantContentLinkColorMap } from '../../theme';
 
 export const getMinHeight = (size: 'medium' | 'big' | 'small' | undefined) =>
   size === 'big' ? '720px' : size === 'medium' ? '480px' : '220px';
@@ -31,21 +32,13 @@ export const HeroTextContent = ({
   const textColor = TextColor(theme);
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
-  const { palette } = useTheme();
+  const { palette } = muiTheme;
 
-  const linkColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.blueIO[500];
-            case 'WALLET':
-              return palette.custom.blueIO[500];
-          }
-        })()
-      : palette.custom.white;
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   return (
     <Stack

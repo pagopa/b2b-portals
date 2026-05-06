@@ -1,11 +1,12 @@
 import { Box, Typography, useTheme, Stack } from '@mui/material';
 import { MediaResourcesProps } from '@react-components/types';
-import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-  TextColor,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { FileDownloadOutlined } from '@mui/icons-material';
+import {
+  resolveByThemeVariant,
+  variantContentLinkColorMap,
+  variantSectionBackgroundColorMap,
+} from '../../theme';
 
 const MediaResources = ({
   items,
@@ -16,33 +17,22 @@ const MediaResources = ({
   labels,
 }: MediaResourcesProps) => {
   const muiTheme = useTheme();
+  const { palette } = muiTheme;
+  const ctx = { palette, theme };
 
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundColorMap,
+    themeVariant,
+    ctx,
+  );
 
   const textColor = TextColor(theme);
 
-  const linkColor =
-    theme === 'dark'
-      ? muiTheme.palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return muiTheme.palette.primary.main;
-            case 'IO':
-              return muiTheme.palette.custom.primaryColorDark;
-            case 'WALLET':
-              return muiTheme.palette.custom.primaryColorDark;
-          }
-        })();
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -95,7 +85,7 @@ const MediaResources = ({
                 style={{
                   marginBottom: '16px',
                   maxWidth: '90vw',
-                  maxHeight: '52.36vw', // Maintains same ratio (330/192 = 90/52.36)
+                  maxHeight: '52.36vw',
                   objectFit: 'cover',
                 }}
               />

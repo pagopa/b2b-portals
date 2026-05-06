@@ -1,15 +1,17 @@
 import { Box, Stack, Typography, useMediaQuery } from '@mui/material';
 import { CtaButtons } from '../common/Common';
-import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-  TextColor,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
+import {
+  resolveByThemeVariant,
+  variantContentLinkColorMap,
+  variantSectionBackgroundColorMap,
+  variantSectionStripeBackgroundsMap,
+} from '../../theme';
 
 const styles = {
   main: {
@@ -39,53 +41,29 @@ const BannerLink = ({
 }: BannerLinkProps) => {
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('md'));
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const { palette } = muiTheme;
+  const ctx = { palette, theme };
 
-  const lightBackgrounds = [
-    muiTheme.palette.grey[100],
-    muiTheme.palette.grey[50],
-  ];
-  const darkBackgroundsIo = [
-    muiTheme.palette.custom.bannerLinkDarkBlueIO,
-    muiTheme.palette.custom.bannerLinkLightBlueIO,
-  ];
-  const darkBackgroundsSend = [
-    muiTheme.palette.custom.bannerLinkDarkBlueSend,
-    muiTheme.palette.custom.bannerLinkLightBlueSend,
-  ];
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundColorMap,
+    themeVariant,
+    ctx,
+  );
 
-  const darkBackgroundsWallet = [
-    muiTheme.palette.custom.bannerLinkDarkBlueIO,
-    muiTheme.palette.custom.bannerLinkLightBlueIO,
-  ];
+  const sectionBackgrounds = resolveByThemeVariant(
+    variantSectionStripeBackgroundsMap,
+    themeVariant,
+    ctx,
+  );
 
   const textColor =
     theme === 'dark' ? muiTheme.palette.primary.contrastText : TextColor(theme);
 
-  const { palette } = useTheme();
-
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })();
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -102,19 +80,7 @@ const BannerLink = ({
               gap={2}
               sx={{
                 ...styles.main,
-                backgroundColor:
-                  theme === 'light'
-                    ? lightBackgrounds[index % 2]
-                    : (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return darkBackgroundsSend[index % 2];
-                          case 'IO':
-                            return darkBackgroundsIo[index % 2];
-                          case 'WALLET':
-                            return darkBackgroundsWallet[index % 2];
-                        }
-                      })(),
+                backgroundColor: sectionBackgrounds[index % 2],
                 width: '100%',
                 flex: 1,
                 display: 'flex',

@@ -1,13 +1,13 @@
 'use client';
 import Image from 'next/image';
-import { Box, Typography, Stack } from '@mui/material';
-import {
-  SendBackgroundColor,
-  TextColor,
-} from '@react-components/components/common/Common.helpers';
+import { Box, Typography, Stack, useTheme } from '@mui/material';
 import EmptyImage from '@react-components/assets/Empty.png';
 import { usePathname } from 'next/navigation';
 import { ErrorPageProps } from '@react-components/types/ErrorPage/ErrorPage.types';
+import {
+  resolveByThemeVariant,
+  variantSectionBackgroundColorMap,
+} from '@react-components/theme';
 
 type Locale = ErrorPageProps['defaultLocale'];
 
@@ -38,6 +38,7 @@ const localizedTexts = {
 };
 
 const ErrorPage = ({ defaultLocale, validLocales }: ErrorPageProps) => {
+  const { palette } = useTheme();
   const pathname = usePathname();
 
   const isValidLocale = (locale: string): boolean => {
@@ -51,8 +52,13 @@ const ErrorPage = ({ defaultLocale, validLocales }: ErrorPageProps) => {
         ? pathname.substring(1, 3)
         : defaultLocale;
 
-  const backgroundColor = SendBackgroundColor('light');
-  const textColor = TextColor('light');
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundColorMap,
+    'SEND',
+    { palette, theme: 'light' },
+  );
+
+  const textColor = palette.text.primary;
   const texts = localizedTexts[locale as Locale];
 
   return (

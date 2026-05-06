@@ -54,6 +54,7 @@ export const Ctas = ({
       </Stack>
     );
   }
+
   if (Array.isArray(ctaButtons) && ctaButtons.length > 0) {
     return (
       <Stack
@@ -76,7 +77,7 @@ export const Ctas = ({
         })}
       </Stack>
     );
-  } else {
-    return null;
   }
+
+  return null;
 };

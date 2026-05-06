@@ -5,6 +5,7 @@ import { EditorialContentProps } from '../../types/Editorial/Editorial.types';
 import { Title } from '../common/Common';
 import { Eyelet } from './Editorial.helpers';
 import { TextColor, ExtraTextColor } from '../common/Common.helpers';
+import { resolveByThemeVariant, variantContentLinkColorMap } from '../../theme';
 
 export const Content = ({
   eyelet,
@@ -20,20 +21,13 @@ export const Content = ({
   const eyeletColor = ExtraTextColor(theme);
   const textColor = TextColor(theme);
   const maxTextWidth = breakpoints.values.md / 2;
+  const ctx = { palette, theme };
 
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })();
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Stack maxWidth={{ md: maxTextWidth }} gap={2}>

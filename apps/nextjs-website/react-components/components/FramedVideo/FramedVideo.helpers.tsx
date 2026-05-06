@@ -1,6 +1,7 @@
 import { Link, Stack, Typography, useTheme } from '@mui/material';
 import { RenderVideoProps } from '@react-components/types/FramedVideo/FramedVideo.types';
 import { TextColor } from '../common/Common.helpers';
+import { resolveByThemeVariant, variantContentLinkColorMap } from '../../theme';
 import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
 
 export const renderVideo = ({
@@ -74,19 +75,11 @@ export const renderTextSection = ({
   const textColor = TextColor(theme);
   const { palette } = useTheme();
 
-  const linkTextColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.blueIO[500];
-            case 'WALLET':
-              return palette.custom.blueIO[500];
-          }
-        })()
-      : palette.custom.white;
+  const linkTextColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   return (
     <Stack

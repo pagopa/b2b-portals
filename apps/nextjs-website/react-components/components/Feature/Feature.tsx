@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Grid, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import {
-  TextColor,
-  SendBackgroundColorAlternativeGrey,
-  IoBackgroundColorAlternativeGrey,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { Title } from '../common/Common';
 import { FeatureProps } from '../../types/Feature/Feature.types';
 import { FeatureStackItem } from './FeatureStackItem';
 import FeatureCarousel from './Feature.helpers';
+import {
+  resolveByThemeVariant,
+  variantSectionBackgroundAlternativeGreyMap,
+} from '../../theme';
 
 const Feature = ({
   title,
@@ -23,9 +23,11 @@ const Feature = ({
 }: FeatureProps) => {
   const [activeStep, setActiveStep] = useState(0);
   const muiTheme = useTheme();
+  const { palette } = muiTheme;
+  const ctx = { palette, theme };
 
   const handleStepChange = (step?: number) => {
-    if (step) {
+    if (step !== undefined) {
       setActiveStep(step);
     }
     return step;
@@ -33,20 +35,15 @@ const Feature = ({
 
   const textColor = TextColor(theme);
 
-  const backgroundColorAlernative = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColorAlternativeGrey(theme);
-      case 'IO':
-        return IoBackgroundColorAlternativeGrey(theme);
-      case 'WALLET':
-        return IoBackgroundColorAlternativeGrey(theme);
-    }
-  })();
+  const backgroundColorAlternative = resolveByThemeVariant(
+    variantSectionBackgroundAlternativeGreyMap,
+    themeVariant,
+    ctx,
+  );
 
   return (
     <ContainerRC
-      background={background ?? backgroundColorAlernative}
+      background={background ?? backgroundColorAlternative}
       py={{ xs: 4, sm: 4, md: 8 }}
       {...(sectionID && { sectionID })}
     >

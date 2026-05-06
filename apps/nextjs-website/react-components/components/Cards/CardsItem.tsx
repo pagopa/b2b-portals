@@ -4,6 +4,7 @@ import { CardsItemProps } from '../../types/Cards/Cards.types';
 import { Title, Body, isValidExternalLink, LinkIcon } from '../common/Common';
 import Image from 'next/image';
 import { useTheme } from '@mui/material/styles';
+import { resolveByThemeVariant, variantActionColorMap } from '../../theme';
 
 const CardsItem = ({
   title,
@@ -16,16 +17,11 @@ const CardsItem = ({
   masonry,
 }: CardsItemProps) => {
   const { palette } = useTheme();
-  const linkColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.primary.main;
-      case 'IO':
-        return palette.custom.blueIO[500];
-      case 'WALLET':
-        return palette.custom.blueIO[500];
-    }
-  })();
+
+  const linkColor = resolveByThemeVariant(variantActionColorMap, themeVariant, {
+    palette,
+    theme: 'light',
+  });
 
   return (
     <Card
@@ -68,7 +64,7 @@ const CardsItem = ({
           <Typography mb={2} component='div'>
             <Title
               variant='h6'
-              textColor={'inherit'}
+              textColor='inherit'
               title={title}
               marginBottom={1}
               textAlign='left'
@@ -76,7 +72,7 @@ const CardsItem = ({
           </Typography>
           <Body
             variant='body2'
-            textColor={'inherit'}
+            textColor='inherit'
             body={text}
             marginBottom={5}
             textAlign={textAlign}

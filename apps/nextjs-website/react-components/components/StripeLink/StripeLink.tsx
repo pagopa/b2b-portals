@@ -1,13 +1,15 @@
 import { Grid, Stack, Button, Box, useTheme, Typography } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import { StripeLinkProps } from '../../types/StripeLink/StripeLink.types';
-import {
-  SendExtraBackgroundColor,
-  IoExtraBackgroundColor,
-  TextColor,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
+import {
+  resolveByThemeVariant,
+  stripeLinkButtonBackgroundColorMap,
+  stripeLinkButtonTextColorMap,
+  variantExtraBackgroundColorMap,
+} from '../../theme';
 import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 const StripeLink = ({
@@ -19,19 +21,27 @@ const StripeLink = ({
   sectionID,
 }: StripeLinkProps) => {
   const textColorWhiteOnly = TextColor('dark');
-
-  const extraBackgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendExtraBackgroundColor(theme);
-      case 'IO':
-        return IoExtraBackgroundColor(theme);
-      case 'WALLET':
-        return IoExtraBackgroundColor(theme);
-    }
-  })();
-
   const { palette } = useTheme();
+  const ctx = { palette, theme };
+
+  const extraBackgroundColor = resolveByThemeVariant(
+    variantExtraBackgroundColorMap,
+    themeVariant,
+    ctx,
+  );
+
+  const buttonBackgroundColor = resolveByThemeVariant(
+    stripeLinkButtonBackgroundColorMap,
+    themeVariant,
+    ctx,
+  );
+
+  const buttonTextColor = resolveByThemeVariant(
+    stripeLinkButtonTextColorMap,
+    themeVariant,
+    ctx,
+  );
+
   return (
     <ContainerRC
       background={extraBackgroundColor}
@@ -86,46 +96,10 @@ const StripeLink = ({
             size='small'
             {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
             sx={{
-              backgroundColor:
-                theme === 'light'
-                  ? palette.custom.white
-                  : (() => {
-                      switch (themeVariant) {
-                        case 'SEND':
-                          return palette.primary.main;
-                        case 'IO':
-                          return palette.custom.blueIO[500];
-                        case 'WALLET':
-                          return palette.custom.blueIO[500];
-                      }
-                    })(),
-              color:
-                theme === 'light'
-                  ? (() => {
-                      switch (themeVariant) {
-                        case 'SEND':
-                          return palette.primary.main;
-                        case 'IO':
-                          return palette.custom.blueIO[500];
-                        case 'WALLET':
-                          return palette.custom.blueIO[500];
-                      }
-                    })()
-                  : palette.custom.white,
+              backgroundColor: buttonBackgroundColor,
+              color: buttonTextColor,
               '&:hover': {
-                backgroundColor:
-                  theme === 'light'
-                    ? palette.custom.white
-                    : (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return palette.primary.main;
-                          case 'IO':
-                            return palette.custom.blueIO[500];
-                          case 'WALLET':
-                            return palette.custom.blueIO[500];
-                        }
-                      })(),
+                backgroundColor: buttonBackgroundColor,
               },
             }}
             endIcon={

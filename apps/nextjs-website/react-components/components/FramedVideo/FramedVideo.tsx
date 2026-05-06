@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { FramedVideoProps } from '@react-components/types';
 import { renderVideo, renderTextSection } from './FramedVideo.helpers';
 import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-} from '../common/Common.helpers';
+  resolveByThemeVariant,
+  variantSectionBackgroundColorMap,
+} from '../../theme';
+import { useTheme } from '@mui/material/styles';
 
 const FramedVideo = ({
   videoURL,
@@ -18,6 +19,7 @@ const FramedVideo = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [error, setError] = useState(false);
   const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
+  const { palette } = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,16 +45,11 @@ const FramedVideo = ({
       : 'space-between'
     : 'center';
 
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   if (!videoURL) {
     return (

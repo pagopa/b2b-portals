@@ -1,14 +1,15 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-  TextColor,
-  LinkColor,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { HeroChipsProps } from '@react-components/types/HeroChips/HeroChips.types';
 import { ChipsBlock } from './HeroChips.helpers';
+import {
+  resolveByThemeVariant,
+  variantSectionBackgroundColorMap,
+  variantContentLinkColorMap,
+} from '../../theme';
+import { useTheme } from '@mui/material/styles';
 
 const HeroChips = (props: HeroChipsProps) => {
   const {
@@ -22,19 +23,19 @@ const HeroChips = (props: HeroChipsProps) => {
     ariaLabelChips,
   } = props;
 
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const { palette } = useTheme();
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   const textColor = TextColor(theme);
-  const linkColor = LinkColor(theme);
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    { palette, theme },
+  );
 
   const BackgroundImage = (
     <Box

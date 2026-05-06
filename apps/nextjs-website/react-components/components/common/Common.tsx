@@ -1,9 +1,16 @@
 import React, { ReactElement } from 'react';
-import { Button, Typography, TypographyProps } from '@mui/material';
+import { Box, Button, Typography, TypographyProps } from '@mui/material';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
-import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
+import {
+  ctaContainedBackgroundColorMap,
+  ctaContainedTextColorMap,
+  ctaOutlinedBorderColorMap,
+  ctaOutlinedTextColorMap,
+  resolveByThemeVariant,
+  variantAccentColorMap,
+} from '../../theme';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const CtaButton = ({
@@ -30,8 +37,8 @@ const CtaButton = ({
         themevariant: undefined,
       }}
       {...(openInNewTab && { target: '_blank' })}
-      {...(randomID && { id: randomID })} // Random ID used by Mixpanel to track links (overrides any existing ID)
-      {...(trackedOnClick && { onClick: trackedOnClick })} // Override onClick (if present) to add tracking
+      {...(randomID && { id: randomID })}
+      {...(trackedOnClick && { onClick: trackedOnClick })}
       {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {buttonProps.text}
@@ -58,6 +65,7 @@ export const CtaButtons = ({
   showExternalLinkIcon?: boolean;
 }) => {
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
   const isCtaButtonProps = (
     button: CtaButtonProps | JSX.Element,
@@ -77,61 +85,28 @@ export const CtaButtons = ({
             showExternalLinkIcon={showExternalLinkIcon}
             style={{
               ...(button.variant === 'contained' && {
-                backgroundColor:
-                  theme === 'dark'
-                    ? palette.custom.white
-                    : (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return palette.primary.main;
-                          case 'IO':
-                            return palette.custom.blueIO[500];
-                          case 'WALLET':
-                            return palette.custom.blueIO[500];
-                        }
-                      })(),
-                color:
-                  theme === 'dark'
-                    ? (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return palette.primary.main;
-                          case 'IO':
-                            return palette.custom.blueIO[500];
-                          case 'WALLET':
-                            return palette.custom.blueIO[500];
-                        }
-                      })()
-                    : palette.custom.white,
+                backgroundColor: resolveByThemeVariant(
+                  ctaContainedBackgroundColorMap,
+                  themeVariant,
+                  ctx,
+                ),
+                color: resolveByThemeVariant(
+                  ctaContainedTextColorMap,
+                  themeVariant,
+                  ctx,
+                ),
               }),
-
               ...(button.variant === 'outlined' && {
-                borderColor:
-                  theme === 'dark'
-                    ? palette.custom.matteWhiteBorder
-                    : (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return palette.primary.main;
-                          case 'IO':
-                            return palette.custom.blueIO[500];
-                          case 'WALLET':
-                            return palette.custom.blueIO[500];
-                        }
-                      })(),
-                color:
-                  theme === 'dark'
-                    ? palette.custom.white
-                    : (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return palette.primary.main;
-                          case 'IO':
-                            return palette.custom.blueIO[500];
-                          case 'WALLET':
-                            return palette.custom.blueIO[500];
-                        }
-                      })(),
+                borderColor: resolveByThemeVariant(
+                  ctaOutlinedBorderColorMap,
+                  themeVariant,
+                  ctx,
+                ),
+                color: resolveByThemeVariant(
+                  ctaOutlinedTextColorMap,
+                  themeVariant,
+                  ctx,
+                ),
               }),
             }}
             {...button}
@@ -263,7 +238,7 @@ const ElementSubtitle = (
         {
           style: { color: textColor, marginBottom },
           align: textAlign,
-          variant: variant,
+          variant,
         },
       )
     : null;
@@ -337,7 +312,7 @@ const ElementBody = (
         {
           style: { color: textColor, marginBottom },
           align: textAlign,
-          variant: variant,
+          variant,
         },
       )}
     </Box>
@@ -374,16 +349,14 @@ export const getButtonStyles = (
 ) => {
   const isSelected = sectionId === currentSectionId;
 
-  const variantColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.primary.main;
-      case 'IO':
-        return palette.custom.primaryColorDark;
-      case 'WALLET':
-        return palette.custom.primaryColorDark;
-    }
-  })();
+  const variantColor = resolveByThemeVariant(
+    variantAccentColorMap,
+    themeVariant,
+    {
+      palette,
+      theme,
+    },
+  );
 
   return {
     backgroundColor: isSelected

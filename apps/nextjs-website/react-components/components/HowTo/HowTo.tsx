@@ -2,13 +2,14 @@ import React from 'react';
 import { Box, Grid, Link, Typography, useTheme } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContainerRC from '../common/ContainerRC';
-import {
-  TextColor,
-  SendBackgroundColorAlternativeGrey,
-  IoBackgroundColorAlternativeGrey,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { HowToProps } from '../../types/HowTo/HowTo.types';
 import { HowToStep } from './HowToStep';
+import {
+  resolveByThemeVariant,
+  variantContentLinkColorMap,
+  variantSectionBackgroundAlternativeGreyMap,
+} from '../../theme';
 import { isValidExternalLink, LinkIcon, Title } from '../common/Common';
 
 const HowTo = (props: HowToProps) => {
@@ -23,35 +24,24 @@ const HowTo = (props: HowToProps) => {
     sectionID,
   } = props;
   const textColor = TextColor(theme);
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColorAlternativeGrey(theme);
-      case 'IO':
-        return IoBackgroundColorAlternativeGrey(theme);
-      case 'WALLET':
-        return IoBackgroundColorAlternativeGrey(theme);
-    }
-  })();
   const { palette, spacing } = useTheme();
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveByThemeVariant(
+    variantSectionBackgroundAlternativeGreyMap,
+    themeVariant,
+    ctx,
+  );
 
   const alignment = { center: 'center', left: 'flex-start', right: 'flex-end' }[
     stepsAlignment
   ];
 
-  const linkColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.blueIO[500];
-            case 'WALLET':
-              return palette.custom.blueIO[500];
-          }
-        })()
-      : palette.custom.white;
+  const linkColor = resolveByThemeVariant(
+    variantContentLinkColorMap,
+    themeVariant,
+    ctx,
+  );
 
   return (
     <ContainerRC
@@ -60,7 +50,6 @@ const HowTo = (props: HowToProps) => {
       {...(sectionID && { sectionID })}
     >
       <Grid item xs={12}>
-        {/** Section title */}
         <Title
           variant='h4'
           component='h2'
@@ -78,7 +67,6 @@ const HowTo = (props: HowToProps) => {
         gap='24px'
         sx={{ paddingLeft: '2em', paddingRight: '2em' }}
       >
-        {/** Steps */}
         <Box
           component='ol'
           sx={{
@@ -118,9 +106,8 @@ const HowTo = (props: HowToProps) => {
             </Box>
           ))}
         </Box>
-        {/** Link */}
         {link && (
-          <Typography component='span' display={'contents'}>
+          <Typography component='span' display='contents'>
             <Link
               sx={{
                 display: 'flex',

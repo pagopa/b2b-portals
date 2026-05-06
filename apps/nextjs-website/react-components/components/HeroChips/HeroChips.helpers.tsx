@@ -1,12 +1,11 @@
 import { Stack, Chip } from '@mui/material';
 import { ChipProps } from '@react-components/types/HeroChips/HeroChips.types';
-import {
-  SendChipsBackgroundColor,
-  IoChipsBackgroundColor,
-  SendChipsBackgroundColorHover,
-  IoChipsBackgroundColorHover,
-} from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
+import {
+  resolveByThemeVariant,
+  variantChipBackgroundColorMap,
+  variantChipBackgroundHoverColorMap,
+} from '../../theme';
 
 export const ChipsBlock = ({
   chips,
@@ -20,28 +19,19 @@ export const ChipsBlock = ({
   themeVariant: 'IO' | 'SEND' | 'WALLET';
 }) => {
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
-  const chipBackgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendChipsBackgroundColor(theme);
-      case 'IO':
-        return IoChipsBackgroundColor(theme);
-      case 'WALLET':
-        return IoChipsBackgroundColor(theme);
-    }
-  })();
+  const chipBackgroundColor = resolveByThemeVariant(
+    variantChipBackgroundColorMap,
+    themeVariant,
+    ctx,
+  );
 
-  const chipBackgroundColorHover = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendChipsBackgroundColorHover(theme);
-      case 'IO':
-        return IoChipsBackgroundColorHover(theme);
-      case 'WALLET':
-        return IoChipsBackgroundColorHover(theme);
-    }
-  })();
+  const chipBackgroundColorHover = resolveByThemeVariant(
+    variantChipBackgroundHoverColorMap,
+    themeVariant,
+    ctx,
+  );
 
   const chipTextColor = palette.custom.chipsTextColor;
 
