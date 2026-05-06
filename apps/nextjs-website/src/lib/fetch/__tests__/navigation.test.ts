@@ -55,6 +55,8 @@ const navigationResponse: Navigation = {
           sectionID: null,
         },
       ],
+      publishedAt: '2024-11-28T15:14:29.486Z',
+      updatedAt: '2024-11-28T15:14:28.486Z',
     },
   ],
 };
@@ -73,7 +75,7 @@ describe('getNavigation', () => {
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?locale=it&pagination[pageSize]=100
 &populate[0]=seo
-&populate[1]=sections.ctaButtons,sections.image,sections.mobileImage,sections.background,sections.link,sections.accordionItems,sections.decoration,sections.storeButtons,sections.categories,sections.counter,sections.icon,sections.chips,sections.bottomCTA
+&populate[1]=sections.ctaButtons,sections.image,sections.mobileImage,sections.background,sections.link,sections.accordionItems,sections.decoration,sections.storeButtons,sections.categories,sections.counter,sections.icon,sections.chips,sections.bottomCTA,sections.link
 &populate[2]=sections.items.links,sections.items.link,sections.items.icon,sections.items.resource,sections.items.thumbnail
 &populate[3]=sections.sections.icon,sections.sections.ctaButtons
 &populate[4]=sections.sections.content.image,sections.sections.content.mobileImage,sections.sections.content.ctaButtons,sections.sections.content.storeButtons
@@ -129,6 +131,8 @@ describe('getNavigation', () => {
               sectionID: null,
             },
           ],
+          publishedAt: '2024-11-28T15:14:29.486Z',
+          updatedAt: '2024-11-28T15:14:28.486Z',
         },
       ],
     };

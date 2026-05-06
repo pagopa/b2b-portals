@@ -25,5 +25,7 @@ export const mockPressReleasePages: Getters['getPressReleasePages'] =
         imageLinkUrl: 'mock',
         sectionID: 'mock',
       },
+      publishedAt: '2024-11-28T15:14:29.486Z',
+      updatedAt: '2024-11-28T15:14:28.486Z',
     },
   ];

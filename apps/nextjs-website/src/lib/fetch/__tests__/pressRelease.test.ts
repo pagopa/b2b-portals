@@ -32,7 +32,6 @@ const pressReleasesResponse = {
     {
       id: 2,
       slug: 'art-2',
-      createdAt: '2024-11-28T15:14:21.415Z',
       updatedAt: '2024-11-28T15:14:28.486Z',
       publishedAt: '2024-11-28T15:14:28.479Z',
       locale: 'it',
@@ -65,7 +64,6 @@ const pressReleasesResponse = {
     {
       id: 1,
       slug: 'art-1',
-      createdAt: '2024-11-28T15:13:04.655Z',
       updatedAt: '2024-11-28T15:33:16.408Z',
       publishedAt: '2024-11-28T15:13:19.076Z',
       locale: 'it',
@@ -159,6 +157,8 @@ describe('getNavigation', () => {
             },
           },
           credits: null,
+          updatedAt: '2024-11-28T15:14:28.486Z',
+          publishedAt: '2024-11-28T15:14:28.479Z',
         },
         {
           slug: 'art-1',
@@ -185,6 +185,8 @@ describe('getNavigation', () => {
             },
           },
           credits: null,
+          updatedAt: '2024-11-28T15:33:16.408Z',
+          publishedAt: '2024-11-28T15:13:19.076Z',
         },
       ],
     };

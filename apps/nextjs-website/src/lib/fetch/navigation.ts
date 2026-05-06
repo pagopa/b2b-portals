@@ -12,9 +12,16 @@ const NavigationCodec = t.strict({
       slug: t.string,
       seo: PageSEOCodec,
       sections: t.array(PageSectionCodec),
+      updatedAt: t.string,
+      publishedAt: t.union([t.string, t.null]),
     }),
   ),
 });
+
+export interface PagePublishDates {
+  readonly updatedAt: string;
+  readonly publishedAt?: string;
+}
 
 export type Navigation = t.TypeOf<typeof NavigationCodec>;
 
@@ -31,7 +38,7 @@ export const getNavigation = ({
         extractTenantStrapiApiData(config).baseUrl
       }/api/pages?locale=${locale}&pagination[pageSize]=100
 &populate[0]=seo
-&populate[1]=sections.ctaButtons,sections.image,sections.mobileImage,sections.background,sections.link,sections.accordionItems,sections.decoration,sections.storeButtons,sections.categories,sections.counter,sections.icon,sections.chips,sections.bottomCTA
+&populate[1]=sections.ctaButtons,sections.image,sections.mobileImage,sections.background,sections.link,sections.accordionItems,sections.decoration,sections.storeButtons,sections.categories,sections.counter,sections.icon,sections.chips,sections.bottomCTA,sections.link
 &populate[2]=sections.items.links,sections.items.link,sections.items.icon,sections.items.resource,sections.items.thumbnail
 &populate[3]=sections.sections.icon,sections.sections.ctaButtons
 &populate[4]=sections.sections.content.image,sections.sections.content.mobileImage,sections.sections.content.ctaButtons,sections.sections.content.storeButtons

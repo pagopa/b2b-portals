@@ -31,6 +31,8 @@ const navigation: Navigation = {
           sectionID: null,
         },
       ],
+      publishedAt: '2024-11-28T15:14:29.486Z',
+      updatedAt: '2024-11-28T15:14:28.486Z',
     },
     {
       slug: 'other-page',
@@ -58,6 +60,8 @@ const navigation: Navigation = {
           sectionID: null,
         },
       ],
+      publishedAt: '2024-11-28T15:14:29.486Z',
+      updatedAt: '2024-11-28T15:14:28.486Z',
     },
   ],
 };
@@ -70,11 +74,15 @@ describe('navigationToPageDataArray', () => {
         seo: navigation.data[0]!.seo,
         sections: navigation.data[0]!.sections,
         slug: [''],
+        publishedAt: '2024-11-28T15:14:29.486Z',
+        updatedAt: '2024-11-28T15:14:28.486Z',
       },
       {
         seo: navigation.data[1]!.seo,
         sections: navigation.data[1]!.sections,
         slug: ['other-page'],
+        publishedAt: '2024-11-28T15:14:29.486Z',
+        updatedAt: '2024-11-28T15:14:28.486Z',
       },
     ];
 

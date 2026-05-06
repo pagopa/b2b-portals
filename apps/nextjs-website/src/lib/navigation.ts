@@ -6,6 +6,8 @@ export interface PageData {
   readonly slug: ReadonlyArray<string>;
   readonly seo: PageSEO;
   readonly sections: ReadonlyArray<PageSection>;
+  readonly updatedAt: string;
+  readonly publishedAt?: string;
 }
 
 export const navigationToPageDataArray = (
@@ -15,4 +17,6 @@ export const navigationToPageDataArray = (
     slug: item.slug === 'homepage' ? [''] : [item.slug],
     seo: item.seo,
     sections: item.sections,
+    updatedAt: item.updatedAt,
+    ...(item.publishedAt && { publishedAt: item.publishedAt }),
   }));
