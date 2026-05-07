@@ -12,10 +12,11 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
   const textColor = TextColor(theme);
   const ctx = { palette, theme };
 
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : resolveThemeVariant<string>('actionColor', themeVariant, ctx);
+  const linkColor = resolveThemeVariant<string>(
+    'featureLinkColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Stack spacing={3} justifyContent='center' alignItems='center'>
@@ -27,11 +28,7 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
           alignItems='center'
           direction='row'
         >
-          <Typography
-            component='span'
-            variant='body1'
-            color={theme === 'light' ? 'text.primary' : linkColor}
-          >
+          <Typography component='span' variant='body1' color={linkColor}>
             <Link
               color={linkColor}
               href={item.link.href}

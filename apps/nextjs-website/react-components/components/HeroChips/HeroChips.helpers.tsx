@@ -29,6 +29,12 @@ export const ChipsBlock = ({
     ctx,
   );
 
+  const chipFocusOutlineColor = resolveThemeVariant<string>(
+    'chipFocusOutlineColor',
+    themeVariant,
+    ctx,
+  );
+
   const chipTextColor = palette.custom.chipsTextColor;
 
   return (
@@ -74,9 +80,7 @@ export const ChipsBlock = ({
                   backgroundColor: `${chipBackgroundColorHover} !important`,
                 },
                 '&:focus': {
-                  outline: `2px solid ${
-                    theme === 'light' ? chipBackgroundColor : 'white'
-                  }`,
+                  outline: `2px solid ${chipFocusOutlineColor}`,
                 },
                 cursor: 'pointer',
               }}

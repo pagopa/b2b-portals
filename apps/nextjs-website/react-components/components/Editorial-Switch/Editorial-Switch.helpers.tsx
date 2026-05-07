@@ -109,17 +109,29 @@ const SplitButton = ({
 
   const anchorRef = React.useRef<HTMLDivElement>(null);
 
-  const variantColor = resolveThemeVariant<string>(
-    'accentColor',
+  const buttonBackgroundColor = resolveThemeVariant<string>(
+    'switchButtonBackgroundColor',
     themeVariant,
     ctx,
   );
 
-  const borderColor =
-    theme === 'light' ? variantColor : palette.primary.contrastText;
+  const buttonTextColor = resolveThemeVariant<string>(
+    'switchButtonTextColor',
+    themeVariant,
+    ctx,
+  );
 
-  const textColor =
-    theme === 'light' ? variantColor : muiTheme.palette.primary.contrastText;
+  const buttonBorderColor = resolveThemeVariant<string>(
+    'switchButtonBorderColor',
+    themeVariant,
+    ctx,
+  );
+
+  const menuTextColor = resolveThemeVariant<string>(
+    'switchMenuTextColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <React.Fragment>
@@ -130,7 +142,7 @@ const SplitButton = ({
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          borderColor: borderColor,
+          borderColor: buttonBorderColor,
         }}
       >
         <Button
@@ -138,18 +150,12 @@ const SplitButton = ({
             onButtonClick(selectedButton.id);
           }}
           sx={{
-            backgroundColor:
-              theme === 'light'
-                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-                : 'transparent',
-            color: textColor,
-            borderColor: borderColor,
+            backgroundColor: buttonBackgroundColor,
+            color: buttonTextColor,
+            borderColor: buttonBorderColor,
             '&:hover': {
-              backgroundColor:
-                theme === 'light'
-                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-                  : 'transparent',
-              borderColor: borderColor,
+              backgroundColor: buttonBackgroundColor,
+              borderColor: buttonBorderColor,
             },
           }}
         >
@@ -161,22 +167,16 @@ const SplitButton = ({
           aria-haspopup='menu'
           onClick={handleButtonClick}
           sx={{
-            backgroundColor:
-              theme === 'light'
-                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-                : 'transparent',
-            color: textColor,
-            borderColor: borderColor,
+            backgroundColor: buttonBackgroundColor,
+            color: buttonTextColor,
+            borderColor: buttonBorderColor,
             '&:hover': {
-              backgroundColor:
-                theme === 'light'
-                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-                  : 'transparent',
-              borderColor: borderColor,
+              backgroundColor: buttonBackgroundColor,
+              borderColor: buttonBorderColor,
             },
           }}
         >
-          <ArrowDropDown sx={{ color: borderColor }} />
+          <ArrowDropDown sx={{ color: buttonBorderColor }} />
         </Button>
       </ButtonGroup>
       <Menu
@@ -208,14 +208,14 @@ const SplitButton = ({
                 button.id === selectedButton.id
                   ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                   : 'transparent',
-              color: variantColor,
+              color: menuTextColor,
               '&.Mui-selected': {
                 backgroundColor: 'rgba(224, 242, 255, 0.7)',
-                color: variantColor,
+                color: menuTextColor,
               },
               '&:hover': {
                 backgroundColor: 'rgba(224, 242, 255, 0.7)',
-                color: variantColor,
+                color: menuTextColor,
               },
             }}
           >
@@ -240,8 +240,14 @@ export const ButtonSwitchRowBlock = ({
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
   const ctx = { palette, theme };
 
-  const variantColor = resolveThemeVariant<string>(
-    'accentColor',
+  const buttonTextColor = resolveThemeVariant<string>(
+    'switchButtonTextColor',
+    themeVariant,
+    ctx,
+  );
+
+  const buttonBackgroundColor = resolveThemeVariant<string>(
+    'switchButtonBackgroundColor',
     themeVariant,
     ctx,
   );
@@ -261,13 +267,10 @@ export const ButtonSwitchRowBlock = ({
               button.id === selectedButton.id
                 ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                 : 'transparent',
-            color:
-              theme === 'light'
-                ? variantColor
-                : muiTheme.palette.primary.contrastText,
+            color: buttonTextColor,
             '&:hover': {
-              backgroundColor:
-                palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+              backgroundColor: buttonBackgroundColor,
+              color: buttonTextColor,
             },
           },
           variant: 'outlined',

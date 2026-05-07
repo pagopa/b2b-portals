@@ -1,6 +1,5 @@
 import { Box, Stack, Typography, useMediaQuery } from '@mui/material';
 import { CtaButtons } from '../common/Common';
-import { TextColor } from '../common/Common.helpers';
 import { BannerLinkProps } from '../../types/BannerLink/BannerLink.types';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
@@ -51,8 +50,11 @@ const BannerLink = ({
     ctx,
   );
 
-  const textColor =
-    theme === 'dark' ? muiTheme.palette.primary.contrastText : TextColor(theme);
+  const textColor = resolveThemeVariant<string>(
+    'bannerLinkTextColor',
+    themeVariant,
+    ctx,
+  );
 
   const linkColor = resolveThemeVariant<string>(
     'contentLinkColor',

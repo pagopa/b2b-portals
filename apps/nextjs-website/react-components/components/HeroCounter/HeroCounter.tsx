@@ -35,10 +35,11 @@ const HeroCounter = ({
     ctx,
   );
 
-  const counterColor =
-    theme === 'dark'
-      ? textColor
-      : resolveThemeVariant<string>('accentColor', themeVariant, ctx);
+  const counterColor = resolveThemeVariant<string>(
+    'heroCounterNumberColor',
+    themeVariant,
+    ctx,
+  );
 
   const BackgroundImage = (
     <Box

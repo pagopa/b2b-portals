@@ -235,6 +235,102 @@ export const variantSectionStripeBackgroundsMap: ThemeVariantMap<string[]> = {
         ],
 };
 
+export const switchButtonBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? 'transparent'
+      : palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? 'transparent'
+      : palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? 'transparent'
+      : palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+};
+
+export const switchButtonTextColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.primary.main,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.primaryColorDark,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.primaryColorDark,
+};
+
+export const switchButtonBorderColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.primary.main,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.primaryColorDark,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.primaryColorDark,
+};
+
+export const switchMenuTextColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.main : palette.primary.main,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.primaryColorDark
+      : palette.custom.primaryColorDark,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.primaryColorDark
+      : palette.custom.primaryColorDark,
+};
+
+export const featureLinkColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.white : palette.primary.main,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.white : palette.custom.blueIO[500],
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.white : palette.custom.blueIO[500],
+};
+
+export const chipFocusOutlineColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.white
+      : palette.custom.sendChipsBackgroundColorLight,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.white
+      : palette.custom.ioChipsBackgroundColorLight,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.white
+      : palette.custom.ioChipsBackgroundColorLight,
+};
+
+export const heroCounterNumberColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.white : palette.primary.main,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.white : palette.custom.primaryColorDark,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.white : palette.custom.primaryColorDark,
+};
+
+export const bannerLinkTextColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
+};
+
 export const themeVariantMaps = {
   accentColor: variantAccentColorMap,
   actionColor: variantActionColorMap,
@@ -253,6 +349,14 @@ export const themeVariantMaps = {
   stripeLinkButtonBackgroundColor: stripeLinkButtonBackgroundColorMap,
   stripeLinkButtonTextColor: stripeLinkButtonTextColorMap,
   sectionStripeBackgrounds: variantSectionStripeBackgroundsMap,
+  switchButtonBackgroundColor: switchButtonBackgroundColorMap,
+  switchButtonTextColor: switchButtonTextColorMap,
+  switchButtonBorderColor: switchButtonBorderColorMap,
+  switchMenuTextColor: switchMenuTextColorMap,
+  featureLinkColor: featureLinkColorMap,
+  chipFocusOutlineColor: chipFocusOutlineColorMap,
+  heroCounterNumberColor: heroCounterNumberColorMap,
+  bannerLinkTextColor: bannerLinkTextColorMap,
 };
 
 export const resolveThemeVariant = <T>(
