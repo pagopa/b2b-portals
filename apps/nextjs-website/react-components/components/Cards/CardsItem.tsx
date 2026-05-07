@@ -99,11 +99,16 @@ const CardsItem = ({
                     fontSize={14}
                     fontWeight={600}
                     {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
-                    {...(link.href.startsWith('https') && { target: '_blank' })}
+                    {...(link.href.startsWith('https://') && {
+                      target: '_blank',
+                    })}
                   >
                     {link.label}
                   </Link>
                   <LinkIcon
+                    {...(link.href.startsWith('https://') && {
+                      externaLinkIconTarget: '_blank',
+                    })}
                     showExternalLinkIcon={isValidExternalLink(link.href)}
                     internalLinkIcon={
                       <ArrowRightAltIcon

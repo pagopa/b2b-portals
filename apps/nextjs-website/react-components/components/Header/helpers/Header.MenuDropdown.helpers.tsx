@@ -105,7 +105,10 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             }}
           >
             {label}
-            <ExternalLinkIcon show={isValidExternalLink(button.href)} />
+            <ExternalLinkIcon
+              show={isValidExternalLink(button.href)}
+              {...(button.href?.startsWith('https://') && { target: '_blank' })}
+            />
           </Typography>
         </Link>
         {hasLinks && (
@@ -147,7 +150,12 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
                 target={item.href?.startsWith('https://') ? '_blank' : '_self'}
               >
                 {item.label}
-                <ExternalLinkIcon show={isValidExternalLink(item.href)} />
+                <ExternalLinkIcon
+                  show={isValidExternalLink(item.href)}
+                  {...(item.href?.startsWith('https://') && {
+                    target: '_blank',
+                  })}
+                />
               </Link>
             ))}
           </Stack>

@@ -5,7 +5,7 @@ import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import { LocaleContext } from '../LocaleProvider/LocaleProvider';
+import { LabelsContext } from '../LabelsProvider/LabelsProvider';
 
 const CtaButton = ({
   trackEvent,
@@ -420,19 +420,27 @@ export const isValidExternalLink = (URL?: string): boolean => {
   );
 };
 
+interface ExternalLinkIconProps {
+  show?: boolean;
+  className?: string;
+  sx?: SxProps;
+  target?: string;
+}
+
 export const ExternalLinkIcon = ({
   show = true,
   className,
   sx,
-}: {
-  show?: boolean;
-  className?: string;
-  sx?: SxProps;
-}) => {
-  const { labels } = useContext(LocaleContext);
+  target,
+}: ExternalLinkIconProps) => {
+  const { externalLinkIconLabel } = useContext(LabelsContext);
   return show ? (
     <ArrowOutwardIcon
-      aria-label={labels.externalLinkIconLabel}
+      aria-label={
+        target === '_blank'
+          ? externalLinkIconLabel.targetBlank
+          : externalLinkIconLabel.default
+      }
       role='img'
       sx={{ ml: 1, width: 24, height: 24, verticalAlign: 'middle', ...sx }}
       {...(className && { className })}
@@ -440,17 +448,24 @@ export const ExternalLinkIcon = ({
   ) : null;
 };
 
+interface LinkIconProps {
+  showExternalLinkIcon?: boolean;
+  internalLinkIcon: JSX.Element;
+  sxExternalLinkIcon?: SxProps;
+  externaLinkIconTarget?: string;
+}
+
 export const LinkIcon = ({
   showExternalLinkIcon,
   internalLinkIcon,
   sxExternalLinkIcon,
-}: {
-  showExternalLinkIcon?: boolean;
-  internalLinkIcon: JSX.Element;
-  sxExternalLinkIcon?: SxProps;
-}) =>
+  externaLinkIconTarget,
+}: LinkIconProps) =>
   showExternalLinkIcon ? (
-    <ExternalLinkIcon {...(sxExternalLinkIcon && { sx: sxExternalLinkIcon })} />
+    <ExternalLinkIcon
+      {...(sxExternalLinkIcon && { sx: sxExternalLinkIcon })}
+      {...(externaLinkIconTarget && { target: externaLinkIconTarget })}
+    />
   ) : (
     internalLinkIcon
   );

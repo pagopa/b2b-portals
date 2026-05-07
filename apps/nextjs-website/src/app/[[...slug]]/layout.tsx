@@ -13,7 +13,7 @@ import EmptyLayout from '@/components/EmptyLayout';
 import { themeExperimental, themeBase } from '../theme';
 import { CssBaseline } from '@mui/material';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
-import LocaleProvider from '@/components/LocaleProvider';
+import LabelsProvider from '@/components/LabelsProvider';
 
 const {
   getSiteWideSEO,
@@ -132,7 +132,7 @@ export default async function RootLayout({
   });
 
   return (
-    <LocaleProvider locale={locale}>
+    <LabelsProvider locale={locale}>
       <ThemeProvider
         theme={
           isExperimentalThemeVariant(themeVariant)
@@ -225,6 +225,6 @@ export default async function RootLayout({
           </body>
         </html>
       </ThemeProvider>
-    </LocaleProvider>
+    </LabelsProvider>
   );
 }
