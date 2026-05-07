@@ -142,6 +142,7 @@ const pageSwitchPageDataResponse: PreviewPageData = {
         title: 'title',
         titleTag: 'h1',
         width: 'standard',
+        customBgColor: null,
       },
     ],
     publishedAt: '2024-11-28T15:14:29.486Z',

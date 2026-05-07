@@ -19,8 +19,10 @@ export const makeEditorialProps = ({
   storeButtons,
   titleTag,
   ariaLabelSection,
+  customBgColor,
   ...rest
 }: EditorialSection & SiteWidePageData): EditorialProps => ({
+  ...(customBgColor && { customBgColor }),
   ...(eyelet && { eyelet }),
   ...(titleTag && { titleTag }),
   ...(ariaLabelSection && { ariaLabelSection }),

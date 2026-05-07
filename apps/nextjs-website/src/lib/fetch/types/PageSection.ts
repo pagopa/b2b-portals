@@ -72,6 +72,7 @@ const EditorialContentCodec = t.strict({
   mobileImage: StrapiImageRequiredSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const EditorialSectionCodec = t.intersection([

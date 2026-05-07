@@ -14,6 +14,7 @@ export interface EditorialProps
   readonly reversed?: boolean;
   readonly width: 'wide' | 'standard' | 'center';
   readonly storeButtons?: StoreButtonsProps;
+  readonly customBgColor?: string;
 }
 
 export interface EditorialContentProps {
