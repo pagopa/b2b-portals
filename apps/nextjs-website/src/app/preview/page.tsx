@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 import Script from 'next/script';
 import { themeBase, themeExperimental } from '../theme';
+import LabelsProvider from '@/components/LabelsProvider';
 
 const {
   getAllPageIDs,
@@ -92,22 +93,24 @@ const PreviewPage = async ({
         strategy='beforeInteractive'
         {...(oneTrustToken && { 'data-settings': oneTrustToken })}
       />
-      <div>
-        {document.sections.map((section) =>
-          PageSection({
-            ...section,
-            themeVariant,
-            locale: document.locale,
-            defaultLocale: document.locale, // Doesn't matter in preview
-            pressReleasePages,
-            updatedAt: document.updatedAt,
-            ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
-            ...(document.publishedAt && {
-              publishedAt: document.publishedAt,
+      <LabelsProvider locale={locale}>
+        <>
+          {document.sections.map((section) =>
+            PageSection({
+              ...section,
+              themeVariant,
+              locale: document.locale,
+              defaultLocale: document.locale, // Doesn't matter in preview
+              pressReleasePages,
+              updatedAt: document.updatedAt,
+              ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
+              ...(document.publishedAt && {
+                publishedAt: document.publishedAt,
+              }),
             }),
-          }),
-        )}
-      </div>
+          )}
+        </>
+      </LabelsProvider>
     </ThemeProvider>
   );
 };

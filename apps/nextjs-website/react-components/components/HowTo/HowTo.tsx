@@ -126,6 +126,9 @@ const HowTo = (props: HowToProps) => {
               {link.label}
               <LinkIcon
                 showExternalLinkIcon={isValidExternalLink(link.href)}
+                {...(link.target === '_blank' && {
+                  externaLinkIconTarget: '_blank',
+                })}
                 internalLinkIcon={
                   <ArrowForwardIcon
                     sx={{ ml: 1 }}

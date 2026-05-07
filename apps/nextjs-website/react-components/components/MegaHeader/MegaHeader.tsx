@@ -286,6 +286,9 @@ const MegaHeader = ({
                                                   <ExternalLinkIcon
                                                     className='arrowIcon'
                                                     sx={{ ml: 0 }}
+                                                    {...(item.href.startsWith(
+                                                      'https://',
+                                                    ) && { target: '_blank' })}
                                                   />
                                                 ) : (
                                                   <ArrowForwardIcon className='arrowIcon' />
@@ -536,6 +539,9 @@ const MegaHeader = ({
                                     <ExternalLinkIcon
                                       className='arrowIcon'
                                       sx={{ ml: 0 }}
+                                      {...(item.href.startsWith('https://') && {
+                                        target: '_blank',
+                                      })}
                                     />
                                   ) : (
                                     <ArrowForwardIcon className='arrowIcon' />

@@ -1,10 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { Box, Button, Typography, TypographyProps } from '@mui/material';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { useMixpanelTracking } from './tracking';
 import { resolveThemeVariant } from '../../theme';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import { LabelsContext } from '../LabelsProvider/LabelsProvider';
 
 const CtaButton = ({
   trackEvent,
@@ -384,33 +385,52 @@ export const isValidExternalLink = (URL?: string): boolean => {
   );
 };
 
+interface ExternalLinkIconProps {
+  show?: boolean;
+  className?: string;
+  sx?: SxProps;
+  target?: string;
+}
+
 export const ExternalLinkIcon = ({
   show = true,
   className,
   sx,
-}: {
-  show?: boolean;
-  className?: string;
-  sx?: SxProps;
-}) =>
-  show ? (
+  target,
+}: ExternalLinkIconProps) => {
+  const { externalLinkIconLabel } = useContext(LabelsContext);
+  return show ? (
     <ArrowOutwardIcon
+      aria-label={
+        target === '_blank'
+          ? externalLinkIconLabel.targetBlank
+          : externalLinkIconLabel.default
+      }
+      role='img'
       sx={{ ml: 1, width: 24, height: 24, verticalAlign: 'middle', ...sx }}
       {...(className && { className })}
     />
   ) : null;
+};
+
+interface LinkIconProps {
+  showExternalLinkIcon?: boolean;
+  internalLinkIcon: JSX.Element;
+  sxExternalLinkIcon?: SxProps;
+  externaLinkIconTarget?: string;
+}
 
 export const LinkIcon = ({
   showExternalLinkIcon,
   internalLinkIcon,
   sxExternalLinkIcon,
-}: {
-  showExternalLinkIcon?: boolean;
-  internalLinkIcon: JSX.Element;
-  sxExternalLinkIcon?: SxProps;
-}) =>
+  externaLinkIconTarget,
+}: LinkIconProps) =>
   showExternalLinkIcon ? (
-    <ExternalLinkIcon {...(sxExternalLinkIcon && { sx: sxExternalLinkIcon })} />
+    <ExternalLinkIcon
+      {...(sxExternalLinkIcon && { sx: sxExternalLinkIcon })}
+      {...(externaLinkIconTarget && { target: externaLinkIconTarget })}
+    />
   ) : (
     internalLinkIcon
   );
