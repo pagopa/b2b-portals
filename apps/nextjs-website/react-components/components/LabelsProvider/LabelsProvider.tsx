@@ -8,14 +8,10 @@ export const LabelsContext = createContext<LabelsProviderProps>({
   },
 });
 
-interface LabelsProviderPropsRC extends LabelsProviderProps {
-  children: JSX.Element;
-}
-
 export default function LabelsProvider({
   externalLinkIconLabel,
   children,
-}: LabelsProviderPropsRC) {
+}: LabelsProviderProps & { children: JSX.Element }) {
   return (
     <LabelsContext.Provider value={{ externalLinkIconLabel }}>
       {children}
