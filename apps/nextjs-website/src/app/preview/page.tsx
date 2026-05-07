@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 import Script from 'next/script';
 import { themeBase, themeExperimental } from '../theme';
-import GlobalsWrapper from '@/components/GlobalsWrapper';
+import LocaleProvider from '@/components/LocaleProvider';
 
 const {
   getAllPageIDs,
@@ -93,7 +93,7 @@ const PreviewPage = async ({
         strategy='beforeInteractive'
         {...(oneTrustToken && { 'data-settings': oneTrustToken })}
       />
-      <GlobalsWrapper locale={locale}>
+      <LocaleProvider locale={locale}>
         <>
           {document.sections.map((section) =>
             PageSection({
@@ -106,7 +106,7 @@ const PreviewPage = async ({
             }),
           )}
         </>
-      </GlobalsWrapper>
+      </LocaleProvider>
     </ThemeProvider>
   );
 };

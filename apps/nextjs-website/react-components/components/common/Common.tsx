@@ -5,7 +5,7 @@ import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import { GlobalsContext } from '../GlobalsWrapper/GlobalsWrapper';
+import { LocaleContext } from '../LocaleProvider/LocaleProvider';
 
 const CtaButton = ({
   trackEvent,
@@ -429,17 +429,11 @@ export const ExternalLinkIcon = ({
   className?: string;
   sx?: SxProps;
 }) => {
-  const labels = {
-    it: 'Link esterno - Apre in una nuova scheda',
-    en: 'External link - Opens in a new tab',
-    de: 'Externer Link - wird in einem neuen Tab geöffnet',
-    fr: "Lien externe - S'ouvre dans un nouvel onglet",
-    sl: 'Zunanja povezava - Odpre se v novem zavihku',
-  };
-  const { locale } = useContext(GlobalsContext);
+  const { labels } = useContext(LocaleContext);
   return show ? (
     <ArrowOutwardIcon
-      titleAccess={labels[locale]}
+      aria-label={labels.externalLinkIconLabel}
+      role='img'
       sx={{ ml: 1, width: 24, height: 24, verticalAlign: 'middle', ...sx }}
       {...(className && { className })}
     />
