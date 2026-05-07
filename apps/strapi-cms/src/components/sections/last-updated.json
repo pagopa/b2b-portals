@@ -16,7 +16,7 @@
       "type": "component",
       "component": "components.link",
       "repeatable": false,
-      "required": true
+      "required": false
     }
   },
   "config": {}

@@ -14,9 +14,9 @@ const LastUpdatedTemplate: StoryFn<LastUpdatedProps> = (args) => (
   <LastUpdated {...args} />
 );
 
-export const LastUpdatedSectionFull: StoryFn<typeof LastUpdated> =
+export const LastUpdatedSectionWithLink: StoryFn<typeof LastUpdated> =
   LastUpdatedTemplate.bind({});
-LastUpdatedSectionFull.args = {
+LastUpdatedSectionWithLink.args = {
   label: 'Ultimo aggiornamento',
   lastUpdated: '05 maggio 2026',
   link: {
@@ -24,4 +24,11 @@ LastUpdatedSectionFull.args = {
     href: 'https://storybook.b2bportals.pagopa.it/?path=/story/components-lastupdated',
     ariaLabel: 'a11y',
   },
+};
+
+export const LastUpdatedSectionNoLink: StoryFn<typeof LastUpdated> =
+  LastUpdatedTemplate.bind({});
+LastUpdatedSectionNoLink.args = {
+  label: 'Ultimo aggiornamento',
+  lastUpdated: '05 maggio 2026',
 };

@@ -41,11 +41,13 @@ const makeLastUpdatedProps = ({
   return {
     label: lastUpdatedLabels[locale],
     lastUpdated: formatDateToLocale(effectiveDate, locale),
-    link: {
-      href: link.href,
-      label: link.label,
-      ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
-    },
+    ...(link && {
+      link: {
+        href: link.href,
+        label: link.label,
+        ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
+      },
+    }),
     ...rest,
   };
 };

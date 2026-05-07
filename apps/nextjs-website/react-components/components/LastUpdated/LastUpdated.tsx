@@ -23,16 +23,18 @@ const LastUpdated = ({
           <Typography variant='body2' sx={{ marginBottom: { xs: 3, md: 0 } }}>
             {label}: {lastUpdated}
           </Typography>
-          <Link
-            href={link.href}
-            {...(link.ariaLabel && {
-              'aria-label': link.ariaLabel,
-            })}
-            sx={{ fontWeight: 'bold' }}
-          >
-            {link.label}
-            <ExternalLinkIcon show={isValidExternalLink(link.href)} />
-          </Link>
+          {link && (
+            <Link
+              href={link.href}
+              {...(link.ariaLabel && {
+                'aria-label': link.ariaLabel,
+              })}
+              sx={{ fontWeight: 'bold' }}
+            >
+              {link.label}
+              <ExternalLinkIcon show={isValidExternalLink(link.href)} />
+            </Link>
+          )}
         </Box>
       </Container>
     </Box>
