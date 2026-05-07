@@ -102,6 +102,7 @@ const AccordionSectionCodec = t.strict({
     t.literal('right'),
   ]),
   sectionID: t.union([t.string, t.null]),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const FeatureItemCodec = t.strict({
