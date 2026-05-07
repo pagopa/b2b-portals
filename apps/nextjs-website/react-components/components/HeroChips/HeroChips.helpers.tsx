@@ -1,12 +1,7 @@
 import { Stack, Chip } from '@mui/material';
 import { ChipProps } from '@react-components/types/HeroChips/HeroChips.types';
-import {
-  SendChipsBackgroundColor,
-  IoChipsBackgroundColor,
-  SendChipsBackgroundColorHover,
-  IoChipsBackgroundColorHover,
-} from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
+import { resolveThemeVariant } from '../../theme';
 
 export const ChipsBlock = ({
   chips,
@@ -20,28 +15,25 @@ export const ChipsBlock = ({
   themeVariant: 'IO' | 'SEND' | 'WALLET';
 }) => {
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
-  const chipBackgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendChipsBackgroundColor(theme);
-      case 'IO':
-        return IoChipsBackgroundColor(theme);
-      case 'WALLET':
-        return IoChipsBackgroundColor(theme);
-    }
-  })();
+  const chipBackgroundColor = resolveThemeVariant<string>(
+    'chipBackgroundColor',
+    themeVariant,
+    ctx,
+  );
 
-  const chipBackgroundColorHover = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendChipsBackgroundColorHover(theme);
-      case 'IO':
-        return IoChipsBackgroundColorHover(theme);
-      case 'WALLET':
-        return IoChipsBackgroundColorHover(theme);
-    }
-  })();
+  const chipBackgroundColorHover = resolveThemeVariant<string>(
+    'chipBackgroundHoverColor',
+    themeVariant,
+    ctx,
+  );
+
+  const chipFocusOutlineColor = resolveThemeVariant<string>(
+    'chipFocusOutlineColor',
+    themeVariant,
+    ctx,
+  );
 
   const chipTextColor = palette.custom.chipsTextColor;
 
@@ -88,7 +80,7 @@ export const ChipsBlock = ({
                   backgroundColor: `${chipBackgroundColorHover} !important`,
                 },
                 '&:focus': {
-                  outline: `2px solid ${theme === 'light' ? chipBackgroundColor : 'white'}`,
+                  outline: `2px solid ${chipFocusOutlineColor}`,
                 },
                 cursor: 'pointer',
               }}

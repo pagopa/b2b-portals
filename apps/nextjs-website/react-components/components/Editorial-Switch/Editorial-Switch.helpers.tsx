@@ -16,6 +16,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
+import { resolveThemeVariant } from '../../theme';
 
 export const TitleSubtitleBlock = ({
   title,
@@ -26,20 +27,13 @@ export const TitleSubtitleBlock = ({
 }: EditorialSwitchBaseProps) => {
   const textColor = TextColor(theme);
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })();
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <div
@@ -94,9 +88,10 @@ const SplitButton = ({
   themeVariant,
 }: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
-  const { palette } = useTheme();
+  const { palette } = muiTheme;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [open, setOpen] = React.useState(false);
+  const ctx = { palette, theme };
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -114,33 +109,29 @@ const SplitButton = ({
 
   const anchorRef = React.useRef<HTMLDivElement>(null);
 
-  const borderColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return muiTheme.palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })()
-      : palette.primary.contrastText;
+  const buttonBackgroundColor = resolveThemeVariant<string>(
+    'switchButtonBackgroundColor',
+    themeVariant,
+    ctx,
+  );
 
-  const textColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return muiTheme.palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })()
-      : muiTheme.palette.primary.contrastText;
+  const buttonTextColor = resolveThemeVariant<string>(
+    'switchButtonTextColor',
+    themeVariant,
+    ctx,
+  );
+
+  const buttonBorderColor = resolveThemeVariant<string>(
+    'switchButtonBorderColor',
+    themeVariant,
+    ctx,
+  );
+
+  const menuTextColor = resolveThemeVariant<string>(
+    'switchMenuTextColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <React.Fragment>
@@ -151,7 +142,7 @@ const SplitButton = ({
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          borderColor: borderColor,
+          borderColor: buttonBorderColor,
         }}
       >
         <Button
@@ -159,18 +150,12 @@ const SplitButton = ({
             onButtonClick(selectedButton.id);
           }}
           sx={{
-            backgroundColor:
-              theme === 'light'
-                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-                : 'transparent',
-            color: textColor,
-            borderColor: borderColor,
+            backgroundColor: buttonBackgroundColor,
+            color: buttonTextColor,
+            borderColor: buttonBorderColor,
             '&:hover': {
-              backgroundColor:
-                theme === 'light'
-                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-                  : 'transparent',
-              borderColor: borderColor,
+              backgroundColor: buttonBackgroundColor,
+              borderColor: buttonBorderColor,
             },
           }}
         >
@@ -182,22 +167,16 @@ const SplitButton = ({
           aria-haspopup='menu'
           onClick={handleButtonClick}
           sx={{
-            backgroundColor:
-              theme === 'light'
-                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-                : 'transparent',
-            color: textColor,
-            borderColor: borderColor,
+            backgroundColor: buttonBackgroundColor,
+            color: buttonTextColor,
+            borderColor: buttonBorderColor,
             '&:hover': {
-              backgroundColor:
-                theme === 'light'
-                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-                  : 'transparent',
-              borderColor: borderColor,
+              backgroundColor: buttonBackgroundColor,
+              borderColor: buttonBorderColor,
             },
           }}
         >
-          <ArrowDropDown sx={{ color: borderColor }} />
+          <ArrowDropDown sx={{ color: buttonBorderColor }} />
         </Button>
       </ButtonGroup>
       <Menu
@@ -229,14 +208,14 @@ const SplitButton = ({
                 button.id === selectedButton.id
                   ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                   : 'transparent',
-              color: muiTheme.palette.primary.main,
+              color: menuTextColor,
               '&.Mui-selected': {
                 backgroundColor: 'rgba(224, 242, 255, 0.7)',
-                color: muiTheme.palette.primary.main,
+                color: menuTextColor,
               },
               '&:hover': {
                 backgroundColor: 'rgba(224, 242, 255, 0.7)',
-                color: muiTheme.palette.primary.main,
+                color: menuTextColor,
               },
             }}
           >
@@ -256,9 +235,22 @@ export const ButtonSwitchRowBlock = ({
   selectedButton,
 }: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
-  const { palette } = useTheme();
+  const { palette } = muiTheme;
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
+  const ctx = { palette, theme };
+
+  const buttonTextColor = resolveThemeVariant<string>(
+    'switchButtonTextColor',
+    themeVariant,
+    ctx,
+  );
+
+  const buttonBackgroundColor = resolveThemeVariant<string>(
+    'switchButtonBackgroundColor',
+    themeVariant,
+    ctx,
+  );
 
   return isLarge ? (
     <Stack
@@ -275,28 +267,17 @@ export const ButtonSwitchRowBlock = ({
               button.id === selectedButton.id
                 ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
                 : 'transparent',
-            color:
-              theme === 'light'
-                ? (() => {
-                    switch (themeVariant) {
-                      case 'SEND':
-                        return muiTheme.palette.primary.main;
-                      case 'IO':
-                        return palette.custom.primaryColorDark;
-                      case 'WALLET':
-                        return palette.custom.primaryColorDark;
-                    }
-                  })()
-                : muiTheme.palette.primary.contrastText,
+            color: buttonTextColor,
             '&:hover': {
-              backgroundColor:
-                palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+              backgroundColor: buttonBackgroundColor,
+              color: buttonTextColor,
             },
           },
           variant: 'outlined',
           onClick: () => onButtonClick(button.id),
         })),
         theme,
+        themeVariant,
       })}
     </Stack>
   ) : (

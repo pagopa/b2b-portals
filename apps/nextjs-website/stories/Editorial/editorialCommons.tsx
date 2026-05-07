@@ -12,12 +12,12 @@ export const EditorialTemplate: StoryFn<EditorialProps> = (args) => (
 export const generateCtaButtons = (count: number): CtaButtonProps[] =>
   Array.from({ length: count }, (_, i) => ({
     text: `CTA Button ${i + 1}`,
-    variant: 'contained',
+    variant: i % 2 === 0 ? 'contained' : 'outlined',
   }));
 
 // Function to generate default props
 const generateDefaultProps = (
-  theme: 'light' | 'dark'
+  theme: 'light' | 'dark',
 ): Partial<EditorialProps> => ({
   theme,
   title: 'Editorial Title',

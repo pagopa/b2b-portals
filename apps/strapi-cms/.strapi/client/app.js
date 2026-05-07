@@ -3,6 +3,7 @@
  * Any modifications made will be discarded.
  */
 import seo from "@strapi-community/plugin-seo/strapi-admin";
+import colorPicker from "@strapi/plugin-color-picker/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import previewButton from "strapi-plugin-preview-button/strapi-admin";
 import staticDeploy from "../../src/plugins/static-deploy/./dist/admin/index.mjs";
@@ -16,6 +17,7 @@ renderAdmin(document.getElementById("strapi"), {
 
   plugins: {
     seo: seo,
+    "color-picker": colorPicker,
     "users-permissions": usersPermissions,
     "preview-button": previewButton,
     "static-deploy": staticDeploy,

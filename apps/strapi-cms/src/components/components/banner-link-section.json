@@ -24,8 +24,13 @@
     },
     "ctaButtons": {
       "type": "component",
-      "repeatable": true,
-      "component": "components.cta-button-simple"
+      "component": "components.cta-button-simple",
+      "repeatable": true
+    },
+    "customBgColor": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
     }
   }
 }

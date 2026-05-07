@@ -3,10 +3,6 @@ import { Box, ButtonGroup, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ContainerRC from '../common/ContainerRC';
 import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-} from '../common/Common.helpers';
-import {
   ButtonSwitchRowBlock,
   TitleSubtitleBlock,
 } from './Editorial-Switch.helpers';
@@ -16,6 +12,7 @@ import {
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
 import Editorial from '../Editorial/Editorial';
 import { getButtonStyles } from '../common/Common';
+import { resolveThemeVariant } from '../../theme';
 
 const EditorialSwitch = ({
   sections,
@@ -60,16 +57,13 @@ const EditorialSwitch = ({
   }, []);
 
   const { palette } = useTheme();
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box>

@@ -2,13 +2,10 @@ import React from 'react';
 import { Box, Grid, Link, Typography, useTheme } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContainerRC from '../common/ContainerRC';
-import {
-  TextColor,
-  SendBackgroundColorAlternativeGrey,
-  IoBackgroundColorAlternativeGrey,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { HowToProps } from '../../types/HowTo/HowTo.types';
 import { HowToStep } from './HowToStep';
+import { resolveThemeVariant } from '../../theme';
 import { isValidExternalLink, LinkIcon, Title } from '../common/Common';
 
 const HowTo = (props: HowToProps) => {
@@ -22,36 +19,26 @@ const HowTo = (props: HowToProps) => {
     stepsAlignment = 'center',
     sectionID,
   } = props;
+
   const textColor = TextColor(theme);
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColorAlternativeGrey(theme);
-      case 'IO':
-        return IoBackgroundColorAlternativeGrey(theme);
-      case 'WALLET':
-        return IoBackgroundColorAlternativeGrey(theme);
-    }
-  })();
   const { palette, spacing } = useTheme();
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundAlternativeGrey',
+    themeVariant,
+    ctx,
+  );
 
   const alignment = { center: 'center', left: 'flex-start', right: 'flex-end' }[
     stepsAlignment
   ];
 
-  const linkColor =
-    theme === 'light'
-      ? (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.blueIO[500];
-            case 'WALLET':
-              return palette.custom.blueIO[500];
-          }
-        })()
-      : palette.custom.white;
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <ContainerRC
@@ -69,6 +56,7 @@ const HowTo = (props: HowToProps) => {
           marginBottom={32}
         />
       </Grid>
+
       <Grid
         item
         container
@@ -120,7 +108,7 @@ const HowTo = (props: HowToProps) => {
         </Box>
         {/** Link */}
         {link && (
-          <Typography component='span' display={'contents'}>
+          <Typography component='span' display='contents'>
             <Link
               sx={{
                 display: 'flex',

@@ -6,6 +6,7 @@ import { TextColor, TextAlternativeColor } from '../common/Common.helpers';
 import { Title } from '../common/Common';
 import { HowToStepNum } from './HowTo.helpers';
 import Image from 'next/image';
+import { resolveThemeVariant } from '../../theme';
 
 export const HowToStep = ({
   index,
@@ -20,20 +21,13 @@ export const HowToStep = ({
   const color2 = TextAlternativeColor(theme);
   const textColor = TextColor(theme);
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
-  const linkColor =
-    theme === 'dark'
-      ? palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return palette.primary.main;
-            case 'IO':
-              return palette.custom.primaryColorDark;
-            case 'WALLET':
-              return palette.custom.primaryColorDark;
-          }
-        })();
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Stack

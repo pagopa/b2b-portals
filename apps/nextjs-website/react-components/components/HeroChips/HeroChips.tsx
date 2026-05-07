@@ -1,14 +1,11 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-  TextColor,
-  LinkColor,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { HeroChipsProps } from '@react-components/types/HeroChips/HeroChips.types';
 import { ChipsBlock } from './HeroChips.helpers';
+import { resolveThemeVariant } from '../../theme';
+import { useTheme } from '@mui/material/styles';
 
 const HeroChips = (props: HeroChipsProps) => {
   const {
@@ -22,19 +19,22 @@ const HeroChips = (props: HeroChipsProps) => {
     ariaLabelChips,
   } = props;
 
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const { palette } = useTheme();
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
+    themeVariant,
+    ctx,
+  );
 
   const textColor = TextColor(theme);
-  const linkColor = LinkColor(theme);
+
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
 
   const BackgroundImage = (
     <Box
@@ -96,6 +96,7 @@ const HeroChips = (props: HeroChipsProps) => {
         >
           {title}
         </Typography>
+
         {subtitle && (
           <Typography
             component='div'
@@ -116,6 +117,7 @@ const HeroChips = (props: HeroChipsProps) => {
             {subtitle}
           </Typography>
         )}
+
         {chips.length > 0 && (
           <ChipsBlock
             chips={chips}

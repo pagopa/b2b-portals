@@ -22,20 +22,6 @@ export const ExtraBackgroundColor = (theme: 'dark' | 'light') => {
     : palette.custom.primaryColorDark;
 };
 
-export const SendExtraBackgroundColor = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.text.primary
-    : palette.custom.backgroundColorDarkAlternative;
-};
-
-export const IoExtraBackgroundColor = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.text.primary
-    : palette.custom.backgroundColorDark;
-};
-
 export const TextColor = (theme: 'dark' | 'light') => {
   const { palette } = useTheme();
   return theme === 'dark' ? palette.primary.contrastText : palette.text.primary;
@@ -67,76 +53,6 @@ export const GrayLinkColor = (theme: 'dark' | 'light') => {
   return theme === 'dark'
     ? palette.custom.grayLinkColor
     : palette.custom.black50;
-};
-
-export const IoBackgroundColor = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.backgroundColorDark
-    : palette.custom.backgroundColorLight;
-};
-
-export const IoBackgroundColorAlternativeBlue = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.backgroundColorDarkAlternative
-    : palette.custom.backgroundColorLight;
-};
-
-export const SendBackgroundColorAlternativeBlue = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.backgroundColorDarkAlternative
-    : palette.custom.backgroundColorLight;
-};
-
-export const IoBackgroundColorAlternativeGrey = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.backgroundColorDark
-    : palette.custom.backgroundColorLightGrey;
-};
-
-export const SendBackgroundColor = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.backgroundColorDarkAlternative
-    : palette.custom.backgroundColorLight;
-};
-
-export const SendBackgroundColorAlternativeGrey = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.backgroundColorDarkAlternative
-    : palette.custom.backgroundColorLightGrey;
-};
-
-export const IoChipsBackgroundColor = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.chipsBackgroundColorDark
-    : palette.custom.ioChipsBackgroundColorLight;
-};
-
-export const SendChipsBackgroundColor = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.chipsBackgroundColorDark
-    : palette.custom.sendChipsBackgroundColorLight;
-};
-
-export const IoChipsBackgroundColorHover = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.chipsBackgroundColorDarkHover
-    : palette.custom.ioChipsBackgroundColorLightHover;
-};
-
-export const SendChipsBackgroundColorHover = (theme: 'dark' | 'light') => {
-  const { palette } = useTheme();
-  return theme === 'dark'
-    ? palette.custom.chipsBackgroundColorDarkHover
-    : palette.custom.sendChipsBackgroundColorLightHover;
 };
 
 export const FONT_THEME_EXPERIMENTAL = '"Titillium Sans Pro", sans-serif';

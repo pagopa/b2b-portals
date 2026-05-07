@@ -19,47 +19,52 @@
     },
     "theme": {
       "type": "enumeration",
+      "required": true,
+      "default": "light",
       "enum": [
         "light",
         "dark"
-      ],
-      "default": "light",
-      "required": true
+      ]
     },
     "layout": {
       "type": "enumeration",
+      "required": true,
+      "default": "center",
       "enum": [
         "left",
         "center"
-      ],
-      "default": "center",
-      "required": true
+      ]
     },
     "accordionItems": {
       "type": "component",
-      "repeatable": true,
       "component": "components.accordion-item",
+      "repeatable": true,
       "required": true,
       "min": 1
     },
     "sectionID": {
       "type": "string",
-      "regex": "^[a-z]+[a-z\\-]*$",
-      "unique": false
+      "unique": false,
+      "regex": "^[a-z]+[a-z\\-]*$"
     },
     "textAlignment": {
       "type": "enumeration",
+      "required": true,
+      "default": "center",
       "enum": [
         "left",
         "center",
         "right"
-      ],
-      "required": true,
-      "default": "center"
+      ]
     },
     "trackItemOpen": {
       "type": "boolean",
       "default": false
+    },
+    "customBgColor": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
     }
   }
 }
