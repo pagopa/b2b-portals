@@ -3,11 +3,9 @@ import { Box, Grid } from '@mui/material';
 import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroProps } from '../../types/Hero/Hero.types';
-import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-} from '../common/Common.helpers';
 import { HeroTextContent, getMinHeight, getOverlay } from './Hero.helpers';
+import { resolveThemeVariant } from '../../theme';
+import { useTheme } from '@mui/material/styles';
 
 const Hero = (props: HeroProps) => {
   const {
@@ -21,18 +19,16 @@ const Hero = (props: HeroProps) => {
     sectionID,
   } = props;
 
+  const { palette } = useTheme();
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
+    themeVariant,
+    ctx,
+  );
 
   const BackgroundImage = isJSX(background) ? (
     background

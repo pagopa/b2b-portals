@@ -1,11 +1,8 @@
 import { Box, Typography, useTheme, Stack } from '@mui/material';
 import { MediaResourcesProps } from '@react-components/types';
-import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-  TextColor,
-} from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { FileDownloadOutlined } from '@mui/icons-material';
+import { resolveThemeVariant } from '../../theme';
 
 const MediaResources = ({
   items,
@@ -16,33 +13,22 @@ const MediaResources = ({
   labels,
 }: MediaResourcesProps) => {
   const muiTheme = useTheme();
+  const { palette } = muiTheme;
+  const ctx = { palette, theme };
 
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
+    themeVariant,
+    ctx,
+  );
 
   const textColor = TextColor(theme);
 
-  const linkColor =
-    theme === 'dark'
-      ? muiTheme.palette.custom.white
-      : (() => {
-          switch (themeVariant) {
-            case 'SEND':
-              return muiTheme.palette.primary.main;
-            case 'IO':
-              return muiTheme.palette.custom.primaryColorDark;
-            case 'WALLET':
-              return muiTheme.palette.custom.primaryColorDark;
-          }
-        })();
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -72,6 +58,7 @@ const MediaResources = ({
             {title}
           </Typography>
         )}
+
         <Stack direction='row' flexWrap='wrap' rowGap={14} columnGap={9}>
           {items.map((item, index) => (
             <Stack
@@ -99,6 +86,7 @@ const MediaResources = ({
                   objectFit: 'cover',
                 }}
               />
+
               <Stack
                 direction='row'
                 alignItems='center'
@@ -110,6 +98,7 @@ const MediaResources = ({
                   {item.label}
                 </Typography>
               </Stack>
+
               <Typography
                 variant='h6'
                 component='h3'

@@ -77,6 +77,7 @@ const ServiceCarousel = ({
           <Body body={description} textColor={palette.text.primary} />
         )}
       </Stack>
+
       {/* Cards */}
       <Stack gap={{ xs: 3.375, sm: 3.375, md: 4 }} width={'100%'}>
         <Stack

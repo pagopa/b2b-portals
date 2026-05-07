@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
-import { Button, Typography, TypographyProps } from '@mui/material';
+import { Box, Button, Typography, TypographyProps } from '@mui/material';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
-import { Box } from '@mui/material';
 import { useMixpanelTracking } from './tracking';
+import { resolveThemeVariant } from '../../theme';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const CtaButton = ({
@@ -58,6 +58,7 @@ export const CtaButtons = ({
   showExternalLinkIcon?: boolean;
 }) => {
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
   const isCtaButtonProps = (
     button: CtaButtonProps | JSX.Element,
@@ -77,61 +78,28 @@ export const CtaButtons = ({
             showExternalLinkIcon={showExternalLinkIcon}
             style={{
               ...(button.variant === 'contained' && {
-                backgroundColor:
-                  theme === 'dark'
-                    ? palette.custom.white
-                    : (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return palette.primary.main;
-                          case 'IO':
-                            return palette.custom.blueIO[500];
-                          case 'WALLET':
-                            return palette.custom.blueIO[500];
-                        }
-                      })(),
-                color:
-                  theme === 'dark'
-                    ? (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return palette.primary.main;
-                          case 'IO':
-                            return palette.custom.blueIO[500];
-                          case 'WALLET':
-                            return palette.custom.blueIO[500];
-                        }
-                      })()
-                    : palette.custom.white,
+                backgroundColor: resolveThemeVariant<string>(
+                  'ctaContainedBackgroundColor',
+                  themeVariant,
+                  ctx,
+                ),
+                color: resolveThemeVariant<string>(
+                  'ctaContainedTextColor',
+                  themeVariant,
+                  ctx,
+                ),
               }),
-
               ...(button.variant === 'outlined' && {
-                borderColor:
-                  theme === 'dark'
-                    ? palette.custom.matteWhiteBorder
-                    : (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return palette.primary.main;
-                          case 'IO':
-                            return palette.custom.blueIO[500];
-                          case 'WALLET':
-                            return palette.custom.blueIO[500];
-                        }
-                      })(),
-                color:
-                  theme === 'dark'
-                    ? palette.custom.white
-                    : (() => {
-                        switch (themeVariant) {
-                          case 'SEND':
-                            return palette.primary.main;
-                          case 'IO':
-                            return palette.custom.blueIO[500];
-                          case 'WALLET':
-                            return palette.custom.blueIO[500];
-                        }
-                      })(),
+                borderColor: resolveThemeVariant<string>(
+                  'ctaOutlinedBorderColor',
+                  themeVariant,
+                  ctx,
+                ),
+                color: resolveThemeVariant<string>(
+                  'ctaOutlinedTextColor',
+                  themeVariant,
+                  ctx,
+                ),
               }),
             }}
             {...button}
@@ -373,17 +341,13 @@ export const getButtonStyles = (
   palette: Theme['palette'],
 ) => {
   const isSelected = sectionId === currentSectionId;
+  const ctx = { palette, theme };
 
-  const variantColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.primary.main;
-      case 'IO':
-        return palette.custom.primaryColorDark;
-      case 'WALLET':
-        return palette.custom.primaryColorDark;
-    }
-  })();
+  const variantColor = resolveThemeVariant<string>(
+    'accentColor',
+    themeVariant,
+    ctx,
+  );
 
   return {
     backgroundColor: isSelected
@@ -413,6 +377,7 @@ export const isValidExternalLink = (URL?: string): boolean => {
   if (!URL) {
     return false;
   }
+
   return (
     URL.toLowerCase().startsWith('http:') ||
     URL.toLowerCase().startsWith('https:')

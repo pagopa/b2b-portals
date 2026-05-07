@@ -3,10 +3,6 @@ import { Box, ButtonGroup, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ContainerRC from '../common/ContainerRC';
 import {
-  SendBackgroundColor,
-  IoBackgroundColor,
-} from '../common/Common.helpers';
-import {
   ButtonSwitchRowBlock,
   TitleSubtitleBlock,
 } from './Page-Switch.helpers';
@@ -19,6 +15,7 @@ import Editorial from '../Editorial/Editorial';
 import Cards from '../Cards/Cards';
 import BannerLink from '../BannerLink/BannerLink';
 import { getButtonStyles } from '../common/Common';
+import { resolveThemeVariant } from '../../theme';
 
 const renderContent = (contents: PageSwitchContent[]) => {
   return contents.map((content, index) => {
@@ -75,16 +72,13 @@ const PageSwitch = ({
   }, []);
 
   const { palette } = useTheme();
-  const backgroundColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return SendBackgroundColor(theme);
-      case 'IO':
-        return IoBackgroundColor(theme);
-      case 'WALLET':
-        return IoBackgroundColor(theme);
-    }
-  })();
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box>
@@ -102,6 +96,7 @@ const PageSwitch = ({
           {...(subtitle && { subtitle })}
           theme={theme}
         />
+
         {isMobile ? (
           <ButtonSwitchRowBlock
             buttons={pages.map((s) => ({
@@ -141,6 +136,7 @@ const PageSwitch = ({
           </ButtonGroup>
         )}
       </ContainerRC>
+
       {renderContent(currentPage.sections)}
     </Box>
   );

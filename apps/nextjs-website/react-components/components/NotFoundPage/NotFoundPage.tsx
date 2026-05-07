@@ -3,12 +3,9 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import { Box, Typography, Link, Stack, useTheme } from '@mui/material';
 import { NotFoundPageProps } from '@react-components/types/NotFoundPage/NotFoundPage.types';
-import {
-  SendBackgroundColor,
-  TextColor,
-} from '@react-components/components/common/Common.helpers';
 import EmptyImage from '@react-components/assets/Empty.png';
 import { usePathname, useRouter } from 'next/navigation';
+import { resolveThemeVariant } from '@react-components/theme';
 
 type Locale = NotFoundPageProps['defaultLocale'];
 
@@ -62,7 +59,7 @@ const NotFoundPage = ({
   defaultLocale,
   validLocales,
 }: NotFoundPageProps) => {
-  const muiTheme = useTheme();
+  const { palette } = useTheme();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -93,9 +90,18 @@ const NotFoundPage = ({
     return () => clearTimeout(timeout);
   }, []);
 
-  const backgroundColor = SendBackgroundColor('light');
-  const textColor = TextColor('light');
-  const linkColor = muiTheme.palette.primary.main;
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
+    'SEND',
+    { palette, theme: 'light' },
+  );
+
+  const textColor = palette.text.primary;
+
+  const linkColor = resolveThemeVariant<string>('contentLinkColor', 'SEND', {
+    palette,
+    theme: 'light',
+  });
 
   const texts = localizedTexts[locale as Locale];
 
@@ -132,6 +138,7 @@ const NotFoundPage = ({
         <Typography variant='body1' sx={{ color: textColor }}>
           {texts.bodyLine1}
         </Typography>
+
         <Typography variant='body1' sx={{ color: textColor }}>
           {texts.bodyLine2}
         </Typography>

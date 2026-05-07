@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import Image from 'next/image';
 import { StatsItemProps } from '@react-components/types/Stats/Stats.types';
+import { resolveThemeVariant } from '../../theme';
 
 export const StatsItem = ({
   title,
@@ -11,25 +12,17 @@ export const StatsItem = ({
 }: StatsItemProps) => {
   const { palette } = useTheme();
 
-  const textColor = (() => {
-    switch (themeVariant) {
-      case 'SEND':
-        return palette.primary.main;
-      case 'IO':
-        return palette.custom.primaryColorDark;
-      case 'WALLET':
-        return palette.custom.primaryColorDark;
-    }
-  })();
+  const textColor = resolveThemeVariant<string>('accentColor', themeVariant, {
+    palette,
+    theme: 'light',
+  });
 
   return (
     <Stack
       spacing={1}
       alignItems='flex-start'
       textAlign='left'
-      sx={{
-        flex: 1,
-      }}
+      sx={{ flex: 1 }}
     >
       {iconURL && (
         <Box height={36} width={36} position='relative'>
