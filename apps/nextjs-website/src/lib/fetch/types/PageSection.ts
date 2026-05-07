@@ -160,6 +160,7 @@ const BannerLinkSectionCodec = t.strict({
       body: t.string,
       ctaButtons: t.array(CTAButtonSimpleCodec),
       icon: StrapiImageSchema,
+      customBgColor: t.union([t.string, t.null]),
     }),
   ),
 });

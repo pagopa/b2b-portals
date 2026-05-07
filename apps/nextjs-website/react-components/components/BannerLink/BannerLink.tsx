@@ -77,7 +77,8 @@ const BannerLink = ({
               gap={2}
               sx={{
                 ...styles.main,
-                backgroundColor: sectionBackgrounds[index % 2],
+                backgroundColor:
+                  section.customBgColor ?? sectionBackgrounds[index % 2],
                 width: '100%',
                 flex: 1,
                 display: 'flex',
