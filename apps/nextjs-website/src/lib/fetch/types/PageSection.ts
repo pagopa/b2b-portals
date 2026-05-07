@@ -199,6 +199,7 @@ const CardsSectionCodec = t.strict({
   }),
   sectionID: t.union([t.string, t.null]),
   bottomCTA: t.union([CTAButtonSimpleCodec, t.null]),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const RedirectSectionCodec = t.strict({

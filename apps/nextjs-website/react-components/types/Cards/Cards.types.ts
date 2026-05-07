@@ -17,6 +17,7 @@ export interface CardsProps extends SectionProps {
   ctaButtons?: CtaButtonProps[];
   textPosition: 'left' | 'right' | 'center' | 'none';
   bottomCTA?: CtaButtonProps;
+  customBgColor?: string;
 }
 
 export interface CardsItemProps {

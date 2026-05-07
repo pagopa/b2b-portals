@@ -17,6 +17,7 @@ export const makeCardsProps = ({
   body,
   ctaButtons,
   bottomCTA,
+  customBgColor,
   ...rest
 }: CardsSection & SiteWidePageData): CardsProps => ({
   text: {
@@ -32,6 +33,7 @@ export const makeCardsProps = ({
     }),
   },
   ...(titleTag && { titleTag }),
+  ...(customBgColor && { customBgColor }),
   items: items.map(({ icon, label, text, title, links }) => ({
     title,
     themeVariant: rest.themeVariant,
