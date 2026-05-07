@@ -12,30 +12,35 @@
     },
     "theme": {
       "type": "enumeration",
+      "required": true,
+      "default": "light",
       "enum": [
         "light",
         "dark"
-      ],
-      "default": "light",
-      "required": true
+      ]
     },
     "showCarouselMobile": {
       "type": "boolean",
-      "default": false,
-      "required": true
+      "required": true,
+      "default": false
     },
     "items": {
       "type": "component",
-      "repeatable": true,
       "component": "components.feature-item",
+      "repeatable": true,
       "required": true,
-      "max": 4,
-      "min": 3
+      "min": 3,
+      "max": 4
     },
     "sectionID": {
       "type": "string",
-      "regex": "^[a-z]+[a-z\\-]*$",
-      "unique": false
+      "unique": false,
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "customBgColor": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
     }
   }
 }

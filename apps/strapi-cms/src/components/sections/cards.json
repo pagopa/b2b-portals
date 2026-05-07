@@ -8,12 +8,12 @@
   "attributes": {
     "theme": {
       "type": "enumeration",
+      "required": true,
+      "default": "light",
       "enum": [
         "light",
         "dark"
-      ],
-      "default": "light",
-      "required": true
+      ]
     },
     "title": {
       "type": "string",
@@ -24,8 +24,8 @@
     },
     "items": {
       "type": "component",
-      "repeatable": true,
       "component": "components.cards-item",
+      "repeatable": true,
       "required": true,
       "min": 1
     },
@@ -38,33 +38,38 @@
     },
     "ctaButtons": {
       "type": "component",
-      "repeatable": true,
       "component": "components.cta-button-simple",
+      "repeatable": true,
       "max": 2
     },
     "textPosition": {
       "type": "enumeration",
+      "required": true,
+      "default": "left",
       "enum": [
         "left",
         "center",
         "right",
         "none"
-      ],
-      "default": "left",
-      "required": true
+      ]
     },
     "bottomCTA": {
       "type": "component",
-      "repeatable": false,
-      "component": "components.cta-button-simple"
+      "component": "components.cta-button-simple",
+      "repeatable": false
     },
     "titleTag": {
       "type": "enumeration",
+      "default": "h2",
       "enum": [
         "h1",
         "h2"
-      ],
-      "default": "h2"
+      ]
+    },
+    "customBgColor": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
     }
   }
 }

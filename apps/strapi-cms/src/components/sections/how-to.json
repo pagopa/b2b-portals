@@ -12,46 +12,51 @@
     },
     "theme": {
       "type": "enumeration",
+      "required": true,
+      "default": "light",
       "enum": [
         "light",
         "dark"
-      ],
-      "default": "light",
-      "required": true
+      ]
     },
     "link": {
       "type": "component",
-      "repeatable": false,
-      "component": "components.link"
+      "component": "components.link",
+      "repeatable": false
     },
     "rowMaxSteps": {
       "type": "integer",
-      "default": 4,
       "required": true,
-      "max": 6,
-      "min": 1
+      "default": 4,
+      "min": 1,
+      "max": 6
     },
     "stepsAlignment": {
       "type": "enumeration",
+      "required": true,
+      "default": "center",
       "enum": [
         "center",
         "left",
         "right"
-      ],
-      "default": "center",
-      "required": true
+      ]
     },
     "steps": {
       "type": "component",
-      "repeatable": true,
       "component": "components.step",
+      "repeatable": true,
       "required": true,
       "min": 2
     },
     "sectionID": {
       "type": "string",
-      "regex": "^[a-z]+[a-z\\-]*$",
-      "unique": false
+      "unique": false,
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "customBgColor": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
     }
   }
 }
