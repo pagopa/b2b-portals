@@ -35,6 +35,8 @@ const pressReleases: PressReleases = {
         },
       },
       credits: null,
+      publishedAt: '2024-11-28T15:14:29.486Z',
+      updatedAt: '2024-11-28T15:14:28.486Z',
     },
     {
       slug: 'art-1',
@@ -61,6 +63,8 @@ const pressReleases: PressReleases = {
         },
       },
       credits: null,
+      publishedAt: '2024-11-28T15:14:29.486Z',
+      updatedAt: '2024-11-28T15:14:28.486Z',
     },
   ],
 };
@@ -94,6 +98,8 @@ const previewPressReleaseData: PreviewPressReleaseData = {
       imageLinkTitle: null,
       imageLinkUrl: null,
     },
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 const previewPageData: PreviewPageData = {
@@ -129,6 +135,8 @@ const previewPageData: PreviewPageData = {
         imageLinkUrl: null,
       },
     ],
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 
@@ -148,6 +156,8 @@ const previewPressReleaseDataNoCredits: PreviewPressReleaseData = {
       },
     },
     credits: null,
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 const previewPageDataNoCredits: PreviewPageData = {
@@ -168,6 +178,8 @@ const previewPageDataNoCredits: PreviewPageData = {
         },
       },
     ],
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 
@@ -184,6 +196,8 @@ describe('pressReleaseToPageDataArray', () => {
           },
         ],
         slug: ['press-releases', 'art-2'],
+        publishedAt: '2024-11-28T15:14:29.486Z',
+        updatedAt: '2024-11-28T15:14:28.486Z',
       },
       {
         seo: pressReleases.data[1]!.seo,
@@ -194,6 +208,8 @@ describe('pressReleaseToPageDataArray', () => {
           },
         ],
         slug: ['press-releases', 'art-1'],
+        publishedAt: '2024-11-28T15:14:29.486Z',
+        updatedAt: '2024-11-28T15:14:28.486Z',
       },
     ];
 

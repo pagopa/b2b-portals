@@ -82,6 +82,8 @@ const pageDataResponse: PreviewPageData = {
         },
       },
     ],
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 
@@ -101,6 +103,8 @@ const pressReleaseDataResponse: PreviewPressReleaseData = {
       },
     },
     credits: null,
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 
@@ -140,6 +144,8 @@ const pageSwitchPageDataResponse: PreviewPageData = {
         width: 'standard',
       },
     ],
+    publishedAt: '2024-11-28T15:14:29.486Z',
+    updatedAt: '2024-11-28T15:14:28.486Z',
   },
 };
 
