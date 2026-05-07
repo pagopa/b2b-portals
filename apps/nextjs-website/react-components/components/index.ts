@@ -30,6 +30,7 @@ import MediaResources from './MediaResources/MediaResources';
 import DynamicsForm from './DynamicsForm/DynamicsForm';
 import TextAndImage from './TextAndImage/TextAndImage';
 import RichBanner from './RichBanner/RichBanner';
+import LabelsProvider from './LabelsProvider/LabelsProvider';
 import LastUpdated from './LastUpdated/LastUpdated';
 export {
   Hero,
@@ -64,5 +65,6 @@ export {
   DynamicsForm,
   TextAndImage,
   RichBanner,
+  LabelsProvider,
   LastUpdated,
 };

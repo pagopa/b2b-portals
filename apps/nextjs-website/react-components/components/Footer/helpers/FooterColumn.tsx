@@ -75,7 +75,7 @@ export const FooterColumn = ({
                 cursor: 'pointer',
               }}
               variant='subtitle2'
-              {...(href.startsWith('https') && { target: '_blank' })}
+              {...(href.startsWith('https://') && { target: '_blank' })}
               {...(showOneTrustPreferencies
                 ? {
                     onClick: () => window.OneTrust.ToggleInfoDisplay(),
@@ -85,7 +85,10 @@ export const FooterColumn = ({
                   })}
             >
               {label}
-              <ExternalLinkIcon show={isValidExternalLink(href)} />
+              <ExternalLinkIcon
+                show={isValidExternalLink(href)}
+                {...(href.startsWith('https://') && { target: '_blank' })}
+              />
             </Link>
           </li>
         ),
