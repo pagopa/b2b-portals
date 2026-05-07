@@ -100,7 +100,11 @@ const PreviewPage = async ({
             locale: document.locale,
             defaultLocale: document.locale, // Doesn't matter in preview
             pressReleasePages,
+            updatedAt: document.updatedAt,
             ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
+            ...(document.publishedAt && {
+              publishedAt: document.publishedAt,
+            }),
           }),
         )}
       </div>
