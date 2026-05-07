@@ -18,17 +18,20 @@ const HowTo = (props: HowToProps) => {
     rowMaxSteps = 4,
     stepsAlignment = 'center',
     sectionID,
+    customBgColor,
   } = props;
 
   const textColor = TextColor(theme);
   const { palette, spacing } = useTheme();
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveThemeVariant<string>(
-    'sectionBackgroundAlternativeGrey',
-    themeVariant,
-    ctx,
-  );
+  const backgroundColor =
+    customBgColor ??
+    resolveThemeVariant<string>(
+      'sectionBackgroundAlternativeGrey',
+      themeVariant,
+      ctx,
+    );
 
   const alignment = { center: 'center', left: 'flex-start', right: 'flex-end' }[
     stepsAlignment
