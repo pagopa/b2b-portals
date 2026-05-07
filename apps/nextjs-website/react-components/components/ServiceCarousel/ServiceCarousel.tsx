@@ -52,6 +52,7 @@ const ServiceCarousel = ({
       component='section'
       {...(sectionID && { id: sectionID })}
     >
+      {/* Text Content */}
       <Stack
         gap={2}
         maxWidth={448}
@@ -77,7 +78,8 @@ const ServiceCarousel = ({
         )}
       </Stack>
 
-      <Stack gap={{ xs: 3.375, sm: 3.375, md: 4 }} width='100%'>
+      {/* Cards */}
+      <Stack gap={{ xs: 3.375, sm: 3.375, md: 4 }} width={'100%'}>
         <Stack
           flexDirection='row'
           alignItems='center'

@@ -77,7 +77,7 @@ export const Ctas = ({
         })}
       </Stack>
     );
+  } else {
+    return null;
   }
-
-  return null;
 };

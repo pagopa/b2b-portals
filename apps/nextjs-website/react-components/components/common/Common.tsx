@@ -3,14 +3,7 @@ import { Box, Button, Typography, TypographyProps } from '@mui/material';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import { CtaButtonProps, ThemeVariant } from '../../types/common/Common.types';
 import { useMixpanelTracking } from './tracking';
-import {
-  ctaContainedBackgroundColorMap,
-  ctaContainedTextColorMap,
-  ctaOutlinedBorderColorMap,
-  ctaOutlinedTextColorMap,
-  resolveByThemeVariant,
-  variantAccentColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const CtaButton = ({
@@ -37,8 +30,8 @@ const CtaButton = ({
         themevariant: undefined,
       }}
       {...(openInNewTab && { target: '_blank' })}
-      {...(randomID && { id: randomID })}
-      {...(trackedOnClick && { onClick: trackedOnClick })}
+      {...(randomID && { id: randomID })} // Random ID used by Mixpanel to track links (overrides any existing ID)
+      {...(trackedOnClick && { onClick: trackedOnClick })} // Override onClick (if present) to add tracking
       {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {buttonProps.text}
@@ -85,25 +78,25 @@ export const CtaButtons = ({
             showExternalLinkIcon={showExternalLinkIcon}
             style={{
               ...(button.variant === 'contained' && {
-                backgroundColor: resolveByThemeVariant(
-                  ctaContainedBackgroundColorMap,
+                backgroundColor: resolveThemeVariant<string>(
+                  'ctaContainedBackgroundColor',
                   themeVariant,
                   ctx,
                 ),
-                color: resolveByThemeVariant(
-                  ctaContainedTextColorMap,
+                color: resolveThemeVariant<string>(
+                  'ctaContainedTextColor',
                   themeVariant,
                   ctx,
                 ),
               }),
               ...(button.variant === 'outlined' && {
-                borderColor: resolveByThemeVariant(
-                  ctaOutlinedBorderColorMap,
+                borderColor: resolveThemeVariant<string>(
+                  'ctaOutlinedBorderColor',
                   themeVariant,
                   ctx,
                 ),
-                color: resolveByThemeVariant(
-                  ctaOutlinedTextColorMap,
+                color: resolveThemeVariant<string>(
+                  'ctaOutlinedTextColor',
                   themeVariant,
                   ctx,
                 ),
@@ -238,7 +231,7 @@ const ElementSubtitle = (
         {
           style: { color: textColor, marginBottom },
           align: textAlign,
-          variant,
+          variant: variant,
         },
       )
     : null;
@@ -312,7 +305,7 @@ const ElementBody = (
         {
           style: { color: textColor, marginBottom },
           align: textAlign,
-          variant,
+          variant: variant,
         },
       )}
     </Box>
@@ -348,14 +341,12 @@ export const getButtonStyles = (
   palette: Theme['palette'],
 ) => {
   const isSelected = sectionId === currentSectionId;
+  const ctx = { palette, theme };
 
-  const variantColor = resolveByThemeVariant(
-    variantAccentColorMap,
+  const variantColor = resolveThemeVariant<string>(
+    'accentColor',
     themeVariant,
-    {
-      palette,
-      theme,
-    },
+    ctx,
   );
 
   return {
@@ -386,6 +377,7 @@ export const isValidExternalLink = (URL?: string): boolean => {
   if (!URL) {
     return false;
   }
+
   return (
     URL.toLowerCase().startsWith('http:') ||
     URL.toLowerCase().startsWith('https:')

@@ -6,11 +6,7 @@ import { CtaButtonProps } from '../../types/common/Common.types';
 import { CtaButtons } from '../common/Common';
 import { Title, Subtitle } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
-import {
-  resolveByThemeVariant,
-  variantContentLinkColorMap,
-  variantSectionBackgroundColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 const Cards = ({
   items,
@@ -27,8 +23,8 @@ const Cards = ({
   const { palette } = muiTheme;
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
     ctx,
   );
@@ -39,8 +35,8 @@ const Cards = ({
   const isNone = textPosition === 'none';
   const isStackLayout = isCenter || isNone;
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
     ctx,
   );
@@ -87,14 +83,14 @@ const Cards = ({
           sx={{
             width: { md: isCenter ? '100%' : '30%', xs: '100%' },
           }}
-          component='div'
+          component={'div'}
         >
           {text.title && (
-            <Typography mb={3} component='div' color='inherit'>
+            <Typography mb={3} component='div' color={'inherit'}>
               <Title
                 component={titleTag ?? 'h2'}
                 variant='h4'
-                textColor='inherit'
+                textColor={'inherit'}
                 title={text.title}
                 textAlign={isCenter ? 'center' : 'left'}
                 marginBottom={0}
@@ -102,10 +98,10 @@ const Cards = ({
             </Typography>
           )}
           {text.subtitle && (
-            <Typography mb={3} component='div' color='inherit'>
+            <Typography mb={3} component='div' color={'inherit'}>
               <Subtitle
                 variant='h6'
-                textColor='inherit'
+                textColor={'inherit'}
                 subtitle={text.subtitle}
                 textAlign={isCenter ? 'center' : 'left'}
                 marginBottom={0}
@@ -117,7 +113,7 @@ const Cards = ({
               mb={4}
               component='div'
               variant='body1'
-              color='inherit'
+              color={'inherit'}
               textAlign={isCenter ? 'center' : 'left'}
               sx={{
                 '& a': {

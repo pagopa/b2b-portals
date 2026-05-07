@@ -1,7 +1,7 @@
 import { ArrowRightAlt } from '@mui/icons-material';
 import { Box, Link, Stack, Typography, useTheme } from '@mui/material';
 import { PressReleasePreviewProps } from '@react-components/types/PressReleaseList/PressReleaseList.types';
-import { resolveByThemeVariant, variantContentLinkColorMap } from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 export const PressReleasePreview = ({
@@ -9,12 +9,12 @@ export const PressReleasePreview = ({
   dateIso,
   title,
   link,
-  themeVariant,
+  themeVariant = 'IO',
 }: PressReleasePreviewProps) => {
   const { palette } = useTheme();
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
     { palette, theme: 'light' },
   );

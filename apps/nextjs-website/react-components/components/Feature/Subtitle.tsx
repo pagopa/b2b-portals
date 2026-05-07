@@ -5,19 +5,17 @@ import { Body, isValidExternalLink, LinkIcon } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { FeatureStackItemProps } from '../../types/Feature/Feature.types';
 import { useTheme } from '@mui/material/styles';
-import { resolveByThemeVariant, variantActionColorMap } from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
   const { palette } = useTheme();
   const textColor = TextColor(theme);
+  const ctx = { palette, theme };
 
   const linkColor =
     theme === 'dark'
       ? palette.custom.white
-      : resolveByThemeVariant(variantActionColorMap, themeVariant, {
-          palette,
-          theme,
-        });
+      : resolveThemeVariant<string>('actionColor', themeVariant, ctx);
 
   return (
     <Stack spacing={3} justifyContent='center' alignItems='center'>

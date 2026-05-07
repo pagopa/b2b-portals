@@ -6,7 +6,7 @@ import { TextColor, TextAlternativeColor } from '../common/Common.helpers';
 import { Title } from '../common/Common';
 import { HowToStepNum } from './HowTo.helpers';
 import Image from 'next/image';
-import { resolveByThemeVariant, variantContentLinkColorMap } from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 export const HowToStep = ({
   index,
@@ -21,11 +21,12 @@ export const HowToStep = ({
   const color2 = TextAlternativeColor(theme);
   const textColor = TextColor(theme);
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   return (
@@ -36,6 +37,7 @@ export const HowToStep = ({
         minWidth: 'auto',
       }}
     >
+      {/** Step with icon */}
       {iconURL && (
         <Stack>
           <Stack spacing={1.2}>
@@ -60,6 +62,7 @@ export const HowToStep = ({
             </Stack>
           </Stack>
 
+          {/** Step title */}
           <Title
             variant='h6'
             component='h3'
@@ -68,6 +71,7 @@ export const HowToStep = ({
             textAlign='left'
           />
 
+          {/** Step description */}
           <Typography
             component='div'
             variant='body2'
@@ -92,6 +96,7 @@ export const HowToStep = ({
         </Stack>
       )}
 
+      {/** Step without icon */}
       {!iconURL && (
         <Stack>
           <HowToStepNum

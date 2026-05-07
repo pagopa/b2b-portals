@@ -3,10 +3,7 @@
 import { DynamicsForm as DynamicsFormRC } from '@react-components/components';
 import { DynamicsFormSectionProps } from '@/lib/fetch/types/PageSection';
 import { Box, useTheme } from '@mui/material';
-import {
-  resolveByThemeVariant,
-  variantActionColorMap,
-} from '@react-components/theme';
+import { resolveThemeVariant } from '@react-components/theme';
 import { getThemeVariantFont } from '@react-components/components/common/Common.helpers';
 
 const DynamicsForm = (
@@ -15,8 +12,8 @@ const DynamicsForm = (
   const { palette } = useTheme();
   const { themeVariant } = props;
 
-  const primaryColor = resolveByThemeVariant(
-    variantActionColorMap,
+  const primaryColor = resolveThemeVariant<string>(
+    'actionColor',
     themeVariant,
     {
       palette,

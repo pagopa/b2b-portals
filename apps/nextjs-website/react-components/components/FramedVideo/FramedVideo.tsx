@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FramedVideoProps } from '@react-components/types';
 import { renderVideo, renderTextSection } from './FramedVideo.helpers';
-import {
-  resolveByThemeVariant,
-  variantSectionBackgroundColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import { useTheme } from '@mui/material/styles';
 
 const FramedVideo = ({
@@ -20,6 +17,7 @@ const FramedVideo = ({
   const [error, setError] = useState(false);
   const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
   useEffect(() => {
     const handleResize = () => {
@@ -45,10 +43,10 @@ const FramedVideo = ({
       : 'space-between'
     : 'center';
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   if (!videoURL) {
@@ -98,11 +96,7 @@ const FramedVideo = ({
         </div>
       )}
 
-      <div
-        style={{
-          flexBasis: videoFlexBasis,
-        }}
-      >
+      <div style={{ flexBasis: videoFlexBasis }}>
         {renderVideo({
           videoRef,
           error,

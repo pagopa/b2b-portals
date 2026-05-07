@@ -4,7 +4,7 @@ import { CardsItemProps } from '../../types/Cards/Cards.types';
 import { Title, Body, isValidExternalLink, LinkIcon } from '../common/Common';
 import Image from 'next/image';
 import { useTheme } from '@mui/material/styles';
-import { resolveByThemeVariant, variantActionColorMap } from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 const CardsItem = ({
   title,
@@ -18,7 +18,7 @@ const CardsItem = ({
 }: CardsItemProps) => {
   const { palette } = useTheme();
 
-  const linkColor = resolveByThemeVariant(variantActionColorMap, themeVariant, {
+  const linkColor = resolveThemeVariant<string>('actionColor', themeVariant, {
     palette,
     theme: 'light',
   });

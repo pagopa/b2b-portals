@@ -4,10 +4,7 @@ import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroProps } from '../../types/Hero/Hero.types';
 import { HeroTextContent, getMinHeight, getOverlay } from './Hero.helpers';
-import {
-  resolveByThemeVariant,
-  variantSectionBackgroundColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import { useTheme } from '@mui/material/styles';
 
 const Hero = (props: HeroProps) => {
@@ -25,10 +22,12 @@ const Hero = (props: HeroProps) => {
   const { palette } = useTheme();
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   const BackgroundImage = isJSX(background) ? (

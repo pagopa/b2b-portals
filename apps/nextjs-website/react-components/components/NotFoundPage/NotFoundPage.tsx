@@ -5,11 +5,7 @@ import { Box, Typography, Link, Stack, useTheme } from '@mui/material';
 import { NotFoundPageProps } from '@react-components/types/NotFoundPage/NotFoundPage.types';
 import EmptyImage from '@react-components/assets/Empty.png';
 import { usePathname, useRouter } from 'next/navigation';
-import {
-  resolveByThemeVariant,
-  variantContentLinkColorMap,
-  variantSectionBackgroundColorMap,
-} from '@react-components/theme';
+import { resolveThemeVariant } from '@react-components/theme';
 
 type Locale = NotFoundPageProps['defaultLocale'];
 
@@ -73,10 +69,16 @@ const NotFoundPage = ({
 
   const redirectUrl =
     pathname.length < 5
-      ? '/'
+      ? // No locale (/x) or an invalid locale's homepage (/xx/)
+        // (If it was valid, we would not be here in the 404 page)
+        // Redirect to the default locale's homepage
+        '/'
       : pathname[3] === '/' && isValidLocale(pathname.slice(1, 3))
-        ? `/${pathname.slice(1, 3) === defaultLocale ? '' : pathname.slice(1, 3)}`
-        : '/';
+        ? // If a valid locale is present in the pathname
+          // Redirect to said locale's homepage
+          `/${pathname.slice(1, 3) === defaultLocale ? '' : pathname.slice(1, 3)}`
+        : // No locale has been specified, simply redirect to the default locale's homepage
+          '/';
 
   const locale = redirectUrl === '/' ? defaultLocale : redirectUrl.slice(1, 3);
 
@@ -86,17 +88,17 @@ const NotFoundPage = ({
       router.replace(redirectUrl);
     }, 5000);
     return () => clearTimeout(timeout);
-  }, [disableRedirect, redirectUrl, router]);
+  }, []);
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     'SEND',
     { palette, theme: 'light' },
   );
 
   const textColor = palette.text.primary;
 
-  const linkColor = resolveByThemeVariant(variantContentLinkColorMap, 'SEND', {
+  const linkColor = resolveThemeVariant<string>('contentLinkColor', 'SEND', {
     palette,
     theme: 'light',
   });

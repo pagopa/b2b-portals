@@ -5,12 +5,7 @@ import ContainerRC from '../common/ContainerRC';
 import { HeroCounterProps } from '@react-components/types/HeroCounter/HeroCounter.types';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
-import {
-  resolveByThemeVariant,
-  variantContentLinkColorMap,
-  variantSectionBackgroundColorMap,
-  variantAccentColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 const HeroCounter = ({
@@ -24,20 +19,26 @@ const HeroCounter = ({
   sectionID,
 }: HeroCounterProps) => {
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   const textColor = TextColor(theme);
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
+
+  const counterColor =
+    theme === 'dark'
+      ? textColor
+      : resolveThemeVariant<string>('accentColor', themeVariant, ctx);
 
   const BackgroundImage = (
     <Box
@@ -98,6 +99,7 @@ const HeroCounter = ({
         >
           {title}
         </Typography>
+
         {subtitle && (
           <Typography
             component='div'
@@ -120,6 +122,7 @@ const HeroCounter = ({
             {subtitle}
           </Typography>
         )}
+
         {link && (
           <Typography
             component='a'
@@ -137,7 +140,6 @@ const HeroCounter = ({
             }}
           >
             {link.label}
-
             <LinkIcon
               showExternalLinkIcon={isValidExternalLink(link.href)}
               internalLinkIcon={
@@ -157,6 +159,7 @@ const HeroCounter = ({
           </Typography>
         )}
       </Box>
+
       <Box
         sx={{
           flex: 1,
@@ -169,10 +172,7 @@ const HeroCounter = ({
       >
         <Typography
           component='div'
-          color={resolveByThemeVariant(variantAccentColorMap, themeVariant, {
-            palette,
-            theme,
-          })}
+          color={counterColor}
           sx={{
             fontSize: { xs: '5.625rem', md: '8rem' },
             display: 'flex',

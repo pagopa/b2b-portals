@@ -6,10 +6,7 @@ import { Title } from '../common/Common';
 import { FeatureProps } from '../../types/Feature/Feature.types';
 import { FeatureStackItem } from './FeatureStackItem';
 import FeatureCarousel from './Feature.helpers';
-import {
-  resolveByThemeVariant,
-  variantSectionBackgroundAlternativeGreyMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 const Feature = ({
   title,
@@ -27,7 +24,7 @@ const Feature = ({
   const ctx = { palette, theme };
 
   const handleStepChange = (step?: number) => {
-    if (step !== undefined) {
+    if (step) {
       setActiveStep(step);
     }
     return step;
@@ -35,8 +32,8 @@ const Feature = ({
 
   const textColor = TextColor(theme);
 
-  const backgroundColorAlternative = resolveByThemeVariant(
-    variantSectionBackgroundAlternativeGreyMap,
+  const backgroundColorAlternative = resolveThemeVariant<string>(
+    'sectionBackgroundAlternativeGrey',
     themeVariant,
     ctx,
   );

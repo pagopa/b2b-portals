@@ -4,10 +4,7 @@ import { Box, Typography, Stack, useTheme } from '@mui/material';
 import EmptyImage from '@react-components/assets/Empty.png';
 import { usePathname } from 'next/navigation';
 import { ErrorPageProps } from '@react-components/types/ErrorPage/ErrorPage.types';
-import {
-  resolveByThemeVariant,
-  variantSectionBackgroundColorMap,
-} from '@react-components/theme';
+import { resolveThemeVariant } from '@react-components/theme';
 
 type Locale = ErrorPageProps['defaultLocale'];
 
@@ -52,8 +49,8 @@ const ErrorPage = ({ defaultLocale, validLocales }: ErrorPageProps) => {
         ? pathname.substring(1, 3)
         : defaultLocale;
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     'SEND',
     { palette, theme: 'light' },
   );

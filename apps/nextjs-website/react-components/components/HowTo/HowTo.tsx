@@ -5,11 +5,7 @@ import ContainerRC from '../common/ContainerRC';
 import { TextColor } from '../common/Common.helpers';
 import { HowToProps } from '../../types/HowTo/HowTo.types';
 import { HowToStep } from './HowToStep';
-import {
-  resolveByThemeVariant,
-  variantContentLinkColorMap,
-  variantSectionBackgroundAlternativeGreyMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import { isValidExternalLink, LinkIcon, Title } from '../common/Common';
 
 const HowTo = (props: HowToProps) => {
@@ -23,12 +19,13 @@ const HowTo = (props: HowToProps) => {
     stepsAlignment = 'center',
     sectionID,
   } = props;
+
   const textColor = TextColor(theme);
   const { palette, spacing } = useTheme();
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundAlternativeGreyMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundAlternativeGrey',
     themeVariant,
     ctx,
   );
@@ -37,8 +34,8 @@ const HowTo = (props: HowToProps) => {
     stepsAlignment
   ];
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
     ctx,
   );
@@ -50,6 +47,7 @@ const HowTo = (props: HowToProps) => {
       {...(sectionID && { sectionID })}
     >
       <Grid item xs={12}>
+        {/** Section title */}
         <Title
           variant='h4'
           component='h2'
@@ -58,6 +56,7 @@ const HowTo = (props: HowToProps) => {
           marginBottom={32}
         />
       </Grid>
+
       <Grid
         item
         container
@@ -67,6 +66,7 @@ const HowTo = (props: HowToProps) => {
         gap='24px'
         sx={{ paddingLeft: '2em', paddingRight: '2em' }}
       >
+        {/** Steps */}
         <Box
           component='ol'
           sx={{
@@ -106,6 +106,7 @@ const HowTo = (props: HowToProps) => {
             </Box>
           ))}
         </Box>
+        {/** Link */}
         {link && (
           <Typography component='span' display='contents'>
             <Link

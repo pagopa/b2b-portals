@@ -16,11 +16,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
-import {
-  resolveByThemeVariant,
-  variantAccentColorMap,
-  variantContentLinkColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 export const TitleSubtitleBlock = ({
   title,
@@ -30,11 +26,12 @@ export const TitleSubtitleBlock = ({
 }: PageSwitchBaseProps) => {
   const textColor = TextColor(theme);
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   return (
@@ -54,6 +51,7 @@ export const TitleSubtitleBlock = ({
         marginTop={3}
         marginBottom={3}
       />
+
       <Typography
         component='div'
         variant='body2'
@@ -89,6 +87,7 @@ const SplitButton = ({
 }: ButtonSwitchRowBlockProps) => {
   const muiTheme = useTheme();
   const { palette } = muiTheme;
+  const ctx = { palette, theme };
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [open, setOpen] = React.useState(false);
 
@@ -108,10 +107,10 @@ const SplitButton = ({
 
   const anchorRef = React.useRef<HTMLDivElement>(null);
 
-  const variantColor = resolveByThemeVariant(
-    variantAccentColorMap,
+  const variantColor = resolveThemeVariant<string>(
+    'accentColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   const borderColor =
@@ -152,6 +151,7 @@ const SplitButton = ({
         >
           {selectedButton.text}
         </Button>
+
         <Button
           aria-controls={open ? 'split-button-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
@@ -177,6 +177,7 @@ const SplitButton = ({
           <ArrowDropDown sx={{ color: borderColor }} />
         </Button>
       </ButtonGroup>
+
       <Menu
         id='split-button-menu'
         anchorEl={anchorEl}
@@ -243,13 +244,14 @@ export const ButtonSwitchRowBlock = ({
 }: ButtonSwitchRowBlockProps & { themeVariant: 'SEND' | 'IO' | 'WALLET' }) => {
   const muiTheme = useTheme();
   const { palette } = muiTheme;
+  const ctx = { palette, theme };
   const isLarge = useMediaQuery(muiTheme.breakpoints.up('lg'));
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
-  const variantColor = resolveByThemeVariant(
-    variantAccentColorMap,
+  const variantColor = resolveThemeVariant<string>(
+    'accentColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   return isLarge ? (

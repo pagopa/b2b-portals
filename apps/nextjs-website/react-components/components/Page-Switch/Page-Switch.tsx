@@ -15,10 +15,7 @@ import Editorial from '../Editorial/Editorial';
 import Cards from '../Cards/Cards';
 import BannerLink from '../BannerLink/BannerLink';
 import { getButtonStyles } from '../common/Common';
-import {
-  resolveByThemeVariant,
-  variantSectionBackgroundColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 const renderContent = (contents: PageSwitchContent[]) => {
   return contents.map((content, index) => {
@@ -75,10 +72,12 @@ const PageSwitch = ({
   }, []);
 
   const { palette } = useTheme();
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   return (
@@ -97,6 +96,7 @@ const PageSwitch = ({
           {...(subtitle && { subtitle })}
           theme={theme}
         />
+
         {isMobile ? (
           <ButtonSwitchRowBlock
             buttons={pages.map((s) => ({
@@ -136,6 +136,7 @@ const PageSwitch = ({
           </ButtonGroup>
         )}
       </ContainerRC>
+
       {renderContent(currentPage.sections)}
     </Box>
   );

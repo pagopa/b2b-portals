@@ -12,10 +12,7 @@ import {
 } from '../../types/Editorial-Switch/Editorial-Switch.types';
 import Editorial from '../Editorial/Editorial';
 import { getButtonStyles } from '../common/Common';
-import {
-  resolveByThemeVariant,
-  variantSectionBackgroundColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 const EditorialSwitch = ({
   sections,
@@ -60,10 +57,12 @@ const EditorialSwitch = ({
   }, []);
 
   const { palette } = useTheme();
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   return (

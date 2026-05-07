@@ -16,11 +16,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
-import {
-  resolveByThemeVariant,
-  variantAccentColorMap,
-  variantContentLinkColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 export const TitleSubtitleBlock = ({
   title,
@@ -33,8 +29,8 @@ export const TitleSubtitleBlock = ({
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
     ctx,
   );
@@ -113,8 +109,8 @@ const SplitButton = ({
 
   const anchorRef = React.useRef<HTMLDivElement>(null);
 
-  const variantColor = resolveByThemeVariant(
-    variantAccentColorMap,
+  const variantColor = resolveThemeVariant<string>(
+    'accentColor',
     themeVariant,
     ctx,
   );
@@ -244,8 +240,8 @@ export const ButtonSwitchRowBlock = ({
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
   const ctx = { palette, theme };
 
-  const variantColor = resolveByThemeVariant(
-    variantAccentColorMap,
+  const variantColor = resolveThemeVariant<string>(
+    'accentColor',
     themeVariant,
     ctx,
   );

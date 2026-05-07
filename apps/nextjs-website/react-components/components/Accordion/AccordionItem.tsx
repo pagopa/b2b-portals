@@ -7,12 +7,7 @@ import { Typography } from '@mui/material';
 import { AccordionItemProps } from '../../types/Accordion/Accordion.types';
 import { useTheme } from '@mui/material/styles';
 import mixpanel from 'mixpanel-browser';
-import {
-  resolveByThemeVariant,
-  variantAccentColorMap,
-  variantFocusBackgroundColorMap,
-  variantFocusOutlineColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 export const AccordionItem: React.FC<
   AccordionItemProps & { trackItemOpen: boolean }
@@ -24,20 +19,20 @@ export const AccordionItem: React.FC<
 
   const ctx = { palette, theme };
 
-  const linkColor = resolveByThemeVariant(
-    variantAccentColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'accentColor',
     themeVariant,
     ctx,
   );
 
-  const focusOutlineColor = resolveByThemeVariant(
-    variantFocusOutlineColorMap,
+  const focusOutlineColor = resolveThemeVariant<string>(
+    'focusOutlineColor',
     themeVariant,
     ctx,
   );
 
-  const focusBackgroundColor = resolveByThemeVariant(
-    variantFocusBackgroundColorMap,
+  const focusBackgroundColor = resolveThemeVariant<string>(
+    'focusBackgroundColor',
     themeVariant,
     ctx,
   );

@@ -10,7 +10,7 @@ import {
 import { ServiceCardProps } from '../../types/ServiceCarousel/ServiceCarousel.types';
 import Image from 'next/image';
 import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
-import { resolveByThemeVariant, variantActionColorMap } from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 // Style Carousel Dots (unfortunately react-slick doesn't offer an easy way)
@@ -58,7 +58,7 @@ export const ServiceCard = (
 ) => {
   const { palette } = useTheme();
 
-  const linkColor = resolveByThemeVariant(variantActionColorMap, themeVariant, {
+  const linkColor = resolveThemeVariant<string>('actionColor', themeVariant, {
     palette,
     theme: 'light',
   });
@@ -68,7 +68,7 @@ export const ServiceCard = (
       sx={{
         display: 'flex !important',
         width: 'fit-content !important',
-      }}
+      }} // Prevent Slider from overwriting
       direction='row'
       gap={8}
       p={3}
@@ -77,12 +77,17 @@ export const ServiceCard = (
       height={272}
       bgcolor={palette.grey[50]}
       borderRadius={4}
+      // Styles for mobile image
       position='relative'
       overflow='hidden'
       component='article'
       tabIndex={-1}
     >
-      <Stack gap={1} width={{ xs: 216, sm: 264, md: 264 }} alignSelf='stretch'>
+      <Stack
+        gap={1}
+        width={{ xs: 216, sm: 264, md: 264 }} // 216 has been found by testing: a higher number breaks react-slick and makes the last slide wrap under the first one
+        alignSelf='stretch'
+      >
         <Typography component='h3' variant='h6' fontWeight={700}>
           {card.title}
         </Typography>
@@ -146,8 +151,8 @@ export const SliderArrowControl = ({
 }) => {
   const { palette } = useTheme();
 
-  const arrowBackgroundColor = resolveByThemeVariant(
-    variantActionColorMap,
+  const arrowBackgroundColor = resolveThemeVariant<string>(
+    'actionColor',
     themeVariant,
     { palette, theme: 'light' },
   );

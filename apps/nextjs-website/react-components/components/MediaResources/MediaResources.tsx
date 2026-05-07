@@ -2,11 +2,7 @@ import { Box, Typography, useTheme, Stack } from '@mui/material';
 import { MediaResourcesProps } from '@react-components/types';
 import { TextColor } from '../common/Common.helpers';
 import { FileDownloadOutlined } from '@mui/icons-material';
-import {
-  resolveByThemeVariant,
-  variantContentLinkColorMap,
-  variantSectionBackgroundColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 const MediaResources = ({
   items,
@@ -20,16 +16,16 @@ const MediaResources = ({
   const { palette } = muiTheme;
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
     ctx,
   );
 
   const textColor = TextColor(theme);
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
     ctx,
   );
@@ -62,6 +58,7 @@ const MediaResources = ({
             {title}
           </Typography>
         )}
+
         <Stack direction='row' flexWrap='wrap' rowGap={14} columnGap={9}>
           {items.map((item, index) => (
             <Stack
@@ -85,10 +82,11 @@ const MediaResources = ({
                 style={{
                   marginBottom: '16px',
                   maxWidth: '90vw',
-                  maxHeight: '52.36vw',
+                  maxHeight: '52.36vw', // Maintains same ratio (330/192 = 90/52.36)
                   objectFit: 'cover',
                 }}
               />
+
               <Stack
                 direction='row'
                 alignItems='center'
@@ -100,6 +98,7 @@ const MediaResources = ({
                   {item.label}
                 </Typography>
               </Stack>
+
               <Typography
                 variant='h6'
                 component='h3'

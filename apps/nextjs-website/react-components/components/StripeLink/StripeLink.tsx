@@ -4,12 +4,7 @@ import { StripeLinkProps } from '../../types/StripeLink/StripeLink.types';
 import { TextColor } from '../common/Common.helpers';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
-import {
-  resolveByThemeVariant,
-  stripeLinkButtonBackgroundColorMap,
-  stripeLinkButtonTextColorMap,
-  variantExtraBackgroundColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import { isValidExternalLink, LinkIcon } from '../common/Common';
 
 const StripeLink = ({
@@ -24,20 +19,20 @@ const StripeLink = ({
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
-  const extraBackgroundColor = resolveByThemeVariant(
-    variantExtraBackgroundColorMap,
+  const extraBackgroundColor = resolveThemeVariant<string>(
+    'extraBackgroundColor',
     themeVariant,
     ctx,
   );
 
-  const buttonBackgroundColor = resolveByThemeVariant(
-    stripeLinkButtonBackgroundColorMap,
+  const buttonBackgroundColor = resolveThemeVariant<string>(
+    'stripeLinkButtonBackgroundColor',
     themeVariant,
     ctx,
   );
 
-  const buttonTextColor = resolveByThemeVariant(
-    stripeLinkButtonTextColorMap,
+  const buttonTextColor = resolveThemeVariant<string>(
+    'stripeLinkButtonTextColor',
     themeVariant,
     ctx,
   );

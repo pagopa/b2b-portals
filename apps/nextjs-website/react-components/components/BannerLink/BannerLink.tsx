@@ -6,12 +6,7 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
 import { CtaButtonProps } from '@react-components/types/common/Common.types';
-import {
-  resolveByThemeVariant,
-  variantContentLinkColorMap,
-  variantSectionBackgroundColorMap,
-  variantSectionStripeBackgroundsMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 const styles = {
   main: {
@@ -44,14 +39,14 @@ const BannerLink = ({
   const { palette } = muiTheme;
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
     ctx,
   );
 
-  const sectionBackgrounds = resolveByThemeVariant(
-    variantSectionStripeBackgroundsMap,
+  const sectionBackgrounds = resolveThemeVariant<string[]>(
+    'sectionStripeBackgrounds',
     themeVariant,
     ctx,
   );
@@ -59,8 +54,8 @@ const BannerLink = ({
   const textColor =
     theme === 'dark' ? muiTheme.palette.primary.contrastText : TextColor(theme);
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
     ctx,
   );

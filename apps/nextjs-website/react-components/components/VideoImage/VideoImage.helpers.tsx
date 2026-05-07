@@ -7,7 +7,7 @@ import {
 } from '@react-components/types/VideoImage/VideoImage.types';
 import { TextColor } from '../common/Common.helpers';
 import { useTheme } from '@mui/material/styles';
-import { resolveByThemeVariant, variantContentLinkColorMap } from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 interface NextImageProps {
   overflow: 'hidden';
@@ -55,6 +55,7 @@ export const renderVideo = ({
       </Typography>
     );
   }
+
   return (
     <video
       onContextMenu={(e) => e.preventDefault()}
@@ -125,11 +126,12 @@ export const VideoText = ({
 }: VideoTextProps) => {
   const textColor = TextColor(theme);
   const { palette } = useTheme();
+  const ctx = { palette, theme };
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   return (
@@ -187,11 +189,12 @@ export const ImageText = ({
 }) => {
   const { palette } = useTheme();
   const textColor = TextColor(theme);
+  const ctx = { palette, theme };
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   return (

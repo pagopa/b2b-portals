@@ -1,11 +1,7 @@
 import { Stack, Chip } from '@mui/material';
 import { ChipProps } from '@react-components/types/HeroChips/HeroChips.types';
 import { useTheme } from '@mui/material/styles';
-import {
-  resolveByThemeVariant,
-  variantChipBackgroundColorMap,
-  variantChipBackgroundHoverColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 export const ChipsBlock = ({
   chips,
@@ -21,14 +17,14 @@ export const ChipsBlock = ({
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
-  const chipBackgroundColor = resolveByThemeVariant(
-    variantChipBackgroundColorMap,
+  const chipBackgroundColor = resolveThemeVariant<string>(
+    'chipBackgroundColor',
     themeVariant,
     ctx,
   );
 
-  const chipBackgroundColorHover = resolveByThemeVariant(
-    variantChipBackgroundHoverColorMap,
+  const chipBackgroundColorHover = resolveThemeVariant<string>(
+    'chipBackgroundHoverColor',
     themeVariant,
     ctx,
   );
@@ -78,7 +74,9 @@ export const ChipsBlock = ({
                   backgroundColor: `${chipBackgroundColorHover} !important`,
                 },
                 '&:focus': {
-                  outline: `2px solid ${theme === 'light' ? chipBackgroundColor : 'white'}`,
+                  outline: `2px solid ${
+                    theme === 'light' ? chipBackgroundColor : 'white'
+                  }`,
                 },
                 cursor: 'pointer',
               }}

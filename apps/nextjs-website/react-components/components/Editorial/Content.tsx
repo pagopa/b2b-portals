@@ -5,7 +5,7 @@ import { EditorialContentProps } from '../../types/Editorial/Editorial.types';
 import { Title } from '../common/Common';
 import { Eyelet } from './Editorial.helpers';
 import { TextColor, ExtraTextColor } from '../common/Common.helpers';
-import { resolveByThemeVariant, variantContentLinkColorMap } from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 export const Content = ({
   eyelet,
@@ -23,8 +23,8 @@ export const Content = ({
   const maxTextWidth = breakpoints.values.md / 2;
   const ctx = { palette, theme };
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
     ctx,
   );

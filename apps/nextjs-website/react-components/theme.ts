@@ -17,15 +17,25 @@ export const resolveByThemeVariant = <T>(
 ): T => map[themeVariant](ctx);
 
 export const variantAccentColorMap: ThemeVariantMap<string> = {
-  SEND: ({ palette }) => palette.primary.main,
-  IO: ({ palette }) => palette.custom.primaryColorDark,
-  WALLET: ({ palette }) => palette.custom.primaryColorDark,
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.main : palette.primary.main,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.primaryColorDark
+      : palette.custom.primaryColorDark,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.primaryColorDark
+      : palette.custom.primaryColorDark,
 };
 
 export const variantActionColorMap: ThemeVariantMap<string> = {
-  SEND: ({ palette }) => palette.primary.main,
-  IO: ({ palette }) => palette.custom.blueIO[500],
-  WALLET: ({ palette }) => palette.custom.blueIO[500],
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.main : palette.primary.main,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.blueIO[500] : palette.custom.blueIO[500],
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.blueIO[500] : palette.custom.blueIO[500],
 };
 
 export const variantContentLinkColorMap: ThemeVariantMap<string> = {
@@ -84,15 +94,33 @@ export const variantExtraBackgroundColorMap: ThemeVariantMap<string> = {
 };
 
 export const variantFocusOutlineColorMap: ThemeVariantMap<string> = {
-  SEND: ({ palette }) => palette.custom.outlineColor,
-  IO: ({ palette }) => palette.custom.primaryColorDark,
-  WALLET: ({ palette }) => palette.custom.primaryColorDark,
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.outlineColor
+      : palette.custom.outlineColor,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.primaryColorDark
+      : palette.custom.primaryColorDark,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.primaryColorDark
+      : palette.custom.primaryColorDark,
 };
 
 export const variantFocusBackgroundColorMap: ThemeVariantMap<string> = {
-  SEND: ({ palette }) => alpha(palette.primary.main, 0.08),
-  IO: ({ palette }) => alpha(palette.custom.primaryColorDark, 0.08),
-  WALLET: ({ palette }) => alpha(palette.custom.primaryColorDark, 0.08),
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? alpha(palette.primary.main, 0.08)
+      : alpha(palette.primary.main, 0.08),
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? alpha(palette.custom.primaryColorDark, 0.08)
+      : alpha(palette.custom.primaryColorDark, 0.08),
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? alpha(palette.custom.primaryColorDark, 0.08)
+      : alpha(palette.custom.primaryColorDark, 0.08),
 };
 
 export const variantChipBackgroundColorMap: ThemeVariantMap<string> = {
@@ -206,3 +234,34 @@ export const variantSectionStripeBackgroundsMap: ThemeVariantMap<string[]> = {
           palette.custom.bannerLinkLightBlueIO,
         ],
 };
+
+export const themeVariantMaps = {
+  accentColor: variantAccentColorMap,
+  actionColor: variantActionColorMap,
+  contentLinkColor: variantContentLinkColorMap,
+  sectionBackgroundColor: variantSectionBackgroundColorMap,
+  sectionBackgroundAlternativeGrey: variantSectionBackgroundAlternativeGreyMap,
+  extraBackgroundColor: variantExtraBackgroundColorMap,
+  focusOutlineColor: variantFocusOutlineColorMap,
+  focusBackgroundColor: variantFocusBackgroundColorMap,
+  chipBackgroundColor: variantChipBackgroundColorMap,
+  chipBackgroundHoverColor: variantChipBackgroundHoverColorMap,
+  ctaContainedBackgroundColor: ctaContainedBackgroundColorMap,
+  ctaContainedTextColor: ctaContainedTextColorMap,
+  ctaOutlinedBorderColor: ctaOutlinedBorderColorMap,
+  ctaOutlinedTextColor: ctaOutlinedTextColorMap,
+  stripeLinkButtonBackgroundColor: stripeLinkButtonBackgroundColorMap,
+  stripeLinkButtonTextColor: stripeLinkButtonTextColorMap,
+  sectionStripeBackgrounds: variantSectionStripeBackgroundsMap,
+};
+
+export const resolveThemeVariant = <T>(
+  mapName: keyof typeof themeVariantMaps,
+  themeVariant: ThemeVariant,
+  ctx: ThemeContext,
+): T =>
+  resolveByThemeVariant(
+    themeVariantMaps[mapName] as ThemeVariantMap<T>,
+    themeVariant,
+    ctx,
+  );

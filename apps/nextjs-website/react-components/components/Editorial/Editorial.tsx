@@ -6,10 +6,7 @@ import { Content as EditorialContent } from './Content';
 import { Ctas as EditorialCtas } from './Ctas';
 import { Image as EditorialImage } from './Image';
 import { useId } from 'react';
-import {
-  resolveByThemeVariant,
-  variantSectionBackgroundColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import { useTheme } from '@mui/material/styles';
 
 const styles = {
@@ -41,8 +38,8 @@ const Editorial = (props: EditorialProps) => {
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
     ctx,
   );

@@ -13,12 +13,7 @@ import { FormProps } from '@react-components/types/Form/Form.types';
 import { TextColor, GrayLinkColor } from '../common/Common.helpers';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { FormCategories } from './Form.helpers';
-import {
-  ctaContainedBackgroundColorMap,
-  ctaContainedTextColorMap,
-  resolveByThemeVariant,
-  variantContentLinkColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 interface ValidationErrors {
   name: string | null;
@@ -170,6 +165,7 @@ const Form = ({
                 ? [formData.category]
                 : [defaultCategoryID],
             email: formData.email,
+            // Optional fields must be all present or all absent (default values are inconsequential)
             ...((showName || showSurname || showOrganization) && {
               name: showName ? formData.name : 'none',
               surname: showSurname ? formData.surname : 'none',
@@ -338,20 +334,20 @@ const Form = ({
     ) : null;
   };
 
-  const notesLinkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const notesLinkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
     ctx,
   );
 
-  const submitButtonBackgroundColor = resolveByThemeVariant(
-    ctaContainedBackgroundColorMap,
+  const submitButtonBackgroundColor = resolveThemeVariant<string>(
+    'ctaContainedBackgroundColor',
     themeVariant,
     ctx,
   );
 
-  const submitButtonTextColor = resolveByThemeVariant(
-    ctaContainedTextColorMap,
+  const submitButtonTextColor = resolveThemeVariant<string>(
+    'ctaContainedTextColor',
     themeVariant,
     ctx,
   );

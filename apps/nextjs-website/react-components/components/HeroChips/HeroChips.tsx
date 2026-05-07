@@ -4,11 +4,7 @@ import ContainerRC from '../common/ContainerRC';
 import { TextColor } from '../common/Common.helpers';
 import { HeroChipsProps } from '@react-components/types/HeroChips/HeroChips.types';
 import { ChipsBlock } from './HeroChips.helpers';
-import {
-  resolveByThemeVariant,
-  variantSectionBackgroundColorMap,
-  variantContentLinkColorMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 import { useTheme } from '@mui/material/styles';
 
 const HeroChips = (props: HeroChipsProps) => {
@@ -24,17 +20,20 @@ const HeroChips = (props: HeroChipsProps) => {
   } = props;
 
   const { palette } = useTheme();
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundColorMap,
+  const ctx = { palette, theme };
+
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   const textColor = TextColor(theme);
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
-    { palette, theme },
+    ctx,
   );
 
   const BackgroundImage = (
@@ -97,6 +96,7 @@ const HeroChips = (props: HeroChipsProps) => {
         >
           {title}
         </Typography>
+
         {subtitle && (
           <Typography
             component='div'
@@ -117,6 +117,7 @@ const HeroChips = (props: HeroChipsProps) => {
             {subtitle}
           </Typography>
         )}
+
         {chips.length > 0 && (
           <ChipsBlock
             chips={chips}

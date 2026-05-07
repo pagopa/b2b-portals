@@ -10,11 +10,7 @@ import { AccordionItem } from './AccordionItem';
 import { Title, Subtitle } from '../common/Common';
 import { AccordionProps } from '../../types/Accordion/Accordion.types';
 import { TextColor } from '../common/Common.helpers';
-import {
-  resolveByThemeVariant,
-  variantContentLinkColorMap,
-  variantSectionBackgroundAlternativeGreyMap,
-} from '../../theme';
+import { resolveThemeVariant } from '../../theme';
 
 const Accordion = (props: AccordionProps) => {
   const {
@@ -34,14 +30,14 @@ const Accordion = (props: AccordionProps) => {
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveByThemeVariant(
-    variantSectionBackgroundAlternativeGreyMap,
+  const backgroundColor = resolveThemeVariant<string>(
+    'sectionBackgroundAlternativeGrey',
     themeVariant,
     ctx,
   );
 
-  const linkColor = resolveByThemeVariant(
-    variantContentLinkColorMap,
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
     themeVariant,
     ctx,
   );
