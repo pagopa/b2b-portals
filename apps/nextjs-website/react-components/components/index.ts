@@ -31,6 +31,7 @@ import DynamicsForm from './DynamicsForm/DynamicsForm';
 import TextAndImage from './TextAndImage/TextAndImage';
 import RichBanner from './RichBanner/RichBanner';
 import LocaleProvider from './LocaleProvider/LocaleProvider';
+import LastUpdated from './LastUpdated/LastUpdated';
 export {
   Hero,
   Editorial,
@@ -65,4 +66,5 @@ export {
   TextAndImage,
   RichBanner,
   LocaleProvider,
+  LastUpdated,
 };
