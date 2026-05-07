@@ -46,8 +46,10 @@ const makeFeatureProps = ({
   locale,
   defaultLocale,
   items,
+  customBgColor,
   ...rest
 }: FeatureSection & SiteWidePageData): FeatureProps => ({
+  ...(customBgColor && { customBgColor }),
   labels: featureLabels[locale],
   items: items.map((item) => ({
     title: item.title,

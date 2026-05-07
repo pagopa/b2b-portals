@@ -121,6 +121,7 @@ const FeatureSectionCodec = t.strict({
   showCarouselMobile: t.boolean,
   sectionID: t.union([t.string, t.null]),
   items: t.array(FeatureItemCodec),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const StepCodec = t.strict({
