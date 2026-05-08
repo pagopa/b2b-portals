@@ -95,7 +95,7 @@ const CardsItem = ({
                     fontSize={14}
                     fontWeight={600}
                     {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
-                    {...(link.href.startsWith('https://') && {
+                    {...(isValidExternalLink(link.href) && {
                       target: '_blank',
                     })}
                   >

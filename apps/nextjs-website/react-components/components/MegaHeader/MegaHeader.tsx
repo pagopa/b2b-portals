@@ -252,9 +252,7 @@ const MegaHeader = ({
                                               <Sublink
                                                 href={item.href}
                                                 target={
-                                                  item.href.startsWith(
-                                                    'https://',
-                                                  )
+                                                  isValidExternalLink(item.href)
                                                     ? '_blank'
                                                     : '_self'
                                                 }
@@ -286,8 +284,8 @@ const MegaHeader = ({
                                                   <ExternalLinkIcon
                                                     className='arrowIcon'
                                                     sx={{ ml: 0 }}
-                                                    {...(item.href.startsWith(
-                                                      'https://',
+                                                    {...(isValidExternalLink(
+                                                      item.href,
                                                     ) && { target: '_blank' })}
                                                   />
                                                 ) : (
@@ -324,7 +322,7 @@ const MegaHeader = ({
                       href={href}
                       title={ariaLabel}
                       aria-label={ariaLabel}
-                      target={href.startsWith('http') ? '_blank' : undefined}
+                      {...(isValidExternalLink(href) && { target: '_blank' })}
                       rel='noopener noreferrer'
                       style={{ display: 'inline-flex', alignItems: 'center' }}
                     >
@@ -508,7 +506,7 @@ const MegaHeader = ({
                                 <Sublink
                                   href={item.href}
                                   target={
-                                    item.href.startsWith('https://')
+                                    isValidExternalLink(item.href)
                                       ? '_blank'
                                       : '_self'
                                   }
@@ -539,7 +537,7 @@ const MegaHeader = ({
                                     <ExternalLinkIcon
                                       className='arrowIcon'
                                       sx={{ ml: 0 }}
-                                      {...(item.href.startsWith('https://') && {
+                                      {...(isValidExternalLink(item.href) && {
                                         target: '_blank',
                                       })}
                                     />
@@ -655,7 +653,7 @@ const MegaHeader = ({
                       href={href}
                       title={ariaLabel}
                       aria-label={ariaLabel}
-                      target={href.startsWith('http') ? '_blank' : undefined}
+                      {...(isValidExternalLink(href) && { target: '_blank' })}
                       rel='noopener noreferrer'
                       style={{
                         display: 'inline-flex',
