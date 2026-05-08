@@ -14,9 +14,11 @@ const makeAccordionProps = ({
   accordionItems,
   textAlignment,
   trackItemOpen,
+  customBgColor,
   ...rest
 }: AccordionSection & SiteWidePageData): AccordionProps => ({
   ...(subtitle && { subtitle }),
+  ...(customBgColor && { customBgColor }),
   ...(description && {
     description: MarkdownRenderer({
       markdown: description,

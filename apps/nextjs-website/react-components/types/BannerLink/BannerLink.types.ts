@@ -5,6 +5,7 @@ export interface BannerLinkSectionProps {
   body: JSX.Element;
   iconURL?: string;
   ctaButtons?: CtaButtonProps[];
+  customBgColor?: string;
 }
 
 export interface BannerLinkProps extends SectionProps {

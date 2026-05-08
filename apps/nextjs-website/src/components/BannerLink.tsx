@@ -12,28 +12,31 @@ export const makeBannerLinkProps = ({
   sections,
   ...rest
 }: BannerLinkSection & SiteWidePageData): BannerLinkProps => ({
-  sections: sections.map(({ body, icon, ctaButtons, ...requiredFields }) => ({
-    ...requiredFields,
-    body: MarkdownRenderer({
-      markdown: body,
-      locale,
-      defaultLocale,
-      variant: 'body2',
+  sections: sections.map(
+    ({ body, icon, ctaButtons, customBgColor, ...requiredFields }) => ({
+      ...requiredFields,
+      ...(customBgColor && { customBgColor }),
+      body: MarkdownRenderer({
+        markdown: body,
+        locale,
+        defaultLocale,
+        variant: 'body2',
+      }),
+      ...(icon && {
+        iconURL: icon.url,
+      }),
+      ...(ctaButtons && {
+        ctaButtons: ctaButtons.map(
+          ({ href, openInNewTab, ariaLabel, ...ctaButton }) => ({
+            ...ctaButton,
+            ...(ariaLabel && { ariaLabel }),
+            ...(openInNewTab && { openInNewTab }),
+            href: LocalizeURL({ URL: href, locale, defaultLocale }),
+          }),
+        ),
+      }),
     }),
-    ...(icon && {
-      iconURL: icon.url,
-    }),
-    ...(ctaButtons && {
-      ctaButtons: ctaButtons.map(
-        ({ href, openInNewTab, ariaLabel, ...ctaButton }) => ({
-          ...ctaButton,
-          ...(ariaLabel && { ariaLabel }),
-          ...(openInNewTab && { openInNewTab }),
-          href: LocalizeURL({ URL: href, locale, defaultLocale }),
-        }),
-      ),
-    }),
-  })),
+  ),
   ...rest,
 });
 

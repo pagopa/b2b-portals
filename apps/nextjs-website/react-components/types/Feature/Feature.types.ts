@@ -1,4 +1,9 @@
-import { LinkProps, SectionProps, Theme, ThemeVariant } from '../common/Common.types';
+import {
+  LinkProps,
+  SectionProps,
+  Theme,
+  ThemeVariant,
+} from '../common/Common.types';
 
 export interface FeatureItem {
   readonly iconURL: string;
@@ -18,6 +23,7 @@ export interface FeatureProps extends SectionProps {
   readonly items: ReadonlyArray<FeatureItem>;
   readonly showCarouselMobile?: boolean;
   readonly background?: string;
+  readonly customBgColor?: string;
   readonly labels: {
     cardNext: string;
     cardPrevious: string;

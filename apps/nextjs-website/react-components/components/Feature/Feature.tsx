@@ -17,6 +17,7 @@ const Feature = ({
   background,
   sectionID,
   labels,
+  customBgColor,
 }: FeatureProps) => {
   const [activeStep, setActiveStep] = useState(0);
   const muiTheme = useTheme();
@@ -32,11 +33,13 @@ const Feature = ({
 
   const textColor = TextColor(theme);
 
-  const backgroundColorAlternative = resolveThemeVariant<string>(
-    'sectionBackgroundAlternativeGrey',
-    themeVariant,
-    ctx,
-  );
+  const backgroundColorAlternative =
+    customBgColor ??
+    resolveThemeVariant<string>(
+      'sectionBackgroundAlternativeGrey',
+      themeVariant,
+      ctx,
+    );
 
   return (
     <ContainerRC

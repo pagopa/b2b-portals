@@ -72,6 +72,7 @@ const EditorialContentCodec = t.strict({
   mobileImage: StrapiImageRequiredSchema,
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const EditorialSectionCodec = t.intersection([
@@ -102,6 +103,7 @@ const AccordionSectionCodec = t.strict({
     t.literal('right'),
   ]),
   sectionID: t.union([t.string, t.null]),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const FeatureItemCodec = t.strict({
@@ -119,6 +121,7 @@ const FeatureSectionCodec = t.strict({
   showCarouselMobile: t.boolean,
   sectionID: t.union([t.string, t.null]),
   items: t.array(FeatureItemCodec),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const StepCodec = t.strict({
@@ -147,6 +150,7 @@ const HowToSectionCodec = t.strict({
   link: t.union([LinkCodec, t.null]),
   steps: t.array(StepCodec),
   sectionID: t.union([t.string, t.null]),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const BannerLinkSectionCodec = t.strict({
@@ -159,6 +163,7 @@ const BannerLinkSectionCodec = t.strict({
       body: t.string,
       ctaButtons: t.array(CTAButtonSimpleCodec),
       icon: StrapiImageSchema,
+      customBgColor: t.union([t.string, t.null]),
     }),
   ),
 });
@@ -197,6 +202,7 @@ const CardsSectionCodec = t.strict({
   }),
   sectionID: t.union([t.string, t.null]),
   bottomCTA: t.union([CTAButtonSimpleCodec, t.null]),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const RedirectSectionCodec = t.strict({

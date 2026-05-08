@@ -11,8 +11,10 @@ const makeHowToProps = ({
   defaultLocale,
   link,
   steps,
+  customBgColor,
   ...rest
 }: HowToSection & SiteWidePageData): HowToProps => ({
+  ...(customBgColor && { customBgColor }),
   ...(link && {
     link: {
       label: link.label,
