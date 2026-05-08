@@ -3,7 +3,7 @@ import { BackgroundColor } from '../common/Common.helpers';
 import { PreFooterProps } from '@react-components/types/PreFooter/PreFooter';
 import { useTheme, useMediaQuery } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import { CtaButtons } from '../common/Common';
+import { CtaButtons, isValidExternalLink } from '../common/Common';
 import { usePathname } from 'next/navigation';
 import { AppStoreButton, GooglePlayButton } from '../common/StoreButtons';
 
@@ -155,7 +155,7 @@ const PreFooter = (props: PreFooterProps) => {
                       width: 'auto',
                       marginTop: '16px',
                     },
-                    ...(button.href?.startsWith('https') && {
+                    ...(isValidExternalLink(button.href) && {
                       target: '_blank',
                     }),
                   })),

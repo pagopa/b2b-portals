@@ -30,6 +30,7 @@ const LastUpdated = ({
                 'aria-label': link.ariaLabel,
               })}
               sx={{ fontWeight: 'bold' }}
+              {...(isValidExternalLink(link.href) && { target: '_blank' })}
             >
               {link.label}
               <ExternalLinkIcon show={isValidExternalLink(link.href)} />

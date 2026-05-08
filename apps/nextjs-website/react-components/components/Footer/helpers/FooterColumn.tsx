@@ -20,7 +20,7 @@ export const FooterColumn = ({
         aria-label={companyLink.ariaLabel}
         href={companyLink.href ?? hrefNoOp}
         sx={{ display: 'inline-flex' }}
-        {...(companyLink.href?.startsWith('https') && { target: '_blank' })}
+        {...(isValidExternalLink(companyLink.href) && { target: '_blank' })}
       >
         <LogoPagoPACompany />
       </Link>
@@ -40,7 +40,7 @@ export const FooterColumn = ({
             <Link
               href={href}
               aria-label={ariaLabel}
-              {...(href.startsWith('https') && { target: '_blank' })}
+              {...(isValidExternalLink(href) && { target: '_blank' })}
             >
               <img
                 src={iconURL}
@@ -75,7 +75,7 @@ export const FooterColumn = ({
                 cursor: 'pointer',
               }}
               variant='subtitle2'
-              {...(href.startsWith('https://') && { target: '_blank' })}
+              {...(isValidExternalLink(href) && { target: '_blank' })}
               {...(showOneTrustPreferencies
                 ? {
                     onClick: () => window.OneTrust.ToggleInfoDisplay(),
@@ -87,7 +87,7 @@ export const FooterColumn = ({
               {label}
               <ExternalLinkIcon
                 show={isValidExternalLink(href)}
-                {...(href.startsWith('https://') && { target: '_blank' })}
+                {...(isValidExternalLink(href) && { target: '_blank' })}
               />
             </Link>
           </li>

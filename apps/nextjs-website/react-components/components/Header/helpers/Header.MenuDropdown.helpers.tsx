@@ -91,7 +91,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             textDecoration: 'none',
           }}
           href={button.href ? button.href : `#${label}`}
-          target={button.href?.startsWith('https://') ? '_blank' : '_self'}
+          target={isValidExternalLink(button.href) ? '_blank' : '_self'}
           onClick={onClick}
         >
           <Typography
@@ -107,7 +107,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             {label}
             <ExternalLinkIcon
               show={isValidExternalLink(button.href)}
-              {...(button.href?.startsWith('https://') && { target: '_blank' })}
+              {...(isValidExternalLink(button.href) && { target: '_blank' })}
             />
           </Typography>
         </Link>
@@ -147,7 +147,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
                   padding: 0,
                 }}
                 href={item.href}
-                target={item.href?.startsWith('https://') ? '_blank' : '_self'}
+                target={isValidExternalLink(button.href) ? '_blank' : '_self'}
               >
                 {item.label}
                 <ExternalLinkIcon
