@@ -16,4 +16,5 @@ export interface AccordionProps extends SectionProps {
   accordionItems: AccordionItemProps[];
   layout: 'left' | 'center';
   textAlignment: 'left' | 'center' | 'right';
+  customBgColor?: string;
 }

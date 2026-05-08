@@ -33,16 +33,15 @@ const Editorial = (props: EditorialProps) => {
     width = 'standard',
     reversed = false,
     sectionID,
+    customBgColor,
   } = props;
 
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveThemeVariant<string>(
-    'sectionBackgroundColor',
-    themeVariant,
-    ctx,
-  );
+  const backgroundColor =
+    customBgColor ??
+    resolveThemeVariant<string>('sectionBackgroundColor', themeVariant, ctx);
 
   const columns = {
     wide: 6,

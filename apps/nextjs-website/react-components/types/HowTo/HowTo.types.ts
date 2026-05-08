@@ -21,4 +21,5 @@ export interface HowToProps extends SectionProps {
   };
   readonly rowMaxSteps?: number;
   readonly stepsAlignment?: 'right' | 'center' | 'left';
+  readonly customBgColor?: string;
 }

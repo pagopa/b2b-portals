@@ -18,16 +18,15 @@ const Cards = ({
   sectionID,
   bottomCTA,
   titleTag,
+  customBgColor,
 }: CardsProps) => {
   const muiTheme = useTheme();
   const { palette } = muiTheme;
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveThemeVariant<string>(
-    'sectionBackgroundColor',
-    themeVariant,
-    ctx,
-  );
+  const backgroundColor =
+    customBgColor ??
+    resolveThemeVariant<string>('sectionBackgroundColor', themeVariant, ctx);
 
   const textColor = TextColor(theme);
   const flexDirection = textPosition === 'right' ? 'row-reverse' : 'row';
