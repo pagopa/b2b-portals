@@ -33,6 +33,7 @@ import TextAndImage from '../TextAndImage';
 import RichBanner from '../RichBanner';
 import LastUpdated from '../LastUpdated';
 import { PagePublishDates } from '@/lib/fetch/navigation';
+import FeedbackForm from '../FeedbackForm';
 
 // eslint-disable-next-line complexity
 const PageSection = (
@@ -102,6 +103,8 @@ const PageSection = (
       return <RichBanner {...props} />;
     case 'sections.last-updated':
       return <LastUpdated {...props} />;
+    case 'sections.feedback-form':
+      return <FeedbackForm {...props} />;
     default:
       return null;
   }

@@ -137,6 +137,11 @@ const LastUpdatedCodec = t.strict({
   link: t.union([LinkCodec, t.null]),
 });
 
+const FeedbackFormCodec = t.strict({
+  __component: t.literal('sections.feedback-form'),
+  sectionID: t.union([t.string, t.null]),
+});
+
 const HowToSectionCodec = t.strict({
   __component: t.literal('sections.how-to'),
   title: t.string,
@@ -501,6 +506,7 @@ export const PageSectionCodec = t.union([
   FeatureSectionCodec,
   HowToSectionCodec,
   LastUpdatedCodec,
+  FeedbackFormCodec,
   BannerLinkSectionCodec,
   StripeLinkSectionCodec,
   CardsSectionCodec,
@@ -536,6 +542,7 @@ export type HowToSection = t.TypeOf<typeof HowToSectionCodec>;
 export type LastUpdatedSection = t.TypeOf<typeof LastUpdatedCodec>;
 export type BannerLinkSection = t.TypeOf<typeof BannerLinkSectionCodec>;
 export type StripeLinkSection = t.TypeOf<typeof StripeLinkSectionCodec>;
+export type FeedbackFormSection = t.TypeOf<typeof FeedbackFormCodec>;
 export type CardsSection = t.TypeOf<typeof CardsSectionCodec>;
 export type RedirectSection = t.TypeOf<typeof RedirectSectionCodec>;
 export type OneTrustSectionProps = t.TypeOf<typeof OneTrustSectionPropsCodec>;
