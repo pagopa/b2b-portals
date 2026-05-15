@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_sections_feedback_forms",
+  "info": {
+    "displayName": "FeedbackForm"
+  },
+  "options": {},
+  "attributes": {
+    "sectionID": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
