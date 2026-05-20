@@ -10,7 +10,7 @@ type PreviewLayoutProps = {
 const PreviewRootLayout = async ({ children }: PreviewLayoutProps) =>
   isPreviewMode() ? (
     <html lang='it'>
-      <body style={{ margin: 0 }}>{children}</body>
+      <body style={{ margin: 0, backgroundColor: 'white' }}>{children}</body>
     </html>
   ) : (
     <EmptyLayout />
