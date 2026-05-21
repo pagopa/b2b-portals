@@ -44,6 +44,7 @@ export default function FeedbackForm({
   const [sending, setSending] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [error, setError] = useState(false);
+  const isValidEnv = tenant && token;
 
   const handleFieldValue = (
     ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -77,6 +78,10 @@ export default function FeedbackForm({
   };
 
   const handleSendFeedback = async () => {
+    if (!isValidEnv) {
+      setError(true);
+      return;
+    }
     setSending(true);
     try {
       const res = await fetch(
@@ -117,6 +122,10 @@ export default function FeedbackForm({
   };
 
   const handleSendDetailedFeedback = async () => {
+    if (!isValidEnv) {
+      setError(true);
+      return;
+    }
     setSending(true);
     try {
       await fetch(

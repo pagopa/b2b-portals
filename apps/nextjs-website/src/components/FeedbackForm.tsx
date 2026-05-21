@@ -155,14 +155,14 @@ const makeFeedbackFormProps = ({
   locale,
   sectionID,
 }: FeedbackFormSection & SiteWidePageData): FeedbackFormProps => {
-  const tenant = 'appio';
-  const token = '';
+  const tenant = process.env['NEXT_PUBLIC_TENANT'];
+  const token = process.env['NEXT_PUBLIC_TOKEN'];
   return {
     sectionID,
     labels: feedbackFormLabels[locale],
     locale,
-    tenant,
-    token,
+    ...(tenant && { tenant }),
+    ...(token && { token }),
   };
 };
 
