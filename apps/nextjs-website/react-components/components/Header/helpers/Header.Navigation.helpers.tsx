@@ -24,7 +24,7 @@ export const Navigation = ({
         justifyContent: 'space-between',
       }}
     >
-      <Stack direction='row' gap={4} alignItems='center' height='100%'>
+      <Stack direction='row' gap={5} alignItems='center' height='100%'>
         {leftItems.map((menu, index) => (
           <MenuDropdown
             key={index}
@@ -34,7 +34,7 @@ export const Navigation = ({
           />
         ))}
       </Stack>
-      <Stack direction='row' gap={4} alignItems='center' height='100%'>
+      <Stack direction='row' gap={5} alignItems='center' height='100%'>
         {rightItems.map((menu, index) => (
           <MenuDropdown
             key={index}

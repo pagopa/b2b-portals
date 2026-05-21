@@ -6,11 +6,11 @@
   "options": {},
   "attributes": {
     "logo": {
+      "type": "media",
+      "multiple": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "productName": {
       "type": "string",
@@ -18,8 +18,8 @@
     },
     "beta": {
       "type": "boolean",
-      "default": false,
-      "required": true
+      "required": true,
+      "default": false
     },
     "supportLink": {
       "type": "string",
@@ -27,15 +27,39 @@
     },
     "menu": {
       "type": "component",
-      "repeatable": false,
       "component": "menu.menu",
+      "repeatable": false,
       "required": true
     },
-    "drawer": {
-      "type": "component",
-      "repeatable": false,
-      "component": "headers.header-drawer",
-      "required": false
+    "mobileLogo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "topBarHeaderTitle": {
+      "type": "string"
+    },
+    "topBarHeaderTitleMobile": {
+      "type": "string"
+    },
+    "topBarHeaderLogo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "theme": {
+      "type": "enumeration",
+      "required": true,
+      "default": "dark",
+      "enum": [
+        "light",
+        "dark"
+      ]
     }
   }
 }

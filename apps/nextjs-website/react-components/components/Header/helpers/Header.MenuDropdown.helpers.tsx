@@ -10,20 +10,19 @@ import {
   ExternalLinkIcon,
   isValidExternalLink,
 } from '@react-components/components/common/Common';
+import { TextColor } from '@react-components/components/common/Common.helpers';
+import { usePathname } from 'next/navigation';
 
 const useStyles = (
   { active, alignRight }: MenuDropdownProp,
   { spacing }: Theme,
 ) => {
-  const muiTheme = useTheme();
-
   return {
     menu: {
       width: '100%',
       height: '100%',
       display: 'flex',
       alignItems: 'center',
-      backgroundColor: active ? '#0073E614' : 'transparent',
       ...(alignRight && { marginLeft: 'auto' }),
     },
     menuItem: {
@@ -40,7 +39,6 @@ const useStyles = (
         bottom: 0,
         left: 0,
         width: active ? '100%' : '0%',
-        borderBottom: `3px solid ${muiTheme.palette.primary.main}`,
         transition: 'width 0.5s ease, left 0.5s ease',
       },
     },
@@ -78,17 +76,27 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
   const muiTheme = useTheme();
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
+  const pathname = usePathname();
+  const textColor = TextColor(theme);
+  const inverseTextColor = TextColor(theme === 'dark' ? 'light' : 'dark');
+  const isCurrentLink = (url?: string) => {
+    if (url && url.indexOf('/') >= 0) {
+      const urlPathname = url.substring(url.indexOf('/'));
+      return pathname === urlPathname;
+    }
+    return false;
+  };
 
   return (
     <Stack sx={styles.menu}>
       <Box sx={styles.menuItem}>
         <Link
-          sx={styles.link}
-          style={{
-            color: active
-              ? muiTheme.palette.primary.main
-              : muiTheme.palette.text.secondary,
-            textDecoration: 'none',
+          sx={{
+            color: textColor,
+            ...(isCurrentLink(button.href) && { textDecoration: 'underline' }),
+            '&:hover': {
+              textDecoration: 'none',
+            },
           }}
           href={button.href ? button.href : `#${label}`}
           target={isValidExternalLink(button.href) ? '_blank' : '_self'}
@@ -117,14 +125,11 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
           >
             <ArrowDropDown
-              color='inherit'
               fontSize='small'
               sx={{
                 transition: 'transform 0.2s',
                 transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                color: active
-                  ? muiTheme.palette.primary.main
-                  : muiTheme.palette.text.secondary,
+                color: textColor,
               }}
             />
           </Box>
@@ -138,10 +143,11 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
                 variant='body1'
                 underline='none'
                 key={item.key ?? index}
-                sx={styles.link}
-                style={{
-                  color: muiTheme.palette.text.secondary,
-                  textDecoration: 'none',
+                sx={{
+                  color: inverseTextColor,
+                  ...(isCurrentLink(item.href) && {
+                    textDecoration: 'underline',
+                  }),
                   fontSize: '1em',
                   fontWeight: 600,
                   padding: 0,

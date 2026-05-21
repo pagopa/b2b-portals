@@ -111,53 +111,23 @@ const makeMegaHeaderSublink = (
 });
 
 const makeHeaderProps = (
-  { productName, menu, logo, beta, supportLink, drawer }: StandardHeaderData,
+  {
+    productName,
+    menu,
+    logo,
+    beta,
+    supportLink,
+    mobileLogo,
+    topBarHeaderLogo,
+    topBarHeaderTitle,
+    topBarHeaderTitleMobile,
+    theme,
+  }: StandardHeaderData,
   pathname: string,
   locale: Locale,
-  defaultLocale: Locale,
 ): HeaderProps => ({
   beta,
-  ...(drawer && {
-    drawer: {
-      title: drawer.title,
-      ...(drawer.subtitle && { subtitle: drawer.subtitle }),
-      buttonText: drawer.buttonText,
-      linkCards: drawer.linkCards.map(({ icons, link, ...card }) => ({
-        ...card,
-        subtitle: MarkdownRenderer({
-          markdown: card.subtitle,
-          variant: 'body2',
-          locale,
-          defaultLocale,
-        }),
-        icons: icons.map((icon) => icon.url),
-        link: {
-          label: link.label,
-          href: link.href,
-          ...(link.ariaLabel && {
-            ariaLabel: link.ariaLabel,
-          }),
-        },
-      })),
-      ctaCard: {
-        title: drawer.ctaCard.title,
-        subtitle: MarkdownRenderer({
-          markdown: drawer.ctaCard.subtitle,
-          variant: 'body2',
-          locale,
-          defaultLocale,
-        }),
-        link: {
-          label: drawer.ctaCard.link.label,
-          href: drawer.ctaCard.link.href,
-          ...(drawer.ctaCard.link.ariaLabel && {
-            ariaLabel: drawer.ctaCard.link.ariaLabel,
-          }),
-        },
-      },
-    },
-  }),
-  theme: 'light',
+  theme,
   ...(supportLink && { supportLink }),
   ...(logo && {
     logo: {
@@ -166,12 +136,28 @@ const makeHeaderProps = (
       alt: logo.alternativeText ?? productName,
     },
   }),
+  ...(mobileLogo && {
+    mobileLogo: {
+      src: mobileLogo.url,
+      href: '/',
+      alt: mobileLogo.alternativeText ?? productName,
+    },
+  }),
+  ...(topBarHeaderLogo && {
+    topBarHeaderLogo: {
+      src: topBarHeaderLogo.url,
+      href: '/',
+      alt: topBarHeaderLogo.alternativeText ?? productName,
+    },
+  }),
+  ...(topBarHeaderTitle && { topBarHeaderTitle }),
+  ...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile }),
   product: {
     name: productName,
     href: '/',
   },
   menu: menu.links.map((link) => ({
-    theme: 'light',
+    theme,
     label: link.label,
     href: link.page?.slug ?? '',
     alignRight: link.alignRight,
@@ -332,11 +318,7 @@ const Header = ({
 
   switch (menuType) {
     case 'headers.standard-header':
-      return (
-        <HeaderRC
-          {...makeHeaderProps(props, pathname, locale, defaultLocale)}
-        />
-      );
+      return <HeaderRC {...makeHeaderProps(props, pathname, locale)} />;
     case 'headers.mega-header':
       return (
         <MegaHeaderRC {...makeMegaHeaderProps(props, locale, defaultLocale)} />

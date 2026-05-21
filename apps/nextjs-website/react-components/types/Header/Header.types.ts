@@ -29,8 +29,20 @@ export interface CardData {
 }
 
 export interface HeaderProps extends HeaderTitleProps, NavigationProps {
-  drawer?: HeaderSideDrawerProps;
-  supportLink?: string;
+  readonly supportLink?: string;
+  readonly mobileLogo?: {
+    src: string;
+    alt: string;
+    href: string;
+  };
+  readonly topBarHeaderLogo?: {
+    src: string;
+    alt: string;
+    href: string;
+  };
+  readonly topBarHeaderTitle?: string;
+  readonly topBarHeaderTitleMobile?: string;
+  readonly theme: Theme;
   readonly labels: {
     openMenu: string;
     closeMenu: string;
@@ -70,6 +82,11 @@ export interface HeaderTitleProps {
   };
   beta: boolean;
   logo?: {
+    src: string;
+    alt: string;
+    href: string;
+  };
+  mobileLogo?: {
     src: string;
     alt: string;
     href: string;

@@ -90,7 +90,11 @@ const StandardHeaderCodec = t.strict({
   beta: t.boolean,
   supportLink: t.union([t.string, t.null]),
   menu: MenuCodec,
-  drawer: t.union([SideDrawerCodec, t.null]),
+  mobileLogo: StrapiImageSchema,
+  topBarHeaderLogo: StrapiImageSchema,
+  topBarHeaderTitle: t.union([t.string, t.null]),
+  topBarHeaderTitleMobile: t.union([t.string, t.null]),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
 });
 
 const HeaderSocialLinkCodec = t.strict({
@@ -146,7 +150,12 @@ export const getHeader = ({
 &populate[9]=header.drawer.linkCards.icons
 &populate[10]=header.drawer.linkCards.link
 &populate[11]=header.socialLinks.icon
-&populate[12]=exclude
+&populate[12]=header.mobileLogo
+&populate[13]=header.topBarHeaderLogo
+&populate[14]=header.topBarHeaderTitle
+&populate[15]=header.topBarHeaderTitleMobile
+&populate[16]=header.theme
+&populate[17]=exclude
       `,
       {
         method: 'GET',

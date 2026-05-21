@@ -11,7 +11,7 @@ export const DialogBubble = ({
     bubbleContainer: {
       position: 'absolute',
       marginTop: muiTheme.spacing(8),
-      padding: muiTheme.spacing(2),
+      padding: muiTheme.spacing(1),
       direction: 'ltr',
       textAlign: { xs: 'right', md: 'left' },
       borderRadius: '4px',

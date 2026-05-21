@@ -12,6 +12,8 @@ const ASSET_OBJECT_KEY_NAMES = [
   'thumbnail',
   'resource',
   'video',
+  'mobileLogo',
+  'topBarHeaderLogo',
 ];
 const ASSET_OBJECT_ARRAY_KEY_NAMES = ['icons'];
 

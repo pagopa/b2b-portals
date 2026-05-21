@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -17,11 +16,9 @@ export const HamburgerMenu = ({
     closeMenu: string;
   };
 }) => {
-  const muiTheme = useTheme();
-
   return open ? (
     <CloseIcon
-      sx={{ color: muiTheme.palette.text.secondary }}
+      sx={{ color: 'inherit' }}
       cursor='pointer'
       onClick={onClose}
       aria-label={ariaLabels.closeMenu}
@@ -30,7 +27,7 @@ export const HamburgerMenu = ({
     />
   ) : (
     <MenuIcon
-      sx={{ color: muiTheme.palette.text.secondary }}
+      sx={{ color: 'inherit', width: 24, height: 24 }}
       cursor='pointer'
       onClick={onOpen}
       aria-label={ariaLabels.openMenu}

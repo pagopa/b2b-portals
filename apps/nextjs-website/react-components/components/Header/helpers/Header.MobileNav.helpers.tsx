@@ -11,18 +11,18 @@ import {
   Link,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import { MenuDropdownProp } from '@react-components/types/Header/Header.types';
 import {
   ExternalLinkIcon,
   isValidExternalLink,
 } from '@react-components/components/common/Common';
+import { ExpandMore } from '@mui/icons-material';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorLeft': {
-    backgroundColor: '#f2f2f2',
-    width: { xs: '100%', md: '75%' },
+    width: '100%',
     height: '100%',
+    backgroundColor: 'transparent',
   },
 };
 
@@ -50,21 +50,13 @@ export default function MobileNav({
 
   return (
     <Drawer anchor={anchor} open={isOpen} onClose={onClose} sx={drawerStyles}>
-      <Box
+      <Stack
         sx={{
-          padding: 2,
-          backgroundColor: 'white',
-          justifyContent: 'center',
-          alignItems: 'center',
           height: '100%',
         }}
+        direction='row'
         role='presentation'
       >
-        <Stack direction='row' justifyContent='flex-end' alignItems='center'>
-          <IconButton onClick={onClose}>
-            <CloseIcon />
-          </IconButton>
-        </Stack>
         <div
           style={{
             display: 'flex',
@@ -88,27 +80,26 @@ export default function MobileNav({
                         backgroundColor: 'transparent',
                       },
                       display: 'flex',
-                      justifyContent: 'space-between',
                       alignItems: 'center',
                       fontWeight: 600,
-                      color: '#5c6f82',
+                      px: 2,
+                      color: '#0066CC',
                     }}
                   >
                     <Link
                       href={item.href ? item.href : `#${item.label}`}
                       underline='none'
                       sx={{
-                        color: '#5c6f82',
+                        color: 'inherit',
                         display: 'flex',
                         alignItems: 'center',
                         fontWeight: 600,
-                        flexGrow: 1,
                       }}
                     >
                       <Typography
                         style={{
                           fontWeight: 600,
-                          color: '#5c6f82',
+                          color: 'inherit',
                         }}
                       >
                         {item.label}
@@ -122,17 +113,18 @@ export default function MobileNav({
                         onClick={() => toggleMenu(index)}
                         sx={{
                           cursor: 'pointer',
+                          color: 'inherit',
                           display: 'flex',
                           alignItems: 'center',
+                          ml: 1,
                         }}
                       >
-                        <ArrowDropDown
-                          style={{
+                        <ExpandMore
+                          sx={{
                             transition: 'transform 0.3s',
                             transform: isSelected
                               ? 'rotate(180deg)'
                               : 'rotate(0deg)',
-                            color: '#5c6f82',
                           }}
                         />
                       </Box>
@@ -152,8 +144,6 @@ export default function MobileNav({
                             '&:focus': {
                               backgroundColor: 'transparent',
                             },
-                            fontWeight: 600,
-                            color: '#5c6f82',
                           }}
                           component={Link}
                           href={
@@ -163,9 +153,10 @@ export default function MobileNav({
                           <ListItemText
                             primary={
                               <Typography
-                                style={{
-                                  color: '#5c6f82',
-                                  fontWeight: 600,
+                                sx={{
+                                  fontWeight: 300,
+                                  py: 2,
+                                  color: '#0066CC',
                                 }}
                               >
                                 {subItem.label}
@@ -181,7 +172,25 @@ export default function MobileNav({
             })}
           </List>
         </div>
-      </Box>
+        <Box
+          sx={{
+            backgroundColor: 'rgba(0,0,0,0.5)',
+          }}
+        >
+          <IconButton
+            onClick={onClose}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 80,
+              height: 80,
+            }}
+          >
+            <CloseIcon sx={{ color: 'white', width: 32, height: 32 }} />
+          </IconButton>
+        </Box>
+      </Stack>
     </Drawer>
   );
 }
