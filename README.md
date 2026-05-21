@@ -8,9 +8,6 @@ This is an npm workspace monorepo. The main applications are:
 
 - **`apps/strapi-cms`**: the Strapi CMS used to create and manage portal content.
 - **`apps/nextjs-website`**: the Next.js website that reads content from Strapi and renders the public portal.
-- **`apps/infrastructure`**: infrastructure code.
-- **`apps/cloudfront-functions`**: CloudFront-related functions.
-- **`packages/*`**: shared packages used by the applications.
 
 In local development, the usual flow is:
 
@@ -27,7 +24,7 @@ Local URLs:
 
 - [Node.js](https://nodejs.org/docs/latest-v22.x/api/index.html)
 - [npm CLI](https://docs.npmjs.com/cli/v9)
-- A local PostgreSQL instance for Strapi
+- A running PostgreSQL instance for Strapi
 
 The repository defines the expected Node.js version in `.node-version`.
 
@@ -40,6 +37,8 @@ The CMS is the admin application where content is created and managed. It runs w
 ### Website
 
 The website is the frontend application. It runs with Next.js and displays the content fetched from Strapi.
+
+During the build phase, Next.js generates static HTML files from the CMS content. In local development, the website actually serves and updates that content when you run `npm run dev -w nextjs-website`.
 
 ### Tenant And `ENVIRONMENT`
 
@@ -76,15 +75,9 @@ Copy the Strapi environment file:
 cp apps/strapi-cms/.env.example apps/strapi-cms/.env
 ```
 
-Edit `apps/strapi-cms/.env` and set:
-
-```env
-DATABASE_CLIENT=postgres
-```
-
 Then fill the variables under `#POSTGRESQL` in the same file.
 
-Make sure your local PostgreSQL instance is running and that the target schema is empty, or has only been used by Strapi.
+Make sure your local PostgreSQL instance is running. The configured schema does not need to exist in advance: if it is missing, Strapi will create it automatically.
 
 ### 3. Configure The Website
 
@@ -103,14 +96,6 @@ DEMO_STRAPI_API_TOKEN=<generated-token>
 ```
 
 The token is generated from the local Strapi admin panel after the first Strapi startup. See the next section.
-
-Optional website flags:
-
-```env
-PREVIEW_MODE
-PREVIEW_TOKEN
-MOCK_BUILD
-```
 
 Do not commit `.env` files or secrets.
 
@@ -146,7 +131,7 @@ npm run configrestore
 cd ../..
 ```
 
-This saves all Strapi view configurations into your local database.
+This saves all Strapi view configurations (stored in `viewconfig.json`) into your local database.
 
 ### 4. Start Strapi Again
 
@@ -158,7 +143,7 @@ npm run dev -w strapi-cms
 
 Open:
 
-```text
+```text\
 http://localhost:1337/admin/
 ```
 
