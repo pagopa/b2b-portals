@@ -161,7 +161,7 @@ export default async function RootLayout({
           }
         `}</style>
           </head>
-          <body style={{ margin: 0 }}>
+          <body style={{ margin: 0, backgroundColor: 'white' }}>
             <LocaleGuard
               noLocaleSlug={slugWithoutLocale}
               locale={locale}
