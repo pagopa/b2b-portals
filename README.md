@@ -1,49 +1,210 @@
 # B2B Portals
 
-In this repository you can find everything you need to work on the B2B Portals project.
+This repository contains the applications and packages needed to work on the B2B Portals project.
+
+## What Is In This Repository
+
+This is an npm workspace monorepo. The main applications are:
+
+- **`apps/strapi-cms`**: the Strapi CMS used to create and manage portal content.
+- **`apps/nextjs-website`**: the Next.js website that reads content from Strapi and renders the public portal.
+- **`apps/infrastructure`**: infrastructure code.
+- **`apps/cloudfront-functions`**: CloudFront-related functions.
+- **`packages/*`**: shared packages used by the applications.
+
+In local development, the usual flow is:
+
+```text
+PostgreSQL -> Strapi CMS -> Next.js website
+```
+
+Local URLs:
+
+- CMS admin panel: [http://localhost:1337/admin/](http://localhost:1337/admin/)
+- Website: [http://localhost:3000](http://localhost:3000)
 
 ## Requirements
 
 - [Node.js](https://nodejs.org/docs/latest-v22.x/api/index.html)
 - [npm CLI](https://docs.npmjs.com/cli/v9)
+- A local PostgreSQL instance for Strapi
 
-## Local Development
+The repository defines the expected Node.js version in `.node-version`.
 
-Before you start, make sure you have completed the following steps:
+## Key Concepts
+
+### CMS
+
+The CMS is the admin application where content is created and managed. It runs with Strapi and exposes APIs consumed by the website.
+
+### Website
+
+The website is the frontend application. It runs with Next.js and displays the content fetched from Strapi.
+
+### Tenant And `ENVIRONMENT`
+
+The website supports multiple portal configurations. The `ENVIRONMENT` variable selects which tenant configuration is used.
+
+Example:
+
+```env
+ENVIRONMENT=demo
+```
+
+With `ENVIRONMENT=demo`, the website uses:
+
+```env
+DEMO_STRAPI_API_BASE_URL
+DEMO_STRAPI_API_TOKEN
+```
+
+## Local Development Setup
+
+### 1. Install Dependencies
+
+From the repository root:
 
 ```bash
-# install dependencies
 npm i
 ```
 
-Then configure the required environment files as described below.
+### 2. Configure Strapi CMS
 
-### Environment Files
+Copy the Strapi environment file:
 
-- **strapi-cms**: copy `apps/strapi-cms/.env.example` to `apps/strapi-cms/.env` and set `DATABASE_CLIENT` to `sqlite` or `postgres`. If you use PostgreSQL, make sure a local PostgreSQL instance is running and that the target schema is empty, or has only been used by Strapi; then fill the variables under `#POSTGRESQL` in the example file.
-- **nextjs-website**: copy `apps/nextjs-website/.env.example` to `apps/nextjs-website/.env` and set provider URLs and tokens, for example `DEMO_STRAPI_API_BASE_URL` and `DEMO_STRAPI_API_TOKEN`. Do not commit secrets; keep the `.env` file local and out of version control.
-- Optional flags: `ENVIRONMENT`, `PREVIEW_MODE`, `PREVIEW_TOKEN`, `MOCK_BUILD`.
+```bash
+cp apps/strapi-cms/.env.example apps/strapi-cms/.env
+```
 
-### Run The Project Locally
+Edit `apps/strapi-cms/.env` and set:
 
-Run the following command from the root folder:
+```env
+DATABASE_CLIENT=postgres
+```
+
+Then fill the variables under `#POSTGRESQL` in the same file.
+
+Make sure your local PostgreSQL instance is running and that the target schema is empty, or has only been used by Strapi.
+
+### 3. Configure The Website
+
+Copy the website environment file:
+
+```bash
+cp apps/nextjs-website/.env.example apps/nextjs-website/.env
+```
+
+For local development with the demo tenant, configure:
+
+```env
+ENVIRONMENT=demo
+DEMO_STRAPI_API_BASE_URL=http://localhost:1337
+DEMO_STRAPI_API_TOKEN=<generated-token>
+```
+
+The token is generated from the local Strapi admin panel after the first Strapi startup. See the next section.
+
+Optional website flags:
+
+```env
+PREVIEW_MODE
+PREVIEW_TOKEN
+MOCK_BUILD
+```
+
+Do not commit `.env` files or secrets.
+
+## First Strapi Startup
+
+Follow these steps the first time you start the CMS locally.
+
+### 1. Start Strapi
+
+From the repository root:
+
+```bash
+npm run dev -w strapi-cms
+```
+
+### 2. Log In For The First Time
+
+Open:
+
+```text
+http://localhost:1337/admin/
+```
+
+Create the first admin user when prompted, then log in to the Strapi admin panel for the first time.
+
+### 3. Restore View Configuration
+
+Stop Strapi, then run `npm run configrestore` inside the `strapi-cms` folder:
+
+```bash
+cd apps/strapi-cms
+npm run configrestore
+cd ../..
+```
+
+This saves all Strapi view configurations into your local database.
+
+### 4. Start Strapi Again
+
+```bash
+npm run dev -w strapi-cms
+```
+
+### 5. Create A Strapi API Token
+
+Open:
+
+```text
+http://localhost:1337/admin/
+```
+
+Then:
+
+1. Go to `Settings`.
+2. Open `API Tokens`.
+3. Create a new token.
+4. Copy the generated token.
+5. Paste it into `apps/nextjs-website/.env`:
+
+```env
+DEMO_STRAPI_API_TOKEN=<generated-token>
+```
+
+The token is shown only once. If you lose it, create a new one.
+
+## Run The Project Locally
+
+You can start all dev tasks from the root folder:
 
 ```bash
 npm run dev
 ```
 
-You can also run a single workspace:
+For troubleshooting, it is often clearer to start each workspace separately:
 
 ```bash
 npm run dev -w strapi-cms
 npm run dev -w nextjs-website
 ```
 
-Open [http://localhost:1337/admin/](http://localhost:1337/admin/) with your browser to access the CMS admin panel. You will be asked to create a user on first launch.
+Open:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to access the website.
+- [http://localhost:1337/admin/](http://localhost:1337/admin/) for the CMS
+- [http://localhost:3000](http://localhost:3000) for the website
 
-### Build, Lint, And Test
+The website will work with the local CMS when `apps/nextjs-website/.env` contains:
+
+```env
+ENVIRONMENT=demo
+DEMO_STRAPI_API_BASE_URL=http://localhost:1337
+DEMO_STRAPI_API_TOKEN=<generated-token>
+```
+
+## Build, Lint, And Test
 
 Run the following commands from the root folder:
 
@@ -51,29 +212,33 @@ Run the following commands from the root folder:
 npm run compile
 npm run lint
 npm run test
+npm run build:mock -w nextjs-website
 ```
 
 ## Commands Cheat Sheet
 
-### Workspace
+### Workspace Commands
 
-For more information, check the [npm CLI workspace documentation](https://docs.npmjs.com/cli/v9/using-npm/workspaces).
-
-#### Run Commands
-
-Run the chosen command in each workspace:
+Run a command in each workspace:
 
 ```bash
 npm run <command> --workspaces
 ```
 
-Run the chosen command on a specific workspace:
+Run a command on a specific workspace:
 
 ```bash
 npm run <command> -w <workspace>
 ```
 
-#### Manage Dependencies
+Examples:
+
+```bash
+npm run dev -w strapi-cms
+npm run dev -w nextjs-website
+```
+
+### Manage Dependencies
 
 Add a dependency to the root package:
 
@@ -87,6 +252,8 @@ Add a dependency to a workspace as a development dependency:
 npm i <dependency> -D -w <workspace>
 ```
 
+For more information, check the [npm CLI workspace documentation](https://docs.npmjs.com/cli/v9/using-npm/workspaces).
+
 ## Changelog
 
 This project uses [Changesets](https://github.com/changesets/changesets) to generate the changelog.
@@ -97,12 +264,6 @@ To add changelog information, run:
 npx changeset
 ```
 
-or:
-
-```bash
-npm run changeset
-```
-
 Then follow the wizard. Changesets will ask what kind of change was made (`major`, `minor`, or `patch`) and for a summary. The entered summary is what will be visible in the changelog.
 
-The `.github/workflows/changelog.yaml` workflow uses the [Changesets action](https://github.com/changesets/action) to convert the changes tracked with `npm run changeset` into a `CHANGELOG.md` file. It then creates a PR with the proposed changes, including version bumps and updates to `CHANGELOG.md`. If more changes are added while that PR is open, the Changesets bot automatically updates it based on the `.changeset` folder.
+The `.github/workflows/changelog.yaml` workflow uses the [Changesets action](https://github.com/changesets/action) to convert the changes tracked in the `.changeset` folder into a `CHANGELOG.md` file. It then creates a PR with the proposed changes, including version bumps and updates to `CHANGELOG.md`. If more changes are added while that PR is open, the Changesets bot automatically updates it based on the `.changeset` folder.
