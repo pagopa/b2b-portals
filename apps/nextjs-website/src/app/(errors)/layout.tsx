@@ -44,7 +44,7 @@ const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
       }
     >
       <html lang={defaultLocale}>
-        <body style={{ margin: 0 }}>
+        <body style={{ margin: 0, backgroundColor: 'white' }}>
           {preHeaderProps && (
             <PreHeader
               {...preHeaderProps}
