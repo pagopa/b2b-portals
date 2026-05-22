@@ -32,13 +32,14 @@ import { PressReleasePage } from '@/lib/fetch/pressRelease';
 import TextAndImage from '../TextAndImage';
 import RichBanner from '../RichBanner';
 import LastUpdated from '../LastUpdated';
-import { PagePublishDates } from '@/lib/fetch/navigation';
+import { PagePublishDates, PageStrapiEnvData } from '@/lib/fetch/navigation';
 import FeedbackForm from '../FeedbackForm';
 
 // eslint-disable-next-line complexity
 const PageSection = (
   props: PageSectionData &
     PagePublishDates &
+    PageStrapiEnvData &
     SiteWidePageData & { pressReleasePages: ReadonlyArray<PressReleasePage> },
 ) => {
   // eslint-disable-next-line no-underscore-dangle

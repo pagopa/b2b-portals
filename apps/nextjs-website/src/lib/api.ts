@@ -16,6 +16,42 @@ export const appEnv = pipe(
 
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
+export const getTenant = () => appEnv.config.ENVIRONMENT;
 
+export const getToken = () => {
+  const tenant = appEnv.config.ENVIRONMENT;
+  switch (tenant) {
+    case 'demo':
+      return appEnv.config.DEMO_STRAPI_API_TOKEN;
+    case 'send':
+      return appEnv.config.SEND_STRAPI_API_TOKEN;
+    case 'pagopa':
+      return appEnv.config.PAGOPA_STRAPI_API_TOKEN;
+    case 'interop':
+      return appEnv.config.INTEROP_STRAPI_API_TOKEN;
+    case 'wallet':
+      return appEnv.config.WALLET_STRAPI_API_TOKEN;
+    default:
+      return '';
+  }
+};
+
+export const getStrapiApiBaseUrl = () => {
+  const tenant = appEnv.config.ENVIRONMENT;
+  switch (tenant) {
+    case 'demo':
+      return appEnv.config.DEMO_STRAPI_API_BASE_URL;
+    case 'send':
+      return appEnv.config.SEND_STRAPI_API_BASE_URL;
+    case 'pagopa':
+      return appEnv.config.PAGOPA_STRAPI_API_BASE_URL;
+    case 'interop':
+      return appEnv.config.INTEROP_STRAPI_API_BASE_URL;
+    case 'wallet':
+      return appEnv.config.WALLET_STRAPI_API_BASE_URL;
+    default:
+      return '';
+  }
+};
 export const getters: Getters =
   appEnv.config.MOCK_BUILD === 'true' ? mock : real;

@@ -1,6 +1,12 @@
 import { Config } from '@/AppEnv';
 import PageSection from '@/components/PageSection/PageSection';
-import { getPreviewToken, isPreviewMode, getters } from '@/lib/api';
+import {
+  getPreviewToken,
+  isPreviewMode,
+  getters,
+  getStrapiApiBaseUrl,
+  getToken,
+} from '@/lib/api';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import { ThemeProvider } from '@mui/material/styles';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
@@ -34,6 +40,8 @@ const PreviewPage = async ({
     return null;
   }
 
+  const token = getToken();
+  const strapiApiBaseUrl = getStrapiApiBaseUrl();
   const type = searchParams.type;
   const secret = searchParams.secret;
   const documentID = searchParams.documentID;
@@ -98,6 +106,8 @@ const PreviewPage = async ({
           {document.sections.map((section) =>
             PageSection({
               ...section,
+              token,
+              strapiApiBaseUrl,
               themeVariant,
               locale: document.locale,
               defaultLocale: document.locale, // Doesn't matter in preview

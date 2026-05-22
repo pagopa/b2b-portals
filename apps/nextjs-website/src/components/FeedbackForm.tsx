@@ -1,5 +1,6 @@
 'use client';
 
+import { PageStrapiEnvData } from '@/lib/fetch/navigation';
 import { Locale, SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { FeedbackFormSection } from '@/lib/fetch/types/PageSection';
 import { FeedbackForm as FeedbackFormRC } from '@react-components/components';
@@ -153,21 +154,23 @@ const feedbackFormLabels: Record<Locale, FeedbackFormProps['labels']> = {
 
 const makeFeedbackFormProps = ({
   locale,
+  token,
+  strapiApiBaseUrl,
   sectionID,
-}: FeedbackFormSection & SiteWidePageData): FeedbackFormProps => {
-  const tenant = process.env['NEXT_PUBLIC_TENANT'];
-  const token = process.env['NEXT_PUBLIC_TOKEN'];
+}: FeedbackFormSection &
+  SiteWidePageData &
+  PageStrapiEnvData): FeedbackFormProps => {
   return {
     sectionID,
     labels: feedbackFormLabels[locale],
     locale,
-    ...(tenant && { tenant }),
+    strapiApiBaseUrl,
     ...(token && { token }),
   };
 };
 
-const FeedbackForm = (props: FeedbackFormSection & SiteWidePageData) => (
-  <FeedbackFormRC {...makeFeedbackFormProps(props)} />
-);
+const FeedbackForm = (
+  props: FeedbackFormSection & SiteWidePageData & PageStrapiEnvData,
+) => <FeedbackFormRC {...makeFeedbackFormProps(props)} />;
 
 export default FeedbackForm;

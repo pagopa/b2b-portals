@@ -28,8 +28,8 @@ export default function FeedbackForm({
   sectionID,
   labels,
   locale,
-  tenant,
   token,
+  strapiApiBaseUrl,
 }: FeedbackFormProps) {
   const pathname = usePathname();
   const slug = pathname === '/' ? 'homepage' : pathname;
@@ -44,7 +44,7 @@ export default function FeedbackForm({
   const [sending, setSending] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [error, setError] = useState(false);
-  const isValidEnv = tenant && token;
+  const isValidToken = token;
 
   const handleFieldValue = (
     ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -78,14 +78,14 @@ export default function FeedbackForm({
   };
 
   const handleSendFeedback = async () => {
-    if (!isValidEnv) {
+    if (!isValidToken) {
       setError(true);
       return;
     }
     setSending(true);
     try {
       const res = await fetch(
-        `https://${tenant}.b2bportals.pagopa.it/api/feedbacks?locale=${locale}`,
+        `${strapiApiBaseUrl}/api/feedbacks?locale=${locale}`,
         {
           mode: 'cors',
           method: 'post',
@@ -122,14 +122,14 @@ export default function FeedbackForm({
   };
 
   const handleSendDetailedFeedback = async () => {
-    if (!isValidEnv) {
+    if (!isValidToken) {
       setError(true);
       return;
     }
     setSending(true);
     try {
-      await fetch(
-        `https://${tenant}.b2bportals.pagopa.it/api/feedbacks/${formData.documentId}?locale=${locale}`,
+      const res = await fetch(
+        `${strapiApiBaseUrl}/api/feedbacks/${formData.documentId}?locale=${locale}`,
         {
           mode: 'cors',
           method: 'put',
@@ -148,6 +148,9 @@ export default function FeedbackForm({
       );
       setOpenModal(false);
       setSending(false);
+      if (res.status !== 200 && res.status !== 204) {
+        setError(true);
+      }
     } catch (_e) {
       setError(true);
     }

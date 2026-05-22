@@ -3,8 +3,8 @@ import { Locale } from '../common/Common.types';
 export interface FeedbackFormProps {
   readonly sectionID: string | null;
   readonly locale: Locale;
-  readonly tenant?: string;
   readonly token?: string;
+  readonly strapiApiBaseUrl: string;
   readonly labels: {
     title: string;
     yes: string;
