@@ -39,12 +39,12 @@ export default function FeedbackForm({
     notUsefulReason: '',
     slug,
   });
-  const [documentId, setDocumentId] = useState<string | undefined>();
-
-  const [feedbackSent, setFeedbackSent] = useState(false);
+  const [documentId, setDocumentId] = useState<string | null>();
   const [sending, setSending] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [error, setError] = useState(false);
+
+  const [formState, setFormState] = useState<
+    'success' | 'ready' | 'error' | 'modal'
+  >('ready');
 
   const handleFieldValue = (
     ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -79,7 +79,7 @@ export default function FeedbackForm({
 
   const handleSendFeedback = async () => {
     if (!feedbackToken) {
-      setError(true);
+      setFormState('error');
       return;
     }
     setSending(true);
@@ -102,25 +102,22 @@ export default function FeedbackForm({
           }),
         },
       );
+      setSending(false);
       if (res.status === 201) {
         const response: FeedbackFormResponseType = await res.json();
         setDocumentId(response.data.documentId);
-        setSending(false);
-        setFeedbackSent(true);
-        if (formData.useful === '0') {
-          setOpenModal(true);
-        }
+        setFormState(formData.useful === '0' ? 'modal' : 'success');
       } else {
-        setError(true);
+        setFormState('error');
       }
     } catch (_e) {
-      setError(true);
+      setFormState('error');
     }
   };
 
   const handleSendDetailedFeedback = async () => {
     if (!feedbackToken || !documentId) {
-      setError(true);
+      setFormState('error');
       return;
     }
     setSending(true);
@@ -149,24 +146,27 @@ export default function FeedbackForm({
           },
         );
         handleCloseModal();
-        setSending(false);
         if (res.status !== 200 && res.status !== 204) {
-          setError(true);
+          setFormState('error');
+        } else {
+          setFormState('success');
         }
       }
     } catch (_e) {
-      setError(true);
+      setFormState('error');
     }
   };
 
   const handleCloseModal = () => {
+    setFormState('success');
+    setSending(false);
+    setDocumentId(null);
     setFormData({
       useful: '',
       notUsefulReason: '',
       suggestions: '',
       slug,
     });
-    setOpenModal(false);
   };
 
   return (
@@ -182,82 +182,78 @@ export default function FeedbackForm({
           px: 3,
         }}
       >
-        {error && (
+        {formState === 'error' && (
           <Box sx={{ ...roundBoxStyle, display: 'flex', alignItems: 'center' }}>
             <ErrorIcon />
-            <Typography sx={{ ml: 1 }} variant='body2'>
+            <Typography sx={{ ml: 1, whiteSpace: 'pre-line' }} variant='body2'>
               {labels.error}
             </Typography>
           </Box>
         )}
-        {!error && (
-          <>
-            {!feedbackSent && (
-              <FormControl sx={{ width: { xs: '100%', md: 'initial' } }}>
-                <Box sx={roundBoxStyle}>
-                  <Typography
-                    component='h2'
-                    variant='h6'
-                    sx={{ fontSize: { xs: '16px', md: '18px' } }}
-                  >
-                    {labels.title}
-                    <Box
-                      sx={{
-                        'label span': { fontSize: { xs: '16px', md: '18px' } },
-                      }}
-                    >
-                      <RadioGroup
-                        name='useful'
-                        row
-                        sx={{ py: 2, label: { fontWeight: 600 } }}
-                        onChange={handleFieldValue}
-                        value={formData.useful}
-                      >
-                        <FormControlLabel
-                          disableTypography
-                          value={'1'}
-                          control={<Radio />}
-                          label={labels.yes}
-                        />
-                        <FormControlLabel
-                          disableTypography
-                          value={'0'}
-                          control={<Radio />}
-                          label={labels.no}
-                        />
-                      </RadioGroup>
-                      <Button
-                        disabled={formData.useful === '' || sending}
-                        onClick={() => handleSendFeedback()}
-                        sx={buttonStyle}
-                      >
-                        {sending ? labels.sending : labels.send}
-                      </Button>
-                    </Box>
-                  </Typography>
-                </Box>
-              </FormControl>
-            )}
-            {feedbackSent && (
-              <Box sx={roundBoxStyle}>
-                <Typography
-                  variant='body2'
+        {formState === 'ready' && (
+          <FormControl sx={{ width: { xs: '100%', md: 'initial' } }}>
+            <Box sx={roundBoxStyle}>
+              <Typography
+                component='h2'
+                variant='h6'
+                sx={{ fontSize: { xs: '16px', md: '18px' } }}
+              >
+                {labels.title}
+                <Box
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontWeight: 600,
+                    'label span': { fontSize: { xs: '16px', md: '18px' } },
                   }}
                 >
-                  <CheckIcon />
-                  <span style={{ marginLeft: 24 }}>{labels.feedbackSent}</span>
-                </Typography>
-              </Box>
-            )}
-          </>
+                  <RadioGroup
+                    name='useful'
+                    row
+                    sx={{ py: 2, label: { fontWeight: 600 } }}
+                    onChange={handleFieldValue}
+                    value={formData.useful}
+                  >
+                    <FormControlLabel
+                      disableTypography
+                      value={'1'}
+                      control={<Radio />}
+                      label={labels.yes}
+                    />
+                    <FormControlLabel
+                      disableTypography
+                      value={'0'}
+                      control={<Radio />}
+                      label={labels.no}
+                    />
+                  </RadioGroup>
+                  <Button
+                    disabled={formData.useful === '' || sending}
+                    onClick={() => handleSendFeedback()}
+                    sx={buttonStyle}
+                  >
+                    {sending ? labels.sending : labels.send}
+                  </Button>
+                </Box>
+              </Typography>
+            </Box>
+          </FormControl>
+        )}
+        {formState === 'success' && (
+          <Box sx={roundBoxStyle}>
+            <Typography
+              variant='body2'
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                fontWeight: 600,
+              }}
+            >
+              <CheckIcon />
+              <span style={{ marginLeft: 24 }}>{labels.feedbackSent}</span>
+            </Typography>
+          </Box>
         )}
       </Box>
       <Dialog
-        open={openModal}
+        open={formState === 'modal'}
         onClose={handleCloseModal}
         fullWidth
         scroll='body'

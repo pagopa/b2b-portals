@@ -31,13 +31,8 @@ const feedbackFormLabels: Record<Locale, FeedbackFormProps['labels']> = {
     textPlaceholder: 'Inserisci qui la tua risposta',
     maximumCharacters: (max: number) =>
       `Hai a disposizione ${max} caratteri. Per favore non inserire dati personali in questo campo`,
-    error: (
-      <>
-        C&apos;è stato un problema nell&apos;invio 😞
-        <br />
-        Ti va di riprovare più tardi? 🙏
-      </>
-    ),
+    error:
+      "C'è stato un problema nell'invio 😞\nTi va di riprovare più tardi? 🙏",
   },
   en: {
     title: 'Hi, was this page helpful?',
@@ -59,13 +54,8 @@ const feedbackFormLabels: Record<Locale, FeedbackFormProps['labels']> = {
     textPlaceholder: 'Enter your answer here',
     maximumCharacters: (max: number) =>
       `You have ${max} characters. Please do not enter personal data in this field`,
-    error: (
-      <>
-        There was a problem sending 😞
-        <br />
-        Would you like to try again later? 🙏
-      </>
-    ),
+    error:
+      'There was a problem sending 😞\nWould you like to try again later? 🙏',
   },
   de: {
     title: 'Hallo, war diese Seite hilfreich?',
@@ -89,13 +79,8 @@ const feedbackFormLabels: Record<Locale, FeedbackFormProps['labels']> = {
     textPlaceholder: 'Geben Sie hier Ihre Antwort ein',
     maximumCharacters: (max: number) =>
       `Sie haben ${max} Zeichen. Bitte geben Sie in diesem Feld keine persönlichen Informationen ein.`,
-    error: (
-      <>
-        Es gab ein Problem beim Senden 😞
-        <br />
-        Möchten Sie es später noch einmal versuchen? 🙏
-      </>
-    ),
+    error:
+      'Es gab ein Problem beim Senden 😞\nMöchten Sie es später noch einmal versuchen? 🙏',
   },
   fr: {
     title: 'Bonjour, cette page vous a-t-elle été utile ?',
@@ -118,12 +103,8 @@ const feedbackFormLabels: Record<Locale, FeedbackFormProps['labels']> = {
     textPlaceholder: 'Saisissez votre réponse ici',
     maximumCharacters: (max: number) =>
       `Vous disposez de ${max}caractères. Veuillez ne pas saisir d'informations personnelles dans ce champ.`,
-    error: (
-      <>
-        Un problème est survenu lors de l&apos;envoi 😞
-        <br /> Voulez-vous réessayer plus tard ? 🙏
-      </>
-    ),
+    error:
+      'Un problème est survenu lors de l&apos;envoi 😞\nVoulez-vous réessayer plus tard ? 🙏',
   },
   sl: {
     title: 'Živjo, vam je bila ta stran v pomoč?',
@@ -145,13 +126,8 @@ const feedbackFormLabels: Record<Locale, FeedbackFormProps['labels']> = {
     textPlaceholder: 'Vnesite svoj odgovor tukaj',
     maximumCharacters: (max: number) =>
       `Imate ${max} znakov. V to polje ne vnašajte osebnih podatkov`,
-    error: (
-      <>
-        Pri pošiljanju je prišlo do težave 😞
-        <br />
-        Bi želeli poskusiti znova pozneje? 🙏
-      </>
-    ),
+    error:
+      'Pri pošiljanju je prišlo do težave 😞\nBi želeli poskusiti znova pozneje? 🙏',
   },
 };
 

@@ -23,7 +23,7 @@ export interface FeedbackFormProps {
     anonymousQuestion: string;
     textPlaceholder: string;
     maximumCharacters: (max: number) => string;
-    error: JSX.Element;
+    error: string;
   };
 }
 
@@ -38,13 +38,5 @@ export interface FeedbackFormResponseType {
   data: {
     id: number;
     documentId: string;
-    useful: boolean;
-    slug: string;
-    notUsefulReason?: string;
-    suggestions?: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    locale: Locale;
   };
 }

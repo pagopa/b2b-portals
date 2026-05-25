@@ -42,12 +42,7 @@ FeedbackFormSection.args = {
     textPlaceholder: 'Inserisci qui la tua risposta',
     maximumCharacters: (max: number) =>
       `Hai a disposizione ${max} caratteri. Per favore non inserire dati personali in questo campo`,
-    error: (
-      <>
-        C&apos;è stato un problema nell&apos;invio 😞
-        <br />
-        Ti va di riprovare più tardi? 🙏
-      </>
-    ),
+    error:
+      "C'è stato un problema nell'invio 😞\nTi va di riprovare più tardi? 🙏",
   },
 };
