@@ -12,6 +12,9 @@ declare module '@mui/material/styles' {
       readonly backgroundColorLightGrey: string;
       readonly divider: string;
       readonly primaryColorDark: string;
+      readonly walletPrimaryColor: string;
+      readonly walletPrimaryColorHover: string;
+      readonly walletBackgroundColorDark: string;
       readonly backgroundColorDefault: string;
       readonly darkLinkColor: string;
       readonly grayLinkColor: string;
@@ -22,7 +25,12 @@ declare module '@mui/material/styles' {
       readonly bannerLinkDarkBlueIO: string;
       readonly bannerLinkLightBlueSend: string;
       readonly bannerLinkDarkBlueSend: string;
+      readonly bannerLinkLightBlueWallet: string;
+      readonly bannerLinkDarkBlueWallet: string;
       readonly blueIO: {
+        readonly 500: string;
+      };
+      readonly blueWallet: {
         readonly 500: string;
       };
       readonly highLightBoxLightGreenBackground: string;
@@ -32,13 +40,16 @@ declare module '@mui/material/styles' {
       readonly white: string;
       readonly matteWhiteBorder: string;
       readonly ioChipsBackgroundColorLight: string;
+      readonly walletChipsBackgroundColorLight: string;
       readonly sendChipsBackgroundColorLight: string;
       readonly chipsBackgroundColorDark: string;
       readonly ioChipsBackgroundColorLightHover: string;
+      readonly walletChipsBackgroundColorLightHover: string;
       readonly sendChipsBackgroundColorLightHover: string;
       readonly chipsBackgroundColorDarkHover: string;
       readonly chipsTextColor: string;
       readonly outlineColor: string;
+      readonly walletOutlineColor: string;
     };
   }
   // interface PaletteOptions {
@@ -79,6 +90,9 @@ const themeStyles = {
       backgroundColorLightGrey: '#FAFAFA',
       divider: '#E3E7EB',
       primaryColorDark: '#0B3EE3',
+      walletPrimaryColor: '#0066CC',
+      walletPrimaryColorHover: '#004D99',
+      walletBackgroundColorDark: '#0066CC',
       backgroundColorDefault: '#FAFAFA',
       darkLinkColor: '#1A73E8',
       grayLinkColor: '#F4F5F8',
@@ -89,8 +103,13 @@ const themeStyles = {
       bannerLinkDarkBlueIO: '#0B3EE3',
       bannerLinkLightBlueSend: '#0A64D2',
       bannerLinkDarkBlueSend: '#0062C3',
+      bannerLinkLightBlueWallet: '#0073E6',
+      bannerLinkDarkBlueWallet: '#0066CC',
       blueIO: {
         500: '#0B3EE3',
+      },
+      blueWallet: {
+        500: '#0066CC',
       },
       highLightBoxLightGreenBackground: '#EFFBFF',
       highLightBoxPurpleText: '#5517E3',
@@ -99,18 +118,22 @@ const themeStyles = {
       white: '#FFF',
       matteWhiteBorder: '#ffffff80',
       ioChipsBackgroundColorLight: '#0B3EE3',
+      walletChipsBackgroundColorLight: '#0066CC',
       sendChipsBackgroundColorLight: '#0073E6',
       chipsBackgroundColorDark: '#ebebf52e',
       ioChipsBackgroundColorLightHover: '#0A34CC',
+      walletChipsBackgroundColorLightHover: '#004D99',
       sendChipsBackgroundColorLightHover: '#0066CC',
       chipsBackgroundColorDarkHover: '#ebebf54d',
       chipsTextColor: '#ffffff',
       outlineColor: '#0073e6',
+      walletOutlineColor: '#0066CC',
     },
   },
 };
 
 const fontFamily = FONT_THEME_EXPERIMENTAL;
+
 export const themeExperimental = createTheme(MUIItaliaTheme, {
   typography: {
     fontFamily,
