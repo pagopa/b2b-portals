@@ -23,10 +23,6 @@ export interface PagePublishDates {
   readonly publishedAt?: string;
 }
 
-export interface PageStrapiEnvData {
-  readonly token: string;
-  readonly strapiApiBaseUrl: string;
-}
 export type Navigation = t.TypeOf<typeof NavigationCodec>;
 
 export const getNavigation = ({

@@ -19,7 +19,7 @@ export const FeedbackFormSection: StoryFn<typeof FeedbackForm> =
 FeedbackFormSection.args = {
   sectionID: 'sectionID',
   locale: 'it',
-  token: 'token',
+  feedbackToken: 'token',
   strapiApiBaseUrl: 'strapi_url',
   labels: {
     title: 'Ciao, questa pagina è stata utile?',

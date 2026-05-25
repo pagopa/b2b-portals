@@ -14,6 +14,11 @@ const strapiApiData: Omit<StrapiApiData, 'ENVIRONMENT'> = {
   PAGOPA_STRAPI_API_BASE_URL: 'pagopaStrapiToken',
   WALLET_STRAPI_API_TOKEN: 'walletStrapiApiBaseUrl',
   WALLET_STRAPI_API_BASE_URL: 'walletStrapiToken',
+  DEMO_STRAPI_FEEDBACK_TOKEN: 'demoFeedbackToken',
+  SEND_STRAPI_FEEDBACK_TOKEN: 'sendFeedbackToken',
+  PAGOPA_STRAPI_FEEDBACK_TOKEN: 'pagopaFeedbackToken',
+  INTEROP_STRAPI_FEEDBACK_TOKEN: 'interopFeedbackToken',
+  WALLET_STRAPI_FEEDBACK_TOKEN: 'walletFeedbackToken',
 };
 
 describe('extractTenantStrapiApiData', () => {

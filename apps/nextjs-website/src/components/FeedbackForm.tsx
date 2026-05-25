@@ -1,7 +1,10 @@
 'use client';
 
-import { PageStrapiEnvData } from '@/lib/fetch/navigation';
-import { Locale, SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import {
+  Locale,
+  PageStrapiEnvData,
+  SiteWidePageData,
+} from '@/lib/fetch/siteWideSEO';
 import { FeedbackFormSection } from '@/lib/fetch/types/PageSection';
 import { FeedbackForm as FeedbackFormRC } from '@react-components/components';
 import { FeedbackFormProps } from '@react-components/types';
@@ -154,7 +157,7 @@ const feedbackFormLabels: Record<Locale, FeedbackFormProps['labels']> = {
 
 const makeFeedbackFormProps = ({
   locale,
-  token,
+  feedbackToken,
   strapiApiBaseUrl,
   sectionID,
 }: FeedbackFormSection &
@@ -165,7 +168,7 @@ const makeFeedbackFormProps = ({
     labels: feedbackFormLabels[locale],
     locale,
     strapiApiBaseUrl,
-    ...(token && { token }),
+    feedbackToken,
   };
 };
 

@@ -40,7 +40,7 @@ const PreviewPage = async ({
     return null;
   }
 
-  const token = getToken();
+  const feedbackToken = getToken();
   const strapiApiBaseUrl = getStrapiApiBaseUrl();
   const type = searchParams.type;
   const secret = searchParams.secret;
@@ -106,7 +106,7 @@ const PreviewPage = async ({
           {document.sections.map((section) =>
             PageSection({
               ...section,
-              token,
+              feedbackToken,
               strapiApiBaseUrl,
               themeVariant,
               locale: document.locale,

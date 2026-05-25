@@ -3,7 +3,7 @@ import { Locale } from '../common/Common.types';
 export interface FeedbackFormProps {
   readonly sectionID: string | null;
   readonly locale: Locale;
-  readonly token?: string;
+  readonly feedbackToken: string;
   readonly strapiApiBaseUrl: string;
   readonly labels: {
     title: string;
@@ -32,7 +32,6 @@ export interface FeedbackFormType {
   slug: string;
   notUsefulReason?: string;
   suggestions?: string;
-  documentId?: string;
 }
 
 export interface FeedbackFormResponseType {

@@ -12,7 +12,7 @@ import TrackPageView from '@/components/TrackPageView';
 const { getSiteWideSEO, getAllPages, getPageProps, getPressReleasePages } =
   getters;
 
-const token = getToken();
+const feedbackToken = getToken();
 const strapiApiBaseUrl = getStrapiApiBaseUrl();
 
 type PageParams = {
@@ -211,7 +211,7 @@ const Page = async ({ params }: PageParams) => {
           locale,
           defaultLocale,
           pressReleasePages,
-          token,
+          feedbackToken,
           strapiApiBaseUrl,
           updatedAt: pageProps.updatedAt,
           ...(pressReleasesParentSlug && { pressReleasesParentSlug }),

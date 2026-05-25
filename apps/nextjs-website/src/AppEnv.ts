@@ -16,6 +16,11 @@ const ConfigCodec = t.type({
   PAGOPA_STRAPI_API_BASE_URL: t.string,
   WALLET_STRAPI_API_TOKEN: t.string,
   WALLET_STRAPI_API_BASE_URL: t.string,
+  DEMO_STRAPI_FEEDBACK_TOKEN: t.string,
+  SEND_STRAPI_FEEDBACK_TOKEN: t.string,
+  PAGOPA_STRAPI_FEEDBACK_TOKEN: t.string,
+  INTEROP_STRAPI_FEEDBACK_TOKEN: t.string,
+  WALLET_STRAPI_FEEDBACK_TOKEN: t.string,
   ENVIRONMENT: t.union([
     t.literal('demo'),
     t.literal('send'),

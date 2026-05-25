@@ -28,7 +28,7 @@ export default function FeedbackForm({
   sectionID,
   labels,
   locale,
-  token,
+  feedbackToken,
   strapiApiBaseUrl,
 }: FeedbackFormProps) {
   const pathname = usePathname();
@@ -39,12 +39,12 @@ export default function FeedbackForm({
     notUsefulReason: '',
     slug,
   });
+  const [documentId, setDocumentId] = useState<string | undefined>();
 
   const [feedbackSent, setFeedbackSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [error, setError] = useState(false);
-  const isValidToken = token;
 
   const handleFieldValue = (
     ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -78,7 +78,7 @@ export default function FeedbackForm({
   };
 
   const handleSendFeedback = async () => {
-    if (!isValidToken) {
+    if (!feedbackToken) {
       setError(true);
       return;
     }
@@ -90,7 +90,7 @@ export default function FeedbackForm({
           mode: 'cors',
           method: 'post',
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${feedbackToken}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
@@ -104,10 +104,7 @@ export default function FeedbackForm({
       );
       if (res.status === 201) {
         const response: FeedbackFormResponseType = await res.json();
-        setFormData((prev) => ({
-          ...prev,
-          documentId: response.data.documentId,
-        }));
+        setDocumentId(response.data.documentId);
         setSending(false);
         setFeedbackSent(true);
         if (formData.useful === '0') {
@@ -122,34 +119,41 @@ export default function FeedbackForm({
   };
 
   const handleSendDetailedFeedback = async () => {
-    if (!isValidToken) {
+    if (!feedbackToken || !documentId) {
       setError(true);
       return;
     }
     setSending(true);
     try {
-      const res = await fetch(
-        `${strapiApiBaseUrl}/api/feedbacks/${formData.documentId}?locale=${locale}`,
-        {
-          mode: 'cors',
-          method: 'put',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            data: {
-              ...formData,
-              useful: false,
+      if (formData.notUsefulReason || formData.suggestions) {
+        const res = await fetch(
+          `${strapiApiBaseUrl}/api/feedbacks/${documentId}?locale=${locale}`,
+          {
+            mode: 'cors',
+            method: 'put',
+            headers: {
+              Authorization: `Bearer ${feedbackToken}`,
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
             },
-          }),
-        },
-      );
-      setOpenModal(false);
-      setSending(false);
-      if (res.status !== 200 && res.status !== 204) {
-        setError(true);
+            body: JSON.stringify({
+              data: {
+                ...formData,
+                ...(formData.notUsefulReason && {
+                  notUsefulReason: formData.notUsefulReason,
+                }),
+                ...(formData.suggestions && {
+                  suggestions: formData.suggestions,
+                }),
+              },
+            }),
+          },
+        );
+        setOpenModal(false);
+        setSending(false);
+        if (res.status !== 200 && res.status !== 204) {
+          setError(true);
+        }
       }
     } catch (_e) {
       setError(true);
