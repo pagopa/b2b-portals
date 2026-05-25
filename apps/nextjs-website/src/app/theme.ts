@@ -52,6 +52,22 @@ declare module '@mui/material/styles' {
       readonly walletOutlineColor: string;
     };
   }
+  // interface PaletteOptions {
+  //   readonly custom?: {
+  //     readonly backgroundColorDark?: string;
+  //     readonly backgroundColorLightGrey?: string;
+  //     readonly divider?: string;
+  //     readonly primaryColorDark?: string;
+  //     readonly backgroundColorDefault?: string;
+  //     readonly darkLinkColor?: string;
+  //     readonly grayLinkColor?: string;
+  //     readonly black50?: string;
+  //     readonly editorialSwitchButtonsBackgroundLightBlue?: string;
+  //     readonly editorialSwitchButtonsBackgroundWhite?: string;
+  //     readonly bannerLinkLightBlue?: string;
+  //     readonly bannerLinkDarkBlue?: string;
+  //   };
+  // }
 }
 
 const themeStyles = {
