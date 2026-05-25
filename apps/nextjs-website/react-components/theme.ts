@@ -25,8 +25,8 @@ export const variantAccentColorMap: ThemeVariantMap<string> = {
       : palette.custom.primaryColorDark,
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
-      ? palette.custom.primaryColorDark
-      : palette.custom.primaryColorDark,
+      ? palette.custom.walletPrimaryColor
+      : palette.custom.walletPrimaryColor,
 };
 
 export const variantActionColorMap: ThemeVariantMap<string> = {
@@ -35,7 +35,9 @@ export const variantActionColorMap: ThemeVariantMap<string> = {
   IO: ({ palette, theme }) =>
     theme === 'dark' ? palette.custom.blueIO[500] : palette.custom.blueIO[500],
   WALLET: ({ palette, theme }) =>
-    theme === 'dark' ? palette.custom.blueIO[500] : palette.custom.blueIO[500],
+    theme === 'dark'
+      ? palette.custom.blueWallet[500]
+      : palette.custom.blueWallet[500],
 };
 
 export const variantContentLinkColorMap: ThemeVariantMap<string> = {
@@ -44,7 +46,7 @@ export const variantContentLinkColorMap: ThemeVariantMap<string> = {
   IO: ({ palette, theme }) =>
     theme === 'dark' ? palette.custom.white : palette.custom.primaryColorDark,
   WALLET: ({ palette, theme }) =>
-    theme === 'dark' ? palette.custom.white : palette.custom.primaryColorDark,
+    theme === 'dark' ? palette.custom.white : palette.custom.walletPrimaryColor,
 };
 
 export const variantSectionBackgroundColorMap: ThemeVariantMap<string> = {
@@ -58,7 +60,7 @@ export const variantSectionBackgroundColorMap: ThemeVariantMap<string> = {
       : palette.custom.backgroundColorLight,
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
-      ? palette.custom.backgroundColorDark
+      ? palette.custom.walletBackgroundColorDark
       : palette.custom.backgroundColorLight,
 };
 
@@ -74,7 +76,7 @@ export const variantSectionBackgroundAlternativeGreyMap: ThemeVariantMap<string>
         : palette.custom.backgroundColorLightGrey,
     WALLET: ({ palette, theme }) =>
       theme === 'dark'
-        ? palette.custom.backgroundColorDark
+        ? palette.custom.walletBackgroundColorDark
         : palette.custom.backgroundColorLightGrey,
   };
 
@@ -90,7 +92,7 @@ export const variantExtraBackgroundColorMap: ThemeVariantMap<string> = {
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
       ? palette.text.primary
-      : palette.custom.backgroundColorDark,
+      : palette.custom.walletBackgroundColorDark,
 };
 
 export const variantFocusOutlineColorMap: ThemeVariantMap<string> = {
@@ -104,8 +106,8 @@ export const variantFocusOutlineColorMap: ThemeVariantMap<string> = {
       : palette.custom.primaryColorDark,
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
-      ? palette.custom.primaryColorDark
-      : palette.custom.primaryColorDark,
+      ? palette.custom.walletOutlineColor
+      : palette.custom.walletOutlineColor,
 };
 
 export const variantFocusBackgroundColorMap: ThemeVariantMap<string> = {
@@ -119,8 +121,8 @@ export const variantFocusBackgroundColorMap: ThemeVariantMap<string> = {
       : alpha(palette.custom.primaryColorDark, 0.08),
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
-      ? alpha(palette.custom.primaryColorDark, 0.08)
-      : alpha(palette.custom.primaryColorDark, 0.08),
+      ? alpha(palette.custom.walletPrimaryColor, 0.08)
+      : alpha(palette.custom.walletPrimaryColor, 0.08),
 };
 
 export const variantChipBackgroundColorMap: ThemeVariantMap<string> = {
@@ -135,7 +137,7 @@ export const variantChipBackgroundColorMap: ThemeVariantMap<string> = {
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
       ? palette.custom.chipsBackgroundColorDark
-      : palette.custom.ioChipsBackgroundColorLight,
+      : palette.custom.walletChipsBackgroundColorLight,
 };
 
 export const variantChipBackgroundHoverColorMap: ThemeVariantMap<string> = {
@@ -150,7 +152,7 @@ export const variantChipBackgroundHoverColorMap: ThemeVariantMap<string> = {
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
       ? palette.custom.chipsBackgroundColorDarkHover
-      : palette.custom.ioChipsBackgroundColorLightHover,
+      : palette.custom.walletChipsBackgroundColorLightHover,
 };
 
 export const ctaContainedBackgroundColorMap: ThemeVariantMap<string> = {
@@ -159,7 +161,7 @@ export const ctaContainedBackgroundColorMap: ThemeVariantMap<string> = {
   IO: ({ palette, theme }) =>
     theme === 'dark' ? palette.custom.white : palette.custom.blueIO[500],
   WALLET: ({ palette, theme }) =>
-    theme === 'dark' ? palette.custom.white : palette.custom.blueIO[500],
+    theme === 'dark' ? palette.custom.white : palette.custom.blueWallet[500],
 };
 
 export const ctaContainedTextColorMap: ThemeVariantMap<string> = {
@@ -168,7 +170,7 @@ export const ctaContainedTextColorMap: ThemeVariantMap<string> = {
   IO: ({ palette, theme }) =>
     theme === 'dark' ? palette.custom.blueIO[500] : palette.custom.white,
   WALLET: ({ palette, theme }) =>
-    theme === 'dark' ? palette.custom.blueIO[500] : palette.custom.white,
+    theme === 'dark' ? palette.custom.blueWallet[500] : palette.custom.white,
 };
 
 export const ctaOutlinedBorderColorMap: ThemeVariantMap<string> = {
@@ -181,7 +183,7 @@ export const ctaOutlinedBorderColorMap: ThemeVariantMap<string> = {
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
       ? palette.custom.matteWhiteBorder
-      : palette.custom.blueIO[500],
+      : palette.custom.blueWallet[500],
 };
 
 export const ctaOutlinedTextColorMap: ThemeVariantMap<string> = {
@@ -190,7 +192,7 @@ export const ctaOutlinedTextColorMap: ThemeVariantMap<string> = {
   IO: ({ palette, theme }) =>
     theme === 'dark' ? palette.custom.white : palette.custom.blueIO[500],
   WALLET: ({ palette, theme }) =>
-    theme === 'dark' ? palette.custom.white : palette.custom.blueIO[500],
+    theme === 'dark' ? palette.custom.white : palette.custom.blueWallet[500],
 };
 
 export const stripeLinkButtonBackgroundColorMap: ThemeVariantMap<string> = {
@@ -199,7 +201,7 @@ export const stripeLinkButtonBackgroundColorMap: ThemeVariantMap<string> = {
   IO: ({ palette, theme }) =>
     theme === 'light' ? palette.custom.white : palette.custom.blueIO[500],
   WALLET: ({ palette, theme }) =>
-    theme === 'light' ? palette.custom.white : palette.custom.blueIO[500],
+    theme === 'light' ? palette.custom.white : palette.custom.blueWallet[500],
 };
 
 export const stripeLinkButtonTextColorMap: ThemeVariantMap<string> = {
@@ -208,7 +210,7 @@ export const stripeLinkButtonTextColorMap: ThemeVariantMap<string> = {
   IO: ({ palette, theme }) =>
     theme === 'light' ? palette.custom.blueIO[500] : palette.custom.white,
   WALLET: ({ palette, theme }) =>
-    theme === 'light' ? palette.custom.blueIO[500] : palette.custom.white,
+    theme === 'light' ? palette.custom.blueWallet[500] : palette.custom.white,
 };
 
 export const variantSectionStripeBackgroundsMap: ThemeVariantMap<string[]> = {
@@ -230,8 +232,8 @@ export const variantSectionStripeBackgroundsMap: ThemeVariantMap<string[]> = {
     theme === 'light'
       ? [palette.grey[100], palette.grey[50]]
       : [
-          palette.custom.bannerLinkDarkBlueIO,
-          palette.custom.bannerLinkLightBlueIO,
+          palette.custom.bannerLinkDarkBlueWallet,
+          palette.custom.bannerLinkLightBlueWallet,
         ],
 };
 
@@ -260,7 +262,7 @@ export const switchButtonTextColorMap: ThemeVariantMap<string> = {
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
       ? palette.primary.contrastText
-      : palette.custom.primaryColorDark,
+      : palette.custom.walletPrimaryColor,
 };
 
 export const switchButtonBorderColorMap: ThemeVariantMap<string> = {
@@ -273,7 +275,7 @@ export const switchButtonBorderColorMap: ThemeVariantMap<string> = {
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
       ? palette.primary.contrastText
-      : palette.custom.primaryColorDark,
+      : palette.custom.walletPrimaryColor,
 };
 
 export const switchMenuTextColorMap: ThemeVariantMap<string> = {
@@ -285,8 +287,8 @@ export const switchMenuTextColorMap: ThemeVariantMap<string> = {
       : palette.custom.primaryColorDark,
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
-      ? palette.custom.primaryColorDark
-      : palette.custom.primaryColorDark,
+      ? palette.custom.walletPrimaryColor
+      : palette.custom.walletPrimaryColor,
 };
 
 export const featureLinkColorMap: ThemeVariantMap<string> = {
@@ -295,7 +297,7 @@ export const featureLinkColorMap: ThemeVariantMap<string> = {
   IO: ({ palette, theme }) =>
     theme === 'dark' ? palette.custom.white : palette.custom.blueIO[500],
   WALLET: ({ palette, theme }) =>
-    theme === 'dark' ? palette.custom.white : palette.custom.blueIO[500],
+    theme === 'dark' ? palette.custom.white : palette.custom.blueWallet[500],
 };
 
 export const chipFocusOutlineColorMap: ThemeVariantMap<string> = {
@@ -310,7 +312,7 @@ export const chipFocusOutlineColorMap: ThemeVariantMap<string> = {
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
       ? palette.custom.white
-      : palette.custom.ioChipsBackgroundColorLight,
+      : palette.custom.walletChipsBackgroundColorLight,
 };
 
 export const heroCounterNumberColorMap: ThemeVariantMap<string> = {
@@ -319,7 +321,7 @@ export const heroCounterNumberColorMap: ThemeVariantMap<string> = {
   IO: ({ palette, theme }) =>
     theme === 'dark' ? palette.custom.white : palette.custom.primaryColorDark,
   WALLET: ({ palette, theme }) =>
-    theme === 'dark' ? palette.custom.white : palette.custom.primaryColorDark,
+    theme === 'dark' ? palette.custom.white : palette.custom.walletPrimaryColor,
 };
 
 export const bannerLinkTextColorMap: ThemeVariantMap<string> = {
