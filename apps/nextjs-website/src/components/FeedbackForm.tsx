@@ -2,7 +2,7 @@
 
 import {
   Locale,
-  PageStrapiEnvData,
+  FeedbackConfig,
   SiteWidePageData,
 } from '@/lib/fetch/siteWideSEO';
 import { FeedbackFormSection } from '@/lib/fetch/types/PageSection';
@@ -162,7 +162,7 @@ const makeFeedbackFormProps = ({
   sectionID,
 }: FeedbackFormSection &
   SiteWidePageData &
-  PageStrapiEnvData): FeedbackFormProps => {
+  FeedbackConfig): FeedbackFormProps => {
   return {
     sectionID,
     labels: feedbackFormLabels[locale],
@@ -173,7 +173,7 @@ const makeFeedbackFormProps = ({
 };
 
 const FeedbackForm = (
-  props: FeedbackFormSection & SiteWidePageData & PageStrapiEnvData,
+  props: FeedbackFormSection & SiteWidePageData & FeedbackConfig,
 ) => <FeedbackFormRC {...makeFeedbackFormProps(props)} />;
 
 export default FeedbackForm;

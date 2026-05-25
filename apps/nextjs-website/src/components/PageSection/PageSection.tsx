@@ -27,7 +27,7 @@ import MediaResources from '../MediaResources';
 import DynamicsForm from '../DynamicsForm';
 import Redirect from '../Redirect';
 import { PageSection as PageSectionData } from '@/lib/fetch/types/PageSection';
-import { PageStrapiEnvData, SiteWidePageData } from '@/lib/fetch/siteWideSEO';
+import { FeedbackConfig, SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { PressReleasePage } from '@/lib/fetch/pressRelease';
 import TextAndImage from '../TextAndImage';
 import RichBanner from '../RichBanner';
@@ -39,7 +39,7 @@ import FeedbackForm from '../FeedbackForm';
 const PageSection = (
   props: PageSectionData &
     PagePublishDates &
-    PageStrapiEnvData &
+    FeedbackConfig &
     SiteWidePageData & { pressReleasePages: ReadonlyArray<PressReleasePage> },
 ) => {
   // eslint-disable-next-line no-underscore-dangle

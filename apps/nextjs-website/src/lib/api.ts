@@ -17,13 +17,15 @@ export const appEnv = pipe(
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
 
-export const getToken = () => {
+export const getFeedbackToken = () => {
   const tenant = appEnv.config.ENVIRONMENT;
   switch (tenant) {
     case 'demo':
       return appEnv.config.DEMO_STRAPI_FEEDBACK_TOKEN;
     case 'send':
       return appEnv.config.SEND_STRAPI_FEEDBACK_TOKEN;
+    case 'appio':
+      return appEnv.config.APPIO_STRAPI_FEEDBACK_TOKEN;
     case 'pagopa':
       return appEnv.config.PAGOPA_STRAPI_FEEDBACK_TOKEN;
     case 'interop':
@@ -43,6 +45,8 @@ export const getStrapiApiBaseUrl = () => {
       return appEnv.config.DEMO_STRAPI_API_BASE_URL;
     case 'send':
       return appEnv.config.SEND_STRAPI_API_BASE_URL;
+    case 'appio':
+      return appEnv.config.APPIO_STRAPI_API_BASE_URL;
     case 'pagopa':
       return appEnv.config.PAGOPA_STRAPI_API_BASE_URL;
     case 'interop':

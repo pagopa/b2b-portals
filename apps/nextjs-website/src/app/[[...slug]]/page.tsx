@@ -3,7 +3,7 @@ import {
   isPreviewMode,
   getters,
   getStrapiApiBaseUrl,
-  getToken,
+  getFeedbackToken,
 } from '@/lib/api';
 import PageSection from '@/components/PageSection/PageSection';
 import { Locale } from '@/lib/fetch/siteWideSEO';
@@ -12,7 +12,7 @@ import TrackPageView from '@/components/TrackPageView';
 const { getSiteWideSEO, getAllPages, getPageProps, getPressReleasePages } =
   getters;
 
-const feedbackToken = getToken();
+const feedbackToken = getFeedbackToken();
 const strapiApiBaseUrl = getStrapiApiBaseUrl();
 
 type PageParams = {

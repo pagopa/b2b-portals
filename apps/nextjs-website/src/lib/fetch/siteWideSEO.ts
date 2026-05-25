@@ -72,7 +72,7 @@ export interface SiteWidePageData {
   readonly pressReleasesParentSlug?: string;
 }
 
-export interface PageStrapiEnvData {
+export interface FeedbackConfig {
   readonly feedbackToken: string;
   readonly strapiApiBaseUrl: string;
 }

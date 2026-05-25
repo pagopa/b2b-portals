@@ -5,7 +5,7 @@ import {
   isPreviewMode,
   getters,
   getStrapiApiBaseUrl,
-  getToken,
+  getFeedbackToken,
 } from '@/lib/api';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import { ThemeProvider } from '@mui/material/styles';
@@ -40,7 +40,7 @@ const PreviewPage = async ({
     return null;
   }
 
-  const feedbackToken = getToken();
+  const feedbackToken = getFeedbackToken();
   const strapiApiBaseUrl = getStrapiApiBaseUrl();
   const type = searchParams.type;
   const secret = searchParams.secret;

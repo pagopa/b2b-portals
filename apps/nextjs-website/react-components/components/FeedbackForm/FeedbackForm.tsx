@@ -138,7 +138,6 @@ export default function FeedbackForm({
             },
             body: JSON.stringify({
               data: {
-                ...formData,
                 ...(formData.notUsefulReason && {
                   notUsefulReason: formData.notUsefulReason,
                 }),
@@ -149,7 +148,7 @@ export default function FeedbackForm({
             }),
           },
         );
-        setOpenModal(false);
+        handleCloseModal();
         setSending(false);
         if (res.status !== 200 && res.status !== 204) {
           setError(true);
@@ -160,7 +159,15 @@ export default function FeedbackForm({
     }
   };
 
-  const handleCloseModal = () => setOpenModal(false);
+  const handleCloseModal = () => {
+    setFormData({
+      useful: '',
+      notUsefulReason: '',
+      suggestions: '',
+      slug,
+    });
+    setOpenModal(false);
+  };
 
   return (
     <>
