@@ -32,6 +32,7 @@ import TextAndImage from './TextAndImage/TextAndImage';
 import RichBanner from './RichBanner/RichBanner';
 import LabelsProvider from './LabelsProvider/LabelsProvider';
 import LastUpdated from './LastUpdated/LastUpdated';
+import SimpleCards from './SimpleCards/SimpleCards';
 export {
   Hero,
   Editorial,
@@ -67,4 +68,5 @@ export {
   RichBanner,
   LabelsProvider,
   LastUpdated,
+  SimpleCards,
 };

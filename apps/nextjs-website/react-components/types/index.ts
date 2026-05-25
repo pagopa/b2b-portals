@@ -31,6 +31,7 @@ import { DynamicsFormProps } from './DynamicsForm/DynamicsForm.types';
 import { TextAndImageProps } from './TextAndImage/TextAndImage.types';
 import { RichBannerProps } from './RichBanner/RichBanner.types';
 import { LabelsProviderProps } from './LabelsProvider/LabelsProvider.types';
+import { SimpleCardsProps } from './SimpleCards/SimpleCards.types';
 
 export type {
   HeroProps,
@@ -66,4 +67,5 @@ export type {
   TextAndImageProps,
   RichBannerProps,
   LabelsProviderProps,
+  SimpleCardsProps,
 };

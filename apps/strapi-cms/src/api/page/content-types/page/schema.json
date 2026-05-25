@@ -73,7 +73,8 @@
         "sections.text-and-image",
         "sections.rich-banner",
         "sections.redirect",
-        "sections.last-updated"
+        "sections.last-updated",
+        "sections.simple-cards"
       ],
       "required": true,
       "min": 1
