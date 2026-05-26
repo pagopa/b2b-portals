@@ -32,7 +32,7 @@ export default function FeedbackForm({
   strapiApiBaseUrl,
 }: FeedbackFormProps) {
   const pathname = usePathname();
-  const slug = pathname === '/' ? 'homepage' : pathname;
+  const slug = pathname === '/' ? 'homepage' : pathname.substring(1);
   const textareaMaxLength = 200;
   const [formData, setFormData] = useState<FeedbackFormType>({
     useful: '',
@@ -60,8 +60,9 @@ export default function FeedbackForm({
     backgroundColor: '#ffffff',
     p: { xs: 3, md: 6 },
     borderRadius: 10,
-    display: 'inline-block',
-    width: { xs: '100%', md: 'initial' },
+    display: 'inline-flex',
+    alignItems: 'center',
+    maxWidth: { xs: 342, md: 'initial' },
     border: '1px solid #C5C7C9',
   };
 
@@ -79,10 +80,6 @@ export default function FeedbackForm({
   };
 
   const handleSendFeedback = async () => {
-    if (!feedbackToken) {
-      setFormState('error');
-      return;
-    }
     setSending(true);
     try {
       const res = await fetch(
@@ -103,7 +100,6 @@ export default function FeedbackForm({
           }),
         },
       );
-      setSending(false);
       if (res.status === 201) {
         const response: FeedbackFormResponseType = await res.json();
         setDocumentId(response.data.documentId);
@@ -111,19 +107,21 @@ export default function FeedbackForm({
       } else {
         setFormState('error');
       }
-    } catch (_e) {
+    } catch {
       setFormState('error');
+    } finally {
+      setSending(false);
     }
   };
 
   const handleSendDetailedFeedback = async () => {
-    if (!feedbackToken || !documentId) {
+    if (!documentId) {
       setFormState('error');
       return;
     }
     setSending(true);
-    try {
-      if (formData.notUsefulReason || formData.suggestions) {
+    if (formData.notUsefulReason || formData.suggestions) {
+      try {
         const res = await fetch(
           `${strapiApiBaseUrl}/api/feedbacks/${documentId}?locale=${locale}`,
           {
@@ -146,20 +144,21 @@ export default function FeedbackForm({
             }),
           },
         );
-        handleCloseModal();
         if (res.status !== 200 && res.status !== 204) {
           setFormState('error');
         } else {
           setFormState('success');
         }
+      } catch {
+        setFormState('error');
+      } finally {
+        resetForm();
       }
-    } catch (_e) {
-      setFormState('error');
+    } else {
+      handleCloseModal();
     }
   };
-
-  const handleCloseModal = () => {
-    setFormState('success');
+  const resetForm = () => {
     setSending(false);
     setDocumentId(null);
     setFormData({
@@ -170,13 +169,18 @@ export default function FeedbackForm({
     });
   };
 
+  const handleCloseModal = () => {
+    setFormState('success');
+    resetForm();
+  };
+
   return (
     <>
       <Box
         component='section'
         {...(sectionID && { id: sectionID })}
         sx={{
-          display: { xs: 'block', md: 'flex' },
+          display: 'flex',
           justifyContent: 'center',
           py: 12.5,
           backgroundColor: '#E6F0FA',
@@ -184,7 +188,7 @@ export default function FeedbackForm({
         }}
       >
         {formState === 'error' && (
-          <Box sx={{ ...roundBoxStyle, display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ ...roundBoxStyle, maxWidth: 'initial' }}>
             <ErrorIcon />
             <Typography sx={{ ml: 1, whiteSpace: 'pre-line' }} variant='body2'>
               {labels.error}
@@ -192,7 +196,7 @@ export default function FeedbackForm({
           </Box>
         )}
         {formState === 'ready' && (
-          <FormControl sx={{ width: { xs: '100%', md: 'initial' } }}>
+          <FormControl sx={{ maxWidth: { xs: 342, md: 'initial' } }}>
             <Box sx={roundBoxStyle}>
               <Typography
                 component='h2'
@@ -238,7 +242,7 @@ export default function FeedbackForm({
           </FormControl>
         )}
         {formState === 'success' && (
-          <Box sx={roundBoxStyle}>
+          <Box sx={{ ...roundBoxStyle, maxWidth: 'initial' }}>
             <Typography
               variant='body2'
               sx={{
@@ -255,7 +259,12 @@ export default function FeedbackForm({
       </Box>
       <Dialog
         open={formState === 'modal'}
-        onClose={handleCloseModal}
+        onClose={(_e, reason) => {
+          if (reason === 'backdropClick') {
+            return;
+          }
+          handleCloseModal();
+        }}
         fullWidth
         scroll='body'
         PaperProps={{

@@ -138,15 +138,13 @@ const makeFeedbackFormProps = ({
   sectionID,
 }: FeedbackFormSection &
   SiteWidePageData &
-  FeedbackConfig): FeedbackFormProps => {
-  return {
-    sectionID,
-    labels: feedbackFormLabels[locale],
-    locale,
-    strapiApiBaseUrl,
-    feedbackToken,
-  };
-};
+  FeedbackConfig): FeedbackFormProps => ({
+  sectionID,
+  labels: feedbackFormLabels[locale],
+  locale,
+  strapiApiBaseUrl,
+  feedbackToken,
+});
 
 const FeedbackForm = (
   props: FeedbackFormSection & SiteWidePageData & FeedbackConfig,
