@@ -269,7 +269,8 @@ export default function FeedbackForm({
         scroll='body'
         PaperProps={{
           sx: (theme) => ({
-            [theme.breakpoints.only('xs')]: {
+            maxWidth: 756,
+            [theme.breakpoints.down('md')]: {
               m: 0,
               width: '100%',
               maxWidth: '100% !important',
