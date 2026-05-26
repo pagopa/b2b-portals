@@ -100,11 +100,11 @@ const HowTo = (props: HowToProps) => {
               }}
             >
               <HowToStep
+                {...step}
                 index={j + 1}
                 theme={theme}
                 themeVariant={themeVariant}
                 isLastStep={j === steps.length - 1}
-                {...step}
               />
             </Box>
           ))}

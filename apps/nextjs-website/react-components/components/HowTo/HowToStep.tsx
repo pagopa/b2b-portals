@@ -2,7 +2,7 @@ import React from 'react';
 import { Stack, Box, useTheme, Typography } from '@mui/material';
 import { HowToStepProps } from '../../types/HowTo/HowTo.types';
 import { ArrowIcon } from './HowTo.helpers';
-import { TextColor, TextAlternativeColor } from '../common/Common.helpers';
+import { TextColor } from '../common/Common.helpers';
 import { Title } from '../common/Common';
 import { HowToStepNum } from './HowTo.helpers';
 import Image from 'next/image';
@@ -18,7 +18,6 @@ export const HowToStep = ({
   isLastStep,
 }: HowToStepProps) => {
   const isDarkTheme = theme === 'dark';
-  const color2 = TextAlternativeColor(theme);
   const textColor = TextColor(theme);
   const { palette } = useTheme();
   const ctx = { palette, theme };
@@ -41,7 +40,11 @@ export const HowToStep = ({
       {iconURL && (
         <Stack>
           <Stack spacing={1.2}>
-            <HowToStepNum variant='overline' color={color2} stepNum={index} />
+            <HowToStepNum
+              variant='overline'
+              color={linkColor}
+              stepNum={index}
+            />
             <Stack
               justifyContent='space-between'
               alignItems='center'
@@ -56,7 +59,7 @@ export const HowToStep = ({
                     transform: { xs: 'rotate(90deg)', md: 'none' },
                   }}
                 >
-                  <ArrowIcon color={color2} />
+                  <ArrowIcon color={linkColor} />
                 </Box>
               )}
             </Stack>
@@ -79,10 +82,10 @@ export const HowToStep = ({
               fontSize: '18px',
               '& a': {
                 fontWeight: 700,
-                color: linkColor,
+                color: `${linkColor} !important`,
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: linkColor,
+                  color: `${linkColor} !important`,
                 },
               },
               '& p': {
@@ -102,7 +105,7 @@ export const HowToStep = ({
           <HowToStepNum
             variant='h6'
             component='p'
-            color={color2}
+            color={linkColor}
             stepNum={index}
             marginBottom={12}
           />
@@ -118,7 +121,7 @@ export const HowToStep = ({
               minHeight: '2em',
             }}
           >
-            {!isLastStep && <ArrowIcon color={color2} />}
+            {!isLastStep && <ArrowIcon color={linkColor} />}
           </Box>
 
           <Title
@@ -137,10 +140,10 @@ export const HowToStep = ({
               fontSize: '18px',
               '& a': {
                 fontWeight: 700,
-                color: linkColor,
+                color: `${linkColor} !important`,
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: linkColor,
+                  color: `${linkColor} !important`,
                 },
               },
               '& p': {

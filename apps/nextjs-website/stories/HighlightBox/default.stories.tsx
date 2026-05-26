@@ -31,6 +31,7 @@ HighlightBoxFull.args = {
     ariaLabel: 'Scopri di più',
   },
   sectionID: 'highlight-box-1',
+  themeVariant: 'SEND',
 };
 
 export const HighlightBoxWithoutButton: StoryFn<typeof HighlightBox> =
@@ -45,6 +46,7 @@ HighlightBoxWithoutButton.args = {
   },
   eyelet: 'In arrivo su IO',
   sectionID: 'highlight-box-2',
+  themeVariant: 'SEND',
 };
 
 export const HighlightBoxWithoutEyelet: StoryFn<typeof HighlightBox> =
@@ -64,4 +66,5 @@ HighlightBoxWithoutEyelet.args = {
     ariaLabel: 'Scopri di più',
   },
   sectionID: 'highlight-box-3',
+  themeVariant: 'SEND',
 };
