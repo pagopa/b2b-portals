@@ -26,13 +26,14 @@ const CardsItem = ({
   return (
     <Card
       component='li'
-      elevation={16}
+      // elevation={16}
       sx={{
         display: 'flex',
         minHeight: '200px',
         width: '100%',
+        border: '1px solid #E8EBF1',
         flex: { md: masonry ? '0 0 auto' : '1 1 0' },
-        borderRadius: '16px',
+        borderRadius: '24px',
         listStyle: 'none',
         padding: 0,
         margin: 0,
