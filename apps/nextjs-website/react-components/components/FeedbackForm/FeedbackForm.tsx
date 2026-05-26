@@ -119,8 +119,8 @@ export default function FeedbackForm({
       setFormState('error');
       return;
     }
-    setSending(true);
     if (formData.notUsefulReason || formData.suggestions) {
+      setSending(true);
       try {
         const res = await fetch(
           `${strapiApiBaseUrl}/api/feedbacks/${documentId}?locale=${locale}`,
