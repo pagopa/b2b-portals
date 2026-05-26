@@ -69,11 +69,12 @@ export default function FeedbackForm({
     backgroundColor: '#0066CC',
     color: '#FFFFFF',
     '&:hover': {
-      backgroundColor: '#0066CC',
+      backgroundColor: '#0052A3 !important',
+      color: '#FFFFFF !important',
     },
     '&:disabled': {
-      backgroundColor: '#D9DADB',
-      color: '#5C6F82',
+      opacity: 0.65,
+      color: '#FFFFFF',
     },
   };
 
