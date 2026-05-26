@@ -22,7 +22,7 @@ const SimpleCardsItem = ({
 }: SimpleCardsItemProps) => {
   const { palette } = useTheme();
 
-  const titleColor = resolveThemeVariant<string>('actionColor', themeVariant, {
+  const linkColor = resolveThemeVariant<string>('actionColor', themeVariant, {
     palette,
     theme: 'light',
   });
@@ -34,7 +34,7 @@ const SimpleCardsItem = ({
       sx={{
         display: 'flex',
         height: '100%',
-        minHeight: { xs: 180, md: 176 },
+        minHeight: '80px',
         border: '1px solid',
         borderColor: 'divider',
         borderRadius: '16px',
@@ -47,6 +47,7 @@ const SimpleCardsItem = ({
           p: 3,
           display: 'flex',
           flexDirection: 'column',
+          justifyContent: 'center',
           alignItems: 'flex-start',
           '&:last-child': {
             pb: 3,
@@ -58,7 +59,7 @@ const SimpleCardsItem = ({
             {href ? (
               <Link
                 href={href}
-                color={titleColor}
+                color={linkColor}
                 underline='always'
                 aria-label={ariaLabel}
                 {...(isValidExternalLink(href) && {
@@ -67,22 +68,29 @@ const SimpleCardsItem = ({
                 })}
                 sx={{ display: 'inline-flex' }}
               >
-                <Image src={iconURL} alt='' width={40} height={40} />
+                <Image src={iconURL} alt='' width={56} height={56} />
               </Link>
             ) : (
-              <Image src={iconURL} alt='' width={40} height={40} />
+              <Image src={iconURL} alt='' width={56} height={56} />
             )}
           </Box>
         )}
 
-        <Box mb={1}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            minHeight: 32,
+            mb: text || label ? 1 : 0,
+          }}
+        >
           {href ? (
             <Link
               href={href}
-              color={titleColor}
+              color={linkColor}
               underline='always'
               aria-label={ariaLabel}
-              fontSize='18px'
+              fontSize='24px'
               fontWeight={700}
               {...(isValidExternalLink(href) && {
                 target: '_blank',
@@ -94,9 +102,9 @@ const SimpleCardsItem = ({
           ) : (
             <Typography
               component='h3'
-              fontSize='18px'
+              fontSize='24px'
               fontWeight={700}
-              color={titleColor}
+              color='text.primary'
               m={0}
             >
               {title}
@@ -114,7 +122,7 @@ const SimpleCardsItem = ({
           <Typography
             mt='auto'
             textTransform='uppercase'
-            fontSize='12px'
+            fontSize='14px'
             fontWeight={600}
             color='text.secondary'
           >
