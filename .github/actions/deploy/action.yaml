@@ -23,6 +23,9 @@ inputs:
   send_strapi_api_token:
     description: 'The Token to communicate with Strapi'
     required: false
+  send_strapi_feedback_token:
+    description: 'The Token to submit Feedback'
+    required: false
   send_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
@@ -31,6 +34,9 @@ inputs:
     required: true
   appio_strapi_api_token:
     description: 'The Token to communicate with Strapi'
+    required: false
+  appio_strapi_feedback_token:
+    description: 'The Token to submit Feedback'
     required: false
   appio_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
@@ -41,6 +47,9 @@ inputs:
   demo_strapi_api_token:
     description: 'The Token to communicate with Strapi'
     required: false
+  demo_strapi_feedback_token:
+    description: 'The Token to submit Feedback'
+    required: false
   demo_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
@@ -49,6 +58,9 @@ inputs:
     required: true
   interop_strapi_api_token:
     description: 'The Token to communicate with Strapi'
+    required: false
+  interop_strapi_feedback_token:
+    description: 'The Token to submit Feedback'
     required: false
   interop_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
@@ -59,6 +71,9 @@ inputs:
   pagopa_strapi_api_token:
     description: 'The Token to communicate with Strapi'
     required: false
+  pagopa_strapi_feedback_token:
+    description: 'The Token to submit Feedback'
+    required: false
   pagopa_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
     required: false
@@ -67,6 +82,9 @@ inputs:
     required: true
   wallet_strapi_api_token:
     description: 'The Token to communicate with Strapi'
+    required: false
+  wallet_strapi_feedback_token:
+    description: 'The Token to submit Feedback'
     required: false
   wallet_strapi_api_base_url:
     description: 'The API URL to communicate with Strapi'
@@ -100,16 +118,22 @@ runs:
         ENVIRONMENT: ${{ inputs.environment }}
         NEXT_TELEMETRY_DISABLED: "1"
         SEND_STRAPI_API_TOKEN: ${{ inputs.send_strapi_api_token }}
+        SEND_STRAPI_FEEDBACK_TOKEN: ${{ inputs.send_strapi_feedback_token }}
         SEND_STRAPI_API_BASE_URL: ${{ inputs.send_strapi_api_base_url }}
         APPIO_STRAPI_API_TOKEN: ${{ inputs.appio_strapi_api_token }}
+        APPIO_STRAPI_FEEDBACK_TOKEN: ${{ inputs.appio_strapi_feedback_token }}
         APPIO_STRAPI_API_BASE_URL: ${{ inputs.appio_strapi_api_base_url }}
         DEMO_STRAPI_API_TOKEN: ${{ inputs.demo_strapi_api_token }}
+        DEMO_STRAPI_FEEDBACK_TOKEN: ${{ inputs.demo_strapi_feedback_token }}
         DEMO_STRAPI_API_BASE_URL: ${{ inputs.demo_strapi_api_base_url }}
         INTEROP_STRAPI_API_TOKEN: ${{ inputs.interop_strapi_api_token }}
+        INTEROP_STRAPI_FEEDBACK_TOKEN: ${{ inputs.interop_strapi_feedback_token }}
         INTEROP_STRAPI_API_BASE_URL: ${{ inputs.interop_strapi_api_base_url }}
         PAGOPA_STRAPI_API_TOKEN: ${{ inputs.pagopa_strapi_api_token }}
+        PAGOPA_STRAPI_FEEDBACK_TOKEN: ${{ inputs.pagopa_strapi_feedback_token }}
         PAGOPA_STRAPI_API_BASE_URL: ${{ inputs.pagopa_strapi_api_base_url }}
         WALLET_STRAPI_API_TOKEN: ${{ inputs.wallet_strapi_api_token }}
+        WALLET_STRAPI_FEEDBACK_TOKEN: ${{ inputs.wallet_strapi_feedback_token }}
         WALLET_STRAPI_API_BASE_URL: ${{ inputs.wallet_strapi_api_base_url }}
         CDN_PATH: ${{ inputs.cdn_path }}
       shell: bash
