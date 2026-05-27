@@ -1,11 +1,8 @@
 import { Box, Typography } from '@mui/material';
-import {
-  ExtraBackgroundColor,
-  TextColor,
-} from '@react-components/components/common/Common.helpers';
-import { Theme } from '@react-components/types/common/Common.types';
+import LangSwitch from './Header.LangSwitch.helpers';
+import { LangSwitchProps } from '@react-components/types/Footer/Footer.types';
 
-interface Props {
+interface Props extends LangSwitchProps {
   topBarHeaderLogo?: {
     src: string;
     alt: string;
@@ -14,7 +11,6 @@ interface Props {
   topBarHeaderTitle?: string;
   topBarHeaderTitleMobile?: string;
   isMobile: boolean;
-  theme: Theme;
 }
 
 export const TopBarHeader = ({
@@ -22,19 +18,17 @@ export const TopBarHeader = ({
   topBarHeaderTitle,
   topBarHeaderTitleMobile,
   isMobile,
-  theme,
+  languages,
+  activeLanguage,
 }: Props) => {
-  const backgroundColor = ExtraBackgroundColor(theme);
-  const color = TextColor(theme);
-
   return (
     <Box
       sx={{
         display: 'flex',
         alignItems: 'center',
         width: '100%',
-        backgroundColor,
-        color,
+        backgroundColor: '#004D99',
+        color: '#FFFFFF',
         p: { xs: '14px 24px', sm: '14px 60px' },
       }}
     >
@@ -46,15 +40,20 @@ export const TopBarHeader = ({
         />
       )}
       {!isMobile && topBarHeaderTitle && (
-        <Typography sx={{ color, fontWeight: 600, fontSize: 14 }}>
+        <Typography sx={{ color: 'inherit', fontWeight: 600, fontSize: 14 }}>
           {topBarHeaderTitle}
         </Typography>
       )}
       {isMobile && topBarHeaderTitleMobile && (
-        <Typography sx={{ color, fontWeight: 600, fontSize: 14 }}>
+        <Typography sx={{ color: 'inherit', fontWeight: 600, fontSize: 14 }}>
           {topBarHeaderTitleMobile}
         </Typography>
       )}
+      <LangSwitch
+        isMobile={isMobile}
+        activeLanguage={activeLanguage}
+        languages={languages}
+      />
     </Box>
   );
 };

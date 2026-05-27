@@ -122,11 +122,26 @@ const makeHeaderProps = (
     topBarHeaderTitle,
     topBarHeaderTitleMobile,
     theme,
-  }: StandardHeaderData,
+    defaultLocale,
+    locale,
+    localizedLinks,
+    activeLocale,
+  }: StandardHeaderData & {
+    defaultLocale: Locale;
+    activeLocale: Locale;
+    locale: Locale;
+    localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
+  },
   pathname: string,
-  locale: Locale,
 ): HeaderProps => ({
   beta,
+  defaultLocale,
+  languages: localizedLinks,
+  activeLanguage: localizedLinks.find((l) => l.id === activeLocale) ?? {
+    id: activeLocale,
+    value: activeLocale,
+    href: '/',
+  },
   theme,
   ...(supportLink && { supportLink }),
   ...(logo && {
@@ -295,13 +310,21 @@ const Header = ({
   locale,
   defaultLocale,
   exclude,
+  localizedLinks,
   ...props
 }: HeaderData['data']['header'][0] & {
   locale: Locale;
   defaultLocale: Locale;
   exclude: HeaderData['data']['exclude'];
+  localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
 }) => {
-  const pathname = usePathname() ?? '';
+  const pathname = usePathname() + '/';
+  const activeLocale = ['it/', 'en/', 'de/', 'fr/', 'sl/'].includes(
+    pathname.slice(1, 4),
+  ) // Include '/' to make sure not to detect slugs happening to begin with the same letters (e.g.: /enroll)
+    ? (pathname.slice(1, 3) as Locale)
+    : defaultLocale;
+
   const excludeSlugs = exclude.map((obj) => obj.slug);
 
   // Compare excluded slugs with current page slug (removing initial '/')
@@ -315,10 +338,16 @@ const Header = ({
   }
 
   const menuType = props.__component;
-
   switch (menuType) {
     case 'headers.standard-header':
-      return <HeaderRC {...makeHeaderProps(props, pathname, locale)} />;
+      return (
+        <HeaderRC
+          {...makeHeaderProps(
+            { ...props, defaultLocale, locale, localizedLinks, activeLocale },
+            pathname,
+          )}
+        />
+      );
     case 'headers.mega-header':
       return (
         <MegaHeaderRC {...makeMegaHeaderProps(props, locale, defaultLocale)} />

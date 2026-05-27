@@ -1,5 +1,6 @@
 import { StackProps, LinkProps as LinkPropsMUI } from '@mui/material';
-import { LinkProps, Theme } from '../common/Common.types';
+import { LinkProps, Locale, Theme } from '../common/Common.types';
+import { LangSwitchProps } from '../Footer/Footer.types';
 
 export interface HeaderSideDrawerCtaCardProps {
   readonly title: string;
@@ -28,8 +29,12 @@ export interface CardData {
   readonly href: string;
 }
 
-export interface HeaderProps extends HeaderTitleProps, NavigationProps {
+export interface HeaderProps
+  extends HeaderTitleProps,
+    NavigationProps,
+    LangSwitchProps {
   readonly supportLink?: string;
+  readonly defaultLocale: Locale;
   readonly mobileLogo?: {
     src: string;
     alt: string;
@@ -75,7 +80,6 @@ export interface NavigationProps {
 }
 
 export interface HeaderTitleProps {
-  theme: Theme;
   product: {
     name: string;
     href?: string;

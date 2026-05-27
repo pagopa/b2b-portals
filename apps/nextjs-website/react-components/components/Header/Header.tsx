@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
-import {
-  BackgroundColor,
-  TextColor,
-} from '@react-components/components/common/Common.helpers';
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
 import { Navigation } from './helpers/Header.Navigation.helpers';
 import { HamburgerMenu } from './helpers/Header.HamburgerMenu.helpers';
@@ -15,7 +11,6 @@ import { TopBarHeader } from './helpers/Header.TopBarHeader.helpers';
 
 const Header = ({
   product,
-  theme,
   menu,
   beta,
   logo,
@@ -24,10 +19,10 @@ const Header = ({
   topBarHeaderTitle,
   topBarHeaderTitleMobile,
   labels,
+  languages,
+  activeLanguage,
 }: HeaderProps) => {
   const muiTheme = useTheme();
-  const backgroundColor = BackgroundColor(theme);
-  const textColor = TextColor(theme);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
     null,
@@ -55,14 +50,10 @@ const Header = ({
   };
 
   return (
-    <Box
-      bgcolor={backgroundColor}
-      component='header'
-      role='banner'
-      sx={{ height: { xs: 'auto', md: 'auto' } }}
-    >
+    <Box bgcolor='#0066CC' component='header' role='banner'>
       <TopBarHeader
-        theme={theme}
+        languages={languages}
+        activeLanguage={activeLanguage}
         {...(topBarHeaderLogo && { topBarHeaderLogo })}
         {...(topBarHeaderTitle && { topBarHeaderTitle })}
         {...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile })}
@@ -74,10 +65,9 @@ const Header = ({
           justifyContent='space-between'
           alignItems='center'
           sx={{ padding: { xs: '16px 24px', md: '24px 32px' } }}
-          color={textColor}
+          color='#FFFFFF'
         >
           <HeaderTitle
-            theme={theme}
             product={product}
             beta={beta}
             {...(logo ? { logo } : {})}
@@ -115,7 +105,7 @@ const Header = ({
                 onDropdownClick: () => handleDropdownToggle(index),
                 active: pathname === menu.href || pathname === '/' + menu.href,
               }))}
-              theme={theme}
+              theme='dark'
               isMobile={false}
             />
           </Stack>
@@ -127,7 +117,7 @@ const Header = ({
             onClose={closeHeader}
             anchor='left'
             menu={menu}
-            theme={theme}
+            theme='dark'
           />
         )}
       </Stack>

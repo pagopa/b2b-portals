@@ -10,7 +10,6 @@ import {
   ExternalLinkIcon,
   isValidExternalLink,
 } from '@react-components/components/common/Common';
-import { TextColor } from '@react-components/components/common/Common.helpers';
 import { usePathname } from 'next/navigation';
 
 const useStyles = (
@@ -77,8 +76,6 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
   const pathname = usePathname();
-  const textColor = TextColor(theme);
-  const inverseTextColor = TextColor(theme === 'dark' ? 'light' : 'dark');
   const isCurrentLink = (url?: string) => {
     if (url && url.indexOf('/') >= 0) {
       const urlPathname = url.substring(url.indexOf('/'));
@@ -92,7 +89,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
       <Box sx={styles.menuItem}>
         <Link
           sx={{
-            color: textColor,
+            color: '#ffffff',
             ...(isCurrentLink(button.href) && { textDecoration: 'underline' }),
             '&:hover': {
               textDecoration: 'none',
@@ -129,7 +126,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
               sx={{
                 transition: 'transform 0.2s',
                 transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                color: textColor,
+                color: '#ffffff',
               }}
             />
           </Box>
@@ -144,13 +141,14 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
                 underline='none'
                 key={item.key ?? index}
                 sx={{
-                  color: inverseTextColor,
+                  color: '#5C6F82',
                   ...(isCurrentLink(item.href) && {
                     textDecoration: 'underline',
                   }),
                   fontSize: '1em',
                   fontWeight: 600,
                   padding: 0,
+                  m: 0,
                 }}
                 href={item.href}
                 target={isValidExternalLink(button.href) ? '_blank' : '_self'}
