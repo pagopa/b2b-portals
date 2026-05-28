@@ -72,6 +72,11 @@ export interface SiteWidePageData {
   readonly pressReleasesParentSlug?: string;
 }
 
+export interface FeedbackConfig {
+  readonly feedbackToken: string;
+  readonly strapiApiBaseUrl: string;
+}
+
 export const fetchSiteWideSEO = ({
   config,
   fetchFun,

@@ -2,6 +2,7 @@ import { Grid, Stack, Button, Typography, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import { HighlightBoxProps } from '../../types/HighlightBox/HighlightBox.types';
 import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
+import { resolveThemeVariant, ThemeContext } from '../../theme';
 
 const HighlightBox = ({
   title,
@@ -10,8 +11,19 @@ const HighlightBox = ({
   eyelet,
   link,
   sectionID,
+  themeVariant,
 }: HighlightBoxProps) => {
-  const theme = useTheme();
+  const { palette } = useTheme();
+  const ctx: ThemeContext = {
+    palette,
+    theme: 'light',
+  };
+
+  const buttonBackgroundColor = resolveThemeVariant<string>(
+    'ctaContainedBackgroundColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <ContainerRC
@@ -20,7 +32,7 @@ const HighlightBox = ({
         justifyContent: { xs: 'start', md: 'start' },
         borderRadius: '24px',
         padding: { xs: '48px', md: '0 48px' },
-        backgroundColor: theme.palette.custom.highLightBoxLightGreenBackground,
+        backgroundColor: palette.custom.highLightBoxLightGreenBackground,
       }}
       {...(sectionID && { sectionID })}
     >
@@ -34,8 +46,8 @@ const HighlightBox = ({
                 color='textSecondary'
                 sx={{
                   backgroundColor:
-                    theme.palette.custom.highLightBoxLightPurpleBackground,
-                  color: theme.palette.custom.highLightBoxPurpleText,
+                    palette.custom.highLightBoxLightPurpleBackground,
+                  color: palette.custom.highLightBoxPurpleText,
                   borderRadius: '100px',
                   display: 'inline-block',
                   px: 2,
@@ -72,7 +84,7 @@ const HighlightBox = ({
                   width: 'fit-content',
                   px: 3,
                   py: 1,
-                  backgroundColor: theme.palette.custom.primaryColorDark,
+                  backgroundColor: buttonBackgroundColor,
                   borderRadius: '4px',
                   fontSize: '16px',
                   fontWeight: 700,

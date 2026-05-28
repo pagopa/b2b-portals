@@ -33,6 +33,8 @@ import RichBanner from './RichBanner/RichBanner';
 import LabelsProvider from './LabelsProvider/LabelsProvider';
 import LastUpdated from './LastUpdated/LastUpdated';
 import SimpleCards from './SimpleCards/SimpleCards';
+import FeedbackForm from './FeedbackForm/FeedbackForm';
+
 export {
   Hero,
   Editorial,
@@ -69,4 +71,5 @@ export {
   LabelsProvider,
   LastUpdated,
   SimpleCards,
+  FeedbackForm,
 };

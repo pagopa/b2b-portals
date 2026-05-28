@@ -32,6 +32,7 @@ import { TextAndImageProps } from './TextAndImage/TextAndImage.types';
 import { RichBannerProps } from './RichBanner/RichBanner.types';
 import { LabelsProviderProps } from './LabelsProvider/LabelsProvider.types';
 import { SimpleCardsProps } from './SimpleCards/SimpleCards.types';
+import { FeedbackFormProps } from './FeedbackForm/FeedbackForm.types';
 
 export type {
   HeroProps,
@@ -68,4 +69,5 @@ export type {
   RichBannerProps,
   LabelsProviderProps,
   SimpleCardsProps,
+  FeedbackFormProps,
 };
