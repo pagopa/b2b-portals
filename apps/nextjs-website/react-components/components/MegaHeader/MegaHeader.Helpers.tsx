@@ -116,7 +116,7 @@ export const Dropdown = styled(Box)({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: 'calc(100% - 140px)', // Take padding into account
+    width: '100%',
     boxShadow: '0 16px 16px 0px rgba(14, 15, 19, 0.06)',
   },
   '& .dropdownSection': {
