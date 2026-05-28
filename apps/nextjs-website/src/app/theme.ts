@@ -48,7 +48,7 @@ declare module '@mui/material/styles' {
       readonly sendChipsBackgroundColorLightHover: string;
       readonly chipsBackgroundColorDarkHover: string;
       readonly chipsTextColor: string;
-      readonly cardsBorderColor: string;
+      readonly borderColor: string;
       readonly outlineColor: string;
       readonly walletOutlineColor: string;
     };
@@ -127,7 +127,7 @@ const themeStyles = {
       sendChipsBackgroundColorLightHover: '#0066CC',
       chipsBackgroundColorDarkHover: '#ebebf54d',
       chipsTextColor: '#ffffff',
-      cardsBorderColor: '#E8EBF1',
+      borderColor: '#E8EBF1',
       outlineColor: '#0073e6',
       walletOutlineColor: '#0066CC',
     },

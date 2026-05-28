@@ -23,8 +23,8 @@ const CardsItem = ({
     theme: 'light',
   });
 
-  const cardBorderColor = resolveThemeVariant<string>(
-    'cardsBorderColor',
+  const borderColor = resolveThemeVariant<string>(
+    'borderColor',
     themeVariant,
     {
       palette,
@@ -39,7 +39,7 @@ const CardsItem = ({
         display: 'flex',
         minHeight: '200px',
         width: '100%',
-        border: `1px solid ${cardBorderColor}`,
+        border: `1px solid ${borderColor}`,
         flex: { md: masonry ? '0 0 auto' : '1 1 0' },
         borderRadius: '24px',
         listStyle: 'none',
