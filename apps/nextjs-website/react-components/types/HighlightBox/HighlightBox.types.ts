@@ -1,4 +1,4 @@
-import { LinkProps } from '../common/Common.types';
+import { LinkProps, ThemeVariant } from '../common/Common.types';
 
 export interface HighlightBoxProps {
   title: string;
@@ -11,4 +11,5 @@ export interface HighlightBoxProps {
   eyelet?: string;
   link?: LinkProps;
   sectionID: string | null;
+  themeVariant: ThemeVariant;
 }

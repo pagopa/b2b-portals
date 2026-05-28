@@ -333,6 +333,12 @@ export const bannerLinkTextColorMap: ThemeVariantMap<string> = {
     theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
 };
 
+export const variantBorderColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette }) => palette.custom.borderColor,
+  IO: ({ palette }) => palette.custom.borderColor,
+  WALLET: ({ palette }) => palette.custom.borderColor,
+};
+
 export const themeVariantMaps = {
   accentColor: variantAccentColorMap,
   actionColor: variantActionColorMap,
@@ -359,6 +365,7 @@ export const themeVariantMaps = {
   chipFocusOutlineColor: chipFocusOutlineColorMap,
   heroCounterNumberColor: heroCounterNumberColorMap,
   bannerLinkTextColor: bannerLinkTextColorMap,
+  borderColor: variantBorderColorMap,
 };
 
 export const resolveThemeVariant = <T>(
