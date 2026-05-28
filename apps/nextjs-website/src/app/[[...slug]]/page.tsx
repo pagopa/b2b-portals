@@ -1,11 +1,19 @@
 import { Metadata } from 'next';
-import { isPreviewMode, getters } from '@/lib/api';
+import {
+  isPreviewMode,
+  getters,
+  getStrapiApiBaseUrl,
+  getFeedbackToken,
+} from '@/lib/api';
 import PageSection from '@/components/PageSection/PageSection';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import TrackPageView from '@/components/TrackPageView';
 
 const { getSiteWideSEO, getAllPages, getPageProps, getPressReleasePages } =
   getters;
+
+const feedbackToken = getFeedbackToken();
+const strapiApiBaseUrl = getStrapiApiBaseUrl();
 
 type PageParams = {
   params: { slug?: string[] };
@@ -203,6 +211,8 @@ const Page = async ({ params }: PageParams) => {
           locale,
           defaultLocale,
           pressReleasePages,
+          feedbackToken,
+          strapiApiBaseUrl,
           updatedAt: pageProps.updatedAt,
           ...(pressReleasesParentSlug && { pressReleasesParentSlug }),
           ...(pageProps.publishedAt && { publishedAt: pageProps.publishedAt }),
