@@ -36,10 +36,9 @@ export const HowToStepNum = ({
   marginBottom?: number | string;
 }) => (
   <Typography
-    color={color}
     variant={variant}
     component={component}
-    style={{ fontWeight, fontSize, marginBottom }}
+    sx={{ color: `${color} !important`, fontWeight, fontSize, marginBottom }}
   >
     {`0${stepNum}`}
   </Typography>
