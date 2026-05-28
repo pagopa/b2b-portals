@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Box, Stack } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+import { Box, Stack, SxProps } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
@@ -12,7 +12,6 @@ import { TopBarHeader } from './helpers/Header.TopBarHeader.helpers';
 const Header = ({
   product,
   menu,
-  beta,
   logo,
   mobileLogo,
   topBarHeaderLogo,
@@ -29,6 +28,10 @@ const Header = ({
   );
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const pathname = usePathname();
+  const [isFixed, setIsFixed] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const headerRef = useRef<HTMLDivElement | null>(null);
+  const preHeaderRef = useRef<HTMLDivElement | null>(null);
 
   const openHeader = () => {
     setMenuOpen(true);
@@ -49,17 +52,90 @@ const Header = ({
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
   };
 
+  const headerStyle: SxProps = {
+    width: '100%',
+    bgcolor: '#0066CC',
+    top: 0,
+    left: 0,
+    zIndex: 1,
+  };
+
+  const toggleAccessibility = (disableAccessibility: boolean) => {
+    const main = document.querySelector('main');
+    const footer = document.querySelector('footer');
+    const prefooter = document.querySelector('#prefooter');
+
+    const elements: Array<Element | null> = [main, footer, prefooter];
+
+    elements.forEach((el) => {
+      if (el) {
+        if (disableAccessibility) {
+          el.setAttribute('inert', '');
+        } else {
+          el.removeAttribute('inert');
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        headerRef &&
+        headerRef.current &&
+        preHeaderRef &&
+        preHeaderRef.current
+      ) {
+        const rectHeader = headerRef.current.getBoundingClientRect();
+        setHeaderHeight(rectHeader.height);
+        const rectPreHeader = preHeaderRef.current.getBoundingClientRect();
+        setIsFixed(rectPreHeader.height <= window.pageYOffset);
+      }
+    };
+
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, {
+      passive: true,
+    });
+
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    toggleAccessibility(menuOpen || openDropdownIndex == null ? false : true);
+  }, [openDropdownIndex, menuOpen]);
+
   return (
-    <Box bgcolor='#0066CC' component='header' role='banner'>
-      <TopBarHeader
-        languages={languages}
-        activeLanguage={activeLanguage}
-        {...(topBarHeaderLogo && { topBarHeaderLogo })}
-        {...(topBarHeaderTitle && { topBarHeaderTitle })}
-        {...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile })}
-        isMobile={isMobile}
-      />
-      <Stack direction='column' gap={{ xs: 0, md: 0 }} sx={{ width: '100%' }}>
+    <Box component='header' role='banner'>
+      <div ref={preHeaderRef}>
+        <TopBarHeader
+          languages={languages}
+          activeLanguage={activeLanguage}
+          {...(topBarHeaderLogo && { topBarHeaderLogo })}
+          {...(topBarHeaderTitle && { topBarHeaderTitle })}
+          {...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile })}
+          isMobile={isMobile}
+        />
+      </div>
+
+      {isFixed && <Box sx={{ height: headerHeight, display: 'block' }}></Box>}
+      <Stack
+        ref={headerRef}
+        direction='column'
+        gap={{ xs: 0, md: 0 }}
+        sx={{
+          ...headerStyle,
+          ...(isFixed && {
+            position: 'fixed',
+          }),
+        }}
+      >
         <Stack
           direction='row'
           justifyContent='space-between'
@@ -69,19 +145,17 @@ const Header = ({
         >
           <HeaderTitle
             product={product}
-            beta={beta}
             {...(logo ? { logo } : {})}
             {...(mobileLogo ? { mobileLogo } : {})}
             isMobile={isMobile}
           />
+
           {isMobile && (
             <HamburgerMenu
               onOpen={openHeader}
-              onClose={closeHeader}
               open={menuOpen}
               ariaLabels={{
                 openMenu: labels.openMenu,
-                closeMenu: labels.closeMenu,
               }}
             />
           )}
@@ -98,6 +172,7 @@ const Header = ({
             }}
           >
             <Navigation
+              labelMainMenu={labels.mainMenu}
               menu={menu.map((menu, index) => ({
                 ...menu,
                 isOpen: openDropdownIndex === index,
@@ -115,6 +190,7 @@ const Header = ({
           <MobileNav
             isOpen={menuOpen}
             onClose={closeHeader}
+            labels={labels}
             anchor='left'
             menu={menu}
             theme='dark'

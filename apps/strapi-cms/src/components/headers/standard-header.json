@@ -16,15 +16,6 @@
       "type": "string",
       "required": true
     },
-    "beta": {
-      "type": "boolean",
-      "required": true,
-      "default": false
-    },
-    "supportLink": {
-      "type": "string",
-      "required": false
-    },
     "menu": {
       "type": "component",
       "component": "menu.menu",

@@ -1,23 +1,14 @@
 import React from 'react';
-import {
-  Link,
-  Stack,
-  Typography,
-  useTheme,
-  Chip,
-  SxProps,
-} from '@mui/material';
+import { Link, Stack, Typography, useTheme, SxProps } from '@mui/material';
 import { HeaderTitleProps } from '@react-components/types/Header/Header.types';
 
 export const HeaderTitle = ({
-  beta,
   product: { name: productName, href: productHref },
   logo,
   mobileLogo,
   isMobile,
 }: HeaderTitleProps & { isMobile: boolean }) => {
   const { spacing } = useTheme();
-  const label = 'beta';
 
   const linkStyle: SxProps = {
     display: 'flex',
@@ -64,14 +55,6 @@ export const HeaderTitle = ({
             <b>{productName}</b>
           )}
         </Typography>
-      )}
-      {beta && (
-        <Chip
-          label={label}
-          color='primary'
-          sx={{ height: 20, width: 45 }}
-          size='small'
-        />
       )}
     </Stack>
   );

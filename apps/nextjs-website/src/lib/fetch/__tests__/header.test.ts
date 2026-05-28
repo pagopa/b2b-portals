@@ -39,67 +39,17 @@ const headerResponse: HeaderData = {
     header: [
       {
         __component: 'headers.standard-header',
-        beta: true,
-        drawer: {
-          buttonText: 'Accedi',
-          title: 'Accedi o Iscriviti',
-          subtitle: null,
-          ctaCard: {
-            title: 'Titolo',
-            subtitle: 'Sottotitolo',
-            link: {
-              label: 'Accedi',
-              ariaLabel: 'Accedi',
-              href: '#',
-            },
-          },
-          linkCards: [
-            {
-              title: 'Cittadini',
-              subtitle: 'Sottotitolo Cittadini',
-              icons: [
-                {
-                  width: 32,
-                  height: 32,
-                  alternativeText: null,
-                  formats: null,
-                  mime: 'png',
-                  url: 'exampleURL',
-                },
-              ],
-              link: {
-                label: 'Accedi',
-                ariaLabel: 'Accedi',
-                href: '#',
-              },
-            },
-            {
-              title: 'Imprese',
-              subtitle: 'Sottotitolo Imprese',
-              icons: [
-                {
-                  width: 32,
-                  height: 32,
-                  alternativeText: null,
-                  formats: null,
-                  mime: 'png',
-                  url: 'exampleURL',
-                },
-              ],
-              link: {
-                label: 'Accedi',
-                ariaLabel: 'Accedi',
-                href: '#',
-              },
-            },
-          ],
-        },
+
         menu: {
           links: [],
         },
         logo: null,
         productName: 'SEND',
-        supportLink: '/assistenza',
+        topBarHeaderTitle: 'Title bar top',
+        topBarHeaderTitleMobile: 'Title bar top mobile',
+        theme: 'dark',
+        mobileLogo: null,
+        topBarHeaderLogo: null,
       },
     ],
   },
@@ -130,7 +80,12 @@ describe('getHeader', () => {
 &populate[9]=header.drawer.linkCards.icons
 &populate[10]=header.drawer.linkCards.link
 &populate[11]=header.socialLinks.icon
-&populate[12]=exclude
+&populate[12]=header.mobileLogo
+&populate[13]=header.topBarHeaderLogo
+&populate[14]=header.topBarHeaderTitle
+&populate[15]=header.topBarHeaderTitleMobile
+&populate[16]=header.theme
+&populate[17]=exclude
       `,
       {
         method: 'GET',

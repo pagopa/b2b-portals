@@ -8,64 +8,13 @@ import {
 
 const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
   __component: 'headers.standard-header',
-  beta: true,
   logo: null,
   productName: 'Demo',
-  supportLink: '/assistenza',
-  drawer: {
-    buttonText: 'Accedi',
-    title: 'Accedi o Iscriviti',
-    subtitle: null,
-    ctaCard: {
-      title: 'Titolo',
-      subtitle: 'Sottotitolo',
-      link: {
-        label: 'Accedi',
-        ariaLabel: 'Accedi',
-        href: '#',
-      },
-    },
-    linkCards: [
-      {
-        link: {
-          label: 'Accedi',
-          ariaLabel: 'Accedi',
-          href: '#',
-        },
-        title: 'Cittadini',
-        subtitle: 'Sottotitolo Cittadini',
-        icons: [
-          {
-            width: 32,
-            height: 32,
-            alternativeText: null,
-            formats: null,
-            mime: 'png',
-            url: 'iconURL',
-          },
-        ],
-      },
-      {
-        link: {
-          label: 'Accedi',
-          ariaLabel: 'Accedi',
-          href: '#',
-        },
-        title: 'Imprese',
-        subtitle: 'Sottotitolo Imprese',
-        icons: [
-          {
-            width: 32,
-            height: 32,
-            alternativeText: null,
-            formats: null,
-            mime: 'png',
-            url: 'iconURL',
-          },
-        ],
-      },
-    ],
-  },
+  mobileLogo: null,
+  topBarHeaderLogo: null,
+  topBarHeaderTitle: 'Title bar top',
+  topBarHeaderTitleMobile: 'Title bar top mobile',
+  theme: 'dark',
 };
 const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
   __component: 'headers.mega-header',

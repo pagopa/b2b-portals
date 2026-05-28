@@ -10,13 +10,17 @@ import {
   Typography,
   Link,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { MenuDropdownProp } from '@react-components/types/Header/Header.types';
+import closeIcon from '@react-components/assets/icon-close-white.svg';
+import {
+  HeaderProps,
+  MenuDropdownProp,
+} from '@react-components/types/Header/Header.types';
 import {
   ExternalLinkIcon,
   isValidExternalLink,
 } from '@react-components/components/common/Common';
-import { ExpandMore } from '@mui/icons-material';
+import chevronBlueIcon from '@react-components/assets/icon-chevron-blue.svg';
+import Image from 'next/image';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorLeft': {
@@ -34,6 +38,7 @@ interface MobileNavProps {
   anchor: Anchor;
   menu: MenuDropdownProp[];
   theme: 'dark' | 'light';
+  labels: HeaderProps['labels'];
 }
 
 export default function MobileNav({
@@ -41,6 +46,7 @@ export default function MobileNav({
   onClose,
   anchor,
   menu,
+  labels,
 }: MobileNavProps) {
   const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null);
 
@@ -49,13 +55,20 @@ export default function MobileNav({
   };
 
   return (
-    <Drawer anchor={anchor} open={isOpen} onClose={onClose} sx={drawerStyles}>
+    <Drawer
+      anchor={anchor}
+      open={isOpen}
+      onClose={onClose}
+      sx={drawerStyles}
+      role='navigation'
+    >
       <Stack
         sx={{
           height: '100%',
         }}
         direction='row'
         role='presentation'
+        aria-label={labels.mainMenu}
       >
         <div
           style={{
@@ -119,8 +132,10 @@ export default function MobileNav({
                           ml: 1,
                         }}
                       >
-                        <ExpandMore
-                          sx={{
+                        <Image
+                          src={chevronBlueIcon}
+                          alt={isSelected ? labels.openMenu : labels.closeMenu}
+                          style={{
                             transition: 'transform 0.3s',
                             transform: isSelected
                               ? 'rotate(180deg)'
@@ -131,13 +146,12 @@ export default function MobileNav({
                     )}
                   </ListItem>
                   {isSelected && item.items && (
-                    <List component='div' disablePadding>
+                    <List disablePadding>
                       {item.items.map((subItem, subIndex) => (
                         <ListItem
-                          button
                           key={subIndex}
                           sx={{
-                            pl: 4,
+                            p: 0,
                             '&:hover': {
                               backgroundColor: 'transparent',
                             },
@@ -145,24 +159,27 @@ export default function MobileNav({
                               backgroundColor: 'transparent',
                             },
                           }}
-                          component={Link}
-                          href={
-                            subItem.href ? subItem.href : `#${subItem.label}`
-                          }
                         >
-                          <ListItemText
-                            primary={
-                              <Typography
-                                sx={{
-                                  fontWeight: 300,
-                                  py: 2,
-                                  color: '#0066CC',
-                                }}
-                              >
-                                {subItem.label}
-                              </Typography>
+                          <Link
+                            href={
+                              subItem.href ? subItem.href : `#${subItem.label}`
                             }
-                          />
+                            sx={{ textDecoration: 'none', m: 0, pl: 4, py: 2 }}
+                          >
+                            <ListItemText
+                              primary={
+                                <Typography
+                                  sx={{
+                                    fontWeight: 300,
+                                    py: 2,
+                                    color: '#0066CC',
+                                  }}
+                                >
+                                  {subItem.label}
+                                </Typography>
+                              }
+                            />
+                          </Link>
                         </ListItem>
                       ))}
                     </List>
@@ -187,7 +204,12 @@ export default function MobileNav({
               height: 80,
             }}
           >
-            <CloseIcon sx={{ color: 'white', width: 32, height: 32 }} />
+            <Image
+              src={closeIcon}
+              alt={labels.closeMenu}
+              width={20}
+              height={20}
+            />
           </IconButton>
         </Box>
       </Stack>

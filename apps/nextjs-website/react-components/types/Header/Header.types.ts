@@ -33,7 +33,6 @@ export interface HeaderProps
   extends HeaderTitleProps,
     NavigationProps,
     LangSwitchProps {
-  readonly supportLink?: string;
   readonly defaultLocale: Locale;
   readonly mobileLogo?: {
     src: string;
@@ -47,11 +46,11 @@ export interface HeaderProps
   };
   readonly topBarHeaderTitle?: string;
   readonly topBarHeaderTitleMobile?: string;
-  readonly theme: Theme;
   readonly labels: {
     openMenu: string;
     closeMenu: string;
     shortMainMenu: string;
+    mainMenu: string;
   };
 }
 
@@ -84,7 +83,6 @@ export interface HeaderTitleProps {
     name: string;
     href?: string;
   };
-  beta: boolean;
   logo?: {
     src: string;
     alt: string;

@@ -1,47 +1,61 @@
-import { Box, Button, Link, Menu, MenuItem } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box, Button, Menu, MenuItem } from '@mui/material';
 import { useRef, useState } from 'react';
 import { LangSwitchProps } from '@react-components/types/Footer/Footer.types';
-import LanguageIcon from '@mui/icons-material/Language';
+import Image from 'next/image';
+import iconLanguage from '@react-components/assets/icon-language-white.svg';
+import iconChevron from '@react-components/assets/icon-chevron-white.svg';
+import { Locale } from '@react-components/types/common/Common.types';
 interface Props extends LangSwitchProps {
   isMobile: boolean;
 }
+interface Labels {
+  dropdownLabel: string;
+  menuItemMobile: string;
+  open: string;
+  close: string;
+}
+
 export default function LangSwitch({
   isMobile,
   languages,
   activeLanguage,
 }: Props) {
-  const labels = {
+  const labels: Record<Locale, Labels> = {
     it: {
       dropdownLabel: 'Cambia la lingua',
-      optionLabel: 'ITA',
-      optionValue: 'it',
+      menuItemMobile: 'ITA',
+      open: 'Apri',
+      close: 'Chiudi',
     },
     en: {
       dropdownLabel: 'Change language',
-      optionLabel: 'ENG',
-      optionValue: 'en',
+      menuItemMobile: 'ENG',
+      open: 'Open',
+      close: 'Close',
     },
     fr: {
       dropdownLabel: 'Changer de langue',
-      optionLabel: 'FRA',
-      optionValue: 'fr',
+      menuItemMobile: 'FRA',
+      open: 'Ouvrir',
+      close: 'Fermer',
     },
     de: {
       dropdownLabel: 'Sprache ändern',
-      optionLabel: 'DEU',
-      optionValue: 'de',
+      menuItemMobile: 'DEU',
+      open: 'Offen',
+      close: 'Schließen',
     },
     sl: {
       dropdownLabel: 'Spremeni jezik',
-      optionLabel: 'SLO',
-      optionValue: 'sl',
+      menuItemMobile: 'SLO',
+      open: 'Odprto',
+      close: 'Zapri',
     },
   };
   const [open, setOpen] = useState(false);
   const currentDropdownLabel = isMobile
-    ? labels[activeLanguage.id].optionLabel
-    : `${labels[activeLanguage.id].dropdownLabel} (${labels[activeLanguage.id].optionLabel})`;
+    ? labels[activeLanguage.id].menuItemMobile
+    : `${labels[activeLanguage.id].dropdownLabel} (${labels[activeLanguage.id].menuItemMobile})`;
 
   const toggleMenu = () => setOpen((prev) => !prev);
   const anchorEl = useRef(null);
@@ -57,6 +71,7 @@ export default function LangSwitch({
           textDecoration: 'none',
           cursor: 'pointer',
           fontSize: 14,
+          height: 24,
           '&:hover': {
             backgroundColor: 'transparent',
             color: 'inherit !important',
@@ -66,10 +81,30 @@ export default function LangSwitch({
         ref={anchorEl}
         variant='text'
         disableRipple
-        {...(!isMobile && { startIcon: <LanguageIcon /> })}
+        aria-label={labels[activeLanguage.id].dropdownLabel}
+        aria-haspopup='true'
+        aria-expanded={open}
+        {...(!isMobile && {
+          startIcon: (
+            <Image
+              src={iconLanguage}
+              alt={currentDropdownLabel}
+              width={20}
+              height={20}
+            />
+          ),
+        })}
         endIcon={
-          <ExpandMoreIcon
-            sx={{ ...(open && { transform: 'rotate(180deg)' }) }}
+          <Image
+            src={iconChevron}
+            alt={
+              open
+                ? labels[activeLanguage.id].close
+                : labels[activeLanguage.id].open
+            }
+            width={12}
+            height={12}
+            style={{ ...(!open && { transform: 'rotate(180deg)' }) }}
           />
         }
       >
@@ -78,7 +113,36 @@ export default function LangSwitch({
       {languages.length > 0 && anchorEl && (
         <Menu
           anchorEl={anchorEl.current}
-          sx={{ display: 'flex' }}
+          sx={{ display: 'flex', top: 12 }}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          slotProps={{
+            paper: {
+              sx: {
+                borderRadius: '0 0 4px 4px',
+                overflow: 'initial',
+                minWidth: { xs: 'auto', sm: 170 },
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 2,
+                  left: '50%',
+                  transform: 'translate(-50%, -50%) rotate(45deg)',
+                  width: 20,
+                  height: 20,
+                  borderRadius: '4px',
+                  bgcolor: 'background.paper',
+                  zIndex: 0,
+                },
+              },
+            },
+          }}
           open={open}
           onClose={() => {
             setOpen(false);
@@ -88,14 +152,26 @@ export default function LangSwitch({
           {languages.map((language) => (
             <MenuItem
               aria-label={language.value}
+              selected={activeLanguage.id === language.id}
               key={language.id}
               lang={language.id}
               onClick={() => {
                 localStorage.setItem('preferredLang', language.id);
                 goToLanguageLink(language.href);
               }}
+              sx={{
+                fontWeight: 400,
+                '&:hover': {
+                  backgroundColor: 'transparent !important',
+                  color: '#0066CC !important',
+                },
+                '&.Mui-selected': {
+                  backgroundColor: 'transparent !important',
+                  color: '#0066CC !important',
+                },
+              }}
             >
-              {language.value}
+              {isMobile ? labels[language.id].menuItemMobile : language.value}
             </MenuItem>
           ))}
         </Menu>

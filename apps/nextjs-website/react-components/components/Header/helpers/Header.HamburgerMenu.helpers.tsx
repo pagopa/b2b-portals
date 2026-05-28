@@ -1,38 +1,28 @@
 import React from 'react';
-import CloseIcon from '@mui/icons-material/Close';
-import MenuIcon from '@mui/icons-material/Menu';
+import menuIcon from '@react-components/assets/icon-menu-white.svg';
+import Image from 'next/image';
 
 export const HamburgerMenu = ({
   open,
   onOpen,
-  onClose,
   ariaLabels,
 }: {
   open: boolean;
   onOpen: () => void;
-  onClose: () => void;
   ariaLabels: {
     openMenu: string;
-    closeMenu: string;
   };
 }) => {
-  return open ? (
-    <CloseIcon
-      sx={{ color: 'inherit' }}
-      cursor='pointer'
-      onClick={onClose}
-      aria-label={ariaLabels.closeMenu}
-      aria-haspopup='true'
-      aria-expanded='true'
-    />
-  ) : (
-    <MenuIcon
-      sx={{ color: 'inherit', width: 24, height: 24 }}
-      cursor='pointer'
+  return !open ? (
+    <Image
+      width={20}
+      height={20}
+      src={menuIcon}
+      alt={ariaLabels.openMenu}
       onClick={onOpen}
       aria-label={ariaLabels.openMenu}
       aria-haspopup='true'
       aria-expanded='false'
     />
-  );
+  ) : null;
 };

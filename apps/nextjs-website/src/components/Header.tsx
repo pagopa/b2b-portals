@@ -68,26 +68,31 @@ const headerLabels: Record<Locale, HeaderProps['labels']> = {
     openMenu: 'Apri menù',
     closeMenu: 'Chiudi menù',
     shortMainMenu: 'Menu',
+    mainMenu: 'Menu principale',
   },
   en: {
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     shortMainMenu: 'Menu',
+    mainMenu: 'Main menu',
   },
   de: {
     openMenu: 'Menü öffnen',
     closeMenu: 'Menü schließen',
     shortMainMenu: 'Menü',
+    mainMenu: 'Hauptmenü',
   },
   fr: {
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
     shortMainMenu: 'Menu',
+    mainMenu: 'Menu principal',
   },
   sl: {
     openMenu: 'Odpri meni',
     closeMenu: 'Zapri meni',
     shortMainMenu: 'Meni',
+    mainMenu: 'Glavni meni',
   },
 };
 
@@ -115,17 +120,15 @@ const makeHeaderProps = (
     productName,
     menu,
     logo,
-    beta,
-    supportLink,
     mobileLogo,
     topBarHeaderLogo,
     topBarHeaderTitle,
     topBarHeaderTitleMobile,
-    theme,
     defaultLocale,
     locale,
     localizedLinks,
     activeLocale,
+    theme,
   }: StandardHeaderData & {
     defaultLocale: Locale;
     activeLocale: Locale;
@@ -134,7 +137,6 @@ const makeHeaderProps = (
   },
   pathname: string,
 ): HeaderProps => ({
-  beta,
   defaultLocale,
   languages: localizedLinks,
   activeLanguage: localizedLinks.find((l) => l.id === activeLocale) ?? {
@@ -143,7 +145,6 @@ const makeHeaderProps = (
     href: '/',
   },
   theme,
-  ...(supportLink && { supportLink }),
   ...(logo && {
     logo: {
       src: logo.url,
@@ -189,6 +190,7 @@ const makeHeaderProps = (
     openMenu: headerLabels[locale].openMenu,
     closeMenu: headerLabels[locale].closeMenu,
     shortMainMenu: headerLabels[locale].shortMainMenu,
+    mainMenu: headerLabels[locale].mainMenu,
   },
 });
 

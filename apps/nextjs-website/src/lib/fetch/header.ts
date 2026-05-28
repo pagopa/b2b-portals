@@ -87,8 +87,6 @@ const StandardHeaderCodec = t.strict({
   __component: t.literal('headers.standard-header'),
   logo: StrapiImageSchema,
   productName: t.string,
-  beta: t.boolean,
-  supportLink: t.union([t.string, t.null]),
   menu: MenuCodec,
   mobileLogo: StrapiImageSchema,
   topBarHeaderLogo: StrapiImageSchema,

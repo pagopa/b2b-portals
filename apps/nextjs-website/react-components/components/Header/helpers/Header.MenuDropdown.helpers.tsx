@@ -22,6 +22,8 @@ const useStyles = (
       height: '100%',
       display: 'flex',
       alignItems: 'center',
+      margin: 0,
+      padding: 0,
       ...(alignRight && { marginLeft: 'auto' }),
     },
     menuItem: {
@@ -32,6 +34,8 @@ const useStyles = (
       alignItems: 'center',
       justifyContent: { xs: 'left', md: 'center' },
       position: 'relative',
+      margin: 0,
+      padding: 0,
       '::after': {
         content: '""',
         position: 'absolute',
@@ -85,7 +89,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
   };
 
   return (
-    <Stack sx={styles.menu}>
+    <Stack sx={styles.menu} component='li'>
       <Box sx={styles.menuItem}>
         <Link
           sx={{
@@ -134,35 +138,45 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
       </Box>
       {hasLinks && isOpen && (
         <DialogBubble>
-          <Stack gap={1}>
-            {items?.map((item: DropdownItem, index) => (
-              <Link
-                variant='body1'
-                underline='none'
-                key={item.key ?? index}
-                sx={{
-                  color: '#5C6F82',
-                  ...(isCurrentLink(item.href) && {
-                    textDecoration: 'underline',
-                  }),
-                  fontSize: '1em',
-                  fontWeight: 600,
-                  padding: 0,
-                  m: 0,
-                }}
-                href={item.href}
-                target={isValidExternalLink(button.href) ? '_blank' : '_self'}
-              >
-                {item.label}
-                <ExternalLinkIcon
-                  show={isValidExternalLink(item.href)}
-                  {...(item.href?.startsWith('https://') && {
-                    target: '_blank',
-                  })}
-                />
-              </Link>
-            ))}
-          </Stack>
+          <Box component='nav'>
+            <Stack
+              gap={1}
+              component='ul'
+              sx={{ p: 0, m: 0, listStyleType: 'none' }}
+            >
+              {items?.map((item: DropdownItem, index) => (
+                <li style={{ margin: 0, padding: 0 }}>
+                  <Link
+                    variant='body1'
+                    underline='none'
+                    key={item.key ?? index}
+                    sx={{
+                      color: '#5C6F82',
+                      ...(isCurrentLink(item.href) && {
+                        textDecoration: 'underline',
+                      }),
+                      fontSize: '1em',
+                      fontWeight: 600,
+                      padding: 0,
+                      m: 0,
+                    }}
+                    href={item.href}
+                    target={
+                      isValidExternalLink(button.href) ? '_blank' : '_self'
+                    }
+                  >
+                    {item.label}
+                    <ExternalLinkIcon
+                      show={isValidExternalLink(item.href)}
+                      {...(item.href?.startsWith('https://') && {
+                        target: '_blank',
+                      })}
+                    />
+                  </Link>
+                </li>
+              ))}
+            </Stack>
+          </Box>
         </DialogBubble>
       )}
     </Stack>
