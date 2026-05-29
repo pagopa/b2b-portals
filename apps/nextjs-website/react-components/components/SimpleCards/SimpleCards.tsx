@@ -17,6 +17,7 @@ const SimpleCards = ({
   ctaButtons,
   imageURL,
   imageAlt,
+  textAlign,
   sectionID,
 }: SimpleCardsProps) => {
   const { palette } = useTheme();
@@ -29,37 +30,53 @@ const SimpleCards = ({
   );
 
   const textColor = TextColor(theme);
+  const isCentered = textAlign === 'center';
+  const isNone = textAlign === 'none';
+  const editorialTextAlign = isCentered ? 'center' : 'left';
+  const shouldShowImage = Boolean(imageURL && !isCentered && !isNone);
+  const shouldShowEditorial = Boolean(
+    !isNone &&
+      (title || subtitle || body || ctaButtons?.length || shouldShowImage),
+  );
 
   return (
     <ContainerRC
       background={backgroundColor}
       py={8}
-      size='xl'
+      size='lg'
       sxInner={{
         width: '100%',
-        px: { xs: 0, md: 10 },
+        maxWidth: '1156px',
+        mx: 'auto',
+        px: 0,
         boxSizing: 'border-box',
       }}
       {...(sectionID && { sectionID })}
     >
       <Box sx={{ width: '100%' }}>
-        {(title || subtitle || body || ctaButtons?.length || imageURL) && (
+        {shouldShowEditorial && (
           <Stack
-            direction={{ xs: 'column', md: imageURL ? 'row' : 'column' }}
+            direction={{ xs: 'column', md: shouldShowImage ? 'row' : 'column' }}
             alignItems={{
-              xs: 'flex-start',
-              md: imageURL ? 'center' : 'flex-start',
+              xs: isCentered ? 'center' : 'flex-start',
+              md: shouldShowImage
+                ? 'center'
+                : isCentered
+                  ? 'center'
+                  : 'flex-start',
             }}
             justifyContent='space-between'
-            spacing={{ xs: 4, md: imageURL ? 8 : 0 }}
+            spacing={{ xs: 4, md: shouldShowImage ? 8 : 0 }}
             mb={6}
             color={textColor}
+            textAlign={editorialTextAlign}
           >
             <Box sx={{ width: '100%', maxWidth: { xs: '100%', md: 680 } }}>
               <Stack
                 spacing={3}
                 color='inherit'
                 sx={{
+                  alignItems: isCentered ? 'center' : 'flex-start',
                   '& h1, & h2, & h3, & h4, & h5, & h6, & p': {
                     margin: 0,
                     color: 'inherit',
@@ -79,7 +96,7 @@ const SimpleCards = ({
                     variant='h4'
                     textColor='inherit'
                     title={title}
-                    textAlign='left'
+                    textAlign={editorialTextAlign}
                     marginBottom={0}
                   />
                 )}
@@ -89,7 +106,7 @@ const SimpleCards = ({
                     variant='h6'
                     textColor='inherit'
                     subtitle={subtitle}
-                    textAlign='left'
+                    textAlign={editorialTextAlign}
                     marginBottom={0}
                   />
                 )}
@@ -99,6 +116,7 @@ const SimpleCards = ({
                     component='div'
                     variant='body1'
                     color='inherit'
+                    textAlign={editorialTextAlign}
                     sx={{
                       '& p': {
                         margin: 0,
@@ -118,12 +136,13 @@ const SimpleCards = ({
                 <Stack
                   direction={{ xs: 'column', sm: 'row' }}
                   spacing={2}
-                  alignItems='flex-start'
+                  alignItems={isCentered ? 'center' : 'flex-start'}
+                  justifyContent={isCentered ? 'center' : 'flex-start'}
                   mt={4}
                   sx={{
                     '& .MuiButton-root': {
                       width: 'auto',
-                      alignSelf: 'flex-start',
+                      alignSelf: isCentered ? 'center' : 'flex-start',
                     },
                   }}
                 >
@@ -133,7 +152,7 @@ const SimpleCards = ({
                       fullWidth: false,
                       sx: {
                         width: 'auto',
-                        alignSelf: 'flex-start',
+                        alignSelf: isCentered ? 'center' : 'flex-start',
                       },
                     })),
                     theme,
@@ -143,7 +162,7 @@ const SimpleCards = ({
               ) : null}
             </Box>
 
-            {imageURL && (
+            {shouldShowImage && imageURL && (
               <Box
                 sx={{
                   width: { xs: '100%', md: 260 },

@@ -248,6 +248,51 @@ TitleOnlyEditorial.args = {
   }),
 };
 
+export const TitleParagraphCentered: StoryFn<typeof SimpleCards> =
+  SimpleCardsTemplate.bind({});
+TitleParagraphCentered.args = {
+  ...defaultPropsDark,
+  textAlign: 'center',
+  title: 'Adotta il brand IT-Wallet',
+  body: markdownLikeBody,
+  items: generateItemsWithLinks(4, {
+    withIcon: true,
+    withText: true,
+  }),
+};
+
+export const TitleParagraphButtonCentered: StoryFn<typeof SimpleCards> =
+  SimpleCardsTemplate.bind({});
+TitleParagraphButtonCentered.args = {
+  ...defaultPropsDark,
+  textAlign: 'center',
+  title: 'Adotta il brand IT-Wallet',
+  body: markdownLikeBody,
+  ctaButtons: exampleCtaButtons.slice(0, 1),
+  items: generateItemsWithLinks(4, {
+    withIcon: true,
+    withText: true,
+  }),
+};
+
+export const FullCentered: StoryFn<typeof SimpleCards> =
+  SimpleCardsTemplate.bind({});
+FullCentered.args = {
+  ...defaultPropsDark,
+  textAlign: 'center',
+  title: 'Adotta il brand IT-Wallet',
+  subtitle: exampleSubtitle,
+  body: markdownLikeBody,
+  ctaButtons: exampleCtaButtons,
+  imageURL,
+  imageAlt: '',
+  items: generateItemsWithLinks(4, {
+    withIcon: true,
+    withLabel: true,
+    withText: true,
+  }),
+};
+
 export const Full: StoryFn<typeof SimpleCards> = SimpleCardsTemplate.bind({});
 Full.args = {
   ...defaultPropsDark,

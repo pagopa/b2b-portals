@@ -228,6 +228,11 @@ const SimpleCardsSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSimpleCodec),
   image: StrapiImageSchema,
   items: t.array(SimpleCardsItemCodec),
+  textAlign: t.keyof({
+    left: null,
+    center: null,
+    none: null,
+  }),
   sectionID: t.union([t.string, t.null]),
 });
 

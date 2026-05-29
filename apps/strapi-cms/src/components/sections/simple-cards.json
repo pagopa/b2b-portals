@@ -37,6 +37,16 @@
       "required": true,
       "min": 1
     },
+    "textAlign": {
+      "type": "enumeration",
+      "required": true,
+      "default": "left",
+      "enum": [
+        "left", 
+        "center",
+        "none"
+      ]
+    },
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$"

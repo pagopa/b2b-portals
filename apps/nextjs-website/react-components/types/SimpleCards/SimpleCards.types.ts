@@ -12,6 +12,7 @@ export interface SimpleCardsProps extends SectionProps {
   ctaButtons?: CtaButtonProps[];
   imageURL?: string;
   imageAlt?: string;
+  textAlign?: 'left' | 'center' | 'none';
   items: SimpleCardsItemProps[];
 }
 

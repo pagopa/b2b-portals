@@ -44,10 +44,11 @@ const SimpleCardsItem = ({
       <CardContent
         sx={{
           width: '100%',
-          p: 3,
+          py: 3,
+          px: 5,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           alignItems: 'flex-start',
           '&:last-child': {
             pb: 3,
@@ -84,32 +85,32 @@ const SimpleCardsItem = ({
             mb: text || label ? 1 : 0,
           }}
         >
-          {href ? (
-            <Link
-              href={href}
-              color={linkColor}
-              underline='always'
-              aria-label={ariaLabel}
-              fontSize='24px'
-              fontWeight={700}
-              {...(isValidExternalLink(href) && {
-                target: '_blank',
-                rel: 'noopener noreferrer',
-              })}
-            >
-              {title}
-            </Link>
-          ) : (
-            <Typography
-              component='h3'
-              fontSize='24px'
-              fontWeight={700}
-              color='text.primary'
-              m={0}
-            >
-              {title}
-            </Typography>
-          )}
+          <Typography
+            component='h3'
+            fontSize='24px'
+            fontWeight={700}
+            color='text.primary'
+            m={0}
+          >
+            {href ? (
+              <Link
+                href={href}
+                color={linkColor}
+                underline='always'
+                aria-label={ariaLabel}
+                fontSize='24px'
+                fontWeight={700}
+                {...(isValidExternalLink(href) && {
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                })}
+              >
+                {title}
+              </Link>
+            ) : (
+              title
+            )}
+          </Typography>
         </Box>
 
         {text && (

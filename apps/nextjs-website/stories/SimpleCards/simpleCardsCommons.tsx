@@ -82,6 +82,7 @@ export const SimpleCardsTemplate: StoryFn<SimpleCardsProps> = (args) => (
 export const defaultPropsLight: SimpleCardsProps = {
   theme: 'light',
   themeVariant: 'SEND',
+  textAlign: 'left',
   items: generateItemsWithLinks(6, {
     withIcon: true,
     withLabel: true,
@@ -93,6 +94,7 @@ export const defaultPropsLight: SimpleCardsProps = {
 export const defaultPropsDark: SimpleCardsProps = {
   theme: 'dark',
   themeVariant: 'SEND',
+  textAlign: 'left',
   items: generateItemsWithLinks(6, {
     withIcon: true,
     withLabel: true,

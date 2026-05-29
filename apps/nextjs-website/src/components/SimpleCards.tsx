@@ -17,6 +17,7 @@ export const makeSimpleCardsProps = ({
   ctaButtons,
   image,
   items,
+  textAlign,
   ...rest
 }: SimpleCardsSection & SiteWidePageData): SimpleCardsProps => ({
   ...(title && { title }),
@@ -33,6 +34,7 @@ export const makeSimpleCardsProps = ({
     imageURL: image.url,
     imageAlt: image.alternativeText ?? '',
   }),
+  ...(textAlign && { textAlign }),
   items: items.map(({ icon, label, text, title, href, ariaLabel }) => ({
     title,
     themeVariant: rest.themeVariant,
