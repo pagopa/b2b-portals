@@ -72,6 +72,8 @@ export const HowToStep = ({
             textColor={textColor}
             title={title}
             textAlign='left'
+            marginTop={8}
+            marginBottom={8}
           />
 
           {/** Step description */}
@@ -79,7 +81,7 @@ export const HowToStep = ({
             component='div'
             variant='body2'
             sx={{
-              fontSize: '18px',
+              fontSize: '16px',
               '& a': {
                 fontWeight: 700,
                 color: `${linkColor} !important`,
@@ -130,6 +132,8 @@ export const HowToStep = ({
             textColor={textColor}
             title={title}
             textAlign='left'
+            marginTop={8}
+            marginBottom={8}
           />
 
           <Typography
@@ -137,7 +141,7 @@ export const HowToStep = ({
             variant='body2'
             color={textColor}
             sx={{
-              fontSize: '18px',
+              fontSize: '16px',
               '& a': {
                 fontWeight: 700,
                 color: `${linkColor} !important`,
