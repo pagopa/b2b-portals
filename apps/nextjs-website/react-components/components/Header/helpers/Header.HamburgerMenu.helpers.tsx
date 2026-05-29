@@ -1,5 +1,5 @@
 import React from 'react';
-import menuIcon from '@react-components/assets/icon-menu-white.svg';
+import menuIcon from '@react-components/assets/icons/icon-menu-white.svg';
 import Image from 'next/image';
 
 export const HamburgerMenu = ({

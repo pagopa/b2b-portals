@@ -2,8 +2,8 @@ import { Box, Button, Menu, MenuItem } from '@mui/material';
 import { useRef, useState } from 'react';
 import { LangSwitchProps } from '@react-components/types/Footer/Footer.types';
 import Image from 'next/image';
-import iconLanguage from '@react-components/assets/icon-language-white.svg';
-import iconChevron from '@react-components/assets/icon-chevron-white.svg';
+import iconLanguage from '@react-components/assets/icons/icon-language-white.svg';
+import iconChevron from '@react-components/assets/icons/icon-chevron-white.svg';
 import { Locale } from '@react-components/types/common/Common.types';
 interface Props extends LangSwitchProps {
   isMobile: boolean;
@@ -104,7 +104,10 @@ export default function LangSwitch({
             }
             width={12}
             height={12}
-            style={{ ...(!open && { transform: 'rotate(180deg)' }) }}
+            style={{
+              transition: 'transform 0.3s',
+              transform: open ? 'rotate(0)' : 'rotate(180deg',
+            }}
           />
         }
       >

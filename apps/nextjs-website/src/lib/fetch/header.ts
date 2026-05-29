@@ -43,7 +43,6 @@ const MenuCodec = t.strict({
   links: t.array(
     t.strict({
       label: t.string,
-      alignRight: t.boolean,
       page: HeaderPageCodec,
       sectionID: t.union([t.string, t.null]),
       sublinks: t.array(HeaderSublinkCodec),

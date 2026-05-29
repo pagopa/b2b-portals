@@ -50,7 +50,6 @@ const standardHeader: HeaderData = {
         menu: {
           links: [
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: {
@@ -66,7 +65,6 @@ const standardHeader: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: { slug: 'otherpage2' },
@@ -86,7 +84,6 @@ const standardHeader: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: null,
@@ -114,7 +111,6 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
         menu: {
           links: [
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: { slug: '/' },
@@ -128,7 +124,6 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: {
@@ -150,7 +145,6 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: null,
@@ -178,7 +172,6 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
         menu: {
           links: [
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: { slug: '/en/' },
@@ -192,7 +185,6 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: {
@@ -214,7 +206,6 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: null,
@@ -242,7 +233,6 @@ const standardHeader_MissingSublink: HeaderData = {
         menu: {
           links: [
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: {

@@ -12,10 +12,7 @@ import {
 } from '@react-components/components/common/Common';
 import { usePathname } from 'next/navigation';
 
-const useStyles = (
-  { active, alignRight }: MenuDropdownProp,
-  { spacing }: Theme,
-) => {
+const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
   return {
     menu: {
       width: '100%',
@@ -24,7 +21,6 @@ const useStyles = (
       alignItems: 'center',
       margin: 0,
       padding: 0,
-      ...(alignRight && { marginLeft: 'auto' }),
     },
     menuItem: {
       height: '100%',
@@ -73,7 +69,6 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
     onClick,
     onDropdownClick,
     isMobile,
-    alignRight,
     ...button
   } = props;
   const muiTheme = useTheme();

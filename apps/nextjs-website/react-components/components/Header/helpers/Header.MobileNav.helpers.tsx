@@ -10,7 +10,7 @@ import {
   Typography,
   Link,
 } from '@mui/material';
-import closeIcon from '@react-components/assets/icon-close-white.svg';
+import closeIcon from '@react-components/assets/icons/icon-close-white.svg';
 import {
   HeaderProps,
   MenuDropdownProp,
@@ -19,7 +19,7 @@ import {
   ExternalLinkIcon,
   isValidExternalLink,
 } from '@react-components/components/common/Common';
-import chevronBlueIcon from '@react-components/assets/icon-chevron-blue.svg';
+import chevronBlueIcon from '@react-components/assets/icons/icon-chevron-blue.svg';
 import Image from 'next/image';
 
 const drawerStyles = {
@@ -137,7 +137,7 @@ export default function MobileNav({
                           alt={isSelected ? labels.openMenu : labels.closeMenu}
                           style={{
                             transition: 'transform 0.3s',
-                            transform: isSelected
+                            transform: !isSelected
                               ? 'rotate(180deg)'
                               : 'rotate(0deg)',
                           }}

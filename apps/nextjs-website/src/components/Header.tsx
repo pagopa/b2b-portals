@@ -176,7 +176,6 @@ const makeHeaderProps = (
     theme,
     label: link.label,
     href: link.page?.slug ?? '',
-    alignRight: link.alignRight,
     ...(link.sublinks.length > 0 && {
       items: link.sublinks.map(makeHeaderSublink),
     }),

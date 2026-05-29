@@ -70,7 +70,6 @@ export interface MenuDropdownProp
   isMobile?: boolean;
   onDropdownClick?: () => void;
   theme: Theme;
-  alignRight?: boolean;
 }
 
 export interface NavigationProps {
