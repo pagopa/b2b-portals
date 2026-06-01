@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_components_simple_cards_items",
+  "info": {
+    "displayName": "SimpleCardsItem"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "text"
+    },
+    "href": {
+      "type": "string"
+    },
+    "ariaLabel": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}
