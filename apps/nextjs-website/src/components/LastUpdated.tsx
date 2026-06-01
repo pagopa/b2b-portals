@@ -33,12 +33,15 @@ const makeLastUpdatedProps = ({
   publishedAt,
   updatedAt,
   link,
-  ...rest
+  sectionID,
+  themeVariant,
 }: LastUpdatedSection &
   SiteWidePageData &
   PagePublishDates): LastUpdatedProps => {
   const effectiveDate = lastUpdated ?? publishedAt ?? updatedAt;
   return {
+    sectionID,
+    themeVariant,
     label: lastUpdatedLabels[locale],
     lastUpdated: formatDateToLocale(effectiveDate, locale),
     ...(link && {
@@ -48,7 +51,6 @@ const makeLastUpdatedProps = ({
         ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
       },
     }),
-    ...rest,
   };
 };
 
