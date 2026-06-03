@@ -45,3 +45,4 @@ declare module 'react-google-recaptcha' {
 }
 
 declare module '*.png';
+declare module '*.svg';

@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
-import { Box, Link, Stack, Typography, Divider } from '@mui/material';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import React, { useEffect, useRef, useState } from 'react';
+import { Box, IconButton, Stack } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
-import { BackgroundColor } from '@react-components/components/common/Common.helpers';
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
 import { Navigation } from './helpers/Header.Navigation.helpers';
-import { HamburgerMenu } from './helpers/Header.HamburgerMenu.helpers';
-import SideDrawer from './helpers/Header.SideDrawer.helpers';
+import menuIcon from '@react-components/assets/icons/icon-menu-white.svg';
 import MobileNav from './helpers/Header.MobileNav.helpers';
-import { HeaderCtas } from './helpers/Header.Ctas.helpers';
 import { usePathname } from 'next/navigation';
+import { TopBarHeader } from './helpers/Header.TopBarHeader.helpers';
+import Image from 'next/image';
 
 const Header = ({
   product,
-  theme,
   menu,
-  beta,
   logo,
-  drawer,
-  supportLink,
+  mobileLogo,
+  topBarHeaderLogo,
+  topBarHeaderTitle,
+  topBarHeaderTitleMobile,
+  topBarHeaderLink,
   labels,
+  languages,
+  activeLanguage,
 }: HeaderProps) => {
   const muiTheme = useTheme();
-  const backgroundColor = BackgroundColor(theme);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
     null,
   );
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const pathname = usePathname();
+  const headerRef = useRef<HTMLDivElement | null>(null);
 
   const openHeader = () => {
     setMenuOpen(true);
@@ -40,13 +40,9 @@ const Header = ({
     setMenuOpen(false);
   };
 
-  const handleOpenDrawer = () => setIsDrawerOpen(true);
-  const handleCloseDrawer = () => setIsDrawerOpen(false);
-
   const handleMenuClick = (index: number, href?: string) => {
     if (href) {
       window.location.href = href;
-      setIsDrawerOpen(false);
       handleDropdownToggle(index);
     }
   };
@@ -55,165 +51,123 @@ const Header = ({
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
   };
 
+  const toggleAccessibility = (disableAccessibility: boolean) => {
+    const main = document.querySelector('main');
+    const footer = document.querySelector('footer');
+    const prefooter = document.querySelector('#prefooter');
+
+    const elements: Array<Element | null> = [main, footer, prefooter];
+
+    elements.forEach((el) => {
+      if (el) {
+        if (disableAccessibility) {
+          el.setAttribute('inert', '');
+        } else {
+          el.removeAttribute('inert');
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    toggleAccessibility(menuOpen || openDropdownIndex == null ? false : true);
+  }, [openDropdownIndex, menuOpen]);
+
   return (
-    <Box
-      bgcolor={backgroundColor}
-      component='header'
-      role='banner'
-      sx={{ height: { xs: 'auto', md: 'auto' } }}
-    >
-      <Stack direction='column' gap={{ xs: 0, md: 0 }} sx={{ width: '100%' }}>
+    <>
+      <TopBarHeader
+        languages={languages}
+        activeLanguage={activeLanguage}
+        {...(topBarHeaderLink && { topBarHeaderLink })}
+        {...(topBarHeaderLogo && { topBarHeaderLogo })}
+        {...(topBarHeaderTitle && { topBarHeaderTitle })}
+        {...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile })}
+        isMobile={isMobile}
+      />
+      <Box
+        component='header'
+        role='banner'
+        position='sticky'
+        top={0}
+        zIndex={1000}
+      >
         <Stack
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'
-          sx={{ padding: '16px 24px' }}
+          ref={headerRef}
+          direction='column'
+          gap={{ xs: 0, md: 0 }}
+          sx={{
+            width: '100%',
+            bgcolor: '#0066CC',
+          }}
         >
-          <HeaderTitle
-            theme={theme}
-            product={product}
-            beta={beta}
-            {...(logo ? { logo } : {})}
-          />
-          {supportLink && (
-            <Link
-              href={supportLink}
-              underline='none'
-              display='flex'
-              flexDirection='row'
-              justifyContent='flex-end'
+          <Stack
+            direction='row'
+            justifyContent='space-between'
+            alignItems='center'
+            sx={{ padding: { xs: '16px 24px', md: '16px 32px' } }}
+            color='#FFFFFF'
+          >
+            <HeaderTitle
+              product={product}
+              {...(logo ? { logo } : {})}
+              {...(mobileLogo ? { mobileLogo } : {})}
+              isMobile={isMobile}
+            />
+
+            {isMobile && (
+              <IconButton onClick={openHeader} sx={{ p: 0 }}>
+                <Image
+                  width={20}
+                  height={20}
+                  src={menuIcon}
+                  alt={labels.openMenu}
+                  aria-label={labels.openMenu}
+                  aria-haspopup='true'
+                  aria-expanded='false'
+                />
+              </IconButton>
+            )}
+          </Stack>
+
+          {!isMobile && (
+            <Stack
+              direction='row'
+              justifyContent='space-between'
+              alignItems='center'
               sx={{
-                color: 'primary.main',
-                fontWeight: 'bold',
-                fontSize: '14px',
-                height: '100%',
-                alignItems: 'center',
-                gap: '1rem',
+                height: '56px',
+                padding: '0px 32px',
               }}
             >
-              Serve aiuto?
-              <Box
-                sx={{
-                  bgcolor: 'primary.main',
-                  width: 48,
-                  height: 48,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '50%',
-                  textDecoration: 'none',
-                  '&:hover': {
-                    bgcolor: 'primary.main',
-                  },
-                }}
-              >
-                <ChatBubbleOutlineIcon
-                  style={{ color: 'white', fontSize: 18 }}
-                />
-              </Box>
-            </Link>
+              <Navigation
+                labelMainMenu={labels.mainMenu}
+                menu={menu.map((menu, index) => ({
+                  ...menu,
+                  isOpen: openDropdownIndex === index,
+                  onClick: () => handleMenuClick(index, menu.href),
+                  onDropdownClick: () => handleDropdownToggle(index),
+                  active:
+                    pathname === menu.href || pathname === '/' + menu.href,
+                }))}
+                theme='dark'
+                isMobile={false}
+              />
+            </Stack>
+          )}
+
+          {isMobile && (
+            <MobileNav
+              isOpen={menuOpen}
+              onClose={closeHeader}
+              labels={labels}
+              anchor='left'
+              menu={menu}
+              theme='dark'
+            />
           )}
         </Stack>
-
-        <Divider />
-
-        {!isMobile && (
-          <Stack
-            direction='row'
-            justifyContent='space-between'
-            alignItems='center'
-            sx={{
-              height: '64px',
-              padding: '0px 24px',
-            }}
-          >
-            <Navigation
-              menu={menu.map((menu, index) => ({
-                ...menu,
-                isOpen: openDropdownIndex === index,
-                onClick: () => handleMenuClick(index, menu.href),
-                onDropdownClick: () => handleDropdownToggle(index),
-                active: pathname === menu.href || pathname === '/' + menu.href,
-              }))}
-              theme={theme}
-              isMobile={false}
-            />
-            {drawer && (
-              <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                <HeaderCtas
-                  onOpenDrawer={handleOpenDrawer}
-                  theme={theme}
-                  buttonText={drawer.buttonText}
-                />
-              </Box>
-            )}
-          </Stack>
-        )}
-
-        {isMobile && (
-          <Stack
-            direction='row'
-            justifyContent='space-between'
-            alignItems='center'
-            sx={{
-              display: { xs: 'flex', md: 'none' },
-              padding: '0.5rem 1.5rem',
-            }}
-          >
-            <Stack direction='row' alignItems='center' gap={1}>
-              <HamburgerMenu
-                onOpen={openHeader}
-                onClose={closeHeader}
-                open={menuOpen}
-                ariaLabels={{
-                  openMenu: labels.openMenu,
-                  closeMenu: labels.closeMenu,
-                }}
-              />
-              <Typography
-                variant='body1'
-                color='text.secondary'
-                sx={{ fontWeight: 600 }}
-              >
-                {labels.shortMainMenu}
-              </Typography>
-            </Stack>
-            {drawer && (
-              <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                <HeaderCtas
-                  onOpenDrawer={handleOpenDrawer}
-                  theme={theme}
-                  buttonText={drawer.buttonText}
-                />
-              </Box>
-            )}
-          </Stack>
-        )}
-
-        {isMobile && (
-          <MobileNav
-            isOpen={menuOpen}
-            onClose={closeHeader}
-            anchor='left'
-            menu={menu}
-            theme={'light'}
-          />
-        )}
-
-        {drawer && (
-          <SideDrawer
-            isOpen={isDrawerOpen}
-            onClose={handleCloseDrawer}
-            anchor='right'
-            theme='light'
-            drawerMenuTitle={drawer.title}
-            {...(drawer.subtitle && { drawerMenuSubtitle: drawer.subtitle })}
-            ctaCard={drawer.ctaCard}
-            linkCards={drawer.linkCards}
-          />
-        )}
-      </Stack>
-    </Box>
+      </Box>
+    </>
   );
 };
 

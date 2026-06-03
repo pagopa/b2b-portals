@@ -17,17 +17,12 @@
     },
     "sublinks": {
       "type": "component",
-      "repeatable": true,
-      "component": "menu.menu-sub-link"
+      "component": "menu.menu-sub-link",
+      "repeatable": true
     },
     "sectionID": {
       "type": "string",
       "regex": "^[a-z]+[a-z\\-]*$"
-    },
-    "alignRight": {
-      "type": "boolean",
-      "default": false,
-      "required": true
     }
   }
 }
