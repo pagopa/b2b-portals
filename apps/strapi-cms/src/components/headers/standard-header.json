@@ -51,6 +51,9 @@
         "light",
         "dark"
       ]
+    },
+    "topBarHeaderLink": {
+      "type": "string"
     }
   }
 }

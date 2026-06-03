@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import LangSwitch from './Header.LangSwitch.helpers';
 import { LangSwitchProps } from '@react-components/types/Footer/Footer.types';
 
@@ -10,12 +10,31 @@ interface Props extends LangSwitchProps {
   };
   topBarHeaderTitle?: string;
   topBarHeaderTitleMobile?: string;
+  topBarHeaderLink?: string;
   isMobile: boolean;
 }
 
+const TopBarHeaderCheckLink = ({
+  topBarHeaderLink,
+  children,
+}: {
+  topBarHeaderLink?: string;
+  children: JSX.Element;
+}) =>
+  topBarHeaderLink ? (
+    <Link
+      href={topBarHeaderLink}
+      sx={{ textDecoration: 'none', color: 'inherit' }}
+    >
+      {children}
+    </Link>
+  ) : (
+    children
+  );
 export const TopBarHeader = ({
   topBarHeaderLogo,
   topBarHeaderTitle,
+  topBarHeaderLink,
   topBarHeaderTitleMobile,
   isMobile,
   languages,
@@ -30,25 +49,34 @@ export const TopBarHeader = ({
         backgroundColor: '#004D99',
         color: '#FFFFFF',
         p: { xs: '14px 24px', md: '12px 60px' },
+        zIndex: 1000,
       }}
     >
-      {topBarHeaderLogo && (
-        <img
-          src={topBarHeaderLogo.src}
-          {...(topBarHeaderLogo.alt && { alt: topBarHeaderLogo.alt })}
-          style={{ marginRight: 8, height: 24 }}
-        />
-      )}
-      {!isMobile && topBarHeaderTitle && (
-        <Typography sx={{ color: 'inherit', fontWeight: 600, fontSize: 14 }}>
-          {topBarHeaderTitle}
-        </Typography>
-      )}
-      {isMobile && topBarHeaderTitleMobile && (
-        <Typography sx={{ color: 'inherit', fontWeight: 600, fontSize: 14 }}>
-          {topBarHeaderTitleMobile}
-        </Typography>
-      )}
+      <TopBarHeaderCheckLink {...(topBarHeaderLink && { topBarHeaderLink })}>
+        <>
+          {topBarHeaderLogo && (
+            <img
+              src={topBarHeaderLogo.src}
+              {...(topBarHeaderLogo.alt && { alt: topBarHeaderLogo.alt })}
+              style={{ marginRight: 8, height: 24 }}
+            />
+          )}
+          {!isMobile && topBarHeaderTitle && (
+            <Typography
+              sx={{ color: 'inherit', fontWeight: 600, fontSize: 14 }}
+            >
+              {topBarHeaderTitle}
+            </Typography>
+          )}
+          {isMobile && topBarHeaderTitleMobile && (
+            <Typography
+              sx={{ color: 'inherit', fontWeight: 600, fontSize: 14 }}
+            >
+              {topBarHeaderTitleMobile}
+            </Typography>
+          )}
+        </>
+      </TopBarHeaderCheckLink>
       <LangSwitch
         isMobile={isMobile}
         activeLanguage={activeLanguage}

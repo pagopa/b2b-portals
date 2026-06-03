@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Stack } from '@mui/material';
+import { Box, IconButton, Stack } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
 import { Navigation } from './helpers/Header.Navigation.helpers';
-import { HamburgerMenu } from './helpers/Header.HamburgerMenu.helpers';
+import menuIcon from '@react-components/assets/icons/icon-menu-white.svg';
 import MobileNav from './helpers/Header.MobileNav.helpers';
 import { usePathname } from 'next/navigation';
 import { TopBarHeader } from './helpers/Header.TopBarHeader.helpers';
+import Image from 'next/image';
 
 const Header = ({
   product,
@@ -17,6 +18,7 @@ const Header = ({
   topBarHeaderLogo,
   topBarHeaderTitle,
   topBarHeaderTitleMobile,
+  topBarHeaderLink,
   labels,
   languages,
   activeLanguage,
@@ -76,6 +78,7 @@ const Header = ({
       <TopBarHeader
         languages={languages}
         activeLanguage={activeLanguage}
+        {...(topBarHeaderLink && { topBarHeaderLink })}
         {...(topBarHeaderLogo && { topBarHeaderLogo })}
         {...(topBarHeaderTitle && { topBarHeaderTitle })}
         {...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile })}
@@ -86,7 +89,7 @@ const Header = ({
         role='banner'
         position='sticky'
         top={0}
-        zIndex={1}
+        zIndex={1000}
       >
         <Stack
           ref={headerRef}
@@ -112,12 +115,17 @@ const Header = ({
             />
 
             {isMobile && (
-              <HamburgerMenu
-                onOpen={openHeader}
-                ariaLabels={{
-                  openMenu: labels.openMenu,
-                }}
-              />
+              <IconButton onClick={openHeader} sx={{ p: 0 }}>
+                <Image
+                  width={20}
+                  height={20}
+                  src={menuIcon}
+                  alt={labels.openMenu}
+                  aria-label={labels.openMenu}
+                  aria-haspopup='true'
+                  aria-expanded='false'
+                />
+              </IconButton>
             )}
           </Stack>
 

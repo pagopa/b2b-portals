@@ -34,6 +34,7 @@ HeaderFull.args = {
   },
   topBarHeaderTitle: 'TITOLO LUNGO',
   topBarHeaderTitleMobile: 'TITOLO',
+  topBarHeaderLink: '#',
   defaultLocale: 'it',
   activeLanguage: {
     id: 'it',

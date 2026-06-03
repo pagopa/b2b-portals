@@ -124,6 +124,7 @@ const makeHeaderProps = (
     topBarHeaderLogo,
     topBarHeaderTitle,
     topBarHeaderTitleMobile,
+    topBarHeaderLink,
     defaultLocale,
     locale,
     localizedLinks,
@@ -148,26 +149,39 @@ const makeHeaderProps = (
   ...(logo && {
     logo: {
       src: logo.url,
-      href: '/',
+      href: LocalizeURL({
+        URL: '/',
+        locale,
+        defaultLocale,
+      }),
       alt: logo.alternativeText ?? productName,
     },
   }),
   ...(mobileLogo && {
     mobileLogo: {
       src: mobileLogo.url,
-      href: '/',
+      href: LocalizeURL({
+        URL: '/',
+        locale,
+        defaultLocale,
+      }),
       alt: mobileLogo.alternativeText ?? productName,
     },
   }),
   ...(topBarHeaderLogo && {
     topBarHeaderLogo: {
       src: topBarHeaderLogo.url,
-      href: '/',
+      href: LocalizeURL({
+        URL: '/',
+        locale,
+        defaultLocale,
+      }),
       alt: topBarHeaderLogo.alternativeText ?? productName,
     },
   }),
   ...(topBarHeaderTitle && { topBarHeaderTitle }),
   ...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile }),
+  ...(topBarHeaderLink && { topBarHeaderLink }),
   product: {
     name: productName,
     href: '/',

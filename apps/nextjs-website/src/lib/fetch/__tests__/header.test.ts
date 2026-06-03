@@ -47,6 +47,7 @@ const headerResponse: HeaderData = {
         productName: 'SEND',
         topBarHeaderTitle: 'Title bar top',
         topBarHeaderTitleMobile: 'Title bar top mobile',
+        topBarHeaderLink: '#',
         theme: 'dark',
         mobileLogo: null,
         topBarHeaderLogo: null,

@@ -46,6 +46,7 @@ export interface HeaderProps
   };
   readonly topBarHeaderTitle?: string;
   readonly topBarHeaderTitleMobile?: string;
+  readonly topBarHeaderLink?: string;
   readonly labels: {
     openMenu: string;
     closeMenu: string;

@@ -108,6 +108,7 @@ export default function MobileNav({
                           display: 'flex',
                           alignItems: 'center',
                           fontWeight: 600,
+                          width: item.items ? 'default' : '100%',
                         }}
                       >
                         <Typography
@@ -174,6 +175,7 @@ export default function MobileNav({
                                 m: 0,
                                 pl: 4,
                                 py: 2,
+                                width: '100%',
                               }}
                             >
                               <ListItemText

@@ -12,6 +12,7 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
   productName: 'Demo',
   mobileLogo: null,
   topBarHeaderLogo: null,
+  topBarHeaderLink: '#',
   topBarHeaderTitle: 'Title bar top',
   topBarHeaderTitleMobile: 'Title bar top mobile',
   theme: 'dark',
