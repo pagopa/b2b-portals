@@ -43,7 +43,6 @@ const MenuCodec = t.strict({
   links: t.array(
     t.strict({
       label: t.string,
-      alignRight: t.boolean,
       page: HeaderPageCodec,
       sectionID: t.union([t.string, t.null]),
       sublinks: t.array(HeaderSublinkCodec),
@@ -87,10 +86,12 @@ const StandardHeaderCodec = t.strict({
   __component: t.literal('headers.standard-header'),
   logo: StrapiImageSchema,
   productName: t.string,
-  beta: t.boolean,
-  supportLink: t.union([t.string, t.null]),
   menu: MenuCodec,
-  drawer: t.union([SideDrawerCodec, t.null]),
+  mobileLogo: StrapiImageSchema,
+  topBarHeaderLogo: StrapiImageSchema,
+  topBarHeaderTitle: t.union([t.string, t.null]),
+  topBarHeaderTitleMobile: t.union([t.string, t.null]),
+  topBarHeaderLink: t.union([t.string, t.null]),
 });
 
 const HeaderSocialLinkCodec = t.strict({
@@ -146,7 +147,12 @@ export const getHeader = ({
 &populate[9]=header.drawer.linkCards.icons
 &populate[10]=header.drawer.linkCards.link
 &populate[11]=header.socialLinks.icon
-&populate[12]=exclude
+&populate[12]=header.mobileLogo
+&populate[13]=header.topBarHeaderLogo
+&populate[14]=header.topBarHeaderTitle
+&populate[15]=header.topBarHeaderTitleMobile
+&populate[16]=header.theme
+&populate[17]=exclude
       `,
       {
         method: 'GET',

@@ -1,17 +1,22 @@
 import React from 'react';
-import { Link, Stack, Typography, useTheme, Chip } from '@mui/material';
+import { Link, Stack, Typography, useTheme, SxProps } from '@mui/material';
 import { HeaderTitleProps } from '@react-components/types/Header/Header.types';
-import { TextColor } from '@react-components/components/common/Common.helpers';
 
 export const HeaderTitle = ({
-  beta,
   product: { name: productName, href: productHref },
-  theme,
   logo,
-}: HeaderTitleProps) => {
+  mobileLogo,
+  isMobile,
+}: HeaderTitleProps & { isMobile: boolean }) => {
   const { spacing } = useTheme();
-  const textColor = TextColor(theme);
-  const label = 'beta';
+
+  const linkStyle: SxProps = {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 0,
+    color: 'inherit',
+    alignItems: 'center',
+  };
 
   return (
     <Stack
@@ -21,42 +26,35 @@ export const HeaderTitle = ({
       paddingX={0}
       paddingY={0}
     >
-      {logo && (
-        <Link
-          alignItems='center'
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            padding: 0,
-          }}
-          href={logo.href}
-        >
-          <img src={logo.src} alt={logo.alt} style={{ height: 70 }} />
+      {!isMobile && logo && (
+        <Link sx={linkStyle} href={logo.href}>
+          <img src={logo.src} alt={logo.alt} style={{ height: 56 }} />
         </Link>
       )}
-      {!logo && (
+      {isMobile && mobileLogo && (
+        <Link sx={linkStyle} href={mobileLogo.href}>
+          <img
+            src={mobileLogo.src}
+            alt={mobileLogo.alt}
+            style={{ height: 40 }}
+          />
+        </Link>
+      )}
+      {!logo && !mobileLogo && (
         <Typography
-          color={textColor}
+          color='inherit'
           fontSize={{ xs: spacing(3), sm: spacing(3.5) }}
           noWrap
           variant='h5'
         >
           {productHref ? (
-            <Link href={productHref} underline='none' color='text.primary'>
+            <Link href={productHref} underline='none' color='inherit'>
               <b>{productName}</b>
             </Link>
           ) : (
             <b>{productName}</b>
           )}
         </Typography>
-      )}
-      {beta && (
-        <Chip
-          label={label}
-          color='primary'
-          sx={{ height: 20, width: 45 }}
-          size='small'
-        />
       )}
     </Stack>
   );

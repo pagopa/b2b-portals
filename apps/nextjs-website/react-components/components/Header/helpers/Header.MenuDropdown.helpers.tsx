@@ -10,21 +10,17 @@ import {
   ExternalLinkIcon,
   isValidExternalLink,
 } from '@react-components/components/common/Common';
+import { usePathname } from 'next/navigation';
 
-const useStyles = (
-  { active, alignRight }: MenuDropdownProp,
-  { spacing }: Theme,
-) => {
-  const muiTheme = useTheme();
-
+const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
   return {
     menu: {
       width: '100%',
       height: '100%',
       display: 'flex',
       alignItems: 'center',
-      backgroundColor: active ? '#0073E614' : 'transparent',
-      ...(alignRight && { marginLeft: 'auto' }),
+      margin: 0,
+      padding: 0,
     },
     menuItem: {
       height: '100%',
@@ -34,13 +30,14 @@ const useStyles = (
       alignItems: 'center',
       justifyContent: { xs: 'left', md: 'center' },
       position: 'relative',
+      margin: 0,
+      padding: 0,
       '::after': {
         content: '""',
         position: 'absolute',
         bottom: 0,
         left: 0,
         width: active ? '100%' : '0%',
-        borderBottom: `3px solid ${muiTheme.palette.primary.main}`,
         transition: 'width 0.5s ease, left 0.5s ease',
       },
     },
@@ -72,23 +69,30 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
     onClick,
     onDropdownClick,
     isMobile,
-    alignRight,
     ...button
   } = props;
   const muiTheme = useTheme();
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
+  const pathname = usePathname();
+  const isCurrentLink = (url?: string) => {
+    if (url && url.indexOf('/') >= 0) {
+      const urlPathname = url.substring(url.indexOf('/'));
+      return pathname === urlPathname;
+    }
+    return false;
+  };
 
   return (
-    <Stack sx={styles.menu}>
+    <Stack sx={styles.menu} component='li'>
       <Box sx={styles.menuItem}>
         <Link
-          sx={styles.link}
-          style={{
-            color: active
-              ? muiTheme.palette.primary.main
-              : muiTheme.palette.text.secondary,
-            textDecoration: 'none',
+          sx={{
+            color: '#ffffff',
+            ...(isCurrentLink(button.href) && { textDecoration: 'underline' }),
+            '&:hover': {
+              textDecoration: 'none',
+            },
           }}
           href={button.href ? button.href : `#${label}`}
           target={isValidExternalLink(button.href) ? '_blank' : '_self'}
@@ -117,14 +121,11 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
           >
             <ArrowDropDown
-              color='inherit'
               fontSize='small'
               sx={{
                 transition: 'transform 0.2s',
                 transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                color: active
-                  ? muiTheme.palette.primary.main
-                  : muiTheme.palette.text.secondary,
+                color: '#ffffff',
               }}
             />
           </Box>
@@ -132,33 +133,45 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
       </Box>
       {hasLinks && isOpen && (
         <DialogBubble>
-          <Stack gap={1}>
-            {items?.map((item: DropdownItem, index) => (
-              <Link
-                variant='body1'
-                underline='none'
-                key={item.key ?? index}
-                sx={styles.link}
-                style={{
-                  color: muiTheme.palette.text.secondary,
-                  textDecoration: 'none',
-                  fontSize: '1em',
-                  fontWeight: 600,
-                  padding: 0,
-                }}
-                href={item.href}
-                target={isValidExternalLink(button.href) ? '_blank' : '_self'}
-              >
-                {item.label}
-                <ExternalLinkIcon
-                  show={isValidExternalLink(item.href)}
-                  {...(item.href?.startsWith('https://') && {
-                    target: '_blank',
-                  })}
-                />
-              </Link>
-            ))}
-          </Stack>
+          <Box component='nav'>
+            <Stack
+              gap={1}
+              component='ul'
+              sx={{ p: 0, m: 0, listStyleType: 'none' }}
+            >
+              {items?.map((item: DropdownItem, index) => (
+                <li style={{ margin: 0, padding: 0 }}>
+                  <Link
+                    variant='body1'
+                    underline='none'
+                    key={item.key ?? index}
+                    sx={{
+                      color: '#5C6F82',
+                      ...(isCurrentLink(item.href) && {
+                        textDecoration: 'underline',
+                      }),
+                      fontSize: '1em',
+                      fontWeight: 600,
+                      padding: 0,
+                      m: 0,
+                    }}
+                    href={item.href}
+                    target={
+                      isValidExternalLink(button.href) ? '_blank' : '_self'
+                    }
+                  >
+                    {item.label}
+                    <ExternalLinkIcon
+                      show={isValidExternalLink(item.href)}
+                      {...(item.href?.startsWith('https://') && {
+                        target: '_blank',
+                      })}
+                    />
+                  </Link>
+                </li>
+              ))}
+            </Stack>
+          </Box>
         </DialogBubble>
       )}
     </Stack>

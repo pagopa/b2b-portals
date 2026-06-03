@@ -68,26 +68,31 @@ const headerLabels: Record<Locale, HeaderProps['labels']> = {
     openMenu: 'Apri menù',
     closeMenu: 'Chiudi menù',
     shortMainMenu: 'Menu',
+    mainMenu: 'Menu principale',
   },
   en: {
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     shortMainMenu: 'Menu',
+    mainMenu: 'Main menu',
   },
   de: {
     openMenu: 'Menü öffnen',
     closeMenu: 'Menü schließen',
     shortMainMenu: 'Menü',
+    mainMenu: 'Hauptmenü',
   },
   fr: {
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
     shortMainMenu: 'Menu',
+    mainMenu: 'Menu principal',
   },
   sl: {
     openMenu: 'Odpri meni',
     closeMenu: 'Zapri meni',
     shortMainMenu: 'Meni',
+    mainMenu: 'Glavni meni',
   },
 };
 
@@ -111,70 +116,83 @@ const makeMegaHeaderSublink = (
 });
 
 const makeHeaderProps = (
-  { productName, menu, logo, beta, supportLink, drawer }: StandardHeaderData,
+  {
+    productName,
+    menu,
+    logo,
+    mobileLogo,
+    topBarHeaderLogo,
+    topBarHeaderTitle,
+    topBarHeaderTitleMobile,
+    topBarHeaderLink,
+    defaultLocale,
+    locale,
+    localizedLinks,
+    activeLocale,
+  }: StandardHeaderData & {
+    defaultLocale: Locale;
+    activeLocale: Locale;
+    locale: Locale;
+    localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
+  },
   pathname: string,
-  locale: Locale,
-  defaultLocale: Locale,
 ): HeaderProps => ({
-  beta,
-  ...(drawer && {
-    drawer: {
-      title: drawer.title,
-      ...(drawer.subtitle && { subtitle: drawer.subtitle }),
-      buttonText: drawer.buttonText,
-      linkCards: drawer.linkCards.map(({ icons, link, ...card }) => ({
-        ...card,
-        subtitle: MarkdownRenderer({
-          markdown: card.subtitle,
-          variant: 'body2',
-          locale,
-          defaultLocale,
-        }),
-        icons: icons.map((icon) => icon.url),
-        link: {
-          label: link.label,
-          href: link.href,
-          ...(link.ariaLabel && {
-            ariaLabel: link.ariaLabel,
-          }),
-        },
-      })),
-      ctaCard: {
-        title: drawer.ctaCard.title,
-        subtitle: MarkdownRenderer({
-          markdown: drawer.ctaCard.subtitle,
-          variant: 'body2',
-          locale,
-          defaultLocale,
-        }),
-        link: {
-          label: drawer.ctaCard.link.label,
-          href: drawer.ctaCard.link.href,
-          ...(drawer.ctaCard.link.ariaLabel && {
-            ariaLabel: drawer.ctaCard.link.ariaLabel,
-          }),
-        },
-      },
-    },
-  }),
-  theme: 'light',
-  ...(supportLink && { supportLink }),
+  theme: 'dark',
+  defaultLocale,
+  languages: localizedLinks,
+  activeLanguage: localizedLinks.find((l) => l.id === activeLocale) ?? {
+    id: activeLocale,
+    value: activeLocale,
+    href: '/',
+  },
   ...(logo && {
     logo: {
       src: logo.url,
-      href: '/',
+      href: LocalizeURL({
+        URL: '/',
+        locale,
+        defaultLocale,
+      }),
       alt: logo.alternativeText ?? productName,
     },
   }),
+  ...(mobileLogo && {
+    mobileLogo: {
+      src: mobileLogo.url,
+      href: LocalizeURL({
+        URL: '/',
+        locale,
+        defaultLocale,
+      }),
+      alt: mobileLogo.alternativeText ?? productName,
+    },
+  }),
+  ...(topBarHeaderLogo && {
+    topBarHeaderLogo: {
+      src: topBarHeaderLogo.url,
+      href: LocalizeURL({
+        URL: '/',
+        locale,
+        defaultLocale,
+      }),
+      alt: topBarHeaderLogo.alternativeText ?? productName,
+    },
+  }),
+  ...(topBarHeaderTitle && { topBarHeaderTitle }),
+  ...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile }),
+  ...(topBarHeaderLink && { topBarHeaderLink }),
   product: {
     name: productName,
-    href: '/',
+    href: LocalizeURL({
+      URL: '/',
+      locale,
+      defaultLocale,
+    }),
   },
   menu: menu.links.map((link) => ({
-    theme: 'light',
+    theme: 'dark',
     label: link.label,
     href: link.page?.slug ?? '',
-    alignRight: link.alignRight,
     ...(link.sublinks.length > 0 && {
       items: link.sublinks.map(makeHeaderSublink),
     }),
@@ -188,6 +206,7 @@ const makeHeaderProps = (
     openMenu: headerLabels[locale].openMenu,
     closeMenu: headerLabels[locale].closeMenu,
     shortMainMenu: headerLabels[locale].shortMainMenu,
+    mainMenu: headerLabels[locale].mainMenu,
   },
 });
 
@@ -309,13 +328,21 @@ const Header = ({
   locale,
   defaultLocale,
   exclude,
+  localizedLinks,
   ...props
 }: HeaderData['data']['header'][0] & {
   locale: Locale;
   defaultLocale: Locale;
   exclude: HeaderData['data']['exclude'];
+  localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
 }) => {
-  const pathname = usePathname() ?? '';
+  const pathname = usePathname() + '/';
+  const activeLocale = ['it/', 'en/', 'de/', 'fr/', 'sl/'].includes(
+    pathname.slice(1, 4),
+  ) // Include '/' to make sure not to detect slugs happening to begin with the same letters (e.g.: /enroll)
+    ? (pathname.slice(1, 3) as Locale)
+    : defaultLocale;
+
   const excludeSlugs = exclude.map((obj) => obj.slug);
 
   // Compare excluded slugs with current page slug (removing initial '/')
@@ -329,12 +356,14 @@ const Header = ({
   }
 
   const menuType = props.__component;
-
   switch (menuType) {
     case 'headers.standard-header':
       return (
         <HeaderRC
-          {...makeHeaderProps(props, pathname, locale, defaultLocale)}
+          {...makeHeaderProps(
+            { ...props, defaultLocale, locale, localizedLinks, activeLocale },
+            pathname,
+          )}
         />
       );
     case 'headers.mega-header':

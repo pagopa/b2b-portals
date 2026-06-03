@@ -181,6 +181,7 @@ export default async function RootLayout({
                 {...headerProps}
                 locale={locale}
                 defaultLocale={defaultLocale}
+                localizedLinks={localizedLinks}
               />
               {children}
               {preFooterProps && (

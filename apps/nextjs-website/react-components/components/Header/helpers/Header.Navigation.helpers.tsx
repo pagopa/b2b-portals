@@ -7,35 +7,30 @@ export const Navigation = ({
   menu,
   theme,
   isMobile,
-}: NavigationProps & { isMobile: boolean }) => {
-  const leftItems = menu.filter((item) => !item.alignRight);
-  const rightItems = menu.filter((item) => item.alignRight);
-
+  labelMainMenu,
+}: NavigationProps & { isMobile: boolean; labelMainMenu: string }) => {
   return (
     <Stack
       direction='row'
       component='nav'
-      aria-label='main'
-      className='desktop-menu'
       sx={{
         width: '100%',
         height: '100%',
         alignItems: 'center',
         justifyContent: 'space-between',
       }}
+      role='navigation'
+      aria-label={labelMainMenu}
     >
-      <Stack direction='row' gap={4} alignItems='center' height='100%'>
-        {leftItems.map((menu, index) => (
-          <MenuDropdown
-            key={index}
-            {...menu}
-            theme={theme}
-            isMobile={isMobile}
-          />
-        ))}
-      </Stack>
-      <Stack direction='row' gap={4} alignItems='center' height='100%'>
-        {rightItems.map((menu, index) => (
+      <Stack
+        direction='row'
+        gap={5}
+        alignItems='center'
+        height='100%'
+        component='ul'
+        sx={{ m: 0, p: 0, listStyleType: 'none' }}
+      >
+        {menu.map((menu, index) => (
           <MenuDropdown
             key={index}
             {...menu}

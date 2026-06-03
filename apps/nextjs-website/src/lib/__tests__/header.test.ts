@@ -8,64 +8,13 @@ import {
 
 const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
   __component: 'headers.standard-header',
-  beta: true,
   logo: null,
   productName: 'Demo',
-  supportLink: '/assistenza',
-  drawer: {
-    buttonText: 'Accedi',
-    title: 'Accedi o Iscriviti',
-    subtitle: null,
-    ctaCard: {
-      title: 'Titolo',
-      subtitle: 'Sottotitolo',
-      link: {
-        label: 'Accedi',
-        ariaLabel: 'Accedi',
-        href: '#',
-      },
-    },
-    linkCards: [
-      {
-        link: {
-          label: 'Accedi',
-          ariaLabel: 'Accedi',
-          href: '#',
-        },
-        title: 'Cittadini',
-        subtitle: 'Sottotitolo Cittadini',
-        icons: [
-          {
-            width: 32,
-            height: 32,
-            alternativeText: null,
-            formats: null,
-            mime: 'png',
-            url: 'iconURL',
-          },
-        ],
-      },
-      {
-        link: {
-          label: 'Accedi',
-          ariaLabel: 'Accedi',
-          href: '#',
-        },
-        title: 'Imprese',
-        subtitle: 'Sottotitolo Imprese',
-        icons: [
-          {
-            width: 32,
-            height: 32,
-            alternativeText: null,
-            formats: null,
-            mime: 'png',
-            url: 'iconURL',
-          },
-        ],
-      },
-    ],
-  },
+  mobileLogo: null,
+  topBarHeaderLogo: null,
+  topBarHeaderLink: '#',
+  topBarHeaderTitle: 'Title bar top',
+  topBarHeaderTitleMobile: 'Title bar top mobile',
 };
 const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
   __component: 'headers.mega-header',
@@ -101,7 +50,6 @@ const standardHeader: HeaderData = {
         menu: {
           links: [
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: {
@@ -117,7 +65,6 @@ const standardHeader: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: { slug: 'otherpage2' },
@@ -137,7 +84,6 @@ const standardHeader: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: null,
@@ -165,7 +111,6 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
         menu: {
           links: [
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: { slug: '/' },
@@ -179,7 +124,6 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: {
@@ -201,7 +145,6 @@ const parsedStandardHeader_DefaultLocale: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: null,
@@ -229,7 +172,6 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
         menu: {
           links: [
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: { slug: '/en/' },
@@ -243,7 +185,6 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: {
@@ -265,7 +206,6 @@ const parsedStandardHeader_NonDefaultLocale: HeaderData = {
               ],
             },
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: null,
@@ -293,7 +233,6 @@ const standardHeader_MissingSublink: HeaderData = {
         menu: {
           links: [
             {
-              alignRight: false,
               label: 'label',
               sectionID: null,
               page: {
