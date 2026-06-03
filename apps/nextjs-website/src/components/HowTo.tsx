@@ -28,6 +28,13 @@ const makeHowToProps = ({
       markdown: step.description,
       locale,
       defaultLocale,
+      sx: {
+        fontSize: '16px',
+        '& p': {
+          fontSize: '16px',
+          marginTop: 0,
+        },
+      },
     }),
     ...(step.icon && {
       iconURL: step.icon.url,
