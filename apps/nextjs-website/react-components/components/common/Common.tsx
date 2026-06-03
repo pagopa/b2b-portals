@@ -112,6 +112,9 @@ export const CtaButtons = ({
   );
 };
 
+const normalizeTitleLineBreaks = (title: string) =>
+  title.replace(/<br\s*\/?>|\\n|\r?\n/gi, '\n');
+
 const StringTitle = (
   title: string,
   textColor: string,
@@ -128,9 +131,10 @@ const StringTitle = (
     component={component}
     align={textAlign}
     style={{ marginTop, marginBottom }}
+    sx={{ whiteSpace: 'pre-line' }}
     {...(id && { id })}
   >
-    {title}
+    {normalizeTitleLineBreaks(title)}
   </Typography>
 );
 
