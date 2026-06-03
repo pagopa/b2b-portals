@@ -18,10 +18,12 @@ const makeHeroProps = ({
   storeButtons,
   link,
   titleTag,
+  customBgColor,
   ...rest
 }: HeroSection & SiteWidePageData): HeroProps => ({
   ...rest,
   useHoverlay: false,
+  ...(customBgColor && { customBgColor }),
   ...(titleTag && { titleTag }),
   ...(subtitle && {
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),

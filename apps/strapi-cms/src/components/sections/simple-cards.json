@@ -42,7 +42,7 @@
       "required": true,
       "default": "left",
       "enum": [
-        "left", 
+        "left",
         "center",
         "none"
       ]
@@ -56,6 +56,11 @@
       "component": "components.cta-button-simple",
       "repeatable": true,
       "max": 2
+    },
+    "customBgColor": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
     }
   },
   "config": {}
