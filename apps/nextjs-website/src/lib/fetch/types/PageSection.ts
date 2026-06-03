@@ -210,6 +210,32 @@ const CardsSectionCodec = t.strict({
   customBgColor: t.union([t.string, t.null]),
 });
 
+const SimpleCardsItemCodec = t.strict({
+  label: t.union([t.string, t.null]),
+  title: t.string,
+  text: t.union([t.string, t.null]),
+  href: t.union([t.string, t.null]),
+  ariaLabel: t.union([t.string, t.null]),
+  icon: StrapiImageSchema,
+});
+
+const SimpleCardsSectionCodec = t.strict({
+  __component: t.literal('sections.simple-cards'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  title: t.union([t.string, t.null]),
+  subtitle: t.union([t.string, t.null]),
+  body: t.union([t.string, t.null]),
+  ctaButtons: t.array(CTAButtonSimpleCodec),
+  image: StrapiImageSchema,
+  items: t.array(SimpleCardsItemCodec),
+  textAlign: t.keyof({
+    left: null,
+    center: null,
+    none: null,
+  }),
+  sectionID: t.union([t.string, t.null]),
+});
+
 const RedirectSectionCodec = t.strict({
   __component: t.literal('sections.redirect'),
   redirectURL: t.string,
@@ -531,6 +557,7 @@ export const PageSectionCodec = t.union([
   MediaResourcesSectionCodec,
   DynamicsFormSectionPropsCodec,
   TextAndImageSectionCodec,
+  SimpleCardsSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -573,3 +600,4 @@ export type DynamicsFormSectionProps = t.TypeOf<
   typeof DynamicsFormSectionPropsCodec
 >;
 export type TextAndImageSection = t.TypeOf<typeof TextAndImageSectionCodec>;
+export type SimpleCardsSection = t.TypeOf<typeof SimpleCardsSectionCodec>;

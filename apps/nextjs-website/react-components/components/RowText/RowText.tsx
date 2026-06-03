@@ -23,6 +23,7 @@ const RowText = (props: RowTextProps) => {
       <Container
         sx={{
           width: { xs: '100%', md: '60%' },
+          maxWidth: { md: 684 },
           mx: 'auto',
           textAlign: layout,
           ml: { xs: 'auto', md: layout === 'left' ? 32 : 'auto' },

@@ -17,6 +17,8 @@ const LastUpdatedTemplate: StoryFn<LastUpdatedProps> = (args) => (
 export const LastUpdatedSectionWithLink: StoryFn<typeof LastUpdated> =
   LastUpdatedTemplate.bind({});
 LastUpdatedSectionWithLink.args = {
+  sectionID: null,
+  themeVariant: 'SEND',
   label: 'Ultimo aggiornamento',
   lastUpdated: '05 maggio 2026',
   link: {
@@ -29,6 +31,8 @@ LastUpdatedSectionWithLink.args = {
 export const LastUpdatedSectionNoLink: StoryFn<typeof LastUpdated> =
   LastUpdatedTemplate.bind({});
 LastUpdatedSectionNoLink.args = {
+  sectionID: null,
+  themeVariant: 'SEND',
   label: 'Ultimo aggiornamento',
   lastUpdated: '05 maggio 2026',
 };
