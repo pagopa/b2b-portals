@@ -55,164 +55,171 @@ export default function MobileNav({
   };
 
   return (
-    <Drawer
-      anchor={anchor}
-      open={isOpen}
-      onClose={onClose}
-      sx={drawerStyles}
-      role='navigation'
-    >
-      <Stack
-        sx={{
-          height: '100%',
-        }}
-        direction='row'
-        role='presentation'
-        aria-label={labels.mainMenu}
+    <>
+      <Drawer
+        anchor={anchor}
+        open={isOpen}
+        onClose={onClose}
+        sx={drawerStyles}
+        role='navigation'
       >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            gap: '1em',
-            backgroundColor: '#fff',
+        <Stack
+          sx={{
+            height: '100%',
           }}
+          direction='row'
+          role='presentation'
+          aria-label={labels.mainMenu}
         >
-          <List>
-            {menu.map((item, index) => {
-              const isSelected = openMenuIndex === index;
-              return (
-                <React.Fragment key={index}>
-                  <ListItem
-                    sx={{
-                      '&:hover': {
-                        backgroundColor: 'transparent',
-                      },
-                      '&:focus': {
-                        backgroundColor: 'transparent',
-                      },
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontWeight: 600,
-                      px: 2,
-                      color: '#0066CC',
-                    }}
-                  >
-                    <Link
-                      href={item.href ? item.href : `#${item.label}`}
-                      underline='none'
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              gap: '1em',
+              backgroundColor: '#fff',
+            }}
+          >
+            <List>
+              {menu.map((item, index) => {
+                const isSelected = openMenuIndex === index;
+                return (
+                  <React.Fragment key={index}>
+                    <ListItem
                       sx={{
-                        color: 'inherit',
+                        '&:hover': {
+                          backgroundColor: 'transparent',
+                        },
+                        '&:focus': {
+                          backgroundColor: 'transparent',
+                        },
                         display: 'flex',
                         alignItems: 'center',
                         fontWeight: 600,
+                        px: 2,
+                        color: '#0066CC',
                       }}
                     >
-                      <Typography
-                        style={{
-                          fontWeight: 600,
-                          color: 'inherit',
-                        }}
-                      >
-                        {item.label}
-                        <ExternalLinkIcon
-                          show={isValidExternalLink(item.href)}
-                        />
-                      </Typography>
-                    </Link>
-                    {item.items && (
-                      <Box
-                        onClick={() => toggleMenu(index)}
+                      <Link
+                        href={item.href ? item.href : `#${item.label}`}
+                        underline='none'
                         sx={{
-                          cursor: 'pointer',
                           color: 'inherit',
                           display: 'flex',
                           alignItems: 'center',
-                          ml: 1,
+                          fontWeight: 600,
                         }}
                       >
-                        <Image
-                          src={chevronBlueIcon}
-                          alt={isSelected ? labels.openMenu : labels.closeMenu}
+                        <Typography
                           style={{
-                            transition: 'transform 0.3s',
-                            transform: !isSelected
-                              ? 'rotate(180deg)'
-                              : 'rotate(0deg)',
-                          }}
-                        />
-                      </Box>
-                    )}
-                  </ListItem>
-                  {isSelected && item.items && (
-                    <List disablePadding>
-                      {item.items.map((subItem, subIndex) => (
-                        <ListItem
-                          key={subIndex}
-                          sx={{
-                            p: 0,
-                            '&:hover': {
-                              backgroundColor: 'transparent',
-                            },
-                            '&:focus': {
-                              backgroundColor: 'transparent',
-                            },
+                            fontWeight: 600,
+                            color: 'inherit',
                           }}
                         >
-                          <Link
-                            href={
-                              subItem.href ? subItem.href : `#${subItem.label}`
+                          {item.label}
+                          <ExternalLinkIcon
+                            show={isValidExternalLink(item.href)}
+                          />
+                        </Typography>
+                      </Link>
+                      {item.items && (
+                        <Box
+                          onClick={() => toggleMenu(index)}
+                          sx={{
+                            cursor: 'pointer',
+                            color: 'inherit',
+                            display: 'flex',
+                            alignItems: 'center',
+                            ml: 1,
+                          }}
+                        >
+                          <Image
+                            src={chevronBlueIcon}
+                            alt={
+                              isSelected ? labels.openMenu : labels.closeMenu
                             }
-                            sx={{ textDecoration: 'none', m: 0, pl: 4, py: 2 }}
+                            style={{
+                              transition: 'transform 0.3s',
+                              transform: !isSelected
+                                ? 'rotate(180deg)'
+                                : 'rotate(0deg)',
+                            }}
+                          />
+                        </Box>
+                      )}
+                    </ListItem>
+                    {isSelected && item.items && (
+                      <List disablePadding>
+                        {item.items.map((subItem, subIndex) => (
+                          <ListItem
+                            key={subIndex}
+                            sx={{
+                              p: 0,
+                              '&:hover': {
+                                backgroundColor: 'transparent',
+                              },
+                              '&:focus': {
+                                backgroundColor: 'transparent',
+                              },
+                            }}
                           >
-                            <ListItemText
-                              primary={
-                                <Typography
-                                  sx={{
-                                    fontWeight: 300,
-                                    py: 2,
-                                    color: '#0066CC',
-                                  }}
-                                >
-                                  {subItem.label}
-                                </Typography>
+                            <Link
+                              href={
+                                subItem.href
+                                  ? subItem.href
+                                  : `#${subItem.label}`
                               }
-                            />
-                          </Link>
-                        </ListItem>
-                      ))}
-                    </List>
-                  )}
-                </React.Fragment>
-              );
-            })}
-          </List>
-        </div>
-        <Box
-          sx={{
-            backgroundColor: 'rgba(0,0,0,0.5)',
-          }}
-        >
-          <IconButton
-            onClick={onClose}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 80,
-              height: 80,
-            }}
-          >
-            <Image
-              src={closeIcon}
-              alt={labels.closeMenu}
-              width={20}
-              height={20}
-            />
-          </IconButton>
-        </Box>
-      </Stack>
-    </Drawer>
+                              sx={{
+                                textDecoration: 'none',
+                                m: 0,
+                                pl: 4,
+                                py: 2,
+                              }}
+                            >
+                              <ListItemText
+                                primary={
+                                  <Typography
+                                    sx={{
+                                      fontWeight: 300,
+                                      py: 2,
+                                      color: '#0066CC',
+                                    }}
+                                  >
+                                    {subItem.label}
+                                  </Typography>
+                                }
+                              />
+                            </Link>
+                          </ListItem>
+                        ))}
+                      </List>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </List>
+          </div>
+          <Box>
+            <IconButton
+              onClick={onClose}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 80,
+                height: 80,
+              }}
+            >
+              <Image
+                src={closeIcon}
+                alt={labels.closeMenu}
+                width={20}
+                height={20}
+              />
+            </IconButton>
+          </Box>
+        </Stack>
+      </Drawer>
+    </>
   );
 }

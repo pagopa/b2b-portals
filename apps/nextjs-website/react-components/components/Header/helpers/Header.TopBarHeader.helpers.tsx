@@ -29,7 +29,7 @@ export const TopBarHeader = ({
         width: '100%',
         backgroundColor: '#004D99',
         color: '#FFFFFF',
-        p: { xs: '14px 24px', sm: '12px 60px' },
+        p: { xs: '14px 24px', md: '12px 60px' },
       }}
     >
       {topBarHeaderLogo && (

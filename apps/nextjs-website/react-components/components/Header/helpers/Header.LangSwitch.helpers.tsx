@@ -72,6 +72,7 @@ export default function LangSwitch({
           cursor: 'pointer',
           fontSize: 14,
           height: 24,
+          paddingInline: 1,
           '&:hover': {
             backgroundColor: 'transparent',
             color: 'inherit !important',
@@ -130,7 +131,7 @@ export default function LangSwitch({
               sx: {
                 borderRadius: '0 0 4px 4px',
                 overflow: 'initial',
-                minWidth: { xs: 'auto', sm: 170 },
+                minWidth: { xs: 'auto', md: 170 },
                 '&::before': {
                   content: '""',
                   position: 'absolute',

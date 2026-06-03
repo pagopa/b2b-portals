@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Stack, SxProps } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
@@ -28,10 +28,7 @@ const Header = ({
   );
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const pathname = usePathname();
-  const [isFixed, setIsFixed] = useState(false);
-  const [headerHeight, setHeaderHeight] = useState(0);
   const headerRef = useRef<HTMLDivElement | null>(null);
-  const preHeaderRef = useRef<HTMLDivElement | null>(null);
 
   const openHeader = () => {
     setMenuOpen(true);
@@ -50,14 +47,6 @@ const Header = ({
 
   const handleDropdownToggle = (index: number) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
-  };
-
-  const headerStyle: SxProps = {
-    width: '100%',
-    bgcolor: '#0066CC',
-    top: 0,
-    left: 0,
-    zIndex: 1,
   };
 
   const toggleAccessibility = (disableAccessibility: boolean) => {
@@ -79,125 +68,98 @@ const Header = ({
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (
-        headerRef &&
-        headerRef.current &&
-        preHeaderRef &&
-        preHeaderRef.current
-      ) {
-        const rectHeader = headerRef.current.getBoundingClientRect();
-        setHeaderHeight(rectHeader.height);
-        const rectPreHeader = preHeaderRef.current.getBoundingClientRect();
-        setIsFixed(rectPreHeader.height <= window.pageYOffset);
-      }
-    };
-
-    handleScroll();
-
-    window.addEventListener('scroll', handleScroll, {
-      passive: true,
-    });
-
-    window.addEventListener('resize', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
     toggleAccessibility(menuOpen || openDropdownIndex == null ? false : true);
   }, [openDropdownIndex, menuOpen]);
 
   return (
-    <Box component='header' role='banner'>
-      <div ref={preHeaderRef}>
-        <TopBarHeader
-          languages={languages}
-          activeLanguage={activeLanguage}
-          {...(topBarHeaderLogo && { topBarHeaderLogo })}
-          {...(topBarHeaderTitle && { topBarHeaderTitle })}
-          {...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile })}
-          isMobile={isMobile}
-        />
-      </div>
-
-      {isFixed && <Box sx={{ height: headerHeight, display: 'block' }}></Box>}
-      <Stack
-        ref={headerRef}
-        direction='column'
-        gap={{ xs: 0, md: 0 }}
-        sx={{
-          ...headerStyle,
-          ...(isFixed && {
-            position: 'fixed',
-          }),
-        }}
+    <>
+      <TopBarHeader
+        languages={languages}
+        activeLanguage={activeLanguage}
+        {...(topBarHeaderLogo && { topBarHeaderLogo })}
+        {...(topBarHeaderTitle && { topBarHeaderTitle })}
+        {...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile })}
+        isMobile={isMobile}
+      />
+      <Box
+        component='header'
+        role='banner'
+        position='sticky'
+        top={0}
+        zIndex={1}
       >
         <Stack
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'
-          sx={{ padding: { xs: '16px 24px', md: '24px 32px' } }}
-          color='#FFFFFF'
+          ref={headerRef}
+          direction='column'
+          gap={{ xs: 0, md: 0 }}
+          sx={{
+            width: '100%',
+            bgcolor: '#0066CC',
+          }}
         >
-          <HeaderTitle
-            product={product}
-            {...(logo ? { logo } : {})}
-            {...(mobileLogo ? { mobileLogo } : {})}
-            isMobile={isMobile}
-          />
-
-          {isMobile && (
-            <HamburgerMenu
-              onOpen={openHeader}
-              open={menuOpen}
-              ariaLabels={{
-                openMenu: labels.openMenu,
-              }}
-            />
-          )}
-        </Stack>
-
-        {!isMobile && (
           <Stack
             direction='row'
             justifyContent='space-between'
             alignItems='center'
-            sx={{
-              height: '56px',
-              padding: '0px 32px',
-            }}
+            sx={{ padding: { xs: '16px 24px', md: '16px 32px' } }}
+            color='#FFFFFF'
           >
-            <Navigation
-              labelMainMenu={labels.mainMenu}
-              menu={menu.map((menu, index) => ({
-                ...menu,
-                isOpen: openDropdownIndex === index,
-                onClick: () => handleMenuClick(index, menu.href),
-                onDropdownClick: () => handleDropdownToggle(index),
-                active: pathname === menu.href || pathname === '/' + menu.href,
-              }))}
-              theme='dark'
-              isMobile={false}
+            <HeaderTitle
+              product={product}
+              {...(logo ? { logo } : {})}
+              {...(mobileLogo ? { mobileLogo } : {})}
+              isMobile={isMobile}
             />
-          </Stack>
-        )}
 
-        {isMobile && (
-          <MobileNav
-            isOpen={menuOpen}
-            onClose={closeHeader}
-            labels={labels}
-            anchor='left'
-            menu={menu}
-            theme='dark'
-          />
-        )}
-      </Stack>
-    </Box>
+            {isMobile && (
+              <HamburgerMenu
+                onOpen={openHeader}
+                ariaLabels={{
+                  openMenu: labels.openMenu,
+                }}
+              />
+            )}
+          </Stack>
+
+          {!isMobile && (
+            <Stack
+              direction='row'
+              justifyContent='space-between'
+              alignItems='center'
+              sx={{
+                height: '56px',
+                padding: '0px 32px',
+              }}
+            >
+              <Navigation
+                labelMainMenu={labels.mainMenu}
+                menu={menu.map((menu, index) => ({
+                  ...menu,
+                  isOpen: openDropdownIndex === index,
+                  onClick: () => handleMenuClick(index, menu.href),
+                  onDropdownClick: () => handleDropdownToggle(index),
+                  active:
+                    pathname === menu.href || pathname === '/' + menu.href,
+                }))}
+                theme='dark'
+                isMobile={false}
+              />
+            </Stack>
+          )}
+
+          {isMobile && (
+            <MobileNav
+              isOpen={menuOpen}
+              onClose={closeHeader}
+              labels={labels}
+              anchor='left'
+              menu={menu}
+              theme='dark'
+            />
+          )}
+        </Stack>
+      </Box>
+    </>
   );
 };
 
