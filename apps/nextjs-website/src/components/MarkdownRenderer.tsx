@@ -1,6 +1,6 @@
 import { marked } from 'marked';
 import parse from 'html-react-parser';
-import { Typography } from '@mui/material';
+import { SxProps, Theme, Typography } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { LocalizeMarkdownLinks } from '@/lib/linkLocalization';
 import { Locale } from '@/lib/fetch/siteWideSEO';
@@ -10,6 +10,7 @@ type MarkdownRendererProps = {
   locale: Locale;
   defaultLocale: Locale;
   variant?: Variant;
+  sx?: SxProps<Theme>;
 };
 
 const MarkdownRenderer = ({
@@ -17,8 +18,9 @@ const MarkdownRenderer = ({
   locale,
   defaultLocale,
   variant,
+  sx,
 }: MarkdownRendererProps) => (
-  <Typography variant={variant || 'body1'} component='div'>
+  <Typography variant={variant || 'body1'} component='div' {...(sx && { sx })}>
     {parse(
       // @ts-expect-error: Temporary workaround until the library offers improved API. See: https://github.com/markedjs/marked/pull/3116
       marked.parse(LocalizeMarkdownLinks({ markdown, locale, defaultLocale }), {
