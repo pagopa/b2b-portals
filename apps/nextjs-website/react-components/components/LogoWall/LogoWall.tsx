@@ -6,12 +6,6 @@ import ContainerRC from '../common/ContainerRC';
 import { resolveThemeVariant } from '../../theme';
 import { LogoWallProps } from '../../types/LogoWall/LogoWall.types';
 
-const imageStyle = {
-  width: '100%',
-  height: 'auto',
-  objectFit: 'contain',
-} as const;
-
 const LogoWall = ({
   theme,
   sectionID,
@@ -23,11 +17,52 @@ const LogoWall = ({
   const { palette } = muiTheme;
 
   const ctx = { palette, theme };
+  const hasFirstGroup = firstGroup.length > 0;
 
   const backgroundColor = resolveThemeVariant<string>(
     'sectionBackgroundColor',
     themeVariant,
     ctx,
+  );
+
+  const renderLogo = (
+    item: LogoWallProps['firstGroup'][number],
+    key: string,
+    index: number,
+    row: number,
+  ) => (
+    <Box
+      key={key}
+      sx={{
+        gridRow: {
+          md: row,
+        },
+        gridColumn: {
+          md: index + 1,
+        },
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: {
+          xs: 'center',
+          md: 'flex-start',
+        },
+        width: '100%',
+        minWidth: 0,
+      }}
+    >
+      <Image
+        src={item.logoURL}
+        alt={item.title}
+        width={0}
+        height={0}
+        style={{
+          width: 'auto',
+          maxWidth: '100%',
+          height: 'auto',
+          objectFit: 'contain',
+        }}
+      />
+    </Box>
   );
 
   return (
@@ -62,61 +97,13 @@ const LogoWall = ({
           alignItems: 'center',
         }}
       >
-        {firstGroup.map((item, index) => (
-          <Box
-            key={`first-${index}`}
-            sx={{
-              gridRow: {
-                md: 1,
-              },
-              gridColumn: {
-                md: index + 1,
-              },
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: {
-                xs: 'center',
-                md: 'flex-start',
-              },
-            }}
-          >
-            <Image
-              src={item.logoURL}
-              alt={item.title}
-              width={0}
-              height={0}
-              style={imageStyle}
-            />
-          </Box>
-        ))}
+        {firstGroup.map((item, index) =>
+          renderLogo(item, `first-${index}`, index, 1),
+        )}
 
-        {secondGroup.map((item, index) => (
-          <Box
-            key={`second-${index}`}
-            sx={{
-              gridRow: {
-                md: 2,
-              },
-              gridColumn: {
-                md: index + 1,
-              },
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: {
-                xs: 'center',
-                md: 'flex-start',
-              },
-            }}
-          >
-            <Image
-              src={item.logoURL}
-              alt={item.title}
-              width={0}
-              height={0}
-              style={imageStyle}
-            />
-          </Box>
-        ))}
+        {secondGroup.map((item, index) =>
+          renderLogo(item, `second-${index}`, index, hasFirstGroup ? 2 : 1),
+        )}
       </Box>
     </ContainerRC>
   );
