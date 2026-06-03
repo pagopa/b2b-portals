@@ -525,6 +525,19 @@ const TextAndImageSectionCodec = t.intersection([
   TextAndImageSectionContentCodec,
 ]);
 
+const LogoWallItemCodec = t.strict({
+  title: t.string,
+  logo: StrapiImageRequiredSchema,
+});
+
+const LogoWallSectionCodec = t.strict({
+  __component: t.literal('sections.logo-wall'),
+  theme: t.union([t.literal('light'), t.literal('dark')]),
+  sectionID: t.union([t.string, t.null]),
+  firstGroup: t.array(LogoWallItemCodec),
+  secondGroup: t.array(LogoWallItemCodec),
+});
+
 export const PageSectionCodec = t.union([
   HeroSectionCodec,
   EditorialSectionCodec,
@@ -558,6 +571,7 @@ export const PageSectionCodec = t.union([
   DynamicsFormSectionPropsCodec,
   TextAndImageSectionCodec,
   SimpleCardsSectionCodec,
+  LogoWallSectionCodec,
 ]);
 
 export type PageSection = t.TypeOf<typeof PageSectionCodec>;
@@ -601,3 +615,4 @@ export type DynamicsFormSectionProps = t.TypeOf<
 >;
 export type TextAndImageSection = t.TypeOf<typeof TextAndImageSectionCodec>;
 export type SimpleCardsSection = t.TypeOf<typeof SimpleCardsSectionCodec>;
+export type LogoWallSection = t.TypeOf<typeof LogoWallSectionCodec>;

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_components_logo_wall_items",
+  "info": {
+    "displayName": "LogoWallItem"
+  },
+  "options": {},
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}
