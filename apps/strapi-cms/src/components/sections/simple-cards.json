@@ -1,0 +1,62 @@
+{
+  "collectionName": "components_sections_simple_cards",
+  "info": {
+    "displayName": "SimpleCards"
+  },
+  "options": {},
+  "attributes": {
+    "theme": {
+      "type": "enumeration",
+      "required": true,
+      "default": "light",
+      "enum": [
+        "light",
+        "dark"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "body": {
+      "type": "richtext"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "items": {
+      "type": "component",
+      "component": "components.simple-cards-item",
+      "repeatable": true,
+      "required": true,
+      "min": 1
+    },
+    "textAlign": {
+      "type": "enumeration",
+      "required": true,
+      "default": "left",
+      "enum": [
+        "left", 
+        "center",
+        "none"
+      ]
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "ctaButtons": {
+      "type": "component",
+      "component": "components.cta-button-simple",
+      "repeatable": true,
+      "max": 2
+    }
+  },
+  "config": {}
+}

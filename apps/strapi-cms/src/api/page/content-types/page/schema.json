@@ -74,6 +74,7 @@
         "sections.rich-banner",
         "sections.redirect",
         "sections.last-updated",
+        "sections.simple-cards",
         "sections.feedback-form"
       ],
       "required": true,
