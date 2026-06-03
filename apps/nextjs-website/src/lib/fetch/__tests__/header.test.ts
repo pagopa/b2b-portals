@@ -48,7 +48,6 @@ const headerResponse: HeaderData = {
         topBarHeaderTitle: 'Title bar top',
         topBarHeaderTitleMobile: 'Title bar top mobile',
         topBarHeaderLink: '#',
-        theme: 'dark',
         mobileLogo: null,
         topBarHeaderLogo: null,
       },

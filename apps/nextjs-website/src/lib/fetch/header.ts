@@ -92,7 +92,6 @@ const StandardHeaderCodec = t.strict({
   topBarHeaderTitle: t.union([t.string, t.null]),
   topBarHeaderTitleMobile: t.union([t.string, t.null]),
   topBarHeaderLink: t.union([t.string, t.null]),
-  theme: t.union([t.literal('light'), t.literal('dark')]),
 });
 
 const HeaderSocialLinkCodec = t.strict({

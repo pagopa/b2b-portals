@@ -129,7 +129,6 @@ const makeHeaderProps = (
     locale,
     localizedLinks,
     activeLocale,
-    theme,
   }: StandardHeaderData & {
     defaultLocale: Locale;
     activeLocale: Locale;
@@ -138,6 +137,7 @@ const makeHeaderProps = (
   },
   pathname: string,
 ): HeaderProps => ({
+  theme: 'dark',
   defaultLocale,
   languages: localizedLinks,
   activeLanguage: localizedLinks.find((l) => l.id === activeLocale) ?? {
@@ -145,7 +145,6 @@ const makeHeaderProps = (
     value: activeLocale,
     href: '/',
   },
-  theme,
   ...(logo && {
     logo: {
       src: logo.url,
@@ -184,10 +183,14 @@ const makeHeaderProps = (
   ...(topBarHeaderLink && { topBarHeaderLink }),
   product: {
     name: productName,
-    href: '/',
+    href: LocalizeURL({
+      URL: '/',
+      locale,
+      defaultLocale,
+    }),
   },
   menu: menu.links.map((link) => ({
-    theme,
+    theme: 'dark',
     label: link.label,
     href: link.page?.slug ?? '',
     ...(link.sublinks.length > 0 && {

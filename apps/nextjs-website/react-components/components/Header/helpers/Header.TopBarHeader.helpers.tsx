@@ -1,6 +1,7 @@
 import { Box, Link, Typography } from '@mui/material';
 import LangSwitch from './Header.LangSwitch.helpers';
 import { LangSwitchProps } from '@react-components/types/Footer/Footer.types';
+import { isValidExternalLink } from '@react-components/components/common/Common';
 
 interface Props extends LangSwitchProps {
   topBarHeaderLogo?: {
@@ -24,7 +25,13 @@ const TopBarHeaderCheckLink = ({
   topBarHeaderLink ? (
     <Link
       href={topBarHeaderLink}
-      sx={{ textDecoration: 'none', color: 'inherit' }}
+      sx={{
+        textDecoration: 'none',
+        color: 'inherit',
+        display: 'flex',
+        alignItems: 'center',
+      }}
+      {...(isValidExternalLink(topBarHeaderLink) && { target: '_blank' })}
     >
       {children}
     </Link>

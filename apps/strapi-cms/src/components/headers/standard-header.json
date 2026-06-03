@@ -43,15 +43,6 @@
         "images"
       ]
     },
-    "theme": {
-      "type": "enumeration",
-      "required": true,
-      "default": "dark",
-      "enum": [
-        "light",
-        "dark"
-      ]
-    },
     "topBarHeaderLink": {
       "type": "string"
     }

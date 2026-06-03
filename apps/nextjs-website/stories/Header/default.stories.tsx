@@ -12,7 +12,6 @@ const HeaderTemplate: StoryFn<HeaderProps> = (args) => <Header {...args} />;
 
 export const HeaderFull: StoryFn<typeof Header> = HeaderTemplate.bind({});
 HeaderFull.args = {
-  theme: 'dark',
   product: {
     name: 'IT-Wallet',
     href: '#',

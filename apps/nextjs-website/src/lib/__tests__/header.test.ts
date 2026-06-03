@@ -15,7 +15,6 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
   topBarHeaderLink: '#',
   topBarHeaderTitle: 'Title bar top',
   topBarHeaderTitleMobile: 'Title bar top mobile',
-  theme: 'dark',
 };
 const megaHeaderBaseFields: Omit<MegaHeaderData, 'menu'> = {
   __component: 'headers.mega-header',
