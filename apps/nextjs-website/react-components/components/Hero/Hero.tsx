@@ -17,6 +17,7 @@ const Hero = (props: HeroProps) => {
     useHoverlay = true,
     image,
     sectionID,
+    customBgColor,
   } = props;
 
   const { palette } = useTheme();
@@ -24,11 +25,9 @@ const Hero = (props: HeroProps) => {
   const overlay = getOverlay(useHoverlay, theme);
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveThemeVariant<string>(
-    'sectionBackgroundColor',
-    themeVariant,
-    ctx,
-  );
+  const backgroundColor =
+    customBgColor ??
+    resolveThemeVariant<string>('sectionBackgroundColor', themeVariant, ctx);
 
   const BackgroundImage = isJSX(background) ? (
     background

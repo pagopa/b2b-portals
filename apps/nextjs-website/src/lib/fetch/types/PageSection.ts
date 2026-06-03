@@ -47,6 +47,7 @@ const HeroSectionCodec = t.strict({
   ctaButtons: t.array(CTAButtonSimpleCodec),
   storeButtons: t.union([StoreButtonsCodec, t.null]),
   link: t.union([LinkCodec, t.null]),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const EditorialContentCodec = t.strict({
@@ -234,6 +235,7 @@ const SimpleCardsSectionCodec = t.strict({
     none: null,
   }),
   sectionID: t.union([t.string, t.null]),
+  customBgColor: t.union([t.string, t.null]),
 });
 
 const RedirectSectionCodec = t.strict({

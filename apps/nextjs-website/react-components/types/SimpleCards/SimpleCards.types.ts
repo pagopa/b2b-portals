@@ -14,6 +14,7 @@ export interface SimpleCardsProps extends SectionProps {
   imageAlt?: string;
   textAlign?: 'left' | 'center' | 'none';
   items: SimpleCardsItemProps[];
+  customBgColor?: string;
 }
 
 export interface SimpleCardsItemProps {
