@@ -7,6 +7,25 @@ import { Eyelet } from './Editorial.helpers';
 import { TextColor, ExtraTextColor } from '../common/Common.helpers';
 import { resolveThemeVariant } from '../../theme';
 
+const renderTitleWithLineBreaks = (title: string) => {
+  const titleParts = title.split(/<br\s*\/?>|\\n|\r?\n/i);
+
+  if (titleParts.length === 1) {
+    return title;
+  }
+
+  return (
+    <>
+      {titleParts.map((titlePart, index) => (
+        <React.Fragment key={`${titlePart}-${index}`}>
+          {index > 0 && <br />}
+          {titlePart}
+        </React.Fragment>
+      ))}
+    </>
+  );
+};
+
 export const Content = ({
   eyelet,
   title,
@@ -34,7 +53,7 @@ export const Content = ({
       {Eyelet(eyeletColor, eyelet, eyeletId)}
       <Title
         textColor={textColor}
-        title={title}
+        title={renderTitleWithLineBreaks(title)}
         variant='h4'
         textAlign='left'
         component={titleTag}

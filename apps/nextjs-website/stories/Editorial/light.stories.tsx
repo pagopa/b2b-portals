@@ -90,6 +90,14 @@ LightEditorialNoEyelet.args = {
   ctaButtons: generateCtaButtons(1),
 };
 
+export const LightEditorialTitleWithLineBreak: StoryFn<typeof Editorial> =
+  EditorialTemplate.bind({});
+LightEditorialTitleWithLineBreak.args = {
+  ...defaultPropsLight,
+  title: 'Editorial<br/>Title\\nSubtitle',
+  ctaButtons: generateCtaButtons(1),
+};
+
 export const LightEditorialNoEyeletReversed: StoryFn<typeof Editorial> =
   EditorialTemplate.bind({});
 LightEditorialNoEyeletReversed.args = {
