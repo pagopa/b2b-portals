@@ -1,5 +1,5 @@
 import { Card, CardContent, Typography, Stack, Link, Box } from '@mui/material';
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { CardsItemProps } from '../../types/Cards/Cards.types';
 import { Title, Body, isValidExternalLink, LinkIcon } from '../common/Common';
 import Image from 'next/image';
@@ -53,6 +53,7 @@ const CardsItem = ({
           flexDirection: 'column',
           justifyContent: 'center',
           minHeight: '200px',
+          width: '100%',
         }}
       >
         <Stack px={4} justifyContent='flex-start' alignItems='flex-start'>
@@ -94,7 +95,8 @@ const CardsItem = ({
                   direction='row'
                   alignItems='center'
                   color={linkColor}
-                  justifyContent='flex-start'
+                  justifyContent='space-between'
+                  width='100%'
                 >
                   <Link
                     color={linkColor}
@@ -116,8 +118,13 @@ const CardsItem = ({
                     })}
                     showExternalLinkIcon={isValidExternalLink(link.href)}
                     internalLinkIcon={
-                      <ArrowRightAltIcon
-                        sx={{ color: linkColor, fontSize: 18, marginLeft: 1 }}
+                      <ArrowForwardIcon
+                        sx={{
+                          color: linkColor,
+                          height: 24,
+                          marginLeft: 1,
+                          width: 24,
+                        }}
                       />
                     }
                   />
