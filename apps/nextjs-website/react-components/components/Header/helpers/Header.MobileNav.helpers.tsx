@@ -54,6 +54,8 @@ export default function MobileNav({
     setOpenMenuIndex(openMenuIndex === index ? null : index);
   };
 
+  const onClickFn = (index: number, menu: MenuDropdownProp) =>
+    menu.items && (!menu.href || menu.href === '') ? toggleMenu(index) : null;
   return (
     <>
       <Drawer
@@ -101,7 +103,8 @@ export default function MobileNav({
                       }}
                     >
                       <Link
-                        href={item.href ? item.href : `#${item.label}`}
+                        {...(item.href && { href: item.href })}
+                        onClick={() => onClickFn(index, item)}
                         underline='none'
                         sx={{
                           color: 'inherit',
