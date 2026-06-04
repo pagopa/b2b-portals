@@ -18,8 +18,10 @@ export const makeSimpleCardsProps = ({
   image,
   items,
   textAlign,
+  customBgColor,
   ...rest
 }: SimpleCardsSection & SiteWidePageData): SimpleCardsProps => ({
+  ...(customBgColor && { customBgColor }),
   ...(title && { title }),
   ...(subtitle && { subtitle }),
   ...(body && {

@@ -25,6 +25,7 @@ export interface HeroProps extends SectionProps, HeroTextProps {
         sizes: string;
       };
   readonly useHoverlay?: boolean;
+  readonly customBgColor?: string;
 }
 
 export interface StoreButtonsProps {

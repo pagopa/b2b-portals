@@ -19,15 +19,14 @@ const SimpleCards = ({
   imageAlt,
   textAlign,
   sectionID,
+  customBgColor,
 }: SimpleCardsProps) => {
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
-  const backgroundColor = resolveThemeVariant<string>(
-    'sectionBackgroundColor',
-    themeVariant,
-    ctx,
-  );
+  const backgroundColor =
+    customBgColor ??
+    resolveThemeVariant<string>('sectionBackgroundColor', themeVariant, ctx);
 
   const textColor = TextColor(theme);
   const isCentered = textAlign === 'center';
@@ -56,7 +55,10 @@ const SimpleCards = ({
       <Box sx={{ width: '100%' }}>
         {shouldShowEditorial && (
           <Stack
-            direction={{ xs: 'column', md: shouldShowImage ? 'row' : 'column' }}
+            direction={{
+              xs: 'column-reverse',
+              md: shouldShowImage ? 'row' : 'column',
+            }}
             alignItems={{
               xs: isCentered ? 'center' : 'flex-start',
               md: shouldShowImage
@@ -71,9 +73,14 @@ const SimpleCards = ({
             color={textColor}
             textAlign={editorialTextAlign}
           >
-            <Box sx={{ width: '100%', maxWidth: { xs: '100%', md: 680 } }}>
+            <Box
+              sx={{
+                width: '100%',
+                maxWidth: { xs: '100%', md: shouldShowImage ? 448 : 684 },
+              }}
+            >
               <Stack
-                spacing={3}
+                spacing={2}
                 color='inherit'
                 sx={{
                   alignItems: isCentered ? 'center' : 'flex-start',
@@ -167,7 +174,7 @@ const SimpleCards = ({
                 sx={{
                   width: { xs: '100%', md: 260 },
                   display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: { xs: 'flex-start', md: 'center' },
                   alignItems: 'center',
                   flexShrink: 0,
                   mt: { xs: 2, md: 0 },

@@ -31,51 +31,53 @@
     },
     "theme": {
       "type": "enumeration",
+      "required": true,
+      "default": "light",
       "enum": [
         "light",
         "dark"
-      ],
-      "default": "light",
-      "required": true
+      ]
     },
     "inverse": {
       "type": "boolean",
-      "default": false,
-      "required": false
+      "required": false,
+      "default": false
     },
     "size": {
       "type": "enumeration",
+      "required": true,
+      "default": "small",
       "enum": [
         "small",
         "medium",
         "big"
-      ],
-      "default": "small",
-      "required": true
+      ]
     },
     "sectionID": {
       "type": "string",
-      "regex": "^[a-z]+[a-z\\-]*$",
-      "unique": false
+      "unique": false,
+      "regex": "^[a-z]+[a-z\\-]*$"
     },
     "ctaButtons": {
       "type": "component",
-      "repeatable": true,
       "component": "components.cta-button-simple",
+      "repeatable": true,
       "max": 2
     },
     "storeButtons": {
       "type": "component",
-      "repeatable": false,
-      "component": "components.store-buttons"
+      "component": "components.store-buttons",
+      "repeatable": false
     },
     "link": {
       "type": "component",
-      "repeatable": false,
-      "component": "components.link"
+      "component": "components.link",
+      "repeatable": false
     },
     "titleTag": {
       "type": "enumeration",
+      "required": false,
+      "default": "p",
       "enum": [
         "h1",
         "h2",
@@ -84,9 +86,12 @@
         "h5",
         "h6",
         "p"
-      ],
-      "required": false,
-      "default": "p"
+      ]
+    },
+    "customBgColor": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
     }
   }
 }

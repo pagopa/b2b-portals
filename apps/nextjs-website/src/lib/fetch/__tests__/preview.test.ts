@@ -86,6 +86,7 @@ const pageDataResponse: PreviewPageData = {
           label: 'example',
           ariaLabel: 'label',
         },
+        customBgColor: null,
       },
     ],
     publishedAt: '2024-11-28T15:14:29.486Z',

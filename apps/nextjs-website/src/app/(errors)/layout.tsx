@@ -57,6 +57,7 @@ const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
             {...headerProps}
             locale={defaultLocale}
             defaultLocale={defaultLocale}
+            localizedLinks={localizedLinks}
           />
           {children}
           <Footer

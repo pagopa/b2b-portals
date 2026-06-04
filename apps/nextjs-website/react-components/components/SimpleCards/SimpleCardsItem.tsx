@@ -91,6 +91,7 @@ const SimpleCardsItem = ({
             fontWeight={700}
             color='text.primary'
             m={0}
+            lineHeight={1}
           >
             {href ? (
               <Link
@@ -124,7 +125,7 @@ const SimpleCardsItem = ({
             mt='auto'
             textTransform='uppercase'
             fontSize='14px'
-            fontWeight={600}
+            fontWeight={400}
             color='text.secondary'
           >
             {label}

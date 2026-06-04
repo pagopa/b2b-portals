@@ -1,5 +1,6 @@
 import { StackProps, LinkProps as LinkPropsMUI } from '@mui/material';
-import { LinkProps, Theme } from '../common/Common.types';
+import { LinkProps, Locale, Theme } from '../common/Common.types';
+import { LangSwitchProps } from '../Footer/Footer.types';
 
 export interface HeaderSideDrawerCtaCardProps {
   readonly title: string;
@@ -28,13 +29,29 @@ export interface CardData {
   readonly href: string;
 }
 
-export interface HeaderProps extends HeaderTitleProps, NavigationProps {
-  drawer?: HeaderSideDrawerProps;
-  supportLink?: string;
+export interface HeaderProps
+  extends HeaderTitleProps,
+    NavigationProps,
+    LangSwitchProps {
+  readonly defaultLocale: Locale;
+  readonly mobileLogo?: {
+    src: string;
+    alt: string;
+    href: string;
+  };
+  readonly topBarHeaderLogo?: {
+    src: string;
+    alt: string;
+    href: string;
+  };
+  readonly topBarHeaderTitle?: string;
+  readonly topBarHeaderTitleMobile?: string;
+  readonly topBarHeaderLink?: string;
   readonly labels: {
     openMenu: string;
     closeMenu: string;
     shortMainMenu: string;
+    mainMenu: string;
   };
 }
 
@@ -54,7 +71,6 @@ export interface MenuDropdownProp
   isMobile?: boolean;
   onDropdownClick?: () => void;
   theme: Theme;
-  alignRight?: boolean;
 }
 
 export interface NavigationProps {
@@ -63,13 +79,16 @@ export interface NavigationProps {
 }
 
 export interface HeaderTitleProps {
-  theme: Theme;
   product: {
     name: string;
     href?: string;
   };
-  beta: boolean;
   logo?: {
+    src: string;
+    alt: string;
+    href: string;
+  };
+  mobileLogo?: {
     src: string;
     alt: string;
     href: string;
