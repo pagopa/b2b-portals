@@ -75,7 +75,8 @@
         "sections.redirect",
         "sections.last-updated",
         "sections.simple-cards",
-        "sections.feedback-form"
+        "sections.feedback-form",
+        "sections.logo-wall"
       ],
       "required": true,
       "min": 1

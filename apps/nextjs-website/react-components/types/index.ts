@@ -33,6 +33,7 @@ import { RichBannerProps } from './RichBanner/RichBanner.types';
 import { LabelsProviderProps } from './LabelsProvider/LabelsProvider.types';
 import { SimpleCardsProps } from './SimpleCards/SimpleCards.types';
 import { FeedbackFormProps } from './FeedbackForm/FeedbackForm.types';
+import { LogoWallProps } from './LogoWall/LogoWall.types';
 
 export type {
   HeroProps,
@@ -70,4 +71,5 @@ export type {
   LabelsProviderProps,
   SimpleCardsProps,
   FeedbackFormProps,
+  LogoWallProps,
 };

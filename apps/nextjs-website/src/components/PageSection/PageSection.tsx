@@ -35,6 +35,7 @@ import LastUpdated from '../LastUpdated';
 import { PagePublishDates } from '@/lib/fetch/navigation';
 import SimpleCards from '../SimpleCards';
 import FeedbackForm from '../FeedbackForm';
+import LogoWall from '../LogoWall';
 
 // eslint-disable-next-line complexity
 const PageSection = (
@@ -109,6 +110,8 @@ const PageSection = (
       return <SimpleCards {...props} />;
     case 'sections.feedback-form':
       return <FeedbackForm {...props} />;
+    case 'sections.logo-wall':
+      return <LogoWall {...props} />;
     default:
       return null;
   }

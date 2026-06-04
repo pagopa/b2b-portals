@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_sections_logo_walls",
+  "info": {
+    "displayName": "LogoWall"
+  },
+  "options": {},
+  "attributes": {
+    "theme": {
+      "type": "enumeration",
+      "required": true,
+      "default": "light",
+      "enum": [
+        "light",
+        "dark"
+      ]
+    },
+    "sectionID": {
+      "type": "string",
+      "regex": "^[a-z]+[a-z\\-]*$"
+    },
+    "firstGroup": {
+      "type": "component",
+      "component": "components.logo-wall-item",
+      "repeatable": true,
+      "required": true,
+      "min": 1
+    },
+    "secondGroup": {
+      "type": "component",
+      "component": "components.logo-wall-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
