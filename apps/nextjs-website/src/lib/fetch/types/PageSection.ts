@@ -530,6 +530,7 @@ const TextAndImageSectionCodec = t.intersection([
 const LogoWallItemCodec = t.strict({
   title: t.string,
   logo: StrapiImageRequiredSchema,
+  href: t.union([t.string, t.null]),
 });
 
 const LogoWallSectionCodec = t.strict({

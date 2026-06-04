@@ -9,11 +9,16 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "title": {
       "type": "string",
       "required": true
+    },
+    "href": {
+      "type": "string"
     }
   },
   "config": {}

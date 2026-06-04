@@ -18,10 +18,12 @@ const firstGroupLogos: LogoWallItemProps[] = [
   {
     title: "Finanziato dall'Unione europea - NextGenerationEU",
     logoURL: euNextGenLogo.src,
+    href: 'https://next-generation-eu.europa.eu/',
   },
   {
     title: 'Dipartimento per la trasformazione digitale',
     logoURL: dtdLogo.src,
+    href: 'https://innovazione.gov.it/',
   },
 ];
 
@@ -29,18 +31,22 @@ const secondGroupLogos: LogoWallItemProps[] = [
   {
     title: 'Agenzia per la cybersicurezza nazionale',
     logoURL: acnLogo.src,
+    href: 'https://www.acn.gov.it/',
   },
   {
     title: "AGID - Agenzia per l'Italia Digitale",
     logoURL: agidLogo.src,
+    href: 'https://www.agid.gov.it/',
   },
   {
     title: 'IPZS - Istituto Poligrafico e Zecca dello Stato',
     logoURL: ipzsLogo.src,
+    href: 'https://www.ipzs.it/',
   },
   {
     title: 'PagoPA',
     logoURL: pagopaLogo.src,
+    href: 'https://www.pagopa.it/',
   },
 ];
 
