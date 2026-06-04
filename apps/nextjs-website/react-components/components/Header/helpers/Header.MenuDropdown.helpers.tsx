@@ -93,8 +93,9 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             '&:hover': {
               textDecoration: 'none',
             },
+            cursor: 'pointer',
           }}
-          href={button.href ? button.href : `#${label}`}
+          {...(button.href && { href: button.href })}
           target={isValidExternalLink(button.href) ? '_blank' : '_self'}
           onClick={onClick}
         >

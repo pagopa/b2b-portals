@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, IconButton, Stack } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { HeaderProps } from '@react-components/types/Header/Header.types';
+import {
+  HeaderProps,
+  MenuDropdownProp,
+} from '@react-components/types/Header/Header.types';
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
 import { Navigation } from './helpers/Header.Navigation.helpers';
 import menuIcon from '@react-components/assets/icons/icon-menu-white.svg';
@@ -40,10 +43,9 @@ const Header = ({
     setMenuOpen(false);
   };
 
-  const handleMenuClick = (index: number, href?: string) => {
+  const handleMenuClick = (href?: string) => {
     if (href) {
       window.location.href = href;
-      handleDropdownToggle(index);
     }
   };
 
@@ -72,6 +74,11 @@ const Header = ({
   useEffect(() => {
     toggleAccessibility(menuOpen || openDropdownIndex == null ? false : true);
   }, [openDropdownIndex, menuOpen]);
+
+  const onClickFn = (index: number, menu: MenuDropdownProp) =>
+    menu.items && (!menu.href || menu.href === '')
+      ? handleDropdownToggle(index)
+      : handleMenuClick(menu.href);
 
   return (
     <>
@@ -144,7 +151,7 @@ const Header = ({
                 menu={menu.map((menu, index) => ({
                   ...menu,
                   isOpen: openDropdownIndex === index,
-                  onClick: () => handleMenuClick(index, menu.href),
+                  onClick: () => onClickFn(index, menu),
                   onDropdownClick: () => handleDropdownToggle(index),
                   active:
                     pathname === menu.href || pathname === '/' + menu.href,
