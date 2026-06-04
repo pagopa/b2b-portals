@@ -53,6 +53,7 @@ const CardsItem = ({
           flexDirection: 'column',
           justifyContent: 'center',
           minHeight: '200px',
+          width: '100%',
         }}
       >
         <Stack px={4} justifyContent='flex-start' alignItems='flex-start'>
@@ -118,7 +119,12 @@ const CardsItem = ({
                     showExternalLinkIcon={isValidExternalLink(link.href)}
                     internalLinkIcon={
                       <ArrowForwardIcon
-                        sx={{ color: linkColor, fontSize: 18, marginLeft: 1 }}
+                        sx={{
+                          color: linkColor,
+                          height: 24,
+                          marginLeft: 1,
+                          width: 24,
+                        }}
                       />
                     }
                   />
