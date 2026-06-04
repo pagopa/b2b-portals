@@ -9,7 +9,10 @@
       "type": "enumeration",
       "required": true,
       "default": "light",
-      "enum": ["light", "dark"]
+      "enum": [
+        "light",
+        "dark"
+      ]
     },
     "sectionID": {
       "type": "string",
@@ -19,13 +22,13 @@
       "type": "component",
       "component": "components.logo-wall-item",
       "repeatable": true,
-      "max": 2
+      "required": true,
+      "min": 1
     },
     "secondGroup": {
       "type": "component",
       "component": "components.logo-wall-item",
-      "repeatable": true,
-      "max": 4
+      "repeatable": true
     }
   },
   "config": {}

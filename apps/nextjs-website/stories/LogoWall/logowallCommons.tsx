@@ -14,7 +14,7 @@ export const LogoWallTemplate: StoryFn<LogoWallProps> = (args) => (
   <LogoWall {...args} />
 );
 
-const firstRowLogos: LogoWallItemProps[] = [
+const firstGroupLogos: LogoWallItemProps[] = [
   {
     title: "Finanziato dall'Unione europea - NextGenerationEU",
     logoURL: euNextGenLogo.src,
@@ -25,7 +25,7 @@ const firstRowLogos: LogoWallItemProps[] = [
   },
 ];
 
-const secondRowLogos: LogoWallItemProps[] = [
+const secondGroupLogos: LogoWallItemProps[] = [
   {
     title: 'Agenzia per la cybersicurezza nazionale',
     logoURL: acnLogo.src,
@@ -44,7 +44,19 @@ const secondRowLogos: LogoWallItemProps[] = [
   },
 ];
 
-const generateDefaultProps = (
+const manyFirstGroupLogos: LogoWallItemProps[] = [
+  ...firstGroupLogos,
+  secondGroupLogos[0]!,
+  secondGroupLogos[1]!,
+  secondGroupLogos[2]!,
+];
+
+const manySecondGroupLogos: LogoWallItemProps[] = [
+  ...secondGroupLogos,
+  firstGroupLogos[0]!,
+];
+
+const generateLogoWallProps = (
   theme: 'light' | 'dark',
   firstGroup: LogoWallItemProps[],
   secondGroup: LogoWallItemProps[],
@@ -56,62 +68,12 @@ const generateDefaultProps = (
   secondGroup,
 });
 
-export const defaultPropsLight = generateDefaultProps(
-  'light',
-  firstRowLogos,
-  secondRowLogos,
-);
-
-export const defaultPropsDark = generateDefaultProps(
-  'dark',
-  firstRowLogos,
-  secondRowLogos,
-);
-
-export const onlySecondRowPropsLight = generateDefaultProps(
-  'light',
-  [],
-  secondRowLogos,
-);
-
-export const onlyFirstRowPropsLight = generateDefaultProps(
-  'light',
-  firstRowLogos,
-  [],
-);
-
-export const oneFirstRowLogoPropsLight = generateDefaultProps(
-  'light',
-  [firstRowLogos[0]!],
-  secondRowLogos,
-);
-
-export const oneSecondRowLogoPropsLight = generateDefaultProps(
-  'light',
-  firstRowLogos,
-  [secondRowLogos[0]!],
-);
-
-export const onlySecondRowPropsDark = generateDefaultProps(
-  'dark',
-  [],
-  secondRowLogos,
-);
-
-export const onlyFirstRowPropsDark = generateDefaultProps(
-  'dark',
-  firstRowLogos,
-  [],
-);
-
-export const oneFirstRowLogoPropsDark = generateDefaultProps(
-  'dark',
-  [firstRowLogos[0]!],
-  secondRowLogos,
-);
-
-export const oneSecondRowLogoPropsDark = generateDefaultProps(
-  'dark',
-  firstRowLogos,
-  [secondRowLogos[0]!],
-);
+export const getLogoWallStories = (theme: 'light' | 'dark') => ({
+  full: generateLogoWallProps(theme, firstGroupLogos, secondGroupLogos),
+  onlyFirstGroup: generateLogoWallProps(theme, firstGroupLogos, []),
+  manyLogos: generateLogoWallProps(
+    theme,
+    manyFirstGroupLogos,
+    manySecondGroupLogos,
+  ),
+});

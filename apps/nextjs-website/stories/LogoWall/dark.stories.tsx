@@ -1,13 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { LogoWall } from '@react-components/components';
-import {
-  LogoWallTemplate,
-  defaultPropsDark,
-  onlySecondRowPropsDark,
-  onlyFirstRowPropsDark,
-  oneFirstRowLogoPropsDark,
-  oneSecondRowLogoPropsDark,
-} from './logowallCommons';
+import { LogoWallTemplate, getLogoWallStories } from './logowallCommons';
 
 const meta: Meta<typeof LogoWall> = {
   title: 'Components/LogoWall/Dark',
@@ -16,33 +9,15 @@ const meta: Meta<typeof LogoWall> = {
 
 export default meta;
 
+const stories = getLogoWallStories('dark');
+
 export const Full: StoryFn<typeof LogoWall> = LogoWallTemplate.bind({});
-Full.args = {
-  ...defaultPropsDark,
-};
+Full.args = stories.full;
 
-export const OnlyFirstRow: StoryFn<typeof LogoWall> = LogoWallTemplate.bind({});
-OnlyFirstRow.args = {
-  ...onlyFirstRowPropsDark,
-};
-
-export const OnlySecondRow: StoryFn<typeof LogoWall> = LogoWallTemplate.bind(
+export const OnlyFirstGroup: StoryFn<typeof LogoWall> = LogoWallTemplate.bind(
   {},
 );
-OnlySecondRow.args = {
-  ...onlySecondRowPropsDark,
-};
+OnlyFirstGroup.args = stories.onlyFirstGroup;
 
-export const OneLogoFirstRow: StoryFn<typeof LogoWall> = LogoWallTemplate.bind(
-  {},
-);
-OneLogoFirstRow.args = {
-  ...oneFirstRowLogoPropsDark,
-};
-
-export const OneLogoSecondRow: StoryFn<typeof LogoWall> = LogoWallTemplate.bind(
-  {},
-);
-OneLogoSecondRow.args = {
-  ...oneSecondRowLogoPropsDark,
-};
+export const ManyLogos: StoryFn<typeof LogoWall> = LogoWallTemplate.bind({});
+ManyLogos.args = stories.manyLogos;
