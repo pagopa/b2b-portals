@@ -34,6 +34,7 @@ import LabelsProvider from './LabelsProvider/LabelsProvider';
 import LastUpdated from './LastUpdated/LastUpdated';
 import SimpleCards from './SimpleCards/SimpleCards';
 import FeedbackForm from './FeedbackForm/FeedbackForm';
+import LogoWall from './LogoWall/LogoWall';
 
 export {
   Hero,
@@ -72,4 +73,5 @@ export {
   LastUpdated,
   SimpleCards,
   FeedbackForm,
+  LogoWall,
 };
