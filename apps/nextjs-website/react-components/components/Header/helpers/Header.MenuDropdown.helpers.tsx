@@ -7,6 +7,7 @@ import {
   useTheme,
   Theme,
   IconButton,
+  Button,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 import {
@@ -95,61 +96,112 @@ export const MenuDropdown = (
     return false;
   };
 
+  const MenuItem = () => {
+    if (button.href) {
+      return (
+        <>
+          <Link
+            sx={{
+              color: '#ffffff',
+              ...(isCurrentLink(button.href) && {
+                textDecoration: 'underline',
+              }),
+              '&:hover': {
+                textDecoration: 'none',
+              },
+              cursor: 'pointer',
+            }}
+            href={button.href}
+            target={isValidExternalLink(button.href) ? '_blank' : '_self'}
+          >
+            <Typography
+              variant='sidenav'
+              color='inherit'
+              sx={{
+                display: 'flex',
+                textDecoration: 'none',
+                fontSize: '1em',
+                padding: 0,
+              }}
+            >
+              {label}
+              <ExternalLinkIcon
+                show={isValidExternalLink(button.href)}
+                {...(isValidExternalLink(button.href) && { target: '_blank' })}
+              />
+            </Typography>
+          </Link>
+          {hasLinks && (
+            <IconButton
+              onClick={onDropdownClick}
+              sx={{
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                p: 0,
+                m: 0,
+              }}
+              aria-label={`${isOpen ? labels.closeMenu : labels.openMenu} ${label}`}
+            >
+              <ArrowDropDown
+                fontSize='small'
+                sx={{
+                  transition: 'transform 0.2s',
+                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  color: '#ffffff',
+                }}
+              />
+            </IconButton>
+          )}
+        </>
+      );
+    }
+    return (
+      <Button
+        variant='text'
+        sx={{
+          color: '#ffffff',
+          padding: 0,
+          margin: 0,
+          '&:hover': {
+            color: '#ffffff !important',
+          },
+        }}
+        onClick={onClick}
+      >
+        <Typography
+          variant='sidenav'
+          color='inherit'
+          sx={{
+            display: 'flex',
+            fontSize: '1em',
+            padding: 0,
+          }}
+        >
+          {label}
+          <ExternalLinkIcon
+            show={isValidExternalLink(button.href)}
+            {...(isValidExternalLink(button.href) && { target: '_blank' })}
+          />
+        </Typography>
+        {hasLinks && (
+          <ArrowDropDown
+            fontSize='small'
+            sx={{
+              transition: 'transform 0.2s',
+              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              color: '#ffffff',
+            }}
+          />
+        )}
+      </Button>
+    );
+  };
+
   return (
     <Stack sx={styles.menu} component='li'>
       <Box sx={styles.menuItem}>
-        <Link
-          sx={{
-            color: '#ffffff',
-            ...(isCurrentLink(button.href) && { textDecoration: 'underline' }),
-            '&:hover': {
-              textDecoration: 'none',
-            },
-            cursor: 'pointer',
-          }}
-          href={button.href ? button.href : '#'}
-          target={isValidExternalLink(button.href) ? '_blank' : '_self'}
-          onClick={onClick}
-        >
-          <Typography
-            variant='sidenav'
-            color='inherit'
-            sx={{
-              display: 'flex',
-              textDecoration: 'none',
-              fontSize: '1em',
-              padding: 0,
-            }}
-          >
-            {label}
-            <ExternalLinkIcon
-              show={isValidExternalLink(button.href)}
-              {...(isValidExternalLink(button.href) && { target: '_blank' })}
-            />
-          </Typography>
-        </Link>
-        {hasLinks && (
-          <IconButton
-            onClick={onDropdownClick}
-            sx={{
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              p: 0,
-              m: 0,
-            }}
-            aria-label={`${isOpen ? labels.closeMenu : labels.openMenu} ${label}`}
-          >
-            <ArrowDropDown
-              fontSize='small'
-              sx={{
-                transition: 'transform 0.2s',
-                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                color: '#ffffff',
-              }}
-            />
-          </IconButton>
-        )}
+        <MenuItem />
       </Box>
       {hasLinks && isOpen && (
         <DialogBubble>

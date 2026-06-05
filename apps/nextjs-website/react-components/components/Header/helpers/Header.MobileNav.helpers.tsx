@@ -9,6 +9,7 @@ import {
   IconButton,
   Typography,
   Link,
+  Button,
 } from '@mui/material';
 import closeIcon from '@react-components/assets/icons/icon-close-white.svg';
 import {
@@ -54,8 +55,103 @@ export default function MobileNav({
     setOpenMenuIndex(openMenuIndex === index ? null : index);
   };
 
-  const onClickFn = (index: number, menu: MenuDropdownProp) =>
-    menu.items && (!menu.href || menu.href === '') ? toggleMenu(index) : null;
+  const MenuItem = ({
+    index,
+    item,
+    isSelected,
+  }: {
+    index: number;
+    item: MenuDropdownProp;
+    isSelected: boolean;
+  }) => {
+    if (item.href) {
+      return (
+        <>
+          <Link
+            href={item.href}
+            underline='none'
+            sx={{
+              color: 'inherit',
+              display: 'flex',
+              alignItems: 'center',
+              fontWeight: 600,
+              width: item.items ? 'default' : '100%',
+            }}
+          >
+            <Typography
+              style={{
+                fontWeight: 600,
+                color: 'inherit',
+              }}
+            >
+              {item.label}
+              <ExternalLinkIcon show={isValidExternalLink(item.href)} />
+            </Typography>
+          </Link>
+          {item.items && (
+            <IconButton
+              onClick={() => toggleMenu(index)}
+              sx={{
+                cursor: 'pointer',
+                color: 'inherit',
+                display: 'flex',
+                alignItems: 'center',
+                ml: 2,
+                p: 0,
+              }}
+              aria-label={`${isOpen ? labels.closeMenu : labels.openMenu} ${item.label}`}
+            >
+              <Image
+                src={chevronBlueIcon}
+                alt={isSelected ? labels.openMenu : labels.closeMenu}
+                style={{
+                  transition: 'transform 0.3s',
+                  transform: !isSelected ? 'rotate(180deg)' : 'rotate(0deg)',
+                }}
+              />
+            </IconButton>
+          )}
+        </>
+      );
+    }
+    return (
+      <Button
+        variant='text'
+        onClick={() => toggleMenu(index)}
+        sx={{
+          color: 'inherit',
+          display: 'flex',
+          alignItems: 'center',
+          p: 0,
+          m: 0,
+          fontWeight: 600,
+          width: item.items ? 'default' : '100%',
+        }}
+      >
+        <Typography
+          style={{
+            fontWeight: 600,
+            color: 'inherit',
+          }}
+        >
+          {item.label}
+          <ExternalLinkIcon show={isValidExternalLink(item.href)} />
+        </Typography>
+        {item.items && (
+          <Image
+            src={chevronBlueIcon}
+            alt={isSelected ? labels.openMenu : labels.closeMenu}
+            style={{
+              transition: 'transform 0.3s',
+              marginLeft: '16px',
+              transform: !isSelected ? 'rotate(180deg)' : 'rotate(0deg)',
+            }}
+          />
+        )}
+      </Button>
+    );
+  };
+
   return (
     <>
       <Drawer
@@ -102,57 +198,11 @@ export default function MobileNav({
                         color: '#0066CC',
                       }}
                     >
-                      <Link
-                        href={item.href ? item.href : '#'}
-                        onClick={() => onClickFn(index, item)}
-                        underline='none'
-                        sx={{
-                          color: 'inherit',
-                          display: 'flex',
-                          alignItems: 'center',
-                          fontWeight: 600,
-                          width: item.items ? 'default' : '100%',
-                        }}
-                      >
-                        <Typography
-                          style={{
-                            fontWeight: 600,
-                            color: 'inherit',
-                          }}
-                        >
-                          {item.label}
-                          <ExternalLinkIcon
-                            show={isValidExternalLink(item.href)}
-                          />
-                        </Typography>
-                      </Link>
-                      {item.items && (
-                        <IconButton
-                          onClick={() => toggleMenu(index)}
-                          sx={{
-                            cursor: 'pointer',
-                            color: 'inherit',
-                            display: 'flex',
-                            alignItems: 'center',
-                            ml: 1,
-                            p: 0,
-                          }}
-                          aria-label={`${isOpen ? labels.closeMenu : labels.openMenu} ${item.label}`}
-                        >
-                          <Image
-                            src={chevronBlueIcon}
-                            alt={
-                              isSelected ? labels.openMenu : labels.closeMenu
-                            }
-                            style={{
-                              transition: 'transform 0.3s',
-                              transform: !isSelected
-                                ? 'rotate(180deg)'
-                                : 'rotate(0deg)',
-                            }}
-                          />
-                        </IconButton>
-                      )}
+                      <MenuItem
+                        item={item}
+                        isSelected={isSelected}
+                        index={index}
+                      />
                     </ListItem>
                     {isSelected && item.items && (
                       <List disablePadding>
