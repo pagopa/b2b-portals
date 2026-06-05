@@ -453,6 +453,7 @@ const FramedVideoSectionCodec = t.strict({
   video: t.union([t.strict({ url: t.string }), t.null]),
   loop: t.boolean,
   autoplay: t.boolean,
+  showControls: t.union([t.boolean, t.null]),
   text: t.union([
     t.strict({
       title: t.string,

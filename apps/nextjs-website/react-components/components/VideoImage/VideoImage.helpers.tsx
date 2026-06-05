@@ -24,6 +24,7 @@ export const renderVideo = ({
   src,
   loop,
   autoplay,
+  showControls,
   fallback,
   onClick,
   onVideoEnd,
@@ -64,6 +65,7 @@ export const renderVideo = ({
       muted
       loop={loop}
       autoPlay={autoplay}
+      controls={showControls}
       onEnded={onVideoEnd}
       onClick={onClick}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}

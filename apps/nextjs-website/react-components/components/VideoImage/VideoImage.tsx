@@ -223,6 +223,7 @@ const VideoImage = ({
             src: video!.src,
             loop: video!.loop,
             autoplay: video!.autoplay,
+            showControls: video!.showControls,
             fallback: video!.fallback,
             onVideoEnd: handleVideoEnd,
             onClick: pause,

@@ -45,6 +45,11 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "showControls": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }
