@@ -1,14 +1,17 @@
 import React from 'react';
 import { Stack } from '@mui/material';
-import { NavigationProps } from '@react-components/types/Header/Header.types';
+import {
+  HeaderProps,
+  NavigationProps,
+} from '@react-components/types/Header/Header.types';
 import { MenuDropdown } from './Header.MenuDropdown.helpers';
 
 export const Navigation = ({
   menu,
   theme,
   isMobile,
-  labelMainMenu,
-}: NavigationProps & { isMobile: boolean; labelMainMenu: string }) => {
+  labels,
+}: NavigationProps & { isMobile: boolean; labels: HeaderProps['labels'] }) => {
   return (
     <Stack
       direction='row'
@@ -20,7 +23,7 @@ export const Navigation = ({
         justifyContent: 'space-between',
       }}
       role='navigation'
-      aria-label={labelMainMenu}
+      aria-label={labels.mainMenu}
     >
       <Stack
         direction='row'
@@ -36,6 +39,7 @@ export const Navigation = ({
             {...menu}
             theme={theme}
             isMobile={isMobile}
+            labels={labels}
           />
         ))}
       </Stack>
