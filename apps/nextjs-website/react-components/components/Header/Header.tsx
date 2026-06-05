@@ -147,7 +147,7 @@ const Header = ({
               }}
             >
               <Navigation
-                labelMainMenu={labels.mainMenu}
+                labels={labels}
                 menu={menu.map((menu, index) => ({
                   ...menu,
                   isOpen: openDropdownIndex === index,

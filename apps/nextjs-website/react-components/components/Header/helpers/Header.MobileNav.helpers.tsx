@@ -103,7 +103,7 @@ export default function MobileNav({
                       }}
                     >
                       <Link
-                        {...(item.href && { href: item.href })}
+                        href={item.href ? item.href : '#'}
                         onClick={() => onClickFn(index, item)}
                         underline='none'
                         sx={{
@@ -127,7 +127,7 @@ export default function MobileNav({
                         </Typography>
                       </Link>
                       {item.items && (
-                        <Box
+                        <IconButton
                           onClick={() => toggleMenu(index)}
                           sx={{
                             cursor: 'pointer',
@@ -135,7 +135,9 @@ export default function MobileNav({
                             display: 'flex',
                             alignItems: 'center',
                             ml: 1,
+                            p: 0,
                           }}
+                          aria-label={`${isOpen ? labels.closeMenu : labels.openMenu} ${item.label}`}
                         >
                           <Image
                             src={chevronBlueIcon}
@@ -149,7 +151,7 @@ export default function MobileNav({
                                 : 'rotate(0deg)',
                             }}
                           />
-                        </Box>
+                        </IconButton>
                       )}
                     </ListItem>
                     {isSelected && item.items && (

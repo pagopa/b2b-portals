@@ -1,9 +1,18 @@
 import React from 'react';
-import { Box, Link, Stack, Typography, useTheme, Theme } from '@mui/material';
+import {
+  Box,
+  Link,
+  Stack,
+  Typography,
+  useTheme,
+  Theme,
+  IconButton,
+} from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 import {
   MenuDropdownProp,
   DropdownItem,
+  HeaderProps,
 } from '@react-components/types/Header/Header.types';
 import { DialogBubble } from './Header.DialogBubble.helpers';
 import {
@@ -59,7 +68,9 @@ const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
   };
 };
 
-export const MenuDropdown = (props: MenuDropdownProp) => {
+export const MenuDropdown = (
+  props: MenuDropdownProp & { labels: HeaderProps['labels'] },
+) => {
   const {
     label,
     active,
@@ -69,6 +80,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
     onClick,
     onDropdownClick,
     isMobile,
+    labels,
     ...button
   } = props;
   const muiTheme = useTheme();
@@ -95,7 +107,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
             },
             cursor: 'pointer',
           }}
-          {...(button.href && { href: button.href })}
+          href={button.href ? button.href : '#'}
           target={isValidExternalLink(button.href) ? '_blank' : '_self'}
           onClick={onClick}
         >
@@ -117,9 +129,16 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
           </Typography>
         </Link>
         {hasLinks && (
-          <Box
+          <IconButton
             onClick={onDropdownClick}
-            sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+            sx={{
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              p: 0,
+              m: 0,
+            }}
+            aria-label={`${isOpen ? labels.closeMenu : labels.openMenu} ${label}`}
           >
             <ArrowDropDown
               fontSize='small'
@@ -129,7 +148,7 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
                 color: '#ffffff',
               }}
             />
-          </Box>
+          </IconButton>
         )}
       </Box>
       {hasLinks && isOpen && (
