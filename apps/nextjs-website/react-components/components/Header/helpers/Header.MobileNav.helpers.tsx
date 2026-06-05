@@ -64,66 +64,51 @@ export default function MobileNav({
     item: MenuDropdownProp;
     isSelected: boolean;
   }) => {
-    if (item.href) {
+    if (item.items) {
       return (
-        <>
-          <Link
-            href={item.href}
-            underline='none'
-            sx={{
-              color: 'inherit',
-              display: 'flex',
-              alignItems: 'center',
+        <Button
+          variant='text'
+          onClick={() => toggleMenu(index)}
+          sx={{
+            color: 'inherit',
+            display: 'flex',
+            alignItems: 'center',
+            p: 0,
+            m: 0,
+            fontWeight: 600,
+            width: item.items ? 'default' : '100%',
+          }}
+        >
+          <Typography
+            style={{
               fontWeight: 600,
-              width: item.items ? 'default' : '100%',
+              color: 'inherit',
             }}
           >
-            <Typography
-              style={{
-                fontWeight: 600,
-                color: 'inherit',
-              }}
-            >
-              {item.label}
-              <ExternalLinkIcon show={isValidExternalLink(item.href)} />
-            </Typography>
-          </Link>
+            {item.label}
+          </Typography>
           {item.items && (
-            <IconButton
-              onClick={() => toggleMenu(index)}
-              sx={{
-                cursor: 'pointer',
-                color: 'inherit',
-                display: 'flex',
-                alignItems: 'center',
-                ml: 2,
-                p: 0,
+            <Image
+              src={chevronBlueIcon}
+              alt={isSelected ? labels.openMenu : labels.closeMenu}
+              style={{
+                transition: 'transform 0.3s',
+                marginLeft: '16px',
+                transform: !isSelected ? 'rotate(180deg)' : 'rotate(0deg)',
               }}
-              aria-label={`${isOpen ? labels.closeMenu : labels.openMenu} ${item.label}`}
-            >
-              <Image
-                src={chevronBlueIcon}
-                alt={isSelected ? labels.openMenu : labels.closeMenu}
-                style={{
-                  transition: 'transform 0.3s',
-                  transform: !isSelected ? 'rotate(180deg)' : 'rotate(0deg)',
-                }}
-              />
-            </IconButton>
+            />
           )}
-        </>
+        </Button>
       );
     }
     return (
-      <Button
-        variant='text'
-        onClick={() => toggleMenu(index)}
+      <Link
+        href={item.href}
+        underline='none'
         sx={{
           color: 'inherit',
           display: 'flex',
           alignItems: 'center',
-          p: 0,
-          m: 0,
           fontWeight: 600,
           width: item.items ? 'default' : '100%',
         }}
@@ -137,18 +122,7 @@ export default function MobileNav({
           {item.label}
           <ExternalLinkIcon show={isValidExternalLink(item.href)} />
         </Typography>
-        {item.items && (
-          <Image
-            src={chevronBlueIcon}
-            alt={isSelected ? labels.openMenu : labels.closeMenu}
-            style={{
-              transition: 'transform 0.3s',
-              marginLeft: '16px',
-              transform: !isSelected ? 'rotate(180deg)' : 'rotate(0deg)',
-            }}
-          />
-        )}
-      </Button>
+      </Link>
     );
   };
 

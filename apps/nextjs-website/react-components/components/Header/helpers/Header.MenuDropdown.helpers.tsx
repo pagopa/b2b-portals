@@ -6,7 +6,6 @@ import {
   Typography,
   useTheme,
   Theme,
-  IconButton,
   Button,
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
@@ -78,7 +77,6 @@ export const MenuDropdown = (
     theme,
     items,
     isOpen,
-    onClick,
     onDropdownClick,
     isMobile,
     labels,
@@ -97,83 +95,63 @@ export const MenuDropdown = (
   };
 
   const MenuItem = () => {
-    if (button.href) {
+    if (hasLinks) {
       return (
-        <>
-          <Link
+        <Button
+          variant='text'
+          sx={{
+            color: '#ffffff',
+            padding: 0,
+            margin: 0,
+            '&:hover': {
+              color: '#ffffff !important',
+            },
+          }}
+          onClick={onDropdownClick}
+        >
+          <Typography
+            variant='sidenav'
+            color='inherit'
             sx={{
-              color: '#ffffff',
-              ...(isCurrentLink(button.href) && {
-                textDecoration: 'underline',
-              }),
-              '&:hover': {
-                textDecoration: 'none',
-              },
-              cursor: 'pointer',
+              display: 'flex',
+              fontSize: '18px',
+              padding: 0,
             }}
-            href={button.href}
-            target={isValidExternalLink(button.href) ? '_blank' : '_self'}
           >
-            <Typography
-              variant='sidenav'
-              color='inherit'
-              sx={{
-                display: 'flex',
-                textDecoration: 'none',
-                fontSize: '1em',
-                padding: 0,
-              }}
-            >
-              {label}
-              <ExternalLinkIcon
-                show={isValidExternalLink(button.href)}
-                {...(isValidExternalLink(button.href) && { target: '_blank' })}
-              />
-            </Typography>
-          </Link>
-          {hasLinks && (
-            <IconButton
-              onClick={onDropdownClick}
-              sx={{
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                p: 0,
-                m: 0,
-              }}
-              aria-label={`${isOpen ? labels.closeMenu : labels.openMenu} ${label}`}
-            >
-              <ArrowDropDown
-                fontSize='small'
-                sx={{
-                  transition: 'transform 0.2s',
-                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                  color: '#ffffff',
-                }}
-              />
-            </IconButton>
-          )}
-        </>
+            {label}
+          </Typography>
+          <ArrowDropDown
+            fontSize='small'
+            sx={{
+              transition: 'transform 0.2s',
+              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              color: '#ffffff',
+            }}
+          />
+        </Button>
       );
     }
     return (
-      <Button
-        variant='text'
+      <Link
         sx={{
           color: '#ffffff',
-          padding: 0,
-          margin: 0,
+          ...(isCurrentLink(button.href) && {
+            textDecoration: 'underline',
+          }),
           '&:hover': {
-            color: '#ffffff !important',
+            textDecoration: 'none',
           },
+          cursor: 'pointer',
         }}
-        onClick={onClick}
+        href={button.href}
+        target={isValidExternalLink(button.href) ? '_blank' : '_self'}
       >
         <Typography
           variant='sidenav'
           color='inherit'
           sx={{
             display: 'flex',
+            textDecoration: 'none',
             fontSize: '1em',
             padding: 0,
           }}
@@ -184,17 +162,7 @@ export const MenuDropdown = (
             {...(isValidExternalLink(button.href) && { target: '_blank' })}
           />
         </Typography>
-        {hasLinks && (
-          <ArrowDropDown
-            fontSize='small'
-            sx={{
-              transition: 'transform 0.2s',
-              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-              color: '#ffffff',
-            }}
-          />
-        )}
-      </Button>
+      </Link>
     );
   };
 
