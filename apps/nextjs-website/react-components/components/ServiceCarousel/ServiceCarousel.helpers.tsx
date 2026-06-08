@@ -169,6 +169,9 @@ export const SliderArrowControl = ({
         width: 32,
         height: 32,
         borderRadius: 16,
+        '&:hover': {
+          bgcolor: arrowBackgroundColor,
+        },
         '&.Mui-focusVisible': { bgcolor: arrowBackgroundColor },
       }}
       disableRipple={true}
