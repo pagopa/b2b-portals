@@ -2,12 +2,19 @@ import { StoryFn } from '@storybook/react';
 import { Cards } from '@react-components/components';
 import { CardsProps } from '@react-components/types';
 import { CardsItemProps } from '@react-components/types/Cards/Cards.types';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 // Function to generate items
 export const generateItems = (count: number): CardsItemProps[] =>
   Array.from({ length: count }, (_, i) => ({
     title: `Card ${i + 1}`,
-    text: `This is card ${i + 1}`,
+    text: MarkdownRenderer({
+      markdown: `This is card ${i + 1}`,
+      locale: 'it',
+      defaultLocale: 'it',
+      variant: 'body2',
+      sx: { '> p': { margin: 0 } },
+    }),
     iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
     themeVariant: 'SEND',
   }));
@@ -16,7 +23,13 @@ export const generateItems = (count: number): CardsItemProps[] =>
 export const generateItemsWithLinks = (count: number): CardsItemProps[] =>
   Array.from({ length: count }, (_, i) => ({
     title: `Card ${i + 1}`,
-    text: `This is card ${i + 1}`,
+    text: MarkdownRenderer({
+      markdown: `This is card ${i + 1}`,
+      locale: 'it',
+      defaultLocale: 'it',
+      variant: 'body2',
+      sx: { '> p': { margin: 0 } },
+    }),
     iconURL: 'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
     links: [
       {
