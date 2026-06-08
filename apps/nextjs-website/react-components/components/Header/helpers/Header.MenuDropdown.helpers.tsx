@@ -1,9 +1,18 @@
 import React from 'react';
-import { Box, Link, Stack, Typography, useTheme, Theme } from '@mui/material';
+import {
+  Box,
+  Link,
+  Stack,
+  Typography,
+  useTheme,
+  Theme,
+  Button,
+} from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 import {
   MenuDropdownProp,
   DropdownItem,
+  HeaderProps,
 } from '@react-components/types/Header/Header.types';
 import { DialogBubble } from './Header.DialogBubble.helpers';
 import {
@@ -59,16 +68,18 @@ const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
   };
 };
 
-export const MenuDropdown = (props: MenuDropdownProp) => {
+export const MenuDropdown = (
+  props: MenuDropdownProp & { labels: HeaderProps['labels'] },
+) => {
   const {
     label,
     active,
     theme,
     items,
     isOpen,
-    onClick,
     onDropdownClick,
     isMobile,
+    labels,
     ...button
   } = props;
   const muiTheme = useTheme();
@@ -83,53 +94,82 @@ export const MenuDropdown = (props: MenuDropdownProp) => {
     return false;
   };
 
-  return (
-    <Stack sx={styles.menu} component='li'>
-      <Box sx={styles.menuItem}>
-        <Link
+  const MenuItem = () => {
+    if (hasLinks) {
+      return (
+        <Button
+          variant='text'
           sx={{
             color: '#ffffff',
-            ...(isCurrentLink(button.href) && { textDecoration: 'underline' }),
+            padding: 0,
+            margin: 0,
             '&:hover': {
-              textDecoration: 'none',
+              color: '#ffffff !important',
             },
           }}
-          href={button.href ? button.href : `#${label}`}
-          target={isValidExternalLink(button.href) ? '_blank' : '_self'}
-          onClick={onClick}
+          onClick={onDropdownClick}
         >
           <Typography
             variant='sidenav'
             color='inherit'
             sx={{
               display: 'flex',
-              textDecoration: 'none',
-              fontSize: '1em',
+              fontSize: '18px',
               padding: 0,
             }}
           >
             {label}
-            <ExternalLinkIcon
-              show={isValidExternalLink(button.href)}
-              {...(isValidExternalLink(button.href) && { target: '_blank' })}
-            />
           </Typography>
-        </Link>
-        {hasLinks && (
-          <Box
-            onClick={onDropdownClick}
-            sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-          >
-            <ArrowDropDown
-              fontSize='small'
-              sx={{
-                transition: 'transform 0.2s',
-                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                color: '#ffffff',
-              }}
-            />
-          </Box>
-        )}
+          <ArrowDropDown
+            fontSize='small'
+            sx={{
+              transition: 'transform 0.2s',
+              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              color: '#ffffff',
+            }}
+          />
+        </Button>
+      );
+    }
+    return (
+      <Link
+        sx={{
+          color: '#ffffff',
+          ...(isCurrentLink(button.href) && {
+            textDecoration: 'underline',
+          }),
+          '&:hover': {
+            textDecoration: 'none',
+          },
+          cursor: 'pointer',
+        }}
+        href={button.href}
+        target={isValidExternalLink(button.href) ? '_blank' : '_self'}
+      >
+        <Typography
+          variant='sidenav'
+          color='inherit'
+          sx={{
+            display: 'flex',
+            textDecoration: 'none',
+            fontSize: '1em',
+            padding: 0,
+          }}
+        >
+          {label}
+          <ExternalLinkIcon
+            show={isValidExternalLink(button.href)}
+            {...(isValidExternalLink(button.href) && { target: '_blank' })}
+          />
+        </Typography>
+      </Link>
+    );
+  };
+
+  return (
+    <Stack sx={styles.menu} component='li'>
+      <Box sx={styles.menuItem}>
+        <MenuItem />
       </Box>
       {hasLinks && isOpen && (
         <DialogBubble>
