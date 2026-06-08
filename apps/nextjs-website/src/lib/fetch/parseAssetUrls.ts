@@ -37,7 +37,7 @@ const makeAssetObjectURLsRelative = (
   return {
     ...asset,
     url: makeURLRelative(asset['url']),
-    ...(asset['formats'] !== null && {
+    ...(asset['formats'] != null && {
       formats: {
         ...(asset['formats']['small'] && {
           small: {

@@ -15,6 +15,7 @@ export const renderVideo = ({
   onClick,
   onVideoEnd,
   isMobileDevice,
+  showControls,
 }: RenderVideoProps) => {
   const mobileStyle: React.CSSProperties = {
     overflow: 'hidden',
@@ -49,7 +50,7 @@ export const renderVideo = ({
       muted
       loop={loop}
       autoPlay={autoplay}
-      controls
+      controls={showControls}
       onEnded={onVideoEnd}
       onClick={onClick}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}

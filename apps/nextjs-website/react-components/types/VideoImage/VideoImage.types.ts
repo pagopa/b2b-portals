@@ -46,6 +46,7 @@ export interface RenderVideoProps {
   src: string;
   loop: boolean;
   autoplay: boolean;
+  showControls: boolean;
   fallback: string;
   onVideoEnd: () => void;
   onClick?: () => void;

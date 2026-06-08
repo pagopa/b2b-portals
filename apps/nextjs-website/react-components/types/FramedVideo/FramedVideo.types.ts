@@ -4,6 +4,7 @@ export interface FramedVideoProps extends SectionProps {
   videoURL?: string;
   loop: boolean;
   autoplay: boolean;
+  showControls: boolean;
   text?: {
     title: string;
     body: string;
@@ -19,6 +20,7 @@ export interface RenderVideoProps {
   src: string;
   loop: boolean;
   autoplay: boolean;
+  showControls: boolean;
   fallback: string;
   onClick?: () => void;
   onVideoEnd: () => void;

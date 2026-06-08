@@ -10,6 +10,7 @@ const makeFramedVideoProps = ({
   defaultLocale,
   videoURL,
   video,
+  showControls,
   text,
   ...rest
 }: FramedVideoSection & SiteWidePageData): FramedVideoProps => ({
@@ -25,6 +26,7 @@ const makeFramedVideoProps = ({
       },
     },
   }),
+  showControls: showControls ?? true,
   ...rest,
 });
 
