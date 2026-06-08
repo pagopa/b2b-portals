@@ -13,14 +13,10 @@
       "type": "string",
       "required": true
     },
-    "text": {
-      "type": "text",
-      "required": false
-    },
     "links": {
       "type": "component",
-      "repeatable": true,
       "component": "components.link",
+      "repeatable": true,
       "required": false,
       "max": 2
     },
@@ -31,6 +27,9 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "text": {
+      "type": "richtext"
     }
   }
 }

@@ -25,7 +25,7 @@ export interface CardsItemProps {
   iconURL?: string;
   label?: string;
   title: string;
-  text?: string;
+  text?: JSX.Element;
   links?: Array<
     LinkProps & {
       title?: string;
