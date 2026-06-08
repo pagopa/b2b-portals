@@ -3,6 +3,7 @@ import { StoryFn, Meta } from '@storybook/react';
 import { PageSwitch } from '@react-components/components';
 import { PageSwitchProps } from '@react-components/types';
 import { defaultPropsDark } from './pageSwitchCommons';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 const meta: Meta<typeof PageSwitch> = {
   title: 'Components/PageSwitch/Dark',
@@ -53,14 +54,26 @@ Default.args = {
             items: [
               {
                 title: 'Card 1',
-                text: 'This is card 1',
+                text: MarkdownRenderer({
+                  markdown: 'This is card 1',
+                  locale: 'it',
+                  defaultLocale: 'it',
+                  variant: 'body2',
+                  sx: { '> p': { margin: 0 } },
+                }),
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
                 themeVariant: 'SEND',
               },
               {
                 title: 'Card 2',
-                text: 'This is card 2',
+                text: MarkdownRenderer({
+                  markdown: 'This is card 2',
+                  locale: 'it',
+                  defaultLocale: 'it',
+                  variant: 'body2',
+                  sx: { '> p': { margin: 0 } },
+                }),
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
                 themeVariant: 'SEND',
@@ -144,7 +157,13 @@ Default.args = {
             items: [
               {
                 title: 'Card 3',
-                text: 'This is card 3',
+                text: MarkdownRenderer({
+                  markdown: 'This is card 3',
+                  locale: 'it',
+                  defaultLocale: 'it',
+                  variant: 'body2',
+                  sx: { '> p': { margin: 0 } },
+                }),
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
                 themeVariant: 'SEND',
@@ -227,14 +246,26 @@ Default.args = {
             items: [
               {
                 title: 'Card 4',
-                text: 'This is card 4',
+                text: MarkdownRenderer({
+                  markdown: 'This is card 4',
+                  locale: 'it',
+                  defaultLocale: 'it',
+                  variant: 'body2',
+                  sx: { '> p': { margin: 0 } },
+                }),
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
                 themeVariant: 'SEND',
               },
               {
                 title: 'Card 5',
-                text: 'This is card 5',
+                text: MarkdownRenderer({
+                  markdown: 'This is card 5',
+                  locale: 'it',
+                  defaultLocale: 'it',
+                  variant: 'body2',
+                  sx: { '> p': { margin: 0 } },
+                }),
                 iconURL:
                   'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
                 themeVariant: 'SEND',
