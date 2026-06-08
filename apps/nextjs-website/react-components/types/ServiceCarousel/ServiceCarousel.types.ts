@@ -13,7 +13,7 @@ export interface ServiceCardProps {
 export interface ServiceCarouselProps extends Omit<SectionProps, 'theme'> {
   readonly title: string;
   readonly eyelet?: string;
-  readonly description?: string;
+  readonly description?: JSX.Element;
   readonly labels: {
     cardNext: string;
     cardPrevious: string;

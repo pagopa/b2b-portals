@@ -4,6 +4,7 @@ import { ServiceCarouselSection } from '@/lib/fetch/types/PageSection';
 import { ServiceCarousel as ServiceCarouselRC } from '@react-components/components';
 import { LocalizeURL } from '@/lib/linkLocalization';
 import { ServiceCarouselProps } from '@react-components/types';
+import MarkdownRenderer from './MarkdownRenderer';
 
 const serviceCarouselLabels: Record<Locale, ServiceCarouselProps['labels']> = {
   it: {
@@ -53,7 +54,14 @@ const makeServiceCarouselProps = ({
 }: ServiceCarouselSection & SiteWidePageData): ServiceCarouselProps => ({
   ...rest,
   ...(eyelet && { eyelet }),
-  ...(description && { description }),
+  ...(description && {
+    description: MarkdownRenderer({
+      markdown: description,
+      locale,
+      defaultLocale,
+      variant: 'body2',
+    }),
+  }),
   labels: serviceCarouselLabels[locale],
   cards: cards.map((card) => ({
     title: card.title,
