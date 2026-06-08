@@ -192,7 +192,7 @@ const makeHeaderProps = (
   menu: menu.links.map((link) => ({
     theme: 'dark',
     label: link.label,
-    href: link.page?.slug ?? '',
+    ...(link.page?.slug && { href: link.page?.slug }),
     ...(link.sublinks.length > 0 && {
       items: link.sublinks.map(makeHeaderSublink),
     }),

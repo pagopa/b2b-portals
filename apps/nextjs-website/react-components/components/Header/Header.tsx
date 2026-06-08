@@ -40,13 +40,6 @@ const Header = ({
     setMenuOpen(false);
   };
 
-  const handleMenuClick = (index: number, href?: string) => {
-    if (href) {
-      window.location.href = href;
-      handleDropdownToggle(index);
-    }
-  };
-
   const handleDropdownToggle = (index: number) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
   };
@@ -140,11 +133,10 @@ const Header = ({
               }}
             >
               <Navigation
-                labelMainMenu={labels.mainMenu}
+                labels={labels}
                 menu={menu.map((menu, index) => ({
                   ...menu,
                   isOpen: openDropdownIndex === index,
-                  onClick: () => handleMenuClick(index, menu.href),
                   onDropdownClick: () => handleDropdownToggle(index),
                   active:
                     pathname === menu.href || pathname === '/' + menu.href,
