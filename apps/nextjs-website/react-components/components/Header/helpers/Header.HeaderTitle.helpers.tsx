@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Stack, Typography, useTheme, SxProps } from '@mui/material';
+import { Link, Stack, Typography } from '@mui/material';
 import { HeaderTitleProps } from '@react-components/types/Header/Header.types';
 
 export const HeaderTitle = ({
@@ -8,54 +8,40 @@ export const HeaderTitle = ({
   mobileLogo,
   isMobile,
 }: HeaderTitleProps & { isMobile: boolean }) => {
-  const { spacing } = useTheme();
-
-  const linkStyle: SxProps = {
-    display: 'flex',
-    justifyContent: 'center',
-    padding: 0,
-    color: 'inherit',
-    alignItems: 'center',
-  };
-
   return (
     <Stack
       direction='row'
       alignItems='center'
-      gap={1}
-      paddingX={0}
-      paddingY={0}
+      className='header-title'
+      sx={{
+        padding: { xs: '16px 24px 16px 24px', md: '16px 32px 0 32px' },
+        overflow: 'hidden',
+      }}
     >
-      {!isMobile && logo && (
-        <Link sx={linkStyle} href={logo.href}>
+      <Link
+        href={productHref}
+        underline='none'
+        color='inherit'
+        sx={{ display: 'flex', alignItems: 'center' }}
+      >
+        {!isMobile && logo && (
           <img src={logo.src} alt={logo.alt} style={{ height: 56 }} />
-        </Link>
-      )}
-      {isMobile && mobileLogo && (
-        <Link sx={linkStyle} href={mobileLogo.href}>
+        )}
+        {isMobile && mobileLogo && (
           <img
             src={mobileLogo.src}
             alt={mobileLogo.alt}
             style={{ height: 40 }}
           />
-        </Link>
-      )}
-      {!logo && !mobileLogo && (
+        )}
         <Typography
           color='inherit'
-          fontSize={{ xs: spacing(3), sm: spacing(3.5) }}
           noWrap
-          variant='h5'
+          sx={{ ml: 1, fontWeight: 700, fontSize: isMobile ? 28 : 40 }}
         >
-          {productHref ? (
-            <Link href={productHref} underline='none' color='inherit'>
-              <b>{productName}</b>
-            </Link>
-          ) : (
-            <b>{productName}</b>
-          )}
+          <b>{productName}</b>
         </Typography>
-      )}
+      </Link>
     </Stack>
   );
 };

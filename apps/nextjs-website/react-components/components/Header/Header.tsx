@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, IconButton, Stack } from '@mui/material';
+import { Box, IconButton, Stack, SxProps } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
@@ -30,7 +30,8 @@ const Header = ({
   );
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const pathname = usePathname();
-  const headerRef = useRef<HTMLDivElement | null>(null);
+  const stickyRef = useRef<HTMLDivElement | null>(null);
+  const [isSticky, setIsSticky] = useState(false);
 
   const openHeader = () => {
     setMenuOpen(true);
@@ -63,8 +64,47 @@ const Header = ({
   };
 
   useEffect(() => {
+    const el = stickyRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry) return;
+      setIsSticky(!entry.isIntersecting);
+    });
+
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     toggleAccessibility(menuOpen || openDropdownIndex == null ? false : true);
   }, [openDropdownIndex, menuOpen]);
+
+  const headerStyle: SxProps = {
+    '.header-navigation': {
+      padding: '0px 32px',
+      img: {
+        display: 'none',
+      },
+    },
+    '&.header-sticky': {
+      '.header-title': {
+        height: 0,
+        maxHeight: 0,
+        opacity: 0,
+        position: 'absolute',
+      },
+      '.header-navigation': {
+        padding: '0 32px 0 64px',
+        img: {
+          display: 'initial',
+          mr: '64px',
+          height: '28px',
+        },
+      },
+    },
+  };
 
   return (
     <>
@@ -77,15 +117,27 @@ const Header = ({
         {...(topBarHeaderTitleMobile && { topBarHeaderTitleMobile })}
         isMobile={isMobile}
       />
+      <div style={{ position: 'relative' }} ref={stickyRef}>
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            height: 1,
+            width: 1,
+            pointerEvents: 'none',
+          }}
+        />
+      </div>
       <Box
         component='header'
         role='banner'
         position='sticky'
         top={0}
         zIndex={1000}
+        sx={headerStyle}
+        className={isSticky && !isMobile ? 'header-sticky' : ''}
       >
         <Stack
-          ref={headerRef}
           direction='column'
           gap={{ xs: 0, md: 0 }}
           sx={{
@@ -97,7 +149,7 @@ const Header = ({
             direction='row'
             justifyContent='space-between'
             alignItems='center'
-            sx={{ padding: { xs: '16px 24px', md: '16px 32px' } }}
+            sx={{ position: 'relative' }}
             color='#FFFFFF'
           >
             <HeaderTitle
@@ -108,7 +160,7 @@ const Header = ({
             />
 
             {isMobile && (
-              <IconButton onClick={openHeader} sx={{ p: 0 }}>
+              <IconButton onClick={openHeader} sx={{ p: '0 16px 0 0' }}>
                 <Image
                   width={20}
                   height={20}
@@ -127,11 +179,12 @@ const Header = ({
               direction='row'
               justifyContent='space-between'
               alignItems='center'
+              className='header-navigation'
               sx={{
                 height: '56px',
-                padding: '0px 32px',
               }}
             >
+              {logo && <img src={logo.src} alt={logo.alt} />}
               <Navigation
                 labels={labels}
                 menu={menu.map((menu, index) => ({
