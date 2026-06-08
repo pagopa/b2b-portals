@@ -27,6 +27,7 @@ ServiceCarouselFull.args = {
     locale: 'it',
     defaultLocale: 'it',
     variant: 'body2',
+    sx: { '> p': { margin: 0 } },
   }),
   cards: [
     {

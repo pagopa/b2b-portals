@@ -60,6 +60,7 @@ const makeServiceCarouselProps = ({
       locale,
       defaultLocale,
       variant: 'body2',
+      sx: { '> p': { margin: 0 } },
     }),
   }),
   labels: serviceCarouselLabels[locale],
