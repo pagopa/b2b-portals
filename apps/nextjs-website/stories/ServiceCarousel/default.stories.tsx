@@ -1,6 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { ServiceCarousel } from '@react-components/components';
 import { ServiceCarouselProps } from '@react-components/types';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 // Define the default export with metadata about your component
 const meta: Meta<typeof ServiceCarousel> = {
@@ -20,8 +21,14 @@ ServiceCarouselFull.args = {
   themeVariant: 'SEND',
   title: 'Le funzionalità su IO',
   eyelet: 'FIORE',
-  description:
-    'Piattaforma Notifiche digitalizza e semplifica la gestione delle comunicazioni a valore legale. Gli enti mittenti non devono che depositare l’atto da notificare: sarà la piattaforma a occuparsi dell’invio, per via digitale o analogica.',
+  description: MarkdownRenderer({
+    markdown:
+      'Piattaforma Notifiche digitalizza e semplifica la gestione delle comunicazioni a valore legale. Gli enti mittenti non devono che depositare l’atto da notificare: sarà la piattaforma a occuparsi dell’invio, per via digitale o analogica.',
+    locale: 'it',
+    defaultLocale: 'it',
+    variant: 'body2',
+    sx: { '> p': { margin: 0 } },
+  }),
   cards: [
     {
       title: 'Funzionalità',
