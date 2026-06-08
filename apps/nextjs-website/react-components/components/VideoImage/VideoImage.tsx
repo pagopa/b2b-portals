@@ -99,6 +99,7 @@ const VideoImage = ({
                 justifyContent: 'center',
                 padding: { xs: '20px', md: '0' },
                 background: 'rgba(0, 0, 0, 0.60)',
+                zIndex: 1,
                 alignItems: isCentered ? 'center' : 'flex-start',
                 textAlign: isCentered ? 'center' : 'left',
               }}
