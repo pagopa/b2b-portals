@@ -77,9 +77,10 @@ const VideoImage = ({
       <Box
         component='section'
         sx={{
-          maxHeight: { xs: 'none', md: '600px' },
+          maxHeight:
+            mediaState === 'image' ? { xs: 'none', md: '600px' } : 'none',
           position: 'relative',
-          overflow: 'hidden',
+          overflow: mediaState === 'image' ? 'hidden' : 'visible',
           lineHeight: 0,
         }}
         {...(sectionID && { id: sectionID })}
@@ -216,19 +217,21 @@ const VideoImage = ({
             )}
           </Box>
         ) : (
-          renderVideo({
-            videoRef,
-            error,
-            setError,
-            src: video!.src,
-            loop: video!.loop,
-            autoplay: video!.autoplay,
-            showControls: video!.showControls && mediaState === 'play',
-            fallback: video!.fallback,
-            onVideoEnd: handleVideoEnd,
-            onClick: pause,
-            isMobileDevice,
-          })
+          <Box sx={{ position: 'relative', width: '100%' }}>
+            {renderVideo({
+              videoRef,
+              error,
+              setError,
+              src: video!.src,
+              loop: video!.loop,
+              autoplay: video!.autoplay,
+              showControls: video!.showControls && mediaState === 'play',
+              fallback: video!.fallback,
+              onVideoEnd: handleVideoEnd,
+              onClick: pause,
+              isMobileDevice,
+            })}
+          </Box>
         )}
       </Box>
       {caption && <VideoCaption caption={caption} isCentered={isCentered} />}

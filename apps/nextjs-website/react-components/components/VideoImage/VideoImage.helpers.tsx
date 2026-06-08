@@ -32,16 +32,16 @@ export const renderVideo = ({
 }: RenderVideoProps) => {
   const mobileStyle = {
     overflow: 'hidden',
-    width: '100vw',
-    height: '100vh',
-    objectFit: 'cover',
-    objectPosition: 'center',
+    width: '100%',
+    height: 'auto',
+    display: 'block',
   };
 
   const nonMobileStyle = {
     overflow: 'hidden',
     width: '100%',
-    height: '100%',
+    height: 'auto',
+    display: 'block',
   };
 
   if (error) {
