@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Box, IconButton, Stack } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+import { Box, IconButton, Link, Stack } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
@@ -31,6 +31,8 @@ const Header = ({
   );
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const hasScrolledRef = useRef(false);
 
   const openHeader = () => {
     setMenuOpen(true);
@@ -66,6 +68,23 @@ const Header = ({
     toggleAccessibility(menuOpen || openDropdownIndex == null ? false : true);
   }, [openDropdownIndex, menuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!hasScrolledRef.current && window.scrollY > 200) {
+        hasScrolledRef.current = true;
+        setIsScrolled(true);
+      } else if (hasScrolledRef.current && window.scrollY < 80) {
+        hasScrolledRef.current = false;
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
       <TopBarHeader
@@ -96,8 +115,18 @@ const Header = ({
             direction='row'
             justifyContent='space-between'
             alignItems='center'
-            sx={{ padding: { xs: '16px 24px', md: '16px 32px' } }}
             color='#FFFFFF'
+            height={88}
+            sx={{
+              transition: 'all .3s ease-out',
+              '> *': {
+                transition: 'all .3s ease-out',
+              },
+              padding: { xs: '16px 24px', md: isScrolled ? 0 : '16px 32px' },
+              ...(isScrolled &&
+                !isMobile && { '> *': { opacity: 0 }, height: 0 }),
+            }}
+            {...(isScrolled && !isMobile && { inert: '' })}
           >
             <HeaderTitle
               product={product}
@@ -132,6 +161,24 @@ const Header = ({
                 padding: '0px 32px',
               }}
             >
+              {logo && (
+                <Link
+                  href={product.href}
+                  p={'0 !important'}
+                  my={'0 !important'}
+                  marginLeft={isScrolled ? 4 : 0}
+                  marginRight={isScrolled ? 5 : 0}
+                  sx={{
+                    transition: 'all .3s ease-out',
+                    maxWidth: isScrolled ? 80 : 0,
+                    opacity: isScrolled ? 1 : 0,
+                  }}
+                  {...(!isScrolled && { inert: '' })}
+                >
+                  <img src={logo.src} alt='Homepage' height={32} />
+                </Link>
+              )}
+
               <Navigation
                 labels={labels}
                 menu={menu.map((menu, index) => ({
