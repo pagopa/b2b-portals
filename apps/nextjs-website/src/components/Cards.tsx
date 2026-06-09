@@ -41,7 +41,15 @@ export const makeCardsProps = ({
       iconURL: icon.url,
     }),
     ...(label && { label }),
-    ...(text && { text }),
+    ...(text && {
+      text: MarkdownRenderer({
+        markdown: text,
+        locale,
+        defaultLocale,
+        variant: 'body2',
+        sx: { '> p': { margin: 0 } },
+      }),
+    }),
     ...(links.length > 0 && {
       links: links.map((link) => ({
         label: link.label,

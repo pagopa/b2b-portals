@@ -24,6 +24,7 @@ export const renderVideo = ({
   src,
   loop,
   autoplay,
+  showControls,
   fallback,
   onClick,
   onVideoEnd,
@@ -31,16 +32,16 @@ export const renderVideo = ({
 }: RenderVideoProps) => {
   const mobileStyle = {
     overflow: 'hidden',
-    width: '100vw',
-    height: '100vh',
-    objectFit: 'cover',
-    objectPosition: 'center',
+    width: '100%',
+    height: 'auto',
+    display: 'block',
   };
 
   const nonMobileStyle = {
     overflow: 'hidden',
     width: '100%',
-    height: '100%',
+    height: 'auto',
+    display: 'block',
   };
 
   if (error) {
@@ -64,6 +65,7 @@ export const renderVideo = ({
       muted
       loop={loop}
       autoPlay={autoplay}
+      controls={showControls}
       onEnded={onVideoEnd}
       onClick={onClick}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}

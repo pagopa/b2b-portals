@@ -24,9 +24,9 @@ const makeVideoImageProps = ({
   }),
   ...(caption && { caption }),
   ...(video &&
-    video.src && {
+    (video.src || video.srcURL) && {
       video: {
-        src: video.src.url,
+        src: video.src?.url ?? video.srcURL!,
         autoplay: video.autoplay,
         loop: video.loop,
         showControls: video.showControls,
