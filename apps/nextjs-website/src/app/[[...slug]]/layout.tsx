@@ -179,6 +179,7 @@ export default async function RootLayout({
               )}
               <Header
                 {...headerProps}
+                themeVariant={themeVariant}
                 locale={locale}
                 defaultLocale={defaultLocale}
                 localizedLinks={localizedLinks}

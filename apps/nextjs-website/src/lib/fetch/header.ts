@@ -87,7 +87,6 @@ const StandardHeaderCodec = t.strict({
   logo: StrapiImageSchema,
   productName: t.string,
   menu: MenuCodec,
-  mobileLogo: StrapiImageSchema,
   topBarHeaderLogo: StrapiImageSchema,
   topBarHeaderTitle: t.union([t.string, t.null]),
   topBarHeaderTitleMobile: t.union([t.string, t.null]),
@@ -147,12 +146,11 @@ export const getHeader = ({
 &populate[9]=header.drawer.linkCards.icons
 &populate[10]=header.drawer.linkCards.link
 &populate[11]=header.socialLinks.icon
-&populate[12]=header.mobileLogo
+&populate[12]=header.theme
 &populate[13]=header.topBarHeaderLogo
 &populate[14]=header.topBarHeaderTitle
 &populate[15]=header.topBarHeaderTitleMobile
-&populate[16]=header.theme
-&populate[17]=exclude
+&populate[16]=exclude
       `,
       {
         method: 'GET',

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, IconButton, Stack } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { HeaderProps } from '@react-components/types/Header/Header.types';
@@ -14,7 +14,6 @@ const Header = ({
   product,
   menu,
   logo,
-  mobileLogo,
   topBarHeaderLogo,
   topBarHeaderTitle,
   topBarHeaderTitleMobile,
@@ -22,6 +21,8 @@ const Header = ({
   labels,
   languages,
   activeLanguage,
+  themeVariant,
+  theme,
 }: HeaderProps) => {
   const muiTheme = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,7 +31,6 @@ const Header = ({
   );
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const pathname = usePathname();
-  const headerRef = useRef<HTMLDivElement | null>(null);
 
   const openHeader = () => {
     setMenuOpen(true);
@@ -85,7 +85,6 @@ const Header = ({
         zIndex={1000}
       >
         <Stack
-          ref={headerRef}
           direction='column'
           gap={{ xs: 0, md: 0 }}
           sx={{
@@ -103,8 +102,9 @@ const Header = ({
             <HeaderTitle
               product={product}
               {...(logo ? { logo } : {})}
-              {...(mobileLogo ? { mobileLogo } : {})}
               isMobile={isMobile}
+              themeVariant={themeVariant}
+              theme={theme}
             />
 
             {isMobile && (

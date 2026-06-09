@@ -10,7 +10,6 @@ const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
   __component: 'headers.standard-header',
   logo: null,
   productName: 'Demo',
-  mobileLogo: null,
   topBarHeaderLogo: null,
   topBarHeaderLink: '#',
   topBarHeaderTitle: 'Title bar top',
