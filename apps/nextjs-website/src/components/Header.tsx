@@ -13,7 +13,7 @@ import {
   HeaderSublink,
   MegaHeaderSublink,
 } from '@/lib/fetch/header';
-import { Locale } from '@/lib/fetch/siteWideSEO';
+import { Locale, ThemeVariant } from '@/lib/fetch/siteWideSEO';
 import { LocalizeURL } from '@/lib/linkLocalization';
 
 declare global {
@@ -120,7 +120,6 @@ const makeHeaderProps = (
     productName,
     menu,
     logo,
-    mobileLogo,
     topBarHeaderLogo,
     topBarHeaderTitle,
     topBarHeaderTitleMobile,
@@ -129,14 +128,17 @@ const makeHeaderProps = (
     locale,
     localizedLinks,
     activeLocale,
+    themeVariant,
   }: StandardHeaderData & {
     defaultLocale: Locale;
     activeLocale: Locale;
     locale: Locale;
     localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
+    themeVariant: ThemeVariant;
   },
   pathname: string,
 ): HeaderProps => ({
+  themeVariant,
   theme: 'dark',
   defaultLocale,
   languages: localizedLinks,
@@ -156,17 +158,6 @@ const makeHeaderProps = (
       alt: logo.alternativeText ?? productName,
     },
   }),
-  ...(mobileLogo && {
-    mobileLogo: {
-      src: mobileLogo.url,
-      href: LocalizeURL({
-        URL: '/',
-        locale,
-        defaultLocale,
-      }),
-      alt: mobileLogo.alternativeText ?? productName,
-    },
-  }),
   ...(topBarHeaderLogo && {
     topBarHeaderLogo: {
       src: topBarHeaderLogo.url,
@@ -175,7 +166,7 @@ const makeHeaderProps = (
         locale,
         defaultLocale,
       }),
-      alt: topBarHeaderLogo.alternativeText ?? productName,
+      alt: topBarHeaderLogo.alternativeText ?? '',
     },
   }),
   ...(topBarHeaderTitle && { topBarHeaderTitle }),
@@ -335,6 +326,7 @@ const Header = ({
   defaultLocale: Locale;
   exclude: HeaderData['data']['exclude'];
   localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
+  themeVariant: ThemeVariant;
 }) => {
   const pathname = usePathname() + '/';
   const activeLocale = ['it/', 'en/', 'de/', 'fr/', 'sl/'].includes(

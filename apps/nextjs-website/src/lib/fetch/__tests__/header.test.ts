@@ -48,7 +48,6 @@ const headerResponse: HeaderData = {
         topBarHeaderTitle: 'Title bar top',
         topBarHeaderTitleMobile: 'Title bar top mobile',
         topBarHeaderLink: '#',
-        mobileLogo: null,
         topBarHeaderLogo: null,
       },
     ],
@@ -80,12 +79,11 @@ describe('getHeader', () => {
 &populate[9]=header.drawer.linkCards.icons
 &populate[10]=header.drawer.linkCards.link
 &populate[11]=header.socialLinks.icon
-&populate[12]=header.mobileLogo
+&populate[12]=header.theme
 &populate[13]=header.topBarHeaderLogo
 &populate[14]=header.topBarHeaderTitle
 &populate[15]=header.topBarHeaderTitleMobile
-&populate[16]=header.theme
-&populate[17]=exclude
+&populate[16]=exclude
       `,
       {
         method: 'GET',

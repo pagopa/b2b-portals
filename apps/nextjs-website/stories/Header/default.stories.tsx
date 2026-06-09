@@ -12,16 +12,13 @@ const HeaderTemplate: StoryFn<HeaderProps> = (args) => <Header {...args} />;
 
 export const HeaderFull: StoryFn<typeof Header> = HeaderTemplate.bind({});
 HeaderFull.args = {
+  theme: 'dark',
+  themeVariant: 'WALLET',
   product: {
     name: 'IT-Wallet',
     href: '#',
   },
   logo: {
-    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/logo_sedn_6453fc30cd.svg',
-    alt: 'Logo',
-    href: '#',
-  },
-  mobileLogo: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/logo_sedn_6453fc30cd.svg',
     alt: 'Logo',
     href: '#',
