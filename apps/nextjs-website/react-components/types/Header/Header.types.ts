@@ -76,7 +76,7 @@ export interface NavigationProps {
 export interface HeaderTitleProps {
   product: {
     name: string;
-    href?: string;
+    href: string;
   };
   logo?: {
     src: string;
