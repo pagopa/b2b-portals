@@ -1,5 +1,5 @@
 import { StackProps, LinkProps as LinkPropsMUI } from '@mui/material';
-import { LinkProps, Locale, Theme } from '../common/Common.types';
+import { LinkProps, Locale, Theme, ThemeVariant } from '../common/Common.types';
 import { LangSwitchProps } from '../Footer/Footer.types';
 
 export interface HeaderSideDrawerCtaCardProps {
@@ -34,11 +34,6 @@ export interface HeaderProps
     NavigationProps,
     LangSwitchProps {
   readonly defaultLocale: Locale;
-  readonly mobileLogo?: {
-    src: string;
-    alt: string;
-    href: string;
-  };
   readonly topBarHeaderLogo?: {
     src: string;
     alt: string;
@@ -81,18 +76,15 @@ export interface NavigationProps {
 export interface HeaderTitleProps {
   product: {
     name: string;
-    href?: string;
+    href: string;
   };
   logo?: {
     src: string;
     alt: string;
     href: string;
   };
-  mobileLogo?: {
-    src: string;
-    alt: string;
-    href: string;
-  };
+  themeVariant: ThemeVariant;
+  theme: Theme;
 }
 
 export interface DialogBubbleProps extends StackProps {

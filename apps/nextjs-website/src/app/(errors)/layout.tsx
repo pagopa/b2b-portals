@@ -55,6 +55,7 @@ const ErrorsRootLayout = async ({ children }: ErrorsLayoutProps) => {
           )}
           <Header
             {...headerProps}
+            themeVariant={themeVariant}
             locale={defaultLocale}
             defaultLocale={defaultLocale}
             localizedLinks={localizedLinks}

@@ -22,14 +22,6 @@
       "repeatable": false,
       "required": true
     },
-    "mobileLogo": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "topBarHeaderTitle": {
       "type": "string"
     },
