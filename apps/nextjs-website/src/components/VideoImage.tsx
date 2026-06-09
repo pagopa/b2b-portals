@@ -15,6 +15,7 @@ const makeVideoImageProps = ({
   image,
   mobileImage,
   video,
+  enableMargins,
   ...rest
 }: VideoImageSection & SiteWidePageData): VideoImageProps => ({
   ...rest,
@@ -50,6 +51,9 @@ const makeVideoImageProps = ({
         sizes: IMAGE_SIZES.background,
       },
     }),
+  ...(enableMargins && {
+    enableMargins,
+  }),
 });
 
 const VideoImage = (props: VideoImageSection & SiteWidePageData) => (
