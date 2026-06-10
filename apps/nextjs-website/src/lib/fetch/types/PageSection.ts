@@ -154,6 +154,7 @@ const HowToSectionCodec = t.strict({
     right: null,
   }),
   link: t.union([LinkCodec, t.null]),
+  ctaButton: t.union([CTAButtonSimpleCodec, t.null]),
   steps: t.array(StepCodec),
   sectionID: t.union([t.string, t.null]),
   customBgColor: t.union([t.string, t.null]),
@@ -351,6 +352,7 @@ const VideoImageSectionCodec = t.strict({
   image: StrapiImageSchema,
   mobileImage: StrapiImageSchema,
   video: t.union([VideoCodec, t.null]),
+  enableMargins: t.union([t.boolean, t.null]),
 });
 
 const ChipPropsCodec = t.strict({

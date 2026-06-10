@@ -5,11 +5,13 @@ import { HowToProps } from '@react-components/types';
 import { HowToSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { LocalizeURL } from '@/lib/linkLocalization';
+import Icon from '@/components/Icon';
 
 const makeHowToProps = ({
   locale,
   defaultLocale,
   link,
+  ctaButton,
   steps,
   customBgColor,
   ...rest
@@ -20,6 +22,17 @@ const makeHowToProps = ({
       label: link.label,
       href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
       ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
+    },
+  }),
+  ...(ctaButton && {
+    ctaButton: {
+      text: ctaButton.text,
+      variant: ctaButton.variant,
+      size: ctaButton.size,
+      href: LocalizeURL({ URL: ctaButton.href, locale, defaultLocale }),
+      ...(ctaButton.icon && { startIcon: Icon(ctaButton.icon) }),
+      ...(ctaButton.openInNewTab && { openInNewTab: ctaButton.openInNewTab }),
+      ...(ctaButton.ariaLabel && { ariaLabel: ctaButton.ariaLabel }),
     },
   }),
   steps: steps.map((step) => ({
