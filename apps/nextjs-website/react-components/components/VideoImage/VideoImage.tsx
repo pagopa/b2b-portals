@@ -25,6 +25,7 @@ const VideoImage = ({
   mobileImage,
   video,
   sectionID,
+  enableMargins,
 }: VideoImageProps) => {
   if (!image && !video) {
     throw new Error();
@@ -40,6 +41,7 @@ const VideoImage = ({
   const textColor = TextColor(theme);
   const themeMUI = useTheme();
   const isMobileDevice = useMediaQuery(themeMUI.breakpoints.down('md'));
+  const borderRadius = enableMargins ? '12px' : 0;
 
   useEffect(() => {
     if (mediaState === 'image') return;
@@ -82,6 +84,11 @@ const VideoImage = ({
           position: 'relative',
           overflow: mediaState === 'image' ? 'hidden' : 'visible',
           lineHeight: 0,
+          ...(enableMargins && {
+            my: '40px',
+            mx: { xs: '32px', md: '40px' },
+            borderRadius,
+          }),
         }}
         {...(sectionID && { id: sectionID })}
       >
@@ -102,6 +109,7 @@ const VideoImage = ({
                 zIndex: 1,
                 alignItems: isCentered ? 'center' : 'flex-start',
                 textAlign: isCentered ? 'center' : 'left',
+                borderRadius,
               }}
             >
               <Box
@@ -161,6 +169,7 @@ const VideoImage = ({
               position: 'relative',
               width: '100%',
               height: { xs: 'auto', md: '600px' },
+              borderRadius,
             }}
           >
             {renderImage({
@@ -188,6 +197,7 @@ const VideoImage = ({
                     height: '100%',
                     backgroundColor: 'rgba(0, 0, 0, 0.60)',
                     zIndex: 10,
+                    borderRadius,
                   }}
                 />
                 <Box
@@ -205,6 +215,7 @@ const VideoImage = ({
                     padding: '20px',
                     marginLeft: { xs: '0', md: isCentered ? '0' : '6em' },
                     textAlign: isCentered ? 'center' : 'left',
+                    borderRadius,
                   }}
                 >
                   <ImageText
@@ -218,7 +229,13 @@ const VideoImage = ({
             )}
           </Box>
         ) : (
-          <Box sx={{ position: 'relative', width: '100%' }}>
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              borderRadius,
+            }}
+          >
             {renderVideo({
               videoRef,
               error,
@@ -231,6 +248,7 @@ const VideoImage = ({
               onVideoEnd: handleVideoEnd,
               onClick: pause,
               isMobileDevice,
+              borderRadius,
             })}
           </Box>
         )}

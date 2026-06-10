@@ -352,6 +352,7 @@ const VideoImageSectionCodec = t.strict({
   image: StrapiImageSchema,
   mobileImage: StrapiImageSchema,
   video: t.union([VideoCodec, t.null]),
+  enableMargins: t.union([t.boolean, t.null]),
 });
 
 const ChipPropsCodec = t.strict({
