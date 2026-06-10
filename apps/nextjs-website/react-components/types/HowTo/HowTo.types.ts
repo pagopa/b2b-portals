@@ -1,4 +1,9 @@
-import { LinkProps, SectionProps, ThemeVariant } from '../common/Common.types';
+import {
+  CtaButtonProps,
+  LinkProps,
+  SectionProps,
+  ThemeVariant,
+} from '../common/Common.types';
 
 export interface Step {
   readonly iconURL?: string;
@@ -19,6 +24,7 @@ export interface HowToProps extends SectionProps {
   readonly link?: LinkProps & {
     readonly target?: React.HTMLAttributeAnchorTarget;
   };
+  readonly ctaButton?: CtaButtonProps;
   readonly rowMaxSteps?: number;
   readonly stepsAlignment?: 'right' | 'center' | 'left';
   readonly customBgColor?: string;

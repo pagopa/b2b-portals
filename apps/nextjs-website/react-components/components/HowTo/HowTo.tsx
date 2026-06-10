@@ -6,7 +6,12 @@ import { TextColor } from '../common/Common.helpers';
 import { HowToProps } from '../../types/HowTo/HowTo.types';
 import { HowToStep } from './HowToStep';
 import { resolveThemeVariant } from '../../theme';
-import { isValidExternalLink, LinkIcon, Title } from '../common/Common';
+import {
+  CtaButtons,
+  isValidExternalLink,
+  LinkIcon,
+  Title,
+} from '../common/Common';
 
 const HowTo = (props: HowToProps) => {
   const {
@@ -19,6 +24,7 @@ const HowTo = (props: HowToProps) => {
     stepsAlignment = 'center',
     sectionID,
     customBgColor,
+    ctaButton,
   } = props;
 
   const textColor = TextColor(theme);
@@ -109,8 +115,16 @@ const HowTo = (props: HowToProps) => {
             </Box>
           ))}
         </Box>
-        {/** Link */}
-        {link && (
+        {/** CTA button or link */}
+        {ctaButton ? (
+          <Box sx={{ mt: 6 }}>
+            {CtaButtons({
+              ctaButtons: [ctaButton],
+              theme,
+              themeVariant,
+            })}
+          </Box>
+        ) : link ? (
           <Typography component='span' display='contents'>
             <Link
               sx={{
@@ -142,7 +156,7 @@ const HowTo = (props: HowToProps) => {
               />
             </Link>
           </Typography>
-        )}
+        ) : null}
       </Grid>
     </ContainerRC>
   );
