@@ -18,6 +18,7 @@ export const makeCardsProps = ({
   ctaButtons,
   bottomCTA,
   customBgColor,
+  cardsAlignment,
   ...rest
 }: CardsSection & SiteWidePageData): CardsProps => ({
   text: {
@@ -34,6 +35,7 @@ export const makeCardsProps = ({
   },
   ...(titleTag && { titleTag }),
   ...(customBgColor && { customBgColor }),
+  ...(cardsAlignment && { cardsAlignment }),
   items: items.map(({ icon, label, text, title, links }) => ({
     title,
     themeVariant: rest.themeVariant,

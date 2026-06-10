@@ -16,6 +16,7 @@ export interface CardsProps extends SectionProps {
   titleTag?: 'h1' | 'h2';
   ctaButtons?: CtaButtonProps[];
   textPosition: 'left' | 'right' | 'center' | 'none';
+  cardsAlignment?: 'left' | 'center';
   bottomCTA?: CtaButtonProps;
   customBgColor?: string;
 }

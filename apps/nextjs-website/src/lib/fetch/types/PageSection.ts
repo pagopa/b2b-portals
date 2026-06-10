@@ -207,6 +207,13 @@ const CardsSectionCodec = t.strict({
     right: null,
     none: null,
   }),
+  cardsAlignment: t.union([
+    t.keyof({
+      left: null,
+      center: null,
+    }),
+    t.null,
+  ]),
   sectionID: t.union([t.string, t.null]),
   bottomCTA: t.union([CTAButtonSimpleCodec, t.null]),
   customBgColor: t.union([t.string, t.null]),
