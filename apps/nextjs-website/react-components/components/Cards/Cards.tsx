@@ -62,12 +62,12 @@ const Cards = ({
 
   const cardListStyles = {
     width: isStackLayout ? '100%' : { xs: '100%', md: '60%' },
+    justifyContent: isCardsCentered ? 'center' : 'left',
     ...(isRowLayout
       ? {
           display: 'flex',
           flexWrap: 'wrap',
           gap: `${columnGap}px`,
-          justifyContent: 'center',
         }
       : {
           columnCount,
