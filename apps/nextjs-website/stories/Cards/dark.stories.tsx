@@ -397,7 +397,7 @@ DarkCardsNoTextWithBottomCta.args = {
 export const DarkCardsCenteredAlignment: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
 DarkCardsCenteredAlignment.args = {
-  ...defaultPropsDarkThree,
+  ...defaultPropsDarkFour,
   text: {
     title: 'Cards Title',
   },

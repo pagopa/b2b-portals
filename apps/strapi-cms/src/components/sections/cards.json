@@ -55,7 +55,6 @@
     },
     "cardsAlignment": {
       "type": "enumeration",
-      "required": true,
       "default": "left",
       "enum": [
         "left",

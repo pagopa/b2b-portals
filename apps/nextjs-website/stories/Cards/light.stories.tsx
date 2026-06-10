@@ -395,7 +395,7 @@ LightCardsNoTextWithBottomCta.args = {
 export const LightCardsCenteredAlignment: StoryFn<typeof Cards> =
   CardsTemplate.bind({});
 LightCardsCenteredAlignment.args = {
-  ...defaultPropsLightThree,
+  ...defaultPropsLightFour,
   text: {
     title: 'Cards Title',
   },

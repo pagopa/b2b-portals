@@ -35,6 +35,7 @@ const Cards = ({
   const isNone = textPosition === 'none';
   const isStackLayout = isCenter || isNone;
   const isCardsCentered = cardsAlignment === 'center';
+  const isRowLayout = isCenter || isCardsCentered;
 
   const linkColor = resolveThemeVariant<string>(
     'contentLinkColor',
@@ -61,7 +62,7 @@ const Cards = ({
 
   const cardListStyles = {
     width: isStackLayout ? '100%' : { xs: '100%', md: '60%' },
-    ...(isCardsCentered
+    ...(isRowLayout
       ? {
           display: 'flex',
           flexWrap: 'wrap',
@@ -77,8 +78,8 @@ const Cards = ({
     listStyle: 'none',
     '& > li': {
       breakInside: 'avoid',
-      marginBottom: isCardsCentered ? 0 : '20px',
-      width: isCardsCentered ? centeredCardWidth : '100%',
+      marginBottom: isRowLayout ? 0 : '20px',
+      width: isRowLayout ? centeredCardWidth : '100%',
     },
   } as const;
 
