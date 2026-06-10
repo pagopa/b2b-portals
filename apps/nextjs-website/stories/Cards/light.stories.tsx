@@ -391,3 +391,15 @@ LightCardsNoTextWithBottomCta.args = {
   textPosition: 'none',
   titleTag: 'h2',
 };
+
+export const LightCardsCenteredAlignment: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+LightCardsCenteredAlignment.args = {
+  ...defaultPropsLightThree,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'none',
+  cardsAlignment: 'center',
+  titleTag: 'h2',
+};

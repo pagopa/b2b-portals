@@ -393,3 +393,15 @@ DarkCardsNoTextWithBottomCta.args = {
   textPosition: 'none',
   titleTag: 'h2',
 };
+
+export const DarkCardsCenteredAlignment: StoryFn<typeof Cards> =
+  CardsTemplate.bind({});
+DarkCardsCenteredAlignment.args = {
+  ...defaultPropsDarkThree,
+  text: {
+    title: 'Cards Title',
+  },
+  textPosition: 'none',
+  cardsAlignment: 'center',
+  titleTag: 'h2',
+};

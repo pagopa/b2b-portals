@@ -53,6 +53,15 @@
         "none"
       ]
     },
+    "cardsAlignment": {
+      "type": "enumeration",
+      "required": true,
+      "default": "left",
+      "enum": [
+        "left",
+        "center"
+      ]
+    },
     "bottomCTA": {
       "type": "component",
       "component": "components.cta-button-simple",
