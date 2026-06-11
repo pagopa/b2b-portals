@@ -35,89 +35,94 @@ const makeTestAppEnv = () => {
 // response example
 const footerResponse: FooterData = {
   data: {
-    legalInfo:
-      '**PagoPA S.p.A.** — società per azioni con socio unico - capitale sociale di euro 1,000,000 interamente versato - sede legale in Roma, Piazza Colonna 370,\nCAP 00187 - n. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009',
-    showFundedByNextGenerationEULogo: true,
-    companyLink: {
-      href: 'https://www.pagopa.it/',
-      ariaLabel: 'Link: vai al sito di PagoPA S.p.A.',
-    },
-    links_aboutUs: {
-      title: null,
-      links: [
-        {
-          label: 'Chi siamo',
-          href: '/',
-          ariaLabel: 'Chi siamo',
-          showOneTrustPreferencies: null,
+    footer: [
+      {
+        __component: 'footers.standard-footer',
+        legalInfo:
+          '**PagoPA S.p.A.** — società per azioni con socio unico - capitale sociale di euro 1,000,000 interamente versato - sede legale in Roma, Piazza Colonna 370,\nCAP 00187 - n. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009',
+        showFundedByNextGenerationEULogo: true,
+        companyLink: {
+          href: 'https://www.pagopa.it/',
+          ariaLabel: 'Link: vai al sito di PagoPA S.p.A.',
         },
-        {
-          label: 'PNRR',
-          href: '/PNRR',
-          ariaLabel: 'PNRR',
-          showOneTrustPreferencies: null,
+        links_aboutUs: {
+          title: null,
+          links: [
+            {
+              label: 'Chi siamo',
+              href: '/',
+              ariaLabel: 'Chi siamo',
+              showOneTrustPreferencies: null,
+            },
+            {
+              label: 'PNRR',
+              href: '/PNRR',
+              ariaLabel: 'PNRR',
+              showOneTrustPreferencies: null,
+            },
+            {
+              label: 'Media',
+              href: '/media',
+              ariaLabel: 'Media',
+              showOneTrustPreferencies: null,
+            },
+            {
+              label: 'Lavora con noi',
+              href: '/lavora-con-noi',
+              ariaLabel: 'Lavora con noi',
+              showOneTrustPreferencies: null,
+            },
+          ],
         },
-        {
-          label: 'Media',
-          href: '/media',
-          ariaLabel: 'Media',
-          showOneTrustPreferencies: null,
+        links_followUs: {
+          title: 'SEGUICI SU',
+          socialLinks: [
+            {
+              icon: {
+                width: 32,
+                height: 32,
+                alternativeText: null,
+                formats: null,
+                mime: 'image/png',
+                url: 'exampleURL',
+              },
+              href: 'https://linkedin.com',
+              ariaLabel: 'LinkedIn',
+            },
+          ],
+          links: [
+            {
+              label: 'Accessibilità',
+              href: 'accessibilita',
+              ariaLabel: 'Accessibilità',
+              showOneTrustPreferencies: null,
+            },
+          ],
         },
-        {
-          label: 'Lavora con noi',
-          href: '/lavora-con-noi',
-          ariaLabel: 'Lavora con noi',
-          showOneTrustPreferencies: null,
+        links_resources: {
+          title: 'RISORSE',
+          links: [
+            {
+              label: 'Test',
+              href: '/test',
+              ariaLabel: 'test',
+              showOneTrustPreferencies: null,
+            },
+          ],
         },
-      ],
-    },
-    links_followUs: {
-      title: 'SEGUICI SU',
-      socialLinks: [
-        {
-          icon: {
-            width: 32,
-            height: 32,
-            alternativeText: null,
-            formats: null,
-            mime: 'image/png',
-            url: 'exampleURL',
-          },
-          href: 'https://linkedin.com',
-          ariaLabel: 'LinkedIn',
+        links_services: {
+          title: 'PRODOTTI E SERVIZI',
+          links: [
+            {
+              label: 'Test',
+              href: '/test',
+              ariaLabel: 'test',
+              showOneTrustPreferencies: null,
+            },
+          ],
         },
-      ],
-      links: [
-        {
-          label: 'Accessibilità',
-          href: 'accessibilita',
-          ariaLabel: 'Accessibilità',
-          showOneTrustPreferencies: null,
-        },
-      ],
-    },
-    links_resources: {
-      title: 'RISORSE',
-      links: [
-        {
-          label: 'Test',
-          href: '/test',
-          ariaLabel: 'test',
-          showOneTrustPreferencies: null,
-        },
-      ],
-    },
-    links_services: {
-      title: 'PRODOTTI E SERVIZI',
-      links: [
-        {
-          label: 'Test',
-          href: '/test',
-          ariaLabel: 'test',
-          showOneTrustPreferencies: null,
-        },
-      ],
-    },
+      },
+    ],
   },
 };
 
@@ -134,12 +139,18 @@ describe('getFooter', () => {
 
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/footer/?locale=it
-&populate[0]=companyLink
-&populate[1]=links_aboutUs.links
-&populate[2]=links_followUs.links
-&populate[3]=links_followUs.socialLinks.icon
-&populate[4]=links_resources.links
-&populate[5]=links_services.links
+&populate[0]=footer.companyLink
+&populate[1]=footer.links_aboutUs.links
+&populate[2]=footer.links_followUs.links
+&populate[3]=footer.links_followUs.socialLinks.icon
+&populate[4]=footer.links_resources.links
+&populate[5]=footer.links_services.links
+&populate[6]=footer.links_Policies.links
+&populate[7]=footer.links_SiteIndex.links
+&populate[8]=footer.links_Social.socialLinks
+&populate[9]=footer.links_Social.socialLinks.icon
+&populate[10]=footer.hashtags
+&populate[11]=footer.hashtags.hashtags
       `,
       {
         method: 'GET',

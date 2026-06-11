@@ -4,7 +4,7 @@ import { HowToProps } from './HowTo/HowTo.types';
 import { AccordionProps } from './Accordion/Accordion.types';
 import { BannerLinkProps } from './BannerLink/BannerLink.types';
 import { CardsProps } from './Cards/Cards.types';
-import { FooterProps } from './Footer/Footer.types';
+import { StandardFooterProps } from './Footer/Footer.types';
 import { EditorialSwitchProps } from './Editorial-Switch/Editorial-Switch.types';
 import { PreHeaderProps } from './PreHeader/PreHeader.types';
 import { StripeLinkProps } from './StripeLink/StripeLink.types';
@@ -34,6 +34,7 @@ import { LabelsProviderProps } from './LabelsProvider/LabelsProvider.types';
 import { SimpleCardsProps } from './SimpleCards/SimpleCards.types';
 import { FeedbackFormProps } from './FeedbackForm/FeedbackForm.types';
 import { LogoWallProps } from './LogoWall/LogoWall.types';
+import { DesignersItaliaFooterProps } from './DesignersItaliaFooter/DesignersItaliaFooter.types';
 
 export type {
   HeroProps,
@@ -42,7 +43,8 @@ export type {
   AccordionProps,
   BannerLinkProps,
   CardsProps,
-  FooterProps,
+  StandardFooterProps,
+  DesignersItaliaFooterProps,
   EditorialSwitchProps,
   PreHeaderProps,
   StripeLinkProps,

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_components_footer_social_link_groups",
+  "info": {
+    "displayName": "footerSocialLinkGroup"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "socialLinks": {
+      "type": "component",
+      "component": "components.footer-link-social",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
