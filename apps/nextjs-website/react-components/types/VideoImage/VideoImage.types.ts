@@ -25,6 +25,7 @@ export interface VideoImageProps
     playButtonLabel: string;
     pausedPlayButtonLabel: string;
   };
+  enableMargins?: boolean;
 }
 
 export interface VideoTextProps {
@@ -51,6 +52,7 @@ export interface RenderVideoProps {
   onVideoEnd: () => void;
   onClick?: () => void;
   isMobileDevice: boolean;
+  borderRadius?: string | number;
 }
 
 export interface RenderImageProps {

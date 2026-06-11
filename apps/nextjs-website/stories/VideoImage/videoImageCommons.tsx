@@ -8,12 +8,13 @@ export const VideoImageTemplate: StoryFn<VideoImageProps> = (args) => (
 );
 
 const createVideoImageDefaults = (
-  theme: 'dark' | 'light'
+  theme: 'dark' | 'light',
 ): VideoImageProps => ({
   theme,
   isCentered: false,
   sectionID: null,
   themeVariant: 'SEND',
+  enableMargins: false,
 });
 
 // Usage example

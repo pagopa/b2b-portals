@@ -29,12 +29,14 @@ export const renderVideo = ({
   onClick,
   onVideoEnd,
   isMobileDevice,
+  borderRadius,
 }: RenderVideoProps) => {
   const mobileStyle = {
     overflow: 'hidden',
     width: '100%',
     height: 'auto',
     display: 'block',
+    borderRadius,
   };
 
   const nonMobileStyle = {
@@ -42,6 +44,7 @@ export const renderVideo = ({
     width: '100%',
     height: 'auto',
     display: 'block',
+    borderRadius,
   };
 
   if (error) {

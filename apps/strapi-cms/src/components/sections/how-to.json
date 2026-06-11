@@ -24,6 +24,11 @@
       "component": "components.link",
       "repeatable": false
     },
+    "ctaButton": {
+      "type": "component",
+      "component": "components.cta-button-simple",
+      "repeatable": false
+    },
     "rowMaxSteps": {
       "type": "integer",
       "required": true,

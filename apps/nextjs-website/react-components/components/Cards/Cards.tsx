@@ -15,6 +15,7 @@ const Cards = ({
   text,
   ctaButtons,
   textPosition,
+  cardsAlignment = 'left',
   sectionID,
   bottomCTA,
   titleTag,
@@ -33,6 +34,8 @@ const Cards = ({
   const isCenter = textPosition === 'center';
   const isNone = textPosition === 'none';
   const isStackLayout = isCenter || isNone;
+  const isCardsCentered = cardsAlignment === 'center';
+  const isRowLayout = isCenter || isCardsCentered;
 
   const linkColor = resolveThemeVariant<string>(
     'contentLinkColor',
@@ -46,18 +49,37 @@ const Cards = ({
     sm: 2,
     md: isStackLayout ? 3 : 2,
   };
+  const columnGap = 20;
+  const centeredCardWidth = {
+    xs: '100%',
+    sm: `calc((100% - ${
+      (columnCount.sm - 1) * columnGap
+    }px) / ${columnCount.sm})`,
+    md: `calc((100% - ${
+      (columnCount.md - 1) * columnGap
+    }px) / ${columnCount.md})`,
+  };
 
   const cardListStyles = {
     width: isStackLayout ? '100%' : { xs: '100%', md: '60%' },
-    columnCount,
-    columnGap: '20px',
+    justifyContent: isCardsCentered ? 'center' : 'left',
+    ...(isRowLayout
+      ? {
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: `${columnGap}px`,
+        }
+      : {
+          columnCount,
+          columnGap: `${columnGap}px`,
+        }),
     margin: 0,
     padding: 0,
     listStyle: 'none',
     '& > li': {
       breakInside: 'avoid',
-      marginBottom: '20px',
-      width: '100%',
+      marginBottom: isRowLayout ? 0 : '20px',
+      width: isRowLayout ? centeredCardWidth : '100%',
     },
   } as const;
 
