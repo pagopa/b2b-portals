@@ -1,6 +1,6 @@
 import React from 'react';
 import { Footer } from '@react-components/components';
-import { FooterProps } from '@react-components/types';
+import { StandardFooterProps } from '@react-components/types';
 
 interface Props {
   showFundedByNextGenerationEULogo: boolean;
@@ -9,7 +9,7 @@ interface Props {
 export const StorybookFooter = ({
   showFundedByNextGenerationEULogo,
 }: Props) => {
-  const links: FooterProps['links'] = {
+  const links: StandardFooterProps['links'] = {
     aboutUs: {
       links: [
         { label: 'Chi siamo', href: '#', ariaLabel: 'Chi siamo' },

@@ -9,7 +9,9 @@ import { PageIDs, PreviewPageData } from '../fetch/preview';
 import { AppEnv, Config } from '@/AppEnv';
 
 export interface Getters {
-  readonly getFooterProps: (locale: Locale) => Promise<FooterData['data']>;
+  readonly getFooterProps: (
+    locale: Locale,
+  ) => Promise<FooterData['data']['footer'][0]>;
   readonly getHeaderProps: (
     locale: Locale,
     defaultLocale: Locale,

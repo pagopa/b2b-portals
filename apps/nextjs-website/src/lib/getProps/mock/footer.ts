@@ -2,6 +2,7 @@ import { Getters } from '../types';
 import { mockImageData } from './commons';
 
 export const mockFooterProps: Getters['getFooterProps'] = async () => ({
+  __component: 'footers.standard-footer',
   companyLink: {
     ariaLabel: 'mock',
     href: 'mock',
