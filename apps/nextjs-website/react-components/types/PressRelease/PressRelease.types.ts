@@ -3,7 +3,7 @@ import { LinkProps } from '../common/Common.types';
 
 interface PressReleaseParagraphProps {
   title: string;
-  body?: string;
+  body?: JSX.Element;
   cards?: CardsItemProps[];
 }
 

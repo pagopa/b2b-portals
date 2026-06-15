@@ -66,7 +66,13 @@ const makeTextSectionProps = ({
   ...(paragraphs.length > 0 && {
     paragraphs: paragraphs.map((paragraph) => ({
       title: paragraph.title,
-      ...(paragraph.body && { body: paragraph.body }),
+      ...(paragraph.body && {
+        body: MarkdownRenderer({
+          markdown: paragraph.body,
+          locale,
+          defaultLocale,
+        }),
+      }),
       ...(paragraph.cards.length > 0 && {
         cards: paragraph.cards.map((card) =>
           makeCardsItemProps({
