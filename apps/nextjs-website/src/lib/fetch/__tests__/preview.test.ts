@@ -108,6 +108,9 @@ const pressReleaseDataResponse: PreviewPressReleaseData = {
         href: '/',
         ariaLabel: 'label',
       },
+      image: null,
+      metadata: null,
+      paragraphs: [],
     },
     credits: null,
     publishedAt: '2024-11-28T15:14:29.486Z',
@@ -339,8 +342,12 @@ describe('fetchPressReleaseFromID', () => {
 
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases/${pageIDExample}?locale=it&status=draft
-&populate[1]=pressRelease.backlink
-&populate[2]=credits.image
+&populate[1]=credits.image
+&populate[2]=pressRelease.backlink
+&populate[3]=pressRelease.image
+&populate[4]=pressRelease.metadata
+&populate[5]=pressRelease.paragraphs.cards.icon
+&populate[6]=pressRelease.paragraphs.cards.links
 &sort[0]=pressRelease.date:desc
         `,
       {

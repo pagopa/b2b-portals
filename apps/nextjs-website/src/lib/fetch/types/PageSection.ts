@@ -478,6 +478,16 @@ const FramedVideoSectionCodec = t.strict({
   ]),
 });
 
+const PressReleaseMetaCodec = t.strict({
+  readingTime: t.union([t.string, t.null]),
+});
+
+const PressReleaseParagraphCodec = t.strict({
+  title: t.string,
+  body: t.union([t.string, t.null]),
+  cards: t.array(CardsItemCodec),
+});
+
 export const PressReleaseSectionContentCodec = t.strict({
   date: t.string,
   title: t.string,
@@ -485,6 +495,9 @@ export const PressReleaseSectionContentCodec = t.strict({
   body: t.string,
   sectionID: t.union([t.string, t.null]),
   backlink: t.union([LinkCodec, t.null]),
+  image: StrapiImageSchema,
+  metadata: t.union([PressReleaseMetaCodec, t.null]),
+  paragraphs: t.array(PressReleaseParagraphCodec),
 });
 
 const PressReleaseSectionCodec = t.intersection([
