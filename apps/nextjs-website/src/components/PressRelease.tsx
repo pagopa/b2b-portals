@@ -5,6 +5,8 @@ import { PressReleaseSection } from '@/lib/fetch/types/PageSection';
 import { PressRelease as PressReleaseRC } from '@react-components/components';
 import { PressReleaseProps } from '@react-components/types';
 import { LocalizeURL } from '@/lib/linkLocalization';
+import { IMAGE_SIZES, makeSrcSetFromStrapiImageData } from '@/lib/image';
+import { makeCardsItemProps } from './Cards';
 
 const formatDateToLocale = (dateString: string, locale: string): string => {
   const date = new Date(dateString);
@@ -27,9 +29,11 @@ const makeTextSectionProps = ({
   body,
   date,
   backlink,
+  image,
+  metadata,
+  paragraphs,
   ...rest
-}: PressReleaseSection &
-  Omit<SiteWidePageData, 'themeVariant'>): PressReleaseProps => ({
+}: PressReleaseSection & SiteWidePageData): PressReleaseProps => ({
   ...(subtitle && { subtitle }),
   body: MarkdownRenderer({ markdown: body, locale, defaultLocale }),
   date: formatDateToLocale(date, locale),
@@ -44,11 +48,42 @@ const makeTextSectionProps = ({
       ...(backlink.ariaLabel && { ariaLabel: backlink.ariaLabel }),
     },
   }),
+  ...(image && {
+    image: {
+      src: image.url,
+      srcSet: makeSrcSetFromStrapiImageData(image),
+      ...(image.alternativeText && {
+        alt: image.alternativeText,
+      }),
+      sizes: IMAGE_SIZES.background,
+    },
+  }),
+  ...(metadata && {
+    metadata: {
+      ...(metadata.readingTime && { readingTime: metadata.readingTime }),
+    },
+  }),
+  ...(paragraphs.length > 0 && {
+    paragraphs: paragraphs.map((paragraph) => ({
+      title: paragraph.title,
+      ...(paragraph.body && { body: paragraph.body }),
+      ...(paragraph.cards.length > 0 && {
+        cards: paragraph.cards.map((card) =>
+          makeCardsItemProps({
+            ...card,
+            themeVariant: rest.themeVariant,
+            locale,
+            defaultLocale,
+          }),
+        ),
+      }),
+    })),
+  }),
   ...rest,
 });
 
-const PressRelease = (
-  props: PressReleaseSection & Omit<SiteWidePageData, 'themeVariant'>,
-) => <PressReleaseRC {...makeTextSectionProps(props)} />;
+const PressRelease = (props: PressReleaseSection & SiteWidePageData) => (
+  <PressReleaseRC {...makeTextSectionProps(props)} />
+);
 
 export default PressRelease;

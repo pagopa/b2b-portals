@@ -7,6 +7,40 @@ import { CardsSection } from '@/lib/fetch/types/PageSection';
 import { SiteWidePageData } from '@/lib/fetch/siteWideSEO';
 import { LocalizeURL } from '@/lib/linkLocalization';
 
+export const makeCardsItemProps = ({
+  icon,
+  label,
+  text,
+  title,
+  links,
+  themeVariant,
+  locale,
+  defaultLocale,
+}: CardsSection['items'][0] & SiteWidePageData): CardsProps['items'][0] => ({
+  title,
+  themeVariant,
+  ...(icon && {
+    iconURL: icon.url,
+  }),
+  ...(label && { label }),
+  ...(text && {
+    text: MarkdownRenderer({
+      markdown: text,
+      locale,
+      defaultLocale,
+      variant: 'body2',
+      sx: { '> p': { margin: 0 } },
+    }),
+  }),
+  ...(links.length > 0 && {
+    links: links.map((link) => ({
+      label: link.label,
+      href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
+      ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
+    })),
+  }),
+});
+
 export const makeCardsProps = ({
   locale,
   defaultLocale,
@@ -36,30 +70,14 @@ export const makeCardsProps = ({
   ...(titleTag && { titleTag }),
   ...(customBgColor && { customBgColor }),
   ...(cardsAlignment && { cardsAlignment }),
-  items: items.map(({ icon, label, text, title, links }) => ({
-    title,
-    themeVariant: rest.themeVariant,
-    ...(icon && {
-      iconURL: icon.url,
+  items: items.map((card) =>
+    makeCardsItemProps({
+      ...card,
+      themeVariant: rest.themeVariant,
+      locale,
+      defaultLocale,
     }),
-    ...(label && { label }),
-    ...(text && {
-      text: MarkdownRenderer({
-        markdown: text,
-        locale,
-        defaultLocale,
-        variant: 'body2',
-        sx: { '> p': { margin: 0 } },
-      }),
-    }),
-    ...(links.length > 0 && {
-      links: links.map((link) => ({
-        label: link.label,
-        href: LocalizeURL({ URL: link.href, locale, defaultLocale }),
-        ...(link.ariaLabel && { ariaLabel: link.ariaLabel }),
-      })),
-    }),
-  })),
+  ),
   ...(ctaButtons &&
     ctaButtons.length > 0 && {
       ctaButtons: ctaButtons.map(
