@@ -9,9 +9,12 @@ import {
   ListItem,
   Button,
   Box,
+  SnackbarCloseReason,
+  Snackbar,
 } from '@mui/material';
 import { DesignersItaliaFooterProps } from '@react-components/types';
 import { ExternalLinkIcon, isValidExternalLink } from '../common/Common';
+import { useState } from 'react';
 
 const listStyle: SxProps = {
   width: '100%',
@@ -37,10 +40,10 @@ const titleStyle: SxProps = {
   mt: { xs: 1, md: 0 },
 };
 
-export const MenuPolicies = ({
-  links_Policies,
+export const MenuBottomLinks = ({
+  bottomLinks,
 }: {
-  links_Policies: DesignersItaliaFooterProps['links_Policies'];
+  bottomLinks: DesignersItaliaFooterProps['bottomLinks'];
 }) => (
   <Box
     sx={{
@@ -49,11 +52,11 @@ export const MenuPolicies = ({
       padding: { xs: '24px 24px 8px 24px', md: '24px 70px' },
     }}
   >
-    {links_Policies.links.length > 0 && (
+    {bottomLinks && bottomLinks.links.length > 0 && (
       <List
         role='navigation'
-        {...(links_Policies.title && {
-          'aria-label': links_Policies.title,
+        {...(bottomLinks.title && {
+          'aria-label': bottomLinks.title,
         })}
         sx={{
           ...listStyle,
@@ -61,7 +64,7 @@ export const MenuPolicies = ({
           flexDirection: { xs: 'column', md: 'row' },
         }}
       >
-        {links_Policies.links.map((link, index) => (
+        {bottomLinks.links.map((link, index) => (
           <ListItem
             disablePadding
             key={`key_footer_policies_${index}`}
@@ -91,27 +94,27 @@ export const MenuPolicies = ({
 );
 
 export const MenuSocial = ({
-  links_Social,
+  socialLinks,
 }: {
-  links_Social: DesignersItaliaFooterProps['links_Social'];
+  socialLinks: DesignersItaliaFooterProps['socialLinks'];
 }) => (
   <>
-    {links_Social.title && (
-      <Typography sx={titleStyle}>{links_Social.title}</Typography>
+    {socialLinks && socialLinks.title && (
+      <Typography sx={titleStyle}>{socialLinks.title}</Typography>
     )}
-    {links_Social.links.length > 0 && (
+    {socialLinks && socialLinks.links.length > 0 && (
       <List
         disablePadding
         role='navigation'
-        {...(links_Social.title && {
-          'aria-label': links_Social.title,
+        {...(socialLinks.title && {
+          'aria-label': socialLinks.title,
         })}
         sx={{
           ...listStyle,
           display: 'inline',
         }}
       >
-        {links_Social.links.map((social, index) => (
+        {socialLinks.links.map((social, index) => (
           <ListItem
             disablePadding
             key={`key_footer_social_${index}`}
@@ -145,8 +148,21 @@ export const HashTags = ({
   labels: DesignersItaliaFooterProps['labels'];
   hashtags: DesignersItaliaFooterProps['hashtags'];
 }) => {
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+
+  const handleCloseSnackBar = (
+    _event: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackBar(false);
+  };
   const copyHashtagToClipboard = async (hashtag: string) => {
     if (navigator.clipboard) {
+      setOpenSnackBar(true);
       await navigator.clipboard.writeText(hashtag);
       return;
     }
@@ -154,10 +170,10 @@ export const HashTags = ({
 
   return (
     <>
-      {hashtags.title && (
+      {hashtags && hashtags.title && (
         <Typography sx={titleStyle}>{hashtags.title}</Typography>
       )}
-      {hashtags.hashtags.length > 0 && (
+      {hashtags && hashtags.hashtags.length > 0 && (
         <List
           disablePadding
           sx={listStyle}
@@ -198,26 +214,30 @@ export const HashTags = ({
           ))}
         </List>
       )}
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackBar}
+        message={labels.copiedToClipboard}
+      />
     </>
   );
 };
 
-export const MenuSiteIndex = ({
-  links_SiteIndex,
+export const MenuLinks = ({
+  links,
 }: {
-  links_SiteIndex: DesignersItaliaFooterProps['links_SiteIndex'];
+  links: DesignersItaliaFooterProps['links'];
 }) => {
   return (
     <>
-      {links_SiteIndex.title && (
-        <Typography sx={titleStyle}>{links_SiteIndex.title}</Typography>
-      )}
-      {links_SiteIndex.links.length > 0 && (
+      {links.title && <Typography sx={titleStyle}>{links.title}</Typography>}
+      {links.links.length > 0 && (
         <List
           disablePadding
           role='navigation'
-          {...(links_SiteIndex.title && {
-            'aria-label': links_SiteIndex.title,
+          {...(links.title && {
+            'aria-label': links.title,
           })}
           sx={{
             ...listStyle,
@@ -225,7 +245,7 @@ export const MenuSiteIndex = ({
             columnGap: '24px',
           }}
         >
-          {links_SiteIndex.links.map((link, index) => (
+          {links.links.map((link, index) => (
             <ListItem disablePadding key={`key_footer_siteindex_${index}`}>
               <Link
                 href={link.href}

@@ -23,11 +23,12 @@ interface FooterSocialLinksGroup {
   links: FooterSocialLinksType[];
 }
 export interface DesignersItaliaFooterProps {
-  links_Policies: FooterLinkGroup;
-  links_SiteIndex: FooterLinkGroup;
-  links_Social: FooterSocialLinksGroup;
-  hashtags: HashTagsGroup;
+  bottomLinks?: FooterLinkGroup;
+  links: FooterLinkGroup;
+  socialLinks?: FooterSocialLinksGroup;
+  hashtags?: HashTagsGroup;
   labels: {
     copyToClipboard: (hashtag: string) => string;
+    copiedToClipboard: string;
   };
 }

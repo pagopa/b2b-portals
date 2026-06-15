@@ -2,15 +2,15 @@ import { Box } from '@mui/material';
 import { DesignersItaliaFooterProps } from '@react-components/types';
 import {
   HashTags,
-  MenuPolicies,
-  MenuSiteIndex,
+  MenuBottomLinks,
+  MenuLinks,
   MenuSocial,
 } from './DesignersItaliaFooter.helpers';
 
 const DesignersItaliaFooter = ({
-  links_SiteIndex,
-  links_Policies,
-  links_Social,
+  links,
+  bottomLinks,
+  socialLinks,
   hashtags,
   labels,
 }: DesignersItaliaFooterProps) => {
@@ -29,16 +29,16 @@ const DesignersItaliaFooter = ({
         }}
       >
         <Box sx={{ width: { xs: '100%', md: '50%' } }}>
-          <MenuSiteIndex links_SiteIndex={links_SiteIndex} />
+          <MenuLinks links={links} />
         </Box>
         <Box sx={{ width: { xs: '100%', md: '25%' } }}>
           <HashTags labels={labels} hashtags={hashtags} />
         </Box>
         <Box sx={{ width: { xs: '100%', md: '25%' } }}>
-          <MenuSocial links_Social={links_Social} />
+          <MenuSocial socialLinks={socialLinks} />
         </Box>
       </Box>
-      <MenuPolicies links_Policies={links_Policies} />
+      {bottomLinks && <MenuBottomLinks bottomLinks={bottomLinks} />}
     </Box>
   );
 };

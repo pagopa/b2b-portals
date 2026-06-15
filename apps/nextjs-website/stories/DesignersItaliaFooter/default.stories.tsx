@@ -17,7 +17,7 @@ export const DesignersItaliaFooterSection: StoryFn<
   typeof DesignersItaliaFooter
 > = DesignersItaliaFooterTemplate.bind({});
 DesignersItaliaFooterSection.args = {
-  links_SiteIndex: {
+  links: {
     title: 'INDICE DEL SITO',
     links: [
       { label: 'Homepage', href: '#', ariaLabel: 'Homepage' },
@@ -41,7 +41,7 @@ DesignersItaliaFooterSection.args = {
       { label: 'Supporto', href: '#', ariaLabel: 'Supporto' },
     ],
   },
-  links_Policies: {
+  bottomLinks: {
     title: 'PRIVACY E CONDIZIONI',
     links: [
       { label: 'Cookie Policy', href: '#', ariaLabel: 'Cookie Policy' },
@@ -62,7 +62,7 @@ DesignersItaliaFooterSection.args = {
     title: 'HASHTAG UFFICIALI',
     hashtags: ['#ITWallet', '#SistemaITWallet', '#PortafoglioDigitaleItaliano'],
   },
-  links_Social: {
+  socialLinks: {
     title: 'SEGUICI SU',
     links: [
       {
@@ -99,5 +99,6 @@ DesignersItaliaFooterSection.args = {
   },
   labels: {
     copyToClipboard: (hashtag: string) => `Copia ${hashtag} negli appunti`,
+    copiedToClipboard: 'Hashtag copiato negli appunti',
   },
 };

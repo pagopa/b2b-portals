@@ -29,20 +29,25 @@ const labelsDesignersItaliaFooter: Record<
 > = {
   it: {
     copyToClipboard: (hashtag: string) => `Copia ${hashtag} negli appunti`,
+    copiedToClipboard: 'Hashtag copiato negli appunti',
   },
   en: {
     copyToClipboard: (hashtag: string) => `Copy ${hashtag} to your clipboard`,
+    copiedToClipboard: 'Hashtag copied to clipboard',
   },
   de: {
     copyToClipboard: (hashtag: string) =>
       `Kopieren Sie ${hashtag} in Ihre Zwischenablage.`,
+    copiedToClipboard: 'Hashtag in die Zwischenablage kopiert',
   },
   fr: {
     copyToClipboard: (hashtag: string) =>
       `Copiez ${hashtag} dans votre presse-papiers`,
+    copiedToClipboard: 'Hashtag copié dans le presse-papiers',
   },
   sl: {
     copyToClipboard: (hashtag: string) => `Kopiraj ${hashtag} v odložišče`,
+    copiedToClipboard: 'Hashtag kopirano v odložišče',
   },
 };
 
@@ -151,9 +156,30 @@ const makeDesignersItaliaFooterProps = (
   },
   activeLocale: Locale,
 ): DesignersItaliaFooterProps => ({
-  links_Policies: {
-    ...(props.links_Policies.title && { title: props.links_Policies.title }),
-    links: props.links_Policies.links.map(
+  ...(props.bottomLinks && {
+    bottomLinks: {
+      ...(props.bottomLinks.ariaLabel && {
+        title: props.bottomLinks.ariaLabel,
+      }),
+      ...(props.bottomLinks.links && {
+        links: props.bottomLinks.links.map(
+          ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+            label,
+            ...(ariaLabel && { ariaLabel }),
+            href: LocalizeURL({
+              URL: href,
+              locale: activeLocale,
+              defaultLocale,
+            }),
+            ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
+          }),
+        ),
+      }),
+    },
+  }),
+  links: {
+    ...(props.links.title && { title: props.links.title }),
+    links: props.links.links.map(
       ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
         label,
         ...(ariaLabel && { ariaLabel }),
@@ -162,27 +188,14 @@ const makeDesignersItaliaFooterProps = (
       }),
     ),
   },
-  links_SiteIndex: {
-    ...(props.links_SiteIndex.title && { title: props.links_SiteIndex.title }),
-    links: props.links_SiteIndex.links.map(
-      ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
-        label,
-        ...(ariaLabel && { ariaLabel }),
+  ...(props.socialLinks && {
+    socialLinks: {
+      ...(props.socialLinks.title && { title: props.socialLinks.title }),
+      links: props.socialLinks.socialLinks.map(({ icon, ariaLabel, href }) => ({
+        iconURL: icon.url,
+        ariaLabel,
         href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
-        ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
-      }),
-    ),
-  },
-  ...(props.links_Social && {
-    links_Social: {
-      ...(props.links_Social.title && { title: props.links_Social.title }),
-      links: props.links_Social.socialLinks.map(
-        ({ icon, ariaLabel, href }) => ({
-          iconURL: icon.url,
-          ariaLabel,
-          href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
-        }),
-      ),
+      })),
     },
   }),
   ...(props.hashtags && {

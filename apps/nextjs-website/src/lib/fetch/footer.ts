@@ -29,6 +29,11 @@ const FooterLinkGroupCodec = t.strict({
   links: t.array(FooterLinkCodec),
 });
 
+const FooterLinkAriaLabelGroupCodec = t.strict({
+  ariaLabel: t.union([t.string, t.null]),
+  links: t.array(FooterLinkCodec),
+});
+
 const FooterLinkGroupWithSocialCodec = t.strict({
   title: t.string,
   links: t.array(FooterLinkCodec),
@@ -61,10 +66,10 @@ const FooterHashtagGroupCodec = t.strict({
 
 const DesignersItaliaFooterCodec = t.strict({
   __component: t.literal('footers.designers-italia-footer'),
-  links_SiteIndex: FooterLinkGroupCodec,
-  links_Policies: FooterLinkGroupCodec,
-  links_Social: FooterLinkSocialGroupCodec,
-  hashtags: FooterHashtagGroupCodec,
+  links: FooterLinkGroupCodec,
+  bottomLinks: t.union([FooterLinkAriaLabelGroupCodec, t.null]),
+  socialLinks: t.union([FooterLinkSocialGroupCodec, t.null]),
+  hashtags: t.union([FooterHashtagGroupCodec, t.null]),
 });
 
 const FooterDataCodec = t.strict({
@@ -95,10 +100,10 @@ export const getFooter = ({
 &populate[3]=footer.links_followUs.socialLinks.icon
 &populate[4]=footer.links_resources.links
 &populate[5]=footer.links_services.links
-&populate[6]=footer.links_Policies.links
-&populate[7]=footer.links_SiteIndex.links
-&populate[8]=footer.links_Social.socialLinks
-&populate[9]=footer.links_Social.socialLinks.icon
+&populate[6]=footer.bottomLinks.links
+&populate[7]=footer.links.links
+&populate[8]=footer.socialLinks.socialLinks
+&populate[9]=footer.socialLinks.socialLinks.icon
 &populate[10]=footer.hashtags
 &populate[11]=footer.hashtags.hashtags
       `,

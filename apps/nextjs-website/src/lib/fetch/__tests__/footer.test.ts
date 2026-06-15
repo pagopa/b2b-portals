@@ -145,10 +145,10 @@ describe('getFooter', () => {
 &populate[3]=footer.links_followUs.socialLinks.icon
 &populate[4]=footer.links_resources.links
 &populate[5]=footer.links_services.links
-&populate[6]=footer.links_Policies.links
-&populate[7]=footer.links_SiteIndex.links
-&populate[8]=footer.links_Social.socialLinks
-&populate[9]=footer.links_Social.socialLinks.icon
+&populate[6]=footer.bottomLinks.links
+&populate[7]=footer.links.links
+&populate[8]=footer.socialLinks.socialLinks
+&populate[9]=footer.socialLinks.socialLinks.icon
 &populate[10]=footer.hashtags
 &populate[11]=footer.hashtags.hashtags
       `,

@@ -5,19 +5,13 @@
   },
   "options": {},
   "attributes": {
-    "links_SiteIndex": {
+    "links": {
       "type": "component",
       "component": "components.footer-link-group",
       "repeatable": false,
       "required": true
     },
-    "links_Policies": {
-      "type": "component",
-      "component": "components.footer-link-group",
-      "repeatable": false,
-      "required": true
-    },
-    "links_Social": {
+    "socialLinks": {
       "type": "component",
       "component": "components.footer-social-link-group",
       "repeatable": false
@@ -25,6 +19,11 @@
     "hashtags": {
       "type": "component",
       "component": "components.footer-hashtag-group",
+      "repeatable": false
+    },
+    "bottomLinks": {
+      "type": "component",
+      "component": "components.footer-link-aria-label-group",
       "repeatable": false
     }
   },
