@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Link,
-  Stack,
-  Button,
-  Snackbar,
-} from '@mui/material';
+import { Box, Typography, Link, Stack, Button, Snackbar } from '@mui/material';
 import {
   TextColor,
   BackgroundColor,
@@ -20,15 +13,8 @@ import linkIcon from '@react-components/assets/icons/link.svg';
 import Image from 'next/image';
 
 const PressRelease = (props: PressReleaseProps) => {
-  const {
-    date,
-    title,
-    subtitle,
-    body,
-    sectionID,
-    backlink,
-    metadata,
-  } = props;
+  const { date, title, subtitle, body, sectionID, backlink, metadata, image } =
+    props;
   const textColor = TextColor('light');
   const eyeletColor = ExtraTextColor('light');
   const backgroundColor = BackgroundColor('light');
@@ -133,6 +119,7 @@ const PressRelease = (props: PressReleaseProps) => {
       >
         {body}
       </Typography>
+
       {metadata && (
         <Stack
           direction={{ xs: 'column', md: 'row' }}
@@ -195,6 +182,22 @@ const PressRelease = (props: PressReleaseProps) => {
             />
           </Stack>
         </Stack>
+      )}
+
+      {image && (
+        <img
+          src={image.src}
+          srcSet={image.srcSet}
+          sizes={image.sizes}
+          alt={image.alt ?? ''}
+          style={{
+            width: '100%',
+            maxHeight: '420px',
+            objectFit: 'cover',
+            borderRadius: '24px',
+            marginTop: '40px',
+          }}
+        />
       )}
     </Box>
   );
