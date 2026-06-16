@@ -21,7 +21,13 @@ export interface PressReleaseProps {
     alt?: string;
   };
   metadata?: {
+    labels: {
+      readingTime: string;
+      shareLink: string;
+      copyLink: string;
+      linkCopied: string;
+    };
     readingTime?: string;
   };
-  paragraphs?: PressReleaseParagraphProps[]
+  paragraphs?: PressReleaseParagraphProps[];
 }
