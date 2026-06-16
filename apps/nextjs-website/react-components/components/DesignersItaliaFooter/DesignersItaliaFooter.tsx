@@ -38,7 +38,7 @@ const DesignersItaliaFooter = ({
           <MenuSocial socialLinks={socialLinks} />
         </Box>
       </Box>
-      {bottomLinks && <MenuBottomLinks bottomLinks={bottomLinks} />}
+      <MenuBottomLinks bottomLinks={bottomLinks} />
     </Box>
   );
 };

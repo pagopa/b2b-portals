@@ -9,7 +9,6 @@ import {
   ListItem,
   Button,
   Box,
-  SnackbarCloseReason,
   Snackbar,
 } from '@mui/material';
 import { DesignersItaliaFooterProps } from '@react-components/types';
@@ -44,102 +43,110 @@ export const MenuBottomLinks = ({
   bottomLinks,
 }: {
   bottomLinks: DesignersItaliaFooterProps['bottomLinks'];
-}) => (
-  <Box
-    sx={{
-      width: '100%',
-      backgroundColor: '#003366',
-      padding: { xs: '24px 24px 8px 24px', md: '24px 70px' },
-    }}
-  >
-    {bottomLinks && bottomLinks.links.length > 0 && (
-      <List
-        role='navigation'
-        {...(bottomLinks.title && {
-          'aria-label': bottomLinks.title,
-        })}
-        sx={{
-          ...listStyle,
-          display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
-        }}
-      >
-        {bottomLinks.links.map((link, index) => (
-          <ListItem
-            disablePadding
-            key={`key_footer_policies_${index}`}
-            sx={{ mb: { md: '0 !important' }, mr: { md: 3 } }}
-          >
-            <Link
-              href={link.href}
-              {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
-              variant='body2'
-              sx={{
-                fontSize: '14px',
-              }}
+}) =>
+  bottomLinks && bottomLinks.links.length > 0 ? (
+    <Box
+      sx={{
+        width: '100%',
+        backgroundColor: '#003366',
+        padding: { xs: '24px 24px 8px 24px', md: '24px 70px' },
+      }}
+    >
+      {bottomLinks && bottomLinks.links.length > 0 && (
+        <List
+          role='navigation'
+          {...(bottomLinks.title && {
+            'aria-label': bottomLinks.title,
+          })}
+          sx={{
+            ...listStyle,
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+          }}
+        >
+          {bottomLinks.links.map((link, index) => (
+            <ListItem
+              disablePadding
+              key={`key_footer_policies_${index}`}
+              sx={{ mb: { md: '0 !important' }, mr: { md: 3 } }}
             >
-              {link.label}
-              <ExternalLinkIcon
-                show={isValidExternalLink(link.href)}
+              <Link
+                href={link.href}
+                {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
+                variant='body2'
+                sx={{
+                  fontSize: '14px',
+                }}
                 {...(isValidExternalLink(link.href) && {
                   target: '_blank',
                 })}
-              />
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-    )}
-  </Box>
-);
+              >
+                {link.label}
+                <ExternalLinkIcon
+                  show={isValidExternalLink(link.href)}
+                  {...(isValidExternalLink(link.href) && {
+                    target: '_blank',
+                  })}
+                />
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </Box>
+  ) : null;
 
 export const MenuSocial = ({
   socialLinks,
 }: {
   socialLinks: DesignersItaliaFooterProps['socialLinks'];
-}) => (
-  <>
-    {socialLinks && socialLinks.title && (
-      <Typography sx={titleStyle}>{socialLinks.title}</Typography>
-    )}
-    {socialLinks && socialLinks.links.length > 0 && (
-      <List
-        disablePadding
-        role='navigation'
-        {...(socialLinks.title && {
-          'aria-label': socialLinks.title,
-        })}
-        sx={{
-          ...listStyle,
-          display: 'inline',
-        }}
-      >
-        {socialLinks.links.map((social, index) => (
-          <ListItem
-            disablePadding
-            key={`key_footer_social_${index}`}
-            sx={{ m: '0 32px 0 0', display: 'inline' }}
-          >
-            <Link
-              variant='body2'
-              href={social.href}
-              {...(social.ariaLabel && {
-                'aria-label': social.ariaLabel,
-              })}
+}) =>
+  socialLinks ? (
+    <>
+      {socialLinks && socialLinks.title && (
+        <Typography sx={titleStyle}>{socialLinks.title}</Typography>
+      )}
+      {socialLinks && socialLinks.links.length > 0 && (
+        <List
+          disablePadding
+          role='navigation'
+          {...(socialLinks.title && {
+            'aria-label': socialLinks.title,
+          })}
+          sx={{
+            ...listStyle,
+            display: 'inline',
+          }}
+        >
+          {socialLinks.links.map((social, index) => (
+            <ListItem
+              disablePadding
+              key={`key_footer_social_${index}`}
+              sx={{ m: '0 32px 0 0', display: 'inline' }}
             >
-              <img
-                src={social.iconURL}
-                alt={social.ariaLabel}
-                width={24}
-                height={24}
-              />
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-    )}
-  </>
-);
+              <Link
+                variant='body2'
+                href={social.href}
+                {...(social.ariaLabel && {
+                  'aria-label': social.ariaLabel,
+                })}
+                {...(isValidExternalLink(social.href) && {
+                  target: '_blank',
+                })}
+              >
+                <img
+                  src={social.iconURL}
+                  alt={social.ariaLabel}
+                  width={24}
+                  height={24}
+                />
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </>
+  ) : null;
 
 export const HashTags = ({
   hashtags,
@@ -150,16 +157,6 @@ export const HashTags = ({
 }) => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
 
-  const handleCloseSnackBar = (
-    _event: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpenSnackBar(false);
-  };
   const copyHashtagToClipboard = async (hashtag: string) => {
     if (navigator.clipboard) {
       setOpenSnackBar(true);
@@ -168,12 +165,12 @@ export const HashTags = ({
     }
   };
 
-  return (
+  return hashtags ? (
     <>
-      {hashtags && hashtags.title && (
+      {hashtags.title && (
         <Typography sx={titleStyle}>{hashtags.title}</Typography>
       )}
-      {hashtags && hashtags.hashtags.length > 0 && (
+      {hashtags.hashtags.length > 0 && (
         <List
           disablePadding
           sx={listStyle}
@@ -217,11 +214,11 @@ export const HashTags = ({
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}
-        onClose={handleCloseSnackBar}
+        onClose={() => setOpenSnackBar(false)}
         message={labels.copiedToClipboard}
       />
     </>
-  );
+  ) : null;
 };
 
 export const MenuLinks = ({
@@ -251,6 +248,9 @@ export const MenuLinks = ({
                 href={link.href}
                 {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
                 variant='body2'
+                {...(isValidExternalLink(link.href) && {
+                  target: '_blank',
+                })}
               >
                 {link.label}
                 <ExternalLinkIcon

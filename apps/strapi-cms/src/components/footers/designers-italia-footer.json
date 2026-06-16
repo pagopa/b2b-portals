@@ -11,6 +11,11 @@
       "repeatable": false,
       "required": true
     },
+    "bottomLinks": {
+      "type": "component",
+      "component": "components.footer-link-aria-label-group",
+      "repeatable": false
+    },
     "socialLinks": {
       "type": "component",
       "component": "components.footer-social-link-group",
@@ -19,11 +24,6 @@
     "hashtags": {
       "type": "component",
       "component": "components.footer-hashtag-group",
-      "repeatable": false
-    },
-    "bottomLinks": {
-      "type": "component",
-      "component": "components.footer-link-aria-label-group",
       "repeatable": false
     }
   },
