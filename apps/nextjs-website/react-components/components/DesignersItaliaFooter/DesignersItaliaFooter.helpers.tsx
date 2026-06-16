@@ -159,8 +159,8 @@ export const HashTags = ({
 
   const copyHashtagToClipboard = async (hashtag: string) => {
     if (navigator.clipboard) {
-      setOpenSnackBar(true);
       await navigator.clipboard.writeText(hashtag);
+      setOpenSnackBar(true);
       return;
     }
   };
