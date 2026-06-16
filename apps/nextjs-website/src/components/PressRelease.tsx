@@ -66,6 +66,7 @@ const makeTextSectionProps = ({
   paragraphs,
   ...rest
 }: PressReleaseSection & SiteWidePageData): PressReleaseProps => ({
+  theme: 'light',
   ...(subtitle && { subtitle }),
   body: MarkdownRenderer({ markdown: body, locale, defaultLocale }),
   date: formatDateToLocale(date, locale),

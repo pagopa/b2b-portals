@@ -1,5 +1,5 @@
 import { CardsItemProps } from '../Cards/Cards.types';
-import { LinkProps } from '../common/Common.types';
+import { LinkProps, SectionProps } from '../common/Common.types';
 
 interface PressReleaseParagraphProps {
   title: string;
@@ -7,11 +7,10 @@ interface PressReleaseParagraphProps {
   cards?: CardsItemProps[];
 }
 
-export interface PressReleaseProps {
+export interface PressReleaseProps extends SectionProps {
   title: string;
   subtitle?: string;
   body: JSX.Element;
-  sectionID: string | null;
   date: string;
   backlink?: LinkProps;
   image?: {

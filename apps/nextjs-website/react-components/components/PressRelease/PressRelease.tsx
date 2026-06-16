@@ -11,14 +11,26 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import shareIcon from '@react-components/assets/icons/share.svg';
 import linkIcon from '@react-components/assets/icons/link.svg';
 import Image from 'next/image';
+import CardsItem from '../Cards/CardsItem';
 
 const PressRelease = (props: PressReleaseProps) => {
-  const { date, title, subtitle, body, sectionID, backlink, metadata, image } =
-    props;
-  const textColor = TextColor('light');
-  const eyeletColor = ExtraTextColor('light');
-  const backgroundColor = BackgroundColor('light');
-  const backlinkColor = TextAlternativeColor('light');
+  const {
+    date,
+    title,
+    subtitle,
+    body,
+    sectionID,
+    backlink,
+    metadata,
+    image,
+    paragraphs,
+    themeVariant,
+    theme,
+  } = props;
+  const textColor = TextColor(theme);
+  const eyeletColor = ExtraTextColor(theme);
+  const backgroundColor = BackgroundColor(theme);
+  const backlinkColor = TextAlternativeColor(theme);
   const [copyLinkSnackBarOpen, setCopyLinkSnackBarOpen] = useState(false);
 
   const ShareLink = () => {
@@ -78,10 +90,9 @@ const PressRelease = (props: PressReleaseProps) => {
         {date}
       </Typography>
       <Typography
-        variant='h4'
-        component='h2'
-        sx={{ fontSize: { xs: '32px', md: '38px' }, color: textColor, mt: 2 }}
-        width='75%'
+        variant='h1'
+        sx={{ color: textColor, mt: 2 }}
+        width={{ xs: '100%', md: '75%' }}
       >
         {title}
       </Typography>
@@ -94,7 +105,7 @@ const PressRelease = (props: PressReleaseProps) => {
             mt: 2,
             color: textColor,
           }}
-          width='75%'
+          width={{ xs: '100%', md: '75%' }}
         >
           {subtitle}
         </Typography>
@@ -103,7 +114,6 @@ const PressRelease = (props: PressReleaseProps) => {
         component='div'
         variant='body1'
         sx={{
-          fontSize: { xs: '14px', md: '16px' },
           mt: 1,
           color: textColor,
           '& a': {
@@ -115,7 +125,7 @@ const PressRelease = (props: PressReleaseProps) => {
             },
           },
         }}
-        width='75%'
+        width={{ xs: '100%', md: '75%' }}
       >
         {body}
       </Typography>
@@ -199,6 +209,55 @@ const PressRelease = (props: PressReleaseProps) => {
           }}
         />
       )}
+
+      {paragraphs &&
+        paragraphs.map((paragraph) => (
+          <Stack mt={5}>
+            <Typography
+              variant='h3'
+              component='h2'
+              sx={{ color: textColor }}
+              width={{ xs: '100%', md: '75%' }}
+            >
+              {paragraph.title}
+            </Typography>
+
+            {paragraph.body && (
+              <Typography
+                component='div'
+                variant='body1'
+                sx={{
+                  mt: 1,
+                  color: textColor,
+                  '& a': {
+                    color: textColor,
+                    textDecoration: 'underline',
+                    '&:hover': {
+                      color: textColor,
+                      textDecoration: 'underline',
+                    },
+                  },
+                }}
+                width={{ xs: '100%', md: '75%' }}
+              >
+                {paragraph.body}
+              </Typography>
+            )}
+
+            {paragraph.cards &&
+              paragraph.cards.map((card, i) => (
+                <CardsItem
+                  key={`${card.title}-${i}`}
+                  {...card}
+                  textAlign='left'
+                  masonry={true}
+                  themeVariant={themeVariant}
+                  alignLinkIconLeft
+                  sx={{ marginTop: paragraph.body ? '22px' : '40px' }}
+                />
+              ))}
+          </Stack>
+        ))}
     </Box>
   );
 };

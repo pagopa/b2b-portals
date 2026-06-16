@@ -8,6 +8,11 @@
     "readingTime": {
       "type": "string",
       "required": false
+    },
+    "showActions": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}
