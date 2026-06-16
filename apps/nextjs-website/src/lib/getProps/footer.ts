@@ -8,5 +8,6 @@ export const getFooterProps: Getters['getFooterProps'] = async (locale) => {
     await getFooter({ ...appEnv, locale }),
     appEnv.config.PREVIEW_MODE === 'true',
   );
-  return data;
+
+  return data.footer[0];
 };

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_components_footer_hashtag_groups",
+  "info": {
+    "displayName": "footerHashtagGroup"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "hashtags": {
+      "type": "component",
+      "component": "components.footer-hashtags",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

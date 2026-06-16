@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_components_footer_hashtags",
+  "info": {
+    "displayName": "footerHashtag"
+  },
+  "options": {},
+  "attributes": {
+    "hashtag": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

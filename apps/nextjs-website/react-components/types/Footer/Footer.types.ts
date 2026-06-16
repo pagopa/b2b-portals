@@ -1,6 +1,6 @@
 import { Generic } from '../common/Common.types';
 
-export interface FooterProps extends LangSwitchProps {
+export interface StandardFooterProps extends LangSwitchProps {
   companyLink: CompanyLinkType;
   legalInfo: string | Generic | Generic[];
   links: PreLoginFooterLinksType;
