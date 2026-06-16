@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_footers_standard_footers",
+  "info": {
+    "displayName": "Standard Footer"
+  },
+  "options": {},
+  "attributes": {
+    "legalInfo": {
+      "type": "richtext",
+      "required": true
+    },
+    "showFundedByNextGenerationEULogo": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "companyLink": {
+      "type": "component",
+      "component": "components.company-link",
+      "repeatable": false,
+      "required": true
+    },
+    "links_aboutUs": {
+      "type": "component",
+      "component": "components.footer-link-group",
+      "repeatable": false,
+      "required": true
+    },
+    "links_services": {
+      "type": "component",
+      "component": "components.footer-link-group",
+      "repeatable": false,
+      "required": true
+    },
+    "links_resources": {
+      "type": "component",
+      "component": "components.footer-link-group",
+      "repeatable": false,
+      "required": true
+    },
+    "links_followUs": {
+      "type": "component",
+      "component": "components.footer-link-group-with-social",
+      "repeatable": false,
+      "required": true
+    }
+  },
+  "config": {}
+}

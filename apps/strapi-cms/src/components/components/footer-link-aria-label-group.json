@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_components_footer_link_aria_label_groups",
+  "info": {
+    "displayName": "FooterLinkAriaLabelGroup"
+  },
+  "options": {},
+  "attributes": {
+    "ariaLabel": {
+      "type": "string"
+    },
+    "links": {
+      "type": "component",
+      "component": "components.footer-link",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
