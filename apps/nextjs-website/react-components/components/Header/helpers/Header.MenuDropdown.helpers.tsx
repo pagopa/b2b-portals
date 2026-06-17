@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Link,
@@ -20,6 +19,7 @@ import {
   isValidExternalLink,
 } from '@react-components/components/common/Common';
 import { usePathname } from 'next/navigation';
+import { useRef } from 'react';
 
 const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
   return {
@@ -94,7 +94,18 @@ export const MenuDropdown = (
     return false;
   };
 
+  const itemsRef = useRef<Array<HTMLAnchorElement | null>>([]);
+
   const MenuItem = () => {
+    const onDropdownClickFn = () => {
+      if (!onDropdownClick) return;
+      onDropdownClick();
+      requestAnimationFrame(() => {
+        if (itemsRef && itemsRef.current[0]) {
+          itemsRef.current[0].focus();
+        }
+      });
+    };
     if (hasLinks) {
       return (
         <Button
@@ -107,7 +118,7 @@ export const MenuDropdown = (
               color: '#ffffff !important',
             },
           }}
-          onClick={onDropdownClick}
+          onClick={onDropdownClickFn}
         >
           <Typography
             variant='sidenav'
@@ -180,11 +191,10 @@ export const MenuDropdown = (
               sx={{ p: 0, m: 0, listStyleType: 'none' }}
             >
               {items?.map((item: DropdownItem, index) => (
-                <li style={{ margin: 0, padding: 0 }}>
+                <li style={{ margin: 0, padding: 0 }} key={item.key ?? index}>
                   <Link
                     variant='body1'
                     underline='none'
-                    key={item.key ?? index}
                     sx={{
                       color: '#5C6F82',
                       ...(isCurrentLink(item.href) && {
@@ -194,6 +204,9 @@ export const MenuDropdown = (
                       fontWeight: 600,
                       padding: 0,
                       m: 0,
+                    }}
+                    ref={(el) => {
+                      itemsRef.current[index] = el;
                     }}
                     href={item.href}
                     target={

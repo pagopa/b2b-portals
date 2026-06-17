@@ -11,6 +11,12 @@ import { ThemeVariant } from '../react-components/types/common/Common.types';
 const themeVariants: ReadonlyArray<ThemeVariant> = ['SEND', 'IO', 'WALLET'];
 const themeModes: ReadonlyArray<AppThemeMode> = ['light', 'dark'];
 
+const themeVariantLabels: Record<ThemeVariant, string> = {
+  SEND: 'SEND',
+  IO: 'APPIO',
+  WALLET: 'WALLET',
+};
+
 const formatLabel = (themeMode: AppThemeMode, index?: number) =>
   index === undefined ? themeMode : `${themeMode} ${index + 1}`;
 
@@ -55,36 +61,29 @@ const getMapColors = (mapName: keyof typeof themeVariantMaps) => {
   });
 };
 
-const hasVariantDifferences = (
-  variantColors: ReturnType<typeof getMapColors>,
-) => {
-  const colorLabels = Object.keys(variantColors[0]?.colors ?? {});
+const getThemeVariantColors = (themeVariant: ThemeVariant) =>
+  Object.keys(themeVariantMaps).map((mapName) => {
+    const variantColors = getMapColors(
+      mapName as keyof typeof themeVariantMaps,
+    ).find((mapColors) => mapColors.themeVariant === themeVariant);
 
-  return colorLabels.some((label) => {
-    const colorsByVariant = variantColors.map(({ colors }) => colors[label]);
-
-    return new Set(colorsByVariant).size > 1;
+    return {
+      title: mapName,
+      colors: variantColors?.colors ?? {},
+    };
   });
-};
 
 export const ThemeVariantColors = () => {
-  const colorGroups = Object.keys(themeVariantMaps)
-    .map((mapName) => ({
-      title: mapName,
-      variantColors: getMapColors(mapName as keyof typeof themeVariantMaps),
-    }))
-    .filter(({ variantColors }) => hasVariantDifferences(variantColors));
-
   return (
     <>
-      {colorGroups.map(({ title, variantColors }) => (
-        <section key={title}>
-          <h2>{title}</h2>
+      {themeVariants.map((themeVariant) => (
+        <section key={themeVariant}>
+          <h2>{themeVariantLabels[themeVariant]}</h2>
           <ColorPalette>
-            {variantColors.map(({ themeVariant, colors }) => (
+            {getThemeVariantColors(themeVariant).map(({ title, colors }) => (
               <ColorItem
-                key={`${title}-${themeVariant}`}
-                title={themeVariant}
+                key={`${themeVariant}-${title}`}
+                title={title}
                 subtitle=''
                 colors={colors}
               />
