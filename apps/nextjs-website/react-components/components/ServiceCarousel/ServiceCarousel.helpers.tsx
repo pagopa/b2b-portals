@@ -173,6 +173,11 @@ export const SliderArrowControl = ({
           bgcolor: arrowBackgroundColor,
         },
         '&.Mui-focusVisible': { bgcolor: arrowBackgroundColor },
+        ...(direction === 'right' && {
+          position: 'absolute',
+          top: 1,
+          left: 40,
+        }),
       }}
       disableRipple={true}
       onClick={action}
