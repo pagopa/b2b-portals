@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_press_release_press_release_metas",
+  "info": {
+    "displayName": "PressReleaseMeta"
+  },
+  "options": {},
+  "attributes": {
+    "readingTime": {
+      "type": "string",
+      "required": false
+    },
+    "showActions": {
+      "type": "boolean",
+      "private": true,
+      "default": true
+    }
+  },
+  "config": {}
+}

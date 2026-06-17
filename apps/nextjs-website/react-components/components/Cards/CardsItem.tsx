@@ -15,6 +15,8 @@ const CardsItem = ({
   label,
   themeVariant,
   masonry,
+  alignLinkIconLeft,
+  sx,
 }: CardsItemProps) => {
   const { palette } = useTheme();
 
@@ -23,14 +25,10 @@ const CardsItem = ({
     theme: 'light',
   });
 
-  const borderColor = resolveThemeVariant<string>(
-    'borderColor',
-    themeVariant,
-    {
-      palette,
-      theme: 'light',
-    },
-  );
+  const borderColor = resolveThemeVariant<string>('borderColor', themeVariant, {
+    palette,
+    theme: 'light',
+  });
 
   return (
     <Card
@@ -45,6 +43,7 @@ const CardsItem = ({
         listStyle: 'none',
         padding: 0,
         margin: 0,
+        ...sx,
       }}
     >
       <CardContent
@@ -95,7 +94,7 @@ const CardsItem = ({
                   direction='row'
                   alignItems='center'
                   color={linkColor}
-                  justifyContent='space-between'
+                  justifyContent={alignLinkIconLeft ? 'left' : 'space-between'}
                   width='100%'
                 >
                   <Link

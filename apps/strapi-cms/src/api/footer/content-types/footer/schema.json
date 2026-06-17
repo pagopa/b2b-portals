@@ -4,8 +4,7 @@
   "info": {
     "singularName": "footer",
     "pluralName": "footers",
-    "displayName": "Footer",
-    "description": ""
+    "displayName": "Footer"
   },
   "options": {
     "draftAndPublish": true
@@ -16,79 +15,20 @@
     }
   },
   "attributes": {
-    "legalInfo": {
-      "type": "richtext",
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "showFundedByNextGenerationEULogo": {
-      "type": "boolean",
-      "default": false,
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "companyLink": {
-      "type": "component",
-      "repeatable": false,
-      "component": "components.company-link",
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "links_aboutUs": {
-      "type": "component",
-      "repeatable": false,
-      "component": "components.footer-link-group",
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "links_services": {
-      "type": "component",
-      "repeatable": false,
-      "component": "components.footer-link-group",
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "links_resources": {
-      "type": "component",
-      "repeatable": false,
-      "component": "components.footer-link-group",
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "links_followUs": {
-      "type": "component",
-      "repeatable": false,
-      "component": "components.footer-link-group-with-social",
+    "footer": {
+      "type": "dynamiczone",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "required": true
+      "components": [
+        "footers.standard-footer",
+        "footers.designers-italia-footer"
+      ],
+      "required": true,
+      "min": 1,
+      "max": 1
     }
   }
 }

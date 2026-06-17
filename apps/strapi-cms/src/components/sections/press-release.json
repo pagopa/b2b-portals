@@ -15,7 +15,7 @@
     },
     "body": {
       "type": "richtext",
-      "required": true
+      "required": false
     },
     "sectionID": {
       "type": "string",
@@ -27,8 +27,28 @@
     },
     "backlink": {
       "type": "component",
-      "repeatable": false,
-      "component": "components.link"
+      "component": "components.link",
+      "repeatable": false
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "metadata": {
+      "type": "component",
+      "component": "press-release.press-release-meta",
+      "repeatable": false
+    },
+    "paragraphs": {
+      "type": "component",
+      "component": "press-release.press-release-paragraph",
+      "repeatable": true
     }
   }
 }

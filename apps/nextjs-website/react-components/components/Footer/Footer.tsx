@@ -3,7 +3,7 @@ import { FundedByNextGenerationEU } from './assets/FundedByNextGenerationEU';
 import { FooterColumn } from './helpers/FooterColumn';
 import { LangSwitch } from './helpers/LangSwitch';
 import { LegalInfo } from './helpers/LegalInfo';
-import { FooterProps } from '../../types/Footer/Footer.types';
+import { StandardFooterProps } from '../../types/Footer/Footer.types';
 
 const Footer = ({
   companyLink,
@@ -12,7 +12,7 @@ const Footer = ({
   showFundedByNextGenerationEULogo = false,
   titleSVG,
   ...langProps
-}: FooterProps) => (
+}: StandardFooterProps) => (
   <Box
     borderColor='divider'
     borderTop='1px'

@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_footers_designers_italia_footers",
+  "info": {
+    "displayName": "Designers Italia Footer"
+  },
+  "options": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "component": "components.footer-link-group",
+      "repeatable": false,
+      "required": true
+    },
+    "bottomLinks": {
+      "type": "component",
+      "component": "components.footer-link-aria-label-group",
+      "repeatable": false
+    },
+    "socialLinks": {
+      "type": "component",
+      "component": "components.footer-social-link-group",
+      "repeatable": false
+    },
+    "hashtags": {
+      "type": "component",
+      "component": "components.footer-hashtag-group",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

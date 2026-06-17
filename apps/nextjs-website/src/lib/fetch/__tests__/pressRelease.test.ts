@@ -64,6 +64,9 @@ const pressReleasesResponse = {
           href: '/',
           ariaLabel: 'label',
         },
+        image: null,
+        metadata: null,
+        paragraphs: [],
       },
       credits: null,
     },
@@ -96,6 +99,9 @@ const pressReleasesResponse = {
           href: '/',
           ariaLabel: 'label',
         },
+        image: null,
+        metadata: null,
+        paragraphs: [],
       },
       credits: null,
     },
@@ -116,8 +122,12 @@ describe('getNavigation', () => {
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases?locale=it&pagination[pageSize]=100
 &populate[0]=seo
-&populate[1]=pressRelease.backlink
-&populate[2]=credits.image
+&populate[1]=credits.image
+&populate[2]=pressRelease.backlink
+&populate[3]=pressRelease.image
+&populate[4]=pressRelease.metadata
+&populate[5]=pressRelease.paragraphs.cards.icon
+&populate[6]=pressRelease.paragraphs.cards.links
 &sort[0]=pressRelease.date:desc
         `,
       {
@@ -161,6 +171,9 @@ describe('getNavigation', () => {
               href: '/',
               ariaLabel: 'label',
             },
+            image: null,
+            metadata: null,
+            paragraphs: [],
           },
           credits: null,
           updatedAt: '2024-11-28T15:14:28.486Z',
@@ -189,6 +202,9 @@ describe('getNavigation', () => {
               href: '/',
               ariaLabel: 'label',
             },
+            image: null,
+            metadata: null,
+            paragraphs: [],
           },
           credits: null,
           updatedAt: '2024-11-28T15:33:16.408Z',

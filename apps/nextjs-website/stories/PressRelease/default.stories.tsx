@@ -1,6 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { PressReleaseProps } from '@react-components/types';
 import { PressRelease } from '@react-components/components';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 // Define the default export with metadata about your component
 const meta: Meta<typeof PressRelease> = {
@@ -14,9 +15,10 @@ const PressReleaseTemplate: StoryFn<PressReleaseProps> = (args) => (
   <PressRelease {...args} />
 );
 
-export const PressReleaseFull: StoryFn<typeof PressRelease> =
+export const PressReleaseSimple: StoryFn<typeof PressRelease> =
   PressReleaseTemplate.bind({});
-PressReleaseFull.args = {
+PressReleaseSimple.args = {
+  themeVariant: 'WALLET',
   title:
     'Rimborsi in arrivo, scadenze e altri avvisi personalizzati. L’Agenzia comunica con i cittadini anche sull’App IO',
   subtitle:
@@ -59,4 +61,116 @@ PressReleaseFull.args = {
     href: '/',
     ariaLabel: 'Torna indietro',
   },
+};
+
+export const PressReleaseParagraphs: StoryFn<typeof PressRelease> =
+  PressReleaseTemplate.bind({});
+PressReleaseParagraphs.args = {
+  themeVariant: 'WALLET',
+  title: 'Lorem ipsum dolor sit amet consectetur vulputate dui augue',
+  body: MarkdownRenderer({
+    markdown: 'Lorem ipsum dolor sit amet consectetur.',
+    locale: 'it',
+    defaultLocale: 'it',
+  }),
+  date: '10 Aprile 2024',
+  metadata: {
+    readingTime: '7 minuti',
+    labels: {
+      copyLink: 'Copia link',
+      linkCopied: 'Link salvato negli appunti',
+      readingTime: 'Tempo di lettura: ',
+      shareLink: 'Condividi',
+    },
+  },
+  image: {
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png',
+    srcSet:
+      'https://d2mk0pc4ejgxx6.cloudfront.net/hero_enti_background_35829ff95a.png 220vw',
+    sizes: '100vw',
+  },
+  paragraphs: [
+    {
+      title: 'Lorem ipsum',
+      body: MarkdownRenderer({
+        locale: 'it',
+        defaultLocale: 'it',
+        markdown:
+          'Lorem ipsum dolor sit amet consectetur. Vulputate dui augue eget in tristique rhoncus tincidunt nunc tincidunt. Vulputate dui augue eget in tristique rhoncus tincidunt nunc tincidunt.',
+      }),
+      cards: [
+        {
+          themeVariant: 'WALLET',
+          title: 'Scopri lorem ipsum',
+          alignLinkIconLeft: true,
+          iconURL:
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+          text: MarkdownRenderer({
+            markdown:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            locale: 'it',
+            defaultLocale: 'it',
+          }),
+          links: [
+            {
+              label: 'Scopri lorem ipsum',
+              href: '#',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Lorem ipsum',
+      body: MarkdownRenderer({
+        locale: 'it',
+        defaultLocale: 'it',
+        markdown:
+          'Lorem ipsum dolor sit amet consectetur. Vulputate dui augue eget in tristique rhoncus tincidunt nunc tincidunt. Vulputate dui augue eget in tristique rhoncus tincidunt nunc tincidunt.',
+      }),
+    },
+    {
+      title: 'Aggiornamenti utili',
+      cards: [
+        {
+          themeVariant: 'WALLET',
+          title: 'Scopri lorem ipsum',
+          alignLinkIconLeft: true,
+          iconURL:
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+          text: MarkdownRenderer({
+            markdown:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            locale: 'it',
+            defaultLocale: 'it',
+          }),
+          links: [
+            {
+              label: 'Scopri lorem ipsum',
+              href: '#',
+            },
+          ],
+        },
+        {
+          themeVariant: 'WALLET',
+          title: 'Scopri lorem ipsum',
+          alignLinkIconLeft: true,
+          iconURL:
+            'https://d2mk0pc4ejgxx6.cloudfront.net/light_icon_45a3f353d1.svg',
+          text: MarkdownRenderer({
+            markdown:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            locale: 'it',
+            defaultLocale: 'it',
+          }),
+          links: [
+            {
+              label: 'Scopri lorem ipsum',
+              href: '#',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

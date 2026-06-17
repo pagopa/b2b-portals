@@ -1,3 +1,4 @@
+import { SxProps } from '@mui/material';
 import {
   SectionProps,
   CtaButtonProps,
@@ -34,4 +35,6 @@ export interface CardsItemProps {
   >;
   masonry?: boolean;
   themeVariant: ThemeVariant;
+  alignLinkIconLeft?: boolean;
+  sx?: SxProps;
 }
