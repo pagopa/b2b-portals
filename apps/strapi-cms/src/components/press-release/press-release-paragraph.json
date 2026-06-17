@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_press_release_press_release_paragraphs",
+  "info": {
+    "displayName": "PressReleaseParagraph"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "richtext",
+      "required": false
+    },
+    "cards": {
+      "type": "component",
+      "component": "components.cards-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

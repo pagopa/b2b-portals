@@ -17,6 +17,15 @@ export const mockPressReleasePages: Getters['getPressReleasePages'] =
         sectionID: 'mock',
         subtitle: 'mock',
         title: 'mock',
+        image: mockImageData,
+        metadata: { readingTime: 'mock' },
+        paragraphs: [
+          {
+            title: 'mock',
+            body: 'mock',
+            cards: [],
+          },
+        ],
       },
       credits: {
         body: 'mock',
