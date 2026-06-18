@@ -21,7 +21,6 @@ const ServiceCarousel = ({
   const { palette } = useTheme();
   const [currentCard, setCurrentCard] = useState(cards[0]);
   const liveRegionRef = useRef<HTMLDivElement>();
-
   const resetAttributes = () => {
     const slides = document.querySelectorAll('.slick-slide');
 
@@ -79,27 +78,17 @@ const ServiceCarousel = ({
       </Stack>
 
       {/* Cards */}
-      <Stack gap={{ xs: 3.375, sm: 3.375, md: 4 }} width={'100%'}>
-        <Stack
-          flexDirection='row'
-          alignItems='center'
-          justifyContent='flex-start'
-          gap={2}
-          display='flex'
-        >
-          <SliderArrowControl
-            direction='left'
-            ariaLabel={labels.cardPrevious}
-            action={() => sliderRef.current?.slickPrev()}
-            themeVariant={themeVariant}
-          />
-          <SliderArrowControl
-            direction='right'
-            ariaLabel={labels.cardNext}
-            action={() => sliderRef.current?.slickNext()}
-            themeVariant={themeVariant}
-          />
-        </Stack>
+      <Stack
+        gap={{ xs: 3.375, sm: 3.375, md: 4 }}
+        width={'100%'}
+        sx={{ position: 'relative' }}
+      >
+        <SliderArrowControl
+          direction='left'
+          ariaLabel={labels.cardPrevious}
+          action={() => sliderRef.current?.slickPrev()}
+          themeVariant={themeVariant}
+        />
 
         <Slider
           role='region'
@@ -131,7 +120,12 @@ const ServiceCarousel = ({
             </div>
           ))}
         </Slider>
-
+        <SliderArrowControl
+          direction='right'
+          ariaLabel={labels.cardNext}
+          action={() => sliderRef.current?.slickNext()}
+          themeVariant={themeVariant}
+        />
         <Box ref={liveRegionRef} aria-live='polite' style={visuallyHidden}>
           {currentCard && ServiceCard(currentCard, themeVariant, true)}
         </Box>
