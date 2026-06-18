@@ -175,7 +175,7 @@ export const SliderArrowControl = ({
         '&.Mui-focusVisible': { bgcolor: arrowBackgroundColor },
         ...(direction === 'right' && {
           position: 'absolute',
-          top: 1,
+          top: 0,
           left: 40,
         }),
       }}
