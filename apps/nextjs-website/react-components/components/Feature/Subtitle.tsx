@@ -37,6 +37,9 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
                 'aria-label': item.link.ariaLabel,
               })}
               sx={{ fontWeight: 'bold' }}
+              {...(isValidExternalLink(item.link.href) && {
+                target: '_blank',
+              })}
             >
               {item.link.label}
             </Link>
@@ -51,6 +54,9 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
                 }}
               />
             }
+            {...(isValidExternalLink(item.link.href) && {
+              externaLinkIconTarget: '_blank',
+            })}
           />
         </Stack>
       )}

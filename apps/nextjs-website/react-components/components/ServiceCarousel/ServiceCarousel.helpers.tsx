@@ -109,6 +109,9 @@ export const ServiceCard = (
               {...(card.link.ariaLabel && {
                 'aria-label': card.link.ariaLabel,
               })}
+              {...(isValidExternalLink(card.link.href) && {
+                target: '_blank',
+              })}
             >
               {card.link.label}
               <LinkIcon
@@ -117,6 +120,9 @@ export const ServiceCard = (
                 internalLinkIcon={
                   <ArrowForward color='inherit' sx={{ fontSize: 18 }} />
                 }
+                {...(isValidExternalLink(card.link.href) && {
+                  externaLinkIconTarget: '_blank',
+                })}
               />
             </Link>
           </Typography>
@@ -173,6 +179,11 @@ export const SliderArrowControl = ({
           bgcolor: arrowBackgroundColor,
         },
         '&.Mui-focusVisible': { bgcolor: arrowBackgroundColor },
+        ...(direction === 'right' && {
+          position: 'absolute',
+          top: 0,
+          left: 40,
+        }),
       }}
       disableRipple={true}
       onClick={action}

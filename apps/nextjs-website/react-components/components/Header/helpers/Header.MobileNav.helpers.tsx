@@ -112,6 +112,9 @@ export default function MobileNav({
           fontWeight: 600,
           width: item.items ? 'default' : '100%',
         }}
+        {...(isValidExternalLink(item.href) && {
+          target: '_blank',
+        })}
       >
         <Typography
           style={{
@@ -120,7 +123,12 @@ export default function MobileNav({
           }}
         >
           {item.label}
-          <ExternalLinkIcon show={isValidExternalLink(item.href)} />
+          <ExternalLinkIcon
+            show={isValidExternalLink(item.href)}
+            {...(isValidExternalLink(item.href) && {
+              target: '_blank',
+            })}
+          />
         </Typography>
       </Link>
     );

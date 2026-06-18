@@ -139,6 +139,9 @@ const HeroCounter = ({
               fontSize: '1rem',
               position: 'relative',
             }}
+            {...(isValidExternalLink(link.href) && {
+              target: '_blank',
+            })}
           >
             {link.label}
             <LinkIcon
@@ -156,6 +159,9 @@ const HeroCounter = ({
                   }}
                 />
               }
+              {...(isValidExternalLink(link.href) && {
+                externaLinkIconTarget: '_blank',
+              })}
             />
           </Typography>
         )}
