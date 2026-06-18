@@ -11,9 +11,17 @@ const CompanyLinkCodec = t.strict({
   ariaLabel: t.string,
 });
 
+const FooterPageCodec = t.union([
+  t.strict({
+    slug: t.string,
+  }),
+  t.null,
+]);
+
 const FooterLinkCodec = t.strict({
   label: t.string,
-  href: t.string,
+  href: t.union([t.string, t.null]),
+  page: FooterPageCodec,
   ariaLabel: t.union([t.string, t.null]),
   showOneTrustPreferencies: t.union([t.boolean, t.null]),
 });
@@ -95,13 +103,13 @@ export const getFooter = ({
         extractTenantStrapiApiData(config).baseUrl
       }/api/footer/?locale=${locale}
 &populate[0]=footer.companyLink
-&populate[1]=footer.links_aboutUs.links
-&populate[2]=footer.links_followUs.links
+&populate[1]=footer.links_aboutUs.links.page
+&populate[2]=footer.links_followUs.links.page
 &populate[3]=footer.links_followUs.socialLinks.icon
-&populate[4]=footer.links_resources.links
-&populate[5]=footer.links_services.links
-&populate[6]=footer.bottomLinks.links
-&populate[7]=footer.links.links
+&populate[4]=footer.links_resources.links.page
+&populate[5]=footer.links_services.links.page
+&populate[6]=footer.bottomLinks.links.page
+&populate[7]=footer.links.links.page
 &populate[8]=footer.socialLinks.socialLinks.icon
 &populate[9]=footer.hashtags.hashtags
       `,

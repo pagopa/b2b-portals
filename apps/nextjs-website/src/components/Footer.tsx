@@ -51,6 +51,17 @@ const labelsDesignersItaliaFooter: Record<
   },
 };
 
+const formatSlug = (
+  slug: string,
+  locale: Locale,
+  defaultLocale: Locale,
+): string => {
+  const localeString = locale === defaultLocale ? '' : `/${locale}`;
+  const slugString = slug === 'homepage' ? '/' : `/${slug}`;
+
+  return localeString + slugString;
+};
+
 const makeFooterProps = (
   {
     legalInfo,
@@ -77,10 +88,16 @@ const makeFooterProps = (
   links: {
     aboutUs: {
       links: links_aboutUs.links.map(
-        ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+        ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
           label,
           ...(ariaLabel && { ariaLabel }),
-          href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
+          href: page
+            ? formatSlug(page.slug, activeLocale, defaultLocale)
+            : LocalizeURL({
+                URL: href ?? '',
+                locale: activeLocale,
+                defaultLocale,
+              }),
           ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
       ),
@@ -88,10 +105,16 @@ const makeFooterProps = (
     },
     services: {
       links: links_services.links.map(
-        ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+        ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
           label,
           ...(ariaLabel && { ariaLabel }),
-          href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
+          href: page
+            ? formatSlug(page.slug, activeLocale, defaultLocale)
+            : LocalizeURL({
+                URL: href ?? '',
+                locale: activeLocale,
+                defaultLocale,
+              }),
           ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
       ),
@@ -99,10 +122,16 @@ const makeFooterProps = (
     },
     resources: {
       links: links_resources.links.map(
-        ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+        ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
           label,
           ...(ariaLabel && { ariaLabel }),
-          href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
+          href: page
+            ? formatSlug(page.slug, activeLocale, defaultLocale)
+            : LocalizeURL({
+                URL: href ?? '',
+                locale: activeLocale,
+                defaultLocale,
+              }),
           ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
       ),
@@ -111,10 +140,16 @@ const makeFooterProps = (
     followUs: {
       title: links_followUs.title,
       links: links_followUs.links.map(
-        ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+        ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
           label,
           ...(ariaLabel && { ariaLabel }),
-          href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
+          href: page
+            ? formatSlug(page.slug, activeLocale, defaultLocale)
+            : LocalizeURL({
+                URL: href ?? '',
+                locale: activeLocale,
+                defaultLocale,
+              }),
           ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
       ),
@@ -163,14 +198,16 @@ const makeDesignersItaliaFooterProps = (
       }),
       ...(props.bottomLinks.links && {
         links: props.bottomLinks.links.map(
-          ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+          ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
             label,
             ...(ariaLabel && { ariaLabel }),
-            href: LocalizeURL({
-              URL: href,
-              locale: activeLocale,
-              defaultLocale,
-            }),
+            href: page
+              ? formatSlug(page.slug, activeLocale, defaultLocale)
+              : LocalizeURL({
+                  URL: href ?? '',
+                  locale: activeLocale,
+                  defaultLocale,
+                }),
             ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
           }),
         ),
@@ -180,10 +217,16 @@ const makeDesignersItaliaFooterProps = (
   links: {
     ...(props.links.title && { title: props.links.title }),
     links: props.links.links.map(
-      ({ href, showOneTrustPreferencies, label, ariaLabel }) => ({
+      ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
         label,
         ...(ariaLabel && { ariaLabel }),
-        href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
+        href: page
+          ? formatSlug(page.slug, activeLocale, defaultLocale)
+          : LocalizeURL({
+              URL: href ?? '',
+              locale: activeLocale,
+              defaultLocale,
+            }),
         ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
       }),
     ),
