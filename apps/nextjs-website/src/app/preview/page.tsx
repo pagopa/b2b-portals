@@ -8,6 +8,7 @@ import {
   getFeedbackToken,
 } from '@/lib/api';
 import { Locale } from '@/lib/fetch/siteWideSEO';
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 import Script from 'next/script';
@@ -84,6 +85,7 @@ const PreviewPage = async ({
         isExperimentalThemeVariant(themeVariant) ? themeExperimental : themeBase
       }
     >
+      <CssBaseline />
       <style>{`
           html {
             scroll-behavior: smooth;
