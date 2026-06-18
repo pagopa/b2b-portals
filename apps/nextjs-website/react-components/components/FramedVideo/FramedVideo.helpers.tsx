@@ -102,9 +102,17 @@ export const renderTextSection = ({
             marginBottom: '32px',
           }}
           {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
+          {...(isValidExternalLink(link.href) && {
+            target: '_blank',
+          })}
         >
           {link.label}
-          <ExternalLinkIcon show={isValidExternalLink(link.href)} />
+          <ExternalLinkIcon
+            show={isValidExternalLink(link.href)}
+            {...(isValidExternalLink(link.href) && {
+              target: '_blank',
+            })}
+          />
         </Link>
       </Typography>
     </Stack>

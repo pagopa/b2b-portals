@@ -168,6 +168,9 @@ export const HeroTextContent = ({
             fontWeight: 'bold',
             fontSize: '1rem',
           }}
+          {...(isValidExternalLink(link.href) && {
+            target: '_blank',
+          })}
         >
           {link.label}
           <LinkIcon
@@ -186,6 +189,9 @@ export const HeroTextContent = ({
                 }}
               />
             }
+            {...(isValidExternalLink(link.href) && {
+              externaLinkIconTarget: '_blank',
+            })}
           />
         </Typography>
       )}
