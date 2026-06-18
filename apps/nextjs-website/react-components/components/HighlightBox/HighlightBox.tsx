@@ -89,9 +89,17 @@ const HighlightBox = ({
                   fontSize: '16px',
                   fontWeight: 700,
                 }}
+                {...(isValidExternalLink(link.href) && {
+                  target: '_blank',
+                })}
               >
                 {link.label}
-                <ExternalLinkIcon show={isValidExternalLink(link.href)} />
+                <ExternalLinkIcon
+                  show={isValidExternalLink(link.href)}
+                  {...(isValidExternalLink(link.href) && {
+                    target: '_blank',
+                  })}
+                />
               </Button>
             )}
           </Stack>

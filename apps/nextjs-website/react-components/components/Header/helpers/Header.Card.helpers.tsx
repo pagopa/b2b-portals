@@ -65,11 +65,17 @@ export default function ActionAreaCard({
             <Button
               size='small'
               href={link.href}
+              {...(isValidExternalLink(link.href) && {
+                target: '_blank',
+              })}
               endIcon={
                 <LinkIcon
                   showExternalLinkIcon={isValidExternalLink(link.href)}
                   sxExternalLinkIcon={{ ml: 0 }}
                   internalLinkIcon={<ArrowForwardIcon />}
+                  {...(isValidExternalLink(link.href) && {
+                    externaLinkIconTarget: '_blank',
+                  })}
                 />
               }
               {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}

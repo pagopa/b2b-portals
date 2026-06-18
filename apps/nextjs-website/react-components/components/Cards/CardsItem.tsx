@@ -112,7 +112,7 @@ const CardsItem = ({
                     {link.label}
                   </Link>
                   <LinkIcon
-                    {...(link.href.startsWith('https://') && {
+                    {...(isValidExternalLink(link.href) && {
                       externaLinkIconTarget: '_blank',
                     })}
                     showExternalLinkIcon={isValidExternalLink(link.href)}

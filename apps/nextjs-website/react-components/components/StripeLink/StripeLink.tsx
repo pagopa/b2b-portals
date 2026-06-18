@@ -102,9 +102,15 @@ const StripeLink = ({
                 sxExternalLinkIcon={{ ml: 0 }}
                 showExternalLinkIcon={isValidExternalLink(link.href)}
                 internalLinkIcon={<ArrowForwardIcon color='inherit' />}
+                {...(isValidExternalLink(link.href) && {
+                  externaLinkIconTarget: '_blank',
+                })}
               />
             }
             href={link.href}
+            {...(isValidExternalLink(link.href) && {
+              target: '_blank',
+            })}
           >
             {link.label}
           </Button>
