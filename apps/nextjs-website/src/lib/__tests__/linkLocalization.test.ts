@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { LocalizeURL, LocalizeMarkdownLinks } from '../linkLocalization';
+import {
+  LocalizeURL,
+  LocalizeMarkdownLinks,
+  FormatSlug,
+} from '../linkLocalization';
 
 const locales: {
   readonly it: 'it';
@@ -180,5 +184,27 @@ describe('LocalizeMarkdownLinks', () => {
       defaultLocale: locales.it,
     });
     expect(actual).toStrictEqual(localizedMarkdown.allLinkTypes);
+  });
+});
+
+describe('FormatSlug', () => {
+  it("should format 'homepage' slug to '/' if locale equals to default locale", () => {
+    const actual = FormatSlug('homepage', 'it', 'it');
+    expect(actual).toStrictEqual('/');
+  });
+
+  it("should format 'homepage' slug to '/en/' if locale is 'en' and default locale is different", () => {
+    const actual = FormatSlug('homepage', 'en', 'it');
+    expect(actual).toStrictEqual('/en/');
+  });
+
+  it("should format 'mypage' slug to '/en/mypage if locale is 'en' and default locale is different", () => {
+    const actual = FormatSlug('mypage', 'en', 'it');
+    expect(actual).toStrictEqual('/en/mypage');
+  });
+
+  it("should not format 'mypage' slug if locale and default locale are the same", () => {
+    const actual = FormatSlug('mypage', 'it', 'it');
+    expect(actual).toStrictEqual('/mypage');
   });
 });
