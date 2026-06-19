@@ -11,7 +11,7 @@ import {
   FooterData,
   StandardFooterData,
 } from '@/lib/fetch/footer';
-import { LocalizeURL } from '@/lib/linkLocalization';
+import { FormatSlug, LocalizeURL } from '@/lib/linkLocalization';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import { DesignersItaliaFooter as DesignersItaliaFooterRC } from '@react-components/components';
 
@@ -51,17 +51,6 @@ const labelsDesignersItaliaFooter: Record<
   },
 };
 
-const formatSlug = (
-  slug: string,
-  locale: Locale,
-  defaultLocale: Locale,
-): string => {
-  const localeString = locale === defaultLocale ? '' : `/${locale}`;
-  const slugString = slug === 'homepage' ? '/' : `/${slug}`;
-
-  return localeString + slugString;
-};
-
 const makeFooterProps = (
   {
     legalInfo,
@@ -92,7 +81,7 @@ const makeFooterProps = (
           label,
           ...(ariaLabel && { ariaLabel }),
           href: page
-            ? formatSlug(page.slug, activeLocale, defaultLocale)
+            ? FormatSlug(page.slug, activeLocale, defaultLocale)
             : LocalizeURL({
                 URL: href ?? '',
                 locale: activeLocale,
@@ -109,7 +98,7 @@ const makeFooterProps = (
           label,
           ...(ariaLabel && { ariaLabel }),
           href: page
-            ? formatSlug(page.slug, activeLocale, defaultLocale)
+            ? FormatSlug(page.slug, activeLocale, defaultLocale)
             : LocalizeURL({
                 URL: href ?? '',
                 locale: activeLocale,
@@ -126,7 +115,7 @@ const makeFooterProps = (
           label,
           ...(ariaLabel && { ariaLabel }),
           href: page
-            ? formatSlug(page.slug, activeLocale, defaultLocale)
+            ? FormatSlug(page.slug, activeLocale, defaultLocale)
             : LocalizeURL({
                 URL: href ?? '',
                 locale: activeLocale,
@@ -144,7 +133,7 @@ const makeFooterProps = (
           label,
           ...(ariaLabel && { ariaLabel }),
           href: page
-            ? formatSlug(page.slug, activeLocale, defaultLocale)
+            ? FormatSlug(page.slug, activeLocale, defaultLocale)
             : LocalizeURL({
                 URL: href ?? '',
                 locale: activeLocale,
@@ -202,7 +191,7 @@ const makeDesignersItaliaFooterProps = (
             label,
             ...(ariaLabel && { ariaLabel }),
             href: page
-              ? formatSlug(page.slug, activeLocale, defaultLocale)
+              ? FormatSlug(page.slug, activeLocale, defaultLocale)
               : LocalizeURL({
                   URL: href ?? '',
                   locale: activeLocale,
@@ -221,7 +210,7 @@ const makeDesignersItaliaFooterProps = (
         label,
         ...(ariaLabel && { ariaLabel }),
         href: page
-          ? formatSlug(page.slug, activeLocale, defaultLocale)
+          ? FormatSlug(page.slug, activeLocale, defaultLocale)
           : LocalizeURL({
               URL: href ?? '',
               locale: activeLocale,

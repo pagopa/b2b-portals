@@ -4,6 +4,7 @@ import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 import { Locale } from './siteWideSEO';
 import { StrapiImageRequiredSchema } from './types/StrapiImage';
+import PageRelationCodec from './types/PageRelation';
 
 // Codec
 const CompanyLinkCodec = t.strict({
@@ -11,17 +12,10 @@ const CompanyLinkCodec = t.strict({
   ariaLabel: t.string,
 });
 
-const FooterPageCodec = t.union([
-  t.strict({
-    slug: t.string,
-  }),
-  t.null,
-]);
-
 const FooterLinkCodec = t.strict({
   label: t.string,
   href: t.union([t.string, t.null]),
-  page: FooterPageCodec,
+  page: t.union([PageRelationCodec, t.null]),
   ariaLabel: t.union([t.string, t.null]),
   showOneTrustPreferencies: t.union([t.boolean, t.null]),
 });
