@@ -33,7 +33,7 @@ export default function FeedbackForm({
 }: FeedbackFormProps) {
   const pathname = usePathname();
   const slug =
-    !pathname || pathname === '/' ? 'homepage' : pathname.substring(1);
+    pathname === '/' ? 'homepage' : pathname?.substring(1);
   const textareaMaxLength = 200;
   const [formData, setFormData] = useState<FeedbackFormType>({
     useful: '',
