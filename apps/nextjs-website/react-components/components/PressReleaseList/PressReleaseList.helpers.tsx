@@ -53,6 +53,9 @@ export const PressReleasePreview = ({
             color='inherit'
             sx={{ textDecoration: 'none' }}
             aria-label={`${link.label} "${title}"`}
+            {...(isValidExternalLink(link.href) && {
+              target: '_blank',
+            })}
           >
             {link.label}
           </Link>
@@ -60,6 +63,9 @@ export const PressReleasePreview = ({
             sxExternalLinkIcon={{ ml: 0 }}
             showExternalLinkIcon={isValidExternalLink(link.href)}
             internalLinkIcon={<ArrowRightAlt color='inherit' />}
+            {...(isValidExternalLink(link.href) && {
+              externaLinkIconTarget: '_blank',
+            })}
           />
         </Typography>
       </Stack>

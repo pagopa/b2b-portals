@@ -106,9 +106,17 @@ const HighlightBox = ({
                     color: buttonTextColor,
                   },
                 }}
+                {...(isValidExternalLink(link.href) && {
+                  target: '_blank',
+                })}
               >
                 {link.label}
-                <ExternalLinkIcon show={isValidExternalLink(link.href)} />
+                <ExternalLinkIcon
+                  show={isValidExternalLink(link.href)}
+                  {...(isValidExternalLink(link.href) && {
+                    target: '_blank',
+                  })}
+                />
               </Button>
             )}
           </Stack>

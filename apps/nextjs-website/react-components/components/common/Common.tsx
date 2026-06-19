@@ -440,7 +440,7 @@ interface LinkIconProps {
   showExternalLinkIcon?: boolean;
   internalLinkIcon: JSX.Element;
   sxExternalLinkIcon?: SxProps;
-  externaLinkIconTarget?: string;
+  externaLinkIconTarget?: React.HTMLAttributeAnchorTarget;
 }
 
 export const LinkIcon = ({

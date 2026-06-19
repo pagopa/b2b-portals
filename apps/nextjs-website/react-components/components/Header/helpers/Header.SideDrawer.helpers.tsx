@@ -156,11 +156,17 @@ export default function SideDrawer({
             <Button
               size='small'
               href={ctaCard.link.href}
+              {...(isValidExternalLink(ctaCard.link.href) && {
+                target: '_blank',
+              })}
               endIcon={
                 <LinkIcon
                   sxExternalLinkIcon={{ ml: 0 }}
                   showExternalLinkIcon={isValidExternalLink(ctaCard.link.href)}
                   internalLinkIcon={<ArrowForwardIcon />}
+                  {...(isValidExternalLink(ctaCard.link.href) && {
+                    externaLinkIconTarget: '_blank',
+                  })}
                 />
               }
               {...(ctaCard.link.ariaLabel && {
