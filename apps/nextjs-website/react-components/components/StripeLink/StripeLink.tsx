@@ -93,9 +93,18 @@ const StripeLink = ({
             sx={{
               backgroundColor: buttonBackgroundColor,
               color: buttonTextColor,
-              '&:hover': {
-                backgroundColor: buttonBackgroundColor,
-              },
+              ...(theme === 'light'
+                ? {
+                    '&&:hover': {
+                      backgroundColor: palette.custom.ctaContainedLightHoverColor,
+                      color: buttonTextColor,
+                    },
+                  }
+                : {
+                    '&:hover': {
+                      backgroundColor: buttonBackgroundColor,
+                    },
+                  }),
             }}
             endIcon={
               <LinkIcon

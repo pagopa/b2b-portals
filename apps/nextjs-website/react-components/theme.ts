@@ -173,6 +173,21 @@ export const ctaContainedTextColorMap: ThemeVariantMap<string> = {
     theme === 'dark' ? palette.custom.blueWallet[500] : palette.custom.white,
 };
 
+export const ctaContainedBackgroundHoverColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.ctaContainedLightHoverColor
+      : palette.custom.ctaContainedDarkHoverColor,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.ctaContainedLightHoverColor
+      : palette.custom.ctaContainedDarkHoverColor,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.ctaContainedLightHoverColor
+      : palette.custom.walletPrimaryColorHover,
+};
+
 export const ctaOutlinedBorderColorMap: ThemeVariantMap<string> = {
   SEND: ({ palette, theme }) =>
     theme === 'dark' ? palette.custom.matteWhiteBorder : palette.primary.main,
@@ -352,6 +367,7 @@ export const themeVariantMaps = {
   chipBackgroundHoverColor: variantChipBackgroundHoverColorMap,
   ctaContainedBackgroundColor: ctaContainedBackgroundColorMap,
   ctaContainedTextColor: ctaContainedTextColorMap,
+  ctaContainedBackgroundHoverColor: ctaContainedBackgroundHoverColorMap,
   ctaOutlinedBorderColor: ctaOutlinedBorderColorMap,
   ctaOutlinedTextColor: ctaOutlinedTextColorMap,
   stripeLinkButtonBackgroundColor: stripeLinkButtonBackgroundColorMap,
