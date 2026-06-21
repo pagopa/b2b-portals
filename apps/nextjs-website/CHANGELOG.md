@@ -1,5 +1,308 @@
 # nextjs-website
 
+## 1.0.0
+
+### Major Changes
+
+- 19a204e: Migrate to Strapi V5
+
+### Minor Changes
+
+- b4487a0: Update BannerLink component
+- 9287f79: Automatically prepend locale to all internal links (links, buttons and markdown) in non-default locales
+- 80e1e13: Migrate StripeLink component from EC to B2BP
+- bba6cb7: Fix PreHeader layout
+- d219cc1: Fix HowTo component Ui
+- a27b79f: Fix Storybook Hero Light
+- 14e0ee8: Migrate Accordion component from EC to B2BP
+- fe41609: Implement MegaMenu new component in RC
+- 0b0e1d8: Fix Footer layout elements
+- 0d4fdd2: Adapt NextJS to new separated-tenants architecture
+- e220164: Implement "stop" video function
+- df5c209: Update Editorial-Switch component
+- b2676a2: Update PageSwitch to adapt to Strapi's implementation
+- 20a7d23: Implement new SEND header structure
+- a97e538: Fix Form on Storybook
+- 2ae7697: Implement mobileImage on Editorial component
+- b06ec3a: Migrate Editorial component from EC to B2BP
+- 9880eb8: Implement storeButtons to Hero component
+- 255f730: Migrate Header component from EC to B2BP
+- aa3390f: Fix BannerLink font style
+- 7a271ca: Add HowTo to Storybook
+- 623a140: Update Cards component
+- 6a713e4: Fix Feature component subtitle rendering
+- b118c40: Fix Editorial-Switch storybook error
+- 4904be0: Implement Page-Switch new component
+- fa01c99: Fix storybook error for Video-Image component
+- c5a4902: Add BannerLink to Storybook
+- e9f7262: Update Form component
+- 6052ab2: Add Accordion to Storybook
+- d6b0e9e: Migrate BannerLink component from EC to B2BP
+- c3ccbf6: Add NextJS Preview Mode ENV VARS
+- 950d998: Migrate Feature component from EC to B2BP
+- 77424cf: Implement new Hero component variation
+- 3a1e3a9: Allow external URLs in Header's sublinks
+- a2a9777: Add PreHeader to Storybook
+- d4e9286: Migrate Footer component from EC to B2BP
+- dbf3920: Create new component 'Form' on RC and B2BP
+- c0158a8: Fix buttons palette colour
+- 0cfd3b2: Add Editorial-Switch to Storybook
+- 7f019f2: Make NextJS fetch data based on tenant
+- eb12fbf: Update logic for fetching and determining the website's structure based on new Strapi implementation of menus
+- 1f05793: Update HeroCounter storybook
+- 66b61dd: Migrate Cards component from EC to B2BP
+- 57cf421: Fix Stripelink layout
+- 897652e: Migrate PreHeader component from EC to B2BP
+- 0a34b9f: Fix Accordion style layout
+- 7ac2d0c: Implement tertiary link for Hero storeButtons
+- d2e6ee5: Add StripeLink to Storybook
+- c632d85: Add Header to Storybook with style fix
+- eece8ca: Add PressRelease component and fetch related Strapi CollectionType as pages
+- e17b6fa: Fix Editorial image-ratio
+- 72d9447: Update Header and MegaHeader parsing to reflect new Strapi structure
+- adf5ea1: Add Cards to Storybook
+- 78f71d8: Fix VideoImage component responsive
+- 02db726: New header implementation
+- 24a7b11: Create Storybook for B2BP RC components
+- 3e0c8d6: Fix Header overflow on responsive
+- cabf6e8: Fix Ui bugs and MegaHeader href
+- af4c7a6: Fix B2BP Use Client build error
+- 143594f: Implement new PreFooter component
+- 49f0c28: Fix submenu jiggling links effect while hovering
+- 66789c1: Implement Video-Image from EC to B2BP
+- e375f64: Implement new HeroChips component
+- 2aa9a59: Fix MegaHeader Ui fix
+- b87f77c: Implement i18n
+- 33c0f5c: Fix header height, update storybook version from 8.1.0 to 8.1.4
+- 00928c7: Implement Iframe component inside B2BP
+- bea1de1: Make Press Releases parent slug editable
+- 600267c: Migrate HowTo component from EC to B2BP
+- a235bc7: Add Footer to Storybook
+- b7c87d3: Add Feature to Storybook
+- a2e07b0: Add Editorial to Storybook
+- ef79697: Fix Cards component Style
+- f48aa27: Fix Hero Counter style
+- ca06d4a: Fix link color on Editorial component
+- bd61148: Fix bug in the VideoImage component
+- 77424cf: Implement new HeroCounter component
+- 70daaae: Substitute MUI Icons in Feature, HowTo, Cards and StripeLink sections with a simple image upload
+- 0a60ec4: Remove EC dependencies from Next.JS
+
+### Patch Changes
+
+- 55a4900: Change DynamicsForm style
+- 22cbbf9: Remove manifest generation
+- 9fe832e: fix misaligned arrow icon
+- 837bcc5: Hero: remove margin from texts
+- 52e8c27: Standard Header: Add drawer subtitle, allow multiple icons in drawer link cards, align drawer cta card to bottom
+- 5cf4824: Add tenants firma and pdnd
+- b3a5f82: Allow footer links to show OneTrust Preferencies
+- d0521c0: Remove store links from MegaHeader
+- ea1e5ed: change font of feature and howto
+- 7f2bfcf: Refactor VideoImage component
+- 9240eee: Mixpanel: Automatic pageview tracking set to url-with-path
+- 7f0ddc5: Refactor ConsentHandler
+- a55ee4c: change hero spacing
+- b72450c: MixPanel: Opt in after init only if user was opted out
+- 1a00b2e: Form: make input field placeholders editable on NextJS
+- fdf7635: Add parsing layer after fetching to make all asset URLs relative
+- cb2b686: Bug fix: MegaHeader AppCTAButton takes priority even if undefined
+- c206a76: Add new component RichBanner for Strapi
+- 6ecf347: Add smooth scrolling and programmatic opening to accordion item
+- 271a06b: Updated population parameters to add mobileImage
+- a2b08e3: Fetch PressReleases ordered by date (newest to oldest)
+- a1b9e8e: Fix MegaHeader Menu positioning and mobile styling
+- 40a7094: HeroChips: change chip's color
+- 33383f7: MegaHeader: Detect active sublink, highlight it and parent link and render respective ctaButton if present
+- 53c54ee: change button color in editorial, cards, hero, bannerlink, prefooter and form components
+- accea4d: Extend preview feature to PressRelease Collection Type
+- c6b150f: Initialize MixPanel only after consent has been given
+- 67b253a: Update and utilize NotFoundPage
+- 104dfcc: Add SectionID to iFrame
+- 27e0cf7: Basic implementation of MixPanel
+- e076b25: Form: fix radio buttons alignment
+- 48ce539: PreFooter: fix bug on storybook and replace store buttons
+- 31f78c9: Accordion: Change behavior of anchor links
+- 7100ec8: Fix bug on cookie banner language
+- 6361829: Add DynamicsForm to Strapi
+- bd28412: Remove FramedVideo hard-coded height to prevent video overflow on large screens
+- d637a94: Add SectionID to ServiceCarousel Section
+- 247d673: Add structuredData to page SEO
+- 5ac16fb: Handle Windows Phone user agent when opening app store from Header
+- f93c504: Add postbuild script to remove preview page from static website
+- 10426a3: Add Service Carousel Section
+- 889b907: Hero : Add blank target to store buttons
+- 87c7eb7: Make PressReleaseList fetch correct PressReleases in Preview
+- 6380260: change style of bannerlink image
+- 2f2d9a6: Service Carousel : add endless scrolling
+- 2e15d3e: iFrame: Allow geolocation and clipboard-write actions
+- a76b22e: Bug Fix: Allow image formats to be null
+- 08a1e47: VideoImage - Mobile View: decrease margin and set overlay
+- 24fdf69: Remove Matomo
+- 0b82ea9: Remove firma tenant
+- a57127b: Mega-Header sublinks are now also considered active when pointing to any of the current page's parents
+- 6489af7: Hide 404 page in preview mode
+- 8aef290: Mixpanel: Add navigation tracking to MegaHeader
+- 614b1c7: NextJS : Add MediaResources component
+- 6397294: Refactor editorial to avoid having to use faulty resize-handler
+- fab8801: RowText: Enable rich-text in component body
+- 0670731: Convert fetching and parsing to Strapi V5's flat response format
+- 871135e: Storybook: User friendly controls for Header
+- bebf543: Update HeroCounter to reflect Strapi data structure
+- 07c8180: Moved use of makeAllAssetURLsRelative after appEnv definition + Updated tests (100% coverage)
+- 5b213dd: Implement Section ID for all sections
+- 3500e77: Fix non working Editorial title tag
+- d78680b: OneTrust: add margin bottom
+- 3f25206: Press Release: switch to european date notation and add margins to the title
+- 3d09703: MegaHeader: fix bug on mobile scroll
+- 9a8c613: Extend Drawer to MegaHeader
+- cbc4c8d: update iframe-resizer to version 5.3.2
+- 82351a1: fix framed video bugs
+- 3a46335: iFrame: Only insert section tag if sectionID exists
+- 2e5c016: Optimize images for responsiveness and SEO
+- ac64ccf: Extend preview functionality to PageSwitch CollectionType
+- 199ebb1: add new NotFoundPage component to Storybook
+- 35e7e7f: Add titleTag to Hero and Editorial
+- 78859c3: Accordion: add segment to URL when opening the element if the slug is configured
+- ea4e407: Add 'use client' to PageSwitch
+- 2392dec: MegaHeader - add on-page overlay when opening menu
+- 4e38e33: Header: change the layout of the cards
+- 287aabb: Add tag heading options to Form title
+- 07c8180: Prevent making asset URLs relative in preview mode
+- f76770b: Add missing title parsing to Cards component
+- 630c195: Add max width to BannerLink body text
+- 7f2d71c: Add clean script
+- 86a94d0: change border radius to image
+- 44e08b0: Change Prefooter UI
+- 2bce447: Fix storybook image URLs
+- 2137977: Add tag heading options for RowText title
+- e2eb245: Set timeout for SSG to 120 seconds
+- 49525ad: HighlightBox: Remove vertical padding in desktop
+- bc224cc: change card component style
+- c8318dc: Add PressReleaseList Section
+- 06a6db4: Update MegaHeader's isActiveSubLink function to account for no pathname (for Storybook)
+- 8cf731a: Fix tag heading title for PageSwitch
+- 571e225: Add tag heading options to Cards title
+- 8f91fdf: Add dry build to run during pull requests
+- adc8ffa: Press Release add European date notation
+- 4e79441: MegaHeader: add "novità" label to sublinks and custom cta to menu groups
+- 575df63: NextJS Add new layout to Cards and add bottom CTA
+- 9cd8cdc: Fix 404 hydration error and add redirect logic to 404 page
+- 17f9652: fix heading tags of several components
+- bba1aaa: Mixpanel: Track page views manually
+- b27b5de: Hero : remove margin-y from images
+- 417a0c3: Add TextAndImage section to Page and PressRelease
+- edcf24c: iFrame: Add child message listener to track MixPanel events
+- 180ab5a: Add Open in new tab option to CTAButton
+- 3198362: Fix megaheader closing when clicking on anchored link
+- 604fddd: Include sectionID in MegaHeader links
+- c9ebd3c: Localize MegaHeader logo link
+- 3aac78d: Add Matomo Analytics
+- 1daba79: App IO : Remove horizontal site overflow caused by Form and RowText components
+- dc60f49: Disable caching during fetch when in development
+- 8e98184: Storybook: User friendly controls for Single Types (Footer, MegaHeader, PreFooter, PreHeader)
+- b21a1d8: Refactor MediaResources and refine its styling
+- cc7479e: MegaHeader: Override default onHover button styling
+- f822ae7: Make Cards links open external links in new tab
+- 9c89b27: Bug fix: Convert "homepage" slug to "/" inside Header
+- 48f7d0d: MegaHeader - enable close on click/tap out
+- 216dca3: Strapi: Add backlink to PressRelease
+- 5714912: Rename ContainerRC sx property to sxInner
+- 2161346: Mixpanel: Add tracking of MegaHeader CTA click
+- 0861b13: Implement workaround for iframe-resizer's resize function not working
+- a9a1391: Update "Scarica app" text in Hero section
+- fde0fd7: Refactor EditorialSwitch to adapt to new Strapi structure
+- 2d22d70: Add Preview Mode
+- 96b7723: Add PressReleaseList to storybook
+- e23a601: Fix social icons position in mobile MegaHeader
+- a3c9a00: fix bug in highlightbox link
+- 98b1f56: NextJS Convert Footer Social Icons to Images
+- 2f6315b: Change cards component style
+- dd61db4: Header update for left and right menu management
+- 4bb9d27: Fix Bannerlink hydration error
+- d86bd7c: Switch MegaHeader's appCtaButton from using href to onClick to enable platform recognition
+- 4101e29: Add global properties to make ReCaptcha use recaptcha.net instead of google.com
+- bba1aaa: Add font to OneTrust Cookie Banner
+- 46f5e9f: Implement themeVariant (IO/SEND)
+- 3dd56e8: add background image to form
+- a3085b8: Remove default button styling from expandable MegaHeader links (desktop)
+- 340da69: Fix HeroChips behaviour for screen readers
+- 3605762: Substitute Themed Icon for simple Icon
+- 8b70163: Add explicit types to PressReleaseList stories
+- bb5adf2: Add defaultCategoryID field to Form
+- c3bbd3d: Fix Framed Video and styling
+- 3dd04a2: change layout property and add text alignment
+- 853082a: Modify hero small style
+- f4c31a6: Track FAQ opening with mixpanel
+- a77cc88: Make Header Drawer Link Card's and CTA Card's subtitle Rich Text
+- eedda36: Fix styling of MegaHeader links
+- 44109c0: Refactored Mixpanel tracking into useMixpanelTracking hook
+- 136cfe8: Separated Hero tertiary link from StoreButtons
+- eb97792: Add loop and autoplay to FramedVideo
+- 274a5c0: Add TextSection component
+- a92790a: OneTrust: Add lineHeight property to the style
+- e9511dd: Add Demo Tenant
+- c4d8232: Make it so Form optional fields (name, surname, organization) are either all passed or none is passed
+- aeed74f: add feedback to form component
+- 118f5bd: Add YouTube as a valid icon for Footer Social Links
+- 8b16f53: PressReleaseList : Add margin-y
+- 7ce8ad3: add new component DynamicsForm (POC)
+- 35b0b35: Make PreHeader optional
+- bcf0646: Refactor storeButtons to use MUI Link
+- 127c650: Up SSG timeout to 10 minutes
+- 65b828d: Add @mui/lab dependency required by mui-italia
+- 660c029: NextJS : Make VideoImage's subtitle Rich Text
+- f174582: Add social icons to megaheader
+- 46c90ef: Bug fix: Make HeroCounter link optional
+- b3c2683: change font, box-shadow, spacing and page scrolling for MegaHeader
+- 8c6195b: add new framed-video component
+- 9e6cf57: HeroChips add smooth scrolling to target
+- 8c37cd7: Add mobile app CTA to MegaHeader
+- b434f1c: Add new Stats component
+- bca8d66: Prefooter - change store buttons direction
+- 3bfb147: Add tag heading options to EditorialSwitch title and also set default Editorial title to h2
+- 8a30f4b: Implement across-subdomain mixpanel cookie
+- f0224e4: Implement HeroChips in Strapi
+- 577533e: Rename tenant pdnd to interop
+- 79f3898: add button label and remove background to form
+- dd2c2c4: add link field to stripelink
+- 142f115: Add new HighlightBox component
+- 192f81a: Add missing new line tag feature to MarkdownRenderer function
+- 0ba0d8a: change Service Carousel card title font weight
+- 0652c77: Implemented @iframe-resizer/react into iFrame
+- 9e49708: Refactor analytics configuration and add mixpanel cookie_domain
+- 7ebba87: change image text order on mobile breakpoint
+- f87e9c2: Add tabindex to all components' top-level sections
+- 2b2fb05: Convert Editorial Switch subtitle to Rich Text
+- f6db763: Update mixpanel configuration and implementation to work on iOS
+- 52691be: update colors and maximum text width
+- be94625: NextJS: Add backlink to PressRelease
+- ec91684: Convert Footer Social Icons to Images
+- 85476e8: Condense BannerLink body text into one field
+- 96ca979: VideoImage: change mobile image width
+- 867e79b: Refactor Form component and implement call to newsletter service
+- a4b11c3: add notes field to form
+- bea4ead: Add WebSite metadata to define site's name
+- 4f5e469: Keep current page when changing language from footer
+- 300d455: Fix NextJs preview deploy
+- 6581621: Add population parameters for BannerLink to preview
+- 2ff39e5: Allow de, fr and sl locales
+- 800b8fb: VideoImage: Show title and subtitle when displaying image and add image for mobile breakpoint
+- 2734f30: Megaheader : Make logo clickable
+- 6890793: Implement cookie consent logic
+- ed38b15: Hero: change margins and font size of title
+- 0585529: Add textPosition to Strapi Cards
+- a5f3d2a: add \_blank targets to the store buttons in the Prefooter and to the social links in the Footer
+- 8334619: Remove dev URL for icons
+- fb7aac9: Mixpanel: Track storeButtons click
+- 88aba26: Fix mobile menu accessibility
+- 3eefa3d: fix mobile display bugs and change text color
+- 27a614b: Change DynamicsForm style
+- 06dfe64: iFrame: Allow child page to request scrolling to a section outside of the iFrame
+- 7a76669: fix language switch accessibility
+- 66c7bcf: Update Strapi API call to populate storeButtons inside navigation
+- 30cf8c1: Update UI behavior to support standardized color themes (IO/SEND). Update components Accordion, Bannerlink, Cards, Editorial, Editorial-Switch, Feature, Form, FramedVideo, Hero, HeroChips, HeroCounter, HowTo, Page-Switch, PreFooter and Stripelink.
+
 ## 0.2.0
 
 ### Minor Changes
