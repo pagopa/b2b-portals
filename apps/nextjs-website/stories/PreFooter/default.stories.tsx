@@ -61,6 +61,7 @@ export const Default: StoryFn<typeof StorybookPreFooter> = Template.bind({});
 Default.args = {
   title: 'Scarica l’app IO',
   theme: 'light',
+  themeVariant: 'IO',
   layout: 'left',
   ctaVariant: 'store',
   showBackground: true,

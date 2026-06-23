@@ -139,6 +139,7 @@ const makeMegaHeaderProps = ({
   drawer,
 }: StorybookMegaHeaderProps): MegaHeaderProps => {
   const baseProps: Partial<MegaHeaderProps> = {
+    themeVariant: 'IO',
     menuItems: defaultMenuItems,
     logo: {
       src:

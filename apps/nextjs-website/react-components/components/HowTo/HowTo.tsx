@@ -27,7 +27,7 @@ const HowTo = (props: HowToProps) => {
     ctaButton,
   } = props;
 
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const { palette, spacing } = useTheme();
   const ctx = { palette, theme };
 

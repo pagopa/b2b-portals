@@ -40,6 +40,7 @@ RichBannerShortTitle.args = {
     </p>
   ),
   body: commonBody,
+  themeVariant: 'IO',
 };
 
 export const RichBannerLongTitle: StoryFn<typeof RichBanner> =
@@ -54,4 +55,5 @@ RichBannerLongTitle.args = {
     </p>
   ),
   body: commonBody,
+  themeVariant: 'IO',
 };

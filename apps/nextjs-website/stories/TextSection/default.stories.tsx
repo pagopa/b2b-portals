@@ -64,6 +64,7 @@ TextSectionFull.args = {
     href: '#',
     ariaLabel: 'Indietro',
   },
+  themeVariant: 'IO',
 };
 
 export const TextSectionOnlyBody: StoryFn<typeof TextSection> =
@@ -101,4 +102,5 @@ TextSectionOnlyBody.args = {
       </p>
     </div>
   ),
+  themeVariant: 'IO',
 };

@@ -4,9 +4,10 @@ import { RowTextProps } from '../../types/RowText/RowText.types';
 import { TextColor, BackgroundColor } from '../common/Common.helpers';
 
 const RowText = (props: RowTextProps) => {
-  const { title, subtitle, body, layout, sectionID, titleTag } = props;
-  const textColor = TextColor('light');
-  const backgroundColor = BackgroundColor('light');
+  const { title, subtitle, body, layout, sectionID, titleTag, themeVariant } =
+    props;
+  const textColor = TextColor('light', themeVariant);
+  const backgroundColor = BackgroundColor('light', themeVariant);
   const { palette } = useTheme();
 
   return (

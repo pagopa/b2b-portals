@@ -9,7 +9,7 @@ import { resolveThemeVariant } from '../../theme';
 
 const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
   const { palette } = useTheme();
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const ctx = { palette, theme };
 
   const linkColor = resolveThemeVariant<string>(

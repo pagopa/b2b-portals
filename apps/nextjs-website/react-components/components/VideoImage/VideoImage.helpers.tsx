@@ -129,7 +129,7 @@ export const VideoText = ({
   theme = 'dark',
   themeVariant,
 }: VideoTextProps) => {
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
@@ -193,7 +193,7 @@ export const ImageText = ({
   themeVariant: 'SEND' | 'IO' | 'WALLET';
 }) => {
   const { palette } = useTheme();
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const ctx = { palette, theme };
 
   const linkColor = resolveThemeVariant<string>(

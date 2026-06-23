@@ -19,6 +19,24 @@ const HighlightBox = ({
     theme: 'light',
   };
 
+  const backgroundColor = resolveThemeVariant<string>(
+    'highlightBoxBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
+  const eyeletBackgroundColor = resolveThemeVariant<string>(
+    'highlightBoxEyeletBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
+  const eyeletTextColor = resolveThemeVariant<string>(
+    'highlightBoxEyeletTextColor',
+    themeVariant,
+    ctx,
+  );
+
   const buttonBackgroundColor = resolveThemeVariant<string>(
     'ctaContainedBackgroundColor',
     themeVariant,
@@ -32,7 +50,7 @@ const HighlightBox = ({
         justifyContent: { xs: 'start', md: 'start' },
         borderRadius: '24px',
         padding: { xs: '48px', md: '0 48px' },
-        backgroundColor: palette.custom.highLightBoxLightGreenBackground,
+        backgroundColor,
       }}
       {...(sectionID && { sectionID })}
     >
@@ -45,9 +63,8 @@ const HighlightBox = ({
                 component='p'
                 color='textSecondary'
                 sx={{
-                  backgroundColor:
-                    palette.custom.highLightBoxLightPurpleBackground,
-                  color: palette.custom.highLightBoxPurpleText,
+                  backgroundColor: eyeletBackgroundColor,
+                  color: eyeletTextColor,
                   borderRadius: '100px',
                   display: 'inline-block',
                   px: 2,

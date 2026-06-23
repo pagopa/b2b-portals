@@ -6,6 +6,7 @@ import ContainerRC from '../common/ContainerRC';
 import { CtaButtons, isValidExternalLink } from '../common/Common';
 import { usePathname } from 'next/navigation';
 import { AppStoreButton, GooglePlayButton } from '../common/StoreButtons';
+import { ThemeVariant } from '@react-components/types/common/Common.types';
 
 const styles = {
   main: (isSmallScreen: boolean, layout: 'left' | 'center') => ({
@@ -19,8 +20,13 @@ const styles = {
     zIndex: 1,
   }),
 
-  backgroundImage: (isSmallScreen: boolean, theme: 'light' | 'dark') => ({
-    backgroundColor: theme === 'dark' ? '#031344' : BackgroundColor(theme),
+  backgroundImage: (
+    isSmallScreen: boolean,
+    theme: 'light' | 'dark',
+    themeVariant: ThemeVariant,
+  ) => ({
+    backgroundColor:
+      theme === 'dark' ? '#031344' : BackgroundColor(theme, themeVariant),
     backgroundSize: isSmallScreen ? 'cover' : '30%',
     backgroundPosition: isSmallScreen ? 'center' : 'right',
     backgroundRepeat: 'no-repeat',
@@ -44,6 +50,7 @@ const PreFooter = (props: PreFooterProps) => {
     ctaButtons,
     excludeSlugs,
     pressReleasesParentSlug = 'press-releases',
+    themeVariant,
   } = props;
   const pathname = usePathname() ?? '';
 
@@ -60,12 +67,12 @@ const PreFooter = (props: PreFooterProps) => {
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
-  const backgroundColor = BackgroundColor(theme);
+  const backgroundColor = BackgroundColor(theme, themeVariant);
 
   return (
     <Box
       component='section'
-      sx={styles.backgroundImage(isSmallScreen, theme)}
+      sx={styles.backgroundImage(isSmallScreen, theme, themeVariant)}
       id='prefooter'
     >
       <Box sx={{ position: 'relative', overflow: 'hidden' }}>
@@ -160,6 +167,7 @@ const PreFooter = (props: PreFooterProps) => {
                     }),
                   })),
                   theme,
+                  themeVariant,
                 })}
               </Stack>
             ) : null}

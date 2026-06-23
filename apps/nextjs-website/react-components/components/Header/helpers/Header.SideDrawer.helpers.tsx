@@ -15,6 +15,7 @@ import {
   isValidExternalLink,
   LinkIcon,
 } from '@react-components/components/common/Common';
+import { ThemeVariant } from '@react-components/types/common/Common.types';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorRight': {
@@ -35,6 +36,7 @@ interface SideDrawerProps {
   linkCards: HeaderSideDrawerLinkCardProps[];
   ctaCard: HeaderSideDrawerCtaCardProps;
   ariaLabelClose?: string;
+  themeVariant: ThemeVariant;
 }
 
 export default function SideDrawer({
@@ -47,8 +49,9 @@ export default function SideDrawer({
   linkCards,
   ctaCard,
   ariaLabelClose,
+  themeVariant,
 }: SideDrawerProps) {
-  const textColorAlternative = TextAlternativeColor(theme);
+  const textColorAlternative = TextAlternativeColor(theme, themeVariant);
 
   return (
     <Drawer anchor={anchor} open={isOpen} onClose={onClose} sx={drawerStyles}>
@@ -125,6 +128,7 @@ export default function SideDrawer({
               icons={card.icons}
               theme={'light'}
               link={card.link}
+              themeVariant={themeVariant}
             />
           ))}
         </div>

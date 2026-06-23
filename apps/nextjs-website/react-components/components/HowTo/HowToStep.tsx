@@ -18,7 +18,7 @@ export const HowToStep = ({
   isLastStep,
 }: HowToStepProps) => {
   const isDarkTheme = theme === 'dark';
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const { palette } = useTheme();
   const ctx = { palette, theme };
 

@@ -15,7 +15,7 @@ const StripeLink = ({
   link,
   sectionID,
 }: StripeLinkProps) => {
-  const textColorWhiteOnly = TextColor('dark');
+  const textColorWhiteOnly = TextColor('dark', themeVariant);
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
