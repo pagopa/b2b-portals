@@ -13,7 +13,7 @@
     },
     "href": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "ariaLabel": {
       "type": "string",
@@ -22,6 +22,11 @@
     "showOneTrustPreferencies": {
       "type": "boolean",
       "default": false
+    },
+    "page": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
     }
   }
 }
