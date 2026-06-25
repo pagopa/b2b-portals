@@ -1,10 +1,10 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import MarkdownRenderer from './MarkdownRenderer';
-import { Footer as FooterRC } from '@react-components/components';
+import { Footer as FooterRC, LangCode, Languages } from '@pagopa/mui-italia';
 import {
   DesignersItaliaFooterProps,
-  StandardFooterProps,
+  FooterProps,
 } from '@react-components/types';
 import {
   DesignersItaliaFooterData,
@@ -14,14 +14,7 @@ import {
 import { FormatSlug, LocalizeURL } from '@/lib/linkLocalization';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import { DesignersItaliaFooter as DesignersItaliaFooterRC } from '@react-components/components';
-
-const titleSVG = {
-  it: "Finanziato dall'Unione Europea · NextGenerationEU",
-  en: 'Funded by the European Union · NextGenerationEU',
-  de: 'Gefördert von der Europäischen Union · NextGenerationEU',
-  fr: "Financé par l'Union européenne · NextGenerationEU",
-  sl: 'Financirano s strani Evropske unije · NextGenerationEU',
-};
+import { isValidExternalLink } from '@react-components/components/common/Common';
 
 const labelsDesignersItaliaFooter: Record<
   Locale,
@@ -51,11 +44,92 @@ const labelsDesignersItaliaFooter: Record<
   },
 };
 
+const languageLabels = {
+  it: {
+    it: 'Italiano',
+    en: 'Inglese',
+    fr: 'Francese',
+    de: 'Tedesco',
+    sl: 'Sloveno',
+  },
+  en: {
+    it: 'Italian',
+    en: 'English',
+    fr: 'French',
+    de: 'German',
+    sl: 'Slovenian',
+  },
+  fr: {
+    it: 'Italien',
+    en: 'Anglais',
+    fr: 'Français',
+    de: 'Allemand',
+    sl: 'Slovène',
+  },
+  de: {
+    it: 'Italienisch',
+    en: 'Englisch',
+    fr: 'Französisch',
+    de: 'Deutsch',
+    sl: 'Slowenisch',
+  },
+  sl: {
+    it: 'Italijanščina',
+    en: 'Angleščina',
+    fr: 'Francoščina',
+    de: 'Nemščina',
+    sl: 'Slovenščina',
+  },
+};
+
+type LocalizedLinksType = ReadonlyArray<{
+  id: Locale;
+  value: string;
+  href: string;
+}>;
+
+const makeLanguagesProps = (languages: LocalizedLinksType) => {
+  return Object.fromEntries(
+    languages.map((lang: { id: LangCode }) => [
+      lang.id,
+      languageLabels[lang.id],
+    ]),
+  ) as Languages;
+};
+
+const resolveLink = (props: {
+  page: { slug: string } | null;
+  activeLocale: Locale;
+  defaultLocale: Locale;
+  href: string | null;
+}) =>
+  props.page
+    ? FormatSlug(props.page.slug, props.activeLocale, props.defaultLocale)
+    : LocalizeURL({
+        URL: props.href ?? '',
+        locale: props.activeLocale,
+        defaultLocale: props.defaultLocale,
+      });
+
+const handleLanguageChange = (
+  language: LangCode,
+  activeLocale: Locale,
+  localizedLinks: LocalizedLinksType,
+) => {
+  localStorage.setItem('preferredLang', language);
+  const newHref = localizedLinks.find((l) => l.id === activeLocale) ?? {
+    id: activeLocale,
+    value: activeLocale,
+    href: '/',
+  };
+  // eslint-disable-next-line functional/immutable-data
+  window.location.href = newHref.href;
+};
+
 const makeFooterProps = (
   {
     legalInfo,
     links_aboutUs,
-    links_services,
     links_resources,
     links_followUs,
     defaultLocale,
@@ -64,64 +138,55 @@ const makeFooterProps = (
     ...rest
   }: StandardFooterData & {
     defaultLocale: Locale;
-    localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
+    localizedLinks: LocalizedLinksType;
   },
   activeLocale: Locale,
-): StandardFooterProps => ({
+): FooterProps => ({
   legalInfo: MarkdownRenderer({
     markdown: legalInfo,
     locale: activeLocale,
     defaultLocale,
     variant: 'caption',
   }),
-  links: {
+  preLoginLinks: {
     aboutUs: {
       links: links_aboutUs.links.map(
         ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
           label,
           ...(ariaLabel && { ariaLabel }),
-          href: page
-            ? FormatSlug(page.slug, activeLocale, defaultLocale)
-            : LocalizeURL({
-                URL: href ?? '',
-                locale: activeLocale,
-                defaultLocale,
+          linkType: isValidExternalLink(
+            resolveLink({ page, activeLocale, defaultLocale, href }),
+          )
+            ? 'external'
+            : 'internal',
+          ...(showOneTrustPreferencies
+            ? {
+                onClick: () => window.OneTrust.ToggleInfoDisplay(),
+              }
+            : {
+                href: resolveLink({ page, activeLocale, defaultLocale, href }),
               }),
-          ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
       ),
       ...(links_aboutUs.title && { title: links_aboutUs.title }),
-    },
-    services: {
-      links: links_services.links.map(
-        ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
-          label,
-          ...(ariaLabel && { ariaLabel }),
-          href: page
-            ? FormatSlug(page.slug, activeLocale, defaultLocale)
-            : LocalizeURL({
-                URL: href ?? '',
-                locale: activeLocale,
-                defaultLocale,
-              }),
-          ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
-        }),
-      ),
-      ...(links_services.title && { title: links_services.title }),
     },
     resources: {
       links: links_resources.links.map(
         ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
           label,
           ...(ariaLabel && { ariaLabel }),
-          href: page
-            ? FormatSlug(page.slug, activeLocale, defaultLocale)
-            : LocalizeURL({
-                URL: href ?? '',
-                locale: activeLocale,
-                defaultLocale,
+          linkType: isValidExternalLink(
+            resolveLink({ page, activeLocale, defaultLocale, href }),
+          )
+            ? 'external'
+            : 'internal',
+          ...(showOneTrustPreferencies
+            ? {
+                onClick: () => window.OneTrust.ToggleInfoDisplay(),
+              }
+            : {
+                href: resolveLink({ page, activeLocale, defaultLocale, href }),
               }),
-          ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
       ),
       ...(links_resources.title && { title: links_resources.title }),
@@ -132,31 +197,36 @@ const makeFooterProps = (
         ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
           label,
           ...(ariaLabel && { ariaLabel }),
-          href: page
-            ? FormatSlug(page.slug, activeLocale, defaultLocale)
-            : LocalizeURL({
-                URL: href ?? '',
-                locale: activeLocale,
-                defaultLocale,
+          linkType: isValidExternalLink(
+            resolveLink({ page, activeLocale, defaultLocale, href }),
+          )
+            ? 'external'
+            : 'internal',
+          ...(showOneTrustPreferencies
+            ? {
+                onClick: () => window.OneTrust.ToggleInfoDisplay(),
+              }
+            : {
+                href: resolveLink({ page, activeLocale, defaultLocale, href }),
               }),
-          ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
         }),
       ),
       socialLinks: links_followUs.socialLinks.map(
-        ({ icon, href, ariaLabel }) => ({
-          iconURL: icon.url,
+        ({ icon, href, ariaLabel, title }) => ({
+          icon,
           href: LocalizeURL({ URL: href, locale: activeLocale, defaultLocale }),
-          ariaLabel,
+          title,
+          ...(ariaLabel && { ariaLabel }),
         }),
       ),
     },
   },
-  languages: localizedLinks,
-  activeLanguage: localizedLinks.find((l) => l.id === activeLocale) ?? {
-    id: activeLocale,
-    value: activeLocale,
-    href: '/',
-  },
+  currentLangCode: activeLocale,
+  onLanguageChanged: (language) =>
+    handleLanguageChange(language, activeLocale, localizedLinks),
+  languages: makeLanguagesProps(localizedLinks),
+  loggedUser: false,
+  postLoginLinks: [],
   companyLink: {
     ariaLabel: companyLink.ariaLabel,
     href: LocalizeURL({
@@ -165,7 +235,6 @@ const makeFooterProps = (
       defaultLocale,
     }),
   },
-  titleSVG: titleSVG[activeLocale],
   ...rest,
 });
 
@@ -176,7 +245,7 @@ const makeDesignersItaliaFooterProps = (
     ...props
   }: DesignersItaliaFooterData & {
     defaultLocale: Locale;
-    localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
+    localizedLinks: LocalizedLinksType;
   },
   activeLocale: Locale,
 ): DesignersItaliaFooterProps => ({
@@ -190,13 +259,7 @@ const makeDesignersItaliaFooterProps = (
           ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
             label,
             ...(ariaLabel && { ariaLabel }),
-            href: page
-              ? FormatSlug(page.slug, activeLocale, defaultLocale)
-              : LocalizeURL({
-                  URL: href ?? '',
-                  locale: activeLocale,
-                  defaultLocale,
-                }),
+            href: resolveLink({ page, activeLocale, defaultLocale, href }),
             ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
           }),
         ),
@@ -209,13 +272,7 @@ const makeDesignersItaliaFooterProps = (
       ({ href, showOneTrustPreferencies, label, ariaLabel, page }) => ({
         label,
         ...(ariaLabel && { ariaLabel }),
-        href: page
-          ? FormatSlug(page.slug, activeLocale, defaultLocale)
-          : LocalizeURL({
-              URL: href ?? '',
-              locale: activeLocale,
-              defaultLocale,
-            }),
+        href: resolveLink({ page, activeLocale, defaultLocale, href }),
         ...(showOneTrustPreferencies && { showOneTrustPreferencies }),
       }),
     ),
@@ -245,7 +302,7 @@ const Footer = ({
   ...props
 }: FooterData['data']['footer'][0] & {
   defaultLocale: Locale;
-  localizedLinks: ReadonlyArray<{ id: Locale; value: string; href: string }>;
+  localizedLinks: LocalizedLinksType;
 }) => {
   const pathname = usePathname() + '/'; // Add final slash to make sure not to miss a non-default locale's homepage (e.g.: \en)
   const activeLocale = ['it/', 'en/', 'de/', 'fr/', 'sl/'].includes(

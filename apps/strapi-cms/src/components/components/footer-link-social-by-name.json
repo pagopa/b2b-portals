@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_components_footer_link_social_by_names",
+  "info": {
+    "displayName": "FooterLinkSocialByName"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "ariaLabel": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "linkedin",
+        "instagram",
+        "threads",
+        "youtube",
+        "twitter",
+        "medium"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -26,12 +26,6 @@
       "repeatable": false,
       "required": true
     },
-    "links_services": {
-      "type": "component",
-      "component": "components.footer-link-group",
-      "repeatable": false,
-      "required": true
-    },
     "links_resources": {
       "type": "component",
       "component": "components.footer-link-group",

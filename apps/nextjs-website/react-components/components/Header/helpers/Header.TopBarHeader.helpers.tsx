@@ -1,7 +1,7 @@
 import { Box, Link, Typography } from '@mui/material';
 import LangSwitch from './Header.LangSwitch.helpers';
-import { LangSwitchProps } from '@react-components/types/Footer/Footer.types';
 import { isValidExternalLink } from '@react-components/components/common/Common';
+import { LangSwitchProps } from '@react-components/types/Header/Header.types';
 
 interface Props extends LangSwitchProps {
   topBarHeaderLogo?: {

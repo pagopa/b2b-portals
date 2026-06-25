@@ -1,66 +1,19 @@
-import { Generic } from '../common/Common.types';
+import {
+  CompanyLinkType,
+  FooterLinksType,
+  LangSwitchProps,
+  PreLoginFooterLinksType,
+} from '@pagopa/mui-italia';
 
-export interface StandardFooterProps extends LangSwitchProps {
+export type FooterProps = LangSwitchProps & {
+  loggedUser: boolean;
   companyLink: CompanyLinkType;
-  legalInfo: string | Generic | Generic[];
-  links: PreLoginFooterLinksType;
-  showFundedByNextGenerationEULogo?: boolean;
-  titleSVG: string;
-}
-
-interface FooterLinksType {
-  label: string;
-  href: string;
-  ariaLabel?: string;
-  showOneTrustPreferencies?: boolean;
-}
-
-interface PreLoginFooterSingleSectionType {
-  title?: string;
-  links: FooterLinksType[];
-}
-
-interface SocialLinkType {
-  iconURL: string;
-  href: string;
-  ariaLabel: string;
-}
-interface PreLoginFooterLinksType {
-  services: PreLoginFooterSingleSectionType;
-  aboutUs: PreLoginFooterSingleSectionType;
-  resources: PreLoginFooterSingleSectionType;
-  followUs: {
-    title: string;
-    socialLinks: SocialLinkType[];
-    links: FooterLinksType[];
-  };
-}
-
-interface CompanyLinkType {
-  /** the url to witch the user will be redirect */
-  href?: string;
-  ariaLabel: string;
-  /** if defined it will override the href behavior */
-  onClick?: () => void;
-}
-
-export interface FooterColumnProps {
-  data: PreLoginFooterSingleSectionType;
-  companyLink?: CompanyLinkType;
-  icons?: SocialLinkType[];
-}
-
-export interface Language {
-  id: 'it' | 'en' | 'de' | 'fr' | 'sl';
-  value: string;
-  href: string;
-}
-
-export interface LangSwitchProps {
-  languages: readonly Language[];
-  activeLanguage: Language;
-}
-
-export interface LegalInfoProps {
-  data?: string | Generic | Generic[];
-}
+  postLoginLinks: Array<FooterLinksType>;
+  preLoginLinks: PreLoginFooterLinksType;
+  legalInfo: JSX.Element | Array<JSX.Element>;
+  onExit?: (exitAction: () => void) => void;
+  productsJsonUrl?: string;
+  productsTitle?: string;
+  onProductsJsonFetchError?: (reason: any) => void;
+  hideProductsColumn?: boolean;
+};

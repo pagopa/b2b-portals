@@ -12,17 +12,17 @@
     },
     "links": {
       "type": "component",
-      "repeatable": true,
       "component": "components.footer-link",
+      "repeatable": true,
       "required": true,
       "min": 1
     },
     "socialLinks": {
       "type": "component",
+      "component": "components.footer-link-social-by-name",
       "repeatable": true,
-      "component": "components.footer-link-social",
       "required": true,
-      "min": 1
+      "min": 0
     }
   }
 }

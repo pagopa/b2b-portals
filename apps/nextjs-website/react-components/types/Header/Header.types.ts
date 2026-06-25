@@ -1,7 +1,5 @@
 import { StackProps, LinkProps as LinkPropsMUI } from '@mui/material';
 import { LinkProps, Locale, Theme, ThemeVariant } from '../common/Common.types';
-import { LangSwitchProps } from '../Footer/Footer.types';
-
 export interface HeaderSideDrawerCtaCardProps {
   readonly title: string;
   readonly subtitle: JSX.Element;
@@ -55,6 +53,17 @@ interface DropdownLink extends LinkPropsMUI {
 }
 
 export type DropdownItem = DropdownLink;
+
+interface Language {
+  id: 'it' | 'en' | 'de' | 'fr' | 'sl';
+  value: string;
+  href: string;
+}
+
+export interface LangSwitchProps {
+  languages: readonly Language[];
+  activeLanguage: Language;
+}
 
 export interface MenuDropdownProp
   extends Partial<Omit<LinkPropsMUI, 'children'>> {

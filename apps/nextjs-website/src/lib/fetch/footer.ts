@@ -26,6 +26,20 @@ const FooterLinkSocialCodec = t.strict({
   ariaLabel: t.string,
 });
 
+const FooterLinkSocialByNameCodec = t.strict({
+  icon: t.union([
+    t.literal('linkedin'),
+    t.literal('instagram'),
+    t.literal('medium'),
+    t.literal('youtube'),
+    t.literal('threads'),
+    t.literal('twitter'),
+  ]),
+  href: t.string,
+  ariaLabel: t.union([t.string, t.null]),
+  title: t.string,
+});
+
 const FooterLinkGroupCodec = t.strict({
   title: t.union([t.string, t.null]),
   links: t.array(FooterLinkCodec),
@@ -39,7 +53,7 @@ const FooterLinkAriaLabelGroupCodec = t.strict({
 const FooterLinkGroupWithSocialCodec = t.strict({
   title: t.string,
   links: t.array(FooterLinkCodec),
-  socialLinks: t.array(FooterLinkSocialCodec),
+  socialLinks: t.array(FooterLinkSocialByNameCodec),
 });
 
 const StandardFooterCodec = t.strict({
@@ -47,9 +61,8 @@ const StandardFooterCodec = t.strict({
   legalInfo: t.string,
   showFundedByNextGenerationEULogo: t.boolean,
   companyLink: CompanyLinkCodec,
-  links_services: FooterLinkGroupCodec,
-  links_aboutUs: FooterLinkGroupCodec,
   links_resources: FooterLinkGroupCodec,
+  links_aboutUs: FooterLinkGroupCodec,
   links_followUs: FooterLinkGroupWithSocialCodec,
 });
 

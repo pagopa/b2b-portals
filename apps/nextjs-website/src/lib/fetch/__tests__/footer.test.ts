@@ -90,16 +90,10 @@ const footerResponse: FooterData = {
           title: 'SEGUICI SU',
           socialLinks: [
             {
-              icon: {
-                width: 32,
-                height: 32,
-                alternativeText: null,
-                formats: null,
-                mime: 'image/png',
-                url: 'exampleURL',
-              },
+              icon: 'linkedin',
               href: 'https://linkedin.com',
               ariaLabel: 'LinkedIn',
+              title: 'linkedin',
             },
           ],
           links: [
@@ -116,20 +110,6 @@ const footerResponse: FooterData = {
         },
         links_resources: {
           title: 'RISORSE',
-          links: [
-            {
-              label: 'Test',
-              href: '/test',
-              ariaLabel: 'test',
-              showOneTrustPreferencies: null,
-              page: {
-                slug: 'homepage',
-              },
-            },
-          ],
-        },
-        links_services: {
-          title: 'PRODOTTI E SERVIZI',
           links: [
             {
               label: 'Test',

@@ -1,10 +1,11 @@
 import { Box, Button, Menu, MenuItem } from '@mui/material';
 import { useRef, useState } from 'react';
-import { LangSwitchProps } from '@react-components/types/Footer/Footer.types';
 import Image from 'next/image';
 import iconLanguage from '@react-components/assets/icons/icon-language-white.svg';
 import iconChevron from '@react-components/assets/icons/icon-chevron-white.svg';
 import { Locale } from '@react-components/types/common/Common.types';
+import { LangSwitchProps } from '@react-components/types/Header/Header.types';
+
 interface Props extends LangSwitchProps {
   isMobile: boolean;
 }
