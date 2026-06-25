@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: 'Titillium Sans Pro';
-  src: url('/fonts/TitilliumSansPro-SemiBold.woff2') format('woff2');
+  src: url('/fonts/TitilliumSansPro-Semibold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: 'Titillium Sans Pro';
-  src: url('/fonts/TitilliumSansPro-SemiBoldItalic.woff2') format('woff2');
+  src: url('/fonts/TitilliumSansPro-SemiboldItalic.woff2') format('woff2');
   font-weight: 600;
   font-style: italic;
   font-display: swap;
