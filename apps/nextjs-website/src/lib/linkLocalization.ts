@@ -96,3 +96,14 @@ export const LocalizeMarkdownLinks = ({
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return markdown.replace(urlsRegex, (matched) => urlsMap[matched]!);
 };
+
+export const FormatSlug = (
+  slug: string,
+  locale: Locale,
+  defaultLocale: Locale,
+): string => {
+  const localeString = locale === defaultLocale ? '' : `/${locale}`;
+  const slugString = slug === 'homepage' ? '/' : `/${slug}`;
+
+  return localeString + slugString;
+};

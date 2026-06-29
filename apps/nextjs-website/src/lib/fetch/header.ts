@@ -12,24 +12,17 @@ import { Locale } from './siteWideSEO';
 import PageRelationCodec from './types/PageRelation';
 import { LinkCodec } from './types/PageSection';
 
-const HeaderPageCodec = t.union([
-  t.strict({
-    slug: t.string,
-  }),
-  t.null,
-]);
-
 const HeaderSublinkCodec = t.strict({
   label: t.string,
   sectionID: t.union([t.string, t.null]),
-  page: HeaderPageCodec,
+  page: t.union([PageRelationCodec, t.null]),
   externalURL: t.union([t.string, t.null]),
 });
 
 const MegaHeaderSublinkCodec = t.strict({
   label: t.string,
   sectionID: t.union([t.string, t.null]),
-  page: HeaderPageCodec,
+  page: t.union([PageRelationCodec, t.null]),
   externalURL: t.union([t.string, t.null]),
   isNew: t.boolean,
 });
@@ -43,7 +36,7 @@ const MenuCodec = t.strict({
   links: t.array(
     t.strict({
       label: t.string,
-      page: HeaderPageCodec,
+      page: t.union([PageRelationCodec, t.null]),
       sectionID: t.union([t.string, t.null]),
       sublinks: t.array(HeaderSublinkCodec),
     }),

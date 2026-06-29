@@ -53,24 +53,36 @@ const footerResponse: FooterData = {
               href: '/',
               ariaLabel: 'Chi siamo',
               showOneTrustPreferencies: null,
+              page: {
+                slug: 'homepage',
+              },
             },
             {
               label: 'PNRR',
               href: '/PNRR',
               ariaLabel: 'PNRR',
               showOneTrustPreferencies: null,
+              page: {
+                slug: 'homepage',
+              },
             },
             {
               label: 'Media',
               href: '/media',
               ariaLabel: 'Media',
               showOneTrustPreferencies: null,
+              page: {
+                slug: 'homepage',
+              },
             },
             {
               label: 'Lavora con noi',
               href: '/lavora-con-noi',
               ariaLabel: 'Lavora con noi',
               showOneTrustPreferencies: null,
+              page: {
+                slug: 'homepage',
+              },
             },
           ],
         },
@@ -96,6 +108,9 @@ const footerResponse: FooterData = {
               href: 'accessibilita',
               ariaLabel: 'Accessibilità',
               showOneTrustPreferencies: null,
+              page: {
+                slug: 'homepage',
+              },
             },
           ],
         },
@@ -107,6 +122,9 @@ const footerResponse: FooterData = {
               href: '/test',
               ariaLabel: 'test',
               showOneTrustPreferencies: null,
+              page: {
+                slug: 'homepage',
+              },
             },
           ],
         },
@@ -118,6 +136,9 @@ const footerResponse: FooterData = {
               href: '/test',
               ariaLabel: 'test',
               showOneTrustPreferencies: null,
+              page: {
+                slug: 'homepage',
+              },
             },
           ],
         },
@@ -140,13 +161,13 @@ describe('getFooter', () => {
     expect(fetchMock).toHaveBeenCalledWith(
       `${config.DEMO_STRAPI_API_BASE_URL}/api/footer/?locale=it
 &populate[0]=footer.companyLink
-&populate[1]=footer.links_aboutUs.links
-&populate[2]=footer.links_followUs.links
+&populate[1]=footer.links_aboutUs.links.page
+&populate[2]=footer.links_followUs.links.page
 &populate[3]=footer.links_followUs.socialLinks.icon
-&populate[4]=footer.links_resources.links
-&populate[5]=footer.links_services.links
-&populate[6]=footer.bottomLinks.links
-&populate[7]=footer.links.links
+&populate[4]=footer.links_resources.links.page
+&populate[5]=footer.links_services.links.page
+&populate[6]=footer.bottomLinks.links.page
+&populate[7]=footer.links.links.page
 &populate[8]=footer.socialLinks.socialLinks.icon
 &populate[9]=footer.hashtags.hashtags
       `,
