@@ -37,6 +37,12 @@ const StripeLink = ({
     ctx,
   );
 
+  const buttonBackgroundHoverColor = resolveThemeVariant<string>(
+    'stripeLinkButtonBackgroundHoverColor',
+    themeVariant,
+    ctx,
+  );
+
   return (
     <ContainerRC
       background={extraBackgroundColor}
@@ -93,18 +99,10 @@ const StripeLink = ({
             sx={{
               backgroundColor: buttonBackgroundColor,
               color: buttonTextColor,
-              ...(theme === 'light'
-                ? {
-                    '&&:hover': {
-                      backgroundColor: palette.custom.ctaContainedLightHoverColor,
-                      color: buttonTextColor,
-                    },
-                  }
-                : {
-                    '&:hover': {
-                      backgroundColor: buttonBackgroundColor,
-                    },
-                  }),
+              '&.MuiButton-contained:hover': {
+                backgroundColor: buttonBackgroundHoverColor,
+                color: buttonTextColor,
+              },
             }}
             endIcon={
               <LinkIcon

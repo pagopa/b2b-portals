@@ -352,6 +352,12 @@ const Form = ({
     ctx,
   );
 
+  const submitButtonBackgroundHoverColor = resolveThemeVariant<string>(
+    'ctaContainedBackgroundHoverColor',
+    themeVariant,
+    ctx,
+  );
+
   return (
     <Box
       sx={{
@@ -476,8 +482,9 @@ const Form = ({
             zIndex: 4,
             backgroundColor: submitButtonBackgroundColor,
             color: submitButtonTextColor,
-            '&:hover': {
-              backgroundColor: submitButtonBackgroundColor,
+            '&.MuiButton-contained:hover': {
+              backgroundColor: submitButtonBackgroundHoverColor,
+              color: submitButtonTextColor,
             },
           }}
           onClick={handleSubmit}

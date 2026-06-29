@@ -100,7 +100,7 @@ export const CtaButtons = ({
           ...(buttonVariant === 'contained' && {
             backgroundColor: containedBackgroundColor,
             color: containedTextColor,
-            '&&:hover': {
+            '&.MuiButton-contained:hover': {
               backgroundColor: resolveThemeVariant<string>(
                 'ctaContainedBackgroundHoverColor',
                 themeVariant,
