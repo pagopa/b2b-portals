@@ -67,49 +67,68 @@ export const CtaButtons = ({
     return (button as CtaButtonProps).text !== undefined;
   };
 
-  return ctaButtons.map((button, i) =>
-    React.isValidElement(button)
-      ? button
-      : isCtaButtonProps(button) && (
-          <CtaButton
-            key={`${button.text}-${i}`}
-            color={theme === 'dark' ? 'negative' : 'primary'}
-            variant={button.variant || 'contained'}
-            disableRipple={disableRipple}
-            showExternalLinkIcon={showExternalLinkIcon}
-            style={{
-              ...(button.variant === 'contained' && {
-                backgroundColor: resolveThemeVariant<string>(
-                  'ctaContainedBackgroundColor',
-                  themeVariant,
-                  ctx,
-                ),
-                color: resolveThemeVariant<string>(
-                  'ctaContainedTextColor',
-                  themeVariant,
-                  ctx,
-                ),
-              }),
-              ...(button.variant === 'outlined' && {
-                borderColor: resolveThemeVariant<string>(
-                  'ctaOutlinedBorderColor',
-                  themeVariant,
-                  ctx,
-                ),
-                color: resolveThemeVariant<string>(
-                  'ctaOutlinedTextColor',
-                  themeVariant,
-                  ctx,
-                ),
-              }),
-            }}
-            {...button}
-            {...(trackEvent && { trackEvent })}
-          >
-            {button.text}
-          </CtaButton>
-        ),
-  );
+  return ctaButtons.map((button, i) => {
+    if (React.isValidElement(button)) {
+      return button;
+    }
+
+    if (!isCtaButtonProps(button)) {
+      return null;
+    }
+
+    const buttonVariant = button.variant || 'contained';
+    const containedBackgroundColor = resolveThemeVariant<string>(
+      'ctaContainedBackgroundColor',
+      themeVariant,
+      ctx,
+    );
+    const containedTextColor = resolveThemeVariant<string>(
+      'ctaContainedTextColor',
+      themeVariant,
+      ctx,
+    );
+
+    return (
+      <CtaButton
+        key={`${button.text}-${i}`}
+        color={theme === 'dark' ? 'negative' : 'primary'}
+        variant={buttonVariant}
+        disableRipple={disableRipple}
+        showExternalLinkIcon={showExternalLinkIcon}
+        {...button}
+        sx={{
+          ...(buttonVariant === 'contained' && {
+            backgroundColor: containedBackgroundColor,
+            color: containedTextColor,
+            '&.MuiButton-contained:hover': {
+              backgroundColor: resolveThemeVariant<string>(
+                'ctaContainedBackgroundHoverColor',
+                themeVariant,
+                ctx,
+              ),
+              color: containedTextColor,
+            },
+          }),
+          ...(buttonVariant === 'outlined' && {
+            borderColor: resolveThemeVariant<string>(
+              'ctaOutlinedBorderColor',
+              themeVariant,
+              ctx,
+            ),
+            color: resolveThemeVariant<string>(
+              'ctaOutlinedTextColor',
+              themeVariant,
+              ctx,
+            ),
+          }),
+          ...(button.sx as object),
+        }}
+        {...(trackEvent && { trackEvent })}
+      >
+        {button.text}
+      </CtaButton>
+    );
+  });
 };
 
 const normalizeTitleLineBreaks = (title: string) =>

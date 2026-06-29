@@ -25,6 +25,18 @@ const HighlightBox = ({
     ctx,
   );
 
+  const buttonBackgroundHoverColor = resolveThemeVariant<string>(
+    'ctaContainedBackgroundHoverColor',
+    themeVariant,
+    ctx,
+  );
+
+  const buttonTextColor = resolveThemeVariant<string>(
+    'ctaContainedTextColor',
+    themeVariant,
+    ctx,
+  );
+
   return (
     <ContainerRC
       py={4}
@@ -85,9 +97,14 @@ const HighlightBox = ({
                   px: 3,
                   py: 1,
                   backgroundColor: buttonBackgroundColor,
+                  color: buttonTextColor,
                   borderRadius: '4px',
                   fontSize: '16px',
                   fontWeight: 700,
+                  '&.MuiButton-contained:hover': {
+                    backgroundColor: buttonBackgroundHoverColor,
+                    color: buttonTextColor,
+                  },
                 }}
                 {...(isValidExternalLink(link.href) && {
                   target: '_blank',
