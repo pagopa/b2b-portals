@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useId, useRef, useState } from 'react';
 import RECAPTCHA from 'react-google-recaptcha';
 import {
   Box,
@@ -9,6 +9,7 @@ import {
   useTheme,
   TextField,
 } from '@mui/material';
+import { visuallyHidden } from '@mui/utils';
 import { FormProps } from '@react-components/types/Form/Form.types';
 import { TextColor, GrayLinkColor } from '../common/Common.helpers';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -60,6 +61,9 @@ const Form = ({
   const recaptchaRef = useRef<RECAPTCHA>(null);
   const { palette } = useTheme();
   const ctx = { palette, theme };
+  const uid = useId();
+  const formTitleId = `${uid}-form-title`;
+  const radioGroupTitleId = `${uid}-radio-group-title`;
 
   const requiredMessages: Record<InputFieldData['name'], string> = {
     name: labels.insertName,
@@ -273,7 +277,15 @@ const Form = ({
           variant='outlined'
           name={name}
           id={name}
-          label={placeholder}
+          label={
+            <>
+              {placeholder}
+              <Box component='span' style={visuallyHidden}>
+                {' '}
+                (obbligatorio)
+              </Box>
+            </>
+          }
           placeholder={placeholder}
           value={formData[name]}
           onChange={handleInputChange}
@@ -284,6 +296,7 @@ const Form = ({
             id: `${name}-error-text`,
           }}
           inputProps={{
+            type: name === 'email' ? 'email' : 'text',
             'aria-invalid': validationErrors[name] !== null ? 'true' : 'false',
             'aria-errormessage':
               validationErrors[name] !== null
@@ -388,7 +401,9 @@ const Form = ({
           color: textColor,
           position: 'relative',
         }}
-        component='section'
+        component='form'
+        onSubmit={handleSubmit}
+        aria-labelledby={formTitleId}
         {...(sectionID && { id: sectionID })}
       >
         <MailOutlineIcon
@@ -397,6 +412,7 @@ const Form = ({
         <Typography
           variant='h4'
           component={titleTag ?? 'h2'}
+          id={formTitleId}
           gutterBottom
           sx={{ position: 'relative', zIndex: 3, color: textColor, mb: 3 }}
         >
@@ -433,6 +449,8 @@ const Form = ({
         {categoriesTitle && categories.length > 0 && (
           <Typography
             variant='h6'
+            component='p'
+            id={radioGroupTitleId}
             gutterBottom
             sx={{
               position: 'relative',
@@ -463,6 +481,7 @@ const Form = ({
             borderColor={borderColor}
             selectedCategory={formData.category}
             handleRadioChange={handleRadioChange}
+            radioGroupTitleId={radioGroupTitleId}
             {...(validationErrors.category
               ? { categoryError: validationErrors.category }
               : {})}
@@ -480,7 +499,7 @@ const Form = ({
               backgroundColor: submitButtonBackgroundColor,
             },
           }}
-          onClick={handleSubmit}
+          type='submit'
         >
           {buttonLabel}
         </Button>
