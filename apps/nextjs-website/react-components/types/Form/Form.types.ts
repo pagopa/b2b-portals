@@ -65,4 +65,5 @@ export interface FormCategoryProps {
   borderColor: string;
   handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   categoryError?: string;
+  radioGroupTitleId: string;
 }
