@@ -51,6 +51,8 @@ declare module '@mui/material/styles' {
       readonly borderColor: string;
       readonly outlineColor: string;
       readonly walletOutlineColor: string;
+      readonly ctaContainedLightHoverColor: string;
+      readonly ctaContainedDarkHoverColor: string;
     };
   }
   // interface PaletteOptions {
@@ -130,6 +132,8 @@ const themeStyles = {
       borderColor: '#E8EBF1',
       outlineColor: '#0073e6',
       walletOutlineColor: '#0066CC',
+      ctaContainedLightHoverColor: '#D9D9D9',
+      ctaContainedDarkHoverColor: '#0055AA',
     },
   },
 };
