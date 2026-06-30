@@ -573,6 +573,15 @@ export const megaHeaderPrimaryColorMap: ThemeVariantMap<string> = {
       : palette.custom.primaryColorDark,
 };
 
+export const preFooterBackgroundColorColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? '#031344' : palette.background.paper,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? '#031344' : palette.background.paper,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? '#031344' : palette.background.paper,
+};
+
 export const themeVariantMaps = {
   accentColor: variantAccentColorMap,
   actionColor: variantActionColorMap,
@@ -619,6 +628,7 @@ export const themeVariantMaps = {
   commonGrayLinkColor: commonGrayLinkColorMap,
   switchMenuItemBackgroundColor: switchMenuItemBackgroundColorMap,
   megaHeaderPrimaryColor: megaHeaderPrimaryColorMap,
+  preFooterBackgroundColorColor: preFooterBackgroundColorColorMap,
 };
 
 export const resolveThemeVariant = <T>(
