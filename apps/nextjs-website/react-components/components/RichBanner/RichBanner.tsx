@@ -4,9 +4,9 @@ import { RichBannerProps } from '@react-components/types/RichBanner/RichBanner.t
 import { BackgroundColor, TextColor } from '../common/Common.helpers';
 
 const RichBanner = (props: RichBannerProps) => {
-  const { sectionID, title, body } = props;
-  const textColor = TextColor('light');
-  const backgroundColor = BackgroundColor('light');
+  const { sectionID, title, body, themeVariant } = props;
+  const textColor = TextColor('light', themeVariant);
+  const backgroundColor = BackgroundColor('light', themeVariant);
   const titleSx: SxProps = {
     widh: '100%',
     textAlign: 'center',

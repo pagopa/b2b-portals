@@ -9,7 +9,10 @@ import {
   isValidExternalLink,
   LinkIcon,
 } from '@react-components/components/common/Common';
-import { LinkProps } from '@react-components/types/common/Common.types';
+import {
+  LinkProps,
+  ThemeVariant,
+} from '@react-components/types/common/Common.types';
 
 interface ActionAreaCardProps {
   title: string;
@@ -17,6 +20,7 @@ interface ActionAreaCardProps {
   icons: string[];
   theme: 'dark' | 'light';
   link: LinkProps;
+  themeVariant: ThemeVariant;
 }
 
 export default function ActionAreaCard({
@@ -25,8 +29,9 @@ export default function ActionAreaCard({
   icons,
   theme,
   link,
+  themeVariant,
 }: ActionAreaCardProps) {
-  const textColorAlternative = TextAlternativeColor(theme);
+  const textColorAlternative = TextAlternativeColor(theme, themeVariant);
 
   return (
     <Card

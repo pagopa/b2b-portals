@@ -365,9 +365,252 @@ export const bannerLinkTextColorMap: ThemeVariantMap<string> = {
 };
 
 export const variantBorderColorMap: ThemeVariantMap<string> = {
-  SEND: ({ palette }) => palette.custom.borderColor,
-  IO: ({ palette }) => palette.custom.borderColor,
-  WALLET: ({ palette }) => palette.custom.borderColor,
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.borderColor : palette.custom.borderColor,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.borderColor : palette.custom.borderColor,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.borderColor : palette.custom.borderColor,
+};
+
+export const chipTextColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.chipsTextColor
+      : palette.custom.chipsTextColor,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.chipsTextColor
+      : palette.custom.chipsTextColor,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.chipsTextColor
+      : palette.custom.chipsTextColor,
+};
+
+export const highlightBoxBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.highLightBoxLightGreenBackground
+      : palette.custom.highLightBoxLightGreenBackground,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.highLightBoxLightGreenBackground
+      : palette.custom.highLightBoxLightGreenBackground,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.highLightBoxLightGreenBackground
+      : palette.custom.highLightBoxLightGreenBackground,
+};
+
+export const highlightBoxEyeletBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.highLightBoxLightPurpleBackground
+      : palette.custom.highLightBoxLightPurpleBackground,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.highLightBoxLightPurpleBackground
+      : palette.custom.highLightBoxLightPurpleBackground,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.highLightBoxLightPurpleBackground
+      : palette.custom.highLightBoxLightPurpleBackground,
+};
+
+export const highlightBoxEyeletTextColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.highLightBoxPurpleText
+      : palette.custom.highLightBoxPurpleText,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.highLightBoxPurpleText
+      : palette.custom.highLightBoxPurpleText,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.highLightBoxPurpleText
+      : palette.custom.highLightBoxPurpleText,
+};
+
+export const textSectionSubtitleColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.black : palette.custom.black,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.black : palette.custom.black,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.black : palette.custom.black,
+};
+
+export const textColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
+};
+
+export const extraTextColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.secondary,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.secondary,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.secondary,
+};
+
+export const grayLinkColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.grey[100] : palette.text.secondary,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.grey[100] : palette.text.secondary,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.grey[100] : palette.text.secondary,
+};
+
+export const switchButtonSelectedBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'light'
+      ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+      : palette.background.paper,
+  IO: ({ palette, theme }) =>
+    theme === 'light'
+      ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+      : palette.background.paper,
+  WALLET: ({ palette, theme }) =>
+    theme === 'light'
+      ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+      : palette.background.paper,
+};
+
+export const commonBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.backgroundColorDark
+      : palette.background.paper,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.backgroundColorDark
+      : palette.background.paper,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.backgroundColorDark
+      : palette.background.paper,
+};
+
+export const commonBackgroundColorAlternativeMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.backgroundColorDark
+      : palette.custom.backgroundColorDefault,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.backgroundColorDark
+      : palette.custom.backgroundColorDefault,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.backgroundColorDark
+      : palette.custom.backgroundColorDefault,
+};
+
+export const commonExtraBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.text.primary : palette.custom.primaryColorDark,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.text.primary : palette.custom.primaryColorDark,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.text.primary : palette.custom.primaryColorDark,
+};
+
+export const commonTextColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.primary,
+};
+
+export const commonTextAlternativeColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.primaryColorDark,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.primaryColorDark,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.primaryColorDark,
+};
+
+export const commonExtraTextColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.secondary,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.secondary,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.primary.contrastText : palette.text.secondary,
+};
+
+export const commonLinkColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.darkLinkColor,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.darkLinkColor,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.primary.contrastText
+      : palette.custom.darkLinkColor,
+};
+
+export const commonGrayLinkColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.grayLinkColor : palette.custom.black50,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.grayLinkColor : palette.custom.black50,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? palette.custom.grayLinkColor : palette.custom.black50,
+};
+
+export const switchMenuItemBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ theme }) =>
+    theme === 'dark' ? 'rgba(224, 242, 255, 0.7)' : 'rgba(224, 242, 255, 0.7)',
+  IO: ({ theme }) =>
+    theme === 'dark' ? 'rgba(224, 242, 255, 0.7)' : 'rgba(224, 242, 255, 0.7)',
+  WALLET: ({ theme }) =>
+    theme === 'dark' ? 'rgba(224, 242, 255, 0.7)' : 'rgba(224, 242, 255, 0.7)',
+};
+
+export const megaHeaderPrimaryColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.primaryColorDark
+      : palette.custom.primaryColorDark,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.primaryColorDark
+      : palette.custom.primaryColorDark,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.primaryColorDark
+      : palette.custom.primaryColorDark,
+};
+
+export const preFooterBackgroundColorColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark' ? '#031344' : palette.background.paper,
+  IO: ({ palette, theme }) =>
+    theme === 'dark' ? '#031344' : palette.background.paper,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark' ? '#031344' : palette.background.paper,
 };
 
 export const themeVariantMaps = {
@@ -399,6 +642,26 @@ export const themeVariantMaps = {
   heroCounterNumberColor: heroCounterNumberColorMap,
   bannerLinkTextColor: bannerLinkTextColorMap,
   borderColor: variantBorderColorMap,
+  chipTextColor: chipTextColorMap,
+  highlightBoxBackgroundColor: highlightBoxBackgroundColorMap,
+  highlightBoxEyeletBackgroundColor: highlightBoxEyeletBackgroundColorMap,
+  highlightBoxEyeletTextColor: highlightBoxEyeletTextColorMap,
+  textSectionSubtitleColor: textSectionSubtitleColorMap,
+  textColor: textColorMap,
+  extraTextColor: extraTextColorMap,
+  grayLinkColor: grayLinkColorMap,
+  switchButtonSelectedBackgroundColor: switchButtonSelectedBackgroundColorMap,
+  commonBackgroundColor: commonBackgroundColorMap,
+  commonBackgroundColorAlternative: commonBackgroundColorAlternativeMap,
+  commonExtraBackgroundColor: commonExtraBackgroundColorMap,
+  commonTextColor: commonTextColorMap,
+  commonTextAlternativeColor: commonTextAlternativeColorMap,
+  commonExtraTextColor: commonExtraTextColorMap,
+  commonLinkColor: commonLinkColorMap,
+  commonGrayLinkColor: commonGrayLinkColorMap,
+  switchMenuItemBackgroundColor: switchMenuItemBackgroundColorMap,
+  megaHeaderPrimaryColor: megaHeaderPrimaryColorMap,
+  preFooterBackgroundColorColor: preFooterBackgroundColorColorMap,
 };
 
 export const resolveThemeVariant = <T>(

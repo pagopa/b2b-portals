@@ -35,6 +35,7 @@ import {
 } from '../common/Common';
 import { usePathname } from 'next/navigation';
 import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
+import { resolveThemeVariant } from '../../theme';
 
 const MegaHeader = ({
   logo,
@@ -45,9 +46,20 @@ const MegaHeader = ({
   drawer,
   socialLinks,
   labels,
+  themeVariant,
 }: MegaHeaderProps) => {
   const pathname = usePathname();
   const { palette, ...theme } = useTheme();
+
+  const megaHeaderPrimaryColor = resolveThemeVariant<string>(
+    'megaHeaderPrimaryColor',
+    themeVariant,
+    {
+      palette,
+      theme: 'light',
+    },
+  );
+
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
@@ -411,13 +423,13 @@ const MegaHeader = ({
             onClick={handleMobileMenuToggle}
             sx={{
               display: { lg: 'none' },
-              color: palette.custom.primaryColorDark,
+              color: megaHeaderPrimaryColor,
             }}
           >
             {mobileMenuOpen ? (
-              <CloseIcon style={{ color: palette.custom.primaryColorDark }} />
+              <CloseIcon style={{ color: megaHeaderPrimaryColor }} />
             ) : (
-              <MenuIcon style={{ color: palette.custom.primaryColorDark }} />
+              <MenuIcon style={{ color: megaHeaderPrimaryColor }} />
             )}
           </IconButton>
         </Content>
@@ -467,7 +479,7 @@ const MegaHeader = ({
                         component='span'
                         {...(isActiveLink(menuItem) && {
                           fontWeight: 600,
-                          color: palette.custom.primaryColorDark,
+                          color: megaHeaderPrimaryColor,
                         })}
                       >
                         {menuItem.primary}
@@ -478,7 +490,7 @@ const MegaHeader = ({
                             dropdownOpen === `mobile${menuItem.primary}`
                               ? 'rotate(180deg)'
                               : 'rotate(0deg)',
-                          color: palette.custom.primaryColorDark,
+                          color: megaHeaderPrimaryColor,
                         }}
                       />
                     </Stack>
@@ -525,7 +537,7 @@ const MegaHeader = ({
                                     fontSize={14}
                                     {...(isActiveSubLink(item.href) && {
                                       fontWeight: 600,
-                                      color: palette.custom.primaryColorDark,
+                                      color: megaHeaderPrimaryColor,
                                     })}
                                   >
                                     {item.label}
@@ -687,6 +699,7 @@ const MegaHeader = ({
             {...(drawer.subtitle && { drawerMenuSubtitle: drawer.subtitle })}
             ctaCard={drawer.ctaCard}
             linkCards={drawer.linkCards}
+            themeVariant={themeVariant}
           />
         )}
       </Container>

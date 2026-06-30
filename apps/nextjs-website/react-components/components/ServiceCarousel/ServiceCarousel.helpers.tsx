@@ -12,48 +12,63 @@ import Image from 'next/image';
 import { ArrowForward, ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { resolveThemeVariant } from '../../theme';
 import { isValidExternalLink, LinkIcon } from '../common/Common';
+import { ThemeVariant } from '../../types/common/Common.types';
+
+interface CarouselDotsProps {
+  themeVariant: ThemeVariant;
+}
 
 // Style Carousel Dots (unfortunately react-slick doesn't offer an easy way)
 // Ignore TS error for position because we need to use !important
 // to overwrite react-slick's absolute positioning
 // @ts-ignore
-export const CarouselDots = styled(Box)(({ theme }) => ({
-  ul: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    gap: '.75rem',
-    padding: '0',
-    margin: '2rem 0 0 0',
-    li: {
-      width: '.5rem !important',
-      height: '.5rem !important',
-      margin: '0 !important',
-      button: {
-        width: '.5rem',
-        height: '.5rem',
-        borderRadius: '.5rem',
-        backgroundColor: theme.palette.grey[300],
-        padding: '0',
-        '::before': {
-          display: 'none',
+export const CarouselDots = styled(Box)<CarouselDotsProps>(({
+  theme,
+  themeVariant,
+}) => {
+  const actionColor = resolveThemeVariant<string>('actionColor', themeVariant, {
+    palette: theme.palette,
+    theme: 'light',
+  });
+
+  return {
+    ul: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      gap: '.75rem',
+      padding: '0',
+      margin: '2rem 0 0 0',
+      li: {
+        width: '.5rem !important',
+        height: '.5rem !important',
+        margin: '0 !important',
+        button: {
+          width: '.5rem',
+          height: '.5rem',
+          borderRadius: '.5rem',
+          backgroundColor: theme.palette.grey[300],
+          padding: '0',
+          '::before': {
+            display: 'none',
+          },
+          '&:focus': {
+            outline: `3px solid ${theme.palette.primary.main}`,
+            outlineOffset: `'2px'`,
+          },
         },
-        '&:focus': {
-          outline: `3px solid ${theme.palette.primary.main}`,
-          outlineOffset: `'2px'`,
+        '&.slick-active button': {
+          backgroundColor: `${actionColor} !important`,
         },
-      },
-      '&.slick-active button': {
-        backgroundColor: theme.palette.custom.blueIO[500] + ' !important',
       },
     },
-  },
-}));
+  };
+});
 
 export const ServiceCard = (
   card: ServiceCardProps,
-  themeVariant: 'SEND' | 'IO' | 'WALLET',
+  themeVariant: ThemeVariant,
   noLink = false,
 ) => {
   const { palette } = useTheme();
@@ -153,7 +168,7 @@ export const SliderArrowControl = ({
   direction: 'left' | 'right';
   action: (() => void) | undefined;
   ariaLabel: string;
-  themeVariant: 'SEND' | 'IO' | 'WALLET';
+  themeVariant: ThemeVariant;
 }) => {
   const { palette } = useTheme();
 

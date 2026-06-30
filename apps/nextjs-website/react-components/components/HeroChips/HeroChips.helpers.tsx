@@ -2,6 +2,7 @@ import { Stack, Chip } from '@mui/material';
 import { ChipProps } from '@react-components/types/HeroChips/HeroChips.types';
 import { useTheme } from '@mui/material/styles';
 import { resolveThemeVariant } from '../../theme';
+import { ThemeVariant } from '../../types/common/Common.types';
 
 export const ChipsBlock = ({
   chips,
@@ -12,7 +13,7 @@ export const ChipsBlock = ({
   chips: ReadonlyArray<ChipProps>;
   ariaLabelChips?: string;
   theme: 'light' | 'dark';
-  themeVariant: 'IO' | 'SEND' | 'WALLET';
+  themeVariant: ThemeVariant;
 }) => {
   const { palette } = useTheme();
   const ctx = { palette, theme };
@@ -35,7 +36,11 @@ export const ChipsBlock = ({
     ctx,
   );
 
-  const chipTextColor = palette.custom.chipsTextColor;
+  const chipTextColor = resolveThemeVariant<string>(
+    'chipTextColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Stack

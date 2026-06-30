@@ -5,54 +5,69 @@ import { FeatureStackItem } from './FeatureStackItem';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FeatureCarouselProps } from '../../types/Feature/Feature.types';
+import { ThemeVariant } from '../../types/common/Common.types';
+import { resolveThemeVariant } from '../../theme';
 
 interface CarouselDotsProps {
   mode: 'light' | 'dark';
+  themeVariant: ThemeVariant;
 }
 
-export const CarouselDots = styled((props: CarouselDotsProps & BoxProps) => (
-  <Box {...props} />
-))(({ theme, mode }) => ({
-  ul: {
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '.75rem',
-    padding: '0',
-    margin: '2rem 0 0 0',
-    li: {
-      width: '.5rem !important',
-      height: '.5rem !important',
-      margin: '0 !important',
-      button: {
-        width: '.5rem',
-        height: '.5rem',
-        borderRadius: '.5rem',
-        backgroundColor:
-          mode === 'light' ? theme.palette.grey[300] : alpha('#ffffff', 0.5),
-        padding: '0',
-        '::before': {
-          display: 'none',
+export const CarouselDots = styled(
+  ({ mode, themeVariant, ...props }: CarouselDotsProps & BoxProps) => (
+    <Box {...props} />
+  ),
+)(({ theme, mode, themeVariant }) => {
+  const ctx = { palette: theme.palette, theme: mode };
+
+  const actionColor = resolveThemeVariant<string>(
+    'actionColor',
+    themeVariant,
+    ctx,
+  );
+
+  return {
+    ul: {
+      display: 'flex',
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '.75rem',
+      padding: '0',
+      margin: '2rem 0 0 0',
+      li: {
+        width: '.5rem !important',
+        height: '.5rem !important',
+        margin: '0 !important',
+        button: {
+          width: '.5rem',
+          height: '.5rem',
+          borderRadius: '.5rem',
+          backgroundColor:
+            mode === 'light' ? theme.palette.grey[300] : alpha('#ffffff', 0.5),
+          padding: '0',
+          '::before': {
+            display: 'none',
+          },
+          '&:focus': {
+            outline:
+              mode === 'dark'
+                ? '#ffffff' + ' !important'
+                : `${actionColor} !important`,
+            outlineOffset: '2px',
+          },
         },
-        '&:focus': {
-          outline:
+        '&.slick-active button': {
+          backgroundColor:
             mode === 'dark'
               ? '#ffffff' + ' !important'
-              : theme.palette.custom.blueIO[500] + ' !important',
-          outlineOffset: `2px`,
+              : `${actionColor} !important`,
         },
       },
-      '&.slick-active button': {
-        backgroundColor:
-          mode === 'dark'
-            ? '#ffffff' + ' !important'
-            : theme.palette.custom.blueIO[500] + ' !important',
-      },
     },
-  },
-}));
+  };
+});
 
 const FeatureCarousel = ({
   items,
@@ -86,7 +101,7 @@ const FeatureCarousel = ({
         aria-roledescription='carousel'
         appendDots={(dots) => (
           <Box aria-label={labels.pagination} role='navigation'>
-            <CarouselDots mode={theme}>
+            <CarouselDots mode={theme} themeVariant={themeVariant}>
               <ul>{dots}</ul>
             </CarouselDots>
           </Box>

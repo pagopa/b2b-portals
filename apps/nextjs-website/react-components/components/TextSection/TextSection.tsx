@@ -15,6 +15,7 @@ import {
   BackgroundColor,
 } from '../common/Common.helpers';
 import { TextSectionProps } from '@react-components/types';
+import { resolveThemeVariant, ThemeContext } from '../../theme';
 
 const TextSection = ({
   eyelet,
@@ -23,11 +24,29 @@ const TextSection = ({
   body,
   link,
   sectionID,
+  themeVariant,
 }: TextSectionProps) => {
-  const textColor = TextColor('light');
-  const eyeletColor = ExtraTextColor('light');
-  const backgroundColor = BackgroundColor('light');
+  const textColor = TextColor('light', themeVariant);
+  const eyeletColor = ExtraTextColor('light', themeVariant);
+  const backgroundColor = BackgroundColor('light', themeVariant);
   const { palette } = useTheme();
+
+  const ctx: ThemeContext = {
+    palette,
+    theme: 'light',
+  };
+
+  const subtitleColor = resolveThemeVariant<string>(
+    'textSectionSubtitleColor',
+    themeVariant,
+    ctx,
+  );
+
+  const linkColor = resolveThemeVariant<string>(
+    'actionColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -74,7 +93,7 @@ const TextSection = ({
             sx={{
               fontSize: { xs: '18px', md: '18px' },
               fontWeight: 400,
-              color: palette.custom.black,
+              color: subtitleColor,
               mt: 2,
             }}
           >
@@ -111,16 +130,14 @@ const TextSection = ({
                   display: 'flex',
                   alignItems: 'center',
                   fontWeight: 'bold',
-                  color: palette.custom.primaryColorDark,
+                  color: linkColor,
                   fontSize: '16px',
                   '&:hover': {
                     textDecoration: 'underline',
                   },
                 }}
               >
-                <ArrowBackIcon
-                  sx={{ mr: 1, color: palette.custom.primaryColorDark }}
-                />
+                <ArrowBackIcon sx={{ mr: 1, color: linkColor }} />
                 {link.label}
               </Link>
             </Typography>

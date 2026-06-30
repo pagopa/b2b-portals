@@ -213,7 +213,9 @@ const makeMegaHeaderProps = (
   }: MegaHeaderData,
   locale: Locale,
   defaultLocale: Locale,
+  themeVariant: ThemeVariant,
 ): MegaHeaderProps => ({
+  themeVariant,
   ...(ctaButton && {
     ctaButton: {
       ...ctaButton,
@@ -320,6 +322,7 @@ const Header = ({
   defaultLocale,
   exclude,
   localizedLinks,
+  themeVariant,
   ...props
 }: HeaderData['data']['header'][0] & {
   locale: Locale;
@@ -353,14 +356,23 @@ const Header = ({
       return (
         <HeaderRC
           {...makeHeaderProps(
-            { ...props, defaultLocale, locale, localizedLinks, activeLocale },
+            {
+              ...props,
+              defaultLocale,
+              locale,
+              localizedLinks,
+              activeLocale,
+              themeVariant,
+            },
             pathname,
           )}
         />
       );
     case 'headers.mega-header':
       return (
-        <MegaHeaderRC {...makeMegaHeaderProps(props, locale, defaultLocale)} />
+        <MegaHeaderRC
+          {...makeMegaHeaderProps(props, locale, defaultLocale, themeVariant)}
+        />
       );
   }
 };

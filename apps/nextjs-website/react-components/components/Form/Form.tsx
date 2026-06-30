@@ -55,8 +55,8 @@ const Form = ({
   placeholderOrganization,
   labels,
 }: FormProps) => {
-  const textColor = TextColor(theme);
-  const graylinkColor = GrayLinkColor(theme);
+  const textColor = TextColor(theme, themeVariant);
+  const graylinkColor = GrayLinkColor(theme, themeVariant);
   const borderColor = theme === 'light' ? graylinkColor : 'white';
   const recaptchaRef = useRef<RECAPTCHA>(null);
   const { palette } = useTheme();
