@@ -1,4 +1,4 @@
-import { Theme } from '../common/Common.types';
+import { Theme, ThemeVariant } from '../common/Common.types';
 import { CtaButtonProps } from '../common/Common.types';
 
 export interface StoreButtonsProps {
@@ -15,9 +15,11 @@ export interface PreFooterProps extends PreFooterContentProps {
   readonly layout: 'left' | 'center';
   readonly excludeSlugs?: string[];
   readonly pressReleasesParentSlug?: string;
+  readonly themeVariant: ThemeVariant;
 }
 
 export interface PreFooterContentProps {
   readonly title: string;
   readonly theme: Theme;
+  readonly themeVariant: ThemeVariant;
 }

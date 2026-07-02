@@ -1,4 +1,4 @@
-import { CtaButtonProps } from '../common/Common.types';
+import { CtaButtonProps, ThemeVariant } from '../common/Common.types';
 import { HeaderSideDrawerProps } from '../Header/Header.types';
 
 export interface MegaMenuItem {
@@ -26,6 +26,7 @@ export interface MegaHeaderProps {
   mobileCtaButton?: CtaButtonProps;
   drawer?: HeaderSideDrawerProps;
   socialLinks?: HeaderSocialLink[];
+  themeVariant: ThemeVariant;
   labels: {
     news: string;
     openMenu: string;

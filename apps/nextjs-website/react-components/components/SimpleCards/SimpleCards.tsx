@@ -28,7 +28,7 @@ const SimpleCards = ({
     customBgColor ??
     resolveThemeVariant<string>('sectionBackgroundColor', themeVariant, ctx);
 
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const isCentered = textAlign === 'center';
   const isNone = textAlign === 'none';
   const editorialTextAlign = isCentered ? 'center' : 'left';

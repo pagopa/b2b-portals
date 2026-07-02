@@ -9,14 +9,15 @@ import { TextSectionProps } from '@react-components/types';
 const makeTextSectionProps = ({
   locale,
   defaultLocale,
+  themeVariant,
   eyelet,
   subtitle,
   body,
   title,
   link,
   ...rest
-}: TextSectionSection &
-  Omit<SiteWidePageData, 'themeVariant'>): TextSectionProps => ({
+}: TextSectionSection & SiteWidePageData): TextSectionProps => ({
+  themeVariant,
   ...(eyelet && { eyelet }),
   ...(subtitle && {
     subtitle: MarkdownRenderer({ markdown: subtitle, locale, defaultLocale }),
@@ -33,8 +34,8 @@ const makeTextSectionProps = ({
   ...rest,
 });
 
-const TextSection = (
-  props: TextSectionSection & Omit<SiteWidePageData, 'themeVariant'>,
-) => <TextSectionRC {...makeTextSectionProps(props)} />;
+const TextSection = (props: TextSectionSection & SiteWidePageData) => (
+  <TextSectionRC {...makeTextSectionProps(props)} />
+);
 
 export default TextSection;
