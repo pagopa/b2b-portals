@@ -32,6 +32,7 @@ const HomePage = () => {
   const [history, setHistory] = useState<Array<Workflow>>([]);
   const [prodDeploymentDescription, setProdDeploymentDescription] =
     useState<string>("");
+  const [descriptionInvalid, setDescriptionInvalid] = useState(false);
   const [loadingHistory, setLoadingHistory] = useState<
     "loading" | "planned" | "none"
   >("none");
@@ -219,7 +220,18 @@ const HomePage = () => {
     }
   }
 
-  async function triggerGithubActions() {
+  async function triggerGithubActions(e: any) {
+    const inputField = document.getElementsByName(
+      "prodDeploymentDescription",
+    )[0];
+    if (inputField) {
+      const isValid = (inputField as HTMLInputElement).checkValidity();
+      setDescriptionInvalid(!isValid);
+      if (!isValid) {
+        e.preventDefault();
+        return;
+      }
+    }
     setLoadingTriggerButton(true);
 
     try {
@@ -461,11 +473,19 @@ const HomePage = () => {
                     </Typography>
                     <TextInput
                       type="text"
+                      name="prodDeploymentDescription"
                       placeholder="Breve descrizione"
                       onChange={(e: any) =>
                         setProdDeploymentDescription(e.target.value)
                       }
+                      pattern="[A-Za-zÀ-ÖØ-öø-ÿ0-9 .,]*"
                     />
+                    {descriptionInvalid && (
+                      <Typography textColor="danger600">
+                        Sono consentiti solo lettere, numeri, spazi, punto e la
+                        virgola
+                      </Typography>
+                    )}
                   </Flex>
                 )}
               </Dialog.Body>

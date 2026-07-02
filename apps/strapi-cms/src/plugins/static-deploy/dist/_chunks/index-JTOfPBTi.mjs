@@ -17,11 +17,88 @@ const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
     );
   });
 };
-const strapi = {
-  displayName: "Deploy Static Site"
+const version = "0.0.0";
+const keywords = [];
+const type = "commonjs";
+const exports = {
+  "./package.json": "./package.json",
+  "./strapi-admin": {
+    types: "./dist/admin/src/index.d.ts",
+    source: "./admin/src/index.ts",
+    "import": "./dist/admin/index.mjs",
+    require: "./dist/admin/index.js",
+    "default": "./dist/admin/index.js"
+  },
+  "./strapi-server": {
+    types: "./dist/server/src/index.d.ts",
+    source: "./server/src/index.ts",
+    "import": "./dist/server/index.mjs",
+    require: "./dist/server/index.js",
+    "default": "./dist/server/index.js"
+  }
 };
+const files = [
+  "dist"
+];
+const scripts = {
+  build: "strapi-plugin build",
+  watch: "strapi-plugin watch",
+  "watch:link": "strapi-plugin watch:link",
+  verify: "strapi-plugin verify",
+  "test:ts:front": "run -T tsc -p admin/tsconfig.json",
+  "test:ts:back": "run -T tsc -p server/tsconfig.json"
+};
+const dependencies = {
+  "@strapi/design-system": "^2.0.0-rc.30",
+  "@strapi/icons": "^2.0.0-rc.30",
+  "react-intl": "^8.1.2"
+};
+const devDependencies = {
+  "@strapi/strapi": "^5.34.0",
+  "@strapi/sdk-plugin": "^5.4.0",
+  prettier: "^3.8.1",
+  react: "^18.3.1",
+  "react-dom": "^18.3.1",
+  "react-router-dom": "^6.30.3",
+  "styled-components": "^6.3.8",
+  "@types/react": "^19.2.10",
+  "@types/react-dom": "^19.2.3",
+  "@strapi/typescript-utils": "^5.34.0",
+  typescript: "^5.9.3"
+};
+const peerDependencies = {
+  "@strapi/strapi": "^5.34.0",
+  "@strapi/sdk-plugin": "^5.4.0",
+  react: "^18.3.1",
+  "react-dom": "^18.3.1",
+  "react-router-dom": "^6.30.3",
+  "styled-components": "^6.3.8"
+};
+const strapi = {
+  kind: "plugin",
+  name: "static-deploy",
+  displayName: "Deploy Static Site",
+  description: "Trigger Github workflows to build and deploy statically generated websites"
+};
+const name$1 = "static-deploy";
+const description = "Trigger Github workflows to build and deploy statically generated websites";
+const license = "MIT";
+const author = "Simone Salsi <simone.salsi@dgsspa.com>";
 const pluginPackage = {
-  strapi
+  version,
+  keywords,
+  type,
+  exports,
+  files,
+  scripts,
+  dependencies,
+  devDependencies,
+  peerDependencies,
+  strapi,
+  name: name$1,
+  description,
+  license,
+  author
 };
 const PLUGIN_ID = "static-deploy";
 const Initializer = ({ setPlugin }) => {
@@ -64,7 +141,7 @@ const index = {
         defaultMessage: name
       },
       Component: async () => {
-        const { App } = await import("./App-KhtY_O_S.mjs");
+        const { App } = await import("./App-DX_Sf9Il.mjs");
         return App;
       }
     });
