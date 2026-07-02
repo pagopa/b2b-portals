@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 import { resolveThemeVariant } from '../../theme';
+import { ThemeVariant } from '../../types/common/Common.types';
 
 export const TitleSubtitleBlock = ({
   title,
@@ -24,7 +25,7 @@ export const TitleSubtitleBlock = ({
   theme,
   themeVariant,
 }: PageSwitchBaseProps) => {
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
 
   const { palette } = useTheme();
 
@@ -137,6 +138,12 @@ const SplitButton = ({
     ctx,
   );
 
+  const menuItemBackgroundColor = resolveThemeVariant<string>(
+    'switchMenuItemBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
   return (
     <React.Fragment>
       <ButtonGroup
@@ -216,20 +223,19 @@ const SplitButton = ({
             sx={{
               backgroundColor:
                 button.id === selectedButton.id
-                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                  ? buttonBackgroundColor
                   : 'transparent',
               color: menuTextColor,
               '&:hover': {
-                backgroundColor:
-                  palette.custom.editorialSwitchButtonsBackgroundLightBlue,
+                backgroundColor: buttonBackgroundColor,
                 color: menuTextColor,
               },
               '&.Mui-selected': {
-                backgroundColor: 'rgba(224, 242, 255, 0.7)',
+                backgroundColor: menuItemBackgroundColor,
                 color: menuTextColor,
               },
               '&.Mui-selected:hover': {
-                backgroundColor: 'rgba(224, 242, 255, 0.7)',
+                backgroundColor: menuItemBackgroundColor,
                 color: menuTextColor,
               },
             }}
@@ -249,7 +255,7 @@ export const ButtonSwitchRowBlock = ({
   themeVariant,
   selectedButton,
 }: ButtonSwitchRowBlockProps & {
-  themeVariant: 'SEND' | 'IO' | 'WALLET';
+  themeVariant: ThemeVariant;
 }) => {
   const muiTheme = useTheme();
 

@@ -373,12 +373,14 @@ export const getButtonStyles = (
     ctx,
   );
 
+  const selectedBackgroundColor = resolveThemeVariant<string>(
+    'switchButtonSelectedBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
   return {
-    backgroundColor: isSelected
-      ? theme === 'light'
-        ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-        : palette.background.paper
-      : 'transparent',
+    backgroundColor: isSelected ? selectedBackgroundColor : 'transparent',
     color:
       theme === 'light'
         ? variantColor
@@ -387,10 +389,7 @@ export const getButtonStyles = (
           : palette.primary.contrastText,
     borderColor: theme === 'light' ? variantColor : palette.background.paper,
     '&:hover': {
-      backgroundColor:
-        theme === 'light'
-          ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
-          : palette.background.paper,
+      backgroundColor: selectedBackgroundColor,
       color: variantColor,
       borderColor: theme === 'light' ? variantColor : palette.background.paper,
     },

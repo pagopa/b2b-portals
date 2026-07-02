@@ -24,18 +24,20 @@ const Accordion = (props: AccordionProps) => {
     layout,
     textAlignment,
     sectionID,
-    customBgColor
+    customBgColor,
   } = props;
 
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
-  const backgroundColor = customBgColor ?? resolveThemeVariant<string>(
-    'sectionBackgroundAlternativeGrey',
-    themeVariant,
-    ctx,
-  );
+  const backgroundColor =
+    customBgColor ??
+    resolveThemeVariant<string>(
+      'sectionBackgroundAlternativeGrey',
+      themeVariant,
+      ctx,
+    );
 
   const linkColor = resolveThemeVariant<string>(
     'contentLinkColor',

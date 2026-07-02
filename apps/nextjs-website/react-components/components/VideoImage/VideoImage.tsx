@@ -38,7 +38,7 @@ const VideoImage = ({
     'play' | 'pause' | 'stop' | 'image'
   >(video ? 'stop' : 'image');
 
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const themeMUI = useTheme();
   const isMobileDevice = useMediaQuery(themeMUI.breakpoints.down('md'));
   const borderRadius = enableMargins ? '12px' : 0;

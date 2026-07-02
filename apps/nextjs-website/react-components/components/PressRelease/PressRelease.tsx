@@ -27,10 +27,10 @@ const PressRelease = (props: PressReleaseProps) => {
     themeVariant,
     theme,
   } = props;
-  const textColor = TextColor(theme);
-  const eyeletColor = ExtraTextColor(theme);
-  const backgroundColor = BackgroundColor(theme);
-  const backlinkColor = TextAlternativeColor(theme);
+  const textColor = TextColor(theme, themeVariant);
+  const eyeletColor = ExtraTextColor(theme, themeVariant);
+  const backgroundColor = BackgroundColor(theme, themeVariant);
+  const backlinkColor = TextAlternativeColor(theme, themeVariant);
   const [copyLinkSnackBarOpen, setCopyLinkSnackBarOpen] = useState(false);
 
   const ShareLink = () => {

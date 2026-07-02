@@ -1,4 +1,4 @@
-import { LinkProps } from '../common/Common.types';
+import { LinkProps, ThemeVariant } from '../common/Common.types';
 
 export interface TextSectionProps {
   title?: string;
@@ -7,4 +7,5 @@ export interface TextSectionProps {
   subtitle?: JSX.Element;
   link?: LinkProps;
   sectionID: string | null;
+  themeVariant: ThemeVariant;
 }

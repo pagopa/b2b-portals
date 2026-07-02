@@ -1,3 +1,5 @@
+import { ThemeVariant } from '../common/Common.types';
+
 export interface RowTextProps {
   title: string;
   titleTag?: 'h1' | 'h2';
@@ -5,4 +7,5 @@ export interface RowTextProps {
   body?: JSX.Element;
   layout: 'left' | 'center';
   sectionID: string | null;
+  themeVariant: ThemeVariant;
 }

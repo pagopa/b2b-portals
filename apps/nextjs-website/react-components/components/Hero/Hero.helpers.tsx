@@ -29,7 +29,7 @@ export const HeroTextContent = ({
   link,
   themeVariant,
 }: HeroTextProps) => {
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const muiTheme = useTheme();
   const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
   const { palette } = muiTheme;
