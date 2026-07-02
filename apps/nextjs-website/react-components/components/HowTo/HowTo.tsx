@@ -117,7 +117,7 @@ const HowTo = (props: HowToProps) => {
         </Box>
         {/** CTA button or link */}
         {ctaButton ? (
-          <Box sx={{ mt: 6 }}>
+          <Box sx={{ mt: 2 }}>
             {CtaButtons({
               ctaButtons: [ctaButton],
               theme,
