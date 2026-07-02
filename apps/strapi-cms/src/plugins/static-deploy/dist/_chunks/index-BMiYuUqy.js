@@ -142,7 +142,7 @@ const index = {
         defaultMessage: name
       },
       Component: async () => {
-        const { App } = await Promise.resolve().then(() => require("./App-Cid71PfY.js"));
+        const { App } = await Promise.resolve().then(() => require("./App-Cf2wqoHq.js"));
         return App;
       }
     });
