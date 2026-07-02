@@ -121,4 +121,14 @@ export default ({ env }: any) => ({
       s3_region: env('AWS_REGION', 'test-region'),
     }
   },
+  'csv-export': {
+    enabled: true,
+    resolve: './node_modules/strapi5-plugin-csv-export',
+    config: {
+      maxExportCount: 1000,
+      defaultFields: ['id', 'createdAt', 'updatedAt'],
+      delimiter: ',',
+      encoding: 'utf8',
+    },
+  },
 });
