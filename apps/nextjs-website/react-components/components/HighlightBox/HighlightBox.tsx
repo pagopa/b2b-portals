@@ -117,7 +117,7 @@ const HighlightBox = ({
                   color: buttonTextColor,
                   borderRadius: '4px',
                   fontSize: '16px',
-                  fontWeight: 700,
+                  fontWeight: 400,
                   '&.MuiButton-contained:hover': {
                     backgroundColor: buttonBackgroundHoverColor,
                     color: buttonTextColor,
