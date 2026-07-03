@@ -1,9 +1,9 @@
 import React from 'react';
 import { ColorItem, ColorPalette } from '@storybook/addon-docs';
-import { theme } from '../src/app/theme';
 import {
   AppThemeMode,
   resolveThemeVariant,
+  theme,
   themeVariantMaps,
 } from '../react-components/theme';
 import { ThemeVariant } from '../react-components/types/common/Common.types';
