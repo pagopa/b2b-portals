@@ -340,6 +340,18 @@ const HomePage = () => {
     }
   }, [showTriggerConfirmationPopup]);
 
+  const handleOnChangeDescription = (e: any) => {
+    setProdDeploymentDescription((prev) => {
+      const validation = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ._-]*$/;
+      const description = e.target.value;
+      if (!validation.test(description)) {
+        e.preventDefault();
+        e.target.value = prev;
+        return prev;
+      }
+      return description;
+    });
+  };
   return (
     <Main
       style={{
@@ -462,10 +474,11 @@ const HomePage = () => {
                     <TextInput
                       type="text"
                       placeholder="Breve descrizione"
-                      onChange={(e: any) =>
-                        setProdDeploymentDescription(e.target.value)
-                      }
+                      onChange={handleOnChangeDescription}
                     />
+                    <Typography fontSize="1.2rem">
+                      Il campo accetta solo numeri, lettere e i caratteri . - _
+                    </Typography>
                   </Flex>
                 )}
               </Dialog.Body>
