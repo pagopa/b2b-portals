@@ -342,7 +342,7 @@ const HomePage = () => {
 
   const handleOnChangeDescription = (e: any) => {
     setProdDeploymentDescription((prev) => {
-      const validation = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9 .,_-]*$/;
+      const validation = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9 ._-]*$/;
       const description = e.target.value;
       if (!validation.test(description)) {
         e.preventDefault();
@@ -477,8 +477,7 @@ const HomePage = () => {
                       onChange={handleOnChangeDescription}
                     />
                     <Typography fontSize="1.2rem">
-                      Il campo accetta solo numeri, lettere e i caratteri , . -
-                      _
+                      Il campo accetta solo numeri, lettere e i caratteri . - _
                     </Typography>
                   </Flex>
                 )}
