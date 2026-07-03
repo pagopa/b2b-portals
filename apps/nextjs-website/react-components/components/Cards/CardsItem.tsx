@@ -35,7 +35,6 @@ const CardsItem = ({
       component='li'
       sx={{
         display: 'flex',
-        minHeight: '200px',
         width: '100%',
         border: `1px solid ${borderColor}`,
         flex: { md: masonry ? '0 0 auto' : '1 1 0' },
@@ -51,14 +50,15 @@ const CardsItem = ({
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          minHeight: '200px',
           width: '100%',
         }}
       >
-        <Stack px={4} justifyContent='flex-start' alignItems='flex-start'>
-          <Box mb={2} color='primary.dark'>
-            {iconURL && <Image src={iconURL} alt='' height={40} width={40} />}
-          </Box>
+        <Stack justifyContent='flex-start' alignItems='flex-start'>
+          {iconURL && (
+            <Box mb={2} color='primary.dark'>
+              <Image src={iconURL} alt='' height={40} width={40} />
+            </Box>
+          )}
           {label && (
             <Typography
               mb={1}
