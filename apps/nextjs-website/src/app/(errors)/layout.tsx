@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@mui/material';
 import { ReactNode } from 'react';
-import { themeBase, themeExperimental } from '../theme';
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import PreHeader from '@/components/PreHeader';
@@ -9,6 +8,7 @@ import Footer from '@/components/Footer';
 import { getters, isPreviewMode } from '@/lib/api';
 import EmptyLayout from '@/components/EmptyLayout';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
+import { themeBase, themeExperimental } from '@react-components/theme';
 
 const { getSiteWideSEO, getPreHeaderProps, getHeaderProps, getFooterProps } =
   getters;
