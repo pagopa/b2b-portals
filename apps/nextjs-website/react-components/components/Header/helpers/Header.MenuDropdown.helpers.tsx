@@ -19,6 +19,7 @@ import {
   isValidExternalLink,
 } from '@react-components/components/common/Common';
 import { useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
   return {
@@ -87,6 +88,14 @@ export const MenuDropdown = (
   const hasLinks = items?.length;
 
   const itemsRef = useRef<Array<HTMLAnchorElement | null>>([]);
+  const pathname = usePathname();
+  const isCurrentLink = (url?: string) => {
+    if (url && url.indexOf('/') >= 0) {
+      const urlPathname = url.substring(url.indexOf('/'));
+      return pathname === urlPathname;
+    }
+    return false;
+  };
 
   const MenuItem = () => {
     const onDropdownClickFn = () => {
@@ -190,6 +199,9 @@ export const MenuDropdown = (
                       fontWeight: 600,
                       padding: 0,
                       m: 0,
+                      ...(isCurrentLink(item.href) && {
+                        textDecoration: 'underline',
+                      }),
                     }}
                     ref={(el) => {
                       itemsRef.current[index] = el;
