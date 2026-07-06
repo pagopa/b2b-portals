@@ -5,8 +5,8 @@
 import seo from "@strapi-community/plugin-seo/strapi-admin";
 import colorPicker from "@strapi/plugin-color-picker/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
+import collectionExporter from "strapi-plugin-collection-exporter/strapi-admin";
 import previewButton from "strapi-plugin-preview-button/strapi-admin";
-import csvExport from "../../node_modules/strapi5-plugin-csv-export/./dist/admin/index.mjs";
 import staticDeploy from "../../src/plugins/static-deploy/./dist/admin/index.mjs";
 import rollback from "../../src/plugins/rollback/./dist/admin/index.mjs";
 import { renderAdmin } from "@strapi/strapi/admin";
@@ -20,8 +20,8 @@ renderAdmin(document.getElementById("strapi"), {
     seo: seo,
     "color-picker": colorPicker,
     "users-permissions": usersPermissions,
+    "collection-exporter": collectionExporter,
     "preview-button": previewButton,
-    "csv-export": csvExport,
     "static-deploy": staticDeploy,
     rollback: rollback,
   },
