@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, IconButton, Link, Stack } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { HeaderProps } from '@react-components/types/Header/Header.types';
+import {
+  HeaderProps,
+  MenuDropdownProp,
+} from '@react-components/types/Header/Header.types';
 import { HeaderTitle } from './helpers/Header.HeaderTitle.helpers';
 import { Navigation } from './helpers/Header.Navigation.helpers';
 import menuIcon from '@react-components/assets/icons/icon-menu-white.svg';
@@ -34,14 +37,29 @@ const Header = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const hasScrolledRef = useRef(false);
 
-  const isCurrentLink = (url?: string) => {
-    if (url && url.indexOf('/') >= 0) {
-      const urlPathname = url.substring(url.indexOf('/'));
-      return pathname === urlPathname;
+  const isActiveSubLink = (href?: string): boolean => {
+    if (href) {
+      return pathname
+        ? pathname.split('/').slice(1).includes(href.replace('/', ''))
+        : false;
     }
     return false;
   };
+  const isCurrentLink = (menuItem: MenuDropdownProp): boolean => {
+    if (menuItem.href && menuItem.href.indexOf('/') >= 0) {
+      const urlPathname = menuItem.href.substring(menuItem.href.indexOf('/'));
+      if (pathname === urlPathname) {
+        console.log('here', menuItem.label);
+        return true;
+      }
+    }
 
+    return menuItem.items
+      ? menuItem.items
+          .map((sublinkGroup) => isActiveSubLink(sublinkGroup.href))
+          .reduce((acc, curr) => curr || acc)
+      : false;
+  };
   const openHeader = () => {
     setMenuOpen(true);
   };
@@ -193,7 +211,7 @@ const Header = ({
                   ...menu,
                   isOpen: openDropdownIndex === index,
                   onDropdownClick: () => handleDropdownToggle(index),
-                  active: isCurrentLink(menu.href),
+                  active: isCurrentLink(menu),
                 }))}
                 theme='dark'
                 isMobile={false}
@@ -207,7 +225,7 @@ const Header = ({
               onClose={closeHeader}
               labels={labels}
               anchor='left'
-              menu={menu.map((m) => ({ ...m, active: isCurrentLink(m.href) }))}
+              menu={menu.map((m) => ({ ...m, active: isCurrentLink(m) }))}
               theme='dark'
             />
           )}
