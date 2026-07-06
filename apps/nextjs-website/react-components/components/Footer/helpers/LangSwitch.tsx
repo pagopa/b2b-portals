@@ -32,10 +32,8 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
     <Stack
       display='flex'
       flexDirection='column'
-      aria-label={ariaLabels[activeLanguage.id]}
       alignItems={{ xs: 'center', sm: 'flex-start' }}
       width='100%'
-      role='menu'
     >
       <Button
         sx={{
@@ -54,7 +52,7 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
         variant='text'
         size='small'
         disableRipple
-        aria-label='lingua'
+        aria-label={ariaLabels[activeLanguage.id]}
         aria-haspopup='true'
         aria-expanded={menuOpen}
         onClick={toggleMenu}
