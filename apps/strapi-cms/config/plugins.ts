@@ -108,9 +108,6 @@ export default ({ env }: any) => ({
       ]
     }
   },
-  'collection-exporter': {
-    enabled: true,
-  },
   rollback: {
     enabled: true,
     resolve: './src/plugins/rollback',
