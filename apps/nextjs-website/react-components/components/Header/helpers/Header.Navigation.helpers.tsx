@@ -27,7 +27,6 @@ export const Navigation = ({
     >
       <Stack
         direction='row'
-        gap={5}
         alignItems='center'
         height='100%'
         component='ul'

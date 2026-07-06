@@ -158,7 +158,7 @@ const Header = ({
               alignItems='center'
               sx={{
                 height: '56px',
-                padding: '0px 32px',
+                padding: '0px 12px',
               }}
             >
               {logo && (

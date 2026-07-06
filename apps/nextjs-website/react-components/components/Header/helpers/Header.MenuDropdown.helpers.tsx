@@ -29,7 +29,8 @@ const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
       display: 'flex',
       alignItems: 'center',
       margin: 0,
-      padding: 0,
+      padding: '0 20px',
+      borderBottom: '3px solid transparent',
     },
     menuItem: {
       height: '100%',
@@ -146,9 +147,6 @@ export const MenuDropdown = (
       <Link
         sx={{
           color: '#ffffff',
-          ...(isCurrentLink(button.href) && {
-            textDecoration: 'underline',
-          }),
           '&:hover': {
             textDecoration: 'none',
           },
@@ -178,7 +176,15 @@ export const MenuDropdown = (
   };
 
   return (
-    <Stack sx={styles.menu} component='li'>
+    <Stack
+      sx={{
+        ...styles.menu,
+        ...(isCurrentLink(button.href) && {
+          borderBottomColor: '#ffffff',
+        }),
+      }}
+      component='li'
+    >
       <Box sx={styles.menuItem}>
         <MenuItem />
       </Box>
