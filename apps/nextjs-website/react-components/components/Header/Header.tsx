@@ -48,7 +48,7 @@ const Header = ({
   const isCurrentLink = (menuItem: MenuDropdownProp): boolean => {
     if (menuItem.href && menuItem.href.indexOf('/') >= 0) {
       const urlPathname = menuItem.href.substring(menuItem.href.indexOf('/'));
-      if (pathname === urlPathname && urlPathname !== '/') {
+      if (pathname === urlPathname) {
         console.log('here', menuItem.label);
         return true;
       }
