@@ -37,34 +37,29 @@ const Header = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const hasScrolledRef = useRef(false);
 
-  /*const isCurrentLink = (url?: string) => {
-    if (url && url.indexOf('/') >= 0) {
-      const urlPathname = url.substring(url.indexOf('/'));
-      return pathname === urlPathname;
-    }
-    return false;
-  };*/
-
   const isActiveSubLink = (href?: string): boolean => {
     if (href) {
-      console.log('sub', href);
-      console.log(
-        'subb',
-        pathname.split('/').slice(1).includes(href.replace('/', '')),
-      );
       return pathname
         ? pathname.split('/').slice(1).includes(href.replace('/', ''))
         : false;
     }
     return false;
   };
-  const isCurrentLink = (menuItem: MenuDropdownProp): boolean =>
-    menuItem.items
+  const isCurrentLink = (menuItem: MenuDropdownProp): boolean => {
+    if (menuItem.href && menuItem.href.indexOf('/') >= 0) {
+      const urlPathname = menuItem.href.substring(menuItem.href.indexOf('/'));
+      if (pathname === urlPathname && urlPathname !== '/') {
+        console.log('here', menuItem.label);
+        return true;
+      }
+    }
+
+    return menuItem.items
       ? menuItem.items
           .map((sublinkGroup) => isActiveSubLink(sublinkGroup.href))
           .reduce((acc, curr) => curr || acc)
       : false;
-
+  };
   const openHeader = () => {
     setMenuOpen(true);
   };
