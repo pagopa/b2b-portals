@@ -338,6 +338,7 @@ const VideoCodec = t.strict({
   fallback: t.string,
   playButtonLabel: t.string,
   pausedPlayButtonLabel: t.string,
+  previewImage: StrapiImageSchema,
 });
 
 const VideoImageSectionCodec = t.strict({
