@@ -102,7 +102,7 @@ const PreFooter = (props: PreFooterProps) => {
           <Box sx={styles.main(isSmallScreen, layout)}>
             <Typography
               variant='h6'
-              component='h2'
+              component='p'
               color={theme === 'dark' ? 'white' : 'black'}
               mb={isSmallScreen || layout === 'center' ? 2 : 'unset'}
               sx={{

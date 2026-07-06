@@ -10,10 +10,10 @@ import ConsentHandler from '@/components/ConsentHandler';
 import { getLocalizedSlugs } from '@/lib/localizedSlugs';
 import LocaleGuard from '@/components/LocaleGuard';
 import EmptyLayout from '@/components/EmptyLayout';
-import { themeExperimental, themeBase } from '../theme';
 import { CssBaseline } from '@mui/material';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 import LabelsProvider from '@/components/LabelsProvider';
+import { themeBase, themeExperimental } from '@react-components/theme';
 
 const {
   getSiteWideSEO,

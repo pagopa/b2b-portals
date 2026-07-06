@@ -2,7 +2,7 @@ import { ThemeVariant } from '../common/Common.types';
 
 export interface RowTextProps {
   title: string;
-  titleTag?: 'h1' | 'h2';
+  titleTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
   subtitle?: string;
   body?: JSX.Element;
   layout: 'left' | 'center';

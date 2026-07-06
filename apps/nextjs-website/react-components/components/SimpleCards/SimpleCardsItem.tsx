@@ -91,7 +91,7 @@ const SimpleCardsItem = ({
             fontWeight={700}
             color='text.primary'
             m={0}
-            lineHeight={1}
+            lineHeight={1.33}
           >
             {href ? (
               <Link
