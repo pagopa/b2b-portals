@@ -34,6 +34,14 @@ const Header = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const hasScrolledRef = useRef(false);
 
+  const isCurrentLink = (url?: string) => {
+    if (url && url.indexOf('/') >= 0) {
+      const urlPathname = url.substring(url.indexOf('/'));
+      return pathname === urlPathname;
+    }
+    return false;
+  };
+
   const openHeader = () => {
     setMenuOpen(true);
   };
@@ -158,7 +166,7 @@ const Header = ({
               alignItems='center'
               sx={{
                 height: '56px',
-                padding: '0px 32px',
+                padding: '0px 12px',
               }}
             >
               {logo && (
@@ -185,8 +193,7 @@ const Header = ({
                   ...menu,
                   isOpen: openDropdownIndex === index,
                   onDropdownClick: () => handleDropdownToggle(index),
-                  active:
-                    pathname === menu.href || pathname === '/' + menu.href,
+                  active: isCurrentLink(menu.href),
                 }))}
                 theme='dark'
                 isMobile={false}
@@ -200,7 +207,7 @@ const Header = ({
               onClose={closeHeader}
               labels={labels}
               anchor='left'
-              menu={menu}
+              menu={menu.map((m) => ({ ...m, active: isCurrentLink(m.href) }))}
               theme='dark'
             />
           )}

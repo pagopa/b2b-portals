@@ -178,6 +178,7 @@ export default function MobileNav({
                         fontWeight: 600,
                         px: 2,
                         color: '#0066CC',
+                        borderLeft: `3px solid ${item.active ? '#0066cc' : 'transparent'}`,
                       }}
                     >
                       <MenuItem

@@ -18,7 +18,6 @@ import {
   ExternalLinkIcon,
   isValidExternalLink,
 } from '@react-components/components/common/Common';
-import { usePathname } from 'next/navigation';
 import { useRef } from 'react';
 
 const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
@@ -29,7 +28,8 @@ const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
       display: 'flex',
       alignItems: 'center',
       margin: 0,
-      padding: 0,
+      padding: '0 20px',
+      borderBottom: `3px solid ${active ? '#ffffff' : 'transparent'}`,
     },
     menuItem: {
       height: '100%',
@@ -85,14 +85,6 @@ export const MenuDropdown = (
   const muiTheme = useTheme();
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
-  const pathname = usePathname();
-  const isCurrentLink = (url?: string) => {
-    if (url && url.indexOf('/') >= 0) {
-      const urlPathname = url.substring(url.indexOf('/'));
-      return pathname === urlPathname;
-    }
-    return false;
-  };
 
   const itemsRef = useRef<Array<HTMLAnchorElement | null>>([]);
 
@@ -146,9 +138,6 @@ export const MenuDropdown = (
       <Link
         sx={{
           color: '#ffffff',
-          ...(isCurrentLink(button.href) && {
-            textDecoration: 'underline',
-          }),
           '&:hover': {
             textDecoration: 'none',
           },
@@ -197,9 +186,6 @@ export const MenuDropdown = (
                     underline='none'
                     sx={{
                       color: '#5C6F82',
-                      ...(isCurrentLink(item.href) && {
-                        textDecoration: 'underline',
-                      }),
                       fontSize: '1em',
                       fontWeight: 600,
                       padding: 0,
