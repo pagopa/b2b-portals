@@ -210,7 +210,7 @@ export default function MobileNav({
                               '&:focus': {
                                 backgroundColor: 'transparent',
                               },
-                              ...(isCurrentLink(item.href) && {
+                              ...(isCurrentLink(subItem.href) && {
                                 textDecoration: 'underline',
                               }),
                             }}
