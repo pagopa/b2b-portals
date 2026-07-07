@@ -148,11 +148,13 @@ export const SliderArrowControl = ({
   direction,
   action,
   ariaLabel,
+  ariaControls,
   themeVariant,
 }: {
   direction: 'left' | 'right';
   action: (() => void) | undefined;
   ariaLabel: string;
+  ariaControls?: string;
   themeVariant: 'SEND' | 'IO' | 'WALLET';
 }) => {
   const { palette } = useTheme();
@@ -188,6 +190,7 @@ export const SliderArrowControl = ({
       disableRipple={true}
       onClick={action}
       aria-label={ariaLabel}
+      {...(ariaControls && { 'aria-controls': ariaControls })}
     >
       {direction === 'right' ? <ChevronRight /> : <ChevronLeft />}
     </IconButton>
