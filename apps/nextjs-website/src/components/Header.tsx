@@ -120,6 +120,8 @@ const makeHeaderProps = (
     productName,
     menu,
     logo,
+    logoMobile,
+    logoDesktopCompressed,
     topBarHeaderLogo,
     topBarHeaderTitle,
     topBarHeaderTitleMobile,
@@ -156,6 +158,28 @@ const makeHeaderProps = (
         defaultLocale,
       }),
       alt: logo.alternativeText ?? productName,
+    },
+  }),
+  ...(logoMobile && {
+    logoMobile: {
+      src: logoMobile.url,
+      href: LocalizeURL({
+        URL: '/',
+        locale,
+        defaultLocale,
+      }),
+      alt: logoMobile.alternativeText ?? productName,
+    },
+  }),
+  ...(logoDesktopCompressed && {
+    logoDesktopCompressed: {
+      src: logoDesktopCompressed.url,
+      href: LocalizeURL({
+        URL: '/',
+        locale,
+        defaultLocale,
+      }),
+      alt: logoDesktopCompressed.alternativeText ?? productName,
     },
   }),
   ...(topBarHeaderLogo && {

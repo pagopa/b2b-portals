@@ -17,6 +17,8 @@ const Header = ({
   product,
   menu,
   logo,
+  logoMobile,
+  logoDesktopCompressed,
   topBarHeaderLogo,
   topBarHeaderTitle,
   topBarHeaderTitleMobile,
@@ -156,7 +158,8 @@ const Header = ({
           >
             <HeaderTitle
               product={product}
-              {...(logo ? { logo } : {})}
+              {...(logo && { logo })}
+              {...(logoMobile && { logoMobile })}
               isMobile={isMobile}
               themeVariant={themeVariant}
               theme={theme}
@@ -187,7 +190,7 @@ const Header = ({
                 padding: '0px 12px',
               }}
             >
-              {logo && (
+              {logoDesktopCompressed && (
                 <Link
                   href={product.href}
                   p={'0 !important'}
@@ -201,7 +204,11 @@ const Header = ({
                   }}
                   {...(!isScrolled && { inert: '' })}
                 >
-                  <img src={logo.src} alt='Homepage' height={32} />
+                  <img
+                    src={logoDesktopCompressed.src}
+                    alt='Homepage'
+                    height={32}
+                  />
                 </Link>
               )}
 

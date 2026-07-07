@@ -78,6 +78,8 @@ const SideDrawerCodec = t.strict({
 const StandardHeaderCodec = t.strict({
   __component: t.literal('headers.standard-header'),
   logo: StrapiImageSchema,
+  logoMobile: StrapiImageSchema,
+  logoDesktopCompressed: StrapiImageSchema,
   productName: t.string,
   menu: MenuCodec,
   topBarHeaderLogo: StrapiImageSchema,
@@ -144,6 +146,8 @@ export const getHeader = ({
 &populate[14]=header.topBarHeaderTitle
 &populate[15]=header.topBarHeaderTitleMobile
 &populate[16]=exclude
+&populate[17]=header.logoDesktopCompressed
+&populate[18]=header.logoMobile
       `,
       {
         method: 'GET',

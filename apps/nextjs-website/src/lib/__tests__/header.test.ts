@@ -9,6 +9,8 @@ import {
 const standardHeaderBaseFields: Omit<StandardHeaderData, 'menu'> = {
   __component: 'headers.standard-header',
   logo: null,
+  logoMobile: null,
+  logoDesktopCompressed: null,
   productName: 'Demo',
   topBarHeaderLogo: null,
   topBarHeaderLink: '#',

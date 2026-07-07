@@ -23,6 +23,16 @@ HeaderFull.args = {
     alt: 'Logo',
     href: '#',
   },
+  logoMobile: {
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/logo_sedn_6453fc30cd.svg',
+    alt: 'Logo Mobile',
+    href: '#',
+  },
+  logoDesktopCompressed: {
+    src: 'https://d2mk0pc4ejgxx6.cloudfront.net/logo_sedn_6453fc30cd.svg',
+    alt: 'Logo Desktop Compressed',
+    href: '#',
+  },
   topBarHeaderLogo: {
     src: 'https://d2mk0pc4ejgxx6.cloudfront.net/logo_sedn_6453fc30cd.svg',
     alt: 'Logo',

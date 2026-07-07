@@ -37,6 +37,20 @@
     },
     "topBarHeaderLink": {
       "type": "string"
+    },
+    "logoMobile": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "logoDesktopCompressed": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }
