@@ -50,6 +50,7 @@ declare module '@mui/material/styles' {
       readonly chipsBackgroundColorDarkHover: string;
       readonly chipsTextColor: string;
       readonly borderColor: string;
+      readonly accordionItemBorderRadius: string;
       readonly outlineColor: string;
       readonly walletOutlineColor: string;
       readonly ctaContainedLightHoverColor: string;
@@ -131,6 +132,7 @@ const themeStyles = {
       chipsBackgroundColorDarkHover: '#ebebf54d',
       chipsTextColor: '#ffffff',
       borderColor: '#E8EBF1',
+      accordionItemBorderRadius: '16px',
       outlineColor: '#0073e6',
       walletOutlineColor: '#0066CC',
       ctaContainedLightHoverColor: '#D9D9D9',

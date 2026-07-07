@@ -34,7 +34,7 @@ const Accordion = (props: AccordionProps) => {
   const backgroundColor =
     customBgColor ??
     resolveThemeVariant<string>(
-      'sectionBackgroundAlternativeGrey',
+      'sectionBackgroundColor',
       themeVariant,
       ctx,
     );
