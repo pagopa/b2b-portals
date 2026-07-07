@@ -20,5 +20,8 @@
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
     "turbo": "^1.10.13"
+  },
+  "overrides": {
+    "@strapi/design-system": "2.2.0"
   }
 }
