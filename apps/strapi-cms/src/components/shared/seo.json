@@ -7,45 +7,37 @@
   "options": {},
   "attributes": {
     "metaTitle": {
-      "required": true,
       "type": "string",
-      "maxLength": 60
+      "maxLength": 60,
+      "required": true
     },
     "metaDescription": {
       "type": "string",
-      "required": true,
+      "minLength": 50,
       "maxLength": 160,
-      "minLength": 50
-    },
-    "metaImage": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "openGraph": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.open-graph"
+      "required": true
     },
     "keywords": {
       "type": "text",
       "regex": "[^,]+"
     },
-    "metaRobots": {
-      "type": "string",
-      "regex": "[^,]+"
-    },
-    "metaViewport": {
-      "type": "string"
-    },
     "canonicalURL": {
       "type": "string"
     },
+    "ogTitle": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "ogDescription": {
+      "type": "string",
+      "maxLength": 160
+    },
     "structuredData": {
       "type": "json"
+    },
+    "hideFromSearchEngines": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
