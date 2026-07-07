@@ -7,6 +7,8 @@
 license.txt
 exports
 *.cache
+
+.strapi
 build
 .strapi-updater.json
 
