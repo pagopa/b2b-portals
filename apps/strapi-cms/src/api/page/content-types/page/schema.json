@@ -80,17 +80,6 @@
       ],
       "required": true,
       "min": 1
-    },
-    "seo": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "shared.seo",
-      "repeatable": false,
-      "required": true
     }
   }
 }

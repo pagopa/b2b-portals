@@ -2,44 +2,50 @@
   "collectionName": "components_shared_seos",
   "info": {
     "displayName": "seo",
-    "icon": "search",
-    "description": ""
+    "icon": "search"
   },
   "options": {},
   "attributes": {
     "metaTitle": {
+      "required": true,
       "type": "string",
-      "maxLength": 60,
-      "required": true
+      "maxLength": 60
     },
     "metaDescription": {
       "type": "string",
-      "minLength": 50,
+      "required": true,
       "maxLength": 160,
-      "required": true
+      "minLength": 50
+    },
+    "metaImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "openGraph": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.open-graph"
     },
     "keywords": {
       "type": "text",
       "regex": "[^,]+"
     },
+    "metaRobots": {
+      "type": "string",
+      "regex": "[^,]+"
+    },
+    "metaViewport": {
+      "type": "string"
+    },
     "canonicalURL": {
       "type": "string"
     },
-    "ogTitle": {
-      "type": "string",
-      "maxLength": 60,
-      "required": false
-    },
-    "ogDescription": {
-      "type": "string",
-      "maxLength": 160
-    },
     "structuredData": {
       "type": "json"
-    },
-    "hideFromSearchEngines": {
-      "type": "boolean",
-      "default": false
     }
   }
 }

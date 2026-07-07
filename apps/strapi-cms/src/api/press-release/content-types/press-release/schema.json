@@ -17,57 +17,46 @@
   },
   "attributes": {
     "name": {
+      "type": "string",
+      "private": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "type": "string",
-      "required": true,
-      "private": true
+      "required": true
     },
     "slug": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
       "type": "string",
-      "required": true,
-      "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-      "unique": true
-    },
-    "seo": {
-      "type": "component",
-      "repeatable": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "shared.seo",
-      "required": true
+      "required": true,
+      "unique": true,
+      "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
     "pressRelease": {
       "type": "component",
-      "repeatable": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
       "component": "sections.press-release",
+      "repeatable": false,
       "required": true
     },
     "credits": {
       "type": "component",
-      "repeatable": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "sections.text-and-image"
+      "component": "sections.text-and-image",
+      "repeatable": false
     }
   }
 }
