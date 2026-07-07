@@ -57,6 +57,17 @@
       },
       "component": "sections.text-and-image",
       "repeatable": false
+    },
+    "seo": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.seo",
+      "repeatable": false,
+      "required": true
     }
   }
 }
