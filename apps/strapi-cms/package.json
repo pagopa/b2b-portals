@@ -4,7 +4,7 @@
   "version": "0.2.0",
   "scripts": {
     "configdump": "strapi config:dump -f viewconfig.json -p",
-    "configrestore": "strapi config:restore -f viewconfig.json -s merge",
+    "configrestore": "strapi config:restore -f viewconfig.json",
     "clean": "shx rm -rf dist/",
     "generate": "strapi ts:generate-types",
     "precompile": "npm run clean && npm run generate",
