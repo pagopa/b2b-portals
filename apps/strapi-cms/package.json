@@ -4,7 +4,7 @@
   "version": "0.2.0",
   "scripts": {
     "configdump": "strapi config:dump -f viewconfig.json -p",
-    "configrestore": "strapi config:restore -f viewconfig.json -s merge",
+    "configrestore": "strapi config:restore -f viewconfig.json",
     "clean": "shx rm -rf dist/",
     "generate": "strapi ts:generate-types",
     "precompile": "npm run clean && npm run generate",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@strapi-community/plugin-seo": "2.1.1",
-    "@strapi/plugin-color-picker": "^5.45.0",
+    "@strapi/plugin-color-picker": "5.45.0",
     "@strapi/plugin-users-permissions": "5.42.0",
     "@strapi/provider-email-amazon-ses": "5.42.0",
     "@strapi/provider-upload-aws-s3": "5.42.0",
@@ -36,7 +36,8 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
-    "strapi-plugin-preview-button": "^3.0.0",
+    "strapi-plugin-collection-exporter": "1.2.0",
+    "strapi-plugin-preview-button": "3.0.0",
     "styled-components": "^6.0.0"
   },
   "strapi": {

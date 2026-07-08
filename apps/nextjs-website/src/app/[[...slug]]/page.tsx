@@ -187,14 +187,6 @@ const Page = async ({ params }: PageParams) => {
   const pressReleasePages = await getPressReleasePages(locale);
   return (
     <main>
-      {pageProps.seo.structuredData && (
-        <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(pageProps.seo.structuredData),
-          }}
-        />
-      )}
       {WebSiteStructuredData && (
         <script
           type='application/ld+json'
