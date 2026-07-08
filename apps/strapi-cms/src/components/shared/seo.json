@@ -2,8 +2,7 @@
   "collectionName": "components_shared_seos",
   "info": {
     "displayName": "seo",
-    "icon": "search",
-    "description": ""
+    "icon": "search"
   },
   "options": {},
   "attributes": {
@@ -27,15 +26,11 @@
     },
     "ogTitle": {
       "type": "string",
-      "maxLength": 60,
-      "required": false
+      "maxLength": 60
     },
     "ogDescription": {
       "type": "string",
       "maxLength": 160
-    },
-    "structuredData": {
-      "type": "json"
     },
     "hideFromSearchEngines": {
       "type": "boolean",

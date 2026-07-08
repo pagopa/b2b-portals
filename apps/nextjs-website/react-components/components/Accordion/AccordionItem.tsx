@@ -107,12 +107,16 @@ export const AccordionItem: React.FC<
       onChange={handleChange}
       id={itemID}
       sx={{
+        '&.Mui-expanded, &:first-of-type, &:last-of-type': {
+          borderRadius,
+        },
         '&:before': {
           display: 'none',
         },
         backgroundColor,
         border: `1px solid ${borderColor}`,
         borderRadius,
+        overflow: 'hidden',
       }}
     >
       <AccordionSummary
