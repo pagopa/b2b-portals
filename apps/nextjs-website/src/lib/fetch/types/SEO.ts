@@ -7,7 +7,6 @@ export const PageSEOCodec = t.strict({
   canonicalURL: t.union([t.string, t.null]),
   ogTitle: t.union([t.string, t.null]),
   ogDescription: t.union([t.string, t.null]),
-  structuredData: t.union([t.UnknownRecord, t.null]), // Currently implementing structuredData as any object to avoid being too restrictive before feedback or real-world use
   hideFromSearchEngines: t.union([t.boolean, t.null]),
 });
 

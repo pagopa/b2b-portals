@@ -1,5 +1,6 @@
 .tmp/
 .cache/
+.strapi/
 .git/
 build/
 node_modules/

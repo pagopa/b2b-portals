@@ -49,7 +49,6 @@ const pressReleasesResponse = {
         canonicalURL: null,
         ogTitle: null,
         ogDescription: null,
-        structuredData: null,
         hideFromSearchEngines: null,
       },
       pressRelease: {
@@ -84,7 +83,6 @@ const pressReleasesResponse = {
         canonicalURL: null,
         ogTitle: null,
         ogDescription: null,
-        structuredData: null,
         hideFromSearchEngines: null,
       },
       pressRelease: {
@@ -157,7 +155,6 @@ describe('getNavigation', () => {
             canonicalURL: null,
             ogTitle: null,
             ogDescription: null,
-            structuredData: null,
             hideFromSearchEngines: null,
           },
           pressRelease: {
@@ -188,7 +185,6 @@ describe('getNavigation', () => {
             canonicalURL: null,
             ogTitle: null,
             ogDescription: null,
-            structuredData: null,
             hideFromSearchEngines: null,
           },
           pressRelease: {
