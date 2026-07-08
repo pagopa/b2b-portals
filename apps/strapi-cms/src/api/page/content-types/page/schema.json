@@ -91,6 +91,14 @@
       "component": "shared.seo",
       "repeatable": false,
       "required": true
+    },
+    "struct": {
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }
