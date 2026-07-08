@@ -73,7 +73,7 @@ export const renderTextSection = ({
   theme: 'light' | 'dark';
   themeVariant: 'SEND' | 'IO' | 'WALLET';
 }) => {
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const { palette } = useTheme();
   const ctx = { palette, theme };
 

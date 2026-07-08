@@ -19,8 +19,38 @@ const HighlightBox = ({
     theme: 'light',
   };
 
+  const backgroundColor = resolveThemeVariant<string>(
+    'highlightBoxBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
+  const eyeletBackgroundColor = resolveThemeVariant<string>(
+    'highlightBoxEyeletBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
+  const eyeletTextColor = resolveThemeVariant<string>(
+    'highlightBoxEyeletTextColor',
+    themeVariant,
+    ctx,
+  );
+
   const buttonBackgroundColor = resolveThemeVariant<string>(
     'ctaContainedBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
+  const buttonBackgroundHoverColor = resolveThemeVariant<string>(
+    'ctaContainedBackgroundHoverColor',
+    themeVariant,
+    ctx,
+  );
+
+  const buttonTextColor = resolveThemeVariant<string>(
+    'ctaContainedTextColor',
     themeVariant,
     ctx,
   );
@@ -32,7 +62,7 @@ const HighlightBox = ({
         justifyContent: { xs: 'start', md: 'start' },
         borderRadius: '24px',
         padding: { xs: '48px', md: '0 48px' },
-        backgroundColor: palette.custom.highLightBoxLightGreenBackground,
+        backgroundColor,
       }}
       {...(sectionID && { sectionID })}
     >
@@ -45,9 +75,8 @@ const HighlightBox = ({
                 component='p'
                 color='textSecondary'
                 sx={{
-                  backgroundColor:
-                    palette.custom.highLightBoxLightPurpleBackground,
-                  color: palette.custom.highLightBoxPurpleText,
+                  backgroundColor: eyeletBackgroundColor,
+                  color: eyeletTextColor,
                   borderRadius: '100px',
                   display: 'inline-block',
                   px: 2,
@@ -85,9 +114,14 @@ const HighlightBox = ({
                   px: 3,
                   py: 1,
                   backgroundColor: buttonBackgroundColor,
+                  color: buttonTextColor,
                   borderRadius: '4px',
                   fontSize: '16px',
-                  fontWeight: 700,
+                  fontWeight: 400,
+                  '&.MuiButton-contained:hover': {
+                    backgroundColor: buttonBackgroundHoverColor,
+                    color: buttonTextColor,
+                  },
                 }}
                 {...(isValidExternalLink(link.href) && {
                   target: '_blank',

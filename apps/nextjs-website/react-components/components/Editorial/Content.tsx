@@ -18,8 +18,8 @@ export const Content = ({
 }: EditorialContentProps) => {
   const muiTheme = useTheme();
   const { breakpoints, palette } = muiTheme;
-  const eyeletColor = ExtraTextColor(theme);
-  const textColor = TextColor(theme);
+  const eyeletColor = ExtraTextColor(theme, themeVariant);
+  const textColor = TextColor(theme, themeVariant);
   const maxTextWidth = breakpoints.values.md / 2;
   const ctx = { palette, theme };
 

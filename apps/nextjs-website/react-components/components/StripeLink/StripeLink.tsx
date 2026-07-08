@@ -15,7 +15,7 @@ const StripeLink = ({
   link,
   sectionID,
 }: StripeLinkProps) => {
-  const textColorWhiteOnly = TextColor('dark');
+  const textColorWhiteOnly = TextColor('dark', themeVariant);
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
@@ -33,6 +33,12 @@ const StripeLink = ({
 
   const buttonTextColor = resolveThemeVariant<string>(
     'stripeLinkButtonTextColor',
+    themeVariant,
+    ctx,
+  );
+
+  const buttonBackgroundHoverColor = resolveThemeVariant<string>(
+    'stripeLinkButtonBackgroundHoverColor',
     themeVariant,
     ctx,
   );
@@ -93,8 +99,9 @@ const StripeLink = ({
             sx={{
               backgroundColor: buttonBackgroundColor,
               color: buttonTextColor,
-              '&:hover': {
-                backgroundColor: buttonBackgroundColor,
+              '&.MuiButton-contained:hover': {
+                backgroundColor: buttonBackgroundHoverColor,
+                color: buttonTextColor,
               },
             }}
             endIcon={

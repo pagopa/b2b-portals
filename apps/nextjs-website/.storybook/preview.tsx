@@ -6,7 +6,7 @@ import {
   INITIAL_VIEWPORTS,
   MINIMAL_VIEWPORTS,
 } from '@storybook/addon-viewport';
-import { theme } from '../src/app/theme';
+import { theme } from '../react-components/theme';
 import './styles.css';
 
 const preview: Preview = {

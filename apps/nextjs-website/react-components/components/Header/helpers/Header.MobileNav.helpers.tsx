@@ -22,6 +22,7 @@ import {
 } from '@react-components/components/common/Common';
 import chevronBlueIcon from '@react-components/assets/icons/icon-chevron-blue.svg';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const drawerStyles = {
   '& .MuiDrawer-paperAnchorLeft': {
@@ -53,6 +54,15 @@ export default function MobileNav({
 
   const toggleMenu = (index: number) => {
     setOpenMenuIndex(openMenuIndex === index ? null : index);
+  };
+
+  const pathname = usePathname();
+  const isCurrentLink = (url?: string) => {
+    if (url && url.indexOf('/') >= 0) {
+      const urlPathname = url.substring(url.indexOf('/'));
+      return pathname === urlPathname;
+    }
+    return false;
   };
 
   const MenuItem = ({
@@ -178,6 +188,7 @@ export default function MobileNav({
                         fontWeight: 600,
                         px: 2,
                         color: '#0066CC',
+                        borderLeft: `3px solid ${item.active ? '#0066cc' : 'transparent'}`,
                       }}
                     >
                       <MenuItem
@@ -199,6 +210,9 @@ export default function MobileNav({
                               '&:focus': {
                                 backgroundColor: 'transparent',
                               },
+                              ...(isCurrentLink(subItem.href) && {
+                                textDecoration: 'underline',
+                              }),
                             }}
                           >
                             <Link

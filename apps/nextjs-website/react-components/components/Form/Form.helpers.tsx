@@ -1,5 +1,5 @@
 import {
-  Grid,
+  Box,
   FormControlLabel,
   Radio,
   Typography,
@@ -14,64 +14,61 @@ export const FormCategories = ({
   selectedCategory,
   handleRadioChange,
   categoryError,
+  radioGroupTitleId,
 }: FormCategoryProps) => {
   return (
     <>
       <RadioGroup
         value={selectedCategory}
         onChange={handleRadioChange}
+        aria-labelledby={radioGroupTitleId}
         aria-invalid={categoryError ? 'true' : 'false'}
         aria-errormessage={categoryError ? 'category-error-text' : undefined}
         aria-describedby={categoryError ? 'category-error-text' : undefined}
       >
         {categories.map(({ categoryID, label, additionalInfo }) => (
-          <Grid
+          <FormControlLabel
             key={categoryID}
-            container
-            alignItems='center'
-            justifyContent='space-between'
+            value={categoryID}
+            htmlFor={`radio-${categoryID}`}
+            labelPlacement='start'
+            label={
+              <Box sx={{ textAlign: 'left' }}>
+                <Typography
+                  variant='body1'
+                  fontWeight='bold'
+                  sx={{ color: textColor }}
+                >
+                  {label}
+                </Typography>
+                {additionalInfo && (
+                  <Typography variant='body2' sx={{ color: textColor }}>
+                    {additionalInfo}
+                  </Typography>
+                )}
+              </Box>
+            }
+            control={
+              <Radio
+                id={`radio-${categoryID}`}
+                sx={{
+                  color: textColor,
+                  '&.Mui-checked': { color: textColor },
+                  '&:hover': { bgcolor: 'transparent' },
+                }}
+              />
+            }
             sx={{
+              width: '100%',
+              justifyContent: 'space-between',
               borderBottom: `1px solid ${borderColor}`,
               zIndex: 3,
-              display: 'flex',
-              flexWrap: 'nowrap',
+              ml: 0,
+              pr: 0,
+              mr: 0,
+              py: 1,
             }}
-          >
-            <Grid item sx={{ textAlign: 'left' }}>
-              <Typography
-                variant='body1'
-                fontWeight='bold'
-                sx={{ color: textColor }}
-              >
-                {label}
-              </Typography>
-              {additionalInfo && (
-                <Typography variant='body2' sx={{ color: textColor }}>
-                  {additionalInfo}
-                </Typography>
-              )}
-            </Grid>
-
-            <Grid item sx={{ textAlign: 'right' }}>
-              <FormControlLabel
-                id={categoryID}
-                value={categoryID}
-                control={
-                  <Radio
-                    sx={{
-                      color: textColor,
-                      '&.Mui-checked': { color: textColor },
-                      '&:hover': { bgcolor: 'transparent' },
-                    }}
-                    inputProps={{ 'aria-label': label }}
-                  />
-                }
-                label=''
-                labelPlacement='end'
-                sx={{ ml: 0, pr: 0, mr: 0, py: 1 }}
-              />
-            </Grid>
-          </Grid>
+          />
         ))}
       </RadioGroup>
 

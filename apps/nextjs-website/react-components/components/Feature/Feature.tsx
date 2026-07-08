@@ -31,7 +31,7 @@ const Feature = ({
     return step;
   };
 
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
 
   const backgroundColorAlternative =
     customBgColor ??

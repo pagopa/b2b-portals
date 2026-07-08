@@ -4,9 +4,13 @@ import { PreFooterContentProps } from '@react-components/types/PreFooter/PreFoot
 import { Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 
-export const Content = ({ title, theme }: PreFooterContentProps) => {
+export const Content = ({
+  title,
+  theme,
+  themeVariant,
+}: PreFooterContentProps) => {
   const { spacing } = useTheme();
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
 
   return (
     <Stack textAlign='center' gap={spacing(2)} sx={{ flex: 1 }}>

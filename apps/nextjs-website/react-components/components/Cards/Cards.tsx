@@ -29,7 +29,7 @@ const Cards = ({
     customBgColor ??
     resolveThemeVariant<string>('sectionBackgroundColor', themeVariant, ctx);
 
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const flexDirection = textPosition === 'right' ? 'row-reverse' : 'row';
   const isCenter = textPosition === 'center';
   const isNone = textPosition === 'none';

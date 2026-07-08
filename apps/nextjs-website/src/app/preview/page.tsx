@@ -12,8 +12,8 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { isExperimentalThemeVariant } from '@react-components/components/common/Common.helpers';
 import Script from 'next/script';
-import { themeBase, themeExperimental } from '../theme';
 import LabelsProvider from '@/components/LabelsProvider';
+import { themeBase, themeExperimental } from '@react-components/theme';
 
 const {
   getAllPageIDs,

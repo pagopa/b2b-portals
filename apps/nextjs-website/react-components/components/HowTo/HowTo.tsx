@@ -27,7 +27,7 @@ const HowTo = (props: HowToProps) => {
     ctaButton,
   } = props;
 
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const { palette, spacing } = useTheme();
   const ctx = { palette, theme };
 
@@ -117,7 +117,7 @@ const HowTo = (props: HowToProps) => {
         </Box>
         {/** CTA button or link */}
         {ctaButton ? (
-          <Box sx={{ mt: 6 }}>
+          <Box sx={{ mt: 2 }}>
             {CtaButtons({
               ctaButtons: [ctaButton],
               theme,

@@ -10,8 +10,8 @@ export const FeatureStackItem = ({
   theme,
   themeVariant,
 }: FeatureStackItemProps) => {
-  const textColor = TextColor(theme);
-  const textColorAlternative = TextAlternativeColor(theme);
+  const textColor = TextColor(theme, themeVariant);
+  const textColorAlternative = TextAlternativeColor(theme, themeVariant);
 
   return (
     <Stack

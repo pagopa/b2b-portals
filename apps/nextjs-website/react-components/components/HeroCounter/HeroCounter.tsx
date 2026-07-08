@@ -27,7 +27,7 @@ const HeroCounter = ({
     ctx,
   );
 
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
 
   const linkColor = resolveThemeVariant<string>(
     'contentLinkColor',

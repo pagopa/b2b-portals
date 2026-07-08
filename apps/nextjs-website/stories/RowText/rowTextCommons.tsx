@@ -20,4 +20,5 @@ export const defaultPropsLight: Partial<RowTextProps> = {
     </p>
   ),
   layout: 'center',
+  themeVariant: 'IO',
 };

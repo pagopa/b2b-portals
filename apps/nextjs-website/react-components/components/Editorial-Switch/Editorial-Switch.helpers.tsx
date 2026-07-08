@@ -25,7 +25,7 @@ export const TitleSubtitleBlock = ({
   titleTag,
   themeVariant,
 }: EditorialSwitchBaseProps) => {
-  const textColor = TextColor(theme);
+  const textColor = TextColor(theme, themeVariant);
   const { palette } = useTheme();
   const ctx = { palette, theme };
 
@@ -133,6 +133,12 @@ const SplitButton = ({
     ctx,
   );
 
+  const menuItemBackgroundColor = resolveThemeVariant<string>(
+    'switchMenuItemBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
   return (
     <React.Fragment>
       <ButtonGroup
@@ -206,15 +212,15 @@ const SplitButton = ({
             sx={{
               backgroundColor:
                 button.id === selectedButton.id
-                  ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                  ? buttonBackgroundColor
                   : 'transparent',
               color: menuTextColor,
               '&.Mui-selected': {
-                backgroundColor: 'rgba(224, 242, 255, 0.7)',
+                backgroundColor: menuItemBackgroundColor,
                 color: menuTextColor,
               },
               '&:hover': {
-                backgroundColor: 'rgba(224, 242, 255, 0.7)',
+                backgroundColor: menuItemBackgroundColor,
                 color: menuTextColor,
               },
             }}
@@ -265,7 +271,7 @@ export const ButtonSwitchRowBlock = ({
             width: { md: 'auto', xs: '100%' },
             backgroundColor:
               button.id === selectedButton.id
-                ? palette.custom.editorialSwitchButtonsBackgroundLightBlue
+                ? buttonBackgroundColor
                 : 'transparent',
             color: buttonTextColor,
             '&:hover': {
