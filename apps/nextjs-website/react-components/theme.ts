@@ -246,6 +246,24 @@ export const variantSectionBackgroundAlternativeGreyMap: ThemeVariantMap<string>
         : palette.custom.backgroundColorLightGrey,
   };
 
+export const accordionBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette }) => palette.custom.backgroundColorLight,
+  IO: ({ palette }) => palette.custom.backgroundColorLight,
+  WALLET: ({ palette }) => palette.custom.backgroundColorLight,
+};
+
+export const accordionItemBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette }) => palette.custom.backgroundColorLight,
+  IO: ({ palette }) => palette.custom.backgroundColorLight,
+  WALLET: ({ palette }) => palette.custom.backgroundColorLight,
+};
+
+export const accordionItemBorderRadiusMap: ThemeVariantMap<string> = {
+  SEND: ({ palette }) => palette.custom.accordionItemBorderRadius,
+  IO: ({ palette }) => palette.custom.accordionItemBorderRadius,
+  WALLET: ({ palette }) => palette.custom.accordionItemBorderRadius,
+};
+
 export const variantExtraBackgroundColorMap: ThemeVariantMap<string> = {
   SEND: ({ palette, theme }) =>
     theme === 'dark'
@@ -785,6 +803,9 @@ export const themeVariantMaps = {
   contentLinkColor: variantContentLinkColorMap,
   sectionBackgroundColor: variantSectionBackgroundColorMap,
   sectionBackgroundAlternativeGrey: variantSectionBackgroundAlternativeGreyMap,
+  accordionBackgroundColor: accordionBackgroundColorMap,
+  accordionItemBackgroundColor: accordionItemBackgroundColorMap,
+  accordionItemBorderRadius: accordionItemBorderRadiusMap,
   extraBackgroundColor: variantExtraBackgroundColorMap,
   focusOutlineColor: variantFocusOutlineColorMap,
   focusBackgroundColor: variantFocusBackgroundColorMap,

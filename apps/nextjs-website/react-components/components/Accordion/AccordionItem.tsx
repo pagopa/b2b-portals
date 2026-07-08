@@ -37,8 +37,20 @@ export const AccordionItem: React.FC<
     ctx,
   );
 
+  const backgroundColor = resolveThemeVariant<string>(
+    'accordionItemBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
   const borderColor = resolveThemeVariant<string>(
     'borderColor',
+    themeVariant,
+    ctx,
+  );
+
+  const borderRadius = resolveThemeVariant<string>(
+    'accordionItemBorderRadius',
     themeVariant,
     ctx,
   );
@@ -98,9 +110,9 @@ export const AccordionItem: React.FC<
         '&:before': {
           display: 'none',
         },
-        backgroundColor: palette.custom.backgroundColorLight,
+        backgroundColor,
         border: `1px solid ${borderColor}`,
-        borderRadius: palette.custom.accordionItemBorderRadius,
+        borderRadius,
       }}
     >
       <AccordionSummary
