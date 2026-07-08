@@ -29,5 +29,4 @@ export const mockPageSEOData: PageSEO = {
   metaTitle: 'mock',
   ogDescription: 'mock',
   ogTitle: 'mock',
-  structuredData: null,
 };
