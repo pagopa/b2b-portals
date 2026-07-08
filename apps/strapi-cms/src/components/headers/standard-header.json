@@ -45,7 +45,7 @@
         "images"
       ]
     },
-    "logoDesktopCompressed": {
+    "logoDesktopCollapsed": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [

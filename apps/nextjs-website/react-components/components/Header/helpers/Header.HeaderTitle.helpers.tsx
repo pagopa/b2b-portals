@@ -17,7 +17,7 @@ export const HeaderTitle = ({
     themeVariant,
     { palette, theme },
   );
-
+  const activeLogo = isMobile ? logoMobile : logo;
   return (
     <Stack
       direction='row'
@@ -35,11 +35,13 @@ export const HeaderTitle = ({
         href={productHref}
         sx={{ textDecoration: 'none' }}
       >
-        {!isMobile && logo && <img src={logo.src} alt={logo.alt} height={56} />}
-        {isMobile && logoMobile && (
-          <img src={logoMobile.src} alt={logoMobile.alt} height={40} />
-        )}
-        {((!logo && !isMobile) || (!logoMobile && isMobile)) && (
+        {activeLogo ? (
+          <img
+            src={activeLogo.src}
+            alt={activeLogo.alt}
+            height={isMobile ? 40 : 56}
+          />
+        ) : (
           <Typography variant='h4' component={'span'} color={textColor}>
             {productName}
           </Typography>

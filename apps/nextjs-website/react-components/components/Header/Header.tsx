@@ -18,7 +18,7 @@ const Header = ({
   menu,
   logo,
   logoMobile,
-  logoDesktopCompressed,
+  logoDesktopCollapsed,
   topBarHeaderLogo,
   topBarHeaderTitle,
   topBarHeaderTitleMobile,
@@ -190,7 +190,7 @@ const Header = ({
                 padding: '0px 12px',
               }}
             >
-              {logoDesktopCompressed && (
+              {logoDesktopCollapsed && (
                 <Link
                   href={product.href}
                   p={'0 !important'}
@@ -205,7 +205,7 @@ const Header = ({
                   {...(!isScrolled && { inert: '' })}
                 >
                   <img
-                    src={logoDesktopCompressed.src}
+                    src={logoDesktopCollapsed.src}
                     alt='Homepage'
                     height={32}
                   />
