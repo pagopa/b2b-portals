@@ -81,7 +81,14 @@ export interface HeaderTitleProps {
   logo?: {
     src: string;
     alt: string;
-    href: string;
+  };
+  logoMobile?: {
+    src: string;
+    alt: string;
+  };
+  logoDesktopCollapsed?: {
+    src: string;
+    alt: string;
   };
   themeVariant: ThemeVariant;
   theme: Theme;
