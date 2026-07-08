@@ -3,4 +3,4 @@
 "strapi-cms": patch
 ---
 
-Add previewImage
+Add previewImage field support to VideoImage
