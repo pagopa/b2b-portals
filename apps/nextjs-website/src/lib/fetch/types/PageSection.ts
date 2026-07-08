@@ -338,6 +338,7 @@ const VideoCodec = t.strict({
   fallback: t.string,
   playButtonLabel: t.string,
   pausedPlayButtonLabel: t.string,
+  previewImage: StrapiImageSchema,
 });
 
 const VideoImageSectionCodec = t.strict({
@@ -372,7 +373,7 @@ const HeroChipsSectionCodec = t.strict({
 
 const ServiceCardCodec = t.strict({
   title: t.string,
-  link: LinkCodec,
+  link: t.union([LinkCodec, t.null]),
   image: StrapiImageSchema,
   description: t.union([t.string, t.null]),
 });

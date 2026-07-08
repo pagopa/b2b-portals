@@ -66,11 +66,13 @@ const makeServiceCarouselProps = ({
   labels: serviceCarouselLabels[locale],
   cards: cards.map((card) => ({
     title: card.title,
-    link: {
-      label: card.link.label,
-      href: LocalizeURL({ URL: card.link.href, locale, defaultLocale }),
-      ...(card.link.ariaLabel && { ariaLabel: card.link.ariaLabel }),
-    },
+    ...(card.link && {
+      link: {
+        label: card.link.label,
+        href: LocalizeURL({ URL: card.link.href, locale, defaultLocale }),
+        ...(card.link.ariaLabel && { ariaLabel: card.link.ariaLabel }),
+      },
+    }),
     ...(card.description && { description: card.description }),
     ...(card.image && {
       image: {

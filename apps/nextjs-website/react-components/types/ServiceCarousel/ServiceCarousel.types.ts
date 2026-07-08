@@ -2,7 +2,7 @@ import { LinkProps, SectionProps } from '../common/Common.types';
 
 export interface ServiceCardProps {
   readonly title: string;
-  readonly link: LinkProps;
+  readonly link?: LinkProps;
   readonly description?: string;
   readonly image?: {
     readonly url: string;

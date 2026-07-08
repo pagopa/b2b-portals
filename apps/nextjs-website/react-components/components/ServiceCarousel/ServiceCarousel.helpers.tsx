@@ -109,7 +109,7 @@ export const ServiceCard = (
         {card.description && (
           <Typography variant='body2'>{card.description}</Typography>
         )}
-        {!noLink && (
+        {!noLink && card.link && (
           <Typography mt='auto' color={linkColor} fontWeight={700}>
             <Link
               href={card.link.href}
