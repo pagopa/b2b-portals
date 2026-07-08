@@ -19,7 +19,6 @@ const pressReleases: PressReleases = {
         canonicalURL: null,
         ogTitle: null,
         ogDescription: null,
-        structuredData: null,
         hideFromSearchEngines: null,
       },
       pressRelease: {
@@ -50,7 +49,6 @@ const pressReleases: PressReleases = {
         canonicalURL: null,
         ogTitle: null,
         ogDescription: null,
-        structuredData: null,
         hideFromSearchEngines: null,
       },
       pressRelease: {
