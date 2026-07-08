@@ -120,6 +120,8 @@ const makeHeaderProps = (
     productName,
     menu,
     logo,
+    logoMobile,
+    logoDesktopCollapsed,
     topBarHeaderLogo,
     topBarHeaderTitle,
     topBarHeaderTitleMobile,
@@ -150,12 +152,19 @@ const makeHeaderProps = (
   ...(logo && {
     logo: {
       src: logo.url,
-      href: LocalizeURL({
-        URL: '/',
-        locale,
-        defaultLocale,
-      }),
       alt: logo.alternativeText ?? productName,
+    },
+  }),
+  ...(logoMobile && {
+    logoMobile: {
+      src: logoMobile.url,
+      alt: logoMobile.alternativeText ?? productName,
+    },
+  }),
+  ...(logoDesktopCollapsed && {
+    logoDesktopCollapsed: {
+      src: logoDesktopCollapsed.url,
+      alt: logoDesktopCollapsed.alternativeText ?? productName,
     },
   }),
   ...(topBarHeaderLogo && {
