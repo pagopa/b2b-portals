@@ -44,6 +44,8 @@ const headerResponse: HeaderData = {
           links: [],
         },
         logo: null,
+        logoDesktopCollapsed: null,
+        logoMobile: null,
         productName: 'SEND',
         topBarHeaderTitle: 'Title bar top',
         topBarHeaderTitleMobile: 'Title bar top mobile',
@@ -84,6 +86,8 @@ describe('getHeader', () => {
 &populate[14]=header.topBarHeaderTitle
 &populate[15]=header.topBarHeaderTitleMobile
 &populate[16]=exclude
+&populate[17]=header.logoDesktopCollapsed
+&populate[18]=header.logoMobile
       `,
       {
         method: 'GET',
