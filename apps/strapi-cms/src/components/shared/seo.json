@@ -35,6 +35,9 @@
     "hideFromSearchEngines": {
       "type": "boolean",
       "default": false
+    },
+    "structured": {
+      "type": "json"
     }
   }
 }
