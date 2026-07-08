@@ -32,9 +32,6 @@
       "type": "string",
       "maxLength": 160
     },
-    "structuredData": {
-      "type": "json"
-    },
     "hideFromSearchEngines": {
       "type": "boolean",
       "default": false
