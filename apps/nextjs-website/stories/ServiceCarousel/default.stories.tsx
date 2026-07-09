@@ -160,3 +160,15 @@ ServiceCarouselMinimum.args = {
     slideOf: (index, total) => `Slide ${index + 1} di ${total}`,
   },
 };
+
+export const ServiceCarouselWithoutCardLink: StoryFn<typeof ServiceCarousel> =
+  ServiceCarouselTemplate.bind({});
+ServiceCarouselWithoutCardLink.args = {
+  ...ServiceCarouselMinimum.args,
+  cards: [
+    {
+      title: 'Card senza link',
+    },
+    ...(ServiceCarouselMinimum.args.cards ?? []),
+  ],
+};
