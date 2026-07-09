@@ -28,6 +28,7 @@ const makeVideoImageProps = ({
     (video.src || video.srcURL) && {
       video: {
         src: video.src?.url ?? video.srcURL!,
+        ...(video.previewImage && { poster: video.previewImage.url }),
         autoplay: video.autoplay,
         loop: video.loop,
         showControls: video.showControls,

@@ -249,6 +249,7 @@ const VideoImage = ({
               onClick: pause,
               isMobileDevice,
               borderRadius,
+              ...(video!.poster && { poster: video!.poster }),
             })}
           </Box>
         )}
