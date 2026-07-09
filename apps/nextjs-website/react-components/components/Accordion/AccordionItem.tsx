@@ -116,7 +116,6 @@ export const AccordionItem: React.FC<
         backgroundColor,
         border: `1px solid ${borderColor}`,
         borderRadius,
-        overflow: 'hidden',
       }}
     >
       <AccordionSummary
