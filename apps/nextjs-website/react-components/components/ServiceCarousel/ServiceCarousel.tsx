@@ -18,36 +18,52 @@ const ServiceCarousel = ({
   themeVariant,
 }: ServiceCarouselProps) => {
   const sliderRef = useRef<Slider>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { palette } = useTheme();
   const [currentCard, setCurrentCard] = useState(cards[0]);
   const liveRegionRef = useRef<HTMLDivElement>();
   const titleId = useId();
   const carouselId = useId();
 
-  const resetAttributes = () => {
-    const slickList = document.querySelector('.slick-list');
-    if (!slickList) return;
-    const listRect = slickList.getBoundingClientRect();
-    if (listRect.width === 0) return;
+  const computeSlideVisibility = () =>
+    Array.from(document.querySelectorAll<HTMLElement>('.slick-slide')).map(
+      (el) => ({
+        el,
+        isVisible: el.classList.contains('slick-active'),
+        link: el.querySelector<HTMLElement>('article a'),
+      }),
+    );
 
-    document.querySelectorAll('.slick-slide').forEach((slide) => {
-      const el = slide as HTMLElement;
-      const slideRect = el.getBoundingClientRect();
-      const isVisible =
-        !el.classList.contains('slick-cloned') &&
-        slideRect.right > listRect.left &&
-        slideRect.left < listRect.right;
-
-      if (isVisible && el.getAttribute('aria-hidden') !== null) {
+  const applySlideVisibility = (
+    slides: ReturnType<typeof computeSlideVisibility>,
+  ) => {
+    slides.forEach(({ el, isVisible, link }) => {
+      if (isVisible) {
         el.removeAttribute('aria-hidden');
-        const link = el.querySelector('article a');
-        if (link) link.removeAttribute('tabindex');
-      } else if (!isVisible && el.getAttribute('aria-hidden') !== 'true') {
+        link?.removeAttribute('tabindex');
+      } else {
         el.setAttribute('aria-hidden', 'true');
-        const link = el.querySelector('article a');
-        if (link) link.setAttribute('tabindex', '-1');
+        link?.setAttribute('tabindex', '-1');
       }
     });
+  };
+
+  const syncSlideAccessibility = () => {
+    const slides = computeSlideVisibility();
+    const activeLink = slides.find((slide) => slide.isVisible)?.link ?? null;
+    const active = document.activeElement;
+    if (
+      activeLink &&
+      active !== activeLink &&
+      containerRef.current?.contains(active)
+    ) {
+      // Move focus off the slide that's about to become aria-hidden
+      // before applying the attributes below, so focus is never left
+      // inside a hidden container. onReInit fires on every slide change
+      // (not just mount/resize), so this must run there too.
+      activeLink.focus();
+    }
+    applySlideVisibility(slides);
   };
 
   return (
@@ -87,6 +103,7 @@ const ServiceCarousel = ({
 
       {/* Cards */}
       <Stack
+        ref={containerRef}
         gap={{ xs: 3.375, sm: 3.375, md: 4 }}
         width={'100%'}
         sx={{ position: 'relative' }}
@@ -111,8 +128,8 @@ const ServiceCarousel = ({
                 setCurrentCard(cards[next]);
               }
             }}
-            onReInit={resetAttributes}
-            afterChange={resetAttributes}
+            onReInit={syncSlideAccessibility}
+            afterChange={syncSlideAccessibility}
             speed={500}
             variableWidth={true}
             infinite={true}
