@@ -30,6 +30,7 @@ export const renderVideo = ({
   onVideoEnd,
   isMobileDevice,
   borderRadius,
+  poster,
 }: RenderVideoProps) => {
   const mobileStyle = {
     overflow: 'hidden',
@@ -62,6 +63,7 @@ export const renderVideo = ({
 
   return (
     <video
+      poster={poster}
       onContextMenu={(e) => e.preventDefault()}
       playsInline
       ref={videoRef}

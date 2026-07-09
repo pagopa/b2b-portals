@@ -24,6 +24,7 @@ export interface VideoImageProps
     fallback: string;
     playButtonLabel: string;
     pausedPlayButtonLabel: string;
+    poster?: string;
   };
   enableMargins?: boolean;
 }
@@ -53,6 +54,7 @@ export interface RenderVideoProps {
   onClick?: () => void;
   isMobileDevice: boolean;
   borderRadius?: string | number;
+  poster?: string;
 }
 
 export interface RenderImageProps {

@@ -43,6 +43,14 @@
     "pausedPlayButtonLabel": {
       "type": "string",
       "required": true
+    },
+    "previewImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }
