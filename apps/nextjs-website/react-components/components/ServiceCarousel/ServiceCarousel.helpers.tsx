@@ -109,7 +109,7 @@ export const ServiceCard = (
         {card.description && (
           <Typography variant='body2'>{card.description}</Typography>
         )}
-        {!noLink && (
+        {!noLink && card.link && (
           <Typography mt='auto' color={linkColor} fontWeight={700}>
             <Link
               href={card.link.href}
@@ -163,11 +163,13 @@ export const SliderArrowControl = ({
   direction,
   action,
   ariaLabel,
+  ariaControls,
   themeVariant,
 }: {
   direction: 'left' | 'right';
   action: (() => void) | undefined;
   ariaLabel: string;
+  ariaControls?: string;
   themeVariant: ThemeVariant;
 }) => {
   const { palette } = useTheme();
@@ -203,6 +205,7 @@ export const SliderArrowControl = ({
       disableRipple={true}
       onClick={action}
       aria-label={ariaLabel}
+      {...(ariaControls && { 'aria-controls': ariaControls })}
     >
       {direction === 'right' ? <ChevronRight /> : <ChevronLeft />}
     </IconButton>
