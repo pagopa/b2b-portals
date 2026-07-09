@@ -6,6 +6,7 @@ import { resolveThemeVariant } from '@react-components/theme';
 export const HeaderTitle = ({
   product: { name: productName, href: productHref },
   logo,
+  logoMobile,
   theme,
   themeVariant,
   isMobile,
@@ -16,7 +17,7 @@ export const HeaderTitle = ({
     themeVariant,
     { palette, theme },
   );
-
+  const activeLogo = isMobile ? logoMobile : logo;
   return (
     <Stack
       direction='row'
@@ -34,10 +35,17 @@ export const HeaderTitle = ({
         href={productHref}
         sx={{ textDecoration: 'none' }}
       >
-        {logo && <img src={logo.src} alt={logo.alt} height={isMobile ? 40 : 56} />}
-        <Typography variant='h4' component={'span'} color={textColor}>
-          {productName}
-        </Typography>
+        {activeLogo ? (
+          <img
+            src={activeLogo.src}
+            alt={activeLogo.alt}
+            height={isMobile ? 40 : 56}
+          />
+        ) : (
+          <Typography variant='h4' component={'span'} color={textColor}>
+            {productName}
+          </Typography>
+        )}
       </Stack>
     </Stack>
   );
