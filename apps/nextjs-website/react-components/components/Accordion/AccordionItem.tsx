@@ -37,6 +37,24 @@ export const AccordionItem: React.FC<
     ctx,
   );
 
+  const backgroundColor = resolveThemeVariant<string>(
+    'accordionItemBackgroundColor',
+    themeVariant,
+    ctx,
+  );
+
+  const borderColor = resolveThemeVariant<string>(
+    'borderColor',
+    themeVariant,
+    ctx,
+  );
+
+  const borderRadius = resolveThemeVariant<string>(
+    'accordionItemBorderRadius',
+    themeVariant,
+    ctx,
+  );
+
   const appendItemIDToURLHash = () => {
     if (!itemID) return;
     window.location.hash = itemID;
@@ -84,13 +102,20 @@ export const AccordionItem: React.FC<
   return (
     <MUIAccordion
       disableGutters
+      elevation={0}
       expanded={expanded}
       onChange={handleChange}
       id={itemID}
       sx={{
+        '&.Mui-expanded, &:first-of-type, &:last-of-type': {
+          borderRadius,
+        },
         '&:before': {
           display: 'none',
         },
+        backgroundColor,
+        border: `1px solid ${borderColor}`,
+        borderRadius,
       }}
     >
       <AccordionSummary

@@ -50,6 +50,7 @@ declare module '@mui/material/styles' {
       readonly chipsBackgroundColorDarkHover: string;
       readonly chipsTextColor: string;
       readonly borderColor: string;
+      readonly accordionItemBorderRadius: string;
       readonly outlineColor: string;
       readonly walletOutlineColor: string;
       readonly ctaContainedLightHoverColor: string;
@@ -131,6 +132,7 @@ const themeStyles = {
       chipsBackgroundColorDarkHover: '#ebebf54d',
       chipsTextColor: '#ffffff',
       borderColor: '#E8EBF1',
+      accordionItemBorderRadius: '16px',
       outlineColor: '#0073e6',
       walletOutlineColor: '#0066CC',
       ctaContainedLightHoverColor: '#D9D9D9',
@@ -243,6 +245,24 @@ export const variantSectionBackgroundAlternativeGreyMap: ThemeVariantMap<string>
         ? palette.custom.walletBackgroundColorDark
         : palette.custom.backgroundColorLightGrey,
   };
+
+export const accordionBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette }) => palette.custom.backgroundColorLight,
+  IO: ({ palette }) => palette.custom.backgroundColorLight,
+  WALLET: ({ palette }) => palette.custom.backgroundColorLight,
+};
+
+export const accordionItemBackgroundColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette }) => palette.custom.backgroundColorLight,
+  IO: ({ palette }) => palette.custom.backgroundColorLight,
+  WALLET: ({ palette }) => palette.custom.backgroundColorLight,
+};
+
+export const accordionItemBorderRadiusMap: ThemeVariantMap<string> = {
+  SEND: ({ palette }) => palette.custom.accordionItemBorderRadius,
+  IO: ({ palette }) => palette.custom.accordionItemBorderRadius,
+  WALLET: ({ palette }) => palette.custom.accordionItemBorderRadius,
+};
 
 export const variantExtraBackgroundColorMap: ThemeVariantMap<string> = {
   SEND: ({ palette, theme }) =>
@@ -783,6 +803,9 @@ export const themeVariantMaps = {
   contentLinkColor: variantContentLinkColorMap,
   sectionBackgroundColor: variantSectionBackgroundColorMap,
   sectionBackgroundAlternativeGrey: variantSectionBackgroundAlternativeGreyMap,
+  accordionBackgroundColor: accordionBackgroundColorMap,
+  accordionItemBackgroundColor: accordionItemBackgroundColorMap,
+  accordionItemBorderRadius: accordionItemBorderRadiusMap,
   extraBackgroundColor: variantExtraBackgroundColorMap,
   focusOutlineColor: variantFocusOutlineColorMap,
   focusBackgroundColor: variantFocusBackgroundColorMap,
