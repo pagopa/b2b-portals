@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Box, IconButton, Link, Stack } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import {
@@ -38,6 +44,7 @@ const Header = ({
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const hasScrolledRef = useRef(false);
+  const [enableTransitions, setEnableTransitions] = useState(false);
 
   const isActiveSubLink = (href?: string): boolean => {
     if (href) {
@@ -51,7 +58,6 @@ const Header = ({
     if (menuItem.href && menuItem.href.indexOf('/') >= 0) {
       const urlPathname = menuItem.href.substring(menuItem.href.indexOf('/'));
       if (pathname === urlPathname) {
-        console.log('here', menuItem.label);
         return true;
       }
     }
@@ -96,22 +102,25 @@ const Header = ({
     toggleAccessibility(menuOpen || openDropdownIndex == null ? false : true);
   }, [openDropdownIndex, menuOpen]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!hasScrolledRef.current && window.scrollY > 200) {
-        hasScrolledRef.current = true;
-        setIsScrolled(true);
-      } else if (hasScrolledRef.current && window.scrollY < 80) {
-        hasScrolledRef.current = false;
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
+  const handleScroll = useCallback(() => {
+    if (!hasScrolledRef.current && window.scrollY > 200) {
+      hasScrolledRef.current = true;
+      setIsScrolled(true);
+    } else if (hasScrolledRef.current && window.scrollY < 80) {
+      hasScrolledRef.current = false;
+      setIsScrolled(false);
+    }
   }, []);
+
+  useLayoutEffect(() => {
+    handleScroll();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    requestAnimationFrame(() => setEnableTransitions(true));
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   return (
     <>
@@ -146,10 +155,12 @@ const Header = ({
             color='#FFFFFF'
             height={88}
             sx={{
-              transition: 'all .3s ease-out',
-              '> *': {
+              ...(enableTransitions && {
                 transition: 'all .3s ease-out',
-              },
+                '> *': {
+                  transition: 'all .3s ease-out',
+                },
+              }),
               padding: { xs: '16px 24px', md: isScrolled ? 0 : '16px 32px' },
               ...(isScrolled &&
                 !isMobile && { '> *': { opacity: 0 }, height: 0 }),
@@ -198,7 +209,9 @@ const Header = ({
                   marginLeft={isScrolled ? 4 : 0}
                   marginRight={isScrolled ? 5 : 0}
                   sx={{
-                    transition: 'all .3s ease-out',
+                    ...(enableTransitions && {
+                      transition: 'all .3s ease-out',
+                    }),
                     maxWidth: isScrolled ? 80 : 0,
                     opacity: isScrolled ? 1 : 0,
                   }}
