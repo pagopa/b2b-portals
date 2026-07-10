@@ -57,22 +57,26 @@ export const Nav = styled('ul')({
     fontWeight: 400,
   },
   '& .menuPrimaryItem': {
+    position: 'relative',
     color: '#2B2E38',
     padding: '10px',
     fontWeight: 400,
     height: 'min-content',
     transition: 'none',
-    '&:hover, &.open': {
-      color: '#0B3EE3',
-      fontWeight: 600,
-      letterSpacing: '-0.003em',
-      backgroundColor: '#F4F4F4 !important',
-      borderRadius: 6,
-    },
-    '&.active': {
-      color: '#0B3EE3',
-      fontWeight: 600,
+    '&:hover, &.open, &.active': {
+      color: '#0B3EE3 !important',
+      fontWeight: 700,
       letterSpacing: '-0.0090em',
+    },
+    '&:hover::after, &.open::after, &.active::after': {
+      content: '""',
+      position: 'absolute',
+      left: 10,
+      right: 10,
+      bottom: 0,
+      height: 2,
+      backgroundColor: '#0B3EE3',
+      borderRadius: 6,
     },
   },
   '& .menuSecondaryItem': {
