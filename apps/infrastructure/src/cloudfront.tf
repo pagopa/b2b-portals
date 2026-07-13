@@ -86,7 +86,7 @@ resource "aws_cloudfront_function" "wallet_viewer_request_handler" {
   name    = "wallet-viewer-request-handler"
   runtime = "cloudfront-js-2.0"
   publish = var.publish_cloudfront_functions
-  code = templatefile("${path.module}/wallet-viewer-request-handler.js.tftpl", {
+  code = templatefile("${path.module}/templates/wallet-viewer-request-handler.js.tftpl", {
     wallet_basic_auth_authorization_header = local.wallet_basic_auth_authorization_header
   })
 }
