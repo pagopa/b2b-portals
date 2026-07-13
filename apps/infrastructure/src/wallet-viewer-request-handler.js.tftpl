@@ -1,0 +1,31 @@
+function handler(event) {
+  if (event.context.eventType === "viewer-request") {
+    var request = event.request;
+    var authorizationHeader = request.headers.authorization && request.headers.authorization.value;
+
+    if (authorizationHeader !== "${wallet_basic_auth_authorization_header}") {
+      return {
+        statusCode: 401,
+        statusDescription: "Unauthorized",
+        headers: {
+          "www-authenticate": {
+            value: "Basic"
+          }
+        }
+      };
+    }
+
+    if (request.uri !== "/") {
+      if (request.uri.endsWith("/")) {
+        request.uri = request.uri.replace(/\/$/, "");
+      }
+      if (!/\.[0-9a-zA-Z]+$/.test(request.uri)) {
+        request.uri += ".html";
+      }
+    }
+
+    return request;
+  }
+
+  return event.request;
+}

@@ -69,6 +69,28 @@ resource "aws_cloudfront_function" "website_viewer_request_handler" {
   code    = file("${path.module}/../../cloudfront-functions/dist/viewer-request-handler.js")
 }
 
+locals {
+  wallet_basic_auth_authorization_header = format(
+    "Basic %s",
+    base64encode(
+      format(
+        "%s:%s",
+        aws_ssm_parameter.wallet_basic_auth_username.value,
+        aws_ssm_parameter.wallet_basic_auth_password.value,
+      ),
+    ),
+  )
+}
+
+resource "aws_cloudfront_function" "wallet_viewer_request_handler" {
+  name    = "wallet-viewer-request-handler"
+  runtime = "cloudfront-js-2.0"
+  publish = var.publish_cloudfront_functions
+  code = templatefile("${path.module}/wallet-viewer-request-handler.js.tftpl", {
+    wallet_basic_auth_authorization_header = local.wallet_basic_auth_authorization_header
+  })
+}
+
 resource "aws_cloudfront_distribution" "cdn_multi_website" {
   for_each = {
     for key, config in var.websites_configs :
@@ -121,7 +143,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
 
     function_association {
       event_type   = "viewer-request"
-      function_arn = aws_cloudfront_function.website_viewer_request_handler.arn
+      function_arn = each.key == "wallet" ? aws_cloudfront_function.wallet_viewer_request_handler.arn : aws_cloudfront_function.website_viewer_request_handler.arn
     }
   }
 
