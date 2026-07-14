@@ -175,12 +175,21 @@ variable "websites_configs" {
     },
     "wallet" = {
       origin_path                = "/wallet"
-      url_tenant                 = "wallet.b2bportals.pagopa.it"
-      create_certificate         = false
+      url_tenant                 = "prod.wallet.b2bportals.pagopa.it"
+      create_certificate         = true
+      create_route53_records     = true
       create_distribution        = true
-      cdn_use_custom_certificate = false
-      cdn_use_alias              = false
+      cdn_use_custom_certificate = true
+      cdn_use_alias              = true
       cdn_indexing_enable        = false
+
+
+      create_certificate         = true
+      create_route53_records     = true
+      create_distribution        = true
+      cdn_use_custom_certificate = true
+      cdn_use_alias              = true
+
       custom_headers = [
         {
           header   = "Server"
