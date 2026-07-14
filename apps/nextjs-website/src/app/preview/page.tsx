@@ -26,6 +26,17 @@ const {
   getSiteWideSEO,
 } = getters;
 
+const getPreviewSiteWideSEO = async (tenant: Config['ENVIRONMENT']) => {
+  const { oneTrustToken, themeVariant, pressReleasesParentSlug } =
+    await getSiteWideSEO(tenant).catch(() => ({
+      oneTrustToken: null,
+      themeVariant: 'IO' as const,
+      pressReleasesParentSlug: null,
+    }));
+
+  return { oneTrustToken, themeVariant, pressReleasesParentSlug };
+};
+
 const PreviewPage = async ({
   searchParams,
 }: {
@@ -59,7 +70,7 @@ const PreviewPage = async ({
   }
 
   const { oneTrustToken, themeVariant, pressReleasesParentSlug } =
-    await getSiteWideSEO(tenant);
+    await getPreviewSiteWideSEO(tenant);
 
   const documentIDs = await (type === 'press-release'
     ? getAllPressReleaseIDs(tenant, locale)
