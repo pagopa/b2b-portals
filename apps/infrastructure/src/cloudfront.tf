@@ -143,7 +143,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website" {
 
     function_association {
       event_type   = "viewer-request"
-      function_arn = each.key == "wallet" ? aws_cloudfront_function.wallet_viewer_request_handler.arn : aws_cloudfront_function.website_viewer_request_handler.arn
+      function_arn = aws_cloudfront_function.website_viewer_request_handler.arn
     }
   }
 
@@ -368,7 +368,7 @@ resource "aws_cloudfront_distribution" "cdn_multi_website_staging" {
 
     function_association {
       event_type   = "viewer-request"
-      function_arn = aws_cloudfront_function.website_viewer_request_handler.arn
+      function_arn = each.key == "wallet" ? aws_cloudfront_function.wallet_viewer_request_handler.arn : aws_cloudfront_function.website_viewer_request_handler.arn
     }
   }
 
