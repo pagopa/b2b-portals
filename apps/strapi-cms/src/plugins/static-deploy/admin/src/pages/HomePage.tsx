@@ -56,7 +56,7 @@ const HomePage = () => {
     event: "staging-trigger" | "prod-trigger" | "trigger",
   ) {
     try {
-      post(`/${PLUGIN_ID}/notify`, { event });
+      await post(`/${PLUGIN_ID}/notify`, { event });
     } catch (error: any) {
       console.error(error);
     }
@@ -153,13 +153,13 @@ const HomePage = () => {
             // If no unstaged updates, check last staging workflow staging
             // Only enable prod trigger if the last staging workflow was successful
             const lastStagingWorkflow: Workflow | undefined =
-              data.workflow_runs.filter((workflow) => {
+              data.workflow_runs.find((workflow) => {
                 const workflowPathArray = workflow.path.split("/");
                 const workflowFileName =
                   workflowPathArray[workflowPathArray.length - 1];
 
                 return workflowFileName === config.staging!.workflowID;
-              })[0];
+              });
 
             // No last staging workflow before current prod workflow, disable prod
             if (!lastStagingWorkflow) {
@@ -226,7 +226,7 @@ const HomePage = () => {
       if (config?.staging && unstagedUpdates) {
         // Staging
         await post(`/${PLUGIN_ID}/trigger-staging`);
-        sendEmailNotification("staging-trigger");
+        await sendEmailNotification("staging-trigger");
       } else {
         // Prod
         // Check for unstaged updates to prevent triggering if another editor published changes while the user was on this page
@@ -258,7 +258,9 @@ const HomePage = () => {
         await post(`/${PLUGIN_ID}/trigger`, {
           description: prodDeploymentDescription,
         });
-        sendEmailNotification(config?.staging ? "prod-trigger" : "trigger");
+        await sendEmailNotification(
+          config?.staging ? "prod-trigger" : "trigger",
+        );
       }
 
       toggleNotification({
@@ -383,61 +385,43 @@ const HomePage = () => {
             onOpenChange={setShowTriggerConfirmationPopup}
           >
             <Dialog.Trigger>
-              {config?.staging ? (
-                <Flex>
-                  <Button
-                    loading={loadingTriggerButton}
-                    disabled={
-                      loadingHistory !== "none" ||
-                      !canTrigger ||
-                      !unstagedUpdates
-                    }
-                    style={{
-                      height: "4.2rem",
-                      borderTopRightRadius: 0,
-                      borderBottomRightRadius: 0,
-                    }}
-                    variant="default"
-                    startIcon={<Expand />}
-                  >
-                    <Typography fontSize="1.6rem">Staging</Typography>
-                  </Button>
-                  <Button
-                    loading={loadingTriggerButton}
-                    disabled={
-                      loadingHistory !== "none" ||
-                      !canTrigger ||
-                      unstagedUpdates
-                    }
-                    style={{
-                      height: "4.2rem",
-                      borderTopLeftRadius: 0,
-                      borderBottomLeftRadius: 0,
-                    }}
-                    variant="default"
-                    startIcon={<Play />}
-                    title={
-                      loadingHistory !== "none" ||
-                      !canTrigger ||
-                      unstagedUpdates
-                        ? "Il deploy in produzione sarà disponibile a seguito di un deploy in staging terminato con successo"
-                        : ""
-                    }
-                  >
-                    <Typography fontSize="1.6rem">Produzione</Typography>
-                  </Button>
-                </Flex>
-              ) : (
+              <Flex>
                 <Button
                   loading={loadingTriggerButton}
-                  disabled={loadingHistory !== "none" || !canTrigger}
-                  style={{ height: "4.2rem" }}
+                  disabled={
+                    loadingHistory !== "none" || !canTrigger || !unstagedUpdates
+                  }
+                  style={{
+                    height: "4.2rem",
+                    borderTopRightRadius: 0,
+                    borderBottomRightRadius: 0,
+                  }}
+                  variant="default"
+                  startIcon={<Expand />}
+                >
+                  <Typography fontSize="1.6rem">Staging</Typography>
+                </Button>
+                <Button
+                  loading={loadingTriggerButton}
+                  disabled={
+                    loadingHistory !== "none" || !canTrigger || unstagedUpdates
+                  }
+                  style={{
+                    height: "4.2rem",
+                    borderTopLeftRadius: 0,
+                    borderBottomLeftRadius: 0,
+                  }}
                   variant="default"
                   startIcon={<Play />}
+                  title={
+                    loadingHistory !== "none" || !canTrigger || unstagedUpdates
+                      ? "Il deploy in produzione sarà disponibile a seguito di un deploy in staging terminato con successo"
+                      : ""
+                  }
                 >
                   <Typography fontSize="1.6rem">Produzione</Typography>
                 </Button>
-              )}
+              </Flex>
             </Dialog.Trigger>
 
             <Dialog.Content>

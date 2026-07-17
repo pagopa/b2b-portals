@@ -1,6 +1,6 @@
-import { Core } from '@strapi/strapi';
-import { PLUGIN_ID } from '../../../admin/src/pluginId';
-import StagingStatus from '../../../types/StagingStatus';
+import { Core } from "@strapi/strapi";
+import { PLUGIN_ID } from "../../../admin/src/pluginId";
+import StagingStatus from "../../../types/StagingStatus";
 
 const stagingStatusService = ({ strapi }: { strapi: Core.Strapi }) => ({
   async get() {
@@ -8,16 +8,18 @@ const stagingStatusService = ({ strapi }: { strapi: Core.Strapi }) => ({
       const unstagedUpdates = await strapi
         .documents(`plugin::${PLUGIN_ID}.staging-status`)
         .findMany({
-          sort: 'createdAt:desc', // Most recent first
+          sort: "createdAt:desc", // Most recent first
         });
 
       const currDocument =
         unstagedUpdates.length < 1 // No documents yet, create one
-          ? await strapi.documents(`plugin::${PLUGIN_ID}.staging-status`).create({
-              data: {
-                unstagedUpdates: true,
-              },
-            })
+          ? await strapi
+              .documents(`plugin::${PLUGIN_ID}.staging-status`)
+              .create({
+                data: {
+                  unstagedUpdates: true,
+                },
+              })
           : unstagedUpdates[0];
 
       if (unstagedUpdates.length > 1) {
@@ -41,25 +43,29 @@ const stagingStatusService = ({ strapi }: { strapi: Core.Strapi }) => ({
       const unstagedUpdates = await strapi
         .documents(`plugin::${PLUGIN_ID}.staging-status`)
         .findMany({
-          sort: 'updatedAt:desc', // Most recent first
+          sort: "updatedAt:desc", // Most recent first
         });
 
-        // Delete all documents before creating a new one (cleaner than updating)
-        unstagedUpdates.forEach(async (doc, idx) => {
-          if (idx !== 0) {
-            await strapi
+      // Delete all documents except first one before creating a new one (cleaner than updating)
+      await Promise.all(
+        unstagedUpdates
+          .slice(1)
+          .map((doc) =>
+            strapi
               .documents(`plugin::${PLUGIN_ID}.staging-status`)
-              .delete({ documentId: doc.documentId });
-          }
-        });
+              .delete({ documentId: doc.documentId }),
+          ),
+      );
 
-        // Create new document
-        await strapi.documents(`plugin::${PLUGIN_ID}.staging-status`).create({ data: newDocumentData });
-        return { success: true, error: null };
+      // Create new document
+      await strapi
+        .documents(`plugin::${PLUGIN_ID}.staging-status`)
+        .create({ data: newDocumentData });
+      return { success: true, error: null };
     } catch (err: any) {
       return { success: false, error: err.response };
     }
-  }
+  },
 });
 
 export default stagingStatusService;
