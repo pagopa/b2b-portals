@@ -108,6 +108,58 @@ export default ({ env }: any) => ({
       ]
     }
   },
+  'audit-logs': {
+    enabled: true,
+    config: {
+      enabled: true,
+      deletion: {
+        enabled: true,
+        frequency: 'logAge',
+        options: {
+          value: 90,
+          interval: 'day',
+        },
+      },
+      excludeContentTypes: [],
+      excludeEndpoints: ['/admin/renew-token'],
+      redactedValues: [
+        'password',
+        'token',
+        'jwt',
+        'authorization',
+        'cookie',
+        'session',
+        'secret',
+        'key',
+        'private',
+      ],
+      events: {
+        track: [
+          'entry.create',
+          'entry.update',
+          'entry.delete',
+          'entry.publish',
+          'entry.unpublish',
+          'media.create',
+          'media.update',
+          'media.delete',
+          'media-folder.create',
+          'media-folder.update',
+          'media-folder.delete',
+        ],
+      },
+      adminPanel: {
+        indexTableColumns: [
+          'action',
+          'date',
+          'user',
+          'method',
+          'ipAddress',
+          'entry',
+        ],
+      },
+    },
+  },
   'collection-exporter': {
     enabled: true,
   },
