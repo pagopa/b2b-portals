@@ -113,12 +113,7 @@ export default ({ env }: any) => ({
     config: {
       enabled: true,
       deletion: {
-        enabled: true,
-        frequency: 'logAge',
-        options: {
-          value: 90,
-          interval: 'day',
-        },
+        enabled: false,
       },
       excludeContentTypes: [],
       excludeEndpoints: ['/admin/renew-token'],
