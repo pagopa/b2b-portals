@@ -1,4 +1,4 @@
-import Config from "../../../types/Config";
+import Config from '../../../types/Config';
 
 type Validator = Partial<Config>;
 
@@ -27,72 +27,72 @@ export default {
       )
     ) {
       throw new Error(
-        "`owner`, `repo`, `branch`, `workflowID` and `githubToken` and `staging` keys in your plugin config are required",
+        '`owner`, `repo`, `branch`, `workflowID` and `githubToken` and `staging` keys in your plugin config are required',
       );
     }
     if (staging && !staging.workflowID) {
       throw new Error(
-        "`staging.workflowID` key in your plugin config is missing",
+        '`staging.workflowID` key in your plugin config is missing',
       );
     }
     if (notifications && notifications.enabled === undefined) {
       throw new Error(
-        "`notifications.enabled` key in your plugin config is missing, either set it to a string or remove the whole notifications object",
+        '`notifications.enabled` key in your plugin config is missing, either set it to a string or remove the whole notifications object',
       );
     }
     if (notifications && !notifications.bearerToken) {
       throw new Error(
-        "`notifications.bearerToken` key in your plugin config is missing, either set it to a string or remove the whole notifications object",
+        '`notifications.bearerToken` key in your plugin config is missing, either set it to a string or remove the whole notifications object',
       );
     }
 
     // Check if base config is valid
-    if (owner && typeof owner !== "string") {
-      throw new Error("`owner` key in your plugin config has to be a string");
+    if (owner && typeof owner !== 'string') {
+      throw new Error('`owner` key in your plugin config has to be a string');
     }
-    if (repo && typeof repo !== "string") {
-      throw new Error("`repo` key in your plugin config has to be a string");
+    if (repo && typeof repo !== 'string') {
+      throw new Error('`repo` key in your plugin config has to be a string');
     }
-    if (branch && typeof branch !== "string") {
-      throw new Error("`branch` key in your plugin config has to be a string");
+    if (branch && typeof branch !== 'string') {
+      throw new Error('`branch` key in your plugin config has to be a string');
     }
-    if (workflowID && typeof workflowID !== "string") {
+    if (workflowID && typeof workflowID !== 'string') {
       throw new Error(
-        "`workflowID` key in your plugin workflowID has to be an string",
+        '`workflowID` key in your plugin workflowID has to be an string',
       );
     }
-    if (githubToken && typeof githubToken !== "string") {
+    if (githubToken && typeof githubToken !== 'string') {
       throw new Error(
-        "`githubToken` key in your plugin config has to be a string",
+        '`githubToken` key in your plugin config has to be a string',
       );
     }
-    if (environment && typeof environment !== "string") {
+    if (environment && typeof environment !== 'string') {
       throw new Error(
-        "`environment` key in your plugin config has to be a string",
+        '`environment` key in your plugin config has to be a string',
       );
     }
 
     // Check if staging config is valid
-    if (typeof staging.workflowID !== "string") {
+    if (typeof staging.workflowID !== 'string') {
       throw new Error(
-        "`staging.workflowID` key in your plugin config has to be a string",
+        '`staging.workflowID` key in your plugin config has to be a string',
       );
     }
-    if (typeof staging.branch !== "string") {
+    if (typeof staging.branch !== 'string') {
       throw new Error(
-        "`staging.branch` key in your plugin config has to be a string",
+        '`staging.branch` key in your plugin config has to be a string',
       );
     }
 
     // Check if notifications config is valid
-    if (notifications && typeof notifications.enabled !== "boolean") {
+    if (notifications && typeof notifications.enabled !== 'boolean') {
       throw new Error(
-        "`notifications.enabled` key in your plugin config has to be a boolean",
+        '`notifications.enabled` key in your plugin config has to be a boolean',
       );
     }
-    if (notifications && typeof notifications.bearerToken !== "string") {
+    if (notifications && typeof notifications.bearerToken !== 'string') {
       throw new Error(
-        "`notifications.bearerToken` key in your plugin config has to be a string",
+        '`notifications.bearerToken` key in your plugin config has to be a string',
       );
     }
   },

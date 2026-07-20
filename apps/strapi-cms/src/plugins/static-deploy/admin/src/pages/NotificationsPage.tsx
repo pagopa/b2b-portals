@@ -1,21 +1,21 @@
-import { Main } from "@strapi/design-system";
-import { Page, useFetchClient, useNotification } from "@strapi/strapi/admin";
-import pluginPermissions from "../permissions";
-import { Flex } from "@strapi/design-system";
-import { Typography } from "@strapi/design-system";
-import { Dialog } from "@strapi/design-system";
-import { useEffect, useState } from "react";
-import { Button } from "@strapi/design-system";
-import { Plus, Trash } from "@strapi/icons";
-import { TextInput } from "@strapi/design-system";
-import { Table } from "@strapi/design-system";
-import { Thead } from "@strapi/design-system";
-import { Tr } from "@strapi/design-system";
-import { Th } from "@strapi/design-system";
-import { Tbody } from "@strapi/design-system";
-import { PLUGIN_ID } from "../pluginId";
-import { Td } from "@strapi/design-system";
-import { IconButton } from "@strapi/design-system";
+import { Main } from '@strapi/design-system';
+import { Page, useFetchClient, useNotification } from '@strapi/strapi/admin';
+import pluginPermissions from '../permissions';
+import { Flex } from '@strapi/design-system';
+import { Typography } from '@strapi/design-system';
+import { Dialog } from '@strapi/design-system';
+import { useEffect, useState } from 'react';
+import { Button } from '@strapi/design-system';
+import { Plus, Trash } from '@strapi/icons';
+import { TextInput } from '@strapi/design-system';
+import { Table } from '@strapi/design-system';
+import { Thead } from '@strapi/design-system';
+import { Tr } from '@strapi/design-system';
+import { Th } from '@strapi/design-system';
+import { Tbody } from '@strapi/design-system';
+import { PLUGIN_ID } from '../pluginId';
+import { Td } from '@strapi/design-system';
+import { IconButton } from '@strapi/design-system';
 
 const NotificationsPage = () => {
   const { get, post, del } = useFetchClient();
@@ -28,7 +28,7 @@ const NotificationsPage = () => {
   const { toggleNotification } = useNotification();
 
   function validateNewEmail(email: string) {
-    if (email === "") {
+    if (email === '') {
       setNewEmail(undefined);
       return;
     }
@@ -69,25 +69,25 @@ const NotificationsPage = () => {
         setNewEmail(undefined);
         getEmailsForNotifications();
         toggleNotification({
-          type: "success",
-          title: "Indirizzo email aggiunto con successo!",
+          type: 'success',
+          title: 'Indirizzo email aggiunto con successo!',
           timeout: 5000,
         });
       } else {
         console.error(data.err);
         toggleNotification({
-          type: "danger",
-          title: "Impossibile aggiungere indirizzo email",
-          message: "Si prega di riprovare",
+          type: 'danger',
+          title: 'Impossibile aggiungere indirizzo email',
+          message: 'Si prega di riprovare',
           timeout: 5000,
         });
       }
     } catch (error: any) {
       console.error(error);
       toggleNotification({
-        type: "danger",
-        title: "Impossibile aggiungere indirizzo email",
-        message: "Si prega di riprovare",
+        type: 'danger',
+        title: 'Impossibile aggiungere indirizzo email',
+        message: 'Si prega di riprovare',
         timeout: 5000,
       });
     }
@@ -101,25 +101,25 @@ const NotificationsPage = () => {
       if (data.success) {
         getEmailsForNotifications();
         toggleNotification({
-          type: "success",
-          title: "Indirizzo email rimosso con successo!",
+          type: 'success',
+          title: 'Indirizzo email rimosso con successo!',
           timeout: 5000,
         });
       } else {
         console.error(data.err);
         toggleNotification({
-          type: "danger",
-          title: "Impossibile rimuovere indirizzo email",
-          message: "Si prega di riprovare",
+          type: 'danger',
+          title: 'Impossibile rimuovere indirizzo email',
+          message: 'Si prega di riprovare',
           timeout: 5000,
         });
       }
     } catch (error: any) {
       console.error(error);
       toggleNotification({
-        type: "danger",
-        title: "Impossibile rimuovere indirizzo email",
-        message: "Si prega di riprovare",
+        type: 'danger',
+        title: 'Impossibile rimuovere indirizzo email',
+        message: 'Si prega di riprovare',
         timeout: 5000,
       });
     } finally {
@@ -141,7 +141,7 @@ const NotificationsPage = () => {
     <Page.Protect permissions={pluginPermissions.notifications}>
       <Main
         style={{
-          padding: "0 5.4rem 3.2rem 5.4rem",
+          padding: '0 5.4rem 3.2rem 5.4rem',
         }}
       >
         <Flex
@@ -159,7 +159,7 @@ const NotificationsPage = () => {
             >
               <Dialog.Trigger>
                 <Button
-                  style={{ height: "4.2rem" }}
+                  style={{ height: '4.2rem' }}
                   variant="default"
                   startIcon={<Plus />}
                 >
@@ -211,10 +211,10 @@ const NotificationsPage = () => {
         <Table colCount={2}>
           <Thead>
             <Tr>
-              <Th key={"email"}>
+              <Th key={'email'}>
                 <Typography variant="sigma">Indirizzo Email</Typography>
               </Th>
-              <Th key={"actions"}></Th>
+              <Th key={'actions'}></Th>
             </Tr>
           </Thead>
           <Tbody>

@@ -1,6 +1,6 @@
-import { Core } from "@strapi/strapi";
-import { PLUGIN_ID } from "../../../admin/src/pluginId";
-import StagingStatus from "../../../types/StagingStatus";
+import { Core } from '@strapi/strapi';
+import { PLUGIN_ID } from '../../../admin/src/pluginId';
+import StagingStatus from '../../../types/StagingStatus';
 
 const stagingStatusService = ({ strapi }: { strapi: Core.Strapi }) => ({
   async get() {
@@ -8,7 +8,7 @@ const stagingStatusService = ({ strapi }: { strapi: Core.Strapi }) => ({
       const unstagedUpdates = await strapi
         .documents(`plugin::${PLUGIN_ID}.staging-status`)
         .findMany({
-          sort: "createdAt:desc", // Most recent first
+          sort: 'createdAt:desc', // Most recent first
         });
 
       const currDocument =
@@ -43,7 +43,7 @@ const stagingStatusService = ({ strapi }: { strapi: Core.Strapi }) => ({
       const unstagedUpdates = await strapi
         .documents(`plugin::${PLUGIN_ID}.staging-status`)
         .findMany({
-          sort: "updatedAt:desc", // Most recent first
+          sort: 'updatedAt:desc', // Most recent first
         });
 
       // Delete all documents except first one before creating a new one (cleaner than updating)
