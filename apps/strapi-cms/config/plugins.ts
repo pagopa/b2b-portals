@@ -154,8 +154,6 @@ export default ({ env }: any) => ({
           'action',
           'date',
           'user',
-          'method',
-          'ipAddress',
           'entry',
         ],
       },
