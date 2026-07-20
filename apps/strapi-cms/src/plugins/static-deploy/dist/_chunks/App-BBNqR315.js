@@ -6,7 +6,7 @@ const reactRouterDom = require("react-router-dom");
 const designSystem = require("@strapi/design-system");
 const icons = require("@strapi/icons");
 const react = require("react");
-const index = require("./index-CilwvGwy.js");
+const index = require("./index-BX7i3uXM.js");
 const millisecondsInWeek = 6048e5;
 const millisecondsInDay = 864e5;
 const constructFromSymbol = Symbol.for("constructDateFrom");
@@ -1509,69 +1509,67 @@ const HomePage = () => {
     }
   }
   async function verifyStagingStatus(data) {
-    if (config?.staging) {
-      const lastWorkflow = data.workflow_runs[0];
-      const currentStagingStatus = await getStagingStatus();
-      if (currentStagingStatus && lastWorkflow) {
-        const lastWorkflowPathArray = lastWorkflow.path.split("/");
-        const lastWorkflowFileName = lastWorkflowPathArray[lastWorkflowPathArray.length - 1];
-        const lastWorkflowCreationDate = new Date(lastWorkflow.created_at);
-        const lastUpdateDate = new Date(currentStagingStatus.createdAt);
-        if (lastWorkflowFileName === config.staging.workflowID) {
-          if (!lastWorkflow.conclusion) {
+    const lastWorkflow = data.workflow_runs[0];
+    const currentStagingStatus = await getStagingStatus();
+    if (currentStagingStatus && lastWorkflow) {
+      const lastWorkflowPathArray = lastWorkflow.path.split("/");
+      const lastWorkflowFileName = lastWorkflowPathArray[lastWorkflowPathArray.length - 1];
+      const lastWorkflowCreationDate = new Date(lastWorkflow.created_at);
+      const lastUpdateDate = new Date(currentStagingStatus.createdAt);
+      if (lastWorkflowFileName === config?.staging.workflowID) {
+        if (!lastWorkflow.conclusion) {
+          setUnstagedUpdates(true);
+          return;
+        }
+        if (lastWorkflow.conclusion !== "success") {
+          setUnstagedUpdates(true);
+          setStagingStatus({ unstagedUpdates: true });
+          return;
+        } else {
+          if (!currentStagingStatus.unstagedUpdates) {
+            setUnstagedUpdates(false);
+            return;
+          }
+          if (lastUpdateDate > lastWorkflowCreationDate) {
+            setUnstagedUpdates(true);
+          } else {
+            setUnstagedUpdates(false);
+            setStagingStatus({ unstagedUpdates: false });
+          }
+        }
+      } else {
+        if (!lastWorkflow.conclusion) {
+          setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
+          return;
+        }
+        if (lastWorkflow.conclusion !== "success") {
+          if (currentStagingStatus.unstagedUpdates) {
             setUnstagedUpdates(true);
             return;
           }
-          if (lastWorkflow.conclusion !== "success") {
+          const lastStagingWorkflow = data.workflow_runs.find((workflow) => {
+            const workflowPathArray = workflow.path.split("/");
+            const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
+            return workflowFileName === config?.staging.workflowID;
+          });
+          if (!lastStagingWorkflow) {
             setUnstagedUpdates(true);
             setStagingStatus({ unstagedUpdates: true });
             return;
-          } else {
-            if (!currentStagingStatus.unstagedUpdates) {
-              setUnstagedUpdates(false);
-              return;
-            }
-            if (lastUpdateDate > lastWorkflowCreationDate) {
-              setUnstagedUpdates(true);
-            } else {
-              setUnstagedUpdates(false);
-              setStagingStatus({ unstagedUpdates: false });
-            }
           }
-        } else {
-          if (!lastWorkflow.conclusion) {
-            setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
+          if (!lastStagingWorkflow.conclusion) {
+            setUnstagedUpdates(true);
+            setStagingStatus({ unstagedUpdates: true });
             return;
           }
-          if (lastWorkflow.conclusion !== "success") {
-            if (currentStagingStatus.unstagedUpdates) {
-              setUnstagedUpdates(true);
-              return;
-            }
-            const lastStagingWorkflow = data.workflow_runs.find((workflow) => {
-              const workflowPathArray = workflow.path.split("/");
-              const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
-              return workflowFileName === config.staging.workflowID;
-            });
-            if (!lastStagingWorkflow) {
-              setUnstagedUpdates(true);
-              setStagingStatus({ unstagedUpdates: true });
-              return;
-            }
-            if (!lastStagingWorkflow.conclusion) {
-              setUnstagedUpdates(true);
-              setStagingStatus({ unstagedUpdates: true });
-              return;
-            }
-            if (lastStagingWorkflow.conclusion !== "success") {
-              setUnstagedUpdates(true);
-              setStagingStatus({ unstagedUpdates: true });
-            } else {
-              setUnstagedUpdates(false);
-            }
+          if (lastStagingWorkflow.conclusion !== "success") {
+            setUnstagedUpdates(true);
+            setStagingStatus({ unstagedUpdates: true });
           } else {
-            setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
+            setUnstagedUpdates(false);
           }
+        } else {
+          setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
         }
       }
     }

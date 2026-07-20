@@ -13,13 +13,11 @@ const stagingStatusService = ({ strapi }: { strapi: Core.Strapi }) => ({
 
       const currDocument =
         unstagedUpdates.length < 1 // No documents yet, create one
-          ? await strapi
-              .documents(`plugin::${PLUGIN_ID}.staging-status`)
-              .create({
-                data: {
-                  unstagedUpdates: true,
-                },
-              })
+          ? strapi.documents(`plugin::${PLUGIN_ID}.staging-status`).create({
+              data: {
+                unstagedUpdates: true,
+              },
+            })
           : unstagedUpdates[0];
 
       if (unstagedUpdates.length > 1) {
@@ -47,20 +45,17 @@ const stagingStatusService = ({ strapi }: { strapi: Core.Strapi }) => ({
         });
 
       // Delete all documents except first one before creating a new one (cleaner than updating)
-      await Promise.all(
-        unstagedUpdates
-          .slice(1)
-          .map((doc) =>
-            strapi
-              .documents(`plugin::${PLUGIN_ID}.staging-status`)
-              .delete({ documentId: doc.documentId }),
-          ),
-      );
-
-      // Create new document
-      await strapi
-        .documents(`plugin::${PLUGIN_ID}.staging-status`)
-        .create({ data: newDocumentData });
+      unstagedUpdates
+        .slice(1)
+        .map((doc) =>
+          strapi
+            .documents(`plugin::${PLUGIN_ID}.staging-status`)
+            .delete({ documentId: doc.documentId }),
+        ),
+        // Create new document
+        await strapi
+          .documents(`plugin::${PLUGIN_ID}.staging-status`)
+          .create({ data: newDocumentData });
       return { success: true, error: null };
     } catch (err: any) {
       return { success: false, error: err.response };
