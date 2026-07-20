@@ -267,7 +267,7 @@ const checkBearerToken = (policyContext, config2, { strapi: strapi2 }) => {
 };
 const checkWorkflowEndEvent = (policyContext, config2, { strapi: strapi2 }) => {
   const { event } = policyContext.request.body;
-  if (!event || !["staging-end", "prod-end", "end"].includes(event)) {
+  if (!event || !["staging-end", "prod-end"].includes(event)) {
     return false;
   }
   return true;

@@ -6,7 +6,7 @@ const reactRouterDom = require("react-router-dom");
 const designSystem = require("@strapi/design-system");
 const icons = require("@strapi/icons");
 const react = require("react");
-const index = require("./index-BAVWxBbD.js");
+const index = require("./index-rT0gwlCn.js");
 const millisecondsInWeek = 6048e5;
 const millisecondsInDay = 864e5;
 const constructFromSymbol = Symbol.for("constructDateFrom");
@@ -1597,7 +1597,7 @@ const HomePage = () => {
   async function triggerGithubActions() {
     setLoadingTriggerButton(true);
     try {
-      if (config?.staging && unstagedUpdates) {
+      if (unstagedUpdates) {
         await post(`/${index.PLUGIN_ID}/trigger-staging`);
         sendEmailNotification("staging-trigger");
       } else {

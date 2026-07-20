@@ -4,7 +4,7 @@ import { useLocation, Routes, Route } from "react-router-dom";
 import { Main, Flex, Typography, Button, Dialog, TextInput, Table, Thead, Tr, Th, Tbody, Td, Badge, IconButton, Link } from "@strapi/design-system";
 import { ArrowClockwise, Expand, Play, ExternalLink, Plus, Trash } from "@strapi/icons";
 import { useState, useEffect } from "react";
-import { p as pluginPermissions, P as PLUGIN_ID } from "./index-LPBHXriF.mjs";
+import { p as pluginPermissions, P as PLUGIN_ID } from "./index-Bp5CeamN.mjs";
 const millisecondsInWeek = 6048e5;
 const millisecondsInDay = 864e5;
 const constructFromSymbol = Symbol.for("constructDateFrom");
@@ -1595,7 +1595,7 @@ const HomePage = () => {
   async function triggerGithubActions() {
     setLoadingTriggerButton(true);
     try {
-      if (config?.staging && unstagedUpdates) {
+      if (unstagedUpdates) {
         await post(`/${PLUGIN_ID}/trigger-staging`);
         sendEmailNotification("staging-trigger");
       } else {

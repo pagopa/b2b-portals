@@ -53,7 +53,7 @@ const HomePage = () => {
   }
 
   async function sendEmailNotification(
-    event: 'staging-trigger' | 'prod-trigger' | 'trigger',
+    event: 'staging-trigger' | 'prod-trigger',
   ) {
     try {
       post(`/${PLUGIN_ID}/notify`, { event });
@@ -221,7 +221,7 @@ const HomePage = () => {
     setLoadingTriggerButton(true);
 
     try {
-      if (config?.staging && unstagedUpdates) {
+      if (unstagedUpdates) {
         // Staging
         await post(`/${PLUGIN_ID}/trigger-staging`);
         sendEmailNotification('staging-trigger');
