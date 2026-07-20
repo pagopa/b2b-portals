@@ -108,6 +108,57 @@ export default ({ env }: any) => ({
       ]
     }
   },
+  'audit-logs': {
+    enabled: true,
+    config: {
+      enabled: true,
+      deletion: {
+        enabled: false,
+      },
+      excludeContentTypes: ['api::feedback.feedback', 'plugin::users-permissions.user'],
+      excludeEndpoints: [],
+      redactedValues: [
+        'password',
+        'token',
+        'jwt',
+        'authorization',
+        'cookie',
+        'session',
+        'secret',
+        'key',
+        'private',
+      ],
+      events: {
+        track: [
+          'entry.create',
+          'entry.update',
+          'entry.delete',
+          'entry.publish',
+          'entry.unpublish',
+          'media.create',
+          'media.update',
+          'media.delete',
+          'media-folder.create',
+          'media-folder.update',
+          'media-folder.delete',
+          'user.create',
+          'user.update',
+          'user.delete',
+          'role.create',
+          'role.update',
+          'role.delete',
+        ],
+      },
+      adminPanel: {
+        indexTableColumns: [
+          'action',
+          'date',
+          'user',
+          'entry',
+        ],
+      },
+    },
+  },
   'collection-exporter': {
     enabled: true,
   },
