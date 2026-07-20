@@ -116,7 +116,7 @@ export default ({ env }: any) => ({
         enabled: false,
       },
       excludeContentTypes: ['api::feedback.feedback', 'plugin::users-permissions.user'],
-      excludeEndpoints: ['/admin/renew-token'],
+      excludeEndpoints: [],
       redactedValues: [
         'password',
         'token',
