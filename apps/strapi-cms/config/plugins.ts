@@ -108,6 +108,55 @@ export default ({ env }: any) => ({
       ],
     },
   },
+  "audit-logs": {
+    enabled: true,
+    config: {
+      enabled: true,
+      deletion: {
+        enabled: false,
+      },
+      excludeContentTypes: [
+        "api::feedback.feedback",
+        "plugin::users-permissions.user",
+      ],
+      excludeEndpoints: [],
+      redactedValues: [
+        "password",
+        "token",
+        "jwt",
+        "authorization",
+        "cookie",
+        "session",
+        "secret",
+        "key",
+        "private",
+      ],
+      events: {
+        track: [
+          "entry.create",
+          "entry.update",
+          "entry.delete",
+          "entry.publish",
+          "entry.unpublish",
+          "media.create",
+          "media.update",
+          "media.delete",
+          "media-folder.create",
+          "media-folder.update",
+          "media-folder.delete",
+          "user.create",
+          "user.update",
+          "user.delete",
+          "role.create",
+          "role.update",
+          "role.delete",
+        ],
+      },
+      adminPanel: {
+        indexTableColumns: ["action", "date", "user", "entry"],
+      },
+    },
+  },
   "collection-exporter": {
     enabled: true,
   },
@@ -122,6 +171,56 @@ export default ({ env }: any) => ({
       s3_endpoint: env("AWS_PROD_WEBSITE_BUCKET_ENDPOINT", "test-endpoint"),
       s3_bucketName: env("AWS_PROD_WEBSITE_BUCKET_NAME", "test-bucket"),
       s3_region: env("AWS_REGION", "test-region"),
+      contentTypes: [
+        {
+          uid: "api::page.page",
+          draft: {
+            url: env("PREVIEW_URL"),
+            query: {
+              type: "page",
+              documentID: "{documentId}",
+              locale: "{locale}",
+              secret: env("PREVIEW_TOKEN"),
+              tenant: env("ENVIRONMENT"),
+            },
+            openTarget: "_blank",
+            copy: false,
+            alwaysVisible: true,
+          },
+        },
+        {
+          uid: "api::press-release.press-release",
+          draft: {
+            url: env("PREVIEW_URL"),
+            query: {
+              type: "press-release",
+              documentID: "{documentId}",
+              locale: "{locale}",
+              secret: env("PREVIEW_TOKEN"),
+              tenant: env("ENVIRONMENT"),
+            },
+            openTarget: "_blank",
+            copy: false,
+            alwaysVisible: true,
+          },
+        },
+        {
+          uid: "api::page-switch-page.page-switch-page",
+          draft: {
+            url: env("PREVIEW_URL"),
+            query: {
+              type: "page-switch-page",
+              documentID: "{documentId}",
+              locale: "{locale}",
+              secret: env("PREVIEW_TOKEN"),
+              tenant: env("ENVIRONMENT"),
+            },
+            openTarget: "_blank",
+            copy: false,
+            alwaysVisible: true,
+          },
+        },
+      ],
     },
   },
 });
