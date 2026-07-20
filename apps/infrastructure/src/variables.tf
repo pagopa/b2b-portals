@@ -65,6 +65,24 @@ variable "publish_cloudfront_functions" {
   default     = false
 }
 
+variable "wallet_basic_auth_password_ssm_parameter_name" {
+  type        = string
+  description = "SSM parameter name for the wallet CloudFront basic auth password"
+  default     = "/cloudfront/wallet/basic_auth/password"
+}
+
+variable "wallet_basic_auth_username" {
+  type        = string
+  description = "Username for the wallet CloudFront basic auth"
+  default     = "wallet"
+}
+
+variable "wallet_basic_auth_username_ssm_parameter_name" {
+  type        = string
+  description = "SSM parameter name for the wallet CloudFront basic auth username"
+  default     = "/cloudfront/wallet/basic_auth/username"
+}
+
 variable "dns_domain_name" {
   description = "DNS domain for the b2b portals"
   type        = map(any)
