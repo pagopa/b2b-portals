@@ -115,7 +115,7 @@ export default ({ env }: any) => ({
       deletion: {
         enabled: false,
       },
-      excludeContentTypes: [],
+      excludeContentTypes: ['api::feedback.feedback', 'plugin::users-permissions.user'],
       excludeEndpoints: ['/admin/renew-token'],
       redactedValues: [
         'password',
