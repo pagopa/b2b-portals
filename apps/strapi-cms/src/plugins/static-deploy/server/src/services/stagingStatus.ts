@@ -13,11 +13,13 @@ const stagingStatusService = ({ strapi }: { strapi: Core.Strapi }) => ({
 
       const currDocument =
         unstagedUpdates.length < 1 // No documents yet, create one
-          ? strapi.documents(`plugin::${PLUGIN_ID}.staging-status`).create({
-              data: {
-                unstagedUpdates: true,
-              },
-            })
+          ? await strapi
+              .documents(`plugin::${PLUGIN_ID}.staging-status`)
+              .create({
+                data: {
+                  unstagedUpdates: true,
+                },
+              })
           : unstagedUpdates[0];
 
       if (unstagedUpdates.length > 1) {

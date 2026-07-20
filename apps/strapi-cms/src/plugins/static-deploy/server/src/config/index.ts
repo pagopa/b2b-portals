@@ -15,7 +15,17 @@ export default {
     notifications,
   }: Validator) {
     // Check if required keys are present
-    if (!(owner && repo && branch && workflowID && githubToken && staging)) {
+    if (
+      !(
+        owner &&
+        repo &&
+        branch &&
+        workflowID &&
+        githubToken &&
+        staging?.workflowID &&
+        staging?.branch
+      )
+    ) {
       throw new Error(
         "`owner`, `repo`, `branch`, `workflowID` and `githubToken` and `staging` keys in your plugin config are required",
       );
@@ -63,14 +73,14 @@ export default {
     }
 
     // Check if staging config is valid
-    if (staging && typeof staging.workflowID !== "string") {
+    if (typeof staging.workflowID !== "string") {
       throw new Error(
         "`staging.workflowID` key in your plugin config has to be a string",
       );
     }
-    if (staging && staging.branch && typeof staging.branch !== "string") {
+    if (typeof staging.branch !== "string") {
       throw new Error(
-        "`staging.githubToken` key in your plugin config has to be a string",
+        "`staging.branch` key in your plugin config has to be a string",
       );
     }
 

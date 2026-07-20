@@ -1,6 +1,7 @@
-import { useRef, useEffect } from "react";
-import { jsx } from "react/jsx-runtime";
-import { Upload } from "@strapi/icons";
+"use strict";
+const react = require("react");
+const jsxRuntime = require("react/jsx-runtime");
+const icons = require("@strapi/icons");
 const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
   const v = glob[path];
   if (v) {
@@ -20,7 +21,7 @@ const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
 const version = "0.0.0";
 const keywords = [];
 const type = "commonjs";
-const exports = {
+const exports$1 = {
   "./package.json": "./package.json",
   "./strapi-admin": {
     types: "./dist/admin/src/index.d.ts",
@@ -88,7 +89,7 @@ const pluginPackage = {
   version,
   keywords,
   type,
-  exports,
+  exports: exports$1,
   files,
   scripts,
   dependencies,
@@ -102,13 +103,13 @@ const pluginPackage = {
 };
 const PLUGIN_ID = "static-deploy";
 const Initializer = ({ setPlugin }) => {
-  const ref = useRef(setPlugin);
-  useEffect(() => {
+  const ref = react.useRef(setPlugin);
+  react.useEffect(() => {
     ref.current(PLUGIN_ID);
   }, []);
   return null;
 };
-const PluginIcon = () => /* @__PURE__ */ jsx(Upload, {});
+const PluginIcon = () => /* @__PURE__ */ jsxRuntime.jsx(icons.Upload, {});
 const pluginPermissions = {
   access: [
     {
@@ -141,7 +142,7 @@ const index = {
         defaultMessage: name
       },
       Component: async () => {
-        const { App } = await import("./App-CM0kCs7d.mjs");
+        const { App } = await Promise.resolve().then(() => require("./App-Dcl3WSUT.js"));
         return App;
       }
     });
@@ -156,7 +157,7 @@ const index = {
     return Promise.all(
       locales.map(async (locale) => {
         try {
-          const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/en.json": () => import("./en-Byx4XI2L.mjs") }), `./translations/${locale}.json`, 3);
+          const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/en.json": () => Promise.resolve().then(() => require("./en-B4KWt_jN.js")) }), `./translations/${locale}.json`, 3);
           return { data, locale };
         } catch {
           return { data: {}, locale };
@@ -165,8 +166,6 @@ const index = {
     );
   }
 };
-export {
-  PLUGIN_ID as P,
-  index as i,
-  pluginPermissions as p
-};
+exports.PLUGIN_ID = PLUGIN_ID;
+exports.index = index;
+exports.pluginPermissions = pluginPermissions;

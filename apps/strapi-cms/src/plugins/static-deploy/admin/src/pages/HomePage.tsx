@@ -56,7 +56,7 @@ const HomePage = () => {
     event: "staging-trigger" | "prod-trigger" | "trigger",
   ) {
     try {
-      await post(`/${PLUGIN_ID}/notify`, { event });
+      post(`/${PLUGIN_ID}/notify`, { event });
     } catch (error: any) {
       console.error(error);
     }
@@ -99,7 +99,7 @@ const HomePage = () => {
       const lastWorkflowCreationDate = new Date(lastWorkflow.created_at);
       const lastUpdateDate = new Date(currentStagingStatus.createdAt);
 
-      if (lastWorkflowFileName === config?.staging!.workflowID) {
+      if (lastWorkflowFileName === config?.staging.workflowID) {
         // Last workflow was a staging workflow
 
         // If it hasn't ended yet, disable prod trigger
@@ -157,7 +157,7 @@ const HomePage = () => {
               const workflowFileName =
                 workflowPathArray[workflowPathArray.length - 1];
 
-              return workflowFileName === config?.staging!.workflowID;
+              return workflowFileName === config?.staging.workflowID;
             });
 
           // No last staging workflow before current prod workflow, disable prod
@@ -224,7 +224,7 @@ const HomePage = () => {
       if (config?.staging && unstagedUpdates) {
         // Staging
         await post(`/${PLUGIN_ID}/trigger-staging`);
-        await sendEmailNotification("staging-trigger");
+        sendEmailNotification("staging-trigger");
       } else {
         // Prod
         // Check for unstaged updates to prevent triggering if another editor published changes while the user was on this page
@@ -256,9 +256,7 @@ const HomePage = () => {
         await post(`/${PLUGIN_ID}/trigger`, {
           description: prodDeploymentDescription,
         });
-        await sendEmailNotification(
-          config?.staging ? "prod-trigger" : "trigger",
-        );
+        await sendEmailNotification("prod-trigger");
       }
 
       toggleNotification({
@@ -301,16 +299,16 @@ const HomePage = () => {
   }
 
   function getWorkflowName(): string {
-    if (config?.staging && unstagedUpdates) {
+    if (unstagedUpdates) {
       // Staging
       const stagingHistory = history.filter((workflow) => {
         const workflowPathArray = workflow.path.split("/");
         const workflowFileName =
           workflowPathArray[workflowPathArray.length - 1];
 
-        return workflowFileName === config.staging!.workflowID;
+        return workflowFileName === config?.staging.workflowID;
       });
-      return `"${stagingHistory[0]?.name ?? config.staging.workflowID}"`;
+      return `"${stagingHistory[0]?.name ?? config?.staging.workflowID}"`;
     } else {
       // Prod
       const prodHistory = history.filter((workflow) => {
