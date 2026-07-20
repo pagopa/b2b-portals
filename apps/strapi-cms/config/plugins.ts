@@ -171,56 +171,6 @@ export default ({ env }: any) => ({
       s3_endpoint: env('AWS_PROD_WEBSITE_BUCKET_ENDPOINT', 'test-endpoint'),
       s3_bucketName: env('AWS_PROD_WEBSITE_BUCKET_NAME', 'test-bucket'),
       s3_region: env('AWS_REGION', 'test-region'),
-      contentTypes: [
-        {
-          uid: 'api::page.page',
-          draft: {
-            url: env('PREVIEW_URL'),
-            query: {
-              type: 'page',
-              documentID: '{documentId}',
-              locale: '{locale}',
-              secret: env('PREVIEW_TOKEN'),
-              tenant: env('ENVIRONMENT'),
-            },
-            openTarget: '_blank',
-            copy: false,
-            alwaysVisible: true,
-          },
-        },
-        {
-          uid: 'api::press-release.press-release',
-          draft: {
-            url: env('PREVIEW_URL'),
-            query: {
-              type: 'press-release',
-              documentID: '{documentId}',
-              locale: '{locale}',
-              secret: env('PREVIEW_TOKEN'),
-              tenant: env('ENVIRONMENT'),
-            },
-            openTarget: '_blank',
-            copy: false,
-            alwaysVisible: true,
-          },
-        },
-        {
-          uid: 'api::page-switch-page.page-switch-page',
-          draft: {
-            url: env('PREVIEW_URL'),
-            query: {
-              type: 'page-switch-page',
-              documentID: '{documentId}',
-              locale: '{locale}',
-              secret: env('PREVIEW_TOKEN'),
-              tenant: env('ENVIRONMENT'),
-            },
-            openTarget: '_blank',
-            copy: false,
-            alwaysVisible: true,
-          },
-        },
-      ],
     },
   },
 });
