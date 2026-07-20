@@ -27,7 +27,7 @@ export default {
       )
     ) {
       throw new Error(
-        '`owner`, `repo`, `branch`, `workflowID` and `githubToken` and `staging` keys in your plugin config are required',
+        '`owner`, `repo`, `branch`, `workflowID`, `githubToken`, `staging.workflowID` and `staging.branch` keys in your plugin config are required',
       );
     }
     if (notifications && notifications.enabled === undefined) {

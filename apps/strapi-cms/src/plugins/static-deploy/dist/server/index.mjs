@@ -56,7 +56,7 @@ const config = {
   }) {
     if (!(owner && repo && branch && workflowID && githubToken && staging?.workflowID && staging?.branch)) {
       throw new Error(
-        "`owner`, `repo`, `branch`, `workflowID` and `githubToken` and `staging` keys in your plugin config are required"
+        "`owner`, `repo`, `branch`, `workflowID`, `githubToken`, `staging.workflowID` and `staging.branch` keys in your plugin config are required"
       );
     }
     if (notifications && notifications.enabled === void 0) {
@@ -2939,7 +2939,6 @@ const githubActionsService = ({ strapi: strapi2 }) => ({
     try {
       const owner = strapi2.plugin(PLUGIN_ID).config("owner");
       const repo = strapi2.plugin(PLUGIN_ID).config("repo");
-      const branch = strapi2.plugin(PLUGIN_ID).config("branch");
       const githubToken = strapi2.plugin(PLUGIN_ID).config("githubToken");
       const environment = strapi2.plugin(PLUGIN_ID).config("environment");
       const staging = strapi2.plugin(PLUGIN_ID).config("staging");
@@ -2955,7 +2954,7 @@ const githubActionsService = ({ strapi: strapi2 }) => ({
         {
           inputs: { environment },
           // TODO: Handle case in which "environment" isn't inserted --> Add inputs conditionally
-          ref: staging.branch ?? branch
+          ref: staging.branch
         },
         {
           headers: {
@@ -2987,7 +2986,7 @@ const githubActionsService = ({ strapi: strapi2 }) => ({
         }
       );
       const stagingHistory = staging ? await axios.get(
-        `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${staging.workflowID}/runs?branch=${staging.branch ?? branch}&per_page=100&page=1`,
+        `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${staging.workflowID}/runs?branch=${staging.branch}&per_page=100&page=1`,
         {
           headers: {
             Accept: "application/vnd.github+json",
@@ -3109,7 +3108,7 @@ const notificationsService = ({ strapi: strapi2 }) => ({
       }
       const emails = (await strapi2.documents(`plugin::${PLUGIN_ID}.email-for-notifications`).findMany({ sort: "email:asc" })).map((doc) => doc.email);
       if (emails.length > 0) {
-        strapi2.plugin("email").services.email.send({
+        await strapi2.plugin("email").services.email.send({
           to: emails,
           subject: notificationTitle[event],
           html: notificationBody(

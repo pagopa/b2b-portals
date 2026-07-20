@@ -66,7 +66,7 @@ const notificationsService = ({ strapi }: { strapi: Core.Strapi }) => ({
       ).map((doc) => doc.email);
 
       if (emails.length > 0) {
-        strapi.plugin('email').services.email.send({
+        await strapi.plugin('email').services.email.send({
           to: emails,
           subject: notificationTitle[event],
           html: notificationBody(
