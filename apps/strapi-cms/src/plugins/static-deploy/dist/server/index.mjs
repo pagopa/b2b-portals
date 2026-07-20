@@ -59,11 +59,6 @@ const config = {
         "`owner`, `repo`, `branch`, `workflowID` and `githubToken` and `staging` keys in your plugin config are required"
       );
     }
-    if (staging && !staging.workflowID) {
-      throw new Error(
-        "`staging.workflowID` key in your plugin config is missing"
-      );
-    }
     if (notifications && notifications.enabled === void 0) {
       throw new Error(
         "`notifications.enabled` key in your plugin config is missing, either set it to a string or remove the whole notifications object"

@@ -8,7 +8,7 @@ export default interface Config {
   hideGithubLink?: boolean;
   staging: {
     workflowID: string;
-    branch?: string;
+    branch: string;
   };
   notifications?: {
     enabled: boolean;

@@ -44,8 +44,8 @@ export default ({ env }: any) => ({
       githubToken: env('GITHUB_PAT', 'test-token'),
       environment: env('ENVIRONMENT', 'demo'),
       staging: {
-        workflowID: env('STAGING_WORKFLOW_ID', 'deploy_website_staging.yaml'),
-        branch: env('STAGING_TARGET_BRANCH', 'main'),
+        workflowID: env('STAGING_WORKFLOW_ID'),
+        branch: env('STAGING_TARGET_BRANCH'),
       },
       notifications: {
         enabled: true,
