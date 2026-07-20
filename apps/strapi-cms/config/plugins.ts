@@ -141,6 +141,12 @@ export default ({ env }: any) => ({
           'media-folder.create',
           'media-folder.update',
           'media-folder.delete',
+          'user.create',
+          'user.update',
+          'user.delete',
+          'role.create',
+          'role.update',
+          'role.delete',
         ],
       },
       adminPanel: {
