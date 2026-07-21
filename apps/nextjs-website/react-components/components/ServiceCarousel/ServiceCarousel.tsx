@@ -106,7 +106,19 @@ const ServiceCarousel = ({
         ref={containerRef}
         gap={{ xs: 3.375, sm: 3.375, md: 4 }}
         width={'100%'}
-        sx={{ position: 'relative' }}
+        sx={{
+          position: 'relative',
+          '.slick-track': {
+            display: 'flex !important',
+            '.slick-slide': {
+              display: 'flex !important',
+              height: 'inherit !important',
+              '> div': {
+                display: 'flex',
+              },
+            },
+          },
+        }}
       >
         <SliderArrowControl
           direction='left'
