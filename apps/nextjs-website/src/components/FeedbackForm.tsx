@@ -35,10 +35,10 @@ const feedbackFormLabels: Record<Locale, FeedbackFormProps['labels']> = {
       "C'è stato un problema nell'invio 😞\nTi va di riprovare più tardi? 🙏",
   },
   en: {
-    title: 'Hi, was this page helpful?',
+    title: 'Hello, was this page helpful?',
     yes: 'Yes',
     no: 'No',
-    send: 'Send',
+    send: 'Submit',
     sendDetails: 'Send details',
     sending: 'Sending...',
     feedbackSent: 'Feedback sent. Thank you.',
