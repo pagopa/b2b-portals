@@ -55,7 +55,7 @@ export const TopBarHeader = ({
         width: '100%',
         backgroundColor: '#004D99',
         color: '#FFFFFF',
-        p: { xs: '14px 24px', md: '12px 60px' },
+        p: { xs: '12px 24px', md: '12px 32px' },
         zIndex: 1000,
       }}
     >
