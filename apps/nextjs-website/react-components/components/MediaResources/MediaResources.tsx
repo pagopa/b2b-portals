@@ -1,8 +1,9 @@
 import { Box, Typography, useTheme, Stack } from '@mui/material';
 import { MediaResourcesProps } from '@react-components/types';
 import { TextColor } from '../common/Common.helpers';
-import { FileDownloadOutlined } from '@mui/icons-material';
 import { resolveThemeVariant } from '../../theme';
+import Image from 'next/image';
+import downloadIcon from '@react-components/assets/icons/download.svg';
 
 const MediaResources = ({
   items,
@@ -93,7 +94,13 @@ const MediaResources = ({
                 spacing={1}
                 color={linkColor}
               >
-                <FileDownloadOutlined />
+                <Image
+                  src={downloadIcon}
+                  alt=''
+                  width={22}
+                  height={20}
+                  aria-hidden='true'
+                />
                 <Typography color='inherit' fontSize={14} fontWeight={600}>
                   {item.label}
                 </Typography>
