@@ -22,13 +22,9 @@ const EditorialSwitch = ({
   titleTag,
   subtitle,
 }: EditorialSwitchProps) => {
-  if (sections[0] === undefined) {
-    return null;
-  }
-
-  const [currentSection, setCurrentSection] = useState<EditorialSwitchSection>(
-    sections[0],
-  );
+  const [currentSection, setCurrentSection] = useState<
+    EditorialSwitchSection | undefined
+  >(sections[0]);
 
   const handleButtonClick = (sectionID: number) => {
     const section = sections.find((s) => s.id === sectionID);
@@ -65,7 +61,7 @@ const EditorialSwitch = ({
     ctx,
   );
 
-  return (
+  return !currentSection ? null : (
     <Box>
       <ContainerRC
         sxInner={{

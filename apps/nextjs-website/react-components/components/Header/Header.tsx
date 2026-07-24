@@ -104,9 +104,11 @@ const Header = ({
 
   const handleScroll = useCallback(() => {
     if (!hasScrolledRef.current && window.scrollY > 200) {
+      // eslint-disable-next-line functional/immutable-data
       hasScrolledRef.current = true;
       setIsScrolled(true);
     } else if (hasScrolledRef.current && window.scrollY < 80) {
+      // eslint-disable-next-line functional/immutable-data
       hasScrolledRef.current = false;
       setIsScrolled(false);
     }
@@ -114,6 +116,7 @@ const Header = ({
 
   useLayoutEffect(() => {
     handleScroll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

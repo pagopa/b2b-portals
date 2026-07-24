@@ -25,7 +25,7 @@ const RowText = (props: RowTextProps) => {
         bgcolor: backgroundColor,
         color: textColor,
         pt: 8,
-        pb: {xs: 3, md: 8},
+        pb: { xs: 3, md: 8 },
       }}
     >
       <Container

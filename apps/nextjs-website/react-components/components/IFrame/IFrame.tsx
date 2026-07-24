@@ -18,7 +18,9 @@ const IFrame = ({ src, sectionID, title }: IFrameProps) => {
         behavior: 'smooth',
       });
       // Specific message created as a workaround when calling parentIFrame.resize() doesn't work
-      iframeRef.current.getElement().style.height = `${newChildHeight}px`;
+      iframeRef.current
+        .getElement()
+        .style.setProperty('height', `${newChildHeight}px`);
     }
   };
 

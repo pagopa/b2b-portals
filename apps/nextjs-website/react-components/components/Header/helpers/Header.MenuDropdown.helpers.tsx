@@ -72,17 +72,7 @@ const useStyles = ({ active }: MenuDropdownProp, { spacing }: Theme) => {
 export const MenuDropdown = (
   props: MenuDropdownProp & { labels: HeaderProps['labels'] },
 ) => {
-  const {
-    label,
-    active,
-    theme,
-    items,
-    isOpen,
-    onDropdownClick,
-    isMobile,
-    labels,
-    ...button
-  } = props;
+  const { label, items, isOpen, onDropdownClick, ...button } = props;
   const muiTheme = useTheme();
   const styles = useStyles(props, muiTheme);
   const hasLinks = items?.length;
@@ -204,6 +194,7 @@ export const MenuDropdown = (
                       }),
                     }}
                     ref={(el) => {
+                      // eslint-disable-next-line functional/immutable-data
                       itemsRef.current[index] = el;
                     }}
                     href={item.href}

@@ -88,7 +88,7 @@ const NotFoundPage = ({
       router.replace(redirectUrl);
     }, 5000);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [redirectUrl]);
 
   const backgroundColor = resolveThemeVariant<string>(
     'sectionBackgroundColor',

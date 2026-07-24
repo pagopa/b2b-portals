@@ -23,6 +23,6 @@ export interface RenderVideoProps {
   showControls: boolean;
   fallback: string;
   onClick?: () => void;
-  onVideoEnd: () => void;
+  onVideoEnd?: () => void;
   isMobileDevice: boolean;
 }

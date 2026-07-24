@@ -19,14 +19,10 @@ export const useMixpanelTracking = ({
   isLink,
   onClick,
 }: MixpanelTrackingProps): MixpanelTracking => {
-  if (!trackEvent) {
-    return {};
-  }
-
   const trackedOnClick = onClick
     ? (e: any) => {
         try {
-          if (!mixpanel.has_opted_out_tracking()) {
+          if (!mixpanel.has_opted_out_tracking() && trackEvent) {
             mixpanel.track(trackEvent, {
               Page: window.location.pathname,
               ...trackingProperties,
@@ -41,33 +37,29 @@ export const useMixpanelTracking = ({
       }
     : null;
 
-  if (isLink) {
-    const [randomID, setRandomID] = useState<string | undefined>(undefined);
+  const [randomID, setRandomID] = useState<string | undefined>(undefined);
 
-    useEffect(() => {
-      setRandomID(Math.random().toString(36).substring(7));
-    }, []);
-
-    useEffect(() => {
-      try {
-        if (randomID && !mixpanel.has_opted_out_tracking()) {
-          mixpanel.track_links(`#${randomID}`, trackEvent, {
-            Page: window.location.pathname,
-            ...trackingProperties,
-          });
-        }
-      } catch {
-        // Mixpanel is not initialized
+  useEffect(() => {
+    setRandomID(Math.random().toString(36).substring(7));
+    try {
+      if (randomID && !mixpanel.has_opted_out_tracking() && trackEvent) {
+        mixpanel.track_links(`#${randomID}`, trackEvent, {
+          Page: window.location.pathname,
+          ...trackingProperties,
+        });
       }
-    }, [randomID]);
+    } catch {
+      // Mixpanel is not initialized
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLink, trackEvent, trackingProperties]);
 
-    return {
-      ...(randomID && { randomID }),
-      ...(trackedOnClick && { trackedOnClick }),
-    };
+  if (!trackEvent) {
+    return {};
   }
 
   return {
+    ...(randomID && { randomID }),
     ...(trackedOnClick && { trackedOnClick }),
   };
 };

@@ -226,8 +226,8 @@ const PressRelease = (props: PressReleaseProps) => {
       )}
 
       {paragraphs &&
-        paragraphs.map((paragraph) => (
-          <Stack mt={5}>
+        paragraphs.map((paragraph, index) => (
+          <Stack mt={5} key={`paragraph_${index}`}>
             <Typography
               variant='h3'
               component='h2'

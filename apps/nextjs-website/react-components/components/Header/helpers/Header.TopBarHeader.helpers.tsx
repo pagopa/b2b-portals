@@ -64,7 +64,7 @@ export const TopBarHeader = ({
           {topBarHeaderLogo && (
             <img
               src={topBarHeaderLogo.src}
-              {...(topBarHeaderLogo.alt && { alt: topBarHeaderLogo.alt })}
+              alt={topBarHeaderLogo.alt ?? ''}
               style={{ marginRight: 8, height: 24 }}
             />
           )}
