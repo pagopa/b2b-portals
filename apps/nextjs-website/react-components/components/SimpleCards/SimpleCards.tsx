@@ -29,6 +29,11 @@ const SimpleCards = ({
     resolveThemeVariant<string>('sectionBackgroundColor', themeVariant, ctx);
 
   const textColor = TextColor(theme, themeVariant);
+  const richTextLinkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
   const isCentered = textAlign === 'center';
   const isNone = textAlign === 'none';
   const editorialTextAlign = isCentered ? 'center' : 'left';
@@ -94,6 +99,9 @@ const SimpleCards = ({
                   '& a': {
                     color: 'inherit',
                     textDecoration: 'underline',
+                    '&:hover': {
+                      color: richTextLinkHoverColor,
+                    },
                   },
                 }}
               >

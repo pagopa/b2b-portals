@@ -40,6 +40,11 @@ const Accordion = (props: AccordionProps) => {
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -78,7 +83,7 @@ const Accordion = (props: AccordionProps) => {
                       color: linkColor,
                       textDecoration: 'underline',
                       '&:hover': {
-                        color: linkColor,
+                        color: linkHoverColor,
                       },
                     },
                     '& p': {

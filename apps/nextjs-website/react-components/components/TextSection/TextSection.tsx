@@ -47,6 +47,11 @@ const TextSection = ({
     themeVariant,
     ctx,
   );
+  const richTextLinkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -111,7 +116,7 @@ const TextSection = ({
               color: textColor,
               textDecoration: 'underline',
               '&:hover': {
-                color: textColor,
+                color: richTextLinkHoverColor,
                 textDecoration: 'underline',
               },
             },

@@ -35,6 +35,11 @@ const HeroChips = (props: HeroChipsProps) => {
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   const BackgroundImage = (
     <Box
@@ -111,6 +116,9 @@ const HeroChips = (props: HeroChipsProps) => {
               },
               '& a': {
                 color: linkColor,
+                '&:hover': {
+                  color: linkHoverColor,
+                },
               },
             }}
             textAlign='center'

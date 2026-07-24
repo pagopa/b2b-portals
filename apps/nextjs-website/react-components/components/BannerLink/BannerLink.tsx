@@ -61,6 +61,11 @@ const BannerLink = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -123,7 +128,7 @@ const BannerLink = ({
                       textDecoration: 'underline',
                       fontWeight: 'bold',
                       '&:hover': {
-                        color: linkColor,
+                        color: linkHoverColor,
                         textDecoration: 'underline',
                       },
                     },
