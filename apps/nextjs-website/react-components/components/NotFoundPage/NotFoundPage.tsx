@@ -88,6 +88,7 @@ const NotFoundPage = ({
       router.replace(redirectUrl);
     }, 5000);
     return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const backgroundColor = resolveThemeVariant<string>(

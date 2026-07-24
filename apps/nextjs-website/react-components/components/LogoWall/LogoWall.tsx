@@ -17,10 +17,6 @@ const LogoWall = ({
   secondGroup,
   themeVariant,
 }: LogoWallProps) => {
-  if (!firstGroup.length) {
-    return null;
-  }
-
   const { palette } = useTheme();
 
   const ctx = { palette, theme };
@@ -108,6 +104,10 @@ const LogoWall = ({
       {items.map((item, index) => renderLogo(item, `${keyPrefix}-${index}`))}
     </Box>
   );
+
+  if (!firstGroup.length) {
+    return null;
+  }
 
   return (
     <ContainerRC

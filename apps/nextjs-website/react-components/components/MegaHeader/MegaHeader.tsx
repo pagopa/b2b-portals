@@ -156,17 +156,18 @@ const MegaHeader = ({
   }, [isMobile]);
 
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-    } else {
-      document.body.style.overflow = 'auto';
-      document.body.style.touchAction = 'auto';
-    }
+    document.body.style.setProperty(
+      'overflow',
+      mobileMenuOpen ? 'hidden' : 'auto',
+    );
+    document.body.style.setProperty(
+      'touchAction',
+      mobileMenuOpen ? 'none' : 'auto',
+    );
 
     return () => {
-      document.body.style.overflow = 'auto';
-      document.body.style.touchAction = 'auto';
+      document.body.style.setProperty('overflow', 'auto');
+      document.body.style.setProperty('touchAction', 'auto');
     };
   }, [mobileMenuOpen]);
 

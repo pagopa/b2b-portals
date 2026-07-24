@@ -22,13 +22,9 @@ const EditorialSwitch = ({
   titleTag,
   subtitle,
 }: EditorialSwitchProps) => {
-  if (sections[0] === undefined) {
-    return null;
-  }
-
-  const [currentSection, setCurrentSection] = useState<EditorialSwitchSection>(
-    sections[0],
-  );
+  const [currentSection, setCurrentSection] = useState<
+    EditorialSwitchSection | undefined
+  >(undefined);
 
   const handleButtonClick = (sectionID: number) => {
     const section = sections.find((s) => s.id === sectionID);
@@ -64,6 +60,10 @@ const EditorialSwitch = ({
     themeVariant,
     ctx,
   );
+
+  if (currentSection === undefined) {
+    return null;
+  }
 
   return (
     <Box>
