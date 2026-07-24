@@ -102,8 +102,8 @@ const CardsItem = ({
                     underline='none'
                     href={link.href}
                     title={link.title}
-                    fontSize={14}
-                    fontWeight={600}
+                    fontSize={16}
+                    fontWeight={700}
                     {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
                     {...(isValidExternalLink(link.href) && {
                       target: '_blank',

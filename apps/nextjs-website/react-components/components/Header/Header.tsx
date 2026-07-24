@@ -156,7 +156,7 @@ const Header = ({
             justifyContent='space-between'
             alignItems='center'
             color='#FFFFFF'
-            height={88}
+            height={64}
             sx={{
               ...(enableTransitions && {
                 transition: 'all .3s ease-out',

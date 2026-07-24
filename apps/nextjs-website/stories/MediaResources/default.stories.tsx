@@ -120,4 +120,8 @@ MediaResourcesFullDark.args = {
       label: 'Scarica il manuale',
     },
   ],
+  labels: {
+    ariaLabelDownload: (filename: string, title: string) =>
+      `${title}: Scarica ${filename}`,
+  },
 };

@@ -18,7 +18,8 @@ const RowText = (props: RowTextProps) => {
         width: '100%',
         bgcolor: backgroundColor,
         color: textColor,
-        py: 8,
+        pt: 8,
+        pb: {xs: 3, md: 8},
       }}
     >
       <Container

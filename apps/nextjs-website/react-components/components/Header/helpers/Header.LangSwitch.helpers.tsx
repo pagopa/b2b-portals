@@ -22,7 +22,7 @@ export default function LangSwitch({
 }: Props) {
   const labels: Record<Locale, Labels> = {
     it: {
-      dropdownLabel: 'Cambia la lingua',
+      dropdownLabel: 'Cambia lingua',
       menuItemMobile: 'ITA',
       open: 'Apri',
       close: 'Chiudi',
