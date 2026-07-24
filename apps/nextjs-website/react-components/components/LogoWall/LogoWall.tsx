@@ -105,11 +105,7 @@ const LogoWall = ({
     </Box>
   );
 
-  if (!firstGroup.length) {
-    return null;
-  }
-
-  return (
+  return !firstGroup.length ? null : (
     <ContainerRC
       background={backgroundColor}
       py={8}
