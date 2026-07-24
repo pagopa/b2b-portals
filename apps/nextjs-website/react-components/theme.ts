@@ -215,6 +215,21 @@ export const variantContentLinkColorMap: ThemeVariantMap<string> = {
     theme === 'dark' ? palette.custom.white : palette.custom.walletPrimaryColor,
 };
 
+export const variantRichTextLinkHoverColorMap: ThemeVariantMap<string> = {
+  SEND: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.white
+      : palette.custom.sendChipsBackgroundColorLightHover,
+  IO: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.white
+      : palette.custom.ioChipsBackgroundColorLightHover,
+  WALLET: ({ palette, theme }) =>
+    theme === 'dark'
+      ? palette.custom.white
+      : palette.custom.walletPrimaryColorHover,
+};
+
 export const variantSectionBackgroundColorMap: ThemeVariantMap<string> = {
   SEND: ({ palette, theme }) =>
     theme === 'dark'
@@ -801,6 +816,7 @@ export const themeVariantMaps = {
   accentColor: variantAccentColorMap,
   actionColor: variantActionColorMap,
   contentLinkColor: variantContentLinkColorMap,
+  richTextLinkHoverColor: variantRichTextLinkHoverColorMap,
   sectionBackgroundColor: variantSectionBackgroundColorMap,
   sectionBackgroundAlternativeGrey: variantSectionBackgroundAlternativeGreyMap,
   accordionBackgroundColor: accordionBackgroundColorMap,

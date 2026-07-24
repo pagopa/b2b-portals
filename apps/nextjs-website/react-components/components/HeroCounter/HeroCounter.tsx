@@ -34,6 +34,11 @@ const HeroCounter = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   const counterColor = resolveThemeVariant<string>(
     'heroCounterNumberColor',
@@ -111,7 +116,7 @@ const HeroCounter = ({
                 color: linkColor,
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: linkColor,
+                  color: linkHoverColor,
                 },
               },
               '& p': {

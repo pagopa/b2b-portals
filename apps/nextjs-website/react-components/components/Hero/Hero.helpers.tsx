@@ -40,6 +40,11 @@ export const HeroTextContent = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Stack
@@ -78,7 +83,7 @@ export const HeroTextContent = ({
               color: linkColor,
               textDecoration: 'underline',
               '&:hover': {
-                color: linkColor,
+                color: linkHoverColor,
               },
             },
             '& p': {

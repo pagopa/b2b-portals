@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Container, useTheme } from '@mui/material';
 import { RowTextProps } from '../../types/RowText/RowText.types';
 import { TextColor, BackgroundColor } from '../common/Common.helpers';
+import { resolveThemeVariant } from '../../theme';
 
 const RowText = (props: RowTextProps) => {
   const { title, subtitle, body, layout, sectionID, titleTag, themeVariant } =
@@ -9,6 +10,11 @@ const RowText = (props: RowTextProps) => {
   const textColor = TextColor('light', themeVariant);
   const backgroundColor = BackgroundColor('light', themeVariant);
   const { palette } = useTheme();
+  const richTextLinkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    { palette, theme: 'light' },
+  );
 
   return (
     <Box
@@ -63,7 +69,7 @@ const RowText = (props: RowTextProps) => {
                 color: palette.primary.main,
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: palette.primary.main,
+                  color: richTextLinkHoverColor,
                   textDecoration: 'underline',
                 },
               },

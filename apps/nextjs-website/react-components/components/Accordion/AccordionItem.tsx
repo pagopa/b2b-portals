@@ -24,6 +24,11 @@ export const AccordionItem: React.FC<
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   const focusOutlineColor = resolveThemeVariant<string>(
     'focusOutlineColor',
@@ -143,7 +148,7 @@ export const AccordionItem: React.FC<
               color: linkColor,
               textDecoration: 'underline',
               '&:hover': {
-                color: linkColor,
+                color: linkHoverColor,
               },
             },
           }}

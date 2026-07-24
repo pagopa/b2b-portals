@@ -36,6 +36,11 @@ export const TitleSubtitleBlock = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Stack
@@ -66,7 +71,7 @@ export const TitleSubtitleBlock = ({
             color: linkColor,
             textDecoration: 'underline',
             '&:hover': {
-              color: linkColor,
+              color: linkHoverColor,
             },
           },
           '& p': {

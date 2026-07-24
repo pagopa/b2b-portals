@@ -42,6 +42,11 @@ const Cards = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   // Cards flow top-to-bottom per column to mimic the design's vertical masonry effect.
   const columnCount = {
@@ -141,7 +146,7 @@ const Cards = ({
                   color: linkColor,
                   textDecoration: 'underline',
                   '&:hover': {
-                    color: linkColor,
+                    color: linkHoverColor,
                   },
                 },
                 '& p': {
