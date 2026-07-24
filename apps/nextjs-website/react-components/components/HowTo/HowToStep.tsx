@@ -27,6 +27,11 @@ export const HowToStep = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Stack
@@ -87,7 +92,7 @@ export const HowToStep = ({
                 color: `${linkColor} !important`,
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: `${linkColor} !important`,
+                  color: `${linkHoverColor} !important`,
                 },
               },
               '& p': {
@@ -147,7 +152,7 @@ export const HowToStep = ({
                 color: `${linkColor} !important`,
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: `${linkColor} !important`,
+                  color: `${linkHoverColor} !important`,
                 },
               },
               '& p': {

@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Box, Typography, Link, Stack, Button, Snackbar } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Link,
+  Stack,
+  Button,
+  Snackbar,
+  useTheme,
+} from '@mui/material';
 import {
   TextColor,
   BackgroundColor,
@@ -12,6 +20,7 @@ import shareIcon from '@react-components/assets/icons/share.svg';
 import linkIcon from '@react-components/assets/icons/link.svg';
 import Image from 'next/image';
 import CardsItem from '../Cards/CardsItem';
+import { resolveThemeVariant } from '../../theme';
 
 const PressRelease = (props: PressReleaseProps) => {
   const {
@@ -31,6 +40,12 @@ const PressRelease = (props: PressReleaseProps) => {
   const eyeletColor = ExtraTextColor(theme, themeVariant);
   const backgroundColor = BackgroundColor(theme, themeVariant);
   const backlinkColor = TextAlternativeColor(theme, themeVariant);
+  const { palette } = useTheme();
+  const richTextLinkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    { palette, theme },
+  );
   const [copyLinkSnackBarOpen, setCopyLinkSnackBarOpen] = useState(false);
 
   const ShareLink = () => {
@@ -120,7 +135,7 @@ const PressRelease = (props: PressReleaseProps) => {
             color: textColor,
             textDecoration: 'underline',
             '&:hover': {
-              color: textColor,
+              color: richTextLinkHoverColor,
               textDecoration: 'underline',
             },
           },
@@ -233,7 +248,7 @@ const PressRelease = (props: PressReleaseProps) => {
                     color: textColor,
                     textDecoration: 'underline',
                     '&:hover': {
-                      color: textColor,
+                      color: richTextLinkHoverColor,
                       textDecoration: 'underline',
                     },
                   },

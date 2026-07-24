@@ -352,6 +352,11 @@ const Form = ({
     themeVariant,
     ctx,
   );
+  const notesLinkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   const submitButtonBackgroundColor = resolveThemeVariant<string>(
     'ctaContainedBackgroundColor',
@@ -563,7 +568,7 @@ const Form = ({
                 color: notesLinkColor,
                 textDecoration: 'underline',
                 '&:hover': {
-                  color: notesLinkColor,
+                  color: notesLinkHoverColor,
                   textDecoration: 'underline',
                 },
               },
