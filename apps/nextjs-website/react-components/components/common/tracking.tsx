@@ -1,5 +1,5 @@
 import mixpanel from 'mixpanel-browser';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { MouseEventHandler, useEffect, useId } from 'react';
 
 interface MixpanelTrackingProps {
   isLink: boolean;
@@ -37,12 +37,11 @@ export const useMixpanelTracking = ({
       }
     : null;
 
-  const [randomID, setRandomID] = useState<string | undefined>(undefined);
+  const randomID = useId();
 
   useEffect(() => {
-    setRandomID(Math.random().toString(36).substring(7));
     try {
-      if (randomID && !mixpanel.has_opted_out_tracking() && trackEvent) {
+      if (isLink && trackEvent && !mixpanel.has_opted_out_tracking()) {
         mixpanel.track_links(`#${randomID}`, trackEvent, {
           Page: window.location.pathname,
           ...trackingProperties,
@@ -51,15 +50,12 @@ export const useMixpanelTracking = ({
     } catch {
       // Mixpanel is not initialized
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLink, trackEvent, trackingProperties]);
+  }, [isLink, randomID, trackEvent, trackingProperties]);
 
-  if (!trackEvent) {
-    return {};
-  }
-
-  return {
-    ...(randomID && { randomID }),
-    ...(trackedOnClick && { trackedOnClick }),
-  };
+  return trackEvent
+    ? {
+        ...(isLink && { randomID }),
+        ...(trackedOnClick && { trackedOnClick }),
+      }
+    : {};
 };
