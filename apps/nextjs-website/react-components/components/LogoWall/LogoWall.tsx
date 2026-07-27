@@ -17,10 +17,6 @@ const LogoWall = ({
   secondGroup,
   themeVariant,
 }: LogoWallProps) => {
-  if (!firstGroup.length) {
-    return null;
-  }
-
   const { palette } = useTheme();
 
   const ctx = { palette, theme };
@@ -109,7 +105,7 @@ const LogoWall = ({
     </Box>
   );
 
-  return (
+  return !firstGroup.length ? null : (
     <ContainerRC
       background={backgroundColor}
       py={8}

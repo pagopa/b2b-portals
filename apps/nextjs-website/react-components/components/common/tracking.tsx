@@ -1,5 +1,5 @@
 import mixpanel from 'mixpanel-browser';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { MouseEventHandler, useEffect, useId } from 'react';
 
 interface MixpanelTrackingProps {
   isLink: boolean;
@@ -19,14 +19,10 @@ export const useMixpanelTracking = ({
   isLink,
   onClick,
 }: MixpanelTrackingProps): MixpanelTracking => {
-  if (!trackEvent) {
-    return {};
-  }
-
   const trackedOnClick = onClick
     ? (e: any) => {
         try {
-          if (!mixpanel.has_opted_out_tracking()) {
+          if (!mixpanel.has_opted_out_tracking() && trackEvent) {
             mixpanel.track(trackEvent, {
               Page: window.location.pathname,
               ...trackingProperties,
@@ -41,33 +37,25 @@ export const useMixpanelTracking = ({
       }
     : null;
 
-  if (isLink) {
-    const [randomID, setRandomID] = useState<string | undefined>(undefined);
+  const randomID = useId();
 
-    useEffect(() => {
-      setRandomID(Math.random().toString(36).substring(7));
-    }, []);
-
-    useEffect(() => {
-      try {
-        if (randomID && !mixpanel.has_opted_out_tracking()) {
-          mixpanel.track_links(`#${randomID}`, trackEvent, {
-            Page: window.location.pathname,
-            ...trackingProperties,
-          });
-        }
-      } catch {
-        // Mixpanel is not initialized
+  useEffect(() => {
+    try {
+      if (isLink && trackEvent && !mixpanel.has_opted_out_tracking()) {
+        mixpanel.track_links(`#${randomID}`, trackEvent, {
+          Page: window.location.pathname,
+          ...trackingProperties,
+        });
       }
-    }, [randomID]);
+    } catch {
+      // Mixpanel is not initialized
+    }
+  }, [isLink, randomID, trackEvent, trackingProperties]);
 
-    return {
-      ...(randomID && { randomID }),
-      ...(trackedOnClick && { trackedOnClick }),
-    };
-  }
-
-  return {
-    ...(trackedOnClick && { trackedOnClick }),
-  };
+  return trackEvent
+    ? {
+        ...(isLink && { randomID }),
+        ...(trackedOnClick && { trackedOnClick }),
+      }
+    : {};
 };

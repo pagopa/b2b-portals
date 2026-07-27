@@ -62,6 +62,7 @@ export const AccordionItem: React.FC<
 
   const appendItemIDToURLHash = () => {
     if (!itemID) return;
+    // eslint-disable-next-line functional/immutable-data
     window.location.hash = itemID;
   };
 

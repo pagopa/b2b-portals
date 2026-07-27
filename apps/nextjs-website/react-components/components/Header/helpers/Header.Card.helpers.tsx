@@ -44,8 +44,14 @@ export default function ActionAreaCard({
       <div>
         <CardContent sx={{ padding: '1.5rem', paddingBottom: '0.5rem' }}>
           <Stack flexDirection='row' gap={2} marginBottom={2}>
-            {icons.map((iconURL) => (
-              <Image src={iconURL} alt='' height={32} width={32} />
+            {icons.map((iconURL, index) => (
+              <Image
+                key={`header_card_image_${index}`}
+                src={iconURL}
+                alt=''
+                height={32}
+                width={32}
+              />
             ))}
           </Stack>
 

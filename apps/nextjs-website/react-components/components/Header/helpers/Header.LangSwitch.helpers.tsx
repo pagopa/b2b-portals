@@ -59,7 +59,7 @@ export default function LangSwitch({
 
   const toggleMenu = () => setOpen((prev) => !prev);
   const anchorEl = useRef(null);
-  const goToLanguageLink = (href: string) => (window.location.href = href);
+  const goToLanguageLink = (href: string) => window.location.assign(href);
 
   return (
     <Box sx={{ ml: 'auto' }}>

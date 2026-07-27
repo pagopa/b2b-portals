@@ -49,16 +49,6 @@ const PreFooter = (props: PreFooterProps) => {
   } = props;
   const pathname = usePathname() ?? '';
 
-  // Don't show PreFooter for any press release
-  if (pathname && pathname.includes(pressReleasesParentSlug)) {
-    return null;
-  }
-
-  // Compare excluded slugs with current page slug (removing initial '/')
-  if (excludeSlugs && pathname && excludeSlugs.includes(pathname.slice(1))) {
-    return null;
-  }
-
   const muiTheme = useTheme();
   const { palette } = muiTheme;
   const ctx = { palette, theme };
@@ -72,6 +62,16 @@ const PreFooter = (props: PreFooterProps) => {
     themeVariant,
     ctx,
   );
+
+  // Don't show PreFooter for any press release
+  if (pathname && pathname.includes(pressReleasesParentSlug)) {
+    return null;
+  }
+
+  // Compare excluded slugs with current page slug (removing initial '/')
+  if (excludeSlugs && pathname && excludeSlugs.includes(pathname.slice(1))) {
+    return null;
+  }
 
   return (
     <Box

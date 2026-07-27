@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Container,
-  SxProps,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { Box, Container, SxProps, Typography, useTheme } from '@mui/material';
 import { RichBannerProps } from '@react-components/types/RichBanner/RichBanner.types';
 import { BackgroundColor, TextColor } from '../common/Common.helpers';
 import { resolveThemeVariant } from '../../theme';

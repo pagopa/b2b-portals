@@ -33,11 +33,7 @@ const Accordion = (props: AccordionProps) => {
 
   const backgroundColor =
     customBgColor ??
-    resolveThemeVariant<string>(
-      'accordionBackgroundColor',
-      themeVariant,
-      ctx,
-    );
+    resolveThemeVariant<string>('accordionBackgroundColor', themeVariant, ctx);
 
   const linkColor = resolveThemeVariant<string>(
     'contentLinkColor',

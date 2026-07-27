@@ -10,7 +10,7 @@
     "clean": "shx rm -rf out/",
     "compile": "tsc --noEmit",
     "dev": "next dev",
-    "lint": "next lint",
+    "lint": "next lint --dir src --dir react-components --no-cache",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "test": "vitest --coverage"

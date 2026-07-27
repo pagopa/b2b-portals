@@ -27,6 +27,7 @@ const makeVideoImageProps = ({
   ...(video &&
     (video.src || video.srcURL) && {
       video: {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         src: video.src?.url ?? video.srcURL!,
         ...(video.previewImage && { poster: video.previewImage.url }),
         autoplay: video.autoplay,

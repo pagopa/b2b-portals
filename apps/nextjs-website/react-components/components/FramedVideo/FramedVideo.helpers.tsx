@@ -51,8 +51,8 @@ export const renderVideo = ({
       loop={loop}
       autoPlay={autoplay}
       controls={showControls}
-      onEnded={onVideoEnd}
-      onClick={onClick}
+      {...(onVideoEnd && { onEnded: onVideoEnd })}
+      {...(onClick && { onClick })}
       style={isMobileDevice ? mobileStyle : nonMobileStyle}
     >
       <source src={src} onError={() => setError(true)} />
@@ -60,7 +60,7 @@ export const renderVideo = ({
   );
 };
 
-export const renderTextSection = ({
+export const RenderTextSection = ({
   title,
   body,
   link,

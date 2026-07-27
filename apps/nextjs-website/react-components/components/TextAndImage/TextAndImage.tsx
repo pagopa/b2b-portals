@@ -13,7 +13,7 @@ const TextAndImage = ({ sectionID, body, image }: TextAndImageProps) => (
     </Typography>
 
     <Link href={image.href} title={image.title} target='_blank'>
-      <img src={image.src} width='280px' height='auto' />
+      <img src={image.src} width='280px' height='auto' alt={image.title} />
     </Link>
   </Stack>
 );

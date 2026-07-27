@@ -59,6 +59,7 @@ const HeroChips = (props: HeroChipsProps) => {
           sizes={background.sizes}
           width={0}
           height={0}
+          alt=''
           style={{
             width: '100%',
             height: '100%',

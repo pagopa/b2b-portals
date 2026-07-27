@@ -62,6 +62,7 @@ const HeroCounter = ({
           src={background.src}
           srcSet={background.srcSet}
           sizes={background.sizes}
+          alt=''
           width={0}
           height={0}
           style={{
