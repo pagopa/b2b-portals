@@ -79,13 +79,16 @@ const HowTo = (props: HowToProps) => {
         <Box
           component='ol'
           sx={{
-            display: { md: 'grid' },
-            gridTemplateColumns: 'auto '.repeat(rowMaxSteps).trim(),
+            display: { sm: 'grid' },
+            gridTemplateColumns: {
+              sm: 'auto auto',
+              md: 'auto '.repeat(rowMaxSteps).trim(),
+            },
             p: 0,
             marginBlockStart: 0,
             marginBlockEnd: 0,
             listStyleType: 'none',
-            gap: { xs: spacing(4), md: spacing(8) },
+            gap: { xs: spacing(4), sm: spacing(6), md: spacing(8) },
           }}
         >
           {steps.map((step, j) => (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Box, useTheme, Typography } from '@mui/material';
+import { Stack, Box, useTheme, Typography, useMediaQuery } from '@mui/material';
 import { HowToStepProps } from '../../types/HowTo/HowTo.types';
 import { ArrowIcon } from './HowTo.helpers';
 import { TextColor } from '../common/Common.helpers';
@@ -17,9 +17,11 @@ export const HowToStep = ({
   themeVariant,
   isLastStep,
 }: HowToStepProps) => {
+  const muiTheme = useTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const isDarkTheme = theme === 'dark';
   const textColor = TextColor(theme, themeVariant);
-  const { palette } = useTheme();
+  const { palette } = muiTheme;
   const ctx = { palette, theme };
 
   const linkColor = resolveThemeVariant<string>(
@@ -57,7 +59,7 @@ export const HowToStep = ({
               color={isDarkTheme ? 'white' : undefined}
             >
               <Image src={iconURL} alt='' height={64} width={64} />
-              {!isLastStep && (
+              {!isMobile && !isLastStep && (
                 <Box
                   sx={{
                     opacity: 1,
