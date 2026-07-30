@@ -2,24 +2,38 @@ import { describe, it, expect } from 'vitest';
 import { extractTenantStrapiApiData, StrapiApiData } from '../tenantApiData';
 
 const strapiApiData: Omit<StrapiApiData, 'ENVIRONMENT'> = {
-  APPIO_STRAPI_API_BASE_URL: 'APPIO_STRAPI_API_BASE_URL',
-  APPIO_STRAPI_API_TOKEN: 'APPIO_STRAPI_API_TOKEN',
-  APPIO_STRAPI_FEEDBACK_TOKEN: 'appioFeedbackToken',
-  DEMO_STRAPI_API_BASE_URL: 'DEMO_STRAPI_API_BASE_URL',
-  DEMO_STRAPI_API_TOKEN: 'DEMO_STRAPI_API_TOKEN',
-  DEMO_STRAPI_FEEDBACK_TOKEN: 'demoFeedbackToken',
-  INTEROP_STRAPI_API_BASE_URL: 'INTEROP_STRAPI_API_BASE_URL',
-  INTEROP_STRAPI_API_TOKEN: 'INTEROP_STRAPI_API_TOKEN',
-  INTEROP_STRAPI_FEEDBACK_TOKEN: 'interopFeedbackToken',
-  SEND_STRAPI_API_BASE_URL: 'SEND_STRAPI_API_BASE_URL',
-  SEND_STRAPI_API_TOKEN: 'SEND_STRAPI_API_TOKEN',
-  SEND_STRAPI_FEEDBACK_TOKEN: 'sendFeedbackToken',
-  PAGOPA_STRAPI_API_TOKEN: 'pagopaStrapiApiBaseUrl',
-  PAGOPA_STRAPI_API_BASE_URL: 'pagopaStrapiToken',
-  PAGOPA_STRAPI_FEEDBACK_TOKEN: 'pagopaFeedbackToken',
-  WALLET_STRAPI_API_TOKEN: 'walletStrapiApiBaseUrl',
-  WALLET_STRAPI_API_BASE_URL: 'walletStrapiToken',
-  WALLET_STRAPI_FEEDBACK_TOKEN: 'walletFeedbackToken',
+  TENANTS_CONFIG: JSON.stringify({
+    appio: {
+      baseUrl: 'APPIO_STRAPI_API_BASE_URL',
+      token: 'APPIO_STRAPI_API_TOKEN',
+      feedbackToken: 'appioFeedbackToken',
+    },
+    demo: {
+      baseUrl: 'DEMO_STRAPI_API_BASE_URL',
+      token: 'DEMO_STRAPI_API_TOKEN',
+      feedbackToken: 'demoFeedbackToken',
+    },
+    interop: {
+      baseUrl: 'INTEROP_STRAPI_API_BASE_URL',
+      token: 'INTEROP_STRAPI_API_TOKEN',
+      feedbackToken: 'interopFeedbackToken',
+    },
+    pagopa: {
+      baseUrl: 'pagopaStrapiToken',
+      token: 'pagopaStrapiApiBaseUrl',
+      feedbackToken: 'pagopaFeedbackToken',
+    },
+    send: {
+      baseUrl: 'SEND_STRAPI_API_BASE_URL',
+      token: 'SEND_STRAPI_API_TOKEN',
+      feedbackToken: 'sendFeedbackToken',
+    },
+    wallet: {
+      baseUrl: 'walletStrapiToken',
+      token: 'walletStrapiApiBaseUrl',
+      feedbackToken: 'walletFeedbackToken',
+    },
+  }),
 };
 
 describe('extractTenantStrapiApiData', () => {
@@ -52,24 +66,24 @@ describe('extractTenantStrapiApiData', () => {
     };
 
     expect(actual.appio).toStrictEqual({
-      baseUrl: strapiApiData.APPIO_STRAPI_API_BASE_URL,
-      token: strapiApiData.APPIO_STRAPI_API_TOKEN,
+      baseUrl: 'APPIO_STRAPI_API_BASE_URL',
+      token: 'APPIO_STRAPI_API_TOKEN',
     });
     expect(actual.demo).toStrictEqual({
-      baseUrl: strapiApiData.DEMO_STRAPI_API_BASE_URL,
-      token: strapiApiData.DEMO_STRAPI_API_TOKEN,
+      baseUrl: 'DEMO_STRAPI_API_BASE_URL',
+      token: 'DEMO_STRAPI_API_TOKEN',
     });
     expect(actual.interop).toStrictEqual({
-      baseUrl: strapiApiData.INTEROP_STRAPI_API_BASE_URL,
-      token: strapiApiData.INTEROP_STRAPI_API_TOKEN,
+      baseUrl: 'INTEROP_STRAPI_API_BASE_URL',
+      token: 'INTEROP_STRAPI_API_TOKEN',
     });
     expect(actual.send).toStrictEqual({
-      baseUrl: strapiApiData.SEND_STRAPI_API_BASE_URL,
-      token: strapiApiData.SEND_STRAPI_API_TOKEN,
+      baseUrl: 'SEND_STRAPI_API_BASE_URL',
+      token: 'SEND_STRAPI_API_TOKEN',
     });
     expect(actual.pagopa).toStrictEqual({
-      baseUrl: strapiApiData.PAGOPA_STRAPI_API_BASE_URL,
-      token: strapiApiData.PAGOPA_STRAPI_API_TOKEN,
+      baseUrl: 'pagopaStrapiToken',
+      token: 'pagopaStrapiApiBaseUrl',
     });
   });
 });

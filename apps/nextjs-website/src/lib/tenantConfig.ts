@@ -1,17 +1,10 @@
-import { Config } from '@/AppEnv';
+import * as E from 'fp-ts/lib/Either';
+import { pipe } from 'fp-ts/lib/function';
 
-type Tenant = Config['ENVIRONMENT'];
-type TenantEnvPrefix = Uppercase<Tenant>;
-type BaseUrlKey = `${TenantEnvPrefix}_STRAPI_API_BASE_URL`;
-type TokenKey = `${TenantEnvPrefix}_STRAPI_API_TOKEN`;
-type FeedbackTokenKey = `${TenantEnvPrefix}_STRAPI_FEEDBACK_TOKEN`;
-type TenantConfigEnvKey =
-  | 'ENVIRONMENT'
-  | BaseUrlKey
-  | TokenKey
-  | FeedbackTokenKey;
-
-export type TenantConfigEnv = Pick<Config, TenantConfigEnvKey>;
+export type TenantConfigEnv = {
+  readonly ENVIRONMENT: string;
+  readonly TENANTS_CONFIG: string;
+};
 
 export type TenantStrapiConfig = {
   readonly baseUrl: string;
@@ -19,55 +12,82 @@ export type TenantStrapiConfig = {
   readonly feedbackToken: string;
 };
 
-const tenantEnvKeys: Record<
-  Tenant,
-  {
-    readonly baseUrl: BaseUrlKey;
-    readonly token: TokenKey;
-    readonly feedbackToken: FeedbackTokenKey;
+type TenantsConfig = Record<string, TenantStrapiConfig>;
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === 'object' && value !== null && !Array.isArray(value);
+
+const isTenantStrapiConfig = (value: unknown): value is TenantStrapiConfig =>
+  isRecord(value) &&
+  typeof value['baseUrl'] === 'string' &&
+  typeof value['token'] === 'string' &&
+  typeof value['feedbackToken'] === 'string';
+
+const parseTenantsConfig = (
+  tenantsConfig: string,
+): E.Either<string, TenantsConfig> => {
+  try {
+    const parsedConfig: unknown = JSON.parse(tenantsConfig);
+
+    if (!isRecord(parsedConfig)) {
+      return E.left('TENANTS_CONFIG must be a JSON object');
+    }
+
+    return E.right(
+      Object.entries(parsedConfig).reduce<TenantsConfig>(
+        (tenantsConfig, [tenant, tenantConfig]) => {
+          if (!isTenantStrapiConfig(tenantConfig)) {
+            throw new Error(
+              `Missing or invalid Strapi config for tenant "${tenant}"`,
+            );
+          }
+
+          return {
+            ...tenantsConfig,
+            [tenant]: tenantConfig,
+          };
+        },
+        {},
+      ),
+    );
+  } catch (error) {
+    return E.left(
+      error instanceof Error
+        ? `Invalid TENANTS_CONFIG: ${error.message}`
+        : 'Invalid TENANTS_CONFIG',
+    );
   }
-> = {
-  appio: {
-    baseUrl: 'APPIO_STRAPI_API_BASE_URL',
-    token: 'APPIO_STRAPI_API_TOKEN',
-    feedbackToken: 'APPIO_STRAPI_FEEDBACK_TOKEN',
-  },
-  demo: {
-    baseUrl: 'DEMO_STRAPI_API_BASE_URL',
-    token: 'DEMO_STRAPI_API_TOKEN',
-    feedbackToken: 'DEMO_STRAPI_FEEDBACK_TOKEN',
-  },
-  interop: {
-    baseUrl: 'INTEROP_STRAPI_API_BASE_URL',
-    token: 'INTEROP_STRAPI_API_TOKEN',
-    feedbackToken: 'INTEROP_STRAPI_FEEDBACK_TOKEN',
-  },
-  pagopa: {
-    baseUrl: 'PAGOPA_STRAPI_API_BASE_URL',
-    token: 'PAGOPA_STRAPI_API_TOKEN',
-    feedbackToken: 'PAGOPA_STRAPI_FEEDBACK_TOKEN',
-  },
-  send: {
-    baseUrl: 'SEND_STRAPI_API_BASE_URL',
-    token: 'SEND_STRAPI_API_TOKEN',
-    feedbackToken: 'SEND_STRAPI_FEEDBACK_TOKEN',
-  },
-  wallet: {
-    baseUrl: 'WALLET_STRAPI_API_BASE_URL',
-    token: 'WALLET_STRAPI_API_TOKEN',
-    feedbackToken: 'WALLET_STRAPI_FEEDBACK_TOKEN',
-  },
 };
+
+export const validateTenantsConfig = (
+  config: TenantConfigEnv,
+): E.Either<string, TenantsConfig> =>
+  pipe(
+    parseTenantsConfig(config.TENANTS_CONFIG),
+    E.chain((tenantsConfig) =>
+      tenantsConfig[config.ENVIRONMENT] === undefined
+        ? E.left(
+            `Missing Strapi config for ENVIRONMENT "${config.ENVIRONMENT}"`,
+          )
+        : E.right(tenantsConfig),
+    ),
+  );
 
 export const getTenantStrapiConfig = (
   config: TenantConfigEnv,
-  tenant: Tenant = config.ENVIRONMENT,
+  tenant: string = config.ENVIRONMENT,
 ): TenantStrapiConfig => {
-  const keys = tenantEnvKeys[tenant];
+  const tenantsConfig = pipe(
+    validateTenantsConfig(config),
+    E.getOrElseW((error) => {
+      throw new Error(error);
+    }),
+  );
+  const tenantConfig = tenantsConfig[tenant];
 
-  return {
-    baseUrl: config[keys.baseUrl],
-    token: config[keys.token],
-    feedbackToken: config[keys.feedbackToken],
-  };
+  if (!isTenantStrapiConfig(tenantConfig)) {
+    throw new Error(`Missing or invalid Strapi config for tenant "${tenant}"`);
+  }
+
+  return tenantConfig;
 };

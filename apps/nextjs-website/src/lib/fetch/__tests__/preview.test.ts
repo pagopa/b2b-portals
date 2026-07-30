@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import {
   PreviewPageData,
   PageIDs,
@@ -10,37 +10,11 @@ import {
   fetchAllPageSwitchPageIDs,
   fetchPageSwitchPageFromID,
 } from '../preview';
-import { Config } from '@/AppEnv';
-
-const makeTestAppEnv = () => {
-  const config: Config = {
-    DEMO_STRAPI_API_TOKEN: 'demoStrapiToken',
-    DEMO_STRAPI_API_BASE_URL: 'demoStrapiApiBaseUrl',
-    DEMO_STRAPI_FEEDBACK_TOKEN: 'demoFeedbackToken',
-    SEND_STRAPI_API_BASE_URL: 'sendStrapiToken',
-    SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
-    SEND_STRAPI_FEEDBACK_TOKEN: 'sendFeedbackToken',
-    APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
-    APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
-    APPIO_STRAPI_FEEDBACK_TOKEN: 'appioFeedbackToken',
-    INTEROP_STRAPI_API_BASE_URL: 'interopStrapiToken',
-    INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
-    INTEROP_STRAPI_FEEDBACK_TOKEN: 'interopFeedbackToken',
-    PAGOPA_STRAPI_API_TOKEN: 'pagopaStrapiApiBaseUrl',
-    PAGOPA_STRAPI_API_BASE_URL: 'pagopaStrapiToken',
-    PAGOPA_STRAPI_FEEDBACK_TOKEN: 'pagopaFeedbackToken',
-    WALLET_STRAPI_API_TOKEN: 'walletStrapiApiBaseUrl',
-    WALLET_STRAPI_API_BASE_URL: 'walletStrapiToken',
-    WALLET_STRAPI_FEEDBACK_TOKEN: 'walletFeedbackToken',
-    ENVIRONMENT: 'demo',
-    PREVIEW_MODE: undefined,
-    PREVIEW_TOKEN: undefined,
-    MOCK_BUILD: undefined,
-  };
-  const fetchMock = vi.fn(fetch);
-  const appEnv = { config, fetchFun: fetchMock };
-  return { appEnv, fetchMock };
-};
+import {
+  demoStrapiApiBaseUrl,
+  demoStrapiApiToken,
+  makeTestAppEnv,
+} from './testConfig';
 
 const pageIDExample = 'docIdExample';
 
@@ -163,7 +137,6 @@ const pageSwitchPageDataResponse: PreviewPageData = {
 describe('fetchAllPageIDs', () => {
   it('should call /api/pages including unpublished content', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
-    const { config } = appEnv;
 
     fetchMock.mockResolvedValueOnce({
       json: () => Promise.resolve(pageIDsResponse),
@@ -172,11 +145,11 @@ describe('fetchAllPageIDs', () => {
     await fetchAllPageIDs({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages?locale=it&pagination[pageSize]=100&status=draft`,
+      `${demoStrapiApiBaseUrl}/api/pages?locale=it&pagination[pageSize]=100&status=draft`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${demoStrapiApiToken}`,
         },
         cache: 'no-cache',
       },
@@ -199,7 +172,6 @@ describe('fetchAllPageIDs', () => {
 describe('fetchAllPressReleaseIDs', () => {
   it('should call /api/press-releases including unpublished content', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
-    const { config } = appEnv;
 
     fetchMock.mockResolvedValueOnce({
       json: () => Promise.resolve(pageIDsResponse),
@@ -208,11 +180,11 @@ describe('fetchAllPressReleaseIDs', () => {
     await fetchAllPressReleaseIDs({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases?locale=it&pagination[pageSize]=100&status=draft`,
+      `${demoStrapiApiBaseUrl}/api/press-releases?locale=it&pagination[pageSize]=100&status=draft`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${demoStrapiApiToken}`,
         },
         cache: 'no-cache',
       },
@@ -235,7 +207,6 @@ describe('fetchAllPressReleaseIDs', () => {
 describe('fetchAllPageSwitchPageIDs', () => {
   it('should call /api/page-switch-pages including unpublished content', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
-    const { config } = appEnv;
 
     fetchMock.mockResolvedValueOnce({
       json: () => Promise.resolve(pageIDsResponse),
@@ -244,11 +215,11 @@ describe('fetchAllPageSwitchPageIDs', () => {
     await fetchAllPageSwitchPageIDs({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/page-switch-pages?locale=it&pagination[pageSize]=100&status=draft`,
+      `${demoStrapiApiBaseUrl}/api/page-switch-pages?locale=it&pagination[pageSize]=100&status=draft`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${demoStrapiApiToken}`,
         },
         cache: 'no-cache',
       },
@@ -271,7 +242,6 @@ describe('fetchAllPageSwitchPageIDs', () => {
 describe('fetchPageFromID', () => {
   it('should call /api/pages/[pageID] including unpublished content', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
-    const { config } = appEnv;
 
     fetchMock.mockResolvedValueOnce({
       json: () => Promise.resolve(pageDataResponse),
@@ -284,7 +254,7 @@ describe('fetchPageFromID', () => {
     });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pages/${pageIDExample}?locale=it&status=draft
+      `${demoStrapiApiBaseUrl}/api/pages/${pageIDExample}?locale=it&status=draft
 &populate[1]=sections.ctaButtons,sections.image,sections.mobileImage,sections.background,sections.link,sections.accordionItems,sections.decoration,sections.storeButtons,sections.categories,sections.counter,sections.icon,sections.chips,sections.bottomCTA,sections.ctaButton
 &populate[2]=sections.items.links,sections.items.link,sections.items.icon,sections.items.resource,sections.items.thumbnail
 &populate[3]=sections.sections.icon,sections.sections.ctaButtons
@@ -301,7 +271,7 @@ describe('fetchPageFromID', () => {
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${demoStrapiApiToken}`,
         },
         cache: 'no-cache',
       },
@@ -328,7 +298,6 @@ describe('fetchPageFromID', () => {
 describe('fetchPressReleaseFromID', () => {
   it('should call /api/press-releases/[pageID] including unpublished content', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
-    const { config } = appEnv;
 
     fetchMock.mockResolvedValueOnce({
       json: () => Promise.resolve(pressReleaseDataResponse),
@@ -341,7 +310,7 @@ describe('fetchPressReleaseFromID', () => {
     });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/press-releases/${pageIDExample}?locale=it&status=draft
+      `${demoStrapiApiBaseUrl}/api/press-releases/${pageIDExample}?locale=it&status=draft
 &populate[1]=credits.image
 &populate[2]=pressRelease.backlink
 &populate[3]=pressRelease.image
@@ -353,7 +322,7 @@ describe('fetchPressReleaseFromID', () => {
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${demoStrapiApiToken}`,
         },
         cache: 'no-cache',
       },
@@ -380,7 +349,6 @@ describe('fetchPressReleaseFromID', () => {
 describe('fetchPageSwitchPageFromID', () => {
   it('should call /api/page-switch-pages/[pageID] including unpublished content', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
-    const { config } = appEnv;
 
     fetchMock.mockResolvedValueOnce({
       json: () => Promise.resolve(pageSwitchPageDataResponse),
@@ -393,7 +361,7 @@ describe('fetchPageSwitchPageFromID', () => {
     });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/page-switch-pages/${pageIDExample}?locale=it&status=draft
+      `${demoStrapiApiBaseUrl}/api/page-switch-pages/${pageIDExample}?locale=it&status=draft
 &populate[1]=sections.ctaButtons,sections.image,sections.mobileImage,sections.storeButtons
 &populate[2]=sections.items.links,sections.items.icon
 &populate[3]=sections.sections.ctaButtons,sections.sections.icon
@@ -401,7 +369,7 @@ describe('fetchPageSwitchPageFromID', () => {
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${demoStrapiApiToken}`,
         },
         cache: 'no-cache',
       },

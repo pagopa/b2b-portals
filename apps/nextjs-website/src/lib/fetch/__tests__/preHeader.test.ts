@@ -1,36 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { getPreHeader } from '../preHeader';
-import { Config } from '@/AppEnv';
-
-const makeTestAppEnv = () => {
-  const config: Config = {
-    DEMO_STRAPI_API_TOKEN: 'demoStrapiToken',
-    DEMO_STRAPI_API_BASE_URL: 'demoStrapiApiBaseUrl',
-    DEMO_STRAPI_FEEDBACK_TOKEN: 'demoFeedbackToken',
-    SEND_STRAPI_API_BASE_URL: 'sendStrapiToken',
-    SEND_STRAPI_API_TOKEN: 'sendStrapiApiBaseUrl',
-    SEND_STRAPI_FEEDBACK_TOKEN: 'sendFeedbackToken',
-    APPIO_STRAPI_API_BASE_URL: 'appioStrapiToken',
-    APPIO_STRAPI_API_TOKEN: 'appioStrapiApiBaseUrl',
-    APPIO_STRAPI_FEEDBACK_TOKEN: 'appioFeedbackToken',
-    INTEROP_STRAPI_API_BASE_URL: 'interopStrapiToken',
-    INTEROP_STRAPI_API_TOKEN: 'interopStrapiApiBaseUrl',
-    INTEROP_STRAPI_FEEDBACK_TOKEN: 'interopFeedbackToken',
-    PAGOPA_STRAPI_API_TOKEN: 'pagopaStrapiApiBaseUrl',
-    PAGOPA_STRAPI_API_BASE_URL: 'pagopaStrapiToken',
-    PAGOPA_STRAPI_FEEDBACK_TOKEN: 'pagopaFeedbackToken',
-    WALLET_STRAPI_API_TOKEN: 'walletStrapiApiBaseUrl',
-    WALLET_STRAPI_API_BASE_URL: 'walletStrapiToken',
-    WALLET_STRAPI_FEEDBACK_TOKEN: 'walletFeedbackToken',
-    ENVIRONMENT: 'demo',
-    PREVIEW_MODE: undefined,
-    PREVIEW_TOKEN: undefined,
-    MOCK_BUILD: undefined,
-  };
-  const fetchMock = vi.fn(fetch);
-  const appEnv = { config, fetchFun: fetchMock };
-  return { appEnv, fetchMock };
-};
+import {
+  demoStrapiApiBaseUrl,
+  demoStrapiApiToken,
+  makeTestAppEnv,
+} from './testConfig';
 
 // Response example for getPreHeader
 const preHeaderResponse = {
@@ -92,7 +66,6 @@ const preHeaderResponseAfterCodec = {
 describe('getPreHeader', () => {
   it('should call /api/pre-header type GET based on tenant', async () => {
     const { appEnv, fetchMock } = makeTestAppEnv();
-    const { config } = appEnv;
 
     fetchMock.mockResolvedValueOnce({
       json: () => Promise.resolve(preHeaderResponse),
@@ -101,7 +74,7 @@ describe('getPreHeader', () => {
     await getPreHeader({ ...appEnv, locale: 'it' });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      `${config.DEMO_STRAPI_API_BASE_URL}/api/pre-header/?locale=it
+      `${demoStrapiApiBaseUrl}/api/pre-header/?locale=it
 &populate[0]=leftCtas
 &populate[1]=rightCtas
 &populate[2]=include
@@ -109,7 +82,7 @@ describe('getPreHeader', () => {
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${config.DEMO_STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${demoStrapiApiToken}`,
         },
       },
     );

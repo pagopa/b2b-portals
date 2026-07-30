@@ -18,12 +18,12 @@ export const appEnv = pipe(
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
 
-export const getFeedbackToken = () => {
-  return getTenantStrapiConfig(appEnv.config).feedbackToken;
+export const getFeedbackToken = (tenant = appEnv.config.ENVIRONMENT) => {
+  return getTenantStrapiConfig(appEnv.config, tenant).feedbackToken;
 };
 
-export const getStrapiApiBaseUrl = () => {
-  return getTenantStrapiConfig(appEnv.config).baseUrl;
+export const getStrapiApiBaseUrl = (tenant = appEnv.config.ENVIRONMENT) => {
+  return getTenantStrapiConfig(appEnv.config, tenant).baseUrl;
 };
 export const getters: Getters =
   appEnv.config.MOCK_BUILD === 'true' ? mock : real;
