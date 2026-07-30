@@ -10,6 +10,11 @@ const RowText = (props: RowTextProps) => {
   const textColor = TextColor('light', themeVariant);
   const backgroundColor = BackgroundColor('light', themeVariant);
   const { palette } = useTheme();
+  const richTextLinkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    { palette, theme: 'light' },
+  );
   const richTextLinkHoverColor = resolveThemeVariant<string>(
     'richTextLinkHoverColor',
     themeVariant,
@@ -67,7 +72,7 @@ const RowText = (props: RowTextProps) => {
               mt: 1,
               color: textColor,
               '& a': {
-                color: palette.primary.main,
+                color: richTextLinkColor,
                 textDecoration: 'underline',
                 '&:hover': {
                   color: richTextLinkHoverColor,
