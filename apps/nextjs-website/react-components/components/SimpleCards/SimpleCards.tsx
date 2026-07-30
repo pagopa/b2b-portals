@@ -193,7 +193,7 @@ const SimpleCards = ({
                   alt={imageAlt ?? ''}
                   width={220}
                   height={220}
-                  objectFit='cover'
+                  style={{ objectFit: 'cover' }}
                 />
               </Box>
             )}

@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Stack, Link, Box } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { CardsItemProps } from '../../types/Cards/Cards.types';
-import { Title, Body, isValidExternalLink, LinkIcon } from '../common/Common';
+import { Title, isValidExternalLink, LinkIcon } from '../common/Common';
 import Image from 'next/image';
 import { useTheme } from '@mui/material/styles';
 import { resolveThemeVariant } from '../../theme';
@@ -24,6 +24,14 @@ const CardsItem = ({
     palette,
     theme: 'light',
   });
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    {
+      palette,
+      theme: 'light',
+    },
+  );
 
   const borderColor = resolveThemeVariant<string>('borderColor', themeVariant, {
     palette,
@@ -79,13 +87,29 @@ const CardsItem = ({
               textAlign='left'
             />
           </Typography>
-          <Body
+          <Typography
+            mb='5px'
+            component='div'
             variant='body2'
-            textColor='inherit'
-            body={text}
-            marginBottom={5}
+            color={'inherit'}
             textAlign={textAlign}
-          />
+            sx={{
+              '& a': {
+                color: linkColor,
+                textDecoration: 'underline',
+                '&:hover': {
+                  color: linkHoverColor,
+                },
+              },
+              '& p': {
+                marginBottom: '0px',
+                color: 'inherit',
+                fontSize: '16px',
+              },
+            }}
+          >
+            {text}
+          </Typography>
           {links?.length
             ? links.map((link, index) => (
                 <Stack
