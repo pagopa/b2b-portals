@@ -9,6 +9,7 @@ const ASSET_OBJECT_KEY_NAMES = [
   'metaImage',
   'favicon',
   'appleTouchIcon',
+  'custom404Image',
   'thumbnail',
   'resource',
   'video',

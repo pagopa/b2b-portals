@@ -4,6 +4,7 @@ import { mockImageData } from './commons';
 export const mockSiteWideSEO: Getters['getSiteWideSEO'] = async () => ({
   analytics: null,
   appleTouchIcon: mockImageData,
+  custom404Image: null,
   defaultLocale: 'it',
   favicon: mockImageData,
   locales: {
