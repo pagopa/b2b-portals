@@ -24,9 +24,6 @@ const listStyle: SxProps = {
     a: {
       m: '0 !important',
       p: '0 !important',
-      color: 'inherit',
-      textDecoration: 'underline',
-      textDecorationThickness: 1,
     },
   },
 };
@@ -71,9 +68,10 @@ export const MenuBottomLinks = ({
               sx={{ mb: { md: '0 !important' }, mr: { md: 3 } }}
             >
               <Link
-                href={link.href}
-                {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
                 variant='body2'
+                href={link.href}
+                color='#fff'
+                {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
                 sx={{
                   fontSize: '14px',
                 }}
@@ -127,6 +125,7 @@ export const MenuSocial = ({
               <Link
                 variant='body2'
                 href={social.href}
+                color='#fff'
                 {...(social.ariaLabel && {
                   'aria-label': social.ariaLabel,
                 })}
@@ -245,9 +244,10 @@ export const MenuLinks = ({
           {links.links.map((link, index) => (
             <ListItem disablePadding key={`key_footer_siteindex_${index}`}>
               <Link
-                href={link.href}
-                {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
                 variant='body2'
+                href={link.href}
+                color='#fff'
+                {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
                 {...(isValidExternalLink(link.href) && {
                   target: '_blank',
                 })}
