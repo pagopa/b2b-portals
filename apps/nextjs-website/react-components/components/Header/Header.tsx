@@ -31,6 +31,7 @@ const Header = ({
   topBarHeaderLink,
   labels,
   languages,
+  defaultLocale,
   activeLanguage,
   themeVariant,
   theme,
@@ -45,18 +46,26 @@ const Header = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const hasScrolledRef = useRef(false);
   const [enableTransitions, setEnableTransitions] = useState(false);
+  const isNotDefaultLanguage = defaultLocale !== activeLanguage.id;
 
   const isActiveSubLink = (href?: string): boolean => {
     if (href) {
+      const cleanHref = href.replace(
+        isNotDefaultLanguage ? `/${activeLanguage.id}/` : '/',
+        '',
+      );
       return pathname
-        ? pathname.split('/').slice(1).includes(href.replace('/', ''))
+        ? pathname.split('/').slice(1).includes(cleanHref)
         : false;
     }
     return false;
   };
   const isCurrentLink = (menuItem: MenuDropdownProp): boolean => {
     if (menuItem.href && menuItem.href.indexOf('/') >= 0) {
-      const urlPathname = menuItem.href.substring(menuItem.href.indexOf('/'));
+      const urlPathname = menuItem.href.substring(
+        menuItem.href.indexOf('/'),
+        isNotDefaultLanguage ? menuItem.href.length - 1 : undefined,
+      );
       if (pathname === urlPathname) {
         return true;
       }
