@@ -15,8 +15,6 @@ const NotFound = async () => {
   const localesArray = Object.keys(locales).filter(
     (locale) => locales[locale as Locale],
   );
-  const walletCustom404Image =
-    themeVariant === 'WALLET' ? custom404Image : null;
 
   return (
     <NotFoundPage
