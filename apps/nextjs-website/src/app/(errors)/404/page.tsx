@@ -21,7 +21,7 @@ const NotFound = async () => {
       defaultLocale={defaultLocale}
       validLocales={localesArray as Array<Locale>}
       themeVariant={themeVariant}
-      custom404Image={walletCustom404Image}
+      custom404Image={custom404Image}
     />
   );
 };
