@@ -59,6 +59,7 @@ const siteWideSEOResponse: SiteWideSEO = {
       url: '/uploads/hero_home_background_969783a4a7.png',
       formats: null,
     },
+    custom404Image: null,
     themeVariant: 'SEND',
     locales: {
       it: true,
@@ -93,7 +94,8 @@ describe('fetchSiteWideSEO', () => {
 &populate[2]=appleTouchIcon
 &populate[3]=locales
 &populate[4]=analytics.mixpanel
-&populate[5]=siteName
+&populate[5]=custom404Image
+&populate[6]=siteName
       `,
       {
         method: 'GET',

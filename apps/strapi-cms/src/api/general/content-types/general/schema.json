@@ -81,6 +81,13 @@
     },
     "oneTrustToken": {
       "type": "text"
+    },
+    "custom404Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

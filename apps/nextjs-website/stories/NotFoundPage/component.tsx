@@ -8,5 +8,13 @@ export interface StorybookNotFoundPageProps {
 export const StorybookNotFoundPage = ({
   defaultLocale,
 }: StorybookNotFoundPageProps) => {
-  return <NotFoundPage defaultLocale={defaultLocale} disableRedirect={true} validLocales={['it', 'en', 'de', 'fr', 'sl']} />;
+  return (
+    <NotFoundPage
+      defaultLocale={defaultLocale}
+      disableRedirect={true}
+      validLocales={['it', 'en', 'de', 'fr', 'sl']}
+      themeVariant='WALLET'
+      custom404Image={null}
+    />
+  );
 };

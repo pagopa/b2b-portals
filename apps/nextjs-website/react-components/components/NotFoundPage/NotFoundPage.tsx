@@ -58,6 +58,8 @@ const NotFoundPage = ({
   disableRedirect,
   defaultLocale,
   validLocales,
+  themeVariant,
+  custom404Image,
 }: NotFoundPageProps) => {
   const { palette } = useTheme();
   const pathname = usePathname();
@@ -92,16 +94,20 @@ const NotFoundPage = ({
 
   const backgroundColor = resolveThemeVariant<string>(
     'sectionBackgroundColor',
-    'SEND',
+    themeVariant,
     { palette, theme: 'light' },
   );
 
   const textColor = palette.text.primary;
 
-  const linkColor = resolveThemeVariant<string>('contentLinkColor', 'SEND', {
-    palette,
-    theme: 'light',
-  });
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    {
+      palette,
+      theme: 'light',
+    },
+  );
 
   const texts = localizedTexts[locale as Locale];
 
@@ -118,13 +124,17 @@ const NotFoundPage = ({
       sx={{ backgroundColor }}
     >
       <Stack spacing={3} alignItems='center' maxWidth={480} mx='auto'>
-        <Image
-          src={EmptyImage}
-          alt='404'
-          width={140}
-          height={140}
-          style={{ display: 'block' }}
-        />
+        {custom404Image ? (
+          <Image
+            src={custom404Image.url}
+            alt={custom404Image.alternativeText ?? ''}
+            width={custom404Image.width}
+            height={custom404Image.height}
+            style={{ display: 'block' }}
+          />
+        ) : (
+          <Image src={EmptyImage} alt='' style={{ display: 'block' }} />
+        )}
 
         <Typography
           variant='h4'

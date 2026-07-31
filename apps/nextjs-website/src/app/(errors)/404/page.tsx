@@ -9,16 +9,21 @@ const NotFound = async () => {
     return null;
   }
 
-  const { defaultLocale, locales } = await getSiteWideSEO();
+  const { defaultLocale, locales, themeVariant, custom404Image } =
+    await getSiteWideSEO();
 
   const localesArray = Object.keys(locales).filter(
     (locale) => locales[locale as Locale],
   );
+  const walletCustom404Image =
+    themeVariant === 'WALLET' ? custom404Image : null;
 
   return (
     <NotFoundPage
       defaultLocale={defaultLocale}
       validLocales={localesArray as Array<Locale>}
+      themeVariant={themeVariant}
+      custom404Image={walletCustom404Image}
     />
   );
 };
