@@ -120,9 +120,14 @@ const CardsItem = ({
                   color={linkColor}
                   justifyContent={alignLinkIconLeft ? 'left' : 'space-between'}
                   width='100%'
+                  sx={{
+                    '&:hover': {
+                      color: linkHoverColor,
+                    },
+                  }}
                 >
                   <Link
-                    color={linkColor}
+                    color='inherit'
                     underline='none'
                     href={link.href}
                     title={link.title}
@@ -143,7 +148,7 @@ const CardsItem = ({
                     internalLinkIcon={
                       <ArrowForwardIcon
                         sx={{
-                          color: linkColor,
+                          color: 'inherit',
                           height: 24,
                           marginLeft: 1,
                           width: 24,

@@ -18,6 +18,11 @@ export const PressReleasePreview = ({
     themeVariant,
     { palette, theme: 'light' },
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    { palette, theme: 'light' },
+  );
 
   return (
     <Box
@@ -47,6 +52,11 @@ export const PressReleasePreview = ({
           justifyContent='flex-start'
           gap={1}
           color={linkColor}
+          sx={{
+            '&:hover': {
+              color: linkHoverColor,
+            },
+          }}
         >
           <Link
             href={link.href}
@@ -65,7 +75,7 @@ export const PressReleasePreview = ({
             internalLinkIcon={
               <ArrowForwardIcon
                 sx={{
-                  color: linkColor,
+                  color: 'inherit',
                   height: 24,
                   width: 24,
                 }}
