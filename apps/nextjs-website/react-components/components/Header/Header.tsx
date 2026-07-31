@@ -47,30 +47,24 @@ const Header = ({
   const hasScrolledRef = useRef(false);
   const [enableTransitions, setEnableTransitions] = useState(false);
   const isNotDefaultLanguage = defaultLocale !== activeLanguage.id;
-
-  const isActiveSubLink = (href?: string): boolean => {
+  const isActiveSubLink = (href?: string) => {
     if (href) {
-      const cleanHref = href.replace(
-        isNotDefaultLanguage ? `/${activeLanguage.id}/` : '/',
-        '',
-      );
-      return pathname
-        ? pathname.split('/').slice(1).includes(cleanHref)
-        : false;
+      const cleanHref = href.replace(/^(.+)\/$/, '$1');
+      if (cleanHref === pathname) {
+        return true;
+      }
+      const urlPathname = pathname.split('/')[isNotDefaultLanguage ? 2 : 1];
+      return urlPathname === href;
     }
     return false;
   };
   const isCurrentLink = (menuItem: MenuDropdownProp): boolean => {
-    if (menuItem.href && menuItem.href.indexOf('/') >= 0) {
-      const urlPathname = menuItem.href.substring(
-        menuItem.href.indexOf('/'),
-        isNotDefaultLanguage ? menuItem.href.length - 1 : undefined,
-      );
-      if (pathname === urlPathname) {
+    if (menuItem.href) {
+      const href = menuItem.href.replace(/^(.+)\/$/, '$1');
+      if (pathname === href) {
         return true;
       }
     }
-
     return menuItem.items
       ? menuItem.items
           .map((sublinkGroup) => isActiveSubLink(sublinkGroup.href))
