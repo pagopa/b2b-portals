@@ -124,17 +124,13 @@ const NotFoundPage = ({
       sx={{ backgroundColor }}
     >
       <Stack spacing={3} alignItems='center' maxWidth={480} mx='auto'>
-        {custom404Image ? (
-          <Image
-            src={custom404Image.url}
-            alt={custom404Image.alternativeText ?? ''}
-            width={custom404Image.width}
-            height={custom404Image.height}
-            style={{ display: 'block' }}
-          />
-        ) : (
-          <Image src={EmptyImage} alt='' style={{ display: 'block' }} />
-        )}
+        <Image
+          src={custom404Image?.url ?? EmptyImage}
+          alt={custom404Image?.alternativeText ?? '404'}
+          width={140}
+          height={140}
+          style={{ display: 'block', objectFit: 'cover' }}
+        />
 
         <Typography
           variant='h4'
