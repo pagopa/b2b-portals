@@ -32,6 +32,7 @@ const Header = ({
   labels,
   languages,
   activeLanguage,
+  defaultLocale,
   themeVariant,
   theme,
 }: HeaderProps) => {
@@ -49,14 +50,30 @@ const Header = ({
   const isActiveSubLink = (href?: string): boolean => {
     if (href) {
       return pathname
-        ? pathname.split('/').slice(1).includes(href.replace('/', ''))
+        ? pathname
+            .split('/')
+            .slice(1)
+            .includes(
+              href.replace(
+                defaultLocale === activeLanguage.id
+                  ? '/'
+                  : `/${activeLanguage.id}/`,
+                '',
+              ),
+            )
         : false;
     }
     return false;
   };
   const isCurrentLink = (menuItem: MenuDropdownProp): boolean => {
     if (menuItem.href && menuItem.href.indexOf('/') >= 0) {
-      const urlPathname = menuItem.href.substring(menuItem.href.indexOf('/'));
+      const hrefNoTrailingSlash =
+        menuItem.href.length > 1 && menuItem.href.endsWith('/')
+          ? menuItem.href.slice(0, -1)
+          : menuItem.href;
+      const urlPathname = hrefNoTrailingSlash.substring(
+        menuItem.href.indexOf('/'),
+      );
       if (pathname === urlPathname) {
         return true;
       }
