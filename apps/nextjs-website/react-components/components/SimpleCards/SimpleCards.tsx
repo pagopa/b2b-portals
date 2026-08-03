@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { Box, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import { CtaButtons, Subtitle, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
@@ -21,8 +20,10 @@ const SimpleCards = ({
   sectionID,
   customBgColor,
 }: SimpleCardsProps) => {
-  const { palette } = useTheme();
+  const muiTheme = useTheme();
+  const { palette } = muiTheme;
   const ctx = { palette, theme };
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
 
   const backgroundColor =
     customBgColor ??
@@ -180,20 +181,25 @@ const SimpleCards = ({
             {shouldShowImage && imageURL && (
               <Box
                 sx={{
-                  width: { xs: '100%', md: 260 },
+                  flex: 1,
+                  width: { xs: '100%', md: 315 },
                   display: 'flex',
-                  justifyContent: { xs: 'flex-start', md: 'center' },
+                  justifyContent: { xs: 'flex-start', md: 'flex-end' },
                   alignItems: 'center',
                   flexShrink: 0,
                   mt: { xs: 2, md: 0 },
+                  overflow: 'hidden',
                 }}
               >
-                <Image
+                <img
                   src={imageURL}
                   alt={imageAlt ?? ''}
-                  width={220}
-                  height={220}
-                  style={{ objectFit: 'cover' }}
+                  style={{
+                    objectFit: 'cover',
+                    width: isMobile ? '100%' : 'auto',
+                    height: isMobile ? 'auto' : '315px',
+                    maxHeight: isMobile ? '490px' : '315px',
+                  }}
                 />
               </Box>
             )}
