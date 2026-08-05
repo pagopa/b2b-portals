@@ -18,7 +18,7 @@ const CardsItem = ({
   alignLinkIconLeft,
   sx,
 }: CardsItemProps) => {
-  const { palette } = useTheme();
+  const { spacing, palette } = useTheme();
 
   const linkColor = resolveThemeVariant<string>('actionColor', themeVariant, {
     palette,
