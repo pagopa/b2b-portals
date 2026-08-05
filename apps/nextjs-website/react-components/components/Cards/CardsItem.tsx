@@ -132,7 +132,7 @@ const CardsItem = ({
                   })}
                   sx={{
                     '&.MuiTypography-root': {
-                      marginTop: (theme) => theme.spacing(2),
+                      marginTop: spacing(2),
                     },
                     '&:hover': {
                       color: linkHoverColor,
