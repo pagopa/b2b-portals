@@ -15,7 +15,7 @@ const CardsItem = ({
   label,
   themeVariant,
   masonry,
-  alignLinkIconLeft = true,
+  alignLinkIconLeft,
   sx,
 }: CardsItemProps) => {
   const { palette } = useTheme();
@@ -112,56 +112,49 @@ const CardsItem = ({
           </Typography>
           {links?.length
             ? links.map((link, index) => (
-                <Stack
+                <Link
                   key={index}
-                  alignItems='center'
-                  direction='row'
                   color={linkColor}
+                  display='inline-flex'
+                  alignItems='center'
+                  fontSize={16}
+                  fontWeight={700}
+                  href={link.href}
+                  justifyContent={
+                    alignLinkIconLeft ? 'flex-start' : 'space-between'
+                  }
                   mt={2}
-                  width='100%'
+                  title={link.title}
+                  underline='none'
+                  width={alignLinkIconLeft ? 'auto' : '100%'}
+                  {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
+                  {...(isValidExternalLink(link.href) && {
+                    target: '_blank',
+                  })}
                   sx={{
                     '&:hover': {
                       color: linkHoverColor,
                     },
                   }}
                 >
-                  <Link
-                    alignItems='center'
-                    color='inherit'
-                    display='inline-flex'
-                    fontSize={16}
-                    fontWeight={700}
-                    href={link.href}
-                    justifyContent={
-                      alignLinkIconLeft ? 'flex-start' : 'space-between'
-                    }
-                    title={link.title}
-                    underline='none'
-                    width={alignLinkIconLeft ? 'auto' : '100%'}
-                    {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
+                  {link.label}
+                  <LinkIcon
                     {...(isValidExternalLink(link.href) && {
-                      target: '_blank',
+                      externaLinkIconTarget: '_blank',
                     })}
-                  >
-                    {link.label}
-                    <LinkIcon
-                      {...(isValidExternalLink(link.href) && {
-                        externaLinkIconTarget: '_blank',
-                      })}
-                      showExternalLinkIcon={isValidExternalLink(link.href)}
-                      internalLinkIcon={
-                        <ArrowForwardIcon
-                          sx={{
-                            color: 'inherit',
-                            height: 24,
-                            marginLeft: 1,
-                            width: 24,
-                          }}
-                        />
-                      }
-                    />
-                  </Link>
-                </Stack>
+                    showExternalLinkIcon={isValidExternalLink(link.href)}
+                    internalLinkIcon={
+                      <ArrowForwardIcon
+                        sx={{
+                          color: 'inherit',
+                          height: 24,
+                          marginLeft: 1,
+                          width: 24,
+                        }}
+                      />
+                    }
+                  />
+                </Link>
               ))
             : null}
         </Stack>
