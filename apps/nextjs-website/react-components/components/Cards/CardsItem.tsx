@@ -18,7 +18,7 @@ const CardsItem = ({
   alignLinkIconLeft,
   sx,
 }: CardsItemProps) => {
-  const { palette } = useTheme();
+  const { spacing, palette } = useTheme();
 
   const linkColor = resolveThemeVariant<string>('actionColor', themeVariant, {
     palette,
@@ -112,34 +112,34 @@ const CardsItem = ({
           </Typography>
           {links?.length
             ? links.map((link, index) => (
-                <Stack
+                <Link
                   key={index}
-                  mt={2}
-                  direction='row'
-                  alignItems='center'
                   color={linkColor}
-                  justifyContent={alignLinkIconLeft ? 'left' : 'space-between'}
-                  width='100%'
+                  display='inline-flex'
+                  alignItems='center'
+                  fontSize={16}
+                  fontWeight={700}
+                  href={link.href}
+                  justifyContent={
+                    alignLinkIconLeft ? 'flex-start' : 'space-between'
+                  }
+                  title={link.title}
+                  underline='none'
+                  width={alignLinkIconLeft ? 'auto' : '100%'}
+                  {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
+                  {...(isValidExternalLink(link.href) && {
+                    target: '_blank',
+                  })}
                   sx={{
+                    '&.MuiTypography-root': {
+                      marginTop: spacing(2),
+                    },
                     '&:hover': {
                       color: linkHoverColor,
                     },
                   }}
                 >
-                  <Link
-                    color='inherit'
-                    underline='none'
-                    href={link.href}
-                    title={link.title}
-                    fontSize={16}
-                    fontWeight={700}
-                    {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
-                    {...(isValidExternalLink(link.href) && {
-                      target: '_blank',
-                    })}
-                  >
-                    {link.label}
-                  </Link>
+                  {link.label}
                   <LinkIcon
                     {...(isValidExternalLink(link.href) && {
                       externaLinkIconTarget: '_blank',
@@ -156,7 +156,7 @@ const CardsItem = ({
                       />
                     }
                   />
-                </Stack>
+                </Link>
               ))
             : null}
         </Stack>
