@@ -9,6 +9,51 @@ import {
 import { styled } from '@mui/material/styles';
 import { useMixpanelTracking } from '../common/tracking';
 
+const getPathSegments = (path: string): string[] => {
+  // Remove any query string or anchor from the path.
+  const pathWithoutQueryOrHash = path.split(/[?#]/)[0] ?? '';
+
+  return pathWithoutQueryOrHash.split('/').filter(Boolean);
+};
+
+const isExternalLink = (href: string): boolean => {
+  // Check whether the link is external (http or https).
+  return /^https?:/i.test(href);
+};
+
+export const isMegaHeaderSublinkActive = ({
+  pathname,
+  href,
+}: {
+  pathname: string | null;
+  href: string;
+}): boolean => {
+  if (!pathname || isExternalLink(href)) {
+    return false;
+  }
+
+  // Remove query strings and anchors from the href.
+  const hrefPath = href.split(/[?#]/)[0] ?? '';
+  const currentPathSegments = getPathSegments(pathname);
+  const hrefPathSegments = getPathSegments(href);
+  const isHomepageLink =
+    hrefPath === '/' ||
+    (hrefPath.endsWith('/') && hrefPathSegments.length === 1);
+
+  if (isHomepageLink) {
+    return (
+      currentPathSegments.length === hrefPathSegments.length &&
+      hrefPathSegments.every(
+        (segment, index) => currentPathSegments[index] === segment,
+      )
+    );
+  }
+
+  return hrefPathSegments.every(
+    (segment, index) => currentPathSegments[index] === segment,
+  );
+};
+
 export const Container = styled(AppBar)({
   display: 'flex',
   justifyContent: 'center',
