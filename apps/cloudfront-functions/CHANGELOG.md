@@ -1,5 +1,11 @@
 # cloudfront-functions
 
+## 0.0.2
+
+### Patch Changes
+
+- 19a204e: Convert to flat eslint configuration (Strapi5 forced the update)
+
 ## 0.0.1
 
 ### Patch Changes
