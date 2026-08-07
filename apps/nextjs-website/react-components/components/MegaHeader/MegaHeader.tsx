@@ -27,6 +27,7 @@ import {
   LinkLabel,
   Overlay,
   Sublink,
+  isMegaHeaderSublinkActive,
 } from './MegaHeader.Helpers';
 import {
   CtaButtons,
@@ -36,7 +37,6 @@ import {
 import { usePathname } from 'next/navigation';
 import SideDrawer from '../Header/helpers/Header.SideDrawer.helpers';
 import { resolveThemeVariant } from '../../theme';
-import { isMegaHeaderSublinkActive } from './MegaHeader.utils';
 
 const MegaHeader = ({
   logo,
