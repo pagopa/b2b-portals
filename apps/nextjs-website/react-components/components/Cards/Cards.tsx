@@ -171,16 +171,16 @@ const Cards = ({
                 textAlign: isCenter ? 'center' : 'left',
               }}
             >
-              {CtaButtons({
-                ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
+              <CtaButtons
+                ctaButtons={ctaButtons.map((button: CtaButtonProps) => ({
                   ...button,
                   sx: {
                     width: 'auto',
                   },
-                })),
-                theme,
-                themeVariant,
-              })}
+                }))}
+                theme={theme}
+                themeVariant={themeVariant}
+              />
             </Stack>
           ) : null}
         </Typography>
@@ -204,7 +204,11 @@ const Cards = ({
             mt: isCenter ? 6 : { xs: 6, md: 0 },
           }}
         >
-          {CtaButtons({ ctaButtons: [bottomCTA], theme, themeVariant })}
+          <CtaButtons
+            ctaButtons={[bottomCTA]}
+            theme={theme}
+            themeVariant={themeVariant}
+          />
         </Box>
       )}
     </ContainerRC>

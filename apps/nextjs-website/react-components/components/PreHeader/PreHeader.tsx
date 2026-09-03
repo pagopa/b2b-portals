@@ -47,8 +47,8 @@ const PreHeader = ({
     >
       {leftCtas && leftCtas.length > 0 && (
         <Stack direction='row'>
-          {CtaButtons({
-            ctaButtons: leftCtas.map((leftCtaButton) => ({
+          <CtaButtons
+            ctaButtons={leftCtas.map((leftCtaButton) => ({
               ...leftCtaButton,
               variant: 'text',
               sx: {
@@ -65,16 +65,16 @@ const PreHeader = ({
                   opacity: 0.8,
                 },
               },
-            })),
-            disableRipple: true,
-            showExternalLinkIcon: false,
-          })}
+            }))}
+            disableRipple
+            showExternalLinkIcon={false}
+          />
         </Stack>
       )}
       {rightCtas && rightCtas.length > 0 && (
         <Stack direction='row-reverse'>
-          {CtaButtons({
-            ctaButtons: rightCtas.map((rightCtaButton) => ({
+          <CtaButtons
+            ctaButtons={rightCtas.map((rightCtaButton) => ({
               ...rightCtaButton,
               variant: 'text',
               sx: {
@@ -91,10 +91,10 @@ const PreHeader = ({
                   opacity: 0.8,
                 },
               },
-            })),
-            disableRipple: true,
-            showExternalLinkIcon: false,
-          })}
+            }))}
+            disableRipple
+            showExternalLinkIcon={false}
+          />
         </Stack>
       )}
     </Stack>

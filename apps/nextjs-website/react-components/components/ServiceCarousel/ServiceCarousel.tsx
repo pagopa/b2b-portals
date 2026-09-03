@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { useId, useRef, useState } from 'react';
 import { ServiceCard, SliderArrowControl } from './ServiceCarousel.helpers';
 import { visuallyHidden } from '@mui/utils';
+import { resolveThemeVariant } from '../../theme';
 
 const ServiceCarousel = ({
   title,
@@ -20,6 +21,20 @@ const ServiceCarousel = ({
   const sliderRef = useRef<Slider>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { palette } = useTheme();
+  const ctx = {
+    palette,
+    theme: 'light' as const,
+  };
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
   const [currentCard, setCurrentCard] = useState(cards[0]);
   const liveRegionRef = useRef<HTMLDivElement>();
   const titleId = useId();
@@ -97,7 +112,12 @@ const ServiceCarousel = ({
         />
 
         {description && (
-          <Body body={description} textColor={palette.text.primary} />
+          <Body
+            body={description}
+            textColor={palette.text.primary}
+            linkColor={linkColor}
+            linkHoverColor={linkHoverColor}
+          />
         )}
       </Stack>
 

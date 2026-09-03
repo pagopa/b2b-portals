@@ -14,35 +14,6 @@ export const BackgroundColor = (
   });
 };
 
-export const BackgroundColorAlternative = (
-  theme: 'dark' | 'light',
-  themeVariant: ThemeVariant,
-) => {
-  const { palette } = useTheme();
-
-  return resolveThemeVariant<string>(
-    'commonBackgroundColorAlternative',
-    themeVariant,
-    { palette, theme },
-  );
-};
-
-export const ExtraBackgroundColor = (
-  theme: 'dark' | 'light',
-  themeVariant: ThemeVariant,
-) => {
-  const { palette } = useTheme();
-
-  return resolveThemeVariant<string>(
-    'commonExtraBackgroundColor',
-    themeVariant,
-    {
-      palette,
-      theme,
-    },
-  );
-};
-
 export const TextColor = (
   theme: 'dark' | 'light',
   themeVariant: ThemeVariant,
@@ -78,18 +49,6 @@ export const ExtraTextColor = (
   const { palette } = useTheme();
 
   return resolveThemeVariant<string>('commonExtraTextColor', themeVariant, {
-    palette,
-    theme,
-  });
-};
-
-export const LinkColor = (
-  theme: 'dark' | 'light',
-  themeVariant: ThemeVariant,
-) => {
-  const { palette } = useTheme();
-
-  return resolveThemeVariant<string>('commonLinkColor', themeVariant, {
     palette,
     theme,
   });

@@ -162,18 +162,18 @@ const SimpleCards = ({
                     },
                   }}
                 >
-                  {CtaButtons({
-                    ctaButtons: ctaButtons.map((button) => ({
+                  <CtaButtons
+                    ctaButtons={ctaButtons.map((button) => ({
                       ...button,
                       fullWidth: false,
                       sx: {
                         width: 'auto',
                         alignSelf: isCentered ? 'center' : 'flex-start',
                       },
-                    })),
-                    theme,
-                    themeVariant,
-                  })}
+                    }))}
+                    theme={theme}
+                    themeVariant={themeVariant}
+                  />
                 </Stack>
               ) : null}
             </Box>

@@ -159,8 +159,8 @@ const PreFooter = (props: PreFooterProps) => {
                   marginLeft: isSmallScreen || layout === 'center' ? 0 : 2,
                 }}
               >
-                {CtaButtons({
-                  ctaButtons: ctaButtons.map((button) => ({
+                <CtaButtons
+                  ctaButtons={ctaButtons.map((button) => ({
                     ...button,
                     sx: {
                       width: 'auto',
@@ -169,10 +169,10 @@ const PreFooter = (props: PreFooterProps) => {
                     ...(isValidExternalLink(button.href) && {
                       target: '_blank',
                     }),
-                  })),
-                  theme,
-                  themeVariant,
-                })}
+                  }))}
+                  theme={theme}
+                  themeVariant={themeVariant}
+                />
               </Stack>
             ) : null}
           </Box>

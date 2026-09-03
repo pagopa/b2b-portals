@@ -285,6 +285,8 @@ export const Subtitle = ({
 const StringBody = (
   body: string,
   textColor: string,
+  linkColor?: string,
+  linkHoverColor?: string,
   textAlign: TypographyProps['align'] = 'inherit',
   variant: TypographyProps['variant'] = 'body2',
   marginBottom: number | string = 0,
@@ -295,9 +297,9 @@ const StringBody = (
     align={textAlign}
     sx={{
       a: {
-        color: textColor,
+        color: linkColor ?? textColor,
         '&:hover': {
-          color: textColor,
+          color: linkHoverColor ?? linkColor ?? textColor,
         },
       },
     }}
@@ -309,6 +311,8 @@ const StringBody = (
 const ElementBody = (
   body: JSX.Element,
   textColor: string,
+  linkColor?: string,
+  linkHoverColor?: string,
   textAlign: TypographyProps['align'] = 'inherit',
   variant: TypographyProps['variant'] = 'body2',
   marginBottom: number | string = 0,
@@ -317,9 +321,9 @@ const ElementBody = (
     <Box
       sx={{
         a: {
-          color: textColor,
+          color: linkColor ?? textColor,
           '&:hover': {
-            color: textColor,
+            color: linkHoverColor ?? linkColor ?? textColor,
           },
         },
       }}
@@ -338,12 +342,16 @@ const ElementBody = (
 export const Body = ({
   body,
   textColor,
+  linkColor,
+  linkHoverColor,
   textAlign = 'inherit',
   variant = 'body2',
   marginBottom = 0,
 }: {
   body: string | JSX.Element | undefined;
   textColor: string;
+  linkColor?: string;
+  linkHoverColor?: string;
   textAlign?: TypographyProps['align'];
   variant?: TypographyProps['variant'];
   marginBottom?: number | string;
@@ -353,8 +361,24 @@ export const Body = ({
   }
 
   return typeof body === 'string'
-    ? StringBody(body, textColor, textAlign, variant, marginBottom)
-    : ElementBody(body, textColor, textAlign, variant, marginBottom);
+    ? StringBody(
+        body,
+        textColor,
+        linkColor,
+        linkHoverColor,
+        textAlign,
+        variant,
+        marginBottom,
+      )
+    : ElementBody(
+        body,
+        textColor,
+        linkColor,
+        linkHoverColor,
+        textAlign,
+        variant,
+        marginBottom,
+      );
 };
 
 export const getButtonStyles = (

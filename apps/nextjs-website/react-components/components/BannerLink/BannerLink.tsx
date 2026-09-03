@@ -146,18 +146,18 @@ const BannerLink = ({
                     spacing={2}
                     sx={{ mt: 2 }}
                   >
-                    {CtaButtons({
-                      ctaButtons: section.ctaButtons.map(
+                    <CtaButtons
+                      ctaButtons={section.ctaButtons.map(
                         (button: CtaButtonProps) => ({
                           ...button,
                           sx: {
                             width: 'auto',
                           },
                         }),
-                      ),
-                      theme,
-                      themeVariant,
-                    })}
+                      )}
+                      theme={theme}
+                      themeVariant={themeVariant}
+                    />
                   </Stack>
                 )}
               </Stack>

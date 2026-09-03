@@ -1,4 +1,4 @@
-import { Link, Typography } from '@mui/material';
+import { Link } from '@mui/material';
 import { Stack } from '@mui/system';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Body, isValidExternalLink, LinkIcon } from '../common/Common';
@@ -18,39 +18,49 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
     ctx,
   );
 
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
+
   return (
     <Stack spacing={3} justifyContent='center' alignItems='center'>
       <Body textColor={textColor} body={item.subtitle} />
       {item.link !== undefined && (
-        <Stack
-          spacing={1}
-          justifyContent='center'
-          alignItems='center'
-          direction='row'
+        <Link
+          color={linkColor}
+          href={item.link.href}
+          variant='body1'
+          underline='none'
+          {...(item.link.ariaLabel && {
+            'aria-label': item.link.ariaLabel,
+          })}
+          sx={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 1,
+            fontWeight: 'bold',
+            '&:hover': {
+              color: linkHoverColor,
+            },
+          }}
+          {...(isValidExternalLink(item.link.href) && {
+            target: '_blank',
+          })}
         >
-          <Typography component='span' variant='body1' color={linkColor}>
-            <Link
-              color={linkColor}
-              href={item.link.href}
-              underline='none'
-              {...(item.link.ariaLabel && {
-                'aria-label': item.link.ariaLabel,
-              })}
-              sx={{ fontWeight: 'bold' }}
-              {...(isValidExternalLink(item.link.href) && {
-                target: '_blank',
-              })}
-            >
-              {item.link.label}
-            </Link>
-          </Typography>
+          {item.link.label}
+
           <LinkIcon
-            sxExternalLinkIcon={{ ml: 0, color: linkColor }}
+            sxExternalLinkIcon={{
+              ml: 0,
+              color: 'inherit',
+            }}
             showExternalLinkIcon={isValidExternalLink(item.link.href)}
             internalLinkIcon={
               <ArrowForwardIcon
                 sx={{
-                  color: linkColor,
+                  color: 'inherit',
                 }}
               />
             }
@@ -58,7 +68,7 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
               externaLinkIconTarget: '_blank',
             })}
           />
-        </Stack>
+        </Link>
       )}
     </Stack>
   );

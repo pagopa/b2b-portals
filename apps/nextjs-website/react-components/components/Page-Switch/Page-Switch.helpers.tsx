@@ -286,8 +286,8 @@ export const ButtonSwitchRowBlock = ({
 
   return isLarge ? (
     <Stack direction={isSmallScreen ? 'column' : 'row'} spacing={2}>
-      {CtaButtons({
-        ctaButtons: buttons.map((button) => ({
+      <CtaButtons
+        ctaButtons={buttons.map((button) => ({
           text: button.text,
           sx: {
             width: { md: 'auto', xs: '100%' },
@@ -303,10 +303,10 @@ export const ButtonSwitchRowBlock = ({
           },
           variant: 'outlined',
           onClick: () => onButtonClick(button.id),
-        })),
-        theme,
-        themeVariant,
-      })}
+        }))}
+        theme={theme}
+        themeVariant={themeVariant}
+      />
     </Stack>
   ) : (
     <SplitButton
