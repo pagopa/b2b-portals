@@ -7,7 +7,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { AccordionItem } from './AccordionItem';
-import { Title, Subtitle } from '../common/Common';
+import { Title } from '../common/Common';
 import { AccordionProps } from '../../types/Accordion/Accordion.types';
 import { TextColor } from '../common/Common.helpers';
 import { resolveThemeVariant } from '../../theme';
@@ -65,12 +65,13 @@ const Accordion = (props: AccordionProps) => {
                 textAlign={layout === 'center' ? textAlignment : 'left'}
               />
               {subtitle && (
-                <Subtitle
+                <Typography
                   variant='h6'
-                  textColor={textColor}
-                  subtitle={subtitle}
+                  color={textColor}
                   textAlign={layout === 'center' ? textAlignment : 'left'}
-                />
+                >
+                  {subtitle}
+                </Typography>
               )}
               {description && (
                 <Typography

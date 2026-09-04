@@ -1,6 +1,6 @@
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import { ServiceCarouselProps } from '../../types/ServiceCarousel/ServiceCarousel.types';
-import { Body, Title } from '../common/Common';
+import { Title } from '../common/Common';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -112,12 +112,19 @@ const ServiceCarousel = ({
         />
 
         {description && (
-          <Body
-            body={description}
-            textColor={palette.text.primary}
-            linkColor={linkColor}
-            linkHoverColor={linkHoverColor}
-          />
+          <Box
+            sx={{
+              color: palette.text.primary,
+              '& a': {
+                color: linkColor,
+                '&:hover': {
+                  color: linkHoverColor,
+                },
+              },
+            }}
+          >
+            {description}
+          </Box>
         )}
       </Stack>
 

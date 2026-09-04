@@ -1,7 +1,7 @@
-import { Link } from '@mui/material';
+import { Link, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Body, isValidExternalLink, LinkIcon } from '../common/Common';
+import { isValidExternalLink, LinkIcon } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { FeatureStackItemProps } from '../../types/Feature/Feature.types';
 import { useTheme } from '@mui/material/styles';
@@ -26,7 +26,9 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
 
   return (
     <Stack spacing={3} justifyContent='center' alignItems='center'>
-      <Body textColor={textColor} body={item.subtitle} />
+      <Typography variant='body2' color={textColor}>
+        {item.subtitle}
+      </Typography>
       {item.link !== undefined && (
         <Link
           color={linkColor}

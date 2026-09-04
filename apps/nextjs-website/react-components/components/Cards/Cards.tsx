@@ -3,8 +3,7 @@ import ContainerRC from '../common/ContainerRC';
 import Item from './CardsItem';
 import { CardsProps } from '../../types/Cards/Cards.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
-import { CtaButtons } from '../common/Common';
-import { Title, Subtitle } from '../common/Common';
+import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { resolveThemeVariant } from '../../theme';
 
@@ -124,14 +123,13 @@ const Cards = ({
             </Typography>
           )}
           {text.subtitle && (
-            <Typography mb={3} component='div' color={'inherit'}>
-              <Subtitle
-                variant='h6'
-                textColor={'inherit'}
-                subtitle={text.subtitle}
-                textAlign={isCenter ? 'center' : 'left'}
-                marginBottom={0}
-              />
+            <Typography
+              mb={3}
+              variant='h6'
+              color='inherit'
+              textAlign={isCenter ? 'center' : 'left'}
+            >
+              {text.subtitle}
             </Typography>
           )}
           {text.body && (
