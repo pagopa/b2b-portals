@@ -121,11 +121,11 @@ const HowTo = (props: HowToProps) => {
         {/** CTA button or link */}
         {ctaButton ? (
           <Box sx={{ mt: 2 }}>
-            {CtaButtons({
-              ctaButtons: [ctaButton],
-              theme,
-              themeVariant,
-            })}
+            <CtaButtons
+              ctaButtons={[ctaButton]}
+              theme={theme}
+              themeVariant={themeVariant}
+            />
           </Box>
         ) : link ? (
           <Typography component='span' display='contents'>

@@ -1,6 +1,6 @@
 import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import { CtaButtons, Subtitle, Title } from '../common/Common';
+import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { resolveThemeVariant } from '../../theme';
 import { SimpleCardsProps } from '../../types/SimpleCards/SimpleCards.types';
@@ -118,13 +118,13 @@ const SimpleCards = ({
                 )}
 
                 {subtitle && (
-                  <Subtitle
+                  <Typography
                     variant='h6'
-                    textColor='inherit'
-                    subtitle={subtitle}
+                    color='inherit'
                     textAlign={editorialTextAlign}
-                    marginBottom={0}
-                  />
+                  >
+                    {subtitle}
+                  </Typography>
                 )}
 
                 {body && (
@@ -162,18 +162,18 @@ const SimpleCards = ({
                     },
                   }}
                 >
-                  {CtaButtons({
-                    ctaButtons: ctaButtons.map((button) => ({
+                  <CtaButtons
+                    ctaButtons={ctaButtons.map((button) => ({
                       ...button,
                       fullWidth: false,
                       sx: {
                         width: 'auto',
                         alignSelf: isCentered ? 'center' : 'flex-start',
                       },
-                    })),
-                    theme,
-                    themeVariant,
-                  })}
+                    }))}
+                    theme={theme}
+                    themeVariant={themeVariant}
+                  />
                 </Stack>
               ) : null}
             </Box>

@@ -143,8 +143,8 @@ export const HeroTextContent = ({
           justifyContent='left'
           spacing={2}
         >
-          {CtaButtons({
-            ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
+          <CtaButtons
+            ctaButtons={ctaButtons.map((button: CtaButtonProps) => ({
               ...button,
               sx: {
                 width: {
@@ -152,10 +152,10 @@ export const HeroTextContent = ({
                   xs: '100%',
                 },
               },
-            })),
-            theme,
-            themeVariant,
-          })}
+            }))}
+            theme={theme}
+            themeVariant={themeVariant}
+          />
         </Stack>
       ) : null}
 
