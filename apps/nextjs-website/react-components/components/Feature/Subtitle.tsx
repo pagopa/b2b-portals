@@ -25,7 +25,7 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
   );
 
   return (
-    <Stack spacing={3} justifyContent='center' alignItems='center'>
+    <Stack justifyContent='center' alignItems='center'>
       <Typography variant='body2' color={textColor}>
         {item.subtitle}
       </Typography>
@@ -43,6 +43,10 @@ const Subtitle = ({ item, theme, themeVariant }: FeatureStackItemProps) => {
             alignItems: 'center',
             gap: 1,
             fontWeight: 'bold',
+            '&&': {
+              m: 0,
+              mt: 3,
+            },
             '&:hover': {
               color: linkHoverColor,
             },
