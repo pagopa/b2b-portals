@@ -30,6 +30,11 @@ const SimpleCards = ({
     resolveThemeVariant<string>('sectionBackgroundColor', themeVariant, ctx);
 
   const textColor = TextColor(theme, themeVariant);
+  const richTextLinkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
   const richTextLinkHoverColor = resolveThemeVariant<string>(
     'richTextLinkHoverColor',
     themeVariant,
@@ -98,7 +103,7 @@ const SimpleCards = ({
                     color: 'inherit',
                   },
                   '& a': {
-                    color: 'inherit',
+                    color: richTextLinkColor,
                     textDecoration: 'underline',
                     '&:hover': {
                       color: richTextLinkHoverColor,
