@@ -2,4 +2,4 @@
 "nextjs-website": patch
 ---
 
-Reduce Editorial vertical padding
+Reduce Editorial vertical padding on mobile
