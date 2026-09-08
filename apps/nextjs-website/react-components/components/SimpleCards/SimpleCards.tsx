@@ -56,7 +56,7 @@ const SimpleCards = ({
       size='lg'
       sxInner={{
         width: '100%',
-        maxWidth: '1156px',
+        maxWidth: '1260px',
         mx: 'auto',
         px: 0,
         boxSizing: 'border-box',
@@ -203,8 +203,8 @@ const SimpleCards = ({
                     objectFit: 'contain',
                     objectPosition: 'center',
                     width: isMobile ? '100%' : 'auto',
-                    height: isMobile ? 'auto' : '315px',
-                    maxHeight: isMobile ? '490px' : '315px',
+                    height: 'auto',
+                    maxHeight: '490px',
                   }}
                 />
               </Box>
