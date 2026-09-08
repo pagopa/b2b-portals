@@ -200,7 +200,8 @@ const SimpleCards = ({
                   src={imageURL}
                   alt={imageAlt ?? ''}
                   style={{
-                    objectFit: 'cover',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
                     width: isMobile ? '100%' : 'auto',
                     height: isMobile ? 'auto' : '315px',
                     maxHeight: isMobile ? '490px' : '315px',
