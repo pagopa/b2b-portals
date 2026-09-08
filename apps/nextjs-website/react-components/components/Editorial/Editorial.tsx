@@ -66,7 +66,7 @@ const Editorial = (props: EditorialProps) => {
           xs: 'column-reverse',
           md: reversed ? 'row-reverse' : 'row',
         }}
-        py={8}
+        py={4}
         spacing={2}
         {...(sectionID && { sectionID })}
       >
@@ -108,7 +108,7 @@ const Editorial = (props: EditorialProps) => {
         xs: 'column-reverse',
         md: reversed ? 'row-reverse' : 'row',
       }}
-      py={8}
+      py={4}
       spacing={2}
     >
       <Grid item md={columns[width]} sx={gridItemStyles}>
