@@ -69,7 +69,6 @@ const LogoWall = ({
           })}
           sx={{
             display: 'inline-flex',
-            width: item.width,
             maxWidth: '100%',
           }}
         >
