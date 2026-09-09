@@ -86,6 +86,7 @@ const SimpleCards = ({
             <Box
               sx={{
                 width: '100%',
+                flex: 1,
                 maxWidth: { xs: '100%', md: shouldShowImage ? 500 : 684 },
               }}
             >
