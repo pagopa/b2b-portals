@@ -3,6 +3,8 @@ import { SectionProps } from '../common/Common.types';
 export interface LogoWallItemProps {
   title: string;
   logoURL: string;
+  width: number;
+  height: number;
   href?: string;
 }
 

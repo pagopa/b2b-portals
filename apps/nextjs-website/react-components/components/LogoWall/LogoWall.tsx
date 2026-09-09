@@ -32,8 +32,8 @@ const LogoWall = ({
       <Image
         src={item.logoURL}
         alt={item.title}
-        width={0}
-        height={0}
+        width={item.width}
+        height={item.height}
         style={{
           width: 'auto',
           maxWidth: '100%',
@@ -57,25 +57,24 @@ const LogoWall = ({
           minWidth: 0,
         }}
       >
-        {item.href ? (
-          <Link
-            href={item.href}
-            aria-label={item.title}
-            underline='none'
-            {...(isValidExternalLink(item.href) && {
+        <Link
+          underline='none'
+          {...(item.href && {
+            href: item.href,
+            'aria-label': item.title,
+            ...(isValidExternalLink(item.href) && {
               target: '_blank',
               rel: 'noopener noreferrer',
-            })}
-            sx={{
-              display: 'inline-flex',
-              maxWidth: '100%',
-            }}
-          >
-            {image}
-          </Link>
-        ) : (
-          image
-        )}
+            }),
+          })}
+          sx={{
+            display: 'inline-flex',
+            width: item.width,
+            maxWidth: '100%',
+          }}
+        >
+          {image}
+        </Link>
       </Box>
     );
   };
