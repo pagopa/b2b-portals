@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Stack, Typography, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
 import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
@@ -23,7 +23,6 @@ const SimpleCards = ({
   const muiTheme = useTheme();
   const { palette } = muiTheme;
   const ctx = { palette, theme };
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
 
   const backgroundColor =
     customBgColor ??
@@ -53,7 +52,7 @@ const SimpleCards = ({
     <ContainerRC
       background={backgroundColor}
       py={8}
-      size='lg'
+      size='xl'
       sxInner={{
         width: '100%',
         maxWidth: '1260px',
@@ -79,7 +78,7 @@ const SimpleCards = ({
                   : 'flex-start',
             }}
             justifyContent='space-between'
-            spacing={{ xs: 4, md: shouldShowImage ? 8 : 0 }}
+            spacing={{ xs: 4, md: shouldShowImage ? 16 : 0 }}
             mb={6}
             color={textColor}
             textAlign={editorialTextAlign}
@@ -87,7 +86,7 @@ const SimpleCards = ({
             <Box
               sx={{
                 width: '100%',
-                maxWidth: { xs: '100%', md: shouldShowImage ? 448 : 684 },
+                maxWidth: { xs: '100%', md: shouldShowImage ? 500 : 684 },
               }}
             >
               <Stack
@@ -187,13 +186,13 @@ const SimpleCards = ({
               <Box
                 sx={{
                   flex: 1,
-                  width: { xs: '100%', md: 315 },
+                  width: '100%',
+                  height: 'auto',
                   display: 'flex',
                   justifyContent: { xs: 'flex-start', md: 'flex-end' },
                   alignItems: 'center',
                   flexShrink: 0,
                   mt: { xs: 2, md: 0 },
-                  overflow: 'hidden',
                 }}
               >
                 <img
@@ -202,7 +201,7 @@ const SimpleCards = ({
                   style={{
                     objectFit: 'contain',
                     objectPosition: 'center',
-                    width: isMobile ? '100%' : 'auto',
+                    width: '100%',
                     height: 'auto',
                     maxHeight: '490px',
                   }}
