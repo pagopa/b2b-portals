@@ -57,25 +57,23 @@ const LogoWall = ({
           minWidth: 0,
         }}
       >
-        {item.href ? (
-          <Link
-            href={item.href}
-            aria-label={item.title}
-            underline='none'
-            {...(isValidExternalLink(item.href) && {
+        <Link
+          underline='none'
+          {...(item.href && {
+            href: item.href,
+            'aria-label': item.title,
+            ...(isValidExternalLink(item.href) && {
               target: '_blank',
               rel: 'noopener noreferrer',
-            })}
-            sx={{
-              display: 'inline-flex',
-              maxWidth: '100%',
-            }}
-          >
-            {image}
-          </Link>
-        ) : (
-          image
-        )}
+            }),
+          })}
+          sx={{
+            display: 'inline-flex',
+            maxWidth: '100%',
+          }}
+        >
+          {image}
+        </Link>
       </Box>
     );
   };
