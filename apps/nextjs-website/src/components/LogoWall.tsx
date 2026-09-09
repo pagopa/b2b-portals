@@ -13,16 +13,12 @@ export const makeLogoWallProps = ({
   firstGroup: firstGroup.map(({ logo, title, href }) => ({
     title,
     logoURL: logo.url,
-    width: logo.width,
-    height: logo.height,
     ...(href && { href }),
   })),
 
   secondGroup: secondGroup.map(({ logo, title, href }) => ({
     title,
     logoURL: logo.url,
-    width: logo.width,
-    height: logo.height,
     ...(href && { href }),
   })),
 

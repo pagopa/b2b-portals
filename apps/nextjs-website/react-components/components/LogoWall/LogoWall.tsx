@@ -32,8 +32,8 @@ const LogoWall = ({
       <Image
         src={item.logoURL}
         alt={item.title}
-        width={item.width}
-        height={item.height}
+        width={0}
+        height={0}
         style={{
           width: 'auto',
           maxWidth: '100%',
@@ -69,7 +69,6 @@ const LogoWall = ({
           })}
           sx={{
             display: 'inline-flex',
-            width: item.width,
             maxWidth: '100%',
           }}
         >
