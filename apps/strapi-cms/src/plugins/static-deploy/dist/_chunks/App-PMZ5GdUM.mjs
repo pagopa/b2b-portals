@@ -4,7 +4,7 @@ import { useLocation, Routes, Route } from "react-router-dom";
 import { Main, Flex, Typography, Button, Dialog, TextInput, Table, Thead, Tr, Th, Tbody, Td, Badge, IconButton, Link } from "@strapi/design-system";
 import { ArrowClockwise, Expand, Play, ExternalLink, Plus, Trash } from "@strapi/icons";
 import { useState, useEffect } from "react";
-import { p as pluginPermissions, P as PLUGIN_ID } from "./index-Hf9qDAX0.mjs";
+import { p as pluginPermissions, P as PLUGIN_ID } from "./index-Bp5CeamN.mjs";
 const millisecondsInWeek = 6048e5;
 const millisecondsInDay = 864e5;
 const constructFromSymbol = Symbol.for("constructDateFrom");
@@ -1507,69 +1507,67 @@ const HomePage = () => {
     }
   }
   async function verifyStagingStatus(data) {
-    if (config?.staging) {
-      const lastWorkflow = data.workflow_runs[0];
-      const currentStagingStatus = await getStagingStatus();
-      if (currentStagingStatus && lastWorkflow) {
-        const lastWorkflowPathArray = lastWorkflow.path.split("/");
-        const lastWorkflowFileName = lastWorkflowPathArray[lastWorkflowPathArray.length - 1];
-        const lastWorkflowCreationDate = new Date(lastWorkflow.created_at);
-        const lastUpdateDate = new Date(currentStagingStatus.createdAt);
-        if (lastWorkflowFileName === config.staging.workflowID) {
-          if (!lastWorkflow.conclusion) {
+    const lastWorkflow = data.workflow_runs[0];
+    const currentStagingStatus = await getStagingStatus();
+    if (currentStagingStatus && lastWorkflow) {
+      const lastWorkflowPathArray = lastWorkflow.path.split("/");
+      const lastWorkflowFileName = lastWorkflowPathArray[lastWorkflowPathArray.length - 1];
+      const lastWorkflowCreationDate = new Date(lastWorkflow.created_at);
+      const lastUpdateDate = new Date(currentStagingStatus.createdAt);
+      if (lastWorkflowFileName === config?.staging.workflowID) {
+        if (!lastWorkflow.conclusion) {
+          setUnstagedUpdates(true);
+          return;
+        }
+        if (lastWorkflow.conclusion !== "success") {
+          setUnstagedUpdates(true);
+          setStagingStatus({ unstagedUpdates: true });
+          return;
+        } else {
+          if (!currentStagingStatus.unstagedUpdates) {
+            setUnstagedUpdates(false);
+            return;
+          }
+          if (lastUpdateDate > lastWorkflowCreationDate) {
+            setUnstagedUpdates(true);
+          } else {
+            setUnstagedUpdates(false);
+            setStagingStatus({ unstagedUpdates: false });
+          }
+        }
+      } else {
+        if (!lastWorkflow.conclusion) {
+          setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
+          return;
+        }
+        if (lastWorkflow.conclusion !== "success") {
+          if (currentStagingStatus.unstagedUpdates) {
             setUnstagedUpdates(true);
             return;
           }
-          if (lastWorkflow.conclusion !== "success") {
+          const lastStagingWorkflow = data.workflow_runs.find((workflow) => {
+            const workflowPathArray = workflow.path.split("/");
+            const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
+            return workflowFileName === config?.staging.workflowID;
+          });
+          if (!lastStagingWorkflow) {
             setUnstagedUpdates(true);
             setStagingStatus({ unstagedUpdates: true });
             return;
-          } else {
-            if (!currentStagingStatus.unstagedUpdates) {
-              setUnstagedUpdates(false);
-              return;
-            }
-            if (lastUpdateDate > lastWorkflowCreationDate) {
-              setUnstagedUpdates(true);
-            } else {
-              setUnstagedUpdates(false);
-              setStagingStatus({ unstagedUpdates: false });
-            }
           }
-        } else {
-          if (!lastWorkflow.conclusion) {
-            setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
+          if (!lastStagingWorkflow.conclusion) {
+            setUnstagedUpdates(true);
+            setStagingStatus({ unstagedUpdates: true });
             return;
           }
-          if (lastWorkflow.conclusion !== "success") {
-            if (currentStagingStatus.unstagedUpdates) {
-              setUnstagedUpdates(true);
-              return;
-            }
-            const lastStagingWorkflow = data.workflow_runs.filter((workflow) => {
-              const workflowPathArray = workflow.path.split("/");
-              const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
-              return workflowFileName === config.staging.workflowID;
-            })[0];
-            if (!lastStagingWorkflow) {
-              setUnstagedUpdates(true);
-              setStagingStatus({ unstagedUpdates: true });
-              return;
-            }
-            if (!lastStagingWorkflow.conclusion) {
-              setUnstagedUpdates(true);
-              setStagingStatus({ unstagedUpdates: true });
-              return;
-            }
-            if (lastStagingWorkflow.conclusion !== "success") {
-              setUnstagedUpdates(true);
-              setStagingStatus({ unstagedUpdates: true });
-            } else {
-              setUnstagedUpdates(false);
-            }
+          if (lastStagingWorkflow.conclusion !== "success") {
+            setUnstagedUpdates(true);
+            setStagingStatus({ unstagedUpdates: true });
           } else {
-            setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
+            setUnstagedUpdates(false);
           }
+        } else {
+          setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
         }
       }
     }
@@ -1597,7 +1595,7 @@ const HomePage = () => {
   async function triggerGithubActions() {
     setLoadingTriggerButton(true);
     try {
-      if (config?.staging && unstagedUpdates) {
+      if (unstagedUpdates) {
         await post(`/${PLUGIN_ID}/trigger-staging`);
         sendEmailNotification("staging-trigger");
       } else {
@@ -1625,7 +1623,7 @@ const HomePage = () => {
         await post(`/${PLUGIN_ID}/trigger`, {
           description: prodDeploymentDescription
         });
-        sendEmailNotification(config?.staging ? "prod-trigger" : "trigger");
+        await sendEmailNotification("prod-trigger");
       }
       toggleNotification({
         type: "success",
@@ -1662,13 +1660,13 @@ const HomePage = () => {
     }
   }
   function getWorkflowName() {
-    if (config?.staging && unstagedUpdates) {
+    if (unstagedUpdates) {
       const stagingHistory = history.filter((workflow) => {
         const workflowPathArray = workflow.path.split("/");
         const workflowFileName = workflowPathArray[workflowPathArray.length - 1];
-        return workflowFileName === config.staging.workflowID;
+        return workflowFileName === config?.staging.workflowID;
       });
-      return `"${stagingHistory[0]?.name ?? config.staging.workflowID}"`;
+      return `"${stagingHistory[0]?.name ?? config?.staging.workflowID}"`;
     } else {
       const prodHistory = history.filter((workflow) => {
         const workflowPathArray = workflow.path.split("/");
@@ -1738,7 +1736,7 @@ const HomePage = () => {
                     open: showTriggerConfirmationPopup,
                     onOpenChange: setShowTriggerConfirmationPopup,
                     children: [
-                      /* @__PURE__ */ jsx(Dialog.Trigger, { children: config?.staging ? /* @__PURE__ */ jsxs(Flex, { children: [
+                      /* @__PURE__ */ jsx(Dialog.Trigger, { children: /* @__PURE__ */ jsxs(Flex, { children: [
                         /* @__PURE__ */ jsx(
                           Button,
                           {
@@ -1770,17 +1768,7 @@ const HomePage = () => {
                             children: /* @__PURE__ */ jsx(Typography, { fontSize: "1.6rem", children: "Produzione" })
                           }
                         )
-                      ] }) : /* @__PURE__ */ jsx(
-                        Button,
-                        {
-                          loading: loadingTriggerButton,
-                          disabled: loadingHistory !== "none" || !canTrigger,
-                          style: { height: "4.2rem" },
-                          variant: "default",
-                          startIcon: /* @__PURE__ */ jsx(Play, {}),
-                          children: /* @__PURE__ */ jsx(Typography, { fontSize: "1.6rem", children: "Produzione" })
-                        }
-                      ) }),
+                      ] }) }),
                       /* @__PURE__ */ jsxs(Dialog.Content, { children: [
                         /* @__PURE__ */ jsx(Dialog.Header, { children: "Conferma Lancio del Workflow" }),
                         /* @__PURE__ */ jsxs(Dialog.Body, { children: [
@@ -1910,7 +1898,9 @@ const NotificationsPage = () => {
       setNewEmail(void 0);
       return;
     }
-    if (email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+    if (email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )) {
       setNewEmail(email);
       return;
     }
@@ -1932,7 +1922,9 @@ const NotificationsPage = () => {
   }
   async function addNewEmail() {
     try {
-      const { data } = await post(`/${PLUGIN_ID}/emails-for-notifications`, { newEmail });
+      const { data } = await post(`/${PLUGIN_ID}/emails-for-notifications`, {
+        newEmail
+      });
       if (data.success) {
         setNewEmail(void 0);
         getEmailsForNotifications();
@@ -1962,7 +1954,9 @@ const NotificationsPage = () => {
   }
   async function deleteEmail() {
     try {
-      const { data } = await del(`/${PLUGIN_ID}/emails-for-notifications`, { params: { email: emailToDelete } });
+      const { data } = await del(`/${PLUGIN_ID}/emails-for-notifications`, {
+        params: { email: emailToDelete }
+      });
       if (data.success) {
         getEmailsForNotifications();
         toggleNotification({
@@ -2015,20 +2009,60 @@ const NotificationsPage = () => {
             marginBottom: "4rem",
             children: [
               /* @__PURE__ */ jsx(Typography, { variant: "beta", children: "Notifiche Email" }),
-              /* @__PURE__ */ jsx(Flex, { direction: "row", alignItems: "center", gap: "1rem", children: /* @__PURE__ */ jsxs(Dialog.Root, { open: showAddEmailPopup, onOpenChange: setShowAddEmailPopup, children: [
-                /* @__PURE__ */ jsx(Dialog.Trigger, { children: /* @__PURE__ */ jsx(Button, { style: { height: "4.2rem" }, variant: "default", startIcon: /* @__PURE__ */ jsx(Plus, {}), children: /* @__PURE__ */ jsx(Typography, { fontSize: "1.6rem", children: "Aggiungi Email" }) }) }),
-                /* @__PURE__ */ jsxs(Dialog.Content, { children: [
-                  /* @__PURE__ */ jsx(Dialog.Header, { children: "Aggiungi Indirizzo Email" }),
-                  /* @__PURE__ */ jsx(Dialog.Body, { children: /* @__PURE__ */ jsxs(Flex, { direction: "column", alignItems: "stretch", gap: "1rem", width: "100%", children: [
-                    /* @__PURE__ */ jsx(Typography, { children: "Questo indirizzo riceverà le email di notifica" }),
-                    /* @__PURE__ */ jsx(TextInput, { type: "email", placeholder: "Indirizzo Email", onChange: (e) => validateNewEmail(e.target.value) })
-                  ] }) }),
-                  /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
-                    /* @__PURE__ */ jsx(Dialog.Cancel, { children: /* @__PURE__ */ jsx(Button, { fullWidth: true, variant: "tertiary", children: "Annulla" }) }),
-                    /* @__PURE__ */ jsx(Dialog.Action, { children: /* @__PURE__ */ jsx(Button, { fullWidth: true, variant: "success-light", disabled: !newEmail, onClick: addNewEmail, children: "Conferma" }) })
-                  ] })
-                ] })
-              ] }) })
+              /* @__PURE__ */ jsx(Flex, { direction: "row", alignItems: "center", gap: "1rem", children: /* @__PURE__ */ jsxs(
+                Dialog.Root,
+                {
+                  open: showAddEmailPopup,
+                  onOpenChange: setShowAddEmailPopup,
+                  children: [
+                    /* @__PURE__ */ jsx(Dialog.Trigger, { children: /* @__PURE__ */ jsx(
+                      Button,
+                      {
+                        style: { height: "4.2rem" },
+                        variant: "default",
+                        startIcon: /* @__PURE__ */ jsx(Plus, {}),
+                        children: /* @__PURE__ */ jsx(Typography, { fontSize: "1.6rem", children: "Aggiungi Email" })
+                      }
+                    ) }),
+                    /* @__PURE__ */ jsxs(Dialog.Content, { children: [
+                      /* @__PURE__ */ jsx(Dialog.Header, { children: "Aggiungi Indirizzo Email" }),
+                      /* @__PURE__ */ jsx(Dialog.Body, { children: /* @__PURE__ */ jsxs(
+                        Flex,
+                        {
+                          direction: "column",
+                          alignItems: "stretch",
+                          gap: "1rem",
+                          width: "100%",
+                          children: [
+                            /* @__PURE__ */ jsx(Typography, { children: "Questo indirizzo riceverà le email di notifica" }),
+                            /* @__PURE__ */ jsx(
+                              TextInput,
+                              {
+                                type: "email",
+                                placeholder: "Indirizzo Email",
+                                onChange: (e) => validateNewEmail(e.target.value)
+                              }
+                            )
+                          ]
+                        }
+                      ) }),
+                      /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
+                        /* @__PURE__ */ jsx(Dialog.Cancel, { children: /* @__PURE__ */ jsx(Button, { fullWidth: true, variant: "tertiary", children: "Annulla" }) }),
+                        /* @__PURE__ */ jsx(Dialog.Action, { children: /* @__PURE__ */ jsx(
+                          Button,
+                          {
+                            fullWidth: true,
+                            variant: "success-light",
+                            disabled: !newEmail,
+                            onClick: addNewEmail,
+                            children: "Conferma"
+                          }
+                        ) })
+                      ] })
+                    ] })
+                  ]
+                }
+              ) })
             ]
           }
         ),
@@ -2044,22 +2078,45 @@ const NotificationsPage = () => {
             ] }, "empty"),
             emailsForNotifications.map((email) => /* @__PURE__ */ jsxs(Tr, { children: [
               /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(Typography, { variant: "sigma", children: email }) }),
-              /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(IconButton, { title: "Rimuovi Email", marginLeft: "auto", onClick: () => setEmailToDelete(email), children: /* @__PURE__ */ jsx(Trash, {}) }) })
+              /* @__PURE__ */ jsx(Td, { children: /* @__PURE__ */ jsx(
+                IconButton,
+                {
+                  title: "Rimuovi Email",
+                  marginLeft: "auto",
+                  onClick: () => setEmailToDelete(email),
+                  children: /* @__PURE__ */ jsx(Trash, {})
+                }
+              ) })
             ] }, email))
           ] })
         ] }),
-        /* @__PURE__ */ jsx(Dialog.Root, { open: showConfirmEmailDeletionPopup, onOpenChange: setShowConfirmEmailDeletionPopup, children: /* @__PURE__ */ jsxs(Dialog.Content, { children: [
-          /* @__PURE__ */ jsx(Dialog.Header, { children: "Conferma Rimozione Email" }),
-          /* @__PURE__ */ jsx(Dialog.Body, { children: /* @__PURE__ */ jsxs(Typography, { fontSize: "1.4rem", children: [
-            "L'indirizzo email [",
-            emailToDelete,
-            "] smetterà di ricevere qualunque notifica"
-          ] }) }),
-          /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
-            /* @__PURE__ */ jsx(Dialog.Cancel, { children: /* @__PURE__ */ jsx(Button, { fullWidth: true, variant: "tertiary", onClick: () => setEmailToDelete(void 0), children: "Annulla" }) }),
-            /* @__PURE__ */ jsx(Dialog.Action, { children: /* @__PURE__ */ jsx(Button, { fullWidth: true, variant: "danger-light", onClick: deleteEmail, children: "Conferma" }) })
-          ] })
-        ] }) })
+        /* @__PURE__ */ jsx(
+          Dialog.Root,
+          {
+            open: showConfirmEmailDeletionPopup,
+            onOpenChange: setShowConfirmEmailDeletionPopup,
+            children: /* @__PURE__ */ jsxs(Dialog.Content, { children: [
+              /* @__PURE__ */ jsx(Dialog.Header, { children: "Conferma Rimozione Email" }),
+              /* @__PURE__ */ jsx(Dialog.Body, { children: /* @__PURE__ */ jsxs(Typography, { fontSize: "1.4rem", children: [
+                "L'indirizzo email [",
+                emailToDelete,
+                "] smetterà di ricevere qualunque notifica"
+              ] }) }),
+              /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
+                /* @__PURE__ */ jsx(Dialog.Cancel, { children: /* @__PURE__ */ jsx(
+                  Button,
+                  {
+                    fullWidth: true,
+                    variant: "tertiary",
+                    onClick: () => setEmailToDelete(void 0),
+                    children: "Annulla"
+                  }
+                ) }),
+                /* @__PURE__ */ jsx(Dialog.Action, { children: /* @__PURE__ */ jsx(Button, { fullWidth: true, variant: "danger-light", onClick: deleteEmail, children: "Conferma" }) })
+              ] })
+            ] })
+          }
+        )
       ]
     }
   ) });

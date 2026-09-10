@@ -1,8 +1,8 @@
-import { ArrowRightAlt } from '@mui/icons-material';
 import { Box, Link, Stack, Typography, useTheme } from '@mui/material';
 import { PressReleasePreviewProps } from '@react-components/types/PressReleaseList/PressReleaseList.types';
 import { resolveThemeVariant } from '../../theme';
 import { isValidExternalLink, LinkIcon } from '../common/Common';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export const PressReleasePreview = ({
   date,
@@ -15,6 +15,11 @@ export const PressReleasePreview = ({
 
   const linkColor = resolveThemeVariant<string>(
     'contentLinkColor',
+    themeVariant,
+    { palette, theme: 'light' },
+  );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
     themeVariant,
     { palette, theme: 'light' },
   );
@@ -47,6 +52,11 @@ export const PressReleasePreview = ({
           justifyContent='flex-start'
           gap={1}
           color={linkColor}
+          sx={{
+            '&:hover': {
+              color: linkHoverColor,
+            },
+          }}
         >
           <Link
             href={link.href}
@@ -62,7 +72,15 @@ export const PressReleasePreview = ({
           <LinkIcon
             sxExternalLinkIcon={{ ml: 0 }}
             showExternalLinkIcon={isValidExternalLink(link.href)}
-            internalLinkIcon={<ArrowRightAlt color='inherit' />}
+            internalLinkIcon={
+              <ArrowForwardIcon
+                sx={{
+                  color: 'inherit',
+                  height: 24,
+                  width: 24,
+                }}
+              />
+            }
             {...(isValidExternalLink(link.href) && {
               externaLinkIconTarget: '_blank',
             })}

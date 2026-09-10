@@ -9,7 +9,7 @@ const configService = ({ strapi }: { strapi: Core.Strapi }) => ({
       const workflowID = strapi.plugin(PLUGIN_ID).config('workflowID');
       const branch = strapi.plugin(PLUGIN_ID).config('branch');
       const githubToken = strapi.plugin(PLUGIN_ID).config('githubToken');
-      const environment = strapi.plugin(PLUGIN_ID).config('environment'); // TODO: Generalize this to inputs to be able to add any input
+      const environment = strapi.plugin(PLUGIN_ID).config('environment');
       const hideGithubLink = strapi.plugin(PLUGIN_ID).config('hideGithubLink');
       const staging = strapi.plugin(PLUGIN_ID).config('staging');
       const notifications = strapi.plugin(PLUGIN_ID).config('notifications');

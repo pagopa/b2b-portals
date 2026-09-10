@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { FramedVideoProps } from '@react-components/types';
-import { renderVideo, renderTextSection } from './FramedVideo.helpers';
+import { renderVideo, RenderTextSection } from './FramedVideo.helpers';
 import { resolveThemeVariant } from '../../theme';
 import { useTheme } from '@mui/material/styles';
 
@@ -87,13 +87,13 @@ const FramedVideo = ({
     >
       {text && (
         <div style={{ flexBasis: isMobileDevice ? '100%' : '50%' }}>
-          {renderTextSection({
-            title: text.title,
-            body: text.body,
-            link: text.link,
-            theme,
-            themeVariant,
-          })}
+          <RenderTextSection
+            title={text.title}
+            body={text.body}
+            link={text.link}
+            theme={theme}
+            themeVariant={themeVariant}
+          />
         </div>
       )}
 
@@ -107,7 +107,6 @@ const FramedVideo = ({
           autoplay,
           showControls,
           fallback: 'Video failed to load',
-          onVideoEnd: () => {},
           isMobileDevice,
         })}
       </div>

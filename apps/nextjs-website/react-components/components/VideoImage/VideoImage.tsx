@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useIsVisible } from '@react-components/types/common/Common.types';
 import { VideoImageProps } from '@react-components/types';
 import { TextColor } from '../common/Common.helpers';
@@ -43,6 +44,22 @@ const VideoImage = ({
   const isMobileDevice = useMediaQuery(themeMUI.breakpoints.down('md'));
   const borderRadius = enableMargins ? '12px' : 0;
 
+  const play = useCallback(
+    (e?: React.MouseEvent) => {
+      e?.preventDefault();
+      if (mediaState === 'image') return;
+      if (videoRef.current) {
+        videoRef.current
+          .play()
+          .then(() => setMediaState('play'))
+          .catch(() => {
+            // play() can be refused by the browser
+          });
+      }
+    },
+    [mediaState, videoRef],
+  );
+
   useEffect(() => {
     if (mediaState === 'image') return;
     if (!isVisible) return;
@@ -50,18 +67,7 @@ const VideoImage = ({
       if (video?.autoplay && isVisible) play();
     };
     startVideoWhenVisible().catch();
-  }, [isVisible]);
-
-  const play = (e?: React.MouseEvent) => {
-    e?.preventDefault();
-    if (mediaState === 'image') return;
-    if (videoRef.current) {
-      videoRef.current
-        .play()
-        .then(() => setMediaState('play'))
-        .catch(() => {});
-    }
-  };
+  }, [isVisible, mediaState, video?.autoplay, play]);
 
   const handleVideoEnd = () => {
     setMediaState('stop');

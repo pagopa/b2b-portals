@@ -1,6 +1,9 @@
 import * as t from 'io-ts';
 import { extractFromResponse } from './extractFromResponse';
-import { StrapiImageRequiredSchema } from './types/StrapiImage';
+import {
+  StrapiImageRequiredSchema,
+  StrapiImageSchema,
+} from './types/StrapiImage';
 import { extractTenantStrapiApiData } from './tenantApiData';
 import { AppEnv } from '@/AppEnv';
 
@@ -44,6 +47,7 @@ const SiteWideSEOCodec = t.strict({
     favicon: StrapiImageRequiredSchema,
     appleTouchIcon: StrapiImageRequiredSchema,
     themeVariant: ThemeVariantCodec,
+    custom404Image: StrapiImageSchema,
     locales: t.strict({
       it: t.boolean,
       en: t.boolean,
@@ -89,7 +93,8 @@ export const fetchSiteWideSEO = ({
 &populate[2]=appleTouchIcon
 &populate[3]=locales
 &populate[4]=analytics.mixpanel
-&populate[5]=siteName
+&populate[5]=custom404Image
+&populate[6]=siteName
       `,
       {
         method: 'GET',

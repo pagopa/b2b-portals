@@ -3,8 +3,7 @@ import ContainerRC from '../common/ContainerRC';
 import Item from './CardsItem';
 import { CardsProps } from '../../types/Cards/Cards.types';
 import { CtaButtonProps } from '../../types/common/Common.types';
-import { CtaButtons } from '../common/Common';
-import { Title, Subtitle } from '../common/Common';
+import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { resolveThemeVariant } from '../../theme';
 
@@ -39,6 +38,11 @@ const Cards = ({
 
   const linkColor = resolveThemeVariant<string>(
     'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
     themeVariant,
     ctx,
   );
@@ -119,14 +123,13 @@ const Cards = ({
             </Typography>
           )}
           {text.subtitle && (
-            <Typography mb={3} component='div' color={'inherit'}>
-              <Subtitle
-                variant='h6'
-                textColor={'inherit'}
-                subtitle={text.subtitle}
-                textAlign={isCenter ? 'center' : 'left'}
-                marginBottom={0}
-              />
+            <Typography
+              mb={3}
+              variant='h6'
+              color='inherit'
+              textAlign={isCenter ? 'center' : 'left'}
+            >
+              {text.subtitle}
             </Typography>
           )}
           {text.body && (
@@ -141,7 +144,7 @@ const Cards = ({
                   color: linkColor,
                   textDecoration: 'underline',
                   '&:hover': {
-                    color: linkColor,
+                    color: linkHoverColor,
                   },
                 },
                 '& p': {
@@ -166,16 +169,16 @@ const Cards = ({
                 textAlign: isCenter ? 'center' : 'left',
               }}
             >
-              {CtaButtons({
-                ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
+              <CtaButtons
+                ctaButtons={ctaButtons.map((button: CtaButtonProps) => ({
                   ...button,
                   sx: {
                     width: 'auto',
                   },
-                })),
-                theme,
-                themeVariant,
-              })}
+                }))}
+                theme={theme}
+                themeVariant={themeVariant}
+              />
             </Stack>
           ) : null}
         </Typography>
@@ -199,7 +202,11 @@ const Cards = ({
             mt: isCenter ? 6 : { xs: 6, md: 0 },
           }}
         >
-          {CtaButtons({ ctaButtons: [bottomCTA], theme, themeVariant })}
+          <CtaButtons
+            ctaButtons={[bottomCTA]}
+            theme={theme}
+            themeVariant={themeVariant}
+          />
         </Box>
       )}
     </ContainerRC>

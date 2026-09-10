@@ -10,19 +10,19 @@ import {
   Tr,
   Th,
   Td,
-} from "@strapi/design-system";
-import { Play, ArrowClockwise, ExternalLink, Expand } from "@strapi/icons";
-import { useEffect, useState } from "react";
-import { useFetchClient, useNotification, useRBAC } from "@strapi/strapi/admin";
-import { PLUGIN_ID } from "../pluginId";
-import { differenceInMilliseconds, formatRelative } from "date-fns";
-import pluginPermissions from "../permissions";
-import { Dialog } from "@strapi/design-system";
-import Workflow from "../../../types/workflow";
-import Config from "../../../types/config";
-import StagingStatus from "../../../types/StagingStatus";
-import { IconButton } from "@strapi/design-system";
-import { TextInput } from "@strapi/design-system";
+} from '@strapi/design-system';
+import { Play, ArrowClockwise, ExternalLink, Expand } from '@strapi/icons';
+import { useEffect, useState } from 'react';
+import { useFetchClient, useNotification, useRBAC } from '@strapi/strapi/admin';
+import { PLUGIN_ID } from '../pluginId';
+import { differenceInMilliseconds, formatRelative } from 'date-fns';
+import pluginPermissions from '../permissions';
+import { Dialog } from '@strapi/design-system';
+import Workflow from '../../../types/workflow';
+import Config from '../../../types/config';
+import StagingStatus from '../../../types/StagingStatus';
+import { IconButton } from '@strapi/design-system';
+import { TextInput } from '@strapi/design-system';
 
 const HomePage = () => {
   const { get, post } = useFetchClient();
@@ -31,10 +31,10 @@ const HomePage = () => {
   const [unstagedUpdates, setUnstagedUpdates] = useState<boolean>(true);
   const [history, setHistory] = useState<Array<Workflow>>([]);
   const [prodDeploymentDescription, setProdDeploymentDescription] =
-    useState<string>("");
+    useState<string>('');
   const [loadingHistory, setLoadingHistory] = useState<
-    "loading" | "planned" | "none"
-  >("none");
+    'loading' | 'planned' | 'none'
+  >('none');
   const [showTriggerConfirmationPopup, setShowTriggerConfirmationPopup] =
     useState(false);
   const {
@@ -53,7 +53,7 @@ const HomePage = () => {
   }
 
   async function sendEmailNotification(
-    event: "staging-trigger" | "prod-trigger" | "trigger",
+    event: 'staging-trigger' | 'prod-trigger',
   ) {
     try {
       post(`/${PLUGIN_ID}/notify`, { event });
@@ -74,7 +74,7 @@ const HomePage = () => {
   }
 
   async function setStagingStatus(
-    newDocumentData: Omit<StagingStatus, "createdAt">,
+    newDocumentData: Omit<StagingStatus, 'createdAt'>,
   ) {
     try {
       await post(`/${PLUGIN_ID}/staging-status`, newDocumentData);
@@ -86,136 +86,134 @@ const HomePage = () => {
 
   async function verifyStagingStatus(data: { workflow_runs: Workflow[] }) {
     // Check last workflow's conclusion to determine whether to allow production trigger (aka setUnstagedUpdates)
-    if (config?.staging) {
-      const lastWorkflow: Workflow | undefined = data.workflow_runs[0];
-      const currentStagingStatus = await getStagingStatus();
+    const lastWorkflow: Workflow | undefined = data.workflow_runs[0];
+    const currentStagingStatus = await getStagingStatus();
 
-      // If no lastWorkflow --> Leave everything as is
-      // If no currentStagingStatus --> There's been an issue --> Leave everything as is (which in this case will be the prod trigger being blocked)
-      if (currentStagingStatus && lastWorkflow) {
-        const lastWorkflowPathArray = lastWorkflow.path.split("/");
-        const lastWorkflowFileName =
-          lastWorkflowPathArray[lastWorkflowPathArray.length - 1];
+    // If no lastWorkflow --> Leave everything as is
+    // If no currentStagingStatus --> There's been an issue --> Leave everything as is (which in this case will be the prod trigger being blocked)
+    if (currentStagingStatus && lastWorkflow) {
+      const lastWorkflowPathArray = lastWorkflow.path.split('/');
+      const lastWorkflowFileName =
+        lastWorkflowPathArray[lastWorkflowPathArray.length - 1];
 
-        const lastWorkflowCreationDate = new Date(lastWorkflow.created_at);
-        const lastUpdateDate = new Date(currentStagingStatus.createdAt);
+      const lastWorkflowCreationDate = new Date(lastWorkflow.created_at);
+      const lastUpdateDate = new Date(currentStagingStatus.createdAt);
 
-        if (lastWorkflowFileName === config.staging.workflowID) {
-          // Last workflow was a staging workflow
+      if (lastWorkflowFileName === config?.staging.workflowID) {
+        // Last workflow was a staging workflow
 
-          // If it hasn't ended yet, disable prod trigger
-          if (!lastWorkflow.conclusion) {
+        // If it hasn't ended yet, disable prod trigger
+        if (!lastWorkflow.conclusion) {
+          setUnstagedUpdates(true);
+          return;
+        }
+
+        // If it ended unsuccessfully, regardless of staging status, disable prod trigger
+        if (lastWorkflow.conclusion !== 'success') {
+          setUnstagedUpdates(true);
+          setStagingStatus({ unstagedUpdates: true });
+          return;
+        } else {
+          // Last workflow (staging) ended successfully
+
+          // If there are no updates, enable prod trigger
+          if (!currentStagingStatus.unstagedUpdates) {
+            setUnstagedUpdates(false);
+            return;
+          }
+
+          // If the updates are more recent than the last workflow, disable prod trigger
+          if (lastUpdateDate > lastWorkflowCreationDate) {
+            setUnstagedUpdates(true);
+          } else {
+            // If the updates are older than the last workflow, enable prod trigger
+            setUnstagedUpdates(false);
+            setStagingStatus({ unstagedUpdates: false });
+          }
+        }
+      } else {
+        // Last workflow was a prod workflow
+
+        // It hasn't ended yet, keep prod trigger enabled only if no new unstaged updates were made
+        if (!lastWorkflow.conclusion) {
+          setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
+          return;
+        }
+
+        // It finished unsuccessfully
+        if (lastWorkflow.conclusion !== 'success') {
+          // If last staging workflow was successful, it set unstaged updates to false
+          // Knowing this, if there are any unstaged updates, we can assume they come after the last staging workflow and disable prod trigger
+          if (currentStagingStatus.unstagedUpdates) {
             setUnstagedUpdates(true);
             return;
           }
 
-          // If it ended unsuccessfully, regardless of staging status, disable prod trigger
-          if (lastWorkflow.conclusion !== "success") {
+          // If no unstaged updates, check last staging workflow staging
+          // Only enable prod trigger if the last staging workflow was successful
+          const lastStagingWorkflow: Workflow | undefined =
+            data.workflow_runs.find((workflow) => {
+              const workflowPathArray = workflow.path.split('/');
+              const workflowFileName =
+                workflowPathArray[workflowPathArray.length - 1];
+
+              return workflowFileName === config?.staging.workflowID;
+            });
+
+          // No last staging workflow before current prod workflow, disable prod
+          if (!lastStagingWorkflow) {
             setUnstagedUpdates(true);
             setStagingStatus({ unstagedUpdates: true });
             return;
-          } else {
-            // Last workflow (staging) ended successfully
-
-            // If there are no updates, enable prod trigger
-            if (!currentStagingStatus.unstagedUpdates) {
-              setUnstagedUpdates(false);
-              return;
-            }
-
-            // If the updates are more recent than the last workflow, disable prod trigger
-            if (lastUpdateDate > lastWorkflowCreationDate) {
-              setUnstagedUpdates(true);
-            } else {
-              // If the updates are older than the last workflow, enable prod trigger
-              setUnstagedUpdates(false);
-              setStagingStatus({ unstagedUpdates: false });
-            }
           }
-        } else {
-          // Last workflow was a prod workflow
 
-          // It hasn't ended yet, keep prod trigger enabled only if no new unstaged updates were made
-          if (!lastWorkflow.conclusion) {
-            setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
+          // Last staging workflow hasn't ended yet --> should not occur, disable prod
+          if (!lastStagingWorkflow.conclusion) {
+            setUnstagedUpdates(true);
+            setStagingStatus({ unstagedUpdates: true });
             return;
           }
 
-          // It finished unsuccessfully
-          if (lastWorkflow.conclusion !== "success") {
-            // If last staging workflow was successful, it set unstaged updates to false
-            // Knowing this, if there are any unstaged updates, we can assume they come after the last staging workflow and disable prod trigger
-            if (currentStagingStatus.unstagedUpdates) {
-              setUnstagedUpdates(true);
-              return;
-            }
-
-            // If no unstaged updates, check last staging workflow staging
-            // Only enable prod trigger if the last staging workflow was successful
-            const lastStagingWorkflow: Workflow | undefined =
-              data.workflow_runs.filter((workflow) => {
-                const workflowPathArray = workflow.path.split("/");
-                const workflowFileName =
-                  workflowPathArray[workflowPathArray.length - 1];
-
-                return workflowFileName === config.staging!.workflowID;
-              })[0];
-
-            // No last staging workflow before current prod workflow, disable prod
-            if (!lastStagingWorkflow) {
-              setUnstagedUpdates(true);
-              setStagingStatus({ unstagedUpdates: true });
-              return;
-            }
-
-            // Last staging workflow hasn't ended yet --> should not occur, disable prod
-            if (!lastStagingWorkflow.conclusion) {
-              setUnstagedUpdates(true);
-              setStagingStatus({ unstagedUpdates: true });
-              return;
-            }
-
-            // Last staging workflow FAIL --> disable prod
-            if (lastStagingWorkflow.conclusion !== "success") {
-              setUnstagedUpdates(true);
-              setStagingStatus({ unstagedUpdates: true });
-            } else {
-              // Last staging workflow SUCCESS --> enable prod
-              setUnstagedUpdates(false);
-            }
+          // Last staging workflow FAIL --> disable prod
+          if (lastStagingWorkflow.conclusion !== 'success') {
+            setUnstagedUpdates(true);
+            setStagingStatus({ unstagedUpdates: true });
           } else {
-            // Last workflow (prod) ended successfully
-
-            // Since a successful staging workflow will set unstaged updates to false
-            // We'll assume that if any unstaged updates are present, they came after staging and we need to disable prod trigger
-            // Otherwise, if there are no updates, keep prod trigger enabled
-            setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
+            // Last staging workflow SUCCESS --> enable prod
+            setUnstagedUpdates(false);
           }
+        } else {
+          // Last workflow (prod) ended successfully
+
+          // Since a successful staging workflow will set unstaged updates to false
+          // We'll assume that if any unstaged updates are present, they came after staging and we need to disable prod trigger
+          // Otherwise, if there are no updates, keep prod trigger enabled
+          setUnstagedUpdates(currentStagingStatus.unstagedUpdates);
         }
       }
     }
   }
 
   async function fetchHistory() {
-    setLoadingHistory("loading");
+    setLoadingHistory('loading');
 
     try {
       const { data } = await get(`/${PLUGIN_ID}/history`);
       await verifyStagingStatus(data);
       setHistory(data.workflow_runs.slice(0, 10));
     } catch (error: any) {
-      if (error.name === "AbortError") {
+      if (error.name === 'AbortError') {
         // User likely just changed page before fetch completed, do nothing
         return;
       } else {
         console.error(error);
         toggleNotification({
-          type: "danger",
-          title: "Impossibile recuperare storico dei deploy!",
+          type: 'danger',
+          title: 'Impossibile recuperare storico dei deploy!',
         });
       }
     } finally {
-      setLoadingHistory("none");
+      setLoadingHistory('none');
     }
   }
 
@@ -223,10 +221,10 @@ const HomePage = () => {
     setLoadingTriggerButton(true);
 
     try {
-      if (config?.staging && unstagedUpdates) {
+      if (unstagedUpdates) {
         // Staging
         await post(`/${PLUGIN_ID}/trigger-staging`);
-        sendEmailNotification("staging-trigger");
+        sendEmailNotification('staging-trigger');
       } else {
         // Prod
         // Check for unstaged updates to prevent triggering if another editor published changes while the user was on this page
@@ -235,9 +233,9 @@ const HomePage = () => {
           // Disable prod trigger and show error
           setUnstagedUpdates(true);
           toggleNotification({
-            type: "danger",
-            title: "Lancio del workflow annullato!",
-            message: "Impossibile recuperare lo staging status corrente",
+            type: 'danger',
+            title: 'Lancio del workflow annullato!',
+            message: 'Impossibile recuperare lo staging status corrente',
             timeout: 5000,
           });
           return;
@@ -246,10 +244,10 @@ const HomePage = () => {
           // Disable prod trigger and show message
           setUnstagedUpdates(true);
           toggleNotification({
-            type: "danger",
-            title: "Lancio del workflow annullato!",
+            type: 'danger',
+            title: 'Lancio del workflow annullato!',
             message:
-              "Sono state trovate nuove modifiche non deployate in staging!",
+              'Sono state trovate nuove modifiche non deployate in staging!',
             timeout: 5000,
           });
           return;
@@ -258,42 +256,42 @@ const HomePage = () => {
         await post(`/${PLUGIN_ID}/trigger`, {
           description: prodDeploymentDescription,
         });
-        sendEmailNotification(config?.staging ? "prod-trigger" : "trigger");
+        await sendEmailNotification('prod-trigger');
       }
 
       toggleNotification({
-        type: "success",
-        title: "Workflow lanciato con successo!",
-        message: "Lo storico dei deploy sarà ricaricato tra 5 secondi",
+        type: 'success',
+        title: 'Workflow lanciato con successo!',
+        message: 'Lo storico dei deploy sarà ricaricato tra 5 secondi',
         timeout: 5000,
       });
-      setLoadingHistory("planned");
+      setLoadingHistory('planned');
       setTimeout(fetchHistory, 5000);
     } catch (error: any) {
       console.error(error);
       const { status, name } = error.response.data.error;
 
-      if (status === 422 && name === "UnprocessableEntityError") {
+      if (status === 422 && name === 'UnprocessableEntityError') {
         toggleNotification({
-          type: "danger",
-          title: "Error 422: Unprocessable Entity",
+          type: 'danger',
+          title: 'Error 422: Unprocessable Entity',
         });
         return;
       }
 
-      if (status === 403 && name === "PolicyError") {
+      if (status === 403 && name === 'PolicyError') {
         toggleNotification({
-          type: "danger",
-          title: "Error 403: Permission Denied",
+          type: 'danger',
+          title: 'Error 403: Permission Denied',
         });
         return;
       }
 
       toggleNotification({
-        type: "danger",
-        title: "Impossibile lanciare il workflow!",
+        type: 'danger',
+        title: 'Impossibile lanciare il workflow!',
         message:
-          "Errore sconosciuto. Controllare la console per maggiori dettagli.",
+          'Errore sconosciuto. Controllare la console per maggiori dettagli.',
       });
     } finally {
       setLoadingTriggerButton(false);
@@ -301,26 +299,26 @@ const HomePage = () => {
   }
 
   function getWorkflowName(): string {
-    if (config?.staging && unstagedUpdates) {
+    if (unstagedUpdates) {
       // Staging
       const stagingHistory = history.filter((workflow) => {
-        const workflowPathArray = workflow.path.split("/");
+        const workflowPathArray = workflow.path.split('/');
         const workflowFileName =
           workflowPathArray[workflowPathArray.length - 1];
 
-        return workflowFileName === config.staging!.workflowID;
+        return workflowFileName === config?.staging.workflowID;
       });
-      return `"${stagingHistory[0]?.name ?? config.staging.workflowID}"`;
+      return `"${stagingHistory[0]?.name ?? config?.staging.workflowID}"`;
     } else {
       // Prod
       const prodHistory = history.filter((workflow) => {
-        const workflowPathArray = workflow.path.split("/");
+        const workflowPathArray = workflow.path.split('/');
         const workflowFileName =
           workflowPathArray[workflowPathArray.length - 1];
 
         return workflowFileName === config?.workflowID;
       });
-      return `"${prodHistory[0]?.name ?? config?.workflowID ?? ""}"`;
+      return `"${prodHistory[0]?.name ?? config?.workflowID ?? ''}"`;
     }
   }
 
@@ -336,7 +334,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!showTriggerConfirmationPopup) {
-      setProdDeploymentDescription("");
+      setProdDeploymentDescription('');
     }
   }, [showTriggerConfirmationPopup]);
 
@@ -355,7 +353,7 @@ const HomePage = () => {
   return (
     <Main
       style={{
-        padding: "0 5.4rem 3.2rem 5.4rem",
+        padding: '0 5.4rem 3.2rem 5.4rem',
       }}
     >
       <Flex
@@ -369,9 +367,9 @@ const HomePage = () => {
         <Flex direction="row" alignItems="center" gap="1rem">
           <Button
             onClick={fetchHistory}
-            loading={loadingHistory !== "none"}
+            loading={loadingHistory !== 'none'}
             disabled={loadingTriggerButton}
-            style={{ height: "4.2rem" }}
+            style={{ height: '4.2rem' }}
             variant="secondary"
             startIcon={<ArrowClockwise />}
           >
@@ -383,61 +381,43 @@ const HomePage = () => {
             onOpenChange={setShowTriggerConfirmationPopup}
           >
             <Dialog.Trigger>
-              {config?.staging ? (
-                <Flex>
-                  <Button
-                    loading={loadingTriggerButton}
-                    disabled={
-                      loadingHistory !== "none" ||
-                      !canTrigger ||
-                      !unstagedUpdates
-                    }
-                    style={{
-                      height: "4.2rem",
-                      borderTopRightRadius: 0,
-                      borderBottomRightRadius: 0,
-                    }}
-                    variant="default"
-                    startIcon={<Expand />}
-                  >
-                    <Typography fontSize="1.6rem">Staging</Typography>
-                  </Button>
-                  <Button
-                    loading={loadingTriggerButton}
-                    disabled={
-                      loadingHistory !== "none" ||
-                      !canTrigger ||
-                      unstagedUpdates
-                    }
-                    style={{
-                      height: "4.2rem",
-                      borderTopLeftRadius: 0,
-                      borderBottomLeftRadius: 0,
-                    }}
-                    variant="default"
-                    startIcon={<Play />}
-                    title={
-                      loadingHistory !== "none" ||
-                      !canTrigger ||
-                      unstagedUpdates
-                        ? "Il deploy in produzione sarà disponibile a seguito di un deploy in staging terminato con successo"
-                        : ""
-                    }
-                  >
-                    <Typography fontSize="1.6rem">Produzione</Typography>
-                  </Button>
-                </Flex>
-              ) : (
+              <Flex>
                 <Button
                   loading={loadingTriggerButton}
-                  disabled={loadingHistory !== "none" || !canTrigger}
-                  style={{ height: "4.2rem" }}
+                  disabled={
+                    loadingHistory !== 'none' || !canTrigger || !unstagedUpdates
+                  }
+                  style={{
+                    height: '4.2rem',
+                    borderTopRightRadius: 0,
+                    borderBottomRightRadius: 0,
+                  }}
+                  variant="default"
+                  startIcon={<Expand />}
+                >
+                  <Typography fontSize="1.6rem">Staging</Typography>
+                </Button>
+                <Button
+                  loading={loadingTriggerButton}
+                  disabled={
+                    loadingHistory !== 'none' || !canTrigger || unstagedUpdates
+                  }
+                  style={{
+                    height: '4.2rem',
+                    borderTopLeftRadius: 0,
+                    borderBottomLeftRadius: 0,
+                  }}
                   variant="default"
                   startIcon={<Play />}
+                  title={
+                    loadingHistory !== 'none' || !canTrigger || unstagedUpdates
+                      ? 'Il deploy in produzione sarà disponibile a seguito di un deploy in staging terminato con successo'
+                      : ''
+                  }
                 >
                   <Typography fontSize="1.6rem">Produzione</Typography>
                 </Button>
-              )}
+              </Flex>
             </Dialog.Trigger>
 
             <Dialog.Content>
@@ -448,24 +428,24 @@ const HomePage = () => {
                 </Typography>
                 {config && (
                   <Typography fontSize="1.2rem">
-                    (Workflow ID:{" "}
+                    (Workflow ID:{' '}
                     {config.staging && unstagedUpdates
                       ? config.staging.workflowID
                       : config.workflowID}
                     )
                   </Typography>
                 )}
-                {(loadingHistory !== "none" ||
+                {(loadingHistory !== 'none' ||
                   !canTrigger ||
                   !unstagedUpdates) && (
                   <Flex
                     direction="column"
                     style={{
-                      borderTop: "1px solid white",
-                      marginTop: "16px",
-                      paddingTop: "24px",
-                      alignItems: "stretch",
-                      gap: "12px",
+                      borderTop: '1px solid white',
+                      marginTop: '16px',
+                      paddingTop: '24px',
+                      alignItems: 'stretch',
+                      gap: '12px',
                     }}
                   >
                     <Typography>
@@ -502,26 +482,26 @@ const HomePage = () => {
       <Table colCount={5} rowCount={11}>
         <Thead>
           <Tr>
-            <Th key={"run-number"}>
+            <Th key={'run-number'}>
               <Typography variant="sigma">NUMERO RUN</Typography>
             </Th>
-            <Th key={"workflow-name"}>
+            <Th key={'workflow-name'}>
               <Typography variant="sigma">NOME WORKFLOW</Typography>
             </Th>
-            <Th key={"status"}>
+            <Th key={'status'}>
               <Typography variant="sigma">STATO</Typography>
             </Th>
-            <Th key={"creation-date"}>
+            <Th key={'creation-date'}>
               <Typography variant="sigma">DATA CREAZIONE</Typography>
             </Th>
-            <Th key={"duration"}>
+            <Th key={'duration'}>
               <Typography variant="sigma">DURATA</Typography>
             </Th>
-            {!config?.hideGithubLink && <Th key={"actions"}></Th>}
+            {!config?.hideGithubLink && <Th key={'actions'}></Th>}
           </Tr>
         </Thead>
         <Tbody>
-          {loadingHistory === "loading" && (
+          {loadingHistory === 'loading' && (
             <Tr>
               <Td></Td>
               <Td></Td>
@@ -534,7 +514,7 @@ const HomePage = () => {
             </Tr>
           )}
 
-          {loadingHistory === "planned" && (
+          {loadingHistory === 'planned' && (
             <Tr>
               <Td></Td>
               <Td></Td>
@@ -549,7 +529,7 @@ const HomePage = () => {
             </Tr>
           )}
 
-          {loadingHistory === "none" &&
+          {loadingHistory === 'none' &&
             history.map((workflow: Workflow) => {
               const msDuration = differenceInMilliseconds(
                 new Date(workflow.updated_at),
@@ -561,16 +541,16 @@ const HomePage = () => {
                 new Date(workflow.created_at),
                 new Date(),
               );
-              const year = relativeDate.includes("/")
-                ? relativeDate.split("/")[2]
+              const year = relativeDate.includes('/')
+                ? relativeDate.split('/')[2]
                 : null;
-              const month = relativeDate.includes("/")
-                ? relativeDate.split("/")[0]
+              const month = relativeDate.includes('/')
+                ? relativeDate.split('/')[0]
                 : null;
-              const day = relativeDate.includes("/")
-                ? relativeDate.split("/")[1]
+              const day = relativeDate.includes('/')
+                ? relativeDate.split('/')[1]
                 : null;
-              const ymdRelativeDate = relativeDate.includes("/")
+              const ymdRelativeDate = relativeDate.includes('/')
                 ? `${year}-${month}-${day}`
                 : relativeDate;
 
@@ -594,7 +574,7 @@ const HomePage = () => {
                     <Typography variant="sigma">
                       {workflow.conclusion
                         ? `${mins}m ${secs}s`
-                        : "in progress"}
+                        : 'in progress'}
                     </Typography>
                   </Td>
                   {!config?.hideGithubLink && (

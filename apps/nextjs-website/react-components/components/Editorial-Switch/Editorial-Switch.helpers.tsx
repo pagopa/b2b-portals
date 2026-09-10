@@ -34,6 +34,11 @@ export const TitleSubtitleBlock = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <div
@@ -65,7 +70,7 @@ export const TitleSubtitleBlock = ({
             color: linkColor,
             textDecoration: 'underline',
             '&:hover': {
-              color: linkColor,
+              color: linkHoverColor,
             },
           },
           '& p': {
@@ -264,8 +269,8 @@ export const ButtonSwitchRowBlock = ({
       justifyContent='left'
       spacing={2}
     >
-      {CtaButtons({
-        ctaButtons: buttons.map((button) => ({
+      <CtaButtons
+        ctaButtons={buttons.map((button) => ({
           text: button.text,
           sx: {
             width: { md: 'auto', xs: '100%' },
@@ -281,10 +286,10 @@ export const ButtonSwitchRowBlock = ({
           },
           variant: 'outlined',
           onClick: () => onButtonClick(button.id),
-        })),
-        theme,
-        themeVariant,
-      })}
+        }))}
+        theme={theme}
+        themeVariant={themeVariant}
+      />
     </Stack>
   ) : (
     <SplitButton

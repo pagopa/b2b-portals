@@ -42,6 +42,11 @@ const StripeLink = ({
     themeVariant,
     ctx,
   );
+  const richTextLinkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <ContainerRC
@@ -80,7 +85,7 @@ const StripeLink = ({
                   color: textColorWhiteOnly,
                   textDecoration: 'underline',
                   '&:hover': {
-                    color: textColorWhiteOnly,
+                    color: richTextLinkHoverColor,
                   },
                 },
                 '& p': {

@@ -108,7 +108,6 @@ const HighlightBox = ({
                 variant='contained'
                 href={link.href}
                 {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
-                size='small'
                 sx={{
                   width: 'fit-content',
                   px: 3,
@@ -117,7 +116,7 @@ const HighlightBox = ({
                   color: buttonTextColor,
                   borderRadius: '4px',
                   fontSize: '16px',
-                  fontWeight: 400,
+                  fontWeight: 600,
                   '&.MuiButton-contained:hover': {
                     backgroundColor: buttonBackgroundHoverColor,
                     color: buttonTextColor,

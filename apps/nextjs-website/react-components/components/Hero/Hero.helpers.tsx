@@ -40,6 +40,11 @@ export const HeroTextContent = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Stack
@@ -78,7 +83,7 @@ export const HeroTextContent = ({
               color: linkColor,
               textDecoration: 'underline',
               '&:hover': {
-                color: linkColor,
+                color: linkHoverColor,
               },
             },
             '& p': {
@@ -93,7 +98,7 @@ export const HeroTextContent = ({
       {storeButtons?.hrefGoogle || storeButtons?.hrefApple ? (
         <Stack direction='column' spacing={2}>
           <Typography color={textColor} fontWeight={700}>
-            Scarica l'app IO
+            Scarica l&apos;app IO
           </Typography>
           <Stack
             justifyContent='left'
@@ -138,8 +143,8 @@ export const HeroTextContent = ({
           justifyContent='left'
           spacing={2}
         >
-          {CtaButtons({
-            ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
+          <CtaButtons
+            ctaButtons={ctaButtons.map((button: CtaButtonProps) => ({
               ...button,
               sx: {
                 width: {
@@ -147,10 +152,10 @@ export const HeroTextContent = ({
                   xs: '100%',
                 },
               },
-            })),
-            theme,
-            themeVariant,
-          })}
+            }))}
+            theme={theme}
+            themeVariant={themeVariant}
+          />
         </Stack>
       ) : null}
 

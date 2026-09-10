@@ -1,8 +1,8 @@
 import { Box, Typography, useTheme, Stack } from '@mui/material';
 import { MediaResourcesProps } from '@react-components/types';
 import { TextColor } from '../common/Common.helpers';
-import { FileDownloadOutlined } from '@mui/icons-material';
 import { resolveThemeVariant } from '../../theme';
+import { DownloadIcon } from './MediaResources.helpers';
 
 const MediaResources = ({
   items,
@@ -93,7 +93,7 @@ const MediaResources = ({
                 spacing={1}
                 color={linkColor}
               >
-                <FileDownloadOutlined />
+                <DownloadIcon color={linkColor} />
                 <Typography color='inherit' fontSize={14} fontWeight={600}>
                   {item.label}
                 </Typography>

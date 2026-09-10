@@ -62,8 +62,8 @@ export const Ctas = ({
         justifyContent='left'
         spacing={2}
       >
-        {CtaButtons({
-          ctaButtons: ctaButtons.map((button: CtaButtonProps) => ({
+        <CtaButtons
+          ctaButtons={ctaButtons.map((button: CtaButtonProps) => ({
             ...button,
             sx: {
               width: {
@@ -71,10 +71,10 @@ export const Ctas = ({
                 xs: '100%',
               },
             },
-          })),
-          theme,
-          themeVariant,
-        })}
+          }))}
+          theme={theme}
+          themeVariant={themeVariant}
+        />
       </Stack>
     );
   } else {

@@ -39,11 +39,9 @@ const PageSwitch = ({
   title,
   subtitle,
 }: PageSwitchProps) => {
-  if (pages[0] === undefined) {
-    return null;
-  }
-
-  const [currentPage, setCurrentPage] = useState<PageSwitchPage>(pages[0]);
+  const [currentPage, setCurrentPage] = useState<PageSwitchPage | undefined>(
+    pages[0],
+  );
 
   const handleButtonClick = (pageID: number) => {
     const page = pages.find((page) => page.id === pageID);
@@ -80,7 +78,7 @@ const PageSwitch = ({
     ctx,
   );
 
-  return (
+  return !currentPage ? null : (
     <Box>
       <ContainerRC
         sxInner={{

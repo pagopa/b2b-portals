@@ -61,6 +61,11 @@ const BannerLink = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Box
@@ -123,7 +128,7 @@ const BannerLink = ({
                       textDecoration: 'underline',
                       fontWeight: 'bold',
                       '&:hover': {
-                        color: linkColor,
+                        color: linkHoverColor,
                         textDecoration: 'underline',
                       },
                     },
@@ -141,18 +146,18 @@ const BannerLink = ({
                     spacing={2}
                     sx={{ mt: 2 }}
                   >
-                    {CtaButtons({
-                      ctaButtons: section.ctaButtons.map(
+                    <CtaButtons
+                      ctaButtons={section.ctaButtons.map(
                         (button: CtaButtonProps) => ({
                           ...button,
                           sx: {
                             width: 'auto',
                           },
                         }),
-                      ),
-                      theme,
-                      themeVariant,
-                    })}
+                      )}
+                      theme={theme}
+                      themeVariant={themeVariant}
+                    />
                   </Stack>
                 )}
               </Stack>

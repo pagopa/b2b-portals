@@ -1,12 +1,13 @@
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import { ServiceCarouselProps } from '../../types/ServiceCarousel/ServiceCarousel.types';
-import { Body, Title } from '../common/Common';
+import { Title } from '../common/Common';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useId, useRef, useState } from 'react';
 import { ServiceCard, SliderArrowControl } from './ServiceCarousel.helpers';
 import { visuallyHidden } from '@mui/utils';
+import { resolveThemeVariant } from '../../theme';
 
 const ServiceCarousel = ({
   title,
@@ -20,6 +21,20 @@ const ServiceCarousel = ({
   const sliderRef = useRef<Slider>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { palette } = useTheme();
+  const ctx = {
+    palette,
+    theme: 'light' as const,
+  };
+  const linkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
   const [currentCard, setCurrentCard] = useState(cards[0]);
   const liveRegionRef = useRef<HTMLDivElement>();
   const titleId = useId();
@@ -97,7 +112,19 @@ const ServiceCarousel = ({
         />
 
         {description && (
-          <Body body={description} textColor={palette.text.primary} />
+          <Box
+            sx={{
+              color: palette.text.primary,
+              '& a': {
+                color: linkColor,
+                '&:hover': {
+                  color: linkHoverColor,
+                },
+              },
+            }}
+          >
+            {description}
+          </Box>
         )}
       </Stack>
 
@@ -106,7 +133,19 @@ const ServiceCarousel = ({
         ref={containerRef}
         gap={{ xs: 3.375, sm: 3.375, md: 4 }}
         width={'100%'}
-        sx={{ position: 'relative' }}
+        sx={{
+          position: 'relative',
+          '.slick-track': {
+            display: 'flex !important',
+            '.slick-slide': {
+              display: 'flex !important',
+              height: 'inherit !important',
+              '> div': {
+                display: 'flex',
+              },
+            },
+          },
+        }}
       >
         <SliderArrowControl
           direction='left'

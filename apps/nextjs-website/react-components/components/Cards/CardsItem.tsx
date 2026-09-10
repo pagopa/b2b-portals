@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Stack, Link, Box } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { CardsItemProps } from '../../types/Cards/Cards.types';
-import { Title, Body, isValidExternalLink, LinkIcon } from '../common/Common';
+import { Title, isValidExternalLink, LinkIcon } from '../common/Common';
 import Image from 'next/image';
 import { useTheme } from '@mui/material/styles';
 import { resolveThemeVariant } from '../../theme';
@@ -18,12 +18,20 @@ const CardsItem = ({
   alignLinkIconLeft,
   sx,
 }: CardsItemProps) => {
-  const { palette } = useTheme();
+  const { spacing, palette } = useTheme();
 
   const linkColor = resolveThemeVariant<string>('actionColor', themeVariant, {
     palette,
     theme: 'light',
   });
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    {
+      palette,
+      theme: 'light',
+    },
+  );
 
   const borderColor = resolveThemeVariant<string>('borderColor', themeVariant, {
     palette,
@@ -79,38 +87,59 @@ const CardsItem = ({
               textAlign='left'
             />
           </Typography>
-          <Body
+          <Typography
+            mb='5px'
+            component='div'
             variant='body2'
-            textColor='inherit'
-            body={text}
-            marginBottom={5}
+            color={'inherit'}
             textAlign={textAlign}
-          />
+            sx={{
+              '& a': {
+                color: linkColor,
+                textDecoration: 'underline',
+                '&:hover': {
+                  color: linkHoverColor,
+                },
+              },
+              '& p': {
+                marginBottom: '0px',
+                color: 'inherit',
+                fontSize: '16px',
+              },
+            }}
+          >
+            {text}
+          </Typography>
           {links?.length
             ? links.map((link, index) => (
-                <Stack
+                <Link
                   key={index}
-                  mt={2}
-                  direction='row'
-                  alignItems='center'
                   color={linkColor}
-                  justifyContent={alignLinkIconLeft ? 'left' : 'space-between'}
-                  width='100%'
+                  display='inline-flex'
+                  alignItems='center'
+                  fontSize={16}
+                  fontWeight={700}
+                  href={link.href}
+                  justifyContent={
+                    alignLinkIconLeft ? 'flex-start' : 'space-between'
+                  }
+                  title={link.title}
+                  underline='none'
+                  width={alignLinkIconLeft ? 'auto' : '100%'}
+                  {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
+                  {...(isValidExternalLink(link.href) && {
+                    target: '_blank',
+                  })}
+                  sx={{
+                    '&.MuiTypography-root': {
+                      marginTop: spacing(2),
+                    },
+                    '&:hover': {
+                      color: linkHoverColor,
+                    },
+                  }}
                 >
-                  <Link
-                    color={linkColor}
-                    underline='none'
-                    href={link.href}
-                    title={link.title}
-                    fontSize={14}
-                    fontWeight={600}
-                    {...(link.ariaLabel && { 'aria-label': link.ariaLabel })}
-                    {...(isValidExternalLink(link.href) && {
-                      target: '_blank',
-                    })}
-                  >
-                    {link.label}
-                  </Link>
+                  {link.label}
                   <LinkIcon
                     {...(isValidExternalLink(link.href) && {
                       externaLinkIconTarget: '_blank',
@@ -119,7 +148,7 @@ const CardsItem = ({
                     internalLinkIcon={
                       <ArrowForwardIcon
                         sx={{
-                          color: linkColor,
+                          color: 'inherit',
                           height: 24,
                           marginLeft: 1,
                           width: 24,
@@ -127,7 +156,7 @@ const CardsItem = ({
                       />
                     }
                   />
-                </Stack>
+                </Link>
               ))
             : null}
         </Stack>

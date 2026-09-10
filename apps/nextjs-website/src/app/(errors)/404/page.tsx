@@ -9,7 +9,8 @@ const NotFound = async () => {
     return null;
   }
 
-  const { defaultLocale, locales } = await getSiteWideSEO();
+  const { defaultLocale, locales, themeVariant, custom404Image } =
+    await getSiteWideSEO();
 
   const localesArray = Object.keys(locales).filter(
     (locale) => locales[locale as Locale],
@@ -19,6 +20,8 @@ const NotFound = async () => {
     <NotFoundPage
       defaultLocale={defaultLocale}
       validLocales={localesArray as Array<Locale>}
+      themeVariant={themeVariant}
+      custom404Image={custom404Image}
     />
   );
 };

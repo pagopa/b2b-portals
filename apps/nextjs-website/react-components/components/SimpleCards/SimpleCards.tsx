@@ -1,7 +1,6 @@
-import Image from 'next/image';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import ContainerRC from '../common/ContainerRC';
-import { CtaButtons, Subtitle, Title } from '../common/Common';
+import { CtaButtons, Title } from '../common/Common';
 import { TextColor } from '../common/Common.helpers';
 import { resolveThemeVariant } from '../../theme';
 import { SimpleCardsProps } from '../../types/SimpleCards/SimpleCards.types';
@@ -21,7 +20,8 @@ const SimpleCards = ({
   sectionID,
   customBgColor,
 }: SimpleCardsProps) => {
-  const { palette } = useTheme();
+  const muiTheme = useTheme();
+  const { palette } = muiTheme;
   const ctx = { palette, theme };
 
   const backgroundColor =
@@ -29,6 +29,16 @@ const SimpleCards = ({
     resolveThemeVariant<string>('sectionBackgroundColor', themeVariant, ctx);
 
   const textColor = TextColor(theme, themeVariant);
+  const richTextLinkColor = resolveThemeVariant<string>(
+    'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
+  const richTextLinkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
   const isCentered = textAlign === 'center';
   const isNone = textAlign === 'none';
   const editorialTextAlign = isCentered ? 'center' : 'left';
@@ -42,10 +52,10 @@ const SimpleCards = ({
     <ContainerRC
       background={backgroundColor}
       py={8}
-      size='lg'
+      size='xl'
       sxInner={{
         width: '100%',
-        maxWidth: '1156px',
+        maxWidth: '1260px',
         mx: 'auto',
         px: 0,
         boxSizing: 'border-box',
@@ -68,7 +78,7 @@ const SimpleCards = ({
                   : 'flex-start',
             }}
             justifyContent='space-between'
-            spacing={{ xs: 4, md: shouldShowImage ? 8 : 0 }}
+            spacing={{ xs: 4, md: shouldShowImage ? 16 : 0 }}
             mb={6}
             color={textColor}
             textAlign={editorialTextAlign}
@@ -76,7 +86,8 @@ const SimpleCards = ({
             <Box
               sx={{
                 width: '100%',
-                maxWidth: { xs: '100%', md: shouldShowImage ? 448 : 684 },
+                flex: 1,
+                maxWidth: { xs: '100%', md: shouldShowImage ? 500 : 684 },
               }}
             >
               <Stack
@@ -92,8 +103,11 @@ const SimpleCards = ({
                     color: 'inherit',
                   },
                   '& a': {
-                    color: 'inherit',
+                    color: richTextLinkColor,
                     textDecoration: 'underline',
+                    '&:hover': {
+                      color: richTextLinkHoverColor,
+                    },
                   },
                 }}
               >
@@ -109,13 +123,13 @@ const SimpleCards = ({
                 )}
 
                 {subtitle && (
-                  <Subtitle
+                  <Typography
                     variant='h6'
-                    textColor='inherit'
-                    subtitle={subtitle}
+                    color='inherit'
                     textAlign={editorialTextAlign}
-                    marginBottom={0}
-                  />
+                  >
+                    {subtitle}
+                  </Typography>
                 )}
 
                 {body && (
@@ -153,18 +167,18 @@ const SimpleCards = ({
                     },
                   }}
                 >
-                  {CtaButtons({
-                    ctaButtons: ctaButtons.map((button) => ({
+                  <CtaButtons
+                    ctaButtons={ctaButtons.map((button) => ({
                       ...button,
                       fullWidth: false,
                       sx: {
                         width: 'auto',
                         alignSelf: isCentered ? 'center' : 'flex-start',
                       },
-                    })),
-                    theme,
-                    themeVariant,
-                  })}
+                    }))}
+                    theme={theme}
+                    themeVariant={themeVariant}
+                  />
                 </Stack>
               ) : null}
             </Box>
@@ -172,19 +186,26 @@ const SimpleCards = ({
             {shouldShowImage && imageURL && (
               <Box
                 sx={{
-                  width: { xs: '100%', md: 260 },
+                  flex: 1,
+                  width: '100%',
+                  height: 'auto',
                   display: 'flex',
-                  justifyContent: { xs: 'flex-start', md: 'center' },
+                  justifyContent: { xs: 'flex-start', md: 'flex-end' },
                   alignItems: 'center',
                   flexShrink: 0,
                   mt: { xs: 2, md: 0 },
                 }}
               >
-                <Image
+                <img
                   src={imageURL}
                   alt={imageAlt ?? ''}
-                  width={220}
-                  height={220}
+                  style={{
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                    width: '100%',
+                    height: 'auto',
+                    maxHeight: '490px',
+                  }}
                 />
               </Box>
             )}

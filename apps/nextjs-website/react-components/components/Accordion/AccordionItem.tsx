@@ -24,6 +24,11 @@ export const AccordionItem: React.FC<
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   const focusOutlineColor = resolveThemeVariant<string>(
     'focusOutlineColor',
@@ -57,6 +62,7 @@ export const AccordionItem: React.FC<
 
   const appendItemIDToURLHash = () => {
     if (!itemID) return;
+    // eslint-disable-next-line functional/immutable-data
     window.location.hash = itemID;
   };
 
@@ -143,7 +149,7 @@ export const AccordionItem: React.FC<
               color: linkColor,
               textDecoration: 'underline',
               '&:hover': {
-                color: linkColor,
+                color: linkHoverColor,
               },
             },
           }}

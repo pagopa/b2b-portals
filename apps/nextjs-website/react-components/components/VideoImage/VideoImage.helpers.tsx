@@ -140,6 +140,11 @@ export const VideoText = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <>
@@ -166,7 +171,7 @@ export const VideoText = ({
               textDecoration: 'underline',
               fontWeight: 'bold',
               '&:hover': {
-                color: linkColor,
+                color: linkHoverColor,
                 textDecoration: 'underline',
               },
             },
@@ -203,6 +208,11 @@ export const ImageText = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <>
@@ -229,7 +239,7 @@ export const ImageText = ({
               textDecoration: 'underline',
               fontWeight: 'bold',
               '&:hover': {
-                color: linkColor,
+                color: linkHoverColor,
                 textDecoration: 'underline',
               },
             },

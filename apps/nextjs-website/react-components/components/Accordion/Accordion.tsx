@@ -7,7 +7,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { AccordionItem } from './AccordionItem';
-import { Title, Subtitle } from '../common/Common';
+import { Title } from '../common/Common';
 import { AccordionProps } from '../../types/Accordion/Accordion.types';
 import { TextColor } from '../common/Common.helpers';
 import { resolveThemeVariant } from '../../theme';
@@ -33,14 +33,15 @@ const Accordion = (props: AccordionProps) => {
 
   const backgroundColor =
     customBgColor ??
-    resolveThemeVariant<string>(
-      'accordionBackgroundColor',
-      themeVariant,
-      ctx,
-    );
+    resolveThemeVariant<string>('accordionBackgroundColor', themeVariant, ctx);
 
   const linkColor = resolveThemeVariant<string>(
     'contentLinkColor',
+    themeVariant,
+    ctx,
+  );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
     themeVariant,
     ctx,
   );
@@ -64,12 +65,13 @@ const Accordion = (props: AccordionProps) => {
                 textAlign={layout === 'center' ? textAlignment : 'left'}
               />
               {subtitle && (
-                <Subtitle
+                <Typography
                   variant='h6'
-                  textColor={textColor}
-                  subtitle={subtitle}
+                  color={textColor}
                   textAlign={layout === 'center' ? textAlignment : 'left'}
-                />
+                >
+                  {subtitle}
+                </Typography>
               )}
               {description && (
                 <Typography
@@ -82,7 +84,7 @@ const Accordion = (props: AccordionProps) => {
                       color: linkColor,
                       textDecoration: 'underline',
                       '&:hover': {
-                        color: linkColor,
+                        color: linkHoverColor,
                       },
                     },
                     '& p': {

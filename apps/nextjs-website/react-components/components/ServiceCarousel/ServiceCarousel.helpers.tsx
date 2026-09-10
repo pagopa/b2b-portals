@@ -89,7 +89,8 @@ export const ServiceCard = (
       p={3}
       mr={4}
       alignItems='flex-end'
-      height={272}
+      minHeight={272}
+      height='100%'
       bgcolor={palette.grey[50]}
       borderRadius={4}
       // Styles for mobile image

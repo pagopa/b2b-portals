@@ -2,6 +2,7 @@ import { StoryFn } from '@storybook/react';
 import { Accordion } from '@react-components/components';
 import { AccordionProps } from '@react-components/types';
 import { AccordionItemProps } from '@react-components/types/Accordion/Accordion.types';
+import { theme as muiTheme } from '@react-components/theme';
 
 // Define a 'Template' function that sets how args map to rendering
 export const AccordionTemplate: StoryFn<AccordionProps> = (args) => (
@@ -10,7 +11,7 @@ export const AccordionTemplate: StoryFn<AccordionProps> = (args) => (
 
 // Function to generate accordion items with a given theme
 const generateAccordionItems = (
-  theme: 'light' | 'dark'
+  theme: 'light' | 'dark',
 ): AccordionItemProps[] => [
   {
     header: 'Accordion Item 1',
@@ -49,6 +50,7 @@ export const defaultPropsDark: Partial<AccordionProps> = {
   title: 'Accordion Title',
   accordionItems: generateAccordionItems('dark'),
   theme: 'dark',
+  customBgColor: muiTheme.palette.custom.backgroundColorDark,
   layout: 'center',
   textAlignment: 'center',
   themeVariant: 'SEND',

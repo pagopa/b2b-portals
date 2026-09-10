@@ -28,6 +28,11 @@ export const Content = ({
     themeVariant,
     ctx,
   );
+  const linkHoverColor = resolveThemeVariant<string>(
+    'richTextLinkHoverColor',
+    themeVariant,
+    ctx,
+  );
 
   return (
     <Stack maxWidth={{ md: maxTextWidth }} gap={2}>
@@ -50,7 +55,7 @@ export const Content = ({
             color: linkColor,
             textDecoration: 'underline',
             '&:hover': {
-              color: linkColor,
+              color: linkHoverColor,
             },
           },
           '& p': {

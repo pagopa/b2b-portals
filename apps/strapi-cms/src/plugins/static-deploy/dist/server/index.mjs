@@ -44,18 +44,30 @@ const register = ({ strapi: strapi2 }) => {
 };
 const config = {
   default: {},
-  validator({ owner, repo, branch, workflowID, githubToken, environment, staging, notifications }) {
-    if (!(owner && repo && branch && workflowID && githubToken)) {
-      throw new Error("`owner`, `repo`, `branch`, `workflowID` and `githubToken` keys in your plugin config are required");
-    }
-    if (staging && !staging.workflowID) {
-      throw new Error("`staging.workflowID` key in your plugin config is missing, either set it to a string or remove the whole staging object");
+  validator({
+    owner,
+    repo,
+    branch,
+    workflowID,
+    githubToken,
+    environment,
+    staging,
+    notifications
+  }) {
+    if (!(owner && repo && branch && workflowID && githubToken && staging?.workflowID && staging?.branch)) {
+      throw new Error(
+        "`owner`, `repo`, `branch`, `workflowID`, `githubToken`, `staging.workflowID` and `staging.branch` keys in your plugin config are required"
+      );
     }
     if (notifications && notifications.enabled === void 0) {
-      throw new Error("`notifications.enabled` key in your plugin config is missing, either set it to a string or remove the whole notifications object");
+      throw new Error(
+        "`notifications.enabled` key in your plugin config is missing, either set it to a string or remove the whole notifications object"
+      );
     }
     if (notifications && !notifications.bearerToken) {
-      throw new Error("`notifications.bearerToken` key in your plugin config is missing, either set it to a string or remove the whole notifications object");
+      throw new Error(
+        "`notifications.bearerToken` key in your plugin config is missing, either set it to a string or remove the whole notifications object"
+      );
     }
     if (owner && typeof owner !== "string") {
       throw new Error("`owner` key in your plugin config has to be a string");
@@ -67,25 +79,39 @@ const config = {
       throw new Error("`branch` key in your plugin config has to be a string");
     }
     if (workflowID && typeof workflowID !== "string") {
-      throw new Error("`workflowID` key in your plugin workflowID has to be an string");
+      throw new Error(
+        "`workflowID` key in your plugin workflowID has to be an string"
+      );
     }
     if (githubToken && typeof githubToken !== "string") {
-      throw new Error("`githubToken` key in your plugin config has to be a string");
+      throw new Error(
+        "`githubToken` key in your plugin config has to be a string"
+      );
     }
     if (environment && typeof environment !== "string") {
-      throw new Error("`environment` key in your plugin config has to be a string");
+      throw new Error(
+        "`environment` key in your plugin config has to be a string"
+      );
     }
-    if (staging && typeof staging.workflowID !== "string") {
-      throw new Error("`staging.workflowID` key in your plugin config has to be a string");
+    if (typeof staging.workflowID !== "string") {
+      throw new Error(
+        "`staging.workflowID` key in your plugin config has to be a string"
+      );
     }
-    if (staging && staging.branch && typeof staging.branch !== "string") {
-      throw new Error("`staging.githubToken` key in your plugin config has to be a string");
+    if (typeof staging.branch !== "string") {
+      throw new Error(
+        "`staging.branch` key in your plugin config has to be a string"
+      );
     }
     if (notifications && typeof notifications.enabled !== "boolean") {
-      throw new Error("`notifications.enabled` key in your plugin config has to be a boolean");
+      throw new Error(
+        "`notifications.enabled` key in your plugin config has to be a boolean"
+      );
     }
     if (notifications && typeof notifications.bearerToken !== "string") {
-      throw new Error("`notifications.bearerToken` key in your plugin config has to be a string");
+      throw new Error(
+        "`notifications.bearerToken` key in your plugin config has to be a string"
+      );
     }
   }
 };
@@ -240,7 +266,7 @@ const checkBearerToken = (policyContext, config2, { strapi: strapi2 }) => {
 };
 const checkWorkflowEndEvent = (policyContext, config2, { strapi: strapi2 }) => {
   const { event } = policyContext.request.body;
-  if (!event || !["staging-end", "prod-end", "end"].includes(event)) {
+  if (!event || !["staging-end", "prod-end"].includes(event)) {
     return false;
   }
   return true;
@@ -2913,7 +2939,6 @@ const githubActionsService = ({ strapi: strapi2 }) => ({
     try {
       const owner = strapi2.plugin(PLUGIN_ID).config("owner");
       const repo = strapi2.plugin(PLUGIN_ID).config("repo");
-      const branch = strapi2.plugin(PLUGIN_ID).config("branch");
       const githubToken = strapi2.plugin(PLUGIN_ID).config("githubToken");
       const environment = strapi2.plugin(PLUGIN_ID).config("environment");
       const staging = strapi2.plugin(PLUGIN_ID).config("staging");
@@ -2929,7 +2954,7 @@ const githubActionsService = ({ strapi: strapi2 }) => ({
         {
           inputs: { environment },
           // TODO: Handle case in which "environment" isn't inserted --> Add inputs conditionally
-          ref: staging.branch ?? branch
+          ref: staging.branch
         },
         {
           headers: {
@@ -2961,7 +2986,7 @@ const githubActionsService = ({ strapi: strapi2 }) => ({
         }
       );
       const stagingHistory = staging ? await axios.get(
-        `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${staging.workflowID}/runs?branch=${staging.branch ?? branch}&per_page=100&page=1`,
+        `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${staging.workflowID}/runs?branch=${staging.branch}&per_page=100&page=1`,
         {
           headers: {
             Accept: "application/vnd.github+json",
@@ -3040,11 +3065,9 @@ const stagingStatusService = ({ strapi: strapi2 }) => ({
         sort: "updatedAt:desc"
         // Most recent first
       });
-      unstagedUpdates.forEach(async (doc, idx) => {
-        if (idx !== 0) {
-          await strapi2.documents(`plugin::${PLUGIN_ID}.staging-status`).delete({ documentId: doc.documentId });
-        }
-      });
+      unstagedUpdates.slice(1).map(
+        (doc) => strapi2.documents(`plugin::${PLUGIN_ID}.staging-status`).delete({ documentId: doc.documentId })
+      ), // Create new document
       await strapi2.documents(`plugin::${PLUGIN_ID}.staging-status`).create({ data: newDocumentData });
       return { success: true, error: null };
     } catch (err) {
@@ -3055,23 +3078,25 @@ const stagingStatusService = ({ strapi: strapi2 }) => ({
 const notificationTitle = {
   "staging-trigger": "Staging Workflow Triggered",
   "prod-trigger": "Production Workflow Triggered",
-  "trigger": "Workflow Triggered",
   "staging-end": "Staging Workflow Ended",
-  "prod-end": "Production Workflow Ended",
-  "end": "Workflow Ended"
+  "prod-end": "Production Workflow Ended"
 };
+const emailAutogenerated = "<small>Questa email è stata generata automaticamente</small>";
 const notificationBody = (workflowID, url) => ({
-  "staging-trigger": `A run of the staging workflow (ID: ${workflowID}) has been triggered!<br/>You can access the ${url === "" ? "admin panel" : `<a href='${url}'>admin panel</a>`} to check and manage workflows.<br/><br/><small>This email was generated automatically</small>`,
-  "prod-trigger": `A run of the production workflow (ID: ${workflowID}) has been triggered!<br/>You can access the ${url === "" ? "admin panel" : `<a href='${url}'>admin panel</a>`} to check and manage workflows.<br/><br/><small>This email was generated automatically</small>`,
-  "trigger": `A workflow run (ID: ${workflowID}) has been triggered!<br/>You can access the ${url === "" ? "admin panel" : `<a href='${url}'>admin panel</a>`} to check and manage workflows.<br/><br/><small>This email was generated automatically</small>`,
-  "staging-end": `A run of the staging workflow (ID: ${workflowID}) has completed!<br/>You can access the ${url === "" ? "admin panel" : `<a href='${url}'>admin panel</a>`} to check its result.<br/><br/><small>This email was generated automatically</small>`,
-  "prod-end": `A run of the production workflow (ID: ${workflowID}) has completed!<br/>You can access the ${url === "" ? "admin panel" : `<a href='${url}'>admin panel</a>`} to check its result.<br/><br/><small>This email was generated automatically</small>`,
-  "end": `A workflow run (ID: ${workflowID}) has completed!<br/>You can access the ${url === "" ? "admin panel" : `<a href='${url}'>admin panel</a>`} to check its result.<br/><br/><small>This email was generated automatically</small>`
+  "staging-trigger": `È stata avviata l'esecuzione del workflow di staging (ID: ${workflowID})!<br/>È possibile accedere al pannello di amministrazione tramite l'URL ${url === "" ? "admin panel" : `<a href='${url}'>pannello di amministrazione</a>`} per controllare e gestire i workflow.<br/><br/>${emailAutogenerated}`,
+  "prod-trigger": `È stata avviata l'esecuzione del workflow di produzione (ID: ${workflowID})!<br/>È possibile accedere al pannello di amministrazione tramite l'URL ${url === "" ? "admin panel" : `<a href='${url}'>pannello di amministrazione</a>`} per controllare e gestire i workflow.<br/><br/>${emailAutogenerated}`,
+  "staging-end": `L'esecuzione del workflow di staging (ID: ${workflowID}) è stata completata!<br/>È possibile accedere a ${url === "" ? "pannello di amministrazione" : `<a href='${url}'>pannello di amministrazione</a>`} per verificarne il risultato.<br/><br/>${emailAutogenerated}`,
+  "prod-end": `L'esecuzione del workflow di produzione (ID: ${workflowID}) è stata completata!<br/>È possibile accedere al pannello di amministrazione tramite l'URL ${url === "" ? "pannello di amministrazione" : `<a href='${url}'>pannello di amministrazione</a>`} per verificarne il risultato.<br/><br/>${emailAutogenerated}`
 });
 const notificationsService = ({ strapi: strapi2 }) => ({
   async send(event) {
     try {
-      if (!["staging-trigger", "prod-trigger", "trigger", "staging-end", "prod-end", "end"].includes(event)) {
+      if (![
+        "staging-trigger",
+        "prod-trigger",
+        "staging-end",
+        "prod-end"
+      ].includes(event)) {
         return { success: false, err: "Invalid Event" };
       }
       const workflowID = strapi2.plugin(PLUGIN_ID).config("workflowID");
@@ -3086,7 +3111,10 @@ const notificationsService = ({ strapi: strapi2 }) => ({
         await strapi2.plugin("email").services.email.send({
           to: emails,
           subject: notificationTitle[event],
-          html: notificationBody(event === "staging-trigger" || event === "staging-end" ? staging?.workflowID ?? "" : workflowID, url)[event]
+          html: notificationBody(
+            event === "staging-trigger" || event === "staging-end" ? staging?.workflowID ?? "" : workflowID,
+            url
+          )[event]
         });
       }
       return { enabled: true, success: true };
@@ -3112,11 +3140,13 @@ const notificationsService = ({ strapi: strapi2 }) => ({
   },
   async deleteEmail(emailToDelete) {
     try {
-      const docToDelete = await strapi2.documents(`plugin::${PLUGIN_ID}.email-for-notifications`).findFirst({ filters: {
-        email: {
-          $eqi: emailToDelete
+      const docToDelete = await strapi2.documents(`plugin::${PLUGIN_ID}.email-for-notifications`).findFirst({
+        filters: {
+          email: {
+            $eqi: emailToDelete
+          }
         }
-      } });
+      });
       if (docToDelete) {
         await strapi2.documents(`plugin::${PLUGIN_ID}.email-for-notifications`).delete({ documentId: docToDelete.documentId });
       }
