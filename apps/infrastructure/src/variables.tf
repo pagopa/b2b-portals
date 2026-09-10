@@ -83,6 +83,24 @@ variable "wallet_basic_auth_username_ssm_parameter_name" {
   default     = "/cloudfront/wallet/basic_auth/username"
 }
 
+variable "wallet_redirect_domain" {
+  description = "Apex domain that redirects to the wallet website"
+  type        = string
+  default     = "wallet.gov.it"
+}
+
+variable "wallet_redirect_route53_zone_id" {
+  description = "Optional existing Route 53 public hosted zone ID for the wallet redirect domain; when null, a hosted zone is created"
+  type        = string
+  default     = null
+}
+
+variable "wallet_redirect_target_domain" {
+  description = "Destination domain for the permanent wallet redirect"
+  type        = string
+  default     = "www.wallet.gov.it"
+}
+
 variable "dns_domain_name" {
   description = "DNS domain for the b2b portals"
   type        = map(any)
