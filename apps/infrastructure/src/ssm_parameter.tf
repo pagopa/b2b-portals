@@ -175,3 +175,21 @@ resource "aws_ssm_parameter" "cms_multitenant_wf_notifications_bearer_token" {
   type  = "SecureString"
   value = random_password.cms_multitenant_wf_notifications_bearer_token[each.key].result
 }
+
+resource "aws_ssm_parameter" "wallet_basic_auth_username" {
+  name  = var.wallet_basic_auth_username_ssm_parameter_name
+  type  = "String"
+  value = var.wallet_basic_auth_username
+}
+
+resource "random_password" "wallet_basic_auth_password" {
+  length           = 32
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+resource "aws_ssm_parameter" "wallet_basic_auth_password" {
+  name  = var.wallet_basic_auth_password_ssm_parameter_name
+  type  = "SecureString"
+  value = random_password.wallet_basic_auth_password.result
+}

@@ -28,17 +28,43 @@ module "cdn_websites_ssl_certificate" {
     aws = aws.us-east-1
   }
 
-  domain_name = each.value.url_tenant
+  domain_name               = each.value.url_tenant
+  subject_alternative_names = each.value.additional_subject_alternative_names
 
   wait_for_validation = false
   validation_method   = "DNS"
   dns_ttl             = 3600
 
-  create_route53_records = each.value.create_route53_records
+  create_route53_records = each.value.create_route53_records && length(each.value.additional_subject_alternative_names) == 0
 
   zone_id = each.value.create_route53_records ? module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]] : null
 
 }
+
+/*
+module "cdn_websites_ssl_certificate_validation_records" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-acm.git?ref=5d113fa07675fc42237907a621b68ac97109043e" # v6.3.0
+
+  for_each = {
+    for key, config in var.websites_configs :
+    key => config
+    if config.create_certificate && config.create_route53_records && length(config.additional_subject_alternative_names) > 0
+  }
+
+  providers = {
+    aws = aws.us-east-1
+  }
+
+  create_certificate          = false
+  create_route53_records_only = true
+
+  zone_id = module.dns_zone.route53_zone_zone_id[keys(var.dns_domain_name)[0]]
+
+  distinct_domain_names = [each.value.url_tenant]
+
+  acm_certificate_domain_validation_options = module.cdn_websites_ssl_certificate[each.key].acm_certificate_domain_validation_options
+}
+*/
 
 ## Certificate HTTPS for Storybook
 module "cdn_storybook_ssl_certificate" {
