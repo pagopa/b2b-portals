@@ -92,14 +92,15 @@ variable "dns_domain_name" {
 variable "websites_configs" {
   description = "Website configurations to create CDNs and SSL certificates for multi-tenancy"
   type = map(object({
-    origin_path                = string
-    url_tenant                 = string
-    create_certificate         = bool
-    create_route53_records     = optional(bool, false)
-    create_distribution        = bool
-    cdn_use_custom_certificate = bool
-    cdn_use_alias              = bool
-    cdn_indexing_enable        = bool
+    origin_path                          = string
+    url_tenant                           = string
+    create_certificate                   = bool
+    create_route53_records               = optional(bool, false)
+    additional_subject_alternative_names = optional(list(string), [])
+    create_distribution                  = bool
+    cdn_use_custom_certificate           = bool
+    cdn_use_alias                        = bool
+    cdn_indexing_enable                  = bool
     custom_headers = optional(list(object({
       header   = string
       override = optional(bool, true)
@@ -192,14 +193,15 @@ variable "websites_configs" {
       ]
     },
     "wallet" = {
-      origin_path                = "/wallet"
-      url_tenant                 = "prod.wallet.b2bportals.pagopa.it"
-      create_certificate         = true
-      create_route53_records     = true
-      create_distribution        = true
-      cdn_use_custom_certificate = true
-      cdn_use_alias              = true
-      cdn_indexing_enable        = false
+      origin_path                          = "/wallet"
+      url_tenant                           = "prod.wallet.b2bportals.pagopa.it"
+      additional_subject_alternative_names = ["www.wallet.gov.it"]
+      create_certificate                   = true
+      create_route53_records               = true
+      create_distribution                  = true
+      cdn_use_custom_certificate           = true
+      cdn_use_alias                        = true
+      cdn_indexing_enable                  = false
 
 
       create_certificate         = true
