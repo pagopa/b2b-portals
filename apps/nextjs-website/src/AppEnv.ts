@@ -2,34 +2,11 @@ import * as t from 'io-ts';
 import { pipe } from 'fp-ts/lib/function';
 import * as E from 'fp-ts/lib/Either';
 import * as PR from 'io-ts/lib/PathReporter';
+import { validateTenantsConfig } from './lib/tenantConfig';
 
 const ConfigCodec = t.type({
-  DEMO_STRAPI_API_TOKEN: t.string,
-  DEMO_STRAPI_API_BASE_URL: t.string,
-  DEMO_STRAPI_FEEDBACK_TOKEN: t.string,
-  SEND_STRAPI_API_TOKEN: t.string,
-  SEND_STRAPI_API_BASE_URL: t.string,
-  SEND_STRAPI_FEEDBACK_TOKEN: t.string,
-  APPIO_STRAPI_API_TOKEN: t.string,
-  APPIO_STRAPI_API_BASE_URL: t.string,
-  APPIO_STRAPI_FEEDBACK_TOKEN: t.string,
-  INTEROP_STRAPI_API_TOKEN: t.string,
-  INTEROP_STRAPI_API_BASE_URL: t.string,
-  INTEROP_STRAPI_FEEDBACK_TOKEN: t.string,
-  PAGOPA_STRAPI_API_TOKEN: t.string,
-  PAGOPA_STRAPI_API_BASE_URL: t.string,
-  PAGOPA_STRAPI_FEEDBACK_TOKEN: t.string,
-  WALLET_STRAPI_API_TOKEN: t.string,
-  WALLET_STRAPI_API_BASE_URL: t.string,
-  WALLET_STRAPI_FEEDBACK_TOKEN: t.string,
-  ENVIRONMENT: t.union([
-    t.literal('demo'),
-    t.literal('send'),
-    t.literal('appio'),
-    t.literal('interop'),
-    t.literal('pagopa'),
-    t.literal('wallet'),
-  ]),
+  TENANTS_CONFIG: t.string,
+  ENVIRONMENT: t.string,
   PREVIEW_MODE: t.union([t.string, t.undefined]),
   PREVIEW_TOKEN: t.union([t.string, t.undefined]),
   MOCK_BUILD: t.union([t.string, t.undefined]),
@@ -49,8 +26,16 @@ export const makeAppEnv = (
 ): E.Either<string, AppEnv> =>
   pipe(
     ConfigCodec.decode(env),
+    E.mapLeft((errors) => PR.failure(errors).join('\n')),
+    E.chain((config) =>
+      pipe(
+        validateTenantsConfig(config),
+        E.mapLeft((error) => error),
+        E.map(() => config),
+      ),
+    ),
     E.bimap(
-      (errors) => PR.failure(errors).join('\n'),
+      (errors) => errors,
       (config) => ({
         config,
         fetchFun: (input: RequestInfo | URL, init?: RequestInit) =>

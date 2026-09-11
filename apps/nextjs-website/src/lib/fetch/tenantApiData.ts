@@ -1,4 +1,5 @@
 import { Config } from '@/AppEnv';
+import { getTenantStrapiConfig } from '../tenantConfig';
 
 export type StrapiApiData = Omit<
   Config,
@@ -12,36 +13,7 @@ type TenantStrapiApiData = {
 export const extractTenantStrapiApiData = (
   strapiData: StrapiApiData,
 ): TenantStrapiApiData => {
-  switch (strapiData.ENVIRONMENT) {
-    case 'demo':
-      return {
-        baseUrl: strapiData.DEMO_STRAPI_API_BASE_URL,
-        token: strapiData.DEMO_STRAPI_API_TOKEN,
-      };
-    case 'send':
-      return {
-        baseUrl: strapiData.SEND_STRAPI_API_BASE_URL,
-        token: strapiData.SEND_STRAPI_API_TOKEN,
-      };
-    case 'appio':
-      return {
-        baseUrl: strapiData.APPIO_STRAPI_API_BASE_URL,
-        token: strapiData.APPIO_STRAPI_API_TOKEN,
-      };
-    case 'interop':
-      return {
-        baseUrl: strapiData.INTEROP_STRAPI_API_BASE_URL,
-        token: strapiData.INTEROP_STRAPI_API_TOKEN,
-      };
-    case 'pagopa':
-      return {
-        baseUrl: strapiData.PAGOPA_STRAPI_API_BASE_URL,
-        token: strapiData.PAGOPA_STRAPI_API_TOKEN,
-      };
-    case 'wallet':
-      return {
-        baseUrl: strapiData.WALLET_STRAPI_API_BASE_URL,
-        token: strapiData.WALLET_STRAPI_API_TOKEN,
-      };
-  }
+  const { baseUrl, token } = getTenantStrapiConfig(strapiData);
+
+  return { baseUrl, token };
 };

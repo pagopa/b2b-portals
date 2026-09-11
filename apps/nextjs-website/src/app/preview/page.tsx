@@ -52,8 +52,6 @@ const PreviewPage = async ({
     return null;
   }
 
-  const feedbackToken = getFeedbackToken();
-  const strapiApiBaseUrl = getStrapiApiBaseUrl();
   const type = searchParams.type;
   const secret = searchParams.secret;
   const documentID = searchParams.documentID;
@@ -68,6 +66,23 @@ const PreviewPage = async ({
   if (documentID === undefined || tenant === undefined) {
     return <div>404: Missing parameters</div>;
   }
+
+  const tenantStrapiData = (() => {
+    try {
+      return {
+        feedbackToken: getFeedbackToken(tenant),
+        strapiApiBaseUrl: getStrapiApiBaseUrl(tenant),
+      };
+    } catch {
+      return undefined;
+    }
+  })();
+
+  if (tenantStrapiData === undefined) {
+    return <div>404: Missing tenant</div>;
+  }
+
+  const { feedbackToken, strapiApiBaseUrl } = tenantStrapiData;
 
   const { oneTrustToken, themeVariant, pressReleasesParentSlug } =
     await getPreviewSiteWideSEO(tenant);

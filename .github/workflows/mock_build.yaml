@@ -14,24 +14,7 @@ jobs:
     env:
       MOCK_BUILD: 'true'
       ENVIRONMENT: demo
-      SEND_STRAPI_API_TOKEN: mock
-      SEND_STRAPI_FEEDBACK_TOKEN: mock
-      SEND_STRAPI_API_BASE_URL: mock
-      APPIO_STRAPI_API_TOKEN: mock
-      APPIO_STRAPI_FEEDBACK_TOKEN: mock
-      APPIO_STRAPI_API_BASE_URL: mock
-      DEMO_STRAPI_API_TOKEN: mock
-      DEMO_STRAPI_FEEDBACK_TOKEN: mock
-      DEMO_STRAPI_API_BASE_URL: mock
-      INTEROP_STRAPI_API_TOKEN: mock
-      INTEROP_STRAPI_FEEDBACK_TOKEN: mock
-      INTEROP_STRAPI_API_BASE_URL: mock
-      PAGOPA_STRAPI_API_TOKEN: mock
-      PAGOPA_STRAPI_FEEDBACK_TOKEN: mock
-      PAGOPA_STRAPI_API_BASE_URL: mock
-      WALLET_STRAPI_API_TOKEN: mock
-      WALLET_STRAPI_FEEDBACK_TOKEN: mock
-      WALLET_STRAPI_API_BASE_URL: mock
+      TENANTS_CONFIG: '{"send":{"baseUrl":"mock","token":"mock","feedbackToken":"mock"},"appio":{"baseUrl":"mock","token":"mock","feedbackToken":"mock"},"demo":{"baseUrl":"mock","token":"mock","feedbackToken":"mock"},"interop":{"baseUrl":"mock","token":"mock","feedbackToken":"mock"},"pagopa":{"baseUrl":"mock","token":"mock","feedbackToken":"mock"},"wallet":{"baseUrl":"mock","token":"mock","feedbackToken":"mock"}}'
       CDN_PATH: mock
 
     steps:
