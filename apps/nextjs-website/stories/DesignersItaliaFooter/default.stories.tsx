@@ -25,7 +25,7 @@ DesignersItaliaFooterSection.args = {
       { label: 'Come iniziare', href: '#', ariaLabel: 'Come iniziare' },
       {
         label: 'Per enti e aziende',
-        href: '#',
+        href: 'https://www.demo.url',
         ariaLabel: 'Per enti e aziende',
       },
       {
@@ -53,7 +53,7 @@ DesignersItaliaFooterSection.args = {
       },
       {
         label: 'Dichiarazione di accessibilità',
-        href: '#',
+        href: 'https://www.demo.url',
         ariaLabel: 'Dichiarazione di accessibilità',
       },
     ],
