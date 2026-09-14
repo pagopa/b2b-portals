@@ -33,7 +33,7 @@ const LogoWall = ({
   const renderLogo = (item: LogoWallItemProps, key: string) => {
     const image = (
       <Image
-        src={'https://staging.wallet.b2bportals.pagopa.it' + item.logoURL}
+        src={item.logoURL}
         alt={item.title}
         width={0}
         height={0}
