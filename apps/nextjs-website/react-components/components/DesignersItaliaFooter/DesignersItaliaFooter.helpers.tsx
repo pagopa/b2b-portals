@@ -58,6 +58,7 @@ export const MenuBottomLinks = ({
           sx={{
             ...listStyle,
             display: 'flex',
+            alignItems: 'baseline',
             flexDirection: { xs: 'column', md: 'row' },
           }}
         >
