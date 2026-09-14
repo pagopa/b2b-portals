@@ -58,6 +58,7 @@ export const MenuBottomLinks = ({
           sx={{
             ...listStyle,
             display: 'flex',
+            alignItems: 'baseline',
             flexDirection: { xs: 'column', md: 'row' },
           }}
         >
@@ -65,7 +66,12 @@ export const MenuBottomLinks = ({
             <ListItem
               disablePadding
               key={`key_footer_policies_${index}`}
-              sx={{ mb: { md: '0 !important' }, mr: { md: 3 } }}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                mb: { md: '0 !important' },
+                mr: { md: 3 },
+              }}
             >
               <Link
                 variant='body2'
@@ -242,7 +248,11 @@ export const MenuLinks = ({
           }}
         >
           {links.links.map((link, index) => (
-            <ListItem disablePadding key={`key_footer_siteindex_${index}`}>
+            <ListItem
+              sx={{ display: 'flex', alignItems: 'center' }}
+              disablePadding
+              key={`key_footer_siteindex_${index}`}
+            >
               <Link
                 variant='body2'
                 href={link.href}
