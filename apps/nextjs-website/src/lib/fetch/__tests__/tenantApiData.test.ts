@@ -20,6 +20,7 @@ const strapiApiData: Omit<StrapiApiData, 'ENVIRONMENT'> = {
   WALLET_STRAPI_API_TOKEN: 'walletStrapiApiBaseUrl',
   WALLET_STRAPI_API_BASE_URL: 'walletStrapiToken',
   WALLET_STRAPI_FEEDBACK_TOKEN: 'walletFeedbackToken',
+  DEV_MEDIA_LIBRARY_URL: 'http://127.0.0.1:1337',
 };
 
 describe('extractTenantStrapiApiData', () => {

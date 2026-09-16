@@ -1,5 +1,43 @@
-import { describe, it, expect } from 'vitest';
+vi.hoisted(() => {
+  const mockEnv = {
+    DEMO_STRAPI_API_TOKEN: 'demoStrapiToken',
+    DEMO_STRAPI_API_BASE_URL: 'demoStrapiApiBaseUrl',
+    DEMO_STRAPI_FEEDBACK_TOKEN: 'demoFeedbackToken',
+
+    SEND_STRAPI_API_BASE_URL: 'sendStrapiApiBaseUrl',
+    SEND_STRAPI_API_TOKEN: 'sendStrapiToken',
+    SEND_STRAPI_FEEDBACK_TOKEN: 'sendFeedbackToken',
+
+    APPIO_STRAPI_API_BASE_URL: 'appioStrapiApiBaseUrl',
+    APPIO_STRAPI_API_TOKEN: 'appioStrapiToken',
+    APPIO_STRAPI_FEEDBACK_TOKEN: 'appioFeedbackToken',
+
+    INTEROP_STRAPI_API_BASE_URL: 'interopStrapiApiBaseUrl',
+    INTEROP_STRAPI_API_TOKEN: 'interopStrapiToken',
+    INTEROP_STRAPI_FEEDBACK_TOKEN: 'interopFeedbackToken',
+
+    PAGOPA_STRAPI_API_TOKEN: 'pagopaStrapiToken',
+    PAGOPA_STRAPI_API_BASE_URL: 'pagopaStrapiApiBaseUrl',
+    PAGOPA_STRAPI_FEEDBACK_TOKEN: 'pagopaFeedbackToken',
+
+    WALLET_STRAPI_API_TOKEN: 'walletStrapiToken',
+    WALLET_STRAPI_API_BASE_URL: 'walletStrapiApiBaseUrl',
+    WALLET_STRAPI_FEEDBACK_TOKEN: 'walletFeedbackToken',
+
+    ENVIRONMENT: 'demo',
+    PREVIEW_MODE: undefined,
+    PREVIEW_TOKEN: undefined,
+    MOCK_BUILD: undefined,
+    DEV_MEDIA_LIBRARY_URL: 'http://127.0.0.1:1337',
+  };
+  Object.entries(mockEnv).forEach(([key, value]) => {
+    if (value !== undefined) {
+      vi.stubEnv(key, value);
+    }
+  });
+});
 import { makeAllAssetURLsRelative } from '../parseAssetUrls';
+import { describe, it, expect, vi, afterAll } from 'vitest';
 
 const fetchResults = {
   allAssets: {
@@ -300,6 +338,9 @@ const expectedOutput = {
 };
 
 describe('makeAllAssetURLsRelative', () => {
+  afterAll(() => {
+    vi.unstubAllEnvs();
+  });
   it('should make all asset URLs relative', () => {
     const actual = makeAllAssetURLsRelative(fetchResults.allAssets, false);
     expect(actual).toStrictEqual(expectedOutput.allAssets);

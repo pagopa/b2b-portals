@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any,functional/no-expression-statements,functional/immutable-data */
 
+import { appEnv } from '../api';
+
 const ASSET_OBJECT_KEY_NAMES = [
   'image',
   'mobileImage',
@@ -16,14 +18,16 @@ const ASSET_OBJECT_KEY_NAMES = [
   'topBarHeaderLogo',
 ];
 const ASSET_OBJECT_ARRAY_KEY_NAMES = ['icons'];
-
 const makeURLRelative = (URL: string): string => {
   if (URL.startsWith('http')) {
     // Assuming an URL formed like the following: https://example.com/asset.jpg
     // Remove https://example.com, aka everything up to the 3rd forward slash
     return '/assets/' + URL.split('/').slice(3).join('/');
   } else {
-    return URL;
+    return process.env.NODE_ENV === 'development' &&
+      appEnv.config.DEV_MEDIA_LIBRARY_URL !== undefined
+      ? `${appEnv.config.DEV_MEDIA_LIBRARY_URL}${URL}`
+      : URL;
   }
 };
 
