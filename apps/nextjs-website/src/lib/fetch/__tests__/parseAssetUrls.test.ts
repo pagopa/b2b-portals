@@ -28,7 +28,7 @@ vi.hoisted(() => {
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
     MOCK_BUILD: undefined,
-    DEV_MEDIA_LIBRARY_URL: 'http://127.0.0.1:1337',
+    DEV_MEDIA_LIBRARY_URL: undefined,
   };
   Object.entries(mockEnv).forEach(([key, value]) => {
     if (value !== undefined) {
