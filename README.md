@@ -96,7 +96,7 @@ DEMO_STRAPI_API_TOKEN=<generated-token>
 DEV_MEDIA_LIBRARY_URL=http://localhost:1337
 ```
 
-DEV_MEDIA_LIBRARY_URL is used to fix relative path of image URLs during dev mode.
+DEV_MEDIA_LIBRARY_URL will be prepended to any media's src url (image or video) since they're normally relative and would break when developing locally.
 
 The token is generated from the local Strapi admin panel after the first Strapi startup. See the next section.
 
