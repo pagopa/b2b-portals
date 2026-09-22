@@ -1,13 +1,3 @@
-locals {
-  wallet_redirect_route53_zone_id = var.wallet_redirect_route53_zone_id != null ? var.wallet_redirect_route53_zone_id : aws_route53_zone.wallet_redirect[0].zone_id
-}
-
-resource "aws_route53_zone" "wallet_redirect" {
-  count = var.wallet_redirect_route53_zone_id == null ? 1 : 0
-
-  name = var.wallet_redirect_domain
-}
-
 resource "aws_acm_certificate" "wallet_redirect" {
   domain_name       = var.wallet_redirect_domain
   validation_method = "DNS"
@@ -15,29 +5,6 @@ resource "aws_acm_certificate" "wallet_redirect" {
   lifecycle {
     create_before_destroy = true
   }
-}
-
-resource "aws_route53_record" "wallet_redirect_certificate_validation" {
-  for_each = {
-    for validation_option in aws_acm_certificate.wallet_redirect.domain_validation_options :
-    validation_option.domain_name => {
-      name   = validation_option.resource_record_name
-      record = validation_option.resource_record_value
-      type   = validation_option.resource_record_type
-    }
-  }
-
-  allow_overwrite = true
-  name            = each.value.name
-  records         = [each.value.record]
-  ttl             = 60
-  type            = each.value.type
-  zone_id         = local.wallet_redirect_route53_zone_id
-}
-
-resource "aws_acm_certificate_validation" "wallet_redirect" {
-  certificate_arn         = aws_acm_certificate.wallet_redirect.arn
-  validation_record_fqdns = [for record in aws_route53_record.wallet_redirect_certificate_validation : record.fqdn]
 }
 
 resource "aws_security_group" "wallet_redirect" {
@@ -97,7 +64,7 @@ resource "aws_lb_listener" "wallet_redirect_https" {
   load_balancer_arn = aws_lb.wallet_redirect.arn
   port              = 443
   protocol          = "HTTPS"
-  certificate_arn   = aws_acm_certificate_validation.wallet_redirect.certificate_arn
+  certificate_arn   = aws_acm_certificate.wallet_redirect.arn
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-2021-06"
 
   default_action {
@@ -155,16 +122,4 @@ resource "aws_globalaccelerator_endpoint_group" "wallet_redirect" {
     aws_lb_listener.wallet_redirect_http,
     aws_lb_listener.wallet_redirect_https,
   ]
-}
-
-resource "aws_route53_record" "wallet_redirect" {
-  name    = var.wallet_redirect_domain
-  type    = "A"
-  zone_id = local.wallet_redirect_route53_zone_id
-
-  alias {
-    evaluate_target_health = false
-    name                   = aws_globalaccelerator_accelerator.wallet_redirect.dns_name
-    zone_id                = aws_globalaccelerator_accelerator.wallet_redirect.hosted_zone_id
-  }
 }
