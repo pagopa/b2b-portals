@@ -21,3 +21,11 @@ output "dns_name_servers" {
 output "video_name_servers" {
   value = try(module.video_streaming.route53_zone_name_servers, null)
 }
+
+output "wallet_global_accelerator_ip_addresses" {
+  description = "Static IPv4 addresses assigned to the wallet redirect Global Accelerator"
+  value = flatten([
+    for ip_set in aws_globalaccelerator_accelerator.wallet_redirect.ip_sets :
+    ip_set.ip_addresses
+  ])
+}
