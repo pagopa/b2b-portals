@@ -211,22 +211,15 @@ variable "websites_configs" {
       ]
     },
     "wallet" = {
-      origin_path                          = "/wallet"
-      url_tenant                           = "prod.wallet.b2bportals.pagopa.it"
-      additional_subject_alternative_names = ["www.wallet.gov.it"]
-      create_certificate                   = true
-      create_route53_records               = true
-      create_distribution                  = true
-      cdn_use_custom_certificate           = true
-      cdn_use_alias                        = true
-      cdn_indexing_enable                  = false
-
-
+      origin_path = "/wallet"
+      url_tenant  = "www.wallet.gov.it"
+      #additional_subject_alternative_names = ["www.wallet.gov.it"]
       create_certificate         = true
-      create_route53_records     = true
+      create_route53_records     = false
       create_distribution        = true
       cdn_use_custom_certificate = true
       cdn_use_alias              = true
+      cdn_indexing_enable        = false
 
       custom_headers = [
         {
