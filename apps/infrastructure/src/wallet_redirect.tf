@@ -34,11 +34,16 @@ resource "aws_security_group" "wallet_redirect" {
 }
 
 resource "aws_lb" "wallet_redirect" {
-  name               = "wallet-redirect"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.wallet_redirect.id]
-  subnets            = module.vpc.public_subnets
+  name                       = "wallet-redirect"
+  internal                   = false
+  load_balancer_type         = "application"
+  enable_deletion_protection = true
+  security_groups            = [aws_security_group.wallet_redirect.id]
+  subnets                    = module.vpc.public_subnets
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_lb_listener" "wallet_redirect_http" {
