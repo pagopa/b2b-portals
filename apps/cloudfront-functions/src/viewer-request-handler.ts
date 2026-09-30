@@ -36,6 +36,11 @@ const regexPatterns: readonly RedirectRule[] = [
     redirectTo: 'https://account.ioapp.it/it/blocco-accesso/link-scaduto/',
   },
   {
+    host: 'ioapp.it',
+    regex: simpleHelper('/bonus-elettrodomestici', false),
+    redirectTo: 'https://ioapp.it/funzionalita-dismesse',
+  },
+  {
     host: 'firma.io.italia.it',
     regex: simpleHelper('', false),
     redirectTo: 'https://ioapp.it/firma-in-digitale',
