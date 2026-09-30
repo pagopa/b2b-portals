@@ -30,6 +30,7 @@ const ConfigCodec = t.type({
     t.literal('pagopa'),
     t.literal('wallet'),
   ]),
+  DEV_MEDIA_LIBRARY_URL: t.union([t.string, t.undefined]),
   PREVIEW_MODE: t.union([t.string, t.undefined]),
   PREVIEW_TOKEN: t.union([t.string, t.undefined]),
   MOCK_BUILD: t.union([t.string, t.undefined]),

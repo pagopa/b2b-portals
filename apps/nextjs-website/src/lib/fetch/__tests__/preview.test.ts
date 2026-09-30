@@ -36,6 +36,7 @@ const makeTestAppEnv = () => {
     PREVIEW_MODE: undefined,
     PREVIEW_TOKEN: undefined,
     MOCK_BUILD: undefined,
+    DEV_MEDIA_LIBRARY_URL: undefined,
   };
   const fetchMock = vi.fn(fetch);
   const appEnv = { config, fetchFun: fetchMock };

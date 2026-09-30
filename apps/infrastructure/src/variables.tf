@@ -83,6 +83,24 @@ variable "wallet_basic_auth_username_ssm_parameter_name" {
   default     = "/cloudfront/wallet/basic_auth/username"
 }
 
+variable "wallet_redirect_domain" {
+  description = "Apex domain that redirects to the wallet website"
+  type        = string
+  default     = "wallet.gov.it"
+}
+
+variable "wallet_redirect_route53_zone_id" {
+  description = "Optional existing Route 53 public hosted zone ID for the wallet redirect domain; when null, a hosted zone is created"
+  type        = string
+  default     = null
+}
+
+variable "wallet_redirect_target_domain" {
+  description = "Destination domain for the permanent wallet redirect"
+  type        = string
+  default     = "www.wallet.gov.it"
+}
+
 variable "dns_domain_name" {
   description = "DNS domain for the b2b portals"
   type        = map(any)
@@ -193,22 +211,15 @@ variable "websites_configs" {
       ]
     },
     "wallet" = {
-      origin_path                          = "/wallet"
-      url_tenant                           = "prod.wallet.b2bportals.pagopa.it"
-      additional_subject_alternative_names = ["www.wallet.gov.it"]
-      create_certificate                   = true
-      create_route53_records               = true
-      create_distribution                  = true
-      cdn_use_custom_certificate           = true
-      cdn_use_alias                        = true
-      cdn_indexing_enable                  = false
-
-
+      origin_path = "/wallet"
+      url_tenant  = "www.wallet.gov.it"
+      #additional_subject_alternative_names = ["www.wallet.gov.it"]
       create_certificate         = true
-      create_route53_records     = true
+      create_route53_records     = false
       create_distribution        = true
       cdn_use_custom_certificate = true
       cdn_use_alias              = true
+      cdn_indexing_enable        = false
 
       custom_headers = [
         {

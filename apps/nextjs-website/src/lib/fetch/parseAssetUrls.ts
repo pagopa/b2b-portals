@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any,functional/no-expression-statements,functional/immutable-data */
 
+import { getDevMediaLibraryUrl } from '../api';
+
 const ASSET_OBJECT_KEY_NAMES = [
   'image',
   'mobileImage',
@@ -23,7 +25,9 @@ const makeURLRelative = (URL: string): string => {
     // Remove https://example.com, aka everything up to the 3rd forward slash
     return '/assets/' + URL.split('/').slice(3).join('/');
   } else {
-    return URL;
+    const devMediaLibraryUrl = getDevMediaLibraryUrl();
+
+    return devMediaLibraryUrl ? `${devMediaLibraryUrl}${URL}` : URL;
   }
 };
 

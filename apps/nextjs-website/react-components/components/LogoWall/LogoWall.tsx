@@ -1,4 +1,4 @@
-import { Box, Link } from '@mui/material';
+import { Box, Link, useMediaQuery } from '@mui/material';
 import React from 'react';
 import Image from 'next/image';
 import { useTheme } from '@mui/material/styles';
@@ -17,7 +17,10 @@ const LogoWall = ({
   secondGroup,
   themeVariant,
 }: LogoWallProps) => {
-  const { palette } = useTheme();
+  const muiTheme = useTheme();
+  const { palette } = muiTheme;
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(muiTheme.breakpoints.down('md'));
 
   const ctx = { palette, theme };
 
@@ -35,10 +38,10 @@ const LogoWall = ({
         width={0}
         height={0}
         style={{
-          width: 'auto',
-          maxWidth: '100%',
-          height: 'auto',
+          width: '100%',
+          height: isTablet ? '48px' : '64px',
           objectFit: 'contain',
+          objectPosition: isMobile ? 'center center' : 'left center',
         }}
       />
     );
@@ -69,7 +72,8 @@ const LogoWall = ({
           })}
           sx={{
             display: 'inline-flex',
-            maxWidth: '100%',
+            width: '100%',
+            maxWidth: isMobile ? '300px' : '100%',
           }}
         >
           {image}

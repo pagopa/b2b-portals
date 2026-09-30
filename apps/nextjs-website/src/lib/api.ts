@@ -16,6 +16,7 @@ export const appEnv = pipe(
 
 export const isPreviewMode = () => appEnv.config.PREVIEW_MODE === 'true';
 export const getPreviewToken = () => appEnv.config.PREVIEW_TOKEN;
+export const getDevMediaLibraryUrl = () => appEnv.config.DEV_MEDIA_LIBRARY_URL;
 
 export const getFeedbackToken = () => {
   const tenant = appEnv.config.ENVIRONMENT;
