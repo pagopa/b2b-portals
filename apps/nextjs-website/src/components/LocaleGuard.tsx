@@ -2,7 +2,7 @@
 
 import { Locale } from '@/lib/fetch/siteWideSEO';
 import { defineRedirectBehaviour } from '@/lib/localeGuard';
-import { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState, useEffect } from 'react';
 
 interface LocaleGuardProps {
   children: React.ReactNode;
@@ -65,6 +65,15 @@ export default function LocaleGuard({
 
     setReady(!expectedBehaviour.redirect);
   }, [languages, locale, defaultLocale, noLocaleSlug]);
+
+  useEffect(() => {
+    if (!ready || !window.location.hash) return;
+    const sectionId = window.location.hash.substring(1);
+    const sectionElement = document.getElementById(sectionId);
+    if (sectionElement) {
+      sectionElement.scrollIntoView();
+    }
+  }, [ready]);
 
   return ready ? children : null;
 }
