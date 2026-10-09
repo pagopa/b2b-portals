@@ -59,7 +59,14 @@ export default function LangSwitch({
 
   const toggleMenu = () => setOpen((prev) => !prev);
   const anchorEl = useRef(null);
-  const goToLanguageLink = (href: string) => window.location.assign(href);
+  const goToLanguageLink = (href: string) => {
+    const url = new URL(href, window.location.origin);
+    if (!url.hash) {
+      // eslint-disable-next-line functional/immutable-data
+      url.hash = window.location.hash;
+    }
+    window.location.assign(url.toString());
+  };
 
   return (
     <Box sx={{ ml: 'auto' }}>

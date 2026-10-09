@@ -26,7 +26,14 @@ export function LangSwitch({ languages, activeLanguage }: LangSwitchProps) {
   /* Currently linking to the other locale's homepage since we have
   no certainty that each page's slug is the same in both languages
   or that the same pages exist at all in each language */
-  const goToLanguageLink = (href: string) => window.location.assign(href);
+  const goToLanguageLink = (href: string) => {
+    const url = new URL(href, window.location.origin);
+    if (!url.hash) {
+      // eslint-disable-next-line functional/immutable-data
+      url.hash = window.location.hash;
+    }
+    window.location.assign(url.toString());
+  };
 
   return (
     <Stack
