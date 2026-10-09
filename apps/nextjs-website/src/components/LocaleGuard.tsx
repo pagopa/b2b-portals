@@ -41,29 +41,29 @@ export default function LocaleGuard({
         break;
     }
 
-    switch (expectedBehaviour.redirect) {
-      case 'default':
-        window.open(`/${noLocaleSlug.join('/')}`, '_self');
-        break;
-      case 'browser':
-        window.open(
-          browserLang === defaultLocale
-            ? `/${noLocaleSlug.join('/')}`
-            : `/${[browserLang].concat(noLocaleSlug).join('/')}`,
-          '_self',
-        );
-        break;
-      case 'preferred':
-        window.open(
-          preferredLang === defaultLocale
-            ? `/${noLocaleSlug.join('/')}`
-            : `/${[preferredLang].concat(noLocaleSlug).join('/')}`,
-          '_self',
-        );
-        break;
+    const redirect = expectedBehaviour.redirect;
+
+    if (redirect) {
+      const targetLocale =
+        redirect === 'preferred'
+          ? preferredLang
+          : redirect === 'browser'
+            ? browserLang
+            : defaultLocale;
+
+      const path =
+        targetLocale === defaultLocale
+          ? noLocaleSlug
+          : [targetLocale, ...noLocaleSlug];
+
+      const targetUrl = new URL(`/${path.join('/')}`, window.location.origin);
+      // eslint-disable-next-line functional/immutable-data
+      targetUrl.hash = window.location.hash;
+
+      window.location.replace(targetUrl.toString());
     }
 
-    setReady(!expectedBehaviour.redirect);
+    setReady(!redirect);
   }, [languages, locale, defaultLocale, noLocaleSlug]);
 
   useEffect(() => {
