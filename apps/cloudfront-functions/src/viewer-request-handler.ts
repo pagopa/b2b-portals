@@ -55,9 +55,14 @@ const handler = (
     const { request } = event;
     const { uri } = request;
     const host = request.headers['host']?.value.toLowerCase();
+    const xForwardedHost =
+      request.headers['x-forwarded-host']?.value.toLowerCase();
 
     for (const pattern of regexPatterns) {
-      if (pattern.host.toLowerCase() === host) {
+      if (
+        pattern.host.toLowerCase() === host ||
+        pattern.host.toLowerCase() === xForwardedHost
+      ) {
         const match = pattern.regex.exec(uri);
 
         if (match) {
