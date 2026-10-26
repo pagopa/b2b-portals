@@ -1,6 +1,7 @@
 resource "aws_acm_certificate" "wallet_redirect" {
-  domain_name       = var.wallet_redirect_domain
-  validation_method = "DNS"
+  domain_name               = var.wallet_redirect_domain
+  subject_alternative_names = var.wallet_redirect_subject_alternative_names
+  validation_method         = "DNS"
 
   lifecycle {
     create_before_destroy = true

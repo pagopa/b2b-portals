@@ -95,6 +95,26 @@ variable "wallet_redirect_route53_zone_id" {
   default     = null
 }
 
+variable "wallet_redirect_subject_alternative_names" {
+  description = "Additional explicit domains covered by the wallet redirect certificate"
+  type        = list(string)
+  default = [
+    "itwallet.gov.it",
+    "it-wallet.gov.it",
+    "portafogliodigitale.gov.it",
+    "portafogliodigitaleitaliano.gov.it",
+    "sistemaitwallet.gov.it",
+    "sistemait-wallet.gov.it",
+    "wallet.italia.it",
+    "itwallet.italia.it",
+    "it-wallet.italia.it",
+    "portafogliodigitale.italia.it",
+    "portafogliodigitaleitaliano.italia.it",
+    "sistemaitwallet.italia.it",
+    "sistemait-wallet.italia.it",
+  ]
+}
+
 variable "wallet_redirect_target_domain" {
   description = "Destination domain for the permanent wallet redirect"
   type        = string

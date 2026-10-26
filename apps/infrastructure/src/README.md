@@ -1,3 +1,21 @@
+## Wallet redirect certificate
+
+The certificate in `wallet_redirect.tf` retains `wallet.gov.it` as its primary
+domain and uses `wallet_redirect_subject_alternative_names` for the additional
+redirect domains. All 13 domains in `wallet-domain-list.txt` are listed
+explicitly, without wildcards.
+
+The certificate contains 14 domain names including `wallet.gov.it`. Ensure the
+regional ACM domain-names-per-certificate quota is at least 14 before applying
+(the default quota is 10).
+
+Changing the domain list replaces the ACM certificate with
+`create_before_destroy`. Publish the replacement certificate's ACM DNS validation
+CNAME records in the authoritative DNS zones and ensure it is issued before
+switching the HTTPS listener. This configuration does not manage those validation
+records. Certificate coverage alone does not route traffic; the additional
+domains must also point to the wallet redirect Global Accelerator.
+
 ## Requirements
 
 | Name | Version |
