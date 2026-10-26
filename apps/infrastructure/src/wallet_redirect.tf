@@ -1,11 +1,28 @@
 resource "aws_acm_certificate" "wallet_redirect" {
-  domain_name               = var.wallet_redirect_domain
-  subject_alternative_names = var.wallet_redirect_subject_alternative_names
+  domain_name       = var.wallet_redirect_domain
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_acm_certificate" "wallet_redirect_additional" {
+  for_each = var.wallet_redirect_additional_certificates
+
+  domain_name               = each.value.domain_name
+  subject_alternative_names = each.value.subject_alternative_names
   validation_method         = "DNS"
 
   lifecycle {
     create_before_destroy = true
   }
+}
+
+resource "aws_acm_certificate_validation" "wallet_redirect_additional" {
+  for_each = aws_acm_certificate.wallet_redirect_additional
+
+  certificate_arn = each.value.arn
 }
 
 resource "aws_security_group" "wallet_redirect" {
@@ -85,6 +102,13 @@ resource "aws_lb_listener" "wallet_redirect_https" {
       status_code = "HTTP_301"
     }
   }
+}
+
+resource "aws_lb_listener_certificate" "wallet_redirect_additional" {
+  for_each = aws_acm_certificate_validation.wallet_redirect_additional
+
+  listener_arn    = aws_lb_listener.wallet_redirect_https.arn
+  certificate_arn = each.value.certificate_arn
 }
 
 resource "aws_globalaccelerator_accelerator" "wallet_redirect" {

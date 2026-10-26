@@ -95,24 +95,35 @@ variable "wallet_redirect_route53_zone_id" {
   default     = null
 }
 
-variable "wallet_redirect_subject_alternative_names" {
-  description = "Additional explicit domains covered by the wallet redirect certificate"
-  type        = list(string)
-  default = [
-    "itwallet.gov.it",
-    "it-wallet.gov.it",
-    "portafogliodigitale.gov.it",
-    "portafogliodigitaleitaliano.gov.it",
-    "sistemaitwallet.gov.it",
-    "sistemait-wallet.gov.it",
-    "wallet.italia.it",
-    "itwallet.italia.it",
-    "it-wallet.italia.it",
-    "portafogliodigitale.italia.it",
-    "portafogliodigitaleitaliano.italia.it",
-    "sistemaitwallet.italia.it",
-    "sistemait-wallet.italia.it",
-  ]
+variable "wallet_redirect_additional_certificates" {
+  description = "Additional SNI certificates for the wallet redirect HTTPS listener, validated through external DNS"
+  type = map(object({
+    domain_name               = string
+    subject_alternative_names = list(string)
+  }))
+  default = {
+    gov_it = {
+      domain_name = "itwallet.gov.it"
+      subject_alternative_names = [
+        "it-wallet.gov.it",
+        "portafogliodigitale.gov.it",
+        "portafogliodigitaleitaliano.gov.it",
+        "sistemaitwallet.gov.it",
+        "sistemait-wallet.gov.it",
+      ]
+    }
+    italia_it = {
+      domain_name = "wallet.italia.it"
+      subject_alternative_names = [
+        "itwallet.italia.it",
+        "it-wallet.italia.it",
+        "portafogliodigitale.italia.it",
+        "portafogliodigitaleitaliano.italia.it",
+        "sistemaitwallet.italia.it",
+        "sistemait-wallet.italia.it",
+      ]
+    }
+  }
 }
 
 variable "wallet_redirect_target_domain" {

@@ -1,20 +1,33 @@
-## Wallet redirect certificate
+## Wallet redirect certificates
 
-The certificate in `wallet_redirect.tf` retains `wallet.gov.it` as its primary
-domain and uses `wallet_redirect_subject_alternative_names` for the additional
-redirect domains. All 13 domains in `wallet-domain-list.txt` are listed
-explicitly, without wildcards.
+The existing `wallet.gov.it` certificate and the HTTPS listener's default
+certificate remain unchanged. Two additional SNI certificates cover the six
+`gov.it` and seven `italia.it` domains configured in
+`wallet_redirect_additional_certificates`, without wildcards.
 
-The certificate contains 14 domain names including `wallet.gov.it`. Ensure the
-regional ACM domain-names-per-certificate quota is at least 14 before applying
-(the default quota is 10).
+DNS validation records are managed externally. First request only the new
+certificates, then print the generated validation CNAME records (from this directory,
+replacing `<env_name>` with the target environment):
 
-Changing the domain list replaces the ACM certificate with
-`create_before_destroy`. Publish the replacement certificate's ACM DNS validation
-CNAME records in the authoritative DNS zones and ensure it is issued before
-switching the HTTPS listener. This configuration does not manage those validation
-records. Certificate coverage alone does not route traffic; the additional
-domains must also point to the wallet redirect Global Accelerator.
+```sh
+./terraform.sh apply <env_name> -target=aws_acm_certificate.wallet_redirect_additional
+./terraform.sh output <env_name> wallet_redirect_certificate_validation_records
+```
+
+Publish each output record's `name`, `type` and `value` in the authoritative DNS
+zone for its domain. Keep these records for automatic renewal. Then run a normal
+plan and apply:
+
+```sh
+./terraform.sh plan <env_name>
+./terraform.sh apply <env_name>
+```
+
+Terraform waits for both certificates to be issued before attaching them to the
+existing HTTPS listener. The initial targeted apply is only for bootstrapping
+external DNS validation; subsequent deployments should use normal plans and
+applies. The additional domains must also point to the wallet redirect Global
+Accelerator to route traffic.
 
 ## Requirements
 
@@ -67,6 +80,8 @@ domains must also point to the wallet redirect Global Accelerator.
 
 | Name | Type |
 |------|------|
+| [aws_acm_certificate.wallet_redirect_additional](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/acm_certificate) | resource |
+| [aws_acm_certificate_validation.wallet_redirect_additional](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/acm_certificate_validation) | resource |
 | [aws_alb.cms_load_balancer](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/alb) | resource |
 | [aws_alb_listener.front_end](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/alb_listener) | resource |
 | [aws_alb_target_group.cms_multitenant](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/alb_target_group) | resource |
@@ -122,6 +137,7 @@ domains must also point to the wallet redirect Global Accelerator.
 | [aws_lb_listener.front_end_https](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/lb_listener) | resource |
 | [aws_lb_listener_certificate.lb_cms_certificate](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/lb_listener_certificate) | resource |
 | [aws_lb_listener_certificate.lb_nextjs_certificate](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/lb_listener_certificate) | resource |
+| [aws_lb_listener_certificate.wallet_redirect_additional](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/lb_listener_certificate) | resource |
 | [aws_lb_listener_rule.cms_rule](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/lb_listener_rule) | resource |
 | [aws_lb_listener_rule.nextjs_rule](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/lb_listener_rule) | resource |
 | [aws_rds_cluster.cms_database_cluster](https://registry.terraform.io/providers/hashicorp/aws/6.43.0/docs/resources/rds_cluster) | resource |
@@ -208,6 +224,7 @@ domains must also point to the wallet redirect Global Accelerator.
 | <a name="input_wallet_basic_auth_password_ssm_parameter_name"></a> [wallet\_basic\_auth\_password\_ssm\_parameter\_name](#input\_wallet\_basic\_auth\_password\_ssm\_parameter\_name) | SSM parameter name for the wallet CloudFront basic auth password | `string` | `"/cloudfront/wallet/basic_auth/password"` | no |
 | <a name="input_wallet_basic_auth_username"></a> [wallet\_basic\_auth\_username](#input\_wallet\_basic\_auth\_username) | Username for the wallet CloudFront basic auth | `string` | `"wallet"` | no |
 | <a name="input_wallet_basic_auth_username_ssm_parameter_name"></a> [wallet\_basic\_auth\_username\_ssm\_parameter\_name](#input\_wallet\_basic\_auth\_username\_ssm\_parameter\_name) | SSM parameter name for the wallet CloudFront basic auth username | `string` | `"/cloudfront/wallet/basic_auth/username"` | no |
+| <a name="input_wallet_redirect_additional_certificates"></a> [wallet\_redirect\_additional\_certificates](#input\_wallet\_redirect\_additional\_certificates) | Additional SNI certificates for the wallet redirect HTTPS listener, validated through external DNS | <pre>map(object({<br/>    domain_name               = string<br/>    subject_alternative_names = list(string)<br/>  }))</pre> | <pre>{<br/>  "gov_it": {<br/>    "domain_name": "itwallet.gov.it",<br/>    "subject_alternative_names": [<br/>      "it-wallet.gov.it",<br/>      "portafogliodigitale.gov.it",<br/>      "portafogliodigitaleitaliano.gov.it",<br/>      "sistemaitwallet.gov.it",<br/>      "sistemait-wallet.gov.it"<br/>    ]<br/>  },<br/>  "italia_it": {<br/>    "domain_name": "wallet.italia.it",<br/>    "subject_alternative_names": [<br/>      "itwallet.italia.it",<br/>      "it-wallet.italia.it",<br/>      "portafogliodigitale.italia.it",<br/>      "portafogliodigitaleitaliano.italia.it",<br/>      "sistemaitwallet.italia.it",<br/>      "sistemait-wallet.italia.it"<br/>    ]<br/>  }<br/>}</pre> | no |
 | <a name="input_websites_configs"></a> [websites\_configs](#input\_websites\_configs) | Website configurations to create CDNs and SSL certificates for multi-tenancy | <pre>map(object({<br/>    origin_path                = string<br/>    url_tenant                 = string<br/>    create_certificate         = bool<br/>    create_route53_records     = optional(bool, false)<br/>    create_distribution        = bool<br/>    cdn_use_custom_certificate = bool<br/>    cdn_use_alias              = bool<br/>    cdn_indexing_enable        = bool<br/>    custom_headers = optional(list(object({<br/>      header   = string<br/>      override = optional(bool, true)<br/>      value    = string<br/>    })), [])<br/>    content_security_policy = optional(string, null)<br/>  }))</pre> | <pre>{<br/>  "appio": {<br/>    "cdn_indexing_enable": false,<br/>    "cdn_use_alias": true,<br/>    "cdn_use_custom_certificate": true,<br/>    "content_security_policy": "script-src-elem 'self' 'unsafe-inline' https://cdn.mxpnl.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js https://cdn.cookielaw.org/scripttemplates/otSDKStub.js https://cdn.cookielaw.org https://recaptcha.net https://www.gstatic.com; img-src 'self' https://d3qjb3tf4m0ri0.cloudfront.net https://cdn.cookielaw.org data:; frame-src https://recaptcha.net https://io.italia.it https://io.italia.it/enti-embeddable https://d2ekco8qmvzmh1.cloudfront.net https://d3qjb3tf4m0ri0.cloudfront.net;",<br/>    "create_certificate": true,<br/>    "create_distribution": true,<br/>    "custom_headers": [<br/>      {<br/>        "header": "Server",<br/>        "override": true,<br/>        "value": "None"<br/>      }<br/>    ],<br/>    "origin_path": "/appio",<br/>    "url_tenant": "ioapp.it"<br/>  },<br/>  "demo": {<br/>    "cdn_indexing_enable": false,<br/>    "cdn_use_alias": true,<br/>    "cdn_use_custom_certificate": true,<br/>    "create_certificate": true,<br/>    "create_distribution": true,<br/>    "create_route53_records": true,<br/>    "custom_headers": [<br/>      {<br/>        "header": "Server",<br/>        "override": true,<br/>        "value": "None"<br/>      }<br/>    ],<br/>    "origin_path": "/demo",<br/>    "url_tenant": "demowebsite.b2bportals.pagopa.it"<br/>  },<br/>  "interop": {<br/>    "cdn_indexing_enable": false,<br/>    "cdn_use_alias": false,<br/>    "cdn_use_custom_certificate": false,<br/>    "create_certificate": false,<br/>    "create_distribution": true,<br/>    "custom_headers": [<br/>      {<br/>        "header": "Server",<br/>        "override": true,<br/>        "value": "None"<br/>      }<br/>    ],<br/>    "origin_path": "/interop",<br/>    "url_tenant": "interop.b2bportals.pagopa.it"<br/>  },<br/>  "pagopa": {<br/>    "cdn_indexing_enable": false,<br/>    "cdn_use_alias": false,<br/>    "cdn_use_custom_certificate": false,<br/>    "create_certificate": false,<br/>    "create_distribution": true,<br/>    "custom_headers": [<br/>      {<br/>        "header": "Server",<br/>        "override": true,<br/>        "value": "None"<br/>      }<br/>    ],<br/>    "origin_path": "/pagopa",<br/>    "url_tenant": "pagopa.b2bportals.pagopa.it"<br/>  },<br/>  "send": {<br/>    "cdn_indexing_enable": false,<br/>    "cdn_use_alias": true,<br/>    "cdn_use_custom_certificate": true,<br/>    "create_certificate": true,<br/>    "create_distribution": true,<br/>    "custom_headers": [<br/>      {<br/>        "header": "Server",<br/>        "override": true,<br/>        "value": "None"<br/>      }<br/>    ],<br/>    "origin_path": "/send",<br/>    "url_tenant": "notifichedigitali.it"<br/>  },<br/>  "wallet": {<br/>    "cdn_indexing_enable": false,<br/>    "cdn_use_alias": true,<br/>    "cdn_use_custom_certificate": true,<br/>    "create_certificate": true,<br/>    "create_distribution": true,<br/>    "create_route53_records": true,<br/>    "custom_headers": [<br/>      {<br/>        "header": "Server",<br/>        "override": true,<br/>        "value": "None"<br/>      }<br/>    ],<br/>    "origin_path": "/wallet",<br/>    "url_tenant": "prod.wallet.b2bportals.pagopa.it"<br/>  }<br/>}</pre> | no |
 
 ## Outputs
@@ -220,3 +237,4 @@ domains must also point to the wallet redirect Global Accelerator.
 | <a name="output_terraform_backend_bucket_name"></a> [terraform\_backend\_bucket\_name](#output\_terraform\_backend\_bucket\_name) | n/a |
 | <a name="output_terraform_lock_dynamodb_table"></a> [terraform\_lock\_dynamodb\_table](#output\_terraform\_lock\_dynamodb\_table) | n/a |
 | <a name="output_video_name_servers"></a> [video\_name\_servers](#output\_video\_name\_servers) | n/a |
+| <a name="output_wallet_redirect_certificate_validation_records"></a> [wallet\_redirect\_certificate\_validation\_records](#output\_wallet\_redirect\_certificate\_validation\_records) | CNAME records to publish in external DNS to validate the additional wallet redirect certificates |
