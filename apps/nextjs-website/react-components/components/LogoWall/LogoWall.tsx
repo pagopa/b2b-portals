@@ -33,7 +33,7 @@ const LogoWall = ({
   const renderLogo = (item: LogoWallItemProps, key: string) => {
     const image = (
       <Image
-        src={item.logoURL}
+        src={isMobile ? (item.logoMobileURL ?? item.logoURL) : item.logoURL}
         alt={item.title}
         width={0}
         height={0}

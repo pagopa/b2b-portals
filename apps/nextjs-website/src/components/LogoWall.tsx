@@ -10,16 +10,18 @@ export const makeLogoWallProps = ({
   secondGroup,
   ...rest
 }: LogoWallSection & SiteWidePageData): LogoWallProps => ({
-  firstGroup: firstGroup.map(({ logo, title, href }) => ({
+  firstGroup: firstGroup.map(({ logo, title, href, logoMobile }) => ({
     title,
     logoURL: logo.url,
     ...(href && { href }),
+    ...(logoMobile && { logoMobileURL: logoMobile.url }),
   })),
 
-  secondGroup: secondGroup.map(({ logo, title, href }) => ({
+  secondGroup: secondGroup.map(({ logo, title, href, logoMobile }) => ({
     title,
     logoURL: logo.url,
     ...(href && { href }),
+    ...(logoMobile && { logoMobileURL: logoMobile.url }),
   })),
 
   ...rest,
