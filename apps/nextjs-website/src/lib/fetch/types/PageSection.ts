@@ -555,6 +555,7 @@ const LogoWallItemCodec = t.strict({
   title: t.string,
   logo: StrapiImageRequiredSchema,
   href: t.union([t.string, t.null]),
+  logoMobile: StrapiImageSchema,
 });
 
 const LogoWallSectionCodec = t.strict({

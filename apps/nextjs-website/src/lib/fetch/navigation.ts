@@ -50,6 +50,7 @@ export const getNavigation = ({
 &populate[10]=sections.pages.sections.items.links,sections.pages.sections.items.icon
 &populate[11]=sections.pages.sections.sections.ctaButtons,sections.pages.sections.sections.icon
 &populate[12]=sections.firstGroup.logo,sections.secondGroup.logo
+&populate[13]=sections.firstGroup.logoMobile,sections.secondGroup.logoMobile
       `,
       {
         method: 'GET',

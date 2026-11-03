@@ -4,6 +4,7 @@ export interface LogoWallItemProps {
   title: string;
   logoURL: string;
   href?: string;
+  logoMobileURL?: string;
 }
 
 export interface LogoWallProps extends SectionProps {

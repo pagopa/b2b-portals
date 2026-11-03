@@ -7,6 +7,7 @@ import acnLogo from '@react-components/assets/acn.png';
 import agidLogo from '@react-components/assets/agid.png';
 import dtdLogo from '@react-components/assets/dtd.png';
 import euNextGenLogo from '@react-components/assets/euNextGen.png';
+import euNextGenMobileLogo from '@react-components/assets/FundedByEUIcons/EU-IT.png';
 import ipzsLogo from '@react-components/assets/ipzs.png';
 import pagopaLogo from '@react-components/assets/pagopa.png';
 
@@ -76,6 +77,13 @@ const generateLogoWallProps = (
 
 export const getLogoWallStories = (theme: 'light' | 'dark') => ({
   full: generateLogoWallProps(theme, firstGroupLogos, secondGroupLogos),
+  withMobileLogo: generateLogoWallProps(
+    theme,
+    firstGroupLogos.map((item, index) =>
+      index === 0 ? { ...item, logoMobileURL: euNextGenMobileLogo.src } : item,
+    ),
+    secondGroupLogos,
+  ),
   onlyFirstGroup: generateLogoWallProps(theme, firstGroupLogos, []),
   manyLogos: generateLogoWallProps(
     theme,

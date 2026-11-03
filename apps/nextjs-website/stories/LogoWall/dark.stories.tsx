@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { LogoWall } from '@react-components/components';
 import { LogoWallTemplate, getLogoWallStories } from './logowallCommons';
 
@@ -13,6 +13,10 @@ const stories = getLogoWallStories('dark');
 
 export const Full: StoryFn<typeof LogoWall> = LogoWallTemplate.bind({});
 Full.args = stories.full;
+
+export const WithMobileLogo: StoryObj<typeof LogoWall> = {
+  args: stories.withMobileLogo,
+};
 
 export const OnlyFirstGroup: StoryFn<typeof LogoWall> = LogoWallTemplate.bind(
   {},
