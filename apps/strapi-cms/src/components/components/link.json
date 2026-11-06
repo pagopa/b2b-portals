@@ -12,7 +12,7 @@
       "required": true
     },
     "href": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "ariaLabel": {
