@@ -519,6 +519,7 @@ const MediaResourcesItemCodec = t.strict({
   thumbnail: StrapiImageRequiredSchema,
   resource: StrapiGenericMediaRequiredSchema,
   label: t.string,
+  fileName: t.union([t.string, t.null]),
 });
 
 const MediaResourcesSectionCodec = t.strict({

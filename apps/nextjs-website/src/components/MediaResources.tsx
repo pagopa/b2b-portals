@@ -33,9 +33,10 @@ const makeMediaResourcesProps = ({
   ...rest
 }: MediaResourcesSection & SiteWidePageData): MediaResourcesProps => ({
   ...(title && { title }),
-  items: items.map(({ resource, thumbnail, ...item }) => ({
+  items: items.map(({ resource, thumbnail, fileName, ...item }) => ({
     resourceURL: resource.url,
     thumbnailURL: thumbnail.url,
+    ...(fileName && { fileName: fileName }),
     ...item,
   })),
   labels: mediaResourcesLabels[locale],

@@ -65,7 +65,7 @@ const MediaResources = ({
               key={index}
               component='a'
               href={item.resourceURL}
-              download
+              download={item.fileName ?? ''}
               target='_blank'
               width={330}
               maxWidth='90vw'

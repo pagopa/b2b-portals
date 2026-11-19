@@ -5,6 +5,7 @@ export interface MediaResourcesItem {
   thumbnailURL: string;
   resourceURL: string;
   label: string;
+  fileName?: string;
 }
 
 export interface MediaResourcesProps extends SectionProps {
