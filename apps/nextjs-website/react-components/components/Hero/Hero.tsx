@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, useMediaQuery } from '@mui/material';
 import { isJSX } from '../../types/common/Common.types';
 import ContainerRC from '../common/ContainerRC';
 import { HeroProps } from '../../types/Hero/Hero.types';
@@ -20,10 +20,11 @@ const Hero = (props: HeroProps) => {
     customBgColor,
   } = props;
 
-  const { palette } = useTheme();
+  const { palette, breakpoints } = useTheme();
   const minHeight = getMinHeight(size);
   const overlay = getOverlay(useHoverlay, theme);
   const ctx = { palette, theme };
+  const isLargeScreen = useMediaQuery(breakpoints.between('lg', 'xl'));
 
   const backgroundColor =
     customBgColor ??
@@ -67,6 +68,10 @@ const Hero = (props: HeroProps) => {
       background={!background ? backgroundColor : BackgroundImage}
       direction={inverse ? 'row-reverse' : 'row'}
       {...(sectionID && { sectionID })}
+      {...(isLargeScreen &&
+        size === 'big' && {
+          px: '0',
+        })}
     >
       {(size === 'medium' || size === 'big') && (
         <Grid item lg={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
@@ -86,9 +91,20 @@ const Hero = (props: HeroProps) => {
             width: '100%',
             display: 'flex',
             justifyContent: { xs: 'center', lg: inverse ? 'start' : 'end' },
-            marginX: { xs: '0px', lg: '48px' },
+            marginLeft: { xs: '0px', lg: '48px' },
+            marginRight: { xs: '0px', lg: '0', xl: '48px' },
           }}
           alignItems='center'
+          maxWidth={{
+            xs: undefined,
+            lg: size === 'big' ? 'none !important' : undefined,
+            xl: undefined,
+          }}
+          flexGrow={{
+            xs: undefined,
+            lg: size === 'big' ? '1 !important' : undefined,
+            xl: undefined,
+          }}
         >
           {isJSX(image) ? (
             image
@@ -101,7 +117,10 @@ const Hero = (props: HeroProps) => {
               width={0}
               height={0}
               style={{
-                objectFit: 'contain',
+                objectFit:
+                  isLargeScreen && size === 'big' ? 'cover' : 'contain',
+                ...(isLargeScreen &&
+                  size === 'big' && { objectPosition: '0% 50%' }),
                 width: '100%',
                 height: '100%',
                 maxHeight: minHeight,

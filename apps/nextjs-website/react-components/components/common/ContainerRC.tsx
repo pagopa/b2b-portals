@@ -41,9 +41,8 @@ const ContainerRC = (props: ContainerProps) => {
     <Box
       component='section'
       id={sectionID}
-      sx={{ px: { xs: 4 }, position: 'relative', overflow: 'hidden' }}
+      sx={{ px: px ?? { xs: 4 }, position: 'relative', overflow: 'hidden' }}
       py={py}
-      px={px}
       tabIndex={tabIndex}
       bgcolor={!backgroundIsJSX ? background : undefined}
       {...(ariaLabel && { 'aria-label': ariaLabel })}
