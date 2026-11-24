@@ -164,6 +164,10 @@ const PressRelease = (props: PressReleaseProps) => {
               sx={{
                 paddingInline: '0',
                 height: '24px',
+                color: backlinkColor,
+                '&:hover': {
+                  color: richTextLinkHoverColor,
+                },
               }}
               onClick={ShareLink}
               endIcon={
@@ -186,6 +190,10 @@ const PressRelease = (props: PressReleaseProps) => {
               sx={{
                 paddingInline: '0',
                 height: '24px',
+                color: backlinkColor,
+                '&:hover': {
+                  color: richTextLinkHoverColor,
+                },
               }}
               onClick={CopyLink}
               endIcon={

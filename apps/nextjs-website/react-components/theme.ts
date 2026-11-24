@@ -743,7 +743,7 @@ export const commonTextAlternativeColorMap: ThemeVariantMap<string> = {
   WALLET: ({ palette, theme }) =>
     theme === 'dark'
       ? palette.primary.contrastText
-      : palette.custom.primaryColorDark,
+      : palette.custom.walletPrimaryColor,
 };
 
 export const commonExtraTextColorMap: ThemeVariantMap<string> = {
